@@ -643,8 +643,9 @@
                                 <span class="software-price-unit">ترخيص سنوي / جهاز</span>
                             </div>
                             <div class="software-btn-group">
+                                <button type="button" class="btn-software-sandbox" onclick="openDesktopSimulatorModal('taxsync')" style="background:rgba(212,175,55,0.15); border:1px solid var(--gold); color:var(--gold); border-radius:8px; padding:6px 10px; font-size:0.75rem; font-weight:700; cursor:pointer;" title="محاكاة حية فورية داخل المتصفح">محاكي حي ⚡</button>
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('taxsync', 'trial')">تجربة 14 يوماً</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareModal('taxsync', 'buy')">شراء الترخيص</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">شراء الترخيص</button>
                             </div>
                         </div>
                     </div>
@@ -687,7 +688,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('flowscan', 'trial')">تجربة مجانية</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareModal('flowscan', 'buy')">اشتراك</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('flowscan')">اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -729,7 +730,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('cloudpos', 'trial')">تجربة الربط</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareModal('cloudpos', 'buy')">تفعيل</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('cloudpos')">تفعيل</button>
                             </div>
                         </div>
                     </div>
@@ -771,7 +772,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('vault', 'trial')">تجربة مجانية</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareModal('vault', 'buy')">اشتراك</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('vault')">اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -815,7 +816,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('sdk', 'trial')">تحميل الـ SDK</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareModal('sdk', 'buy')">طلب الترخيص</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('sdk')">طلب الترخيص</button>
                             </div>
                         </div>
                     </div>
@@ -864,7 +865,10 @@
                         <option value="استشارات مالية وحوكمة">استشارات مالية وحوكمة</option>
                     </select>
                 </div>
-                <div class="modal-form-actions">
+                            <button type="button" class="table-action-btn w-100 justify-content-center mb-3" onclick="closeSoftwareModal(); openDesktopSimulatorModal(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');" style="background:rgba(212,175,55,0.12); border-color:var(--gold); color:var(--gold); font-size:0.85rem; padding:10px; font-weight:700;">
+                🖥️ تشغيل المحاكي التفاعلي داخل المتصفح (Live Desktop Sandbox)
+            </button>
+            <div class="modal-form-actions">
                     <button type="button" class="btn-return-main" onclick="closeNewTxModal()">إلغاء</button>
                     <button type="button" class="action-cta-btn" onclick="saveNewTx()">حفظ ومزامنة فورية</button>
                 </div>
@@ -1066,7 +1070,12 @@
         // التبديل بين الشاشات في القائمة الجانبية
         function switchPortalTab(tabId, el) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            el.classList.add('active');
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const targetNav = document.querySelector(`.nav-item[onclick*="'${tabId}'"]`);
+                if (targetNav) targetNav.classList.add('active');
+            }
 
             document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
             const target = document.getElementById('tab-' + tabId);
@@ -1754,6 +1763,7 @@
 
         function openSoftwareModal(id, mode = 'trial') {
             const sw = softwareCatalog[id] || softwareCatalog.taxsync;
+            sw.id = id;
             currentActiveSoftware = sw;
 
             document.getElementById('modalSwTitle').innerText = sw.title;
@@ -1832,22 +1842,9 @@ Direct Founders Contact: info@coresync.cloud
 
         function triggerSoftwareCheckout() {
             if (!currentActiveSoftware) return;
+            const swId = currentActiveSoftware.id || 'taxsync';
             closeSoftwareModal();
-            const sw = currentActiveSoftware;
-            const currentName = localStorage.getItem('sr_custom_brand_name') || 'مجموعة الرياض للخدمات اللوجستية';
-            
-            previewInvoiceModal(
-                `INV-SW-${Math.floor(1000 + Math.random() * 9000)}`,
-                `S&R Enterprise Client (${sw.title})`,
-                sw.price,
-                Math.round(sw.price * 0.21 * 100) / 100,
-                Math.round(sw.price * 1.21 * 100) / 100,
-                'فاتورة شراء ترخيص برمجيات معتمدة ✓',
-                '2026-10-06',
-                '21% BTW',
-                'S&R CoreSync Software Licensing B.V.'
-            );
-            showPortalToast(`🎉 تم تجهيز فاتورة شراء ترخيص [${sw.title}] بنجاح!`);
+            openSoftwareCheckoutModal(swId);
         }
 
         function openPublishSoftwareModal() {
@@ -1924,6 +1921,296 @@ Direct Founders Contact: info@coresync.cloud
             closePublishSoftwareModal();
             showPortalToast(`🚀 تم نشر برنامج [${title}] بنجاح في متجر المنصة!`);
         }
+
+        
+        /* =========================================================
+           محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator JS)
+           ========================================================= */
+        let currentSimApp = 'taxsync';
+        let generatedDigipoortXml = '';
+
+        function openDesktopSimulatorModal(appId = 'taxsync') {
+            currentSimApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+            const titleEl = document.getElementById('simAppTitle');
+            if (titleEl) titleEl.innerText = `${sw.title} ${sw.version}`;
+
+            switchSimulatorTab('app');
+            recalcTaxSyncSimulator();
+            document.getElementById('desktopSimulatorModal').classList.add('active');
+            showPortalToast(`💻 تم تشغيل المحاكي التفاعلي لـ [${sw.title}] بنجاح!`);
+        }
+
+        function closeDesktopSimulatorModal() {
+            document.getElementById('desktopSimulatorModal').classList.remove('active');
+        }
+
+        function switchSimulatorTab(tab) {
+            const btnApp = document.getElementById('simTabBtn-app');
+            const btnSpecs = document.getElementById('simTabBtn-specs');
+            const contentApp = document.getElementById('simContent-app');
+            const contentSpecs = document.getElementById('simContent-specs');
+
+            if (tab === 'app') {
+                btnApp.classList.add('active');
+                btnSpecs.classList.remove('active');
+                contentApp.style.display = 'grid';
+                contentSpecs.style.display = 'none';
+            } else {
+                btnApp.classList.remove('active');
+                btnSpecs.classList.add('active');
+                contentApp.style.display = 'none';
+                contentSpecs.style.display = 'grid';
+            }
+        }
+
+        function switchSimSidebar(item) {
+            document.querySelectorAll('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            const target = document.getElementById(`simSide-${item}`);
+            if (target) target.classList.add('active');
+        }
+
+        function recalcTaxSyncSimulator() {
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+
+            const btw21 = omzet21 * 0.21;
+            const btw9 = omzet9 * 0.09;
+            const netPay = (btw21 + btw9) - voorb;
+
+            document.getElementById('simResBtw21').innerText = `€ ${btw21.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResBtw9').innerText = `€ ${btw9.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResDeduct').innerText = `- € ${voorb.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            const netEl = document.getElementById('simResNetPay');
+            netEl.innerText = `€ ${netPay.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (netPay < 0) {
+                netEl.style.color = '#34d399';
+                netEl.innerText = `استرداد: € ${Math.abs(netPay).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            } else {
+                netEl.style.color = 'var(--gold)';
+            }
+        }
+
+        function runAiComplianceAudit() {
+            switchSimSidebar('audit');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '🛡️ تقرير الفحص والامتثال الضريبي الذكي (AWR Audit Report):';
+            
+            contentEl.innerText = `[S&R AUDIT ENGINE v2.4 - EXECUTION TIME: 2026-10-06 12:45:00]
+----------------------------------------------------------------------
+[PASS] Dutch Tax Administration AWR Article 52 Ledger Validation: OK
+[PASS] VAT Identification Number Format (NL862145890B01): VALID
+[PASS] BTW Tarief Hoog (21%) & Laag (9%) Mathematical Parity: 100% MATCH
+[PASS] PEPPOL BIS Billing 3.0 Electronic Invoice Compatibility: VALIDATED
+[PASS] Zero Cloud Leakage & AES-256 Local Encryption Integrity: SECURE
+----------------------------------------------------------------------
+STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`;
+            
+            showPortalToast('🛡️ اكتمل تدقيق الامتثال الضريبي بنجاح: متوافق بنسبة 100%!');
+        }
+
+        function exportDigipoortXml() {
+            switchSimSidebar('xml');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+            const btw21 = (omzet21 * 0.21).toFixed(2);
+            const btw9 = (omzet9 * 0.09).toFixed(2);
+            const netPay = ((omzet21 * 0.21 + omzet9 * 0.09) - voorb).toFixed(2);
+
+            generatedDigipoortXml = `<?xml version="1.0" encoding="UTF-8"?>
+<AangifteOmzetbelasting xmlns="http://www.nltaxonomie.nl/sbr/2026/bd" period="2026-Q3">
+  <Header>
+    <SoftwareVendor>S&R CoreSync Solutions B.V.</SoftwareVendor>
+    <SoftwarePackage>S&R TaxSync Desktop</SoftwarePackage>
+    <SoftwareVersion>2.4 Pro</SoftwareVersion>
+    <MessageTimestamp>2026-10-06T12:45:00</MessageTimestamp>
+  </Header>
+  <Belastingplichtige>
+    <BtwNummer>NL862145890B01</BtwNummer>
+    <Handelsnaam>S&R CoreSync Solutions B.V.</Handelsnaam>
+  </Belastingplichtige>
+  <Rubrieken>
+    <!-- 1a. Leveringen/diensten belast met hoog tarief (21%) -->
+    <Rubriek1a>
+      <Omzet>${omzet21}</Omzet>
+      <Omzetbelasting>${btw21}</Omzetbelasting>
+    </Rubriek1a>
+    <!-- 1b. Leveringen/diensten belast met laag tarief (9%) -->
+    <Rubriek1b>
+      <Omzet>${omzet9}</Omzet>
+      <Omzetbelasting>${btw9}</Omzetbelasting>
+    </Rubriek1b>
+    <!-- 5b. Voorbelasting -->
+    <Rubriek5b>
+      <Voorbelasting>${voorb}</Voorbelasting>
+    </Rubriek5b>
+    <!-- 5g. Totaal te betalen / terug te vragen -->
+    <Rubriek5g>
+      <Totaal>${netPay}</Totaal>
+    </Rubriek5g>
+  </Rubrieken>
+</AangifteOmzetbelasting>`;
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '📄 ملف الإقرار الضريبي الرسمي المولد (Digipoort SBR XML):';
+            contentEl.innerText = generatedDigipoortXml;
+            showPortalToast('⚡ تم توليد وتشفير ملف Digipoort XML بنجاح!');
+        }
+
+        function downloadGeneratedTaxXml() {
+            if (!generatedDigipoortXml) {
+                exportDigipoortXml();
+            }
+            const blob = new Blob([generatedDigipoortXml], { type: 'application/xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Belastingdienst_Aangifte_Q3_2026.xml`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showPortalToast('📁 تم تنزيل ملف Digipoort XML الرسمي على جهازك!');
+        }
+
+        /* =========================================================
+           بوابة الدفع والتراخيص الدولية (Stripe / Mollie iDEAL Checkout JS)
+           ========================================================= */
+        let currentCheckoutApp = 'taxsync';
+        let selectedGateway = 'ideal';
+
+        function openSoftwareCheckoutModal(appId = 'taxsync') {
+            currentCheckoutApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+
+            document.getElementById('chkAppTitle').innerText = sw.title;
+            document.getElementById('chkAppIcon').innerText = sw.icon;
+            document.getElementById('chkAppLicenseType').innerText = `ترخيص تجاري كامل (${sw.version}) • شامل الفاتورة الضريبية`;
+
+            const netPrice = sw.price;
+            const vat = Math.round(netPrice * 0.21 * 100) / 100;
+            const total = Math.round((netPrice + vat) * 100) / 100;
+
+            document.getElementById('chkNetPrice').innerText = `€ ${netPrice.toFixed(2)}`;
+            document.getElementById('chkVatAmount').innerText = `€ ${vat.toFixed(2)}`;
+            document.getElementById('chkTotalPrice').innerText = `€ ${total.toFixed(2)}`;
+            document.getElementById('chkBtnText').innerText = `تأكيد الدفع الآمن وإصدار الفاتورة (€ ${total.toFixed(2)})`;
+
+            // إعادة ضبط حالة النجاح
+            document.getElementById('chkSuccessBox').style.display = 'none';
+            document.getElementById('chkBtnSubmit').style.display = 'flex';
+            document.getElementById('chkBtnSpinner').style.display = 'none';
+
+            selectPaymentGateway('ideal');
+            document.getElementById('softwareCheckoutModal').classList.add('active');
+        }
+
+        function closeSoftwareCheckoutModal() {
+            document.getElementById('softwareCheckoutModal').classList.remove('active');
+        }
+
+        function selectPaymentGateway(type) {
+            selectedGateway = type;
+            ['ideal', 'card', 'sepa'].forEach(gw => {
+                const card = document.getElementById(`gwCard-${gw}`);
+                const input = document.getElementById(`gwInput-${gw}`);
+                if (card) card.classList.toggle('selected', gw === type);
+                if (input) input.style.display = (gw === type) ? 'block' : 'none';
+            });
+        }
+
+        function executeCheckoutPayment() {
+            const sw = softwareCatalog[currentCheckoutApp] || softwareCatalog.taxsync;
+            const btn = document.getElementById('chkBtnSubmit');
+            const spinner = document.getElementById('chkBtnSpinner');
+            const text = document.getElementById('chkBtnText');
+            const successBox = document.getElementById('chkSuccessBox');
+
+            btn.disabled = true;
+            spinner.style.display = 'inline-block';
+            text.innerText = 'جاري الاتصال الآمن مع بوابة الدفع وتوثيق الترخيص...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                btn.style.display = 'none';
+
+                // توليد مفتاح ترخيص تجاري
+                const proKey = generateCryptoLicenseKey(`PRO-${currentCheckoutApp.toUpperCase()}`);
+                document.getElementById('chkSuccessKey').innerText = proKey;
+                successBox.style.display = 'block';
+
+                // توليد وإضافة الفاتورة في جدول الفواتير
+                const netPrice = sw.price;
+                const vat = Math.round(netPrice * 0.21 * 100) / 100;
+                const total = Math.round((netPrice + vat) * 100) / 100;
+                const invNum = `INV-2026-0${Math.floor(84 + Math.random() * 20)}`;
+                const clientName = `S&R Enterprise Licensee (${sw.title})`;
+                const gwLabel = selectedGateway === 'ideal' ? 'Mollie iDEAL ✓' : selectedGateway === 'card' ? 'Stripe Card ✓' : 'SEPA B2B Direct ✓';
+
+                // إضافة الفاتورة لجدول الفواتير في الواجهة
+                const tbody = document.getElementById('invoicesTableBody');
+                if (tbody) {
+                    const tr = document.createElement('tr');
+                    tr.setAttribute('data-status', 'paid');
+                    tr.innerHTML = `
+                        <td class="font-num">${invNum}</td>
+                        <td>${clientName}</td>
+                        <td class="font-num">€ ${netPrice.toLocaleString()}</td>
+                        <td class="font-num">€ ${vat.toLocaleString()} (21% BTW)</td>
+                        <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
+                        <td><span class="status-badge status-completed">مدفوعة عبر ${gwLabel}</span></td>
+                        <td>
+                            <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${clientName}', ${netPrice}, ${vat}, ${total}, 'مدفوعة عبر ${gwLabel}', '2026-10-06', 'BTW 21%')">معاينة الفاتورة</button>
+                        </td>
+                    `;
+                    tbody.insertBefore(tr, tbody.firstChild);
+                    
+                    const countAll = document.getElementById('count-all');
+                    const countPaid = document.getElementById('count-paid');
+                    if (countAll) countAll.innerText = parseInt(countAll.innerText || '3') + 1;
+                    if (countPaid) countPaid.innerText = parseInt(countPaid.innerText || '2') + 1;
+                }
+
+                // ربط زر معاينة الفاتورة في صندوق النجاح
+                const btnViewInv = document.getElementById('chkBtnViewInvoice');
+                btnViewInv.onclick = () => {
+                    closeSoftwareCheckoutModal();
+                    previewInvoiceModal(invNum, clientName, netPrice, vat, total, `مدفوعة عبر ${gwLabel}`, '2026-10-06', 'BTW 21%');
+                };
+
+                showPortalToast(`🎉 تم إتمام الدفع بنجاح وإصدار الفاتورة [${invNum}] وتفعيل الترخيص!`);
+            }, 1200);
+        }
+
+        // فحص الروابط المباشرة عند التحميل (URL Query Params Auto-Trigger)
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            if (urlParams.get('sandbox')) {
+                const targetApp = urlParams.get('sandbox');
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openDesktopSimulatorModal(targetApp);
+            } else if (urlParams.get('checkout') || urlParams.get('action') === 'checkout') {
+                const targetApp = urlParams.get('app') || urlParams.get('checkout') || 'taxsync';
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openSoftwareCheckoutModal(targetApp);
+            } else if (hash === '#software') {
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+            }
+        });
+
 
         // استعادة التخصيص المحفوظ عند تحميل الصفحة
         window.addEventListener('DOMContentLoaded', restoreSavedBrandSettings);
@@ -2037,6 +2324,312 @@ Direct Founders Contact: info@coresync.cloud
             </form>
         </div>
     </div>
+
+    
+    <!-- =========================================================
+         محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator Modal)
+         ========================================================= -->
+    <div class="modal-overlay" id="desktopSimulatorModal" onclick="if(event.target === this) closeDesktopSimulatorModal()">
+        <div class="modal-card simulator-modal-card">
+            <!-- شريط نافذة نظام التشغيل (OS Window Bar) -->
+            <div class="os-window-header">
+                <div class="os-window-controls">
+                    <span class="os-dot red" onclick="closeDesktopSimulatorModal()" style="cursor:pointer;" title="إغلاق"></span>
+                    <span class="os-dot yellow" title="تصغير"></span>
+                    <span class="os-dot green" title="تكبير"></span>
+                </div>
+                <div class="os-window-title">
+                    <span>💻</span>
+                    <span id="simAppTitle">S&R TaxSync Desktop v2.4 Pro</span>
+                    <span class="status-badge status-completed" style="font-size:0.68rem; padding:1px 6px;">SANDBOX RUNNING</span>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeDesktopSimulatorModal()">✕</button>
+            </div>
+
+            <!-- تبويبات المحاكي (Tabs) -->
+            <div class="os-window-tabs">
+                <button type="button" class="os-tab-btn active" id="simTabBtn-app" onclick="switchSimulatorTab('app')">
+                    <span>⚡</span> محاكي واجهة البرنامج الحية (Live OS Sandbox)
+                </button>
+                <button type="button" class="os-tab-btn" id="simTabBtn-specs" onclick="switchSimulatorTab('specs')">
+                    <span>📋</span> بطاقة المواصفات والمعمارية (Architecture & Specs)
+                </button>
+            </div>
+
+            <!-- شريط قوائم البرنامج الداخلي (App Ribbon) -->
+            <div class="os-app-ribbon">
+                <span>📁 ملف (Bestand)</span>
+                <span>📊 مبيعات وضرائب (Omzet & BTW)</span>
+                <span onclick="runAiComplianceAudit()" style="color:var(--gold); font-weight:600;">🛡️ فحص الامتثال AWR (Audit)</span>
+                <span onclick="exportDigipoortXml()" style="color:#38bdf8;">⚡ تصدير Digipoort XML</span>
+                <span>⚙️ إعدادات الأمان (AES-256)</span>
+            </div>
+
+            <!-- تبويب 1: المحاكي التفاعلي المباشر -->
+            <div id="simContent-app" class="os-content-pane">
+                <!-- الشريط الجانبي لتطبيق سطح المكتب -->
+                <div class="os-sidebar">
+                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
+                        <span>📊</span> إقرار BTW والضرائب
+                    </button>
+                    <button type="button" class="os-sidebar-btn" id="simSide-audit" onclick="runAiComplianceAudit()">
+                        <span>🤖</span> تدقيق الذكاء الاصطناعي
+                    </button>
+                    <button type="button" class="os-sidebar-btn" id="simSide-xml" onclick="exportDigipoortXml()">
+                        <span>📄</span> تصدير Digipoort XML
+                    </button>
+                    <div style="margin-top:auto; padding:10px; background:rgba(0,0,0,0.3); border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
+                        <div class="text-caption text-white-64" style="font-size:0.7rem;">محرك الحسابات:</div>
+                        <div style="font-size:0.78rem; font-weight:700; color:var(--gold);">S&R BTW Engine v2.4</div>
+                        <div class="text-caption text-white-64" style="font-size:0.68rem;">وضع العمل: Offline 100%</div>
+                    </div>
+                </div>
+
+                <!-- مساحة العمل الرئيسية للمحاكي -->
+                <div class="os-main-stage">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="fw-bold mb-1 text-white" style="font-size:1.05rem;">نموذج حساب ضريبة القيمة المضافة (Aangifte Omzetbelasting Q3 2026)</h4>
+                            <p class="text-caption text-white-64 mb-0">جرب إدخال الأرقام أدناه لمشاهدة الاحتساب الآلي وتوليد الإقرار الهولندي والخليجي فورياً</p>
+                        </div>
+                        <span class="status-badge status-completed" id="simStatusBadge">جاهز للاحتساب ✓</span>
+                    </div>
+
+                    <!-- حقول الإدخال التفاعلية -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simOmzet21">المبيعات بنسبة 21% BTW (Omzet Hoog):</label>
+                                <input type="number" id="simOmzet21" value="18500" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simOmzet9">المبيعات بنسبة 9% BTW (Omzet Laag):</label>
+                                <input type="number" id="simOmzet9" value="4200" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simVoorbelasting">ضريبة المدخلات القابلة للخصم (Voorbelasting):</label>
+                                <input type="number" id="simVoorbelasting" value="2150" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- بطاقات نتائج الاحتساب المالي الفوري -->
+                    <div class="glass-box p-3 mb-3" style="background:rgba(212,175,55,0.04); border-color:rgba(212,175,55,0.25);">
+                        <div class="row text-center g-2">
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">ضريبة 21% (Hoog)</span>
+                                <span class="fw-bold text-white font-num" id="simResBtw21" style="font-size:0.95rem;">€ 3,885.00</span>
+                            </div>
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">ضريبة 9% (Laag)</span>
+                                <span class="fw-bold text-white font-num" id="simResBtw9" style="font-size:0.95rem;">€ 378.00</span>
+                            </div>
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">الخصم المسموح (Voorb.)</span>
+                                <span class="fw-bold text-danger font-num" id="simResDeduct" style="font-size:0.95rem;">- € 2,150.00</span>
+                            </div>
+                            <div class="col-3" style="border-right:1px solid rgba(255,255,255,0.1);">
+                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">صافي الضريبة الواجبة السداد</span>
+                                <span class="fw-bold font-num" id="simResNetPay" style="font-size:1.1rem; color:var(--gold);">€ 2,113.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أزرار الإجراءات داخل المحاكي -->
+                    <div class="d-flex gap-2 flex-wrap mb-3">
+                        <button type="button" class="table-action-btn" onclick="runAiComplianceAudit()" style="background:rgba(16,185,129,0.15); border-color:#10b981; color:#34d399;">
+                            🛡️ فحص الامتثال المحاسبي AWR
+                        </button>
+                        <button type="button" class="table-action-btn" onclick="exportDigipoortXml()" style="background:rgba(56,189,248,0.15); border-color:#38bdf8; color:#38bdf8;">
+                            📄 توليد ملف Digipoort XML
+                        </button>
+                        <button type="button" class="action-cta-btn" onclick="openSoftwareCheckoutModal('taxsync')" style="margin-right:auto; padding:6px 16px; font-size:0.8rem;">
+                            💳 ترقية للنسخة الكاملة (€ 189)
+                        </button>
+                    </div>
+
+                    <!-- منطقة نتائج الفحص والتصدير (Console output) -->
+                    <div id="simConsoleBox" style="display:none;" class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="text-caption text-white-64" id="simConsoleTitle">تقرير تدقيق الامتثال:</span>
+                            <button type="button" class="btn-return-main font-num btn-modal-close-sm" style="font-size:0.7rem; padding:2px 8px;" onclick="downloadGeneratedTaxXml()">تنزيل ملف .xml</button>
+                        </div>
+                        <div class="xml-preview-box" id="simXmlContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تبويب 2: بطاقة المواصفات والمعمارية التقنية -->
+            <div id="simContent-specs" class="os-content-pane" style="display:none; grid-template-columns:1fr; padding:24px; max-height:520px; overflow-y:auto;">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="glass-box p-3 h-100">
+                            <h5 class="fw-bold text-white mb-2" style="font-size:0.95rem; color:var(--gold) !important;">معمارية الخصوصية والأمان (Zero-Cloud Privacy)</h5>
+                            <p class="text-caption text-white-64">
+                                تم تصميم البرنامج ليعمل بمعمارية محلية بحتة (Offline-First Engine)، حيث تُخزن قواعد البيانات محلياً عبر محرك SQLite مشفر بخوارزمية AES-256 بت، مما يضمن سرية البيانات المحاسبية بنسبة 100% دون أي تسريب سحابي.
+                            </p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item"><span>✓</span> توافق كامل مع المادة 52 من قانون الضرائب الهولندي (AWR)</li>
+                                <li class="software-feature-item"><span>✓</span> حماية البيانات بموجب اللائحة الأوروبية العامة لحماية البيانات (GDPR)</li>
+                                <li class="software-feature-item"><span>✓</span> توليد مفاتيح تشفير رقمية مرتبطة بالعتاد (Hardware ID Locking)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-box p-3 h-100">
+                            <h5 class="fw-bold text-white mb-2" style="font-size:0.95rem; color:var(--gold) !important;">التوافق والتكامل (Digipoort & PEPPOL)</h5>
+                            <p class="text-caption text-white-64">
+                                يدعم الربط المباشر مع بوابة مصلحة الضرائب الهولندية (Digipoort SBR) وبروتوكول الفوترة الأوروبية الموحدة PEPPOL BIS 3.0.
+                            </p>
+                            <div class="p-2 mb-2" style="background:#090e0b; border-radius:8px; border:1px solid rgba(255,255,255,0.06); font-family:'JetBrains Mono',monospace; font-size:0.75rem;">
+                                <div class="text-white-64">SBR / XBRL Taxonomy: NL-2026.1</div>
+                                <div class="text-white-64">Supported OS: Windows 11/10 (x64) • macOS Apple Silicon</div>
+                                <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
+                            </div>
+                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" onclick="openSoftwareCheckoutModal('taxsync')">
+                                شراء الترخيص التجاري الآن (€ 189 / سنة)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         نافذة إتمام الشراء والربط مع بوابات الدفع (Stripe / Mollie iDEAL Checkout Modal)
+         ========================================================= -->
+    <div class="modal-overlay" id="softwareCheckoutModal" onclick="if(event.target === this) closeSoftwareCheckoutModal()">
+        <div class="modal-card checkout-modal-card">
+            <!-- الهيدر -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="software-icon-wrap" id="chkAppIcon" style="width:38px; height:38px; font-size:1.1rem;">💻</div>
+                    <div>
+                        <h4 class="fw-bold mb-0 text-white" id="chkAppTitle">S&R TaxSync Desktop</h4>
+                        <span class="text-caption text-white-64" id="chkAppLicenseType">ترخيص تجاري مؤسسي سنوي • Commercial B2B</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareCheckoutModal()">✕</button>
+            </div>
+
+            <!-- ملخص الفاتورة واحتساب ضريبة BTW 21% -->
+            <div class="order-summary-box">
+                <div class="order-summary-row">
+                    <span>قيمة الترخيص البرمجي الصافي (Net Price):</span>
+                    <span class="font-num" id="chkNetPrice">€ 189.00</span>
+                </div>
+                <div class="order-summary-row">
+                    <span>ضريبة القيمة المضافة الهولندية (BTW 21%):</span>
+                    <span class="font-num" id="chkVatAmount">€ 39.69</span>
+                </div>
+                <div class="order-summary-row total">
+                    <span>الإجمالي المستحق للسداد (Total Incl. BTW):</span>
+                    <span class="font-num" id="chkTotalPrice" style="color:var(--gold);">€ 228.69</span>
+                </div>
+            </div>
+
+            <!-- محدد بوابة الدفع الدولية -->
+            <div class="text-caption text-white-64 mb-1">اختر طريقة الدفع المعتمدة:</div>
+            <div class="gateway-selector">
+                <div class="gateway-card selected" id="gwCard-ideal" onclick="selectPaymentGateway('ideal')">
+                    <div style="font-size:1.3rem;">🇳🇱</div>
+                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">Mollie iDEAL</div>
+                    <span class="gateway-badge">هولندا وأوروبا</span>
+                </div>
+                <div class="gateway-card" id="gwCard-card" onclick="selectPaymentGateway('card')">
+                    <div style="font-size:1.3rem;">💳</div>
+                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">Stripe Card</div>
+                    <span class="gateway-badge">Visa / Mastercard</span>
+                </div>
+                <div class="gateway-card" id="gwCard-sepa" onclick="selectPaymentGateway('sepa')">
+                    <div style="font-size:1.3rem;">🏦</div>
+                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">SEPA B2B</div>
+                    <span class="gateway-badge">تحويل بنكي مباشر</span>
+                </div>
+            </div>
+
+            <!-- حقول الإدخال حسب البوابة المختارة -->
+            <!-- 1. iDEAL bank selector -->
+            <div id="gwInput-ideal" class="payment-input-group">
+                <label for="idealBankSelect" class="text-caption text-white-64 mb-1 d-block">اختر البنك الهولندي (Kies uw bank):</label>
+                <select id="idealBankSelect" class="form-select-dark">
+                    <option value="ing">ING Bank</option>
+                    <option value="rabobank">Rabobank</option>
+                    <option value="abnamro">ABN AMRO</option>
+                    <option value="bunq">bunq</option>
+                    <option value="revolut">Revolut NL</option>
+                    <option value="sns">SNS Bank</option>
+                    <option value="asn">ASN Bank</option>
+                </select>
+                <div class="text-caption text-white-64 mt-2" style="font-size:0.7rem;">
+                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect.
+                </div>
+            </div>
+
+            <!-- 2. Stripe Card fields -->
+            <div id="gwInput-card" class="payment-input-group" style="display:none;">
+                <label class="text-caption text-white-64 mb-1 d-block">رقم البطاقة الائتمانية:</label>
+                <input type="text" class="ai-chat-input mb-2" value="4242 •••• •••• 4242" style="font-family:'JetBrains Mono',monospace;">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label class="text-caption text-white-64 mb-1 d-block">تاريخ الانتهاء:</label>
+                        <input type="text" class="ai-chat-input" value="12/28" style="font-family:'JetBrains Mono',monospace;">
+                    </div>
+                    <div class="col-6">
+                        <label class="text-caption text-white-64 mb-1 d-block">رمز الأمان CVC:</label>
+                        <input type="text" class="ai-chat-input" value="888" style="font-family:'JetBrains Mono',monospace;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SEPA Direct Debit -->
+            <div id="gwInput-sepa" class="payment-input-group" style="display:none;">
+                <label class="text-caption text-white-64 mb-1 d-block">رقم الآيبان للشركة (Business IBAN):</label>
+                <input type="text" class="ai-chat-input mb-2" value="NL91 ABNA 0417 1641 00" style="font-family:'JetBrains Mono',monospace;">
+                <label class="text-caption text-white-64 mb-1 d-block">اسم الحساب التجاري (Bedrijfsnaam):</label>
+                <input type="text" class="ai-chat-input" value="S&R B2B Enterprise Client">
+            </div>
+
+            <!-- حالة النجاح بعد الدفع (Success State) -->
+            <div id="chkSuccessBox" style="display:none; background:rgba(16,185,129,0.1); border:1px solid #10b981; border-radius:12px; padding:16px; margin-bottom:16px;">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span style="font-size:1.4rem;">🎉</span>
+                    <div>
+                        <h5 class="fw-bold text-white mb-0" style="font-size:0.95rem;">تم إتمام عملية الدفع بنجاح!</h5>
+                        <span class="text-caption text-white-64">تم تفعيل الترخيص التجاري وإصدار الفاتورة الضريبية الرسمية</span>
+                    </div>
+                </div>
+                <div class="license-key-display my-2">
+                    <span id="chkSuccessKey">PRO-SR-TAXSYNC-COMMERCIAL-2026-X98B</span>
+                    <button type="button" class="table-action-btn" onclick="navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('تم نسخ مفتاح الترخيص!');">نسخ</button>
+                </div>
+                <div class="d-flex gap-2 flex-wrap mt-2">
+                    <button type="button" class="action-cta-btn" id="chkBtnViewInvoice" style="font-size:0.8rem; padding:7px 14px;">
+                        📄 معاينة الفاتورة الصادرة
+                    </button>
+                    <button type="button" class="table-action-btn" onclick="triggerSoftwareDownload()" style="font-size:0.8rem; padding:7px 14px;">
+                        📦 تنزيل حزمة التثبيت
+                    </button>
+                </div>
+            </div>
+
+            <!-- زر الدفع الرئيسي -->
+            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" onclick="executeCheckoutPayment()">
+                <span id="chkBtnSpinner" style="display:none;">⏳</span>
+                <span id="chkBtnText">تأكيد الدفع الآمن وإصدار الفاتورة (€ 228.69)</span>
+            </button>
+            <div class="d-flex justify-content-between align-items-center text-caption text-white-64 mt-2">
+                <span>🔐 SSL 256-Bit Encrypted Transaction</span>
+                <span>PCI-DSS Level 1 Compliant</span>
+            </div>
+        </div>
+    </div>
+
 
     <!-- إشعار التخصيص العائم (Portal Floating Toast) -->
     <div id="portal-toast" style="position:fixed; bottom:24px; left:24px; z-index:9999; background:rgba(9,9,11,0.92); backdrop-filter:blur(12px); border:1px solid var(--gold); border-radius:12px; padding:12px 18px; color:#fff; font-size:13px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:0 12px 32px rgba(0,0,0,0.6); transform:translateY(100px); opacity:0; transition:all 0.35s ease; pointer-events:none;">
