@@ -2197,6 +2197,17 @@
         }
     }
 
+    // Card activation toggle
+    window.toggleDanaCardActive = function (cardEl) {
+        if (!cardEl) return;
+        const allCards = document.querySelectorAll('.dana-signature-card');
+        const wasActive = cardEl.classList.contains('is-active');
+        allCards.forEach(function (c) { c.classList.remove('is-active'); });
+        if (!wasActive) {
+            cardEl.classList.add('is-active');
+        }
+    };
+
     // Override init with extended version
     window.initEnterpriseSuite = initEnterpriseSuiteExtended;
 
