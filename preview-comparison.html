@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معاينة نافذة مقارنة الباقات - S&R CoreSync Solutions</title>
+    <title>معاينة جدول مقارنة باقات الخدمات - S&R CoreSync Solutions</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
@@ -14,21 +14,93 @@
             color: #ffffff;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .preview-wrapper {
+            width: 100%;
+            max-width: 980px;
         }
     </style>
 </head>
 <body>
-    <div style="height: 100vh;"></div>
-    <script src="./css/enterprise-suite.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                if (window.openServicesComparisonModal) {
-                    window.openServicesComparisonModal();
-                }
-            }, 100);
-        });
-    </script>
+    <div class="preview-wrapper">
+        <div class="es-modal-inner" style="max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.9); border: 1.5px solid rgba(197, 168, 128, 0.4);" role="dialog">
+            <div class="es-modal-header">
+                <div class="es-modal-header-left">
+                    <span class="es-modal-tag">مقارنة معتمدة • 2026</span>
+                    <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة</h3>
+                </div>
+            </div>
+            <div class="es-modal-body" style="overflow-x:auto;">
+                <p style="color:rgba(255,255,255,0.7); font-size:0.88rem; margin-bottom:14px;">
+                    جدول المقارنة الاستراتيجي لاختيار المسار الأمثل لمنشأتكم مع أسعار تنافسية واضحة ومدروسة.
+                </p>
+                <table class="es-compare-table">
+                    <thead>
+                        <tr>
+                            <th>الميزة والقدرة التقنية</th>
+                            <th>الهوية البصرية<br><span style="color:#c5a880; font-size:0.95rem; font-weight:800;" data-eur-price="590">€590</span></th>
+                            <th>تصميم المواقع<br><span style="color:#c5a880; font-size:0.95rem; font-weight:800;" data-eur-price="980">€980</span></th>
+                            <th>متجر إلكتروني + ERP<br><span style="color:#c5a880; font-size:0.95rem; font-weight:800;" data-eur-price="1450">€1,450</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>مدة التنفيذ والتسليم المعتمدة</td>
+                            <td>5 - 7 أيام عمل</td>
+                            <td>10 - 14 يوم عمل</td>
+                            <td>14 - 20 يوم عمل</td>
+                        </tr>
+                        <tr>
+                            <td>دليل العلامة والهوية الكامل (Brand Guidelines)</td>
+                            <td><span class="es-compare-check">✓</span> متكامل 100%</td>
+                            <td><span class="es-compare-check">✓</span> تضمين الشعار والخطوط</td>
+                            <td><span class="es-compare-check">✓</span> نظام هوية رقمي كامل</td>
+                        </tr>
+                        <tr>
+                            <td>واجهات UI/UX حصرية متوافقة مع جميع الشاشات</td>
+                            <td><span class="es-compare-dash">—</span></td>
+                            <td><span class="es-compare-check">✓</span> فائق السرعة والأداء</td>
+                            <td><span class="es-compare-check">✓</span> تجربة تسوق محسنة للتحويل</td>
+                        </tr>
+                        <tr>
+                            <td>بوابات الدفع الأوروبية (iDEAL, Stripe, Mollie, Apple Pay)</td>
+                            <td><span class="es-compare-dash">—</span></td>
+                            <td>اختياري</td>
+                            <td><span class="es-compare-check">✓</span> ربط مباشر متوافق مع PSD2</td>
+                        </tr>
+                        <tr>
+                            <td>المزامنة السحابية مع دفاتر المحاسبة والـ ERP</td>
+                            <td><span class="es-compare-dash">—</span></td>
+                            <td><span class="es-compare-dash">—</span></td>
+                            <td><span class="es-compare-check">✓</span> فواتير وضريبة BTW/VAT لحظية</td>
+                        </tr>
+                        <tr>
+                            <td>تحسين محركات البحث وسرعة التحميل (SEO & Speed)</td>
+                            <td>تصدير بصيغ ويب حديثة (SVG/WebP)</td>
+                            <td><span class="es-compare-check">✓</span> PageSpeed 95+ و Schema.org</td>
+                            <td><span class="es-compare-check">✓</span> SEO احترافي للمنتجات والتصنيفات</td>
+                        </tr>
+                        <tr>
+                            <td>الدعم الفني وضمان ما بعد الإطلاق</td>
+                            <td>30 يوماً</td>
+                            <td>60 يوماً</td>
+                            <td>90 يوماً شامل التحديثات</td>
+                        </tr>
+                        <tr>
+                            <td>الإجراء المباشر</td>
+                            <td><button type="button" class="dana-btn-booking" style="width:100%;">حجز استشارة 📅</button></td>
+                            <td><button type="button" class="dana-btn-booking" style="width:100%;">حجز استشارة 📅</button></td>
+                            <td><button type="button" class="dana-btn-booking" style="width:100%;">حجز استشارة 📅</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
