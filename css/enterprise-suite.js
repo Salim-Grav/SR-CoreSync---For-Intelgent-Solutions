@@ -110,6 +110,7 @@
         injectCaseStudyModal();
         attachEstimatorButton();
         injectHeaderDemoPill();
+        injectHeaderCurrencyWidget();
         bindCaseStudiesOnCards();
         checkURLParams();
     }
@@ -1707,15 +1708,39 @@
     };
 
     let activeCurrency = 'EUR';
+    try {
+        const savedCur = localStorage.getItem('coresync_currency');
+        if (savedCur && CURRENCIES[savedCur]) {
+            activeCurrency = savedCur;
+        }
+    } catch(e){}
 
     window.switchCurrency = function(code) {
         if (!CURRENCIES[code]) return;
         activeCurrency = code;
         const cur = CURRENCIES[code];
 
-        // Update all currency buttons across document
-        document.querySelectorAll('.es-currency-btn, .dana-cur-pill').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.currency === code);
+        // Persist preference
+        try {
+            localStorage.setItem('coresync_currency', code);
+        } catch(e) {}
+
+        // Update all currency buttons across document (pills, modal buttons, and header dropdown options)
+        document.querySelectorAll('.es-currency-btn, .dana-cur-pill, .header-cur-option').forEach(btn => {
+            const isMatch = btn.dataset.currency === code;
+            btn.classList.toggle('active', isMatch);
+            btn.classList.toggle('is-active', isMatch);
+        });
+
+        // Update Header Currency Display badge
+        document.querySelectorAll('.header-currency').forEach(hc => {
+            const currentBadge = hc.querySelector('.header-currency__current') || document.getElementById('headerCurCurrent');
+            if (currentBadge) {
+                currentBadge.innerHTML = `
+                    <span class="header-cur-flag">${cur.flag}</span>
+                    <span class="header-cur-code">${code} (${cur.symbol})</span>
+                `;
+            }
         });
 
         // Update all price displays tagged with data-eur-price
@@ -1724,6 +1749,21 @@
             if (isNaN(baseEur)) return;
             const converted = Math.round(baseEur * cur.rate);
             const formatted = converted.toLocaleString('en-US');
+
+            // Handle preceding currency symbol sibling (e.g. in pricing cards)
+            const prev = el.previousElementSibling;
+            if (prev && (prev.classList.contains('gold-accent') || prev.dataset.currencySymbolMarker === 'true')) {
+                prev.dataset.currencySymbolMarker = 'true';
+                if (code === 'SAR' || code === 'AED') {
+                    prev.style.display = 'none';
+                    el.textContent = `${formatted} ${cur.symbol}`;
+                } else {
+                    prev.style.display = '';
+                    prev.textContent = cur.symbol;
+                    el.textContent = formatted;
+                }
+                return;
+            }
 
             if (code === 'SAR' || code === 'AED') {
                 el.textContent = `${formatted} ${cur.symbol}`;
@@ -1741,7 +1781,72 @@
         if (window.switchROICurrency) {
             window.switchROICurrency(code);
         }
+
+        // Recalculate comparison addons if table is open
+        if (window.recalcComparisonAddons) {
+            window.recalcComparisonAddons();
+        }
     };
+
+    // Auto-inject header currency widget if not already in DOM
+    function injectHeaderCurrencyWidget() {
+        if (document.getElementById('headerCurrencyDropdown')) return;
+        const actions = document.querySelector('.header-col-actions');
+        if (!actions) return;
+
+        const cur = CURRENCIES[activeCurrency] || CURRENCIES.EUR;
+        const isAr = document.documentElement.lang === 'ar' || !document.documentElement.lang;
+        const isNl = document.documentElement.lang === 'nl';
+        
+        const curWidget = document.createElement('details');
+        curWidget.id = 'headerCurrencyDropdown';
+        curWidget.className = 'header-currency notranslate';
+        curWidget.setAttribute('translate', 'no');
+        
+        const optLabels = {
+            EUR: isAr ? 'اليورو (EUR)' : (isNl ? 'EUR (Euro)' : 'EUR (Euro)'),
+            USD: isAr ? 'الدولار (USD)' : (isNl ? 'USD (Dollar)' : 'USD (Dollar)'),
+            SAR: isAr ? 'الريال السعودي (SAR)' : (isNl ? 'SAR (Riyal)' : 'SAR (Riyal)'),
+            AED: isAr ? 'الدرهم الإماراتي (AED)' : (isNl ? 'AED (Dirham)' : 'AED (Dirham)'),
+            GBP: isAr ? 'الجنيه الإسترليني (GBP)' : (isNl ? 'GBP (Pound)' : 'GBP (Pound)')
+        };
+
+        curWidget.innerHTML = `
+            <summary aria-label="${isAr ? 'اختيار العملة' : (isNl ? 'Selecteer Valuta' : 'Select Currency')}">
+                <span class="header-currency__current" id="headerCurCurrent">
+                    <span class="header-cur-flag">${cur.flag}</span>
+                    <span class="header-cur-code">${activeCurrency} (${cur.symbol})</span>
+                </span>
+                <span class="header-currency__chevron" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+            </summary>
+            <div class="header-currency__options">
+                ${Object.entries(CURRENCIES).map(([code, c]) => `
+                    <button type="button" class="header-cur-option${code === activeCurrency ? ' is-active' : ''}" data-currency="${code}" onclick="window.switchCurrency('${code}'); this.closest('details').removeAttribute('open');">
+                        <span class="opt-left"><span class="header-cur-flag">${c.flag}</span><span>${optLabels[code] || code}</span></span>
+                        <span class="opt-symbol">${c.symbol}</span>
+                    </button>
+                `).join('')}
+            </div>
+        `;
+
+        const langSwitcher = actions.querySelector('.header-language');
+        if (langSwitcher && langSwitcher.nextSibling) {
+            actions.insertBefore(curWidget, langSwitcher.nextSibling);
+        } else {
+            actions.prepend(curWidget);
+        }
+    }
+
+    // Close header currency on click outside
+    document.addEventListener('click', function(e) {
+        document.querySelectorAll('.header-currency').forEach(function(el) {
+            if (el.hasAttribute('open') && !el.contains(e.target)) {
+                el.removeAttribute('open');
+            }
+        });
+    });
 
     /* =====================================================================
        FEATURE 5: Cloud Architecture ROI & Cost Optimizer
