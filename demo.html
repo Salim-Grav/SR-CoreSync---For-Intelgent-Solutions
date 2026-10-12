@@ -1915,6 +1915,214 @@
             });
         }
 
+        // =========================================================================
+        // 1. محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator Logic)
+        // =========================================================================
+        let currentCurrency = 'EUR';
+        let currentVatRate = 0.21;
+        const currencyConfig = {
+            EUR: { symbol: '€', rate: 1.0, label: 'يورو (EUR)' },
+            USD: { symbol: '$', rate: 1.08, label: 'دولار أمريكي (USD)' },
+            SAR: { symbol: '﷼', rate: 4.05, label: 'ريال سعودي (SAR)' }
+        };
+        const baseFinancials = {
+            revenue: 842500,
+            cashflow: 318920
+        };
+
+        function setCurrency(cur) {
+            if (!currencyConfig[cur]) return;
+            currentCurrency = cur;
+            document.querySelectorAll('.cur-pill').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`curPill-${cur}`);
+            if (activeBtn) activeBtn.classList.add('active');
+            updateGlobalFinancials();
+            showPortalToast(`💱 تم التبديل إلى عملة: ${currencyConfig[cur].label}`);
+        }
+
+        function setGlobalVat(rate) {
+            currentVatRate = parseFloat(rate) || 0;
+            updateGlobalFinancials();
+            const vatText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :
+                            currentVatRate === 0.09 ? 'BTW مخفض (9%)' :
+                            currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى (0%)';
+            showPortalToast(`🏛️ تم تطبيق النظام الضريبي: ${vatText}`);
+        }
+
+        function updateGlobalFinancials() {
+            const conf = currencyConfig[currentCurrency];
+            const rev = baseFinancials.revenue * conf.rate;
+            const cash = baseFinancials.cashflow * conf.rate;
+            const vatEst = rev * currentVatRate;
+
+            const revEl = document.getElementById('stat-revenue');
+            const cashEl = document.getElementById('stat-cashflow');
+            const vatEstEl = document.getElementById('globalVatEst');
+            const sym1 = document.getElementById('stat-currency-sym1');
+
+            if (revEl) revEl.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (cashEl) cashEl.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (vatEstEl) vatEstEl.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (sym1) sym1.innerText = conf.symbol;
+
+            // تحديث محتوى نافذة الـ PDF
+            const pdfRev = document.getElementById('pdfRevVal');
+            const pdfCash = document.getElementById('pdfCashVal');
+            const pdfVat = document.getElementById('pdfVatVal');
+            const pdfVatScheme = document.getElementById('pdfVatScheme');
+            if (pdfRev) pdfRev.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfCash) pdfCash.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVat) pdfVat.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVatScheme) {
+                pdfVatScheme.innerText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :
+                                         currentVatRate === 0.09 ? 'BTW مخفض (9%)' :
+                                         currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى من الضريبة (0%)';
+            }
+        }
+
+        // =========================================================================
+        // 2. الجولة الإرشادية التفاعلية (Interactive Guided Tour Logic)
+        // =========================================================================
+        const tourSteps = [
+            {
+                targetId: 'currencyVatSimulatorBar',
+                tab: 'overview',
+                title: '⚡ محاكي العملات والضرائب اللحظي (Simulator Bar)',
+                desc: 'يتيح للزبون التبديل اللحظي بين اليورو والدولار والريال السعودي مع احتساب مباشر لضريبة القيمة المضافة BTW 21% والخليجية 15% وتحديث الأرقام فورياً.'
+            },
+            {
+                targetId: 'tourStatsGrid',
+                tab: 'overview',
+                title: '📊 لوحة القيادة والتدفق المالي (Financial KPIs)',
+                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، التدفقات النقدية الصافية، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+            },
+            {
+                targetId: 'tourNav-erp',
+                tab: 'erp',
+                title: '📦 إدارة الـ ERP والمخازن الذكية',
+                desc: 'وحدة الـ ERP الموزعة لإدارة الفروع المتعددة، تتبع سلاسل التوريد، والتنبؤ بالطلب بدقة عالية.'
+            },
+            {
+                targetId: 'tourNav-invoices',
+                tab: 'invoices',
+                title: '🧾 الفواتير الإلكترونية والامتثال الضريبي الأوروبي',
+                desc: 'إنشاء الفواتير المشفرة بنظام EN 16931 الأوروبي وتوافق كامل مع بوابات الدفع iDEAL والتحويل المصرفي SEPA.'
+            },
+            {
+                targetId: 'softwareGridContainer',
+                tab: 'software',
+                title: '💻 سوق البرمجيات وحاسبة S&R TaxSync',
+                desc: 'تراخيص رقمية فورية، حاسبة ضريبة BTW مدمجة، ومولد مفاتيح تجريبية (14 يوماً) يعمل بضغطة زر مع تنزيل فوري.'
+            }
+        ];
+        let currentTourStep = 0;
+
+        function startGuidedTour() {
+            currentTourStep = 0;
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'block';
+            if (card) card.style.display = 'block';
+            renderTourStep();
+            showPortalToast('🚀 مرحباً بك في الجولة الإرشادية التفاعلية!');
+        }
+
+        function renderTourStep() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+
+            const step = tourSteps[currentTourStep];
+            if (!step) return;
+
+            // التبديل إلى التبويب المطلوب إذا لزم
+            const tabBtn = document.querySelector(`.nav-item[onclick*="'${step.tab}'"]`);
+            if (tabBtn) {
+                switchPortalTab(step.tab, tabBtn);
+            }
+
+            document.getElementById('tourStepBadge').innerText = `خطوة ${currentTourStep + 1} من ${tourSteps.length}`;
+            document.getElementById('tourStepTitle').innerText = step.title;
+            document.getElementById('tourStepDesc').innerText = step.desc;
+
+            const prevBtn = document.getElementById('tourPrevBtn');
+            const nextBtn = document.getElementById('tourNextBtn');
+            if (prevBtn) prevBtn.style.visibility = currentTourStep === 0 ? 'hidden' : 'visible';
+            if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'إنهاء الجولة ✓' : 'التالي ➡️';
+
+            // تحديد وتأطير العنصر
+            setTimeout(() => {
+                const target = document.getElementById(step.targetId);
+                const card = document.getElementById('tourCard');
+                if (target) {
+                    target.classList.add('tour-highlight-target');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    if (card) {
+                        const rect = target.getBoundingClientRect();
+                        const cardWidth = 360;
+                        let topPos = rect.bottom + 15;
+                        let leftPos = rect.left + (rect.width / 2) - (cardWidth / 2);
+
+                        if (topPos + 220 > window.innerHeight) {
+                            topPos = Math.max(20, rect.top - 230);
+                        }
+                        if (leftPos < 20) leftPos = 20;
+                        if (leftPos + cardWidth > window.innerWidth) leftPos = window.innerWidth - cardWidth - 20;
+
+                        card.style.top = `${topPos}px`;
+                        card.style.left = `${leftPos}px`;
+                    }
+                } else if (card) {
+                    card.style.top = '35%';
+                    card.style.left = 'calc(50% - 180px)';
+                }
+            }, 150);
+        }
+
+        function nextTourStep() {
+            if (currentTourStep < tourSteps.length - 1) {
+                currentTourStep++;
+                renderTourStep();
+            } else {
+                endGuidedTour();
+                showPortalToast('🎉 اكتملت الجولة الإرشادية بنجاح!');
+            }
+        }
+
+        function prevTourStep() {
+            if (currentTourStep > 0) {
+                currentTourStep--;
+                renderTourStep();
+            }
+        }
+
+        function endGuidedTour() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'none';
+            if (card) card.style.display = 'none';
+        }
+
+        // =========================================================================
+        // 3. تصدير ملخص العرض التنفيذي كـ PDF (One-Click Executive PDF Logic)
+        // =========================================================================
+        function openExecutivePdfModal() {
+            updateGlobalFinancials();
+            const dateEl = document.getElementById('pdfDateDisplay');
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeExecutivePdfModal() {
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function printExecutiveBrief() {
+            window.print();
+        }
+
         function triggerSoftwareDownload() {
             if (!currentActiveSoftware) return;
             const title = currentActiveSoftware.title;
