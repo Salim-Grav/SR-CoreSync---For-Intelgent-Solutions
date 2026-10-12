@@ -2638,42 +2638,68 @@
         html[lang="ar"] .tf-header .header-inner .row,
         html[lang="ar"] .tf-header.header-refined .header-inner .row {
             direction: rtl !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 16px !important;
         }
 
         html[lang="ar"] .header-col-brand {
             order: 1 !important; /* طرف اليمين */
+            flex: 0 0 auto !important;
         }
 
         html[lang="ar"] .header-col-nav {
             order: 2 !important; /* الوسط */
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
             direction: rtl !important;
         }
 
         html[lang="ar"] .header-col-actions {
             order: 3 !important; /* طرف اليسار */
-            direction: rtl !important;
+            flex: 0 0 auto !important;
+            direction: ltr !important; /* ترتيب الأزرار بوضوح من اليسار نحو الداخل */
             justify-content: flex-start !important;
+            align-items: center !important;
+            display: flex !important;
+            gap: 7px !important;
+            white-space: nowrap !important;
         }
 
         /* ضبط الاتجاه LTR للنسخ الأجنبية */
         html:not([lang="ar"]) .tf-header .header-inner .row,
         html:not([lang="ar"]) .tf-header.header-refined .header-inner .row {
             direction: ltr !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 16px !important;
         }
 
         html:not([lang="ar"]) .header-col-brand {
             order: 1 !important;
+            flex: 0 0 auto !important;
         }
 
         html:not([lang="ar"]) .header-col-nav {
             order: 2 !important;
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
             direction: ltr !important;
         }
 
         html:not([lang="ar"]) .header-col-actions {
             order: 3 !important;
+            flex: 0 0 auto !important;
             direction: ltr !important;
             justify-content: flex-end !important;
+            align-items: center !important;
+            display: flex !important;
+            gap: 7px !important;
+            white-space: nowrap !important;
         }
 
         .tf-header .header-inner .row > div {
@@ -2684,7 +2710,7 @@
             max-width: none !important;
         }
 
-        /* 1. Zone 1: Brand & Emblem */
+        /* 1. Zone 1: Brand & Emblem - قفل الاتجاه LTR دائماً للشعار لمنع الانقلاب */
         .header-col-brand {
             flex: 0 0 auto !important;
             display: flex !important;
@@ -2695,16 +2721,27 @@
         .brand-logo-site {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 8px !important;
+            gap: 10px !important;
             text-decoration: none !important;
+            direction: ltr !important; /* حماية العلامة التجارية من الانقلاب في RTL */
+            unicode-bidi: isolate !important;
+        }
+
+        .brand-logo-site-logo {
+            display: inline-flex !important;
+            align-items: baseline !important;
+            gap: 5px !important;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
         }
 
         .brand-emblem-img {
-            width: 38px !important;
-            height: 38px !important;
+            width: 40px !important;
+            height: 40px !important;
             object-fit: contain !important;
             filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.45)) !important;
             transition: transform 0.3s ease, filter 0.3s ease !important;
+            flex-shrink: 0 !important;
         }
 
         .brand-emblem-img:hover {
@@ -2713,24 +2750,19 @@
         }
 
         .brand-sr-text {
-            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-family: 'Playfair Display', 'Plus Jakarta Sans', serif, sans-serif !important;
             font-weight: 800 !important;
-            font-size: 1.12rem !important;
+            font-size: 1.22rem !important;
             color: var(--primary-gold) !important;
-            letter-spacing: -0.5px !important;
+            letter-spacing: -0.3px !important;
         }
 
         .brand-sub-text {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             font-weight: 700 !important;
-            font-size: 1.12rem !important;
+            font-size: 1.22rem !important;
             color: #ffffff !important;
-            letter-spacing: -0.5px !important;
-            margin-right: 4px;
-        }
-        html:not([lang="ar"]) .brand-sub-text {
-            margin-right: 0;
-            margin-left: 4px;
+            letter-spacing: -0.3px !important;
         }
 
         /* 2. Zone 2: Desktop Navigation Bar */
