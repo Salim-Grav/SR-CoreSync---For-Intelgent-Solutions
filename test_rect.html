@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/enterprise-suite.css">
+</head>
+<body style="background:#010907; min-height:100vh;">
+    <script src="css/enterprise-suite.js"></script>
+    <div id="dbg" style="color:#fff; font-size:14px; padding:20px;"></div>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const el = document.getElementById('esFloatingSuite');
+                if (!el) {
+                    document.getElementById('dbg').textContent = 'NOT FOUND';
+                    return;
+                }
+                const rect = el.getBoundingClientRect();
+                const cs = getComputedStyle(el);
+                document.getElementById('dbg').textContent = JSON.stringify({
+                    top: rect.top,
+                    bottom: rect.bottom,
+                    left: rect.left,
+                    right: rect.right,
+                    width: rect.width,
+                    height: rect.height,
+                    position: cs.position,
+                    zIndex: cs.zIndex
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
