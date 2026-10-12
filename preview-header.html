@@ -44,7 +44,7 @@
             direction: rtl !important;
         }
 
-        /* 1. العلامة التجارية والشعار (أقصى اليمين في RTL) */
+        /* 1. العلامة التجارية والشعار (الشعار قبل النص من اليمين إلى اليسار) */
         .header-col-brand {
             flex: 0 0 auto !important;
             order: 1 !important;
@@ -55,25 +55,23 @@
         .brand-logo-site {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 10px !important;
+            gap: 12px !important;
             text-decoration: none !important;
-            direction: ltr !important; /* ثابت LTR حتى لا ينقلب الرمز والنص */
-            unicode-bidi: isolate !important;
+            direction: rtl !important; /* اتجاه طبيعي من اليمين إلى اليسار: الشعار قبل النص */
         }
 
         .brand-logo-site-logo {
             display: inline-flex !important;
             align-items: baseline !important;
-            gap: 5px !important;
-            direction: ltr !important;
-            unicode-bidi: isolate !important;
+            gap: 6px !important;
+            direction: rtl !important;
         }
 
         .brand-emblem-img {
-            width: 42px !important;
-            height: 42px !important;
+            width: 44px !important;
+            height: 44px !important;
             object-fit: contain !important;
-            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5)) !important;
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45)) !important;
             transition: transform 0.3s ease !important;
         }
 
