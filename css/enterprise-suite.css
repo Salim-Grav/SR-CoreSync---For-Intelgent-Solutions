@@ -1521,3 +1521,108 @@ input[type="range"].es-slider::-webkit-slider-thumb { -webkit-appearance: none; 
     color: #ffffff;
     box-shadow: 0 3px 12px rgba(205, 0, 113, 0.4);
 }
+
+/* ==========================================================================
+   إصلاح حاوية قسم الخدمات وكروت دانا نجمة الفاخرة (Full-Width Responsive Fix)
+   ========================================================================== */
+.service-orbit-section > .container,
+html[lang="ar"] .service-orbit-section > .container,
+html[lang="en"] .service-orbit-section > .container,
+html[lang="nl"] .service-orbit-section > .container {
+    display: block !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    max-width: 1380px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: clamp(16px, 2.5vw, 36px) !important;
+    padding-right: clamp(16px, 2.5vw, 36px) !important;
+    box-sizing: border-box !important;
+    float: none !important;
+}
+
+.service-orbit-section .s-header {
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 2.2rem !important;
+    display: block !important;
+}
+
+.dana-signature-section-header {
+    width: 100% !important;
+    margin-bottom: 2.5rem !important;
+    text-align: center !important;
+    display: block !important;
+}
+
+.dana-signature-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: clamp(1.4rem, 2.2vw, 2.2rem) !important;
+    margin-bottom: 3.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 991px) {
+    .dana-signature-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.8rem !important;
+    }
+}
+
+.dana-signature-card {
+    background: linear-gradient(180deg, #0b120e 0%, #030806 100%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px !important;
+    padding: clamp(1.4rem, 2vw, 2.2rem) !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75) !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    min-height: 520px !important;
+}
+
+.dana-signature-card:hover,
+.dana-signature-card.is-active,
+.dana-signature-card:focus-within {
+    border-color: rgba(197, 168, 128, 0.85) !important;
+    transform: translateY(-8px) scale(1.015) !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(197, 168, 128, 0.35) !important;
+}
+
+.dana-card-actions-row {
+    display: flex !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+}
+
+.dana-btn-booking {
+    flex: 1 !important;
+    background: rgba(197, 168, 128, 0.15) !important;
+    border: 1px solid var(--gold, #c5a880) !important;
+    color: var(--gold, #c5a880) !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    padding: 10px 12px !important;
+    font-size: 0.8rem !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    text-decoration: none !important;
+}
+
+.dana-btn-booking:hover {
+    background: var(--gold, #c5a880) !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4) !important;
+}
+
