@@ -58,14 +58,16 @@
             align-items: center !important;
             gap: 12px !important;
             text-decoration: none !important;
-            direction: rtl !important; /* اتجاه طبيعي من اليمين إلى اليسار: الشعار قبل النص */
+            direction: ltr !important; /* قفل الاتجاه LTR دائماً للشعار لمنع الانقلاب وحماية الهوية البصرية الرسمية */
+            unicode-bidi: isolate !important;
         }
 
         .brand-logo-site-logo {
             display: inline-flex !important;
             align-items: baseline !important;
             gap: 6px !important;
-            direction: rtl !important;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
         }
 
         .brand-emblem-img {
