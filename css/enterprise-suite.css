@@ -1141,6 +1141,50 @@
 .es-roi-slider-val { color: var(--es-gold); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; }
 input[type="range"].es-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 999px; background: rgba(255, 255, 255, 0.1); outline: none; cursor: pointer; }
 input[type="range"].es-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--es-gold); border: 2px solid #010907; box-shadow: 0 0 8px rgba(197, 168, 128, 0.5); cursor: pointer; }
+
+/* بالون التلميح الرقمي العائم لمقابض حاسبة ROI التفاعلية (ROI Slider Drag Tooltip) */
+.sr-roi-range-wrap {
+    position: relative;
+    width: 100%;
+    padding: 18px 0 6px;
+}
+.sr-roi-drag-bubble {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background: linear-gradient(135deg, rgba(20, 26, 23, 0.96), rgba(7, 13, 10, 0.98));
+    border: 1px solid rgba(243, 223, 186, 0.75);
+    color: #f3dfba;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.75), 0 0 12px rgba(197, 168, 128, 0.4);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    z-index: 20;
+    letter-spacing: 0.3px;
+}
+.sr-roi-drag-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: rgba(243, 223, 186, 0.75) transparent transparent;
+}
+.sr-roi-range-wrap.is-active .sr-roi-drag-bubble,
+.sr-roi-range-wrap:hover .sr-roi-drag-bubble,
+.sr-roi-range-wrap:focus-within .sr-roi-drag-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-100%) scale(1.06);
+}
+
 .es-roi-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
 .es-roi-compare-card { border-radius: 12px; padding: 16px; text-align: center; }
 .es-roi-compare-card.current { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); }
