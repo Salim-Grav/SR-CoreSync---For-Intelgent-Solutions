@@ -3965,14 +3965,49 @@
             margin-bottom: 1.2rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+        /* ===================================================================
+           إصلاح وتوسيع حاوية قسم الخدمات (Fix Full-Width Container Layout)
+           =================================================================== */
+        .service-orbit-section > .container,
+        html[lang="ar"] .service-orbit-section > .container,
+        html[lang="en"] .service-orbit-section > .container,
+        html[lang="nl"] .service-orbit-section > .container {
+            display: block !important;
+            grid-template-columns: none !important;
+            width: 100% !important;
+            max-width: 1360px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: clamp(16px, 2.5vw, 36px) !important;
+            padding-right: clamp(16px, 2.5vw, 36px) !important;
+            box-sizing: border-box !important;
+        }
+
+        .service-orbit-section .s-header {
+            width: 100% !important;
+            text-align: center !important;
+            margin-bottom: 2rem !important;
+        }
+
+        .dana-signature-section-header {
+            width: 100% !important;
+            margin-bottom: 2.2rem !important;
+            text-align: center !important;
+        }
 
         .dana-signature-grid {
             display: grid !important;
             grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-            gap: clamp(1.2rem, 2vw, 2rem) !important;
+            gap: clamp(1.4rem, 2.2vw, 2.2rem) !important;
             margin-bottom: 3.5rem !important;
             width: 100% !important;
             box-sizing: border-box !important;
+        }
+
+        @media (max-width: 991px) {
+            .dana-signature-grid {
+                grid-template-columns: 1fr !important;
+            }
         }
 
         .tab-pane.pane-hidden {
@@ -3984,23 +4019,26 @@
         }
 
         .dana-signature-card {
-            background: linear-gradient(180deg, #0a0e0c 0%, #030705 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(180deg, #0b120e 0%, #030806 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
-            padding: clamp(1.4rem, 2vw, 2rem);
+            padding: clamp(1.4rem, 2vw, 2.2rem);
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
             overflow: hidden;
+            cursor: pointer;
         }
 
-        .dana-signature-card:hover {
-            border-color: rgba(197, 168, 128, 0.5);
-            transform: translateY(-6px);
-            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(197, 168, 128, 0.18);
+        .dana-signature-card:hover,
+        .dana-signature-card.is-active,
+        .dana-signature-card:focus-within {
+            border-color: rgba(197, 168, 128, 0.8) !important;
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(197, 168, 128, 0.35) !important;
         }
 
         /* شارات الثقة لبوابات الدفع الأوروبية (Payment Trust Badges) */
