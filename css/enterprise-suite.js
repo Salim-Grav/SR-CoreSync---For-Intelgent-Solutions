@@ -912,8 +912,19 @@
         return { text: AI_KB.default[lang] || AI_KB.default.ar, category: 'default' };
     }
 
+    window.toggleAiChat = function () {
+        const win = document.getElementById('esAiChatWindow');
+        if (win) {
+            win.classList.toggle('active');
+            if (win.classList.contains('active')) {
+                const input = document.getElementById('esAiInput');
+                input && input.focus();
+            }
+        }
+    };
+
     function injectAIConcierge() {
-        if (document.getElementById('esAiFab')) return;
+        if (document.getElementById('esAiChatWindow')) return;
         const lang = detectLang();
         const labels = {
             ar: { name: 'CoreSync AI Concierge', status: 'متاح الآن', humanBtn: '👤 خبير بشري', placeholder: 'اكتب سؤالك...', send: 'إرسال', quick: ['☁️ الحلول السحابية', '💼 أنظمة ERP', '🤖 الذكاء الاصطناعي', '💰 طلب عرض سعر', '📞 تواصل معنا'] },
@@ -922,16 +933,6 @@
         };
         const lbl = labels[lang] || labels.ar;
         const welcomeMsg = AI_KB.default[lang] || AI_KB.default.ar;
-
-        const fab = document.createElement('button');
-        fab.id = 'esAiFab';
-        fab.className = 'es-ai-fab';
-        fab.setAttribute('aria-label', 'Open AI Concierge');
-        fab.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.6 5.9-4 7.5V21a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2.5A9 9 0 0 1 3 11a9 9 0 0 1 9-9z"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>`;
-        fab.onclick = () => {
-            const win = document.getElementById('esAiChatWindow');
-            win && win.classList.toggle('active');
-        };
 
         const humanWhatsAppMsg = encodeURIComponent('مرحباً فريق S&R CoreSync، أود التحدث مع خبير بشري (م. سليم عزيزة أو أ. رائد كعكة) لمناقشة متطلبات مشروعنا.');
 
@@ -966,8 +967,18 @@
             </div>
         `;
 
-        document.body.appendChild(fab);
         document.body.appendChild(win);
+
+        // Bind chat toggle to the floating follow chat button
+        const followChatBtn = document.getElementById('floatingFollowChatBtn');
+        if (followChatBtn) {
+            followChatBtn.onclick = window.toggleAiChat;
+        }
+
+        // Auto open if URL has #chat hash
+        if (window.location.hash === '#chat') {
+            win.classList.add('active');
+        }
 
         const input = document.getElementById('esAiInput');
         if (input) {
