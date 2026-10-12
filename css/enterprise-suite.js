@@ -1184,10 +1184,16 @@
         if (grandEl) grandEl.textContent = `€${total.toLocaleString('en')}`;
 
         const overlay = document.getElementById('esQuoteModalOverlay');
-        if (overlay) overlay.classList.add('active');
+        if (overlay) {
+            triggerHaptic(15);
+            overlay.classList.add('active');
+        }
     };
 
-    window.closeQuoteModal = () => document.getElementById('esQuoteModalOverlay')?.classList.remove('active');
+    window.closeQuoteModal = () => {
+        triggerHaptic(10);
+        document.getElementById('esQuoteModalOverlay')?.classList.remove('active');
+    };
     window.printOfficialQuote = () => window.print();
 
     // =========================================================================
