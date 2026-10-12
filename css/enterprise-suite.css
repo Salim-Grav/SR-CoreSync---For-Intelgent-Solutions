@@ -341,18 +341,56 @@
 .es-floating-suite {
     position: fixed;
     bottom: 24px;
-    left: 24px !important;
-    right: auto !important;
     z-index: 9995;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    align-items: flex-start;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* RTL Layout (Arabic) - Floating suite & side rail on LEFT, GoTop on RIGHT */
 [dir="rtl"] .es-floating-suite,
-[dir="ltr"] .es-floating-suite {
+html[lang="ar"] .es-floating-suite {
     left: 24px !important;
+    right: auto !important;
+    align-items: flex-start !important;
+}
+
+[dir="rtl"] .floating-follow,
+html[lang="ar"] .floating-follow {
+    left: 18px !important;
+    right: auto !important;
+}
+
+[dir="rtl"] .floating-actions,
+html[lang="ar"] .floating-actions {
+    right: 20px !important;
+    left: auto !important;
+}
+
+/* LTR Layout (English & Dutch) - Floating suite & side rail on RIGHT, GoTop on LEFT */
+[dir="ltr"] .es-floating-suite,
+html[lang="en"] .es-floating-suite,
+html[lang="nl"] .es-floating-suite,
+html:not([dir="rtl"]) .es-floating-suite {
+    right: 24px !important;
+    left: auto !important;
+    align-items: flex-end !important;
+}
+
+[dir="ltr"] .floating-follow,
+html[lang="en"] .floating-follow,
+html[lang="nl"] .floating-follow,
+html:not([dir="rtl"]) .floating-follow {
+    right: 18px !important;
+    left: auto !important;
+}
+
+[dir="ltr"] .floating-actions,
+html[lang="en"] .floating-actions,
+html[lang="nl"] .floating-actions,
+html:not([dir="rtl"]) .floating-actions {
+    left: 20px !important;
     right: auto !important;
 }
 
