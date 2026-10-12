@@ -1190,11 +1190,278 @@
     window.closeQuoteModal = () => document.getElementById('esQuoteModalOverlay')?.classList.remove('active');
     window.printOfficialQuote = () => window.print();
 
-    window.openFeedbackModal = () => document.getElementById('esFeedbackModalOverlay')?.classList.add('active');
-    window.closeFeedbackModal = () => document.getElementById('esFeedbackModalOverlay')?.classList.remove('active');
+    // =========================================================================
+    // Haptic Feedback Engine (Mobile & Touch Interaction)
+    // =========================================================================
+    function triggerHaptic(duration = 15) {
+        if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+            try {
+                navigator.vibrate(duration);
+            } catch (e) {}
+        }
+    }
+    window.triggerHaptic = triggerHaptic;
+
+    // =========================================================================
+    // Full Page Language Auto-Sync & Navigation Resolver
+    // =========================================================================
+    function getLocalizedTargetUrl(targetLang) {
+        const currentPath = window.location.pathname;
+        let filename = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
+        if (!filename.endsWith('.html')) filename = 'index.html';
+
+        const isNl = currentPath.includes('/nl/');
+        const isEn = currentPath.includes('/en/');
+
+        if (targetLang === 'ar') {
+            if (isNl || isEn) return '../' + filename;
+            return filename;
+        } else if (targetLang === 'en') {
+            if (isEn) return filename;
+            if (isNl) return '../en/' + filename;
+            return 'en/' + filename;
+        } else if (targetLang === 'nl') {
+            if (isNl) return filename;
+            if (isEn) return '../nl/' + filename;
+            return 'nl/' + filename;
+        }
+        return filename;
+    }
+    window.getLocalizedTargetUrl = getLocalizedTargetUrl;
+
+    let toastTimeout = null;
+    function showLangSyncToast(targetLang) {
+        if (targetLang === getPageLang()) {
+            dismissLangSyncToast();
+            return;
+        }
+
+        let toast = document.getElementById('esLangSyncToast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'esLangSyncToast';
+            toast.className = 'es-lang-sync-toast';
+            document.body.appendChild(toast);
+        }
+
+        const toastDict = {
+            ar: {
+                msg: 'هل ترغب في تطبيق اللغة العربية على كامل الموقع وتصفح كافة الأقسام؟',
+                btn: 'مزامنة الموقع الآن',
+                dir: 'rtl'
+            },
+            en: {
+                msg: 'Apply English to the entire website for a full localized experience?',
+                btn: 'Sync Entire Site',
+                dir: 'ltr'
+            },
+            nl: {
+                msg: 'Wilt u de hele website overschakelen naar het Nederlands?',
+                btn: 'Synchroniseer Hele Site',
+                dir: 'ltr'
+            }
+        };
+
+        const t = toastDict[targetLang] || toastDict.en;
+        toast.setAttribute('dir', t.dir);
+        toast.innerHTML = `
+            <div class="es-sync-toast-content">
+                <span class="es-sync-toast-icon">🌐</span>
+                <span class="es-sync-toast-msg">${t.msg}</span>
+            </div>
+            <div class="es-sync-toast-actions">
+                <button type="button" class="es-btn-sync-apply" onclick="window.applyFullPageLanguage('${targetLang}')">
+                    <span>${t.btn}</span>
+                </button>
+                <button type="button" class="es-btn-sync-close" onclick="window.dismissLangSyncToast()" title="إغلاق / Close">✕</button>
+            </div>
+        `;
+        toast.classList.add('active');
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('active');
+        }, 8500);
+    }
+    window.showLangSyncToast = showLangSyncToast;
+
+    window.applyFullPageLanguage = function (targetLang) {
+        triggerHaptic(25);
+        saveFeedbackDraft();
+        saveSchedulerDraft();
+        try {
+            localStorage.setItem('coresync_preferred_lang', targetLang);
+        } catch (e) {}
+        const url = getLocalizedTargetUrl(targetLang);
+        window.location.href = url;
+    };
+
+    window.dismissLangSyncToast = function () {
+        triggerHaptic(10);
+        const toast = document.getElementById('esLangSyncToast');
+        if (toast) toast.classList.remove('active');
+        if (toastTimeout) clearTimeout(toastTimeout);
+    };
+
+    // =========================================================================
+    // Offline Draft Auto-Save Engine (Feedback & Scheduler)
+    // =========================================================================
+    function saveFeedbackDraft() {
+        const name = document.getElementById('fbClientName')?.value || '';
+        const section = document.getElementById('fbTargetSection')?.value || '';
+        const category = document.getElementById('fbCategory')?.value || '';
+        const details = document.getElementById('fbDetails')?.value || '';
+
+        if (details.trim() || name.trim()) {
+            try {
+                localStorage.setItem('coresync_feedback_draft', JSON.stringify({
+                    name, section, category, details, timestamp: Date.now()
+                }));
+            } catch (e) {}
+        } else {
+            try { localStorage.removeItem('coresync_feedback_draft'); } catch (e) {}
+        }
+    }
+    window.saveFeedbackDraft = saveFeedbackDraft;
+
+    function clearFeedbackDraft() {
+        triggerHaptic(15);
+        try { localStorage.removeItem('coresync_feedback_draft'); } catch (e) {}
+        const nameEl = document.getElementById('fbClientName');
+        const detailsEl = document.getElementById('fbDetails');
+        if (nameEl) nameEl.value = '';
+        if (detailsEl) detailsEl.value = '';
+        const banner = document.getElementById('fbDraftRestoredBanner');
+        if (banner) banner.remove();
+    }
+    window.clearFeedbackDraft = clearFeedbackDraft;
+
+    function restoreFeedbackDraft() {
+        try {
+            const raw = localStorage.getItem('coresync_feedback_draft');
+            if (!raw) return;
+            const draft = JSON.parse(raw);
+            if (!draft || (!draft.details && !draft.name)) return;
+
+            const nameEl = document.getElementById('fbClientName');
+            const secEl = document.getElementById('fbTargetSection');
+            const catEl = document.getElementById('fbCategory');
+            const detEl = document.getElementById('fbDetails');
+
+            if (nameEl && draft.name) nameEl.value = draft.name;
+            if (secEl && draft.section) secEl.value = draft.section;
+            if (catEl && draft.category) catEl.value = draft.category;
+            if (detEl && draft.details) detEl.value = draft.details;
+
+            const lang = currentModalLang || getPageLang();
+            const noticeTexts = {
+                ar: { text: '✨ تم استرجاع مسودتك المحفوظة تلقائياً', clear: 'مسح المسودة' },
+                en: { text: '✨ Your saved draft has been auto-restored', clear: 'Clear Draft' },
+                nl: { text: '✨ Uw opgeslagen concept is hersteld', clear: 'Concept wissen' }
+            };
+            const n = noticeTexts[lang] || noticeTexts.ar;
+
+            let banner = document.getElementById('fbDraftRestoredBanner');
+            const modalBody = document.querySelector('.es-feedback-modal .es-feedback-body');
+            if (!banner && modalBody) {
+                banner = document.createElement('div');
+                banner.id = 'fbDraftRestoredBanner';
+                banner.className = 'es-draft-restored-pill';
+                modalBody.insertBefore(banner, modalBody.children[1] || modalBody.firstChild);
+            }
+            if (banner) {
+                banner.innerHTML = `
+                    <span>${n.text}</span>
+                    <button type="button" onclick="window.clearFeedbackDraft()" class="es-btn-clear-draft">${n.clear}</button>
+                `;
+            }
+        } catch (e) {}
+    }
+    window.restoreFeedbackDraft = restoreFeedbackDraft;
+
+    function saveSchedulerDraft() {
+        const name = document.getElementById('schClientName')?.value || '';
+        const topic = document.getElementById('schTopic')?.value || '';
+        if (name.trim() || topic.trim()) {
+            try {
+                localStorage.setItem('coresync_scheduler_draft', JSON.stringify({
+                    name, topic, consultant: selectedConsultant, slot: selectedSlot, timestamp: Date.now()
+                }));
+            } catch (e) {}
+        }
+    }
+    window.saveSchedulerDraft = saveSchedulerDraft;
+
+    function restoreSchedulerDraft() {
+        try {
+            const raw = localStorage.getItem('coresync_scheduler_draft');
+            if (!raw) return;
+            const draft = JSON.parse(raw);
+            if (!draft) return;
+
+            const nameEl = document.getElementById('schClientName');
+            const topicEl = document.getElementById('schTopic');
+            if (nameEl && draft.name) nameEl.value = draft.name;
+            if (topicEl && draft.topic) topicEl.value = draft.topic;
+
+            if (draft.consultant) {
+                selectedConsultant = draft.consultant;
+                document.querySelectorAll('.es-consultant-card').forEach(c => {
+                    const onclickStr = c.getAttribute('onclick') || '';
+                    if (onclickStr.includes(draft.consultant)) c.classList.add('active');
+                    else c.classList.remove('active');
+                });
+            }
+            if (draft.slot) {
+                selectedSlot = draft.slot;
+                document.querySelectorAll('.es-slot-btn').forEach(b => {
+                    if (b.textContent.trim() === draft.slot) b.classList.add('active');
+                    else b.classList.remove('active');
+                });
+            }
+        } catch (e) {}
+    }
+    window.restoreSchedulerDraft = restoreSchedulerDraft;
+
+    function attachDraftListeners() {
+        ['fbClientName', 'fbDetails'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.draftBound) {
+                el.dataset.draftBound = 'true';
+                el.addEventListener('input', saveFeedbackDraft);
+            }
+        });
+        ['fbTargetSection', 'fbCategory'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.draftBound) {
+                el.dataset.draftBound = 'true';
+                el.addEventListener('change', saveFeedbackDraft);
+            }
+        });
+        ['schClientName', 'schTopic'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el && !el.dataset.draftBound) {
+                el.dataset.draftBound = 'true';
+                el.addEventListener('input', saveSchedulerDraft);
+            }
+        });
+    }
+    window.attachDraftListeners = attachDraftListeners;
+
+    window.openFeedbackModal = () => {
+        triggerHaptic(15);
+        document.getElementById('esFeedbackModalOverlay')?.classList.add('active');
+        restoreFeedbackDraft();
+        attachDraftListeners();
+    };
+    window.closeFeedbackModal = () => {
+        triggerHaptic(10);
+        document.getElementById('esFeedbackModalOverlay')?.classList.remove('active');
+    };
 
     window.sendFeedbackViaWhatsApp = function () {
-        const lang = getPageLang();
+        triggerHaptic(20);
+        const lang = currentModalLang || getPageLang();
         const fb = (ES_I18N[lang] || ES_I18N.ar).feedback;
 
         const defaultClient = lang === 'en' ? 'Enterprise Client' : (lang === 'nl' ? 'Zakelijke Klant' : 'عميل تجريبي');
@@ -1217,6 +1484,10 @@
             `🔗 *${lang === 'en' ? 'URL:' : (lang === 'nl' ? 'Link:' : 'الرابط:')}* ${window.location.href}`
         ].join('\n');
 
+        try { localStorage.removeItem('coresync_feedback_draft'); } catch (e) {}
+        const banner = document.getElementById('fbDraftRestoredBanner');
+        if (banner) banner.remove();
+
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
         window.closeFeedbackModal();
     };
@@ -1225,18 +1496,21 @@
     let selectedConsultant = 'salim';
     let selectedSlot = '';
 
-
     // In-Modal Instant Language Switcher & State Memory
     let currentModalLang = getPageLang();
     window.currentModalLang = currentModalLang;
 
     window.switchModalLang = function (targetLang) {
         if (!['ar', 'en', 'nl'].includes(targetLang)) return;
+        triggerHaptic(15);
         currentModalLang = targetLang;
         window.currentModalLang = targetLang;
         try {
             localStorage.setItem('coresync_preferred_lang', targetLang);
         } catch (e) {}
+
+        // Trigger Full Page Sync Toast if language differs from current page
+        showLangSyncToast(targetLang);
 
         // Update active class on all lang pill buttons across all modals
         document.querySelectorAll('.es-modal-lang-switcher').forEach(sw => {
@@ -1285,6 +1559,21 @@
 
             const sendBtnSpan = fbModal.querySelector('.es-btn-send-wa span');
             if (sendBtnSpan) sendBtnSpan.textContent = fbData.sendBtn;
+
+            // Also update restored draft notice if visible
+            const restoredBanner = document.getElementById('fbDraftRestoredBanner');
+            if (restoredBanner) {
+                const noticeTexts = {
+                    ar: { text: '✨ تم استرجاع مسودتك المحفوظة تلقائياً', clear: 'مسح المسودة' },
+                    en: { text: '✨ Your saved draft has been auto-restored', clear: 'Clear Draft' },
+                    nl: { text: '✨ Uw opgeslagen concept is hersteld', clear: 'Concept wissen' }
+                };
+                const n = noticeTexts[targetLang] || noticeTexts.ar;
+                restoredBanner.innerHTML = `
+                    <span>${n.text}</span>
+                    <button type="button" onclick="window.clearFeedbackDraft()" class="es-btn-clear-draft">${n.clear}</button>
+                `;
+            }
         }
 
         // 2. Dynamic Update: Scheduler Modal
@@ -1356,30 +1645,41 @@
         }
     };
 
-        window.openSchedulerModal = function() {
-        const lang = getPageLang();
+    window.openSchedulerModal = function () {
+        triggerHaptic(15);
+        const lang = currentModalLang || getPageLang();
         const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
         if (!selectedSlot && t.slots && t.slots[0]) {
             selectedSlot = t.slots[0];
         }
         document.getElementById('esSchedulerModalOverlay')?.classList.add('active');
+        restoreSchedulerDraft();
+        attachDraftListeners();
     };
-    window.closeSchedulerModal = () => document.getElementById('esSchedulerModalOverlay')?.classList.remove('active');
+    window.closeSchedulerModal = () => {
+        triggerHaptic(10);
+        document.getElementById('esSchedulerModalOverlay')?.classList.remove('active');
+    };
 
     window.selectConsultant = function (type, el) {
+        triggerHaptic(12);
         selectedConsultant = type;
         document.querySelectorAll('.es-consultant-card').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
+        saveSchedulerDraft();
     };
 
     window.selectSlot = function (slot, el) {
+        triggerHaptic(12);
         selectedSlot = slot;
         document.querySelectorAll('.es-slot-btn').forEach(b => b.classList.remove('active'));
         el.classList.add('active');
+        saveSchedulerDraft();
     };
 
     window.confirmScheduler = function () {
-        const lang = getPageLang();
+        triggerHaptic(20);
+        const lang = currentModalLang || getPageLang();
         const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
 
         const defaultClient = lang === 'en' ? 'Executive Leader' : (lang === 'nl' ? 'Directielid' : 'شخصية قيادية');
@@ -1398,18 +1698,24 @@
             `🌐 *${lang === 'en' ? 'Timezone:' : (lang === 'nl' ? 'Tijdzone:' : 'المنطقة الزمنية:')}* ${Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Amsterdam'}`
         ].join('\n');
 
+        try { localStorage.removeItem('coresync_scheduler_draft'); } catch (e) {}
+
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
         window.closeSchedulerModal();
     };
 
     // Assessment Quiz Handlers
     window.openReadinessModal = function () {
+        triggerHaptic(15);
         currentQuizStep = 0;
         renderQuizStep();
         document.getElementById('esReadinessModalOverlay')?.classList.add('active');
     };
 
-    window.closeReadinessModal = () => document.getElementById('esReadinessModalOverlay')?.classList.remove('active');
+    window.closeReadinessModal = () => {
+        triggerHaptic(10);
+        document.getElementById('esReadinessModalOverlay')?.classList.remove('active');
+    };
 
     function renderQuizStep() {
         const fill = document.getElementById('quizProgressFill');
@@ -1447,6 +1753,7 @@
     }
 
     window.chooseQuizOption = function (score, saving) {
+        triggerHaptic(15);
         quizAnswers[currentQuizStep] = { score, saving };
         currentQuizStep++;
         renderQuizStep();
@@ -1495,6 +1802,7 @@
     }
 
     window.bookAssessmentConsultation = function (score, saving) {
+        triggerHaptic(20);
         const lang = getPageLang();
         const t = (ES_I18N[lang] || ES_I18N.ar).readiness;
 
@@ -1510,6 +1818,7 @@
 
     // Case Study Modal Handlers
     window.openCaseStudy = function (key) {
+        triggerHaptic(15);
         const lang = getPageLang();
         const langStudies = CASE_STUDIES_I18N[lang] || CASE_STUDIES_I18N.ar;
         const data = langStudies[key] || langStudies.almarai;
@@ -1558,9 +1867,13 @@
         document.getElementById('esCaseStudyModalOverlay')?.classList.add('active');
     };
 
-    window.closeCaseStudyModal = () => document.getElementById('esCaseStudyModalOverlay')?.classList.remove('active');
+    window.closeCaseStudyModal = () => {
+        triggerHaptic(10);
+        document.getElementById('esCaseStudyModalOverlay')?.classList.remove('active');
+    };
 
     window.discussProjectWithTeam = function (projectName) {
+        triggerHaptic(20);
         const lang = getPageLang();
         const t = (ES_I18N[lang] || ES_I18N.ar).caseStudy;
         const msg = t.waMsg(projectName);
@@ -1569,11 +1882,13 @@
     };
 
     window.acceptGDPR = function () {
+        triggerHaptic(15);
         localStorage.setItem('coresync_gdpr_status', 'accepted');
         document.getElementById('esGdprBanner')?.classList.remove('active');
     };
 
     window.declineGDPR = function () {
+        triggerHaptic(10);
         localStorage.setItem('coresync_gdpr_status', 'essential_only');
         document.getElementById('esGdprBanner')?.classList.remove('active');
     };

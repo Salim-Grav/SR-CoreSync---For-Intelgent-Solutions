@@ -521,6 +521,138 @@ html:not([dir="rtl"]) .floating-actions {
 }
 
 /* ==========================================================================
+   Full Page Language Auto-Sync Toast Notification
+   ========================================================================== */
+.es-lang-sync-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    background: rgba(9, 18, 14, 0.96);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--es-gold, #c5a880);
+    border-radius: 999px;
+    padding: 10px 22px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(197, 168, 128, 0.35);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 90vw;
+}
+
+.es-lang-sync-toast.active {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.es-sync-toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.es-sync-toast-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.es-sync-toast-msg {
+    color: #ffffff;
+    font-size: 0.84rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.es-sync-toast-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.es-btn-sync-apply {
+    background: var(--es-gold, #c5a880);
+    color: #010907;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(197, 168, 128, 0.3);
+}
+
+.es-btn-sync-apply:hover {
+    background: var(--es-gold-light, #f3dfba);
+    transform: scale(1.04);
+    box-shadow: 0 6px 16px rgba(197, 168, 128, 0.5);
+}
+
+.es-btn-sync-close {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.es-btn-sync-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Offline Draft Restored Notification Banner
+   ========================================================================== */
+.es-draft-restored-pill {
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 10px;
+    padding: 7px 12px;
+    margin: 4px 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.76rem;
+    color: #34d399;
+    font-weight: 600;
+    animation: esModalSlide 0.25s ease;
+}
+
+.es-btn-clear-draft {
+    background: transparent;
+    border: none;
+    color: #f87171;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font-family: inherit;
+    transition: opacity 0.2s;
+}
+
+.es-btn-clear-draft:hover {
+    opacity: 0.8;
+}
+
+/* ==========================================================================
    Mobile & Tablet Responsive Adaptations (< 640px)
    Transform 3 Floating Capsules into Compact Circular Interactive FAB Icons
    ========================================================================== */
@@ -616,6 +748,33 @@ html:not([dir="rtl"]) .floating-actions {
     .es-slots-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 6px !important;
+    }
+
+    /* Mobile adjustments for Full Page Language Sync Toast */
+    .es-lang-sync-toast {
+        bottom: 74px !important;
+        flex-direction: column !important;
+        border-radius: 16px !important;
+        padding: 12px 16px !important;
+        gap: 10px !important;
+        width: calc(100% - 32px) !important;
+    }
+
+    .es-sync-toast-msg {
+        white-space: normal !important;
+        text-align: center !important;
+        font-size: 0.8rem !important;
+    }
+
+    .es-sync-toast-actions {
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    .es-btn-sync-apply {
+        flex: 1 !important;
+        padding: 8px 12px !important;
+        text-align: center !important;
     }
 }
 
