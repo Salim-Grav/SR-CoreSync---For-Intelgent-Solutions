@@ -1096,7 +1096,7 @@
             },
             nl: {
                 type: { title: 'Merkidentiteit & Full Stack Systeemontwikkeling', price: 950, days: '7 - 10 werkdagen' },
-                pages: { title: '1 - 5 Kernpagina's', price: 0 },
+                pages: { title: "1 - 5 Kernpagina's", price: 0 },
                 lang: { title: 'Eén Taal', price: 0 },
                 pay: { title: 'Geen Online Betaalkoppeling', price: 0 },
                 speed: { title: 'Standaard Levering', price: 0 },
@@ -1128,7 +1128,7 @@
                     <td>€${(state.type.price || total).toLocaleString('en')}</td>
                 </tr>
                 <tr>
-                    <td><strong>${lang === 'en' ? 'Pages & Deliverables Scope' : (lang === 'nl' ? 'Omvang Pagina's & Modules' : 'نطاق الصفحات والتنفيذ')}</strong></td>
+                    <td><strong>${lang === 'en' ? 'Pages & Deliverables Scope' : (lang === 'nl' ? "Omvang Pagina's & Modules" : 'نطاق الصفحات والتنفيذ')}</strong></td>
                     <td>${state.pages.title}</td>
                     <td>${langDict.included}</td>
                     <td>€${(state.pages.price || 0).toLocaleString('en')}</td>
