@@ -2086,7 +2086,10 @@
 
         /* 100% full-width header container - prevents cramping on desktop */
         .tf-header .container,
-        .tf-header .header-inner .container {
+        .tf-header .header-inner .container,
+        .tf-header .container-fluid,
+        .tf-header .header-inner .container-fluid,
+        .header-container-fluid {
             max-width: 100% !important;
             width: 100% !important;
             padding-left: clamp(20px, 3.5vw, 60px) !important;
@@ -2094,7 +2097,8 @@
         }
 
         /* Pure flex row with strict RTL for Arabic and LTR for English/Dutch */
-        html[lang="ar"] .tf-header .header-inner .row {
+        html[lang="ar"] .tf-header .header-inner .row,
+        html[lang="ar"] .tf-header .header-inner .header-row-layout {
             display: flex !important;
             flex-wrap: nowrap !important;
             flex-direction: row !important;
@@ -2107,20 +2111,22 @@
             width: 100% !important;
         }
 
-        html:not([lang="ar"]) .tf-header .header-inner .row {
+        html:not([lang="ar"]) .tf-header .header-inner .row,
+        html:not([lang="ar"]) .tf-header .header-inner .header-row-layout {
             display: flex !important;
             flex-wrap: nowrap !important;
             flex-direction: row !important;
             align-items: center !important;
             justify-content: space-between !important;
             direction: ltr !important;
-            gap: clamp(12px, 1.8vw, 36px) !important;
+            gap: clamp(14px, 2vw, 36px) !important;
             grid-template-columns: none !important;
             margin: 0 !important;
             width: 100% !important;
         }
 
-        .tf-header .header-inner .row > div {
+        .tf-header .header-inner .row > div,
+        .tf-header .header-inner .header-row-layout > div {
             padding: 0 !important;
             margin: 0 !important;
             grid-column: auto !important;
@@ -2134,6 +2140,7 @@
             display: flex !important;
             align-items: center !important;
             z-index: 2;
+            margin-right: clamp(24px, 3.2vw, 56px) !important; /* مسافة أمان وتنفس سخية تفصل الشعار عن أول رابط */
         }
 
         .brand-logo-site {
@@ -3687,11 +3694,10 @@
 
             <!-- شريط التنقل العلوي (Header Refined) -->
             <!-- Luxury Refined Top Navigation Bar (Header Refined) -->
-            <!-- Luxury Refined Top Navigation Bar (Header Refined) -->
             <header class="tf-header header-refined">
                 <div class="header-inner">
-                    <div class="container">
-                        <div class="row align-items-center">
+                    <div class="container-fluid header-container-fluid">
+                        <div class="header-row-layout align-items-center">
                             <!-- 1. Brand & Emblem (Left in LTR) -->
                             <div class="header-col-brand">
                                 <a href="./index.html" class="brand-logo-site brand-logo-preview-trigger" onclick="openLogoLightbox(event)" title="S&R CoreSync Solutions - Click to view full brand identity" aria-label="S&R CoreSync Solutions Official Brandmark">
@@ -3713,7 +3719,6 @@
                                         <li class="menu-item"><a href="#pricing" class="item-link link text-caption"><span>04 /</span>Pricing</a></li>
                                         <li class="menu-item"><a href="#roi-calculator" class="item-link link text-caption gold-accent"><span>05 /</span>ROI CALCULATOR</a></li>
                                         <li class="menu-item"><a href="#faq" class="item-link link text-caption"><span>06 /</span>FAQ</a></li>
-                                        <li class="menu-item"><a href="#contact" class="item-link link text-caption"><span>07 /</span>CONTACT</a></li>
                                     </ul>
                                 </div>
                             </div>
