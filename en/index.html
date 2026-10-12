@@ -6450,7 +6450,10 @@
                         <span class="text-white">Current Operational &amp; Administrative Monthly Cost:</span>
                         <span class="sr-roi-val-badge" id="roiCostDisplay">€ 6,500</span>
                     </div>
-                    <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" oninput="updateRoiCalc()" />
+                    <div class="sr-roi-range-wrap">
+                        <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
+                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" oninput="updateRoiCalc()" />
+                    </div>
                 </div>
 
                 <!-- Team Size Slider -->
@@ -6459,7 +6462,10 @@
                         <span class="text-white">Administrative &amp; Finance Team Size (Employees):</span>
                         <span class="sr-roi-val-badge" id="roiTeamDisplay">12 employees</span>
                     </div>
-                    <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" oninput="updateRoiCalc()" />
+                    <div class="sr-roi-range-wrap">
+                        <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 employees</div>
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" oninput="updateRoiCalc()" />
+                    </div>
                 </div>
 
                 <!-- Systems Maturity -->
@@ -7099,6 +7105,16 @@
             }
         }
 
+        function updateSliderBubble(rangeEl, bubbleEl, valueText) {
+            if (!rangeEl || !bubbleEl) return;
+            const min = parseFloat(rangeEl.min) || 0;
+            const max = parseFloat(rangeEl.max) || 100;
+            const val = parseFloat(rangeEl.value);
+            const percent = Math.min(Math.max(((val - min) / (max - min)) * 100, 0), 100);
+            bubbleEl.style.left = `calc(${percent}% + (${8 - percent * 0.16}px))`;
+            bubbleEl.textContent = valueText;
+        }
+
         function updateRoiCalc() {
             const costRange = document.getElementById('roiCostRange');
             const teamRange = document.getElementById('roiTeamRange');
@@ -7114,6 +7130,9 @@
             const teamDisp = document.getElementById('roiTeamDisplay');
             if (costDisp) costDisp.textContent = `€ ${cost.toLocaleString()}`;
             if (teamDisp) teamDisp.textContent = `${team} employees`;
+
+            updateSliderBubble(costRange, document.getElementById('roiCostBubble'), `€ ${cost.toLocaleString()}`);
+            updateSliderBubble(teamRange, document.getElementById('roiTeamBubble'), `${team} employees`);
 
             const annualCost = cost * 12;
             const annualSavings = Math.round(annualCost * factor);
