@@ -2159,7 +2159,136 @@
         injectTrackerModal();
         injectROIOptimizer();
         injectNextGenButtons();
+        injectServicesComparisonModal();
+        init3DCardTilt();
     }
+
+    /* =====================================================================
+       Services 3D Tilt Effect & Comparison Modal
+       ===================================================================== */
+    function init3DCardTilt() {
+        const cards = document.querySelectorAll('.dana-signature-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-8px) scale(1.015)`;
+            });
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    function injectServicesComparisonModal() {
+        if (document.getElementById('servicesComparisonModal')) return;
+        const modal = document.createElement('div');
+        modal.id = 'servicesComparisonModal';
+        modal.className = 'es-modal-overlay';
+        modal.style.display = 'none';
+        modal.innerHTML = `
+            <div class="es-modal-inner" style="max-width:920px;" role="dialog" aria-label="مقارنة باقات الخدمات">
+                <div class="es-modal-header">
+                    <div class="es-modal-header-left">
+                        <span class="es-modal-tag">مقارنة معتمدة • 2026</span>
+                        <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة</h3>
+                    </div>
+                    <button class="es-modal-close" onclick="window.closeServicesComparisonModal()" aria-label="إغلاق">&times;</button>
+                </div>
+                <div class="es-modal-body" style="overflow-x:auto;">
+                    <p style="color:rgba(255,255,255,0.7); font-size:0.88rem; margin-bottom:14px;">
+                        جدول المقارنة الاستراتيجي لاختيار المسار الأمثل لمنشأتكم مع أسعار تنافسية واضحة ومدروسة.
+                    </p>
+                    <table class="es-compare-table">
+                        <thead>
+                            <tr>
+                                <th>الميزة والقدرة التقنية</th>
+                                <th>الهوية البصرية<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="590">€590</span></th>
+                                <th>تصميم المواقع<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="980">€980</span></th>
+                                <th>متجر إلكتروني + ERP<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="1450">€1,450</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>مدة التنفيذ والتسليم المعتمدة</td>
+                                <td>5 - 7 أيام عمل</td>
+                                <td>10 - 14 يوم عمل</td>
+                                <td>14 - 20 يوم عمل</td>
+                            </tr>
+                            <tr>
+                                <td>دليل العلامة والهوية الكامل (Brand Guidelines)</td>
+                                <td><span class="es-compare-check">✓</span> متكامل 100%</td>
+                                <td><span class="es-compare-check">✓</span> تضمين الشعار والخطوط</td>
+                                <td><span class="es-compare-check">✓</span> نظام هوية رقمي كامل</td>
+                            </tr>
+                            <tr>
+                                <td>واجهات UI/UX حصرية متوافقة مع جميع الشاشات</td>
+                                <td><span class="es-compare-dash">—</span></td>
+                                <td><span class="es-compare-check">✓</span> فائق السرعة والأداء</td>
+                                <td><span class="es-compare-check">✓</span> تجربة تسوق محسنة للتحويل</td>
+                            </tr>
+                            <tr>
+                                <td>بوابات الدفع الأوروبية (iDEAL, Stripe, Mollie, Apple Pay)</td>
+                                <td><span class="es-compare-dash">—</span></td>
+                                <td>اختياري</td>
+                                <td><span class="es-compare-check">✓</span> ربط مباشر متوافق مع PSD2</td>
+                            </tr>
+                            <tr>
+                                <td>المزامنة السحابية مع دفاتر المحاسبة والـ ERP</td>
+                                <td><span class="es-compare-dash">—</span></td>
+                                <td><span class="es-compare-dash">—</span></td>
+                                <td><span class="es-compare-check">✓</span> فواتير وضريبة BTW/VAT لحظية</td>
+                            </tr>
+                            <tr>
+                                <td>تحسين محركات البحث وسرعة التحميل (SEO & Speed)</td>
+                                <td>تصدير بصيغ ويب حديثة (SVG/WebP)</td>
+                                <td><span class="es-compare-check">✓</span> PageSpeed 95+ و Schema.org</td>
+                                <td><span class="es-compare-check">✓</span> SEO احترافي للمنتجات والتصنيفات</td>
+                            </tr>
+                            <tr>
+                                <td>الدعم الفني وضمان ما بعد الإطلاق</td>
+                                <td>30 يوماً</td>
+                                <td>60 يوماً</td>
+                                <td>90 يوماً شامل التحديثات</td>
+                            </tr>
+                            <tr>
+                                <td>الإجراء المباشر</td>
+                                <td><button type="button" class="dana-btn-booking" style="width:100%;" onclick="window.closeServicesComparisonModal(); openExecutiveBookingModal('identity')">حجز استشارة 📅</button></td>
+                                <td><button type="button" class="dana-btn-booking" style="width:100%;" onclick="window.closeServicesComparisonModal(); openExecutiveBookingModal('web')">حجز استشارة 📅</button></td>
+                                <td><button type="button" class="dana-btn-booking" style="width:100%;" onclick="window.closeServicesComparisonModal(); openExecutiveBookingModal('store')">حجز استشارة 📅</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) window.closeServicesComparisonModal();
+        });
+    }
+
+    window.openServicesComparisonModal = function() {
+        injectServicesComparisonModal();
+        const m = document.getElementById('servicesComparisonModal');
+        if (m) {
+            m.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            if (window.switchCurrency && activeCurrency) {
+                window.switchCurrency(activeCurrency);
+            }
+        }
+    };
+
+    window.closeServicesComparisonModal = function() {
+        const m = document.getElementById('servicesComparisonModal');
+        if (m) {
+            m.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    };
 
     function injectNextGenButtons() {
         // Inject Tracker button inside the Feedback Hub header if it exists
