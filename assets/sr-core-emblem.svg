@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <defs>
+    <!-- أنماط التدرجات الذهبية الملكية الشامبانية عالية الدقة والحدة -->
+    <linearGradient id="srGoldGradPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4da" />
+      <stop offset="25%" stop-color="#e2c595" />
+      <stop offset="60%" stop-color="#c5a880" />
+      <stop offset="100%" stop-color="#8a673c" />
+    </linearGradient>
+
+    <linearGradient id="srGoldGradSpecular" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#ecd6b7" />
+      <stop offset="75%" stop-color="#b89363" />
+      <stop offset="100%" stop-color="#6e5028" />
+    </linearGradient>
+
+    <radialGradient id="srCoreSphere" cx="42%" cy="36%" r="68%">
+      <stop offset="0%" stop-color="#1b1c19" />
+      <stop offset="50%" stop-color="#0a0d0b" />
+      <stop offset="85%" stop-color="#030605" />
+      <stop offset="100%" stop-color="#010302" />
+    </radialGradient>
+
+    <radialGradient id="srNodeSheen" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#eedcc4" />
+      <stop offset="100%" stop-color="#c5a880" />
+    </radialGradient>
+
+    <!-- توهج خفيف حاد لا يسبب أي ضبابية أو تشويش عند التصغير -->
+    <filter id="srCrispGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.6" />
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#c5a880" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <g transform="translate(60, 60)">
+    <!-- 1. القرص المركزي الكريستالي الداكن الفاخر -->
+    <circle cx="0" cy="0" r="54" fill="url(#srCoreSphere)" stroke="url(#srGoldGradPrimary)" stroke-width="2.2" />
+    <circle cx="0" cy="0" r="50.5" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="0.8" />
+    <circle cx="0" cy="0" r="47.5" fill="none" stroke="#c5a880" stroke-opacity="0.15" stroke-width="0.6" />
+
+    <!-- 2. مدارات التزامن الديناميكية (CoreSync Orbital Arcs) بدقة متناهية -->
+    <ellipse cx="0" cy="0" rx="44" ry="20" transform="rotate(-30)" fill="none" stroke="url(#srGoldGradSpecular)" stroke-width="1.6" stroke-opacity="0.75" />
+    <ellipse cx="0" cy="0" rx="44" ry="20" transform="rotate(30)" fill="none" stroke="url(#srGoldGradPrimary)" stroke-width="1.6" stroke-opacity="0.75" />
+
+    <!-- 3. عقد التزامن المدارية الذكية (Sync Quantum Nodes) -->
+    <g transform="rotate(-30) translate(44, 0)">
+      <circle cx="0" cy="0" r="3.4" fill="url(#srNodeSheen)" stroke="#ffffff" stroke-width="0.7" />
+    </g>
+    <g transform="rotate(150) translate(44, 0)">
+      <circle cx="0" cy="0" r="3.4" fill="url(#srNodeSheen)" stroke="#ffffff" stroke-width="0.7" />
+    </g>
+
+    <!-- 4. المونوغرام الهندسي الفاخر المتقن S & R (Crisp Vector Monogram) -->
+    <!-- حرف S الملكي الأنيق المنحني بنعومة هندسية -->
+    <path d="M -12,-20 
+             C -6,-24 4,-24 10,-20 
+             C 14,-17 15,-12 11,-8 
+             C 8,-5 0,-3 -6,0 
+             C -14,4 -17,10 -13,16 
+             C -9,22 2,24 10,21 
+             C 15,19 18,15 17,11" 
+          fill="none" 
+          stroke="url(#srGoldGradPrimary)" 
+          stroke-width="3.8" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          filter="url(#srCrispGlow)" />
+
+    <!-- حرف R الملكي المتداخل بنسق احترافي متناسق -->
+    <path d="M 5,-19 L 5,19 
+             M 5,-19 C 14,-19 22,-19 22,-9 C 22,0 14,0 5,0 
+             M 12,0 L 22,19" 
+          fill="none" 
+          stroke="url(#srGoldGradSpecular)" 
+          stroke-width="3.6" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+          filter="url(#srCrispGlow)" />
+
+    <!-- رمز التزامن والربط الماسي المركزي & -->
+    <circle cx="0" cy="0" r="2.8" fill="#ffffff" filter="url(#srCrispGlow)" />
+    <circle cx="0" cy="0" r="1.4" fill="#c5a880" />
+
+    <!-- نقطة البريق واللمعان العلوية الملكية (Diamond Specular Spark) -->
+    <path d="M 0,-50 L 1.5,-47 L 4.5,-47 L 2,-44.5 L 3,-41.5 L 0,-43.5 L -3,-41.5 L -2,-44.5 L -4.5,-47 L -1.5,-47 Z" 
+          fill="#ffffff" 
+          opacity="0.95" />
+  </g>
+</svg>
