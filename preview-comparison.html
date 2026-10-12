@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معاينة جدول مقارنة باقات الخدمات - S&R CoreSync Solutions</title>
+    <title>معاينة جدول مقارنة باقات الخدمات والتصدير - S&R CoreSync Solutions</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
@@ -32,14 +32,23 @@
             <div class="es-modal-header">
                 <div class="es-modal-header-left">
                     <span class="es-modal-tag">مقارنة معتمدة • 2026</span>
-                    <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة</h3>
+                    <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة المؤسسية</h3>
                 </div>
             </div>
             <div class="es-modal-body" style="overflow-x:auto;">
-                <p style="color:rgba(255,255,255,0.7); font-size:0.88rem; margin-bottom:14px;">
-                    جدول المقارنة الاستراتيجي لاختيار المسار الأمثل لمنشأتكم مع أسعار تنافسية واضحة ومدروسة.
-                </p>
-                <table class="es-compare-table">
+                
+                <!-- شريط الإجراءات: اسم العميل وتصدير PDF -->
+                <div class="es-compare-actions-bar">
+                    <div class="es-client-name-wrap">
+                        <span style="font-size:0.85rem; color:#c5a880; font-weight:700;">🏢 المنشأة / العميل:</span>
+                        <input type="text" id="esCompareClientName" class="es-client-input" value="شركة النخبة الدولية (Elite Global)" placeholder="أدخل اسم شركتكم لإدراجه بالتقرير (اختياري)">
+                    </div>
+                    <button type="button" class="es-compare-pdf-btn" onclick="window.exportComparisonPDF()">
+                        <span>📄 تصدير جدول المقارنة PDF</span>
+                    </button>
+                </div>
+
+                <table class="es-compare-table" id="esComparisonTableMain">
                     <thead>
                         <tr>
                             <th>الميزة والقدرة التقنية</th>
@@ -91,6 +100,12 @@
                             <td>60 يوماً</td>
                             <td>90 يوماً شامل التحديثات</td>
                         </tr>
+                        <tr class="es-live-total-row">
+                            <td>الإجمالي المعتمد (مع الإضافات المختارة)</td>
+                            <td id="esTotalCol1" style="color:#f3dfba; font-weight:800;">€740</td>
+                            <td id="esTotalCol2" style="color:#f3dfba; font-weight:800;">€1,130</td>
+                            <td id="esTotalCol3" style="color:#f3dfba; font-weight:800;">€1,600</td>
+                        </tr>
                         <tr>
                             <td>الإجراء المباشر</td>
                             <td><button type="button" class="dana-btn-booking" style="width:100%;">حجز استشارة 📅</button></td>
@@ -99,8 +114,36 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <!-- حاسبة الإضافات التكميلية السريعة (Package Add-ons Selector) -->
+                <div class="es-addons-box">
+                    <div class="es-addons-title">
+                        <span>⚡ حاسبة الإضافات السريعة (Optional Enterprise Add-ons):</span>
+                        <span style="font-size:0.75rem; color:rgba(255,255,255,0.6); font-weight:normal;">اختر ما يناسبك لتحديث التكلفة الإجمالية لحظياً</span>
+                    </div>
+                    <div class="es-addons-grid">
+                        <label class="es-addon-item">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="150" checked onchange="window.recalcComparisonAddons()">
+                            <span>🌐 لغة إضافية للموقع (+€150)</span>
+                        </label>
+                        <label class="es-addon-item">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="120" onchange="window.recalcComparisonAddons()">
+                            <span>💳 بوابة دفع إضافية (+€120)</span>
+                        </label>
+                        <label class="es-addon-item">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="350" onchange="window.recalcComparisonAddons()">
+                            <span>🤖 شات بوت ذكاء اصطناعي RAG (+€350)</span>
+                        </label>
+                        <label class="es-addon-item">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="180" onchange="window.recalcComparisonAddons()">
+                            <span>🛡️ دعم فني VIP وحماية سنوية (+€180)</span>
+                        </label>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+    <script src="./css/enterprise-suite.js"></script>
 </body>
 </html>
