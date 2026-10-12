@@ -154,7 +154,12 @@
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 <span>${label}</span>
             `;
-            actions.insertBefore(demoBtn, actions.firstChild);
+            const mobileBtn = actions.querySelector('.btn-mobile-menu');
+            if (mobileBtn) {
+                actions.insertBefore(demoBtn, mobileBtn);
+            } else {
+                actions.appendChild(demoBtn);
+            }
         }
     }
 
