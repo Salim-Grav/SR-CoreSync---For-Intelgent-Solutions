@@ -1551,3 +1551,279 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(212,175,55,0.45);
         }
+
+        /* ==========================================================================
+           1. أزرار الهيدر للجولة التفاعلية وتصدير PDF
+           ========================================================================== */
+        .btn-tour-start {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(16, 185, 129, 0.2));
+            border: 1px solid var(--gold);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
+        }
+        .btn-tour-start:hover {
+            background: linear-gradient(135deg, var(--gold), #10b981);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.5);
+        }
+        .btn-export-pdf {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .btn-export-pdf:hover {
+            background: rgba(197, 168, 128, 0.18);
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           2. شريط محاكي العملات والضرائب اللحظي (Currency & VAT Simulator Bar)
+           ========================================================================== */
+        .currency-vat-bar {
+            background: rgba(4, 16, 12, 0.85);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 14px;
+            padding: 10px 16px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+        .cur-vat-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.84rem;
+            color: #fff;
+        }
+        .cur-badge-pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+        .cur-vat-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .cur-selector-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cur-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .cur-pill-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            padding: 2px;
+            gap: 2px;
+        }
+        .cur-pill {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .cur-pill.active {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+        }
+        .cur-select-vat {
+            background: #02140e;
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            border-radius: 8px;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-family: 'Alexandria', sans-serif;
+            cursor: pointer;
+            outline: none;
+        }
+        .cur-select-vat:focus {
+            border-color: var(--gold);
+        }
+        .cur-summary-chip {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            font-family: 'JetBrains Mono', 'Alexandria', sans-serif;
+        }
+
+        /* ==========================================================================
+           3. مكونات الجولة الإرشادية التفاعلية (Guided Tour UI)
+           ========================================================================== */
+        .tour-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9998;
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s ease;
+        }
+        .tour-highlight-target {
+            position: relative;
+            z-index: 9999 !important;
+            box-shadow: 0 0 0 4px var(--gold), 0 0 35px rgba(212, 175, 55, 0.6) !important;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            animation: tourPulse 2s infinite alternate;
+        }
+        @keyframes tourPulse {
+            0% { box-shadow: 0 0 0 3px var(--gold), 0 0 20px rgba(212, 175, 55, 0.4); }
+            100% { box-shadow: 0 0 0 5px var(--gold), 0 0 40px rgba(212, 175, 55, 0.75); }
+        }
+        .tour-card {
+            position: fixed;
+            z-index: 10000;
+            background: #03140e;
+            border: 1.5px solid var(--gold);
+            border-radius: 16px;
+            padding: 1.4rem;
+            width: 360px;
+            max-width: 90vw;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.3);
+            color: #fff;
+            animation: tourFadeIn 0.3s ease forwards;
+        }
+        @keyframes tourFadeIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .tour-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .tour-step-badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+        .tour-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .tour-close-btn:hover {
+            color: #fff;
+        }
+        .tour-step-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0 0 0.5rem 0;
+        }
+        .tour-step-desc {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+        .tour-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-tour-nav {
+            padding: 7px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-tour-nav:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .btn-tour-nav.primary {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
+            font-weight: 800;
+        }
+        .btn-tour-nav.primary:hover {
+            background: #fff;
+            border-color: #fff;
+        }
+
+        /* ==========================================================================
+           4. نافذة ملخص العرض التنفيذي والطباعة (Executive PDF Modal & Print)
+           ========================================================================== */
+        @media print {
+            body * {
+                visibility: hidden !important;
+            }
+            #printableExecutiveBrief, #printableExecutiveBrief * {
+                visibility: visible !important;
+            }
+            #printableExecutiveBrief {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                background: #ffffff !important;
+                color: #0b1511 !important;
+                padding: 20mm !important;
+                z-index: 999999 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
