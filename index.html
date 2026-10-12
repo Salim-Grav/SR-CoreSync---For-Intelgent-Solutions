@@ -2626,25 +2626,29 @@
 
         /* Reset and override any conflicting CSS grid / nth-child rules from external bundles */
         .tf-header .header-inner .row,
-        .tf-header.header-refined .header-inner .row {
+        .tf-header .header-inner .header-row-layout,
+        .tf-header.header-refined .header-inner .row,
+        .tf-header.header-refined .header-inner .header-row-layout {
             display: flex !important;
             flex-wrap: nowrap !important;
             align-items: center !important;
             justify-content: space-between !important;
-            gap: clamp(8px, 1vw, 18px) !important;
+            gap: clamp(12px, 1.5vw, 24px) !important;
             grid-template-columns: none !important;
             margin: 0 !important;
         }
 
         /* ضبط الاتجاه RTL للنسخة العربية: الشعار باليمين، القائمة بالوسط، والإجراءات باليسار */
         html[lang="ar"] .tf-header .header-inner .row,
-        html[lang="ar"] .tf-header.header-refined .header-inner .row {
+        html[lang="ar"] .tf-header .header-inner .header-row-layout,
+        html[lang="ar"] .tf-header.header-refined .header-inner .row,
+        html[lang="ar"] .tf-header.header-refined .header-inner .header-row-layout {
             direction: rtl !important;
             display: flex !important;
             flex-wrap: nowrap !important;
             align-items: center !important;
             justify-content: space-between !important;
-            gap: 16px !important;
+            gap: 18px !important;
         }
 
         html[lang="ar"] .header-col-brand {
