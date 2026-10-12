@@ -1223,20 +1223,22 @@
 
         const isNl = currentPath.includes('/nl/');
         const isEn = currentPath.includes('/en/');
+        const hash = window.location.hash || '';
 
+        let target = filename;
         if (targetLang === 'ar') {
-            if (isNl || isEn) return '../' + filename;
-            return filename;
+            if (isNl || isEn) target = '../' + filename;
+            else target = filename;
         } else if (targetLang === 'en') {
-            if (isEn) return filename;
-            if (isNl) return '../en/' + filename;
-            return 'en/' + filename;
+            if (isEn) target = filename;
+            else if (isNl) target = '../en/' + filename;
+            else target = 'en/' + filename;
         } else if (targetLang === 'nl') {
-            if (isNl) return filename;
-            if (isEn) return '../nl/' + filename;
-            return 'nl/' + filename;
+            if (isNl) target = filename;
+            else if (isEn) target = '../nl/' + filename;
+            else target = 'nl/' + filename;
         }
-        return filename;
+        return target + hash;
     }
     window.getLocalizedTargetUrl = getLocalizedTargetUrl;
 
@@ -1298,7 +1300,7 @@
 
     window.applyFullPageLanguage = function (targetLang) {
         triggerHaptic(25);
-        saveFeedbackDraft();
+        saveFeedbackDraft(true);
         saveSchedulerDraft();
         try {
             localStorage.setItem('coresync_preferred_lang', targetLang);
@@ -1315,22 +1317,67 @@
     };
 
     // =========================================================================
-    // Offline Draft Auto-Save Engine (Feedback & Scheduler)
+    // Offline Draft Auto-Save Engine with Live Cloud Pulse Indicator
     // =========================================================================
-    function saveFeedbackDraft() {
-        const name = document.getElementById('fbClientName')?.value || '';
-        const section = document.getElementById('fbTargetSection')?.value || '';
-        const category = document.getElementById('fbCategory')?.value || '';
-        const details = document.getElementById('fbDetails')?.value || '';
+    let autoSaveTimer = null;
+    let autoSaveIndicatorTimer = null;
 
-        if (details.trim() || name.trim()) {
-            try {
-                localStorage.setItem('coresync_feedback_draft', JSON.stringify({
-                    name, section, category, details, timestamp: Date.now()
-                }));
-            } catch (e) {}
+    function updateAutoSaveIndicator(state) {
+        const indicator = document.getElementById('fbAutoSaveIndicator');
+        if (!indicator) return;
+
+        const lang = currentModalLang || getPageLang();
+        const labels = {
+            ar: { saving: 'جاري الحفظ...', saved: 'تم الحفظ تلقائياً' },
+            en: { saving: 'Saving...', saved: 'Auto-saved' },
+            nl: { saving: 'Opslaan...', saved: 'Opgeslagen' }
+        };
+        const l = labels[lang] || labels.ar;
+
+        if (state === 'saving') {
+            indicator.className = 'es-autosave-indicator saving';
+            indicator.innerHTML = `<span class="es-cloud-icon">☁️</span> <span>${l.saving}</span>`;
+        } else if (state === 'saved') {
+            indicator.className = 'es-autosave-indicator saved';
+            indicator.innerHTML = `<span class="es-cloud-icon">☁️</span> <span>${l.saved}</span>`;
+            if (autoSaveIndicatorTimer) clearTimeout(autoSaveIndicatorTimer);
+            autoSaveIndicatorTimer = setTimeout(() => {
+                indicator.className = 'es-autosave-indicator';
+            }, 2500);
         } else {
-            try { localStorage.removeItem('coresync_feedback_draft'); } catch (e) {}
+            indicator.className = 'es-autosave-indicator';
+        }
+    }
+    window.updateAutoSaveIndicator = updateAutoSaveIndicator;
+
+    function saveFeedbackDraft(immediate = false) {
+        updateAutoSaveIndicator('saving');
+
+        const doSave = () => {
+            const name = document.getElementById('fbClientName')?.value || '';
+            const section = document.getElementById('fbTargetSection')?.value || '';
+            const category = document.getElementById('fbCategory')?.value || '';
+            const details = document.getElementById('fbDetails')?.value || '';
+
+            if (details.trim() || name.trim()) {
+                try {
+                    localStorage.setItem('coresync_feedback_draft', JSON.stringify({
+                        name, section, category, details, timestamp: Date.now()
+                    }));
+                } catch (e) {}
+                updateAutoSaveIndicator('saved');
+            } else {
+                try { localStorage.removeItem('coresync_feedback_draft'); } catch (e) {}
+                updateAutoSaveIndicator('idle');
+            }
+        };
+
+        if (immediate) {
+            if (autoSaveTimer) clearTimeout(autoSaveTimer);
+            doSave();
+        } else {
+            if (autoSaveTimer) clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(doSave, 380);
         }
     }
     window.saveFeedbackDraft = saveFeedbackDraft;
@@ -1344,6 +1391,7 @@
         if (detailsEl) detailsEl.value = '';
         const banner = document.getElementById('fbDraftRestoredBanner');
         if (banner) banner.remove();
+        updateAutoSaveIndicator('idle');
     }
     window.clearFeedbackDraft = clearFeedbackDraft;
 
@@ -1439,14 +1487,14 @@
             const el = document.getElementById(id);
             if (el && !el.dataset.draftBound) {
                 el.dataset.draftBound = 'true';
-                el.addEventListener('input', saveFeedbackDraft);
+                el.addEventListener('input', () => saveFeedbackDraft(false));
             }
         });
         ['fbTargetSection', 'fbCategory'].forEach(id => {
             const el = document.getElementById(id);
             if (el && !el.dataset.draftBound) {
                 el.dataset.draftBound = 'true';
-                el.addEventListener('change', saveFeedbackDraft);
+                el.addEventListener('change', () => saveFeedbackDraft(true));
             }
         });
         ['schClientName', 'schTopic'].forEach(id => {
@@ -1459,15 +1507,36 @@
     }
     window.attachDraftListeners = attachDraftListeners;
 
+    // Global Keyboard Shortcut: Alt + L to cycle languages
+    document.addEventListener('keydown', function (e) {
+        if (e.altKey && (e.key === 'l' || e.key === 'L' || e.code === 'KeyL')) {
+            e.preventDefault();
+            triggerHaptic(15);
+            const langs = ['ar', 'en', 'nl'];
+            const cur = currentModalLang || getPageLang();
+            const nextIdx = (langs.indexOf(cur) + 1) % langs.length;
+            const nextLang = langs[nextIdx];
+            window.switchModalLang(nextLang);
+        }
+    });
+
     window.openFeedbackModal = () => {
         triggerHaptic(15);
         document.getElementById('esFeedbackModalOverlay')?.classList.add('active');
+        try {
+            history.replaceState(null, '', window.location.pathname + window.location.search + '#feedback');
+        } catch (e) {}
         restoreFeedbackDraft();
         attachDraftListeners();
     };
     window.closeFeedbackModal = () => {
         triggerHaptic(10);
         document.getElementById('esFeedbackModalOverlay')?.classList.remove('active');
+        try {
+            if (window.location.hash === '#feedback') {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        } catch (e) {}
     };
 
     window.sendFeedbackViaWhatsApp = function () {
@@ -1664,12 +1733,20 @@
             selectedSlot = t.slots[0];
         }
         document.getElementById('esSchedulerModalOverlay')?.classList.add('active');
+        try {
+            history.replaceState(null, '', window.location.pathname + window.location.search + '#scheduler');
+        } catch (e) {}
         restoreSchedulerDraft();
         attachDraftListeners();
     };
     window.closeSchedulerModal = () => {
         triggerHaptic(10);
         document.getElementById('esSchedulerModalOverlay')?.classList.remove('active');
+        try {
+            if (window.location.hash === '#scheduler') {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        } catch (e) {}
     };
 
     window.selectConsultant = function (type, el) {
@@ -1721,11 +1798,19 @@
         currentQuizStep = 0;
         renderQuizStep();
         document.getElementById('esReadinessModalOverlay')?.classList.add('active');
+        try {
+            history.replaceState(null, '', window.location.pathname + window.location.search + '#assessment');
+        } catch (e) {}
     };
 
     window.closeReadinessModal = () => {
         triggerHaptic(10);
         document.getElementById('esReadinessModalOverlay')?.classList.remove('active');
+        try {
+            if (window.location.hash === '#assessment') {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        } catch (e) {}
     };
 
     function renderQuizStep() {
