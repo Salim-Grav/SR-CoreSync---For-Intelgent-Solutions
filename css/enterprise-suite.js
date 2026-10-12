@@ -146,10 +146,13 @@
             demoBtn.id = 'headerLiveDemoPill';
             demoBtn.href = window.location.pathname.includes('/en/') || window.location.pathname.includes('/nl/') ? '../demo.html' : 'demo.html';
             demoBtn.className = 'btn-live-sandbox-header';
-            demoBtn.title = 'تجربة لوحة تحكم ERP السحابية الحية';
+            const isEn = window.location.pathname.includes('/en/');
+            const isNl = window.location.pathname.includes('/nl/');
+            const label = isEn ? 'Live ERP Demo ⚡' : (isNl ? 'Live ERP Demo ⚡' : 'تجربة ERP السحابي ⚡');
+            demoBtn.title = isEn ? 'Test Live Cloud ERP Dashboard' : (isNl ? 'Test Live Cloud ERP Dashboard' : 'تجربة لوحة تحكم ERP السحابية الحية');
             demoBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                <span>تجربة ERP السحابي ⚡</span>
+                <span>${label}</span>
             `;
             actions.insertBefore(demoBtn, actions.firstChild);
         }
