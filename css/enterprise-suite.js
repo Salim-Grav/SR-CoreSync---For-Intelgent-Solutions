@@ -1706,7 +1706,7 @@
         const cur = CURRENCIES[code];
 
         // Update all currency buttons across document
-        document.querySelectorAll('.es-currency-btn').forEach(btn => {
+        document.querySelectorAll('.es-currency-btn, .dana-cur-pill').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.currency === code);
         });
 
