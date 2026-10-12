@@ -34,9 +34,18 @@
                 <span class="live-status-dot"></span>
                 <span>النظام السحابي متصل (EU Node)</span>
             </div>
+            <!-- زر الجولة الإرشادية التفاعلية للزبائن -->
+            <button type="button" class="btn-tour-start" id="btnStartTour" onclick="startGuidedTour()" title="بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون">
+                <span>🚀 ابدأ الجولة</span>
+            </button>
+            <!-- زر تصدير ملخص العرض بنقرة واحدة كـ PDF -->
+            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" onclick="openExecutivePdfModal()" title="تصدير بطاقة العرض التنفيذي إلى ملف PDF أنيق للعميل">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                <span>ملخص العرض (PDF)</span>
+            </button>
             <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" onclick="togglePresentationMode()" title="وضع العرض التقديمي للزبائن (شاشة كاملة وتجربة تنفيذية)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
-                <span>وضع عرض الزبائن [P]</span>
+                <span>عرض الزبائن [P]</span>
             </button>
             <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()" title="نقل تفضيلات الجلسة وحجز موعد استشاري">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
