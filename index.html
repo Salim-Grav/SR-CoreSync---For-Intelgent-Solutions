@@ -2728,18 +2728,24 @@
         .brand-logo-site {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 10px !important;
+            gap: 12px !important;
             text-decoration: none !important;
-            direction: ltr !important; /* حماية العلامة التجارية من الانقلاب في RTL */
-            unicode-bidi: isolate !important;
+            direction: rtl !important; /* اتجاه طبيعي من اليمين إلى اليسار: الشعار قبل النص */
         }
 
         .brand-logo-site-logo {
             display: inline-flex !important;
             align-items: baseline !important;
-            gap: 5px !important;
+            gap: 6px !important;
+            direction: rtl !important;
+        }
+
+        html:not([lang="ar"]) .brand-logo-site {
             direction: ltr !important;
-            unicode-bidi: isolate !important;
+        }
+
+        html:not([lang="ar"]) .brand-logo-site-logo {
+            direction: ltr !important;
         }
 
         .brand-emblem-img {
