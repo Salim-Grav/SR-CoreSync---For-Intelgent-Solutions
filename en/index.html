@@ -3808,6 +3808,15 @@
                         <span class="s-kashida" data-text="Our Services" aria-hidden="true"></span>
                         <span class="s-plain">Our Services</span>
                     </h2>
+                    <div class="text-center">
+                        <div class="dana-services-currency-bar">
+                            <span class="dana-cur-label">💱 Active Currency:</span>
+                            <button type="button" class="dana-cur-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (AED)</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 1:1 Replica of Signature Service Cards with Photorealistic 3D Mockups -->
@@ -3840,7 +3849,7 @@
                                 <span class="dana-price-label">Transparent Price:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Direct Savings</span>
-                                    <span class="dana-price-value"><span>€</span>590</span>
+                                    <span class="dana-price-value" data-eur-price="590"><span>€</span>590</span>
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
@@ -3883,7 +3892,7 @@
                                 <span class="dana-price-label">Transparent Price:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Most Popular</span>
-                                    <span class="dana-price-value"><span>€</span>980</span>
+                                    <span class="dana-price-value" data-eur-price="980"><span>€</span>980</span>
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
@@ -3926,7 +3935,7 @@
                                 <span class="dana-price-label">Transparent Price:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Full ERP Bridge</span>
-                                    <span class="dana-price-value"><span>€</span>1,450</span>
+                                    <span class="dana-price-value" data-eur-price="1450"><span>€</span>1,450</span>
                                 </div>
                             </div>
                             <div class="dana-payment-badges" aria-label="Supported payment gateways">
@@ -3950,6 +3959,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Package Comparison Button -->
+                <div class="dana-compare-trigger-wrap">
+                    <button type="button" class="dana-btn-compare" onclick="window.openServicesComparisonModal()">
+                        <span>📊 Comprehensive Package &amp; Feature Comparison</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
 
                 <div class="services-orbit-divider">
