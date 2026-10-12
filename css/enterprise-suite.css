@@ -2070,3 +2070,202 @@ html[lang="nl"] .service-orbit-section > .container {
     color: #c5a880;
     font-weight: 700;
 }
+
+/* ==========================================================================
+   20. Specialized Components (Extracted from inline styles)
+   ========================================================================== */
+
+/* Reading Scroll Progress */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--primary, #c5a880);
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s ease-out;
+    border-radius: 0 2px 2px 0;
+}
+
+/* Selected Work Section bottom spacing */
+.section-selected-work--original {
+    padding-bottom: clamp(65px, 8vh, 105px) !important;
+}
+
+/* Creative Bundle Banner & Price Value */
+.dana-price-badge-exclusive {
+    background: rgba(197, 168, 128, 0.25) !important;
+    color: #f3dfba !important;
+    border: 1px solid #c5a880 !important;
+}
+.dana-price-value--bundle {
+    font-size: 1.6rem !important;
+}
+.dana-price-value-strikethrough {
+    font-size: 1.05rem !important;
+}
+.dana-price-value-main {
+    font-size: 1.85rem !important;
+}
+
+/* Tech Marquee */
+.tech-marquee-wrapper {
+    background: rgba(197, 168, 128, 0.03);
+    border-top: 1px solid rgba(197, 168, 128, 0.1);
+    border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+    overflow: hidden;
+    white-space: nowrap;
+}
+.tech-marquee-content {
+    display: inline-block;
+    animation: srMarquee 25s linear infinite;
+}
+@keyframes srMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Demo Sync Banner */
+.demo-sync-notification {
+    display: none;
+}
+
+/* ROI Actions and Custom Buttons */
+.sr-roi-actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+.sr-roi-btn-whatsapp {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3) !important;
+}
+.sr-roi-grid-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+.sr-roi-btn-gold {
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+    padding: 11px 18px !important;
+    background: rgba(197, 168, 128, 0.15) !important;
+    border: 1px solid rgba(197, 168, 128, 0.4) !important;
+    color: #f3dfba !important;
+}
+.sr-roi-btn-ghost {
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+    padding: 11px 18px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Live Demo Quick Modal Specifics */
+.sr-live-dot-champagne {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e2c8a2;
+    display: inline-block;
+}
+.sr-demo-modal-footer-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+.sr-demo-modal-sandbox-btn {
+    flex: 1;
+    text-decoration: none !important;
+    margin-top: 0 !important;
+}
+.sr-demo-modal-custom-tour-btn {
+    padding: 12px 20px !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(197, 168, 128, 0.3) !important;
+    color: #fff !important;
+    cursor: pointer !important;
+}
+
+/* Software Hub Section & Cards */
+.section-software-hub {
+    background: radial-gradient(ellipse at 50% 20%, rgba(197, 168, 128, 0.08) 0%, rgba(1, 9, 7, 0.98) 75%);
+    border-top: 1px solid var(--border-glass, rgba(197, 168, 128, 0.15));
+    border-bottom: 1px solid var(--border-glass, rgba(197, 168, 128, 0.15));
+}
+.software-hub-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: rgba(197, 168, 128, 0.12);
+    border: 1px solid var(--primary-gold, #c5a880);
+    color: var(--primary-gold, #c5a880);
+}
+.software-hub-desc {
+    max-width: 680px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.software-product-card {
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    background: rgba(14, 24, 20, 0.75);
+}
+.software-product-card--featured {
+    border: 1px solid rgba(197, 168, 128, 0.55);
+    background: rgba(16, 28, 23, 0.85);
+}
+.software-card-icon {
+    font-size: 1.4rem;
+}
+.software-card-badge {
+    background: rgba(197, 168, 128, 0.2);
+    color: var(--primary-gold, #c5a880);
+    font-size: 0.7rem;
+}
+.software-card-title {
+    font-size: 1.15rem;
+}
+.software-card-ver {
+    font-size: 0.72rem;
+}
+.software-card-desc {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+}
+.software-card-specs {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.25rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.software-card-price {
+    font-size: 1.2rem;
+    color: var(--primary-gold, #c5a880);
+}
+.software-card-license-type {
+    font-size: 0.65rem;
+}
+.software-btn-sim {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    background: rgba(197, 168, 128, 0.15) !important;
+    border: 1px solid var(--primary-gold, #c5a880) !important;
+    color: var(--primary-gold, #c5a880) !important;
+}
+.software-btn-buy {
+    padding: 6px 12px !important;
+    font-size: 0.75rem !important;
+}
