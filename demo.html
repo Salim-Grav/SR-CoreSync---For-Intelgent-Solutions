@@ -1836,6 +1836,46 @@
             });
         }
 
+        // حساب الضريبة الفورية المصغرة في بطاقة TaxSync
+        function calcQuickTax() {
+            const amountInput = document.getElementById('quickTaxAmount');
+            const rateSelect = document.getElementById('quickTaxRate');
+            if (!amountInput || !rateSelect) return;
+            const amount = parseFloat(amountInput.value) || 0;
+            const rate = parseFloat(rateSelect.value) || 0.21;
+            const vat = amount * rate;
+            const total = amount + vat;
+            const vatEl = document.getElementById('quickTaxVat');
+            const totalEl = document.getElementById('quickTaxTotal');
+            if (vatEl) vatEl.innerText = `€ ${vat.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (totalEl) totalEl.innerText = `€ ${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        // توليد مفتاح تجريبي فوري جديد
+        function generateNewQuickKey() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const randomPart = () => Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+            const newKey = `SRTX-2026-TRIAL-${randomPart()}`;
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            if (keyEl) {
+                keyEl.innerText = newKey;
+                keyEl.style.color = 'var(--gold)';
+                setTimeout(() => { if (keyEl) keyEl.style.color = '#fff'; }, 350);
+            }
+            showPortalToast(`✨ تم توليد مفتاح تجريبي جديد: ${newKey}`);
+        }
+
+        // نسخ المفتاح التجريبي الفوري للحافظة
+        function copyQuickTrialKey() {
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
+            navigator.clipboard.writeText(key).then(() => {
+                showPortalToast(`🔑 تم نسخ المفتاح التجريبي: ${key}`);
+            }).catch(() => {
+                showPortalToast(`🔑 تم نسخ المفتاح: ${key}`);
+            });
+        }
+
         function triggerSoftwareDownload() {
             if (!currentActiveSoftware) return;
             const title = currentActiveSoftware.title;
