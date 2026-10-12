@@ -4857,7 +4857,7 @@
             </div>
 
             <!-- شريط تقدم القراءة المستمر -->
-            <div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--primary);z-index:9999;width:0%;transition:width 0.1s ease-out; border-radius: 0 2px 2px 0;"></div>
+            <div id="scroll-progress"></div>
 
             <!-- شريط التنقل العلوي الملكي (Header Refined) -->
             <header class="tf-header header-refined">
@@ -5260,7 +5260,7 @@
         </section>
 
         <!-- 3. قسم الأعمال المختارة (Selected Work Section with Mountain Background) -->
-        <div class="section-selected-work section-selected-work--original flat-spacing flat-animate-tab" id="work" data-section dir="ltr" style="padding-bottom: clamp(65px, 8vh, 105px) !important;">
+        <div class="section-selected-work section-selected-work--original flat-spacing flat-animate-tab" id="work" data-section dir="ltr">
             <div class="bg-img effectFade fadeUp">
                 <img loading="lazy" width="1440" height="720" src="./assets/mountain.webp" alt="خلفية الجبل">
             </div>
@@ -6120,7 +6120,7 @@
                                     <p>احصل على المنظومة الكاملة لشركتك: <strong>(الهوية البصرية المتكاملة + الموقع الفاخر أو المتجر + الربط المحاسبي المالي)</strong> بسعر استثنائي موحد.</p>
                                 </div>
                                 <div class="d-flex flex-column align-items-end gap-2 flex-shrink-0">
-                                    <div class="dana-price-value text-white" style="font-size: 1.6rem;">
+                                    <div class="dana-price-value text-white dana-price-value--bundle">
                                         <span class="text-white-64 text-decoration-line-through fs-6 me-2" data-eur-price="3020">€3,020</span>
                                         <span data-eur-price="1990">€1,990</span>
                                     </div>
@@ -6427,16 +6427,16 @@
         <!-- ======================================================== -->
         <!-- 7.5. سوق البرمجيات الحصرية وحلول التطبيقات (Software Hub & Store) -->
         <!-- ======================================================== -->
-        <section class="flat-spacing section-software-hub" id="software-hub" data-section style="background: radial-gradient(ellipse at 50% 20%, rgba(197, 168, 128, 0.08) 0%, rgba(1, 9, 7, 0.98) 75%); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+        <section class="flat-spacing section-software-hub" id="software-hub" data-section>
             <div class="container">
                 <div class="s-header text-center mb-5">
-                    <span class="about-hero-tag font-latin mb-2" style="display:inline-block; font-size:0.75rem; padding:4px 14px; border-radius:20px; background:rgba(197,168,128,0.12); border:1px solid var(--primary-gold); color:var(--primary-gold);">
+                    <span class="about-hero-tag font-latin mb-2 software-hub-tag">
                         S&R EXCLUSIVE SOFTWARE PRODUCTS • READY TO DEPLOY
                     </span>
                     <h2 class="text-display-2 letter-space--3 mb-3 text-white">
                         سوق البرمجيات الحصرية وحلول التطبيقات
                     </h2>
-                    <p class="desc text-white-64 mx-auto" style="max-width: 680px; font-size: 0.95rem; line-height: 1.6;">
+                    <p class="desc text-white-64 mx-auto software-hub-desc">
                         برمجيات سطح مكتب مستقلة، تطبيقات هاتف ذكية، وأدوات ربط محاسبي ولوازم تشفير مطورة حصرياً لشركتنا، متاحة للشراء والترخيص الرقمي الفوري مع فترات تجربة مجانية.
                     </p>
                 </div>
@@ -6446,20 +6446,20 @@
                     
                     <!-- 1. S&R TaxSync Desktop -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between" style="border: 1px solid rgba(197, 168, 128, 0.35); background: rgba(14, 24, 20, 0.75);">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span style="font-size: 1.4rem;">💻</span>
-                                    <span class="status-badge status-completed" style="background:rgba(197,168,128,0.2); color:var(--primary-gold); font-size:0.7rem;">الأكثر طلباً ★</span>
+                                    <span class="software-card-icon">💻</span>
+                                    <span class="status-badge status-completed software-card-badge">الأكثر طلباً ★</span>
                                 </div>
-                                <h4 class="text-white fw-bold mb-1" style="font-size: 1.15rem;">S&R TaxSync Desktop</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3" style="font-size: 0.72rem;">
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R TaxSync Desktop</h4>
+                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
                                     v2.4 Pro • Windows 11/10 & macOS
                                 </div>
-                                <p class="text-white-64" style="font-size: 0.82rem; line-height: 1.55; margin-bottom: 1rem;">
+                                <p class="text-white-64 software-card-desc">
                                     برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين لحساب ضريبة BTW/VAT 21% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية.
                                 </p>
-                                <ul style="list-style: none; padding: 0; margin-bottom: 1.25rem; font-size: 0.78rem; color: rgba(255,255,255,0.85); display: flex; flex-direction: column; gap: 6px;">
+                                <ul class="software-card-specs">
                                     <li>✓ تشفير البيانات محلياً دون اتصال</li>
                                     <li>✓ تقارير BTW جاهزة للتدقيق المالي</li>
                                     <li>✓ طباعة فواتير EN 16931 متوافقة</li>
@@ -6467,14 +6467,14 @@
                             </div>
                             <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span class="text-white font-latin fw-bold" style="font-size: 1.2rem; color: var(--primary-gold);">€ 189</span>
-                                    <span class="text-caption text-white-64 d-block" style="font-size: 0.65rem;">ترخيص سنوي / جهاز</span>
+                                    <span class="text-white font-latin fw-bold software-card-price">€ 189</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص سنوي / جهاز</span>
                                 </div>
                                 <div class="d-flex gap-2 flex-wrap">
-                                    <a href="demo.html?sandbox=taxsync#software" class="tf-btn" style="padding: 6px 10px; font-size: 0.75rem; background: rgba(197,168,128,0.15); border: 1px solid var(--primary-gold); color: var(--primary-gold);" title="محاكاة حية فورية داخل المتصفح">
+                                    <a href="demo.html?sandbox=taxsync#software" class="tf-btn software-btn-sim" title="محاكاة حية فورية داخل المتصفح">
                                         <span>محاكي حي ⚡</span>
                                     </a>
-                                    <a href="demo.html?action=checkout&app=taxsync#software" class="tf-btn" style="padding: 6px 12px; font-size: 0.75rem;">
+                                    <a href="demo.html?action=checkout&app=taxsync#software" class="tf-btn software-btn-buy">
                                         <span>شراء وترخيص ←</span>
                                     </a>
                                 </div>
@@ -6484,20 +6484,20 @@
 
                     <!-- 2. S&R FlowScan AI Mobile -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between" style="border: 1px solid rgba(56, 189, 248, 0.35); background: rgba(14, 24, 20, 0.75);">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--blue">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span style="font-size: 1.4rem;">📱</span>
-                                    <span class="status-badge" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem;">OCR Mobile AI</span>
+                                    <span class="software-card-icon">📱</span>
+                                    <span class="status-badge software-card-badge--blue">OCR Mobile AI</span>
                                 </div>
-                                <h4 class="text-white fw-bold mb-1" style="font-size: 1.15rem;">S&R FlowScan AI Mobile</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3" style="font-size: 0.72rem;">
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R FlowScan AI Mobile</h4>
+                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
                                     v1.8 • iOS 17+ & Android 14+
                                 </div>
-                                <p class="text-white-64" style="font-size: 0.82rem; line-height: 1.55; margin-bottom: 1rem;">
+                                <p class="text-white-64 software-card-desc">
                                     تطبيق هاتف ذكي لمسح الفواتير والإيصالات الورقية بالكاميرا واستخراج الضريبة والبنود آلياً وترحيلها لحظياً للـ ERP.
                                 </p>
-                                <ul style="list-style: none; padding: 0; margin-bottom: 1.25rem; font-size: 0.78rem; color: rgba(255,255,255,0.85); display: flex; flex-direction: column; gap: 6px;">
+                                <ul class="software-card-specs">
                                     <li>✓ استخراج ضوئي OCR بدقة 99.4%</li>
                                     <li>✓ فرز آلي لمصاريف التشغيل والوقود</li>
                                     <li>✓ مزامنة سحابية مع لوحة تحكم الإدارة</li>
@@ -6505,10 +6505,10 @@
                             </div>
                             <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span class="text-white font-latin fw-bold" style="font-size: 1.2rem; color: #38bdf8;">€ 9.99</span>
-                                    <span class="text-caption text-white-64 d-block" style="font-size: 0.65rem;">شهرياً / مستخدم</span>
+                                    <span class="text-white font-latin fw-bold software-card-price--blue">€ 9.99</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / مستخدم</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn" style="padding: 7px 14px; font-size: 0.78rem;">
+                                <a href="demo.html#software" class="tf-btn software-btn-buy">
                                     <span>تحميل التطبيق ←</span>
                                 </a>
                             </div>
@@ -6517,20 +6517,20 @@
 
                     <!-- 3. S&R CloudPOS Connector -->
                     <div class="col-lg-4 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between" style="border: 1px solid rgba(16, 185, 129, 0.35); background: rgba(14, 24, 20, 0.75);">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--green">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span style="font-size: 1.4rem;">⚡</span>
-                                    <span class="status-badge" style="background:rgba(16,185,129,0.2); color:#10b981; font-size:0.7rem;">ربط نقاط البيع</span>
+                                    <span class="software-card-icon">⚡</span>
+                                    <span class="status-badge software-card-badge--green">ربط نقاط البيع</span>
                                 </div>
-                                <h4 class="text-white fw-bold mb-1" style="font-size: 1.15rem;">S&R CloudPOS Connector</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3" style="font-size: 0.72rem;">
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R CloudPOS Connector</h4>
+                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
                                     v3.1 Agent • Windows POS Terminal
                                 </div>
-                                <p class="text-white-64" style="font-size: 0.82rem; line-height: 1.55; margin-bottom: 1rem;">
+                                <p class="text-white-64 software-card-desc">
                                     وسيط برمجي خفيف يربط كاشيرات ونقاط بيع المطاعم والمتاجر بنظام الـ ERP السحابي لحظياً دون الحاجة لتغيير الأجهزة القائمة.
                                 </p>
-                                <ul style="list-style: none; padding: 0; margin-bottom: 1.25rem; font-size: 0.78rem; color: rgba(255,255,255,0.85); display: flex; flex-direction: column; gap: 6px;">
+                                <ul class="software-card-specs">
                                     <li>✓ تكامل مع طابعات الإيصالات والباركود</li>
                                     <li>✓ مبيعات أوفلاين واسترجاع تلقائي</li>
                                     <li>✓ تسوية نقدية لحظية بنهاية كل وردية</li>
@@ -6538,10 +6538,10 @@
                             </div>
                             <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span class="text-white font-latin fw-bold" style="font-size: 1.2rem; color: #10b981;">€ 25</span>
-                                    <span class="text-caption text-white-64 d-block" style="font-size: 0.65rem;">شهرياً / نقطة بيع</span>
+                                    <span class="text-white font-latin fw-bold software-card-price--green">€ 25</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / نقطة بيع</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn" style="padding: 7px 14px; font-size: 0.78rem;">
+                                <a href="demo.html#software" class="tf-btn software-btn-buy">
                                     <span>تجربة الربط ←</span>
                                 </a>
                             </div>
@@ -6550,26 +6550,26 @@
 
                     <!-- 4. S&R SecureVault B2B -->
                     <div class="col-lg-6 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between" style="border: 1px solid rgba(168, 85, 247, 0.35); background: rgba(14, 24, 20, 0.75);">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--purple">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span style="font-size: 1.4rem;">🛡️</span>
-                                    <span class="status-badge" style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.7rem;">GDPR Encrypted</span>
+                                    <span class="software-card-icon">🛡️</span>
+                                    <span class="status-badge software-card-badge--purple">GDPR Encrypted</span>
                                 </div>
-                                <h4 class="text-white fw-bold mb-1" style="font-size: 1.15rem;">S&R SecureVault B2B</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3" style="font-size: 0.72rem;">
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R SecureVault B2B</h4>
+                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
                                     v2.0 • Win Server / Linux / Cloud
                                 </div>
-                                <p class="text-white-64" style="font-size: 0.82rem; line-height: 1.55; margin-bottom: 1rem;">
+                                <p class="text-white-64 software-card-desc">
                                     تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع خوادم معزولة في أمستردام.
                                 </p>
                             </div>
                             <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span class="text-white font-latin fw-bold" style="font-size: 1.2rem; color: #c084fc;">€ 49</span>
-                                    <span class="text-caption text-white-64 d-block" style="font-size: 0.65rem;">شهرياً (1TB Encrypted)</span>
+                                    <span class="text-white font-latin fw-bold software-card-price--purple">€ 49</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (1TB Encrypted)</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn" style="padding: 7px 14px; font-size: 0.78rem;">
+                                <a href="demo.html#software" class="tf-btn software-btn-buy">
                                     <span>طلب الحماية ←</span>
                                 </a>
                             </div>
@@ -6578,26 +6578,26 @@
 
                     <!-- 5. S&R Financial AI SDK -->
                     <div class="col-lg-6 col-md-12">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between" style="border: 1px solid rgba(197, 168, 128, 0.35); background: rgba(14, 24, 20, 0.75);">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span style="font-size: 1.4rem;">🧩</span>
-                                    <span class="status-badge" style="background:rgba(197,168,128,0.2); color:var(--primary-gold); font-size:0.7rem;">للمطورين والشركات</span>
+                                    <span class="software-card-icon">🧩</span>
+                                    <span class="status-badge software-card-badge">للمطورين والشركات</span>
                                 </div>
-                                <h4 class="text-white fw-bold mb-1" style="font-size: 1.15rem;">S&R Financial AI SDK</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3" style="font-size: 0.72rem;">
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R Financial AI SDK</h4>
+                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
                                     v1.2 Dev • Python / Node.js / C# / REST
                                 </div>
-                                <p class="text-white-64" style="font-size: 0.82rem; line-height: 1.55; margin-bottom: 1rem;">
+                                <p class="text-white-64 software-card-desc">
                                     مكتبة برمجية للمطورين والشركات لدمج خوارزميات التنبؤ المالي والفوترة والامتثال في تطبيقاتهم الخاصة بسهولة وسرعة فائقة.
                                 </p>
                             </div>
                             <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
                                 <div>
-                                    <span class="text-white font-latin fw-bold" style="font-size: 1.2rem; color: var(--primary-gold);">€ 99</span>
-                                    <span class="text-caption text-white-64 d-block" style="font-size: 0.65rem;">شهرياً (50k API Calls)</span>
+                                    <span class="text-white font-latin fw-bold software-card-price">€ 99</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (50k API Calls)</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn" style="padding: 7px 14px; font-size: 0.78rem;">
+                                <a href="demo.html#software" class="tf-btn software-btn-buy">
                                     <span>تحميل الـ SDK ←</span>
                                 </a>
                             </div>
@@ -6607,19 +6607,19 @@
                 </div>
 
                 <!-- شريط الشراكة مع المطورين -->
-                <div class="glass-box p-4 rounded-4" style="background: rgba(14, 24, 20, 0.85); border: 1px solid var(--border-glass);">
+                <div class="glass-box p-4 rounded-4 software-dev-partner-box">
                     <div class="row align-items-center">
                         <div class="col-lg-8">
                             <h4 class="text-white fw-bold mb-1">هل تمتلك برنامجاً وترغب في توزيعه وترخيصه تجارياً عبر شبكتنا؟</h4>
-                            <p class="text-white-64 mb-0" style="font-size: 0.88rem;">
+                            <p class="text-white-64 mb-0 software-dev-partner-desc">
                                 منصة S&R CoreSync Solutions توفر بيئة متكاملة لترخيص وتشفير البرمجيات مع تسويات مالية عبر iDEAL و SEPA و بطاقات الائتمان لشركائنا البرمجيين.
                             </p>
                         </div>
                         <div class="col-lg-4 text-lg-start mt-3 mt-lg-0 d-flex gap-2 justify-content-lg-end flex-wrap">
-                            <a href="demo.html?sandbox=taxsync#software" class="tf-btn" style="background: rgba(197,168,128,0.15); border: 1px solid var(--primary-gold); color: var(--primary-gold); font-size: 0.82rem; padding: 10px 16px;">
+                            <a href="demo.html?sandbox=taxsync#software" class="tf-btn software-dev-btn-sim">
                                 <span>⚡ تجربة المحاكي التفاعلي</span>
                             </a>
-                            <a href="demo.html#software" class="tf-btn" style="background: linear-gradient(135deg, var(--primary-gold), var(--primary-gold-hover)); color:#000; font-size: 0.82rem; padding: 10px 16px;">
+                            <a href="demo.html#software" class="tf-btn software-dev-btn-store">
                                 <span>متجر التراخيص ←</span>
                             </a>
                         </div>
@@ -6728,8 +6728,8 @@
 
         <!-- 9. قسم التواصل ونموذج الطلب (Section CTA) -->
         <!-- شريط التقنيات المتدفق (Tech Marquee) -->
-        <div class="tech-marquee-wrapper py-4" style="background: rgba(197, 168, 128, 0.03); border-top: 1px solid rgba(197,168,128,0.1); border-bottom: 1px solid rgba(197,168,128,0.1); overflow: hidden; white-space: nowrap;">
-            <div class="tech-marquee-content" style="display: inline-block; animation: srMarquee 25s linear infinite;">
+        <div class="tech-marquee-wrapper py-4">
+            <div class="tech-marquee-content">
                 <span class="text-display-3 text-white-64 px-4 font-latin">Next.js</span><span class="gold-accent px-2">✦</span>
                 <span class="text-display-3 text-white-64 px-4 font-latin">React</span><span class="gold-accent px-2">✦</span>
                 <span class="text-display-3 text-white-64 px-4 font-latin">Vercel Edge</span><span class="gold-accent px-2">✦</span>
@@ -6767,7 +6767,7 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- شريط مزامنة البيانات من المنصة التجريبية -->
-                        <div id="demo-sync-banner" class="demo-sync-notification" style="display: none;">
+                        <div id="demo-sync-banner" class="demo-sync-notification">
                             <div class="demo-sync-icon-glow">✨</div>
                             <div class="demo-sync-text">
                                 <h4 id="demo-sync-title">تمت مزامنة بياناتك من المنصة السحابية التجريبية بنجاح!</h4>
@@ -8777,17 +8777,17 @@
             </div>
 
             <!-- خيارات مشاركة وإرسال تقرير التوفير والعائد المالي المباشرة -->
-            <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px;">
-                <button type="button" class="sr-exec-submit-btn" style="background:linear-gradient(135deg, #25D366 0%, #128C7E 100%); color:#ffffff; border:none; box-shadow:0 8px 24px rgba(37,211,102,0.3);" onclick="sendRoiDirectWhatsApp()">
+            <div class="sr-roi-actions-wrapper">
+                <button type="button" class="sr-exec-submit-btn sr-roi-btn-whatsapp" onclick="sendRoiDirectWhatsApp()">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     <span>إرسال تقرير الأرقام مباشرة لواتساب الاستشاري المالي</span>
                 </button>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
-                    <button type="button" class="sr-exec-submit-btn" style="margin:0; font-size:0.9rem; padding:11px 18px; background:rgba(197,168,128,0.15); border:1px solid rgba(197,168,128,0.4); color:#f3dfba;" onclick="applyRoiToConsultation()">
+                <div class="sr-roi-grid-actions">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-gold" onclick="applyRoiToConsultation()">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <span>حجز جلسة VIP مفصلة بالأرقام</span>
                     </button>
-                    <button type="button" class="sr-exec-submit-btn" style="margin:0; font-size:0.9rem; padding:11px 18px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.2); color:#ffffff;" onclick="sendRoiDirectEmail()">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-ghost" onclick="sendRoiDirectEmail()">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         <span>إرسال التقرير عبر البريد</span>
                     </button>
@@ -8803,7 +8803,7 @@
             <div class="sr-exec-modal-header">
                 <div>
                     <div class="sr-exec-modal-badge">
-                        <span class="live-dot" style="width:8px;height:8px;border-radius:50%;background:#e2c8a2;display:inline-block;"></span>
+                        <span class="live-dot sr-live-dot-champagne"></span>
                         <span>بيئة العرض الحي المباشرة (S&R Interactive Sandbox)</span>
                     </div>
                     <h3 class="sr-exec-modal-title" id="liveDemoTitle">استعراض حلول S&R CoreSync السحابية والمحاسبية</h3>
@@ -8830,12 +8830,12 @@
                 <!-- يتم تعبئتها ديناميكياً بواسطة switchDemoModalTab -->
             </div>
 
-            <div style="display: flex; gap: 10px; margin-top: 1.5rem; flex-wrap: wrap;">
-                <a href="demo.html" class="sr-exec-submit-btn" style="flex: 1; text-decoration: none; margin-top: 0;">
+            <div class="sr-demo-modal-footer-btns">
+                <a href="demo.html" class="sr-exec-submit-btn sr-demo-modal-sandbox-btn">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 8"/></svg>
                     <span>دخول بيئة النظام التجريبي التفاعلي الكامل (Full Sandbox)</span>
                 </a>
-                <button type="button" class="sr-exec-btn exec-stage-btn-glass" onclick="closeLiveDemoQuickModal(); openExecutiveBookingModal('both');" style="padding: 12px 20px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(197,168,128,0.3); color: #fff; cursor: pointer;">
+                <button type="button" class="sr-exec-btn exec-stage-btn-glass sr-demo-modal-custom-tour-btn" onclick="closeLiveDemoQuickModal(); openExecutiveBookingModal('both');">
                     <span>طلب جولة حية مخصصة لشركتك</span>
                 </button>
             </div>
