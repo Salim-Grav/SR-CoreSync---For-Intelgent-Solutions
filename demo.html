@@ -637,6 +637,38 @@
                                     طباعة فواتير رسمية وتوافق مع EN 16931
                                 </li>
                             </ul>
+
+                            <!-- حاسبة الضريبة الفورية التفاعلية (Mini BTW/VAT Calculator Widget) -->
+                            <div class="quick-tax-calc-box" style="margin: 10px 0; padding: 10px 12px; background: rgba(1, 9, 7, 0.75); border: 1px solid rgba(197, 168, 128, 0.28); border-radius: 10px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <span style="font-size:0.75rem; font-weight:800; color:var(--gold);">⚡ حاسبة ضريبة فورية:</span>
+                                    <select id="quickTaxRate" onchange="calcQuickTax()" style="background:#02150f; border:1px solid rgba(197,168,128,0.4); color:#fff; font-size:0.7rem; border-radius:6px; padding:2px 8px; font-family:'Alexandria', sans-serif; cursor:pointer;">
+                                        <option value="0.21">BTW هولندي 21%</option>
+                                        <option value="0.09">BTW مخفض 9%</option>
+                                        <option value="0.15">ضريبة خليجية 15%</option>
+                                    </select>
+                                </div>
+                                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                                    <span style="font-size:0.72rem; color:var(--text-muted); white-space:nowrap;">المبلغ (€):</span>
+                                    <input type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" style="width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#fff; font-size:0.8rem; padding:4px 8px; font-family:'JetBrains Mono', monospace;" placeholder="المبلغ" />
+                                </div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.73rem; background:rgba(197,168,128,0.1); padding:6px 10px; border-radius:6px;">
+                                    <span>الضريبة: <strong id="quickTaxVat" style="color:var(--gold);">€ 210.00</strong></span>
+                                    <span>الإجمالي: <strong id="quickTaxTotal" style="color:#10b981;">€ 1,210.00</strong></span>
+                                </div>
+                            </div>
+
+                            <!-- مولد مفتاح الترخيص التجريبي الفوري (Instant Trial License Key Generator) -->
+                            <div class="trial-key-bar" id="taxsyncTrialBar" style="margin-bottom: 10px; background: rgba(16,185,129,0.09); border: 1px dashed rgba(16,185,129,0.4); border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                                <div style="min-width: 0;">
+                                    <div style="font-size: 0.65rem; color: #a7f3d0; font-weight: 700;">مفتاح تجريبي فوري (14 يوماً):</div>
+                                    <div id="quickTrialKeyDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">SRTX-2026-TRIAL-8849</div>
+                                </div>
+                                <div style="display: flex; gap: 4px; flex-shrink: 0;">
+                                    <button type="button" onclick="generateNewQuickKey()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: #fff; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; cursor: pointer; transition: 0.2s;" title="توليد مفتاح جديد">🔄</button>
+                                    <button type="button" onclick="copyQuickTrialKey()" style="background: var(--gold); border: none; color: #000; font-weight: 800; border-radius: 6px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer; transition: 0.2s;" title="نسخ المفتاح">📋 نسخ</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="software-card-bottom">
                             <div class="software-price-wrap">
