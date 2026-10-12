@@ -2545,8 +2545,13 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             if (e.key === 'p' || e.key === 'P' || e.key === 'f' || e.key === 'F') {
                 e.preventDefault();
                 togglePresentationMode();
-            } else if (e.key === 'Escape' && isPresentationActive) {
-                togglePresentationMode();
+            } else if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                startGuidedTour();
+            } else if (e.key === 'Escape') {
+                if (typeof isPresentationActive !== 'undefined' && isPresentationActive) togglePresentationMode();
+                if (typeof endGuidedTour === 'function') endGuidedTour();
+                if (typeof closeExecutivePdfModal === 'function') closeExecutivePdfModal();
             }
         });
     </script>
