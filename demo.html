@@ -122,6 +122,36 @@
             
             <!-- 1. شاشة النظرة العامة والمالية -->
             <section class="tab-section active" id="tab-overview">
+                <!-- شريط محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator) -->
+                <div class="currency-vat-bar" id="currencyVatSimulatorBar">
+                    <div class="cur-vat-title">
+                        <span class="cur-badge-pulse"></span>
+                        <strong>محاكي العملات والضرائب الحي (Live Currency & VAT Simulator):</strong>
+                    </div>
+                    <div class="cur-vat-controls">
+                        <div class="cur-selector-group">
+                            <span class="cur-label">العملة:</span>
+                            <div class="cur-pill-toggle">
+                                <button type="button" class="cur-pill active" id="curPill-EUR" onclick="setCurrency('EUR')">€ EUR</button>
+                                <button type="button" class="cur-pill" id="curPill-USD" onclick="setCurrency('USD')">$ USD</button>
+                                <button type="button" class="cur-pill" id="curPill-SAR" onclick="setCurrency('SAR')">﷼ SAR</button>
+                            </div>
+                        </div>
+                        <div class="cur-selector-group">
+                            <span class="cur-label">النظام الضريبي:</span>
+                            <select id="globalVatSelector" onchange="setGlobalVat(this.value)" class="cur-select-vat">
+                                <option value="0.21" selected>🇳🇱 BTW هولندي (21%)</option>
+                                <option value="0.09">🇳🇱 BTW مخفض (9%)</option>
+                                <option value="0.15">🇸🇦 ضريبة خليجية (15%)</option>
+                                <option value="0.00">🌐 معفى ضريبياً (0%)</option>
+                            </select>
+                        </div>
+                        <div class="cur-summary-chip">
+                            <span>الضريبة المحتسبة: <strong id="globalVatEst">€ 176,925.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="section-header">
                     <div class="section-title-wrap">
                         <h2>لوحة القيادة والتدفق المالي اللحظي</h2>
@@ -134,26 +164,26 @@
                 </div>
 
                 <!-- شبكة بطاقات الأرقام -->
-                <div class="stats-grid">
-                    <div class="stat-card">
+                <div class="stats-grid" id="tourStatsGrid">
+                    <div class="stat-card" id="tourStatCardRevenue">
                         <div class="stat-top">
                             <span class="stat-label">إجمالي الإيرادات السنوية</span>
-                            <div class="stat-icon font-num">€</div>
+                            <div class="stat-icon font-num" id="stat-currency-sym1">€</div>
                         </div>
-                        <div class="stat-value font-num" id="stat-revenue">€ 842,500</div>
+                        <div class="stat-value font-num" id="stat-revenue">€ 842,500.00</div>
                         <div class="stat-trend positive">
                             <span>+18.4%</span> مقارنة بالربع السابق
                         </div>
                     </div>
 
-                    <div class="stat-card">
+                    <div class="stat-card" id="tourStatCardCashflow">
                         <div class="stat-top">
                             <span class="stat-label">التدفقات النقدية الصافية</span>
-                            <div class="stat-icon">
+                            <div class="stat-icon" id="stat-currency-sym2">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
                             </div>
                         </div>
-                        <div class="stat-value font-num">€ 318,920</div>
+                        <div class="stat-value font-num" id="stat-cashflow">€ 318,920.00</div>
                         <div class="stat-trend positive">
                             <span>+9.2%</span> هامش ربحية تشغيلية
                         </div>
@@ -2710,8 +2740,129 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <span>PCI-DSS Level 1 Compliant</span>
             </div>
         </div>
+    <!-- حاوية الجولة الإرشادية التفاعلية للزبائن (Spotlight Guided Tour) -->
+    <div id="tourBackdrop" class="tour-backdrop" style="display:none;" onclick="endGuidedTour()"></div>
+    <div id="tourCard" class="tour-card" style="display:none;">
+        <div class="tour-card-header">
+            <span class="tour-step-badge" id="tourStepBadge">خطوة 1 من 5</span>
+            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="إغلاق الجولة">✕</button>
+        </div>
+        <h4 id="tourStepTitle" class="tour-step-title">لوحة القيادة والتدفق المالي</h4>
+        <p id="tourStepDesc" class="tour-step-desc">هنا يظهر الأداء المالي اللحظي للشركة مع مؤشرات الإيرادات ونسب النمو بدقة متناهية.</p>
+        <div class="tour-card-footer">
+            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ السابق</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">التالي ➡️</button>
+        </div>
     </div>
 
+    <!-- نافذة تصدير ملخص العرض التنفيذي للزبائن (One-Click Executive PDF) -->
+    <div class="modal-overlay" id="executivePdfModal" onclick="if(event.target === this) closeExecutivePdfModal()">
+        <div class="modal-card exec-pdf-card" style="max-width:880px; width:95%; max-height:92vh; overflow-y:auto; background:#02100b; border:1.5px solid var(--gold); border-radius:18px; padding:2.2rem; box-shadow:0 25px 70px rgba(0,0,0,0.9); color:#fff;">
+            <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(197,168,128,0.25); padding-bottom:1rem; margin-bottom:1.5rem;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <img src="./assets/logo-neon-icon.svg" style="height:42px; width:42px;" alt="S&R CoreSync" />
+                    <div>
+                        <h3 style="margin:0; font-size:1.25rem; color:var(--gold);">S&R CORESYNC SOLUTIONS B.V.</h3>
+                        <span style="font-size:0.75rem; color:var(--text-muted);">Executive Capability Brief & Digital Quotation (Official Dossier)</span>
+                    </div>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button type="button" onclick="printExecutiveBrief()" style="background:linear-gradient(135deg, var(--gold), #10b981); color:#000; font-weight:800; border:none; border-radius:8px; padding:9px 18px; font-size:0.82rem; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 4px 15px rgba(212,175,55,0.35);">
+                        🖨️ طباعة / حفظ كـ PDF
+                    </button>
+                    <button type="button" onclick="closeExecutivePdfModal()" style="background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:9px 14px; font-size:0.82rem; cursor:pointer;">
+                        إغلاق ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- محتوى التقرير للطباعة والمعاينة -->
+            <div id="printableExecutiveBrief" style="font-family:'Alexandria', sans-serif; line-height:1.6; color:#ffffff;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c5a880; padding-bottom:14px; margin-bottom:20px;">
+                    <div>
+                        <h2 style="margin:0; font-size:1.6rem; color:#c5a880; font-weight:900;">ملخص العرض التنفيذي والجاهزية المؤسسية</h2>
+                        <span style="font-size:0.85rem; color:#94a3b8;">S&R Enterprise Architecture • Netherlands Headquarters</span>
+                    </div>
+                    <div style="text-align:left; font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:#cbd5e1;">
+                        <div>REF: <strong style="color:#c5a880;">SR-EXEC-2026-Q4</strong></div>
+                        <div>DATE: <strong id="pdfDateDisplay">2026-10-12</strong></div>
+                        <div>STATUS: <strong style="color:#34d399;">VERIFIED & ACTIVE</strong></div>
+                    </div>
+                </div>
+
+                <!-- نبذة عن الحل السحابي -->
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,168,128,0.2); border-radius:12px; padding:16px; margin-bottom:20px;">
+                    <h4 style="margin:0 0 8px 0; color:#fff; font-size:1rem;">🌟 نظرة عامة على حلول S&R CoreSync</h4>
+                    <p style="margin:0; font-size:0.84rem; color:rgba(255,255,255,0.8); line-height:1.7;">
+                        منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر.
+                    </p>
+                </div>
+
+                <!-- جدول المؤشرات المالية المعتمدة بالعملة والضريبة المختارة -->
+                <div style="margin-bottom:20px;">
+                    <h4 style="margin:0 0 10px 0; color:#c5a880; font-size:0.95rem;">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>
+                    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:right;">
+                        <thead>
+                            <tr style="background:rgba(197,168,128,0.15); border-bottom:1px solid #c5a880;">
+                                <th style="padding:10px; color:#fff;">البند المالي</th>
+                                <th style="padding:10px; color:#fff;">القيمة المعتمدة</th>
+                                <th style="padding:10px; color:#fff;">الحالة والامتثال</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                                <td style="padding:10px;">إجمالي الإيرادات السنوية التقديرية</td>
+                                <td style="padding:10px; font-weight:800; color:#c5a880;" id="pdfRevVal">€ 842,500.00</td>
+                                <td style="padding:10px; color:#34d399;">متحقق سحابياً (+18.4%)</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                                <td style="padding:10px;">التدفقات النقدية الصافية المحققة</td>
+                                <td style="padding:10px; font-weight:800; color:#fff;" id="pdfCashVal">€ 318,920.00</td>
+                                <td style="padding:10px; color:#34d399;">هامش ربحية 9.2%</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                                <td style="padding:10px;">نظام الضريبة المطبق في الجلسة</td>
+                                <td style="padding:10px; font-weight:800; color:#fff;" id="pdfVatScheme">BTW هولندي (21%)</td>
+                                <td style="padding:10px; color:#38bdf8;">متوافق مع AWR Art. 52</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                                <td style="padding:10px;">الضريبة المقدرة المحتسبة</td>
+                                <td style="padding:10px; font-weight:800; color:#34d399;" id="pdfVatVal">€ 176,925.00</td>
+                                <td style="padding:10px;">Digipoort XML جاهز</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- حزم البرمجيات الموصى بها -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px;">
+                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px;">
+                        <div style="font-weight:800; color:#fff; font-size:0.9rem; margin-bottom:4px;">💻 S&R TaxSync Desktop (v2.4 Pro)</div>
+                        <div style="font-size:0.78rem; color:#94a3b8;">تطبيق سطح مكتب مستقل (Offline-First) لحساب BTW وتوليد ملفات إقرارات الضرائب المشفرة.</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px;">
+                        <div style="font-weight:800; color:#fff; font-size:0.9rem; margin-bottom:4px;">🤖 S&R CoreSync AI Assistant</div>
+                        <div style="font-size:0.78rem; color:#94a3b8;">محرك تحليل ذكاء اصطناعي محلي مع معالجة مستندات الفواتير بدقة 99.4%.</div>
+                    </div>
+                </div>
+
+                <!-- توقيع المؤسسين الرسمي -->
+                <div style="border-top:1px dashed rgba(197,168,128,0.4); padding-top:16px; display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div style="font-weight:800; font-size:0.88rem; color:#fff;">Eng. Mohammad Salim Aziza</div>
+                        <div style="font-size:0.75rem; color:#94a3b8;">Co-Founder & CTO // Lead Cloud Architect</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:0.75rem; color:#c5a880; font-weight:800; border:1px solid #c5a880; padding:4px 10px; border-radius:6px;">ختم الاعتماد الرقمي (Verified SHA-256)</div>
+                    </div>
+                    <div style="text-align:left;">
+                        <div style="font-weight:800; font-size:0.88rem; color:#fff;">Mr. Mohammad Raed Kaakeh</div>
+                        <div style="font-size:0.75rem; color:#94a3b8;">Co-Founder & CFO // Financial ERP Architect</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- إشعار التخصيص العائم (Portal Floating Toast) -->
     <div id="portal-toast" style="position:fixed; bottom:24px; left:24px; z-index:9999; background:rgba(9,9,11,0.92); backdrop-filter:blur(12px); border:1px solid var(--gold); border-radius:12px; padding:12px 18px; color:#fff; font-size:13px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:0 12px 32px rgba(0,0,0,0.6); transform:translateY(100px); opacity:0; transition:all 0.35s ease; pointer-events:none;">
