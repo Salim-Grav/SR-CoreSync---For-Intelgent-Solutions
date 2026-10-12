@@ -779,6 +779,18 @@
         });
     }
 
+    
+    // Modal Language Switcher UI Component
+    function renderModalLangSwitcher(activeLang) {
+        return `
+            <div class="es-modal-lang-switcher" role="group" aria-label="Language Switcher">
+                <button type="button" class="es-lang-pill ${activeLang === 'en' ? 'active' : ''}" onclick="window.switchModalLang('en')">EN</button>
+                <button type="button" class="es-lang-pill ${activeLang === 'nl' ? 'active' : ''}" onclick="window.switchModalLang('nl')">NL</button>
+                <button type="button" class="es-lang-pill ${activeLang === 'ar' ? 'active' : ''}" onclick="window.switchModalLang('ar')">عربي</button>
+            </div>
+        `;
+    }
+
     // 3. Inject Floating Hub (Feedback, Quiz, Scheduler)
     function injectFloatingHub() {
         if (document.getElementById('esFloatingSuite')) return;
@@ -816,9 +828,12 @@
                 <div class="es-feedback-header">
                     <h3>
                         <span class="es-feedback-dot"></span>
-                        <span>${fb.title}</span>
+                        <span id="fbModalTitle">${fb.title}</span>
                     </h3>
-                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeFeedbackModal()">✕</button>
+                    <div class="es-header-tools">
+                        ${renderModalLangSwitcher(lang)}
+                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeFeedbackModal()">✕</button>
+                    </div>
                 </div>
                 <div class="es-feedback-body">
                     <p style="font-size: 0.82rem; color: rgba(255,255,255,0.7); margin: 0 0 10px;">
@@ -881,9 +896,12 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        <span>${t.title}</span>
+                        <span id="schModalTitle">${t.title}</span>
                     </h3>
-                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeSchedulerModal()">✕</button>
+                    <div class="es-header-tools">
+                        ${renderModalLangSwitcher(lang)}
+                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeSchedulerModal()">✕</button>
+                    </div>
                 </div>
                 <div class="es-feedback-body">
                     <p style="font-size: 0.82rem; color: rgba(255,255,255,0.7); margin: 0;">
@@ -962,9 +980,12 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-                        <span>${t.modalTitle}</span>
+                        <span id="readinessModalTitle">${t.modalTitle}</span>
                     </h3>
-                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeReadinessModal()">✕</button>
+                    <div class="es-header-tools">
+                        ${renderModalLangSwitcher(lang)}
+                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeReadinessModal()">✕</button>
+                    </div>
                 </div>
                 <div class="es-feedback-body" id="quizContainer">
                     <div class="es-quiz-progress-bar">
@@ -997,9 +1018,12 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        <span>${t.modalTitle}</span>
+                        <span id="caseStudyModalTitle">${t.modalTitle}</span>
                     </h3>
-                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeCaseStudyModal()">✕</button>
+                    <div class="es-header-tools">
+                        ${renderModalLangSwitcher(lang)}
+                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeCaseStudyModal()">✕</button>
+                    </div>
                 </div>
                 <div class="es-feedback-body" id="caseStudyBody">
                     <!-- Populated dynamically -->
@@ -1201,7 +1225,138 @@
     let selectedConsultant = 'salim';
     let selectedSlot = '';
 
-    window.openSchedulerModal = function() {
+
+    // In-Modal Instant Language Switcher & State Memory
+    let currentModalLang = getPageLang();
+    window.currentModalLang = currentModalLang;
+
+    window.switchModalLang = function (targetLang) {
+        if (!['ar', 'en', 'nl'].includes(targetLang)) return;
+        currentModalLang = targetLang;
+        window.currentModalLang = targetLang;
+        try {
+            localStorage.setItem('coresync_preferred_lang', targetLang);
+        } catch (e) {}
+
+        // Update active class on all lang pill buttons across all modals
+        document.querySelectorAll('.es-modal-lang-switcher').forEach(sw => {
+            sw.querySelectorAll('.es-lang-pill').forEach(btn => {
+                const text = btn.textContent.trim().toLowerCase();
+                const isTarget = text === targetLang || (targetLang === 'ar' && text === 'عربي');
+                btn.classList.toggle('active', isTarget);
+            });
+        });
+
+        // 1. Dynamic Update: Feedback Modal
+        const fbModal = document.querySelector('.es-feedback-modal');
+        if (fbModal) {
+            fbModal.setAttribute('dir', targetLang === 'ar' ? 'rtl' : 'ltr');
+            const fbData = (ES_I18N[targetLang] || ES_I18N.ar).feedback;
+            const titleEl = document.getElementById('fbModalTitle');
+            if (titleEl) titleEl.textContent = fbData.title;
+            const descEl = fbModal.querySelector('.es-feedback-body > p');
+            if (descEl) descEl.textContent = fbData.desc;
+
+            const labels = fbModal.querySelectorAll('.es-input-group label');
+            if (labels[0]) labels[0].textContent = fbData.clientNameLabel;
+            if (labels[1]) labels[1].textContent = fbData.targetSectionLabel;
+            if (labels[2]) labels[2].textContent = fbData.categoryLabel;
+            if (labels[3]) labels[3].textContent = fbData.detailsLabel;
+
+            const nameInput = document.getElementById('fbClientName');
+            if (nameInput) nameInput.placeholder = fbData.clientNamePlaceholder;
+
+            const secSelect = document.getElementById('fbTargetSection');
+            if (secSelect) {
+                const curVal = secSelect.value;
+                secSelect.innerHTML = fbData.sections.map(s => `<option value="${s}">${s}</option>`).join('');
+                if (fbData.sections.includes(curVal)) secSelect.value = curVal;
+            }
+
+            const catSelect = document.getElementById('fbCategory');
+            if (catSelect) {
+                const curVal = catSelect.value;
+                catSelect.innerHTML = fbData.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+                if (fbData.categories.includes(curVal)) catSelect.value = curVal;
+            }
+
+            const detailsInput = document.getElementById('fbDetails');
+            if (detailsInput) detailsInput.placeholder = fbData.detailsPlaceholder;
+
+            const sendBtnSpan = fbModal.querySelector('.es-btn-send-wa span');
+            if (sendBtnSpan) sendBtnSpan.textContent = fbData.sendBtn;
+        }
+
+        // 2. Dynamic Update: Scheduler Modal
+        const schModal = document.querySelector('.es-scheduler-modal');
+        if (schModal) {
+            schModal.setAttribute('dir', targetLang === 'ar' ? 'rtl' : 'ltr');
+            const schData = (ES_I18N[targetLang] || ES_I18N.ar).scheduler;
+            const titleEl = document.getElementById('schModalTitle');
+            if (titleEl) titleEl.textContent = schData.title;
+            const descEl = schModal.querySelector('.es-feedback-body > p');
+            if (descEl) descEl.textContent = schData.desc;
+
+            const labels = schModal.querySelectorAll('.es-input-group label');
+            if (labels[0]) labels[0].textContent = schData.advisorLabel;
+            if (labels[1]) labels[1].textContent = schData.slotLabel;
+            if (labels[2]) labels[2].textContent = schData.nameLabel;
+            if (labels[3]) labels[3].textContent = schData.topicLabel;
+
+            const cards = schModal.querySelectorAll('.es-consultant-card');
+            if (cards[0]) {
+                const n = cards[0].querySelector('.es-consultant-name');
+                const r = cards[0].querySelector('.es-consultant-role');
+                if (n) n.textContent = schData.consultants.salim.name;
+                if (r) r.textContent = schData.consultants.salim.role;
+            }
+            if (cards[1]) {
+                const n = cards[1].querySelector('.es-consultant-name');
+                const r = cards[1].querySelector('.es-consultant-role');
+                if (n) n.textContent = schData.consultants.raed.name;
+                if (r) r.textContent = schData.consultants.raed.role;
+            }
+            if (cards[2]) {
+                const n = cards[2].querySelector('.es-consultant-name');
+                const r = cards[2].querySelector('.es-consultant-role');
+                if (n) n.textContent = schData.consultants.both.name;
+                if (r) r.textContent = schData.consultants.both.role;
+            }
+
+            const tzSpan = schModal.querySelector('div[style*="var(--es-cyan)"] span');
+            if (tzSpan) tzSpan.textContent = schData.tzLabel;
+
+            const slotsGrid = schModal.querySelector('.es-slots-grid');
+            if (slotsGrid) {
+                slotsGrid.innerHTML = schData.slots.map((s, idx) => `
+                    <button type="button" class="es-slot-btn ${idx === 0 ? 'active' : ''}" onclick="window.selectSlot('${s}', this)">${s}</button>
+                `).join('');
+                selectedSlot = schData.slots[0];
+            }
+
+            const nameInput = document.getElementById('schClientName');
+            if (nameInput) nameInput.placeholder = schData.namePlaceholder;
+            const topicInput = document.getElementById('schTopic');
+            if (topicInput) topicInput.placeholder = schData.topicPlaceholder;
+
+            const confirmBtnSpan = schModal.querySelector('.es-btn-send-wa span');
+            if (confirmBtnSpan) confirmBtnSpan.textContent = schData.confirmBtn;
+        }
+
+        // 3. Dynamic Update: Readiness Modal
+        const readModal = document.querySelector('.es-readiness-modal');
+        if (readModal) {
+            readModal.setAttribute('dir', targetLang === 'ar' ? 'rtl' : 'ltr');
+            const readData = (ES_I18N[targetLang] || ES_I18N.ar).readiness;
+            const titleEl = document.getElementById('readinessModalTitle');
+            if (titleEl) titleEl.textContent = readData.modalTitle;
+            if (document.getElementById('esReadinessModalOverlay')?.classList.contains('active')) {
+                renderQuizStep();
+            }
+        }
+    };
+
+        window.openSchedulerModal = function() {
         const lang = getPageLang();
         const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
         if (!selectedSlot && t.slots && t.slots[0]) {
