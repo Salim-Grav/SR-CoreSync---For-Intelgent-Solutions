@@ -1,11 +1,12 @@
 /**
  * S&R CoreSync Solutions - Enterprise Suite Engine v2.0
- * 1. Instant Official PDF Quotation Generator
- * 2. Client Visual Feedback Hub
- * 3. EU GDPR Cookie Consent System
- * 4. Executive Meeting Scheduler (Auto-Timezone & Calendar .ICS)
- * 5. AI & ERP Digital Readiness Assessment Engine
- * 6. Enterprise Case Studies & Measurable ROI Hub
+ * Fully Unified Multi-Language Enterprise Architecture (AR / EN / NL)
+ * 1. Instant Official PDF Quotation Generator (Multi-Language)
+ * 2. Client Visual Feedback Hub (Auto-Flipping RTL/LTR & Multi-Language)
+ * 3. EU GDPR Cookie Consent System (Dutch / European Compliance)
+ * 4. Executive Meeting Scheduler (Auto-Timezone & Multi-Language)
+ * 5. AI & ERP Digital Readiness Assessment Engine (Multi-Language)
+ * 6. Enterprise Case Studies & Measurable ROI Hub (Multi-Language)
  * 7. Live Cloud ERP Demo Sandbox Quick Access
  */
 
@@ -14,89 +15,604 @@
 
     const WHATSAPP_NUM = '31687764998';
 
+    // Central Multi-Language Page Detector
+    function getPageLang() {
+        const docLang = (document.documentElement.lang || document.documentElement.getAttribute('data-page-language') || '').toLowerCase();
+        if (docLang.startsWith('nl') || window.location.pathname.includes('/nl/')) return 'nl';
+        if (docLang.startsWith('en') || window.location.pathname.includes('/en/')) return 'en';
+        return 'ar';
+    }
+    window.getPageLang = getPageLang;
+
     // State for Assessment Quiz
     let currentQuizStep = 0;
     const quizAnswers = {};
 
-    const QUIZ_QUESTIONS = [
-        {
-            title: 'ما هو حجم منشأتكم وعدد الموظفين الحالي؟',
-            options: [
-                { text: 'مؤسسة ناشئة / متنامية (1 - 10 موظفين)', score: 15, saving: 800 },
-                { text: 'شركة متوسطة الحجم (11 - 50 موظفاً)', score: 25, saving: 1800 },
-                { text: 'مؤسسة متعددة الأقسام (51 - 200 موظف)', score: 35, saving: 3500 },
-                { text: 'مجموعة كبرى / سلاسل فروع (+200 موظف)', score: 45, saving: 6500 }
-            ]
-        },
-        {
-            title: 'كيف تدار العمليات المحاسبية وسلاسل الإمداد حالياً؟',
-            options: [
-                { text: 'ملفات Excel يدوية وتقارير مبعثرة', score: 10, saving: 1200 },
-                { text: 'برنامج محاسبي قديم غير متصل بالسحابة', score: 20, saving: 900 },
-                { text: 'نظام سحابي منفصل يفتقر للتكامل الكامل', score: 30, saving: 600 },
-                { text: 'نظام ERP متقدم ولكن يحتاج أتمتة وذكاء اصطناعي', score: 40, saving: 400 }
-            ]
-        },
-        {
-            title: 'ما هو مستوى الأتمتة بالذكاء الاصطناعي لديكم؟',
-            options: [
-                { text: 'لا يوجد أي استخدام للذكاء الاصطناعي حتى الآن', score: 5, saving: 1500 },
-                { text: 'استخدامات فردية وبدائية (ChatGPT فقط)', score: 15, saving: 1000 },
-                { text: 'أتمتة جزئية لبعض المهام المكررة', score: 25, saving: 700 },
-                { text: 'منظومة سحابية ذكية تبحث عن حلول RAG مخصصة', score: 35, saving: 500 }
-            ]
-        },
-        {
-            title: 'ما هو الهدف الأهم لمنشأتكم في المرحلة المقبلة؟',
-            options: [
-                { text: 'الامتثال الضريبي الأوروبي وتوحيد حسابات الفروع', score: 25, saving: 1100 },
-                { text: 'تقليل الهدر المالي وتسريع دورة إصدار الفواتير', score: 30, saving: 1400 },
-                { text: 'ربط الفروع بنظام سحابي مركزي فوري المزامنة', score: 35, saving: 1600 },
-                { text: 'بناء تطبيق سحابي ومنصة مخصصة لعملاء VIP', score: 40, saving: 1200 }
-            ]
-        }
-    ];
+    // 1. Multi-Language Readiness Quiz Questions
+    const QUIZ_QUESTIONS_I18N = {
+        ar: [
+            {
+                title: 'ما هو حجم منشأتكم وعدد الموظفين الحالي؟',
+                options: [
+                    { text: 'مؤسسة ناشئة / متنامية (1 - 10 موظفين)', score: 15, saving: 800 },
+                    { text: 'شركة متوسطة الحجم (11 - 50 موظفاً)', score: 25, saving: 1800 },
+                    { text: 'مؤسسة متعددة الأقسام (51 - 200 موظف)', score: 35, saving: 3500 },
+                    { text: 'مجموعة كبرى / سلاسل فروع (+200 موظف)', score: 45, saving: 6500 }
+                ]
+            },
+            {
+                title: 'كيف تدار العمليات المحاسبية وسلاسل الإمداد حالياً؟',
+                options: [
+                    { text: 'ملفات Excel يدوية وتقارير مبعثرة', score: 10, saving: 1200 },
+                    { text: 'برنامج محاسبي قديم غير متصل بالسحابة', score: 20, saving: 900 },
+                    { text: 'نظام سحابي منفصل يفتقر للتكامل الكامل', score: 30, saving: 600 },
+                    { text: 'نظام ERP متقدم ولكن يحتاج أتمتة وذكاء اصطناعي', score: 40, saving: 400 }
+                ]
+            },
+            {
+                title: 'ما هو مستوى الأتمتة بالذكاء الاصطناعي لديكم؟',
+                options: [
+                    { text: 'لا يوجد أي استخدام للذكاء الاصطناعي حتى الآن', score: 5, saving: 1500 },
+                    { text: 'استخدامات فردية وبدائية (ChatGPT فقط)', score: 15, saving: 1000 },
+                    { text: 'أتمتة جزئية لبعض المهام المكررة', score: 25, saving: 700 },
+                    { text: 'منظومة سحابية ذكية تبحث عن حلول RAG مخصصة', score: 35, saving: 500 }
+                ]
+            },
+            {
+                title: 'ما هو الهدف الأهم لمنشأتكم في المرحلة المقبلة؟',
+                options: [
+                    { text: 'الامتثال الضريبي الأوروبي وتوحيد حسابات الفروع', score: 25, saving: 1100 },
+                    { text: 'تقليل الهدر المالي وتسريع دورة إصدار الفواتير', score: 30, saving: 1400 },
+                    { text: 'ربط الفروع بنظام سحابي مركزي فوري المزامنة', score: 35, saving: 1600 },
+                    { text: 'بناء تطبيق سحابي ومنصة مخصصة لعملاء VIP', score: 40, saving: 1200 }
+                ]
+            }
+        ],
+        en: [
+            {
+                title: 'What is your current organization size and workforce headcount?',
+                options: [
+                    { text: 'Growing venture / Startup (1 - 10 team members)', score: 15, saving: 800 },
+                    { text: 'Mid-sized enterprise (11 - 50 team members)', score: 25, saving: 1800 },
+                    { text: 'Multi-department company (51 - 200 team members)', score: 35, saving: 3500 },
+                    { text: 'Large corporation / Branch chain (200+ team members)', score: 45, saving: 6500 }
+                ]
+            },
+            {
+                title: 'How are your accounting workflows and supply chains managed today?',
+                options: [
+                    { text: 'Manual spreadsheets (Excel) and fragmented reports', score: 10, saving: 1200 },
+                    { text: 'Legacy desktop software with zero cloud connectivity', score: 20, saving: 900 },
+                    { text: 'Siloed cloud tools lacking cohesive integration', score: 30, saving: 600 },
+                    { text: 'Modern ERP needing autonomous AI workflows', score: 40, saving: 400 }
+                ]
+            },
+            {
+                title: 'What is your current enterprise AI adoption level?',
+                options: [
+                    { text: 'No AI integration deployed yet', score: 5, saving: 1500 },
+                    { text: 'Ad-hoc employee use only (ChatGPT/Copilot)', score: 15, saving: 1000 },
+                    { text: 'Partial scripted automation for repetitive tasks', score: 25, saving: 700 },
+                    { text: 'Scalable cloud infrastructure seeking proprietary RAG', score: 35, saving: 500 }
+                ]
+            },
+            {
+                title: 'What is your primary strategic priority for the next phase?',
+                options: [
+                    { text: 'European tax compliance (VAT/BTW) and branch consolidation', score: 25, saving: 1100 },
+                    { text: 'Cutting operational leakage and speeding up invoice cycles', score: 30, saving: 1400 },
+                    { text: 'Connecting branches into unified real-time cloud data sync', score: 35, saving: 1600 },
+                    { text: 'Engineering bespoke cloud portal and exclusive VIP app', score: 40, saving: 1200 }
+                ]
+            }
+        ],
+        nl: [
+            {
+                title: 'Wat is de huidige omvang van uw organisatie en personeelsbestand?',
+                options: [
+                    { text: 'Startende / groeiende onderneming (1 - 10 medewerkers)', score: 15, saving: 800 },
+                    { text: 'Middelgrote onderneming (11 - 50 medewerkers)', score: 25, saving: 1800 },
+                    { text: 'Bedrijf met meerdere afdelingen (51 - 200 medewerkers)', score: 35, saving: 3500 },
+                    { text: 'Grote corporate / filialennetwerk (+200 medewerkers)', score: 45, saving: 6500 }
+                ]
+            },
+            {
+                title: 'Hoe worden uw boekhouding en toeleveringsketens momenteel beheerd?',
+                options: [
+                    { text: 'Handmatige Excel-bestanden en versnipperde rapporten', score: 10, saving: 1200 },
+                    { text: 'Verouderde lokale boekhoudsoftware zonder cloudverbinding', score: 20, saving: 900 },
+                    { text: 'Losstaande cloudtools zonder naadloze integratie', score: 30, saving: 600 },
+                    { text: 'Geavanceerd ERP-systeem gereed voor AI-automatisering', score: 40, saving: 400 }
+                ]
+            },
+            {
+                title: 'Wat is uw huidige niveau van AI-adoptie en automatisering?',
+                options: [
+                    { text: 'Nog geen gebruik van AI binnen de organisatie', score: 5, saving: 1500 },
+                    { text: 'Individueel ad-hoc gebruik (enkel ChatGPT/Copilot)', score: 15, saving: 1000 },
+                    { text: 'Gedeeltelijke automatisering van herhalende taken', score: 25, saving: 700 },
+                    { text: 'Cloud-ecosysteem op zoek naar maatwerk RAG & AI-workflows', score: 35, saving: 500 }
+                ]
+            },
+            {
+                title: 'Wat is uw belangrijkste strategische doel voor de komende fase?',
+                options: [
+                    { text: 'Europese belastingnaleving (BTW/Belastingdienst) & consolidatie', score: 25, saving: 1100 },
+                    { text: 'Kostenverspilling reduceren & facturatiecyclus versnellen', score: 30, saving: 1400 },
+                    { text: 'Vestigingen koppelen aan realtime centrale cloudsynchronisatie', score: 35, saving: 1600 },
+                    { text: 'Maatwerk cloudplatform en exclusief VIP-klantenportaal bouwen', score: 40, saving: 1200 }
+                ]
+            }
+        ]
+    };
 
-    // Enterprise Case Studies Data
-    const CASE_STUDIES = {
-        almarai: {
-            client: 'سلاسل الإمداد الأوروبية – قطاع المواد الغذائية',
-            title: 'مزامنة لوجستية فورية وأنظمة ERP عالية التوافر عبر 4 دول أوروبية',
-            tag: 'Cloud ERP & Microservices',
-            kpis: [
-                { val: '94%', lbl: 'تسريع مزامنة البيانات' },
-                { val: '18 ساعة', lbl: 'وفر أسبوعي لفرق المحاسبة' },
-                { val: '99.99%', lbl: 'توافر سحابي High Availability' }
-            ],
-            challenge: 'كانت المستودعات في هولندا وألمانيا وبلجيكا تعاني من تأخر مزامنة المخزون وتكرار الفواتير اليدوية بسبب استخدام أنظمة محلية متفرقة، مما أدى لاختناقات في التوزيع وتأخر التسويات المالية الشهرية.',
-            solution: 'قام م. سليم عزيزة بتصميم بنية سحابية موزعة بنظام Microservices فائقة السرعة على خوادم أوروبية آمنة، بينما أشرف أ. رائد كعكة على توحيد شجرة الحسابات والامتثال لضريبة القيمة المضافة الأوروبية (VAT & IFRS).',
-            roi: 'تم خفض وقت إصدار التقارير المجمعة من 8 أيام إلى نقرة واحدة فورية، وتحقيق وفر سنوي تجاوز 45,000 يورو في تكاليف العمليات والفاقد المخزني.'
+    // 2. Multi-Language Enterprise Case Studies
+    const CASE_STUDIES_I18N = {
+        ar: {
+            almarai: {
+                client: 'سلاسل الإمداد الأوروبية – قطاع المواد الغذائية',
+                title: 'مزامنة لوجستية فورية وأنظمة ERP عالية التوافر عبر 4 دول أوروبية',
+                tag: 'Cloud ERP & Microservices',
+                kpis: [
+                    { val: '94%', lbl: 'تسريع مزامنة البيانات' },
+                    { val: '18 ساعة', lbl: 'وفر أسبوعي لفرق المحاسبة' },
+                    { val: '99.99%', lbl: 'توافر سحابي High Availability' }
+                ],
+                challenge: 'كانت المستودعات في هولندا وألمانيا وبلجيكا تعاني من تأخر مزامنة المخزون وتكرار الفواتير اليدوية بسبب استخدام أنظمة محلية متفرقة، مما أدى لاختناقات في التوزيع وتأخر التسويات المالية الشهرية.',
+                solution: 'قام م. سليم عزيزة بتصميم بنية سحابية موزعة بنظام Microservices فائقة السرعة على خوادم أوروبية آمنة، بينما أشرف أ. رائد كعكة على توحيد شجرة الحسابات والامتثال لضريبة القيمة المضافة الأوروبية (VAT & IFRS).',
+                roi: 'تم خفض وقت إصدار التقارير المجمعة من 8 أيام إلى نقرة واحدة فورية، وتحقيق وفر سنوي تجاوز 45,000 يورو في تكاليف العمليات والفاقد المخزني.'
+            },
+            schoon365: {
+                client: '365 SCHOON B.V. – هولندا',
+                title: 'أتمتة الفواتير والامتثال الضريبي الهولندي (Belastingdienst)',
+                tag: 'Dutch Tax & Financial Automation',
+                kpis: [
+                    { val: '100%', lbl: 'امتثال ضريبي هولندي خالٍ من الأخطاء' },
+                    { val: '45%', lbl: 'تسريع تحصيل الفواتير (iDEAL)' },
+                    { val: '0 دقيقة', lbl: 'جهد يدوي في حساب الـ BTW' }
+                ],
+                challenge: 'التعامل مع آلاف الفواتير الشهرية وعقود الصيانة المتكررة وفق اللوائح الضريبية الهولندية الصارمة للـ Belastingdienst، مع صعوبة متابعة التحصيل اليدوي للشركات المتعاقدة.',
+                solution: 'تطوير محرك مالي مخصص يربط مباشرة مع بوابات الدفع الهولندية (iDEAL / SEPA Direct Debit)، ويقوم بتوليد الإقرارات الضريبية تلقائياً بصيغة موحدة متوافقة مع مكاتب المحاسبة والتدقيق الهولندية.',
+                roi: 'تحول دورة الفوترة إلى دورة آلية بالكامل تعمل في الخلفية دون أي تدخل بشري، مما مكن الإدارة من مضاعفة عدد العملاء دون الحاجة لتوظيف محاسبين إضافيين.'
+            },
+            buraq: {
+                client: 'براق للخدمات اللوجستية والشحن الذكي',
+                title: 'نظام ذكاء اصطناعي للتنبؤ بالمسارات وإدارة الأساطيل اللحظية',
+                tag: 'Predictive AI & Logistics Ops',
+                kpis: [
+                    { val: '22%', lbl: 'توفير في تكاليف استهلاك الوقود' },
+                    { val: '99.2%', lbl: 'التزام دقيق بمواعيد التسليم' },
+                    { val: '< 2 ثانية', lbl: 'استجابة التوجيه اللحظي للمركبات' }
+                ],
+                challenge: 'تذبذب أوقات التوصيل وارتفاع تكاليف الوقود بسبب عدم وجود رؤية تنبؤية للازدحامات وتوزيع الشحنات غير المتوازن بين السائقين.',
+                solution: 'بناء خوارزمية ذكاء اصطناعي تنبؤية تقوم بتحليل بيانات المسارات والطقس وحجم الشحنات لحظياً، وإعادة توجيه الأسطول ديناميكياً مع لوحة تحكم فورية للإدارة.',
+                roi: 'تقليص وقت الرحلات بنسبة 28% وزيادة رضا العملاء بنسبة 40%، مما أتاح للشركة توسيع أسطولها وزيادة عقود النقل B2B الكبرى.'
+            }
         },
-        schoon365: {
-            client: '365 SCHOON B.V. – هولندا',
-            title: 'أتمتة الفواتير والامتثال الضريبي الهولندي (Belastingdienst)',
-            tag: 'Dutch Tax & Financial Automation',
-            kpis: [
-                { val: '100%', lbl: 'امتثال ضريبي هولندي خالٍ من الأخطاء' },
-                { val: '45%', lbl: 'تسريع تحصيل الفواتير (iDEAL)' },
-                { val: '0 دقيقة', lbl: 'جهد يدوي في حساب الـ BTW' }
-            ],
-            challenge: 'التعامل مع آلاف الفواتير الشهرية وعقود الصيانة المتكررة وفق اللوائح الضريبية الهولندية الصارمة للـ Belastingdienst، مع صعوبة متابعة التحصيل اليدوي للشركات المتعاقدة.',
-            solution: 'تطوير محرك مالي مخصص يربط مباشرة مع بوابات الدفع الهولندية (iDEAL / SEPA Direct Debit)، ويقوم بتوليد الإقرارات الضريبية تلقائياً بصيغة موحدة متوافقة مع مكاتب المحاسبة والتدقيق الهولندية.',
-            roi: 'تحول دورة الفوترة إلى دورة آلية بالكامل تعمل في الخلفية دون أي تدخل بشري، مما مكن الإدارة من مضاعفة عدد العملاء دون الحاجة لتوظيف محاسبين إضافيين.'
+        en: {
+            almarai: {
+                client: 'European Supply Chains – FMCG & Food Logistics',
+                title: 'Real-Time Logistics Sync & High-Availability ERP across 4 EU Countries',
+                tag: 'Cloud ERP & Microservices',
+                kpis: [
+                    { val: '94%', lbl: 'Faster Data Sync Speed' },
+                    { val: '18 hrs', lbl: 'Weekly Accounting Saved' },
+                    { val: '99.99%', lbl: 'High-Availability Cloud SLA' }
+                ],
+                challenge: 'Warehouses across the Netherlands, Germany, and Belgium suffered inventory discrepancies and duplicate billing due to disparate on-premise tools, causing logistics bottlenecks and delayed month-end closings.',
+                solution: 'Eng. Salim Aziza engineered a distributed, high-throughput microservices architecture on secure EU infrastructure, while Mr. Raed Kaakeh unified the general ledger and standardized European VAT & IFRS compliance.',
+                roi: 'Consolidated reporting time plummeted from 8 business days to an instantaneous single-click report, yielding over €45,000 in direct annual operational savings.'
+            },
+            schoon365: {
+                client: '365 SCHOON B.V. – Netherlands',
+                title: 'Automated Billing & Dutch Belastingdienst Tax Compliance Architecture',
+                tag: 'Dutch Tax & Financial Automation',
+                kpis: [
+                    { val: '100%', lbl: 'Error-Free Belastingdienst Audit' },
+                    { val: '45%', lbl: 'Faster Invoice Collection (iDEAL)' },
+                    { val: '0 min', lbl: 'Manual Effort in BTW Calculation' }
+                ],
+                challenge: 'Managing thousands of recurring monthly corporate maintenance contracts under strict Dutch tax regulations, with manual follow-up causing invoice collection friction.',
+                solution: 'Developed a custom financial orchestration engine linking directly to Dutch payment rails (iDEAL / SEPA Direct Debit), automatically generating compliant XML/audit ledgers for Dutch accounting firms.',
+                roi: 'The billing cycle now runs 100% autonomously in the background, allowing leadership to double client accounts without hiring additional accounting personnel.'
+            },
+            buraq: {
+                client: 'Al-Buraq Smart Logistics & Freight Fleet',
+                title: 'Predictive Route AI & Autonomous Fleet Telemetry Architecture',
+                tag: 'Predictive AI & Logistics Ops',
+                kpis: [
+                    { val: '22%', lbl: 'Fuel Consumption Savings' },
+                    { val: '99.2%', lbl: 'On-Time Delivery Rate' },
+                    { val: '< 2s', lbl: 'Real-Time Dynamic Rerouting' }
+                ],
+                challenge: 'Delivery time volatility and rising fuel expenses caused by lack of predictive traffic insights and uneven parcel distribution among fleet drivers.',
+                solution: 'Constructed a predictive AI dispatch algorithm evaluating traffic patterns, weather telemetry, and parcel volume in real time to dynamically balance fleet routing with an executive dashboard.',
+                roi: 'Reduced average journey times by 28% and boosted enterprise customer satisfaction by 40%, empowering the company to win major multi-year B2B transport contracts.'
+            }
         },
-        buraq: {
-            client: 'براق للخدمات اللوجستية والشحن الذكي',
-            title: 'نظام ذكاء اصطناعي للتنبؤ بالمسارات وإدارة الأساطيل اللحظية',
-            tag: 'Predictive AI & Logistics Ops',
-            kpis: [
-                { val: '22%', lbl: 'توفير في تكاليف استهلاك الوقود' },
-                { val: '99.2%', lbl: 'التزام دقيق بمواعيد التسليم' },
-                { val: '< 2 ثانية', lbl: 'استجابة التوجيه اللحظي للمركبات' }
-            ],
-            challenge: 'تذبذب أوقات التوصيل وارتفاع تكاليف الوقود بسبب عدم وجود رؤية تنبؤية للازدحامات وتوزيع الشحنات غير المتوازن بين السائقين.',
-            solution: 'بناء خوارزمية ذكاء اصطناعي تنبؤية تقوم بتحليل بيانات المسارات والطقس وحجم الشحنات لحظياً، وإعادة توجيه الأسطول ديناميكياً مع لوحة تحكم فورية للإدارة.',
-            roi: 'تقليص وقت الرحلات بنسبة 28% وزيادة رضا العملاء بنسبة 40%، مما أتاح للشركة توسيع أسطولها وزيادة عقود النقل B2B الكبرى.'
+        nl: {
+            almarai: {
+                client: 'Europese Supply Chains – Levensmiddelensector',
+                title: 'Realtime Logistieke Synchronisatie & High-Availability ERP over 4 EU-Landen',
+                tag: 'Cloud ERP & Microservices',
+                kpis: [
+                    { val: '94%', lbl: 'Snellere Datasynchronisatie' },
+                    { val: '18 uur', lbl: 'Wekelijkse Boekhoudwinst' },
+                    { val: '99.99%', lbl: 'Cloud High-Availability SLA' }
+                ],
+                challenge: 'Magazijnen in Nederland, Duitsland en België kampten met voorraadverschillen en dubbele handmatige facturen door versnipperde lokale systemen, met distributievertragingen tot gevolg.',
+                solution: 'Ir. Salim Aziza ontwierp een gedistribueerde microservices-architectuur op veilige Europese datacenters, terwijl Dhr. Raed Kaakeh het rekeningschema harmoniseerde conform de Europese BTW- en IFRS-normen.',
+                roi: 'Consolidatierapporten worden nu met één klik gegenereerd in plaats van 8 werkdagen, met een aantoonbare jaarlijkse besparing van ruim €45.000 op operationele kosten.'
+            },
+            schoon365: {
+                client: '365 SCHOON B.V. – Nederland',
+                title: 'Geautomatiseerde Facturatie & Fiscale Naleving Belastingdienst',
+                tag: 'Dutch Tax & Financial Automation',
+                kpis: [
+                    { val: '100%', lbl: 'Foutloze Belastingdienst Compliance' },
+                    { val: '45%', lbl: 'Snellere Betalingsontvangst (iDEAL)' },
+                    { val: '0 min', lbl: 'Handmatige BTW-berekening' }
+                ],
+                challenge: 'Verwerking van duizenden periodieke onderhoudscontracten conform strikte Nederlandse fiscale wetgeving, met tijdrovende handmatige debiteurenopvolging.',
+                solution: 'Ontwikkeling van een geautomatiseerde financiële koppeling met Nederlandse betaalproviders (iDEAL / SEPA Incasso) die directe audit-bestanden genereert voor accountantskantoren.',
+                roi: 'Volledig autonome achtergrondfacturatie waardoor de directie het klantenbestand kon verdubbelen zonder extra administratief personeel aan te nemen.'
+            },
+            buraq: {
+                client: 'Al-Buraq Smart Logistics & Vrachtvervoer',
+                title: 'Voorspellende Route-AI & Realtime Wagenpark Telemetrie',
+                tag: 'Predictive AI & Logistics Ops',
+                kpis: [
+                    { val: '22%', lbl: 'Brandstofbesparing' },
+                    { val: '99.2%', lbl: 'Stiptheid van Leveringen' },
+                    { val: '< 2s', lbl: 'Dynamische Herberekening' }
+                ],
+                challenge: 'Fluctuerende levertijden en oplopende brandstofkosten door gebrek aan voorspellende verkeersinzichten en onevenwichtige zendingsverdeling over chauffeurs.',
+                solution: 'Ontwikkeling van een voorspellend AI-dispatchalgoritme dat realtime verkeers- en weerdata analyseert om het wagenpark dynamisch aan te sturen met een centraal directiedashboard.',
+                roi: 'Rijtijden daalden met 28% en de klanttevredenheid steeg met 40%, waardoor de onderneming omvangrijke meerjarige B2B-transportcontracten kon afsluiten.'
+            }
+        }
+    };
+
+    // 3. Central UI Text Dictionary (ES_I18N)
+    const ES_I18N = {
+        ar: {
+            hub: {
+                readinessTitle: 'قياس الجاهزية الرقمية لشركتكم',
+                readinessLabel: 'قياس الجاهزية الرقمية 📊',
+                schedulerTitle: 'حجز جلسة استشارية تنفيذية',
+                schedulerLabel: 'حجز استشارة تنفيذية 📅',
+                feedbackTitle: 'إرسال ملاحظة أو طلب تعديل مباشر',
+                feedbackLabel: 'ملاحظات الزبون | Feedback'
+            },
+            feedback: {
+                title: 'بوابة ملاحظات الزبون المباشرة',
+                desc: 'شارك ملاحظاتك أو طلبات التعديل مباشرة مع م. سليم ليتم تنفيذها في النسخة التجريبية الحية.',
+                clientNameLabel: 'الاسم أو المؤسسة:',
+                clientNamePlaceholder: 'مثال: شركة الأفق للتجارة',
+                targetSectionLabel: 'القسم المستهدف بالملاحظة:',
+                sections: [
+                    'الواجهة الرئيسية (Hero Section)',
+                    'كروت الخدمات وباقات دانا',
+                    'حاسبة التكلفة والأسعار',
+                    'المشاريع السابقة (Portfolio)',
+                    'قسم الشركاء والمؤسسين',
+                    'أخرى / فكرة عامة'
+                ],
+                categoryLabel: 'نوع الملاحظة:',
+                categories: [
+                    '🎨 تعديل تصميم وألوان',
+                    '✍️ تعديل نصوص وصياغة',
+                    '⚡ طلب ميزة إضافية',
+                    '🐞 ملاحظة فنية / استجابة'
+                ],
+                detailsLabel: 'نص الملاحظة بالتفصيل:',
+                detailsPlaceholder: 'اكتب تفاصيل التعديل المطلوب هنا...',
+                sendBtn: 'إرسال فوراً عبر واتساب',
+                alertEmpty: 'يرجى كتابة نص الملاحظة قبل الإرسال.',
+                waMsgHeader: '*💡 ملاحظة جديدة على النسخة التجريبية – S&R CoreSync*'
+            },
+            scheduler: {
+                title: 'مجدول الاستشارات التنفيذية // S&R Executive Advisory',
+                desc: 'احجز جلسة استشارية أولية مجانية مدتها 30 دقيقة عبر Zoom لمناقشة بنيتكم السحابية أو متطلبات الـ ERP.',
+                advisorLabel: 'اختر المستشار التنفيذي:',
+                consultants: {
+                    salim: { name: 'م. سليم عزيزة', role: 'CTO • الأنظمة والذكاء الاصطناعي', waTitle: 'م. سليم عزيزة (CTO السحابي والذكاء الاصطناعي)' },
+                    raed: { name: 'أ. رائد كعكة', role: 'CFO • الحلول المالية وERP', waTitle: 'أ. رائد كعكة (CFO الأنظمة المالية وERP)' },
+                    both: { name: 'جلسة مشتركة', role: 'استشارة تقنية ومالية شاملة', waTitle: 'جلسة استشارية مشتركة (م. سليم + أ. رائد)' }
+                },
+                tzLabel: '🌐 منطقتك الزمنية المكتشفة تلقائياً:',
+                slotLabel: 'اختر اليوم والوقت المفضل (بتوقيتك المحلي):',
+                slots: [
+                    'غداً 11:00 ص',
+                    'غداً 03:00 م',
+                    'بعد غد 01:00 م',
+                    'بعد غد 05:00 م',
+                    'الأسبوع القادم (ص)',
+                    'الأسبوع القادم (م)'
+                ],
+                nameLabel: 'الاسم والشركة:',
+                namePlaceholder: 'مثال: م. أحمد - المدير العام لشركة ...',
+                topicLabel: 'موضوع الاستشارة الأساسي:',
+                topicPlaceholder: 'مثال: ترقية نظام الـ ERP السحابي وربط الفروع',
+                confirmBtn: 'تأكيد الحجز وجدولة الموعد فوراً',
+                waHeader: '*📅 طلب حجز جلسة استشارية تنفيذية – S&R CoreSync*'
+            },
+            readiness: {
+                modalTitle: 'مقياس الجاهزية الرقمية والوفر المالي // CoreSync AI Assessment',
+                stepLabel: (step, total) => `السؤال ${step} من ${total}`,
+                scoreLabel: 'الجاهزية الرقمية',
+                reportTitle: 'تقرير الجدوى والتحول الرقمي لمنشأتكم',
+                reportDesc: (saving) => `بناءً على إجاباتكم، تمتلك منشأتكم أرضية ممتازة للتطوير، مع وجود <strong>فرصة مؤكدة لوفر تشغيلي يقدر بـ €${saving.toLocaleString('en')} شهرياً</strong> عبر أتمتة الـ ERP ودمج الذكاء الاصطناعي مع CoreSync.`,
+                kpi1Val: (saving) => `€${saving.toLocaleString('en')}`,
+                kpi1Lbl: 'وفر شهري مقدر',
+                kpi2Val: '4.5x',
+                kpi2Lbl: 'تسريع التقارير المالية',
+                kpi3Val: '100%',
+                kpi3Lbl: 'أتمتة سحابية موثوقة',
+                bookBtn: 'حجز جلسة لمناقشة خطة التحول المقترحة 🚀',
+                waHeader: '*📊 نتيجة تقييم الجاهزية الرقمية – S&R CoreSync*'
+            },
+            gdpr: {
+                title: 'الامتثال للائحة حماية البيانات الأوروبية (EU GDPR)',
+                text: 'نحن نستخدم ملفات تعريف الارتباط والتقنيات السحابية الأساسية في منصة S&R CoreSync لضمان سرعة التحميل وتجربة تصفح آمنة ومطابقة للقوانين الهولندية والأوروبية.',
+                accept: 'قبول الكل (Accept All)',
+                decline: 'الأساسية فقط'
+            },
+            pdf: {
+                btnTitle: 'تصدير عرض سعر رسمي بصيغة PDF',
+                btnLabel: 'تصدير عرض سعر رسمي (PDF)',
+                toolbarTitle: 'عرض السعر المؤسسي الرسمي // S&R CoreSync B.V.',
+                printBtn: 'طباعة / حفظ كـ PDF',
+                closeBtn: 'إغلاق ✕',
+                issueDateLabel: 'تاريخ الإصدار:',
+                validityLabel: 'صلاحية العرض: 14 يوماً من تاريخه',
+                sectionTitle: 'تفاصيل عرض العمل والمواصفات المحددة',
+                colItem: 'البند / المكون البرمجي',
+                colSpec: 'المواصفات الفنية',
+                colTime: 'الجدول الزمني',
+                colPrice: 'التقدير المالي',
+                subtotalLabel: 'المجموع الصافي:',
+                vatLabel: 'ضريبة القيمة المضافة (0% B2B EU):',
+                grandTotalLabel: 'الإجمالي المقدر:',
+                disclaimer: '* ملاحظة: هذا التقدير معتمد بموجب بروتوكول S&R للهندسة السحابية وأنظمة الـ ERP والذكاء الاصطناعي، ويخضع لاتفاقية مستوى الخدمة المؤسسية (SLA). يشمل العرض كافة اختبارات الحماية وتوافق معايير GDPR الأوروبية.',
+                sigSalimTitle: 'الاعتماد التقني والهندسة السحابية',
+                sigRaedTitle: 'الإشراف المالي والأنظمة المؤسسية'
+            },
+            caseStudy: {
+                modalTitle: 'دراسة حالة موثقة وعائد الاستثمار // Enterprise Case Study',
+                clientLabel: 'العميل / القطاع:',
+                challengeTitle: '⚠️ التحدي التشغيلي والمالي:',
+                solutionTitle: '⚡ الحل الهندسي من CoreSync:',
+                roiTitle: '📈 الأثر المالي وعائد الاستثمار (ROI):',
+                btnWa: 'طلب دراسة حل مماثل لمشروعي عبر WhatsApp',
+                waMsg: (client) => `مرحباً S&R CoreSync، اطلعت على دراسة الحالة الخاصة بـ (${client}) وأرغب في مناقشة حل سحابي/مالي مماثل لشركتنا.`
+            }
+        },
+        en: {
+            hub: {
+                readinessTitle: 'Assess Your Enterprise Digital & AI Readiness',
+                readinessLabel: 'Digital Readiness Assessment 📊',
+                schedulerTitle: 'Book an Executive Advisory Strategy Session',
+                schedulerLabel: 'Executive Advisory Session 📅',
+                feedbackTitle: 'Submit Live Feedback or Revision Request',
+                feedbackLabel: 'Client Feedback Hub'
+            },
+            feedback: {
+                title: 'Direct Client Feedback Portal',
+                desc: 'Share your live feedback or requested revisions directly with Eng. Salim to be implemented on the live build.',
+                clientNameLabel: 'Name or Organization:',
+                clientNamePlaceholder: 'e.g. Horizon Enterprise B.V.',
+                targetSectionLabel: 'Target Section / Feature:',
+                sections: [
+                    'Hero Section (Main Banner)',
+                    'Services & Packages Cards',
+                    'ROI & Cost Calculator',
+                    'Portfolio & Case Studies',
+                    'Founders & Leadership Section',
+                    'Other / General Feedback'
+                ],
+                categoryLabel: 'Feedback Category:',
+                categories: [
+                    '🎨 Design & Styling Adjustments',
+                    '✍️ Copywriting & Content Refinement',
+                    '⚡ New Feature Request',
+                    '🐞 Technical / Responsiveness Issue'
+                ],
+                detailsLabel: 'Detailed Feedback / Request:',
+                detailsPlaceholder: 'Provide details of your requested changes here...',
+                sendBtn: 'Submit Instantly via WhatsApp',
+                alertEmpty: 'Please enter feedback details before sending.',
+                waMsgHeader: '*💡 New Client Feedback – S&R CoreSync*'
+            },
+            scheduler: {
+                title: 'Executive Advisory Scheduler // S&R Executive Advisory',
+                desc: 'Book a complimentary 30-minute Zoom advisory session to discuss your cloud architecture or ERP modernization requirements.',
+                advisorLabel: 'Select Executive Advisor:',
+                consultants: {
+                    salim: { name: 'Eng. Salim Aziza', role: 'CTO • Cloud & Enterprise AI', waTitle: 'Eng. Salim Aziza (CTO Cloud & Enterprise AI)' },
+                    raed: { name: 'Mr. Raed Kaakeh', role: 'CFO • Financial Systems & ERP', waTitle: 'Mr. Raed Kaakeh (CFO Financial Systems & ERP)' },
+                    both: { name: 'Joint Advisory', role: 'Comprehensive Tech & Financial Architecture', waTitle: 'Joint Advisory Session (Eng. Salim + Mr. Raed)' }
+                },
+                tzLabel: '🌐 Automatically Detected Timezone:',
+                slotLabel: 'Select Preferred Slot (Your Local Time):',
+                slots: [
+                    'Tomorrow 11:00 AM',
+                    'Tomorrow 03:00 PM',
+                    'Day After Tomorrow 01:00 PM',
+                    'Day After Tomorrow 05:00 PM',
+                    'Next Week (Morning)',
+                    'Next Week (Afternoon)'
+                ],
+                nameLabel: 'Name & Organization:',
+                namePlaceholder: 'e.g. Alex van Dijk - Managing Director at ...',
+                topicLabel: 'Primary Advisory Topic:',
+                topicPlaceholder: 'e.g. Cloud ERP migration, branch sync & AI workflows',
+                confirmBtn: 'Confirm Booking & Schedule Instantly',
+                waHeader: '*📅 Executive Advisory Session Booking – S&R CoreSync*'
+            },
+            readiness: {
+                modalTitle: 'Digital & AI Readiness Assessment // CoreSync AI Assessment',
+                stepLabel: (step, total) => `Question ${step} of ${total}`,
+                scoreLabel: 'Digital Readiness',
+                reportTitle: 'Digital Transformation & Feasibility Report',
+                reportDesc: (saving) => `Based on your assessment, your organization possesses solid operational footing with a <strong>confirmed monthly operational savings potential of €${saving.toLocaleString('en')}</strong> through CoreSync ERP automation and enterprise AI integration.`,
+                kpi1Val: (saving) => `€${saving.toLocaleString('en')}`,
+                kpi1Lbl: 'Est. Monthly Savings',
+                kpi2Val: '4.5x',
+                kpi2Lbl: 'Faster Financial Reporting',
+                kpi3Val: '100%',
+                kpi3Lbl: 'Automated Cloud Reliability',
+                bookBtn: 'Schedule Roadmap Advisory Session 🚀',
+                waHeader: '*📊 Digital Readiness Assessment Result – S&R CoreSync*'
+            },
+            gdpr: {
+                title: 'European Data Protection Compliance (EU GDPR)',
+                text: 'We utilize essential cookies and cloud performance technologies across S&R CoreSync to ensure fast loading, secure navigation, and strict compliance with Dutch and European GDPR standards.',
+                accept: 'Accept All',
+                decline: 'Essential Only'
+            },
+            pdf: {
+                btnTitle: 'Export official enterprise quotation as PDF',
+                btnLabel: 'Export Official Quote (PDF)',
+                toolbarTitle: 'Official Enterprise Quotation // S&R CoreSync B.V.',
+                printBtn: 'Print / Save as PDF',
+                closeBtn: 'Close ✕',
+                issueDateLabel: 'Issue Date:',
+                validityLabel: 'Validity: 14 days from issuance',
+                sectionTitle: 'Scope of Work & Technical Specifications',
+                colItem: 'Deliverable / Module',
+                colSpec: 'Technical Specifications',
+                colTime: 'Timeline',
+                colPrice: 'Financial Estimate',
+                subtotalLabel: 'Net Subtotal:',
+                vatLabel: 'VAT (0% Reverse Charge B2B EU):',
+                grandTotalLabel: 'Estimated Total:',
+                disclaimer: '* Notice: This formal estimate is governed by S&R Cloud Engineering & Enterprise ERP protocols, subject to enterprise SLA terms. Includes security audit and European GDPR compliance.',
+                sigSalimTitle: 'Technical Sign-Off & Cloud Architecture',
+                sigRaedTitle: 'Financial Governance & ERP Systems'
+            },
+            caseStudy: {
+                modalTitle: 'Enterprise Case Study & Measurable ROI // S&R CoreSync',
+                clientLabel: 'Client / Sector:',
+                challengeTitle: '⚠️ Operational & Financial Challenge:',
+                solutionTitle: '⚡ CoreSync Engineering Solution:',
+                roiTitle: '📈 Financial Impact & Measurable ROI:',
+                btnWa: 'Discuss Similar Solution via WhatsApp',
+                waMsg: (client) => `Hello S&R CoreSync, I reviewed the case study for (${client}) and would like to discuss a similar cloud/ERP solution for our organization.`
+            }
+        },
+        nl: {
+            hub: {
+                readinessTitle: 'Meet de digitale & AI-gereedheid van uw bedrijf',
+                readinessLabel: 'Digitale Gereedheidsscan 📊',
+                schedulerTitle: 'Plan een strategisch directie-adviesgesprek',
+                schedulerLabel: 'Directie Adviesgesprek 📅',
+                feedbackTitle: 'Directe feedback of wijzigingsverzoek indienen',
+                feedbackLabel: 'Klant Feedback & Verzoek'
+            },
+            feedback: {
+                title: 'Direct Klant Feedback Portaal',
+                desc: 'Deel uw feedback of gewenste wijzigingen rechtstreeks met Ir. Salim voor directe implementatie op de live versie.',
+                clientNameLabel: 'Naam of Bedrijf:',
+                clientNamePlaceholder: 'bijv. Horizon Enterprise B.V.',
+                targetSectionLabel: 'Betreffend Onderdeel / Functie:',
+                sections: [
+                    'Hero Sectie (Hoofdbanner)',
+                    'Diensten & Pakketten Kaarten',
+                    'ROI & Kosten Calculator',
+                    'Portfolio & Casestudies',
+                    'Oprichters & Directiesectie',
+                    'Overig / Algemene Feedback'
+                ],
+                categoryLabel: 'Type Feedback:',
+                categories: [
+                    '🎨 Design & Kleuraanpassingen',
+                    '✍️ Tekst- & Contentverfijning',
+                    '⚡ Nieuwe Functie Aanvraag',
+                    '🐞 Technische / Responsiviteitsmelding'
+                ],
+                detailsLabel: 'Gedetailleerde Feedback / Verzoek:',
+                detailsPlaceholder: 'Beschrijf hier uw gewenste aanpassingen...',
+                sendBtn: 'Direct Versturen via WhatsApp',
+                alertEmpty: 'Vul alstublieft uw feedback in voordat u verzendt.',
+                waMsgHeader: '*💡 Nieuwe Klantfeedback – S&R CoreSync*'
+            },
+            scheduler: {
+                title: 'Directie Advies Agenda // S&R Executive Advisory',
+                desc: 'Boek een vrijblijvend adviesgesprek van 30 minuten via Zoom om uw cloudarchitectuur of ERP-wensen te bespreken.',
+                advisorLabel: 'Kies Directieadviseur:',
+                consultants: {
+                    salim: { name: 'Ir. Salim Aziza', role: 'CTO • Cloud & Enterprise AI', waTitle: 'Ir. Salim Aziza (CTO Cloud & Enterprise AI)' },
+                    raed: { name: 'Dhr. Raed Kaakeh', role: 'CFO • Financiële Systemen & ERP', waTitle: 'Dhr. Raed Kaakeh (CFO Financiële Systemen & ERP)' },
+                    both: { name: 'Gezamenlijke Sessie', role: 'Integrale Technische & Financiële Strategie', waTitle: 'Gezamenlijke Directiesessie (Ir. Salim + Dhr. Raed)' }
+                },
+                tzLabel: '🌐 Automatisch Gedetecteerde Tijdzone:',
+                slotLabel: 'Kies Gewenste Tijd (Uw Lokale Tijd):',
+                slots: [
+                    'Morgen 11:00',
+                    'Morgen 15:00',
+                    'Overmorgen 13:00',
+                    'Overmorgen 17:00',
+                    'Volgende week (Ochtend)',
+                    'Volgende week (Middag)'
+                ],
+                nameLabel: 'Naam & Organisatie:',
+                namePlaceholder: 'bijv. Alex van Dijk - Directeur bij ...',
+                topicLabel: 'Onderwerp van Adviesgesprek:',
+                topicPlaceholder: 'bijv. Cloud ERP modernisering, vestigingskoppeling & AI',
+                confirmBtn: 'Afspraak Bevestigen & Direct Inplannen',
+                waHeader: '*📅 Directie Adviesgesprek Aanvraag – S&R CoreSync*'
+            },
+            readiness: {
+                modalTitle: 'Digitale & AI Gereedheidsscan // CoreSync AI Assessment',
+                stepLabel: (step, total) => `Vraag ${step} van ${total}`,
+                scoreLabel: 'Digitale Gereedheid',
+                reportTitle: 'Digitale Haalbaarheid & Transformatierapport',
+                reportDesc: (saving) => `Op basis van uw antwoorden beschikt uw onderneming over een solide basis, met een <strong>aantoonbare potentiële maandelijkse besparing van €${saving.toLocaleString('en')}</strong> via CoreSync ERP-automatisering en AI-integratie.`,
+                kpi1Val: (saving) => `€${saving.toLocaleString('en')}`,
+                kpi1Lbl: 'Geschatte Maandbesparing',
+                kpi2Val: '4.5x',
+                kpi2Lbl: 'Snellere Financiële Rapportage',
+                kpi3Val: '100%',
+                kpi3Lbl: 'Betrouwbare Cloudautomatisering',
+                bookBtn: 'Plan Transformatie Adviesgesprek 🚀',
+                waHeader: '*📊 Digitale Gereedheidsscan Resultaat – S&R CoreSync*'
+            },
+            gdpr: {
+                title: 'Europese Privacybescherming (EU GDPR)',
+                text: 'Wij gebruiken essentiële cookies en cloudtechnologieën op het S&R CoreSync platform voor maximale laadsnelheid, veilige navigatie en volledige naleving van de Nederlandse en Europese AVG-wetgeving (GDPR).',
+                accept: 'Alles Accepteren',
+                decline: 'Alleen Noodzakelijk'
+            },
+            pdf: {
+                btnTitle: 'Exporteer officiële zakelijke offerte als PDF',
+                btnLabel: 'Officiële Offerte Exporteren (PDF)',
+                toolbarTitle: 'Officiële Zakelijke Offerte // S&R CoreSync B.V.',
+                printBtn: 'Afdrukken / Opslaan als PDF',
+                closeBtn: 'Sluiten ✕',
+                issueDateLabel: 'Uitgiftedatum:',
+                validityLabel: 'Geldigheid: 14 dagen vanaf uitgiftedatum',
+                sectionTitle: 'Projectomvang & Technische Specificaties',
+                colItem: 'Onderdeel / Module',
+                colSpec: 'Technische Specificaties',
+                colTime: 'Planning',
+                colPrice: 'Financiële Schatting',
+                subtotalLabel: 'Subtotaal Netto:',
+                vatLabel: 'BTW (0% B2B Verlegd EU):',
+                grandTotalLabel: 'Geschat Totaal:',
+                disclaimer: '* Let op: Deze officiële offerte valt onder de S&R Cloud Engineering & ERP-protocollen conform enterprise SLA-voorwaarden. Inclusief beveiligingsaudits en Europese AVG/GDPR-naleving.',
+                sigSalimTitle: 'Technische Goedkeuring & Cloudarchitectuur',
+                sigRaedTitle: 'Financieel Toezicht & ERP-Systemen'
+            },
+            caseStudy: {
+                modalTitle: 'Casestudie & Rendement op Investering // S&R CoreSync',
+                clientLabel: 'Klant / Sector:',
+                challengeTitle: '⚠️ Operationele & Financiële Uitdaging:',
+                solutionTitle: '⚡ CoreSync Engineering Oplossing:',
+                roiTitle: '📈 Financiële Impact & Rendement (ROI):',
+                btnWa: 'Vergelijkbare Oplossing Bespreken via WhatsApp',
+                waMsg: (client) => `Beste S&R CoreSync, ik heb de casestudie van (${client}) bekeken en wil graag een vergelijkbare cloud-/ERP-oplossing voor onze onderneming bespreken.`
+            }
         }
     };
 
@@ -119,11 +635,13 @@
     function attachEstimatorButton() {
         const actionsContainer = document.querySelector('.summary-actions');
         if (actionsContainer && !document.getElementById('estimatorPdfBtn')) {
+            const lang = getPageLang();
+            const t = (ES_I18N[lang] || ES_I18N.ar).pdf;
             const pdfBtn = document.createElement('button');
             pdfBtn.type = 'button';
             pdfBtn.id = 'estimatorPdfBtn';
             pdfBtn.className = 'estimator-btn-pdf';
-            pdfBtn.title = 'تصدير عرض سعر رسمي بصيغة PDF';
+            pdfBtn.title = t.btnTitle;
             pdfBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -132,7 +650,7 @@
                     <line x1="16" y1="17" x2="8" y2="17"></line>
                     <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
-                <span>تصدير عرض سعر رسمي (PDF)</span>
+                <span>${t.btnLabel}</span>
             `;
             pdfBtn.onclick = window.exportEstimatorPDF;
             actionsContainer.appendChild(pdfBtn);
@@ -147,10 +665,9 @@
             demoBtn.id = 'headerLiveDemoPill';
             demoBtn.href = window.location.pathname.includes('/en/') || window.location.pathname.includes('/nl/') ? '../demo.html' : 'demo.html';
             demoBtn.className = 'btn-live-sandbox-header';
-            const isEn = window.location.pathname.includes('/en/');
-            const isNl = window.location.pathname.includes('/nl/');
-            const label = isEn ? 'Live ERP Demo ⚡' : (isNl ? 'Live ERP Demo ⚡' : 'تجربة ERP السحابي ⚡');
-            demoBtn.title = isEn ? 'Test Live Cloud ERP Dashboard' : (isNl ? 'Test Live Cloud ERP Dashboard' : 'تجربة لوحة تحكم ERP السحابية الحية');
+            const lang = getPageLang();
+            const label = lang === 'en' ? 'Live ERP Demo ⚡' : (lang === 'nl' ? 'Live ERP Demo ⚡' : 'تجربة ERP السحابي ⚡');
+            demoBtn.title = lang === 'en' ? 'Test Live Cloud ERP Dashboard' : (lang === 'nl' ? 'Test Live Cloud ERP Dashboard' : 'تجربة لوحة تحكم ERP السحابية الحية');
             demoBtn.innerHTML = `
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 <span>${label}</span>
@@ -167,6 +684,8 @@
     // 2. Inject PDF Quotation Modal
     function injectPDFModal() {
         if (document.getElementById('esQuoteModalOverlay')) return;
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).pdf;
 
         const overlay = document.createElement('div');
         overlay.id = 'esQuoteModalOverlay';
@@ -176,14 +695,14 @@
                 <div class="es-quote-toolbar">
                     <div class="es-quote-toolbar-title" id="esQuoteTitle">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        <span>عرض السعر المؤسسي الرسمي // S&R CoreSync B.V.</span>
+                        <span>${t.toolbarTitle}</span>
                     </div>
                     <div class="es-toolbar-actions">
                         <button type="button" class="es-btn-tool es-btn-tool-print" onclick="window.printOfficialQuote()">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                            <span>طباعة / حفظ كـ PDF</span>
+                            <span>${t.printBtn}</span>
                         </button>
-                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeQuoteModal()">إغلاق ✕</button>
+                        <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeQuoteModal()">${t.closeBtn}</button>
                     </div>
                 </div>
 
@@ -196,22 +715,22 @@
                         </div>
                         <div class="es-quote-meta">
                             <span class="es-quote-ref" id="quoteRefNumber">REF-SR-2026-8941</span>
-                            <div><strong>تاريخ الإصدار:</strong> <span id="quoteIssueDate"></span></div>
-                            <div><strong>صلاحية العرض:</strong> 14 يوماً من تاريخه</div>
+                            <div><strong>${t.issueDateLabel}</strong> <span id="quoteIssueDate"></span></div>
+                            <div>${t.validityLabel}</div>
                         </div>
                     </div>
 
                     <div class="es-quote-section-title">
-                        <span>تفاصيل عرض العمل والمواصفات المحددة</span>
+                        <span>${t.sectionTitle}</span>
                     </div>
 
                     <table class="es-quote-table">
                         <thead>
                             <tr>
-                                <th>البند / المكون البرمجي</th>
-                                <th>المواصفات الفنية</th>
-                                <th>الجدول الزمني</th>
-                                <th>التقدير المالي</th>
+                                <th>${t.colItem}</th>
+                                <th>${t.colSpec}</th>
+                                <th>${t.colTime}</th>
+                                <th>${t.colPrice}</th>
                             </tr>
                         </thead>
                         <tbody id="quoteTableBody"></tbody>
@@ -220,32 +739,32 @@
                     <div class="es-quote-total-box">
                         <div class="es-quote-total-card">
                             <div class="es-quote-total-row">
-                                <span>المجموع الصافي:</span>
+                                <span>${t.subtotalLabel}</span>
                                 <span id="quoteSubtotal">€0</span>
                             </div>
                             <div class="es-quote-total-row">
-                                <span>ضريبة القيمة المضافة (0% B2B EU):</span>
+                                <span>${t.vatLabel}</span>
                                 <span>€0.00</span>
                             </div>
                             <div class="es-quote-total-row grand-total">
-                                <span>الإجمالي المقدر:</span>
+                                <span>${t.grandTotalLabel}</span>
                                 <span id="quoteGrandTotal" style="color: #c5a880;">€0</span>
                             </div>
                         </div>
                     </div>
 
                     <div style="font-size: 0.78rem; color: #718096; line-height: 1.6; margin-bottom: 24px;">
-                        * ملاحظة: هذا التقدير معتمد بموجب بروتوكول S&R للهندسة السحابية وأنظمة الـ ERP والذكاء الاصطناعي، ويخضع لاتفاقية مستوى الخدمة المؤسسية (SLA). يشمل العرض كافة اختبارات الحماية وتوافق معايير GDPR الأوروبية.
+                        ${t.disclaimer}
                     </div>
 
                     <div class="es-quote-signatures">
                         <div class="es-sig-block">
-                            <div class="es-sig-title">الاعتماد التقني والهندسة السحابية</div>
+                            <div class="es-sig-title">${t.sigSalimTitle}</div>
                             <div class="es-sig-name">Eng. Mohammad Salim Aziza</div>
                             <div class="es-sig-role">Co-Founder & CTO // Lead Cloud Systems Architect</div>
                         </div>
                         <div class="es-sig-block">
-                            <div class="es-sig-title">الإشراف المالي والأنظمة المؤسسية</div>
+                            <div class="es-sig-title">${t.sigRaedTitle}</div>
                             <div class="es-sig-name">Mr. Mohammad Raed Kaakeh</div>
                             <div class="es-sig-role">Co-Founder & CFO // Financial ERP Architect</div>
                         </div>
@@ -264,22 +783,26 @@
     function injectFloatingHub() {
         if (document.getElementById('esFloatingSuite')) return;
 
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).hub;
+        const fb = (ES_I18N[lang] || ES_I18N.ar).feedback;
+
         const hub = document.createElement('div');
         hub.id = 'esFloatingSuite';
         hub.className = 'es-floating-suite';
         hub.innerHTML = `
-            <button type="button" class="es-feedback-fab" onclick="window.openReadinessModal()" title="قياس الجاهزية الرقمية لشركتكم">
+            <button type="button" class="es-feedback-fab" onclick="window.openReadinessModal()" title="${t.readinessTitle}">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-                <span>قياس الجاهزية الرقمية 📊</span>
+                <span>${t.readinessLabel}</span>
             </button>
-            <button type="button" class="es-feedback-fab" onclick="window.openSchedulerModal()" title="حجز جلسة استشارية تنفيذية">
+            <button type="button" class="es-feedback-fab" onclick="window.openSchedulerModal()" title="${t.schedulerTitle}">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span>حجز استشارة تنفيذية 📅</span>
+                <span>${t.schedulerLabel}</span>
             </button>
-            <button type="button" class="es-feedback-fab" onclick="window.openFeedbackModal()" title="إرسال ملاحظة أو طلب تعديل مباشر">
+            <button type="button" class="es-feedback-fab" onclick="window.openFeedbackModal()" title="${t.feedbackTitle}">
                 <span class="es-feedback-dot"></span>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-                <span>ملاحظات الزبون | Feedback</span>
+                <span>${t.feedbackLabel}</span>
             </button>
         `;
         document.body.appendChild(hub);
@@ -293,51 +816,43 @@
                 <div class="es-feedback-header">
                     <h3>
                         <span class="es-feedback-dot"></span>
-                        <span>بوابة ملاحظات الزبون المباشرة</span>
+                        <span>${fb.title}</span>
                     </h3>
                     <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeFeedbackModal()">✕</button>
                 </div>
                 <div class="es-feedback-body">
                     <p style="font-size: 0.82rem; color: rgba(255,255,255,0.7); margin: 0 0 10px;">
-                        شارك ملاحظاتك أو طلبات التعديل مباشرة مع م. سليم ليتم تنفيذها في النسخة التجريبية الحية.
+                        ${fb.desc}
                     </p>
 
                     <div class="es-input-group">
-                        <label>الاسم أو المؤسسة:</label>
-                        <input type="text" id="fbClientName" class="es-input-field" placeholder="مثال: شركة الأفق للتجارة">
+                        <label>${fb.clientNameLabel}</label>
+                        <input type="text" id="fbClientName" class="es-input-field" placeholder="${fb.clientNamePlaceholder}">
                     </div>
 
                     <div class="es-input-group">
-                        <label>القسم المستهدف بالملاحظة:</label>
+                        <label>${fb.targetSectionLabel}</label>
                         <select id="fbTargetSection" class="es-select-field">
-                            <option value="الواجهة الرئيسية (Hero Section)">الواجهة الرئيسية (Hero Section)</option>
-                            <option value="كروت الخدمات وباقات دانا">كروت الخدمات وباقات دانا</option>
-                            <option value="حاسبة التكلفة والأسعار">حاسبة التكلفة والأسعار</option>
-                            <option value="المشاريع السابقة (Portfolio)">المشاريع السابقة (Portfolio)</option>
-                            <option value="قسم الشركاء والمؤسسين">قسم الشركاء والمؤسسين</option>
-                            <option value="أخرى / فكرة عامة">أخرى / فكرة عامة</option>
+                            ${fb.sections.map(s => `<option value="${s}">${s}</option>`).join('')}
                         </select>
                     </div>
 
                     <div class="es-input-group">
-                        <label>نوع الملاحظة:</label>
+                        <label>${fb.categoryLabel}</label>
                         <select id="fbCategory" class="es-select-field">
-                            <option value="🎨 تعديل تصميم وألوان">🎨 تعديل تصميم وألوان</option>
-                            <option value="✍️ تعديل نصوص وصياغة">✍️ تعديل نصوص وصياغة</option>
-                            <option value="⚡ طلب ميزة إضافية">⚡ طلب ميزة إضافية</option>
-                            <option value="🐞 ملاحظة فنية / استجابة">🐞 ملاحظة فنية / استجابة</option>
+                            ${fb.categories.map(c => `<option value="${c}">${c}</option>`).join('')}
                         </select>
                     </div>
 
                     <div class="es-input-group">
-                        <label>نص الملاحظة بالتفصيل:</label>
-                        <textarea id="fbDetails" class="es-textarea-field" rows="3" placeholder="اكتب تفاصيل التعديل المطلوب هنا..."></textarea>
+                        <label>${fb.detailsLabel}</label>
+                        <textarea id="fbDetails" class="es-textarea-field" rows="3" placeholder="${fb.detailsPlaceholder}"></textarea>
                     </div>
 
                     <div class="es-feedback-actions">
                         <button type="button" class="es-btn-send-wa" onclick="window.sendFeedbackViaWhatsApp()">
                             <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
-                            <span>إرسال فوراً عبر واتساب</span>
+                            <span>${fb.sendBtn}</span>
                         </button>
                     </div>
                 </div>
@@ -354,6 +869,8 @@
     function injectSchedulerModal() {
         if (document.getElementById('esSchedulerModalOverlay')) return;
 
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Amsterdam';
 
         const overlay = document.createElement('div');
@@ -364,64 +881,61 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        <span>مجدول الاستشارات التنفيذية // S&R Executive Advisory</span>
+                        <span>${t.title}</span>
                     </h3>
                     <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeSchedulerModal()">✕</button>
                 </div>
                 <div class="es-feedback-body">
                     <p style="font-size: 0.82rem; color: rgba(255,255,255,0.7); margin: 0;">
-                        احجز جلسة استشارية أولية مجانية مدتها 30 دقيقة عبر Zoom لمناقشة بنيتكم السحابية أو متطلبات الـ ERP.
+                        ${t.desc}
                     </p>
 
                     <div class="es-input-group">
-                        <label>اختر المستشار التنفيذي:</label>
+                        <label>${t.advisorLabel}</label>
                         <div class="es-consultant-grid">
                             <div class="es-consultant-card active" onclick="window.selectConsultant('salim', this)">
-                                <div class="es-consultant-name">م. سليم عزيزة</div>
-                                <div class="es-consultant-role">CTO • الأنظمة والذكاء الاصطناعي</div>
+                                <div class="es-consultant-name">${t.consultants.salim.name}</div>
+                                <div class="es-consultant-role">${t.consultants.salim.role}</div>
                             </div>
                             <div class="es-consultant-card" onclick="window.selectConsultant('raed', this)">
-                                <div class="es-consultant-name">أ. رائد كعكة</div>
-                                <div class="es-consultant-role">CFO • الحلول المالية وERP</div>
+                                <div class="es-consultant-name">${t.consultants.raed.name}</div>
+                                <div class="es-consultant-role">${t.consultants.raed.role}</div>
                             </div>
                             <div class="es-consultant-card" onclick="window.selectConsultant('both', this)">
-                                <div class="es-consultant-name">جلسة مشتركة</div>
-                                <div class="es-consultant-role">استشارة تقنية ومالية شاملة</div>
+                                <div class="es-consultant-name">${t.consultants.both.name}</div>
+                                <div class="es-consultant-role">${t.consultants.both.role}</div>
                             </div>
                         </div>
                     </div>
 
                     <div style="font-size: 0.75rem; color: var(--es-cyan); display: flex; align-items: center; gap: 6px;">
-                        <span>🌐 منطقتك الزمنية المكتشفة تلقائياً:</span>
+                        <span>${t.tzLabel}</span>
                         <strong>${tz}</strong>
                     </div>
 
                     <div class="es-input-group">
-                        <label>اختر اليوم والوقت المفضل (بتوقيتك المحلي):</label>
+                        <label>${t.slotLabel}</label>
                         <div class="es-slots-grid">
-                            <button type="button" class="es-slot-btn active" onclick="window.selectSlot('غداً - 11:00 صباحاً', this)">غداً 11:00 ص</button>
-                            <button type="button" class="es-slot-btn" onclick="window.selectSlot('غداً - 03:00 مساءً', this)">غداً 03:00 م</button>
-                            <button type="button" class="es-slot-btn" onclick="window.selectSlot('بعد غد - 01:00 ظهراً', this)">بعد غد 01:00 م</button>
-                            <button type="button" class="es-slot-btn" onclick="window.selectSlot('بعد غد - 05:00 مساءً', this)">بعد غد 05:00 م</button>
-                            <button type="button" class="es-slot-btn" onclick="window.selectSlot('الأسبوع القادم - صباحاً', this)">الأسبوع القادم (ص)</button>
-                            <button type="button" class="es-slot-btn" onclick="window.selectSlot('الأسبوع القادم - مساءً', this)">الأسبوع القادم (م)</button>
+                            ${t.slots.map((slot, idx) => `
+                                <button type="button" class="es-slot-btn ${idx === 0 ? 'active' : ''}" onclick="window.selectSlot('${slot}', this)">${slot}</button>
+                            `).join('')}
                         </div>
                     </div>
 
                     <div class="es-input-group">
-                        <label>الاسم والشركة:</label>
-                        <input type="text" id="schClientName" class="es-input-field" placeholder="مثال: م. أحمد - المدير العام لشركة ...">
+                        <label>${t.nameLabel}</label>
+                        <input type="text" id="schClientName" class="es-input-field" placeholder="${t.namePlaceholder}">
                     </div>
 
                     <div class="es-input-group">
-                        <label>موضوع الاستشارة الأساسي:</label>
-                        <input type="text" id="schTopic" class="es-input-field" placeholder="مثال: ترقية نظام الـ ERP السحابي وربط الفروع">
+                        <label>${t.topicLabel}</label>
+                        <input type="text" id="schTopic" class="es-input-field" placeholder="${t.topicPlaceholder}">
                     </div>
 
                     <div class="es-feedback-actions">
                         <button type="button" class="es-btn-send-wa" onclick="window.confirmScheduler()">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                            <span>تأكيد الحجز وجدولة الموعد فوراً</span>
+                            <span>${t.confirmBtn}</span>
                         </button>
                     </div>
                 </div>
@@ -437,6 +951,8 @@
     // 5. Inject AI & ERP Digital Readiness Assessment Modal
     function injectReadinessModal() {
         if (document.getElementById('esReadinessModalOverlay')) return;
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).readiness;
 
         const overlay = document.createElement('div');
         overlay.id = 'esReadinessModalOverlay';
@@ -446,7 +962,7 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-                        <span>مقياس الجاهزية الرقمية والوفر المالي // CoreSync AI Assessment</span>
+                        <span>${t.modalTitle}</span>
                     </h3>
                     <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeReadinessModal()">✕</button>
                 </div>
@@ -470,6 +986,8 @@
     // 6. Inject Enterprise Case Studies Modal
     function injectCaseStudyModal() {
         if (document.getElementById('esCaseStudyModalOverlay')) return;
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).caseStudy;
 
         const overlay = document.createElement('div');
         overlay.id = 'esCaseStudyModalOverlay';
@@ -479,7 +997,7 @@
                 <div class="es-feedback-header">
                     <h3>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                        <span>دراسة حالة موثقة وعائد الاستثمار // Enterprise Case Study</span>
+                        <span>${t.modalTitle}</span>
                     </h3>
                     <button type="button" class="es-btn-tool es-btn-tool-close" onclick="window.closeCaseStudyModal()">✕</button>
                 </div>
@@ -500,6 +1018,9 @@
         if (localStorage.getItem('coresync_gdpr_status')) return;
         if (document.getElementById('esGdprBanner')) return;
 
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).gdpr;
+
         const banner = document.createElement('div');
         banner.id = 'esGdprBanner';
         banner.className = 'es-gdpr-banner active';
@@ -507,15 +1028,15 @@
             <div class="es-gdpr-content">
                 <div class="es-gdpr-title">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <span>الامتثال للائحة حماية البيانات الأوروبية (EU GDPR)</span>
+                    <span>${t.title}</span>
                 </div>
                 <p class="es-gdpr-text">
-                    نحن نستخدم ملفات تعريف الارتباط والتقنيات السحابية الأساسية في منصة S&R CoreSync لضمان سرعة التحميل وتجربة تصفح آمنة ومطابقة للقوانين الهولندية والأوروبية.
+                    ${t.text}
                 </p>
             </div>
             <div class="es-gdpr-actions">
-                <button type="button" class="es-btn-gdpr-accept" onclick="window.acceptGDPR()">قبول الكل (Accept All)</button>
-                <button type="button" class="es-btn-gdpr-decline" onclick="window.declineGDPR()">الأساسية فقط</button>
+                <button type="button" class="es-btn-gdpr-accept" onclick="window.acceptGDPR()">${t.accept}</button>
+                <button type="button" class="es-btn-gdpr-decline" onclick="window.declineGDPR()">${t.decline}</button>
             </div>
         `;
         document.body.appendChild(banner);
@@ -551,61 +1072,95 @@
     // ==========================================
 
     window.exportEstimatorPDF = function () {
-        const state = window._estimatorState || {
-            type: { title: 'هوية بصرية وتطوير متكامل', price: 950, days: '7 - 10 أيام عمل' },
-            pages: { title: '1 - 5 صفحات رئيسية', price: 0 },
-            lang: { title: 'لغة واحدة', price: 0 },
-            pay: { title: 'بدون دفع إلكتروني', price: 0 },
-            speed: { title: 'تسليم قياسي', price: 0 }
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).pdf;
+
+        const defaultTitles = {
+            ar: {
+                type: { title: 'هوية بصرية وتطوير متكامل', price: 950, days: '7 - 10 أيام عمل' },
+                pages: { title: '1 - 5 صفحات رئيسية', price: 0 },
+                lang: { title: 'لغة واحدة', price: 0 },
+                pay: { title: 'بدون دفع إلكتروني', price: 0 },
+                speed: { title: 'تسليم قياسي', price: 0 },
+                included: 'مشمول',
+                agreed: 'حسب الاتفاق'
+            },
+            en: {
+                type: { title: 'Visual Identity & Full Stack Engineering', price: 950, days: '7 - 10 business days' },
+                pages: { title: '1 - 5 Core Web Pages', price: 0 },
+                lang: { title: 'Single Language', price: 0 },
+                pay: { title: 'No Online Payment Gateway', price: 0 },
+                speed: { title: 'Standard Delivery Timeline', price: 0 },
+                included: 'Included',
+                agreed: 'Per Agreement'
+            },
+            nl: {
+                type: { title: 'Merkidentiteit & Full Stack Systeemontwikkeling', price: 950, days: '7 - 10 werkdagen' },
+                pages: { title: '1 - 5 Kernpagina's', price: 0 },
+                lang: { title: 'Eén Taal', price: 0 },
+                pay: { title: 'Geen Online Betaalkoppeling', price: 0 },
+                speed: { title: 'Standaard Levering', price: 0 },
+                included: 'Inbegrepen',
+                agreed: 'Volgens Afspraak'
+            }
         };
 
+        const state = window._estimatorState || defaultTitles[lang] || defaultTitles.ar;
         const total = Object.values(state).reduce((sum, g) => sum + (g.price || 0), 0);
         const now = new Date();
-        const issueDate = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        const dateLocale = lang === 'nl' ? 'nl-NL' : (lang === 'en' ? 'en-US' : 'ar-EG');
+        const issueDate = now.toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' });
         const ref = 'CSR-' + now.getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
 
-        document.getElementById('quoteRefNumber').textContent = ref;
-        document.getElementById('quoteIssueDate').textContent = issueDate;
+        const refEl = document.getElementById('quoteRefNumber');
+        const dateEl = document.getElementById('quoteIssueDate');
+        if (refEl) refEl.textContent = ref;
+        if (dateEl) dateEl.textContent = issueDate;
 
+        const langDict = defaultTitles[lang] || defaultTitles.ar;
         const tbody = document.getElementById('quoteTableBody');
-        tbody.innerHTML = `
-            <tr>
-                <td><strong>نوع الحزمة والمشروع</strong></td>
-                <td>${state.type.title}</td>
-                <td>${state.type.days || 'حسب الاتفاق'}</td>
-                <td>€${(state.type.price || total).toLocaleString('en')}</td>
-            </tr>
-            <tr>
-                <td><strong>نطاق الصفحات والتنفيذ</strong></td>
-                <td>${state.pages.title}</td>
-                <td>مشمول</td>
-                <td>€${(state.pages.price || 0).toLocaleString('en')}</td>
-            </tr>
-            <tr>
-                <td><strong>منظومة اللغات والترجمة</strong></td>
-                <td>${state.lang.title}</td>
-                <td>مشمول</td>
-                <td>€${(state.lang.price || 0).toLocaleString('en')}</td>
-            </tr>
-            <tr>
-                <td><strong>بوابات الدفع والربط البنكي</strong></td>
-                <td>${state.pay.title}</td>
-                <td>مشمول</td>
-                <td>€${(state.pay.price || 0).toLocaleString('en')}</td>
-            </tr>
-            <tr>
-                <td><strong>معيار وسرعة التسليم</strong></td>
-                <td>${state.speed.title}</td>
-                <td>مشمول</td>
-                <td>€${(state.speed.price || 0).toLocaleString('en')}</td>
-            </tr>
-        `;
+        if (tbody) {
+            tbody.innerHTML = `
+                <tr>
+                    <td><strong>${lang === 'en' ? 'Package & Project Scope' : (lang === 'nl' ? 'Pakket & Projectomvang' : 'نوع الحزمة والمشروع')}</strong></td>
+                    <td>${state.type.title}</td>
+                    <td>${state.type.days || langDict.agreed}</td>
+                    <td>€${(state.type.price || total).toLocaleString('en')}</td>
+                </tr>
+                <tr>
+                    <td><strong>${lang === 'en' ? 'Pages & Deliverables Scope' : (lang === 'nl' ? 'Omvang Pagina's & Modules' : 'نطاق الصفحات والتنفيذ')}</strong></td>
+                    <td>${state.pages.title}</td>
+                    <td>${langDict.included}</td>
+                    <td>€${(state.pages.price || 0).toLocaleString('en')}</td>
+                </tr>
+                <tr>
+                    <td><strong>${lang === 'en' ? 'Languages & Localization' : (lang === 'nl' ? 'Talen & Lokalisatie' : 'منظومة اللغات والترجمة')}</strong></td>
+                    <td>${state.lang.title}</td>
+                    <td>${langDict.included}</td>
+                    <td>€${(state.lang.price || 0).toLocaleString('en')}</td>
+                </tr>
+                <tr>
+                    <td><strong>${lang === 'en' ? 'Payment Gateways & Banking API' : (lang === 'nl' ? 'Betaalproviders & Bankkoppeling' : 'بوابات الدفع والربط البنكي')}</strong></td>
+                    <td>${state.pay.title}</td>
+                    <td>${langDict.included}</td>
+                    <td>€${(state.pay.price || 0).toLocaleString('en')}</td>
+                </tr>
+                <tr>
+                    <td><strong>${lang === 'en' ? 'Delivery Standard & SLA' : (lang === 'nl' ? 'Levering & SLA Norm' : 'معيار وسرعة التسليم')}</strong></td>
+                    <td>${state.speed.title}</td>
+                    <td>${langDict.included}</td>
+                    <td>€${(state.speed.price || 0).toLocaleString('en')}</td>
+                </tr>
+            `;
+        }
 
-        document.getElementById('quoteSubtotal').textContent = `€${total.toLocaleString('en')}`;
-        document.getElementById('quoteGrandTotal').textContent = `€${total.toLocaleString('en')}`;
+        const subEl = document.getElementById('quoteSubtotal');
+        const grandEl = document.getElementById('quoteGrandTotal');
+        if (subEl) subEl.textContent = `€${total.toLocaleString('en')}`;
+        if (grandEl) grandEl.textContent = `€${total.toLocaleString('en')}`;
 
         const overlay = document.getElementById('esQuoteModalOverlay');
-        overlay.classList.add('active');
+        if (overlay) overlay.classList.add('active');
     };
 
     window.closeQuoteModal = () => document.getElementById('esQuoteModalOverlay')?.classList.remove('active');
@@ -615,23 +1170,27 @@
     window.closeFeedbackModal = () => document.getElementById('esFeedbackModalOverlay')?.classList.remove('active');
 
     window.sendFeedbackViaWhatsApp = function () {
-        const clientName = document.getElementById('fbClientName').value.trim() || 'عميل تجريبي';
-        const targetSection = document.getElementById('fbTargetSection').value;
-        const category = document.getElementById('fbCategory').value;
-        const details = document.getElementById('fbDetails').value.trim();
+        const lang = getPageLang();
+        const fb = (ES_I18N[lang] || ES_I18N.ar).feedback;
+
+        const defaultClient = lang === 'en' ? 'Enterprise Client' : (lang === 'nl' ? 'Zakelijke Klant' : 'عميل تجريبي');
+        const clientName = document.getElementById('fbClientName')?.value.trim() || defaultClient;
+        const targetSection = document.getElementById('fbTargetSection')?.value || '';
+        const category = document.getElementById('fbCategory')?.value || '';
+        const details = document.getElementById('fbDetails')?.value.trim() || '';
 
         if (!details) {
-            alert('يرجى كتابة نص الملاحظة قبل الإرسال.');
+            alert(fb.alertEmpty);
             return;
         }
 
         const msg = [
-            `*💡 ملاحظة جديدة على النسخة التجريبية – S&R CoreSync*`,
-            `👤 *من:* ${clientName}`,
-            `📍 *القسم:* ${targetSection}`,
-            `🏷️ *النوع:* ${category}`,
-            `📝 *الملاحظة:* ${details}`,
-            `🔗 *الرابط:* ${window.location.href}`
+            fb.waMsgHeader,
+            `👤 *${lang === 'en' ? 'From:' : (lang === 'nl' ? 'Van:' : 'من:')}* ${clientName}`,
+            `📍 *${lang === 'en' ? 'Section:' : (lang === 'nl' ? 'Onderdeel:' : 'القسم:')}* ${targetSection}`,
+            `🏷️ *${lang === 'en' ? 'Category:' : (lang === 'nl' ? 'Type:' : 'النوع:')}* ${category}`,
+            `📝 *${lang === 'en' ? 'Feedback:' : (lang === 'nl' ? 'Feedback:' : 'الملاحظة:')}* ${details}`,
+            `🔗 *${lang === 'en' ? 'URL:' : (lang === 'nl' ? 'Link:' : 'الرابط:')}* ${window.location.href}`
         ].join('\n');
 
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -640,9 +1199,16 @@
 
     // Scheduler Handlers
     let selectedConsultant = 'salim';
-    let selectedSlot = 'غداً - 11:00 صباحاً';
+    let selectedSlot = '';
 
-    window.openSchedulerModal = () => document.getElementById('esSchedulerModalOverlay')?.classList.add('active');
+    window.openSchedulerModal = function() {
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
+        if (!selectedSlot && t.slots && t.slots[0]) {
+            selectedSlot = t.slots[0];
+        }
+        document.getElementById('esSchedulerModalOverlay')?.classList.add('active');
+    };
     window.closeSchedulerModal = () => document.getElementById('esSchedulerModalOverlay')?.classList.remove('active');
 
     window.selectConsultant = function (type, el) {
@@ -658,21 +1224,23 @@
     };
 
     window.confirmScheduler = function () {
-        const name = document.getElementById('schClientName').value.trim() || 'شخصية قيادية';
-        const topic = document.getElementById('schTopic').value.trim() || 'استشارة سحابية وERP';
-        const consultantNames = {
-            salim: 'م. سليم عزيزة (CTO السحابي والذكاء الاصطناعي)',
-            raed: 'أ. رائد كعكة (CFO الأنظمة المالية وERP)',
-            both: 'جلسة استشارية مشتركة (م. سليم + أ. رائد)'
-        };
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).scheduler;
+
+        const defaultClient = lang === 'en' ? 'Executive Leader' : (lang === 'nl' ? 'Directielid' : 'شخصية قيادية');
+        const defaultTopic = lang === 'en' ? 'Cloud & ERP Architecture' : (lang === 'nl' ? 'Cloud & ERP Architectuur' : 'استشارة سحابية وERP');
+        const name = document.getElementById('schClientName')?.value.trim() || defaultClient;
+        const topic = document.getElementById('schTopic')?.value.trim() || defaultTopic;
+        const chosenConsultant = t.consultants[selectedConsultant]?.waTitle || t.consultants.salim.waTitle;
+        const currentSlot = selectedSlot || (t.slots && t.slots[0]) || '';
 
         const msg = [
-            `*📅 طلب حجز جلسة استشارية تنفيذية – S&R CoreSync*`,
-            `👤 *الاسم / المنشأة:* ${name}`,
-            `💼 *المستشار المطلوب:* ${consultantNames[selectedConsultant]}`,
-            `⏰ *الموعد المقترح:* ${selectedSlot}`,
-            `🎯 *موضوع الاستشارة:* ${topic}`,
-            `🌐 *المنطقة الزمنية:* ${Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Amsterdam'}`
+            t.waHeader,
+            `👤 *${lang === 'en' ? 'Name / Organization:' : (lang === 'nl' ? 'Naam / Bedrijf:' : 'الاسم / المنشأة:')}* ${name}`,
+            `💼 *${lang === 'en' ? 'Advisor:' : (lang === 'nl' ? 'Adviseur:' : 'المستشار المطلوب:')}* ${chosenConsultant}`,
+            `⏰ *${lang === 'en' ? 'Selected Slot:' : (lang === 'nl' ? 'Gewenste Tijd:' : 'الموعد المقترح:')}* ${currentSlot}`,
+            `🎯 *${lang === 'en' ? 'Topic:' : (lang === 'nl' ? 'Onderwerp:' : 'موضوع الاستشارة:')}* ${topic}`,
+            `🌐 *${lang === 'en' ? 'Timezone:' : (lang === 'nl' ? 'Tijdzone:' : 'المنطقة الزمنية:')}* ${Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Amsterdam'}`
         ].join('\n');
 
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -693,23 +1261,27 @@
         const area = document.getElementById('quizQuestionArea');
         if (!area || !fill) return;
 
-        if (currentQuizStep >= QUIZ_QUESTIONS.length) {
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).readiness;
+        const questions = QUIZ_QUESTIONS_I18N[lang] || QUIZ_QUESTIONS_I18N.ar;
+
+        if (currentQuizStep >= questions.length) {
             renderQuizResults();
             return;
         }
 
-        const q = QUIZ_QUESTIONS[currentQuizStep];
-        fill.style.width = `${((currentQuizStep + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+        const q = questions[currentQuizStep];
+        fill.style.width = `${((currentQuizStep + 1) / questions.length) * 100}%`;
 
         area.innerHTML = `
             <div style="font-size: 0.75rem; color: var(--es-cyan); font-weight: 700; margin-bottom: 6px;">
-                السؤال ${currentQuizStep + 1} من ${QUIZ_QUESTIONS.length}
+                ${t.stepLabel(currentQuizStep + 1, questions.length)}
             </div>
             <h4 style="color: #fff; font-size: 1.05rem; font-weight: 800; margin-bottom: 16px;">
                 ${q.title}
             </h4>
             <div class="es-quiz-options">
-                ${q.options.map((opt, i) => `
+                ${q.options.map((opt) => `
                     <div class="es-quiz-option" onclick="window.chooseQuizOption(${opt.score}, ${opt.saving})">
                         <span>${opt.text}</span>
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
@@ -731,45 +1303,51 @@
         const monthlySaving = Object.values(quizAnswers).reduce((sum, a) => sum + a.saving, 0);
         const scorePercentage = Math.min(95, Math.max(35, totalScore));
 
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).readiness;
+
         area.innerHTML = `
             <div style="text-align: center; padding: 10px 0;">
                 <div class="es-quiz-score-circle">
                     <span class="es-quiz-score-val">${scorePercentage}%</span>
-                    <span class="es-quiz-score-lbl">الجاهزية الرقمية</span>
+                    <span class="es-quiz-score-lbl">${t.scoreLabel}</span>
                 </div>
                 <h3 style="color: #fff; font-size: 1.2rem; font-weight: 800; margin-bottom: 8px;">
-                    تقرير الجدوى والتحول الرقمي لمنشأتكم
+                    ${t.reportTitle}
                 </h3>
                 <p style="color: rgba(255,255,255,0.78); font-size: 0.85rem; line-height: 1.6; max-width: 480px; margin: 0 auto 16px;">
-                    بناءً على إجاباتكم، تمتلك منشأتكم أرضية ممتازة للتطوير، مع وجود <strong>فرصة مؤكدة لوفر تشغيلي يقدر بـ €${monthlySaving.toLocaleString('en')} شهرياً</strong> عبر أتمتة الـ ERP ودمج الذكاء الاصطناعي مع CoreSync.
+                    ${t.reportDesc(monthlySaving)}
                 </p>
                 <div class="es-casestudy-kpi-grid" style="margin-bottom: 20px;">
                     <div class="es-casestudy-kpi">
-                        <div class="val">€${monthlySaving.toLocaleString('en')}</div>
-                        <div class="lbl">وفر شهري مقدر</div>
+                        <div class="val">${t.kpi1Val(monthlySaving)}</div>
+                        <div class="lbl">${t.kpi1Lbl}</div>
                     </div>
                     <div class="es-casestudy-kpi">
-                        <div class="val">4.5x</div>
-                        <div class="lbl">تسريع التقارير المالية</div>
+                        <div class="val">${t.kpi2Val}</div>
+                        <div class="lbl">${t.kpi2Lbl}</div>
                     </div>
                     <div class="es-casestudy-kpi">
-                        <div class="val">100%</div>
-                        <div class="lbl">أتمتة سحابية موثوقة</div>
+                        <div class="val">${t.kpi3Val}</div>
+                        <div class="lbl">${t.kpi3Lbl}</div>
                     </div>
                 </div>
                 <button type="button" class="es-btn-send-wa" style="width: 100%;" onclick="window.bookAssessmentConsultation(${scorePercentage}, ${monthlySaving})">
-                    <span>حجز جلسة لمناقشة خطة التحول المقترحة 🚀</span>
+                    <span>${t.bookBtn}</span>
                 </button>
             </div>
         `;
     }
 
     window.bookAssessmentConsultation = function (score, saving) {
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).readiness;
+
         const msg = [
-            `*📊 نتيجة تقييم الجاهزية الرقمية – S&R CoreSync*`,
-            `🎯 *نسبة الجاهزية الحالية:* ${score}%`,
-            `💰 *الوفر الشهري المقدر:* €${saving.toLocaleString('en')}`,
-            `🤝 نرغب في مناقشة خطة العمل وأتمتة المنظومة معكم.`
+            t.waHeader,
+            `🎯 *${lang === 'en' ? 'Digital Readiness Score:' : (lang === 'nl' ? 'Digitale Gereedheidsscore:' : 'نسبة الجاهزية الحالية:')}* ${score}%`,
+            `💰 *${lang === 'en' ? 'Estimated Monthly Savings:' : (lang === 'nl' ? 'Geschatte Maandbesparing:' : 'الوفر الشهري المقدر:')}* €${saving.toLocaleString('en')}`,
+            `🤝 ${lang === 'en' ? 'We would like to discuss our enterprise roadmap and automation architecture.' : (lang === 'nl' ? 'Wij willen graag onze enterprise roadmap en automatiseringsarchitectuur bespreken.' : 'نرغب في مناقشة خطة العمل وأتمتة المنظومة معكم.')}`
         ].join('\n');
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
         window.closeReadinessModal();
@@ -777,7 +1355,11 @@
 
     // Case Study Modal Handlers
     window.openCaseStudy = function (key) {
-        const data = CASE_STUDIES[key] || CASE_STUDIES.almarai;
+        const lang = getPageLang();
+        const langStudies = CASE_STUDIES_I18N[lang] || CASE_STUDIES_I18N.ar;
+        const data = langStudies[key] || langStudies.almarai;
+        const t = (ES_I18N[lang] || ES_I18N.ar).caseStudy;
+
         const body = document.getElementById('caseStudyBody');
         if (!body) return;
 
@@ -785,7 +1367,7 @@
             <div class="es-casestudy-hero">
                 <span class="es-casestudy-tag">${data.tag}</span>
                 <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin: 4px 0 6px;">${data.title}</h3>
-                <p style="font-size: 0.8rem; color: var(--es-gold-light); margin: 0;">العميل / القطاع: ${data.client}</p>
+                <p style="font-size: 0.8rem; color: var(--es-gold-light); margin: 0;">${t.clientLabel} ${data.client}</p>
             </div>
             <div style="padding: 16px 20px;">
                 <div class="es-casestudy-kpi-grid">
@@ -798,22 +1380,22 @@
                 </div>
 
                 <div style="margin-bottom: 14px;">
-                    <h5 style="color: #f87171; font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">⚠️ التحدي التشغيلي والمالي:</h5>
+                    <h5 style="color: #f87171; font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">${t.challengeTitle}</h5>
                     <p style="font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">${data.challenge}</p>
                 </div>
 
                 <div style="margin-bottom: 14px;">
-                    <h5 style="color: var(--es-cyan); font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">⚡ الحل الهندسي من CoreSync:</h5>
+                    <h5 style="color: var(--es-cyan); font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">${t.solutionTitle}</h5>
                     <p style="font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">${data.solution}</p>
                 </div>
 
                 <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 12px; margin-bottom: 16px;">
-                    <h5 style="color: #34d399; font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">📈 الأثر المالي وعائد الاستثمار (ROI):</h5>
+                    <h5 style="color: #34d399; font-size: 0.82rem; font-weight: 800; margin-bottom: 4px;">${t.roiTitle}</h5>
                     <p style="font-size: 0.8rem; color: #ecfdf5; line-height: 1.5; margin: 0;">${data.roi}</p>
                 </div>
 
                 <button type="button" class="es-btn-send-wa" style="width: 100%;" onclick="window.discussProjectWithTeam('${data.client}')">
-                    <span>طلب دراسة حل مماثل لمشروعي عبر WhatsApp</span>
+                    <span>${t.btnWa}</span>
                 </button>
             </div>
         `;
@@ -824,7 +1406,9 @@
     window.closeCaseStudyModal = () => document.getElementById('esCaseStudyModalOverlay')?.classList.remove('active');
 
     window.discussProjectWithTeam = function (projectName) {
-        const msg = `مرحباً S&R CoreSync، اطلعت على دراسة الحالة الخاصة بـ (${projectName}) وأرغب في مناقشة حل سحابي/مالي مماثل لشركتنا.`;
+        const lang = getPageLang();
+        const t = (ES_I18N[lang] || ES_I18N.ar).caseStudy;
+        const msg = t.waMsg(projectName);
         window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
         window.closeCaseStudyModal();
     };
@@ -839,7 +1423,7 @@
         document.getElementById('esGdprBanner')?.classList.remove('active');
     };
 
-/* =====================================================================
+    /* =====================================================================
        FEATURE 1: CoreSync AI Concierge Widget with Purchase Intent & WhatsApp Human Expert
        ===================================================================== */
     const AI_KB = {
@@ -2591,13 +3175,14 @@
     };
 
     function injectNextGenButtons() {
+        const lang = getPageLang();
         // Inject Tracker button inside the Feedback Hub header if it exists
         const hubHeader = document.querySelector('.es-hub-header');
         if (hubHeader && !document.getElementById('esHubTrackerBtn')) {
             const btn = document.createElement('button');
             btn.id = 'esHubTrackerBtn';
             btn.className = 'btn-tracker-portal';
-            btn.innerHTML = '📡 بوابة العملاء وتتبع المشاريع';
+            btn.innerHTML = lang === 'en' ? '📡 Client Portal & Tracking' : (lang === 'nl' ? '📡 Klantenportaal & Tracking' : '📡 بوابة العملاء وتتبع المشاريع');
             btn.onclick = window.openTrackerModal;
             hubHeader.appendChild(btn);
         }
@@ -2609,7 +3194,7 @@
             btn.id = 'esRoiOptBtn';
             btn.className = 'es-btn-secondary';
             btn.style.margin = '10px 0';
-            btn.innerHTML = '🚀 محاكي التكلفة السحابية وROI';
+            btn.innerHTML = lang === 'en' ? '🚀 Cloud ROI & Cost Simulator' : (lang === 'nl' ? '🚀 Cloud ROI & Kostensimulator' : '🚀 محاكي التكلفة السحابية وROI');
             btn.onclick = window.openROIModal;
             caseStudySec.prepend(btn);
         }
@@ -2620,7 +3205,8 @@
             const btn = document.createElement('button');
             btn.id = 'esExecutiveDeckBtn';
             btn.className = 'es-deck-download-btn';
-            btn.innerHTML = '<span>📊 تحميل ملف القدرات التنفيذي PDF</span>';
+            const deckLabel = lang === 'en' ? '<span>📊 Download Executive Capability Deck PDF</span>' : (lang === 'nl' ? '<span>📊 Download Directie Profiel Deck PDF</span>' : '<span>📊 تحميل ملف القدرات التنفيذي PDF</span>');
+            btn.innerHTML = deckLabel;
             btn.onclick = window.downloadCapabilityDeck;
             heroActions.appendChild(btn);
         }
