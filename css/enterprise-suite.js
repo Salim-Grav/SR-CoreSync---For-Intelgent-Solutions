@@ -783,10 +783,11 @@
     // Modal Language Switcher UI Component
     function renderModalLangSwitcher(activeLang) {
         return `
-            <div class="es-modal-lang-switcher" role="group" aria-label="Language Switcher">
+            <div class="es-modal-lang-switcher" role="group" aria-label="Language Switcher" title="Alt + L للتبديل السريع">
                 <button type="button" class="es-lang-pill ${activeLang === 'en' ? 'active' : ''}" onclick="window.switchModalLang('en')">EN</button>
                 <button type="button" class="es-lang-pill ${activeLang === 'nl' ? 'active' : ''}" onclick="window.switchModalLang('nl')">NL</button>
                 <button type="button" class="es-lang-pill ${activeLang === 'ar' ? 'active' : ''}" onclick="window.switchModalLang('ar')">عربي</button>
+                <span class="es-kbd-badge" title="اختصار لوحة المفاتيح: Alt + L">Alt+L</span>
             </div>
         `;
     }
@@ -860,7 +861,10 @@
                     </div>
 
                     <div class="es-input-group">
-                        <label>${fb.detailsLabel}</label>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label style="margin-bottom:0;">${fb.detailsLabel}</label>
+                            <span id="fbAutoSaveIndicator" class="es-autosave-indicator"></span>
+                        </div>
                         <textarea id="fbDetails" class="es-textarea-field" rows="3" placeholder="${fb.detailsPlaceholder}"></textarea>
                     </div>
 
@@ -1080,14 +1084,15 @@
 
     function checkURLParams() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('feedback') || urlParams.get('preview') === 'client') {
-            setTimeout(() => window.openFeedbackModal(), 800);
+        const hash = (window.location.hash || '').toLowerCase();
+        if (urlParams.has('feedback') || urlParams.get('preview') === 'client' || hash === '#feedback') {
+            setTimeout(() => window.openFeedbackModal(), 500);
         }
-        if (urlParams.has('scheduler')) {
-            setTimeout(() => window.openSchedulerModal(), 800);
+        if (urlParams.has('scheduler') || hash === '#scheduler') {
+            setTimeout(() => window.openSchedulerModal(), 500);
         }
-        if (urlParams.has('assessment')) {
-            setTimeout(() => window.openReadinessModal(), 800);
+        if (urlParams.has('assessment') || hash === '#assessment') {
+            setTimeout(() => window.openReadinessModal(), 500);
         }
     }
 

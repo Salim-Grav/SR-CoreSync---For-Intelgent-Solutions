@@ -653,6 +653,63 @@ html:not([dir="rtl"]) .floating-actions {
 }
 
 /* ==========================================================================
+   Live Cloud Auto-Save Pulse Indicator & Keyboard Shortcut Badge
+   ========================================================================== */
+.es-autosave-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(-1px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.es-autosave-indicator.saving {
+    opacity: 1;
+    color: var(--es-cyan, #38bdf8);
+}
+
+.es-autosave-indicator.saved {
+    opacity: 1;
+    color: #34d399;
+}
+
+.es-autosave-indicator .es-cloud-icon {
+    font-size: 0.78rem;
+    display: inline-block;
+}
+
+.es-autosave-indicator.saving .es-cloud-icon {
+    animation: esCloudPulse 0.9s infinite alternate;
+}
+
+@keyframes esCloudPulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.15); opacity: 1; }
+}
+
+.es-kbd-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.62rem;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.55);
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+[dir="rtl"] .es-kbd-badge {
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+/* ==========================================================================
    Mobile & Tablet Responsive Adaptations (< 640px)
    Transform 3 Floating Capsules into Compact Circular Interactive FAB Icons
    ========================================================================== */
