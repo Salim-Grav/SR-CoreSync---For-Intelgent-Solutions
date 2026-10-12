@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+fetch('http://127.0.0.1:3000/en/index.html')
+  .then(r => r.text())
+  .then(html => {
+    // create iframe
+    const ifr = document.createElement('iframe');
+    ifr.style.width = '1440px';
+    ifr.style.height = '900px';
+    document.body.appendChild(ifr);
+    const doc = ifr.contentWindow.document;
+    doc.open();
+    doc.write(html);
+    doc.close();
+    ifr.onload = () => {
+      const b = doc.querySelector('.header-col-brand');
+      const n = doc.querySelector('.header-col-nav');
+      const a = doc.querySelector('.header-col-actions');
+      const l1 = doc.querySelector('.nav-menu-main li:first-child');
+      const r = doc.querySelector('.header-row-layout');
+      console.log('DEBUG_DATA:' + JSON.stringify({
+        r_box: r.getBoundingClientRect(),
+        b_box: b.getBoundingClientRect(),
+        n_box: n.getBoundingClientRect(),
+        l1_box: l1 ? l1.getBoundingClientRect() : null,
+        a_box: a.getBoundingClientRect(),
+        b_cs: {display: getComputedStyle(b).display, flex: getComputedStyle(b).flex, pos: getComputedStyle(b).position, order: getComputedStyle(b).order},
+        n_cs: {display: getComputedStyle(n).display, flex: getComputedStyle(n).flex, pos: getComputedStyle(n).position, order: getComputedStyle(n).order},
+        a_cs: {display: getComputedStyle(a).display, flex: getComputedStyle(a).flex, pos: getComputedStyle(a).position, order: getComputedStyle(a).order}
+      }));
+    };
+  });
+</script>
+</body>
+</html>
