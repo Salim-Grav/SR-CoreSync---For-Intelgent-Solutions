@@ -2117,9 +2117,9 @@
             flex-wrap: nowrap !important;
             flex-direction: row !important;
             align-items: center !important;
-            justify-content: space-between !important;
+            justify-content: flex-start !important;
             direction: ltr !important;
-            gap: clamp(14px, 2vw, 36px) !important;
+            gap: 0 !important;
             grid-template-columns: none !important;
             margin: 0 !important;
             width: 100% !important;
@@ -2128,19 +2128,22 @@
         .tf-header .header-inner .row > div,
         .tf-header .header-inner .header-row-layout > div {
             padding: 0 !important;
-            margin: 0 !important;
             grid-column: auto !important;
             grid-row: auto !important;
             max-width: none !important;
         }
 
-        /* Zone 1: Logo (Right in RTL, Left in LTR) */
+        /* Zone 1: Logo & Emblem (Left in LTR) */
+        .tf-header .header-inner .header-row-layout > .header-col-brand,
         .header-col-brand {
+            order: 1 !important;
             flex: 0 0 auto !important;
             display: flex !important;
             align-items: center !important;
             z-index: 2;
-            margin-right: clamp(24px, 3.2vw, 56px) !important; /* مسافة أمان وتنفس سخية تفصل الشعار عن أول رابط */
+            margin: 0 !important;
+            margin-right: clamp(28px, 2.8vw, 54px) !important; /* مسافة أمان وتنفس سخية تفصل الشعار عن أول رابط */
+            padding: 0 !important;
         }
 
         .brand-logo-site {
@@ -2151,8 +2154,8 @@
         }
 
         .brand-emblem-img {
-            width: 42px !important;
-            height: 42px !important;
+            width: 40px !important;
+            height: 40px !important;
             object-fit: contain !important;
             filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.45)) !important;
             transition: transform 0.3s ease, filter 0.3s ease !important;
@@ -2166,7 +2169,7 @@
         .brand-sr-text {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             font-weight: 800 !important;
-            font-size: 1.18rem !important;
+            font-size: 1.15rem !important;
             color: var(--primary-gold) !important;
             letter-spacing: -0.5px !important;
         }
@@ -2174,7 +2177,7 @@
         .brand-sub-text {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             font-weight: 700 !important;
-            font-size: 1.18rem !important;
+            font-size: 1.15rem !important;
             color: #ffffff !important;
             letter-spacing: -0.5px !important;
             margin-right: 4px;
@@ -2184,27 +2187,31 @@
             margin-left: 4px;
         }
 
-        /* Zone 2: Navigation Links (Center) */
+        /* Zone 2: Navigation Links (Center-Left) */
+        .tf-header .header-inner .header-row-layout > .header-col-nav,
         .header-col-nav {
+            order: 2 !important;
             flex: 0 1 auto !important;
             display: flex !important;
-            justify-content: center !important;
+            justify-content: flex-start !important;
             align-items: center !important;
             min-width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         .box-navigation {
             display: flex !important;
             align-items: center !important;
-            justify-content: center !important;
-            width: 100% !important;
+            justify-content: flex-start !important;
+            width: auto !important;
         }
 
         .nav-menu-main {
             display: flex !important;
             align-items: center !important;
-            justify-content: center !important;
-            gap: clamp(8px, 1.1vw, 20px) !important;
+            justify-content: flex-start !important;
+            gap: clamp(4px, 0.7vw, 14px) !important;
             list-style: none !important;
             margin: 0 !important;
             padding: 0 !important;
@@ -2219,9 +2226,9 @@
         .nav-menu-main .item-link {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 5px !important;
-            padding: 6px 10px !important;
-            font-size: clamp(0.76rem, 0.84vw, 0.88rem) !important;
+            gap: 4px !important;
+            padding: 5px 8px !important;
+            font-size: clamp(0.72rem, 0.78vw, 0.82rem) !important;
             font-weight: 600 !important;
             color: rgba(255, 255, 255, 0.8) !important;
             text-decoration: none !important;
@@ -2232,7 +2239,7 @@
 
         .nav-menu-main .item-link span {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
-            font-size: 0.7rem !important;
+            font-size: 0.65rem !important;
             color: var(--primary-gold) !important;
             opacity: 0.9 !important;
             font-weight: 700 !important;
@@ -2247,12 +2254,17 @@
             color: var(--primary-gold) !important;
         }
 
-        /* Zone 3: Actions (Left in RTL, Right in LTR) */
+        /* Zone 3: Actions (Right in LTR) */
+        .tf-header .header-inner .header-row-layout > .header-col-actions,
         .header-col-actions {
+            order: 3 !important;
             flex: 0 0 auto !important;
             display: flex !important;
             align-items: center !important;
-            gap: clamp(6px, 0.8vw, 12px) !important;
+            justify-content: flex-end !important;
+            margin: 0 0 0 auto !important; /* قفل إزاحة الأزرار لأقصى اليمين */
+            padding: 0 !important;
+            gap: clamp(5px, 0.6vw, 10px) !important;
             white-space: nowrap !important;
             z-index: 2;
         }
@@ -2261,13 +2273,13 @@
             background: rgba(197, 168, 128, 0.08) !important;
             border: 1px solid rgba(197, 168, 128, 0.35) !important;
             color: #e6ca9f !important;
-            padding: 6px 14px !important;
+            padding: 5px 12px !important;
             border-radius: 999px !important;
-            font-size: 0.8rem !important;
+            font-size: 0.76rem !important;
             font-weight: 700 !important;
             display: inline-flex !important;
             align-items: center !important;
-            gap: 6px !important;
+            gap: 5px !important;
             cursor: pointer !important;
             transition: all 0.25s ease !important;
             white-space: nowrap !important;
