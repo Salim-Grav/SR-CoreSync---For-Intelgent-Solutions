@@ -3804,6 +3804,15 @@
                         <span class="s-kashida" data-text="Onze Diensten" aria-hidden="true"></span>
                         <span class="s-plain">Onze Diensten</span>
                     </h2>
+                    <div class="text-center">
+                        <div class="dana-services-currency-bar">
+                            <span class="dana-cur-label">💱 Actieve Valuta:</span>
+                            <button type="button" class="dana-cur-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (AED)</button>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 1:1 Replica van Signature Dienstenkaarten met Fotorealistische 3D-mockups -->
@@ -3836,7 +3845,7 @@
                                 <span class="dana-price-label">Scherpe Instaptarief:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Direct Voordeel</span>
-                                    <span class="dana-price-value"><span>€</span>590</span>
+                                    <span class="dana-price-value" data-eur-price="590"><span>€</span>590</span>
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
@@ -3879,7 +3888,7 @@
                                 <span class="dana-price-label">Scherpe Instaptarief:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Meest Gekozen</span>
-                                    <span class="dana-price-value"><span>€</span>980</span>
+                                    <span class="dana-price-value" data-eur-price="980"><span>€</span>980</span>
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
@@ -3922,7 +3931,7 @@
                                 <span class="dana-price-label">Scherpe Instaptarief:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Volledige ERP-Sync</span>
-                                    <span class="dana-price-value"><span>€</span>1.450</span>
+                                    <span class="dana-price-value" data-eur-price="1450"><span>€</span>1.450</span>
                                 </div>
                             </div>
                             <div class="dana-payment-badges" aria-label="Ondersteunde betaalmethoden">
@@ -3946,6 +3955,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Pakketvergelijking Knop -->
+                <div class="dana-compare-trigger-wrap">
+                    <button type="button" class="dana-btn-compare" onclick="window.openServicesComparisonModal()">
+                        <span>📊 Uitgebreide Pakket- &amp; Functievergelijking</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
 
                 <div class="services-orbit-divider">
