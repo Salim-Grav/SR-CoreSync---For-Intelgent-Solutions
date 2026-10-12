@@ -2806,3 +2806,61 @@ html[lang="nl"] .service-orbit-section > .container {
     font-size: 0.82rem !important;
     padding: 10px 16px !important;
 }
+
+/* ==========================================================================
+   Royal Brand Emblem Micro-Interactions, Orbital Glow & 4K Sub-Pixel Rendering
+   ========================================================================== */
+@keyframes srEmblemOrbitalPulse {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.25));
+        transform: scale(1.08) rotate(0deg);
+    }
+    50% {
+        filter: drop-shadow(0 0 24px rgba(212, 175, 55, 0.95)) drop-shadow(0 0 9px rgba(255, 215, 0, 0.55)) drop-shadow(0 0 3px #ffffff);
+        transform: scale(1.12) rotate(3.5deg);
+    }
+    100% {
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 2px rgba(255, 255, 255, 0.25));
+        transform: scale(1.08) rotate(0deg);
+    }
+}
+
+.brand-emblem-img {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    will-change: transform, filter;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease !important;
+}
+
+.brand-logo-site {
+    cursor: pointer !important;
+    position: relative !important;
+    user-select: none !important;
+    transition: opacity 0.25s ease !important;
+}
+
+.brand-logo-site:hover .brand-emblem-img {
+    animation: srEmblemOrbitalPulse 2.4s infinite ease-in-out !important;
+}
+
+.brand-logo-site:hover .brand-sr-text {
+    color: #ffd700 !important;
+    text-shadow: 0 0 14px rgba(255, 215, 0, 0.55), 0 0 3px rgba(255, 255, 255, 0.4) !important;
+    letter-spacing: -0.2px !important;
+    transition: all 0.3s ease !important;
+}
+
+.brand-logo-site:hover .brand-sub-text {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.65) !important;
+    transition: all 0.3s ease !important;
+}
+
+.brand-logo-site:active .brand-emblem-img {
+    transform: scale(0.95) !important;
+    animation: none !important;
+    transition: transform 0.1s ease !important;
+}
+

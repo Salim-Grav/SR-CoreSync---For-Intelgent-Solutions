@@ -3424,6 +3424,69 @@
     };
 
     /* =====================================================================
+       Royal Brand Logo Engine: Smooth Home Scroll, Lightbox & Language Memory
+       ===================================================================== */
+    function initBrandLogoEnhancements() {
+        const logoTriggers = document.querySelectorAll('.brand-logo-site');
+        const lang = getPageLang();
+
+        logoTriggers.forEach(trigger => {
+            // Prevent multiple bindings
+            if (trigger.dataset.brandEnhanced === 'true') return;
+            trigger.dataset.brandEnhanced = 'true';
+
+            trigger.addEventListener('click', function(e) {
+                // 1. Persist current language choice in localStorage
+                try {
+                    localStorage.setItem('coresync_lang_pref', lang);
+                } catch (err) {}
+
+                // 2. If user is scrolled down the page, execute smooth scroll to top
+                if (window.scrollY > 80) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                    // Subtle luxury haptic vibration on mobile
+                    if (navigator.vibrate) {
+                        try { navigator.vibrate(12); } catch (_) {}
+                    }
+
+                    // Luxury sound feedback if available
+                    if (window.LuxuryAudio && typeof window.LuxuryAudio.play === 'function') {
+                        try { window.LuxuryAudio.play('click'); } catch (_) {}
+                    }
+
+                    // Clean URL hash if any modal or section hash was set
+                    if (window.location.hash) {
+                        try { history.replaceState(null, '', window.location.pathname); } catch (_) {}
+                    }
+                } else {
+                    // 3. If already at top of the page, open high-res Brand Lightbox modal
+                    if (typeof window.openLogoLightbox === 'function') {
+                        e.preventDefault();
+                        window.openLogoLightbox(e);
+                    }
+                }
+            });
+
+            // Mobile touch micro-interaction
+            trigger.addEventListener('touchstart', function() {
+                const emblem = trigger.querySelector('.brand-emblem-img');
+                if (emblem) emblem.style.transform = 'scale(0.95)';
+            }, { passive: true });
+
+            trigger.addEventListener('touchend', function() {
+                const emblem = trigger.querySelector('.brand-emblem-img');
+                if (emblem) emblem.style.transform = '';
+            }, { passive: true });
+        });
+    }
+
+    /* =====================================================================
        Inject new feature modals into initEnterpriseSuite
        ===================================================================== */
     const _origInit = initEnterpriseSuite;
@@ -3435,6 +3498,7 @@
         injectNextGenButtons();
         injectServicesComparisonModal();
         init3DCardTilt();
+        initBrandLogoEnhancements();
     }
 
     /* =====================================================================
