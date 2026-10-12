@@ -2123,6 +2123,14 @@
             window.print();
         }
 
+        // تحديث اسم شركة العميل في تقرير الـ PDF المخصص
+        function updatePdfClientName(name) {
+            const displayEl = document.getElementById('pdfClientNameDisplay');
+            if (displayEl) {
+                displayEl.innerText = name && name.trim() ? name.trim() : 'مجموعة الشريك التجاري المستهدف';
+            }
+        }
+
         function triggerSoftwareDownload() {
             if (!currentActiveSoftware) return;
             const title = currentActiveSoftware.title;
@@ -2528,6 +2536,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 openSoftwareCheckoutModal(targetApp);
             } else if (hash === '#software') {
                 if (typeof switchPortalTab === 'function') switchPortalTab('software');
+            } else if (urlParams.get('modal') === 'pdf' || hash === '#pdf') {
+                openExecutivePdfModal();
+            } else if (urlParams.get('tour') === '1' || hash === '#tour') {
+                setTimeout(startGuidedTour, 300);
             }
         });
 
@@ -2989,9 +3001,18 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
             </div>
 
+            <!-- شريط تخصيص اسم شركة العميل (Personalized Client Input) -->
+            <div class="no-print" style="margin-bottom: 1.2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(197,168,128,0.25); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:280px;">
+                    <span style="font-size:0.8rem; color:var(--gold); font-weight:700; white-space:nowrap;">🏢 مخصص لشركة (Client Enterprise):</span>
+                    <input type="text" id="pdfClientNameInput" oninput="updatePdfClientName(this.value)" placeholder="أدخل اسم شركة العميل..." value="مجموعة الشريك التجاري المستهدف" style="flex:1; background:#02150f; border:1px solid rgba(197,168,128,0.4); color:#fff; border-radius:6px; padding:6px 12px; font-size:0.8rem; font-family:'Alexandria', sans-serif;" />
+                </div>
+                <span style="font-size:0.72rem; color:var(--text-muted);">ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة</span>
+            </div>
+
             <!-- محتوى التقرير للطباعة والمعاينة -->
             <div id="printableExecutiveBrief" style="font-family:'Alexandria', sans-serif; line-height:1.6; color:#ffffff;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c5a880; padding-bottom:14px; margin-bottom:20px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c5a880; padding-bottom:14px; margin-bottom:16px;">
                     <div>
                         <h2 style="margin:0; font-size:1.6rem; color:#c5a880; font-weight:900;">ملخص العرض التنفيذي والجاهزية المؤسسية</h2>
                         <span style="font-size:0.85rem; color:#94a3b8;">S&R Enterprise Architecture • Netherlands Headquarters</span>
@@ -3003,8 +3024,19 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
 
+                <!-- بطاقة تخصيص العميل المستهدف -->
+                <div style="background: rgba(197,168,128,0.08); border-right: 4px solid #c5a880; padding: 10px 14px; margin-bottom: 18px; border-radius: 0 8px 8px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                    <div>
+                        <span style="font-size:0.75rem; color:#94a3b8;">إعداد وتخصيص الملف التنفيذي إلى (Presented To):</span>
+                        <div id="pdfClientNameDisplay" style="font-size:1.15rem; font-weight:900; color:#c5a880;">مجموعة الشريك التجاري المستهدف</div>
+                    </div>
+                    <div style="font-size:0.75rem; color:#34d399; font-weight:700; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); padding:4px 10px; border-radius:6px;">
+                        ✓ عرض استشاري مخصص (Bespoke Enterprise Dossier)
+                    </div>
+                </div>
+
                 <!-- نبذة عن الحل السحابي -->
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,168,128,0.2); border-radius:12px; padding:16px; margin-bottom:20px;">
+                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,168,128,0.2); border-radius:12px; padding:16px; margin-bottom:18px;">
                     <h4 style="margin:0 0 8px 0; color:#fff; font-size:1rem;">🌟 نظرة عامة على حلول S&R CoreSync</h4>
                     <p style="margin:0; font-size:0.84rem; color:rgba(255,255,255,0.8); line-height:1.7;">
                         منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر.
@@ -3012,7 +3044,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
 
                 <!-- جدول المؤشرات المالية المعتمدة بالعملة والضريبة المختارة -->
-                <div style="margin-bottom:20px;">
+                <div style="margin-bottom:18px;">
                     <h4 style="margin:0 0 10px 0; color:#c5a880; font-size:0.95rem;">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>
                     <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:right;">
                         <thead>
@@ -3045,6 +3077,59 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- رسم بياني مصغر لمؤشرات التدفق والسيولة (Mini Executive Print Chart) -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(197,168,128,0.25); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h5 style="margin:0; font-size:0.88rem; color:#c5a880; font-weight:800;">📈 مخطط مسار الإيرادات والسيولة المتوقعة (2026 Trend Simulation):</h5>
+                        <span style="font-size:0.72rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">Q1 - Q4 Projections</span>
+                    </div>
+                    <svg viewBox="0 0 700 130" style="width:100%; height:auto; overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+                        <!-- خطوط الشبكة -->
+                        <line x1="40" y1="20" x2="680" y2="20" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
+                        <line x1="40" y1="60" x2="680" y2="60" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
+                        <line x1="40" y1="100" x2="680" y2="100" stroke="rgba(255,255,255,0.15)" />
+                        
+                        <!-- تدرجات الألوان -->
+                        <defs>
+                            <linearGradient id="pdfRevGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#c5a880" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#c5a880" stop-opacity="0.0"/>
+                            </linearGradient>
+                            <linearGradient id="pdfCashGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- مسار الإيرادات -->
+                        <path d="M 60 90 Q 200 65, 340 50 T 660 22 L 660 100 L 60 100 Z" fill="url(#pdfRevGrad)" />
+                        <path d="M 60 90 Q 200 65, 340 50 T 660 22" fill="none" stroke="#c5a880" stroke-width="3" stroke-linecap="round" />
+                        
+                        <!-- مسار التدفق النقدي -->
+                        <path d="M 60 96 Q 200 82, 340 70 T 660 48 L 660 100 L 60 100 Z" fill="url(#pdfCashGrad)" />
+                        <path d="M 60 96 Q 200 82, 340 70 T 660 48" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+                        
+                        <!-- نقاط البيانات -->
+                        <circle cx="60" cy="90" r="4" fill="#c5a880" />
+                        <circle cx="340" cy="50" r="4" fill="#c5a880" />
+                        <circle cx="660" cy="22" r="5" fill="#f3dfba" stroke="#c5a880" stroke-width="2" />
+                        
+                        <circle cx="60" cy="96" r="3.5" fill="#10b981" />
+                        <circle cx="340" cy="70" r="3.5" fill="#10b981" />
+                        <circle cx="660" cy="48" r="4.5" fill="#34d399" stroke="#10b981" stroke-width="2" />
+                        
+                        <!-- النصوص السفلية للأرباع -->
+                        <text x="60" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q1 Inception</text>
+                        <text x="260" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q2 Growth</text>
+                        <text x="460" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q3 Acceleration</text>
+                        <text x="650" y="118" fill="#c5a880" font-size="11" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q4 Scale Peak</text>
+                    </svg>
+                    <div style="display:flex; justify-content:center; gap:20px; margin-top:8px; font-size:0.75rem;">
+                        <span style="display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:3px; background:#c5a880;"></span> إجمالي الإيرادات (Gross Revenue)</span>
+                        <span style="display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:3px; background:#10b981;"></span> التدفق النقدي الصافي (Net Cash Flow)</span>
+                    </div>
                 </div>
 
                 <!-- حزم البرمجيات الموصى بها -->
