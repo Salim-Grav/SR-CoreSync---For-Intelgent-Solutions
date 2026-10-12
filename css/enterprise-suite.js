@@ -2188,25 +2188,34 @@
         modal.className = 'es-modal-overlay';
         modal.style.display = 'none';
         modal.innerHTML = `
-            <div class="es-modal-inner" style="max-width:920px;" role="dialog" aria-label="مقارنة باقات الخدمات">
+            <div class="es-modal-inner" style="max-width:960px;" role="dialog" aria-label="مقارنة باقات الخدمات">
                 <div class="es-modal-header">
                     <div class="es-modal-header-left">
                         <span class="es-modal-tag">مقارنة معتمدة • 2026</span>
-                        <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة</h3>
+                        <h3 class="es-modal-title">مقارنة ميزات باقات الاستوديو والأنظمة المؤسسية</h3>
                     </div>
                     <button class="es-modal-close" onclick="window.closeServicesComparisonModal()" aria-label="إغلاق">&times;</button>
                 </div>
                 <div class="es-modal-body" style="overflow-x:auto;">
-                    <p style="color:rgba(255,255,255,0.7); font-size:0.88rem; margin-bottom:14px;">
-                        جدول المقارنة الاستراتيجي لاختيار المسار الأمثل لمنشأتكم مع أسعار تنافسية واضحة ومدروسة.
-                    </p>
-                    <table class="es-compare-table">
+                    
+                    <!-- شريط الإجراءات: اسم العميل وتصدير PDF -->
+                    <div class="es-compare-actions-bar">
+                        <div class="es-client-name-wrap">
+                            <span style="font-size:0.85rem; color:#c5a880; font-weight:700;">🏢 المنشأة / العميل:</span>
+                            <input type="text" id="esCompareClientName" class="es-client-input" placeholder="أدخل اسم شركتكم لإدراجه بالتقرير (اختياري)">
+                        </div>
+                        <button type="button" class="es-compare-pdf-btn" onclick="window.exportComparisonPDF()">
+                            <span>📄 تصدير جدول المقارنة PDF</span>
+                        </button>
+                    </div>
+
+                    <table class="es-compare-table" id="esComparisonTableMain">
                         <thead>
                             <tr>
                                 <th>الميزة والقدرة التقنية</th>
-                                <th>الهوية البصرية<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="590">€590</span></th>
-                                <th>تصميم المواقع<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="980">€980</span></th>
-                                <th>متجر إلكتروني + ERP<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="1450">€1,450</span></th>
+                                <th>الهوية البصرية<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="590" class="base-col-price">€590</span></th>
+                                <th>تصميم المواقع<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="980" class="base-col-price">€980</span></th>
+                                <th>متجر إلكتروني + ERP<br><span style="color:#c5a880; font-size:0.9rem;" data-eur-price="1450" class="base-col-price">€1,450</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -2252,6 +2261,12 @@
                                 <td>60 يوماً</td>
                                 <td>90 يوماً شامل التحديثات</td>
                             </tr>
+                            <tr class="es-live-total-row">
+                                <td>الإجمالي المعتمد (مع الإضافات المختارة)</td>
+                                <td id="esTotalCol1" style="color:#f3dfba; font-weight:800;">€590</td>
+                                <td id="esTotalCol2" style="color:#f3dfba; font-weight:800;">€980</td>
+                                <td id="esTotalCol3" style="color:#f3dfba; font-weight:800;">€1,450</td>
+                            </tr>
                             <tr>
                                 <td>الإجراء المباشر</td>
                                 <td><button type="button" class="dana-btn-booking" style="width:100%;" onclick="window.closeServicesComparisonModal(); openExecutiveBookingModal('identity')">حجز استشارة 📅</button></td>
@@ -2260,6 +2275,33 @@
                             </tr>
                         </tbody>
                     </table>
+
+                    <!-- حاسبة الإضافات التكميلية السريعة (Package Add-ons Selector) -->
+                    <div class="es-addons-box">
+                        <div class="es-addons-title">
+                            <span>⚡ حاسبة الإضافات السريعة (Optional Enterprise Add-ons):</span>
+                            <span style="font-size:0.75rem; color:rgba(255,255,255,0.6); font-weight:normal;">اختر ما يناسبك لتحديث التكلفة الإجمالية لحظياً</span>
+                        </div>
+                        <div class="es-addons-grid">
+                            <label class="es-addon-item">
+                                <input type="checkbox" class="es-addon-check" data-addon-price="150" onchange="window.recalcComparisonAddons()">
+                                <span>🌐 لغة إضافية للموقع (+€150)</span>
+                            </label>
+                            <label class="es-addon-item">
+                                <input type="checkbox" class="es-addon-check" data-addon-price="120" onchange="window.recalcComparisonAddons()">
+                                <span>💳 بوابة دفع إضافية (+€120)</span>
+                            </label>
+                            <label class="es-addon-item">
+                                <input type="checkbox" class="es-addon-check" data-addon-price="350" onchange="window.recalcComparisonAddons()">
+                                <span>🤖 شات بوت ذكاء اصطناعي RAG (+€350)</span>
+                            </label>
+                            <label class="es-addon-item">
+                                <input type="checkbox" class="es-addon-check" data-addon-price="180" onchange="window.recalcComparisonAddons()">
+                                <span>🛡️ دعم فني VIP وحماية سنوية (+€180)</span>
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         `;
@@ -2270,6 +2312,139 @@
         });
     }
 
+    window.recalcComparisonAddons = function() {
+        let addonTotalEur = 0;
+        document.querySelectorAll('.es-addon-check:checked').forEach(chk => {
+            addonTotalEur += parseFloat(chk.dataset.addonPrice || 0);
+        });
+
+        const cur = CURRENCIES[activeCurrency] || CURRENCIES.EUR;
+        const basePrices = [590, 980, 1450];
+        const targetIds = ['esTotalCol1', 'esTotalCol2', 'esTotalCol3'];
+
+        targetIds.forEach((id, idx) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const totalEur = basePrices[idx] + addonTotalEur;
+            const converted = Math.round(totalEur * cur.rate);
+            const formatted = converted.toLocaleString('en-US');
+
+            if (activeCurrency === 'SAR' || activeCurrency === 'AED') {
+                el.textContent = `${formatted} ${cur.symbol}`;
+            } else {
+                el.textContent = `${cur.symbol}${formatted}`;
+            }
+        });
+    };
+
+    window.exportComparisonPDF = function() {
+        const clientName = (document.getElementById('esCompareClientName') ? document.getElementById('esCompareClientName').value.trim() : '') || 'العميل الموقر (Executive Client)';
+        const cur = CURRENCIES[activeCurrency] || CURRENCIES.EUR;
+        
+        let addonTotalEur = 0;
+        const selectedAddons = [];
+        document.querySelectorAll('.es-addon-check:checked').forEach(chk => {
+            addonTotalEur += parseFloat(chk.dataset.addonPrice || 0);
+            selectedAddons.push(chk.parentElement.textContent.trim());
+        });
+
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) {
+            alert('يرجى السماح بالنوافذ المنبثقة لطباعة وثيقة المقارنة الرسمية');
+            return;
+        }
+
+        const dateStr = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="ar" dir="rtl">
+            <head>
+                <meta charset="UTF-8">
+                <title>وثيقة مقارنة الباقات الرسمية - S&R CoreSync Solutions</title>
+                <style>
+                    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 35px; color: #111; line-height: 1.6; }
+                    .header { border-bottom: 2px solid #c5a880; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+                    .logo { font-size: 22px; font-weight: 800; color: #0a0e0c; }
+                    .meta { font-size: 13px; color: #666; text-align: left; }
+                    .dossier-tag { display: inline-block; background: #f4ecdf; color: #8e6d3e; padding: 4px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; margin-bottom: 8px; }
+                    h2 { margin: 0 0 5px 0; color: #0a0e0c; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
+                    th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: center; }
+                    th { background-color: #fcf9f5; color: #333; }
+                    th:first-child, td:first-child { text-align: right; font-weight: 600; width: 35%; }
+                    .check { color: #2e7d32; font-weight: bold; }
+                    .addons-summary { margin-top: 25px; padding: 15px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; }
+                    .footer { margin-top: 40px; border-top: 1px solid #eee; padding-top: 15px; font-size: 12px; color: #777; display: flex; justify-content: space-between; }
+                    @media print { body { padding: 0; } }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div>
+                        <div class="logo">S&R CoreSync Solutions B.V.</div>
+                        <div style="font-size:12px; color:#555;">The Netherlands • Enterprise Cloud & Financial AI</div>
+                    </div>
+                    <div class="meta">
+                        <div>التاريخ: ${dateStr}</div>
+                        <div>العملة: ${cur.name} (${cur.symbol})</div>
+                        <div>الضريبة: ${cur.vatName}</div>
+                    </div>
+                </div>
+
+                <div class="dossier-tag">وثيقة مقارنة واعتماد العرض التنفيذي</div>
+                <h2>مقارنة باقات استوديو الهوية الرقمية والأنظمة المؤسسية</h2>
+                <p>مُعدة خصيصاً إلى: <strong>${clientName}</strong></p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الميزة والقدرة التقنية</th>
+                            <th>الهوية البصرية<br>${Math.round(590 * cur.rate)} ${cur.symbol}</th>
+                            <th>تصميم المواقع<br>${Math.round(980 * cur.rate)} ${cur.symbol}</th>
+                            <th>متجر إلكتروني + ERP<br>${Math.round(1450 * cur.rate)} ${cur.symbol}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>مدة التنفيذ المعتمدة</td><td>5 - 7 أيام عمل</td><td>10 - 14 يوم عمل</td><td>14 - 20 يوم عمل</td></tr>
+                        <tr><td>دليل العلامة والهوية الكامل</td><td>✓ متكامل 100%</td><td>✓ الشعار والخطوط</td><td>✓ نظام هوية رقمي شامل</td></tr>
+                        <tr><td>واجهات UI/UX حصرية</td><td>—</td><td>✓ فائق السرعة والأداء</td><td>✓ تجربة تسوق محسنة</td></tr>
+                        <tr><td>بوابات الدفع الأوروبية (PSD2)</td><td>—</td><td>اختياري</td><td>✓ iDEAL, Stripe, Apple Pay</td></tr>
+                        <tr><td>الربط المحاسبي مع الـ ERP والضرائب</td><td>—</td><td>—</td><td>✓ فواتير وضريبة BTW/VAT</td></tr>
+                        <tr><td>تحسين محركات البحث SEO والأداء</td><td>صيغ حديثة SVG/WebP</td><td>✓ PageSpeed 95+</td><td>✓ SEO للمنتجات والتصنيفات</td></tr>
+                        <tr><td>الدعم الفني والضمان المعتمد</td><td>30 يوماً</td><td>60 يوماً</td><td>90 يوماً شامل التحديثات</td></tr>
+                        <tr style="background:#f4ecdf; font-weight:bold;">
+                            <td>الإجمالي النهائي المعتمد</td>
+                            <td>${Math.round((590 + addonTotalEur) * cur.rate)} ${cur.symbol}</td>
+                            <td>${Math.round((980 + addonTotalEur) * cur.rate)} ${cur.symbol}</td>
+                            <td>${Math.round((1450 + addonTotalEur) * cur.rate)} ${cur.symbol}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                ${selectedAddons.length > 0 ? `
+                <div class="addons-summary">
+                    <strong>الإضافات والترقيات التكميلية المختارة:</strong>
+                    <ul style="margin:5px 0 0 0; padding-right:20px;">
+                        ${selectedAddons.map(a => `<li>${a}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+
+                <div class="footer">
+                    <div>S&R CoreSync Solutions — www.coresync.nl • info@coresync.nl • +31 6 87764998</div>
+                    <div>اعتماد رسمي معفى من التوقيع اليدوي</div>
+                </div>
+
+                <script>
+                    window.onload = function() { window.print(); };
+                <\/script>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+    };
+
     window.openServicesComparisonModal = function() {
         injectServicesComparisonModal();
         const m = document.getElementById('servicesComparisonModal');
@@ -2279,6 +2454,7 @@
             if (window.switchCurrency && activeCurrency) {
                 window.switchCurrency(activeCurrency);
             }
+            window.recalcComparisonAddons();
         }
     };
 
