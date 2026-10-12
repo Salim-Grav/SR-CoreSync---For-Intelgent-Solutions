@@ -461,6 +461,7 @@ html:not([dir="rtl"]) .floating-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
 }
 
 .es-feedback-header h3 {
@@ -471,6 +472,151 @@ html:not([dir="rtl"]) .floating-actions {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.es-header-tools {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Modal In-Place Mini Language Switcher */
+.es-modal-lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 999px;
+    padding: 2px 4px;
+    gap: 2px;
+}
+
+.es-lang-pill {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.1;
+    font-family: inherit;
+}
+
+.es-lang-pill:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.es-lang-pill.active {
+    background: var(--es-gold, #c5a880);
+    color: #010907;
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.4);
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   Mobile & Tablet Responsive Adaptations (< 640px)
+   Transform 3 Floating Capsules into Compact Circular Interactive FAB Icons
+   ========================================================================== */
+@media (max-width: 640px) {
+    .es-floating-suite {
+        bottom: 16px !important;
+        gap: 8px !important;
+        z-index: 9995 !important;
+    }
+
+    [dir="rtl"] .es-floating-suite,
+    html[lang="ar"] .es-floating-suite {
+        left: 14px !important;
+        right: auto !important;
+    }
+
+    [dir="ltr"] .es-floating-suite,
+    html[lang="en"] .es-floating-suite,
+    html[lang="nl"] .es-floating-suite,
+    html:not([dir="rtl"]) .es-floating-suite {
+        right: 14px !important;
+        left: auto !important;
+    }
+
+    /* Transform long rectangular capsules into sleek circular interactive touch icons */
+    .es-feedback-fab {
+        width: 46px !important;
+        height: 46px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 15px rgba(197, 168, 128, 0.3) !important;
+    }
+
+    /* Hide long text on mobile portrait so only clean, high-precision SVG icons show */
+    .es-feedback-fab span:not(.es-feedback-dot) {
+        display: none !important;
+    }
+
+    .es-feedback-fab svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .es-feedback-dot {
+        position: absolute !important;
+        top: 6px !important;
+        right: 6px !important;
+        width: 8px !important;
+        height: 8px !important;
+    }
+
+    /* Responsive modal width and touch padding */
+    .es-feedback-modal,
+    .es-scheduler-modal,
+    .es-readiness-modal,
+    .es-casestudy-modal {
+        width: 95% !important;
+        max-height: 88vh !important;
+        border-radius: 14px !important;
+    }
+
+    .es-feedback-header {
+        padding: 12px 14px !important;
+    }
+
+    .es-feedback-header h3 {
+        font-size: 0.85rem !important;
+    }
+
+    .es-header-tools {
+        gap: 6px !important;
+    }
+
+    .es-lang-pill {
+        padding: 2px 6px !important;
+        font-size: 0.65rem !important;
+    }
+
+    .es-feedback-body {
+        padding: 14px !important;
+        gap: 10px !important;
+    }
+
+    .es-consultant-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .es-slots-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px !important;
+    }
 }
 
 .es-feedback-body {
