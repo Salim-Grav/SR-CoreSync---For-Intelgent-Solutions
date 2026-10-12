@@ -3116,8 +3116,8 @@
 
         .hero-cinematic .cinematic-scene,
         .hero-cinematic .cinematic-video {
-            filter: grayscale(100%) contrast(1.16) brightness(0.92) !important;
             -webkit-filter: grayscale(100%) contrast(1.16) brightness(0.92) !important;
+            filter: grayscale(100%) contrast(1.16) brightness(0.92) !important;
         }
 
         html[lang="ar"] .hero-cinematic .cinematic-video {
@@ -3207,8 +3207,8 @@
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 1.25rem;
-            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(197, 168, 128, 0.15);
             transition: all 0.4s ease;
         }
@@ -3302,8 +3302,8 @@
             background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.16);
-            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
         }
 
         .section-executive-stage .exec-stage-btn-glass:hover {
@@ -3321,8 +3321,8 @@
             border: 1px solid rgba(197, 168, 128, 0.28);
             border-radius: 20px;
             padding: 18px 22px;
-            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
@@ -3541,8 +3541,8 @@
             background: rgba(4, 9, 7, 0.88);
             border: 1px solid rgba(197, 168, 128, 0.35);
             border-radius: 14px;
-            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
             direction: rtl !important;
             text-align: right !important;
@@ -3650,8 +3650,8 @@
             position: absolute;
             inset: 0;
             background: rgba(1, 9, 7, 0.88);
-            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             cursor: pointer;
         }
 
@@ -5434,11 +5434,11 @@
                                     القيادة المباشرة:
                                 </span>
                                 <div class="exec-stage-capsule" role="tablist" aria-label="تبديل عرض القيادة التنفيذية">
-                                    <button type="button" class="exec-stage-tab active" id="execBtnSalim" onclick="switchExecStage('salim')">
+                                    <button type="button" role="tab" aria-selected="true" class="exec-stage-tab active" id="execBtnSalim" onclick="switchExecStage('salim')">
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>م. محمد سليم عزيزة (CTO)</span>
                                     </button>
-                                    <button type="button" class="exec-stage-tab" id="execBtnRaed" onclick="switchExecStage('raed')">
+                                    <button type="button" role="tab" aria-selected="false" class="exec-stage-tab" id="execBtnRaed" onclick="switchExecStage('raed')">
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>أ. محمد رائد كعكة (CFO)</span>
                                     </button>
@@ -9257,10 +9257,14 @@
             if (btnSalim && btnRaed) {
                 if (target === 'salim') {
                     btnSalim.classList.add('active');
+                    btnSalim.setAttribute('aria-selected', 'true');
                     btnRaed.classList.remove('active');
+                    btnRaed.setAttribute('aria-selected', 'false');
                 } else {
                     btnSalim.classList.remove('active');
+                    btnSalim.setAttribute('aria-selected', 'false');
                     btnRaed.classList.add('active');
+                    btnRaed.setAttribute('aria-selected', 'true');
                 }
             }
 

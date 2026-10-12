@@ -2564,8 +2564,8 @@
             font-weight: 600;
             color: #ffffff;
             margin-bottom: 1.25rem;
-            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px rgba(197, 168, 128, 0.15);
             transition: all 0.4s ease;
         }
@@ -2649,8 +2649,8 @@
             background: rgba(14, 24, 20, 0.7);
             color: #ffffff !important;
             border: 1px solid rgba(197, 168, 128, 0.28);
-            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
         }
 
         .section-executive-stage .exec-stage-btn-glass:hover {
@@ -2667,8 +2667,8 @@
             border: 1px solid rgba(197, 168, 128, 0.22);
             border-radius: 16px;
             padding: 1.25rem 1.5rem;
-            backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
@@ -2861,8 +2861,8 @@
             border: 1px solid rgba(197, 168, 128, 0.35);
             border-radius: 14px;
             padding: 10px 14px;
-            backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -2960,8 +2960,8 @@
             position: absolute;
             inset: 0;
             background: rgba(1, 9, 7, 0.88);
-            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
         }
 
         .sr-exec-modal-container {
@@ -4116,11 +4116,11 @@
                                     Directielid:
                                 </span>
                                 <div class="exec-stage-capsule" role="tablist" aria-label="Wissel van directielid">
-                                    <button type="button" class="exec-stage-tab active" id="execBtnSalim" onclick="switchExecStage('salim')">
+                                    <button type="button" role="tab" aria-selected="true" class="exec-stage-tab active" id="execBtnSalim" onclick="switchExecStage('salim')">
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>Ing. Salim Azizah (CTO)</span>
                                     </button>
-                                    <button type="button" class="exec-stage-tab" id="execBtnRaed" onclick="switchExecStage('raed')">
+                                    <button type="button" role="tab" aria-selected="false" class="exec-stage-tab" id="execBtnRaed" onclick="switchExecStage('raed')">
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>Dhr. Raed Kaakeh (CFO)</span>
                                     </button>
@@ -7512,10 +7512,14 @@
             if (btnSalim && btnRaed) {
                 if (target === 'salim') {
                     btnSalim.classList.add('active');
+                    btnSalim.setAttribute('aria-selected', 'true');
                     btnRaed.classList.remove('active');
+                    btnRaed.setAttribute('aria-selected', 'false');
                 } else {
                     btnSalim.classList.remove('active');
+                    btnSalim.setAttribute('aria-selected', 'false');
                     btnRaed.classList.add('active');
+                    btnRaed.setAttribute('aria-selected', 'true');
                 }
             }
 
