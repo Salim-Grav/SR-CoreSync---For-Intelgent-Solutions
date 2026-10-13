@@ -13,7 +13,9 @@
 (function () {
     'use strict';
 
-    const WHATSAPP_NUM = '31687764998';
+    const WHATSAPP_SALIM = '31618111116';
+    const WHATSAPP_RAED = '31687710290';
+    const WHATSAPP_NUM = WHATSAPP_SALIM;
 
     // Central Multi-Language Page Detector
     function getPageLang() {
@@ -1815,8 +1817,8 @@
         ].join('\n');
 
         try { localStorage.removeItem('coresync_scheduler_draft'); } catch (e) {}
-
-        window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+        const targetAdvisorWa = (selectedConsultant === 'raed') ? WHATSAPP_RAED : WHATSAPP_SALIM;
+        window.open(`https://wa.me/${targetAdvisorWa}?text=${encodeURIComponent(msg)}`, '_blank');
         window.closeSchedulerModal();
     };
 
