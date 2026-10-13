@@ -9,15 +9,15 @@ const path = require('path');
 const zlib = require('zlib');
 
 function minifyCSS(css) {
+  // Strip comments FIRST to prevent apostrophes in comments from corrupting string tokens
+  let cleaned = css.replace(/\/\*[\s\S]*?\*\//g, '');
+
   // Tokenize strings & urls to protect them
   const tokens = [];
-  let tokenized = css.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|url\([^)]*\))/g, (match) => {
+  let tokenized = cleaned.replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|url\([^)]*\))/g, (match) => {
     tokens.push(match);
     return `___TOKEN_${tokens.length - 1}___`;
   });
-
-  // Strip comments
-  tokenized = tokenized.replace(/\/\*[\s\S]*?\*\//g, '');
 
   // Collapse whitespace
   tokenized = tokenized.replace(/\s+/g, ' ');
