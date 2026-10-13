@@ -4999,12 +4999,20 @@
                         <div class="roi-card-wrapper h-100">
                             <div class="roi-inputs-pane">
                                 <div class="roi-field-group">
-                                    <label for="roiCompanySize" class="roi-label">
-                                        <span>Teamgrootte of Medewerkers:</span>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label for="roiCompanySize" class="roi-label m-0">
+                                            <span>Teamgrootte of Medewerkers:</span>
+                                        </label>
                                         <span class="roi-label-badge" id="roiCompanySizeVal">15 medewerkers</span>
-                                    </label>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mb-2">
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(5)">Startup (5)</button>
+                                        <button type="button" class="roi-preset-btn active" onclick="setRoiTeamPreset(15)">Groeiend (15)</button>
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">Middenbedrijf (45)</button>
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">Enterprise (100+)</button>
+                                    </div>
                                     <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
                                         <span>3 medewerkers</span>
                                         <span>75 medewerkers</span>
                                         <span>150+ medewerkers</span>
@@ -5017,7 +5025,7 @@
                                         <span class="roi-label-badge" id="roiManualHoursVal">8 uur / week</span>
                                     </label>
                                     <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
                                         <span>2 uur (licht)</span>
                                         <span>12 uur (gemiddeld)</span>
                                         <span>25 uur (intensief)</span>
@@ -5030,7 +5038,7 @@
                                         <span class="roi-label-badge" id="roiAvgSalaryVal">€28 / uur</span>
                                     </label>
                                     <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
                                         <span>€15</span>
                                         <span>€45</span>
                                         <span>€80+</span>
