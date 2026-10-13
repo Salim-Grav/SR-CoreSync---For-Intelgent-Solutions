@@ -64,7 +64,7 @@ class EmailNotificationService {
         <div class="key-badge">${licenseKey}</div>
         <div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:8px;">Status: <strong>Actief &amp; Geregistreerd</strong> • Looptijd: <strong>${plan || '1 Jaar'}</strong></div>
         <div style="margin-top:14px;">
-          <a href="${downloadUrl || 'https://dananajmah.com/preview-software.html'}" class="btn-action">Download Software Pakket ⚡</a>
+          <a href="${downloadUrl || 'https://sr-coresync.com/preview-software.html'}" class="btn-action">Download Software Pakket ⚡</a>
         </div>
       </div>
 

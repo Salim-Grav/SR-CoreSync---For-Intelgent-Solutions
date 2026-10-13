@@ -41,8 +41,8 @@ class PaymentWebhookService {
         value: Number(amount).toFixed(2)
       },
       description: description || `S&R CoreSync - Order #${orderId}`,
-      redirectUrl: `${this.config.mollie?.redirectUrl || 'https://dananajmah.com/preview-checkout.html'}?order=${orderId}&status=success`,
-      webhookUrl: this.config.mollie?.webhookUrl || 'https://dananajmah.com/api/webhooks/mollie',
+      redirectUrl: `${this.config.mollie?.redirectUrl || 'https://sr-coresync.com/preview-checkout.html'}?order=${orderId}&status=success`,
+      webhookUrl: this.config.mollie?.webhookUrl || 'https://sr-coresync.com/api/webhooks/mollie',
       metadata: {
         orderId,
         customerEmail,
@@ -85,8 +85,8 @@ class PaymentWebhookService {
         quantity: 1
       }],
       mode: 'payment',
-      success_url: `https://dananajmah.com/preview-checkout.html?session_id={CHECKOUT_SESSION_ID}&order=${orderId}`,
-      cancel_url: `https://dananajmah.com/preview-checkout.html?canceled=true`
+      success_url: `https://sr-coresync.com/preview-checkout.html?session_id={CHECKOUT_SESSION_ID}&order=${orderId}`,
+      cancel_url: `https://sr-coresync.com/preview-checkout.html?canceled=true`
     };
 
     return {
@@ -129,7 +129,7 @@ class PaymentWebhookService {
         productTitle: product.title || 'S&R TaxSync Desktop v2.4 Pro',
         amount: product.rawPrice || 189,
         plan: licenseRecord.plan,
-        downloadUrl: product.downloadFile ? `https://dananajmah.com/${product.downloadFile}` : 'https://dananajmah.com/preview-software.html'
+        downloadUrl: product.downloadFile ? `https://sr-coresync.com/${product.downloadFile}` : 'https://sr-coresync.com/preview-software.html'
       }).catch(err => console.error('Failed to dispatch invoice email:', err.message));
     }
 
