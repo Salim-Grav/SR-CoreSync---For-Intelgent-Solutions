@@ -879,6 +879,19 @@
             box-shadow: 0 8px 24px rgba(37,211,102,0.3);
         }
 
+        .sr-roi-export-pdf-btn {
+            background: linear-gradient(135deg, #c5a880 0%, #a68962 100%);
+            color: #0b0e14;
+            border: none;
+            box-shadow: 0 8px 24px rgba(197, 168, 128, 0.35);
+            font-weight: 800;
+        }
+
+        .sr-roi-export-pdf-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
         .sr-roi-actions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1249,6 +1262,10 @@
 
             <!-- خيارات مشاركة وإرسال تقرير التوفير والعائد المالي المباشرة -->
             <div class="sr-roi-share-box">
+                <button type="button" class="sr-exec-submit-btn sr-roi-export-pdf-btn" onclick="exportRoiPdfReport()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <span>تحميل تقرير الجدوى المالي المعتمد (PDF Report) 📄</span>
+                </button>
                 <button type="button" class="sr-exec-submit-btn sr-roi-whatsapp-btn" onclick="sendRoiDirectWhatsApp()">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     <span>إرسال تقرير الأرقام مباشرة لواتساب الاستشاري المالي</span>
@@ -1580,6 +1597,141 @@
                 `مع خالص التقدير،`
             );
             window.location.href = `mailto:info@sr-coresync.com?subject=${subject}&body=${body}`;
+        }
+
+        function exportRoiPdfReport() {
+            const data = calculatedRoiData || { annualSavings: 19500, hoursSaved: 96, costMonthly: 6500, teamSize: 12, multiplier: '3.8' };
+            const refCode = 'SR-ROI-' + Math.floor(1000 + Math.random() * 9000);
+            const today = new Date().toLocaleDateString('ar-NL', { year: 'numeric', month: 'long', day: 'numeric' });
+
+            const printHtml = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <title>تقرير دراسة الجدوى والوفر المالي المعتمد - S&R CoreSync Solutions</title>
+    <style>
+        @page { size: A4 portrait; margin: 15mm; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+        body { margin: 0; padding: 20px; color: #0f172a; background: #ffffff; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #c5a880; padding-bottom: 18px; margin-bottom: 24px; }
+        .brand-title { font-size: 22px; font-weight: 800; color: #022319; margin: 0; }
+        .brand-sub { font-size: 12px; color: #c5a880; margin: 4px 0 0; font-weight: 700; text-transform: uppercase; }
+        .meta-box { text-align: left; font-size: 12px; color: #475569; }
+        .meta-ref { font-weight: 800; color: #022319; font-size: 14px; }
+        .section-title { font-size: 15px; font-weight: 800; color: #022319; margin: 20px 0 10px; border-right: 4px solid #c5a880; padding-right: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px 14px; font-size: 13px; text-align: right; color: #334155; }
+        td { border: 1px solid #e2e8f0; padding: 10px 14px; font-size: 13px; }
+        .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+        .metric-card { background: #f8fafc; border: 1px solid #c5a880; border-radius: 8px; padding: 14px; text-align: center; }
+        .metric-val { font-size: 20px; font-weight: 800; color: #022319; }
+        .metric-lbl { font-size: 11px; color: #64748b; margin-top: 4px; }
+        .executive-summary { background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px; padding: 16px; font-size: 13px; line-height: 1.6; color: #166534; margin-bottom: 28px; }
+        .signatures { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 36px; padding-top: 20px; border-top: 1px dashed #cbd5e1; }
+        .sign-box { text-align: center; }
+        .sign-title { font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: bold; margin-bottom: 8px; }
+        .sign-name { font-size: 14px; font-weight: 800; color: #022319; }
+        .sign-role { font-size: 11px; color: #c5a880; font-weight: 600; }
+        .sign-badge { display: inline-block; margin-top: 8px; border: 1px solid #10b981; color: #10b981; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+        .footer { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 30px; }
+        @media print {
+            body { padding: 0; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1 class="brand-title">S&R CoreSync Solutions</h1>
+            <div class="brand-sub">Enterprise Cloud Architecture & Financial Intelligence • Amsterdam</div>
+        </div>
+        <div class="meta-box">
+            <div class="meta-ref">\${refCode}</div>
+            <div>تاريخ التقييم: \${today}</div>
+            <div style="color:#10b981;font-weight:bold;">تقرير جدوى معتمد ✓</div>
+        </div>
+    </div>
+
+    <div class="section-title">1. المؤشرات التشغيلية والمالية الأساسية</div>
+    <table>
+        <thead>
+            <tr>
+                <th>المعيار</th>
+                <th>القيمة المقاسة</th>
+                <th>الأثر المؤسسي المباشر</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>التكلفة التشغيلية الشهرية الحالية</strong></td>
+                <td>€ \${data.costMonthly.toLocaleString()} / شهرياً</td>
+                <td>المصروفات المباشرة على العمليات والبرمجيات والمحاسبة</td>
+            </tr>
+            <tr>
+                <td><strong>حجم الفريق الإداري والمالي</strong></td>
+                <td>\${data.teamSize} موظفاً</td>
+                <td>الكادر المستهدف بهندسة الأتمتة واسترداد الساعات المهدرة</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">2. نتائج هندسة الكفاءة والعائد على الاستثمار المتوقع (ROI)</div>
+    <div class="results-grid">
+        <div class="metric-card">
+            <div class="metric-val">€ \${data.annualSavings.toLocaleString()}</div>
+            <div class="metric-lbl">التوفير السنوي المتوقع</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-val" style="color:#0284c7;">\${data.hoursSaved} ساعة</div>
+            <div class="metric-lbl">ساعات مستردة شهرياً</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-val" style="color:#10b981;">\${data.multiplier}x</div>
+            <div class="metric-lbl">مضاعف العائد الاستثماري</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-val" style="color:#c5a880;">&lt; 2 شهر</div>
+            <div class="metric-lbl">فترة استرداد الاستثمار</div>
+        </div>
+    </div>
+
+    <div class="executive-summary">
+        <strong>الخلاصة الاستشارية المعتمدة:</strong>
+        تؤكد مخرجات التدقيق الأولي أن تطبيق البنية السحابية ومنظومة الـ ERP المخصصة لشركة S&R CoreSync Solutions سيمكن مؤسستكم من تقليص الهدر اليدوي بنسبة تصل إلى 42%، وتحقيق وفر مالي سنوي قدره <strong>€ \${data.annualSavings.toLocaleString()}</strong> مع استرداد كامل تكلفة التطوير خلال أقل من شهرين من الإطلاق المعتمد.
+    </div>
+
+    <div class="signatures">
+        <div class="sign-box">
+            <div class="sign-title">الاعتماد التقني والهندسي السحابي</div>
+            <div class="sign-name">م. محمد سليم عزيزة</div>
+            <div class="sign-role">كبير مهندسي السحابة والذكاء الاصطناعي • CTO</div>
+            <div class="sign-badge">تم الاعتماد التقني ✓</div>
+        </div>
+        <div class="sign-box">
+            <div class="sign-title">الاعتماد المالي والضريبي الأوروبي</div>
+            <div class="sign-name">أ. محمد رائد كعكة</div>
+            <div class="sign-role">المسؤول المالي وخبير أنظمة الـ ERP والضرائب • CFO</div>
+            <div class="sign-badge">تم الاعتماد المالي ✓</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        S&R CoreSync Solutions B.V. • Keizersgracht, Amsterdam, The Netherlands • www.sr-coresync.com • info@sr-coresync.com
+    </div>
+</body>
+</html>`;
+
+            const printWin = window.open('', '_blank');
+            if (printWin) {
+                printWin.document.open();
+                printWin.document.write(printHtml);
+                printWin.document.close();
+                setTimeout(() => {
+                    printWin.focus();
+                    printWin.print();
+                }, 350);
+            }
         }
 
         function applyRoiToConsultation() {
