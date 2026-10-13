@@ -47,7 +47,9 @@ const rootFiles = [
   'manifest.json',
   'sw.js',
   'sitemap.xml',
-  'robots.txt'
+  'robots.txt',
+  '.htaccess',
+  '.env.example'
 ];
 
 rootFiles.forEach(file => {
