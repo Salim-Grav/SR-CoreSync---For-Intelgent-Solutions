@@ -933,6 +933,63 @@
             cursor: pointer;
         }
 
+        .sr-demo-dyn-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .sr-demo-dyn-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .sr-demo-dyn-badge {
+            font-size: 0.75rem;
+            background: rgba(197,168,128,0.18);
+            border: 1px solid rgba(197,168,128,0.3);
+            color: #f3dfba;
+            padding: 3px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .sr-demo-dyn-desc {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+            margin: 0 0 10px 0;
+        }
+
+        .sr-demo-dyn-metric-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(197,168,128,0.25);
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sr-demo-dyn-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #c5a880;
+            flex-shrink: 0;
+        }
+
+        .sr-demo-dyn-metric-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #f3dfba;
+        }
+
         @media (max-width: 768px) {
             .sr-advisor-select-grid { grid-template-columns: 1fr; }
             .sr-exec-form-grid { grid-template-columns: 1fr; }
@@ -1592,23 +1649,32 @@
             const btnGov = document.getElementById('demoTabBtnGov');
             const contentBox = document.getElementById('demoTabContent');
 
-            if (btnErp) btnErp.classList.toggle('active', tabKey === 'erp');
-            if (btnCloud) btnCloud.classList.toggle('active', tabKey === 'cloud');
-            if (btnGov) btnGov.classList.toggle('active', tabKey === 'gov');
+            if (btnErp) {
+                btnErp.classList.toggle('active', tabKey === 'erp');
+                btnErp.setAttribute('aria-selected', tabKey === 'erp' ? 'true' : 'false');
+            }
+            if (btnCloud) {
+                btnCloud.classList.toggle('active', tabKey === 'cloud');
+                btnCloud.setAttribute('aria-selected', tabKey === 'cloud' ? 'true' : 'false');
+            }
+            if (btnGov) {
+                btnGov.classList.toggle('active', tabKey === 'gov');
+                btnGov.setAttribute('aria-selected', tabKey === 'gov' ? 'true' : 'false');
+            }
 
             if (contentBox) {
                 contentBox.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;">
-                        <h4 style="font-size:1.15rem; font-weight:800; color:#ffffff; margin:0;">${data.title}</h4>
-                        <span style="font-size:0.75rem; background:rgba(197,168,128,0.18); border:1px solid rgba(197,168,128,0.3); color:#f3dfba; padding:3px 10px; border-radius:999px; white-space:nowrap;">جاهز للاختبار</span>
+                    <div class="sr-demo-dyn-header">
+                        <h4 class="sr-demo-dyn-title">${data.title}</h4>
+                        <span class="sr-demo-dyn-badge">جاهز للاختبار</span>
                     </div>
-                    <p style="font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.5; margin:0 0 10px 0;">${data.desc}</p>
+                    <p class="sr-demo-dyn-desc">${data.desc}</p>
                     <ul class="sr-demo-feature-list">
                         ${data.features.map(f => `<li class="sr-demo-feature-item"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>${f}</span></li>`).join('')}
                     </ul>
-                    <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(197,168,128,0.25); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px;">
-                        <span style="width:6px; height:6px; border-radius:50%; background:#c5a880;"></span>
-                        <span style="font-size:0.8rem; font-weight:700; color:#f3dfba;">مؤشر الكفاءة: ${data.metric}</span>
+                    <div class="sr-demo-dyn-metric-box">
+                        <span class="sr-demo-dyn-dot"></span>
+                        <span class="sr-demo-dyn-metric-text">مؤشر الكفاءة: ${data.metric}</span>
                     </div>
                 `;
             }
