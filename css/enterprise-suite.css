@@ -3317,3 +3317,282 @@ html[lang="nl"] .sw-modal-close-btn {
     background: rgba(197, 168, 128, 0.25);
     color: #fff;
 }
+
+/* ==========================================================================
+   Salim's Software License Manager Portal (Suggestion 1)
+   ========================================================================== */
+.salim-lm-modal-container {
+    max-width: 960px;
+    width: 95%;
+}
+
+.salim-lm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.salim-lm-stat-card {
+    background: rgba(5, 14, 10, 0.85);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: right;
+}
+
+[dir="ltr"] .salim-lm-stat-card,
+html[lang="en"] .salim-lm-stat-card,
+html[lang="nl"] .salim-lm-stat-card {
+    text-align: left;
+}
+
+.salim-lm-stat-val {
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-family: 'Consolas', 'Plus Jakarta Sans', monospace;
+    color: #00e699;
+}
+
+.salim-lm-stat-lbl {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+.salim-lm-form-card {
+    background: rgba(8, 18, 13, 0.9);
+    border: 1px solid rgba(0, 230, 153, 0.3);
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 24px;
+}
+
+.salim-lm-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media (max-width: 768px) {
+    .salim-lm-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.salim-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(2, 8, 5, 0.9);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 10px;
+    color: #f1f5f9;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.salim-input:focus {
+    border-color: #00e699;
+    box-shadow: 0 0 0 2px rgba(0, 230, 153, 0.2);
+}
+
+.salim-table-wrap {
+    background: rgba(4, 11, 8, 0.9);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 14px;
+    overflow-x: auto;
+}
+
+.salim-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+    text-align: right;
+}
+
+[dir="ltr"] .salim-table,
+html[lang="en"] .salim-table,
+html[lang="nl"] .salim-table {
+    text-align: left;
+}
+
+.salim-table th {
+    background: rgba(14, 25, 20, 0.95);
+    color: #c5a880;
+    padding: 12px 16px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+    white-space: nowrap;
+}
+
+.salim-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    white-space: nowrap;
+}
+
+.salim-table tr:hover td {
+    background: rgba(0, 230, 153, 0.04);
+}
+
+/* ==========================================================================
+   Checkout & Payment Gateway Modal (Suggestion 3)
+   ========================================================================== */
+.checkout-modal-container {
+    max-width: 720px;
+    width: 95%;
+}
+
+.checkout-order-summary {
+    background: rgba(6, 16, 11, 0.9);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.checkout-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    color: #94a3b8;
+}
+
+.checkout-price-row.total-row {
+    border-top: 1px dashed rgba(197, 168, 128, 0.35);
+    margin-top: 8px;
+    padding-top: 12px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #f7e2bd;
+}
+
+.checkout-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.checkout-tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    background: rgba(12, 22, 17, 0.9);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    border-radius: 10px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.checkout-tab-btn.active {
+    background: rgba(0, 230, 153, 0.15);
+    border-color: #00e699;
+    color: #00e699;
+    box-shadow: 0 0 15px rgba(0, 230, 153, 0.2);
+}
+
+.checkout-bank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.checkout-bank-pill {
+    padding: 8px 12px;
+    background: rgba(4, 10, 7, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.checkout-bank-pill:hover,
+.checkout-bank-pill.active {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.12);
+    color: #fde68a;
+}
+
+.checkout-btn-pay {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #00e699, #00a86b);
+    color: #03140c;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 230, 153, 0.4);
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.checkout-btn-pay:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(0, 230, 153, 0.55);
+}
+
+.sw-btn-exe-dl {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: #ffffff;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.sw-btn-exe-dl:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(139, 92, 246, 0.5);
+    color: #ffffff;
+}
+
+.btn-open-license-manager {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(197, 168, 128, 0.15);
+    border: 1px solid rgba(197, 168, 128, 0.5);
+    color: #f7e2bd;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-open-license-manager:hover {
+    background: #c5a880;
+    color: #030a07;
+}
