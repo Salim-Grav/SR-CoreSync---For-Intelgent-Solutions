@@ -10431,6 +10431,72 @@
             } catch(e) { console.error('Demo sync error:', e); }
         });
     </script>
+    <!-- ==========================================================================
+         نافذة تحميل وتثبيت البرمجيات الحقيقية مع التراخيص الرقمية
+         ========================================================================== -->
+    <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
+        <div class="software-modal-container" role="dialog" aria-modal="true">
+            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareDownloadModal()" aria-label="إغلاق النافذة">&times;</button>
+            
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
+                <span id="swDlIcon" style="font-size: 2.2rem;">⚡</span>
+                <div>
+                    <span id="swDlCategoryBadge" class="sw-badge">برمجيات مكتبية وأنظمة ERP</span>
+                    <h2 id="swDlTitle" style="margin: 0; font-size: 1.5rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">S&R TaxSync Desktop</h2>
+                </div>
+            </div>
+
+            <div id="swDlVer" style="font-size: 0.85rem; color: #a3c2b3; margin-bottom: 16px; font-weight: 600;">
+                v2.4 Pro • Windows 11/10 & macOS • 14.2 MB
+            </div>
+
+            <p id="swDlDesc" style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+                برنامج محاسبي وضريبي مكتبي يعمل محلياً دون إنترنت لحساب ضريبة BTW/VAT وإصدار فواتير معتمدة.
+            </p>
+
+            <div style="background: rgba(14, 25, 20, 0.6); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 14px; padding: 16px; margin-bottom: 16px;">
+                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 8px;">الميزات والاعتمادات المضمنة:</div>
+                <ul id="swDlSpecs" style="margin: 0; padding-right: 18px; color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+                    <li>✓ تشفير البيانات محلياً بمعيار AES-256</li>
+                    <li>✓ مطابقة تامة لمعايير الفواتير الأوروبية EN 16931</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: #c5a880;">مفتاح الترخيص الرقمي (Enterprise License Key):</span>
+                    <span style="font-size: 0.75rem; color: #00e699;">✓ ترخيص أصلي مفعل</span>
+                </div>
+                <div class="sw-key-box">
+                    <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
+                    <button type="button" class="sw-btn-copy-key" onclick="copySoftwareLicenseKey()">نسخ المفتاح 📋</button>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 10px;">خطوات التثبيت السريع:</div>
+                <div id="swDlSteps">
+                    <div class="sw-step-item">
+                        <span class="sw-step-num">1</span>
+                        <span>حمّل الحزمة وفك ضغط ملف الـ ZIP.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sw-action-row">
+                <a id="swDlDirectBtn" href="downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
+                    <span>⬇️ تحميل الحزمة الحقيقية الكاملة (ZIP)</span>
+                </a>
+                <a id="swDlSandboxBtn" href="demo.html#software" class="sw-btn-sec-sim">
+                    <span>⚡ تشغيل المحاكي السحابي</span>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 14px; font-size: 0.78rem; color: #64748b;">
+                🔒 حزمة معتمدة وموقعة رقمياً وخالية 100% من أي برمجيات ضارة • S&R CoreSync Solutions
+            </div>
+        </div>
+    </div>
+
     <!-- محرك الخدمات والأنظمة المؤسسية الذكية -->
     <script src="./css/enterprise-suite.js"></script>
 </body>
