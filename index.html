@@ -9800,6 +9800,56 @@
             if (!modal) return;
             if (advisor === 'stage') {
                 advisor = (typeof currentExecFounder !== 'undefined' ? currentExecFounder : 'salim');
+            } else if (advisor === 'roi') {
+                advisor = 'both';
+                const teamSlider = document.getElementById('roiCompanySize');
+                const hoursSlider = document.getElementById('roiManualHours');
+                const salarySlider = document.getElementById('roiAvgSalary');
+                const solutionSelect = document.getElementById('roiSolutionType');
+
+                const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
+                const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || { symbol: '€', rate: 1 };
+
+                const team = teamSlider ? teamSlider.value : '15';
+                const hours = hoursSlider ? hoursSlider.value : '8';
+                const rate = salarySlider ? Math.round(parseFloat(salarySlider.value) * cur.rate) : Math.round(28 * cur.rate);
+                const solText = solutionSelect && solutionSelect.options[solutionSelect.selectedIndex] ? solutionSelect.options[solutionSelect.selectedIndex].text : 'تكامل ERP وأتمتة محاسبية';
+
+                const savingsEl = document.getElementById('roiAnnualSavings');
+                const savingsVal = savingsEl ? savingsEl.textContent.trim().replace(/\s+/g, ' ') : '';
+                const paybackEl = document.getElementById('roiPaybackMonths');
+                const paybackVal = paybackEl ? paybackEl.textContent.trim() : '1.2 شهر';
+                const hoursSavedEl = document.getElementById('roiHoursSaved');
+                const hoursSavedVal = hoursSavedEl ? hoursSavedEl.textContent.trim().replace(/\s+/g, ' ') : '';
+
+                const notesField = document.getElementById('bookingNotes');
+                if (notesField) {
+                    notesField.value = `🎯 بيانات استشارة دراسة الجدوى (Smart ROI Engine):\n• حجم الفريق: ${team} موظفاً\n• ساعات الهدر اليدوي: ${hours} ساعات/أسبوع لكل موظف\n• تكلفة الساعة التقديرية: ${cur.symbol} ${rate}/ساعة\n• الحل المنشود: ${solText}\n• صافي الوفر السنوي المتوقع: ${savingsVal}\n• الساعات المستردة سنوياً: ${hoursSavedVal}\n• فترة استرداد الاستثمار: ${paybackVal}\n\nنود مناقشة تفاصيل وأولويات التنفيذ المالي والتقني مع الشريكين المؤسسين.`;
+                }
+
+                const sessionSelect = document.getElementById('bookingSessionType');
+                if (sessionSelect) {
+                    sessionSelect.value = 'online';
+                    togglePackageField();
+                }
+
+                let roiNotice = document.getElementById('bookingRoiNotice');
+                if (!roiNotice) {
+                    roiNotice = document.createElement('div');
+                    roiNotice.id = 'bookingRoiNotice';
+                    roiNotice.style.cssText = 'background: rgba(197, 168, 128, 0.12); border: 1px solid rgba(197, 168, 128, 0.4); border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.82rem; color: #e6ca9f; display: flex; align-items: center; gap: 8px;';
+                    const formGrid = document.querySelector('.sr-exec-form-grid');
+                    if (formGrid && formGrid.parentNode) {
+                        formGrid.parentNode.insertBefore(roiNotice, formGrid);
+                    }
+                }
+                if (roiNotice) {
+                    roiNotice.innerHTML = `<span>✨ تم ربط وتعبئة بيانات دراسة الجدوى التقديرية تلقائياً <strong>(${savingsVal})</strong> لجلسة المراجعة مع الشريكين.</span>`;
+                    roiNotice.style.display = 'flex';
+                }
+            } else {
+                const roiNotice = document.getElementById('bookingRoiNotice');
+                if (roiNotice) roiNotice.style.display = 'none';
             }
             selectBookingAdvisor(advisor);
             modal.classList.add('active');
