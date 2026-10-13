@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-page-language="ar">
+<head>
+    <meta charset="utf-8">
+    <title>معاينة بوابة الدفع والترخيص الأوروبية iDEAL | S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.css">
+    <style>
+        body {
+            background-color: #010907;
+            color: #ffffff;
+            font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="softwareCheckoutModal" class="software-modal-overlay active" style="display: flex; opacity: 1;">
+        <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
+            <button type="button" class="sw-modal-close-btn" aria-label="إغلاق النافذة">&times;</button>
+
+            <!-- نموذج الدفع المباشر -->
+            <div id="checkoutFormView">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                    <span style="font-size: 2.2rem;">💳</span>
+                    <div>
+                        <span class="sw-badge" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fde68a;">
+                            بوابة الدفع والتسوية الأوروبية المعتمدة • Mollie &amp; Stripe SSL
+                        </span>
+                        <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                            شراء وترخيص البرمجيات الرسمية فوراً
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- تفاصيل الطلب والحساب الضريبي -->
+                <div class="checkout-order-summary">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <strong id="checkoutItemTitle" style="color: #fff; font-size: 1rem;">S&R TaxSync Desktop v2.4 Pro (ترخيص تجاري سنوي)</strong>
+                        <span id="checkoutItemPrice" style="color: #00e699; font-weight: 800; font-size: 1.1rem;">€ 189,00</span>
+                    </div>
+                    <div class="checkout-price-row">
+                        <span>المبلغ الصافي قبل الضريبة (Excl. BTW):</span>
+                        <span id="checkoutNetPrice">€ 156,20</span>
+                    </div>
+                    <div class="checkout-price-row">
+                        <span>ضريبة القيمة المضافة الهولندية (BTW 21%):</span>
+                        <span id="checkoutVatAmount">€ 32,80</span>
+                    </div>
+                    <div class="checkout-price-row total-row">
+                        <span>المجموع الإجمالي المطلوب سداده (Incl. BTW 21%):</span>
+                        <span id="checkoutTotalPrice" style="color: #00e699;">€ 189,00</span>
+                    </div>
+                </div>
+
+                <form onsubmit="event.preventDefault()">
+                    <!-- تبويبات وسائل الدفع -->
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 8px;">اختر وسيلة الدفع المعتمدة:</div>
+                    <div class="checkout-tabs">
+                        <button type="button" class="checkout-tab-btn active">
+                            <span>🏦 iDEAL (هولندا)</span>
+                        </button>
+                        <button type="button" class="checkout-tab-btn">
+                            <span>💳 بطاقة بنكية (Visa/Mastercard)</span>
+                        </button>
+                        <button type="button" class="checkout-tab-btn">
+                            <span>🇪🇺 تحويل SEPA البنكي</span>
+                        </button>
+                    </div>
+
+                    <!-- بنوك iDEAL الهولندية -->
+                    <div id="checkoutIdealBox" style="margin-bottom: 16px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">المصرف الهولندي المعتمد للتسوية الفورية:</label>
+                        <div class="checkout-bank-grid">
+                            <div class="checkout-bank-pill active">🦁 ING Bank</div>
+                            <div class="checkout-bank-pill">🌾 Rabobank</div>
+                            <div class="checkout-bank-pill">🛡️ ABN AMRO</div>
+                            <div class="checkout-bank-pill">🌈 bunq</div>
+                            <div class="checkout-bank-pill">🏦 SNS Bank</div>
+                            <div class="checkout-bank-pill">⚡ Revolut</div>
+                        </div>
+                    </div>
+
+                    <!-- بيانات العميل لإصدار الفاتورة والترخيص -->
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">الاسم الكامل أو اسم المؤسسة / الشركة:</label>
+                            <input id="checkoutCustName" type="text" class="salim-input" value="Heineken International N.V." placeholder="اسمك أو اسم مؤسستك" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البريد الإلكتروني لاستلام الترخيص والفاتورة:</label>
+                            <input id="checkoutCustEmail" type="email" class="salim-input" value="finance-billing@heineken.nl" placeholder="name@company.com" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="checkoutSubmitBtn" class="checkout-btn-pay">
+                        <span id="checkoutPayBtnText">إتمام الدفع الآمن عبر ING واستلام الترخيص فوراً (€ 189,00) 🔒</span>
+                    </button>
+
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.76rem; color: #94a3b8;">
+                        <span>🔒 مشفر 256-bit SSL</span>
+                        <span>📄 يتضمن فاتورة BTW رسمية</span>
+                        <span>⚡ تسليم فوري وتلقائي لمفتاح التفعيل</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./css/enterprise-suite.js"></script>
+</body>
+</html>
