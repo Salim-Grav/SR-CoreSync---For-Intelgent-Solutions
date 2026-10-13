@@ -58,7 +58,7 @@ rootFiles.forEach(file => {
 });
 
 // Production Directories
-const prodDirs = ['assets', 'css', 'js', 'downloads', 'en', 'nl'];
+const prodDirs = ['assets', 'css', 'js', 'downloads', 'en', 'nl', 'api', 'config'];
 
 function copyDirRecursive(srcDir, destDir) {
   if (!fs.existsSync(destDir)) {

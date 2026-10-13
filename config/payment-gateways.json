@@ -1,0 +1,43 @@
+{
+  "environment": "sandbox",
+  "activeGateway": "mollie",
+  "mollie": {
+    "testApiKey": "test_sr_coresync_ideal_demo_key_2026",
+    "liveApiKey": "live_REPLACE_WITH_REAL_MOLLIE_API_KEY",
+    "webhookUrl": "https://dananajmah.com/api/webhooks/mollie",
+    "redirectUrl": "https://dananajmah.com/preview-checkout.html?status=paid",
+    "supportedMethods": [
+      "ideal",
+      "creditcard",
+      "banktransfer",
+      "bancontact",
+      "applepay",
+      "sofort"
+    ],
+    "idealIssuers": {
+      "ing": "ideal_INGBNL2A",
+      "rabobank": "ideal_RABONL2U",
+      "abn_amro": "ideal_ABNAnL2A",
+      "bunq": "ideal_BUNQNL2A",
+      "sns": "ideal_SNSBNL2A",
+      "revolut": "ideal_REVONL2A"
+    }
+  },
+  "stripe": {
+    "testPublishableKey": "pk_test_51MockCoreSyncKeyForStripeDev2026",
+    "livePublishableKey": "pk_live_REPLACE_WITH_REAL_STRIPE_PUB_KEY",
+    "testSecretKey": "sk_test_MockCoreSyncSecretKey2026",
+    "liveSecretKey": "sk_live_REPLACE_WITH_REAL_STRIPE_SEC_KEY",
+    "webhookSecret": "whsec_REPLACE_WITH_REAL_WEBHOOK_SECRET",
+    "webhookUrl": "https://dananajmah.com/api/webhooks/stripe"
+  },
+  "merchant": {
+    "legalName": "S&R CoreSync Solutions B.V.",
+    "kvkNumber": "84920183",
+    "btwNumber": "NL863412987B01",
+    "iban": "NL91INGB0001234567",
+    "bic": "INGBNL2A",
+    "city": "Amsterdam",
+    "country": "Netherlands"
+  }
+}
