@@ -206,7 +206,12 @@
                 <button type="button" class="toggle-btn" id="btnMobile" onclick="setDevice('mobile')">📱 الهاتف</button>
             </div>
 
-            <button type="button" class="btn btn-gold" onclick="copyEmailCode()">
+            <button type="button" class="btn btn-gold" onclick="copyVisualEmail()" title="نسخ محتوى الإيميل بكامل ألوانه وتنسيقاته للصقه مباشرة في Gmail">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                نسخ مرئي للصق في Gmail
+            </button>
+
+            <button type="button" class="btn btn-outline" onclick="copyEmailCode()" title="نسخ كود الـ HTML الصافي">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                 نسخ كود الـ HTML
             </button>
@@ -224,7 +229,7 @@
         </div>
     </main>
 
-    <div class="toast-msg" id="toast">✅ تم نسخ كود الإيميل بنجاح إلى الحافظة!</div>
+    <div class="toast-msg" id="toast">✅ تم نسخ القالب بنجاح! توجه لـ Gmail واضغط Ctrl+V</div>
 
     <script>
         function setDevice(device) {
@@ -243,21 +248,46 @@
             }
         }
 
+        async function copyVisualEmail() {
+            try {
+                const response = await fetch('./templates/welcome-email.html');
+                const htmlText = await response.text();
+                
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blobHtml = new Blob([htmlText], { type: 'text/html' });
+                    const blobText = new Blob([htmlText], { type: 'text/plain' });
+                    const item = new ClipboardItem({
+                        'text/html': blobHtml,
+                        'text/plain': blobText
+                    });
+                    await navigator.clipboard.write([item]);
+                    showToast('✅ تم نسخ القالب المرئي! الصقه الآن (Ctrl+V) داخل Gmail');
+                } else {
+                    await navigator.clipboard.writeText(htmlText);
+                    showToast('✅ تم نسخ كود الإيميل بنجاح!');
+                }
+            } catch (err) {
+                console.error('Copy failed', err);
+                copyEmailCode();
+            }
+        }
+
         async function copyEmailCode() {
             try {
                 const response = await fetch('./templates/welcome-email.html');
                 const htmlText = await response.text();
                 await navigator.clipboard.writeText(htmlText);
-                showToast();
+                showToast('✅ تم نسخ كود الـ HTML الصافي!');
             } catch (err) {
                 console.error('Failed to copy', err);
             }
         }
 
-        function showToast() {
+        function showToast(msg) {
             const toast = document.getElementById('toast');
+            if (msg) toast.innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2500);
+            setTimeout(() => toast.classList.remove('show'), 2800);
         }
     </script>
 </body>
