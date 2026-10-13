@@ -18,19 +18,19 @@
     </style>
 </head>
 <body>
-    <div id="softwareCheckoutModal" class="software-modal-overlay active" style="display: flex; opacity: 1;">
+    <div id="softwareCheckoutModal" class="software-modal-overlay active sw-modal-preview-active">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" aria-label="إغلاق النافذة">&times;</button>
 
             <!-- نموذج الدفع المباشر -->
             <div id="checkoutFormView">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                    <span style="font-size: 2.2rem;">💳</span>
+                <div class="checkout-header-row">
+                    <span class="checkout-header-icon">💳</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fde68a;">
+                        <span class="sw-badge checkout-mollie-badge">
                             بوابة الدفع والتسوية الأوروبية المعتمدة • Mollie &amp; Stripe SSL
                         </span>
-                        <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                        <h2 class="checkout-header-title">
                             شراء وترخيص البرمجيات الرسمية فوراً
                         </h2>
                     </div>
@@ -38,9 +38,9 @@
 
                 <!-- تفاصيل الطلب والحساب الضريبي -->
                 <div class="checkout-order-summary">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <strong id="checkoutItemTitle" style="color: #fff; font-size: 1rem;">S&R TaxSync Desktop v2.4 Pro (ترخيص تجاري سنوي)</strong>
-                        <span id="checkoutItemPrice" style="color: #00e699; font-weight: 800; font-size: 1.1rem;">€ 189,00</span>
+                    <div class="checkout-summary-head">
+                        <strong id="checkoutItemTitle" class="checkout-item-title">S&R TaxSync Desktop v2.4 Pro (ترخيص تجاري سنوي)</strong>
+                        <span id="checkoutItemPrice" class="checkout-item-price">€ 189,00</span>
                     </div>
                     <div class="checkout-price-row">
                         <span>المبلغ الصافي قبل الضريبة (Excl. BTW):</span>
@@ -52,13 +52,13 @@
                     </div>
                     <div class="checkout-price-row total-row">
                         <span>المجموع الإجمالي المطلوب سداده (Incl. BTW 21%):</span>
-                        <span id="checkoutTotalPrice" style="color: #00e699;">€ 189,00</span>
+                        <span id="checkoutTotalPrice" class="checkout-total-price-val">€ 189,00</span>
                     </div>
                 </div>
 
                 <form onsubmit="event.preventDefault()">
                     <!-- تبويبات وسائل الدفع -->
-                    <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 8px;">اختر وسيلة الدفع المعتمدة:</div>
+                    <div class="checkout-section-subtitle">اختر وسيلة الدفع المعتمدة:</div>
                     <div class="checkout-tabs">
                         <button type="button" class="checkout-tab-btn active">
                             <span>🏦 iDEAL (هولندا)</span>
@@ -72,8 +72,8 @@
                     </div>
 
                     <!-- بنوك iDEAL الهولندية -->
-                    <div id="checkoutIdealBox" style="margin-bottom: 16px;">
-                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">المصرف الهولندي المعتمد للتسوية الفورية:</label>
+                    <div id="checkoutIdealBox" class="checkout-ideal-box">
+                        <label class="checkout-field-label">المصرف الهولندي المعتمد للتسوية الفورية:</label>
                         <div class="checkout-bank-grid">
                             <div class="checkout-bank-pill active">🦁 ING Bank</div>
                             <div class="checkout-bank-pill">🌾 Rabobank</div>
@@ -87,11 +87,11 @@
                     <!-- بيانات العميل لإصدار الفاتورة والترخيص -->
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">الاسم الكامل أو اسم المؤسسة / الشركة:</label>
+                            <label class="checkout-field-label">الاسم الكامل أو اسم المؤسسة / الشركة:</label>
                             <input id="checkoutCustName" type="text" class="salim-input" value="Heineken International N.V." placeholder="اسمك أو اسم مؤسستك" required>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البريد الإلكتروني لاستلام الترخيص والفاتورة:</label>
+                            <label class="checkout-field-label">البريد الإلكتروني لاستلام الترخيص والفاتورة:</label>
                             <input id="checkoutCustEmail" type="email" class="salim-input" value="finance-billing@heineken.nl" placeholder="name@company.com" required>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <span id="checkoutPayBtnText">إتمام الدفع الآمن عبر ING واستلام الترخيص فوراً (€ 189,00) 🔒</span>
                     </button>
 
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.76rem; color: #94a3b8;">
+                    <div class="checkout-security-row">
                         <span>🔒 مشفر 256-bit SSL</span>
                         <span>📄 يتضمن فاتورة BTW رسمية</span>
                         <span>⚡ تسليم فوري وتلقائي لمفتاح التفعيل</span>
