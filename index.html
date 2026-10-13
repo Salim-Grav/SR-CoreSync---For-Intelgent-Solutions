@@ -1330,6 +1330,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -1359,6 +1360,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -6541,7 +6543,7 @@
                                     <label for="roiSolutionType" class="roi-label">
                                         <span>نوع الحل المنشود تطبيقه:</span>
                                     </label>
-                                    <select class="roi-select-custom w-100" id="roiSolutionType" onchange="updateROICalculator()">
+                                    <select class="roi-select-custom w-100" id="roiSolutionType" title="نوع الحل المنشود تطبيقه" aria-label="نوع الحل المنشود تطبيقه" onchange="updateROICalculator()">
                                         <option value="0.75" selected>تكامل ERP كامل + أتمتة محاسبية (وفر حتى 75%)</option>
                                         <option value="0.60">نظام سحابي مخصص + لوحات قيادة (وفر 60%)</option>
                                         <option value="0.85">أتمتة ذكاء اصطناعي شاملة + ربط عمليات (وفر حتى 85%)</option>
@@ -8599,7 +8601,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="vipPlatform" class="form-label text-white-64 text-caption mb-1">قناة الاجتماع المفضلة *</label>
-                        <select id="vipPlatform" class="tf-input w-100 form-select-dark">
+                        <select id="vipPlatform" class="tf-input w-100 form-select-dark" title="قناة الاجتماع المفضلة" aria-label="قناة الاجتماع المفضلة">
                             <option value="طلب هوية بصرية / موقع ويب / متجر إلكتروني">طلب هوية بصرية / موقع ويب / متجر إلكتروني</option>
                             <option value="Google Meet">Google Meet (مرئي)</option>
                             <option value="Zoom">Zoom Cloud (مرئي)</option>
@@ -8616,7 +8618,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="vipTime" class="form-label text-white-64 text-caption mb-1">التوقيت المفضل *</label>
-                        <select id="vipTime" class="tf-input w-100 form-select-dark">
+                        <select id="vipTime" class="tf-input w-100 form-select-dark" title="التوقيت المفضل للجلسة" aria-label="التوقيت المفضل للجلسة">
                             <option value="11:00 AM (توقيت أمستردام / CET)">11:00 صباحًا (توقيت أوروبا / أمستردام)</option>
                             <option value="02:00 PM (توقيت أمستردام / CET)">02:00 ظهرًا (توقيت أوروبا / أمستردام)</option>
                             <option value="05:00 PM (توقيت السعودية والخليج)">05:00 مساءً (توقيت الرياض والخليج)</option>
@@ -8971,7 +8973,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingSessionType">نوع الاستشارة / الاجتماع *</label>
-                        <select id="bookingSessionType" class="sr-exec-select" onchange="togglePackageField()">
+                        <select id="bookingSessionType" class="sr-exec-select" title="نوع الاستشارة أو الاجتماع" aria-label="نوع الاستشارة أو الاجتماع" onchange="togglePackageField()">
                             <option value="creative">طلب هوية بصرية / موقع ويب / متجر إلكتروني</option>
                             <option value="online">اجتماع مرئي مباشر (Google Meet / Teams)</option>
                             <option value="phone">اتصال هاتفي مباشر عبر الواتساب</option>
@@ -8980,7 +8982,7 @@
                     </div>
                     <div class="sr-exec-form-group full-width sr-package-group" id="bookingPackageGroup">
                         <label class="sr-exec-label" for="bookingPackage">الباقة المستهدفة (اختياري)</label>
-                        <select id="bookingPackage" class="sr-exec-select">
+                        <select id="bookingPackage" class="sr-exec-select" title="الباقة المستهدفة" aria-label="الباقة المستهدفة">
                             <option value="">لم أحدد بعد — أرغب بالتوجيه والاستشارة</option>
                             <option value="identity">باقة الهوية البصرية المتكاملة — €590</option>
                             <option value="website">باقة المواقع الفاخرة عالية الأداء — €980</option>
@@ -8995,7 +8997,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingTimeSlot">الفترة الزمنية المفضلة *</label>
-                        <select id="bookingTimeSlot" class="sr-exec-select">
+                        <select id="bookingTimeSlot" class="sr-exec-select" title="الفترة الزمنية المفضلة" aria-label="الفترة الزمنية المفضلة">
                             <option value="morning">فترة صباحية (10:00 - 12:00 CET)</option>
                             <option value="afternoon" selected>فترة ظهيرة (13:00 - 15:00 CET)</option>
                             <option value="evening">فترة مسائية (16:00 - 18:00 CET)</option>
@@ -9062,7 +9064,7 @@
                     <div class="sr-roi-slider-header">
                         <span class="text-white">مستوى الأنظمة والأتمتة المعتمد حالياً في شركتك:</span>
                     </div>
-                    <select id="roiSystemLevel" class="sr-exec-select" onchange="updateRoiCalc()">
+                    <select id="roiSystemLevel" class="sr-exec-select" title="مستوى الأنظمة والأتمتة" aria-label="مستوى الأنظمة والأتمتة" onchange="updateRoiCalc()">
                         <option value="0.36">عمل يدوي أو ملفات Excel مبعثرة (إمكانية توفير قصوى 36%)</option>
                         <option value="0.25" selected>برامج محاسبية تقليدية غير مترابطة مع السحابة (توفير 25%)</option>
                         <option value="0.16">نظام سحابي جزئي تنقصه الأتمتة المتقدمة (توفير 16%)</option>
@@ -10560,7 +10562,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البرنامج أو النظام المستهدف:</label>
-                            <select id="salimGenProduct" class="salim-input">
+                            <select id="salimGenProduct" class="salim-input" title="البرنامج أو النظام المستهدف" aria-label="البرنامج أو النظام المستهدف">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
                                 <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
@@ -10579,7 +10581,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">نوع وخطة الترخيص:</label>
-                            <select id="salimGenPlan" class="salim-input">
+                            <select id="salimGenPlan" class="salim-input" title="نوع وخطة الترخيص" aria-label="نوع وخطة الترخيص">
                                 <option value="سنوي (Annual License)">ترخيص سنوي (1 Year)</option>
                                 <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month)</option>
                                 <option value="دائم مدى الحياة (Lifetime Enterprise)">ترخيص دائم مدى الحياة (Lifetime)</option>
