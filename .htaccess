@@ -39,6 +39,13 @@
     # Referrer Policy
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
+    # Content-Security-Policy (CSP - Bank Grade Enterprise & Payment Gateways)
+    Header always set Content-Security-Policy "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://js.stripe.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https: wss:; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.mollie.com; frame-ancestors 'self'; upgrade-insecure-requests;"
+
+    # Cross-Origin Policies (COOP & CORP)
+    Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+    Header always set Cross-Origin-Resource-Policy "cross-origin"
+
     # Permissions Policy (Restrict unneeded device APIs)
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
@@ -46,7 +53,7 @@
 # ------------------------------------------------------------------------------
 # 3. PROTECT SENSITIVE FILES & CONFIGURATIONS
 # ------------------------------------------------------------------------------
-<FilesMatch "(^\.env|\.git|payment-gateways\.json|package(-lock)?\.json|\.ps1$|\.log$|\.sh$)">
+<FilesMatch "(^\.env|\.git|payment-gateways\.json|package(-lock)?\.json|\.ps1$|\.log$|\.sh$|\.sql$|\.bak$|\.py$|\.bat$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
