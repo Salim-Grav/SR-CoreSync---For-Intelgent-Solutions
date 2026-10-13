@@ -9448,6 +9448,7 @@
                 closeExecutiveBookingModal();
                 closeClientPortalModal();
                 closeInstallModal();
+                if (typeof closeRoiPdfModal === 'function') closeRoiPdfModal();
             }
         });
 
@@ -9484,6 +9485,15 @@
 
             if (!teamSlider || !hoursSlider || !salarySlider || !solutionSelect) return;
 
+            // استعلام العملة النشطة
+            const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
+            const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || { symbol: '€', rate: 1, name: 'Euro' };
+
+            // مزامنة حالة أزرار العملة
+            document.querySelectorAll('.roi-currency-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.currency === curCode);
+            });
+
             // تحديث خط السحب الذهبي المتفاعل لكل شريط
             updateSliderTrack(teamSlider);
             updateSliderTrack(hoursSlider);
@@ -9491,7 +9501,8 @@
 
             const teamSize = parseInt(teamSlider.value, 10) || 15;
             const manualHours = parseInt(hoursSlider.value, 10) || 8;
-            const hourlyRate = parseFloat(salarySlider.value) || 28;
+            const hourlyRateEur = parseFloat(salarySlider.value) || 28;
+            const convertedHourlyRate = Math.round(hourlyRateEur * cur.rate);
             const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
 
             // مزامنة حالة أزرار الخيارات السريعة
@@ -9500,10 +9511,11 @@
             });
 
             // تحديث بطاقات القيم اللحظية (Badges)
+            const isAr = document.documentElement.lang === 'ar' || !document.documentElement.lang;
+            const isNl = document.documentElement.lang === 'nl';
+
             const teamValBadge = document.getElementById('roiCompanySizeVal');
             if (teamValBadge) {
-                const isAr = document.documentElement.lang === 'ar';
-                const isNl = document.documentElement.lang === 'nl';
                 if (isAr) {
                     teamValBadge.textContent = teamSize <= 10 ? `${teamSize} موظفين` : `${teamSize} موظفاً`;
                 } else if (isNl) {
@@ -9515,8 +9527,6 @@
 
             const hoursValBadge = document.getElementById('roiManualHoursVal');
             if (hoursValBadge) {
-                const isAr = document.documentElement.lang === 'ar';
-                const isNl = document.documentElement.lang === 'nl';
                 if (isAr) {
                     hoursValBadge.textContent = `${manualHours} ساعات / أسبوع`;
                 } else if (isNl) {
@@ -9528,33 +9538,38 @@
 
             const salaryValBadge = document.getElementById('roiAvgSalaryVal');
             if (salaryValBadge) {
-                const isAr = document.documentElement.lang === 'ar';
-                const isNl = document.documentElement.lang === 'nl';
-                salaryValBadge.textContent = isAr ? `€${hourlyRate} / ساعة` : (isNl ? `€${hourlyRate} / uur` : `€${hourlyRate} / hr`);
+                salaryValBadge.textContent = isAr ? `${cur.symbol} ${convertedHourlyRate} / ساعة` : (isNl ? `${cur.symbol} ${convertedHourlyRate} / uur` : `${cur.symbol} ${convertedHourlyRate} / hr`);
+            }
+
+            // تحديث تدريج شريط التكلفة للعملة المحددة
+            const salaryScale = document.getElementById('roiSalaryScaleLabels');
+            if (salaryScale) {
+                salaryScale.innerHTML = `<span>${cur.symbol} ${Math.round(15 * cur.rate)}</span><span>${cur.symbol} ${Math.round(45 * cur.rate)}</span><span>${cur.symbol} ${Math.round(80 * cur.rate)}+</span>`;
             }
 
             // الحسابات الرياضية المعتمدة
             const weeksPerYear = 52;
             const totalAnnualManualHours = teamSize * manualHours * weeksPerYear;
             const annualHoursSaved = Math.round(totalAnnualManualHours * efficiencyRate);
-            const grossAnnualSavings = Math.round(annualHoursSaved * hourlyRate);
+            const grossAnnualSavingsEur = Math.round(annualHoursSaved * hourlyRateEur);
+            const convertedAnnualSavings = Math.round(grossAnnualSavingsEur * cur.rate);
 
             // حساب تقديري لفترة استرداد التكلفة (Payback Period)
-            let baseCost = 10000;
-            if (teamSize <= 10) baseCost = 7500;
-            else if (teamSize <= 30) baseCost = 13500;
-            else if (teamSize <= 70) baseCost = 22000;
-            else baseCost = 35000;
+            let baseCostEur = 10000;
+            if (teamSize <= 10) baseCostEur = 7500;
+            else if (teamSize <= 30) baseCostEur = 13500;
+            else if (teamSize <= 70) baseCostEur = 22000;
+            else baseCostEur = 35000;
 
-            const monthlySavings = grossAnnualSavings / 12;
-            let paybackMonths = (baseCost / (monthlySavings || 1)).toFixed(1);
+            const monthlySavingsEur = grossAnnualSavingsEur / 12;
+            let paybackMonths = (baseCostEur / (monthlySavingsEur || 1)).toFixed(1);
             if (paybackMonths < 0.8) paybackMonths = "0.8";
             if (paybackMonths > 6.0) paybackMonths = "5.5";
 
             // عرض النتائج المحدثة في واجهة المستخدم
             const savingsElem = document.getElementById('roiAnnualSavings');
             if (savingsElem) {
-                savingsElem.innerHTML = `<span>€</span>${grossAnnualSavings.toLocaleString('en-US')}`;
+                savingsElem.innerHTML = `<span>${cur.symbol}</span>${convertedAnnualSavings.toLocaleString('en-US')}`;
             }
 
             const hoursSavedElem = document.getElementById('roiHoursSaved');
