@@ -8444,6 +8444,10 @@
             document.getElementById('directCallModal').classList.remove('active');
         }
 
+        if (window.location.hash === '#direct-call') {
+            setTimeout(openDirectCallModal, 250);
+        }
+
         // أثر مؤشر الماوس (Cursor Trail Canvas)
         const canvas = document.getElementById('trail');
         if (canvas) {
