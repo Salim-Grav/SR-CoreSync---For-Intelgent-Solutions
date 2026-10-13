@@ -6426,12 +6426,20 @@
                         <div class="roi-card-wrapper h-100">
                             <div class="roi-inputs-pane">
                                 <div class="roi-field-group">
-                                    <label for="roiCompanySize" class="roi-label">
-                                        <span>حجم الفريق أو الموظفين:</span>
-                                        <span class="roi-label-badge" id="roiCompanySizeVal">15 موظف</span>
-                                    </label>
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <label for="roiCompanySize" class="roi-label m-0">
+                                            <span>حجم الفريق أو الموظفين:</span>
+                                        </label>
+                                        <span class="roi-label-badge" id="roiCompanySizeVal">15 موظفاً</span>
+                                    </div>
+                                    <div class="roi-preset-pills d-flex gap-2 flex-wrap mb-2">
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(5)">فريق ناشئ (5)</button>
+                                        <button type="button" class="roi-preset-btn active" onclick="setRoiTeamPreset(15)">شركة نامية (15)</button>
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">مؤسسة متوسطة (45)</button>
+                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">شركة كبرى (100+)</button>
+                                    </div>
                                     <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels" dir="ltr">
                                         <span>3 موظفين</span>
                                         <span>75 موظف</span>
                                         <span>150+ موظف</span>
@@ -6444,7 +6452,7 @@
                                         <span class="roi-label-badge" id="roiManualHoursVal">8 ساعات / أسبوع</span>
                                     </label>
                                     <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels" dir="ltr">
                                         <span>2 ساعة (بسيط)</span>
                                         <span>12 ساعة (متوسط)</span>
                                         <span>25 ساعة (معقد)</span>
@@ -6457,7 +6465,7 @@
                                         <span class="roi-label-badge" id="roiAvgSalaryVal">€28 / ساعة</span>
                                     </label>
                                     <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels" dir="ltr">
                                         <span>€15</span>
                                         <span>€45</span>
                                         <span>€80+</span>
