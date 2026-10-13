@@ -5479,14 +5479,14 @@
                             <div class="lab-action-box">
                                 <div class="lab-action-badge">Exclusive Partner Program</div>
                                 <h4 class="text-white fw-bold mb-2">Publish &amp; Monetize Your Software</h4>
-                                <p class="text-white-64 mb-4" style="font-size: 0.88rem; line-height: 1.6;">
+                                <p class="text-white-64 mb-4 lab-action-desc">
                                     Connect directly with Lead Systems Architect Eng. Salim Aziza to review your system, define commercial licensing tiers, and publish it on our marketplace.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
                                     <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('dev')">
                                         <span>Apply to Publish Your Software Project ←</span>
                                     </button>
-                                    <a href="../demo.html#software" class="btn-live-preview w-100 justify-content-center" style="padding: 12px 18px;">
+                                    <a href="../demo.html#software" class="btn-live-preview w-100 justify-content-center btn-live-preview--pad">
                                         <span>Test Interactive Software Simulator ⚡</span>
                                     </a>
                                 </div>
@@ -6977,7 +6977,7 @@
     <!-- 2.5. Executive ROI Feasibility PDF Report Modal (EN) -->
     <div class="sr-exec-modal" id="roiPdfModal" role="dialog" aria-modal="true" aria-labelledby="roiPdfTitle">
         <div class="sr-exec-modal-backdrop" onclick="closeRoiPdfModal()"></div>
-        <div class="sr-exec-modal-container" style="max-width: 860px; max-height: 94vh; overflow-y: auto;">
+        <div class="sr-exec-modal-container roi-pdf-container">
             <div class="es-quote-toolbar mb-3">
                 <div class="es-quote-toolbar-title" id="roiPdfTitle">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -6988,7 +6988,7 @@
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         <span>Print / Save as PDF 🖨️</span>
                     </button>
-                    <button type="button" class="es-btn-tool" onclick="shareRoiPdfWhatsApp()" style="background: rgba(37, 211, 102, 0.2); border: 1px solid rgba(37, 211, 102, 0.4); color: #25d366;">
+                    <button type="button" class="es-btn-tool roi-pdf-btn-whatsapp" onclick="shareRoiPdfWhatsApp()">
                         <span>Share via WhatsApp 📱</span>
                     </button>
                     <button type="button" class="es-btn-tool es-btn-tool-close" onclick="closeRoiPdfModal()">Close &times;</button>
@@ -7000,24 +7000,24 @@
                 <div class="es-quote-header">
                     <div class="es-quote-brand">
                         <div class="d-flex align-items-center gap-3 mb-2">
-                            <img src="../assets/sr-core-emblem.svg" alt="S&R CoreSync" width="54" height="54" style="filter: drop-shadow(0 2px 8px rgba(197, 168, 128, 0.4));">
+                            <img src="../assets/sr-core-emblem.svg" alt="S&R CoreSync" width="54" height="54" class="roi-pdf-emblem-img">
                             <div>
-                                <h2 style="margin: 0; font-size: 1.35rem; font-weight: 900; color: #0d1512; letter-spacing: -0.5px;">S&amp;R CORESYNC SOLUTIONS</h2>
-                                <p style="margin: 0; font-size: 0.8rem; color: #718096;">Enterprise Cloud Architecture, ERP &amp; Financial Intelligence Systems</p>
+                                <h2 class="roi-pdf-brand-title">S&amp;R CORESYNC SOLUTIONS</h2>
+                                <p class="roi-pdf-brand-sub">Enterprise Cloud Architecture, ERP &amp; Financial Intelligence Systems</p>
                             </div>
                         </div>
-                        <p style="font-size: 0.76rem; color: #a0aec0; margin: 0;">Amsterdam HQ, The Netherlands | European Union &amp; Global Delivery</p>
+                        <p class="roi-pdf-brand-loc">Amsterdam HQ, The Netherlands | European Union &amp; Global Delivery</p>
                     </div>
                     <div class="es-quote-meta">
                         <span class="es-quote-ref" id="roiPdfRef">REF-CS-ROI-2026-8942</span>
                         <div><strong>Issue Date:</strong> <span id="roiPdfDate"></span></div>
-                        <div style="font-size: 0.78rem; color: #718096;">Official Feasibility Study</div>
+                        <div class="roi-pdf-meta-status">Official Feasibility Study</div>
                     </div>
                 </div>
 
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;">
-                    <div style="font-size: 0.8rem; color: #718096; margin-bottom: 4px;">Beneficiary Organization / Client Enterprise:</div>
-                    <input type="text" id="roiPdfClientName" value="Executive Leadership / Prospective Client Partner" style="width: 100%; border: 1px dashed #cbd5e0; background: #ffffff; border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.95rem; color: #1a202c;" placeholder="Enter company name..." />
+                <div class="roi-pdf-client-box">
+                    <div class="roi-pdf-client-lbl">Beneficiary Organization / Client Enterprise:</div>
+                    <input type="text" id="roiPdfClientName" value="Executive Leadership / Prospective Client Partner" class="roi-pdf-client-input" placeholder="Enter company name..." />
                 </div>
 
                 <div class="es-quote-section-title">
@@ -7060,28 +7060,28 @@
                     <span>2. Financial Return &amp; Cost-Efficiency Simulation</span>
                 </div>
 
-                <div class="es-quote-total-box" style="margin-bottom: 20px;">
-                    <div class="es-quote-total-card" style="width: 100%;">
+                <div class="es-quote-total-box checkout-ideal-box">
+                    <div class="es-quote-total-card w-100">
                         <div class="es-quote-total-row">
                             <span>Total Annual Workforce Hours Reclaimed:</span>
-                            <strong id="roiPdfHoursSavedVal" style="color: #2b6cb0; font-size: 1.05rem;">4,680 hrs/year</strong>
+                            <strong id="roiPdfHoursSavedVal" class="roi-pdf-summary-val-blue">4,680 hrs/year</strong>
                         </div>
                         <div class="es-quote-total-row">
                             <span>Operational Velocity Acceleration:</span>
-                            <strong id="roiPdfEffGainVal" style="color: #2f855a; font-size: 1.05rem;">+75%</strong>
+                            <strong id="roiPdfEffGainVal" class="roi-pdf-summary-val-green">+75%</strong>
                         </div>
                         <div class="es-quote-total-row">
                             <span>Full Capital Payback Period:</span>
-                            <strong id="roiPdfPaybackVal" style="color: #d69e2e; font-size: 1.05rem;">1.2 months</strong>
+                            <strong id="roiPdfPaybackVal" class="roi-pdf-summary-val-yellow">1.2 months</strong>
                         </div>
-                        <div class="es-quote-total-row grand-total" style="border-top: 2px solid #cbd5e0; margin-top: 8px; padding-top: 10px;">
-                            <span style="font-size: 1.15rem; font-weight: 900; color: #0d1512;">Projected Net Annual Financial Savings:</span>
-                            <span id="roiPdfSavingsVal" style="font-size: 1.45rem; font-weight: 900; color: #b7791f;">€ 131,040</span>
+                        <div class="es-quote-total-row grand-total roi-pdf-total-row">
+                            <span class="roi-pdf-total-title">Projected Net Annual Financial Savings:</span>
+                            <span id="roiPdfSavingsVal" class="roi-pdf-total-val">€ 131,040</span>
                         </div>
                     </div>
                 </div>
 
-                <div style="background: #f7fafc; border-left: 4px solid #c5a880; padding: 12px 16px; margin-bottom: 24px; font-size: 0.82rem; color: #4a5568; line-height: 1.6;">
+                <div class="roi-pdf-methodology-note">
                     <strong>Executive Summary:</strong> The study highlights rapid capital payback within 2 months, converting routine administrative overhead into high-velocity operational capacity and scalable enterprise growth.
                 </div>
 
@@ -8130,34 +8130,34 @@
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareDownloadModal()" aria-label="Close modal">&times;</button>
             
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
-                <span id="swDlIcon" style="font-size: 2.2rem;">⚡</span>
+            <div class="sw-dl-header-row">
+                <span id="swDlIcon" class="sw-dl-header-icon">⚡</span>
                 <div>
                     <span id="swDlCategoryBadge" class="sw-badge">Desktop Systems &amp; ERP</span>
                     <h2 id="swDlTitle" style="margin: 0; font-size: 1.5rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">S&R TaxSync Desktop</h2>
                 </div>
             </div>
 
-            <div id="swDlVer" style="font-size: 0.85rem; color: #a3c2b3; margin-bottom: 16px; font-weight: 600;">
+            <div id="swDlVer" class="sw-dl-version-text">
                 v2.4 Pro • Windows 11/10 &amp; macOS • 14.2 MB
             </div>
 
-            <p id="swDlDesc" style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+            <p id="swDlDesc" class="sw-dl-desc-text">
                 Standalone offline tax ERP and accounting software calculating BTW/VAT and generating verified tax returns.
             </p>
 
-            <div style="background: rgba(14, 25, 20, 0.6); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 14px; padding: 16px; margin-bottom: 16px;">
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 8px;">Included Specifications &amp; Compliances:</div>
-                <ul id="swDlSpecs" style="margin: 0; padding-left: 18px; color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+            <div class="sw-dl-specs-box">
+                <div class="sw-dl-section-label">Included Specifications &amp; Compliances:</div>
+                <ul id="swDlSpecs" class="sw-dl-specs-list">
                     <li>✓ Local AES-256 encrypted database</li>
                     <li>✓ Full compliance with European EN 16931 e-invoicing standard</li>
                 </ul>
             </div>
 
-            <div style="margin-bottom: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #c5a880;">Enterprise Digital License Key:</span>
-                    <span style="font-size: 0.75rem; color: #00e699;">✓ Verified Genuine License</span>
+            <div class="sw-dl-key-row">
+                <div class="sw-dl-key-header">
+                    <span class="sw-dl-section-label">Enterprise Digital License Key:</span>
+                    <span class="sw-dl-key-status">✓ Verified Genuine License</span>
                 </div>
                 <div class="sw-key-box">
                     <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
@@ -8166,7 +8166,7 @@
             </div>
 
             <div>
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 10px;">Quick Setup Instructions:</div>
+                <div class="sw-dl-steps-title">Quick Setup Instructions:</div>
                 <div id="swDlSteps">
                     <div class="sw-step-item">
                         <span class="sw-step-num">1</span>
@@ -8182,14 +8182,14 @@
                 <a id="swDlDirectBtn" href="../downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
                     <span>⬇️ Download Full Real Package (ZIP)</span>
                 </a>
-                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim" style="color: #00e699; border-color: rgba(0,230,153,0.4);">
+                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim sw-dl-checkout-btn">
                     <span>💳 Buy &amp; License Instantly via iDEAL</span>
                 </button>
                 <a id="swDlSandboxBtn" href="../demo.html#software" class="sw-btn-sec-sim">
                     <span>⚡ Launch Interactive Simulator</span>
                 </a>
             </div>
-            <div style="text-align: center; margin-top: 14px; font-size: 0.78rem; color: #64748b;">
+            <div class="sw-dl-footer-note">
                 🔒 Digitally Signed &amp; Certified 100% Malware-Free • S&R CoreSync Solutions
             </div>
         </div>
@@ -8202,11 +8202,11 @@
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" onclick="closeSalimLicenseManagerModal()" aria-label="Close modal">&times;</button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                    <span style="font-size: 2.2rem;">🔑</span>
+            <div class="salim-lm-header-bar">
+                <div class="salim-lm-header-title-wrap">
+                    <span class="salim-lm-header-icon">🔑</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); border-color: #c5a880; color: #f7e2bd;">
+                        <span class="sw-badge salim-lm-badge">
                             🔐 Founder &amp; Chief Architect Salim Aziza's Cryptographic Portal
                         </span>
                         <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
@@ -8226,24 +8226,24 @@
                     <div class="salim-lm-stat-lbl">Total Issued Licenses</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #38bdf8;">100%</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-sky">100%</div>
                     <div class="salim-lm-stat-lbl">Offline System Uptime</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #f59e0b;" id="salimTotalRevenueEstimate">€ 756</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-amber" id="salimTotalRevenueEstimate">€ 756</div>
                     <div class="salim-lm-stat-lbl">Estimated License Value</div>
                 </div>
             </div>
 
             <!-- Generate Form -->
             <div class="salim-lm-form-card">
-                <h4 style="margin: 0 0 14px 0; color: #00e699; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                <h4 class="salim-lm-form-title">
                     <span>⚡ Generate New Cryptographic License Key</span>
                 </h4>
                 <form onsubmit="generateSalimLicense(event)">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Target Product / Solution:</label>
+                            <label class="salim-lm-field-label">Target Product / Solution:</label>
                             <select id="salimGenProduct" class="salim-input" title="Target Product or Solution" aria-label="Target Product or Solution">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
@@ -8255,14 +8255,14 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Client / Partner Enterprise:</label>
+                            <label class="salim-lm-field-label">Client / Partner Enterprise:</label>
                             <input id="salimGenClient" type="text" class="salim-input" placeholder="e.g., Heineken International N.V." required>
                         </div>
                     </div>
 
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">License Tier / Duration:</label>
+                            <label class="salim-lm-field-label">License Tier / Duration:</label>
                             <select id="salimGenPlan" class="salim-input" title="License Plan Tier" aria-label="License Plan Tier">
                                 <option value="Annual License (1 Year)">Annual License (1 Year)</option>
                                 <option value="Monthly SaaS (1 Month)">Monthly SaaS (1 Month)</option>
@@ -8270,13 +8270,13 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Hardware Machine ID (Optional):</label>
+                            <label class="salim-lm-field-label">Hardware Machine ID (Optional):</label>
                             <input id="salimGenMachine" type="text" class="salim-input" placeholder="e.g. NL-AMS-SR991 or leave auto">
                         </div>
                     </div>
 
-                    <div style="display: flex; justify-content: flex-end;">
-                        <button type="submit" class="tf-btn" style="background: linear-gradient(135deg, #00e699, #009966); color: #05140e; font-weight: 800; border: none; padding: 10px 22px; border-radius: 10px; cursor: pointer;">
+                    <div class="salim-lm-btn-wrap">
+                        <button type="submit" class="tf-btn salim-lm-submit-btn">
                             <span>Generate &amp; Activate License Key ⚡</span>
                         </button>
                     </div>
@@ -8285,9 +8285,9 @@
 
             <!-- Active License Ledger Table -->
             <div>
-                <h4 style="margin: 0 0 12px 0; color: #f7e2bd; font-size: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                <h4 class="salim-lm-ledger-title">
                     <span>Active License Ledger</span>
-                    <span style="font-size: 0.8rem; color: #94a3b8;">Encrypted &amp; Persisted Locally</span>
+                    <span class="salim-lm-ledger-note">Encrypted &amp; Persisted Locally</span>
                 </h4>
                 <div class="salim-table-wrap">
                     <table class="salim-table">
@@ -8309,7 +8309,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 18px; font-size: 0.78rem; color: #64748b;">
+            <div class="salim-lm-footer-note">
                 🛡️ Software License Management Portal • Exclusively for Salim Aziza, Founder &amp; Chief Architect • S&R CoreSync Solutions
             </div>
         </div>
@@ -8324,10 +8324,10 @@
 
             <!-- 1. Checkout Form View -->
             <div id="checkoutFormView">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                    <span style="font-size: 2.2rem;">💳</span>
+                <div class="checkout-header-row">
+                    <span class="checkout-header-icon">💳</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fde68a;">
+                        <span class="sw-badge checkout-mollie-badge">
                             European Compliant Payment Gateway • Mollie &amp; Stripe SSL
                         </span>
                         <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
@@ -8338,9 +8338,9 @@
 
                 <!-- Order Summary & Dutch BTW Breakdown -->
                 <div class="checkout-order-summary">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <strong id="checkoutItemTitle" style="color: #fff; font-size: 1rem;">S&R TaxSync Desktop v2.4 Pro</strong>
-                        <span id="checkoutItemPrice" style="color: #00e699; font-weight: 800; font-size: 1.1rem;">€ 189.00</span>
+                    <div class="checkout-summary-head">
+                        <strong id="checkoutItemTitle" class="checkout-item-title">S&R TaxSync Desktop v2.4 Pro</strong>
+                        <span id="checkoutItemPrice" class="checkout-item-price">€ 189.00</span>
                     </div>
                     <div class="checkout-price-row">
                         <span>Net Amount (Excl. BTW):</span>
@@ -8352,13 +8352,13 @@
                     </div>
                     <div class="checkout-price-row total-row">
                         <span>Total Due (Incl. BTW 21%):</span>
-                        <span id="checkoutTotalPrice" style="color: #00e699;">€ 189.00</span>
+                        <span id="checkoutTotalPrice" class="checkout-total-price-val">€ 189.00</span>
                     </div>
                 </div>
 
                 <form onsubmit="processSoftwareCheckout(event)">
                     <!-- Payment Methods -->
-                    <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 8px;">Select Payment Method:</div>
+                    <div class="checkout-section-subtitle">Select Payment Method:</div>
                     <div class="checkout-tabs">
                         <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
                             <span>🏦 iDEAL (Netherlands)</span>
@@ -8372,8 +8372,8 @@
                     </div>
 
                     <!-- Dutch iDEAL Banks -->
-                    <div id="checkoutIdealBox" style="margin-bottom: 16px;">
-                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Select Your Dutch Bank:</label>
+                    <div id="checkoutIdealBox" class="checkout-ideal-box">
+                        <label class="salim-lm-field-label">Select Your Dutch Bank:</label>
                         <div class="checkout-bank-grid">
                             <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
                             <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
@@ -8385,10 +8385,10 @@
                     </div>
 
                     <!-- Credit Card -->
-                    <div id="checkoutCardBox" style="display: none; margin-bottom: 16px;">
+                    <div id="checkoutCardBox" class="checkout-hidden-box">
                         <div class="salim-lm-grid-2 mb-2">
                             <input type="text" class="salim-input" placeholder="Card Number (16 digits)">
-                            <div style="display: flex; gap: 8px;">
+                            <div class="checkout-card-row">
                                 <input type="text" class="salim-input" placeholder="MM/YY">
                                 <input type="text" class="salim-input" placeholder="CVC">
                             </div>
@@ -8396,18 +8396,18 @@
                     </div>
 
                     <!-- SEPA Transfer -->
-                    <div id="checkoutSepaBox" style="display: none; margin-bottom: 16px;">
+                    <div id="checkoutSepaBox" class="checkout-hidden-box">
                         <input type="text" class="salim-input" placeholder="IBAN (NLxx ...)">
                     </div>
 
                     <!-- Customer Details -->
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Full Name or Company:</label>
+                            <label class="salim-lm-field-label">Full Name or Company:</label>
                             <input id="checkoutCustName" type="text" class="salim-input" placeholder="Your Name or Enterprise" required>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Email Address (For License &amp; Invoice):</label>
+                            <label class="salim-lm-field-label">Email Address (For License &amp; Invoice):</label>
                             <input id="checkoutCustEmail" type="email" class="salim-input" placeholder="name@company.com" required>
                         </div>
                     </div>
@@ -8416,7 +8416,7 @@
                         <span id="checkoutPayBtnText">Complete Secure Payment &amp; Get License (€ 189.00) 🔒</span>
                     </button>
 
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.76rem; color: #94a3b8;">
+                    <div class="checkout-security-row">
                         <span>🔒 256-bit SSL Encrypted</span>
                         <span>📄 Official Dutch BTW Tax Invoice</span>
                         <span>⚡ Instant Automated Key Delivery</span>
@@ -8425,33 +8425,33 @@
             </div>
 
             <!-- 2. Checkout Success View -->
-            <div id="checkoutSuccessView" style="display: none; text-align: center; padding: 10px 0;">
-                <div style="font-size: 3.5rem; margin-bottom: 8px;">🎉</div>
-                <h3 style="color: #00e699; font-size: 1.4rem; margin-bottom: 6px;">Payment Successful &amp; Digital License Issued!</h3>
-                <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 18px;">
+            <div id="checkoutSuccessView" class="checkout-success-view">
+                <div class="checkout-success-icon">🎉</div>
+                <h3 class="checkout-success-title">Payment Successful &amp; Digital License Issued!</h3>
+                <p class="checkout-success-desc">
                     Thank you for choosing S&R CoreSync Solutions. Your transaction is verified and registered under the Dutch fiscal framework.
                 </p>
 
-                <div style="background: rgba(6, 16, 11, 0.9); border: 1px solid rgba(0, 230, 153, 0.35); border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: left;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">Fiscal Invoice Number:</span>
-                        <strong id="checkoutSuccessInvNum" style="color: #f7e2bd; font-family: monospace;">INV-2026-SR-9481</strong>
+                <div class="checkout-success-card">
+                    <div class="checkout-success-row">
+                        <span class="checkout-success-lbl">Fiscal Invoice Number:</span>
+                        <strong id="checkoutSuccessInvNum" class="checkout-success-inv-num">INV-2026-SR-9481</strong>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">Authentication Status:</span>
-                        <span class="status-badge status-completed" style="font-size: 0.75rem;">Officially Paid &amp; Active ✓</span>
+                    <div class="checkout-success-status-row">
+                        <span class="checkout-success-lbl">Authentication Status:</span>
+                        <span class="status-badge status-completed salim-table-badge">Officially Paid &amp; Active ✓</span>
                     </div>
 
-                    <div style="border-top: 1px dashed rgba(197, 168, 128, 0.3); padding-top: 12px;">
-                        <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 6px;">Your Genuine Digital License Key:</div>
-                        <div class="sw-key-box" style="margin: 0;">
+                    <div class="checkout-success-key-box">
+                        <div class="checkout-success-key-lbl">Your Genuine Digital License Key:</div>
+                        <div class="sw-key-box sw-key-box--nomargin">
                             <span id="checkoutSuccessKey" class="sw-key-code">SRTX-PRO-2026-PAID-98A1</span>
                             <button type="button" class="sw-btn-copy-key" onclick="navigator.clipboard.writeText(document.getElementById('checkoutSuccessKey').textContent); alert('📋 Key copied to clipboard!');">Copy Key 📋</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="sw-action-row" style="margin-top: 0;">
+                <div class="sw-action-row sw-action-row--nomargin">
                     <a id="checkoutSuccessExeBtn" href="../downloads/SR-TaxSync-Setup-v2.4.exe" download="SR-TaxSync-Setup-v2.4.exe" class="sw-btn-exe-dl">
                         <span>🚀 Download Setup Executable (Setup.exe)</span>
                     </a>
@@ -8460,8 +8460,8 @@
                     </a>
                 </div>
 
-                <div style="margin-top: 14px;">
-                    <button type="button" class="sw-btn-sec-sim" style="width: 100%;" onclick="alert('📄 Official BTW tax invoice & license key sent to your email!'); closeSoftwareCheckoutModal();">
+                <div class="checkout-success-action-wrap">
+                    <button type="button" class="sw-btn-sec-sim sw-btn-sec-sim--full" onclick="alert('📄 Official BTW tax invoice & license key sent to your email!'); closeSoftwareCheckoutModal();">
                         <span>Send Official BTW Invoice (PDF) to Email 📧</span>
                     </button>
                 </div>
