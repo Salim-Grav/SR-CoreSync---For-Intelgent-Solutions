@@ -838,6 +838,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -867,6 +868,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -5114,7 +5116,7 @@
                                     <label for="roiSolutionType" class="roi-label">
                                         <span>Gewenste Systeemarchitectuur:</span>
                                     </label>
-                                    <select class="roi-select-custom w-100" id="roiSolutionType" onchange="updateROICalculator()">
+                                    <select class="roi-select-custom w-100" id="roiSolutionType" title="Gewenste Architectuuroplossing" aria-label="Gewenste Architectuuroplossing" onchange="updateROICalculator()">
                                         <option value="0.75" selected>Volledige ERP-integratie + Boekhoudautomatisering (tot 75% besparing)</option>
                                         <option value="0.60">Maatwerk Cloudplatform + Directiedashboards (60% besparing)</option>
                                         <option value="0.85">AI-Automatisering + End-to-End Integraties (tot 85% besparing)</option>
@@ -6852,7 +6854,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="vipPlatform" class="form-label text-white-64 text-caption mb-1">Voorkeursplatform *</label>
-                        <select id="vipPlatform" class="tf-input w-100 form-select-dark">
+                        <select id="vipPlatform" class="tf-input w-100 form-select-dark" title="Voorkeurskanaal voor vergadering" aria-label="Voorkeurskanaal voor vergadering">
                             <option value="Aanvraag Visuele Identiteit / Website / E-commerce Webshop">Aanvraag Visuele Identiteit / Website / E-commerce Webshop</option>
                             <option value="Google Meet">Google Meet (Videovergadering)</option>
                             <option value="Zoom">Zoom Cloud (Videovergadering)</option>
@@ -6869,7 +6871,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="vipTime" class="form-label text-white-64 text-caption mb-1">Voorkeurstijd *</label>
-                        <select id="vipTime" class="tf-input w-100 form-select-dark">
+                        <select id="vipTime" class="tf-input w-100 form-select-dark" title="Voorkeurstijdstip voor sessie" aria-label="Voorkeurstijdstip voor sessie">
                             <option value="11:00 AM (Amsterdam / CET)">11:00 (Amsterdam / CET)</option>
                             <option value="02:00 PM (Amsterdam / CET)">14:00 (Amsterdam / CET)</option>
                             <option value="05:00 PM (Golf-standaardtijd)">17:00 (Golf-standaardtijd)</option>
@@ -7125,7 +7127,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingSessionType">Type Consultatie / Kanaal *</label>
-                        <select id="bookingSessionType" class="sr-exec-select" onchange="togglePackageField()">
+                        <select id="bookingSessionType" class="sr-exec-select" title="Type Consultatiesessie" aria-label="Type Consultatiesessie" onchange="togglePackageField()">
                             <option value="creative">Aanvraag Visuele Identiteit / Website / E-commerce Webshop</option>
                             <option value="online">Online Videoconsultatie (Google Meet / Teams)</option>
                             <option value="phone">Direct WhatsApp / Telefonisch Gesprek</option>
@@ -7134,7 +7136,7 @@
                     </div>
                     <div class="sr-exec-form-group full-width sr-package-group" id="bookingPackageGroup">
                         <label class="sr-exec-label" for="bookingPackage">Gewenst Pakket (Optioneel)</label>
-                        <select id="bookingPackage" class="sr-exec-select">
+                        <select id="bookingPackage" class="sr-exec-select" title="Gewenst Pakket" aria-label="Gewenst Pakket">
                             <option value="">Nog niet besloten — ik wil graag advies</option>
                             <option value="identity">Complete Visuele Identiteit — €590</option>
                             <option value="website">High-Performance Luxe Website — €980</option>
@@ -7149,7 +7151,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingTimeSlot">Gewenst Tijdslot *</label>
-                        <select id="bookingTimeSlot" class="sr-exec-select">
+                        <select id="bookingTimeSlot" class="sr-exec-select" title="Gewenst Tijdslot" aria-label="Gewenst Tijdslot">
                             <option value="morning">Ochtendslot (10:00 - 12:00 CET)</option>
                             <option value="afternoon" selected>Middagslot (13:00 - 15:00 CET)</option>
                             <option value="evening">Avondslot (16:00 - 18:00 CET)</option>
@@ -7216,7 +7218,7 @@
                     <div class="sr-roi-slider-header">
                         <span class="text-white">Huidig Automatiserings- &amp; Systeemniveau:</span>
                     </div>
-                    <select id="roiSystemLevel" class="sr-exec-select" onchange="updateRoiCalc()">
+                    <select id="roiSystemLevel" class="sr-exec-select" title="Huidig Automatiseringsniveau" aria-label="Huidig Automatiseringsniveau" onchange="updateRoiCalc()">
                         <option value="0.36">Handmatig werk of losse spreadsheets (Tot 36% besparingspotentieel)</option>
                         <option value="0.25" selected>Traditionele boekhoudsoftware zonder cloudintegratie (25% besparing)</option>
                         <option value="0.16">Gedeeltelijke cloudtools zonder geavanceerde AI-automatisering (16% besparing)</option>
@@ -8347,7 +8349,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Doelsoftware / Oplossing:</label>
-                            <select id="salimGenProduct" class="salim-input">
+                            <select id="salimGenProduct" class="salim-input" title="Doelsoftware of oplossing" aria-label="Doelsoftware of oplossing">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
                                 <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
@@ -8366,7 +8368,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Licentieperiode / Type:</label>
-                            <select id="salimGenPlan" class="salim-input">
+                            <select id="salimGenPlan" class="salim-input" title="Licentieniveau of periode" aria-label="Licentieniveau of periode">
                                 <option value="Jaarlicentie (Annual 1 Year)">Jaarlicentie (1 Jaar)</option>
                                 <option value="Maandlicentie (Monthly SaaS)">Maandlicentie (1 Maand)</option>
                                 <option value="Levenslang (Lifetime Enterprise)">Levenslange Bedrijfslicentie</option>
