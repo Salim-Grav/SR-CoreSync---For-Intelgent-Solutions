@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة قالب الفواتير وعروض الأسعار • S&R CoreSync Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0c10;
+            --panel-bg: #12161f;
+            --gold-primary: #c5a880;
+            --gold-light: #dfc299;
+            --emerald: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            background: rgba(18, 22, 31, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-emblem {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gold-primary);
+        }
+
+        .brand-titles h1 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .brand-titles p {
+            font-size: 12px;
+            color: var(--gold-light);
+        }
+
+        .actions-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), #a68962);
+            color: #0b0e14;
+        }
+
+        .btn-gold:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-group {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 3px;
+            display: flex;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        .preview-wrapper {
+            flex: 1;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: radial-gradient(circle at 50% 15%, rgba(197, 168, 128, 0.07), transparent 70%);
+        }
+
+        .frame-container {
+            width: 100%;
+            max-width: 680px;
+            transition: max-width 0.3s ease;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            background: #080a0f;
+        }
+
+        .frame-container.mobile {
+            max-width: 390px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 1120px;
+            border: none;
+            display: block;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="brand-info">
+            <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="brand-emblem">
+            <div class="brand-titles">
+                <h1>قالب الفواتير وعروض الأسعار • S&R CoreSync Solutions</h1>
+                <p>مستند رقمي رسمي صادر من الإدارة المالية والتقنية للمنظومة</p>
+            </div>
+        </div>
+
+        <div class="actions-group">
+            <div class="toggle-group">
+                <button type="button" class="toggle-btn active" id="btnQuote" onclick="switchDocType('quote')">📜 عرض سعر</button>
+                <button type="button" class="toggle-btn" id="btnInvoice" onclick="switchDocType('invoice')">💳 فاتورة رسمية</button>
+            </div>
+
+            <div class="toggle-group">
+                <button type="button" class="toggle-btn active" id="btnDesktop" onclick="setDevice('desktop')">💻 سطح المكتب</button>
+                <button type="button" class="toggle-btn" id="btnMobile" onclick="setDevice('mobile')">📱 الهاتف</button>
+            </div>
+
+            <button type="button" class="btn btn-gold" onclick="copyVisualEmail()" title="نسخ محتوى الفاتورة/العرض بكامل تنسيقه للصقه فوراً في Gmail">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                نسخ مرئي لـ Gmail
+            </button>
+
+            <button type="button" class="btn btn-outline" onclick="printDoc()" title="طباعة أو تصدير كملف PDF رسمي">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                طباعة / PDF
+            </button>
+
+            <a href="./templates/invoice-quote-email.html" target="_blank" class="btn btn-outline">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                فتح مستقل
+            </a>
+        </div>
+    </header>
+
+    <main class="preview-wrapper">
+        <div class="frame-container" id="frameBox">
+            <iframe id="emailFrame" src="./templates/invoice-quote-email.html"></iframe>
+        </div>
+    </main>
+
+    <div class="toast-msg" id="toast">✅ تم نسخ القالب بنجاح! الصقه في Gmail بالضغط على Ctrl+V</div>
+
+    <script>
+        function setDevice(device) {
+            const frameBox = document.getElementById('frameBox');
+            const btnDesktop = document.getElementById('btnDesktop');
+            const btnMobile = document.getElementById('btnMobile');
+
+            if (device === 'mobile') {
+                frameBox.classList.add('mobile');
+                btnMobile.classList.add('active');
+                btnDesktop.classList.remove('active');
+            } else {
+                frameBox.classList.remove('mobile');
+                btnDesktop.classList.add('active');
+                btnMobile.classList.remove('active');
+            }
+        }
+
+        function switchDocType(type) {
+            const btnQuote = document.getElementById('btnQuote');
+            const btnInvoice = document.getElementById('btnInvoice');
+            const iframe = document.getElementById('emailFrame');
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+
+            if (!doc) return;
+
+            if (type === 'invoice') {
+                btnInvoice.classList.add('active');
+                btnQuote.classList.remove('active');
+                
+                // Update badge and text inside iframe
+                doc.body.innerHTML = doc.body.innerHTML
+                    .replace(/عرض سعر رسمي معتمد • QUOTE/g, 'فاتورة رقمية رسمية معتمدة • INVOICE')
+                    .replace(/#SR-2026-Q892/g, '#SR-2026-INV-892')
+                    .replace(/صلاحية العرض:/g, 'تاريخ الاستحقاق:')
+                    .replace(/30 يوماً من تاريخه/g, 'فوري عند الاستلام')
+                    .replace(/اعتماد العرض والموافقة على السداد الإلكتروني/g, 'سداد الفاتورة إلكترونياً عبر iDEAL / البطاقة');
+                showToast('✅ تم التحويل إلى وضع: الفاتورة الرسمية (Invoice)');
+            } else {
+                btnQuote.classList.add('active');
+                btnInvoice.classList.remove('active');
+                iframe.src = './templates/invoice-quote-email.html';
+                showToast('✅ تم التحويل إلى وضع: عرض السعر (Quote)');
+            }
+        }
+
+        async function copyVisualEmail() {
+            try {
+                const iframe = document.getElementById('emailFrame');
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const htmlText = doc.documentElement.outerHTML;
+                
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blobHtml = new Blob([htmlText], { type: 'text/html' });
+                    const blobText = new Blob([doc.body.innerText], { type: 'text/plain' });
+                    const item = new ClipboardItem({
+                        'text/html': blobHtml,
+                        'text/plain': blobText
+                    });
+                    await navigator.clipboard.write([item]);
+                    showToast('✅ تم نسخ المستند كقالب مرئي! توجه لـ Gmail واضغط Ctrl+V');
+                } else {
+                    await navigator.clipboard.writeText(htmlText);
+                    showToast('✅ تم نسخ الكود الصافي للحافظة!');
+                }
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+        }
+
+        function printDoc() {
+            const iframe = document.getElementById('emailFrame');
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            if (msg) toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2800);
+        }
+    </script>
+</body>
+</html>
