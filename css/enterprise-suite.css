@@ -4468,5 +4468,177 @@ html[lang="nl"] .salim-table {
     color: #f3dfba;
 }
 
+/* ==========================================================================
+   8. Enterprise Newsletter & Executive Lead Capture Section
+   ========================================================================== */
+
+.sr-newsletter-section {
+    padding: 70px 0 30px;
+    position: relative;
+    z-index: 10;
+}
+
+.sr-newsletter-card {
+    background: radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                rgba(11, 17, 24, 0.94);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    border-radius: 24px;
+    padding: 42px 46px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(197, 168, 128, 0.06);
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+.sr-newsletter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #10b981 0%, #c5a880 50%, #dfc299 100%);
+}
+
+.sr-newsletter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(197, 168, 128, 0.12);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    color: #dfc299;
+    padding: 5px 14px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.sr-newsletter-title {
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.35;
+    margin-bottom: 12px;
+}
+
+.sr-newsletter-subtitle {
+    font-size: 0.95rem;
+    color: rgba(226, 232, 240, 0.8);
+    line-height: 1.7;
+    margin-bottom: 18px;
+    max-width: 580px;
+}
+
+.sr-newsletter-perks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.82rem;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.sr-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sr-newsletter-input-wrap {
+    display: flex;
+    background: rgba(4, 8, 12, 0.85);
+    border: 1.5px solid rgba(197, 168, 128, 0.35);
+    border-radius: 14px;
+    padding: 6px;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.sr-newsletter-input-wrap:focus-within {
+    border-color: #c5a880;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.3), inset 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.sr-newsletter-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.95rem;
+    padding: 10px 16px;
+    font-family: inherit;
+    min-width: 0;
+}
+
+.sr-newsletter-input::placeholder {
+    color: rgba(148, 163, 184, 0.7);
+}
+
+.sr-newsletter-btn {
+    background: linear-gradient(135deg, #c5a880 0%, #a68962 100%);
+    color: #0b0e14;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 800;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sr-newsletter-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(197, 168, 128, 0.35);
+}
+
+.sr-newsletter-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    color: rgba(148, 163, 184, 0.75);
+    padding: 2px 6px;
+}
+
+.sr-newsletter-note svg {
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .sr-newsletter-card {
+        padding: 28px 20px;
+    }
+    .sr-newsletter-input-wrap {
+        flex-direction: column;
+        gap: 8px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+    }
+    .sr-newsletter-input {
+        background: rgba(4, 8, 12, 0.85);
+        border: 1.5px solid rgba(197, 168, 128, 0.35);
+        border-radius: 12px;
+        padding: 12px 14px;
+    }
+    .sr-newsletter-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 13px;
+    }
+}
+
 
 
