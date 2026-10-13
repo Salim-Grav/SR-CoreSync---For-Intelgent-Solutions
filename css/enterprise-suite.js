@@ -4316,6 +4316,30 @@
             };
         }
 
+        const exeBtn = document.getElementById('swDlExeBtn');
+        if (exeBtn) {
+            if (sw.id === 'taxsync') {
+                exeBtn.style.display = 'inline-flex';
+                exeBtn.href = 'downloads/SR-TaxSync-Setup-v2.4.exe';
+                exeBtn.setAttribute('download', 'SR-TaxSync-Setup-v2.4.exe');
+                exeBtn.onclick = function() {
+                    if (typeof showFloatingToast === 'function') {
+                        showFloatingToast('🚀 بدأ تنزيل مثبت الويندوز المباشر (Setup.exe) بنجاح!');
+                    }
+                };
+            } else {
+                exeBtn.style.display = 'none';
+            }
+        }
+
+        const checkoutBtn = document.getElementById('swDlCheckoutBtn');
+        if (checkoutBtn) {
+            checkoutBtn.onclick = function() {
+                window.closeSoftwareDownloadModal();
+                window.openSoftwareCheckoutModal(sw.id);
+            };
+        }
+
         const simBtn = document.getElementById('swDlSandboxBtn');
         if (simBtn) {
             simBtn.href = sw.sandboxUrl;
@@ -4372,6 +4396,240 @@
             }
         }
         if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('switch');
+    };
+
+    // =========================================================================
+    // Suggestion 1: Salim's Software License Manager Portal
+    // =========================================================================
+    const DEFAULT_SALIM_LICENSES = [
+        { key: 'SRTX-PRO-2026-X892-OFFLINE', client: 'Heineken International N.V.', product: 'TaxSync Desktop', plan: 'سنوي (Annual)', expiry: '2027-10-15', status: 'نشط ومفعل', machine: 'NL-AMS-SR991' },
+        { key: 'SRPOS-POS-2026-P881-CLOUD', client: 'De Koffie Salon Amsterdam', product: 'CloudPOS Connector', plan: 'شهري (Monthly)', expiry: '2026-11-30', status: 'نشط ومفعل', machine: 'POS-TERM-04' },
+        { key: 'SRVLT-AES256-2026-V200-MIL', client: 'AWT Group Netherlands', product: 'SecureVault B2B', plan: 'دائم (Lifetime)', expiry: 'مدى الحياة', status: 'نشط ومفعل', machine: 'AMS-SRV-SEC01' },
+        { key: 'SRSDK-DEV-2026-S120-REST', client: 'Fintech Solutions Dubai', product: 'Financial AI SDK', plan: 'شهري (50k Calls)', expiry: '2026-12-01', status: 'نشط ومفعل', machine: 'API-CL-992' }
+    ];
+
+    window.getSalimLicenses = function() {
+        try {
+            const raw = localStorage.getItem('sr_salim_licenses');
+            if (raw) return JSON.parse(raw);
+        } catch(e) {}
+        return DEFAULT_SALIM_LICENSES;
+    };
+
+    window.saveSalimLicenses = function(list) {
+        try {
+            localStorage.setItem('sr_salim_licenses', JSON.stringify(list));
+        } catch(e) {}
+    };
+
+    window.renderSalimLicensesTable = function() {
+        const tbody = document.getElementById('salimLicensesTableBody');
+        if (!tbody) return;
+        const list = window.getSalimLicenses();
+        
+        tbody.innerHTML = list.map((lic, idx) => `
+            <tr>
+                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">${lic.key}</td>
+                <td style="font-weight: 600;">${lic.product}</td>
+                <td>${lic.client}</td>
+                <td><span style="color:#a3c2b3;">${lic.plan}</span></td>
+                <td><span style="color:#94a3b8; font-size:0.8rem;">${lic.expiry}</span></td>
+                <td><span class="status-badge ${lic.status === 'نشط ومفعل' ? 'status-completed' : 'status-in-progress'}" style="font-size:0.75rem;">${lic.status}</span></td>
+                <td>
+                    <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;" onclick="navigator.clipboard.writeText('${lic.key}'); alert('🔑 تم نسخ مفتاح: ${lic.key}');">نسخ 📋</button>
+                    <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem; color:#f87171; border-color:rgba(248,113,113,0.3);" onclick="revokeSalimLicense(${idx})">إلغاء ✕</button>
+                </td>
+            </tr>
+        `).join('');
+
+        const countEl = document.getElementById('salimTotalLicensesCount');
+        if (countEl) countEl.textContent = list.length;
+        const revEl = document.getElementById('salimTotalRevenueEstimate');
+        if (revEl) revEl.textContent = '€ ' + (list.length * 189).toLocaleString();
+    };
+
+    window.openSalimLicenseManagerModal = function() {
+        const modal = document.getElementById('salimLicenseManagerModal');
+        if (!modal) return;
+        window.renderSalimLicensesTable();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('open');
+    };
+
+    window.closeSalimLicenseManagerModal = function() {
+        const modal = document.getElementById('salimLicenseManagerModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('close');
+    };
+
+    window.generateSalimLicense = function(e) {
+        if (e) e.preventDefault();
+        const prod = document.getElementById('salimGenProduct')?.value || 'TaxSync Desktop';
+        const client = document.getElementById('salimGenClient')?.value.trim() || 'Enterprise Client';
+        const plan = document.getElementById('salimGenPlan')?.value || 'سنوي (Annual)';
+        const machine = document.getElementById('salimGenMachine')?.value.trim() || 'NODE-ANY';
+
+        const prefix = prod.includes('TaxSync') ? 'SRTX' : (prod.includes('POS') ? 'SRPOS' : (prod.includes('Vault') ? 'SRVLT' : 'SRCORE'));
+        const randHex = Math.random().toString(16).substring(2, 6).toUpperCase();
+        const randHex2 = Math.random().toString(16).substring(2, 6).toUpperCase();
+        const key = `${prefix}-PRO-2026-${randHex}-${randHex2}`;
+
+        const newLic = {
+            key: key,
+            client: client,
+            product: prod,
+            plan: plan,
+            expiry: plan.includes('دائم') ? 'مدى الحياة' : '2027-10-15',
+            status: 'نشط ومفعل',
+            machine: machine
+        };
+
+        const list = window.getSalimLicenses();
+        list.unshift(newLic);
+        window.saveSalimLicenses(list);
+        window.renderSalimLicensesTable();
+
+        alert(`🎉 تم توليد وحفظ الترخيص الرقمي بنجاح للمؤسس م. سليم:\n\n🔑 المفتاح: ${key}\n👤 العميل: ${client}\n📦 المنتج: ${prod}`);
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('success');
+    };
+
+    window.revokeSalimLicense = function(idx) {
+        const list = window.getSalimLicenses();
+        if (confirm(`هل أنت متأكد من إلغاء ترخيص (${list[idx]?.key})؟`)) {
+            list[idx].status = 'ملغي / Revoked';
+            window.saveSalimLicenses(list);
+            window.renderSalimLicensesTable();
+        }
+    };
+
+    // =========================================================================
+    // Suggestion 3: Mollie & Stripe European Payment Gateway Checkout
+    // =========================================================================
+    let currentCheckoutSoftware = null;
+    let selectedPaymentMethod = 'ideal';
+
+    window.openSoftwareCheckoutModal = function(softwareId) {
+        const sw = window.REAL_SOFTWARE_CATALOG[softwareId] || window.REAL_SOFTWARE_CATALOG.taxsync;
+        currentCheckoutSoftware = sw;
+        const modal = document.getElementById('softwareCheckoutModal');
+        if (!modal) return;
+
+        const titleEl = document.getElementById('checkoutItemTitle');
+        const priceEl = document.getElementById('checkoutItemPrice');
+        const netEl = document.getElementById('checkoutNetPrice');
+        const vatEl = document.getElementById('checkoutVatAmount');
+        const totalEl = document.getElementById('checkoutTotalPrice');
+        const btnTextEl = document.getElementById('checkoutPayBtnText');
+
+        if (titleEl) titleEl.textContent = sw.title + ' (' + sw.ver + ')';
+        if (priceEl) priceEl.textContent = sw.price;
+
+        const rawP = sw.rawPrice || 189;
+        const netP = (rawP / 1.21).toFixed(2);
+        const vatP = (rawP - parseFloat(netP)).toFixed(2);
+
+        if (netEl) netEl.textContent = '€ ' + netP.replace('.', ',');
+        if (vatEl) vatEl.textContent = '€ ' + vatP.replace('.', ',');
+        if (totalEl) totalEl.textContent = '€ ' + rawP.toFixed(2).replace('.', ',');
+        if (btnTextEl) btnTextEl.textContent = `إتمام الدفع الآمن واستلام الترخيص فوراً (€ ${rawP})`;
+
+        const formView = document.getElementById('checkoutFormView');
+        const successView = document.getElementById('checkoutSuccessView');
+        if (formView) formView.style.display = '';
+        if (successView) successView.style.display = 'none';
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('open');
+    };
+
+    window.closeSoftwareCheckoutModal = function() {
+        const modal = document.getElementById('softwareCheckoutModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('close');
+    };
+
+    window.switchCheckoutMethod = function(method, btn) {
+        selectedPaymentMethod = method;
+        document.querySelectorAll('.checkout-tab-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+
+        const idealBox = document.getElementById('checkoutIdealBox');
+        const cardBox = document.getElementById('checkoutCardBox');
+        const sepaBox = document.getElementById('checkoutSepaBox');
+
+        if (idealBox) idealBox.style.display = method === 'ideal' ? '' : 'none';
+        if (cardBox) cardBox.style.display = method === 'card' ? '' : 'none';
+        if (sepaBox) sepaBox.style.display = method === 'sepa' ? '' : 'none';
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('switch');
+    };
+
+    window.selectIdealBank = function(bankName, el) {
+        document.querySelectorAll('.checkout-bank-pill').forEach(p => p.classList.remove('active'));
+        if (el) el.classList.add('active');
+    };
+
+    window.processSoftwareCheckout = function(e) {
+        if (e) e.preventDefault();
+        const btn = document.getElementById('checkoutSubmitBtn');
+        const btnText = document.getElementById('checkoutPayBtnText');
+        const sw = currentCheckoutSoftware || window.REAL_SOFTWARE_CATALOG.taxsync;
+
+        const custName = document.getElementById('checkoutCustName')?.value || 'Valued Client';
+        const custEmail = document.getElementById('checkoutCustEmail')?.value || 'client@company.nl';
+
+        if (btn) btn.disabled = true;
+        if (btnText) btnText.innerHTML = '⏳ جاري التفويض الآمن مع البنك الهولندي عبر بروتوكول 3D Secure...';
+
+        setTimeout(() => {
+            if (btn) btn.disabled = false;
+            
+            const formView = document.getElementById('checkoutFormView');
+            const successView = document.getElementById('checkoutSuccessView');
+            if (formView) formView.style.display = 'none';
+            if (successView) successView.style.display = '';
+
+            const invNum = 'INV-2026-SR-' + Math.floor(1000 + Math.random() * 9000);
+            const randHex = Math.random().toString(16).substring(2, 6).toUpperCase();
+            const genKey = `${sw.id.toUpperCase()}-PRO-2026-PAID-${randHex}`;
+
+            const resInv = document.getElementById('checkoutSuccessInvNum');
+            const resKey = document.getElementById('checkoutSuccessKey');
+            const resExe = document.getElementById('checkoutSuccessExeBtn');
+            const resZip = document.getElementById('checkoutSuccessZipBtn');
+
+            if (resInv) resInv.textContent = invNum;
+            if (resKey) resKey.textContent = genKey;
+            if (resExe) {
+                resExe.href = sw.id === 'taxsync' ? 'downloads/SR-TaxSync-Setup-v2.4.exe' : sw.downloadFile;
+                resExe.setAttribute('download', sw.id === 'taxsync' ? 'SR-TaxSync-Setup-v2.4.exe' : sw.fileName);
+            }
+            if (resZip) {
+                resZip.href = sw.downloadFile;
+                resZip.setAttribute('download', sw.fileName);
+            }
+
+            const list = window.getSalimLicenses();
+            list.unshift({
+                key: genKey,
+                client: custName + ' (' + custEmail + ')',
+                product: sw.title,
+                plan: 'مدفوع عبر ' + selectedPaymentMethod.toUpperCase(),
+                expiry: '2027-10-15',
+                status: 'نشط ومفعل',
+                machine: 'ONLINE-PAYMENT-' + invNum
+            });
+            window.saveSalimLicenses(list);
+
+            if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('success');
+        }, 1200);
     };
 
     // Override init with extended version
