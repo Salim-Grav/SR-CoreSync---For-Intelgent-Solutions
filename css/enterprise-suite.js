@@ -3878,9 +3878,17 @@
         updateSliderTrack(hoursSlider);
         updateSliderTrack(salarySlider);
 
+        const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
+        const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || (typeof CURRENCIES !== 'undefined' && CURRENCIES[curCode]) || { symbol: '€', rate: 1, name: 'Euro' };
+
+        document.querySelectorAll('.roi-currency-pill').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.currency === curCode);
+        });
+
         const teamSize = parseInt(teamSlider.value, 10) || 15;
         const manualHours = parseInt(hoursSlider.value, 10) || 8;
-        const hourlyRate = parseFloat(salarySlider.value) || 28;
+        const hourlyRateEur = parseFloat(salarySlider.value) || 28;
+        const convertedRate = Math.round(hourlyRateEur * cur.rate);
         const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
 
         document.querySelectorAll('.roi-preset-btn').forEach(btn => {
@@ -3902,27 +3910,33 @@
 
         const salaryValBadge = document.getElementById('roiAvgSalaryVal');
         if (salaryValBadge) {
-            salaryValBadge.textContent = isAr ? `€${hourlyRate} / ساعة` : (isNl ? `€${hourlyRate} / uur` : `€${hourlyRate} / hr`);
+            salaryValBadge.textContent = isAr ? `${cur.symbol} ${convertedRate} / ساعة` : (isNl ? `${cur.symbol} ${convertedRate} / uur` : `${cur.symbol} ${convertedRate} / hr`);
+        }
+
+        const salaryScale = document.getElementById('roiSalaryScaleLabels');
+        if (salaryScale) {
+            salaryScale.innerHTML = `<span>${cur.symbol}${Math.round(15 * cur.rate)}</span><span>${cur.symbol}${Math.round(45 * cur.rate)}</span><span>${cur.symbol}${Math.round(80 * cur.rate)}+</span>`;
         }
 
         const totalHours = teamSize * manualHours * 52;
         const hoursSaved = Math.round(totalHours * efficiencyRate);
-        const annualSavings = Math.round(hoursSaved * hourlyRate);
+        const annualSavingsEur = Math.round(hoursSaved * hourlyRateEur);
+        const convertedSavings = Math.round(annualSavingsEur * cur.rate);
 
-        let baseCost = 10000;
-        if (teamSize <= 10) baseCost = 7500;
-        else if (teamSize <= 30) baseCost = 13500;
-        else if (teamSize <= 70) baseCost = 22000;
-        else baseCost = 35000;
+        let baseCostEur = 10000;
+        if (teamSize <= 10) baseCostEur = 7500;
+        else if (teamSize <= 30) baseCostEur = 13500;
+        else if (teamSize <= 70) baseCostEur = 22000;
+        else baseCostEur = 35000;
 
-        const monthlySavings = annualSavings / 12;
-        let paybackMonths = (baseCost / (monthlySavings || 1)).toFixed(1);
+        const monthlySavingsEur = annualSavingsEur / 12;
+        let paybackMonths = (baseCostEur / (monthlySavingsEur || 1)).toFixed(1);
         if (paybackMonths < 0.8) paybackMonths = "0.8";
         if (paybackMonths > 6.0) paybackMonths = "5.5";
 
         const savingsElem = document.getElementById('roiAnnualSavings');
         if (savingsElem) {
-            savingsElem.innerHTML = `<span>€</span>${annualSavings.toLocaleString('en-US')}`;
+            savingsElem.innerHTML = `<span>${cur.symbol}</span>${convertedSavings.toLocaleString('en-US')}`;
         }
 
         const hoursSavedElem = document.getElementById('roiHoursSaved');
@@ -3948,6 +3962,112 @@
         if (!slider) return;
         slider.value = size;
         window.updateROICalculator();
+    };
+
+    window.openRoiPdfModal = function() {
+        const modal = document.getElementById('roiPdfModal');
+        if (!modal) return;
+
+        const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
+        const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || (typeof CURRENCIES !== 'undefined' && CURRENCIES[curCode]) || { symbol: '€', rate: 1 };
+
+        const teamSlider = document.getElementById('roiCompanySize');
+        const hoursSlider = document.getElementById('roiManualHours');
+        const salarySlider = document.getElementById('roiAvgSalary');
+        const solutionSelect = document.getElementById('roiSolutionType');
+
+        const teamSize = teamSlider ? parseInt(teamSlider.value, 10) : 15;
+        const manualHours = hoursSlider ? parseInt(hoursSlider.value, 10) : 8;
+        const hourlyRateEur = salarySlider ? parseFloat(salarySlider.value) : 28;
+        const convertedRate = Math.round(hourlyRateEur * cur.rate);
+        const efficiencyRate = solutionSelect ? parseFloat(solutionSelect.value) : 0.75;
+        const solutionText = solutionSelect && solutionSelect.options[solutionSelect.selectedIndex] ? solutionSelect.options[solutionSelect.selectedIndex].text : 'تكامل ERP كامل + أتمتة محاسبية';
+
+        const totalHours = teamSize * manualHours * 52;
+        const hoursSaved = Math.round(totalHours * efficiencyRate);
+        const annualSavingsEur = Math.round(hoursSaved * hourlyRateEur);
+        const convertedSavings = Math.round(annualSavingsEur * cur.rate);
+
+        const paybackElem = document.getElementById('roiPaybackMonths');
+        const paybackMonths = paybackElem ? paybackElem.textContent.trim() : '1.2 شهر';
+
+        const dateEl = document.getElementById('roiPdfDate');
+        if (dateEl) {
+            const now = new Date();
+            dateEl.textContent = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        const refEl = document.getElementById('roiPdfRef');
+        if (refEl && !refEl.dataset.initialized) {
+            refEl.textContent = `REF-CS-ROI-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+            refEl.dataset.initialized = 'true';
+        }
+
+        const teamEl = document.getElementById('roiPdfTeamVal');
+        if (teamEl) teamEl.textContent = `${teamSize} موظفاً (${teamSize <= 10 ? 'فريق ناشئ' : teamSize <= 30 ? 'شركة نامية' : teamSize <= 70 ? 'مؤسسة متوسطة' : 'شركة كبرى'})`;
+
+        const hoursEl = document.getElementById('roiPdfHoursVal');
+        if (hoursEl) hoursEl.textContent = `${manualHours} ساعات / أسبوع لكل موظف`;
+
+        const salaryEl = document.getElementById('roiPdfSalaryVal');
+        if (salaryEl) salaryEl.textContent = `${cur.symbol} ${convertedRate} / ساعة`;
+
+        const solEl = document.getElementById('roiPdfSolutionVal');
+        if (solEl) solEl.textContent = solutionText;
+
+        const hoursSavedEl = document.getElementById('roiPdfHoursSavedVal');
+        if (hoursSavedEl) hoursSavedEl.textContent = `${hoursSaved.toLocaleString('en-US')} ساعة/سنة`;
+
+        const effEl = document.getElementById('roiPdfEffGainVal');
+        if (effEl) effEl.textContent = `+${Math.round(efficiencyRate * 100)}%`;
+
+        const paybackEl = document.getElementById('roiPdfPaybackVal');
+        if (paybackEl) paybackEl.textContent = `${paybackMonths} فقط بعد الإطلاق`;
+
+        const savingsEl = document.getElementById('roiPdfSavingsVal');
+        if (savingsEl) savingsEl.textContent = `${cur.symbol} ${convertedSavings.toLocaleString('en-US')}`;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('open');
+    };
+
+    window.closeRoiPdfModal = function() {
+        const modal = document.getElementById('roiPdfModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('close');
+    };
+
+    window.printRoiReport = function() {
+        window.print();
+    };
+
+    window.shareRoiPdfWhatsApp = function() {
+        const clientName = document.getElementById('roiPdfClientName') ? document.getElementById('roiPdfClientName').value.trim() : 'مجموعة الشريك التجاري';
+        const savingsEl = document.getElementById('roiPdfSavingsVal');
+        const savings = savingsEl ? savingsEl.textContent.trim() : '';
+        const hoursSavedEl = document.getElementById('roiPdfHoursSavedVal');
+        const hours = hoursSavedEl ? hoursSavedEl.textContent.trim() : '';
+        const teamEl = document.getElementById('roiPdfTeamVal');
+        const team = teamEl ? teamEl.textContent.trim() : '';
+        const paybackEl = document.getElementById('roiPdfPaybackVal');
+        const payback = paybackEl ? paybackEl.textContent.trim() : '';
+
+        const msg = `*تقرير دراسة الجدوى الاستثمارية والوفر السنوي - S&R CoreSync Solutions*\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `🏢 *الشركة:* ${clientName}\n` +
+                    `👥 *حجم الفريق:* ${team}\n` +
+                    `💰 *صافي الوفر المالي السنوي المتوقع:* ${savings}\n` +
+                    `⏱️ *الساعات المستردة سنوياً:* ${hours}\n` +
+                    `📈 *فترة استرداد رأس المال:* ${payback}\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `_تم استخراج التقرير عبر Smart ROI Engine المعتمد لشركة S&R CoreSync Solutions_`;
+
+        const waUrl = `https://wa.me/31687764998?text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, '_blank');
     };
 
     // Override init with extended version
