@@ -46,7 +46,7 @@
 # ------------------------------------------------------------------------------
 # 3. PROTECT SENSITIVE FILES & CONFIGURATIONS
 # ------------------------------------------------------------------------------
-<FilesMatch "(^\.env|\.git|payment-gateways\.json|\.json$|\.ps1$|\.log$)">
+<FilesMatch "(^\.env|\.git|payment-gateways\.json|package(-lock)?\.json|\.ps1$|\.log$|\.sh$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>
