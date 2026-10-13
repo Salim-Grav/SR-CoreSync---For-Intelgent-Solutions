@@ -998,10 +998,27 @@
             <!-- الكرة المركزية الزرقاء المضيئة -->
             <circle cx="50" cy="50" r="33.5" fill="url(#officialOrbGrad)" stroke="url(#officialBorderGrad)" stroke-width="1.25" />
 
+            <!-- النجمة الملكية ثلاثية الأبعاد (3D Faceted Star) -->
+            <g transform="translate(50, 28) scale(0.22)" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.7))">
+              <polygon points="0,0 0,-30 -7.8,-9.5" fill="#ffffff" />
+              <polygon points="0,0 0,-30 7.8,-9.5" fill="${color2}" />
+              <polygon points="0,0 28.5,-9.3 7.8,-9.5" fill="#ffffff" />
+              <polygon points="0,0 28.5,-9.3 17.6,5.8" fill="${color2}" />
+              <polygon points="0,0 17.6,24.3 17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 17.6,24.3 0,11.5" fill="${color2}" />
+              <polygon points="0,0 -17.6,24.3 0,11.5" fill="${color2}" />
+              <polygon points="0,0 -17.6,24.3 -17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 -28.5,-9.3 -17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 -28.5,-9.3 -7.8,-9.5" fill="#ffffff" />
+            </g>
+
             <!-- المونوغرام S&R بالخط الكلاسيكي الفاخر المتناسق بتباعد متوازن -->
-            <text x="35" y="56.5" font-family="'Playfair Display', 'Times New Roman', serif" font-size="28" font-weight="800" fill="#ffffff" text-anchor="middle">S</text>
-            <text x="49.5" y="52" font-family="'Playfair Display', 'Times New Roman', serif" font-size="14" font-weight="800" fill="${color1}" text-anchor="middle">&amp;</text>
-            <text x="64.5" y="56.5" font-family="'Playfair Display', 'Times New Roman', serif" font-size="28" font-weight="800" fill="#ffffff" text-anchor="middle">R</text>
+            <text x="35" y="56" font-family="'Playfair Display', 'Times New Roman', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">S</text>
+            <text x="49.5" y="51.5" font-family="'Playfair Display', 'Times New Roman', serif" font-style="italic" font-size="16" font-weight="700" fill="${color1}" text-anchor="middle">&amp;</text>
+            <text x="64.5" y="56" font-family="'Playfair Display', 'Times New Roman', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">R</text>
+
+            <!-- عبارة CORESYNC الرسمية أسفل الأحرف -->
+            <text x="50" y="68.5" font-family="'Playfair Display', 'Cinzel', serif" font-size="4.2" font-weight="700" letter-spacing="1.2px" fill="${color1}" text-anchor="middle">CORESYNC</text>
           </g>
         `;
       } else if (currentVariant === 4) {
