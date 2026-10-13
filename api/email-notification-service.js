@@ -112,7 +112,7 @@ class EmailNotificationService {
 
     <div class="footer">
       S&amp;R CoreSync Solutions B.V. • Keizersgracht, 1016 Amsterdam, Nederland<br>
-      Voor technische ondersteuning: <a href="mailto:info@sr-coresync.com" style="color:#c5a880;">info@sr-coresync.com</a> of WhatsApp: +31 6 87764998.<br>
+      Voor technische ondersteuning: <a href="mailto:info@sr-coresync.com" style="color:#c5a880;">info@sr-coresync.com</a> of WhatsApp: +31 6 1811 1116.<br>
       Dit document geldt als officieel digitaal betalingsbewijs conform de Nederlandse belastingwetgeving.
     </div>
   </div>
