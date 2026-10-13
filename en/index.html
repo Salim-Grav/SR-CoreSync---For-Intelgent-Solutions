@@ -5742,6 +5742,47 @@
             </div>
         </section>
 
+        <!-- Executive Newsletter & Demo Access Section -->
+        <section class="sr-newsletter-section" id="newsletter" aria-labelledby="newsletterHeadingEn">
+            <div class="container">
+                <div class="sr-newsletter-card">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-7">
+                            <div class="sr-newsletter-badge">
+                                <span class="live-dot" style="width:8px;height:8px;border-radius:50%;background:#e2c8a2;display:inline-block;"></span>
+                                <span>Executive Digital Briefing 2026</span>
+                            </div>
+                            <h2 class="sr-newsletter-title" id="newsletterHeadingEn">
+                                Join the <span class="gold-gradient-text" style="color:#dfc299;">S&R CoreSync</span> Elite Network
+                            </h2>
+                            <p class="sr-newsletter-subtitle">
+                                Receive monthly corporate ROI benchmarks, European cloud tax (BTW/VAT) automation updates, and exclusive enterprise sandbox access directly to your inbox.
+                            </p>
+                            <div class="sr-newsletter-perks">
+                                <span>✓ Instant Sandbox Access</span>
+                                <span>✓ Cloud Transformation Playbook</span>
+                                <span>✓ Direct Executive Advisory</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5 mt-4 mt-lg-0">
+                            <form class="sr-newsletter-form" id="newsletterFormEn" onsubmit="handleNewsletterSubmitEn(event)">
+                                <div class="sr-newsletter-input-wrap">
+                                    <input type="email" id="subscriberEmailEn" class="sr-newsletter-input" placeholder="Enter corporate email (name@company.com)" required aria-label="Corporate Email Address" />
+                                    <button type="submit" class="sr-newsletter-btn" id="newsletterBtnSubmitEn">
+                                        <span>Subscribe Free ←</span>
+                                    </button>
+                                </div>
+                                <div class="sr-newsletter-note">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <span>We respect your privacy under EU GDPR regulations. Strictly zero spam.</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 10. الفوتر الأصلي الفاخر (Footer Original) -->
         <footer class="tf-footer tf-footer--original">
             <div class="footer-stars" aria-hidden="true"></div>
@@ -8474,6 +8515,37 @@
         </div>
     </div>
 
+    <script>
+        function handleNewsletterSubmitEn(e) {
+            e.preventDefault();
+            var emailInput = document.getElementById('subscriberEmailEn');
+            var email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                var leads = JSON.parse(localStorage.getItem('sr_newsletter_leads') || '[]');
+                if (leads.indexOf(email) === -1) leads.push(email);
+                localStorage.setItem('sr_newsletter_leads', JSON.stringify(leads));
+            } catch(err) {}
+
+            var btn = document.getElementById('newsletterBtnSubmitEn');
+            if (btn) {
+                btn.innerHTML = '<span>Subscribed Successfully ✓</span>';
+                btn.style.background = '#10b981';
+                btn.style.color = '#ffffff';
+            }
+
+            setTimeout(function() {
+                alert('🎉 Welcome to S&R CoreSync Solutions!\n\nYour executive onboarding briefing has been queued for: ' + email + '\n\nYou may now explore the live cloud sandbox or book an executive advisory session.');
+                if (emailInput) emailInput.value = '';
+                if (btn) {
+                    btn.innerHTML = '<span>Subscribe Free ←</span>';
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }
+            }, 300);
+        }
+    </script>
     <script src="../css/enterprise-suite.min.js"></script>
 </body>
 </html>

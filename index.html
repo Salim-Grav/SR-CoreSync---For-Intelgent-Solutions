@@ -10838,6 +10838,37 @@
     </div>
 
     <!-- محرك الخدمات والأنظمة المؤسسية الذكية -->
+    <script>
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            var emailInput = document.getElementById('subscriberEmail');
+            var email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                var leads = JSON.parse(localStorage.getItem('sr_newsletter_leads') || '[]');
+                if (leads.indexOf(email) === -1) leads.push(email);
+                localStorage.setItem('sr_newsletter_leads', JSON.stringify(leads));
+            } catch(err) {}
+
+            var btn = document.getElementById('newsletterBtnSubmit');
+            if (btn) {
+                btn.innerHTML = '<span>تم الاشتراك بنجاح ✓</span>';
+                btn.style.background = '#10b981';
+                btn.style.color = '#ffffff';
+            }
+
+            setTimeout(function() {
+                alert('🎉 تهانينا! تم تسجيل اشتراككم بنجاح في مجتمع S&R CoreSync Solutions.\n\nتم تجهيز حزمة الترحيب الرسمية وإرسالها إلى: ' + email + '\n\nيمكنكم الآن تصفح النظام التجريبي السحابي أو حجز استشارة تنفيذية.');
+                if (emailInput) emailInput.value = '';
+                if (btn) {
+                    btn.innerHTML = '<span>اشتراك فوري ←</span>';
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }
+            }, 300);
+        }
+    </script>
     <script src="./css/enterprise-suite.min.js"></script>
 </body>
 </html>
