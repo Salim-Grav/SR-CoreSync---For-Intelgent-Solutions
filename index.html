@@ -6598,75 +6598,136 @@
         <!-- ======================================================== -->
         <!-- 7.5. سوق البرمجيات الحصرية وحلول التطبيقات (Software Hub & Store) -->
         <!-- ======================================================== -->
+        <!-- ======================================================== -->
+        <!-- 7.8. سوق البرمجيات الحصرية ومختبر حلول التطبيقات (Section Software Marketplace & Lab) -->
+        <!-- ======================================================== -->
         <section class="flat-spacing section-software-hub" id="software-hub" data-section>
             <div class="container">
-                <div class="s-header text-center mb-5">
+                <div class="s-header text-center mb-4">
                     <span class="about-hero-tag font-latin mb-2 software-hub-tag">
-                        S&R EXCLUSIVE SOFTWARE PRODUCTS • READY TO DEPLOY
+                        S&R EXCLUSIVE SOFTWARE PRODUCTS &amp; ARCHITECT LAB • READY TO DEPLOY
                     </span>
                     <h2 class="text-display-2 letter-space--3 mb-3 text-white">
-                        سوق البرمجيات الحصرية وحلول التطبيقات
+                        سوق البرمجيات الحصرية ومختبر حلول التطبيقات
                     </h2>
                     <p class="desc text-white-64 mx-auto software-hub-desc">
-                        برمجيات سطح مكتب مستقلة، تطبيقات هاتف ذكية، وأدوات ربط محاسبي ولوازم تشفير مطورة حصرياً لشركتنا، متاحة للشراء والترخيص الرقمي الفوري مع فترات تجربة مجانية.
+                        منظومة برمجيات مستقلة مطورة حصرياً لشركتنا بإشراف م. سليم عزيزة وأ. رائد كعكة. برامج محاسبية وضريبية أوفلاين، حزم مطورين وذكاء اصطناعي، وبوابة نشر وتوزيع مشاريع المطور بتراخيص رقمية معتمدة وتحميل فوري مباشر على جهازكم.
                     </p>
                 </div>
 
-                <!-- شبكة كروت المنتجات البرمجية الخمس -->
-                <div class="row g-4 mb-5">
+                <!-- شريط التبويب والفصل المعماري المستقل -->
+                <div class="software-filter-bar">
+                    <button type="button" class="software-filter-pill active" onclick="filterSoftwareMarketplace('all', this)">
+                        <span>🗂️ جميع البرمجيات والأنظمة</span>
+                        <span class="pill-count">6 منتجات</span>
+                    </button>
+                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('accounting', this)">
+                        <span>📊 الحلول المحاسبية والمالية المستقلة</span>
+                        <span class="pill-count">3 حلول</span>
+                    </button>
+                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('developer', this)">
+                        <span>💻 برمجيات المطورين والسحابة والـ SDK</span>
+                        <span class="pill-count">3 أدوات</span>
+                    </button>
+                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('lab', this)">
+                        <span>🚀 مختبر مشاريع المؤسس م. سليم</span>
+                        <span class="pill-count">حصري</span>
+                    </button>
+                </div>
+
+                <!-- شبكة كروت المنتجات البرمجية المنظمة بدقة 3x2 -->
+                <div class="row g-4 mb-4" id="softwareGridContainer">
                     
                     <!-- 1. S&R TaxSync Desktop -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card">
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="accounting">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--featured">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="software-card-icon">💻</span>
-                                    <span class="status-badge status-completed software-card-badge">الأكثر طلباً ★</span>
+                                    <span class="status-badge status-completed software-card-badge">الأكثر طلباً ★ • Offline Desktop</span>
                                 </div>
                                 <h4 class="text-white fw-bold mb-1 software-card-title">S&R TaxSync Desktop</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
-                                    v2.4 Pro • Windows 11/10 & macOS
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    v2.4 Pro • Windows 11/10 (64-bit) &amp; macOS
                                 </div>
                                 <p class="text-white-64 software-card-desc">
-                                    برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين لحساب ضريبة BTW/VAT 21% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية.
+                                    برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين لحساب ضريبة BTW/VAT 21% و 9% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية وفق معايير Belastingdienst.
                                 </p>
                                 <ul class="software-card-specs">
-                                    <li>✓ تشفير البيانات محلياً دون اتصال</li>
-                                    <li>✓ تقارير BTW جاهزة للتدقيق المالي</li>
-                                    <li>✓ طباعة فواتير EN 16931 متوافقة</li>
+                                    <li>✓ تشفير البيانات والعمليات محلياً دون اتصال</li>
+                                    <li>✓ توليد وتصدير إقرارات XML الضريبية المعتمدة</li>
+                                    <li>✓ طباعة فواتير رسمية متوافقة مع معيار EN 16931</li>
                                 </ul>
                             </div>
-                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
                                 <div>
                                     <span class="text-white font-latin fw-bold software-card-price">€ 189</span>
                                     <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص سنوي / جهاز</span>
                                 </div>
-                                <div class="d-flex gap-2 flex-wrap">
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('taxsync')" title="تحميل وتثبيت البرنامج الحقيقي فوراً">
+                                        <span>تحميل البرنامج 📥</span>
+                                    </button>
                                     <a href="demo.html?sandbox=taxsync#software" class="tf-btn software-btn-sim" title="محاكاة حية فورية داخل المتصفح">
                                         <span>محاكي حي ⚡</span>
-                                    </a>
-                                    <a href="demo.html?action=checkout&app=taxsync#software" class="tf-btn software-btn-buy">
-                                        <span>شراء وترخيص ←</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2. S&R FlowScan AI Mobile -->
-                    <div class="col-lg-4 col-md-6">
+                    <!-- 2. S&R CloudPOS Connector -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="accounting">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--green">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">⚡</span>
+                                    <span class="status-badge software-card-badge--green">نقاط البيع • POS Agent</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R CloudPOS Connector</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    v3.1 Agent Service • Windows POS Terminal
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    وسيط برمجي خفيف يربط كاشيرات ونقاط بيع المتاجر والمطاعم بنظام الـ ERP السحابي لمزامنة حركة المخزون والسيولة النقدية دون تغيير الأجهزة القائمة.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ تكامل مع طابعات الإيصالات الحرارية والباركود</li>
+                                    <li>✓ تخزين ومبيعات أوفلاين واسترجاع تلقائي</li>
+                                    <li>✓ تسوية نقدية وجرد لحظي بنهاية كل وردية</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white font-latin fw-bold software-card-price--green">€ 25</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / نقطة بيع</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('cloudpos')" title="تحميل وتثبيت وسيط نقاط البيع">
+                                        <span>تحميل الوسيط 📥</span>
+                                    </button>
+                                    <a href="demo.html#software" class="tf-btn software-btn-sim">
+                                        <span>تجربة الربط ⚡</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. S&R FlowScan AI Mobile -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="accounting">
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--blue">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="software-card-icon">📱</span>
-                                    <span class="status-badge software-card-badge--blue">OCR Mobile AI</span>
+                                    <span class="status-badge software-card-badge--blue">مسح ضوئي ذكي • Mobile OCR AI</span>
                                 </div>
                                 <h4 class="text-white fw-bold mb-1 software-card-title">S&R FlowScan AI Mobile</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
-                                    v1.8 • iOS 17+ & Android 14+
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    v1.8 AI Engine • iOS 17+ &amp; Android 14+ PWA
                                 </div>
                                 <p class="text-white-64 software-card-desc">
-                                    تطبيق هاتف ذكي لمسح الفواتير والإيصالات الورقية بالكاميرا واستخراج الضريبة والبنود آلياً وترحيلها لحظياً للـ ERP.
+                                    تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.
                                 </p>
                                 <ul class="software-card-specs">
                                     <li>✓ استخراج ضوئي OCR بدقة 99.4%</li>
@@ -6674,125 +6735,196 @@
                                     <li>✓ مزامنة سحابية مع لوحة تحكم الإدارة</li>
                                 </ul>
                             </div>
-                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
                                 <div>
                                     <span class="text-white font-latin fw-bold software-card-price--blue">€ 9.99</span>
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / مستخدم</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn software-btn-buy">
-                                    <span>تحميل التطبيق ←</span>
-                                </a>
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('flowscan')" title="تحميل حزمة تطبيق الهاتف">
+                                        <span>تحميل التطبيق 📥</span>
+                                    </button>
+                                    <a href="demo.html#software" class="tf-btn software-btn-sim">
+                                        <span>معاينة حية ⚡</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. S&R CloudPOS Connector -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--green">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="software-card-icon">⚡</span>
-                                    <span class="status-badge software-card-badge--green">ربط نقاط البيع</span>
-                                </div>
-                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R CloudPOS Connector</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
-                                    v3.1 Agent • Windows POS Terminal
-                                </div>
-                                <p class="text-white-64 software-card-desc">
-                                    وسيط برمجي خفيف يربط كاشيرات ونقاط بيع المطاعم والمتاجر بنظام الـ ERP السحابي لحظياً دون الحاجة لتغيير الأجهزة القائمة.
-                                </p>
-                                <ul class="software-card-specs">
-                                    <li>✓ تكامل مع طابعات الإيصالات والباركود</li>
-                                    <li>✓ مبيعات أوفلاين واسترجاع تلقائي</li>
-                                    <li>✓ تسوية نقدية لحظية بنهاية كل وردية</li>
-                                </ul>
-                            </div>
-                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <span class="text-white font-latin fw-bold software-card-price--green">€ 25</span>
-                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / نقطة بيع</span>
-                                </div>
-                                <a href="demo.html#software" class="tf-btn software-btn-buy">
-                                    <span>تجربة الربط ←</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. S&R SecureVault B2B -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--purple">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="software-card-icon">🛡️</span>
-                                    <span class="status-badge software-card-badge--purple">GDPR Encrypted</span>
-                                </div>
-                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R SecureVault B2B</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
-                                    v2.0 • Win Server / Linux / Cloud
-                                </div>
-                                <p class="text-white-64 software-card-desc">
-                                    تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع خوادم معزولة في أمستردام.
-                                </p>
-                            </div>
-                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
-                                <div>
-                                    <span class="text-white font-latin fw-bold software-card-price--purple">€ 49</span>
-                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (1TB Encrypted)</span>
-                                </div>
-                                <a href="demo.html#software" class="tf-btn software-btn-buy">
-                                    <span>طلب الحماية ←</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 5. S&R Financial AI SDK -->
-                    <div class="col-lg-6 col-md-12">
+                    <!-- 4. S&R Financial AI SDK -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="developer">
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card">
                             <div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <span class="software-card-icon">🧩</span>
-                                    <span class="status-badge software-card-badge">للمطورين والشركات</span>
+                                    <span class="status-badge software-card-badge">للمطورين والشركات • Developer SDK</span>
                                 </div>
                                 <h4 class="text-white fw-bold mb-1 software-card-title">S&R Financial AI SDK</h4>
-                                <div class="text-caption text-white-64 font-latin mb-3 software-card-ver">
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
                                     v1.2 Dev • Python / Node.js / C# / REST
                                 </div>
                                 <p class="text-white-64 software-card-desc">
                                     مكتبة برمجية للمطورين والشركات لدمج خوارزميات التنبؤ المالي والفوترة والامتثال في تطبيقاتهم الخاصة بسهولة وسرعة فائقة.
                                 </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ حزم جاهزة لـ Node.js (npm) و Python (pip)</li>
+                                    <li>✓ خوارزميات تنبؤ بالسيولة ومطابقة الفواتير بالـ AI</li>
+                                    <li>✓ توثيق برمجي كامل مع أمثلة تشغيل فورية</li>
+                                </ul>
                             </div>
-                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between">
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
                                 <div>
                                     <span class="text-white font-latin fw-bold software-card-price">€ 99</span>
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (50k API Calls)</span>
                                 </div>
-                                <a href="demo.html#software" class="tf-btn software-btn-buy">
-                                    <span>تحميل الـ SDK ←</span>
-                                </a>
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('sdk')" title="تحميل حزمة SDK الكاملة">
+                                        <span>تحميل الـ SDK 📥</span>
+                                    </button>
+                                    <a href="demo.html#software" class="tf-btn software-btn-sim">
+                                        <span>توثيق الـ API ⚡</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. S&R SecureVault B2B -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="developer">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--purple">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">🛡️</span>
+                                    <span class="status-badge software-card-badge--purple">تشفير عسكري • AES-256 GDPR</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R SecureVault B2B</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    v2.0 • Win Server / Linux / Cloud Docker
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع خوادم معزولة في أمستردام متوافقة 100% مع قانون GDPR.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ تشفير وفك تشفير محلي بنقرة واحدة</li>
+                                    <li>✓ حماية متقدمة لقواعد بيانات SQL والمستندات</li>
+                                    <li>✓ أداة سطر أوامر CLI للأتمتة والنسخ المجدول</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white font-latin fw-bold software-card-price--purple">€ 49</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (1TB Encrypted)</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('vault')" title="تحميل أداة التشفير">
+                                        <span>تحميل الأداة 📥</span>
+                                    </button>
+                                    <a href="demo.html#software" class="tf-btn software-btn-sim">
+                                        <span>طلب الحماية ⚡</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. S&R Cloud Terminal Agent -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="developer">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--featured">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">⚙️</span>
+                                    <span class="status-badge software-card-badge">إدارة السيرفرات • DevOps Agent</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&R Cloud Terminal Agent</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    v1.0 DevOps • Windows / Linux CLI
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    وكيل سحابي متطور لمراقبة خوادم الـ Microservices وتتبع استهلاك المعالج والذاكرة وإعادة تشغيل الخدمات تلقائياً مع تنبيهات فورية.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ مراقبة لحظية بنبضات الـ Heartbeat ومقاييس SLA</li>
+                                    <li>✓ استهلاك فائق الخفة للذاكرة (أقل من 15MB)</li>
+                                    <li>✓ ربط فوري ومباشر مع كلوستر أمستردام AMS-01</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white font-latin fw-bold software-card-price">€ 39</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / Cluster</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('terminal')" title="تحميل الوكيل السحابي">
+                                        <span>تحميل الوكيل 📥</span>
+                                    </button>
+                                    <a href="demo.html#software" class="tf-btn software-btn-sim">
+                                        <span>لوحة السيرفرات ⚡</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- شريط الشراكة مع المطورين -->
-                <div class="glass-box p-4 rounded-4 software-dev-partner-box">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8">
-                            <h4 class="text-white fw-bold mb-1">هل تمتلك برنامجاً وترغب في توزيعه وترخيصه تجارياً عبر شبكتنا؟</h4>
-                            <p class="text-white-64 mb-0 software-dev-partner-desc">
-                                منصة S&R CoreSync Solutions توفر بيئة متكاملة لترخيص وتشفير البرمجيات مع تسويات مالية عبر iDEAL و SEPA و بطاقات الائتمان لشركائنا البرمجيين.
-                            </p>
+                <!-- مختبر وبرمجيات المطور م. سليم عزيزة (Architect Software Lab & Monetization Pipeline) -->
+                <div class="software-architect-lab mb-4" id="softwareArchitectLab">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <span style="font-size: 2rem;">🚀</span>
+                            <div>
+                                <h3 class="text-white fw-bold mb-1" style="font-size: 1.3rem;">
+                                    مختبر وبوابة برمجيات المؤسس م. سليم عزيزة // Architect's Project Release Lab
+                                </h3>
+                                <p class="text-white-64 mb-0" style="font-size: 0.85rem;">
+                                    بنية معمارية مخصصة لنشر وربط وترخيص المشاريع البرمجية الحصرية لمؤسس التقنية م. سليم عزيزة، مع دعم التوزيع التجاري والتسويات المالية عبر iDEAL و SEPA و بطاقات الائتمان.
+                                </p>
+                            </div>
                         </div>
-                        <div class="col-lg-4 text-lg-start mt-3 mt-lg-0 d-flex gap-2 justify-content-lg-end flex-wrap">
-                            <a href="demo.html?sandbox=taxsync#software" class="tf-btn software-dev-btn-sim">
-                                <span>⚡ تجربة المحاكي التفاعلي</span>
-                            </a>
-                            <a href="demo.html#software" class="tf-btn software-dev-btn-store">
-                                <span>متجر التراخيص ←</span>
-                            </a>
+                        <span class="sr-logo-badge-pill">
+                            <span class="gold-dot"></span> مشاريع حصرية قيد التوزيع التجاري
+                        </span>
+                    </div>
+
+                    <div class="lab-pipeline-grid">
+                        <div class="lab-pipeline-card">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong class="text-white" style="font-size: 0.95rem;">S&R Autonomous Cloud Scraper &amp; ETL</strong>
+                                <span class="status-badge status-processing" style="font-size: 0.7rem;">قيد الإطلاق (Beta)</span>
+                            </div>
+                            <p class="text-white-64 mb-3" style="font-size: 0.8rem; line-height: 1.5;">
+                                أداة بايثون سحابية متقدمة لاستخراج وتحليل بيانات التجارة الإلكترونية والأسعار المنافسة وترحيلها لحظياً لقواعد البيانات.
+                            </p>
+                            <button type="button" class="tf-btn software-btn-sim w-100 justify-content-center" onclick="openExecutiveBookingModal('salim')">
+                                <span>طلب وصول مبكر (Early Access) ←</span>
+                            </button>
+                        </div>
+
+                        <div class="lab-pipeline-card">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong class="text-white" style="font-size: 0.95rem;">S&R ERP Flow Microservices Core</strong>
+                                <span class="status-badge status-completed" style="font-size: 0.7rem;">جاهز للتخصيص</span>
+                            </div>
+                            <p class="text-white-64 mb-3" style="font-size: 0.8rem; line-height: 1.5;">
+                                نواة برمجية مصغرة لربط مخازن الشركات وبوابات الدفع الإلكتروني بنظام محاسبي أوروبي متكامل دون كود معقد.
+                            </p>
+                            <button type="button" class="tf-btn software-btn-sim w-100 justify-content-center" onclick="openExecutiveBookingModal('salim')">
+                                <span>طلب ترخيص تجاري للمشروع ←</span>
+                            </button>
+                        </div>
+
+                        <div class="lab-pipeline-card">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong class="text-white" style="font-size: 0.95rem;">بوابة ربط وتوزيع برمجياتك الخاصة</strong>
+                                <span class="status-badge" style="background:rgba(197,168,128,0.2); color:#c5a880; font-size: 0.7rem;">شراكة برمجية</span>
+                            </div>
+                            <p class="text-white-64 mb-3" style="font-size: 0.8rem; line-height: 1.5;">
+                                هل طوّرت برنامجاً أو تطبيقاً وترغب في توزيعه وتشفيره وبيعه تجارياً عبر شبكة CoreSync الأوروبية مع حماية فكرية كاملة؟
+                            </p>
+                            <button type="button" class="tf-btn software-dev-btn-store w-100 justify-content-center" onclick="openExecutiveBookingModal('both')">
+                                <span>تقديم مشروعك للشراكة البرمجية ←</span>
+                            </button>
                         </div>
                     </div>
                 </div>
