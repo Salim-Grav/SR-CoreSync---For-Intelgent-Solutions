@@ -1,19 +1,26 @@
 /**
  * S&R CoreSync Solutions - Enterprise Email & Invoice Dispatcher
- * Multi-Provider Architecture: SendGrid, Postmark & Native SMTP
+ * Multi-Provider Architecture: Native Hostinger SMTP (TLS/SSL 465) & SendGrid API
  * Automatically sends branded HTML receipt, official BTW invoice details,
  * and cryptographic license activation keys upon verified payment.
  */
 
 const https = require('https');
+const tls = require('tls');
 
 class EmailNotificationService {
   constructor(options = {}) {
-    this.provider = process.env.EMAIL_PROVIDER || options.provider || 'sendgrid';
+    this.provider = process.env.EMAIL_PROVIDER || options.provider || 'smtp';
+    this.smtpHost = process.env.SMTP_HOST || options.smtpHost || 'smtp.hostinger.com';
+    this.smtpPort = parseInt(process.env.SMTP_PORT || options.smtpPort || '465', 10);
+    this.smtpUser = process.env.SMTP_USER || options.smtpUser || 'billing@sr-coresync.com';
+    this.smtpPass = process.env.SMTP_PASS || options.smtpPass || '';
     this.sendgridApiKey = process.env.SENDGRID_API_KEY || options.sendgridApiKey;
     this.postmarkToken = process.env.POSTMARK_SERVER_TOKEN || options.postmarkToken;
     this.fromEmail = process.env.EMAIL_FROM || options.fromEmail || 'billing@sr-coresync.com';
     this.fromName = process.env.EMAIL_FROM_NAME || options.fromName || 'S&R CoreSync Solutions B.V.';
+    this.adminEmail = process.env.EMAIL_ADMIN || options.adminEmail || 'salim@sr-coresync.com';
+    this.supportEmail = process.env.EMAIL_SUPPORT || options.supportEmail || 'info@sr-coresync.com';
   }
 
   /**
@@ -115,6 +122,98 @@ class EmailNotificationService {
   }
 
   /**
+   * Dispatches the email through Native Hostinger SMTP (TLS/SSL Port 465)
+   * Zero external dependencies using Node.js 'tls' module
+   */
+  async sendViaHostingerSMTP({ to, subject, html }) {
+    if (!this.smtpPass || this.smtpPass.includes('your_hostinger_email_password')) {
+      console.log(`[Hostinger SMTP Mock] Credentials not configured in .env. Simulated dispatch to: ${to} (Sender: ${this.fromEmail})`);
+      return { success: true, mode: 'simulated', provider: 'smtp', sender: this.fromEmail };
+    }
+
+    return new Promise((resolve) => {
+      const socket = tls.connect({
+        host: this.smtpHost,
+        port: this.smtpPort,
+        rejectUnauthorized: false
+      }, () => {
+        let step = 0;
+        let responseBuffer = '';
+
+        const commands = [
+          `EHLO sr-coresync.com\r\n`,
+          `AUTH LOGIN\r\n`,
+          Buffer.from(this.smtpUser).toString('base64') + '\r\n',
+          Buffer.from(this.smtpPass).toString('base64') + '\r\n',
+          `MAIL FROM:<${this.fromEmail}>\r\n`,
+          `RCPT TO:<${to}>\r\n`,
+          `DATA\r\n`
+        ];
+
+        socket.on('data', (chunk) => {
+          responseBuffer += chunk.toString();
+          const lines = responseBuffer.split('\r\n');
+          const lastLine = lines[lines.length - 2] || lines[lines.length - 1];
+
+          if (step === 0 && lastLine.startsWith('220')) {
+            socket.write(commands[0]);
+            step = 1;
+          } else if (step === 1 && lastLine.startsWith('250')) {
+            socket.write(commands[1]);
+            step = 2;
+          } else if (step === 2 && lastLine.startsWith('334')) {
+            socket.write(commands[2]);
+            step = 3;
+          } else if (step === 3 && lastLine.startsWith('334')) {
+            socket.write(commands[3]);
+            step = 4;
+          } else if (step === 4 && lastLine.startsWith('235')) {
+            socket.write(commands[4]);
+            step = 5;
+          } else if (step === 5 && lastLine.startsWith('250')) {
+            socket.write(commands[5]);
+            step = 6;
+          } else if (step === 6 && lastLine.startsWith('250')) {
+            socket.write(commands[6]);
+            step = 7;
+          } else if (step === 7 && lastLine.startsWith('354')) {
+            const rawMime = [
+              `From: "${this.fromName}" <${this.fromEmail}>`,
+              `To: <${to}>`,
+              `Subject: =?UTF-8?B?${Buffer.from(subject).toString('base64')}?=`,
+              `MIME-Version: 1.0`,
+              `Content-Type: text/html; charset=UTF-8`,
+              `Content-Transfer-Encoding: base64`,
+              ``,
+              Buffer.from(html).toString('base64'),
+              `.`,
+              ``
+            ].join('\r\n');
+            socket.write(rawMime);
+            step = 8;
+          } else if (step === 8 && lastLine.startsWith('250')) {
+            socket.write('QUIT\r\n');
+            socket.end();
+            resolve({ success: true, provider: 'smtp', host: this.smtpHost });
+          } else if (lastLine.startsWith('5') || lastLine.startsWith('4')) {
+            socket.end();
+            resolve({ success: false, error: lastLine, provider: 'smtp' });
+          }
+        });
+      });
+
+      socket.on('error', (err) => {
+        resolve({ success: false, error: err.message, provider: 'smtp' });
+      });
+
+      socket.setTimeout(12000, () => {
+        socket.destroy();
+        resolve({ success: false, error: 'SMTP Timeout', provider: 'smtp' });
+      });
+    });
+  }
+
+  /**
    * Dispatches the email through SendGrid API (Zero npm dependencies)
    */
   async sendViaSendGrid({ to, subject, html }) {
@@ -130,7 +229,7 @@ class EmailNotificationService {
       content: [{ type: 'text/html', value: html }]
     });
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const req = https.request({
         hostname: 'api.sendgrid.com',
         port: 443,
@@ -162,8 +261,12 @@ class EmailNotificationService {
     const subject = `Factuur & Licentie ${invoiceNumber} - ${productTitle} | S&R CoreSync Solutions`;
     const html = this.generateInvoiceHtml({ customerName, invoiceNumber, licenseKey, productTitle, amount, plan, downloadUrl });
 
-    console.log(`[Email Service] Dispatching official BTW invoice to ${to} for order ${invoiceNumber}...`);
-    return await this.sendViaSendGrid({ to, subject, html });
+    console.log(`[Email Service] Dispatching official BTW invoice to ${to} for order ${invoiceNumber} via ${this.provider}...`);
+    if (this.provider === 'smtp') {
+      return await this.sendViaHostingerSMTP({ to, subject, html });
+    } else {
+      return await this.sendViaSendGrid({ to, subject, html });
+    }
   }
 }
 
