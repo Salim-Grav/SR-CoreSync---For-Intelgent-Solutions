@@ -849,6 +849,60 @@
             box-shadow: 0 0 10px rgba(197, 168, 128, 0.35);
         }
 
+        .roi-currency-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .roi-currency-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 999px;
+            padding: 4px 14px;
+            font-size: 0.8rem;
+            color: #e6ca9f;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .roi-currency-pill:hover,
+        .roi-currency-pill.active {
+            background: rgba(197, 168, 128, 0.25);
+            border-color: #c5a880;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.35);
+        }
+
+        .roi-pdf-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            color: #e6ca9f;
+            font-weight: 600;
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 0.88rem;
+            text-decoration: none;
+        }
+
+        .roi-pdf-btn:hover {
+            background: rgba(197, 168, 128, 0.18);
+            border-color: #c5a880;
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.3);
+            transform: translateY(-1px);
+        }
+
         .roi-range-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -6592,6 +6646,133 @@
         </div>
     </div>
 
+    <!-- 2.5. Executive ROI Feasibility PDF Report Modal (EN) -->
+    <div class="sr-exec-modal" id="roiPdfModal" role="dialog" aria-modal="true" aria-labelledby="roiPdfTitle">
+        <div class="sr-exec-modal-backdrop" onclick="closeRoiPdfModal()"></div>
+        <div class="sr-exec-modal-container" style="max-width: 860px; max-height: 94vh; overflow-y: auto;">
+            <div class="es-quote-toolbar mb-3">
+                <div class="es-quote-toolbar-title" id="roiPdfTitle">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                    <span>Executive ROI &amp; Operational Feasibility Report // Official Dispatch</span>
+                </div>
+                <div class="es-toolbar-actions d-flex gap-2">
+                    <button type="button" class="es-btn-tool es-btn-tool-print" onclick="window.printRoiReport()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        <span>Print / Save as PDF 🖨️</span>
+                    </button>
+                    <button type="button" class="es-btn-tool" onclick="shareRoiPdfWhatsApp()" style="background: rgba(37, 211, 102, 0.2); border: 1px solid rgba(37, 211, 102, 0.4); color: #25d366;">
+                        <span>Share via WhatsApp 📱</span>
+                    </button>
+                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="closeRoiPdfModal()">Close &times;</button>
+                </div>
+            </div>
+
+            <!-- Printable Paper -->
+            <div class="es-quote-paper" id="roiPrintablePaper">
+                <div class="es-quote-header">
+                    <div class="es-quote-brand">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <img src="../assets/sr-core-emblem.svg" alt="S&R CoreSync" width="54" height="54" style="filter: drop-shadow(0 2px 8px rgba(197, 168, 128, 0.4));">
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.35rem; font-weight: 900; color: #0d1512; letter-spacing: -0.5px;">S&amp;R CORESYNC SOLUTIONS</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #718096;">Enterprise Cloud Architecture, ERP &amp; Financial Intelligence Systems</p>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.76rem; color: #a0aec0; margin: 0;">Amsterdam HQ, The Netherlands | European Union &amp; Global Delivery</p>
+                    </div>
+                    <div class="es-quote-meta">
+                        <span class="es-quote-ref" id="roiPdfRef">REF-CS-ROI-2026-8942</span>
+                        <div><strong>Issue Date:</strong> <span id="roiPdfDate"></span></div>
+                        <div style="font-size: 0.78rem; color: #718096;">Official Feasibility Study</div>
+                    </div>
+                </div>
+
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;">
+                    <div style="font-size: 0.8rem; color: #718096; margin-bottom: 4px;">Beneficiary Organization / Client Enterprise:</div>
+                    <input type="text" id="roiPdfClientName" value="Executive Leadership / Prospective Client Partner" style="width: 100%; border: 1px dashed #cbd5e0; background: #ffffff; border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.95rem; color: #1a202c;" placeholder="Enter company name..." />
+                </div>
+
+                <div class="es-quote-section-title">
+                    <span>1. Approved Operational Baseline Parameters</span>
+                </div>
+
+                <table class="es-quote-table">
+                    <thead>
+                        <tr>
+                            <th>Operational Parameter</th>
+                            <th>Calculated Value</th>
+                            <th>Description &amp; Organizational Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Team / Staff Count</strong></td>
+                            <td id="roiPdfTeamVal">15 employees</td>
+                            <td>Administrative &amp; financial workforce impacted by routine manual processes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Routine Manual Hours per Week</strong></td>
+                            <td id="roiPdfHoursVal">8 hrs / week</td>
+                            <td>Average hours per staff member dedicated to administrative tasks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estimated Hourly Workforce Cost</strong></td>
+                            <td id="roiPdfSalaryVal">€ 28 / hr</td>
+                            <td>Direct loaded hourly cost applied to company operational payroll</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Target Architecture Solution</strong></td>
+                            <td id="roiPdfSolutionVal">Full ERP Integration + Accounting Automation</td>
+                            <td>Cloud infrastructure with automated workflows, ledger sync, and inventory</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="es-quote-section-title">
+                    <span>2. Financial Return &amp; Cost-Efficiency Simulation</span>
+                </div>
+
+                <div class="es-quote-total-box" style="margin-bottom: 20px;">
+                    <div class="es-quote-total-card" style="width: 100%;">
+                        <div class="es-quote-total-row">
+                            <span>Total Annual Workforce Hours Reclaimed:</span>
+                            <strong id="roiPdfHoursSavedVal" style="color: #2b6cb0; font-size: 1.05rem;">4,680 hrs/year</strong>
+                        </div>
+                        <div class="es-quote-total-row">
+                            <span>Operational Velocity Acceleration:</span>
+                            <strong id="roiPdfEffGainVal" style="color: #2f855a; font-size: 1.05rem;">+75%</strong>
+                        </div>
+                        <div class="es-quote-total-row">
+                            <span>Full Capital Payback Period:</span>
+                            <strong id="roiPdfPaybackVal" style="color: #d69e2e; font-size: 1.05rem;">1.2 months</strong>
+                        </div>
+                        <div class="es-quote-total-row grand-total" style="border-top: 2px solid #cbd5e0; margin-top: 8px; padding-top: 10px;">
+                            <span style="font-size: 1.15rem; font-weight: 900; color: #0d1512;">Projected Net Annual Financial Savings:</span>
+                            <span id="roiPdfSavingsVal" style="font-size: 1.45rem; font-weight: 900; color: #b7791f;">€ 131,040</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #f7fafc; border-left: 4px solid #c5a880; padding: 12px 16px; margin-bottom: 24px; font-size: 0.82rem; color: #4a5568; line-height: 1.6;">
+                    <strong>Executive Summary:</strong> The study highlights rapid capital payback within 2 months, converting routine administrative overhead into high-velocity operational capacity and scalable enterprise growth.
+                </div>
+
+                <div class="es-quote-signatures">
+                    <div class="es-sig-block">
+                        <div class="es-sig-title">Technical &amp; Systems Architecture</div>
+                        <div class="es-sig-name">Eng. Salim Azizah</div>
+                        <div class="es-sig-role">Co-Founder &amp; CTO // Lead Cloud Systems Architect</div>
+                    </div>
+                    <div class="es-sig-block">
+                        <div class="es-sig-title">Financial Feasibility &amp; ERP</div>
+                        <div class="es-sig-name">Mr. Raed Kaakeh</div>
+                        <div class="es-sig-role">Co-Founder &amp; CFO // Financial ERP Architect</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- 3. Live Demo Quick Showcase Modal -->
     <div class="sr-exec-modal" id="liveDemoQuickModal" role="dialog" aria-modal="true" aria-labelledby="liveDemoTitle">
         <div class="sr-exec-modal-backdrop" onclick="closeLiveDemoQuickModal()"></div>
@@ -7050,7 +7231,60 @@
         function openExecutiveBookingModal(advisor = 'salim') {
             const modal = document.getElementById('executiveBookingModal');
             if (!modal) return;
-            selectBookingAdvisor(advisor === 'stage' ? 'both' : (advisor || 'salim'));
+            if (advisor === 'stage') {
+                advisor = (typeof currentExecFounderEn !== 'undefined' ? currentExecFounderEn : 'salim');
+            } else if (advisor === 'roi') {
+                advisor = 'both';
+                const teamSlider = document.getElementById('roiCompanySize');
+                const hoursSlider = document.getElementById('roiManualHours');
+                const salarySlider = document.getElementById('roiAvgSalary');
+                const solutionSelect = document.getElementById('roiSolutionType');
+
+                const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
+                const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || { symbol: '€', rate: 1 };
+
+                const team = teamSlider ? teamSlider.value : '15';
+                const hours = hoursSlider ? hoursSlider.value : '8';
+                const rate = salarySlider ? Math.round(parseFloat(salarySlider.value) * cur.rate) : Math.round(28 * cur.rate);
+                const solText = solutionSelect && solutionSelect.options[solutionSelect.selectedIndex] ? solutionSelect.options[solutionSelect.selectedIndex].text : 'Full ERP Integration + Accounting Automation';
+
+                const savingsEl = document.getElementById('roiAnnualSavings');
+                const savingsVal = savingsEl ? savingsEl.textContent.trim().replace(/\s+/g, ' ') : '';
+                const paybackEl = document.getElementById('roiPaybackMonths');
+                const paybackVal = paybackEl ? paybackEl.textContent.trim() : '1.5 months';
+                const hoursSavedEl = document.getElementById('roiHoursSaved');
+                const hoursSavedVal = hoursSavedEl ? hoursSavedEl.textContent.trim().replace(/\s+/g, ' ') : '';
+
+                const notesField = document.getElementById('bookingNotes');
+                if (notesField) {
+                    notesField.value = `🎯 Smart ROI Feasibility Parameters:\n• Team size: ${team} employees\n• Manual routine hours: ${hours} hrs/week per person\n• Hourly rate: ${cur.symbol} ${rate}/hr\n• Target Architecture: ${solText}\n• Projected Net Annual Savings: ${savingsVal}\n• Reclaimed Hours: ${hoursSavedVal}\n• Payback Timeline: ${paybackVal}\n\nWe would like to discuss implementation priorities directly with both founders (Salim & Raed).`;
+                }
+
+                const sessionSelect = document.getElementById('bookingSessionType');
+                if (sessionSelect) {
+                    sessionSelect.value = 'online';
+                    if (typeof togglePackageField === 'function') togglePackageField();
+                }
+
+                let roiNotice = document.getElementById('bookingRoiNotice');
+                if (!roiNotice) {
+                    roiNotice = document.createElement('div');
+                    roiNotice.id = 'bookingRoiNotice';
+                    roiNotice.style.cssText = 'background: rgba(197, 168, 128, 0.12); border: 1px solid rgba(197, 168, 128, 0.4); border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 0.82rem; color: #e6ca9f; display: flex; align-items: center; gap: 8px;';
+                    const formGrid = document.querySelector('.sr-exec-form-grid');
+                    if (formGrid && formGrid.parentNode) {
+                        formGrid.parentNode.insertBefore(roiNotice, formGrid);
+                    }
+                }
+                if (roiNotice) {
+                    roiNotice.innerHTML = `<span>✨ ROI feasibility estimates automatically pre-filled <strong>(${savingsVal})</strong> for your roadmap session.</span>`;
+                    roiNotice.style.display = 'flex';
+                }
+            } else {
+                const roiNotice = document.getElementById('bookingRoiNotice');
+                if (roiNotice) roiNotice.style.display = 'none';
+            }
+            selectBookingAdvisor(advisor);
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('open');
