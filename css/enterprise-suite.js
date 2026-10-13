@@ -804,21 +804,49 @@
         hub.id = 'esFloatingSuite';
         hub.className = 'es-floating-suite';
         hub.innerHTML = `
-            <button type="button" class="es-feedback-fab" onclick="window.openReadinessModal()" title="${t.readinessTitle}">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-                <span>${t.readinessLabel}</span>
-            </button>
-            <button type="button" class="es-feedback-fab" onclick="window.openSchedulerModal()" title="${t.schedulerTitle}">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span>${t.schedulerLabel}</span>
-            </button>
-            <button type="button" class="es-feedback-fab" onclick="window.openFeedbackModal()" title="${t.feedbackTitle}">
+            <div class="es-floating-suite-collapse-bar">
+                <button type="button" class="es-fab-toggle" id="esFabToggle" onclick="window.toggleFloatingSuite()" title="تصغير / إخفاء الأزرار" aria-label="Toggle floating buttons">
+                    &minus;
+                </button>
+            </div>
+            <div class="es-floating-suite-content" id="esFloatingContent" style="display:flex; flex-direction:column; gap:8px;">
+                <button type="button" class="es-feedback-fab" onclick="window.openReadinessModal()" title="${t.readinessTitle}">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    <span>${t.readinessLabel}</span>
+                </button>
+                <button type="button" class="es-feedback-fab" onclick="window.openSchedulerModal()" title="${t.schedulerTitle}">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span>${t.schedulerLabel}</span>
+                </button>
+                <button type="button" class="es-feedback-fab" onclick="window.openFeedbackModal()" title="${t.feedbackTitle}">
+                    <span class="es-feedback-dot"></span>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                    <span>${t.feedbackLabel}</span>
+                </button>
+            </div>
+            <button type="button" class="es-feedback-fab-min" id="esFloatingMinBtn" onclick="window.toggleFloatingSuite()" style="display:none;" title="إظهار أزرار الدعم">
                 <span class="es-feedback-dot"></span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-                <span>${t.feedbackLabel}</span>
+                <span>⚡ أدوات الدعم</span>
             </button>
         `;
         document.body.appendChild(hub);
+
+        window.toggleFloatingSuite = function() {
+            const h = document.getElementById('esFloatingSuite');
+            if (!h) return;
+            const isMin = h.classList.toggle('is-minimized');
+            const content = document.getElementById('esFloatingContent');
+            const minBtn = document.getElementById('esFloatingMinBtn');
+            const toggle = document.getElementById('esFabToggle');
+            if (content) content.style.display = isMin ? 'none' : 'flex';
+            if (minBtn) minBtn.style.display = isMin ? 'inline-flex' : 'none';
+            if (toggle) toggle.innerHTML = isMin ? '+' : '&minus;';
+            localStorage.setItem('coresync_hub_minimized', isMin ? '1' : '0');
+        };
+
+        if (localStorage.getItem('coresync_hub_minimized') === '1') {
+            window.toggleFloatingSuite();
+        }
 
         // Feedback Modal
         const overlay = document.createElement('div');

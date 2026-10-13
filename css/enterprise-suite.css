@@ -2864,3 +2864,241 @@ html[lang="nl"] .service-orbit-section > .container {
     transition: transform 0.1s ease !important;
 }
 
+/* ==========================================================================
+   Software Marketplace Redesign & Architect's Lab Styles
+   ========================================================================== */
+.software-filter-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.software-filter-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #e6ca9f;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+}
+
+.software-filter-pill:hover,
+.software-filter-pill.active {
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.3), rgba(143, 104, 52, 0.25));
+    border-color: #c5a880;
+    color: #ffffff;
+    box-shadow: 0 0 16px rgba(197, 168, 128, 0.35);
+    transform: translateY(-1px);
+}
+
+.software-filter-pill .pill-count {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 999px;
+    padding: 2px 7px;
+    font-size: 0.72rem;
+    color: #c5a880;
+}
+
+.software-filter-pill.active .pill-count {
+    background: #c5a880;
+    color: #060b09;
+    font-weight: 800;
+}
+
+.software-card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.software-btn-download {
+    background: linear-gradient(135deg, #c5a880, #8f6834) !important;
+    color: #060b09 !important;
+    font-weight: 800 !important;
+    padding: 7px 14px !important;
+    font-size: 0.78rem !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.software-btn-download:hover {
+    filter: brightness(1.15) !important;
+    box-shadow: 0 0 14px rgba(197, 168, 128, 0.5) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Architect Lab Box */
+.software-architect-lab {
+    background: linear-gradient(135deg, rgba(14, 24, 20, 0.95), rgba(7, 14, 11, 0.98)) !important;
+    border: 1px solid rgba(197, 168, 128, 0.35) !important;
+    border-radius: 16px !important;
+    padding: 28px !important;
+    margin-top: 36px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.software-architect-lab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c5a880, transparent);
+}
+
+.lab-pipeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.lab-pipeline-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(197, 168, 128, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.25s ease;
+}
+
+.lab-pipeline-card:hover {
+    border-color: #c5a880;
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+}
+
+/* Download Modal */
+.sw-modal-meta-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 168, 128, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.sw-key-box {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px dashed #10b981;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.sw-key-val {
+    font-family: monospace;
+    font-weight: 800;
+    color: #10b981;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+}
+
+.sw-steps-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+}
+
+.sw-step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.sw-step-item:last-child { margin-bottom: 0; }
+
+.sw-step-num {
+    background: #c5a880;
+    color: #060b09;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+/* Floating Suite Collapsible Fix */
+.es-floating-suite-collapse-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2px;
+}
+
+.es-fab-toggle {
+    background: rgba(14, 24, 20, 0.9);
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    color: #e6ca9f;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.es-fab-toggle:hover {
+    background: #c5a880;
+    color: #010907;
+}
+
+.es-feedback-fab-min {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(11, 19, 15, 0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(197, 168, 128, 0.5);
+    color: #f3dfba;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    transition: all 0.2s ease;
+}
+
+.es-feedback-fab-min:hover {
+    background: #c5a880;
+    color: #010907;
+}
+
+
