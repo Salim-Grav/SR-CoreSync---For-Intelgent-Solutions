@@ -19,39 +19,39 @@
 </head>
 <body>
     <!-- نافذة تحميل وتثبيت البرمجيات الحقيقية مع التراخيص الرقمية -->
-    <div id="softwareDownloadModal" class="software-modal-overlay active" style="display: flex; opacity: 1;">
+    <div id="softwareDownloadModal" class="software-modal-overlay active sw-modal-preview-active">
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" aria-label="إغلاق النافذة">&times;</button>
             
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
-                <span id="swDlIcon" style="font-size: 2.2rem;">💻</span>
+            <div class="sw-dl-header-row">
+                <span id="swDlIcon" class="sw-dl-header-icon">💻</span>
                 <div>
                     <span id="swDlCategoryBadge" class="sw-badge">برمجيات مكتبية وأنظمة ERP أوفلاين</span>
-                    <h2 id="swDlTitle" style="margin: 0; font-size: 1.5rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">S&R TaxSync Desktop</h2>
+                    <h2 id="swDlTitle" class="sw-dl-header-title">S&R TaxSync Desktop</h2>
                 </div>
             </div>
 
-            <div id="swDlVer" style="font-size: 0.85rem; color: #a3c2b3; margin-bottom: 16px; font-weight: 600;">
+            <div id="swDlVer" class="sw-dl-version-text">
                 v2.4 Pro • Windows 11/10 (64-bit) &amp; macOS • 14.2 MB
             </div>
 
-            <p id="swDlDesc" style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+            <p id="swDlDesc" class="sw-dl-desc-text">
                 برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين دون إنترنت لحساب ضريبة BTW/VAT 21% و 9% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية وفق معايير Belastingdienst.
             </p>
 
-            <div style="background: rgba(14, 25, 20, 0.6); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 14px; padding: 16px; margin-bottom: 16px;">
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 8px;">الميزات والاعتمادات المضمنة:</div>
-                <ul id="swDlSpecs" style="margin: 0; padding-right: 18px; color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+            <div class="sw-dl-specs-box">
+                <div class="sw-dl-section-label">الميزات والاعتمادات المضمنة:</div>
+                <ul id="swDlSpecs" class="sw-dl-specs-list">
                     <li>✓ تشفير البيانات والعمليات محلياً دون اتصال بمعيار AES-256</li>
                     <li>✓ توليد وتصدير إقرارات XML الضريبية المعتمدة للجهات الضريبية</li>
                     <li>✓ طباعة فواتير رسمية متوافقة تماماً مع المعيار الأوروبي الموحد EN 16931</li>
                 </ul>
             </div>
 
-            <div style="margin-bottom: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #c5a880;">مفتاح الترخيص الرقمي الأصلي (Enterprise License Key):</span>
-                    <span style="font-size: 0.75rem; color: #00e699;">✓ ترخيص أصلي مفعل مدى الحياة</span>
+            <div class="sw-dl-key-row">
+                <div class="sw-dl-key-header">
+                    <span class="sw-dl-section-label">مفتاح الترخيص الرقمي الأصلي (Enterprise License Key):</span>
+                    <span class="sw-dl-key-status">✓ ترخيص أصلي مفعل مدى الحياة</span>
                 </div>
                 <div class="sw-key-box">
                     <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
@@ -60,7 +60,7 @@
             </div>
 
             <div>
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 10px;">خطوات التثبيت السريع والتشغيل الفوري:</div>
+                <div class="sw-dl-steps-title">خطوات التثبيت السريع والتشغيل الفوري:</div>
                 <div id="swDlSteps">
                     <div class="sw-step-item">
                         <span class="sw-step-num">1</span>
@@ -84,14 +84,14 @@
                 <a id="swDlDirectBtn" href="downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
                     <span>⬇️ تحميل الحزمة الكاملة (ZIP)</span>
                 </a>
-                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim" style="color: #00e699; border-color: rgba(0,230,153,0.4);">
+                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim sw-dl-checkout-btn">
                     <span>💳 شراء وترخيص فوري عبر iDEAL</span>
                 </button>
                 <a id="swDlSandboxBtn" href="demo.html#software" class="sw-btn-sec-sim">
                     <span>⚡ المحاكي السحابي</span>
                 </a>
             </div>
-            <div style="text-align: center; margin-top: 14px; font-size: 0.78rem; color: #64748b;">
+            <div class="sw-dl-footer-note">
                 🔒 حزمة معتمدة وموقعة رقمياً وخالية 100% من أي برمجيات ضارة • S&R CoreSync Solutions
             </div>
         </div>

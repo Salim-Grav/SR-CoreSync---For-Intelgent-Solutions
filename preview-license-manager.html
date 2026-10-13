@@ -18,18 +18,18 @@
     </style>
 </head>
 <body>
-    <div id="salimLicenseManagerModal" class="software-modal-overlay active" style="display: flex; opacity: 1;">
+    <div id="salimLicenseManagerModal" class="software-modal-overlay active sw-modal-preview-active">
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" aria-label="إغلاق النافذة">&times;</button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                    <span style="font-size: 2.2rem;">🔑</span>
+            <div class="salim-lm-header-bar">
+                <div class="salim-lm-header-title-wrap">
+                    <span class="salim-lm-header-icon">🔑</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); border-color: #c5a880; color: #f7e2bd;">
+                        <span class="sw-badge salim-lm-badge">
                             🔐 وحدة التحكم المركزية للمؤسس والمهندس سليم عزيزة
                         </span>
-                        <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                        <h2 class="salim-lm-title">
                             Salim's Software License Manager &amp; Cryptographic Portal
                         </h2>
                     </div>
@@ -46,24 +46,24 @@
                     <div class="salim-lm-stat-lbl">إجمالي التراخيص المصدرة</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #38bdf8;">100%</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-sky">100%</div>
                     <div class="salim-lm-stat-lbl">معدل تشغيل الأجهزة أوفلاين</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #f59e0b;" id="salimTotalRevenueEstimate">€ 756</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-amber" id="salimTotalRevenueEstimate">€ 756</div>
                     <div class="salim-lm-stat-lbl">القيمة التقديرية للتراخيص</div>
                 </div>
             </div>
 
             <!-- نموذج توليد ترخيص جديد للمؤسس -->
             <div class="salim-lm-form-card">
-                <h4 style="margin: 0 0 14px 0; color: #00e699; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                <h4 class="salim-lm-form-title">
                     <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
                 </h4>
                 <form onsubmit="generateSalimLicense(event)">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البرنامج أو النظام المستهدف:</label>
+                            <label class="salim-lm-field-label">البرنامج أو النظام المستهدف:</label>
                             <select id="salimGenProduct" class="salim-input" title="البرنامج أو النظام المستهدف" aria-label="البرنامج أو النظام المستهدف">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
@@ -75,14 +75,14 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">اسم العميل أو المؤسسة الشريكة:</label>
+                            <label class="salim-lm-field-label">اسم العميل أو المؤسسة الشريكة:</label>
                             <input id="salimGenClient" type="text" class="salim-input" value="Heineken International N.V." placeholder="اسم العميل" required>
                         </div>
                     </div>
 
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">نوع وخطة الترخيص:</label>
+                            <label class="salim-lm-field-label">نوع وخطة الترخيص:</label>
                             <select id="salimGenPlan" class="salim-input" title="نوع وخطة الترخيص" aria-label="نوع وخطة الترخيص">
                                 <option value="سنوي (Annual License)">ترخيص سنوي (1 Year)</option>
                                 <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month)</option>
@@ -90,13 +90,13 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">بصمة العتاد (Hardware Machine ID):</label>
+                            <label class="salim-lm-field-label">بصمة العتاد (Hardware Machine ID):</label>
                             <input id="salimGenMachine" type="text" class="salim-input" value="NL-AMS-SR991" placeholder="بصمة العتاد">
                         </div>
                     </div>
 
-                    <div style="display: flex; justify-content: flex-end;">
-                        <button type="submit" class="tf-btn" style="background: linear-gradient(135deg, #00e699, #009966); color: #05140e; font-weight: 800; border: none; padding: 10px 22px; border-radius: 10px; cursor: pointer;">
+                    <div class="salim-lm-btn-wrap">
+                        <button type="submit" class="tf-btn salim-lm-submit-btn">
                             <span>توليد وتفعيل الترخيص المشفر الآن ⚡</span>
                         </button>
                     </div>
@@ -105,9 +105,9 @@
 
             <!-- سجل التراخيص النشطة -->
             <div>
-                <h4 style="margin: 0 0 12px 0; color: #f7e2bd; font-size: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                <h4 class="salim-lm-ledger-title">
                     <span>سجل التراخيص الرقمية المفعلة (Active License Ledger)</span>
-                    <span style="font-size: 0.8rem; color: #94a3b8;">محفوظ محلياً ومشفر</span>
+                    <span class="salim-lm-ledger-note">محفوظ محلياً ومشفر</span>
                 </h4>
                 <div class="salim-table-wrap">
                     <table class="salim-table">
@@ -124,47 +124,47 @@
                         </thead>
                         <tbody id="salimLicensesTableBody">
                             <tr>
-                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRTX-PRO-2026-X892-OFFLINE</td>
-                                <td style="font-weight: 600;">TaxSync Desktop</td>
+                                <td class="salim-table-key">SRTX-PRO-2026-X892-OFFLINE</td>
+                                <td class="salim-table-prod">TaxSync Desktop</td>
                                 <td>Heineken International N.V.</td>
-                                <td><span style="color:#a3c2b3;">سنوي (Annual)</span></td>
-                                <td><span style="color:#94a3b8; font-size:0.8rem;">2027-10-15</span></td>
-                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
-                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                                <td><span class="salim-table-plan">سنوي (Annual)</span></td>
+                                <td><span class="salim-table-date">2027-10-15</span></td>
+                                <td><span class="status-badge status-completed salim-table-badge">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key salim-table-copy-btn">نسخ 📋</button></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRPOS-POS-2026-P881-CLOUD</td>
-                                <td style="font-weight: 600;">CloudPOS Connector</td>
+                                <td class="salim-table-key">SRPOS-POS-2026-P881-CLOUD</td>
+                                <td class="salim-table-prod">CloudPOS Connector</td>
                                 <td>De Koffie Salon Amsterdam</td>
-                                <td><span style="color:#a3c2b3;">شهري (Monthly)</span></td>
-                                <td><span style="color:#94a3b8; font-size:0.8rem;">2026-11-30</span></td>
-                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
-                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                                <td><span class="salim-table-plan">شهري (Monthly)</span></td>
+                                <td><span class="salim-table-date">2026-11-30</span></td>
+                                <td><span class="status-badge status-completed salim-table-badge">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key salim-table-copy-btn">نسخ 📋</button></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRVLT-AES256-2026-V200-MIL</td>
-                                <td style="font-weight: 600;">SecureVault B2B</td>
+                                <td class="salim-table-key">SRVLT-AES256-2026-V200-MIL</td>
+                                <td class="salim-table-prod">SecureVault B2B</td>
                                 <td>AWT Group Netherlands</td>
-                                <td><span style="color:#a3c2b3;">دائم (Lifetime)</span></td>
-                                <td><span style="color:#94a3b8; font-size:0.8rem;">مدى الحياة</span></td>
-                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
-                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                                <td><span class="salim-table-plan">دائم (Lifetime)</span></td>
+                                <td><span class="salim-table-date">مدى الحياة</span></td>
+                                <td><span class="status-badge status-completed salim-table-badge">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key salim-table-copy-btn">نسخ 📋</button></td>
                             </tr>
                             <tr>
-                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRSDK-DEV-2026-S120-REST</td>
-                                <td style="font-weight: 600;">Financial AI SDK</td>
+                                <td class="salim-table-key">SRSDK-DEV-2026-S120-REST</td>
+                                <td class="salim-table-prod">Financial AI SDK</td>
                                 <td>Fintech Solutions Dubai</td>
-                                <td><span style="color:#a3c2b3;">شهري (50k Calls)</span></td>
-                                <td><span style="color:#94a3b8; font-size:0.8rem;">2026-12-01</span></td>
-                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
-                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                                <td><span class="salim-table-plan">شهري (50k Calls)</span></td>
+                                <td><span class="salim-table-date">2026-12-01</span></td>
+                                <td><span class="status-badge status-completed salim-table-badge">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key salim-table-copy-btn">نسخ 📋</button></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 18px; font-size: 0.78rem; color: #64748b;">
+            <div class="salim-lm-footer-note">
                 🛡️ بوابة إدارة التراخيص حصرية لكبير مهندسي ومطوري البرمجيات (م. سليم عزيزة) • S&R CoreSync Solutions
             </div>
         </div>
