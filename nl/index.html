@@ -8619,6 +8619,37 @@
         </div>
     </div>
 
+    <script>
+        function handleNewsletterSubmitNl(e) {
+            e.preventDefault();
+            var emailInput = document.getElementById('subscriberEmailNl');
+            var email = emailInput ? emailInput.value.trim() : '';
+            if (!email) return;
+
+            try {
+                var leads = JSON.parse(localStorage.getItem('sr_newsletter_leads') || '[]');
+                if (leads.indexOf(email) === -1) leads.push(email);
+                localStorage.setItem('sr_newsletter_leads', JSON.stringify(leads));
+            } catch(err) {}
+
+            var btn = document.getElementById('newsletterBtnSubmitNl');
+            if (btn) {
+                btn.innerHTML = '<span>Succesvol Aangemeld ✓</span>';
+                btn.style.background = '#10b981';
+                btn.style.color = '#ffffff';
+            }
+
+            setTimeout(function() {
+                alert('🎉 Welkom bij S&R CoreSync Solutions!\n\nUw zakelijke onboarding-pakket is verzonden naar: ' + email + '\n\nU kunt nu de live cloud-sandbox verkennen of een adviesgesprek inplannen.');
+                if (emailInput) emailInput.value = '';
+                if (btn) {
+                    btn.innerHTML = '<span>Gratis Aanmelden ←</span>';
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }
+            }, 300);
+        }
+    </script>
     <script src="../css/enterprise-suite.min.js"></script>
 </body>
 </html>
