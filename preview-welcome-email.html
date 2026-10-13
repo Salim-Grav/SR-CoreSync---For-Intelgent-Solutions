@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة قالب البريد الترحيبي الرسمي • S&R CoreSync Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0c10;
+            --panel-bg: #12161f;
+            --gold-primary: #c5a880;
+            --gold-light: #dfc299;
+            --emerald: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Action Bar */
+        .top-bar {
+            background: rgba(18, 22, 31, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-emblem {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gold-primary);
+        }
+
+        .brand-titles h1 {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .brand-titles p {
+            font-size: 12px;
+            color: var(--gold-light);
+        }
+
+        .actions-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary), #a68962);
+            color: #0b0e14;
+        }
+
+        .btn-gold:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-group {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 3px;
+            display: flex;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        /* Preview Canvas */
+        .preview-wrapper {
+            flex: 1;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: radial-gradient(circle at 50% 20%, rgba(197, 168, 128, 0.06), transparent 70%);
+        }
+
+        .frame-container {
+            width: 100%;
+            max-width: 660px;
+            transition: max-width 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            background: #080a0f;
+        }
+
+        .frame-container.mobile {
+            max-width: 390px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 980px;
+            border: none;
+            display: block;
+        }
+
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="brand-info">
+            <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="brand-emblem">
+            <div class="brand-titles">
+                <h1>قالب البريد الترحيبي الرسمي • S&R CoreSync</h1>
+                <p>مخصص للإرسال من info@sr-coresync.com للمشتركين والعملاء</p>
+            </div>
+        </div>
+
+        <div class="actions-group">
+            <div class="toggle-group">
+                <button type="button" class="toggle-btn active" id="btnDesktop" onclick="setDevice('desktop')">💻 سطح المكتب</button>
+                <button type="button" class="toggle-btn" id="btnMobile" onclick="setDevice('mobile')">📱 الهاتف</button>
+            </div>
+
+            <button type="button" class="btn btn-gold" onclick="copyEmailCode()">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                نسخ كود الـ HTML
+            </button>
+
+            <a href="./templates/welcome-email.html" target="_blank" class="btn btn-outline">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                فتح مستقل
+            </a>
+        </div>
+    </header>
+
+    <main class="preview-wrapper">
+        <div class="frame-container" id="frameBox">
+            <iframe id="emailFrame" src="./templates/welcome-email.html"></iframe>
+        </div>
+    </main>
+
+    <div class="toast-msg" id="toast">✅ تم نسخ كود الإيميل بنجاح إلى الحافظة!</div>
+
+    <script>
+        function setDevice(device) {
+            const frameBox = document.getElementById('frameBox');
+            const btnDesktop = document.getElementById('btnDesktop');
+            const btnMobile = document.getElementById('btnMobile');
+
+            if (device === 'mobile') {
+                frameBox.classList.add('mobile');
+                btnMobile.classList.add('active');
+                btnDesktop.classList.remove('active');
+            } else {
+                frameBox.classList.remove('mobile');
+                btnDesktop.classList.add('active');
+                btnMobile.classList.remove('active');
+            }
+        }
+
+        async function copyEmailCode() {
+            try {
+                const response = await fetch('./templates/welcome-email.html');
+                const htmlText = await response.text();
+                await navigator.clipboard.writeText(htmlText);
+                showToast();
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+    </script>
+</body>
+</html>
