@@ -1,6 +1,6 @@
 $tempDir = Join-Path $env:TEMP ("edge_cap_" + [Guid]::NewGuid().ToString())
 $edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\b4adc775-45bf-4bfa-8d40-6a12a92a104c\live_hostinger_ready_production.png"
+$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\98021c3f-b2d7-4399-9020-5c36ee97997e\live_hostinger_ready_production.png"
 $url = "http://127.0.0.1:3000/index.html"
 
 Start-Process $edgePath -ArgumentList @(
