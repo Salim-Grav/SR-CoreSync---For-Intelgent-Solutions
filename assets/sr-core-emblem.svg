@@ -1,80 +1,209 @@
-<svg viewBox="0 0 100 100" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+<svg viewBox="0 0 500 500" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
   <defs>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&amp;display=swap');
-      .sr-serif {
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&amp;family=Cinzel:wght@700;800&amp;display=swap');
+      
+      .emblem-serif-white {
         font-family: 'Playfair Display', 'Times New Roman', serif;
         font-weight: 800;
         fill: #ffffff;
       }
-      .sr-amp {
+      .emblem-ampersand-gold {
         font-family: 'Playfair Display', 'Times New Roman', serif;
-        font-weight: 800;
-        fill: #c5a880;
+        font-style: italic;
+        font-weight: 700;
+        fill: url(#goldAmpGrad);
+      }
+      .emblem-sub-coresync {
+        font-family: 'Playfair Display', 'Cinzel', 'Times New Roman', serif;
+        font-weight: 700;
+        font-size: 21px;
+        letter-spacing: 0.36em;
+        fill: url(#goldTextGrad);
+        text-anchor: middle;
       }
     </style>
-    
-    <!-- التدرجات الذهبية الشامبانية الملكية النقية عالية الوضوح -->
-    <radialGradient id="officialCoreSphere" cx="45%" cy="38%" r="65%">
-      <stop offset="0%" stop-color="#241d11" stop-opacity="0.98" />
-      <stop offset="45%" stop-color="#121310" stop-opacity="0.98" />
-      <stop offset="85%" stop-color="#050806" stop-opacity="1" />
-      <stop offset="100%" stop-color="#010403" stop-opacity="1" />
+
+    <!-- تدرجات الكرة المركزية الفاخرة (Obsidian Disc) -->
+    <radialGradient id="obsidianDiscGrad" cx="46%" cy="38%" r="66%">
+      <stop offset="0%" stop-color="#24252b" stop-opacity="0.98" />
+      <stop offset="42%" stop-color="#14151a" stop-opacity="0.99" />
+      <stop offset="78%" stop-color="#090a0d" stop-opacity="1" />
+      <stop offset="100%" stop-color="#020304" stop-opacity="1" />
     </radialGradient>
 
-    <linearGradient id="officialGoldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fff4da" />
+    <!-- إطار الذهب المعدني المصقول عالي الدقة (Brushed Gold Bezel) -->
+    <linearGradient id="goldBezelGrad" x1="12%" y1="0%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#8c6633" />
+      <stop offset="15%" stop-color="#d8b780" />
+      <stop offset="28%" stop-color="#fff9ec" />
+      <stop offset="45%" stop-color="#c5a880" />
+      <stop offset="62%" stop-color="#734e20" />
+      <stop offset="82%" stop-color="#e2c595" />
+      <stop offset="100%" stop-color="#916a37" />
+    </linearGradient>
+
+    <!-- الحافة الداخلية الذهبية الناعمة -->
+    <linearGradient id="goldRimInner" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fff3db" />
       <stop offset="50%" stop-color="#c5a880" />
-      <stop offset="100%" stop-color="#8a673c" />
+      <stop offset="100%" stop-color="#6e4d21" />
     </linearGradient>
 
-    <linearGradient id="orbitalRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+    <!-- تدرج رمز الربط & الذهبي -->
+    <linearGradient id="goldAmpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff5df" />
+      <stop offset="40%" stop-color="#dec294" />
+      <stop offset="80%" stop-color="#ba955f" />
+      <stop offset="100%" stop-color="#846231" />
+    </linearGradient>
+
+    <!-- تدرج كلمة CORESYNC -->
+    <linearGradient id="goldTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eed8b6" />
+      <stop offset="50%" stop-color="#c5a880" />
+      <stop offset="100%" stop-color="#dfbe8a" />
+    </linearGradient>
+
+    <!-- تدرج المدارات الخارجية الرقيقة -->
+    <linearGradient id="orbitLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#c5a880" stop-opacity="0.8" />
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#c5a880" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#c5a880" stop-opacity="0.45" />
     </linearGradient>
 
-    <radialGradient id="nodeGrad" cx="35%" cy="35%" r="65%">
+    <!-- تدرج الكرة ثلاثية الأبعاد (3D Sync Node Spheres) -->
+    <radialGradient id="sphereNodeGrad" cx="35%" cy="30%" r="68%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="50%" stop-color="#eedcc4" />
-      <stop offset="100%" stop-color="#c5a880" />
+      <stop offset="25%" stop-color="#fff2d4" />
+      <stop offset="55%" stop-color="#d4af37" />
+      <stop offset="85%" stop-color="#7e5723" />
+      <stop offset="100%" stop-color="#321c07" />
     </radialGradient>
+
+    <!-- تدرجات أوجه النجمة ثلاثية الأبعاد المجسمة (3D Faceted Star) -->
+    <linearGradient id="starFacetLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#fdf2db" />
+      <stop offset="100%" stop-color="#dfbe8e" />
+    </linearGradient>
+    <linearGradient id="starFacetMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eed5ac" />
+      <stop offset="60%" stop-color="#c8a571" />
+      <stop offset="100%" stop-color="#947340" />
+    </linearGradient>
+    <linearGradient id="starFacetDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#aa8650" />
+      <stop offset="60%" stop-color="#785527" />
+      <stop offset="100%" stop-color="#493213" />
+    </linearGradient>
+
+    <!-- ظل واقعي ناعم للأحرف -->
+    <filter id="letterDepthShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.85" />
+    </filter>
+    
+    <!-- توهج خفيف للكرات المدارية -->
+    <filter id="nodeHaloGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur" />
+      <feFlood flood-color="#c5a880" flood-opacity="0.45" result="color" />
+      <feComposite in2="blur" operator="in" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
-  
-  <g>
-    <!-- 1. الحلقة المدارية الخارجية الدقيقة (Outer Orbital Ring) -->
-    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#orbitalRingGrad)" stroke-width="0.9" stroke-opacity="0.75" />
-    <circle cx="50" cy="50" r="47.5" fill="none" stroke="#c5a880" stroke-width="0.5" stroke-dasharray="2 3" stroke-opacity="0.35" />
 
-    <!-- 2. عقد التزامن المدارية الذكية (Sync Nodes) -->
-    <g transform="rotate(-35 50 50) translate(95, 50)">
-      <circle cx="0" cy="0" r="2.8" fill="url(#nodeGrad)" stroke="#ffffff" stroke-width="0.6" />
-    </g>
-    <g transform="rotate(145 50 50) translate(95, 50)">
-      <circle cx="0" cy="0" r="2.8" fill="url(#nodeGrad)" stroke="#ffffff" stroke-width="0.6" />
-    </g>
-
-    <!-- 3. مدارات التزامن المتداخلة (Dual Synchronous Orbitals) -->
-    <ellipse cx="50" cy="50" rx="44" ry="18" transform="rotate(35 50 50)" fill="none" stroke="url(#officialGoldBorder)" stroke-width="0.9" stroke-opacity="0.65" />
-    <ellipse cx="50" cy="50" rx="44" ry="18" transform="rotate(-35 50 50)" fill="none" stroke="url(#officialGoldBorder)" stroke-width="0.9" stroke-opacity="0.65" />
-
-    <!-- 4. الكرة المركزية الملكية الفاخرة ذات الإطار الذهبي المصقول -->
-    <circle cx="50" cy="50" r="34" fill="url(#officialCoreSphere)" stroke="url(#officialGoldBorder)" stroke-width="1.6" />
-    <circle cx="50" cy="50" r="32" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3" />
-
-    <!-- 5. مونوغرام S&R المعتمد بالخط السيريف الأصلي بتباعد فخم ومتوازن -->
-    <!-- حرف S متوازن ومتباعد نحو اليسار لمنع التلاصق -->
-    <text x="35" y="58" class="sr-serif" font-size="28" text-anchor="middle">S</text>
+  <g id="official-emblem-master">
+    <!-- 1. شبكة الخطوط الفلكية والمدارية الخلفية الدقيقة (Celestial Dial Grid) -->
+    <circle cx="250" cy="250" r="240" fill="none" stroke="#c5a880" stroke-opacity="0.18" stroke-width="0.8" stroke-dasharray="2 6" />
+    <circle cx="250" cy="250" r="226" fill="none" stroke="#c5a880" stroke-opacity="0.25" stroke-width="0.6" />
     
-    <!-- علامة الربط & بالذهب الشامباني في الوسط بهامش انسيابي -->
-    <text x="49.5" y="53" class="sr-amp" font-size="14" text-anchor="middle">&amp;</text>
-    
-    <!-- حرف R متوازن ومتباعد نحو اليمين لمنع التلاصق -->
-    <text x="64.5" y="58" class="sr-serif" font-size="28" text-anchor="middle">R</text>
+    <!-- خطوط الإحداثيات المتقاطعة (Crosshairs) -->
+    <line x1="15" y1="250" x2="485" y2="250" stroke="#c5a880" stroke-opacity="0.22" stroke-width="0.6" />
+    <line x1="250" y1="15" x2="250" y2="485" stroke="#c5a880" stroke-opacity="0.22" stroke-width="0.6" />
 
-    <!-- نجمة البريق واللمعان الملكية منزلة للأسفل نحو النسبة الذهبية الهندسية -->
-    <path d="M 50,24 L 51,26.5 L 53.5,27 L 51.5,28.5 L 52,31 L 50,29.5 L 48,31 L 48.5,28.5 L 46.5,27 L 49,26.5 Z" 
-          fill="#ffffff" 
-          opacity="0.95" />
+    <!-- 2. مدارات التزامن الذكية المزدوجة المتداخلة (Dual Synchronous Orbitals) -->
+    <ellipse cx="250" cy="250" rx="226" ry="96" transform="rotate(-33 250 250)" fill="none" stroke="url(#orbitLineGrad)" stroke-width="1.3" stroke-opacity="0.75" />
+    <ellipse cx="250" cy="250" rx="226" ry="96" transform="rotate(33 250 250)" fill="none" stroke="url(#orbitLineGrad)" stroke-width="1.3" stroke-opacity="0.75" />
+    
+    <!-- أقواس ثانوية ناعمة -->
+    <circle cx="250" cy="250" r="192" fill="none" stroke="#c5a880" stroke-opacity="0.22" stroke-width="0.6" stroke-dasharray="6 12" />
+
+    <!-- 3. كرات التزامن المدارية الذهبية المجسمة (3D Gold Spherical Sync Nodes) -->
+    <!-- العقدة العلوية اليمنى -->
+    <g transform="translate(424, 138)" filter="url(#nodeHaloGlow)">
+      <circle cx="0" cy="0" r="14.5" fill="url(#sphereNodeGrad)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85" />
+      <circle cx="-3" cy="-4" r="3.5" fill="#ffffff" opacity="0.65" />
+    </g>
+    <!-- العقدة السفلية اليسرى -->
+    <g transform="translate(76, 362)" filter="url(#nodeHaloGlow)">
+      <circle cx="0" cy="0" r="14.5" fill="url(#sphereNodeGrad)" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.85" />
+      <circle cx="-3" cy="-4" r="3.5" fill="#ffffff" opacity="0.65" />
+    </g>
+
+    <!-- 4. الميدالية المركزية الملكية الفاخرة (The Royal Sovereign Medallion) -->
+    <!-- ظل إسقاط خارجي للقرص المركزي -->
+    <circle cx="250" cy="254" r="165" fill="#000000" opacity="0.55" filter="blur(8px)" />
+
+    <!-- إطار الذهب المعدني المصقول السميك (Outer Beveled Gold Bezel) -->
+    <circle cx="250" cy="250" r="162" fill="none" stroke="url(#goldBezelGrad)" stroke-width="9" />
+
+    <!-- المجرى الداكن الفاصل (Recessed Shadow Groove) -->
+    <circle cx="250" cy="250" r="156.8" fill="none" stroke="#090a0d" stroke-width="1.8" />
+
+    <!-- الحافة الذهبية الداخلية الدقيقة (Inner Chamfer Bevel) -->
+    <circle cx="250" cy="250" r="155.2" fill="none" stroke="url(#goldRimInner)" stroke-width="1.5" />
+
+    <!-- قرص الأوبسيديان الداكن المصقول (Inner Obsidian Sphere) -->
+    <circle cx="250" cy="250" r="153.8" fill="url(#obsidianDiscGrad)" />
+
+    <!-- خط دائري داخلي دقيق ناعم -->
+    <circle cx="250" cy="250" r="148" fill="none" stroke="#ffffff" stroke-width="0.45" stroke-opacity="0.12" />
+
+    <!-- 5. النجمة الملكية خماسية الأوجه ثلاثية الأبعاد (3D Faceted Dimensional Star) -->
+    <!-- مركز النجمة: (250, 144) | نصف القطر الخارجي: 32 | نصف القطر الداخلي: 13.5 -->
+    <g id="star-3d-faceted" filter="drop-shadow(0 3px 5px rgba(0,0,0,0.75))">
+      <!-- الرأس العلوي (Top Point P0: 250, 112) -->
+      <polygon points="250,144 250,112 242.1,133.1" fill="url(#starFacetLight)" />
+      <polygon points="250,144 250,112 257.9,133.1" fill="url(#starFacetDark)" />
+
+      <!-- الرأس الأيمن العلوي (P1: 280.4, 134.1) -->
+      <polygon points="250,144 280.4,134.1 257.9,133.1" fill="url(#starFacetLight)" />
+      <polygon points="250,144 280.4,134.1 262.8,148.2" fill="url(#starFacetDark)" />
+
+      <!-- الرأس الأيمن السفلي (P2: 268.8, 169.9) -->
+      <polygon points="250,144 268.8,169.9 262.8,148.2" fill="url(#starFacetMid)" />
+      <polygon points="250,144 268.8,169.9 250,157.5" fill="url(#starFacetDark)" />
+
+      <!-- الرأس الأيسر السفلي (P3: 231.2, 169.9) -->
+      <polygon points="250,144 231.2,169.9 250,157.5" fill="url(#starFacetDark)" />
+      <polygon points="250,144 231.2,169.9 237.2,148.2" fill="url(#starFacetMid)" />
+
+      <!-- الرأس الأيسر العلوي (P4: 219.6, 134.1) -->
+      <polygon points="250,144 219.6,134.1 237.2,148.2" fill="url(#starFacetMid)" />
+      <polygon points="250,144 219.6,134.1 242.1,133.1" fill="url(#starFacetLight)" />
+    </g>
+
+    <!-- 6. مونوغرام S&R الملكي الأصيل بتباعد فخم ومظهر مطابق تماماً (Monogram Typography) -->
+    <g filter="url(#letterDepthShadow)">
+      <!-- حرف S الملكي الأبيض فائق الوضوح -->
+      <text x="174" y="282" class="emblem-serif-white" font-size="138" text-anchor="middle">S</text>
+      
+      <!-- رمز الربط & بالذهب الشامباني المائل مع ذيل الانسياب الدقيق -->
+      <text x="249" y="258" class="emblem-ampersand-gold" font-size="84" text-anchor="middle">&amp;</text>
+      
+      <!-- ذيل رمز & المتدلي بانسيابية فخمة تحت ساق حرف R -->
+      <path d="M 252,260 Q 262,274 278,273.5 Q 284,273 288,271.5" stroke="url(#goldAmpGrad)" stroke-width="2.6" fill="none" stroke-linecap="round" />
+
+      <!-- حرف R الملكي الأبيض فائق الوضوح -->
+      <text x="325" y="282" class="emblem-serif-white" font-size="138" text-anchor="middle">R</text>
+    </g>
+
+    <!-- 7. عبارة CORESYNC المتباعدة بفخامة أسفل الأحرف (Sub-title CoreSync) -->
+    <g filter="drop-shadow(0 2px 3px rgba(0,0,0,0.8))">
+      <text x="250" y="344" class="emblem-sub-coresync">CORESYNC</text>
+    </g>
   </g>
 </svg>
