@@ -7,7 +7,7 @@
 class CoreSyncFinancialSDK {
     constructor(config = {}) {
         this.apiKey = config.apiKey || 'DEMO_API_KEY_2026';
-        this.baseUrl = config.baseUrl || 'https://api.coresync-solutions.com/v1';
+        this.baseUrl = config.baseUrl || 'https://api.sr-coresync.com/v1';
     }
 
     calculateVat(amount, rate = 0.21) {

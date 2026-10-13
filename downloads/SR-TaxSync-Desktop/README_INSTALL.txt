@@ -17,4 +17,4 @@ TRIAL-SRTX-2026-X892-PRO
 
 للدعم الفني وتراخيص الشركات:
 S&R CoreSync Solutions B.V. - Amsterdam HQ
-contact@coresync-solutions.com
+info@sr-coresync.com
