@@ -4094,6 +4094,10 @@
                     `━━━━━━━━━━━━━━━━━━━━\n` +
                     `_تم استخراج التقرير عبر Smart ROI Engine المعتمد لشركة S&R CoreSync Solutions_`;
 
+        const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+    };
+
     // ========================================================
     // Real Software Catalog & Direct Download Controller
     // ========================================================
