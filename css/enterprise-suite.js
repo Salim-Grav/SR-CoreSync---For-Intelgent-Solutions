@@ -3853,6 +3853,99 @@
         }
     };
 
+    // Expose ROI Engine globally
+    window.updateROICalculator = typeof updateROICalculator === 'function' ? updateROICalculator : function() {
+        const teamSlider = document.getElementById('roiCompanySize');
+        const hoursSlider = document.getElementById('roiManualHours');
+        const salarySlider = document.getElementById('roiAvgSalary');
+        const solutionSelect = document.getElementById('roiSolutionType');
+        if (!teamSlider || !hoursSlider || !salarySlider || !solutionSelect) return;
+
+        function updateSliderTrack(slider) {
+            if (!slider) return;
+            const min = parseFloat(slider.min) || 0;
+            const max = parseFloat(slider.max) || 100;
+            const val = parseFloat(slider.value) || 0;
+            const pct = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+            slider.style.background = `linear-gradient(to right, #c5a880 0%, #c5a880 ${pct}%, rgba(255, 255, 255, 0.12) ${pct}%, rgba(255, 255, 255, 0.12) 100%)`;
+        }
+
+        updateSliderTrack(teamSlider);
+        updateSliderTrack(hoursSlider);
+        updateSliderTrack(salarySlider);
+
+        const teamSize = parseInt(teamSlider.value, 10) || 15;
+        const manualHours = parseInt(hoursSlider.value, 10) || 8;
+        const hourlyRate = parseFloat(salarySlider.value) || 28;
+        const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
+
+        document.querySelectorAll('.roi-preset-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.includes(`(${teamSize})`));
+        });
+
+        const isAr = document.documentElement.lang === 'ar';
+        const isNl = document.documentElement.lang === 'nl';
+
+        const teamValBadge = document.getElementById('roiCompanySizeVal');
+        if (teamValBadge) {
+            teamValBadge.textContent = isAr ? (teamSize <= 10 ? `${teamSize} موظفين` : `${teamSize} موظفاً`) : (isNl ? `${teamSize} medewerkers` : `${teamSize} employees`);
+        }
+
+        const hoursValBadge = document.getElementById('roiManualHoursVal');
+        if (hoursValBadge) {
+            hoursValBadge.textContent = isAr ? `${manualHours} ساعات / أسبوع` : (isNl ? `${manualHours} uur / week` : `${manualHours} hrs / week`);
+        }
+
+        const salaryValBadge = document.getElementById('roiAvgSalaryVal');
+        if (salaryValBadge) {
+            salaryValBadge.textContent = isAr ? `€${hourlyRate} / ساعة` : (isNl ? `€${hourlyRate} / uur` : `€${hourlyRate} / hr`);
+        }
+
+        const totalHours = teamSize * manualHours * 52;
+        const hoursSaved = Math.round(totalHours * efficiencyRate);
+        const annualSavings = Math.round(hoursSaved * hourlyRate);
+
+        let baseCost = 10000;
+        if (teamSize <= 10) baseCost = 7500;
+        else if (teamSize <= 30) baseCost = 13500;
+        else if (teamSize <= 70) baseCost = 22000;
+        else baseCost = 35000;
+
+        const monthlySavings = annualSavings / 12;
+        let paybackMonths = (baseCost / (monthlySavings || 1)).toFixed(1);
+        if (paybackMonths < 0.8) paybackMonths = "0.8";
+        if (paybackMonths > 6.0) paybackMonths = "5.5";
+
+        const savingsElem = document.getElementById('roiAnnualSavings');
+        if (savingsElem) {
+            savingsElem.innerHTML = `<span>€</span>${annualSavings.toLocaleString('en-US')}`;
+        }
+
+        const hoursSavedElem = document.getElementById('roiHoursSaved');
+        if (hoursSavedElem) {
+            const suffix = isAr ? 'ساعة/سنة' : (isNl ? 'uur/jaar' : 'hrs/year');
+            hoursSavedElem.innerHTML = `${hoursSaved.toLocaleString('en-US')} <span>${suffix}</span>`;
+        }
+
+        const effGainElem = document.getElementById('roiEfficiencyGain');
+        if (effGainElem) {
+            effGainElem.innerHTML = `+<span>${Math.round(efficiencyRate * 100)}%</span>`;
+        }
+
+        const paybackElem = document.getElementById('roiPaybackMonths');
+        if (paybackElem) {
+            const monthSuffix = isAr ? 'شهر' : (isNl ? 'maand' : 'months');
+            paybackElem.textContent = `${paybackMonths} ${monthSuffix}`;
+        }
+    };
+
+    window.setRoiTeamPreset = function(size) {
+        const slider = document.getElementById('roiCompanySize');
+        if (!slider) return;
+        slider.value = size;
+        window.updateROICalculator();
+    };
+
     // Override init with extended version
     window.initEnterpriseSuite = initEnterpriseSuiteExtended;
 
