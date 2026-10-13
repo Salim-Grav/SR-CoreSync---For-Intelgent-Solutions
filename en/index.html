@@ -7901,17 +7901,17 @@
 
             if (contentBox) {
                 contentBox.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:8px;">
-                        <h4 style="font-size:1.15rem; font-weight:800; color:#ffffff; margin:0;">${data.title}</h4>
-                        <span style="font-size:0.75rem; background:rgba(197,168,128,0.18); border:1px solid rgba(197,168,128,0.3); color:#f3dfba; padding:3px 10px; border-radius:999px; white-space:nowrap;">Active Sandbox</span>
+                    <div class="sandbox-card-header">
+                        <h4 class="sandbox-card-title">${data.title}</h4>
+                        <span class="sandbox-card-pill">Active Sandbox</span>
                     </div>
-                    <p style="font-size:0.88rem; color:rgba(255,255,255,0.75); line-height:1.5; margin:0 0 10px 0;">${data.desc}</p>
+                    <p class="sandbox-card-desc">${data.desc}</p>
                     <ul class="sr-demo-feature-list">
                         ${data.features.map(f => `<li class="sr-demo-feature-item"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span>${f}</span></li>`).join('')}
                     </ul>
-                    <div style="background:rgba(0,0,0,0.5); border:1px solid rgba(197,168,128,0.25); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px;">
-                        <span style="width:6px; height:6px; border-radius:50%; background:#c5a880;"></span>
-                        <span style="font-size:0.8rem; font-weight:700; color:#f3dfba;">Benchmark: ${data.metric}</span>
+                    <div class="sandbox-card-metric-box">
+                        <span class="sandbox-card-metric-dot"></span>
+                        <span class="sandbox-card-metric-text">Benchmark: ${data.metric}</span>
                     </div>
                 `;
             }
@@ -8134,7 +8134,7 @@
                 <span id="swDlIcon" class="sw-dl-header-icon">⚡</span>
                 <div>
                     <span id="swDlCategoryBadge" class="sw-badge">Desktop Systems &amp; ERP</span>
-                    <h2 id="swDlTitle" style="margin: 0; font-size: 1.5rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">S&R TaxSync Desktop</h2>
+                    <h2 id="swDlTitle" class="sw-dl-header-title">S&R TaxSync Desktop</h2>
                 </div>
             </div>
 
@@ -8209,7 +8209,7 @@
                         <span class="sw-badge salim-lm-badge">
                             🔐 Founder &amp; Chief Architect Salim Aziza's Cryptographic Portal
                         </span>
-                        <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
+                        <h2 class="salim-lm-title">
                             Salim's Software License Manager &amp; Cryptographic Console
                         </h2>
                     </div>
@@ -8330,7 +8330,7 @@
                         <span class="sw-badge checkout-mollie-badge">
                             European Compliant Payment Gateway • Mollie &amp; Stripe SSL
                         </span>
-                        <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
+                        <h2 class="checkout-header-title">
                             Purchase &amp; Instant License Activation
                         </h2>
                     </div>
