@@ -24,7 +24,7 @@
 <body>
     <div class="preview-container">
         <!-- سوق البرمجيات الحصرية ومختبر حلول التطبيقات -->
-        <section class="flat-spacing section-software-hub" id="software-hub" data-section style="padding: 10px 0;">
+        <section class="flat-spacing section-software-hub section-software-hub--preview" id="software-hub" data-section>
             <div class="container">
                 <div class="s-header text-center mb-4">
                     <span class="about-hero-tag font-latin mb-2 software-hub-tag">
@@ -331,14 +331,14 @@
                             <div class="lab-action-box">
                                 <div class="lab-action-badge">شراكة النشر الحصرية للمطورين</div>
                                 <h4 class="text-white fw-bold mb-2">انشر برمجياتك وابدأ بالربح المالي</h4>
-                                <p class="text-white-64 mb-4" style="font-size: 0.88rem; line-height: 1.6;">
+                                <p class="text-white-64 mb-4 lab-action-desc">
                                     تواصل مباشرة مع كبير مهندسي ومطوري الأنظمة (م. سليم عزيزة) لدراسة مشروعك البرمجي، وهيكلته تجارياً، وإدراجه في المتجر الرسمي.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
                                     <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('dev')">
                                         <span>تقديم طلب إدراج مشروع برمجى ←</span>
                                     </button>
-                                    <a href="demo.html#software" class="btn-live-preview w-100 justify-content-center" style="padding: 12px 18px;">
+                                    <a href="demo.html#software" class="btn-live-preview w-100 justify-content-center btn-live-preview--pad">
                                         <span>تجربة المحاكي التفاعلي ⚡</span>
                                     </a>
                                 </div>
@@ -359,35 +359,35 @@
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareDownloadModal()" aria-label="إغلاق النافذة">&times;</button>
             
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 8px;">
-                <span id="swDlIcon" style="font-size: 2.2rem;">💻</span>
+            <div class="sw-dl-header-row">
+                <span id="swDlIcon" class="sw-dl-header-icon">💻</span>
                 <div>
                     <span id="swDlCategoryBadge" class="sw-badge">برمجيات مكتبية وأنظمة ERP</span>
-                    <h2 id="swDlTitle" style="margin: 0; font-size: 1.5rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">S&R TaxSync Desktop</h2>
+                    <h2 id="swDlTitle" class="sw-dl-header-title">S&R TaxSync Desktop</h2>
                 </div>
             </div>
 
-            <div id="swDlVer" style="font-size: 0.85rem; color: #a3c2b3; margin-bottom: 16px; font-weight: 600;">
+            <div id="swDlVer" class="sw-dl-version-text">
                 v2.4 Pro • Windows 11/10 &amp; macOS • 14.2 MB
             </div>
 
-            <p id="swDlDesc" style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px;">
+            <p id="swDlDesc" class="sw-dl-desc-text">
                 برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين لحساب ضريبة BTW/VAT 21% و 9% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية وفق معايير Belastingdienst.
             </p>
 
-            <div style="background: rgba(14, 25, 20, 0.6); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 14px; padding: 16px; margin-bottom: 16px;">
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 8px;">الميزات والاعتمادات المضمنة:</div>
-                <ul id="swDlSpecs" style="margin: 0; padding-right: 18px; color: #94a3b8; font-size: 0.85rem; line-height: 1.7;">
+            <div class="sw-dl-specs-box">
+                <div class="sw-dl-section-label">الميزات والاعتمادات المضمنة:</div>
+                <ul id="swDlSpecs" class="sw-dl-specs-list">
                     <li>✓ تشفير البيانات والعمليات محلياً دون اتصال</li>
                     <li>✓ توليد وتصدير إقرارات XML الضريبية المعتمدة</li>
                     <li>✓ طباعة فواتير رسمية متوافقة مع معيار EN 16931</li>
                 </ul>
             </div>
 
-            <div style="margin-bottom: 8px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.85rem; font-weight: 700; color: #c5a880;">مفتاح الترخيص الرقمي (Enterprise License Key):</span>
-                    <span style="font-size: 0.75rem; color: #00e699;">✓ ترخيص أصلي مفعل</span>
+            <div class="sw-dl-key-row">
+                <div class="sw-dl-key-header">
+                    <span class="sw-dl-section-label">مفتاح الترخيص الرقمي (Enterprise License Key):</span>
+                    <span class="sw-dl-key-status">✓ ترخيص أصلي مفعل</span>
                 </div>
                 <div class="sw-key-box">
                     <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
@@ -396,7 +396,7 @@
             </div>
 
             <div>
-                <div style="font-weight: 700; font-size: 0.85rem; color: #c5a880; margin-bottom: 10px;">خطوات التثبيت السريع:</div>
+                <div class="sw-dl-steps-title">خطوات التثبيت السريع:</div>
                 <div id="swDlSteps">
                     <div class="sw-step-item">
                         <span class="sw-step-num">1</span>
@@ -420,14 +420,14 @@
                 <a id="swDlDirectBtn" href="downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
                     <span>⬇️ تحميل الحزمة الكاملة (ZIP)</span>
                 </a>
-                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim" style="color: #00e699; border-color: rgba(0,230,153,0.4);" onclick="closeSoftwareDownloadModal(); openSoftwareCheckoutModal('taxsync')">
+                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim sw-dl-checkout-btn" onclick="closeSoftwareDownloadModal(); openSoftwareCheckoutModal('taxsync')">
                     <span>💳 شراء وترخيص فوري عبر iDEAL</span>
                 </button>
                 <a id="swDlSandboxBtn" href="demo.html#software" class="sw-btn-sec-sim">
                     <span>⚡ المحاكي السحابي</span>
                 </a>
             </div>
-            <div style="text-align: center; margin-top: 14px; font-size: 0.78rem; color: #64748b;">
+            <div class="sw-dl-footer-note">
                 🔒 حزمة معتمدة وموقعة رقمياً وخالية 100% من أي برمجيات ضارة • S&R CoreSync Solutions
             </div>
         </div>
@@ -438,14 +438,14 @@
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" onclick="closeSalimLicenseManagerModal()" aria-label="إغلاق النافذة">&times;</button>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                    <span style="font-size: 2.2rem;">🔑</span>
+            <div class="salim-lm-header-bar">
+                <div class="salim-lm-header-title-wrap">
+                    <span class="salim-lm-header-icon">🔑</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); border-color: #c5a880; color: #f7e2bd;">
+                        <span class="sw-badge salim-lm-badge">
                             🔐 وحدة التحكم المركزية للمؤسس والمهندس سليم عزيزة
                         </span>
-                        <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                        <h2 class="salim-lm-title">
                             Salim's Software License Manager &amp; Cryptographic Portal
                         </h2>
                     </div>
@@ -461,23 +461,23 @@
                     <div class="salim-lm-stat-lbl">إجمالي التراخيص المصدرة</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #38bdf8;">100%</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-sky">100%</div>
                     <div class="salim-lm-stat-lbl">معدل تشغيل الأجهزة أوفلاين</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #f59e0b;" id="salimTotalRevenueEstimate">€ 756</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-amber" id="salimTotalRevenueEstimate">€ 756</div>
                     <div class="salim-lm-stat-lbl">القيمة التقديرية للتراخيص</div>
                 </div>
             </div>
 
             <div class="salim-lm-form-card">
-                <h4 style="margin: 0 0 14px 0; color: #00e699; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                <h4 class="salim-lm-form-title">
                     <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
                 </h4>
                 <form onsubmit="generateSalimLicense(event)">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البرنامج أو النظام المستهدف:</label>
+                            <label class="salim-lm-field-label">البرنامج أو النظام المستهدف:</label>
                             <select id="salimGenProduct" class="salim-input" title="البرنامج أو النظام المستهدف" aria-label="البرنامج أو النظام المستهدف">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
@@ -489,14 +489,14 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">اسم العميل أو المؤسسة الشريكة:</label>
+                            <label class="salim-lm-field-label">اسم العميل أو المؤسسة الشريكة:</label>
                             <input id="salimGenClient" type="text" class="salim-input" placeholder="مثال: Heineken NL أو شركة التقنية الدولية" required>
                         </div>
                     </div>
 
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">نوع وخطة الترخيص:</label>
+                            <label class="salim-lm-field-label">نوع وخطة الترخيص:</label>
                             <select id="salimGenPlan" class="salim-input" title="نوع وخطة الترخيص" aria-label="نوع وخطة الترخيص">
                                 <option value="سنوي (Annual License)">ترخيص سنوي (1 Year)</option>
                                 <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month)</option>
@@ -504,13 +504,13 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">بصمة العتاد (Hardware Machine ID - اختياري):</label>
+                            <label class="salim-lm-field-label">بصمة العتاد (Hardware Machine ID - اختياري):</label>
                             <input id="salimGenMachine" type="text" class="salim-input" placeholder="مثال: NL-SRV-X892 أو اتركه تلقائي">
                         </div>
                     </div>
 
-                    <div style="display: flex; justify-content: flex-end;">
-                        <button type="submit" class="tf-btn" style="background: linear-gradient(135deg, #00e699, #009966); color: #05140e; font-weight: 800; border: none; padding: 10px 22px; border-radius: 10px; cursor: pointer;">
+                    <div class="salim-lm-btn-wrap">
+                        <button type="submit" class="tf-btn salim-lm-submit-btn">
                             <span>توليد وتفعيل الترخيص المشفر الآن ⚡</span>
                         </button>
                     </div>
@@ -518,9 +518,9 @@
             </div>
 
             <div>
-                <h4 style="margin: 0 0 12px 0; color: #f7e2bd; font-size: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                <h4 class="salim-lm-ledger-title">
                     <span>سجل التراخيص الرقمية المفعلة (Active License Ledger)</span>
-                    <span style="font-size: 0.8rem; color: #94a3b8;">محفوظ محلياً ومشفر</span>
+                    <span class="salim-lm-ledger-note">محفوظ محلياً ومشفر</span>
                 </h4>
                 <div class="salim-table-wrap">
                     <table class="salim-table">
@@ -542,7 +542,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 18px; font-size: 0.78rem; color: #64748b;">
+            <div class="salim-lm-footer-note">
                 🛡️ بوابة إدارة التراخيص حصرية لكبير مهندسي ومطوري البرمجيات (م. سليم عزيزة) • S&R CoreSync Solutions
             </div>
         </div>
@@ -554,22 +554,22 @@
             <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareCheckoutModal()" aria-label="إغلاق النافذة">&times;</button>
 
             <div id="checkoutFormView">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                    <span style="font-size: 2.2rem;">💳</span>
+                <div class="checkout-header-row">
+                    <span class="checkout-header-icon">💳</span>
                     <div>
-                        <span class="sw-badge" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fde68a;">
+                        <span class="sw-badge checkout-mollie-badge">
                             بوابة الدفع والتسوية الأوروبية المعتمدة • Mollie &amp; Stripe SSL
                         </span>
-                        <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                        <h2 class="checkout-header-title">
                             شراء وترخيص البرمجيات الرسمية فوراً
                         </h2>
                     </div>
                 </div>
 
                 <div class="checkout-order-summary">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <strong id="checkoutItemTitle" style="color: #fff; font-size: 1rem;">S&R TaxSync Desktop v2.4 Pro</strong>
-                        <span id="checkoutItemPrice" style="color: #00e699; font-weight: 800; font-size: 1.1rem;">€ 189</span>
+                    <div class="checkout-summary-head">
+                        <strong id="checkoutItemTitle" class="checkout-item-title">S&R TaxSync Desktop v2.4 Pro</strong>
+                        <span id="checkoutItemPrice" class="checkout-item-price">€ 189</span>
                     </div>
                     <div class="checkout-price-row">
                         <span>المبلغ الصافي (Excl. BTW):</span>
@@ -581,12 +581,12 @@
                     </div>
                     <div class="checkout-price-row total-row">
                         <span>المجموع الإجمالي (Incl. BTW 21%):</span>
-                        <span id="checkoutTotalPrice" style="color: #00e699;">€ 189,00</span>
+                        <span id="checkoutTotalPrice" class="checkout-total-price-val">€ 189,00</span>
                     </div>
                 </div>
 
                 <form onsubmit="processSoftwareCheckout(event)">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 8px;">اختر وسيلة الدفع:</div>
+                    <div class="checkout-section-subtitle">اختر وسيلة الدفع:</div>
                     <div class="checkout-tabs">
                         <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
                             <span>🏦 iDEAL (هولندا)</span>
@@ -599,8 +599,8 @@
                         </button>
                     </div>
 
-                    <div id="checkoutIdealBox" style="margin-bottom: 16px;">
-                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">اختر المصرف الهولندي التابع له:</label>
+                    <div id="checkoutIdealBox" class="checkout-ideal-box">
+                        <label class="checkout-field-label">اختر المصرف الهولندي التابع له:</label>
                         <div class="checkout-bank-grid">
                             <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
                             <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
@@ -611,27 +611,27 @@
                         </div>
                     </div>
 
-                    <div id="checkoutCardBox" style="display: none; margin-bottom: 16px;">
+                    <div id="checkoutCardBox" class="checkout-hidden-box">
                         <div class="salim-lm-grid-2 mb-2">
                             <input type="text" class="salim-input" placeholder="رقم البطاقة (16 رقم)">
-                            <div style="display: flex; gap: 8px;">
+                            <div class="checkout-card-row">
                                 <input type="text" class="salim-input" placeholder="MM/YY">
                                 <input type="text" class="salim-input" placeholder="CVC">
                             </div>
                         </div>
                     </div>
 
-                    <div id="checkoutSepaBox" style="display: none; margin-bottom: 16px;">
+                    <div id="checkoutSepaBox" class="checkout-hidden-box">
                         <input type="text" class="salim-input" placeholder="رقم الآيبان الأوروبي (IBAN NLxx)">
                     </div>
 
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">الاسم الكامل أو اسم الشركة:</label>
+                            <label class="checkout-field-label">الاسم الكامل أو اسم الشركة:</label>
                             <input id="checkoutCustName" type="text" class="salim-input" placeholder="اسمك أو اسم مؤسستك" required>
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البريد الإلكتروني لاستلام الترخيص والفاتورة:</label>
+                            <label class="checkout-field-label">البريد الإلكتروني لاستلام الترخيص والفاتورة:</label>
                             <input id="checkoutCustEmail" type="email" class="salim-input" placeholder="name@company.com" required>
                         </div>
                     </div>
@@ -640,7 +640,7 @@
                         <span id="checkoutPayBtnText">إتمام الدفع الآمن واستلام الترخيص فوراً (€ 189) 🔒</span>
                     </button>
 
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.76rem; color: #94a3b8;">
+                    <div class="checkout-security-row">
                         <span>🔒 مشفر 256-bit SSL</span>
                         <span>📄 يتضمن فاتورة BTW رسمية</span>
                         <span>⚡ تسليم فوري للمفتاح</span>
@@ -648,33 +648,33 @@
                 </form>
             </div>
 
-            <div id="checkoutSuccessView" style="display: none; text-align: center; padding: 10px 0;">
-                <div style="font-size: 3.5rem; margin-bottom: 8px;">🎉</div>
-                <h3 style="color: #00e699; font-size: 1.4rem; margin-bottom: 6px;">تم الدفع بنجاح وإصدار الترخيص الرقمي!</h3>
-                <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 18px;">
+            <div id="checkoutSuccessView" class="checkout-success-view">
+                <div class="checkout-success-icon">🎉</div>
+                <h3 class="checkout-success-title">تم الدفع بنجاح وإصدار الترخيص الرقمي!</h3>
+                <p class="checkout-success-desc">
                     شكراً لاختياركم برمجيات S&R CoreSync Solutions. تم توثيق عمليتكم وتسجيل الفاتورة لدى النظام المالي الهولندي.
                 </p>
 
-                <div style="background: rgba(6, 16, 11, 0.9); border: 1px solid rgba(0, 230, 153, 0.35); border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: right;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">رقم الفاتورة الضريبية:</span>
-                        <strong id="checkoutSuccessInvNum" style="color: #f7e2bd; font-family: monospace;">INV-2026-SR-9481</strong>
+                <div class="checkout-success-card">
+                    <div class="checkout-success-row">
+                        <span class="checkout-success-lbl">رقم الفاتورة الضريبية:</span>
+                        <strong id="checkoutSuccessInvNum" class="checkout-success-inv-num">INV-2026-SR-9481</strong>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">حالة الاعتماد:</span>
-                        <span class="status-badge status-completed" style="font-size: 0.75rem;">مدفوع ومفعل رسمياً ✓</span>
+                    <div class="checkout-success-status-row">
+                        <span class="checkout-success-lbl">حالة الاعتماد:</span>
+                        <span class="status-badge status-completed salim-table-badge">مدفوع ومفعل رسمياً ✓</span>
                     </div>
 
-                    <div style="border-top: 1px dashed rgba(197, 168, 128, 0.3); padding-top: 12px;">
-                        <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 6px;">مفتاح الترخيص الرقمي الأصلي المخصص لك:</div>
-                        <div class="sw-key-box" style="margin: 0;">
+                    <div class="checkout-success-key-box">
+                        <div class="checkout-success-key-lbl">مفتاح الترخيص الرقمي الأصلي المخصص لك:</div>
+                        <div class="sw-key-box sw-key-box--nomargin">
                             <span id="checkoutSuccessKey" class="sw-key-code">SRTX-PRO-2026-PAID-98A1</span>
                             <button type="button" class="sw-btn-copy-key" onclick="navigator.clipboard.writeText(document.getElementById('checkoutSuccessKey').textContent); alert('📋 تم نسخ مفتاحك بنجاح!');">نسخ المفتاح 📋</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="sw-action-row" style="margin-top: 0;">
+                <div class="sw-action-row sw-action-row--nomargin">
                     <a id="checkoutSuccessExeBtn" href="downloads/SR-TaxSync-Setup-v2.4.exe" download="SR-TaxSync-Setup-v2.4.exe" class="sw-btn-exe-dl">
                         <span>🚀 تحميل برنامج التثبيت (Setup.exe)</span>
                     </a>
@@ -683,8 +683,8 @@
                     </a>
                 </div>
 
-                <div style="margin-top: 14px;">
-                    <button type="button" class="sw-btn-sec-sim" style="width: 100%;" onclick="alert('📄 تم إرسال نسخة الفاتورة الضريبية PDF ومفتاح الترخيص إلى بريدك الإلكتروني بنجاح!'); closeSoftwareCheckoutModal();">
+                <div class="checkout-success-action-wrap">
+                    <button type="button" class="sw-btn-sec-sim sw-btn-sec-sim--full" onclick="alert('📄 تم إرسال نسخة الفاتورة الضريبية PDF ومفتاح الترخيص إلى بريدك الإلكتروني بنجاح!'); closeSoftwareCheckoutModal();">
                         <span>إرسال نسخة الفاتورة الضريبية PDF إلى بريدي الإلكتروني 📧</span>
                     </button>
                 </div>
