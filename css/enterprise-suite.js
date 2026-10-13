@@ -4094,8 +4094,284 @@
                     `━━━━━━━━━━━━━━━━━━━━\n` +
                     `_تم استخراج التقرير عبر Smart ROI Engine المعتمد لشركة S&R CoreSync Solutions_`;
 
-        const waUrl = `https://wa.me/31687764998?text=${encodeURIComponent(msg)}`;
-        window.open(waUrl, '_blank');
+    // ========================================================
+    // Real Software Catalog & Direct Download Controller
+    // ========================================================
+    window.REAL_SOFTWARE_CATALOG = {
+        taxsync: {
+            id: 'taxsync',
+            title: 'S&R TaxSync Desktop v2.4 Pro',
+            category: 'accounting',
+            categoryName: 'الحلول المحاسبية والضريبية المستقلة',
+            icon: '💻',
+            ver: 'v2.4 Pro (Offline-First Edition)',
+            os: 'Windows 11 / 10 (64-bit) & macOS',
+            size: '14.8 MB',
+            price: '€ 189',
+            priceType: 'ترخيص سنوي / جهاز',
+            downloadFile: 'downloads/SR-TaxSync-Desktop-v2.4-Setup.zip',
+            fileName: 'SR-TaxSync-Desktop-v2.4-Setup.zip',
+            licenseKey: 'SRTX-PRO-2026-X892-OFFLINE',
+            desc: 'برنامج سطح مكتب محاسبي وضريبي مستقل يعمل أوفلاين لحساب ضريبة BTW/VAT 21% و 9% وإصدار إقرارات XML لمصلحة الضرائب الهولندية والخليجية وفق معايير Belastingdienst الرسمية.',
+            specs: [
+                'يعمل محلياً أوفلاين 100% دون الحاجة لأي اتصال بالإنترنت',
+                'توليد وتصدير إقرارات XML الضريبية المعتمدة رسمياً',
+                'طباعة فواتير ضريبية مطابقة للمواصفة القياسية الأوروبية EN 16931',
+                'مشفّر بقواعد بيانات محلية آمنة'
+            ],
+            steps: [
+                'قم بفك ضغط ملف الـ ZIP المحمل إلى أي مجلد تريده على جهازك.',
+                'اضغط مرتين على ملف تشغيل (Run-TaxSync.bat) ليفتح البرنامج فوراً كنافذة تطبيق مستقلة فائقة السرعة.',
+                'أدخل مفتاح الترخيص المفعل أدناه لتأكيد النسخة والاستفادة من كافة المزايا.'
+            ],
+            sandboxUrl: 'demo.html?sandbox=taxsync#software'
+        },
+        cloudpos: {
+            id: 'cloudpos',
+            title: 'S&R CloudPOS Connector v3.1',
+            category: 'accounting',
+            categoryName: 'الحلول المحاسبية والضريبية المستقلة',
+            icon: '⚡',
+            ver: 'v3.1 Agent Service',
+            os: 'Windows POS Terminal / USB & COM Ports',
+            size: '8.4 MB',
+            price: '€ 25',
+            priceType: 'شهرياً / نقطة بيع',
+            downloadFile: 'downloads/SR-CloudPOS-Connector-v3.1.zip',
+            fileName: 'SR-CloudPOS-Connector-v3.1.zip',
+            licenseKey: 'SRPOS-PRO-2026-C310-LIVE',
+            desc: 'وسيط برمجي خفيف يعمل في خلفية أجهزة الكاشير القديمة لربطها فورياً بنظام الـ ERP السحابي لمزامنة حركة المخازن والسيولة النقدية دون تغيير الأجهزة.',
+            specs: [
+                'تكامل كامل مع طابعات الإيصالات الحرارية والباركود',
+                'مبيعات أوفلاين مع مزامنة تلقائية فور عودة الاتصال',
+                'تسوية نقدية وجرد فوري بنهاية كل وردية'
+            ],
+            steps: [
+                'فك ضغط الحزمة على جهاز الكاشير أو الخادم المحلي.',
+                'شغّل ملف (Run-POS-Agent.bat) لبدء خدمة الربط.',
+                'اربط الـ API Key الخاص بك للاتصال بنظام CoreSync Cloud ERP.'
+            ],
+            sandboxUrl: 'demo.html#software'
+        },
+        flowscan: {
+            id: 'flowscan',
+            title: 'S&R FlowScan AI Mobile v1.8',
+            category: 'accounting',
+            categoryName: 'الحلول المحاسبية والضريبية المستقلة',
+            icon: '📱',
+            ver: 'v1.8 OCR AI Engine',
+            os: 'Android & iOS PWA Standalone',
+            size: '6.2 MB',
+            price: '€ 9.99',
+            priceType: 'شهرياً / مستخدم',
+            downloadFile: 'downloads/SR-FlowScan-Mobile-v1.8.zip',
+            fileName: 'SR-FlowScan-Mobile-v1.8.zip',
+            licenseKey: 'SRSCAN-AI-2026-F180-MOBILE',
+            desc: 'تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.',
+            specs: [
+                'استخراج ضوئي ذكي OCR بدقة 99.4%',
+                'فرز آلي لمصاريف التشغيل والوقود والضيافة',
+                'مزامنة سحابية مباشرة مع لوحة تحكم الإدارة'
+            ],
+            steps: [
+                'فك ضغط الحزمة أو افتح ملف index.html في متصفح هاتفك لتثبيته كـ PWA.',
+                'اختر "إضافة إلى الشاشة الرئيسية" ليعمل كتطبيق هاتف مستقل.',
+                'سجل الدخول باستخدام مفتاح الترخيص المفعل.'
+            ],
+            sandboxUrl: 'demo.html#software'
+        },
+        sdk: {
+            id: 'sdk',
+            title: 'S&R Financial AI SDK v1.2',
+            category: 'developer',
+            categoryName: 'برمجيات وأدوات المطورين والبنية التحتية',
+            icon: '🧩',
+            ver: 'v1.2 Developer Kit',
+            os: 'Python 3.10+ / Node.js 18+ / C# / REST',
+            size: '11.5 MB',
+            price: '€ 99',
+            priceType: 'شهرياً (50k API Calls)',
+            downloadFile: 'downloads/SR-Financial-AI-SDK-v1.2.zip',
+            fileName: 'SR-Financial-AI-SDK-v1.2.zip',
+            licenseKey: 'SRSDK-DEV-2026-S120-REST',
+            desc: 'مكتبة برمجية للمطورين والشركات لدمج خوارزميات التنبؤ المالي والفوترة والامتثال المحاسبي الأوروبي (UBL) في تطبيقاتهم الخاصة بسهولة عبر REST APIs.',
+            specs: [
+                'حزم جاهزة لـ Node.js (npm) و Python (pip)',
+                'خوارزميات تنبؤ مالي ومطابقة فواتير بالذكاء الاصطناعي',
+                'توثيق برمجي كامل مع أمثلة تشغيل فورية'
+            ],
+            steps: [
+                'فك ضغط الحزمة في مسار مشروعك البرمجي.',
+                'في بايثون: نفذ `python sr_financial_sdk.py` للتجربة المباشرة.',
+                'في نود: استورد `const CoreSync = require("./index.js")` وابدأ التطوير فوراً.'
+            ],
+            sandboxUrl: 'demo.html#software'
+        },
+        vault: {
+            id: 'vault',
+            title: 'S&R SecureVault B2B v2.0',
+            category: 'developer',
+            categoryName: 'برمجيات وأدوات المطورين والبنية التحتية',
+            icon: '🛡️',
+            ver: 'v2.0 Enterprise Encrypted',
+            os: 'Win Server / Linux CLI / Docker',
+            size: '9.1 MB',
+            price: '€ 49',
+            priceType: 'شهرياً (1TB Encrypted)',
+            downloadFile: 'downloads/SR-SecureVault-v2.0.zip',
+            fileName: 'SR-SecureVault-v2.0.zip',
+            licenseKey: 'SRVLT-AES256-2026-V200-MIL',
+            desc: 'برمجية تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع تخزين متوافق 100% مع قانون GDPR الأوروبي.',
+            specs: [
+                'تشفير وفك تشفير عسكري بمعيار AES-256',
+                'أداة CLI سريعة لأتمتة النسخ الاحتياطي عبر Cron / Task Scheduler',
+                'حماية كاملة لقواعد بيانات SQL و المستندات الحساسة'
+            ],
+            steps: [
+                'فك ضغط ملف الـ ZIP.',
+                'شغّل Run-Vault.bat لتشفير ملفاتك محلياً عبر سطر الأوامر.',
+                'استخدم مفتاح التشفير الآمن لحماية مستنداتك المؤسسية.'
+            ],
+            sandboxUrl: 'demo.html#software'
+        },
+        terminal: {
+            id: 'terminal',
+            title: 'S&R Cloud Terminal Agent v1.0',
+            category: 'developer',
+            categoryName: 'برمجيات وأدوات المطورين والبنية التحتية',
+            icon: '⚙️',
+            ver: 'v1.0 DevOps Agent',
+            os: 'Windows / Linux CLI / Docker Cluster',
+            size: '7.8 MB',
+            price: '€ 39',
+            priceType: 'شهرياً / Cluster',
+            downloadFile: 'downloads/SR-Cloud-Terminal-Agent-v1.0.zip',
+            fileName: 'SR-Cloud-Terminal-Agent-v1.0.zip',
+            licenseKey: 'SRTRM-OPS-2026-T100-CLOUD',
+            desc: 'وكيل سحابي متطور لمراقبة خوادم الـ Microservices وتتبع استهلاك المعالج والذاكرة وإعادة تشغيل الخدمات تلقائياً مع تنبيهات فورية.',
+            specs: [
+                'مراقبة لحظية بنبضات الـ Heartbeat ومقاييس SLA',
+                'استهلاك فائق الخفة للذاكرة (أقل من 15MB)',
+                'ربط فوري ومباشر مع كلوستر أمستردام AMS-01'
+            ],
+            steps: [
+                'فك ضغط ملف الـ ZIP على خادمك أو حاسوبك.',
+                'شغّل ملف (Run-Agent.bat) أو نفّذ `python agent.py`.',
+                'يبدأ الوكيل المراقبة اللحظية والاتصال السحابي الآمن فوراً.'
+            ],
+            sandboxUrl: 'demo.html#software'
+        }
+    };
+
+    window.openSoftwareDownloadModal = function(softwareId) {
+        const sw = window.REAL_SOFTWARE_CATALOG[softwareId] || window.REAL_SOFTWARE_CATALOG.taxsync;
+        const modal = document.getElementById('softwareDownloadModal');
+        if (!modal) {
+            const a = document.createElement('a');
+            a.href = sw.downloadFile;
+            a.download = sw.fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            return;
+        }
+
+        const titleEl = document.getElementById('swDlTitle');
+        const iconEl = document.getElementById('swDlIcon');
+        const verEl = document.getElementById('swDlVer');
+        const descEl = document.getElementById('swDlDesc');
+        const keyEl = document.getElementById('swDlKey');
+        const badgeEl = document.getElementById('swDlCategoryBadge');
+
+        if (titleEl) titleEl.textContent = sw.title;
+        if (iconEl) iconEl.textContent = sw.icon;
+        if (verEl) verEl.textContent = `${sw.ver} • ${sw.os} • ${sw.size}`;
+        if (descEl) descEl.textContent = sw.desc;
+        if (keyEl) keyEl.textContent = sw.licenseKey;
+        if (badgeEl) badgeEl.textContent = sw.categoryName;
+
+        const specsEl = document.getElementById('swDlSpecs');
+        if (specsEl && sw.specs) {
+            specsEl.innerHTML = sw.specs.map(s => `<li>✓ ${s}</li>`).join('');
+        }
+
+        const stepsEl = document.getElementById('swDlSteps');
+        if (stepsEl && sw.steps) {
+            stepsEl.innerHTML = sw.steps.map((st, i) => `
+                <div class="sw-step-item">
+                    <span class="sw-step-num">${i + 1}</span>
+                    <span>${st}</span>
+                </div>
+            `).join('');
+        }
+
+        const dlBtn = document.getElementById('swDlDirectBtn');
+        if (dlBtn) {
+            dlBtn.href = sw.downloadFile;
+            dlBtn.setAttribute('download', sw.fileName);
+            dlBtn.onclick = function() {
+                if (typeof showFloatingToast === 'function') {
+                    showFloatingToast(`📥 بدأ تنزيل حزمة ${sw.title} بنجاح!`);
+                }
+            };
+        }
+
+        const simBtn = document.getElementById('swDlSandboxBtn');
+        if (simBtn) {
+            simBtn.href = sw.sandboxUrl;
+        }
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('open');
+    };
+
+    window.closeSoftwareDownloadModal = function() {
+        const modal = document.getElementById('softwareDownloadModal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('close');
+    };
+
+    window.copySoftwareLicenseKey = function() {
+        const keyEl = document.getElementById('swDlKey');
+        const key = keyEl ? keyEl.textContent.trim() : 'SRTX-PRO-2026-X892-OFFLINE';
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(key).then(() => {
+                alert(`🔑 تم نسخ مفتاح الترخيص: ${key}`);
+            }).catch(() => {
+                alert(`🔑 تم نسخ مفتاح الترخيص: ${key}`);
+            });
+        } else {
+            alert(`🔑 مفتاح الترخيص الخاص بك: ${key}`);
+        }
+    };
+
+    window.filterSoftwareMarketplace = function(category, btnEl) {
+        document.querySelectorAll('.software-filter-pill').forEach(b => b.classList.remove('active'));
+        if (btnEl) btnEl.classList.add('active');
+
+        const items = document.querySelectorAll('.software-grid-item');
+        items.forEach(item => {
+            const itemCat = item.getAttribute('data-category');
+            if (category === 'all' || itemCat === category) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        const labSection = document.getElementById('softwareArchitectLab');
+        if (labSection) {
+            if (category === 'all' || category === 'lab') {
+                labSection.style.display = '';
+            } else {
+                labSection.style.display = 'none';
+            }
+        }
+        if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('switch');
     };
 
     // Override init with extended version
