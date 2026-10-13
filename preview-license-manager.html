@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-page-language="ar">
+<head>
+    <meta charset="utf-8">
+    <title>معاينة لوحة تحكم التراخيص للمؤسس م. سليم | S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.css">
+    <style>
+        body {
+            background-color: #010907;
+            color: #ffffff;
+            font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="salimLicenseManagerModal" class="software-modal-overlay active" style="display: flex; opacity: 1;">
+        <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
+            <button type="button" class="sw-modal-close-btn" aria-label="إغلاق النافذة">&times;</button>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="font-size: 2.2rem;">🔑</span>
+                    <div>
+                        <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); border-color: #c5a880; color: #f7e2bd;">
+                            🔐 وحدة التحكم المركزية للمؤسس والمهندس سليم عزيزة
+                        </span>
+                        <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Cairo', serif;">
+                            Salim's Software License Manager &amp; Cryptographic Portal
+                        </h2>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="status-badge status-completed">AMS Cluster Active</span>
+                </div>
+            </div>
+
+            <!-- إحصائيات التراخيص المباشرة -->
+            <div class="salim-lm-stats-grid">
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" id="salimTotalLicensesCount">4</div>
+                    <div class="salim-lm-stat-lbl">إجمالي التراخيص المصدرة</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #38bdf8;">100%</div>
+                    <div class="salim-lm-stat-lbl">معدل تشغيل الأجهزة أوفلاين</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #f59e0b;" id="salimTotalRevenueEstimate">€ 756</div>
+                    <div class="salim-lm-stat-lbl">القيمة التقديرية للتراخيص</div>
+                </div>
+            </div>
+
+            <!-- نموذج توليد ترخيص جديد للمؤسس -->
+            <div class="salim-lm-form-card">
+                <h4 style="margin: 0 0 14px 0; color: #00e699; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                    <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
+                </h4>
+                <form onsubmit="generateSalimLicense(event)">
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">البرنامج أو النظام المستهدف:</label>
+                            <select id="salimGenProduct" class="salim-input">
+                                <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
+                                <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
+                                <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
+                                <option value="Financial AI SDK v1.2">S&R Financial AI SDK v1.2</option>
+                                <option value="SecureVault B2B v2.0">S&R SecureVault B2B v2.0</option>
+                                <option value="Cloud Terminal Agent v1.0">S&R Cloud Terminal Agent v1.0</option>
+                                <option value="Custom Software (مشروع مخصص)">مشروع برمجي مخصص للمؤسس</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">اسم العميل أو المؤسسة الشريكة:</label>
+                            <input id="salimGenClient" type="text" class="salim-input" value="Heineken International N.V." placeholder="اسم العميل" required>
+                        </div>
+                    </div>
+
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">نوع وخطة الترخيص:</label>
+                            <select id="salimGenPlan" class="salim-input">
+                                <option value="سنوي (Annual License)">ترخيص سنوي (1 Year)</option>
+                                <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month)</option>
+                                <option value="دائم مدى الحياة (Lifetime Enterprise)">ترخيص دائم مدى الحياة (Lifetime)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">بصمة العتاد (Hardware Machine ID):</label>
+                            <input id="salimGenMachine" type="text" class="salim-input" value="NL-AMS-SR991" placeholder="بصمة العتاد">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="tf-btn" style="background: linear-gradient(135deg, #00e699, #009966); color: #05140e; font-weight: 800; border: none; padding: 10px 22px; border-radius: 10px; cursor: pointer;">
+                            <span>توليد وتفعيل الترخيص المشفر الآن ⚡</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- سجل التراخيص النشطة -->
+            <div>
+                <h4 style="margin: 0 0 12px 0; color: #f7e2bd; font-size: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span>سجل التراخيص الرقمية المفعلة (Active License Ledger)</span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">محفوظ محلياً ومشفر</span>
+                </h4>
+                <div class="salim-table-wrap">
+                    <table class="salim-table">
+                        <thead>
+                            <tr>
+                                <th>مفتاح الترخيص (License Key)</th>
+                                <th>المنتج</th>
+                                <th>العميل / المؤسسة</th>
+                                <th>الخطة</th>
+                                <th>الصلاحية</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salimLicensesTableBody">
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRTX-PRO-2026-X892-OFFLINE</td>
+                                <td style="font-weight: 600;">TaxSync Desktop</td>
+                                <td>Heineken International N.V.</td>
+                                <td><span style="color:#a3c2b3;">سنوي (Annual)</span></td>
+                                <td><span style="color:#94a3b8; font-size:0.8rem;">2027-10-15</span></td>
+                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRPOS-POS-2026-P881-CLOUD</td>
+                                <td style="font-weight: 600;">CloudPOS Connector</td>
+                                <td>De Koffie Salon Amsterdam</td>
+                                <td><span style="color:#a3c2b3;">شهري (Monthly)</span></td>
+                                <td><span style="color:#94a3b8; font-size:0.8rem;">2026-11-30</span></td>
+                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRVLT-AES256-2026-V200-MIL</td>
+                                <td style="font-weight: 600;">SecureVault B2B</td>
+                                <td>AWT Group Netherlands</td>
+                                <td><span style="color:#a3c2b3;">دائم (Lifetime)</span></td>
+                                <td><span style="color:#94a3b8; font-size:0.8rem;">مدى الحياة</span></td>
+                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">SRSDK-DEV-2026-S120-REST</td>
+                                <td style="font-weight: 600;">Financial AI SDK</td>
+                                <td>Fintech Solutions Dubai</td>
+                                <td><span style="color:#a3c2b3;">شهري (50k Calls)</span></td>
+                                <td><span style="color:#94a3b8; font-size:0.8rem;">2026-12-01</span></td>
+                                <td><span class="status-badge status-completed" style="font-size:0.75rem;">نشط ومفعل</span></td>
+                                <td><button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;">نسخ 📋</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 18px; font-size: 0.78rem; color: #64748b;">
+                🛡️ بوابة إدارة التراخيص حصرية لكبير مهندسي ومطوري البرمجيات (م. سليم عزيزة) • S&R CoreSync Solutions
+            </div>
+        </div>
+    </div>
+
+    <script src="./css/enterprise-suite.js"></script>
+</body>
+</html>
