@@ -807,7 +807,12 @@
             if (e.key === 'Escape') closeRoiPdfModal();
         });
 
-        document.addEventListener('DOMContentLoaded', updateROICalculator);
+        document.addEventListener('DOMContentLoaded', () => {
+            updateROICalculator();
+            if (new URLSearchParams(window.location.search).get('open') === 'pdf') {
+                setTimeout(openRoiPdfModal, 150);
+            }
+        });
         window.addEventListener('load', updateROICalculator);
     </script>
 </body>
