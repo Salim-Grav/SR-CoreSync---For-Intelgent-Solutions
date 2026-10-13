@@ -4999,6 +4999,14 @@
                     <p class="text-white-64 max-w-700 mx-auto mt-2">
                         Calculate the exact financial savings and reclaimed administrative hours unlocked when automating your workflows and integrating your ERP with our architects.
                     </p>
+                    <div class="roi-currency-bar mt-3">
+                        <span class="text-caption text-white-64 me-2">Financial Currency:</span>
+                        <button type="button" class="roi-currency-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (AED)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="GBP" onclick="window.switchCurrency('GBP')">🇬🇧 GBP (£)</button>
+                    </div>
                 </div>
 
                 <div class="row align-items-stretch g-4">
@@ -5041,11 +5049,11 @@
 
                                 <div class="roi-field-group">
                                     <label for="roiAvgSalary" class="roi-label">
-                                        <span>Estimated Hourly Cost per Employee (€):</span>
+                                        <span>Estimated Hourly Cost per Employee:</span>
                                         <span class="roi-label-badge" id="roiAvgSalaryVal">€28 / hr</span>
                                     </label>
                                     <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" oninput="updateROICalculator()">
-                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
+                                    <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1" id="roiSalaryScaleLabels">
                                         <span>€15</span>
                                         <span>€45</span>
                                         <span>€80+</span>
@@ -5092,11 +5100,15 @@
                                 </div>
                             </div>
 
-                            <div class="mt-3">
+                            <div class="d-flex flex-column gap-2 mt-3">
                                 <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('roi')">
                                     <span>Schedule Free Executive Roadmap Session ←</span>
                                 </button>
-                                <p class="text-center text-caption text-white-64 mt-2 mb-0">
+                                <button type="button" class="roi-pdf-btn w-100 justify-content-center" onclick="openRoiPdfModal()">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+                                    <span>Export Feasibility Report as PDF 📄</span>
+                                </button>
+                                <p class="text-center text-caption text-white-64 mt-1 mb-0">
                                     Complimentary feasibility review conducted directly by Founders (Salim &amp; Raed)
                                 </p>
                             </div>
