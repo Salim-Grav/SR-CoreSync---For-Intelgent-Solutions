@@ -2868,6 +2868,10 @@
         GBP: { symbol: '£', flag: '🇬🇧', name: 'British Pound', rate: 0.86, vat: 20, vatName: '🇬🇧 20% VAT (UK Compliant)' }
     };
 
+    window.CURRENCIES = CURRENCIES;
+    window.getActiveCurrency = function() { return activeCurrency; };
+    window.switchROICurrency = function(code) { window.switchCurrency(code); };
+
     let activeCurrency = 'EUR';
     try {
         const savedCur = localStorage.getItem('coresync_currency');
@@ -2887,7 +2891,7 @@
         } catch(e) {}
 
         // Update all currency buttons across document (pills, modal buttons, and header dropdown options)
-        document.querySelectorAll('.es-currency-btn, .dana-cur-pill, .header-cur-option').forEach(btn => {
+        document.querySelectorAll('.es-currency-btn, .dana-cur-pill, .header-cur-option, .roi-currency-pill').forEach(btn => {
             const isMatch = btn.dataset.currency === code;
             btn.classList.toggle('active', isMatch);
             btn.classList.toggle('is-active', isMatch);
@@ -2938,9 +2942,9 @@
             el.textContent = cur.vatName;
         });
 
-        // Sync with ROI modal if open
-        if (window.switchROICurrency) {
-            window.switchROICurrency(code);
+        // Sync with ROI engine
+        if (typeof window.updateROICalculator === 'function') {
+            window.updateROICalculator();
         }
 
         // Recalculate comparison addons if table is open
