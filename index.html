@@ -9255,6 +9255,134 @@
             }
         });
 
+        // ==========================================
+        // محرك حاسبة الجدوى الاستثمارية والوفر المؤسسي (Smart ROI Engine)
+        // ==========================================
+        function setRoiTeamPreset(size) {
+            const slider = document.getElementById('roiCompanySize');
+            if (!slider) return;
+            slider.value = size;
+            document.querySelectorAll('.roi-preset-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(`(${size})`));
+            });
+            updateROICalculator();
+            if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) {
+                LuxuryAudio.play('switch');
+            }
+        }
+
+        function updateSliderTrack(slider) {
+            if (!slider) return;
+            const min = parseFloat(slider.min) || 0;
+            const max = parseFloat(slider.max) || 100;
+            const val = parseFloat(slider.value) || 0;
+            const pct = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+            slider.style.background = `linear-gradient(to right, #c5a880 0%, #c5a880 ${pct}%, rgba(255, 255, 255, 0.12) ${pct}%, rgba(255, 255, 255, 0.12) 100%)`;
+        }
+
+        function updateROICalculator() {
+            const teamSlider = document.getElementById('roiCompanySize');
+            const hoursSlider = document.getElementById('roiManualHours');
+            const salarySlider = document.getElementById('roiAvgSalary');
+            const solutionSelect = document.getElementById('roiSolutionType');
+
+            if (!teamSlider || !hoursSlider || !salarySlider || !solutionSelect) return;
+
+            // تحديث خط السحب الذهبي المتفاعل لكل شريط
+            updateSliderTrack(teamSlider);
+            updateSliderTrack(hoursSlider);
+            updateSliderTrack(salarySlider);
+
+            const teamSize = parseInt(teamSlider.value, 10) || 15;
+            const manualHours = parseInt(hoursSlider.value, 10) || 8;
+            const hourlyRate = parseFloat(salarySlider.value) || 28;
+            const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
+
+            // مزامنة حالة أزرار الخيارات السريعة
+            document.querySelectorAll('.roi-preset-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.includes(`(${teamSize})`));
+            });
+
+            // تحديث بطاقات القيم اللحظية (Badges)
+            const teamValBadge = document.getElementById('roiCompanySizeVal');
+            if (teamValBadge) {
+                const isAr = document.documentElement.lang === 'ar';
+                const isNl = document.documentElement.lang === 'nl';
+                if (isAr) {
+                    teamValBadge.textContent = teamSize <= 10 ? `${teamSize} موظفين` : `${teamSize} موظفاً`;
+                } else if (isNl) {
+                    teamValBadge.textContent = `${teamSize} medewerkers`;
+                } else {
+                    teamValBadge.textContent = `${teamSize} employees`;
+                }
+            }
+
+            const hoursValBadge = document.getElementById('roiManualHoursVal');
+            if (hoursValBadge) {
+                const isAr = document.documentElement.lang === 'ar';
+                const isNl = document.documentElement.lang === 'nl';
+                if (isAr) {
+                    hoursValBadge.textContent = `${manualHours} ساعات / أسبوع`;
+                } else if (isNl) {
+                    hoursValBadge.textContent = `${manualHours} uur / week`;
+                } else {
+                    hoursValBadge.textContent = `${manualHours} hrs / week`;
+                }
+            }
+
+            const salaryValBadge = document.getElementById('roiAvgSalaryVal');
+            if (salaryValBadge) {
+                const isAr = document.documentElement.lang === 'ar';
+                const isNl = document.documentElement.lang === 'nl';
+                salaryValBadge.textContent = isAr ? `€${hourlyRate} / ساعة` : (isNl ? `€${hourlyRate} / uur` : `€${hourlyRate} / hr`);
+            }
+
+            // الحسابات الرياضية المعتمدة
+            const weeksPerYear = 52;
+            const totalAnnualManualHours = teamSize * manualHours * weeksPerYear;
+            const annualHoursSaved = Math.round(totalAnnualManualHours * efficiencyRate);
+            const grossAnnualSavings = Math.round(annualHoursSaved * hourlyRate);
+
+            // حساب تقديري لفترة استرداد التكلفة (Payback Period)
+            let baseCost = 10000;
+            if (teamSize <= 10) baseCost = 7500;
+            else if (teamSize <= 30) baseCost = 13500;
+            else if (teamSize <= 70) baseCost = 22000;
+            else baseCost = 35000;
+
+            const monthlySavings = grossAnnualSavings / 12;
+            let paybackMonths = (baseCost / (monthlySavings || 1)).toFixed(1);
+            if (paybackMonths < 0.8) paybackMonths = "0.8";
+            if (paybackMonths > 6.0) paybackMonths = "5.5";
+
+            // عرض النتائج المحدثة في واجهة المستخدم
+            const savingsElem = document.getElementById('roiAnnualSavings');
+            if (savingsElem) {
+                savingsElem.innerHTML = `<span>€</span>${grossAnnualSavings.toLocaleString('en-US')}`;
+            }
+
+            const hoursSavedElem = document.getElementById('roiHoursSaved');
+            if (hoursSavedElem) {
+                const isAr = document.documentElement.lang === 'ar';
+                const isNl = document.documentElement.lang === 'nl';
+                const suffix = isAr ? 'ساعة/سنة' : (isNl ? 'uur/jaar' : 'hrs/year');
+                hoursSavedElem.innerHTML = `${annualHoursSaved.toLocaleString('en-US')} <span>${suffix}</span>`;
+            }
+
+            const effGainElem = document.getElementById('roiEfficiencyGain');
+            if (effGainElem) {
+                effGainElem.innerHTML = `+<span>${Math.round(efficiencyRate * 100)}%</span>`;
+            }
+
+            const paybackElem = document.getElementById('roiPaybackMonths');
+            if (paybackElem) {
+                const isAr = document.documentElement.lang === 'ar';
+                const isNl = document.documentElement.lang === 'nl';
+                const monthSuffix = isAr ? 'شهر' : (isNl ? 'maand' : 'months');
+                paybackElem.textContent = `${paybackMonths} ${monthSuffix}`;
+            }
+        }
+
         // تفعيل النقر التلقائي على أي عنصر يحمل كلاس الشعار لفتح المعاينة وتفعيل فيزياء الميلان 3D
         document.addEventListener('DOMContentLoaded', () => {
             updateROICalculator();
