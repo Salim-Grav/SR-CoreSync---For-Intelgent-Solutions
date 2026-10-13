@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { EmailNotificationService } = require('./email-notification-service');
 
 // Load Gateway Configuration
 const CONFIG_PATH = path.resolve(__dirname, '../config/payment-gateways.json');
@@ -20,10 +21,11 @@ try {
 class PaymentWebhookService {
   constructor(cfg = config) {
     this.config = cfg;
-    this.isLive = cfg.environment === 'production';
-    this.mollieKey = this.isLive ? cfg.mollie?.liveApiKey : cfg.mollie?.testApiKey;
-    this.stripeKey = this.isLive ? cfg.stripe?.liveSecretKey : cfg.stripe?.testSecretKey;
-    this.stripeWebhookSecret = cfg.stripe?.webhookSecret;
+    this.isLive = process.env.GATEWAY_ENVIRONMENT === 'production' || cfg.environment === 'production';
+    this.mollieKey = process.env.MOLLIE_API_KEY || (this.isLive ? cfg.mollie?.liveApiKey : cfg.mollie?.testApiKey);
+    this.stripeKey = process.env.STRIPE_SECRET_KEY || (this.isLive ? cfg.stripe?.liveSecretKey : cfg.stripe?.testSecretKey);
+    this.stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET || cfg.stripe?.webhookSecret;
+    this.emailService = new EmailNotificationService();
   }
 
   /**
@@ -116,6 +118,20 @@ class PaymentWebhookService {
       status: 'Active & Verified',
       machineLock: `SR-MACHINE-${randHex}`
     };
+
+    // Trigger automated email dispatch to client
+    if (customer.email) {
+      this.emailService.sendLicenseInvoice({
+        to: customer.email,
+        customerName: customer.name || 'Valued Client',
+        invoiceNumber,
+        licenseKey,
+        productTitle: product.title || 'S&R TaxSync Desktop v2.4 Pro',
+        amount: product.rawPrice || 189,
+        plan: licenseRecord.plan,
+        downloadUrl: product.downloadFile ? `https://dananajmah.com/${product.downloadFile}` : 'https://dananajmah.com/preview-software.html'
+      }).catch(err => console.error('Failed to dispatch invoice email:', err.message));
+    }
 
     return licenseRecord;
   }
