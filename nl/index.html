@@ -8279,15 +8279,295 @@
             </div>
 
             <div class="sw-action-row">
+                <a id="swDlExeBtn" href="../downloads/SR-TaxSync-Setup-v2.4.exe" download="SR-TaxSync-Setup-v2.4.exe" class="sw-btn-exe-dl">
+                    <span>🚀 Download Windows Installatiebestand (Setup.exe • 64-bit)</span>
+                </a>
                 <a id="swDlDirectBtn" href="../downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
                     <span>⬇️ Download Volledig Softwarepakket (ZIP)</span>
                 </a>
+                <button type="button" id="swDlCheckoutBtn" class="sw-btn-sec-sim" style="color: #00e699; border-color: rgba(0,230,153,0.4);">
+                    <span>💳 Direct Kopen &amp; Licentiëren via iDEAL</span>
+                </button>
                 <a id="swDlSandboxBtn" href="../demo.html#software" class="sw-btn-sec-sim">
                     <span>⚡ Start Interactieve Simulator</span>
                 </a>
             </div>
             <div style="text-align: center; margin-top: 14px; font-size: 0.78rem; color: #64748b;">
                 🔒 Digitaal Ondertekend &amp; 100% Vrij van Malware • S&R CoreSync Solutions
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         Suggestion 1: Salim's Software Licentiebeheer Portaal (NL)
+         ========================================================================== -->
+    <div id="salimLicenseManagerModal" class="software-modal-overlay" onclick="if(event.target===this)closeSalimLicenseManagerModal()">
+        <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
+            <button type="button" class="sw-modal-close-btn" onclick="closeSalimLicenseManagerModal()" aria-label="Venster sluiten">&times;</button>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="font-size: 2.2rem;">🔑</span>
+                    <div>
+                        <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); border-color: #c5a880; color: #f7e2bd;">
+                            🔐 Centraal Cryptografisch Controleportaal voor Oprichter Salim Aziza
+                        </span>
+                        <h2 style="margin: 0; font-size: 1.45rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
+                            Salim's Software License Manager &amp; Cryptografisch Portaal
+                        </h2>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="status-badge status-completed">AMS Cluster Actief</span>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="salim-lm-stats-grid">
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" id="salimTotalLicensesCount">4</div>
+                    <div class="salim-lm-stat-lbl">Totaal Uitgegeven Licenties</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #38bdf8;">100%</div>
+                    <div class="salim-lm-stat-lbl">Offline Beschikbaarheid</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #f59e0b;" id="salimTotalRevenueEstimate">€ 756</div>
+                    <div class="salim-lm-stat-lbl">Geschatte Licentiewaarde</div>
+                </div>
+            </div>
+
+            <!-- Generate Form -->
+            <div class="salim-lm-form-card">
+                <h4 style="margin: 0 0 14px 0; color: #00e699; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                    <span>⚡ Direct Nieuwe Cryptografische Licentiesleutel Genereren</span>
+                </h4>
+                <form onsubmit="generateSalimLicense(event)">
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Doelsoftware / Oplossing:</label>
+                            <select id="salimGenProduct" class="salim-input">
+                                <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
+                                <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
+                                <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
+                                <option value="Financial AI SDK v1.2">S&R Financial AI SDK v1.2</option>
+                                <option value="SecureVault B2B v2.0">S&R SecureVault B2B v2.0</option>
+                                <option value="Cloud Terminal Agent v1.0">S&R Cloud Terminal Agent v1.0</option>
+                                <option value="Custom Software (Oprichtersproject)">Maatwerk Softwareproject voor Oprichter</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Klant of Partnerorganisatie:</label>
+                            <input id="salimGenClient" type="text" class="salim-input" placeholder="bijv. Heineken International N.V." required>
+                        </div>
+                    </div>
+
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Licentieperiode / Type:</label>
+                            <select id="salimGenPlan" class="salim-input">
+                                <option value="Jaarlicentie (Annual 1 Year)">Jaarlicentie (1 Jaar)</option>
+                                <option value="Maandlicentie (Monthly SaaS)">Maandlicentie (1 Maand)</option>
+                                <option value="Levenslang (Lifetime Enterprise)">Levenslange Bedrijfslicentie</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Hardware Machine ID (Optioneel):</label>
+                            <input id="salimGenMachine" type="text" class="salim-input" placeholder="bijv. NL-AMS-SR991 of laat leeg">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="tf-btn" style="background: linear-gradient(135deg, #00e699, #009966); color: #05140e; font-weight: 800; border: none; padding: 10px 22px; border-radius: 10px; cursor: pointer;">
+                            <span>Genereer &amp; Activeer Licentiesleutel ⚡</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Active License Ledger Table -->
+            <div>
+                <h4 style="margin: 0 0 12px 0; color: #f7e2bd; font-size: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span>Actief Licentieregister (Active License Ledger)</span>
+                    <span style="font-size: 0.8rem; color: #94a3b8;">Lokaal &amp; Versleuteld Opgeslagen</span>
+                </h4>
+                <div class="salim-table-wrap">
+                    <table class="salim-table">
+                        <thead>
+                            <tr>
+                                <th>Licentiesleutel</th>
+                                <th>Product</th>
+                                <th>Klant / Bedrijf</th>
+                                <th>Pakket</th>
+                                <th>Geldigheid</th>
+                                <th>Status</th>
+                                <th>Acties</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salimLicensesTableBody">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 18px; font-size: 0.78rem; color: #64748b;">
+                🛡️ Software Licentiebeheer Portaal • Exclusief voor Salim Aziza, Oprichter &amp; Hoofdarchitect • S&R CoreSync Solutions
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         Suggestion 3: Europese Betalingsgateway & Directe Licentie (NL)
+         ========================================================================== -->
+    <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
+        <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
+            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareCheckoutModal()" aria-label="Venster sluiten">&times;</button>
+
+            <!-- 1. Checkout Form View -->
+            <div id="checkoutFormView">
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                    <span style="font-size: 2.2rem;">💳</span>
+                    <div>
+                        <span class="sw-badge" style="background: rgba(245, 158, 11, 0.15); border-color: #f59e0b; color: #fde68a;">
+                            Europese Gecertificeerde Betalingsgateway • Mollie &amp; Stripe SSL
+                        </span>
+                        <h2 style="margin: 0; font-size: 1.4rem; color: #fff; font-family: 'Cinzel', 'Plus Jakarta Sans', serif;">
+                            Software Aanschaffen &amp; Direct Licentiëren
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Order Summary & Dutch BTW Breakdown -->
+                <div class="checkout-order-summary">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <strong id="checkoutItemTitle" style="color: #fff; font-size: 1rem;">S&R TaxSync Desktop v2.4 Pro</strong>
+                        <span id="checkoutItemPrice" style="color: #00e699; font-weight: 800; font-size: 1.1rem;">€ 189,00</span>
+                    </div>
+                    <div class="checkout-price-row">
+                        <span>Netto Bedrag (Excl. btw):</span>
+                        <span id="checkoutNetPrice">€ 156,20</span>
+                    </div>
+                    <div class="checkout-price-row">
+                        <span>Nederlandse btw (BTW 21%):</span>
+                        <span id="checkoutVatAmount">€ 32,80</span>
+                    </div>
+                    <div class="checkout-price-row total-row">
+                        <span>Totaal Te Voldoen (Incl. 21% btw):</span>
+                        <span id="checkoutTotalPrice" style="color: #00e699;">€ 189,00</span>
+                    </div>
+                </div>
+
+                <form onsubmit="processSoftwareCheckout(event)">
+                    <!-- Payment Methods -->
+                    <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 8px;">Kies Betaalmethode:</div>
+                    <div class="checkout-tabs">
+                        <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
+                            <span>🏦 iDEAL (Nederland)</span>
+                        </button>
+                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('card', this)">
+                            <span>💳 Creditcard (Visa/Mastercard)</span>
+                        </button>
+                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('sepa', this)">
+                            <span>🇪🇺 SEPA Bankoverschrijving</span>
+                        </button>
+                    </div>
+
+                    <!-- Dutch iDEAL Banks -->
+                    <div id="checkoutIdealBox" style="margin-bottom: 16px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Selecteer uw bank:</label>
+                        <div class="checkout-bank-grid">
+                            <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
+                            <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
+                            <div class="checkout-bank-pill" onclick="selectIdealBank('ABN AMRO', this)">🛡️ ABN AMRO</div>
+                            <div class="checkout-bank-pill" onclick="selectIdealBank('bunq', this)">🌈 bunq</div>
+                            <div class="checkout-bank-pill" onclick="selectIdealBank('SNS', this)">🏦 SNS Bank</div>
+                            <div class="checkout-bank-pill" onclick="selectIdealBank('Revolut', this)">⚡ Revolut</div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Card -->
+                    <div id="checkoutCardBox" style="display: none; margin-bottom: 16px;">
+                        <div class="salim-lm-grid-2 mb-2">
+                            <input type="text" class="salim-input" placeholder="Kaartnummer (16 cijfers)">
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" class="salim-input" placeholder="MM/JJ">
+                                <input type="text" class="salim-input" placeholder="CVC">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEPA Transfer -->
+                    <div id="checkoutSepaBox" style="display: none; margin-bottom: 16px;">
+                        <input type="text" class="salim-input" placeholder="IBAN (NLxx ...)">
+                    </div>
+
+                    <!-- Customer Details -->
+                    <div class="salim-lm-grid-2 mb-3">
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Volledige Naam of Bedrijfsnaam:</label>
+                            <input id="checkoutCustName" type="text" class="salim-input" placeholder="Uw naam of onderneming" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">E-mailadres (voor factuur &amp; licentie):</label>
+                            <input id="checkoutCustEmail" type="email" class="salim-input" placeholder="naam@bedrijf.nl" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="checkoutSubmitBtn" class="checkout-btn-pay">
+                        <span id="checkoutPayBtnText">Veilig Betalen &amp; Licentiesleutel Ontvangen (€ 189,00) 🔒</span>
+                    </button>
+
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 14px; font-size: 0.76rem; color: #94a3b8;">
+                        <span>🔒 256-bit SSL Beveiligd</span>
+                        <span>📄 Officiële btw-factuur inbegrepen</span>
+                        <span>⚡ Directe geautomatiseerde levering</span>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 2. Checkout Success View -->
+            <div id="checkoutSuccessView" style="display: none; text-align: center; padding: 10px 0;">
+                <div style="font-size: 3.5rem; margin-bottom: 8px;">🎉</div>
+                <h3 style="color: #00e699; font-size: 1.4rem; margin-bottom: 6px;">Betaling Geslaagd &amp; Digitale Licentie Uitgegeven!</h3>
+                <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 18px;">
+                    Bedankt voor uw keuze voor S&R CoreSync Solutions. Uw transactie is geverifieerd en geregistreerd onder het Nederlandse fiscale kader.
+                </p>
+
+                <div style="background: rgba(6, 16, 11, 0.9); border: 1px solid rgba(0, 230, 153, 0.35); border-radius: 16px; padding: 18px; margin-bottom: 20px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem;">
+                        <span style="color: #94a3b8;">Factuurnummer:</span>
+                        <strong id="checkoutSuccessInvNum" style="color: #f7e2bd; font-family: monospace;">INV-2026-SR-9481</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.85rem;">
+                        <span style="color: #94a3b8;">Status:</span>
+                        <span class="status-badge status-completed" style="font-size: 0.75rem;">Officieel Betaald &amp; Actief ✓</span>
+                    </div>
+
+                    <div style="border-top: 1px dashed rgba(197, 168, 128, 0.3); padding-top: 12px;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: #c5a880; margin-bottom: 6px;">Uw Originele Licentiesleutel:</div>
+                        <div class="sw-key-box" style="margin: 0;">
+                            <span id="checkoutSuccessKey" class="sw-key-code">SRTX-PRO-2026-PAID-98A1</span>
+                            <button type="button" class="sw-btn-copy-key" onclick="navigator.clipboard.writeText(document.getElementById('checkoutSuccessKey').textContent); alert('📋 Sleutel gekopieerd naar klembord!');">Kopieer Sleutel 📋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sw-action-row" style="margin-top: 0;">
+                    <a id="checkoutSuccessExeBtn" href="../downloads/SR-TaxSync-Setup-v2.4.exe" download="SR-TaxSync-Setup-v2.4.exe" class="sw-btn-exe-dl">
+                        <span>🚀 Download Installatiebestand (Setup.exe)</span>
+                    </a>
+                    <a id="checkoutSuccessZipBtn" href="../downloads/SR-TaxSync-Desktop-v2.4-Setup.zip" download="SR-TaxSync-Desktop-v2.4-Setup.zip" class="sw-btn-primary-dl">
+                        <span>⬇️ Download Volledig ZIP Pakket</span>
+                    </a>
+                </div>
+
+                <div style="margin-top: 14px;">
+                    <button type="button" class="sw-btn-sec-sim" style="width: 100%;" onclick="alert('📄 Officiële btw-factuur en licentiesleutel verzonden naar uw e-mail!'); closeSoftwareCheckoutModal();">
+                        <span>Stuur Officiële BTW-factuur (PDF) naar E-mail 📧</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
