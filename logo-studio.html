@@ -60,6 +60,64 @@
       background: #27272a;
       border-radius: 9999px;
     }
+    .card-3d-custom-wrap {
+      background: radial-gradient(circle at 80% 20%, rgba(197, 168, 128, 0.25) 0%, #0d0d12 70%);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .card-sheen-gradient {
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);
+    }
+    .font-alexandria {
+      font-family: 'Alexandria', sans-serif;
+    }
+    .print-card-front-bg {
+      background: radial-gradient(circle at 85% 15%, #2a241b 0%, #0d0d12 75%);
+    }
+    .print-card-back-bg {
+      background: radial-gradient(circle at 15% 85%, #051d28 0%, #09090e 75%);
+    }
+    .print-header-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-align: center;
+      margin-bottom: 10mm;
+    }
+    .print-header-title {
+      font-size: 16pt;
+      margin: 0;
+      color: #111111;
+    }
+    .print-header-sub {
+      font-size: 9pt;
+      color: #666666;
+      margin: 3mm 0 0;
+    }
+    .print-sheet-row {
+      display: flex;
+      flex-direction: row;
+      gap: 12mm;
+      justify-content: center;
+    }
+    .print-sheet-card-front {
+      width: 85mm;
+      height: 55mm;
+      border: 1px dashed #bbb;
+      padding: 5mm;
+      background: #0d0d12;
+      color: #ffffff;
+      border-radius: 4mm;
+      box-sizing: border-box;
+    }
+    .print-sheet-card-back {
+      width: 85mm;
+      height: 55mm;
+      border: 1px dashed #bbb;
+      padding: 5mm;
+      background: #09090e;
+      color: #ffffff;
+      border-radius: 4mm;
+      box-sizing: border-box;
+    }
   
     /* تنسيقات الطباعة الدقيقة لبطاقات الأعمال */
     @media print {
@@ -419,12 +477,11 @@
           </div>
 
           <!-- حاوية البطاقة ثلاثية الأبعاد -->
-          <div id="card-3d-wrap" class="w-full h-56 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden transition-transform duration-150 ease-out cursor-pointer shadow-2xl border border-amber-500/30"
-               style="background: radial-gradient(circle at 80% 20%, rgba(197, 168, 128, 0.25) 0%, #0d0d12 70%); transform-style: preserve-3d; perspective: 1000px;"
+          <div id="card-3d-wrap" class="card-3d-custom-wrap w-full h-56 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden transition-transform duration-150 ease-out cursor-pointer shadow-2xl border border-amber-500/30"
                onmousemove="handleCard3dMove(event, this)" onmouseleave="resetCard3d(this)">
             
             <!-- لمعان الإضاءة المتحرك -->
-            <div id="card-sheen" class="absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay transition-opacity" style="background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);"></div>
+            <div id="card-sheen" class="card-sheen-gradient absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay transition-opacity"></div>
 
             <div class="flex items-center justify-between z-10">
               <div class="flex items-center gap-2">
@@ -625,7 +682,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
         <div class="bg-[#09090b] border border-white/10 rounded-xl p-4">
           <div class="text-xs font-bold text-amber-400 mb-1 font-mono">الخط العربي المعتمد:</div>
-          <div class="text-base font-bold text-white mb-2" style="font-family: 'Alexandria', sans-serif;">Alexandria & IBM Plex Sans Arabic</div>
+          <div class="font-alexandria text-base font-bold text-white mb-2">Alexandria & IBM Plex Sans Arabic</div>
           <p class="text-xs text-zinc-400 leading-relaxed">
             يُستخدم بوزن 800 و900 للعناوين الرئيسية الفخمة، وبوزن 400 و500 للنصوص والمحتوى التشغيلي.
           </p>
@@ -687,8 +744,7 @@
             <span>الوجه الأمامي (Front Face)</span>
             <span>Matt Black & Hot Foil Gold</span>
           </div>
-          <div id="print-card-front" class="w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-amber-500/40"
-               style="background: radial-gradient(circle at 85% 15%, #2a241b 0%, #0d0d12 75%);">
+          <div id="print-card-front" class="print-card-front-bg w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-amber-500/40">
             
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
@@ -726,8 +782,7 @@
             <span>الوجه الخلفي (Back Face)</span>
             <span>Security Seal & Dynamic QR</span>
           </div>
-          <div id="print-card-back" class="w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-cyan-500/40"
-               style="background: radial-gradient(circle at 15% 85%, #051d28 0%, #09090e 75%);">
+          <div id="print-card-back" class="print-card-back-bg w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-cyan-500/40">
             
             <div class="flex items-center justify-between">
               <span class="text-[9px] text-cyan-300 font-mono tracking-wider">ENTERPRISE SYSTEM CONNECT</span>
@@ -833,13 +888,13 @@
 
   <!-- منطقة الطباعة المخصصة المعزولة (Isolated Print Sheet Area) -->
   <div id="print-area" class="hidden">
-    <div style="font-family:'Plus Jakarta Sans',sans-serif; text-align:center; margin-bottom:10mm;">
-      <h2 style="font-size:16pt; margin:0; color:#111;">S&R CORESYNC SOLUTIONS B.V. — OFFICIAL BUSINESS CARDS</h2>
-      <p style="font-size:9pt; color:#666; margin:3mm 0 0;">Standard Euro Spec: 85x55 mm • 300 DPI High-Precision Vectors</p>
+    <div class="print-header-text">
+      <h2 class="print-header-title">S&R CORESYNC SOLUTIONS B.V. — OFFICIAL BUSINESS CARDS</h2>
+      <p class="print-header-sub">Standard Euro Spec: 85x55 mm • 300 DPI High-Precision Vectors</p>
     </div>
-    <div style="display:flex; flex-direction:row; gap:12mm; justify-content:center;">
-      <div id="print-sheet-front" style="width:85mm; height:55mm; border:1px dashed #bbb; padding:5mm; background:#0d0d12; color:#fff; border-radius:4mm; box-sizing:border-box;"></div>
-      <div id="print-sheet-back" style="width:85mm; height:55mm; border:1px dashed #bbb; padding:5mm; background:#09090e; color:#fff; border-radius:4mm; box-sizing:border-box;"></div>
+    <div class="print-sheet-row">
+      <div id="print-sheet-front" class="print-sheet-card-front"></div>
+      <div id="print-sheet-back" class="print-sheet-card-back"></div>
     </div>
   </div>
 
