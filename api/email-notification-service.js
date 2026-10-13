@@ -12,7 +12,7 @@ class EmailNotificationService {
     this.provider = process.env.EMAIL_PROVIDER || options.provider || 'sendgrid';
     this.sendgridApiKey = process.env.SENDGRID_API_KEY || options.sendgridApiKey;
     this.postmarkToken = process.env.POSTMARK_SERVER_TOKEN || options.postmarkToken;
-    this.fromEmail = process.env.EMAIL_FROM || options.fromEmail || 'billing@coresync.solutions';
+    this.fromEmail = process.env.EMAIL_FROM || options.fromEmail || 'billing@sr-coresync.com';
     this.fromName = process.env.EMAIL_FROM_NAME || options.fromName || 'S&R CoreSync Solutions B.V.';
   }
 
@@ -105,7 +105,7 @@ class EmailNotificationService {
 
     <div class="footer">
       S&amp;R CoreSync Solutions B.V. • Keizersgracht, 1016 Amsterdam, Nederland<br>
-      Voor technische ondersteuning: <a href="mailto:support@coresync.solutions" style="color:#c5a880;">support@coresync.solutions</a> of WhatsApp: +31 6 87764998.<br>
+      Voor technische ondersteuning: <a href="mailto:info@sr-coresync.com" style="color:#c5a880;">info@sr-coresync.com</a> of WhatsApp: +31 6 87764998.<br>
       Dit document geldt als officieel digitaal betalingsbewijs conform de Nederlandse belastingwetgeving.
     </div>
   </div>
