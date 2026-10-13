@@ -38,121 +38,33 @@ function minifyCSS(css) {
 }
 
 function minifyJS(js) {
-  // Robust regex/string-aware lexer
-  let result = '';
-  let i = 0;
-  const n = js.length;
-  
-  while (i < n) {
-    const c = js[i];
-    const next = js[i + 1];
+  // Strip block comments
+  let cleaned = js.replace(/\/\*[\s\S]*?\*\//g, '');
 
-    // Single-line comment
-    if (c === '/' && next === '/') {
-      i += 2;
-      while (i < n && js[i] !== '\n' && js[i] !== '\r') i++;
-      continue;
-    }
+  // Process line by line to safely preserve ASI and regexes
+  const lines = cleaned.split('\n');
+  const processedLines = [];
 
-    // Multi-line comment
-    if (c === '/' && next === '*') {
-      i += 2;
-      while (i < n && !(js[i] === '*' && js[i + 1] === '/')) i++;
-      i += 2;
-      continue;
-    }
-
-    // Double-quoted string
-    if (c === '"') {
-      let str = '"';
-      i++;
-      while (i < n) {
-        const sc = js[i];
-        str += sc;
-        if (sc === '\\') {
-          i++;
-          if (i < n) str += js[i];
-        } else if (sc === '"') {
-          i++;
-          break;
-        }
-        i++;
+  for (let line of lines) {
+    let trimmed = line.trim();
+    if (!trimmed) continue;
+    // Skip single line comments
+    if (trimmed.startsWith('//')) continue;
+    // Strip trailing comments if safe (not in quotes)
+    // For safety, remove inline // comments only if preceded by space and not inside string
+    if (!trimmed.includes('://') && !trimmed.includes('"') && !trimmed.includes("'") && !trimmed.includes('`')) {
+      const idx = trimmed.indexOf('//');
+      if (idx !== -1) {
+        trimmed = trimmed.substring(0, idx).trim();
       }
-      result += str;
-      continue;
     }
-
-    // Single-quoted string
-    if (c === "'") {
-      let str = "'";
-      i++;
-      while (i < n) {
-        const sc = js[i];
-        str += sc;
-        if (sc === '\\') {
-          i++;
-          if (i < n) str += js[i];
-        } else if (sc === "'") {
-          i++;
-          break;
-        }
-        i++;
-      }
-      result += str;
-      continue;
+    if (trimmed) {
+      processedLines.push(trimmed);
     }
-
-    // Template literal
-    if (c === '`') {
-      let str = '`';
-      i++;
-      while (i < n) {
-        const sc = js[i];
-        str += sc;
-        if (sc === '\\') {
-          i++;
-          if (i < n) str += js[i];
-        } else if (sc === '`') {
-          i++;
-          break;
-        }
-        i++;
-      }
-      result += str;
-      continue;
-    }
-
-    // Collapse whitespace / newlines
-    if (/\s/.test(c)) {
-      // Keep single space only if needed between identifiers/keywords
-      const prevChar = result.length > 0 ? result[result.length - 1] : '';
-      let hasNewline = (c === '\n' || c === '\r');
-      while (i + 1 < n && /\s/.test(js[i + 1])) {
-        if (js[i + 1] === '\n' || js[i + 1] === '\r') hasNewline = true;
-        i++;
-      }
-      const nextChar = i + 1 < n ? js[i + 1] : '';
-
-      const isWordChar = (ch) => /[a-zA-Z0-9_$]/.test(ch);
-      if (isWordChar(prevChar) && isWordChar(nextChar)) {
-        result += ' ';
-      } else if (hasNewline) {
-        // Automatic semicolon insertion safety: if prev was not a connector, add newline or space
-        if (/[;{}(),:\[\]]/.test(prevChar) || /[;{}(),:\[\]]/.test(nextChar)) {
-          // no space needed
-        } else {
-          result += '\n';
-        }
-      }
-      i++;
-      continue;
-    }
-
-    result += c;
-    i++;
   }
 
-  return result.trim();
+  const result = processedLines.join('\n');
+  return result;
 }
 
 function processAsset(inputPath, outputPath, type) {
