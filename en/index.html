@@ -838,6 +838,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -867,6 +868,7 @@
             color: #e6ca9f;
             cursor: pointer;
             transition: all 0.2s ease;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -5118,7 +5120,7 @@
                                     <label for="roiSolutionType" class="roi-label">
                                         <span>Target Architectural Solution:</span>
                                     </label>
-                                    <select class="roi-select-custom w-100" id="roiSolutionType" onchange="updateROICalculator()">
+                                    <select class="roi-select-custom w-100" id="roiSolutionType" title="Target Solution Type" aria-label="Target Solution Type" onchange="updateROICalculator()">
                                         <option value="0.75" selected>Full ERP Integration + Accounting Automation (up to 75% savings)</option>
                                         <option value="0.60">Custom Cloud Platform + Executive Dashboards (60% savings)</option>
                                         <option value="0.85">Enterprise AI Agents + End-to-End Automation (up to 85% savings)</option>
@@ -6833,7 +6835,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingSessionType">Consultation Type / Channel *</label>
-                        <select id="bookingSessionType" class="sr-exec-select" onchange="togglePackageField()">
+                        <select id="bookingSessionType" class="sr-exec-select" title="Consultation Session Type" aria-label="Consultation Session Type" onchange="togglePackageField()">
                             <option value="creative">Visual Identity / Website / E-Commerce Store Request</option>
                             <option value="online">Online Video Conference (Google Meet / Teams)</option>
                             <option value="phone">Direct WhatsApp / Phone Call</option>
@@ -6842,7 +6844,7 @@
                     </div>
                     <div class="sr-exec-form-group full-width sr-package-group" id="bookingPackageGroup">
                         <label class="sr-exec-label" for="bookingPackage">Target Package (Optional)</label>
-                        <select id="bookingPackage" class="sr-exec-select">
+                        <select id="bookingPackage" class="sr-exec-select" title="Consultation Package" aria-label="Consultation Package">
                             <option value="">Not decided yet — I'd like guidance</option>
                             <option value="identity">Complete Visual Identity — €590</option>
                             <option value="website">High-Performance Luxury Website — €980</option>
@@ -6857,7 +6859,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingTimeSlot">Preferred Time Window *</label>
-                        <select id="bookingTimeSlot" class="sr-exec-select">
+                        <select id="bookingTimeSlot" class="sr-exec-select" title="Preferred Time Slot" aria-label="Preferred Time Slot">
                             <option value="morning">Morning Window (10:00 - 12:00 CET)</option>
                             <option value="afternoon" selected>Afternoon Window (13:00 - 15:00 CET)</option>
                             <option value="evening">Evening Window (16:00 - 18:00 CET)</option>
@@ -6924,7 +6926,7 @@
                     <div class="sr-roi-slider-header">
                         <span class="text-white">Current Software &amp; Workflow Maturity Level:</span>
                     </div>
-                    <select id="roiSystemLevel" class="sr-exec-select" onchange="updateRoiCalc()">
+                    <select id="roiSystemLevel" class="sr-exec-select" title="System Automation Level" aria-label="System Automation Level" onchange="updateRoiCalc()">
                         <option value="0.36">Manual workflows or scattered spreadsheets (Up to 36% savings potential)</option>
                         <option value="0.25" selected>Legacy accounting software without cloud synchronization (25% savings)</option>
                         <option value="0.16">Partial cloud setup lacking autonomous AI workflows (16% savings)</option>
@@ -8242,7 +8244,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">Target Product / Solution:</label>
-                            <select id="salimGenProduct" class="salim-input">
+                            <select id="salimGenProduct" class="salim-input" title="Target Product or Solution" aria-label="Target Product or Solution">
                                 <option value="TaxSync Desktop v2.4 Pro">S&R TaxSync Desktop v2.4 Pro</option>
                                 <option value="CloudPOS Connector v3.1">S&R CloudPOS Connector v3.1</option>
                                 <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
@@ -8261,7 +8263,7 @@
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 6px;">License Tier / Duration:</label>
-                            <select id="salimGenPlan" class="salim-input">
+                            <select id="salimGenPlan" class="salim-input" title="License Plan Tier" aria-label="License Plan Tier">
                                 <option value="Annual License (1 Year)">Annual License (1 Year)</option>
                                 <option value="Monthly SaaS (1 Month)">Monthly SaaS (1 Month)</option>
                                 <option value="Lifetime Enterprise">Lifetime Enterprise</option>
