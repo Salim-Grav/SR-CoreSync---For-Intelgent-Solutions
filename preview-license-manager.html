@@ -18,6 +18,20 @@
             padding: 30px 20px;
             min-height: 100vh;
         }
+        .sw-modal-preview-active {
+            position: static !important;
+            min-height: auto !important;
+            height: auto !important;
+            display: block !important;
+            padding: 0 !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+        }
+        .sw-modal-preview-active .salim-lm-modal-container {
+            max-height: none !important;
+            overflow-y: visible !important;
+            margin: 0 auto !important;
+        }
     </style>
 </head>
 <body>
@@ -211,5 +225,14 @@
     </div>
 
     <script src="./css/enterprise-suite.min.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof renderSalimLicensesTable === 'function') {
+                    renderSalimLicensesTable();
+                }
+            }, 50);
+        });
+    </script>
 </body>
 </html>

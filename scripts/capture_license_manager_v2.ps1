@@ -5,12 +5,13 @@ $serverJob = Start-Process python -ArgumentList @("-m", "http.server", "8000") -
 Start-Sleep -Seconds 2
 
 $url = "http://localhost:8000/preview-license-manager.html"
-$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\c343b500-bda0-4fad-aa48-4c2182879e6c\live_executive_license_dashboard.png"
+$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\c343b500-bda0-4fad-aa48-4c2182879e6c\live_executive_license_ledger.png"
 
+# We open Edge and capture with larger height to cover full dashboard and table
 Start-Process $edgePath -ArgumentList @(
     "--headless=new",
     "--user-data-dir=$tempDir",
-    "--window-size=1440,1150",
+    "--window-size=1440,1650",
     "--screenshot=$outImg",
     $url
 ) -Wait
@@ -18,4 +19,4 @@ Start-Process $edgePath -ArgumentList @(
 Start-Sleep -Seconds 1
 Stop-Process -Id $serverJob.Id -Force -ErrorAction SilentlyContinue
 Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
-Write-Host "Snapshot captured: $outImg"
+Write-Host "Ledger Snapshot captured: $outImg"
