@@ -1,111 +1,140 @@
 const { spawn } = require('child_process');
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
 const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const userDataDir = process.env.TEMP + '\\edge_test_' + Date.now();
-const port = 9555;
+const projectDir = path.resolve(__dirname, '..');
 
-const edge = spawn(edgePath, [
-    '--headless=new',
-    '--remote-debugging-port=' + port,
-    '--user-data-dir=' + userDataDir,
-    'http://localhost:8000/index.html'
-]);
+function startServer(port) {
+    const mimeTypes = {
+        '.html': 'text/html; charset=utf-8',
+        '.js': 'application/javascript; charset=utf-8',
+        '.css': 'text/css; charset=utf-8',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.webp': 'image/webp',
+        '.svg': 'image/svg+xml'
+    };
 
-setTimeout(async () => {
+    const server = http.createServer((req, res) => {
+        let reqPath = decodeURI(req.url.split('?')[0]);
+        if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
+        const filePath = path.join(projectDir, reqPath);
+
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+            const ext = path.extname(filePath).toLowerCase();
+            res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+            fs.createReadStream(filePath).pipe(res);
+        } else {
+            res.writeHead(404);
+            res.end('Not found');
+        }
+    });
+
+    return new Promise(resolve => server.listen(port, '127.0.0.1', () => resolve(server)));
+}
+
+async function debugEl() {
+    const srvPort = 9568;
+    const server = await startServer(srvPort);
+    const dbgPort = 9896;
+    const userDataDir = path.join(process.env.TEMP, 'edge_dbg_' + Date.now());
+
+    const edge = spawn(edgePath, [
+        '--headless=new',
+        '--remote-debugging-port=' + dbgPort,
+        '--user-data-dir=' + userDataDir,
+        '--window-size=375,812',
+        `http://127.0.0.1:${srvPort}/index.html`
+    ]);
+
     try {
+        await new Promise(r => setTimeout(r, 2200));
         const pages = await new Promise((res, rej) => {
-            http.get('http://127.0.0.1:' + port + '/json', r => {
+            http.get(`http://127.0.0.1:${dbgPort}/json`, r => {
                 let d = '';
                 r.on('data', c => d += c);
                 r.on('end', () => res(JSON.parse(d)));
             }).on('error', rej);
         });
-        const page = pages.find(p => p.url && p.url.includes('localhost:8000'));
+
+        const page = pages.find(p => p.url && p.url.includes(`127.0.0.1:${srvPort}`));
         const ws = new WebSocket(page.webSocketDebuggerUrl);
         await new Promise(r => ws.onopen = r);
 
-        let id = 1;
+        let curId = 1;
         const call = (method, params = {}) => new Promise(res => {
-            const curId = id++;
+            const id = curId++;
             const handler = (evt) => {
                 const m = JSON.parse(evt.data);
-                if (m.id === curId) {
+                if (m.id === id) {
                     ws.removeEventListener('message', handler);
                     res(m);
                 }
             };
             ws.addEventListener('message', handler);
-            ws.send(JSON.stringify({ id: curId, method, params }));
+            ws.send(JSON.stringify({ id, method, params }));
         });
 
+        await call('Page.enable');
         await call('Runtime.enable');
-        await call('DOM.enable');
-        await call('CSS.enable');
+        await call('Emulation.setDeviceMetricsOverride', {
+            width: 375,
+            height: 812,
+            deviceScaleFactor: 2,
+            mobile: true
+        });
 
-        await call('Runtime.evaluate', { expression: 'openCurrentProjectModal()' });
+        await new Promise(r => setTimeout(r, 1200));
 
-        const res = await call('Runtime.evaluate', {
+        const result = await call('Runtime.evaluate', {
             expression: `
             (function() {
-                const el = document.querySelector('.project-modal__details');
-                const cs = window.getComputedStyle(el);
-                
-                // Also check if any element has animation or transition or inline style
+                const el = document.querySelector('.section-software-hub .container') || document.querySelector('.software-filter-bar');
+                if (!el) return 'element not found';
+                const s = window.getComputedStyle(el);
+                const parent = el.parentElement;
+                const ps = window.getComputedStyle(parent);
                 return {
-                    opacity: cs.opacity,
-                    visibility: cs.visibility,
-                    classes: el.className,
-                    inlineStyle: el.getAttribute('style'),
-                    parentOpacity: window.getComputedStyle(el.parentElement).opacity,
-                    parentVisibility: window.getComputedStyle(el.parentElement).visibility,
-                    parentClass: el.parentElement.className,
-                    grandParentOpacity: window.getComputedStyle(el.parentElement.parentElement).opacity,
-                    grandParentVisibility: window.getComputedStyle(el.parentElement.parentElement).visibility,
-                    grandParentClass: el.parentElement.parentElement.className,
-                    // Check closeBtn
-                    closeBtnInlineStyle: document.querySelector('.project-modal__close').getAttribute('style'),
-                    closeBtnClass: document.querySelector('.project-modal__close').className,
-                    closeBtnOpacity: window.getComputedStyle(document.querySelector('.project-modal__close')).opacity,
-                    closeBtnVisibility: window.getComputedStyle(document.querySelector('.project-modal__close')).visibility
+                    tag: el.tagName,
+                    cls: el.className,
+                    width: s.width,
+                    minWidth: s.minWidth,
+                    maxWidth: s.maxWidth,
+                    boxSizing: s.boxSizing,
+                    parentCls: parent.className,
+                    parentWidth: ps.width,
+                    parentDisplay: ps.display,
+                    heroActions: (function() {
+                        const h = document.querySelector('.hero-reference__actions');
+                        if (!h) return 'no hero actions';
+                        const hs = window.getComputedStyle(h);
+                        const firstBtn = h.querySelector('.tf-btn');
+                        const bs = firstBtn ? window.getComputedStyle(firstBtn) : null;
+                        return {
+                            hWidth: hs.width,
+                            hDisplay: hs.display,
+                            hFlexWrap: hs.flexWrap,
+                            btnWidth: bs ? bs.width : '',
+                            btnMinW: bs ? bs.minWidth : '',
+                            btnRect: firstBtn ? firstBtn.getBoundingClientRect() : null
+                        };
+                    })()
                 };
             })()
             `,
             returnByValue: true
         });
 
-        console.log('DETAILS STYLE INFO:', JSON.stringify(res.result.value, null, 2));
+        console.log('Inspection:', JSON.stringify(result.result.value, null, 2));
 
-        // Now let's find matched CSS rules for .project-modal__details using CSS domain
-        const doc = await call('DOM.getDocument');
-        const node = await call('DOM.querySelector', { nodeId: doc.result.root.nodeId, selector: '.project-modal__details' });
-        if (node && node.result && node.result.nodeId) {
-            const matched = await call('CSS.getMatchedStylesForNode', { nodeId: node.result.nodeId });
-            console.log('MATCHED CSS RULES:');
-            for (const r of matched.result.matchedCSSRules || []) {
-                const decls = r.rule.style.cssProperties.filter(p => ['opacity', 'visibility', 'display'].includes(p.name));
-                if (decls.length) {
-                    console.log('Rule:', r.rule.selectorList.text, decls.map(p => `${p.name}: ${p.value} (${p.important ? '!important' : ''})`));
-                }
-            }
-        }
-
-        // Also for .project-modal__close
-        const closeNode = await call('DOM.querySelector', { nodeId: doc.result.root.nodeId, selector: '.project-modal__close' });
-        if (closeNode && closeNode.result && closeNode.result.nodeId) {
-            const matchedClose = await call('CSS.getMatchedStylesForNode', { nodeId: closeNode.result.nodeId });
-            console.log('MATCHED CLOSE RULES:');
-            for (const r of matchedClose.result.matchedCSSRules || []) {
-                const decls = r.rule.style.cssProperties.filter(p => ['opacity', 'visibility', 'display'].includes(p.name));
-                if (decls.length) {
-                    console.log('Rule:', r.rule.selectorList.text, decls.map(p => `${p.name}: ${p.value} (${p.important ? '!important' : ''})`));
-                }
-            }
-        }
-
+    } finally {
         edge.kill();
-    } catch(e) {
-        console.error(e);
-        edge.kill();
+        server.close();
+        try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
     }
-}, 3000);
+}
+
+debugEl();
