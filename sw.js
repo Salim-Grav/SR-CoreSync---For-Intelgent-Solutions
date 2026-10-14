@@ -24,7 +24,8 @@ const PRECACHE_ASSETS = [
   './css/enterprise-suite.min.js',
   './css/enterprise-suite.css',
   './css/enterprise-suite.js',
-  './css/demo-portal.css'
+  './css/demo-portal.css',
+  './api/lead-dispatcher.js'
 ];
 
 self.addEventListener('install', (event) => {
