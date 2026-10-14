@@ -114,6 +114,12 @@ const results = [];
 if (fs.existsSync('css/enterprise-suite.css')) {
   results.push(processAsset('css/enterprise-suite.css', 'css/enterprise-suite.min.css', 'css'));
 }
+if (fs.existsSync('css/invoice-quote-email.css')) {
+  results.push(processAsset('css/invoice-quote-email.css', 'css/invoice-quote-email.min.css', 'css'));
+}
+if (fs.existsSync('css/welcome-email.css')) {
+  results.push(processAsset('css/welcome-email.css', 'css/welcome-email.min.css', 'css'));
+}
 
 // 2. Minify JS
 if (fs.existsSync('css/enterprise-suite.js')) {
