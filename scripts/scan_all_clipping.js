@@ -94,7 +94,9 @@ async function run() {
             (function() {
                 const clipped = [];
                 const winW = window.innerWidth;
+                let totalChecked = 0;
                 document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, button, li, label, div').forEach(el => {
+                    totalChecked++;
                     const style = window.getComputedStyle(el);
                     if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return;
                     const r = el.getBoundingClientRect();
@@ -119,18 +121,22 @@ async function run() {
                             isHorizClipped,
                             isVertClipped,
                             rect: { l: Math.round(r.left), r: Math.round(r.right), w: Math.round(r.width) },
-                            text: text.slice(0, 50).replace(/\\s+/g, ' ')
+                            text: text.slice(0, 50).replace(/\s+/g, ' ')
                         });
                     }
                 });
-                return clipped;
+                return { winW, totalChecked, clipped };
             })()
             `,
             returnByValue: true
         });
 
-        console.log('Total clipped elements on 375px mobile (excluding marquee):', result.result.value.length);
-        console.log(JSON.stringify(result.result.value, null, 2));
+        if (result.exceptionDetails) {
+            console.error('JS Exception:', result.exceptionDetails);
+        } else {
+            const data = result.result?.value;
+            console.log('Result data:', JSON.stringify(data, null, 2));
+        }
     } finally {
         edge.kill();
         server.close();
