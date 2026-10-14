@@ -62,16 +62,23 @@ function auditPage(pageConfig) {
 
   // 4. Duplicate IDs
   const idRegex = /\sid=["']([^"']+)["']/gi;
-  const idCounts = {};
-  let match;
-  while ((match = idRegex.exec(html)) !== null) {
-    const id = match[1];
-    idCounts[id] = (idCounts[id] || 0) + 1;
-  }
-  const duplicateIds = Object.keys(idCounts).filter(id => idCounts[id] > 1);
+  const idOccurrences = {};
+  const lines = html.split('\n');
+  lines.forEach((lineText, lineIdx) => {
+    let m;
+    const re = /\sid=["']([^"']+)["']/gi;
+    while ((m = re.exec(lineText)) !== null) {
+      const id = m[1];
+      if (!idOccurrences[id]) idOccurrences[id] = [];
+      idOccurrences[id].push(lineIdx + 1);
+    }
+  });
+
+  const duplicateIds = Object.keys(idOccurrences).filter(id => idOccurrences[id].length > 1);
   metrics.duplicateIdsCount = duplicateIds.length;
   if (duplicateIds.length > 0) {
-    issues.push(`Duplicate IDs detected: ${duplicateIds.slice(0, 10).join(', ')}${duplicateIds.length > 10 ? ' ...' : ''}`);
+    issues.push(`Duplicate IDs detected: ${duplicateIds.join(', ')}`);
+    metrics.duplicateDetails = duplicateIds.map(id => ({ id, lines: idOccurrences[id] }));
   }
 
   // 5. Image Accessibility (Alt tags)
