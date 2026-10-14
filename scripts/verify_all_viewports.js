@@ -194,6 +194,15 @@ async function verifyAll() {
         });
         await new Promise(r => setTimeout(r, 1000));
 
+        // Dismiss cookie banner for clean visual capture of hero
+        await call('Runtime.evaluate', {
+            expression: `
+            const b = document.getElementById('esGdprBanner');
+            if (b) { b.classList.remove('active'); b.style.display = 'none'; }
+            `
+        });
+        await new Promise(r => setTimeout(r, 300));
+
         // 1. Hero Mobile View
         const heroSS = await call('Page.captureScreenshot', { format: 'png' });
         fs.writeFileSync(path.join(artifactDir, 'live_mobile_hero_portrait.png'), Buffer.from(heroSS.result.data, 'base64'));

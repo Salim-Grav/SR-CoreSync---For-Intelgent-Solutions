@@ -5793,10 +5793,11 @@ li, dt, dd, td, th {
     height: auto !important;
     min-height: 46px !important;
     line-height: 1.4 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     box-sizing: border-box !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
+    position: relative !important;
 }
 
 /* 4. Marquee & Infinite Scroll Containment */
@@ -5812,6 +5813,42 @@ li, dt, dd, td, th {
 }
 
 /* 5. Hero Section Responsiveness */
+.hero-reference__actions .hero-reference__action::before,
+.hero-reference__actions .tf-btn::before {
+    display: none !important;
+}
+
+.hero-reference__actions .tf-btn,
+.hero-reference__actions .hero-reference__action {
+    background: rgba(14, 24, 20, 0.85) !important;
+    border: 1px solid rgba(197, 168, 128, 0.45) !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+}
+
+.hero-reference__actions .hero-reference__action span,
+.hero-reference__actions .tf-btn span {
+    position: relative !important;
+    z-index: 2 !important;
+    color: inherit !important;
+}
+
+.hero-reference__actions .hero-reference__action:hover {
+    background: linear-gradient(135deg, #d4af37, #c5a880) !important;
+    color: #010907 !important;
+    border-color: #d4af37 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35) !important;
+}
+
+.hero-reference__actions .hero-reference__action:hover span {
+    color: #010907 !important;
+}
+
 @media (max-width: 991px) {
     .hero-reference__grid {
         grid-template-columns: 1fr !important;
@@ -5937,9 +5974,9 @@ li, dt, dd, td, th {
         max-width: 100% !important;
         justify-content: center !important;
         text-align: center !important;
-        white-space: normal !important;
+        white-space: nowrap !important;
         padding: 10px 6px !important;
-        font-size: clamp(0.74rem, 3.2vw, 0.85rem) !important;
+        font-size: clamp(0.72rem, 3vw, 0.84rem) !important;
         border-radius: 10px !important;
         min-height: 48px !important;
         height: auto !important;
