@@ -147,5 +147,11 @@ PAGES.forEach(p => {
     console.log('Issues:');
     res.issues.forEach(i => console.log(`  - ${i}`));
   }
+  if (res.metrics.duplicateDetails) {
+    console.log('Duplicate ID Details:');
+    res.metrics.duplicateDetails.forEach(d => {
+      console.log(`  #${d.id}: lines ${d.lines.join(', ')}`);
+    });
+  }
   console.log('------------------------------------------------------------\n');
 });
