@@ -20,11 +20,12 @@
         }
         .sw-modal-preview-active {
             position: static !important;
-            min-height: auto !important;
+            min-height: 0 !important;
             height: auto !important;
             display: block !important;
             padding: 0 !important;
             background: transparent !important;
+            -webkit-backdrop-filter: none !important;
             backdrop-filter: none !important;
         }
         .sw-modal-preview-active .salim-lm-modal-container {
@@ -32,6 +33,10 @@
             overflow-y: visible !important;
             margin: 0 auto !important;
         }
+        .salim-lm-stat-blue { color: #60a5fa !important; }
+        .salim-lm-stat-emerald { color: #34d399 !important; }
+        .salim-lm-chart-status { font-size: 0.8rem; color: #10b981; font-weight: 600; }
+        .salim-lm-export-wrap { display: flex; gap: 8px; }
     </style>
 </head>
 <body>
@@ -71,11 +76,11 @@
                     <div class="salim-lm-stat-lbl">الإيرادات الإجمالية المحققة</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #60a5fa;" id="salimNetRevenueEstimate">€ 10,239</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-blue" id="salimNetRevenueEstimate">€ 10,239</div>
                     <div class="salim-lm-stat-lbl">الإيرادات الصافية (Excl. BTW)</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" style="color: #34d399;" id="salimVatRevenueEstimate">€ 2,150</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-emerald" id="salimVatRevenueEstimate">€ 2,150</div>
                     <div class="salim-lm-stat-lbl">ضريبة BTW 21% المستحقة</div>
                 </div>
             </div>
@@ -84,7 +89,7 @@
             <div class="salim-lm-chart-card">
                 <div class="salim-lm-chart-title">
                     <span>📊 تحليل الإيرادات وحجم المبيعات حسب الأنظمة البرمجية (Revenue per Product)</span>
-                    <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">● تحديث لحظي مباشر</span>
+                    <span class="salim-lm-chart-status">● تحديث لحظي مباشر</span>
                 </div>
                 <div id="salimRevenueBarsContainer" class="salim-lm-bars-container">
                     <!-- Dynamic Bars Injected by JS -->
@@ -157,7 +162,7 @@
                         <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('monthly', this)">شهري</button>
                         <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('lifetime', this)">دائم</button>
                     </div>
-                    <div style="display: flex; gap: 8px;">
+                    <div class="salim-lm-export-wrap">
                         <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('csv')" title="تصدير السجل بتنسيق CSV">تصدير CSV 📥</button>
                         <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('json')" title="تصدير السجل بتنسيق JSON">تصدير JSON 🔒</button>
                     </div>
