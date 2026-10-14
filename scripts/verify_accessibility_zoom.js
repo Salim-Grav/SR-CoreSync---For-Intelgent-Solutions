@@ -137,14 +137,17 @@ async function verifyAndCapture() {
         fs.writeFileSync(path.join(artifactDir, 'live_mobile_menu_resizer.png'), Buffer.from(menuSS.result.data, 'base64'));
         console.log('Saved: live_mobile_menu_resizer.png');
 
-        // Close mobile menu
+        // Close mobile menu completely
         await call('Runtime.evaluate', {
             expression: `
                 const m = document.getElementById('mobileMenu');
-                if (m) m.classList.remove('active');
+                if (m) {
+                    m.classList.remove('active');
+                    m.style.display = 'none';
+                }
             `
         });
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 600));
 
         // 3. Scroll to Footer to show the footer accessibility text resizer
         console.log('Scrolling to footer bottom bar...');
