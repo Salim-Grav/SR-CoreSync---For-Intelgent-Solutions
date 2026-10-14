@@ -459,8 +459,8 @@
             transform: scale(0.92) translateY(20px);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             color: #ffffff;
-            direction: rtl;
-            text-align: right;
+            direction: ltr;
+            text-align: left;
             max-height: 94vh;
             overflow-y: auto;
         }
@@ -4377,28 +4377,69 @@
                 <div class="tab-pane fade active show work-pane" id="work-dynamic-pane">
                     <div class="content-wrap-1 wrap-list-btn">
                         <div class="container">
-                            <div class="row align-items-center">
-                                <!-- Menu الجانبية اليسرى للمشاريع (أو اليمنى في RTL) -->
-                                <div class="col-md-4">
+                            <div class="row align-items-center g-4">
+                                <!-- تفاصيل المشروع والقائمة التفاعلية الجانبية -->
+                                <div class="col-lg-4 col-md-5">
                                     <div class="col-left mb-md-0">
                                         <div class="position-relative">
                                             <!-- أسماء مشاريع القسم النشط للاختيار المباشر بالضغط عليها -->
                                             <div class="work-project-list-nav" id="work-project-names-nav">
-                                                <!-- يتم تعبئتها برمجياً: e.g. Oasis, SARLOR, Toneh -->
+                                                <!-- Populated dynamically -->
                                             </div>
-                                            <p class="text-caption text-white-64" id="project-subtitle-label">
-                                                Brand Identity for Syrian Artisanal Eatery in the Netherlands
+                                            <p class="text-caption text-white-64 mb-3" id="project-subtitle-label">
+                                                Independent Food Ordering & Delivery Ecosystem with iDEAL & Real-time Kitchen Dispatch
                                             </p>
+                                            <!-- شريط مؤشرات الأداء السريع للمشروع -->
+                                            <div class="work-kpis-strip">
+                                                <div class="work-kpi-box">
+                                                    <div class="work-kpi-val" id="work-kpi-speed">0.34s</div>
+                                                    <div class="work-kpi-lbl">Page Speed</div>
+                                                </div>
+                                                <div class="work-kpi-box">
+                                                    <div class="work-kpi-val" id="work-kpi-conv">+185%</div>
+                                                    <div class="work-kpi-lbl">Conversion</div>
+                                                </div>
+                                                <div class="work-kpi-box">
+                                                    <div class="work-kpi-val" id="work-kpi-sales">+4.2x</div>
+                                                    <div class="work-kpi-lbl">Sales Surge</div>
+                                                </div>
+                                            </div>
+                                            <div class="work-actions-row">
+                                                <button type="button" class="work-explore-btn" onclick="openCurrentProjectModal()" title="Click to view comprehensive case study">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                                    <span>Full Case Study</span>
+                                                </button>
+                                                <a id="work-live-preview-btn" href="https://shoarma-hintham.com" target="_blank" rel="noopener" class="work-live-link-btn" title="Open live production system or brand kit">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                                    <span>Live Demo ↗</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- كرت صورة المشروع الرئيسي -->
-                                <div class="col-md-8">
+                                <!-- إطار المتصفح التفاعلي الفاخر لعرض الموقع -->
+                                <div class="col-lg-8 col-md-7">
                                     <div class="col-right">
-                                        <div class="image work-project-trigger main-mouse-hover cs-pointer work-card-media" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
-                                            <img id="work-main-image" loading="lazy" width="1256" height="942" src="../assets/work-3.webp" alt="Project Preview" class="work-card-img">
-                                            <div class="tf-mouse work-card-badge-gold" title="Click to view full case study">
-                                                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                        <div class="work-browser-frame">
+                                            <div class="work-browser-bar">
+                                                <div class="work-browser-dots">
+                                                    <span class="dot-red"></span>
+                                                    <span class="dot-yellow"></span>
+                                                    <span class="dot-green"></span>
+                                                </div>
+                                                <div class="work-browser-url" id="work-browser-url-bar">
+                                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                                    <span id="work-browser-url-text">https://shoarma-hintham.com</span>
+                                                </div>
+                                                <div class="work-browser-badge" id="work-live-badge">
+                                                    <span class="live-dot"></span> Live / Online
+                                                </div>
+                                            </div>
+                                            <div class="image work-project-trigger main-mouse-hover cs-pointer work-card-media" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
+                                                <img id="work-main-image" loading="lazy" width="1256" height="706" src="../assets/work-web-hintham.jpg" alt="Project Preview" class="work-card-img">
+                                                <div class="tf-mouse work-card-badge-gold" title="Click to view full case study">
+                                                    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -4406,29 +4447,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content-wrap-2">
+                    <div class="content-wrap-2 mt-4">
                         <div class="container position-relative z-5">
                             <div class="row align-items-center">
                                 <!-- التاجات والتصنيفات -->
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <div class="group-btn d-flex gap-2 flex-wrap" id="work-project-tags">
-                                        <span class="tf-btn style-2">Brand Identity</span>
-                                        <span class="tf-btn style-2">Emblem Design</span>
+                                        <span class="tf-btn style-2">Web Application</span>
+                                        <span class="tf-btn style-2">iDEAL Gateway</span>
                                     </div>
                                 </div>
                                 <!-- أزرار التنقل بين مشاريع القسم -->
-                                <div class="col-6 col-md-4 text-center">
-                                    <div class="group-btn-slider d-inline-flex gap-3">
+                                <div class="col-md-4 text-center my-3 my-md-0">
+                                    <div class="group-btn-slider d-inline-flex gap-3 align-items-center">
                                         <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" onclick="cycleProject(-1)" aria-label="Previous Project">
-                                            Previous
+                                            ← Previous
                                         </button>
+                                        <span class="work-counter-badge" id="work-project-counter">01 / 04</span>
                                         <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" onclick="cycleProject(1)" aria-label="Next Project">
-                                            Next
+                                            Next →
                                         </button>
                                     </div>
                                 </div>
                                 <!-- سنة الإنجاز -->
-                                <div class="col-6 col-md-4 text-end">
+                                <div class="col-md-3 text-end">
                                     <p class="text-display-2 letter-space--3 fw-semibold work-year font-latin mb-0" id="work-project-year">
                                         20<span class="gold-accent">24</span>
                                     </p>
@@ -6107,22 +6149,18 @@
                     preview: null,
                     desc: "Crafted a sophisticated visual identity for Sarlor, an artisan eatery in the Netherlands specializing in Middle Eastern pastries, manakish, and stone-baked pizza. The logo integrates the letter 'O' as a pizza slice with aerodynamic curves symbolizing rapid delivery, complemented by warm crimson, amber gold, and cream tones tailored for the European gastronomic landscape.",
                     quote: "A masterfully balanced visual system with strong culinary rhythm and lasting commercial impact.",
+                    kpiConversion: '+165%', kpiSpeed: '—', kpiSales: '+3.2x brand value',
+                    techs: ['Illustrator', 'Figma', 'Vector Identity', 'Brand Guidelines'],
                     gallery: [
                         "../assets/work-3.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp"
+                        "../assets/service-identity-3d.jpg"
                     ]
                 },
                 {
                     id: "oasis",
                     name: "Oasis",
                     subtitle: "Luxury Brand Identity & Comprehensive Guidelines Architecture",
-                    heroImg: "../assets/work-1.webp",
+                    heroImg: "../assets/work-2.webp",
                     tags: ["Luxury Identity", "Brand Guidelines", "Bespoke Packaging"],
                     year: "2024",
                     client: "Oasis Studio",
@@ -6131,12 +6169,11 @@
                     preview: null,
                     desc: "Engineered an upscale visual identity system channeling serene luxury and organic symmetry. Includes full design guidelines, digital UI kits, and sustainable packaging applications created for the discerning European premium market.",
                     quote: "An identity that cements prestige through quiet elegance and unforgettable craftsmanship.",
+                    kpiConversion: '+180%', kpiSpeed: '—', kpiSales: '+2.9x recognition',
+                    techs: ['Brand Architecture', 'Figma', 'Typography System', 'Eco Packaging'],
                     gallery: [
                         "../assets/work-2.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp"
+                        "../assets/service-identity-3d.jpg"
                     ]
                 },
                 {
@@ -6152,18 +6189,18 @@
                     preview: null,
                     desc: "Developed a dynamic branding system balancing bold simplicity with harmonic Latin-Arabic typography, designed specifically for rapid visual recognition across modern streaming platforms and mobile applications.",
                     quote: "A bold visual rhythm pulsating with modern energy across every digital surface.",
+                    kpiConversion: '+210%', kpiSpeed: '—', kpiSales: '+4.1x engagement',
+                    techs: ['Bilingual Typography', '3D Metallic Wall', 'Social Design System'],
                     gallery: [
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp",
                         "../assets/work-1.webp",
-                        "../assets/work-2.webp"
+                        "../assets/service-identity-3d.jpg"
                     ]
                 },
                 {
                     id: "lumina",
                     name: "Lumina Café",
                     subtitle: "Artisan Coffee Roastery Visual Identity & Sustainable Packaging",
-                    heroImg: "../assets/work-1.webp",
+                    heroImg: "../assets/service-identity-3d.jpg",
                     tags: ["Specialty Coffee", "Eco Packaging", "Retail Identity"],
                     year: "2025",
                     client: "Lumina Coffee BV",
@@ -6172,10 +6209,10 @@
                     preview: null,
                     desc: "Conceived an artisanal brand environment marrying Dutch minimalism with the warmth of single-origin coffee origins. Features tactile packaging, earthy color palettes, and typographic precision engineered for European retail shelves.",
                     quote: "Artistic distinction that bridges specialty roasting heritage with contemporary European allure.",
+                    kpiConversion: '+195%', kpiSpeed: '—', kpiSales: '+3.5x customer loyalty',
+                    techs: ['Packaging Design', 'Gold Foil & Emboss', 'Retail Guidelines'],
                     gallery: [
-                        "../assets/work-1.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
+                        "../assets/service-identity-3d.jpg",
                         "../assets/work-2.webp"
                     ]
                 }
@@ -6479,7 +6516,7 @@
                 list.forEach((p, idx) => {
                     const itemBtn = document.createElement('div');
                     itemBtn.className = 'work-project-nav-item' + (idx === currentWorkProjectIdx ? ' active' : '');
-                    itemBtn.textContent = p.name;
+                    itemBtn.innerHTML = `<span class="work-nav-num">0${idx + 1}</span> <span class="work-nav-title">${p.name}</span>`;
                     itemBtn.onclick = function() {
                         currentWorkProjectIdx = idx;
                         renderActiveWork();
@@ -6491,6 +6528,62 @@
             // CoreSync System Controller
             const subLabel = document.getElementById('project-subtitle-label');
             if (subLabel) subLabel.textContent = activeProject.subtitle;
+
+            // KPIs
+            const kpiSpeed = document.getElementById('work-kpi-speed');
+            if (kpiSpeed) kpiSpeed.textContent = activeProject.kpiSpeed || '0.34s';
+            const kpiConv = document.getElementById('work-kpi-conv');
+            if (kpiConv) kpiConv.textContent = activeProject.kpiConversion || '+185%';
+            const kpiSales = document.getElementById('work-kpi-sales');
+            if (kpiSales) kpiSales.textContent = activeProject.kpiSales || '+4.2x';
+
+            // Browser URL & Preview Buttons
+            const browserUrl = document.getElementById('work-browser-url-text');
+            const liveBtn = document.getElementById('work-live-preview-btn');
+            const liveBadge = document.getElementById('work-live-badge');
+            const displayUrl = activeProject.preview ? (activeProject.previewLabel || activeProject.preview.replace(/^https?:\/\//, '')) : `coresync-solutions.com/portfolio/${activeProject.id}`;
+            if (browserUrl) browserUrl.textContent = displayUrl;
+
+            if (liveBadge) {
+                if (activeProject.preview) {
+                    liveBadge.innerHTML = '<span class="live-dot"></span> Live / Online';
+                    liveBadge.style.color = '#10b981';
+                    liveBadge.style.borderColor = 'rgba(16, 185, 129, 0.45)';
+                    liveBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#c5a880;box-shadow:0 0 8px #c5a880;"></span> Brand & Emblem';
+                    liveBadge.style.color = '#c5a880';
+                    liveBadge.style.borderColor = 'rgba(197, 168, 128, 0.45)';
+                    liveBadge.style.background = 'rgba(197, 168, 128, 0.15)';
+                } else {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span> Certified Architecture';
+                    liveBadge.style.color = '#38bdf8';
+                    liveBadge.style.borderColor = 'rgba(56, 189, 248, 0.45)';
+                    liveBadge.style.background = 'rgba(6, 182, 212, 0.12)';
+                }
+            }
+
+            if (liveBtn) {
+                if (activeProject.preview) {
+                    liveBtn.href = activeProject.preview;
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>Live Demo ↗</span>';
+                    liveBtn.onclick = null;
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_blank';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBtn.href = '#!';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>View Logo & Identity 🔍</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
+                } else {
+                    liveBtn.href = '#!';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>Explore System ⚡</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
+                }
+            }
 
             // CoreSync System Controller
             const mainImg = document.getElementById('work-main-image');
@@ -6509,6 +6602,14 @@
                     tagEl.textContent = t;
                     tagsContainer.appendChild(tagEl);
                 });
+            }
+
+            // Counter
+            const counterEl = document.getElementById('work-project-counter');
+            if (counterEl) {
+                const cur = String(currentWorkProjectIdx + 1).padStart(2, '0');
+                const tot = String(list.length).padStart(2, '0');
+                counterEl.textContent = `${cur} / ${tot}`;
             }
 
             // CoreSync System Controller

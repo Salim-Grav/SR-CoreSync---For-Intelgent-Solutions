@@ -518,7 +518,7 @@
                             </div>
                         </div>
                         <div class="work-actions-row">
-                            <button type="button" class="work-explore-btn" onclick="alert('دراسة الحالة التفصيلية جاهزة')">
+                            <button type="button" class="work-explore-btn" onclick="openCurrentProjectModal()">
                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                                 <span>دراسة الحالة الكاملة</span>
                             </button>
@@ -542,11 +542,11 @@
                                     <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                                     <span id="work-browser-url-text">shoarma-hintham.com</span>
                                 </div>
-                                <div class="work-browser-badge">
+                                <div class="work-browser-badge" id="work-live-badge">
                                     <span class="live-dot"></span> مباشر / Live
                                 </div>
                             </div>
-                            <div class="work-card-media" id="work-main-card-trigger">
+                            <div class="work-card-media cs-pointer" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
                                 <img id="work-main-image" src="./assets/work-web-hintham.jpg" alt="معاينة العمل" class="work-card-img">
                                 <div class="work-card-badge-gold" title="استعراض التفاصيل">
                                     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -576,6 +576,107 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- نافذة تفاصيل دراسة الحالة والمشاريع المنبثقة -->
+    <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <div class="project-modal__backdrop" onclick="closeProjectModal()"></div>
+        
+        <!-- زر الإغلاق الدائري الفاخر -->
+        <button type="button" class="project-modal__close" onclick="closeProjectModal()" aria-label="إغلاق تفاصيل المشروع" title="إغلاق">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- زر التوسيع / العرض الأوسع في الزاوية السفلية -->
+        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" onclick="toggleWideView()" aria-label="تبديل العرض الأوسع">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+            <span id="projectModalExpandText">عرض أوسع</span>
+        </button>
+
+        <div class="project-modal__panel" role="document">
+            <!-- عمود معرض الصور العمودي المتدفق -->
+            <div class="project-modal__media">
+                <div class="project-modal__gallery" id="projectModalGallery"></div>
+            </div>
+
+            <!-- عمود تفاصيل ومعلومات المشروع الثابت -->
+            <div class="project-modal__details">
+                <div class="project-details-sticky">
+                    <h2 id="projectModalTitle" class="project-modal-title">SARLOR</h2>
+                    <p id="projectModalDescription" class="project-modal-desc">
+                        صممت الهوية البصرية لمطعم Sarlor السوري في هولندا والمتخصص في الفطائر والمناقيش والبيتزا...
+                    </p>
+
+                    <dl class="project-modal__meta">
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.4-4.3 2.7-6.5 7-6.5s6.6 2.2 7 6.5z"></path></svg>
+                                <span>العميل:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalClient">SARLOR</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3.5h7l4 4V20.5H7z"></path><path d="M14 3.5v4h4M10 12h5M10 16h5"></path></svg>
+                                <span>النوع:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalType">هوية بصرية</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5.5" width="16" height="15" rx="1"></rect><path d="M8 3v5M16 3v5M4 10h16"></path></svg>
+                                <span>السنة:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalYear">2024</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>الموقع:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalLoc">هولندا</dd>
+                        </div>
+                        <div class="meta-row" id="projectModalPreviewRow">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                <span>الموقع الحي:</span>
+                            </dt>
+                            <dd class="meta-dd">
+                                <a id="projectModalPreview" href="#" target="_blank" rel="noopener">زيارة الموقع ↗</a>
+                            </dd>
+                        </div>
+                    </dl>
+
+                    <blockquote class="project-modal__quote">
+                        <p id="projectModalQuote">"نظام بصري متقن بإيقاع قوي وصور معبرة وتجربة لا تُنسى."</p>
+                    </blockquote>
+
+                    <!-- بطاقات مؤشرات الأداء داخل النافذة -->
+                    <div class="project-modal-kpis">
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val text-gradient-gold" id="projectModalKpiConversion">+165%</span>
+                            <span class="project-kpi-lbl">معدل التحويل</span>
+                        </div>
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val" id="projectModalKpiSpeed">0.34s</span>
+                            <span class="project-kpi-lbl">سرعة الاستجابة</span>
+                        </div>
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val text-gradient-gold" id="projectModalKpiSales">+3.2x</span>
+                            <span class="project-kpi-lbl">نمو المبيعات</span>
+                        </div>
+                    </div>
+
+                    <!-- التاجات والتقنيات المستخدمة -->
+                    <div class="project-modal-techs" id="projectModalTechPills"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -652,13 +753,84 @@
             ],
             identity: [
                 {
+                    id: "sarlor",
+                    name: "SARLOR",
+                    subtitle: "هوية بصرية لمطعم وفطائر سورية في هولندا",
+                    heroImg: "./assets/work-3.webp",
+                    tags: ["الهوية البصرية", "تصميم الشعار", "تصميم العبوات والتغليف"],
+                    year: "2024",
+                    client: "SARLOR",
+                    type: "هوية بصرية",
+                    loc: "هولندا",
+                    preview: null,
+                    desc: "صممت الهوية البصرية لمطعم Sarlor السوري في هولندا والمتخصص في الفطائر والمناقيش والبيتزا الشرق أوسطية. يتضمن الشعار حرف O مصمماً على هيئة شريحة بيتزا مع خطوط منحنية ترمز إلى السرعة والحركة لتعكس خدمة التوصيل السريع، وتمنح ألوان الأحمر والأصفر والكريمي إحساساً بالدفء والشهية وهوية عصرية وأصيلة تناسب السوق الأوروبية.",
+                    quote: "نظام بصري متقن بإيقاع قوي وصور معبرة وتجربة لا تُنسى.",
+                    kpiConversion: '+165%', kpiSpeed: '—', kpiSales: '+3.2x قيمة العلامة',
+                    techs: ['Illustrator', 'Figma', 'Vector Identity', 'Brand Guidelines'],
+                    gallery: [
+                        "./assets/work-3.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
+                    id: "oasis",
+                    name: "Oasis",
+                    subtitle: "تصميم هوية بصرية فاخرة وأدلة العلامة التجارية",
+                    heroImg: "./assets/work-2.webp",
+                    tags: ["هوية فاخرة", "شعار", "تغليف مخصص"],
+                    year: "2024",
+                    client: "Oasis Studio",
+                    type: "هوية بصرية متكاملة",
+                    loc: "أمستردام، هولندا",
+                    preview: null,
+                    desc: "بناء وتطوير هوية بصرية عصرية راقية تعكس الهدوء والفخامة والتوازن الطبيعي، مع أدلة متكاملة للعلامة التجارية وتطبيقات التغليف الرقمية والورقية الموجهة للسوق الأوروبي الممتاز.",
+                    quote: "هوية بصرية ترسخ مكانة العلامة بأناقة استثنائية وانطباع فخم يدوم طويلاً.",
+                    kpiConversion: '+180%', kpiSpeed: '—', kpiSales: '+2.9x انتشار وثقة',
+                    techs: ['Brand Architecture', 'Figma', 'Typography System', 'Eco Packaging'],
+                    gallery: [
+                        "./assets/work-2.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
+                    id: "toneh",
+                    name: "Toneh",
+                    subtitle: "هوية رقمية وتصميم علامة تجارية متعددة الوسائط",
+                    heroImg: "./assets/work-1.webp",
+                    tags: ["هوية رقمية", "تايبوغرافي عربي ولاتيني", "براندنج"],
+                    year: "2023",
+                    client: "Toneh Media",
+                    type: "هوية بصرية وعلامة تجارية",
+                    loc: "دبي، الإمارات",
+                    preview: null,
+                    desc: "تطوير هوية ديناميكية تجمع بين البساطة والجرأة، مع خطوط عربية ولاتينية متناغمة تلائم وسائط التواصل الرقمية والتطبيقات الحديثة بأعلى معايير الإخراج الجمالي.",
+                    quote: "إيقاع بصري فريد ينبض بالعصرية والتجدد والتميز في الفضاء الرقمي.",
+                    kpiConversion: '+210%', kpiSpeed: '—', kpiSales: '+4.1x تفاعل المنصات',
+                    techs: ['Bilingual Typography', '3D Metallic Wall', 'Social Design System'],
+                    gallery: [
+                        "./assets/work-1.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
                     id: "lumina",
                     name: "Lumina Café",
                     subtitle: "هوية بصرية فاخرة لمحمصة وقهوة مختصة في أمستردام",
                     heroImg: "./assets/service-identity-3d.jpg",
                     tags: ["قهوة مختصة", "تغليف صديق للبيئة", "هوية تجارية"],
                     year: "2025",
-                    kpiConversion: '+142%', kpiSpeed: '—', kpiSales: '+2.5x ثقة'
+                    client: "Lumina Coffee BV",
+                    type: "هوية بصرية وعلامة تجارية",
+                    loc: "أمستردام، هولندا",
+                    preview: null,
+                    desc: "ابتكار هوية بصرية دافئة تجمع بين الحداثة الأوروبية وأصالة تحميص البن الأثيوبي والكولومبي، مع خطوط طباعية نقية، وألوان ترابية مستوحاة من الطبيعة، وتصاميم أكياس تغليف مبتكرة تدعم الاستدامة.",
+                    quote: "تصميم فني استثنائي يربط أصالة القهوة بالطابع الأوروبي الحديث ويعزز ولاء العملاء منذ اللحظة الأولى.",
+                    kpiConversion: '+195%', kpiSpeed: '—', kpiSales: '+3.5x ولاء العملاء',
+                    techs: ['Packaging Design', 'Gold Foil & Emboss', 'Retail Guidelines'],
+                    gallery: [
+                        "./assets/service-identity-3d.jpg",
+                        "./assets/work-2.webp"
+                    ]
                 }
             ],
             erp: [
@@ -669,7 +841,8 @@
                     heroImg: "./assets/service-website-3d.jpg",
                     tags: ["نظام ERP سحابي", "إدارة سلاسل التوريد", "أتمتة الأعمال"],
                     year: "2026",
-                    kpiConversion: '+240%', kpiSpeed: '0.25s', kpiSales: '+5.0x كفاءة'
+                    kpiConversion: '+240%', kpiSpeed: '0.25s', kpiSales: '+5.0x كفاءة',
+                    gallery: ["./assets/service-website-3d.jpg", "./assets/work-1.webp"]
                 }
             ],
             apps: [
@@ -680,7 +853,8 @@
                     heroImg: "./assets/service-ecommerce-3d.jpg",
                     tags: ["ذكاء اصطناعي", "رؤية حاسوبية", "أتمتة صناعية"],
                     year: "2026",
-                    kpiConversion: '+310%', kpiSpeed: '0.18s', kpiSales: '+85% دقة'
+                    kpiConversion: '+310%', kpiSpeed: '0.18s', kpiSales: '+85% دقة',
+                    gallery: ["./assets/service-ecommerce-3d.jpg", "./assets/work-2.webp"]
                 }
             ]
         };
@@ -751,16 +925,48 @@
             // 4. تحديث شريط المتصفح ورابط المعاينة
             const browserUrl = document.getElementById('work-browser-url-text');
             const liveBtn = document.getElementById('work-live-preview-btn');
+            const liveBadge = document.getElementById('work-live-badge');
             const displayUrl = activeProject.preview ? (activeProject.previewLabel || activeProject.preview.replace(/^https?:\/\//, '')) : `coresync-solutions.com/portfolio/${activeProject.id}`;
             if (browserUrl) browserUrl.textContent = displayUrl;
+
+            if (liveBadge) {
+                if (activeProject.preview) {
+                    liveBadge.innerHTML = '<span class="live-dot"></span> مباشر / Live';
+                    liveBadge.style.color = '#10b981';
+                    liveBadge.style.borderColor = 'rgba(16, 185, 129, 0.45)';
+                    liveBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#c5a880;box-shadow:0 0 8px #c5a880;"></span> هوية وشعار موثّق / Verified';
+                    liveBadge.style.color = '#c5a880';
+                    liveBadge.style.borderColor = 'rgba(197, 168, 128, 0.45)';
+                    liveBadge.style.background = 'rgba(197, 168, 128, 0.15)';
+                } else {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span> نظام موثّق / Verified';
+                    liveBadge.style.color = '#38bdf8';
+                    liveBadge.style.borderColor = 'rgba(56, 189, 248, 0.45)';
+                    liveBadge.style.background = 'rgba(6, 182, 212, 0.12)';
+                }
+            }
+
             if (liveBtn) {
                 if (activeProject.preview) {
                     liveBtn.href = activeProject.preview;
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>معاينة حية ↗</span>';
+                    liveBtn.onclick = null;
                     liveBtn.style.display = 'inline-flex';
                     liveBtn.target = '_blank';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBtn.href = '#!';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>معاينة الشعار والهوية 🔍</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
                 } else {
                     liveBtn.href = '#!';
-                    liveBtn.style.display = 'none';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>استعراض النظام ⚡</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
                 }
             }
 
@@ -809,6 +1015,98 @@
             currentWorkProjectIdx = (currentWorkProjectIdx + step + list.length) % list.length;
             renderActiveWork();
         }
+
+        // فتح نافذة دراسة الحالة للمشروع الحالي
+        function openCurrentProjectModal() {
+            const list = projectsDB[currentWorkCategory] || [];
+            const p = list[currentWorkProjectIdx] || list[0];
+            if (p) openProjectModalWithData(p);
+        }
+
+        function openProjectModalWithData(p) {
+            if (!p) return;
+
+            document.getElementById('projectModalTitle').textContent = p.name;
+            document.getElementById('projectModalDescription').textContent = p.desc;
+            document.getElementById('projectModalClient').textContent = p.client;
+            document.getElementById('projectModalType').textContent = p.type;
+            document.getElementById('projectModalYear').textContent = p.year;
+            document.getElementById('projectModalLoc').textContent = p.loc;
+            document.getElementById('projectModalQuote').textContent = `"${p.quote}"`;
+
+            const previewRow = document.getElementById('projectModalPreviewRow');
+            const previewLink = document.getElementById('projectModalPreview');
+            if (previewRow && previewLink) {
+                if (p.preview) {
+                    previewRow.style.display = 'flex';
+                    previewLink.href = p.preview;
+                    previewLink.textContent = p.previewLabel || p.preview;
+                } else {
+                    previewRow.style.display = 'none';
+                }
+            }
+
+            const galleryContainer = document.getElementById('projectModalGallery');
+            if (galleryContainer) {
+                galleryContainer.innerHTML = '';
+                const imgs = p.gallery && p.gallery.length ? p.gallery : [p.heroImg];
+                imgs.forEach((imgUrl, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'project-gallery-item';
+                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />`;
+                    galleryContainer.appendChild(item);
+                });
+                const mediaPanel = document.querySelector('.project-modal__media');
+                if (mediaPanel) mediaPanel.scrollTop = 0;
+            }
+
+            const kpiConv = document.getElementById('projectModalKpiConversion');
+            const kpiSpeed = document.getElementById('projectModalKpiSpeed');
+            const kpiSales = document.getElementById('projectModalKpiSales');
+            if (kpiConv) kpiConv.textContent = p.kpiConversion || '+142%';
+            if (kpiSpeed) kpiSpeed.textContent = p.kpiSpeed || '0.38s';
+            if (kpiSales) kpiSales.textContent = p.kpiSales || '+3.4x';
+
+            const techPills = document.getElementById('projectModalTechPills');
+            if (techPills) {
+                const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
+                techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
+            }
+
+            const modal = document.getElementById('projectModal');
+            if (modal) {
+                modal.classList.add('active');
+                modal.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.classList.remove('is-open');
+                modal.classList.remove('is-wide');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function toggleWideView() {
+            const modal = document.getElementById('projectModal');
+            const expandText = document.getElementById('projectModalExpandText');
+            if (modal) {
+                modal.classList.toggle('is-wide');
+                if (modal.classList.contains('is-wide')) {
+                    if (expandText) expandText.textContent = 'عرض التفاصيل';
+                } else {
+                    if (expandText) expandText.textContent = 'عرض أوسع';
+                }
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
 
         // تشغيل فوري
         renderActiveWork();
