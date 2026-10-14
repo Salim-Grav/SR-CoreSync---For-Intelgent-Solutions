@@ -106,8 +106,21 @@ async function run() {
                     heroContainerWidth: heroContainer ? heroContainer.offsetWidth : null,
                     heroContainerPadLeft: heroContainer ? window.getComputedStyle(heroContainer).paddingLeft : null,
                     heroContainerPadRight: heroContainer ? window.getComputedStyle(heroContainer).paddingRight : null,
-                    actionsRect: actions ? actions.getBoundingClientRect() : null,
-                    btnRect: btn ? btn.getBoundingClientRect() : null,
+                    heroContainerMarginLeft: heroContainer ? window.getComputedStyle(heroContainer).marginLeft : null,
+                    heroContainerMarginRight: heroContainer ? window.getComputedStyle(heroContainer).marginRight : null,
+                    heroContainerBoxSizing: heroContainer ? window.getComputedStyle(heroContainer).boxSizing : null,
+                    heroContainerMaxWidth: heroContainer ? window.getComputedStyle(heroContainer).maxWidth : null,
+                    actionsScrollW: actions ? actions.scrollWidth : null,
+                    actionsOffsetW: actions ? actions.offsetWidth : null,
+                    actionsChildren: actions ? Array.from(actions.children).map(c => ({
+                        tag: c.tagName,
+                        cls: c.className,
+                        text: c.innerText.trim(),
+                        scrollW: c.scrollWidth,
+                        offsetW: c.offsetWidth,
+                        clientW: c.clientWidth,
+                        rect: c.getBoundingClientRect()
+                    })) : null,
                     swTag: (function() {
                         const tag = document.querySelector('.software-hub-tag');
                         return tag ? {
