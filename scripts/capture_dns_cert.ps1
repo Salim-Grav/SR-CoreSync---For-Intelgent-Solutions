@@ -1,0 +1,21 @@
+$tempDir = Join-Path $env:TEMP ("edge_cap_" + [Guid]::NewGuid().ToString())
+$edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+
+$serverJob = Start-Process python -ArgumentList @("-m", "http.server", "8000") -PassThru -WindowStyle Hidden
+Start-Sleep -Seconds 2
+
+$url = "http://localhost:8000/dist/dns-status.html"
+$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\c343b500-bda0-4fad-aa48-4c2182879e6c\live_dns_deliverability_certified.png"
+
+Start-Process $edgePath -ArgumentList @(
+    "--headless=new",
+    "--user-data-dir=$tempDir",
+    "--window-size=1200,900",
+    "--screenshot=$outImg",
+    $url
+) -Wait
+
+Start-Sleep -Seconds 1
+Stop-Process -Id $serverJob.Id -Force -ErrorAction SilentlyContinue
+Remove-Item -Path $tempDir -Recurse -Force -ErrorAction SilentlyContinue
+Write-Host "DNS Snapshot done: $outImg"
