@@ -53,7 +53,7 @@
 # ------------------------------------------------------------------------------
 # 3. PROTECT SENSITIVE FILES & CONFIGURATIONS
 # ------------------------------------------------------------------------------
-<FilesMatch "(^\.env|\.git|payment-gateways\.json|package(-lock)?\.json|\.ps1$|\.log$|\.sh$|\.sql$|\.bak$|\.py$|\.bat$)">
+<FilesMatch "(^\.env|\.git|payment-gateways\.json|leads-ledger\.json|lead-webhook-config\.json|package(-lock)?\.json|\.ps1$|\.log$|\.sh$|\.sql$|\.bak$|\.py$|\.bat$)">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>

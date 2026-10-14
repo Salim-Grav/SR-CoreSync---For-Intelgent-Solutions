@@ -7851,6 +7851,40 @@
             msg += `━━━━━━━━━━━━━━━━━━━━\n` +
                    `_Verzonden via de officiële S&R CoreSync Directieportal_`;
 
+            // 🚀 Webhook Lead Dispatcher: Relay lead to Make.com / Google Sheets / Local Ledger
+            const leadPayload = {
+                clientName: clientName || '',
+                companyName: companyName || '',
+                phone: phone || '',
+                advisor: advisor || 'salim',
+                advisorName: advisorName,
+                sessionType: sessionType || 'online',
+                sessionLabel: sessionLabel,
+                package: (pkgEl && pkgEl.value) || '',
+                packageLabel: pkgLabel || '',
+                preferredDate: preferredDate || '',
+                timeSlot: timeSlot || 'afternoon',
+                timeSlotLabel: timeSlotLabel,
+                notes: notes || '',
+                language: 'nl',
+                sourceUrl: window.location.href
+            };
+
+            if (typeof SRLeadDispatcher !== 'undefined' && SRLeadDispatcher.dispatch) {
+                SRLeadDispatcher.dispatch(leadPayload);
+            } else {
+                try {
+                    const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
+                    leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
+                    localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
+                    fetch('/api/lead-capture.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(leadPayload)
+                    }).catch(() => {});
+                } catch(err) {}
+            }
+
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('open');
             alert('Uw consultatie-aanvraag is succesvol geregistreerd! U wordt direct doorgeschakeld naar WhatsApp om het tijdslot definitief te bevestigen.');
             const whatsappUrl = `https://wa.me/31618111116?text=${encodeURIComponent(msg)}`;
@@ -8765,6 +8799,7 @@
             }, 300);
         }
     </script>
+    <script src="../api/lead-dispatcher.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>
 </body>
 </html>
