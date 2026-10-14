@@ -6566,7 +6566,7 @@
                 imgs.forEach((imgUrl, i) => {
                     const item = document.createElement('div');
                     item.className = 'project-gallery-item';
-                    item.innerHTML = `<img loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Galerijopname ${i + 1}" />`;
+                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Galerijopname ${i + 1}" />`;
                     galleryContainer.appendChild(item);
                 });
                 // CoreSync System Controller
@@ -6618,13 +6618,14 @@
             // Add tech pills
             const techPills = document.getElementById('projectModalTechPills');
             if (techPills) {
-                const techs = p.techs || ['HTML5', 'CSS3', 'JavaScript'];
+                const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
                 techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
             }
 
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.add('active');
+                modal.classList.add('is-open');
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -6646,6 +6647,7 @@
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.remove('active');
+                modal.classList.remove('is-open');
                 modal.classList.remove('is-wide');
                 document.body.style.overflow = '';
                 const expandText = document.getElementById('projectModalExpandText');
