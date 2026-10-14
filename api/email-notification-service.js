@@ -5,6 +5,8 @@
  * and cryptographic license activation keys upon verified payment.
  */
 
+const fs = require('fs');
+const path = require('path');
 const https = require('https');
 const tls = require('tls');
 
@@ -24,7 +26,73 @@ class EmailNotificationService {
   }
 
   /**
-   * Generates official Dutch/English BTW Invoice & License HTML template
+   * Bundles external CSS into an internal <style> block for bulletproof email client rendering
+   */
+  bundleTemplateStyles(htmlContent, cssPath) {
+    try {
+      if (fs.existsSync(cssPath)) {
+        const cssContent = fs.readFileSync(cssPath, 'utf8');
+        const styleBlock = `<style type="text/css">\n${cssContent}\n</style>`;
+        // Replace external CSS link with bundled inline style block
+        return htmlContent.replace(/<link\s+rel="stylesheet"\s+href="[^"]*"\s*\/?>/i, styleBlock);
+      }
+    } catch (err) {
+      console.warn(`[EmailNotificationService] Could not bundle CSS from ${cssPath}:`, err.message);
+    }
+    return htmlContent;
+  }
+
+  /**
+   * Compiles the official Arabic & Multi-language Invoice/Quote Email Template
+   */
+  compileInvoiceQuoteTemplate(data = {}) {
+    const templatePath = path.resolve(__dirname, '../templates/invoice-quote-email.html');
+    const cssPath = path.resolve(__dirname, '../css/invoice-quote-email.css');
+    let html = fs.readFileSync(templatePath, 'utf8');
+
+    // Bundle CSS
+    html = this.bundleTemplateStyles(html, cssPath);
+
+    // Apply dynamic replacements if supplied
+    if (data.clientName) {
+      html = html.replace(/شركة النخبة للاستشارات والتجارة/g, data.clientName);
+    }
+    if (data.quoteNumber) {
+      html = html.replace(/#SR-2026-Q892/g, data.quoteNumber);
+    }
+    if (data.issueDate) {
+      html = html.replace(/13 أكتوبر 2026/g, data.issueDate);
+    }
+    if (data.validityDays) {
+      html = html.replace(/30 يوماً من تاريخه/g, `${data.validityDays} يوماً من تاريخه`);
+    }
+    if (data.totalFormatted) {
+      html = html.replace(/€5,445\.00/g, data.totalFormatted);
+    }
+
+    return html;
+  }
+
+  /**
+   * Compiles the official Welcome & Onboarding Email Template
+   */
+  compileWelcomeEmailTemplate(data = {}) {
+    const templatePath = path.resolve(__dirname, '../templates/welcome-email.html');
+    const cssPath = path.resolve(__dirname, '../css/welcome-email.css');
+    let html = fs.readFileSync(templatePath, 'utf8');
+
+    // Bundle CSS
+    html = this.bundleTemplateStyles(html, cssPath);
+
+    if (data.customerName) {
+      html = html.replace(/نخبة الأعمال 2026/g, `${data.customerName} - 2026`);
+    }
+
+    return html;
+  }
+
+  /**
+   * Generates official Dutch/English BTW Invoice & License HTML template (fallback inline)
    */
   generateInvoiceHtml({ customerName, invoiceNumber, licenseKey, productTitle, amount, plan, downloadUrl }) {
     const rawPrice = Number(amount || 189).toFixed(2);
@@ -127,8 +195,8 @@ class EmailNotificationService {
    */
   async sendViaHostingerSMTP({ to, subject, html }) {
     if (!this.smtpPass || this.smtpPass.includes('your_hostinger_email_password')) {
-      console.log(`[Hostinger SMTP Mock] Credentials not configured in .env. Simulated dispatch to: ${to} (Sender: ${this.fromEmail})`);
-      return { success: true, mode: 'simulated', provider: 'smtp', sender: this.fromEmail };
+      console.log(`[Hostinger SMTP Simulation] Credentials not in .env. Simulated dispatch to: ${to} (Sender: ${this.fromEmail})`);
+      return { success: true, mode: 'simulated', provider: 'smtp', sender: this.fromEmail, recipient: to, subject };
     }
 
     return new Promise((resolve) => {
@@ -194,7 +262,7 @@ class EmailNotificationService {
           } else if (step === 8 && lastLine.startsWith('250')) {
             socket.write('QUIT\r\n');
             socket.end();
-            resolve({ success: true, provider: 'smtp', host: this.smtpHost });
+            resolve({ success: true, provider: 'smtp', host: this.smtpHost, to });
           } else if (lastLine.startsWith('5') || lastLine.startsWith('4')) {
             socket.end();
             resolve({ success: false, error: lastLine, provider: 'smtp' });
@@ -219,7 +287,7 @@ class EmailNotificationService {
   async sendViaSendGrid({ to, subject, html }) {
     if (!this.sendgridApiKey || this.sendgridApiKey.startsWith('SG.your_real')) {
       console.log(`[Email Sandbox Mock] SendGrid API Key not configured. Simulated dispatch to: ${to}`);
-      return { success: true, mode: 'simulated', provider: 'sendgrid' };
+      return { success: true, mode: 'simulated', provider: 'sendgrid', to, subject };
     }
 
     const payload = JSON.stringify({
@@ -255,7 +323,37 @@ class EmailNotificationService {
   }
 
   /**
-   * High-level unified dispatcher
+   * High-level unified dispatcher for official Arabic/Multi-lingual Invoice & Quote
+   */
+  async sendOfficialInvoiceQuote({ to, clientName, quoteNumber, issueDate, validityDays, totalFormatted }) {
+    const subject = `فاتورة / عرض سعر رسمي معتمد #${quoteNumber || 'SR-2026-Q892'} • S&R CoreSync Solutions`;
+    const html = this.compileInvoiceQuoteTemplate({ clientName, quoteNumber, issueDate, validityDays, totalFormatted });
+
+    console.log(`[Email Service] Dispatching certified Invoice/Quote to ${to} (${subject})...`);
+    if (this.provider === 'smtp') {
+      return await this.sendViaHostingerSMTP({ to, subject, html });
+    } else {
+      return await this.sendViaSendGrid({ to, subject, html });
+    }
+  }
+
+  /**
+   * High-level unified dispatcher for Welcome & Onboarding Email
+   */
+  async sendOfficialWelcomeEmail({ to, customerName }) {
+    const subject = `أهلاً بكم في منظومة S&R CoreSync Solutions | مرحباً بكم`;
+    const html = this.compileWelcomeEmailTemplate({ customerName });
+
+    console.log(`[Email Service] Dispatching Official Welcome Email to ${to}...`);
+    if (this.provider === 'smtp') {
+      return await this.sendViaHostingerSMTP({ to, subject, html });
+    } else {
+      return await this.sendViaSendGrid({ to, subject, html });
+    }
+  }
+
+  /**
+   * High-level unified dispatcher for Dutch BTW License invoice
    */
   async sendLicenseInvoice({ to, customerName, invoiceNumber, licenseKey, productTitle, amount, plan, downloadUrl }) {
     const subject = `Factuur & Licentie ${invoiceNumber} - ${productTitle} | S&R CoreSync Solutions`;
