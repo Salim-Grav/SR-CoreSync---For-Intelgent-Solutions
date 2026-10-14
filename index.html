@@ -5611,7 +5611,7 @@
 
         <!-- 3. قسم الأعمال والمشاريع المختارة (Selected Work & Digital Showcase) -->
         <div class="section-selected-work section-selected-work--original flat-spacing flat-animate-tab" id="work" data-section>
-            <div class="bg-img effectFade fadeUp">
+            <div class="bg-img">
                 <img loading="lazy" width="1440" height="720" src="./assets/mountain.webp" alt="خلفية الجبل">
             </div>
             <div class="work-head">
@@ -5620,14 +5620,14 @@
                         <div class="summary-badge mb-3">
                             <span>💼 سجل الإنجازات والأنظمة المنفذة</span>
                         </div>
-                        <h2 class="text-display-2 letter-space--3 effectFade fadeUp">
+                        <h2 class="text-display-2 letter-space--3">
                             أعمال وحلول رقمية مختارة
                         </h2>
                         <p class="text-caption text-white-64 max-w-650 mx-auto mt-2">
                             استكشف نماذج من المواقع والمتاجر والأنظمة السحابية والهويات المؤسسية التي طورناها لعملائنا في أوروبا والشرق الأوسط بأعلى معايير السرعة والأمان.
                         </p>
                     </div>
-                    <ul class="pricing-tab_btn work-tab_btn effectFade fadeUp" role="tablist" aria-label="نوع الأعمال">
+                    <ul class="work-tab_btn" role="tablist" aria-label="نوع الأعمال">
                         <li class="nav-tab-item" role="presentation">
                             <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" onclick="switchWorkTab('websites', this)">
                                 <span class="dot-active" aria-hidden="true"></span>
@@ -5669,7 +5669,7 @@
                                 <!-- تفاصيل المشروع والقائمة التفاعلية الجانبية -->
                                 <div class="col-lg-4 col-md-5 order-2 order-md-1">
                                     <div class="col-left mb-md-0">
-                                        <div class="position-relative effectFade fadeUp">
+                                        <div class="position-relative">
                                             <!-- أسماء مشاريع القسم النشط للاختيار المباشر بالضغط عليها -->
                                             <div class="work-project-list-nav" id="work-project-names-nav">
                                                 <!-- يتم تعبئتها برمجياً ديناميكياً -->
@@ -5723,7 +5723,7 @@
                                                     <span class="live-dot"></span> مباشر / Live
                                                 </div>
                                             </div>
-                                            <div class="image work-project-trigger main-mouse-hover effectFade fadeZoom cs-pointer work-card-media" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
+                                            <div class="image work-project-trigger main-mouse-hover cs-pointer work-card-media" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
                                                 <img id="work-main-image" loading="lazy" width="1256" height="706" src="./assets/work-web-hintham.jpg" alt="معاينة العمل" class="work-card-img">
                                                 <div class="tf-mouse work-card-badge-gold" title="انقر لفتح دراسة الحالة الكاملة">
                                                     <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -8654,10 +8654,8 @@
             }
         });
 
-        // تهيئة التبويب الافتراضي وميزات الواجهة المتقدمة عند التحميل
+        // تهيئة ميزات الواجهة المتقدمة عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
-            switchWorkTab('identity');
-
             // 1. شريط تقدم القراءة (Scroll Progress Bar)
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
