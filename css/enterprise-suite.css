@@ -5752,6 +5752,25 @@ html, body {
     box-sizing: border-box;
 }
 
+/* Fluid Container Unification across all sections */
+.container,
+.wrapper,
+.content-wrap,
+.hero-reference .container,
+.section-software-hub .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1200px) {
+    .container,
+    .wrapper,
+    .section-software-hub .container {
+        max-width: 1320px !important;
+    }
+}
+
 /* 2. Universal Text Wrapping & Overflow Immunization */
 h1, h2, h3, h4, h5, h6,
 p, span, a, button, label,
@@ -5797,6 +5816,8 @@ li, dt, dd, td, th {
     .hero-reference__grid {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     .hero-cinematic.hero-editorial .hero-reference__copy,
     html[lang="ar"] .hero-cinematic.hero-editorial .hero-reference__copy,
@@ -5814,9 +5835,40 @@ li, dt, dd, td, th {
 }
 
 @media (max-width: 767px) {
+    .section-hero-v1.hero-reference {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-top: 180px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .content-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .hero-reference__grid,
+    .hero-reference__copy,
+    .hero-reference__bottom {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .hero-title-line {
+        display: block !important;
+        white-space: normal !important;
+        width: 100% !important;
+    }
+    .hero-title-line__text {
+        display: inline !important;
+        white-space: normal !important;
+    }
     .hero-reference__title {
-        font-size: clamp(1.55rem, 6.5vw, 2.2rem) !important;
-        line-height: 1.32 !important;
+        font-size: clamp(1.4rem, 6vw, 2.1rem) !important;
+        line-height: 1.35 !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        width: 100% !important;
     }
     .hero-reference__bottom p {
         font-size: clamp(0.85rem, 3.4vw, 0.96rem) !important;
@@ -5829,11 +5881,12 @@ li, dt, dd, td, th {
         width: 100% !important;
         max-width: 100% !important;
         margin-top: 18px !important;
+        box-sizing: border-box !important;
     }
     .hero-reference__actions .tf-btn,
     .hero-reference__actions .hero-reference__action {
         flex: 1 1 calc(50% - 6px) !important;
-        min-width: 135px !important;
+        min-width: 130px !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
         white-space: normal !important;
@@ -5841,8 +5894,8 @@ li, dt, dd, td, th {
         justify-content: center !important;
         display: inline-flex !important;
         align-items: center !important;
-        font-size: clamp(0.76rem, 3.1vw, 0.88rem) !important;
-        padding: 10px 8px !important;
+        font-size: clamp(0.76rem, 3vw, 0.86rem) !important;
+        padding: 9px 8px !important;
     }
     .hero-reference__actions .hero-btn-install {
         flex: 1 1 100% !important;
@@ -5947,7 +6000,32 @@ li, dt, dd, td, th {
     }
 }
 
-/* 9. Software Architect Lab Pipeline Responsiveness */
+/* 9. Software Architect Lab Pipeline & Hub Responsiveness */
+.software-hub-tag {
+    white-space: normal !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    display: inline-block !important;
+}
+.software-filter-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.software-filter-pill {
+    white-space: normal !important;
+    text-align: center !important;
+    font-size: clamp(0.75rem, 3vw, 0.85rem) !important;
+    padding: 8px 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
 @media (max-width: 767px) {
     .software-architect-lab {
         padding: 18px 14px !important;
@@ -5962,6 +6040,31 @@ li, dt, dd, td, th {
         max-width: 100% !important;
         box-sizing: border-box !important;
     }
+}
+
+@media (max-width: 580px) {
+    .software-filter-pill {
+        flex: 1 1 calc(50% - 6px) !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .software-filter-pill {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Executive Visual Badge (No Truncation) */
+.exec-visual-frame,
+.exec-visual-badge,
+.exec-visual-badge-title {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* 10. GDPR Cookie Banner Mobile Shield */
