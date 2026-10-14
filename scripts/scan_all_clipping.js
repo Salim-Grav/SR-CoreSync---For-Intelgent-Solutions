@@ -131,12 +131,7 @@ async function run() {
             returnByValue: true
         });
 
-        if (result.exceptionDetails) {
-            console.error('JS Exception:', result.exceptionDetails);
-        } else {
-            const data = result.result?.value;
-            console.log('Result data:', JSON.stringify(data, null, 2));
-        }
+        console.log('Raw result:', JSON.stringify(result));
     } finally {
         edge.kill();
         server.close();
