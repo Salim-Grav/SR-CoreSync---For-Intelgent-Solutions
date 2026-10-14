@@ -5728,6 +5728,362 @@ html[lang="nl"] .salim-table {
     box-shadow: 0 8px 24px rgba(197, 168, 128, 0.35);
 }
 
+/* ==========================================================================
+   26. S&R CoreSync - Universal OmniViewport 2026 Responsive & Typography Engine
+   Architected for 100% Unified Rendering & Zero-Text-Clipping across:
+   - Mobile Portrait (320px, 360px, 375px, 390px, 412px, 430px)
+   - Mobile Landscape (568px, 667px, 844px, 926px)
+   - Tablets & iPads (Portrait & Landscape: 768px, 820px, 1024px, 1180px, 1366px)
+   - Laptops & Desktops (1280px, 1440px, 1920px)
+   - Ultra-Wide & Large 4K Television Displays (2560px, 3840px)
+   ========================================================================== */
+
+/* 1. Global Viewport & Container Containment */
+html, body {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: clip !important;
+    position: relative;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 2. Universal Text Wrapping & Overflow Immunization */
+h1, h2, h3, h4, h5, h6,
+p, span, a, button, label,
+li, dt, dd, td, th {
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+}
+
+/* 3. Universal Button Text Safety (No Vertical Truncation of Arabic dots/descenders) */
+.tf-btn,
+.tf-btn.style-2,
+.tf-btn-tab,
+.hero-reference__action,
+.software-btn-sim,
+.software-dev-btn-store,
+.tf-btn-submit,
+.brand-kit-download-action-btn,
+.brand-kit-3d-btn,
+.pricing-btn-primary {
+    height: auto !important;
+    min-height: 46px !important;
+    line-height: 1.4 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/* 4. Marquee & Infinite Scroll Containment */
+.brand-marquee,
+.brand-marquee__track-wrap,
+.section-brand-marquee,
+.tech-marquee-wrapper,
+.marquee,
+.marquee-track {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 5. Hero Section Responsiveness */
+@media (max-width: 991px) {
+    .hero-reference__grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    .hero-cinematic.hero-editorial .hero-reference__copy,
+    html[lang="ar"] .hero-cinematic.hero-editorial .hero-reference__copy,
+    html[lang="nl"] .hero-cinematic.hero-editorial .hero-reference__copy,
+    html[lang="en"] .hero-cinematic.hero-editorial .hero-reference__copy {
+        transform: none !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    .hero-reference__title {
+        font-size: clamp(1.85rem, 5.5vw, 2.75rem) !important;
+        line-height: 1.35 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-reference__title {
+        font-size: clamp(1.55rem, 6.5vw, 2.2rem) !important;
+        line-height: 1.32 !important;
+    }
+    .hero-reference__bottom p {
+        font-size: clamp(0.85rem, 3.4vw, 0.96rem) !important;
+        line-height: 1.65 !important;
+    }
+    .hero-reference__actions {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 18px !important;
+    }
+    .hero-reference__actions .tf-btn,
+    .hero-reference__actions .hero-reference__action {
+        flex: 1 1 calc(50% - 6px) !important;
+        min-width: 135px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        text-align: center !important;
+        justify-content: center !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        font-size: clamp(0.76rem, 3.1vw, 0.88rem) !important;
+        padding: 10px 8px !important;
+    }
+    .hero-reference__actions .hero-btn-install {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-reference__actions {
+        flex-direction: column !important;
+    }
+    .hero-reference__actions .tf-btn,
+    .hero-reference__actions .hero-reference__action {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* 6. Work & Portfolio Section Category Tabs */
+@media (max-width: 767px) {
+    .work-tab_btn {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 8px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 20px auto 30px auto !important;
+        border-radius: 16px !important;
+        box-sizing: border-box !important;
+        background: rgba(15, 22, 34, 0.85) !important;
+    }
+    .work-tab_btn > li {
+        width: 100% !important;
+    }
+    .work-tab_btn .tf-btn-tab {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        white-space: normal !important;
+        padding: 10px 6px !important;
+        font-size: clamp(0.74rem, 3.2vw, 0.85rem) !important;
+        border-radius: 10px !important;
+        min-height: 48px !important;
+        height: auto !important;
+        gap: 6px !important;
+    }
+    .work-tab_btn .pricing-tab__icon {
+        width: 16px !important;
+        height: 16px !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .work-tab_btn {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 7. Instant Project Estimator Responsiveness */
+@media (max-width: 640px) {
+    .estimator-options.grid-2,
+    .estimator-options.grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+    .estimator-step {
+        padding: 18px 14px !important;
+    }
+    .estimator-option-card {
+        padding: 14px 12px !important;
+    }
+    .estimator-summary-card {
+        padding: 18px 14px !important;
+    }
+    .estimator-grand-price {
+        font-size: clamp(1.6rem, 7vw, 2.2rem) !important;
+    }
+}
+
+/* 8. Client Portal & Milestone Tracker Responsiveness */
+@media (max-width: 767px) {
+    .client-portal-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .client-portal-kpi-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+    .client-portal-phases-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+@media (max-width: 420px) {
+    .client-portal-kpi-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 9. Software Architect Lab Pipeline Responsiveness */
+@media (max-width: 767px) {
+    .software-architect-lab {
+        padding: 18px 14px !important;
+        margin-top: 24px !important;
+    }
+    .lab-pipeline-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    .lab-pipeline-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* 10. GDPR Cookie Banner Mobile Shield */
+@media (max-width: 640px) {
+    .es-gdpr-banner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        left: 12px !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        gap: 12px !important;
+        padding: 16px !important;
+    }
+    .es-gdpr-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 8px !important;
+    }
+    .es-btn-gdpr-accept,
+    .es-btn-gdpr-decline {
+        flex: 1 !important;
+        text-align: center !important;
+        justify-content: center !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        min-height: 42px !important;
+    }
+}
+
+/* 11. Modal Dialogs Omni-Device Optimization */
+@media (max-width: 640px) {
+    .modal-dialog,
+    .es-quote-modal,
+    .project-modal-dialog,
+    .booking-modal-content {
+        max-width: calc(100vw - 20px) !important;
+        margin: 10px auto !important;
+        padding: 16px 14px !important;
+        max-height: 94vh !important;
+        border-radius: 16px !important;
+    }
+    .project-modal-brand-kit {
+        padding: 16px 12px !important;
+    }
+    .brand-kit-actions-group {
+        flex-direction: column !important;
+    }
+    .brand-kit-3d-btn {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* 12. Tablets & iPads (Portrait & Landscape: 768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    .work-tab_btn {
+        display: inline-flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        border-radius: 40px !important;
+    }
+    .work-tab_btn .tf-btn-tab {
+        padding: 10px 18px !important;
+        font-size: 0.88rem !important;
+    }
+    .hero-reference__actions {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+}
+
+/* 13. Desktops, Ultra-Wide & Large 4K Television Displays (1920px - 3840px) */
+@media (min-width: 1920px) {
+    .container,
+    .wrapper {
+        max-width: 1680px !important;
+        margin-inline: auto !important;
+    }
+    .hero-reference__grid {
+        gap: 50px !important;
+    }
+}
+
+@media (min-width: 2560px) {
+    /* 4K UHD Displays (3840x2160 / Smart TVs & Large Conference Screens) */
+    html {
+        font-size: 18px !important;
+    }
+    .container,
+    .wrapper {
+        max-width: 2100px !important;
+        margin-inline: auto !important;
+    }
+    .hero-reference__title {
+        font-size: clamp(3.2rem, 3.8vw, 4.8rem) !important;
+        line-height: 1.25 !important;
+    }
+    .hero-reference__bottom p {
+        font-size: 1.2rem !important;
+        line-height: 1.8 !important;
+        max-width: 820px !important;
+    }
+    .tf-btn {
+        min-height: 54px !important;
+        font-size: 1.05rem !important;
+        padding-inline: 28px !important;
+    }
+    .work-tab_btn .tf-btn-tab {
+        font-size: 1.08rem !important;
+        padding: 14px 28px !important;
+    }
+}
+
+
 
 
 
