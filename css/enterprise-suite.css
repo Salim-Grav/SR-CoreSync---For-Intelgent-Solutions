@@ -4876,12 +4876,13 @@ html[lang="nl"] .salim-table {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 12px !important;
+    gap: 8px !important;
     list-style: none !important;
     padding: 6px !important;
     margin: 25px auto 40px auto !important;
-    flex-wrap: wrap !important;
-    max-width: 920px !important;
+    flex-wrap: nowrap !important;
+    width: fit-content !important;
+    max-width: 98% !important;
     background: rgba(15, 22, 34, 0.75) !important;
     border: 1px solid rgba(197, 168, 128, 0.25) !important;
     border-radius: 60px !important;
@@ -4904,18 +4905,29 @@ html[lang="nl"] .salim-table {
     background: transparent !important;
     border: 1px solid transparent !important;
     color: rgba(255, 255, 255, 0.75) !important;
-    padding: 11px 24px !important;
+    padding: 10px 20px !important;
     border-radius: 50px !important;
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     font-weight: 600 !important;
     cursor: pointer !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     font-family: inherit !important;
     outline: none !important;
     user-select: none;
+}
+
+@media (max-width: 991px) {
+    .work-tab_btn {
+        overflow-x: auto !important;
+        justify-content: flex-start !important;
+        max-width: 100% !important;
+        padding: 6px 14px !important;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .work-tab_btn .tf-btn-tab:hover {
