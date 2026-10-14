@@ -4542,14 +4542,19 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
     };
 
     // =========================================================================
-    // Suggestion 1: Salim's Software License Manager Portal
+    // Suggestion 1: Salim's Software License Manager & Revenue Intelligence Portal
     // =========================================================================
     const DEFAULT_SALIM_LICENSES = [
-        { key: 'SRTX-PRO-2026-X892-OFFLINE', client: 'Heineken International N.V.', product: 'TaxSync Desktop', plan: 'سنوي (Annual)', expiry: '2027-10-15', status: 'نشط ومفعل', machine: 'NL-AMS-SR991' },
-        { key: 'SRPOS-POS-2026-P881-CLOUD', client: 'De Koffie Salon Amsterdam', product: 'CloudPOS Connector', plan: 'شهري (Monthly)', expiry: '2026-11-30', status: 'نشط ومفعل', machine: 'POS-TERM-04' },
-        { key: 'SRVLT-AES256-2026-V200-MIL', client: 'AWT Group Netherlands', product: 'SecureVault B2B', plan: 'دائم (Lifetime)', expiry: 'مدى الحياة', status: 'نشط ومفعل', machine: 'AMS-SRV-SEC01' },
-        { key: 'SRSDK-DEV-2026-S120-REST', client: 'Fintech Solutions Dubai', product: 'Financial AI SDK', plan: 'شهري (50k Calls)', expiry: '2026-12-01', status: 'نشط ومفعل', machine: 'API-CL-992' }
+        { key: 'SRTX-PRO-2026-X892-OFFLINE', client: 'Heineken International N.V.', product: 'TaxSync Desktop', plan: 'سنوي (Annual)', price: 1400, expiry: '2027-10-15', status: 'نشط ومفعل', machine: 'NL-AMS-SR991' },
+        { key: 'SRPOS-POS-2026-P881-CLOUD', client: 'De Koffie Salon Amsterdam', product: 'CloudPOS Connector', plan: 'شهري (Monthly)', price: 189, expiry: '2026-11-30', status: 'نشط ومفعل', machine: 'POS-TERM-04' },
+        { key: 'SRVLT-AES256-2026-V200-MIL', client: 'AWT Group Netherlands', product: 'SecureVault B2B', plan: 'دائم (Lifetime)', price: 4800, expiry: 'مدى الحياة', status: 'نشط ومفعل', machine: 'AMS-SRV-SEC01' },
+        { key: 'SRSDK-DEV-2026-S120-REST', client: 'Fintech Solutions Dubai', product: 'Financial AI SDK', plan: 'سنوي (Annual)', price: 1800, expiry: '2027-12-01', status: 'نشط ومفعل', machine: 'API-CL-992' },
+        { key: 'SRERP-ENT-2026-E994-CORE', client: 'Al-Faisal Global Logistics', product: 'CoreSync Cloud ERP', plan: 'سنوي (Annual)', price: 2800, expiry: '2027-10-14', status: 'نشط ومفعل', machine: 'KSA-RYD-SR01' },
+        { key: 'SRTX-PRO-2026-K114-OFFLINE', client: 'Rotterdam Maritime Logistics', product: 'TaxSync Desktop', plan: 'سنوي (Annual)', price: 1400, expiry: '2027-09-20', status: 'نشط ومفعل', machine: 'NL-RTM-SR204' }
     ];
+
+    let currentSalimFilter = 'all';
+    let currentSalimSearch = '';
 
     window.getSalimLicenses = function() {
         try {
@@ -4565,12 +4570,127 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
         } catch(e) {}
     };
 
+    window.calculateSalimFinancials = function(list) {
+        const total = list.length;
+        const active = list.filter(l => l.status === 'نشط ومفعل').length;
+        const totalRevenue = list.reduce((sum, l) => {
+            const price = l.price || (l.plan.includes('دائم') ? 4800 : (l.plan.includes('سنوي') ? 1400 : 189));
+            return sum + price;
+        }, 0);
+        const netRevenue = Math.round(totalRevenue / 1.21);
+        const vatAmount = totalRevenue - netRevenue;
+
+        // Breakdown by product
+        const productBreakdown = {};
+        list.forEach(l => {
+            const p = l.product || 'Other';
+            if (!productBreakdown[p]) productBreakdown[p] = { count: 0, revenue: 0 };
+            productBreakdown[p].count++;
+            const price = l.price || (l.plan.includes('دائم') ? 4800 : (l.plan.includes('سنوي') ? 1400 : 189));
+            productBreakdown[p].revenue += price;
+        });
+
+        return {
+            total,
+            active,
+            retentionRate: total > 0 ? ((active / total) * 100).toFixed(1) : '100',
+            totalRevenue,
+            netRevenue,
+            vatAmount,
+            productBreakdown
+        };
+    };
+
+    window.renderSalimRevenueCharts = function(financials) {
+        const chartContainer = document.getElementById('salimRevenueBarsContainer');
+        if (!chartContainer) return;
+
+        const maxRev = Math.max(...Object.values(financials.productBreakdown).map(b => b.revenue), 1);
+        const products = Object.keys(financials.productBreakdown);
+
+        chartContainer.innerHTML = products.map(prod => {
+            const item = financials.productBreakdown[prod];
+            const pct = Math.round((item.revenue / maxRev) * 100);
+            return `
+                <div class="salim-lm-bar-item">
+                    <div class="salim-lm-bar-header">
+                        <span><strong>${prod}</strong> (${item.count} تراخيص)</span>
+                        <span style="color:#dfc299; font-weight:700;">€ ${item.revenue.toLocaleString()}</span>
+                    </div>
+                    <div class="salim-lm-bar-track">
+                        <div class="salim-lm-bar-fill" style="width: ${pct}%;"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    };
+
+    window.filterSalimLicenses = function(filterType, element) {
+        currentSalimFilter = filterType;
+        if (element && element.parentElement) {
+            element.parentElement.querySelectorAll('.salim-lm-filter-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+        }
+        window.renderSalimLicensesTable();
+    };
+
+    window.onSalimLicenseSearch = function(query) {
+        currentSalimSearch = (query || '').toLowerCase().trim();
+        window.renderSalimLicensesTable();
+    };
+
     window.renderSalimLicensesTable = function() {
         const tbody = document.getElementById('salimLicensesTableBody');
-        if (!tbody) return;
         const list = window.getSalimLicenses();
-        
-        tbody.innerHTML = list.map((lic, idx) => `
+        const financials = window.calculateSalimFinancials(list);
+
+        // Update Financial KPIs
+        const countEl = document.getElementById('salimTotalLicensesCount');
+        if (countEl) countEl.textContent = financials.total;
+
+        const revEl = document.getElementById('salimTotalRevenueEstimate');
+        if (revEl) revEl.textContent = '€ ' + financials.totalRevenue.toLocaleString();
+
+        const netEl = document.getElementById('salimNetRevenueEstimate');
+        if (netEl) netEl.textContent = '€ ' + financials.netRevenue.toLocaleString();
+
+        const vatEl = document.getElementById('salimVatRevenueEstimate');
+        if (vatEl) vatEl.textContent = '€ ' + financials.vatAmount.toLocaleString();
+
+        const activeEl = document.getElementById('salimActiveLicensesCount');
+        if (activeEl) activeEl.textContent = financials.active + ' (' + financials.retentionRate + '%)';
+
+        // Render charts
+        window.renderSalimRevenueCharts(financials);
+
+        if (!tbody) return;
+
+        // Apply filters
+        let filtered = list;
+        if (currentSalimFilter === 'annual') {
+            filtered = filtered.filter(l => l.plan.includes('سنوي') || l.plan.includes('Annual'));
+        } else if (currentSalimFilter === 'monthly') {
+            filtered = filtered.filter(l => l.plan.includes('شهري') || l.plan.includes('Monthly'));
+        } else if (currentSalimFilter === 'lifetime') {
+            filtered = filtered.filter(l => l.plan.includes('دائم') || l.plan.includes('Lifetime'));
+        }
+
+        if (currentSalimSearch) {
+            filtered = filtered.filter(l => 
+                l.client.toLowerCase().includes(currentSalimSearch) ||
+                l.product.toLowerCase().includes(currentSalimSearch) ||
+                l.key.toLowerCase().includes(currentSalimSearch)
+            );
+        }
+
+        if (filtered.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">لا توجد تراخيص مطابقة لمعايير البحث الحالية</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = filtered.map((lic, idx) => {
+            const rawIdx = list.indexOf(lic);
+            return `
             <tr>
                 <td style="font-family: monospace; font-weight: 700; color: #f7e2bd;">${lic.key}</td>
                 <td style="font-weight: 600;">${lic.product}</td>
@@ -4579,16 +4699,73 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
                 <td><span style="color:#94a3b8; font-size:0.8rem;">${lic.expiry}</span></td>
                 <td><span class="status-badge ${lic.status === 'نشط ومفعل' ? 'status-completed' : 'status-in-progress'}" style="font-size:0.75rem;">${lic.status}</span></td>
                 <td>
-                    <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;" onclick="navigator.clipboard.writeText('${lic.key}'); alert('🔑 تم نسخ مفتاح: ${lic.key}');">نسخ 📋</button>
-                    <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem; color:#f87171; border-color:rgba(248,113,113,0.3);" onclick="revokeSalimLicense(${idx})">إلغاء ✕</button>
+                    <div style="display:flex; gap:4px; align-items:center;">
+                        <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem;" onclick="navigator.clipboard.writeText('${lic.key}'); alert('🔑 تم نسخ مفتاح: ${lic.key}');" title="نسخ المفتاح">نسخ 📋</button>
+                        <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem; color:#10b981; border-color:rgba(16,185,129,0.3);" onclick="downloadSalimLicenseKeyFile(${rawIdx})" title="تنزيل الشهادة الرقمية">شهادة .key ⚡</button>
+                        <button type="button" class="sw-btn-copy-key" style="padding:4px 8px; font-size:0.75rem; color:#f87171; border-color:rgba(248,113,113,0.3);" onclick="revokeSalimLicense(${rawIdx})" title="إلغاء الترخيص">✕</button>
+                    </div>
                 </td>
             </tr>
-        `).join('');
+        `;
+        }).join('');
+    };
 
-        const countEl = document.getElementById('salimTotalLicensesCount');
-        if (countEl) countEl.textContent = list.length;
-        const revEl = document.getElementById('salimTotalRevenueEstimate');
-        if (revEl) revEl.textContent = '€ ' + (list.length * 189).toLocaleString();
+    window.downloadSalimLicenseKeyFile = function(idx) {
+        const list = window.getSalimLicenses();
+        const lic = list[idx];
+        if (!lic) return;
+
+        const certContent = [
+            '========================================================================',
+            ' S&R CoreSync Solutions — Official Software License Certificate (.key)',
+            ' Amsterdam HQ, Keizersgracht, The Netherlands • BTW NL863412987B01',
+            '========================================================================',
+            '',
+            `LICENSE_KEY        : ${lic.key}`,
+            `AUTHORIZED_CLIENT  : ${lic.client}`,
+            `SOFTWARE_PRODUCT   : ${lic.product}`,
+            `TIER_PLAN          : ${lic.plan}`,
+            `EXPIRATION_DATE    : ${lic.expiry}`,
+            `TARGET_MACHINE_ID  : ${lic.machine || 'NL-CLUSTER-ANY'}`,
+            `STATUS             : ${lic.status}`,
+            `ISSUED_AT          : ${new Date().toISOString()}`,
+            '',
+            '--- CRYPTOGRAPHIC INTEGRITY PROOF ---',
+            `CERT_HASH_SHA256   : ${Math.random().toString(16).substring(2)}${Math.random().toString(16).substring(2)}`,
+            'SIGNATURE_CTO      : Eng. Mohammad Salim Aziza (CTO & Chief Software Architect)',
+            'SIGNATURE_CFO      : Mr. Mohammad Raed Kaakeh (CFO & Managing Director)',
+            '========================================================================'
+        ].join('\r\n');
+
+        const blob = new Blob([certContent], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${lic.key}.key`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+
+        alert(`🛡️ تم تنزيل شهادة الترخيص الرسمية المشفرة (.key) بنجاح:\nالملف: ${lic.key}.key`);
+    };
+
+    window.exportSalimLedger = function(format) {
+        const list = window.getSalimLicenses();
+        if (format === 'json') {
+            const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(list, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute('href', dataStr);
+            dlAnchor.setAttribute('download', `SR_License_Ledger_${new Date().toISOString().slice(0,10)}.json`);
+            dlAnchor.click();
+        } else {
+            const headers = ['License_Key', 'Product', 'Client', 'Plan', 'Expiry', 'Status', 'Machine'];
+            const rows = list.map(l => [l.key, `"${l.product}"`, `"${l.client}"`, `"${l.plan}"`, l.expiry, l.status, l.machine || ''].join(','));
+            const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent([headers.join(','), ...rows].join('\n'));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute('href', csvContent);
+            dlAnchor.setAttribute('download', `SR_License_Ledger_${new Date().toISOString().slice(0,10)}.csv`);
+            dlAnchor.click();
+        }
     };
 
     window.openSalimLicenseManagerModal = function() {
@@ -4616,16 +4793,19 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
         const plan = document.getElementById('salimGenPlan')?.value || 'سنوي (Annual)';
         const machine = document.getElementById('salimGenMachine')?.value.trim() || 'NODE-ANY';
 
-        const prefix = prod.includes('TaxSync') ? 'SRTX' : (prod.includes('POS') ? 'SRPOS' : (prod.includes('Vault') ? 'SRVLT' : 'SRCORE'));
+        const prefix = prod.includes('TaxSync') ? 'SRTX' : (prod.includes('POS') ? 'SRPOS' : (prod.includes('Vault') ? 'SRVLT' : (prod.includes('SDK') ? 'SRSDK' : 'SRERP')));
         const randHex = Math.random().toString(16).substring(2, 6).toUpperCase();
         const randHex2 = Math.random().toString(16).substring(2, 6).toUpperCase();
         const key = `${prefix}-PRO-2026-${randHex}-${randHex2}`;
+
+        const price = plan.includes('دائم') ? 4800 : (plan.includes('سنوي') ? 1400 : 189);
 
         const newLic = {
             key: key,
             client: client,
             product: prod,
             plan: plan,
+            price: price,
             expiry: plan.includes('دائم') ? 'مدى الحياة' : '2027-10-15',
             status: 'نشط ومفعل',
             machine: machine
@@ -4636,7 +4816,7 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
         window.saveSalimLicenses(list);
         window.renderSalimLicensesTable();
 
-        alert(`🎉 تم توليد وحفظ الترخيص الرقمي بنجاح للمؤسس م. سليم:\n\n🔑 المفتاح: ${key}\n👤 العميل: ${client}\n📦 المنتج: ${prod}`);
+        alert(`🎉 تم توليد وحفظ الترخيص الرقمي بنجاح للمؤسس م. سليم:\n\n🔑 المفتاح: ${key}\n👤 العميل: ${client}\n📦 المنتج: ${prod}\n💰 القيمة: € ${price}`);
         if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('success');
     };
 

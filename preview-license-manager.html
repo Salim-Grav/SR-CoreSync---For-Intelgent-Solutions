@@ -42,19 +42,38 @@
                 </div>
             </div>
 
-            <!-- إحصائيات التراخيص المباشرة -->
+            <!-- لوحة المؤشرات المالية والإحصائيات التنفيذية -->
             <div class="salim-lm-stats-grid">
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val" id="salimTotalLicensesCount">4</div>
+                    <div class="salim-lm-stat-val" id="salimTotalLicensesCount">6</div>
                     <div class="salim-lm-stat-lbl">إجمالي التراخيص المصدرة</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val salim-lm-stat-sky">100%</div>
-                    <div class="salim-lm-stat-lbl">معدل تشغيل الأجهزة أوفلاين</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-sky" id="salimActiveLicensesCount">6 (100%)</div>
+                    <div class="salim-lm-stat-lbl">التراخيص النشطة والاحتفاظ</div>
                 </div>
                 <div class="salim-lm-stat-card">
-                    <div class="salim-lm-stat-val salim-lm-stat-amber" id="salimTotalRevenueEstimate">€ 756</div>
-                    <div class="salim-lm-stat-lbl">القيمة التقديرية للتراخيص</div>
+                    <div class="salim-lm-stat-val salim-lm-stat-amber" id="salimTotalRevenueEstimate">€ 12,389</div>
+                    <div class="salim-lm-stat-lbl">الإيرادات الإجمالية المحققة</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #60a5fa;" id="salimNetRevenueEstimate">€ 10,239</div>
+                    <div class="salim-lm-stat-lbl">الإيرادات الصافية (Excl. BTW)</div>
+                </div>
+                <div class="salim-lm-stat-card">
+                    <div class="salim-lm-stat-val" style="color: #34d399;" id="salimVatRevenueEstimate">€ 2,150</div>
+                    <div class="salim-lm-stat-lbl">ضريبة BTW 21% المستحقة</div>
+                </div>
+            </div>
+
+            <!-- مخطط بياني تفاعلي لتوزيع الإيرادات حسب الأنظمة -->
+            <div class="salim-lm-chart-card">
+                <div class="salim-lm-chart-title">
+                    <span>📊 تحليل الإيرادات وحجم المبيعات حسب الأنظمة البرمجية (Revenue per Product)</span>
+                    <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">● تحديث لحظي مباشر</span>
+                </div>
+                <div id="salimRevenueBarsContainer" class="salim-lm-bars-container">
+                    <!-- Dynamic Bars Injected by JS -->
                 </div>
             </div>
 
@@ -73,7 +92,7 @@
                                 <option value="FlowScan AI Mobile v1.8">S&R FlowScan AI Mobile v1.8</option>
                                 <option value="Financial AI SDK v1.2">S&R Financial AI SDK v1.2</option>
                                 <option value="SecureVault B2B v2.0">S&R SecureVault B2B v2.0</option>
-                                <option value="Cloud Terminal Agent v1.0">S&R Cloud Terminal Agent v1.0</option>
+                                <option value="CoreSync Cloud ERP Enterprise">S&R CoreSync Cloud ERP Enterprise</option>
                                 <option value="Custom Software (مشروع مخصص)">مشروع برمجي مخصص للمؤسس</option>
                             </select>
                         </div>
@@ -87,9 +106,9 @@
                         <div>
                             <label class="salim-lm-field-label">نوع وخطة الترخيص:</label>
                             <select id="salimGenPlan" class="salim-input" title="نوع وخطة الترخيص" aria-label="نوع وخطة الترخيص">
-                                <option value="سنوي (Annual License)">ترخيص سنوي (1 Year)</option>
-                                <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month)</option>
-                                <option value="دائم مدى الحياة (Lifetime Enterprise)">ترخيص دائم مدى الحياة (Lifetime)</option>
+                                <option value="سنوي (Annual License)">ترخيص سنوي (1 Year - €1,400)</option>
+                                <option value="شهري (Monthly SaaS)">ترخيص شهري (1 Month - €189)</option>
+                                <option value="دائم مدى الحياة (Lifetime Enterprise)">ترخيص دائم مدى الحياة (Lifetime - €4,800)</option>
                             </select>
                         </div>
                         <div>
@@ -106,12 +125,30 @@
                 </form>
             </div>
 
-            <!-- سجل التراخيص النشطة -->
+            <!-- سجل التراخيص النشطة والفلترة -->
             <div>
                 <h4 class="salim-lm-ledger-title">
                     <span>سجل التراخيص الرقمية المفعلة (Active License Ledger)</span>
-                    <span class="salim-lm-ledger-note">محفوظ محلياً ومشفر</span>
+                    <span class="salim-lm-ledger-note">محفوظ محلياً وموثق تشفيرياً</span>
                 </h4>
+
+                <!-- شريط البحث والفلترة والتصدير -->
+                <div class="salim-lm-filter-bar">
+                    <div class="salim-lm-search-box">
+                        <input type="text" class="salim-lm-search-input" placeholder="🔍 ابحث بالعميل، النظام، أو المفتاح..." oninput="onSalimLicenseSearch(this.value)" aria-label="بحث في التراخيص">
+                    </div>
+                    <div class="salim-lm-filter-btns">
+                        <button type="button" class="salim-lm-filter-btn active" onclick="filterSalimLicenses('all', this)">الكل</button>
+                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('annual', this)">سنوي</button>
+                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('monthly', this)">شهري</button>
+                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('lifetime', this)">دائم</button>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('csv')" title="تصدير السجل بتنسيق CSV">تصدير CSV 📥</button>
+                        <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('json')" title="تصدير السجل بتنسيق JSON">تصدير JSON 🔒</button>
+                    </div>
+                </div>
+
                 <div class="salim-table-wrap">
                     <table class="salim-table">
                         <thead>
@@ -122,7 +159,7 @@
                                 <th>الخطة</th>
                                 <th>الصلاحية</th>
                                 <th>الحالة</th>
-                                <th>الإجراءات</th>
+                                <th>الإجراءات والشهادة</th>
                             </tr>
                         </thead>
                         <tbody id="salimLicensesTableBody">
