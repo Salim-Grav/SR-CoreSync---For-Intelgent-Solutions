@@ -1206,9 +1206,9 @@
                 const tbody = document.getElementById('sheetTableBody');
                 tbody.innerHTML = `
                     <tr>
-                        <td><strong>${state.catName}</strong><br><small style="color: #64748b;">النطاق: ${state.scopeName}</small></td>
-                        <td style="text-align: center;">${document.getElementById('estTimeVal').textContent}</td>
-                        <td style="text-align: left; font-weight: 800;">${res.sym}${Math.round((state.catPrice + state.scopeFee) * state.exchange[state.currency]).toLocaleString()}</td>
+                        <td><strong>${state.catName}</strong><br><small class="est-sheet-muted">النطاق: ${state.scopeName}</small></td>
+                        <td class="est-sheet-center">${document.getElementById('estTimeVal').textContent}</td>
+                        <td class="est-sheet-amount">${res.sym}${Math.round((state.catPrice + state.scopeFee) * state.exchange[state.currency]).toLocaleString()}</td>
                     </tr>
                 `;
 
@@ -1216,8 +1216,8 @@
                     tbody.innerHTML += `
                         <tr>
                             <td>+ ${a.name}</td>
-                            <td style="text-align: center;">مضمن</td>
-                            <td style="text-align: left; font-weight: 800;">+${res.sym}${Math.round(a.fee * state.exchange[state.currency]).toLocaleString()}</td>
+                            <td class="est-sheet-center">مضمن</td>
+                            <td class="est-sheet-amount">+${res.sym}${Math.round(a.fee * state.exchange[state.currency]).toLocaleString()}</td>
                         </tr>
                     `;
                 });
