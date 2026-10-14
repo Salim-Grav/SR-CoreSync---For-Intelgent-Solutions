@@ -7607,6 +7607,23 @@
                                 © <span>2026</span> <span>S&R CoreSync Solutions. جميع الحقوق محفوظة.</span>
                             </p>
                         </div>
+                        <div class="sr-footer-accessibility-wrap d-flex align-items-center gap-3">
+                            <div class="sr-text-resizer-widget" role="group" aria-label="التحكم في حجم الخط والقراءة">
+                                <span class="sr-resizer-label">
+                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19h16"/><path d="M7 15l5-10 5 10"/><path d="M9 11h6"/></svg>
+                                    <span>الخط:</span>
+                                </span>
+                                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" onclick="window.srAdjustFontSize(-1)" aria-label="تصغير حجم الخط (A-)" title="تصغير الخط (A-)">
+                                    <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">-</span>
+                                </button>
+                                <button type="button" class="sr-resizer-indicator" onclick="window.srResetFontSize()" aria-label="إعادة ضبط الخط الافتراضي (100%)" title="إعادة الضبط (100%)">
+                                    <span class="sr-resizer-val">100%</span>
+                                </button>
+                                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" onclick="window.srAdjustFontSize(1)" aria-label="تكبير حجم الخط (A+)" title="تكبير الخط (A+)">
+                                    <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">+</span>
+                                </button>
+                            </div>
+                        </div>
                         <a href="#home" class="action-go-top tf-link-icon link text-caption fw-medium letter-space--1" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
                             العودة للأعلى
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
@@ -7832,6 +7849,23 @@
             <li><a href="#contact" onclick="closeMobileMenu()"><span class="menu-label">تواصل معنا</span><span class="mobile-menu-num">07 /</span></a></li>
             <li><a href="demo.html" class="gold-accent" onclick="closeMobileMenu()"><span class="menu-label">النظام السحابي التجريبي (Live Demo)</span><span class="mobile-menu-num">08 /</span></a></li>
         </ul>
+        <div class="offcanvas-resizer-box">
+            <span class="text-caption fw-medium text-white-64 d-flex align-items-center gap-2">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16"/><path d="M7 15l5-10 5 10"/><path d="M9 11h6"/></svg>
+                <span>حجم الخط والقراءة:</span>
+            </span>
+            <div class="sr-text-resizer-widget" role="group" aria-label="حجم الخط والقراءة">
+                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" onclick="window.srAdjustFontSize(-1)" aria-label="تصغير حجم الخط (A-)" title="تصغير الخط (A-)">
+                    <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">-</span>
+                </button>
+                <button type="button" class="sr-resizer-indicator" onclick="window.srResetFontSize()" aria-label="إعادة ضبط الخط الافتراضي (100%)" title="الوضع الافتراضي (100%)">
+                    <span class="sr-resizer-val">100%</span>
+                </button>
+                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" onclick="window.srAdjustFontSize(1)" aria-label="تكبير حجم الخط (A+)" title="تكبير الخط (A+)">
+                    <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">+</span>
+                </button>
+            </div>
+        </div>
         <div class="offcanvas-actions-footer">
             <button type="button" class="tf-btn btn-vip-header w-100 justify-content-center py-2" onclick="closeMobileMenu(); openExecutiveBookingModal();">
                 <span>حجز استشارة VIP 👔</span>
