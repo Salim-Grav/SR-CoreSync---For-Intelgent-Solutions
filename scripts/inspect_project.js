@@ -1,137 +1,129 @@
+const { spawn } = require('child_process');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const rootDir = path.resolve(__dirname, '..');
-const htmlFiles = [
-    'index.html',
-    'en/index.html',
-    'nl/index.html',
-    'demo.html',
-    'logo-studio.html',
-    'preview-checkout.html',
-    'preview-comparison.html',
-    'preview-header.html',
-    'preview-invoice-quote.html',
-    'preview-license-manager.html',
-    'preview-roi.html',
-    'preview-services.html',
-    'preview-software-modal.html',
-    'preview-software.html',
-    'preview-welcome-email.html',
-    'preview-work.html'
-];
+const edgePath = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const projectDir = path.resolve(__dirname, '..');
 
-console.log('============================================================');
-console.log('🔬 S&R CoreSync Solutions - Deep Project Diagnostics');
-console.log('============================================================\n');
+function startServer(port) {
+    const mimeTypes = {
+        '.html': 'text/html; charset=utf-8',
+        '.js': 'application/javascript; charset=utf-8',
+        '.css': 'text/css; charset=utf-8',
+        '.json': 'application/json',
+        '.png': 'image/png',
+        '.jpg': 'image/jpeg',
+        '.webp': 'image/webp',
+        '.svg': 'image/svg+xml'
+    };
 
-let totalIssues = 0;
-const report = [];
+    const server = http.createServer((req, res) => {
+        let reqPath = decodeURI(req.url.split('?')[0]);
+        if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
+        const filePath = path.join(projectDir, reqPath);
 
-function checkFileExists(relPath, baseFile) {
-    if (!relPath || relPath.startsWith('http://') || relPath.startsWith('https://') || relPath.startsWith('//') || relPath.startsWith('data:') || relPath.startsWith('blob:') || relPath.startsWith('mailto:') || relPath.startsWith('tel:') || relPath.startsWith('javascript:') || relPath.startsWith('#')) {
-        return true;
-    }
-    // Remove query params or hash
-    const cleanPath = relPath.split('?')[0].split('#')[0];
-    if (!cleanPath) return true;
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+            const ext = path.extname(filePath).toLowerCase();
+            res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
+            fs.createReadStream(filePath).pipe(res);
+        } else {
+            res.writeHead(404);
+            res.end('Not found');
+        }
+    });
 
-    const baseDir = path.dirname(path.join(rootDir, baseFile));
-    let targetPath;
-    if (cleanPath.startsWith('/')) {
-        targetPath = path.join(rootDir, cleanPath);
-    } else {
-        targetPath = path.resolve(baseDir, cleanPath);
-    }
-
-    return fs.existsSync(targetPath);
+    return new Promise(resolve => server.listen(port, '127.0.0.1', () => resolve(server)));
 }
 
-htmlFiles.forEach(file => {
-    const fullPath = path.join(rootDir, file);
-    if (!fs.existsSync(fullPath)) return;
+async function run() {
+    const srvPort = 9570;
+    const server = await startServer(srvPort);
+    const dbgPort = 9895;
+    const userDataDir = path.join(process.env.TEMP, 'edge_insp_' + Date.now());
 
-    const content = fs.readFileSync(fullPath, 'utf8');
-    const pageIssues = [];
+    const edge = spawn(edgePath, [
+        '--headless=new',
+        '--remote-debugging-port=' + dbgPort,
+        '--user-data-dir=' + userDataDir,
+        '--window-size=375,812',
+        `http://127.0.0.1:${srvPort}/index.html`
+    ]);
 
-    // 1. Check Script Syntax
-    const scriptRegex = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
-    let match;
-    let scriptIdx = 0;
-    while ((match = scriptRegex.exec(content)) !== null) {
-        scriptIdx++;
-        const code = match[1].trim();
-        if (!code || match[0].includes('application/ld+json')) continue;
-        try {
-            new Function(code);
-        } catch (err) {
-            pageIssues.push(`[JS Syntax Error] In inline script #${scriptIdx}: ${err.message}`);
-        }
-    }
+    try {
+        await new Promise(r => setTimeout(r, 2200));
+        const pages = await new Promise((res, rej) => {
+            http.get(`http://127.0.0.1:${dbgPort}/json`, r => {
+                let d = '';
+                r.on('data', c => d += c);
+                r.on('end', () => res(JSON.parse(d)));
+            }).on('error', rej);
+        });
 
-    // 2. Check Duplicate IDs
-    const idRegex = /\bid=["']([^"']+)["']/gi;
-    const seenIds = new Set();
-    const dupIds = new Set();
-    while ((match = idRegex.exec(content)) !== null) {
-        const id = match[1];
-        if (seenIds.has(id)) {
-            dupIds.add(id);
-        }
-        seenIds.add(id);
-    }
-    if (dupIds.size > 0) {
-        pageIssues.push(`[Duplicate IDs] Found: ${Array.from(dupIds).join(', ')}`);
-    }
+        const page = pages.find(p => p.url && p.url.includes(`127.0.0.1:${srvPort}`));
+        const ws = new WebSocket(page.webSocketDebuggerUrl);
+        await new Promise(r => ws.onopen = r);
 
-    // 3. Check Resource References (src, href) in HTML markup (excluding script blocks)
-    const htmlWithoutScripts = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
-    const srcRegex = /\b(?:src|href)=["']([^"']+)["']/gi;
-    const missingResources = [];
-    while ((match = srcRegex.exec(htmlWithoutScripts)) !== null) {
-        const url = match[1];
-        // Skip external or inline
-        if (!checkFileExists(url, file)) {
-            missingResources.push(url);
-        }
-    }
-    if (missingResources.length > 0) {
-        pageIssues.push(`[Missing Resources] (${missingResources.length}): ${missingResources.slice(0, 5).join(', ')}${missingResources.length > 5 ? '...' : ''}`);
-    }
+        let curId = 1;
+        const call = (method, params = {}) => new Promise(res => {
+            const id = curId++;
+            const handler = (evt) => {
+                const m = JSON.parse(evt.data);
+                if (m.id === id) {
+                    ws.removeEventListener('message', handler);
+                    res(m);
+                }
+            };
+            ws.addEventListener('message', handler);
+            ws.send(JSON.stringify({ id, method, params }));
+        });
 
-    // 4. Check Internal Anchor Targets (#...)
-    const anchorRegex = /<a\b[^>]*\bhref=["']#([^"']+)["']/gi;
-    const missingAnchors = [];
-    while ((match = anchorRegex.exec(content)) !== null) {
-        const hashId = match[1];
-        if (hashId && !seenIds.has(hashId)) {
-            // Check if there is an <a name="...">
-            const nameRegex = new RegExp(`\\bname=["']${hashId}["']`, 'i');
-            if (!nameRegex.test(content)) {
-                missingAnchors.push('#' + hashId);
-            }
-        }
-    }
-    if (missingAnchors.length > 0) {
-        const uniqueMissing = Array.from(new Set(missingAnchors));
-        pageIssues.push(`[Unmatched Anchors] (${uniqueMissing.length}): ${uniqueMissing.join(', ')}`);
-    }
+        await call('Page.enable');
+        await call('Runtime.enable');
+        await call('Emulation.setDeviceMetricsOverride', {
+            width: 375,
+            height: 812,
+            deviceScaleFactor: 2,
+            mobile: true
+        });
 
-    totalIssues += pageIssues.length;
-    report.push({
-        file,
-        status: pageIssues.length === 0 ? '✅ PASS' : `❌ ${pageIssues.length} ISSUES`,
-        issues: pageIssues
-    });
-});
+        await new Promise(r => setTimeout(r, 1200));
 
-report.forEach(r => {
-    console.log(`Page: ${r.file} => ${r.status}`);
-    if (r.issues.length > 0) {
-        r.issues.forEach(iss => console.log(`   - ${iss}`));
+        const result = await call('Runtime.evaluate', {
+            expression: `
+            (function() {
+                const el = document.querySelector('.section-software-hub .container');
+                const heroActions = document.querySelector('.hero-reference__actions');
+                const heroCopy = document.querySelector('.hero-reference__copy');
+                const heroGrid = document.querySelector('.hero-reference__grid');
+
+                // Inspect heroCopy and heroGrid widths
+                return {
+                    containerWidth: el ? el.offsetWidth : null,
+                    containerInlineStyle: el ? el.getAttribute('style') : null,
+                    heroGridWidth: heroGrid ? heroGrid.offsetWidth : null,
+                    heroCopyWidth: heroCopy ? heroCopy.offsetWidth : null,
+                    heroActionsWidth: heroActions ? heroActions.offsetWidth : null,
+                    heroCopyMargin: heroCopy ? window.getComputedStyle(heroCopy).margin : null,
+                    heroCopyPadding: heroCopy ? window.getComputedStyle(heroCopy).padding : null,
+                    heroGridStyle: heroGrid ? {
+                        width: window.getComputedStyle(heroGrid).width,
+                        display: window.getComputedStyle(heroGrid).display,
+                        gridTemplateColumns: window.getComputedStyle(heroGrid).gridTemplateColumns
+                    } : null
+                };
+            })()
+            `,
+            returnByValue: true
+        });
+
+        console.log('DOM metrics:', JSON.stringify(result.result.value, null, 2));
+
+    } finally {
+        edge.kill();
+        server.close();
+        try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
     }
-});
+}
 
-console.log('\n------------------------------------------------------------');
-console.log(`Total Issues Found: ${totalIssues}`);
-console.log('------------------------------------------------------------\n');
+run();
