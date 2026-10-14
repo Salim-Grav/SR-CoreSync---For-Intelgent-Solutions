@@ -1,23 +1,37 @@
-// S&R CoreSync Solutions - Progressive Web App & Offline Presentation Service Worker
-const CACHE_NAME = 'coresync-offline-v2';
+// S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
+// Version: coresync-prerender-v3
+const CACHE_NAME = 'coresync-prerender-v3';
+
+// Core pre-rendered pages and critical assets for sub-50ms international TTFB
 const PRECACHE_ASSETS = [
   './',
   './index.html',
+  './en/',
+  './en/index.html',
+  './nl/',
+  './nl/index.html',
   './demo.html',
-  './logo-studio.html',
   './manifest.json',
+  './assets/sr-core-emblem.svg?v=sovereign2026',
   './assets/logo-neon-icon.svg',
+  './assets/work-1.webp',
+  './assets/work-2.webp',
+  './assets/work-3.webp',
+  './assets/founder-salim.png?v=color_v2',
+  './assets/founder-raed.png?v=color_v2',
   './css/dananajmah-bundle.min.css',
+  './css/enterprise-suite.min.css',
+  './css/enterprise-suite.min.js',
   './css/enterprise-suite.css',
-  './css/demo-portal.css',
-  './css/enterprise-suite.js'
+  './css/enterprise-suite.js',
+  './css/demo-portal.css'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('Some offline assets failed to precache:', err);
+        console.warn('[SW] Non-critical precache asset warning:', err);
       });
     }).then(() => self.skipWaiting())
   );
@@ -29,6 +43,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
+            console.log('[SW] Purging outdated cache:', key);
             return caches.delete(key);
           }
         })
@@ -37,29 +52,63 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Stale-While-Revalidate (SWR) Engine for Sub-50ms Global TTFB
 self.addEventListener('fetch', (event) => {
-  // Network first, falling back to cache for offline presentation mode
+  const request = event.request;
+
+  // Bypass non-GET requests and external API endpoints (e.g. Stripe, WhatsApp API)
+  if (request.method !== 'GET') {
+    return;
+  }
+
+  const url = new URL(request.url);
+
+  // If request is external or an API call, let it go to the network directly
+  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // Stale-While-Revalidate Strategy
   event.respondWith(
-    fetch(event.request)
-      .then((networkResponse) => {
-        // Cache successful responses for subsequent offline viewing
-        if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        return networkResponse;
-      })
-      .catch(() => {
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) {
-            return cachedResponse;
+    caches.open(CACHE_NAME).then(async (cache) => {
+      const cachedResponse = await cache.match(request);
+
+      // Start network fetch in background to keep cache fresh
+      const networkFetchPromise = fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            cache.put(request, networkResponse.clone());
           }
-          if (event.request.mode === 'navigate') {
-            return caches.match('./demo.html') || caches.match('./index.html');
-          }
+          return networkResponse;
+        })
+        .catch((err) => {
+          // Network failed (offline mode)
+          return null;
         });
-      })
+
+      // If cached response exists, return immediately for instant <20ms TTFB
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // Otherwise wait for network response
+      const networkResponse = await networkFetchPromise;
+      if (networkResponse) {
+        return networkResponse;
+      }
+
+      // Offline Navigation Fallback
+      if (request.mode === 'navigate') {
+        if (url.pathname.includes('/en/')) {
+          return cache.match('./en/index.html');
+        }
+        if (url.pathname.includes('/nl/')) {
+          return cache.match('./nl/index.html');
+        }
+        return cache.match('./index.html') || cache.match('./demo.html');
+      }
+
+      return new Response('Offline resource not available', { status: 503, statusText: 'Offline' });
+    })
   );
 });

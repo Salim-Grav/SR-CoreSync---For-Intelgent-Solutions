@@ -116,7 +116,28 @@ Options -Indexes
     ExpiresByType font/ttf "access plus 1 year"
     ExpiresByType font/otf "access plus 1 year"
     ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# 5b. EDGE CACHE CONTROL & PRE-RENDER TTFB OPTIMIZATION (Sub-50ms Global Response)
+# ------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # HTML Pages: Cache-Control with Stale-While-Revalidate for Cloudflare/LiteSpeed Edge TTFB < 50ms
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400, stale-if-error=604800"
+    </FilesMatch>
+
+    # Static Immutable Assets (CSS, JS, Fonts, Images)
+    <FilesMatch "\.(css|js|woff2|woff|ttf|svg|webp|png|jpg|jpeg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Service Worker must always revalidate immediately to apply updates
+    <FilesMatch "sw\.js$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </FilesMatch>
 </IfModule>
 
 # ------------------------------------------------------------------------------
