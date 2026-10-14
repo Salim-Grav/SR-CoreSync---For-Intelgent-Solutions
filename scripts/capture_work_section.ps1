@@ -4,13 +4,13 @@ $edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 $serverJob = Start-Process python -ArgumentList @("-m", "http.server", "8000") -PassThru -WindowStyle Hidden
 Start-Sleep -Seconds 2
 
-$url = "http://localhost:8000/index.html#work"
-$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\c343b500-bda0-4fad-aa48-4c2182879e6c\live_work_section_debug.png"
+$url = "http://localhost:8000/preview-work.html"
+$outImg = "C:\Users\msali\.gemini\antigravity-ide\brain\c343b500-bda0-4fad-aa48-4c2182879e6c\live_royal_work_section.png"
 
 Start-Process $edgePath -ArgumentList @(
     "--headless=new",
     "--user-data-dir=$tempDir",
-    "--window-size=1440,900",
+    "--window-size=1440,960",
     "--screenshot=$outImg",
     $url
 ) -Wait
