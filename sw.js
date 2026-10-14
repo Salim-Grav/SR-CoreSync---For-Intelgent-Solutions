@@ -64,8 +64,8 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // If request is external or an API call, let it go to the network directly
-  if (url.origin !== self.location.origin || url.pathname.startsWith('/api/')) {
+  // If request is external or a backend dynamic API call (.php), bypass cache to network
+  if (url.origin !== self.location.origin || url.pathname.endsWith('.php') || url.pathname.includes('/webhooks/')) {
     return;
   }
 
