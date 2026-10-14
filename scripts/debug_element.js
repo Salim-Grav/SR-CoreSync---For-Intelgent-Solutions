@@ -128,7 +128,7 @@ async function debugEl() {
             returnByValue: true
         });
 
-        console.log('Inspection:', JSON.stringify(result.result.value, null, 2));
+        console.log('Inspection:', JSON.stringify(result, null, 2));
 
     } finally {
         edge.kill();
