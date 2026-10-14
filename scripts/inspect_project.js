@@ -117,7 +117,7 @@ async function run() {
             returnByValue: true
         });
 
-        console.log('DOM metrics:', JSON.stringify(result.result.value, null, 2));
+        console.log('Result:', JSON.stringify(result));
 
     } finally {
         edge.kill();
