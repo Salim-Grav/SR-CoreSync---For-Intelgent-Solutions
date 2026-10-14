@@ -6,7 +6,7 @@ $url = "http://localhost:3000/preview-booking-modal.html"
 Start-Process $edge -ArgumentList @(
     "--headless=new",
     "--user-data-dir=$temp",
-    "--window-size=1440,960",
+    "--window-size=1440,1180",
     "--screenshot=$out",
     $url
 ) -Wait
