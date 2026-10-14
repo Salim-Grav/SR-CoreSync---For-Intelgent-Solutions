@@ -92,25 +92,16 @@ async function run() {
         const result = await call('Runtime.evaluate', {
             expression: `
             (function() {
-                let el = document.querySelector('.hero-reference__actions');
-                const chain = [];
-                while (el && el !== document.documentElement) {
-                    const s = window.getComputedStyle(el);
-                    const rect = el.getBoundingClientRect();
-                    chain.push({
-                        tag: el.tagName,
-                        cls: el.className,
-                        id: el.id,
-                        offsetWidth: el.offsetWidth,
-                        scrollWidth: el.scrollWidth,
-                        rect: { l: Math.round(rect.left), r: Math.round(rect.right), w: Math.round(rect.width) },
-                        margin: s.margin,
-                        padding: s.padding,
-                        transform: s.transform
-                    });
-                    el = el.parentElement;
-                }
-                return chain;
+                const copy = document.querySelector('.hero-reference__copy');
+                const items = copy ? Array.from(copy.children).map(c => ({
+                    tag: c.tagName,
+                    cls: c.className,
+                    text: c.innerText.slice(0, 30),
+                    scrollW: c.scrollWidth,
+                    offsetW: c.offsetWidth,
+                    whiteSpace: window.getComputedStyle(c).whiteSpace
+                })) : [];
+                return items;
             })()
             `,
             returnByValue: true
