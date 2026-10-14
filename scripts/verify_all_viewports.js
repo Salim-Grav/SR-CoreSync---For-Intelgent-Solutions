@@ -180,6 +180,10 @@ async function verifyAll() {
             'Text Clipping Count': r.overflowCount === 0 ? '✅ 0' : `❌ ${r.overflowCount}`
         })));
 
+        results.filter(r => r.overflowCount > 0).forEach(r => {
+            console.log(`\nOverflow details for ${r.device}:`, JSON.stringify(r.sampleOverflows, null, 2));
+        });
+
         // Capture live mobile portrait screenshots for the final response
         console.log('\nCapturing live mobile portrait screenshots...');
         await call('Emulation.setDeviceMetricsOverride', {
