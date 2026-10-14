@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <title>معاينة مجسمات الهوية ثلاثية الأبعاد 3D • S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="عارض مجسمات الهوية والشعارات ثلاثي الأبعاد 360 درجة التفاعلي من S&R CoreSync Solutions - أمستردام.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.min.css">
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #040806;
+            --sr-card-bg: rgba(9, 16, 12, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #ffffff;
+            font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .sr-3d-header {
+            background: rgba(7, 13, 10, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .sr-3d-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sr-3d-emblem {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--sr-gold);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.35);
+        }
+
+        .sr-3d-brand-text h1 {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.2;
+        }
+
+        .sr-3d-brand-text p {
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .sr-3d-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sr-btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .sr-btn-back:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--sr-gold);
+            color: var(--sr-gold-light);
+        }
+
+        .sr-3d-main-layout {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            padding: 24px;
+            max-width: 1560px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 980px) {
+            .sr-3d-main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar Controls */
+        .sr-3d-sidebar {
+            background: var(--sr-card-bg);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            height: fit-content;
+        }
+
+        .sr-3d-section-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--sr-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .sr-model-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sr-model-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: right;
+            font-family: inherit;
+        }
+
+        [dir="ltr"] .sr-model-btn {
+            text-align: left;
+        }
+
+        .sr-model-btn:hover {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--sr-gold);
+            transform: translateX(-3px);
+        }
+
+        [dir="ltr"] .sr-model-btn:hover {
+            transform: translateX(3px);
+        }
+
+        .sr-model-btn.active {
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.25), rgba(197, 168, 128, 0.08));
+            border-color: var(--sr-gold);
+            box-shadow: 0 4px 18px rgba(197, 168, 128, 0.25);
+        }
+
+        .sr-model-btn-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .sr-model-btn-text h3 {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 2px;
+        }
+
+        .sr-model-btn-text p {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* Material Finish Grid */
+        .sr-pills-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .sr-pill-btn {
+            flex: 1;
+            min-width: 80px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .sr-pill-btn:hover {
+            background: rgba(197, 168, 128, 0.15);
+            border-color: var(--sr-gold);
+            color: #ffffff;
+        }
+
+        .sr-pill-btn.active {
+            background: var(--sr-gold);
+            border-color: var(--sr-gold-light);
+            color: #010907;
+            font-weight: 900;
+            box-shadow: 0 2px 10px rgba(197, 168, 128, 0.4);
+        }
+
+        /* Canvas Stage */
+        .sr-3d-stage-wrapper {
+            background: var(--sr-card-bg);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+            min-height: 600px;
+        }
+
+        .sr-3d-stage-canvas {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            min-height: 520px;
+            cursor: grab;
+        }
+
+        .sr-3d-stage-canvas:active {
+            cursor: grabbing;
+        }
+
+        /* Floating Toolbar */
+        .sr-3d-floating-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(7, 13, 10, 0.92);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--sr-border);
+            border-radius: 999px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+            z-index: 10;
+        }
+
+        .sr-bar-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .sr-bar-btn:hover {
+            background: rgba(197, 168, 128, 0.2);
+            color: var(--sr-gold-light);
+        }
+
+        .sr-bar-btn.primary {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #010907;
+            font-weight: 800;
+        }
+
+        .sr-bar-btn.primary:hover {
+            background: var(--sr-gold-light);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.5);
+        }
+
+        /* Toast confirmation */
+        .sr-toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(16, 185, 129, 0.95);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .sr-toast.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="sr-3d-header">
+        <a href="./index.html" class="sr-3d-brand">
+            <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R Emblem" class="sr-3d-emblem">
+            <div class="sr-3d-brand-text">
+                <h1>S&R CoreSync • عارض المجسمات ثلاثي الأبعاد 3D</h1>
+                <p>فحص تفاعلي 360° للشعارات والهويات البصرية بدقة متناهية</p>
+            </div>
+        </a>
+
+        <div class="sr-3d-nav-actions">
+            <a href="./preview-work.html" class="sr-btn-back">معرض الأعمال 🎨</a>
+            <a href="./index.html" class="sr-btn-back">الرئيسية ⌂</a>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="sr-3d-main-layout">
+        <!-- Sidebar Controls -->
+        <aside class="sr-3d-sidebar">
+            <div>
+                <div class="sr-3d-section-title">📦 اختيار مجسم الهوية التجارية:</div>
+                <div class="sr-model-grid">
+                    <button type="button" class="sr-model-btn active" data-model="sarlor">
+                        <span class="sr-model-btn-icon">🍕</span>
+                        <div class="sr-model-btn-text">
+                            <h3>SARLOR Foods Box</h3>
+                            <p>علبة بيتزا وفطائر فاخرة • أمستردام</p>
+                        </div>
+                    </button>
+
+                    <button type="button" class="sr-model-btn" data-model="oasis">
+                        <span class="sr-model-btn-icon">💳</span>
+                        <div class="sr-model-btn-text">
+                            <h3>Oasis Luxury Card</h3>
+                            <p>بطاقة أعمال بختم الذهب البارز</p>
+                        </div>
+                    </button>
+
+                    <button type="button" class="sr-model-btn" data-model="lumina">
+                        <span class="sr-model-btn-icon">☕</span>
+                        <div class="sr-model-btn-text">
+                            <h3>Lumina Specialty Cup</h3>
+                            <p>كوب قهوة صديق للبيئة • أمستردام</p>
+                        </div>
+                    </button>
+
+                    <button type="button" class="sr-model-btn" data-model="toneh">
+                        <span class="sr-model-btn-icon">📱</span>
+                        <div class="sr-model-btn-text">
+                            <h3>Toneh Digital Tablet</h3>
+                            <p>شاشة وسائط رقمية ثنائية اللغة</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Material Finish -->
+            <div>
+                <div class="sr-3d-section-title">✨ تشطيب وملمس السطح (Finish):</div>
+                <div class="sr-pills-row">
+                    <button type="button" class="sr-pill-btn active" data-mat="gold_foil">رقائق ذهبية (Gold Foil)</button>
+                    <button type="button" class="sr-pill-btn" data-mat="matte">مخملي مطفي (Matte)</button>
+                    <button type="button" class="sr-pill-btn" data-mat="glossy">لمعان زجاجي (Glossy)</button>
+                </div>
+            </div>
+
+            <!-- Lighting Studio -->
+            <div>
+                <div class="sr-3d-section-title">💡 إضاءة الاستوديو (Studio Light):</div>
+                <div class="sr-pills-row">
+                    <button type="button" class="sr-pill-btn active" data-light="studio_gold">استوديو ذهبي</button>
+                    <button type="button" class="sr-pill-btn" data-light="cyber_neon">سايبر نيون</button>
+                    <button type="button" class="sr-pill-btn" data-light="neutral">إضاءة محايدة</button>
+                </div>
+            </div>
+
+            <!-- Actions CTA -->
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid var(--sr-border);">
+                <button type="button" id="btnDownloadMockupSnap" class="dana-btn-booking dana-btn-booking--full" style="width: 100%; justify-content: center; padding: 12px; font-weight: 800;">
+                    📸 حفظ لقطة المجسم بدقة 4K
+                </button>
+            </div>
+        </aside>
+
+        <!-- 3D Canvas Stage -->
+        <section class="sr-3d-stage-wrapper">
+            <canvas id="sr3DCanvas" class="sr-3d-stage-canvas"></canvas>
+
+            <!-- Floating Control Bar -->
+            <div class="sr-3d-floating-bar">
+                <button type="button" id="btnToggleRotate" class="sr-bar-btn">
+                    <span id="rotateIcon">⏸</span> <span id="rotateText">إيقاف التدوير</span>
+                </button>
+                <button type="button" id="btnResetView" class="sr-bar-btn">
+                    ↺ إعادة الضبط
+                </button>
+                <a href="./index.html#bookingModal" class="sr-bar-btn primary">
+                    طلب هوية مماثلة ⚡
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div id="srToast" class="sr-toast">✓ تم حفظ لقطة المجسم بنجاح!</div>
+
+    <script src="./js/sr-mockup-3d.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('sr3DCanvas');
+            const viewer = new SR3DMockupViewer(canvas, {
+                model: 'sarlor',
+                material: 'gold_foil',
+                lighting: 'studio_gold',
+                autoRotate: true
+            });
+
+            // Model Switchers
+            document.querySelectorAll('.sr-model-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.sr-model-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const m = btn.getAttribute('data-model');
+                    viewer.setModel(m);
+                });
+            });
+
+            // Material Switchers
+            document.querySelectorAll('[data-mat]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('[data-mat]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const mat = btn.getAttribute('data-mat');
+                    viewer.setMaterial(mat);
+                });
+            });
+
+            // Light Switchers
+            document.querySelectorAll('[data-light]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('[data-light]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const light = btn.getAttribute('data-light');
+                    viewer.setLighting(light);
+                });
+            });
+
+            // Auto-Rotate Button
+            const btnRotate = document.getElementById('btnToggleRotate');
+            const rotateIcon = document.getElementById('rotateIcon');
+            const rotateText = document.getElementById('rotateText');
+            btnRotate.addEventListener('click', () => {
+                const isRunning = viewer.toggleAutoRotate();
+                rotateIcon.textContent = isRunning ? '⏸' : '▶';
+                rotateText.textContent = isRunning ? 'إيقاف التدوير' : 'تشغيل التدوير';
+            });
+
+            // Reset View Button
+            document.getElementById('btnResetView').addEventListener('click', () => {
+                viewer.resetView();
+            });
+
+            // Snapshot Download
+            document.getElementById('btnDownloadMockupSnap').addEventListener('click', () => {
+                const dataUrl = viewer.captureSnapshot();
+                const a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = `coresync-3d-mockup-${viewer.options.model}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                const toast = document.getElementById('srToast');
+                toast.classList.add('active');
+                setTimeout(() => toast.classList.remove('active'), 2500);
+            });
+        });
+    </script>
+</body>
+</html>

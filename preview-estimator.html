@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <title>حاسبة ومولد عروض الأسعار الفورية والـ PDF • S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="حاسبة المشاريع التقديرية وتوليد عروض الأسعار الرسمية الفورية بصيغة PDF - S&R CoreSync Solutions.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.min.css">
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg: #040806;
+            --sr-card: rgba(10, 19, 14, 0.92);
+            --sr-border: rgba(197, 168, 128, 0.28);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--sr-bg);
+            color: #ffffff;
+            font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .est-header {
+            background: rgba(7, 13, 10, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .est-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .est-emblem {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--sr-gold);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.35);
+        }
+
+        .est-brand-text h1 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.2;
+        }
+
+        .est-brand-text p {
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .est-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .est-btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .est-btn-nav:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--sr-gold);
+            color: var(--sr-gold-light);
+        }
+
+        .est-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 440px;
+            gap: 28px;
+            flex: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .est-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .est-card {
+            background: var(--sr-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .est-section-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .est-section-sub {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 22px;
+            line-height: 1.5;
+        }
+
+        /* Category Grid */
+        .est-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .est-cat-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 16px;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #ffffff;
+            font-family: inherit;
+        }
+
+        [dir="ltr"] .est-cat-btn {
+            text-align: left;
+        }
+
+        .est-cat-btn:hover {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--sr-gold);
+            transform: translateY(-2px);
+        }
+
+        .est-cat-btn.active {
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.25), rgba(197, 168, 128, 0.08));
+            border-color: var(--sr-gold);
+            box-shadow: 0 4px 20px rgba(197, 168, 128, 0.25);
+        }
+
+        .est-cat-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .est-cat-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .est-cat-desc {
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .est-cat-base {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--sr-gold);
+        }
+
+        /* Scope Radio buttons */
+        .est-scope-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 26px;
+        }
+
+        @media (max-width: 640px) {
+            .est-scope-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .est-scope-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .est-scope-card.active {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .est-scope-title {
+            font-size: 0.86rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .est-scope-users {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+        }
+
+        .est-scope-price {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--sr-gold-light);
+        }
+
+        /* Addons Checkbox List */
+        .est-addons-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+            margin-bottom: 26px;
+        }
+
+        .est-addon-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .est-addon-box:hover {
+            background: rgba(197, 168, 128, 0.08);
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+
+        .est-addon-box.checked {
+            background: rgba(197, 168, 128, 0.14);
+            border-color: var(--sr-gold);
+        }
+
+        .est-addon-chk {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--sr-gold);
+            cursor: pointer;
+        }
+
+        .est-addon-info {
+            flex: 1;
+        }
+
+        .est-addon-name {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .est-addon-fee {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--sr-gold);
+        }
+
+        .est-addon-desc {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: 2px;
+        }
+
+        /* Timeline Selector */
+        .est-timeline-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .est-timeline-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 8px;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .est-timeline-btn.active {
+            border-color: var(--sr-cyan);
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        .est-timeline-btn .t-name {
+            font-size: 0.82rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .est-timeline-btn .t-weeks {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Live Summary Card (Sticky) */
+        .est-summary-card {
+            background: linear-gradient(180deg, #0d1a14 0%, #050d09 100%);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 96px;
+            height: fit-content;
+        }
+
+        .est-summary-header {
+            border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+            padding-bottom: 16px;
+        }
+
+        .est-summary-ref {
+            display: inline-block;
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            color: var(--sr-gold-light);
+            font-family: monospace;
+            font-size: 0.76rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .est-total-label {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
+        }
+
+        .est-total-amount {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.1;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 4px 0;
+        }
+
+        .est-curr-switches {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .est-curr-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .est-curr-btn.active {
+            background: var(--sr-gold);
+            color: #010907;
+            border-color: var(--sr-gold);
+            font-weight: 900;
+        }
+
+        .est-kpi-pill-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .est-kpi-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .est-kpi-val {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--sr-emerald);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .est-kpi-lbl {
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 2px;
+        }
+
+        /* Items breakdown */
+        .est-breakdown-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .est-item-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            padding-bottom: 4px;
+        }
+
+        .est-item-row span:last-child {
+            font-weight: 800;
+            color: var(--sr-gold);
+        }
+
+        /* Client Info Inputs */
+        .est-client-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .est-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 0.84rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .est-input:focus {
+            border-color: var(--sr-gold);
+        }
+
+        /* Actions */
+        .est-cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .est-btn-pdf {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold) 0%, var(--sr-gold-dark) 100%);
+            color: #010907;
+            font-weight: 900;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+            font-family: inherit;
+        }
+
+        .est-btn-pdf:hover {
+            background: var(--sr-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(197, 168, 128, 0.5);
+        }
+
+        .est-btn-book {
+            width: 100%;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1.5px solid var(--sr-emerald);
+            color: #6ee7b7;
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .est-btn-book:hover {
+            background: var(--sr-emerald);
+            color: #010907;
+        }
+
+        /* Official Printable Quotation Modal */
+        .est-quote-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .est-quote-modal-overlay.active {
+            display: flex;
+        }
+
+        .est-quote-sheet {
+            background: #ffffff;
+            color: #0f172a;
+            width: 100%;
+            max-width: 860px;
+            max-height: 94vh;
+            border-radius: 16px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', 'Alexandria', sans-serif;
+        }
+
+        .est-sheet-toolbar {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .est-sheet-content {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
+            background: #ffffff;
+        }
+
+        .est-sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .est-sheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .est-sheet-table th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.8rem;
+            padding: 10px 14px;
+            text-align: right;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        [dir="ltr"] .est-sheet-table th {
+            text-align: left;
+        }
+
+        .est-sheet-table td {
+            padding: 12px 14px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .est-sheet-totals {
+            margin-right: auto;
+            width: 320px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .est-sheet-sign-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden !important;
+            }
+            .est-quote-modal-overlay,
+            .est-quote-modal-overlay.active,
+            .est-quote-sheet,
+            .est-sheet-content,
+            .est-sheet-content * {
+                visibility: visible !important;
+            }
+            .est-quote-modal-overlay {
+                position: absolute;
+                inset: 0;
+                background: transparent;
+                padding: 0;
+                display: block !important;
+            }
+            .est-sheet-toolbar {
+                display: none !important;
+            }
+            .est-quote-sheet {
+                max-width: 100% !important;
+                max-height: none !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .est-sheet-content {
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="est-header">
+        <a href="./index.html" class="est-brand">
+            <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R Emblem" class="est-emblem">
+            <div class="est-brand-text">
+                <h1>S&R CoreSync Solutions • حاسبة عروض الأسعار الذكية</h1>
+                <p>توليد فوري لعروض الأسعار الرسمية، حساب العائد على الاستثمار ووثائق الـ PDF</p>
+            </div>
+        </a>
+
+        <div class="est-nav-actions">
+            <a href="./preview-work.html" class="est-btn-nav">معرض المشاريع 🎨</a>
+            <a href="./index.html" class="est-btn-nav">الرئيسية ⌂</a>
+        </div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="est-container">
+        <!-- Configuration Form -->
+        <section class="est-card">
+            <!-- 1. System Category -->
+            <div class="est-section-title">
+                <span>1️⃣ نوع المنظومة والحلول المطلوبة:</span>
+            </div>
+            <p class="est-section-sub">اختر المنصة الأساسية التي تلبي أهداف أعمالك بدقة:</p>
+
+            <div class="est-category-grid">
+                <div class="est-cat-btn active" data-cat="erp" data-price="3400">
+                    <span class="est-cat-icon">🏢</span>
+                    <div class="est-cat-title">أنظمة ERP & المالية</div>
+                    <div class="est-cat-desc">إدارة الموارد، الفواتير، ونقاط البيع السحابية.</div>
+                    <div class="est-cat-base">يبدأ من €3,400</div>
+                </div>
+
+                <div class="est-cat-btn" data-cat="ecommerce" data-price="2400">
+                    <span class="est-cat-icon">🛒</span>
+                    <div class="est-cat-title">منصات التجارة وسلاسل الإمداد</div>
+                    <div class="est-cat-desc">متاجر إلكترونية عالية السرعة وتتبع الشحنات.</div>
+                    <div class="est-cat-base">يبدأ من €2,400</div>
+                </div>
+
+                <div class="est-cat-btn" data-cat="saas" data-price="4800">
+                    <span class="est-cat-icon">⚡</span>
+                    <div class="est-cat-title">منصات SaaS سحابية مخصصة</div>
+                    <div class="est-cat-desc">بنية Microservices وتعدد المشتركين Multi-tenant.</div>
+                    <div class="est-cat-base">يبدأ من €4,800</div>
+                </div>
+
+                <div class="est-cat-btn" data-cat="brand" data-price="1200">
+                    <span class="est-cat-icon">🎨</span>
+                    <div class="est-cat-title">الهوية البصرية وشعارات 4K</div>
+                    <div class="est-cat-desc">أصول متجهة غير محدودة، دليل الهوية ومجسمات 3D.</div>
+                    <div class="est-cat-base">يبدأ من €1,200</div>
+                </div>
+            </div>
+
+            <!-- 2. Operational Scope -->
+            <div class="est-section-title">
+                <span>2️⃣ نطاق وحجم العمليات (Scale):</span>
+            </div>
+            <p class="est-section-sub">حدد حجم مؤسستك وعدد المستخدمين المستهدفين:</p>
+
+            <div class="est-scope-grid">
+                <div class="est-scope-card active" data-scope="startup" data-fee="0">
+                    <div class="est-scope-title">شركة ناشئة / فرع واحد</div>
+                    <div class="est-scope-users">1 - 5 مستخدمين أساسيين</div>
+                    <div class="est-scope-price">مضمن في الحزمة</div>
+                </div>
+
+                <div class="est-scope-card" data-scope="sme" data-fee="750">
+                    <div class="est-scope-title">شركة متوسطة / فروع متعددة</div>
+                    <div class="est-scope-users">6 - 30 مستخدم مع صلاحيات متقدمة</div>
+                    <div class="est-scope-price">+ €750</div>
+                </div>
+
+                <div class="est-scope-card" data-scope="enterprise" data-fee="1950">
+                    <div class="est-scope-title">مؤسسة كبرى / بنية سحابية دولية</div>
+                    <div class="est-scope-users">مستخدمين غير محدودين + خوادم مخصصة</div>
+                    <div class="est-scope-price">+ €1,950</div>
+                </div>
+            </div>
+
+            <!-- 3. Smart Add-on Modules -->
+            <div class="est-section-title">
+                <span>3️⃣ الوحدات والمميزات المتقدمة (Add-ons):</span>
+            </div>
+            <p class="est-section-sub">فعّل المكونات الإضافية لتعزيز قوة نظامك:</p>
+
+            <div class="est-addons-list">
+                <label class="est-addon-box checked">
+                    <input type="checkbox" class="est-addon-chk" checked data-fee="850" data-name="محرك الذكاء الاصطناعي وأتمتة العمليات">
+                    <div class="est-addon-info">
+                        <div class="est-addon-name">
+                            <span>🤖 محرك الذكاء الاصطناعي والأتمتة</span>
+                            <span class="est-addon-fee">+€850</span>
+                        </div>
+                        <div class="est-addon-desc">روبوت استشاري ذكي وأتمتة المهام المتكررة.</div>
+                    </div>
+                </label>
+
+                <label class="est-addon-box checked">
+                    <input type="checkbox" class="est-addon-chk" checked data-fee="450" data-name="تكامل بوابات الدفع (Stripe & iDEAL & Mada)">
+                    <div class="est-addon-info">
+                        <div class="est-addon-name">
+                            <span>💳 بوابات الدفع المتعددة المعتمدة</span>
+                            <span class="est-addon-fee">+€450</span>
+                        </div>
+                        <div class="est-addon-desc">ربط فوري وآمن بالبنوك الأوروبية والخليجية.</div>
+                    </div>
+                </label>
+
+                <label class="est-addon-box checked">
+                    <input type="checkbox" class="est-addon-chk" checked data-fee="350" data-name="دعم اللغات الثلاث المتزامن (AR / NL / EN)">
+                    <div class="est-addon-info">
+                        <div class="est-addon-name">
+                            <span>🌍 واجهة ثلاثية اللغات (عربي/هولندي/إنجليزي)</span>
+                            <span class="est-addon-fee">+€350</span>
+                        </div>
+                        <div class="est-addon-desc">توافق كامل RTL و LTR وتبديل لغوي فوري.</div>
+                    </div>
+                </label>
+
+                <label class="est-addon-box">
+                    <input type="checkbox" class="est-addon-chk" data-fee="1800" data-name="تطبيق هاتف أصلي (iOS & Android Native)">
+                    <div class="est-addon-info">
+                        <div class="est-addon-name">
+                            <span>📱 تطبيقات الهواتف الذكية الأصلية</span>
+                            <span class="est-addon-fee">+€1,800</span>
+                        </div>
+                        <div class="est-addon-desc">تطبيقات عالية الاستجابة مع إشعارات Push.</div>
+                    </div>
+                </label>
+
+                <label class="est-addon-box">
+                    <input type="checkbox" class="est-addon-chk" data-fee="1200" data-name="تسليم الكود المصدري الكامل وترخيص غير محدود">
+                    <div class="est-addon-info">
+                        <div class="est-addon-name">
+                            <span>🔑 الملكية التامة للكود المصدري</span>
+                            <span class="est-addon-fee">+€1,200</span>
+                        </div>
+                        <div class="est-addon-desc">ترخيص دائم بدون رسوم تجديد سنوية.</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- 4. Timeline Selection -->
+            <div class="est-section-title">
+                <span>4️⃣ الجدول الزمني والتسليم (Timeline):</span>
+            </div>
+            <p class="est-section-sub">اختر أولوية وسرعة إطلاق المشروع:</p>
+
+            <div class="est-timeline-row">
+                <div class="est-timeline-btn active" data-speed="standard" data-multiplier="1.0">
+                    <div class="t-name">قياسي ومدروس</div>
+                    <div class="t-weeks">4 - 6 أسابيع</div>
+                </div>
+
+                <div class="est-timeline-btn" data-speed="fast" data-multiplier="1.15">
+                    <div class="t-name">متسارع (+15%)</div>
+                    <div class="t-weeks">2 - 3 أسابيع</div>
+                </div>
+
+                <div class="est-timeline-btn" data-speed="vip" data-multiplier="1.30">
+                    <div class="t-name">إطلاق VIP طارئ (+30%)</div>
+                    <div class="t-weeks">7 - 10 أيام عمل</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Summary Sidebar -->
+        <aside class="est-summary-card">
+            <div class="est-summary-header">
+                <span class="est-summary-ref" id="estRefCode">REF-CORE-2026-8941</span>
+                <div class="est-total-label">إجمالي التكلفة التقديرية للاستثمار:</div>
+                <div class="est-total-amount" id="estTotalDisplay">€5,050</div>
+
+                <div class="est-curr-switches">
+                    <button type="button" class="est-curr-btn active" data-curr="EUR">يورو (€)</button>
+                    <button type="button" class="est-curr-btn" data-curr="SAR">ريال (SAR)</button>
+                    <button type="button" class="est-curr-btn" data-curr="USD">دولار ($)</button>
+                </div>
+            </div>
+
+            <!-- ROI & Timeline KPIs -->
+            <div class="est-kpi-pill-row">
+                <div class="est-kpi-box">
+                    <div class="est-kpi-val" id="estRoiVal">+240%</div>
+                    <div class="est-kpi-lbl">العائد المتوقع (ROI)</div>
+                </div>
+                <div class="est-kpi-box">
+                    <div class="est-kpi-val" id="estTimeVal" style="color: var(--sr-gold-light);">4-5 أسابيع</div>
+                    <div class="est-kpi-lbl">مدة التنفيذ المعتمدة</div>
+                </div>
+            </div>
+
+            <!-- Breakdown list -->
+            <div>
+                <div style="font-size: 0.78rem; font-weight: 800; color: var(--sr-gold-light); margin-bottom: 8px;">
+                    تفصيل البنود والخدمات:
+                </div>
+                <div class="est-breakdown-list" id="estBreakdownList">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Client Info -->
+            <div class="est-client-fields">
+                <input type="text" id="clientOrgName" class="est-input" placeholder="اسم الشركة أو المؤسسة الموقرة..." value="مؤسسة رواد الأعمال العالمية">
+                <input type="text" id="clientContactName" class="est-input" placeholder="اسم المسؤول الكريم..." value="المدير التنفيذي">
+            </div>
+
+            <!-- Actions CTA -->
+            <div class="est-cta-buttons">
+                <button type="button" id="btnOpenQuoteModal" class="est-btn-pdf">
+                    📄 عرض وتنزيل عرض السعر الرسمي (PDF)
+                </button>
+                <a href="./index.html#bookingModal" class="est-btn-book">
+                    ⚡ تثبيت العرض وحجز استشارة VIP مباشرة
+                </a>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Official Printable Quotation Modal -->
+    <div class="est-quote-modal-overlay" id="estQuoteModal">
+        <div class="est-quote-sheet">
+            <div class="est-sheet-toolbar">
+                <div style="font-weight: 800; font-size: 0.95rem; color: #f3dfba;">
+                    📜 عرض سعر رسمي معتمد • S&R CoreSync Solutions
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button type="button" onclick="window.print()" style="background: var(--sr-gold); border: none; padding: 6px 14px; border-radius: 6px; font-weight: 800; cursor: pointer;">
+                        🖨️ طباعة / حفظ كـ PDF
+                    </button>
+                    <button type="button" onclick="document.getElementById('estQuoteModal').classList.remove('active')" style="background: rgba(255,255,255,0.2); border: none; color: #ffffff; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+                        إغلاق ✕
+                    </button>
+                </div>
+            </div>
+
+            <div class="est-sheet-content">
+                <!-- Header -->
+                <div class="est-sheet-header">
+                    <div>
+                        <h2 style="font-size: 1.4rem; font-weight: 900; color: #0f172a; margin-bottom: 4px;">S&R CoreSync Solutions B.V.</h2>
+                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 2px;">HQ: Keizersgracht 482, 1016 GD Amsterdam, Netherlands</p>
+                        <p style="font-size: 0.8rem; color: #64748b;">Enterprise Systems • Cloud Infrastructure • AI Solutions</p>
+                        <p style="font-size: 0.8rem; color: #64748b;">KVK / Tax ID: NL-864201938B01</p>
+                    </div>
+
+                    <div style="text-align: left;">
+                        <span style="font-family: monospace; font-size: 0.9rem; font-weight: 900; background: #f1f5f9; padding: 4px 10px; border-radius: 6px; display: inline-block;" id="sheetRef">REF-CORE-2026-8941</span>
+                        <p style="font-size: 0.82rem; color: #64748b; margin-top: 6px;">التاريخ: 14 أكتوبر 2026</p>
+                        <p style="font-size: 0.82rem; color: #10b981; font-weight: 700;">الحالة: عرض سعر رسمي معتمد</p>
+                    </div>
+                </div>
+
+                <!-- Recipient Info -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;">
+                    <div style="font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 4px;">مقدم إلى السادة المحترمين:</div>
+                    <div style="font-size: 1.05rem; font-weight: 900; color: #0f172a;" id="sheetClientOrg">مؤسسة رواد الأعمال العالمية</div>
+                    <div style="font-size: 0.85rem; color: #334155;" id="sheetClientPerson">عناية: المدير التنفيذي</div>
+                </div>
+
+                <!-- Items Table -->
+                <table class="est-sheet-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 55%;">البيان ونطاق العمل</th>
+                            <th style="text-align: center; width: 15%;">المدة التقديرية</th>
+                            <th style="text-align: left; width: 30%;">القيمة الاستثمارية</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sheetTableBody">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+
+                <!-- Totals Box -->
+                <div class="est-sheet-totals">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; margin-bottom: 6px;">
+                        <span>المجموع الأساسي:</span>
+                        <strong id="sheetSubtotal" style="color: #0f172a;">€5,050</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #10b981; margin-bottom: 8px;">
+                        <span>ضريبة القيمة المضافة (0% B2B Reverse):</span>
+                        <span>€0.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 900; color: #0f172a; border-top: 2px solid #e2e8f0; padding-top: 8px;">
+                        <span>الإجمالي الصافي:</span>
+                        <span id="sheetGrandTotal" style="color: #b45309;">€5,050</span>
+                    </div>
+                </div>
+
+                <!-- Terms & Guarantees -->
+                <div style="margin-top: 24px; font-size: 0.78rem; color: #64748b; line-height: 1.6;">
+                    <strong>شروط الاعتماد والضمان المالي:</strong>
+                    <ul style="padding-right: 18px; margin-top: 4px;">
+                        <li>العرض سارٍ لمدة 30 يوماً من تاريخ إصداره، ومحمي باتفاقية عدم إفصاح رسمية (NDA).</li>
+                        <li>يشمل الدعم الفني وضمان الأمان الشامل لمدة 12 شهراً مجاناً بعد التدشين.</li>
+                        <li>نظام الدفع: 50% دفعة مقدمة عند توقيع العقد، و50% بعد الفحص والاعتماد النهائي.</li>
+                    </ul>
+                </div>
+
+                <!-- Official Signatures -->
+                <div class="est-sheet-sign-row">
+                    <div>
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px;">اعتماد S&R CoreSync Solutions:</div>
+                        <div style="font-family: serif; font-size: 1.2rem; font-weight: bold; color: #b45309;">M. Salim Aziza</div>
+                        <div style="font-size: 0.76rem; color: #94a3b8;">م. سليم عزيزة • المؤسس والمدير التنفيذي</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px;">اعتماد وقبول الطرف الثاني:</div>
+                        <div style="height: 25px; border-bottom: 1.5px solid #cbd5e1; width: 180px; margin: 0 auto 6px;"></div>
+                        <div style="font-size: 0.76rem; color: #94a3b8;">التوقيع والختم الرسمي</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const state = {
+                cat: 'erp',
+                catPrice: 3400,
+                catName: 'منظومة CoreSync ERP والمالية السحابية',
+                scope: 'startup',
+                scopeFee: 0,
+                scopeName: 'شركة ناشئة / فرع واحد',
+                addons: [
+                    { name: 'محرك الذكاء الاصطناعي والأتمتة', fee: 850 },
+                    { name: 'بوابات الدفع (Stripe & iDEAL & Mada)', fee: 450 },
+                    { name: 'دعم اللغات الثلاث (AR/NL/EN)', fee: 350 }
+                ],
+                timeline: 'standard',
+                multiplier: 1.0,
+                currency: 'EUR',
+                exchange: { EUR: 1, SAR: 4.12, USD: 1.08 },
+                symbols: { EUR: '€', SAR: 'ر.س', USD: '$' }
+            };
+
+            function calculate() {
+                let base = state.catPrice + state.scopeFee;
+                let addonsTotal = state.addons.reduce((acc, a) => acc + a.fee, 0);
+                let rawTotal = (base + addonsTotal) * state.multiplier;
+                let converted = Math.round(rawTotal * state.exchange[state.currency]);
+
+                // Update UI
+                const display = document.getElementById('estTotalDisplay');
+                const sym = state.symbols[state.currency];
+                display.textContent = `${sym}${converted.toLocaleString()}`;
+
+                // Update breakdown
+                const list = document.getElementById('estBreakdownList');
+                list.innerHTML = '';
+
+                // Main Cat
+                const row1 = document.createElement('div');
+                row1.className = 'est-item-row';
+                row1.innerHTML = `<span>${state.catName}</span><span>${sym}${Math.round(state.catPrice * state.exchange[state.currency]).toLocaleString()}</span>`;
+                list.appendChild(row1);
+
+                // Scope
+                if (state.scopeFee > 0) {
+                    const rowScope = document.createElement('div');
+                    rowScope.className = 'est-item-row';
+                    rowScope.innerHTML = `<span>نطاق العمليات (${state.scopeName})</span><span>+${sym}${Math.round(state.scopeFee * state.exchange[state.currency]).toLocaleString()}</span>`;
+                    list.appendChild(rowScope);
+                }
+
+                // Addons
+                state.addons.forEach(a => {
+                    const rowAddon = document.createElement('div');
+                    rowAddon.className = 'est-item-row';
+                    rowAddon.innerHTML = `<span>+ ${a.name}</span><span>+${sym}${Math.round(a.fee * state.exchange[state.currency]).toLocaleString()}</span>`;
+                    list.appendChild(rowAddon);
+                });
+
+                // Timeline Lift
+                if (state.multiplier > 1.0) {
+                    const rushPercent = Math.round((state.multiplier - 1.0) * 100);
+                    const rowRush = document.createElement('div');
+                    rowRush.className = 'est-item-row';
+                    rowRush.style.color = '#38bdf8';
+                    rowRush.innerHTML = `<span>تسريع التسليم VIP (+${rushPercent}%)</span><span>مشمول</span>`;
+                    list.appendChild(rowRush);
+                }
+
+                return { rawTotal, converted, sym };
+            }
+
+            // Category Clicks
+            document.querySelectorAll('.est-cat-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.est-cat-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.cat = btn.dataset.cat;
+                    state.catPrice = parseInt(btn.dataset.price, 10);
+                    state.catName = btn.querySelector('.est-cat-title').textContent.trim();
+                    calculate();
+                });
+            });
+
+            // Scope Clicks
+            document.querySelectorAll('.est-scope-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.est-scope-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    state.scope = card.dataset.scope;
+                    state.scopeFee = parseInt(card.dataset.fee, 10);
+                    state.scopeName = card.querySelector('.est-scope-title').textContent.trim();
+                    calculate();
+                });
+            });
+
+            // Addon Toggles
+            document.querySelectorAll('.est-addon-box').forEach(box => {
+                const chk = box.querySelector('.est-addon-chk');
+                chk.addEventListener('change', () => {
+                    if (chk.checked) {
+                        box.classList.add('checked');
+                    } else {
+                        box.classList.remove('checked');
+                    }
+                    // Rebuild addons array
+                    state.addons = [];
+                    document.querySelectorAll('.est-addon-chk:checked').forEach(c => {
+                        state.addons.push({
+                            name: c.dataset.name,
+                            fee: parseInt(c.dataset.fee, 10)
+                        });
+                    });
+                    calculate();
+                });
+            });
+
+            // Timeline clicks
+            document.querySelectorAll('.est-timeline-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.est-timeline-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.timeline = btn.dataset.speed;
+                    state.multiplier = parseFloat(btn.dataset.multiplier);
+                    const timeEl = document.getElementById('estTimeVal');
+                    if (state.timeline === 'vip') timeEl.textContent = '7 - 10 أيام';
+                    else if (state.timeline === 'fast') timeEl.textContent = '2 - 3 أسابيع';
+                    else timeEl.textContent = '4 - 5 أسابيع';
+                    calculate();
+                });
+            });
+
+            // Currency switches
+            document.querySelectorAll('.est-curr-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.est-curr-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.currency = btn.dataset.curr;
+                    calculate();
+                });
+            });
+
+            // Open Quote Modal
+            document.getElementById('btnOpenQuoteModal').addEventListener('click', () => {
+                const res = calculate();
+                const org = document.getElementById('clientOrgName').value || 'السادة الكرام';
+                const person = document.getElementById('clientContactName').value || 'المدير العام';
+
+                document.getElementById('sheetClientOrg').textContent = org;
+                document.getElementById('sheetClientPerson').textContent = `عناية: ${person}`;
+
+                const tbody = document.getElementById('sheetTableBody');
+                tbody.innerHTML = `
+                    <tr>
+                        <td><strong>${state.catName}</strong><br><small style="color: #64748b;">النطاق: ${state.scopeName}</small></td>
+                        <td style="text-align: center;">${document.getElementById('estTimeVal').textContent}</td>
+                        <td style="text-align: left; font-weight: 800;">${res.sym}${Math.round((state.catPrice + state.scopeFee) * state.exchange[state.currency]).toLocaleString()}</td>
+                    </tr>
+                `;
+
+                state.addons.forEach(a => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>+ ${a.name}</td>
+                            <td style="text-align: center;">مضمن</td>
+                            <td style="text-align: left; font-weight: 800;">+${res.sym}${Math.round(a.fee * state.exchange[state.currency]).toLocaleString()}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById('sheetSubtotal').textContent = `${res.sym}${res.converted.toLocaleString()}`;
+                document.getElementById('sheetGrandTotal').textContent = `${res.sym}${res.converted.toLocaleString()}`;
+                document.getElementById('estQuoteModal').classList.add('active');
+            });
+
+            // Initial calc
+            calculate();
+        });
+    </script>
+</body>
+</html>
