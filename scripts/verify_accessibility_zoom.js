@@ -141,8 +141,6 @@ async function verifyAndCapture() {
 
         console.log('\nAll accessibility snapshots captured successfully!');
 
-        console.log('\nAll accessibility snapshots captured successfully!');
-
     } finally {
         edge.kill();
         server.close();
