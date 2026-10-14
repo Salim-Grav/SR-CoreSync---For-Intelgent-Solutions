@@ -84,10 +84,11 @@ htmlFiles.forEach(file => {
         pageIssues.push(`[Duplicate IDs] Found: ${Array.from(dupIds).join(', ')}`);
     }
 
-    // 3. Check Resource References (src, href)
+    // 3. Check Resource References (src, href) in HTML markup (excluding script blocks)
+    const htmlWithoutScripts = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
     const srcRegex = /\b(?:src|href)=["']([^"']+)["']/gi;
     const missingResources = [];
-    while ((match = srcRegex.exec(content)) !== null) {
+    while ((match = srcRegex.exec(htmlWithoutScripts)) !== null) {
         const url = match[1];
         // Skip external or inline
         if (!checkFileExists(url, file)) {

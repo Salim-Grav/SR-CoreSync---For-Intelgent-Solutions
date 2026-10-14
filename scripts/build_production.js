@@ -124,6 +124,9 @@ if (fs.existsSync('css/welcome-email.css')) {
 // 2. Minify JS
 if (fs.existsSync('css/enterprise-suite.js')) {
   results.push(processAsset('css/enterprise-suite.js', 'css/enterprise-suite.min.js', 'js'));
+  if (fs.existsSync('js')) {
+    results.push(processAsset('css/enterprise-suite.js', 'js/enterprise-suite.min.js', 'js'));
+  }
 }
 
 console.table(results);
