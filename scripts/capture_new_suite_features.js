@@ -119,8 +119,16 @@ async function captureAll() {
                     (function() {
                         const tab = document.getElementById('tab-btn-identity');
                         if (tab) tab.click();
-                        if (typeof openProjectModal === 'function') openProjectModal('sarlor');
+                        const btn = document.getElementById('workLivePreviewBtn');
+                        if (btn) btn.click();
                         
+                        setTimeout(() => {
+                            const brandKit = document.getElementById('projectModalBrandKit');
+                            if (brandKit) {
+                                brandKit.scrollIntoView({ behavior: 'instant', block: 'center' });
+                            }
+                        }, 500);
+
                         const toast = document.getElementById('srSocialToast');
                         if (toast) {
                             toast.classList.add('is-visible');
