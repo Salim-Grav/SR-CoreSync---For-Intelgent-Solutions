@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@500;700;800;900&amp;display=swap');
+
+      .sr-serif-neon {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #ffffff;
+      }
+      .sr-amp-neon {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #c5a880;
+      }
+      .brand-title-sr {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 58px;
+        fill: #ffffff;
+      }
+      .brand-title-sr-amp {
+        fill: #c5a880;
+      }
+      .brand-title-core {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 52px;
+        letter-spacing: -1px;
+        fill: #ffffff;
+      }
+      .brand-sub-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        letter-spacing: 9px;
+        fill: #c5a880;
+      }
+
+      /* حركات الأيقونة والمدارات الدوارة */
+      @keyframes orbitRotateSlow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes counterOrbitRotate {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+
+      @keyframes neonPulseGlow {
+        0%, 100% {
+          filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.75)) drop-shadow(0 0 7px rgba(197, 168, 128, 0.5)) drop-shadow(0 0 15px rgba(197, 168, 128, 0.2));
+          opacity: 1;
+        }
+        50% {
+          filter: drop-shadow(0 0 1.5px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 5px rgba(197, 168, 128, 0.35)) drop-shadow(0 0 10px rgba(197, 168, 128, 0.12));
+          opacity: 0.94;
+        }
+      }
+
+      @keyframes starTwinkleGlint {
+        0%, 100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 0.9;
+          filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 6px rgba(197, 168, 128, 0.6));
+        }
+        50% {
+          transform: scale(1.18) rotate(45deg);
+          opacity: 1;
+          filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 10px rgba(197, 168, 128, 0.8));
+        }
+      }
+
+      .animated-orbit-ring {
+        transform-origin: 0 0;
+        animation: orbitRotateSlow 28s linear infinite;
+      }
+
+      .animated-satellites {
+        transform-origin: 0 0;
+        animation: orbitRotateSlow 16s linear infinite;
+      }
+
+      .animated-ellipse-1 {
+        transform-origin: 0 0;
+        animation: orbitRotateSlow 40s linear infinite;
+      }
+
+      .animated-ellipse-2 {
+        transform-origin: 0 0;
+        animation: counterOrbitRotate 36s linear infinite;
+      }
+
+      .neon-glow-core {
+        animation: neonPulseGlow 3.6s ease-in-out infinite;
+      }
+
+      .star-sparkle-center {
+        transform-origin: 0 -45px;
+        animation: starTwinkleGlint 2.8s ease-in-out infinite;
+      }
+    </style>
+
+    <radialGradient id="neonOrbSphereLogo" cx="45%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#1f180d" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#0e0f0d" stop-opacity="0.98" />
+      <stop offset="85%" stop-color="#040807" stop-opacity="1" />
+      <stop offset="100%" stop-color="#010504" stop-opacity="1" />
+    </radialGradient>
+
+    <linearGradient id="neonGoldTubeGradLogo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf6e9" />
+      <stop offset="50%" stop-color="#c5a880" />
+      <stop offset="100%" stop-color="#8c6f47" />
+    </linearGradient>
+
+    <radialGradient id="neonNodeGradLogo" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="45%" stop-color="#e8d5bc" />
+      <stop offset="100%" stop-color="#c5a880" />
+    </radialGradient>
+
+    <filter id="neonLogoBloom" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.5" result="b1" />
+      <feGaussianBlur stdDeviation="6" result="b2" />
+      <feGaussianBlur stdDeviation="11" result="b3" />
+      <feMerge>
+        <feMergeNode in="b3" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="b1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="nodeHaloFilterLogo" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- القسم الأيسر: الرمز الكمي المضيء المتحرك -->
+  <g transform="translate(170, 160)">
+    <!-- هالة خافتة محيطية -->
+    <circle cx="0" cy="0" r="148" fill="none" stroke="#c5a880" stroke-opacity="0.1" stroke-width="1.2" stroke-dasharray="5 7" />
+    <circle cx="0" cy="0" r="135" fill="#c5a880" fill-opacity="0.02" filter="url(#neonLogoBloom)" />
+
+    <!-- المدارات التزامنية المائلة الدوارة -->
+    <g class="animated-ellipse-1">
+      <ellipse cx="0" cy="0" rx="124" ry="53" fill="none" stroke="#c5a880" stroke-opacity="0.22" stroke-width="1.4" />
+      <ellipse cx="0" cy="0" rx="124" ry="53" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="0.8" stroke-dasharray="10 120" />
+    </g>
+
+    <g class="animated-ellipse-2">
+      <ellipse cx="0" cy="0" rx="53" ry="124" fill="none" stroke="#c5a880" stroke-opacity="0.24" stroke-width="1.4" />
+      <ellipse cx="0" cy="0" rx="53" ry="124" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="0.8" stroke-dasharray="10 120" />
+    </g>
+
+    <!-- الحلقة المدارية الخارجية الدقيقة مع الأقمار الدوارة -->
+    <circle cx="0" cy="0" r="126" fill="none" stroke="url(#neonGoldTubeGradLogo)" stroke-opacity="0.65" stroke-width="1.6" filter="url(#neonLogoBloom)" />
+    
+    <g class="animated-satellites">
+      <g transform="rotate(0) translate(126, 0)">
+        <circle cx="0" cy="0" r="10" fill="#c5a880" fill-opacity="0.25" filter="url(#nodeHaloFilterLogo)" />
+        <circle cx="0" cy="0" r="5.5" fill="url(#neonNodeGradLogo)" stroke="#ffffff" stroke-width="1.1" />
+      </g>
+      <g transform="rotate(180) translate(126, 0)">
+        <circle cx="0" cy="0" r="10" fill="#c5a880" fill-opacity="0.25" filter="url(#nodeHaloFilterLogo)" />
+        <circle cx="0" cy="0" r="5.5" fill="url(#neonNodeGradLogo)" stroke="#ffffff" stroke-width="1.1" />
+      </g>
+    </g>
+
+    <!-- الكرة المركزية -->
+    <g class="neon-glow-core">
+      <circle cx="0" cy="0" r="96" fill="url(#neonOrbSphereLogo)" stroke="#c5a880" stroke-width="2.5" filter="url(#neonLogoBloom)" />
+      <circle cx="0" cy="0" r="92" fill="none" stroke="#090a0d" stroke-width="1.2" />
+      <circle cx="0" cy="0" r="90.5" fill="none" stroke="#c5a880" stroke-width="1" stroke-opacity="0.8" />
+      <circle cx="0" cy="0" r="86" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.15" />
+    </g>
+
+    <!-- النجمة الملكية ثلاثية الأبعاد المجسمة (3D Faceted Dimensional Star) -->
+    <g transform="translate(0, -56) scale(0.68)" filter="url(#neonLogoBloom)">
+      <polygon points="0,0 0,-30 -7.8,-9.5" fill="#ffffff" />
+      <polygon points="0,0 0,-30 7.8,-9.5" fill="#785527" />
+      <polygon points="0,0 28.5,-9.3 7.8,-9.5" fill="#ffffff" />
+      <polygon points="0,0 28.5,-9.3 17.6,5.8" fill="#785527" />
+      <polygon points="0,0 17.6,24.3 17.6,5.8" fill="#c8a571" />
+      <polygon points="0,0 17.6,24.3 0,11.5" fill="#785527" />
+      <polygon points="0,0 -17.6,24.3 0,11.5" fill="#785527" />
+      <polygon points="0,0 -17.6,24.3 -17.6,5.8" fill="#c8a571" />
+      <polygon points="0,0 -28.5,-9.3 -17.6,5.8" fill="#c8a571" />
+      <polygon points="0,0 -28.5,-9.3 -7.8,-9.5" fill="#ffffff" />
+    </g>
+
+    <!-- الحروف المركزية بتباعد فخم مطابق للمرجع -->
+    <g text-anchor="middle" dominant-baseline="central" class="neon-glow-core">
+      <g filter="url(#neonLogoBloom)">
+        <text x="-44" y="6" font-size="82" class="sr-serif-neon" fill="#ffffff" stroke="#c5a880" stroke-width="1.8">S</text>
+        <text x="-1" y="-8" font-size="44" class="sr-amp-neon" fill="#ffffff" stroke="#c5a880" stroke-width="1.2">&amp;</text>
+        <text x="44" y="6" font-size="82" class="sr-serif-neon" fill="#ffffff" stroke="#c5a880" stroke-width="1.8">R</text>
+      </g>
+      <text x="-44" y="6" font-size="82" class="sr-serif-neon" fill="#ffffff">S</text>
+      <text x="-1" y="-8" font-size="44" class="sr-amp-neon" fill="#c5a880" font-style="italic">&amp;</text>
+      <text x="44" y="6" font-size="82" class="sr-serif-neon" fill="#ffffff">R</text>
+    </g>
+
+    <!-- ذيل رمز & المتدلي بانسيابية -->
+    <path d="M 1,2 Q 8,12 19,11.5 Q 23,11 26,10" stroke="#c5a880" stroke-width="1.8" fill="none" stroke-linecap="round" />
+
+    <!-- عبارة CORESYNC الرسمية أسفل الأحرف -->
+    <text x="0" y="58" font-family="'Playfair Display', 'Cinzel', serif" font-size="12.5" font-weight="700" letter-spacing="4px" fill="#c5a880" text-anchor="middle">CORESYNC</text>
+  </g>
+
+  <!-- القسم الأيمن: التيبوغرافيا النيونية الملكية الكاملة -->
+  <g transform="translate(365, 0)">
+    <!-- السطر الأول: S&R CoreSync بالوهج والنبض الذهبي الملكي الناعم -->
+    <g transform="translate(0, 150)" class="neon-glow-core">
+      <g filter="url(#neonLogoBloom)" opacity="0.4">
+        <text x="0" y="0" class="brand-title-sr" fill="#c5a880">S<tspan class="brand-title-sr-amp">&amp;</tspan>R</text>
+        <text x="145" y="0" class="brand-title-core" fill="#c5a880">CoreSync</text>
+      </g>
+      <text x="0" y="0" class="brand-title-sr">S<tspan class="brand-title-sr-amp">&amp;</tspan>R</text>
+      <text x="145" y="0" class="brand-title-core">CoreSync</text>
+    </g>
+
+    <!-- خط الفصل النيوني المضيء -->
+    <line x1="0" y1="182" x2="520" y2="182" stroke="url(#neonGoldTubeGradLogo)" stroke-width="1.8" stroke-linecap="round" filter="url(#neonLogoBloom)" />
+
+    <!-- السطر الثاني: SOLUTIONS مع نجوم التألق -->
+    <g transform="translate(0, 222)">
+      <text x="5" y="0" class="brand-sub-title" filter="url(#neonLogoBloom)" stroke="#c5a880" stroke-width="1.2" stroke-opacity="0.4">SOLUTIONS</text>
+      <text x="5" y="0" class="brand-sub-title">SOLUTIONS</text>
+      <!-- نجمة بريق صغيرة مكملة للتصميم -->
+      <g transform="translate(480, -6)" class="star-sparkle-center">
+        <path d="M 0,-10 L 2,-3 L 7,-3 L 3,1 L 4.5,6 L 0,3 L -4.5,6 L -3,1 L -7,-3 L -2,-3 Z" fill="#ffffff" stroke="#c5a880" stroke-width="0.7" filter="url(#neonLogoBloom)"/>
+      </g>
+    </g>
+  </g>
+</svg>

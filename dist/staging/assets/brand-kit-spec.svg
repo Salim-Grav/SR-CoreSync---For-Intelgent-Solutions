@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;family=Playfair+Display:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap');
+
+      .spec-bg { fill: #020705; }
+      .text-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; font-weight: 800; fill: #ffffff; letter-spacing: -0.5px; }
+      .text-sub { font-family: 'Cairo', sans-serif; font-size: 16px; font-weight: 600; fill: #c5a880; }
+      .text-section { font-family: 'Cairo', sans-serif; font-size: 18px; font-weight: 700; fill: #ffffff; }
+      .text-body { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 500; fill: #a1a1aa; }
+      .text-code { font-family: monospace; font-size: 13px; font-weight: 700; fill: #e6ca9f; }
+      .card-box { fill: #06110e; stroke: rgba(197, 168, 128, 0.25); stroke-width: 1.5; rx: 16px; }
+      .swatch-border { stroke: rgba(255, 255, 255, 0.15); stroke-width: 1; rx: 10px; }
+      .sr-serif { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 42px; fill: #ffffff; }
+      .sr-amp { fill: #c5a880; }
+      .sr-core { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 38px; fill: #ffffff; }
+      .sr-sol { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 7px; fill: #c5a880; }
+    </style>
+
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051410" />
+      <stop offset="60%" stop-color="#020705" />
+      <stop offset="100%" stop-color="#010403" />
+    </linearGradient>
+
+    <linearGradient id="goldSpecGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf6e9" />
+      <stop offset="50%" stop-color="#c5a880" />
+      <stop offset="100%" stop-color="#8c6f47" />
+    </linearGradient>
+  </defs>
+
+  <!-- خلفية البطاقة الرسمية -->
+  <rect width="1200" height="800" rx="28" fill="url(#bgGrad)" stroke="rgba(197, 168, 128, 0.35)" stroke-width="2" />
+
+  <!-- زخرفة هندسية محيطية -->
+  <circle cx="1200" cy="0" r="320" fill="none" stroke="rgba(197, 168, 128, 0.08)" stroke-width="1.5" />
+  <circle cx="1200" cy="0" r="460" fill="none" stroke="rgba(197, 168, 128, 0.05)" stroke-width="1" stroke-dasharray="8 12" />
+  <circle cx="0" cy="800" r="350" fill="none" stroke="rgba(197, 168, 128, 0.06)" stroke-width="1.2" />
+
+  <!-- رأس البطاقة -->
+  <g transform="translate(60, 65)">
+    <rect x="0" y="0" width="170" height="28" rx="14" fill="rgba(197, 168, 128, 0.12)" stroke="rgba(197, 168, 128, 0.3)" />
+    <circle cx="14" cy="14" r="4" fill="#c5a880" />
+    <text x="26" y="19" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#e6ca9f">OFFICIAL BRAND SPEC</text>
+
+    <text x="0" y="65" class="text-title">S&amp;R CoreSync Solutions B.V.</text>
+    <text x="0" y="92" class="text-sub">دليل ومعايير الهوية البصرية الرسمية — الإصدار المعتمد 2026</text>
+  </g>
+
+  <!-- فاصل أفقي -->
+  <line x1="60" y1="185" x2="1140" y2="185" stroke="rgba(197, 168, 128, 0.2)" stroke-width="1" />
+
+  <!-- 1. منطقة استعراض الشعار الرئيسي (Brandmark Spec) -->
+  <g transform="translate(60, 215)">
+    <rect width="640" height="260" class="card-box" />
+    <text x="30" y="38" class="text-section">1. الشعار الرسمي المتكامل (Official Primary Logo)</text>
+    
+    <!-- الشعار الصغير داخل البطاقة -->
+    <g transform="translate(40, 75)">
+      <!-- الرمز المصغر -->
+      <circle cx="55" cy="55" r="48" fill="#010504" stroke="#c5a880" stroke-width="1.5" />
+      <circle cx="55" cy="55" r="40" fill="none" stroke="#c5a880" stroke-opacity="0.3" stroke-dasharray="4 6" />
+      <text x="42" y="62" font-family="'Playfair Display', serif" font-weight="800" font-size="28" fill="#ffffff">S</text>
+      <text x="56" y="65" font-family="'Playfair Display', serif" font-weight="800" font-size="16" fill="#c5a880">&amp;</text>
+      <text x="68" y="62" font-family="'Playfair Display', serif" font-weight="800" font-size="28" fill="#ffffff">R</text>
+
+      <!-- النص المؤسسي -->
+      <text x="130" y="52" class="sr-serif">S<tspan class="sr-amp">&amp;</tspan>R</text>
+      <text x="215" y="52" class="sr-core">CoreSync</text>
+      <line x1="130" y1="68" x2="480" y2="68" stroke="url(#goldSpecGrad)" stroke-width="1.5" />
+      <text x="135" y="92" class="sr-sol">SOLUTIONS</text>
+    </g>
+
+    <!-- هوامش الأمان والملاحظة -->
+    <text x="30" y="210" class="text-body">• مساحة الأمان الإلزامية: لا تقل عن 20px حول الشعار.</text>
+    <text x="30" y="235" class="text-body">• الاستخدام المعتمد: على الخلفيات الداكنة، والتقارير التنفيذية، والمنصات السحابية.</text>
+  </g>
+
+  <!-- 2. لوحة الألوان المعتمدة (Color Palette) -->
+  <g transform="translate(730, 215)">
+    <rect width="410" height="260" class="card-box" />
+    <text x="30" y="38" class="text-section">2. اللوحة اللونية (Color Palette)</text>
+
+    <!-- لون الذهب الشامباني الملكي -->
+    <g transform="translate(30, 60)">
+      <rect width="70" height="42" fill="#c5a880" class="swatch-border" />
+      <text x="82" y="20" font-family="'Cairo', sans-serif" font-weight="700" font-size="14" fill="#ffffff">الذهب الشامباني (Royal Gold)</text>
+      <text x="82" y="37" class="text-code">#C5A880 • RGB(197, 168, 128)</text>
+    </g>
+
+    <!-- لون أسود أوبسيديان -->
+    <g transform="translate(30, 115)">
+      <rect width="70" height="42" fill="#020705" stroke="#c5a880" stroke-width="1" class="swatch-border" />
+      <text x="82" y="20" font-family="'Cairo', sans-serif" font-weight="700" font-size="14" fill="#ffffff">أسود الأوبسيديان (Obsidian)</text>
+      <text x="82" y="37" class="text-code">#020705 • RGB(2, 7, 5)</text>
+    </g>
+
+    <!-- لون الزمردي المؤسسي الداكن -->
+    <g transform="translate(30, 170)">
+      <rect width="70" height="42" fill="#041c14" stroke="#c5a880" stroke-width="1" class="swatch-border" />
+      <text x="82" y="20" font-family="'Cairo', sans-serif" font-weight="700" font-size="14" fill="#ffffff">الزمردي الداكن (Imperial Emerald)</text>
+      <text x="82" y="37" class="text-code">#041C14 • RGB(4, 28, 20)</text>
+    </g>
+  </g>
+
+  <!-- 3. الخطوط والتيبوغرافيا (Typography) -->
+  <g transform="translate(60, 505)">
+    <rect width="520" height="230" class="card-box" />
+    <text x="30" y="38" class="text-section">3. الخطوط الرسمية (Brand Typography)</text>
+
+    <g transform="translate(30, 65)">
+      <text x="0" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="16" fill="#ffffff">Playfair Display &amp; Plus Jakarta Sans</text>
+      <text x="0" y="38" class="text-body">العناوين اللاتينية، أحرف الاختصار، وأسماء المنظومات البرمجية.</text>
+    </g>
+
+    <g transform="translate(30, 135)">
+      <text x="0" y="16" font-family="'Cairo', sans-serif" font-weight="800" font-size="16" fill="#c5a880">خط كـايرو (Cairo Font)</text>
+      <text x="0" y="38" class="text-body">النصوص العربية، الواجهات السحابية، والتقارير المالية والتحليلية.</text>
+    </g>
+  </g>
+
+  <!-- 4. الاعتماد والرخصة (Legal & Ownership) -->
+  <g transform="translate(610, 505)">
+    <rect width="530" height="230" class="card-box" />
+    <text x="30" y="38" class="text-section">4. الترخيص والحماية (Corporate Rights)</text>
+    <text x="30" y="75" class="text-body">• الشركة: S&amp;R CoreSync Solutions B.V.</text>
+    <text x="30" y="105" class="text-body">• المقر الرئيسي: Keizersgracht, Amsterdam, The Netherlands</text>
+    <text x="30" y="135" class="text-body">• التخصص: هندسة وتطوير الأنظمة السحابية والحلول المالية الذكية وERP</text>
+    <text x="30" y="165" class="text-body">• الاستخدام غير المصرح به أو التعديل على الشعار محظور قانوناً.</text>
+
+    <!-- ختم الجودة الرقمي -->
+    <g transform="translate(420, 120)">
+      <circle cx="45" cy="45" r="38" fill="rgba(197, 168, 128, 0.08)" stroke="#c5a880" stroke-width="1.2" stroke-dasharray="3 3" />
+      <text x="45" y="42" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#c5a880" text-anchor="middle">VERIFIED</text>
+      <text x="45" y="56" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">2026</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة ترويسة الموقع والشعار الفاخر المحدث - S&R CoreSync Solutions</title>
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.min.css">
+    <style>
+        body {
+            background-color: #030705;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* تنسيقات الهيدر الملكي الفاخر المحدث لمنع أي تداخل أو انقلاب */
+        .tf-header.header-refined {
+            position: relative;
+            background: rgba(3, 7, 5, 0.94) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            backdrop-filter: blur(16px) !important;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.22) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .tf-header .container {
+            max-width: 1720px !important;
+            width: 96% !important;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .header-row-layout {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 16px !important;
+            direction: rtl !important;
+        }
+
+        /* 1. العلامة التجارية والشعار (الشعار قبل النص من اليمين إلى اليسار) */
+        .header-col-brand {
+            flex: 0 0 auto !important;
+            order: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .brand-logo-site {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            text-decoration: none !important;
+            direction: ltr !important; /* قفل الاتجاه LTR دائماً للشعار لمنع الانقلاب وحماية الهوية البصرية الرسمية */
+            unicode-bidi: isolate !important;
+        }
+
+        .brand-logo-site-logo {
+            display: inline-flex !important;
+            align-items: baseline !important;
+            gap: 6px !important;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
+        }
+
+        .brand-emblem-img {
+            width: 64px !important;
+            height: 64px !important;
+            object-fit: contain !important;
+            filter: drop-shadow(0 0 16px rgba(197, 168, 128, 0.55)) !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .brand-emblem-img:hover {
+            transform: scale(1.08) !important;
+        }
+
+        .brand-sr-text {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 800 !important;
+            font-size: 1.25rem !important;
+            color: #d4af37 !important;
+            letter-spacing: -0.3px !important;
+        }
+
+        .brand-sub-text {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            color: #ffffff !important;
+            letter-spacing: -0.3px !important;
+        }
+
+        /* 2. روابط القائمة (الوسط) */
+        .header-col-nav {
+            flex: 1 1 auto !important;
+            order: 2 !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-width: 0 !important;
+            direction: rtl !important;
+        }
+
+        .nav-menu-main {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: clamp(4px, 0.65vw, 10px) !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            flex-wrap: nowrap !important;
+        }
+
+        .nav-menu-main .item-link {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 3px !important;
+            padding: 5px clamp(5px, 0.45vw, 8px) !important;
+            font-size: clamp(0.72rem, 0.76vw, 0.82rem) !important;
+            font-weight: 600 !important;
+            color: rgba(255, 255, 255, 0.82) !important;
+            text-decoration: none !important;
+            white-space: nowrap !important;
+            border-radius: 8px !important;
+            transition: all 0.22s ease !important;
+        }
+
+        .nav-menu-main .item-link span {
+            font-size: 0.64rem !important;
+            color: #c5a880 !important;
+            font-weight: 700 !important;
+        }
+
+        .nav-menu-main .item-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+        }
+
+        .nav-menu-main .item-link.gold-accent {
+            color: #e6ca9f !important;
+        }
+
+        /* 3. أدوات وإجراءات الهيدر (أقصى اليسار في RTL) */
+        .header-col-actions {
+            flex: 0 0 auto !important;
+            order: 3 !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            white-space: nowrap !important;
+            direction: ltr !important; /* مرتبة بنظام LTR من اليسار نحو الداخل */
+        }
+
+        .btn-live-sandbox-header {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            padding: 5px 12px !important;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(56, 189, 248, 0.1)) !important;
+            border: 1px solid rgba(212, 175, 55, 0.45) !important;
+            color: #fff4da !important;
+            border-radius: 999px !important;
+            font-size: 0.76rem !important;
+            font-weight: 700 !important;
+            text-decoration: none !important;
+            transition: all 0.25s ease !important;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.15) !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+        }
+
+        .btn-portal-header {
+            background: rgba(197, 168, 128, 0.08) !important;
+            border: 1px solid rgba(197, 168, 128, 0.35) !important;
+            color: #e6ca9f !important;
+            padding: 5px 11px !important;
+            border-radius: 999px !important;
+            font-size: 0.76rem !important;
+            font-weight: 700 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            cursor: pointer !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+        }
+
+        .btn-vip-header {
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.24), rgba(197, 168, 128, 0.08)) !important;
+            border: 1px solid rgba(197, 168, 128, 0.55) !important;
+            color: #ffffff !important;
+            padding: 5px 11px !important;
+            border-radius: 999px !important;
+            font-size: 0.76rem !important;
+            font-weight: 700 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            cursor: pointer !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+        }
+
+        .header-whatsapp-btn {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            padding: 5px 11px !important;
+            border: 1px solid rgba(255, 255, 255, 0.35) !important;
+            border-radius: 10px !important;
+            background: rgba(0, 0, 0, 0.3) !important;
+            color: #ffffff !important;
+            font-size: 0.76rem !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            white-space: nowrap !important;
+            line-height: 1.2 !important;
+        }
+
+        .lang-badge {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* قسم خيارات الشعار المقترحة */
+        .showcase-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .showcase-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .showcase-header h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .showcase-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .logo-options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .logo-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-card.featured {
+            border-color: #d4af37;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08), rgba(2, 8, 6, 0.6));
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .logo-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #d4af37;
+            color: #010907;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+        }
+
+        .logo-display-box {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .logo-display-box img {
+            max-height: 80px;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.4));
+        }
+
+        .logo-card h3 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .logo-card p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: right;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.75);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 14px;
+        }
+
+        .specs-list li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .specs-list li::before {
+            content: "✓";
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .logo-display-box img.logo-display-horizon {
+            max-height: 52px;
+            width: auto;
+        }
+
+        .pure-monogram-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #1a160d, #020705);
+            border: 2px solid #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+        }
+
+        .pure-monogram-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: #d4af37;
+        }
+
+        .pure-monogram-amp {
+            color: #ffffff;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. شريط التنقل العلوي الملكي المعتمد في الموقع الآن -->
+    <header class="tf-header header-refined">
+        <div class="container">
+            <div class="header-row-layout">
+                <!-- أ. الشعار والعلامة التجارية (طرف اليمين في النسخة العربية) -->
+                <div class="header-col-brand">
+                    <a href="./index.html" class="brand-logo-site" title="S&R CoreSync Solutions">
+                        <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R CoreSync Official Emblem" class="brand-emblem-img" />
+                        <div class="brand-logo-site-logo">
+                            <span class="brand-sr-text">S&amp;R</span>
+                            <span class="brand-sub-text">CoreSync</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- ب. قائمة الروابط المركزية (الوسط) -->
+                <div class="header-col-nav">
+                    <ul class="nav-menu-main">
+                        <li class="menu-item"><a href="./index.html#service" class="item-link"><span>01 /</span>الخدمات</a></li>
+                        <li class="menu-item"><a href="./index.html#about" class="item-link"><span>02 /</span>نبذة</a></li>
+                        <li class="menu-item"><a href="./index.html#pricing" class="item-link"><span>03 /</span>الأسعار</a></li>
+                        <li class="menu-item"><a href="./index.html#roi-calculator" class="item-link gold-accent"><span>04 /</span>ROI</a></li>
+                        <li class="menu-item"><a href="./index.html#software-hub" class="item-link gold-accent"><span>05 /</span>المتجر</a></li>
+                        <li class="menu-item"><a href="./index.html#faq" class="item-link"><span>06 /</span>الأسئلة</a></li>
+                    </ul>
+                </div>
+
+                <!-- ج. الإجراءات التنفيذية وأدوات التواصل (طرف اليسار) -->
+                <div class="header-col-actions">
+                    <div class="lang-badge">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.8 12h16.4M12 3.5c2.2 2.3 3.4 5.1 3.4 8.5S14.2 18.2 12 20.5M12 3.5C9.8 5.8 8.6 8.6 8.6 12s1.2 6.2 3.4 8.5"></path></svg>
+                        <span>AR</span>
+                    </div>
+
+                    <details class="header-currency notranslate" id="previewHeaderCurDropdown" translate="no">
+                        <summary aria-label="اختيار العملة">
+                            <span class="header-currency__current">
+                                <span class="header-cur-flag">🇪🇺</span>
+                                <span class="header-cur-code">EUR (€)</span>
+                            </span>
+                            <span class="header-currency__chevron" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </span>
+                        </summary>
+                        <div class="header-currency__options">
+                            <button type="button" class="header-cur-option is-active" data-currency="EUR">
+                                <span class="opt-left"><span class="header-cur-flag">🇪🇺</span><span>اليورو (EUR)</span></span>
+                                <span class="opt-symbol">€</span>
+                            </button>
+                            <button type="button" class="header-cur-option" data-currency="USD">
+                                <span class="opt-left"><span class="header-cur-flag">🇺🇸</span><span>الدولار (USD)</span></span>
+                                <span class="opt-symbol">$</span>
+                            </button>
+                            <button type="button" class="header-cur-option" data-currency="SAR">
+                                <span class="opt-left"><span class="header-cur-flag">🇸🇦</span><span>الريال السعودي (SAR)</span></span>
+                                <span class="opt-symbol">﷼</span>
+                            </button>
+                            <button type="button" class="header-cur-option" data-currency="AED">
+                                <span class="opt-left"><span class="header-cur-flag">🇦🇪</span><span>الدرهم الإماراتي (AED)</span></span>
+                                <span class="opt-symbol">د.إ</span>
+                            </button>
+                            <button type="button" class="header-cur-option" data-currency="GBP">
+                                <span class="opt-left"><span class="header-cur-flag">🇬🇧</span><span>الجنيه الإسترليني (GBP)</span></span>
+                                <span class="opt-symbol">£</span>
+                            </button>
+                        </div>
+                    </details>
+
+                    <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="header-whatsapp-btn">
+                        <svg viewBox="0 0 32 32" width="14" height="14" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
+                        <span>تواصل معي</span>
+                    </a>
+
+                    <button type="button" class="btn-vip-header">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>حجز VIP</span>
+                    </button>
+
+                    <button type="button" class="btn-portal-header">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>بوابة العملاء</span>
+                    </button>
+
+                    <a href="demo.html" class="btn-live-sandbox-header">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        <span>تجربة ERP السحابي ⚡</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. استعراض حلول الشعار ومقارنتها -->
+    <div class="showcase-container">
+        <div class="showcase-header">
+            <h2>خيارات واقتراحات الشعار الفاخر (S&amp;R CoreSync Logo Proposals)</h2>
+            <p>حل مشكلة الاتجاه والانقلاب بنسبة 100%، مع رفع حدة ووضوح الرمز الفيكتوري بتقنيات العرض الحديثة</p>
+        </div>
+
+        <div class="logo-options-grid">
+            <!-- الخيار الأول: المعتمد الملكي فائق النقاء -->
+            <div class="logo-card featured">
+                <span class="logo-card-badge">الخيار المعتمد والموصى به</span>
+                <div class="logo-display-box">
+                    <img src="./assets/sr-core-emblem.svg" alt="Royal Sovereign Sync Emblem" />
+                </div>
+                <h3>1. الرمز الملكي فائق النقاء (Royal Sovereign Sync)</h3>
+                <p>رمز فيكتوري هندسي حاد ودقيق، يدمج مدارات الكور السحابي مع مونوغرام S&R الذهبي بنقاء كريستالي 100% وبدون أي ضبابية أو تشويش حتى بأصغر المقاسات.</p>
+                <ul class="specs-list">
+                    <li>حدة كريستالية خالية من فلاتر التمويه الضبابية</li>
+                    <li>ثبات اتجاه LTR عالمي يمنع أي انقلاب للكلمات</li>
+                    <li>حواف ذهبية شامبانية 24K مع لمعان specular متناسق</li>
+                </ul>
+            </div>
+
+            <!-- الخيار الثاني: الشعار المتكامل الأفقي -->
+            <div class="logo-card">
+                <div class="logo-display-box">
+                    <img src="./assets/logo-neon.svg" alt="Horizontal Executive Lockup" class="logo-display-horizon" />
+                </div>
+                <h3>2. الشعار التنفيذي الكامل (Executive Horizon Lockup)</h3>
+                <p>قفل بصري متكامل يجمع الرمز مع الاسم والصفة المؤسسية بخط سيريف كلاسيكي فخم، مثالي للترويسات العريضة وخطابات العروض الرسمية.</p>
+                <ul class="specs-list">
+                    <li>تناغم بصري كامل بين المونوغرام واسم الشركة</li>
+                    <li>أبعاد هيدر ممتدة تعطي فخامة للشركات الاستشارية</li>
+                    <li>مخصص لشاشات الـ 4K والطباعة الرسمية</li>
+                </ul>
+            </div>
+
+            <!-- الخيار الثالث: المونوغرام التقني الحديث -->
+            <div class="logo-card">
+                <div class="logo-display-box">
+                    <div class="pure-monogram-circle">
+                        <span class="pure-monogram-text">S<span class="pure-monogram-amp">&amp;</span>R</span>
+                    </div>
+                </div>
+                <h3>3. المونوغرام الكلاسيكي النقي (Pure Classic Monogram)</h3>
+                <p>مونوغرام بيور يركز مباشرة على الحرفين الأساسيين S & R بخط ملكي سيريف بارز بدون مدارات إضافية، لأقصى درجات الوضوح والتبسيط المينيماليستي.</p>
+                <ul class="specs-list">
+                    <li>بساطة مينيماليستية فائقة (Ultra Minimalist)</li>
+                    <li>مقروئية مباشرة ومطلقة للعين من النظرة الأولى</li>
+                    <li>ألوان ذهبية نقية متباينة على خلفية الأوبسيديان الداكنة</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
