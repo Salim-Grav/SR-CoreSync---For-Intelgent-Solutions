@@ -5951,9 +5951,23 @@ li, dt, dd, td, th {
     }
 }
 
-/* 6. Work & Portfolio Section Category Tabs */
+/* 6. Work & Pricing Section Category Tabs */
+.tf-btn.style-2 {
+    height: auto !important;
+    min-height: 34px !important;
+    line-height: 1.3 !important;
+    padding: 6px 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+}
+
 @media (max-width: 767px) {
-    .work-tab_btn {
+    .work-tab_btn,
+    .pricing-tab_btn {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 8px !important;
@@ -5964,25 +5978,31 @@ li, dt, dd, td, th {
         border-radius: 16px !important;
         box-sizing: border-box !important;
         background: rgba(15, 22, 34, 0.85) !important;
+        height: auto !important;
     }
-    .work-tab_btn > li {
+    .work-tab_btn > li,
+    .pricing-tab_btn > li {
         width: 100% !important;
     }
-    .work-tab_btn .tf-btn-tab {
+    .work-tab_btn .tf-btn-tab,
+    .pricing-tab_btn .tf-btn-tab {
         width: 100% !important;
         min-width: 0 !important;
         max-width: 100% !important;
         justify-content: center !important;
         text-align: center !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
         padding: 10px 6px !important;
         font-size: clamp(0.72rem, 3vw, 0.84rem) !important;
         border-radius: 10px !important;
         min-height: 48px !important;
         height: auto !important;
         gap: 6px !important;
+        display: inline-flex !important;
+        align-items: center !important;
     }
-    .work-tab_btn .pricing-tab__icon {
+    .work-tab_btn .pricing-tab__icon,
+    .pricing-tab_btn .pricing-tab__icon {
         width: 16px !important;
         height: 16px !important;
         flex-shrink: 0 !important;
@@ -5990,7 +6010,8 @@ li, dt, dd, td, th {
 }
 
 @media (max-width: 360px) {
-    .work-tab_btn {
+    .work-tab_btn,
+    .pricing-tab_btn {
         grid-template-columns: 1fr !important;
     }
 }
