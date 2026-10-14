@@ -32,6 +32,29 @@
             position: relative;
         }
 
+        .preview-booking-title {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            color: #ffffff;
+        }
+
+        .preview-booking-desc {
+            margin: 0 0 16px 0;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 14px;
+        }
+
+        .preview-dispatch-result {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            display: none;
+            font-size: 13px;
+            color: #10b981;
+        }
+
         .webhook-status-pill {
             display: inline-flex;
             align-items: center;
@@ -196,8 +219,8 @@
             <span>نظام الأتمتة المزدوج مفعل: Webhook Lead Dispatcher (v2.0)</span>
         </div>
 
-        <h2 style="margin: 0 0 8px 0; font-size: 24px; color: #ffffff;">جلسة استشارية تنفيذية مغلقة (VIP Board Session)</h2>
-        <p style="margin: 0 0 16px 0; color: rgba(255, 255, 255, 0.65); font-size: 14px;">
+        <h2 class="preview-booking-title">جلسة استشارية تنفيذية مغلقة (VIP Board Session)</h2>
+        <p class="preview-booking-desc">
             يتم تسجيل طلبات الحجز والاستشارات أوتوماتيكياً ونقلها فوراً إلى جداول Google Sheets ومنصات الأتمتة (Make / n8n) مع إشعار الواتساب المباشر.
         </p>
 
@@ -291,7 +314,7 @@
             </button>
         </form>
 
-        <div id="dispatchResultBox" style="margin-top: 16px; padding: 12px; border-radius: 10px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); display: none; font-size: 13px; color: #10b981;">
+        <div id="dispatchResultBox" class="preview-dispatch-result">
             ✓ تم تسجيل الطلب بنجاح وتوجيهه إلى سجل الأتمتة الموحد برقم: <strong id="leadIdOutput"></strong>
         </div>
     </div>
