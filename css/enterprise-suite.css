@@ -962,6 +962,31 @@ html:not([dir="rtl"]) .floating-actions {
     flex-shrink: 0;
 }
 
+@media (max-width: 640px) {
+    .es-gdpr-banner {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        left: 12px !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        gap: 12px !important;
+        padding: 16px !important;
+    }
+    .es-gdpr-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 8px !important;
+    }
+    .es-btn-gdpr-accept,
+    .es-btn-gdpr-decline {
+        flex: 1 !important;
+        text-align: center !important;
+        justify-content: center !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+}
+
 .es-btn-gdpr-accept {
     background: var(--es-gold);
     color: #010907;
