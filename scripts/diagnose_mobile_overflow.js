@@ -153,7 +153,7 @@ async function runAudit() {
                 returnByValue: true
             });
 
-            console.log(JSON.stringify(diagResult.result.value, null, 2));
+            console.log(JSON.stringify(diagResult, null, 2));
         }
 
     } catch (e) {
