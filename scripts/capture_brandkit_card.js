@@ -58,7 +58,7 @@ async function captureBrandKitCard() {
                 const panel = document.querySelector('.project-modal__panel');
                 const brandKit = document.getElementById('projectModalBrandKit');
                 if (panel && brandKit) {
-                    panel.scrollTop = 380;
+                    panel.scrollTop = 620;
                 }
             })()
             `
