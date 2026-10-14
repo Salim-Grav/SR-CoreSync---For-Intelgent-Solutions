@@ -1627,10 +1627,34 @@
             overflow-y: hidden;
         }
 
-        .project-modal.active {
+        .project-modal.active,
+        .project-modal.is-open {
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+            top: 0 !important;
+        }
+
+        /* Zorg dat alle onderdelen van de modal zichtbaar zijn */
+        .project-modal.active .project-modal__close,
+        .project-modal.active .project-modal__media,
+        .project-modal.active .project-modal__details,
+        .project-modal.is-open .project-modal__close,
+        .project-modal.is-open .project-modal__media,
+        .project-modal.is-open .project-modal__details {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+
+        .project-modal__gallery img,
+        .project-gallery-item img,
+        .project-gallery-img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
         }
 
         .project-modal__backdrop {
@@ -1688,7 +1712,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            font-family: 'Alexandria', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .project-modal__expand-btn:hover {
@@ -1707,7 +1731,7 @@
             height: 100vh;
             margin: 0 auto;
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: row;
             gap: 50px;
             padding: 40px 48px 80px 48px;
             overflow-y: auto;
@@ -1718,7 +1742,7 @@
         .project-modal__details {
             width: 380px;
             flex-shrink: 0;
-            text-align: right;
+            text-align: left;
             transition: all 0.35s ease;
         }
 
@@ -6157,7 +6181,7 @@
                     id: "hintham",
                     name: "Shoarma Hintham",
                     subtitle: "Zelfstandig Bestel- en Bezorgplatform met iDEAL & Real-time Keukensysteem",
-                    heroImg: "../assets/work-3.webp",
+                    heroImg: "../assets/work-web-hintham.jpg",
                     tags: ["E-Commerce", "iDEAL Koppeling", "Keukenmanagementsysteem"],
                     year: "2024",
                     client: "Shoarma Hintham Restaurant",
@@ -6168,18 +6192,16 @@
                     desc: "Ontwerp en ontwikkeling van een direct bestelplatform met snelle checkout, automatische printorders in de keuken en iDEAL-betalingen, waardoor het restaurant volledig commissievrij kan opereren.",
                     quote: "Verhoogde het aandeel directe bestellingen met 45% en zorgde voor een soepele klantervaring.",
                     gallery: [
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp"
+                        "../assets/work-web-hintham.jpg",
+                        "../assets/service-website-3d.jpg",
+                        "../assets/service-ecommerce-3d.jpg"
                     ]
                 },
                 {
                     id: "reinigung",
                     name: "NA Reinigung",
                     subtitle: "Geautomatiseerd Boekings- en Planningssysteem voor Schoonmaakdiensten",
-                    heroImg: "../assets/work-1.webp",
+                    heroImg: "../assets/work-web-cleaning.jpg",
                     tags: ["Boekingsplatform", "Meertalige UX", "Zakelijke UI"],
                     year: "2025",
                     client: "NA Reinigung GmbH",
@@ -6190,9 +6212,8 @@
                     desc: "Ontwikkeling van een intuïtief offerte- en plansysteem voor zakelijke en particuliere schoonmaakklanten, compleet met automatische agenda-afstemming en facturatie conform de Duitse wetgeving.",
                     quote: "Een modern, betrouwbaar platform dat direct autoriteit uitstraalt naar zakelijke klanten.",
                     gallery: [
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp"
+                        "../assets/work-web-cleaning.jpg",
+                        "../assets/service-website-3d.jpg"
                     ]
                 },
                 {

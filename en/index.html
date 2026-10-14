@@ -6185,7 +6185,7 @@
                     id: "hintham",
                     name: "Shoarma Hintham",
                     subtitle: "Full-Stack Food Commerce Platform with iDEAL & Instant Logistics",
-                    heroImg: "../assets/work-3.webp",
+                    heroImg: "../assets/work-web-hintham.jpg",
                     tags: ["E-Commerce", "iDEAL Integration", "Real-Time Kitchen Display"],
                     year: "2024",
                     client: "Shoarma Hintham Restaurant",
@@ -6196,18 +6196,16 @@
                     desc: "Engineered an independent direct-ordering web platform featuring sub-second checkout, automated kitchen ticket dispatch, and native iDEAL/card processing, liberating the business from third-party marketplace commissions.",
                     quote: "Increased direct online orders by 45% while providing an effortless, instant customer checkout experience.",
                     gallery: [
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp",
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp"
+                        "../assets/work-web-hintham.jpg",
+                        "../assets/service-website-3d.jpg",
+                        "../assets/service-ecommerce-3d.jpg"
                     ]
                 },
                 {
                     id: "reinigung",
                     name: "NA Reinigung",
                     subtitle: "Automated Facility Services Booking & Scheduling Engine",
-                    heroImg: "../assets/work-1.webp",
+                    heroImg: "../assets/work-web-cleaning.jpg",
                     tags: ["Booking Platform", "Multilingual UX", "Enterprise UI"],
                     year: "2025",
                     client: "NA Reinigung GmbH",
@@ -6218,9 +6216,8 @@
                     desc: "Developed an intelligent quote estimation and scheduling platform for commercial and residential cleaning operations, complete with automated calendar syncing, invoice generation, and German tax compliance.",
                     quote: "A sleek, confidence-inspiring booking portal that immediately establishes enterprise credibility.",
                     gallery: [
-                        "../assets/work-1.webp",
-                        "../assets/work-2.webp",
-                        "../assets/work-3.webp"
+                        "../assets/work-web-cleaning.jpg",
+                        "../assets/service-website-3d.jpg"
                     ]
                 },
                 {
@@ -6573,7 +6570,7 @@
                 imgs.forEach((imgUrl, i) => {
                     const item = document.createElement('div');
                     item.className = 'project-gallery-item';
-                    item.innerHTML = `<img loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Gallery Slide ${i + 1}" />`;
+                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Gallery Slide ${i + 1}" />`;
                     galleryContainer.appendChild(item);
                 });
                 // CoreSync System Controller
@@ -6625,13 +6622,14 @@
             // Add tech pills
             const techPills = document.getElementById('projectModalTechPills');
             if (techPills) {
-                const techs = p.techs || ['HTML5', 'CSS3', 'JavaScript'];
+                const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
                 techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
             }
 
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.add('active');
+                modal.classList.add('is-open');
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -6653,6 +6651,7 @@
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.remove('active');
+                modal.classList.remove('is-open');
                 modal.classList.remove('is-wide');
                 document.body.style.overflow = '';
                 const expandText = document.getElementById('projectModalExpandText');
