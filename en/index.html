@@ -6007,10 +6007,15 @@
                         <div class="brand-kit-body">
                             <h4 class="brand-kit-heading" id="brandKitHeadingText">Certified Master Brand Kit</h4>
                             <p class="brand-kit-sub" id="brandKitSubText">Download infinite resolution vector assets, color palette specs, and official guidelines.</p>
-                            <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                <span id="brandKitBtnText">Download Brand Kit (ZIP)</span>
-                            </button>
+                            <div class="brand-kit-actions-group">
+                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()" style="flex: 1.2;">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <span id="brandKitBtnText">Download Brand Kit (ZIP)</span>
+                                </button>
+                                <a href="../preview-3d-mockup.html" class="brand-kit-3d-btn" id="brandKit3DBtn" target="_blank" title="3D Mockup Viewer 360°">
+                                    <span>3D Mockup 🧊</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -8898,6 +8903,7 @@
 
     <script src="../api/lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
+    <script src="../js/sr-social-proof.min.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>
 </body>
 </html>
