@@ -108,58 +108,38 @@ async function verifyAndCapture() {
         fs.writeFileSync(path.join(artifactDir, 'live_mobile_scaled_125.png'), Buffer.from(heroSS.result.data, 'base64'));
         console.log('Saved: live_mobile_scaled_125.png');
 
-        // Check horizontal scroll at 125%
-        const scrollCheck = await call('Runtime.evaluate', {
+        // 2. Scroll to Footer to show the footer accessibility text resizer
+        console.log('Scrolling to footer bottom bar...');
+        await call('Runtime.evaluate', {
             expression: `
-                ({
-                    winW: window.innerWidth,
-                    docW: document.documentElement.scrollWidth,
-                    hasScroll: document.documentElement.scrollWidth > window.innerWidth + 1
-                })
-            `,
-            returnByValue: true
+                const ft = document.querySelector('.footer-bottom');
+                if (ft) ft.scrollIntoView({ behavior: 'instant', block: 'end' });
+                else window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
+            `
         });
-        console.log('Scroll check at 125% zoom:', scrollCheck.result?.value);
+        await new Promise(r => setTimeout(r, 1000));
+        const footerSS = await call('Page.captureScreenshot', { format: 'png' });
+        fs.writeFileSync(path.join(artifactDir, 'live_footer_accessibility_resizer.png'), Buffer.from(footerSS.result.data, 'base64'));
+        console.log('Saved: live_footer_accessibility_resizer.png');
 
-        // 2. Open Mobile Offcanvas Menu to show the resizer box inside the drawer
+        // 3. Open Mobile Offcanvas Menu to show the resizer box inside the drawer
         console.log('Opening offcanvas mobile menu...');
         await call('Runtime.evaluate', {
             expression: `
+                window.scrollTo({ top: 0, behavior: 'instant' });
                 const m = document.getElementById('mobileMenu');
                 if (m) {
                     m.classList.add('active');
-                    m.scrollTop = m.scrollHeight; // scroll to bottom where resizer is
+                    m.scrollTop = m.scrollHeight;
                 }
             `
         });
-        await new Promise(r => setTimeout(r, 800));
+        await new Promise(r => setTimeout(r, 1000));
         const menuSS = await call('Page.captureScreenshot', { format: 'png' });
         fs.writeFileSync(path.join(artifactDir, 'live_mobile_menu_resizer.png'), Buffer.from(menuSS.result.data, 'base64'));
         console.log('Saved: live_mobile_menu_resizer.png');
 
-        // Close mobile menu completely
-        await call('Runtime.evaluate', {
-            expression: `
-                const m = document.getElementById('mobileMenu');
-                if (m) {
-                    m.classList.remove('active');
-                    m.style.display = 'none';
-                }
-            `
-        });
-        await new Promise(r => setTimeout(r, 600));
-
-        // 3. Scroll to Footer to show the footer accessibility text resizer
-        console.log('Scrolling to footer bottom bar...');
-        await call('Runtime.evaluate', {
-            expression: `
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
-            `
-        });
-        await new Promise(r => setTimeout(r, 800));
-        const footerSS = await call('Page.captureScreenshot', { format: 'png' });
-        fs.writeFileSync(path.join(artifactDir, 'live_footer_accessibility_resizer.png'), Buffer.from(footerSS.result.data, 'base64'));
-        console.log('Saved: live_footer_accessibility_resizer.png');
+        console.log('\nAll accessibility snapshots captured successfully!');
 
         console.log('\nAll accessibility snapshots captured successfully!');
 
