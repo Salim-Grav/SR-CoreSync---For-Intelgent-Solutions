@@ -113,14 +113,13 @@ async function captureAll() {
             },
             {
                 name: 'live_brandkit_with_3d_and_toast.png',
-                url: `http://127.0.0.1:${srvPort}/preview-work.html`,
-                waitMs: 2000,
+                url: `http://127.0.0.1:${srvPort}/index.html`,
+                waitMs: 2500,
                 action: `
                     (function() {
                         const tab = document.getElementById('tab-btn-identity');
                         if (tab) tab.click();
-                        const btn = document.getElementById('workLivePreviewBtn');
-                        if (btn) btn.click();
+                        if (typeof openCurrentProjectModal === 'function') openCurrentProjectModal();
                         
                         setTimeout(() => {
                             const brandKit = document.getElementById('projectModalBrandKit');
