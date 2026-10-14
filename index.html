@@ -8211,7 +8211,7 @@
             ]
         };
 
-        let currentWorkCategory = 'identity';
+        let currentWorkCategory = 'websites';
         let currentWorkProjectIdx = 0;
 
         // تبديل تبويب الأعمال وتحديث البيانات
@@ -8250,69 +8250,116 @@
             const activeProject = list[currentWorkProjectIdx];
 
             // تأثير التحريك والانسيابية عند التبديل
-            const workWrapper = document.querySelector('.project-grid-main');
+            const workWrapper = document.getElementById('work-dynamic-pane') || document.querySelector('.work-pane');
             if (workWrapper) {
-                workWrapper.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-                workWrapper.style.opacity = '0';
-                workWrapper.style.transform = 'translateY(15px)';
+                workWrapper.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)';
+                workWrapper.style.opacity = '0.3';
+                workWrapper.style.transform = 'translateY(8px)';
             }
 
             setTimeout(() => {
                 // 1. تحديث قائمة أسماء المشاريع في الجانب
-            const navContainer = document.getElementById('work-project-names-nav');
-            if (navContainer) {
-                navContainer.innerHTML = '';
-                list.forEach((p, idx) => {
-                    const itemBtn = document.createElement('div');
-                    itemBtn.className = 'work-project-nav-item' + (idx === currentWorkProjectIdx ? ' active' : '');
-                    itemBtn.textContent = p.name;
-                    itemBtn.onclick = function() {
-                        currentWorkProjectIdx = idx;
-                        renderActiveWork();
-                    };
-                    navContainer.appendChild(itemBtn);
-                });
-            }
-
-            // 2. تحديث الوصف الفرعي
-            const subLabel = document.getElementById('project-subtitle-label');
-            if (subLabel) subLabel.textContent = activeProject.subtitle;
-
-            // 3. تحديث صورة الكرت الرئيسي
-            const mainImg = document.getElementById('work-main-image');
-            if (mainImg) {
-                mainImg.src = activeProject.heroImg;
-                mainImg.alt = activeProject.name;
-            }
-
-            // 4. تحديث التاجات
-            const tagsContainer = document.getElementById('work-project-tags');
-            if (tagsContainer) {
-                tagsContainer.innerHTML = '';
-                activeProject.tags.forEach(t => {
-                    const tagEl = document.createElement('span');
-                    tagEl.className = 'tf-btn style-2';
-                    tagEl.textContent = t;
-                    tagsContainer.appendChild(tagEl);
-                });
-            }
-
-            // 5. تحديث السنة
-            const yearEl = document.getElementById('work-project-year');
-            if (yearEl && activeProject.year) {
-                const y = String(activeProject.year);
-                if (y.length === 4) {
-                    yearEl.innerHTML = `${y.substring(0, 2)}<span class="gold-accent">${y.substring(2)}</span>`;
-                } else {
-                    yearEl.textContent = y;
+                const navContainer = document.getElementById('work-project-names-nav');
+                if (navContainer) {
+                    navContainer.innerHTML = '';
+                    list.forEach((p, idx) => {
+                        const itemBtn = document.createElement('div');
+                        itemBtn.className = 'work-project-nav-item' + (idx === currentWorkProjectIdx ? ' active' : '');
+                        itemBtn.textContent = p.name;
+                        itemBtn.onclick = function() {
+                            currentWorkProjectIdx = idx;
+                            renderActiveWork();
+                        };
+                        navContainer.appendChild(itemBtn);
+                    });
                 }
-            }
 
-            if (workWrapper) {
-                workWrapper.style.opacity = '1';
-                workWrapper.style.transform = 'translateY(0)';
-            }
-            }, 250);
+                // 2. تحديث العنوان والوصف الفرعي
+                const titleEl = document.getElementById('work-project-title');
+                if (titleEl) titleEl.textContent = activeProject.name;
+
+                const subLabel = document.getElementById('project-subtitle-label');
+                if (subLabel) subLabel.textContent = activeProject.subtitle;
+
+                // 3. تحديث مؤشرات الأداء اللحظية (KPIs)
+                const kpiSpeed = document.getElementById('work-kpi-speed');
+                if (kpiSpeed) kpiSpeed.textContent = activeProject.kpiSpeed || '0.34s';
+
+                const kpiConv = document.getElementById('work-kpi-conv');
+                if (kpiConv) kpiConv.textContent = activeProject.kpiConversion || '+185%';
+
+                const kpiSales = document.getElementById('work-kpi-sales');
+                if (kpiSales) kpiSales.textContent = activeProject.kpiSales || '+4.2x';
+
+                // 4. تحديث شريط المتصفح ورابط المعاينة الحية
+                const browserUrl = document.getElementById('work-browser-url-text');
+                const liveBtn = document.getElementById('work-live-preview-btn');
+                const displayUrl = activeProject.preview ? (activeProject.previewLabel || activeProject.preview.replace(/^https?:\/\//, '')) : `coresync-solutions.com/portfolio/${activeProject.id}`;
+                if (browserUrl) browserUrl.textContent = displayUrl;
+                if (liveBtn) {
+                    if (activeProject.preview) {
+                        liveBtn.href = activeProject.preview;
+                        liveBtn.style.display = 'inline-flex';
+                        liveBtn.target = '_blank';
+                    } else {
+                        liveBtn.href = '#!';
+                        liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                        liveBtn.style.display = 'inline-flex';
+                    }
+                }
+
+                // 5. تحديث صورة الكرت الرئيسي
+                const mainImg = document.getElementById('work-main-image');
+                if (mainImg) {
+                    mainImg.src = activeProject.heroImg;
+                    mainImg.alt = activeProject.name;
+                }
+
+                // 6. تحديث التاجات
+                const tagsContainer = document.getElementById('work-project-tags');
+                if (tagsContainer) {
+                    tagsContainer.innerHTML = '';
+                    (activeProject.tags || []).forEach(t => {
+                        const tagEl = document.createElement('span');
+                        tagEl.className = 'tf-btn style-2';
+                        tagEl.textContent = t;
+                        tagsContainer.appendChild(tagEl);
+                    });
+                }
+
+                // 7. تحديث عداد المشاريع (01 / 04)
+                const counterEl = document.getElementById('work-project-counter');
+                if (counterEl) {
+                    const cur = String(currentWorkProjectIdx + 1).padStart(2, '0');
+                    const tot = String(list.length).padStart(2, '0');
+                    counterEl.textContent = `${cur} / ${tot}`;
+                }
+
+                // 8. تحديث السنة
+                const yearEl = document.getElementById('work-project-year');
+                if (yearEl && activeProject.year) {
+                    const y = String(activeProject.year);
+                    if (y.length === 4) {
+                        yearEl.innerHTML = `${y.substring(0, 2)}<span class="gold-accent">${y.substring(2)}</span>`;
+                    } else {
+                        yearEl.textContent = y;
+                    }
+                }
+
+                if (workWrapper) {
+                    workWrapper.style.opacity = '1';
+                    workWrapper.style.transform = 'translateY(0)';
+                }
+            }, 180);
+        }
+
+        // تشغيل القسم تلقائياً فور تحميل الصفحة
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                switchWorkTab('websites');
+            });
+        } else {
+            switchWorkTab('websites');
         }
 
         // التنقل بين المشاريع داخل نفس التبويب (السابق / التالي)
