@@ -37,10 +37,10 @@ function startServer(port) {
 }
 
 async function run() {
-    const srvPort = 9570;
+    const srvPort = 9572;
     const server = await startServer(srvPort);
-    const dbgPort = 9895;
-    const userDataDir = path.join(process.env.TEMP, 'edge_insp_' + Date.now());
+    const dbgPort = 9894;
+    const userDataDir = path.join(process.env.TEMP, 'edge_insp2_' + Date.now());
 
     const edge = spawn(edgePath, [
         '--headless=new',
@@ -92,32 +92,38 @@ async function run() {
         const result = await call('Runtime.evaluate', {
             expression: `
             (function() {
-                const el = document.querySelector('.section-software-hub .container');
-                const heroActions = document.querySelector('.hero-reference__actions');
-                const heroCopy = document.querySelector('.hero-reference__copy');
-                const heroGrid = document.querySelector('.hero-reference__grid');
+                const actions = document.querySelector('.hero-reference__actions');
+                const btn = actions ? actions.querySelector('.tf-btn') : null;
+                const heroSection = document.querySelector('.hero-editorial');
+                const heroWrap = document.querySelector('.hero-reference');
+                const heroContainer = heroWrap ? heroWrap.querySelector('.container') : null;
 
-                // Inspect heroCopy and heroGrid widths
                 return {
-                    containerWidth: el ? el.offsetWidth : null,
-                    containerInlineStyle: el ? el.getAttribute('style') : null,
-                    heroGridWidth: heroGrid ? heroGrid.offsetWidth : null,
-                    heroCopyWidth: heroCopy ? heroCopy.offsetWidth : null,
-                    heroActionsWidth: heroActions ? heroActions.offsetWidth : null,
-                    heroCopyMargin: heroCopy ? window.getComputedStyle(heroCopy).margin : null,
-                    heroCopyPadding: heroCopy ? window.getComputedStyle(heroCopy).padding : null,
-                    heroGridStyle: heroGrid ? {
-                        width: window.getComputedStyle(heroGrid).width,
-                        display: window.getComputedStyle(heroGrid).display,
-                        gridTemplateColumns: window.getComputedStyle(heroGrid).gridTemplateColumns
-                    } : null
+                    bodyWidth: document.body.offsetWidth,
+                    bodyScrollWidth: document.body.scrollWidth,
+                    heroSectionWidth: heroSection ? heroSection.offsetWidth : null,
+                    heroWrapWidth: heroWrap ? heroWrap.offsetWidth : null,
+                    heroContainerWidth: heroContainer ? heroContainer.offsetWidth : null,
+                    heroContainerPadLeft: heroContainer ? window.getComputedStyle(heroContainer).paddingLeft : null,
+                    heroContainerPadRight: heroContainer ? window.getComputedStyle(heroContainer).paddingRight : null,
+                    actionsRect: actions ? actions.getBoundingClientRect() : null,
+                    btnRect: btn ? btn.getBoundingClientRect() : null,
+                    swTag: (function() {
+                        const tag = document.querySelector('.software-hub-tag');
+                        return tag ? {
+                            text: tag.innerText,
+                            scrollW: tag.scrollWidth,
+                            whiteSpace: window.getComputedStyle(tag).whiteSpace
+                        } : null;
+                    })()
                 };
             })()
             `,
             returnByValue: true
         });
 
-        console.log('Result:', JSON.stringify(result));
+        const val = result.result?.result?.value ?? result.result?.value ?? result;
+        console.log('Result:', JSON.stringify(val, null, 2));
 
     } finally {
         edge.kill();
