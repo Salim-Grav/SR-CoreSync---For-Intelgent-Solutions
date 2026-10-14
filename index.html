@@ -7727,6 +7727,25 @@
                         </div>
                     </div>
 
+                    <!-- باقة تحميل ملفات الشعار المعتمدة (Brand Assets Download Bundle) -->
+                    <div class="project-modal-brand-kit" id="projectModalBrandKit">
+                        <div class="brand-kit-top">
+                            <div class="brand-kit-badge">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>MASTER BRAND PACK</span>
+                            </div>
+                            <span class="brand-kit-formats-pill">SVG • PNG 4K • EPS • PDF</span>
+                        </div>
+                        <div class="brand-kit-body">
+                            <h4 class="brand-kit-heading" id="brandKitHeadingText">حزمة أصول الشعار والهوية المعتمدة</h4>
+                            <p class="brand-kit-sub" id="brandKitSubText">تحميل الأصول المتجهة الفيكتور بدقة غير محدودة مع كود الألوان ودليل الاستخدام.</p>
+                            <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span id="brandKitBtnText">تحميل ملفات الشعار (ZIP)</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="project-modal-cta mt-3">
                         <button type="button" onclick="orderSimilarProject()" class="tf-btn w-100 justify-content-center project-modal-order-btn">
                             <span>طلب مشروع مماثل الآن</span>
@@ -8469,7 +8488,19 @@
                 imgs.forEach((imgUrl, i) => {
                     const item = document.createElement('div');
                     item.className = 'project-gallery-item';
-                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />`;
+                    item.title = 'انقر للتكبير والفحص بدقة 4K';
+                    item.innerHTML = `
+                        <img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />
+                        <div class="project-gallery-zoom-trigger">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                            <span>فحص وتكبير 4K</span>
+                        </div>
+                    `;
+                    item.onclick = function() {
+                        if (window.openImageZoom) {
+                            window.openImageZoom(imgUrl, `${p.name} • تفاصيل الشعار والعرض بدقة 4K`);
+                        }
+                    };
                     galleryContainer.appendChild(item);
                 });
                 // إعادة التمرير للأعلى في المعرض
@@ -8524,6 +8555,11 @@
             if (techPills) {
                 const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
                 techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
+            }
+
+            // ضبط وتحديث باقة الشعار القابلة للتنزيل
+            if (window.setActiveBrandProject) {
+                window.setActiveBrandProject(p);
             }
 
             const modal = document.getElementById('projectModal');
@@ -11341,7 +11377,48 @@
             }, 300);
         }
     </script>
+    <!-- نافذة فحص دقة 4K الفائقة والتكبير والتنقل التفاعلي (4K Vector & Brand Zoom Inspector) -->
+    <div class="sr-zoom-modal" id="srImageZoomModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="فاحص الدقة الفائقة 4K">
+        <div class="sr-zoom-backdrop" onclick="closeImageZoom()"></div>
+        
+        <!-- شريط التحكم العلوي العائم -->
+        <div class="sr-zoom-toolbar">
+            <div class="sr-zoom-title-box">
+                <span class="sr-zoom-badge-gold">4K ULTRA-HD</span>
+                <span class="sr-zoom-title" id="srZoomModalTitle">SARLOR • فحص تفاصيل الشعار بدقة 4K</span>
+            </div>
+            
+            <div class="sr-zoom-actions">
+                <button type="button" class="sr-zoom-btn" onclick="zoomIn()" title="تكبير (+)" aria-label="Zoom In">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </button>
+                <span class="sr-zoom-level-pill" id="srZoomLevelText">100%</span>
+                <button type="button" class="sr-zoom-btn" onclick="zoomOut()" title="تصغير (-)" aria-label="Zoom Out">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </button>
+                <button type="button" class="sr-zoom-btn" onclick="resetZoom()" title="إعادة الضبط (1:1)" aria-label="Reset Zoom">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+                </button>
+                <div class="sr-zoom-hint">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+                    <span id="srZoomHintText">اسحب للتحريك • انقر مرتين للتكبير</span>
+                </div>
+                <button type="button" class="sr-zoom-close-btn" onclick="closeImageZoom()" title="إغلاق (Esc)" aria-label="Close">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- مسرح العرض والتكبير والسحب -->
+        <div class="sr-zoom-viewport" id="srZoomViewport">
+            <div class="sr-zoom-stage" id="srZoomStage">
+                <img id="srZoomImage" src="" alt="4K Zoom Preview" draggable="false" />
+            </div>
+        </div>
+    </div>
+
     <script src="./api/lead-dispatcher.js"></script>
+    <script src="./js/sr-brand-inspector.js"></script>
     <script src="./css/enterprise-suite.min.js"></script>
 </body>
 </html>

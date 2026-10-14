@@ -5991,6 +5991,25 @@
                         "Een gedisciplineerd visueel systeem met een krachtig ritme, overtuigende esthetiek en blijvende impact."
                     </blockquote>
 
+                    <!-- Meester Merkpakket (Brand Assets Download Bundle - Dutch) -->
+                    <div class="project-modal-brand-kit" id="projectModalBrandKit">
+                        <div class="brand-kit-top">
+                            <div class="brand-kit-badge">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>MEESTER MERKPAKKET</span>
+                            </div>
+                            <span class="brand-kit-formats-pill">SVG • PNG 4K • EPS • PDF</span>
+                        </div>
+                        <div class="brand-kit-body">
+                            <h4 class="brand-kit-heading" id="brandKitHeadingText">Gecertificeerd Meester Merkpakket</h4>
+                            <p class="brand-kit-sub" id="brandKitSubText">Download oneindige resolutie vectorbestanden, kleurcodes en officiële merkrichtlijnen.</p>
+                            <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span id="brandKitBtnText">Download Merkkit (ZIP)</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="project-modal-cta mt-4">
                         <a href="#contact" onclick="closeProjectModal()" class="tf-btn w-100 justify-content-center project-modal-order-btn">
                             <span>Vergelijkbaar Project Aanvragen</span>
@@ -6669,7 +6688,19 @@
                 imgs.forEach((imgUrl, i) => {
                     const item = document.createElement('div');
                     item.className = 'project-gallery-item';
-                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Galerijopname ${i + 1}" />`;
+                    item.title = 'Klik om in te zoomen en in 4K te inspecteren';
+                    item.innerHTML = `
+                        <img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - Galerijopname ${i + 1}" />
+                        <div class="project-gallery-zoom-trigger">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                            <span>4K Zoom &amp; Inspectie</span>
+                        </div>
+                    `;
+                    item.onclick = function() {
+                        if (window.openImageZoom) {
+                            window.openImageZoom(imgUrl, `${p.name} • 4K Detail Inspectie`);
+                        }
+                    };
                     galleryContainer.appendChild(item);
                 });
                 // CoreSync System Controller
@@ -6723,6 +6754,11 @@
             if (techPills) {
                 const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
                 techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
+            }
+
+            // Active Brand Kit State
+            if (window.setActiveBrandProject) {
+                window.setActiveBrandProject(p);
             }
 
             const modal = document.getElementById('projectModal');
