@@ -37,10 +37,10 @@ function startServer(port) {
 }
 
 async function run() {
-    const srvPort = 9572;
+    const srvPort = 9574;
     const server = await startServer(srvPort);
-    const dbgPort = 9894;
-    const userDataDir = path.join(process.env.TEMP, 'edge_insp2_' + Date.now());
+    const dbgPort = 9893;
+    const userDataDir = path.join(process.env.TEMP, 'edge_insp3_' + Date.now());
 
     const edge = spawn(edgePath, [
         '--headless=new',
@@ -92,51 +92,32 @@ async function run() {
         const result = await call('Runtime.evaluate', {
             expression: `
             (function() {
-                const actions = document.querySelector('.hero-reference__actions');
-                const btn = actions ? actions.querySelector('.tf-btn') : null;
-                const heroSection = document.querySelector('.hero-editorial');
-                const heroWrap = document.querySelector('.hero-reference');
-                const heroContainer = heroWrap ? heroWrap.querySelector('.container') : null;
-
-                return {
-                    bodyWidth: document.body.offsetWidth,
-                    bodyScrollWidth: document.body.scrollWidth,
-                    heroSectionWidth: heroSection ? heroSection.offsetWidth : null,
-                    heroWrapWidth: heroWrap ? heroWrap.offsetWidth : null,
-                    heroContainerWidth: heroContainer ? heroContainer.offsetWidth : null,
-                    heroContainerPadLeft: heroContainer ? window.getComputedStyle(heroContainer).paddingLeft : null,
-                    heroContainerPadRight: heroContainer ? window.getComputedStyle(heroContainer).paddingRight : null,
-                    heroContainerMarginLeft: heroContainer ? window.getComputedStyle(heroContainer).marginLeft : null,
-                    heroContainerMarginRight: heroContainer ? window.getComputedStyle(heroContainer).marginRight : null,
-                    heroContainerBoxSizing: heroContainer ? window.getComputedStyle(heroContainer).boxSizing : null,
-                    heroContainerMaxWidth: heroContainer ? window.getComputedStyle(heroContainer).maxWidth : null,
-                    actionsScrollW: actions ? actions.scrollWidth : null,
-                    actionsOffsetW: actions ? actions.offsetWidth : null,
-                    actionsChildren: actions ? Array.from(actions.children).map(c => ({
-                        tag: c.tagName,
-                        cls: c.className,
-                        text: c.innerText.trim(),
-                        scrollW: c.scrollWidth,
-                        offsetW: c.offsetWidth,
-                        clientW: c.clientWidth,
-                        rect: c.getBoundingClientRect()
-                    })) : null,
-                    swTag: (function() {
-                        const tag = document.querySelector('.software-hub-tag');
-                        return tag ? {
-                            text: tag.innerText,
-                            scrollW: tag.scrollWidth,
-                            whiteSpace: window.getComputedStyle(tag).whiteSpace
-                        } : null;
-                    })()
-                };
+                let el = document.querySelector('.hero-reference__actions');
+                const chain = [];
+                while (el && el !== document.documentElement) {
+                    const s = window.getComputedStyle(el);
+                    const rect = el.getBoundingClientRect();
+                    chain.push({
+                        tag: el.tagName,
+                        cls: el.className,
+                        id: el.id,
+                        offsetWidth: el.offsetWidth,
+                        scrollWidth: el.scrollWidth,
+                        rect: { l: Math.round(rect.left), r: Math.round(rect.right), w: Math.round(rect.width) },
+                        margin: s.margin,
+                        padding: s.padding,
+                        transform: s.transform
+                    });
+                    el = el.parentElement;
+                }
+                return chain;
             })()
             `,
             returnByValue: true
         });
 
         const val = result.result?.result?.value ?? result.result?.value ?? result;
-        console.log('Result:', JSON.stringify(val, null, 2));
+        console.log('Parent chain:', JSON.stringify(val, null, 2));
 
     } finally {
         edge.kill();
