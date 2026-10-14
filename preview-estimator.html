@@ -918,14 +918,14 @@
                     <div class="est-kpi-lbl">العائد المتوقع (ROI)</div>
                 </div>
                 <div class="est-kpi-box">
-                    <div class="est-kpi-val" id="estTimeVal" style="color: var(--sr-gold-light);">4-5 أسابيع</div>
+                    <div class="est-kpi-val est-kpi-val--gold" id="estTimeVal">4-5 أسابيع</div>
                     <div class="est-kpi-lbl">مدة التنفيذ المعتمدة</div>
                 </div>
             </div>
 
             <!-- Breakdown list -->
             <div>
-                <div style="font-size: 0.78rem; font-weight: 800; color: var(--sr-gold-light); margin-bottom: 8px;">
+                <div class="est-breakdown-heading">
                     تفصيل البنود والخدمات:
                 </div>
                 <div class="est-breakdown-list" id="estBreakdownList">
@@ -955,14 +955,14 @@
     <div class="est-quote-modal-overlay" id="estQuoteModal">
         <div class="est-quote-sheet">
             <div class="est-sheet-toolbar">
-                <div style="font-weight: 800; font-size: 0.95rem; color: #f3dfba;">
+                <div class="est-sheet-toolbar-title">
                     📜 عرض سعر رسمي معتمد • S&R CoreSync Solutions
                 </div>
-                <div style="display: flex; gap: 8px;">
-                    <button type="button" onclick="window.print()" style="background: var(--sr-gold); border: none; padding: 6px 14px; border-radius: 6px; font-weight: 800; cursor: pointer;">
+                <div class="est-sheet-toolbar-actions">
+                    <button type="button" onclick="window.print()" class="est-sheet-btn-print">
                         🖨️ طباعة / حفظ كـ PDF
                     </button>
-                    <button type="button" onclick="document.getElementById('estQuoteModal').classList.remove('active')" style="background: rgba(255,255,255,0.2); border: none; color: #ffffff; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+                    <button type="button" onclick="document.getElementById('estQuoteModal').classList.remove('active')" class="est-sheet-btn-close">
                         إغلاق ✕
                     </button>
                 </div>
@@ -972,33 +972,33 @@
                 <!-- Header -->
                 <div class="est-sheet-header">
                     <div>
-                        <h2 style="font-size: 1.4rem; font-weight: 900; color: #0f172a; margin-bottom: 4px;">S&R CoreSync Solutions B.V.</h2>
-                        <p style="font-size: 0.8rem; color: #64748b; margin-bottom: 2px;">HQ: Keizersgracht 482, 1016 GD Amsterdam, Netherlands</p>
-                        <p style="font-size: 0.8rem; color: #64748b;">Enterprise Systems • Cloud Infrastructure • AI Solutions</p>
-                        <p style="font-size: 0.8rem; color: #64748b;">KVK / Tax ID: NL-864201938B01</p>
+                        <h2 class="est-sheet-brand-title">S&R CoreSync Solutions B.V.</h2>
+                        <p class="est-sheet-brand-sub">HQ: Keizersgracht 482, 1016 GD Amsterdam, Netherlands</p>
+                        <p class="est-sheet-brand-text">Enterprise Systems • Cloud Infrastructure • AI Solutions</p>
+                        <p class="est-sheet-brand-text">KVK / Tax ID: NL-864201938B01</p>
                     </div>
 
-                    <div style="text-align: left;">
-                        <span style="font-family: monospace; font-size: 0.9rem; font-weight: 900; background: #f1f5f9; padding: 4px 10px; border-radius: 6px; display: inline-block;" id="sheetRef">REF-CORE-2026-8941</span>
-                        <p style="font-size: 0.82rem; color: #64748b; margin-top: 6px;">التاريخ: 14 أكتوبر 2026</p>
-                        <p style="font-size: 0.82rem; color: #10b981; font-weight: 700;">الحالة: عرض سعر رسمي معتمد</p>
+                    <div class="est-sheet-ref-box">
+                        <span class="est-sheet-ref-pill" id="sheetRef">REF-CORE-2026-8941</span>
+                        <p class="est-sheet-meta-date">التاريخ: 14 أكتوبر 2026</p>
+                        <p class="est-sheet-meta-status">الحالة: عرض سعر رسمي معتمد</p>
                     </div>
                 </div>
 
                 <!-- Recipient Info -->
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;">
-                    <div style="font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 4px;">مقدم إلى السادة المحترمين:</div>
-                    <div style="font-size: 1.05rem; font-weight: 900; color: #0f172a;" id="sheetClientOrg">مؤسسة رواد الأعمال العالمية</div>
-                    <div style="font-size: 0.85rem; color: #334155;" id="sheetClientPerson">عناية: المدير التنفيذي</div>
+                <div class="est-sheet-client-card">
+                    <div class="est-sheet-client-lbl">مقدم إلى السادة المحترمين:</div>
+                    <div class="est-sheet-client-org" id="sheetClientOrg">مؤسسة رواد الأعمال العالمية</div>
+                    <div class="est-sheet-client-person" id="sheetClientPerson">عناية: المدير التنفيذي</div>
                 </div>
 
                 <!-- Items Table -->
                 <table class="est-sheet-table">
                     <thead>
                         <tr>
-                            <th style="width: 55%;">البيان ونطاق العمل</th>
-                            <th style="text-align: center; width: 15%;">المدة التقديرية</th>
-                            <th style="text-align: left; width: 30%;">القيمة الاستثمارية</th>
+                            <th class="est-sheet-col-desc">البيان ونطاق العمل</th>
+                            <th class="est-sheet-col-time">المدة التقديرية</th>
+                            <th class="est-sheet-col-val">القيمة الاستثمارية</th>
                         </tr>
                     </thead>
                     <tbody id="sheetTableBody">
@@ -1008,24 +1008,24 @@
 
                 <!-- Totals Box -->
                 <div class="est-sheet-totals">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; margin-bottom: 6px;">
+                    <div class="est-sheet-row-subtotal">
                         <span>المجموع الأساسي:</span>
-                        <strong id="sheetSubtotal" style="color: #0f172a;">€5,050</strong>
+                        <strong id="sheetSubtotal" class="est-sheet-val-dark">€5,050</strong>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #10b981; margin-bottom: 8px;">
+                    <div class="est-sheet-row-tax">
                         <span>ضريبة القيمة المضافة (0% B2B Reverse):</span>
                         <span>€0.00</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 900; color: #0f172a; border-top: 2px solid #e2e8f0; padding-top: 8px;">
+                    <div class="est-sheet-row-grand">
                         <span>الإجمالي الصافي:</span>
-                        <span id="sheetGrandTotal" style="color: #b45309;">€5,050</span>
+                        <span id="sheetGrandTotal" class="est-sheet-grand-val">€5,050</span>
                     </div>
                 </div>
 
                 <!-- Terms & Guarantees -->
-                <div style="margin-top: 24px; font-size: 0.78rem; color: #64748b; line-height: 1.6;">
+                <div class="est-sheet-terms">
                     <strong>شروط الاعتماد والضمان المالي:</strong>
-                    <ul style="padding-right: 18px; margin-top: 4px;">
+                    <ul class="est-sheet-terms-list">
                         <li>العرض سارٍ لمدة 30 يوماً من تاريخ إصداره، ومحمي باتفاقية عدم إفصاح رسمية (NDA).</li>
                         <li>يشمل الدعم الفني وضمان الأمان الشامل لمدة 12 شهراً مجاناً بعد التدشين.</li>
                         <li>نظام الدفع: 50% دفعة مقدمة عند توقيع العقد، و50% بعد الفحص والاعتماد النهائي.</li>
@@ -1035,14 +1035,14 @@
                 <!-- Official Signatures -->
                 <div class="est-sheet-sign-row">
                     <div>
-                        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px;">اعتماد S&R CoreSync Solutions:</div>
-                        <div style="font-family: serif; font-size: 1.2rem; font-weight: bold; color: #b45309;">M. Salim Aziza</div>
-                        <div style="font-size: 0.76rem; color: #94a3b8;">م. سليم عزيزة • المؤسس والمدير التنفيذي</div>
+                        <div class="est-sheet-sign-lbl">اعتماد S&R CoreSync Solutions:</div>
+                        <div class="est-sheet-signature-founder">M. Salim Aziza</div>
+                        <div class="est-sheet-sign-sub">م. سليم عزيزة • المؤسس والمدير التنفيذي</div>
                     </div>
                     <div>
-                        <div style="font-size: 0.8rem; font-weight: 700; color: #64748b; margin-bottom: 8px;">اعتماد وقبول الطرف الثاني:</div>
-                        <div style="height: 25px; border-bottom: 1.5px solid #cbd5e1; width: 180px; margin: 0 auto 6px;"></div>
-                        <div style="font-size: 0.76rem; color: #94a3b8;">التوقيع والختم الرسمي</div>
+                        <div class="est-sheet-sign-lbl">اعتماد وقبول الطرف الثاني:</div>
+                        <div class="est-sheet-sign-line"></div>
+                        <div class="est-sheet-sign-sub">التوقيع والختم الرسمي</div>
                     </div>
                 </div>
             </div>
