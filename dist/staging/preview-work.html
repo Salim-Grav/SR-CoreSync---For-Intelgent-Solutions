@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="معاينة قسم تصاميم المواقع والمشاريع الرقمية المختارة - S&R CoreSync Solutions.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <title>معاينة قسم المواقع والأعمال الرقمية - S&R CoreSync Solutions</title>
+    
+    <!-- الخطوط الرسمية الأصلية لموقع دانا نجمة: Alexandria الفاخر + Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/enterprise-suite.min.css">
+    <style>
+        :root {
+            --primary-gold: #c5a880;
+            --primary-gold-hover: #d8bc95;
+            --bg-dark: #010907;
+            --card-glass: rgba(14, 24, 20, 0.65);
+            --border-glass: rgba(197, 168, 128, 0.18);
+        }
+
+        body {
+            background-color: #010907;
+            color: #ffffff;
+            font-family: 'Alexandria', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        .gold-accent {
+            color: var(--primary-gold) !important;
+        }
+
+        .summary-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: var(--primary-gold);
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .section-selected-work {
+            position: relative;
+            background: #010907;
+            border-radius: 24px;
+            padding: 40px 20px;
+            overflow: hidden;
+            border: 1px solid rgba(197, 168, 128, 0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+        }
+
+        .work-tab_btn {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            list-style: none;
+            padding: 0;
+            margin: 25px 0 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .work-tab_btn .tf-btn-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: #ffffff;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .work-tab_btn .tf-btn-tab:hover {
+            border-color: var(--primary-gold);
+            background: rgba(197, 168, 128, 0.12);
+        }
+
+        .work-tab_btn .tf-btn-tab.active {
+            background: var(--primary-gold);
+            color: #010907;
+            border-color: var(--primary-gold);
+            box-shadow: 0 4px 20px rgba(197, 168, 128, 0.4);
+            font-weight: 700;
+        }
+
+        .work-tab_btn .tf-btn-tab.active .dot-active {
+            background: #010907;
+        }
+
+        .dot-active {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            display: inline-block;
+        }
+
+        .work-project-list-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 1.4rem;
+        }
+
+        .work-project-nav-item {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: right;
+            -webkit-user-select: none;
+            user-select: none;
+            line-height: 1.25;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 4px 0;
+        }
+
+        .work-section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+        }
+
+        .work-section-subtitle {
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
+        .work-project-subtitle-text {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.6;
+        }
+
+        .work-project-year-badge {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .work-nav-num {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            opacity: 0.65;
+            display: inline-block;
+        }
+
+        .work-project-nav-item:hover {
+            color: rgba(255, 255, 255, 0.9);
+            transform: translateX(-4px);
+        }
+
+        .work-project-nav-item.active {
+            color: #ffffff;
+            font-size: 1.75rem;
+            font-weight: 800;
+            transform: translateX(-8px);
+        }
+
+        .work-project-nav-item.active .work-nav-num {
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        .work-project-nav-item.active::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary-gold);
+            box-shadow: 0 0 10px var(--primary-gold);
+            display: inline-block;
+        }
+
+        .work-browser-frame {
+            background: #0a0f16;
+            border: 1px solid rgba(197, 168, 128, 0.28);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(197, 168, 128, 0.12);
+            transition: all 0.35s ease;
+        }
+
+        .work-browser-frame:hover {
+            border-color: rgba(197, 168, 128, 0.55);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 50px rgba(197, 168, 128, 0.22);
+        }
+
+        .work-browser-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: #0f1622;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            direction: ltr !important;
+            gap: 12px;
+        }
+
+        .work-browser-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .work-browser-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+
+        .work-browser-url {
+            flex: 1;
+            max-width: 440px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 20px;
+            padding: 4px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 11px;
+            font-family: 'Plus Jakarta Sans', monospace;
+            color: #94a3b8;
+        }
+
+        .work-browser-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            color: #10b981;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            display: inline-block;
+        }
+
+        .work-card-media {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            cursor: pointer;
+            aspect-ratio: 16 / 9.6;
+        }
+
+        .work-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card-media:hover .work-card-img {
+            transform: scale(1.03);
+        }
+
+        .work-card-badge-gold {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(1, 9, 7, 0.88);
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            transition: all 0.35s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .work-card-media:hover .work-card-badge-gold {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: var(--primary-gold);
+            color: #010907;
+            opacity: 1;
+        }
+
+        .work-kpis-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 1.2rem 0;
+        }
+
+        .work-kpi-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 168, 128, 0.18);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .work-kpi-val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #c5a880;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.2;
+        }
+
+        .work-kpi-lbl {
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 3px;
+        }
+
+        .work-actions-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+
+        .work-explore-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+
+        .work-explore-btn:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .work-live-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.25), rgba(197, 168, 128, 0.08));
+            border: 1px solid rgba(197, 168, 128, 0.5);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .work-live-link-btn:hover {
+            background: var(--primary-gold);
+            color: #010907;
+            box-shadow: 0 4px 20px rgba(197, 168, 128, 0.4);
+        }
+
+        .work-counter-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: var(--primary-gold);
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', monospace;
+        }
+
+        .tf-btn.style-2 {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+
+        .btn-nav-swiper {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-nav-swiper:hover {
+            background: var(--primary-gold);
+            color: #010907;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-4">
+        <section class="section-selected-work" id="work">
+            <div class="text-center mb-4">
+                <div class="summary-badge mb-3">
+                    <span>💼 سجل الإنجازات والأنظمة المنفذة</span>
+                </div>
+                <h2 class="work-section-title">
+                    أعمال وحلول رقمية مختارة
+                </h2>
+                <p class="work-section-subtitle">
+                    استكشف نماذج من المواقع والمتاجر والأنظمة السحابية والهويات المؤسسية التي طورناها لعملائنا في أوروبا والشرق الأوسط بأعلى معايير السرعة والأمان.
+                </p>
+            </div>
+
+            <!-- تبويبات الأقسام الأربعة -->
+            <ul class="work-tab_btn" role="tablist" aria-label="أقسام الأعمال والمشاريع">
+                <li role="presentation">
+                    <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab active" onclick="switchWorkTab('websites', this)">
+                        <span class="dot-active"></span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                        مواقع ومتاجر إلكترونية
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('identity', this)">
+                        <span class="dot-active"></span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/><path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/></svg>
+                        هويات بصرية وشعارات
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('erp', this)">
+                        <span class="dot-active"></span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        أنظمة سحابية وERP
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('apps', this)">
+                        <span class="dot-active"></span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                        تطبيقات ذكية وAI
+                    </button>
+                </li>
+            </ul>
+
+            <!-- عرض العمل التفاعلي -->
+            <div id="work-dynamic-pane">
+                <div class="row align-items-center g-4">
+                    <!-- القائمة الجانبية وتفاصيل المشروع والمؤشرات -->
+                    <div class="col-lg-4 col-md-5 order-2 order-md-1">
+                        <div class="work-project-list-nav" id="work-project-names-nav"></div>
+                        <p class="text-white-64 mb-3 work-project-subtitle-text" id="project-subtitle-label">
+                            متجر وتطبيق ويب للطلبات السريعة وبوابة دفع iDEAL بهولندا
+                        </p>
+                        <!-- شريط مؤشرات الأداء -->
+                        <div class="work-kpis-strip">
+                            <div class="work-kpi-box">
+                                <div class="work-kpi-val" id="work-kpi-speed">0.34s</div>
+                                <div class="work-kpi-lbl">سرعة التحميل</div>
+                            </div>
+                            <div class="work-kpi-box">
+                                <div class="work-kpi-val" id="work-kpi-conv">+185%</div>
+                                <div class="work-kpi-lbl">معدل التحويل</div>
+                            </div>
+                            <div class="work-kpi-box">
+                                <div class="work-kpi-val" id="work-kpi-sales">+4.2x</div>
+                                <div class="work-kpi-lbl">نمو المبيعات</div>
+                            </div>
+                        </div>
+                        <div class="work-actions-row">
+                            <button type="button" class="work-explore-btn" onclick="openCurrentProjectModal()">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                <span>دراسة الحالة الكاملة</span>
+                            </button>
+                            <a id="work-live-preview-btn" href="https://shoarma-hintham.com" target="_blank" rel="noopener" class="work-live-link-btn">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                <span>معاينة حية ↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- إطار المتصفح التفاعلي الفاخر لعرض الموقع -->
+                    <div class="col-lg-8 col-md-7 order-1 order-md-2">
+                        <div class="work-browser-frame">
+                            <div class="work-browser-bar">
+                                <div class="work-browser-dots">
+                                    <span class="dot-red"></span>
+                                    <span class="dot-yellow"></span>
+                                    <span class="dot-green"></span>
+                                </div>
+                                <div class="work-browser-url">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                    <span id="work-browser-url-text">shoarma-hintham.com</span>
+                                </div>
+                                <div class="work-browser-badge" id="work-live-badge">
+                                    <span class="live-dot"></span> مباشر / Live
+                                </div>
+                            </div>
+                            <div class="work-card-media cs-pointer" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
+                                <img id="work-main-image" src="./assets/work-web-hintham.jpg" alt="معاينة العمل" class="work-card-img">
+                                <div class="work-card-badge-gold" title="استعراض التفاصيل">
+                                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- شريط التاجات والتنقل السفلي -->
+                <div class="row align-items-center mt-4 pt-2">
+                    <div class="col-md-5">
+                        <div class="d-flex gap-2 flex-wrap" id="work-project-tags"></div>
+                    </div>
+                    <div class="col-md-4 text-center my-3 my-md-0">
+                        <div class="d-inline-flex align-items-center gap-3">
+                            <button type="button" class="btn-nav-swiper" onclick="cycleProject(-1)">← السابق</button>
+                            <span class="work-counter-badge" id="work-project-counter">01 / 04</span>
+                            <button type="button" class="btn-nav-swiper" onclick="cycleProject(1)">التالي →</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-md-end text-center">
+                        <p class="work-project-year-badge" id="work-project-year">
+                            20<span class="gold-accent">25</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- نافذة تفاصيل دراسة الحالة والمشاريع المنبثقة -->
+    <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+        <div class="project-modal__backdrop" onclick="closeProjectModal()"></div>
+        
+        <!-- زر الإغلاق الدائري الفاخر -->
+        <button type="button" class="project-modal__close" onclick="closeProjectModal()" aria-label="إغلاق تفاصيل المشروع" title="إغلاق">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- زر التوسيع / العرض الأوسع في الزاوية السفلية -->
+        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" onclick="toggleWideView()" aria-label="تبديل العرض الأوسع">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+            </svg>
+            <span id="projectModalExpandText">عرض أوسع</span>
+        </button>
+
+        <div class="project-modal__panel" role="document">
+            <!-- عمود معرض الصور العمودي المتدفق -->
+            <div class="project-modal__media">
+                <div class="project-modal__gallery" id="projectModalGallery"></div>
+            </div>
+
+            <!-- عمود تفاصيل ومعلومات المشروع الثابت -->
+            <div class="project-modal__details">
+                <div class="project-details-sticky">
+                    <h2 id="projectModalTitle" class="project-modal-title">SARLOR</h2>
+                    <p id="projectModalDescription" class="project-modal-desc">
+                        صممت الهوية البصرية لمطعم Sarlor السوري في هولندا والمتخصص في الفطائر والمناقيش والبيتزا...
+                    </p>
+
+                    <dl class="project-modal__meta">
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.4-4.3 2.7-6.5 7-6.5s6.6 2.2 7 6.5z"></path></svg>
+                                <span>العميل:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalClient">SARLOR</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3.5h7l4 4V20.5H7z"></path><path d="M14 3.5v4h4M10 12h5M10 16h5"></path></svg>
+                                <span>النوع:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalType">هوية بصرية</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5.5" width="16" height="15" rx="1"></rect><path d="M8 3v5M16 3v5M4 10h16"></path></svg>
+                                <span>السنة:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalYear">2024</dd>
+                        </div>
+                        <div class="meta-row">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <span>الموقع:</span>
+                            </dt>
+                            <dd class="meta-dd" id="projectModalLoc">هولندا</dd>
+                        </div>
+                        <div class="meta-row" id="projectModalPreviewRow">
+                            <dt class="meta-dt">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                                <span>الموقع الحي:</span>
+                            </dt>
+                            <dd class="meta-dd">
+                                <a id="projectModalPreview" href="#" target="_blank" rel="noopener">زيارة الموقع ↗</a>
+                            </dd>
+                        </div>
+                    </dl>
+
+                    <blockquote class="project-modal__quote">
+                        <p id="projectModalQuote">"نظام بصري متقن بإيقاع قوي وصور معبرة وتجربة لا تُنسى."</p>
+                    </blockquote>
+
+                    <!-- بطاقات مؤشرات الأداء داخل النافذة -->
+                    <div class="project-modal-kpis">
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val text-gradient-gold" id="projectModalKpiConversion">+165%</span>
+                            <span class="project-kpi-lbl">معدل التحويل</span>
+                        </div>
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val" id="projectModalKpiSpeed">0.34s</span>
+                            <span class="project-kpi-lbl">سرعة الاستجابة</span>
+                        </div>
+                        <div class="project-kpi-card">
+                            <span class="project-kpi-val text-gradient-gold" id="projectModalKpiSales">+3.2x</span>
+                            <span class="project-kpi-lbl">نمو المبيعات</span>
+                        </div>
+                    </div>
+
+                    <!-- باقة تحميل ملفات الشعار المعتمدة (Brand Assets Download Bundle) -->
+                    <div class="project-modal-brand-kit" id="projectModalBrandKit">
+                        <div class="brand-kit-top">
+                            <div class="brand-kit-badge">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                <span>MASTER BRAND PACK</span>
+                            </div>
+                            <span class="brand-kit-formats-pill">SVG • PNG 4K • EPS • PDF</span>
+                        </div>
+                        <div class="brand-kit-body">
+                            <h4 class="brand-kit-heading" id="brandKitHeadingText">حزمة أصول الشعار والهوية المعتمدة</h4>
+                            <p class="brand-kit-sub" id="brandKitSubText">تحميل الأصول المتجهة الفيكتور بدقة غير محدودة مع كود الألوان ودليل الاستخدام.</p>
+                            <div class="brand-kit-actions-group">
+                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <span id="brandKitBtnText">تحميل ملفات الشعار (ZIP)</span>
+                                </button>
+                                <a href="./preview-3d-mockup.html" class="brand-kit-3d-btn" id="brandKit3DBtn" target="_blank" title="فحص المجسم ثلاثي الأبعاد 360°">
+                                    <span>معاينة ثلاثية الأبعاد 🧊</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- التاجات والتقنيات المستخدمة -->
+                    <div class="project-modal-techs" id="projectModalTechPills"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projectsDB = {
+            websites: [
+                {
+                    id: "hintham",
+                    name: "Shoarma Hintham",
+                    subtitle: "متجر وتطبيق ويب للطلبات السريعة وبوابة دفع iDEAL بهولندا",
+                    heroImg: "./assets/work-web-hintham.jpg",
+                    tags: ["موقع وتطبيق ويب", "سلة طلبات فورية", "بوابة دفع iDEAL", "Next.js 15"],
+                    year: "2025",
+                    client: "Shoarma Hintham Restaurant",
+                    type: "موقع وتطبيق ويب للتوصيل",
+                    loc: "سيرتوخيمبوس، هولندا",
+                    preview: "https://shoarma-hintham.com",
+                    previewLabel: "shoarma-hintham.com",
+                    desc: "تصميم وتطوير موقع إلكتروني ومنظومة طلبات طعام سريعة مع تكامل الدفع عبر iDEAL وبطاقات الائتمان، ونظام إدارة مطبخ ذكي ولوحة تحكم فورية للطلبات بدون عمولات المنصات الخارجية.",
+                    quote: "رفع نسبة الطلبات المباشرة بنسبة 45% وحقق تجربة مستخدم فورية وسلسة للعملاء.",
+                    kpiConversion: '+185%', kpiSpeed: '0.34s', kpiSales: '+4.2x',
+                    techs: ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS', 'Kitchen WMS', 'Apple Pay']
+                },
+                {
+                    id: "reinigung",
+                    name: "NA Reinigung",
+                    subtitle: "منصة حجز خدمات تنظيف احترافية وحاسبة تكلفة ذكية بألمانيا",
+                    heroImg: "./assets/work-web-cleaning.jpg",
+                    tags: ["منصة حجز إلكتروني", "موقع متعدد اللغات", "UI/UX فاخر", "حاسبة تكلفة"],
+                    year: "2025",
+                    client: "NA Reinigung GmbH",
+                    type: "منصة حجز وجدولة مواعيد",
+                    loc: "فرانكفورت، ألمانيا",
+                    preview: "https://na-reinigung.de",
+                    previewLabel: "na-reinigung.de",
+                    desc: "موقع تعريفي ونظام حجز وجدولة ذكي لخدمات التنظيف السكنية والتجارية، يتيح حساب التكلفة فوراً وحجز المواعيد وأتمتة تأكيدات الحجز عبر البريد والواتساب مع واجهة أنيقة باللغة الألمانية.",
+                    quote: "منصة سلسة وتصميم عصري يبعث على الثقة والاحترافية المطلقة لدى العملاء الأوروبيين.",
+                    kpiConversion: '+160%', kpiSpeed: '0.29s', kpiSales: '+3.1x',
+                    techs: ['React', 'Next.js', 'Booking Engine', 'WhatsApp API', 'Multilingual DE/EN/AR']
+                },
+                {
+                    id: "aurora",
+                    name: "AURORA Wealth",
+                    subtitle: "موقع مؤسسي فائق السرعة ولوحة مؤشرات مالية تفاعلية",
+                    heroImg: "./assets/service-website-3d.jpg",
+                    tags: ["موقع مؤسسي فاخر", "SEO 98/100", "لوحة تحكم تفاعلية"],
+                    year: "2026",
+                    client: "Aurora Wealth Management",
+                    type: "موقع ويب وتحسين أداء",
+                    loc: "زيورخ، سويسرا",
+                    preview: "https://aurora-wealth.example.com",
+                    previewLabel: "aurora-wealth.com",
+                    desc: "تصميم موقع مؤسسي متجاوب بالكامل مع لوحة عملاء تعرض المؤشرات المالية لحظياً، وتحسين تقني رفع تقييم الأداء إلى 98/100 مع تهيئة شاملة لمحركات البحث.",
+                    quote: "موقع يبعث على الثقة ويحوّل الزوار إلى عملاء بمعدل تحويل تضاعف مرتين.",
+                    kpiConversion: '+210%', kpiSpeed: '0.32s', kpiSales: '+2.8x',
+                    techs: ['Next.js 15', 'Tailwind', 'Interactive Charts', 'Edge Network']
+                },
+                {
+                    id: "aurum",
+                    name: "AURUM E-Commerce",
+                    subtitle: "متجر إلكتروني فاخر مع بوابات دفع أوروبية وسداد بنكي فوري",
+                    heroImg: "./assets/service-ecommerce-3d.jpg",
+                    tags: ["متجر إلكتروني", "بوابات دفع iDEAL / Stripe", "تصميم Dark Gold"],
+                    year: "2026",
+                    client: "Aurum Luxury BV",
+                    type: "متجر إلكتروني عالمي",
+                    loc: "أمستردام، هولندا",
+                    preview: "https://aurum-store.example.com",
+                    previewLabel: "aurum-store.nl",
+                    desc: "تصميم وتطوير متجر إلكتروني فاخر بتجربة شراء سلسة على الجوال، مع تكامل كامل لبوابات الدفع الأوروبية (iDEAL وStripe وMollie وApple Pay)، وإدارة مخزون لحظية، وفوترة ضريبية متوافقة مع المعايير الهولندية.",
+                    quote: "ارتفع معدل إتمام الشراء بنسبة 38% في الأشهر الثلاثة الأولى بفضل الدفع السريع والتصميم الواضح.",
+                    kpiConversion: '+195%', kpiSpeed: '0.36s', kpiSales: '+3.8x',
+                    techs: ['Next.js 15', 'iDEAL & Stripe', 'Mollie', 'Apple Pay', 'PSD2 / SCA']
+                }
+            ],
+            identity: [
+                {
+                    id: "sarlor",
+                    name: "SARLOR",
+                    subtitle: "هوية بصرية لمطعم وفطائر سورية في هولندا",
+                    heroImg: "./assets/work-3.webp",
+                    tags: ["الهوية البصرية", "تصميم الشعار", "تصميم العبوات والتغليف"],
+                    year: "2024",
+                    client: "SARLOR",
+                    type: "هوية بصرية",
+                    loc: "هولندا",
+                    preview: null,
+                    desc: "صممت الهوية البصرية لمطعم Sarlor السوري في هولندا والمتخصص في الفطائر والمناقيش والبيتزا الشرق أوسطية. يتضمن الشعار حرف O مصمماً على هيئة شريحة بيتزا مع خطوط منحنية ترمز إلى السرعة والحركة لتعكس خدمة التوصيل السريع، وتمنح ألوان الأحمر والأصفر والكريمي إحساساً بالدفء والشهية وهوية عصرية وأصيلة تناسب السوق الأوروبية.",
+                    quote: "نظام بصري متقن بإيقاع قوي وصور معبرة وتجربة لا تُنسى.",
+                    kpiConversion: '+165%', kpiSpeed: '—', kpiSales: '+3.2x قيمة العلامة',
+                    techs: ['Illustrator', 'Figma', 'Vector Identity', 'Brand Guidelines'],
+                    gallery: [
+                        "./assets/work-3.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
+                    id: "oasis",
+                    name: "Oasis",
+                    subtitle: "تصميم هوية بصرية فاخرة وأدلة العلامة التجارية",
+                    heroImg: "./assets/work-2.webp",
+                    tags: ["هوية فاخرة", "شعار", "تغليف مخصص"],
+                    year: "2024",
+                    client: "Oasis Studio",
+                    type: "هوية بصرية متكاملة",
+                    loc: "أمستردام، هولندا",
+                    preview: null,
+                    desc: "بناء وتطوير هوية بصرية عصرية راقية تعكس الهدوء والفخامة والتوازن الطبيعي، مع أدلة متكاملة للعلامة التجارية وتطبيقات التغليف الرقمية والورقية الموجهة للسوق الأوروبي الممتاز.",
+                    quote: "هوية بصرية ترسخ مكانة العلامة بأناقة استثنائية وانطباع فخم يدوم طويلاً.",
+                    kpiConversion: '+180%', kpiSpeed: '—', kpiSales: '+2.9x انتشار وثقة',
+                    techs: ['Brand Architecture', 'Figma', 'Typography System', 'Eco Packaging'],
+                    gallery: [
+                        "./assets/work-2.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
+                    id: "toneh",
+                    name: "Toneh",
+                    subtitle: "هوية رقمية وتصميم علامة تجارية متعددة الوسائط",
+                    heroImg: "./assets/work-1.webp",
+                    tags: ["هوية رقمية", "تايبوغرافي عربي ولاتيني", "براندنج"],
+                    year: "2023",
+                    client: "Toneh Media",
+                    type: "هوية بصرية وعلامة تجارية",
+                    loc: "دبي، الإمارات",
+                    preview: null,
+                    desc: "تطوير هوية ديناميكية تجمع بين البساطة والجرأة، مع خطوط عربية ولاتينية متناغمة تلائم وسائط التواصل الرقمية والتطبيقات الحديثة بأعلى معايير الإخراج الجمالي.",
+                    quote: "إيقاع بصري فريد ينبض بالعصرية والتجدد والتميز في الفضاء الرقمي.",
+                    kpiConversion: '+210%', kpiSpeed: '—', kpiSales: '+4.1x تفاعل المنصات',
+                    techs: ['Bilingual Typography', '3D Metallic Wall', 'Social Design System'],
+                    gallery: [
+                        "./assets/work-1.webp",
+                        "./assets/service-identity-3d.jpg"
+                    ]
+                },
+                {
+                    id: "lumina",
+                    name: "Lumina Café",
+                    subtitle: "هوية بصرية فاخرة لمحمصة وقهوة مختصة في أمستردام",
+                    heroImg: "./assets/service-identity-3d.jpg",
+                    tags: ["قهوة مختصة", "تغليف صديق للبيئة", "هوية تجارية"],
+                    year: "2025",
+                    client: "Lumina Coffee BV",
+                    type: "هوية بصرية وعلامة تجارية",
+                    loc: "أمستردام، هولندا",
+                    preview: null,
+                    desc: "ابتكار هوية بصرية دافئة تجمع بين الحداثة الأوروبية وأصالة تحميص البن الأثيوبي والكولومبي، مع خطوط طباعية نقية، وألوان ترابية مستوحاة من الطبيعة، وتصاميم أكياس تغليف مبتكرة تدعم الاستدامة.",
+                    quote: "تصميم فني استثنائي يربط أصالة القهوة بالطابع الأوروبي الحديث ويعزز ولاء العملاء منذ اللحظة الأولى.",
+                    kpiConversion: '+195%', kpiSpeed: '—', kpiSales: '+3.5x ولاء العملاء',
+                    techs: ['Packaging Design', 'Gold Foil & Emboss', 'Retail Guidelines'],
+                    gallery: [
+                        "./assets/service-identity-3d.jpg",
+                        "./assets/work-2.webp"
+                    ]
+                }
+            ],
+            erp: [
+                {
+                    id: "coresync",
+                    name: "CoreSync Cloud ERP",
+                    subtitle: "نظام إدارة الموارد وتتبع العمليات وسلاسل الإمداد السحابي",
+                    heroImg: "./assets/service-website-3d.jpg",
+                    tags: ["نظام ERP سحابي", "إدارة سلاسل التوريد", "أتمتة الأعمال"],
+                    year: "2026",
+                    kpiConversion: '+240%', kpiSpeed: '0.25s', kpiSales: '+5.0x كفاءة',
+                    gallery: ["./assets/service-website-3d.jpg", "./assets/work-1.webp"]
+                }
+            ],
+            apps: [
+                {
+                    id: "visionai",
+                    name: "VisionAI Inspector",
+                    subtitle: "نظام الرؤية الحاسوبية وفحص جودة خطوط الإنتاج بالذكاء الاصطناعي",
+                    heroImg: "./assets/service-ecommerce-3d.jpg",
+                    tags: ["ذكاء اصطناعي", "رؤية حاسوبية", "أتمتة صناعية"],
+                    year: "2026",
+                    kpiConversion: '+310%', kpiSpeed: '0.18s', kpiSales: '+85% دقة',
+                    gallery: ["./assets/service-ecommerce-3d.jpg", "./assets/work-2.webp"]
+                }
+            ]
+        };
+
+        let currentWorkCategory = 'websites';
+        let currentWorkProjectIdx = 0;
+
+        function switchWorkTab(category, btn) {
+            currentWorkCategory = category;
+            currentWorkProjectIdx = 0;
+
+            document.querySelectorAll('.work-tab_btn .tf-btn-tab').forEach(b => {
+                b.classList.remove('active');
+            });
+
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                const targetBtn = document.getElementById('tab-btn-' + category);
+                if (targetBtn) targetBtn.classList.add('active');
+            }
+
+            renderActiveWork();
+        }
+
+        function renderActiveWork() {
+            const list = projectsDB[currentWorkCategory] || [];
+            if (!list.length) return;
+
+            if (currentWorkProjectIdx >= list.length) currentWorkProjectIdx = 0;
+            if (currentWorkProjectIdx < 0) currentWorkProjectIdx = list.length - 1;
+
+            const activeProject = list[currentWorkProjectIdx];
+
+            // 1. تحديث قائمة أسماء المشاريع
+            const navContainer = document.getElementById('work-project-names-nav');
+            if (navContainer) {
+                navContainer.innerHTML = '';
+                list.forEach((p, idx) => {
+                    const itemBtn = document.createElement('div');
+                    itemBtn.className = 'work-project-nav-item' + (idx === currentWorkProjectIdx ? ' active' : '');
+                    itemBtn.innerHTML = `<span class="work-nav-num">0${idx + 1}</span> <span class="work-nav-title">${p.name}</span>`;
+                    itemBtn.onclick = function() {
+                        currentWorkProjectIdx = idx;
+                        renderActiveWork();
+                    };
+                    navContainer.appendChild(itemBtn);
+                });
+            }
+
+            // 2. تحديث العنوان والوصف
+            const titleEl = document.getElementById('work-project-title');
+            if (titleEl) titleEl.textContent = activeProject.name;
+
+            const subLabel = document.getElementById('project-subtitle-label');
+            if (subLabel) subLabel.textContent = activeProject.subtitle;
+
+            // 3. تحديث مؤشرات الأداء
+            const kpiSpeed = document.getElementById('work-kpi-speed');
+            if (kpiSpeed) kpiSpeed.textContent = activeProject.kpiSpeed || '0.34s';
+
+            const kpiConv = document.getElementById('work-kpi-conv');
+            if (kpiConv) kpiConv.textContent = activeProject.kpiConversion || '+185%';
+
+            const kpiSales = document.getElementById('work-kpi-sales');
+            if (kpiSales) kpiSales.textContent = activeProject.kpiSales || '+4.2x';
+
+            // 4. تحديث شريط المتصفح ورابط المعاينة
+            const browserUrl = document.getElementById('work-browser-url-text');
+            const liveBtn = document.getElementById('work-live-preview-btn');
+            const liveBadge = document.getElementById('work-live-badge');
+            const displayUrl = activeProject.preview ? (activeProject.previewLabel || activeProject.preview.replace(/^https?:\/\//, '')) : `coresync-solutions.com/portfolio/${activeProject.id}`;
+            if (browserUrl) browserUrl.textContent = displayUrl;
+
+            if (liveBadge) {
+                if (activeProject.preview) {
+                    liveBadge.innerHTML = '<span class="live-dot"></span> مباشر / Live';
+                    liveBadge.style.color = '#10b981';
+                    liveBadge.style.borderColor = 'rgba(16, 185, 129, 0.45)';
+                    liveBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#c5a880;box-shadow:0 0 8px #c5a880;"></span> هوية وشعار موثّق / Verified';
+                    liveBadge.style.color = '#c5a880';
+                    liveBadge.style.borderColor = 'rgba(197, 168, 128, 0.45)';
+                    liveBadge.style.background = 'rgba(197, 168, 128, 0.15)';
+                } else {
+                    liveBadge.innerHTML = '<span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span> نظام موثّق / Verified';
+                    liveBadge.style.color = '#38bdf8';
+                    liveBadge.style.borderColor = 'rgba(56, 189, 248, 0.45)';
+                    liveBadge.style.background = 'rgba(6, 182, 212, 0.12)';
+                }
+            }
+
+            if (liveBtn) {
+                if (activeProject.preview) {
+                    liveBtn.href = activeProject.preview;
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>معاينة حية ↗</span>';
+                    liveBtn.onclick = null;
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_blank';
+                } else if (currentWorkCategory === 'identity') {
+                    liveBtn.href = '#!';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>معاينة الشعار والهوية 🔍</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
+                } else {
+                    liveBtn.href = '#!';
+                    liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>استعراض النظام ⚡</span>';
+                    liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
+                    liveBtn.style.display = 'inline-flex';
+                    liveBtn.target = '_self';
+                }
+            }
+
+            // 5. تحديث الصورة
+            const mainImg = document.getElementById('work-main-image');
+            if (mainImg) {
+                mainImg.src = activeProject.heroImg;
+                mainImg.alt = activeProject.name;
+            }
+
+            // 6. تحديث التاجات
+            const tagsContainer = document.getElementById('work-project-tags');
+            if (tagsContainer) {
+                tagsContainer.innerHTML = '';
+                (activeProject.tags || []).forEach(t => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'tf-btn style-2';
+                    tagEl.textContent = t;
+                    tagsContainer.appendChild(tagEl);
+                });
+            }
+
+            // 7. العداد
+            const counterEl = document.getElementById('work-project-counter');
+            if (counterEl) {
+                const cur = String(currentWorkProjectIdx + 1).padStart(2, '0');
+                const tot = String(list.length).padStart(2, '0');
+                counterEl.textContent = `${cur} / ${tot}`;
+            }
+
+            // 8. السنة
+            const yearEl = document.getElementById('work-project-year');
+            if (yearEl && activeProject.year) {
+                const y = String(activeProject.year);
+                if (y.length === 4) {
+                    yearEl.innerHTML = `${y.substring(0, 2)}<span class="gold-accent">${y.substring(2)}</span>`;
+                } else {
+                    yearEl.textContent = y;
+                }
+            }
+        }
+
+        function cycleProject(step) {
+            const list = projectsDB[currentWorkCategory] || [];
+            if (!list.length) return;
+            currentWorkProjectIdx = (currentWorkProjectIdx + step + list.length) % list.length;
+            renderActiveWork();
+        }
+
+        // فتح نافذة دراسة الحالة للمشروع الحالي
+        function openCurrentProjectModal() {
+            const list = projectsDB[currentWorkCategory] || [];
+            const p = list[currentWorkProjectIdx] || list[0];
+            if (p) openProjectModalWithData(p);
+        }
+
+        function openProjectModalWithData(p) {
+            if (!p) return;
+
+            document.getElementById('projectModalTitle').textContent = p.name;
+            document.getElementById('projectModalDescription').textContent = p.desc;
+            document.getElementById('projectModalClient').textContent = p.client;
+            document.getElementById('projectModalType').textContent = p.type;
+            document.getElementById('projectModalYear').textContent = p.year;
+            document.getElementById('projectModalLoc').textContent = p.loc;
+            document.getElementById('projectModalQuote').textContent = `"${p.quote}"`;
+
+            const previewRow = document.getElementById('projectModalPreviewRow');
+            const previewLink = document.getElementById('projectModalPreview');
+            if (previewRow && previewLink) {
+                if (p.preview) {
+                    previewRow.style.display = 'flex';
+                    previewLink.href = p.preview;
+                    previewLink.textContent = p.previewLabel || p.preview;
+                } else {
+                    previewRow.style.display = 'none';
+                }
+            }
+
+            const galleryContainer = document.getElementById('projectModalGallery');
+            if (galleryContainer) {
+                galleryContainer.innerHTML = '';
+                const imgs = p.gallery && p.gallery.length ? p.gallery : [p.heroImg];
+                imgs.forEach((imgUrl, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'project-gallery-item';
+                    item.title = 'انقر للتكبير والفحص بدقة 4K';
+                    item.innerHTML = `
+                        <img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />
+                        <div class="project-gallery-zoom-trigger">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                            <span>فحص وتكبير 4K</span>
+                        </div>
+                    `;
+                    item.onclick = function() {
+                        if (window.openImageZoom) {
+                            window.openImageZoom(imgUrl, `${p.name} • تفاصيل الشعار والعرض بدقة 4K`);
+                        }
+                    };
+                    galleryContainer.appendChild(item);
+                });
+                const mediaPanel = document.querySelector('.project-modal__media');
+                if (mediaPanel) mediaPanel.scrollTop = 0;
+            }
+
+            const kpiConv = document.getElementById('projectModalKpiConversion');
+            const kpiSpeed = document.getElementById('projectModalKpiSpeed');
+            const kpiSales = document.getElementById('projectModalKpiSales');
+            if (kpiConv) kpiConv.textContent = p.kpiConversion || '+142%';
+            if (kpiSpeed) kpiSpeed.textContent = p.kpiSpeed || '0.38s';
+            if (kpiSales) kpiSales.textContent = p.kpiSales || '+3.4x';
+
+            const techPills = document.getElementById('projectModalTechPills');
+            if (techPills) {
+                const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
+                techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
+            }
+
+            // تفعيل وتحديث باقة الشعار والهوية
+            if (window.setActiveBrandProject) {
+                window.setActiveBrandProject(p);
+            }
+
+            const modal = document.getElementById('projectModal');
+            if (modal) {
+                modal.classList.add('active');
+                modal.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.classList.remove('is-open');
+                modal.classList.remove('is-wide');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function toggleWideView() {
+            const modal = document.getElementById('projectModal');
+            const expandText = document.getElementById('projectModalExpandText');
+            if (modal) {
+                modal.classList.toggle('is-wide');
+                if (modal.classList.contains('is-wide')) {
+                    if (expandText) expandText.textContent = 'عرض التفاصيل';
+                } else {
+                    if (expandText) expandText.textContent = 'عرض أوسع';
+                }
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+
+        // تشغيل فوري
+        renderActiveWork();
+    </script>
+
+    <!-- نافذة فحص دقة 4K الفائقة والتكبير والتنقل التفاعلي (4K Vector & Brand Zoom Inspector) -->
+    <div class="sr-zoom-modal" id="srImageZoomModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="فاحص الدقة الفائقة 4K">
+        <div class="sr-zoom-backdrop" onclick="closeImageZoom()"></div>
+        
+        <!-- شريط التحكم العلوي العائم -->
+        <div class="sr-zoom-toolbar">
+            <div class="sr-zoom-title-box">
+                <span class="sr-zoom-badge-gold">4K ULTRA-HD</span>
+                <span class="sr-zoom-title" id="srZoomModalTitle">SARLOR • فحص تفاصيل الشعار بدقة 4K</span>
+            </div>
+            
+            <div class="sr-zoom-actions">
+                <button type="button" class="sr-zoom-btn" onclick="zoomIn()" title="تكبير (+)" aria-label="Zoom In">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </button>
+                <span class="sr-zoom-level-pill" id="srZoomLevelText">100%</span>
+                <button type="button" class="sr-zoom-btn" onclick="zoomOut()" title="تصغير (-)" aria-label="Zoom Out">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </button>
+                <button type="button" class="sr-zoom-btn" onclick="resetZoom()" title="إعادة الضبط (1:1)" aria-label="Reset Zoom">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+                </button>
+                <div class="sr-zoom-hint">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+                    <span id="srZoomHintText">اسحب للتحريك • انقر مرتين للتكبير</span>
+                </div>
+                <button type="button" class="sr-zoom-close-btn" onclick="closeImageZoom()" title="إغلاق (Esc)" aria-label="Close">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- مسرح العرض والتكبير والسحب -->
+        <div class="sr-zoom-viewport" id="srZoomViewport">
+            <div class="sr-zoom-stage" id="srZoomStage">
+                <img id="srZoomImage" src="" alt="4K Zoom Preview" draggable="false" />
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/sr-brand-inspector.js"></script>
+    <script src="./js/sr-social-proof.min.js"></script>
+</body>
+</html>

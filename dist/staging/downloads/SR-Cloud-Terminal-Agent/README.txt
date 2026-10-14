@@ -1,0 +1,1 @@
+S&R Cloud Terminal Agent v1.0\n(c) 2026 S&R CoreSync Solutions B.V.\nAuthor: Eng. Salim Azizah\n
