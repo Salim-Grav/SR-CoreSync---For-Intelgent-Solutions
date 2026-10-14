@@ -128,6 +128,9 @@ if (fs.existsSync('css/enterprise-suite.js')) {
     results.push(processAsset('css/enterprise-suite.js', 'js/enterprise-suite.min.js', 'js'));
   }
 }
+if (fs.existsSync('js/sr-brand-inspector.js')) {
+  results.push(processAsset('js/sr-brand-inspector.js', 'js/sr-brand-inspector.min.js', 'js'));
+}
 
 console.table(results);
 console.log('✅ Production Assets Compiled & Verified Successfully!');
