@@ -2161,10 +2161,34 @@
             overflow-y: hidden;
         }
 
-        .project-modal.active {
+        .project-modal.active,
+        .project-modal.is-open {
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+            top: 0 !important;
+        }
+
+        /* ضمان ظهور كافة عناصر النافذة وتجاوز أي حجب موروث من الحزم القديمة */
+        .project-modal.active .project-modal__close,
+        .project-modal.active .project-modal__media,
+        .project-modal.active .project-modal__details,
+        .project-modal.is-open .project-modal__close,
+        .project-modal.is-open .project-modal__media,
+        .project-modal.is-open .project-modal__details {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+        }
+
+        .project-modal__gallery img,
+        .project-gallery-item img,
+        .project-gallery-img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
         }
 
         .project-modal__backdrop {
@@ -7949,7 +7973,7 @@
                     techs: ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS', 'Kitchen WMS', 'Apple Pay'],
                     gallery: [
                         "./assets/work-web-hintham.jpg",
-                        "./assets/work-3.webp",
+                        "./assets/service-website-3d.jpg",
                         "./assets/service-ecommerce-3d.jpg"
                     ]
                 },
@@ -8439,7 +8463,7 @@
                 imgs.forEach((imgUrl, i) => {
                     const item = document.createElement('div');
                     item.className = 'project-gallery-item';
-                    item.innerHTML = `<img loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />`;
+                    item.innerHTML = `<img class="project-gallery-img" loading="lazy" decoding="async" src="${imgUrl}" alt="${p.name} - لقطة المعرض ${i + 1}" />`;
                     galleryContainer.appendChild(item);
                 });
                 // إعادة التمرير للأعلى في المعرض
@@ -8492,13 +8516,14 @@
             // تعبئة شرائح التقنيات المستخدمة
             const techPills = document.getElementById('projectModalTechPills');
             if (techPills) {
-                const techs = p.techs || ['HTML5', 'CSS3', 'JavaScript'];
+                const techs = p.techs || ['Next.js 15', 'iDEAL & Stripe', 'TailwindCSS'];
                 techPills.innerHTML = techs.map(t => `<span class="project-tech-pill">${t}</span>`).join('');
             }
 
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.add('active');
+                modal.classList.add('is-open');
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -8520,6 +8545,7 @@
             const modal = document.getElementById('projectModal');
             if (modal) {
                 modal.classList.remove('active');
+                modal.classList.remove('is-open');
                 modal.classList.remove('is-wide');
                 document.body.style.overflow = '';
                 const expandText = document.getElementById('projectModalExpandText');

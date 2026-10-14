@@ -5256,3 +5256,37 @@ html[lang="nl"] .salim-table {
     letter-spacing: 1px;
 }
 
+/* ==========================================================================
+   Project Case Study Modal - High-Spec Visibility & Animation Overrides
+   Guarantees full visibility across all viewports and language editions
+   ========================================================================== */
+.project-modal.active,
+.project-modal.is-open {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    top: 0 !important;
+}
+
+.project-modal.active .project-modal__close,
+.project-modal.active .project-modal__media,
+.project-modal.active .project-modal__details,
+.project-modal.is-open .project-modal__close,
+.project-modal.is-open .project-modal__media,
+.project-modal.is-open .project-modal__details {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.project-modal__gallery img,
+.project-gallery-item img,
+.project-gallery-img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+
