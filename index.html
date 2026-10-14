@@ -5342,44 +5342,120 @@
                 </div>
             </header>
 
-            <!-- المحتوى التحريري الرئيسي للبانر (Hero Banner Content - التصميم الأول الأصلي) -->
-            <div class="section-hero-v1 hero-reference">
-                <div class="overlay"></div>
-                <div class="content-wrap">
-                    <div class="container">
-                        <div class="hero-reference__grid">
-                            <div class="hero-reference__copy">
-                                <p class="hero-availability hero-intro">
-                                    <span class="hero-availability__dot"></span>
-                                    متاحون لبدء مشاريع التحول الرقمي والـ ERP لعام 2026
-                                </p>
-                                <h1 class="hero-reference__title">
-                                    <span class="hero-title-line"><span class="hero-title-line__text">أنظمة برمجية متقدمة</span></span>
-                                    <span class="hero-title-line"><span class="hero-title-line__text">وحلول <span class="hero-title-accent">ERP وذكاء اصطناعي</span> ذكية</span></span>
-                                </h1>
-                                <div class="hero-reference__bottom hero-intro">
-                                    <p>نبتكر حلولاً برمجية مخصصة، تطبيقات سحابية، وتكامل أنظمة الـ ERP والمحاسبة وأتمتة الذكاء الاصطناعي لمساعدة الشركات في أوروبا والشرق الأوسط على التوسع والريادة.</p>
-                                    <div class="hero-reference__actions d-flex flex-wrap gap-2">
-                                        <a href="#contact" class="tf-btn hero-reference__action">تواصـــل معنا</a>
-                                        <button type="button" class="tf-btn hero-reference__action hero-btn-vip" onclick="openExecutiveBookingModal()">
-                                            <span>حجز استشارة VIP 👔</span>
-                                        </button>
-                                        <a href="#roi-calculator" class="tf-btn hero-reference__action hero-btn-roi">
-                                            <span>حاسبة التوفير (ROI) 📊</span>
-                                        </a>
-                                        <button type="button" class="tf-btn hero-reference__action hero-btn-install" onclick="openInstallModal()">
-                                            <span>تثبيت التطبيق (Windows & Mobile)</span>
-                                        </button>
-                                        <a href="demo.html" class="tf-btn hero-reference__action hero-btn-demo">
-                                            <span>النظام التجريبي (Live Demo)</span>
-                                        </a>
-                                        <a href="#pricing" class="tf-btn hero-reference__action hero-reference__package-btn"><span>عـــرض البـــاقات</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- المحتوى التحريري والمسرح السينمائي للبانر الحي (Royal Dual Living Hero Stage) -->
+            <div class="hero-living-container">
+                
+                <!-- كبسولة التبديل التنفيذية العلوية (Executive Switcher Capsule) -->
+                <div class="hero-exec-switcher-wrap">
+                    <div class="hero-exec-capsule" role="tablist" aria-label="تبديل عرض القيادة التنفيذية">
+                        <button type="button" role="tab" aria-selected="true" class="hero-exec-tab active" id="heroTabSalim" onclick="switchHeroFounder('salim')">
+                            <span class="hero-exec-tab-dot"></span>
+                            <span>م. محمد سليم عزيزة (CTO)</span>
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" class="hero-exec-tab" id="heroTabRaed" onclick="switchHeroFounder('raed')">
+                            <span class="hero-exec-tab-dot"></span>
+                            <span>أ. محمد رائد كعكة (CFO)</span>
+                        </button>
                     </div>
                 </div>
+
+                <div class="hero-living-grid">
+                    
+                    <!-- 1. المحتوى التحريري الحي المتجاوب (Semantic & Responsive Copy) -->
+                    <div class="hero-living-content">
+                        
+                        <div class="hero-living-badge" id="heroLivingBadge">
+                            <span class="live-dot"></span>
+                            <span id="heroLivingBadgeText">المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي</span>
+                        </div>
+
+                        <h1 class="hero-living-title" id="heroLivingTitle">
+                            أنظمة برمجية متكاملة <span class="gold-gradient-text">وحلول ذكاء اصطناعي</span>
+                        </h1>
+
+                        <div class="hero-living-person-sub" id="heroLivingPerson">
+                            <span id="heroLivingPersonName">م. محمد سليم عزيزة</span>
+                            <span class="badge-separator">•</span>
+                            <span class="hero-exec-role" id="heroLivingPersonRole">Chief Technology Officer &amp; AI Architect</span>
+                        </div>
+
+                        <p class="hero-living-desc" id="heroLivingDesc">
+                            نطور ونحدث الأنظمة البرمجية المتكاملة للشركات والمؤسسات، مع بنية رقمية سحابية متقدمة تشمل تطبيقات الهواتف والمنصات الرقمية السريعة وأنظمة الذكاء الاصطناعي المخصصة، لمساعدة عملائنا في هولندا وأوروبا والشرق الأوسط على أتمتة العمليات وتعزيز الريادة الرقمية.
+                        </p>
+
+                        <!-- شبكة الركائز الأربعة الذهبية (The 4 Golden Pillars Matching the Banner) -->
+                        <div class="hero-living-pillars" id="heroLivingPillars">
+                            <div class="hero-pillar-card">
+                                <div class="hero-pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                </div>
+                                <span class="hero-pillar-label">بناء وتحديث المنظومات</span>
+                            </div>
+                            <div class="hero-pillar-card">
+                                <div class="hero-pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                                </div>
+                                <span class="hero-pillar-label">حلول سحابية متقدمة</span>
+                            </div>
+                            <div class="hero-pillar-card">
+                                <div class="hero-pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                </div>
+                                <span class="hero-pillar-label">تطبيقات ومنصات رقمية</span>
+                            </div>
+                            <div class="hero-pillar-card">
+                                <div class="hero-pillar-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.6 5.9-4 7.5V21a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2.5A9 9 0 0 1 3 11a9 9 0 0 1 9-9z"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>
+                                </div>
+                                <span class="hero-pillar-label">ذكاء اصطناعي وأتمتة</span>
+                            </div>
+                        </div>
+
+                        <!-- أزرار الإجراءات المتكاملة (Action CTAs) -->
+                        <div class="hero-reference__actions d-flex flex-wrap gap-2">
+                            <a href="#contact" class="tf-btn hero-reference__action">تواصـــل معنا</a>
+                            <button type="button" class="tf-btn hero-reference__action hero-btn-vip" onclick="openExecutiveBookingModal()">
+                                <span>حجز استشارة VIP 👔</span>
+                            </button>
+                            <a href="#roi-calculator" class="tf-btn hero-reference__action hero-btn-roi">
+                                <span>حاسبة التوفير (ROI) 📊</span>
+                            </a>
+                            <button type="button" class="tf-btn hero-reference__action hero-btn-install" onclick="openInstallModal()">
+                                <span>تثبيت التطبيق (Windows &amp; Mobile)</span>
+                            </button>
+                            <a href="demo.html" class="tf-btn hero-reference__action hero-btn-demo">
+                                <span>النظام التجريبي (Live Demo)</span>
+                            </a>
+                            <a href="#pricing" class="tf-btn hero-reference__action hero-reference__package-btn"><span>عـــرض البـــاقات</span></a>
+                        </div>
+
+                    </div>
+
+                    <!-- 2. المسرح البصري للكرسي الإخراجي والشعار الملكي (Executive Portrait Stage) -->
+                    <div class="hero-living-visual">
+                        <div class="hero-living-visual-stage">
+                            
+                            <!-- شعار S&R CoreSync الذهبي المطور كشارة مضيئة أعلى الصورة -->
+                            <div class="hero-living-emblem-badge" onclick="openLogoLightbox(event)" title="S&R CoreSync - الشعار الملكي الرسمي">
+                                <img src="./assets/hero-banner-emblem-gold.jpg" alt="S&R CoreSync Royal Emblem" class="hero-living-emblem-img">
+                            </div>
+
+                            <!-- بورتريه المهندس سليم عزيزة على الكرسي القيادي -->
+                            <img id="heroLivingImgSalim" src="./assets/hero-founder-salim-chair.jpg" alt="م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة" class="hero-living-portrait active">
+
+                            <!-- بورتريه الأستاذ رائد كعكة على الكرسي القيادي -->
+                            <img id="heroLivingImgRaed" src="./assets/hero-founder-raed-chair.jpg" alt="أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP" class="hero-living-portrait">
+
+                            <!-- زر استعراض البانر السينمائي الكامل بدقة عالية (Full HD Poster) -->
+                            <button type="button" class="hero-living-view-banner-btn" id="heroViewBannerBtn" onclick="openFullHeroBannerModal()">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                                <span>استعراض البانر السينمائي عالي الدقة (Full HD) 🔍</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
