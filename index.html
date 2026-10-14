@@ -8306,17 +8306,35 @@
                 // 4. تحديث شريط المتصفح ورابط المعاينة الحية
                 const browserUrl = document.getElementById('work-browser-url-text');
                 const liveBtn = document.getElementById('work-live-preview-btn');
+                const liveBadge = document.getElementById('work-live-badge');
                 const displayUrl = activeProject.preview ? (activeProject.previewLabel || activeProject.preview.replace(/^https?:\/\//, '')) : `coresync-solutions.com/portfolio/${activeProject.id}`;
                 if (browserUrl) browserUrl.textContent = displayUrl;
+                if (liveBadge) {
+                    if (activeProject.preview) {
+                        liveBadge.innerHTML = '<span class="live-dot"></span> مباشر / Live';
+                        liveBadge.style.color = '#10b981';
+                        liveBadge.style.borderColor = 'rgba(16, 185, 129, 0.45)';
+                        liveBadge.style.background = 'rgba(16, 185, 129, 0.15)';
+                    } else {
+                        liveBadge.innerHTML = '<span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span> نظام موثّق / Verified';
+                        liveBadge.style.color = '#38bdf8';
+                        liveBadge.style.borderColor = 'rgba(56, 189, 248, 0.45)';
+                        liveBadge.style.background = 'rgba(6, 182, 212, 0.12)';
+                    }
+                }
                 if (liveBtn) {
                     if (activeProject.preview) {
                         liveBtn.href = activeProject.preview;
+                        liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span>معاينة حية ↗</span>';
+                        liveBtn.onclick = null;
                         liveBtn.style.display = 'inline-flex';
                         liveBtn.target = '_blank';
                     } else {
                         liveBtn.href = '#!';
+                        liveBtn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>استعراض النظام ⚡</span>';
                         liveBtn.onclick = (e) => { e.preventDefault(); openCurrentProjectModal(); };
                         liveBtn.style.display = 'inline-flex';
+                        liveBtn.target = '_self';
                     }
                 }
 
