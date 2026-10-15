@@ -10583,10 +10583,21 @@
             }
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startHeroLivingAutoTimer);
-        } else {
+        function initHeroLiving() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const founder = params.get('founder');
+                if (founder === 'raed' || window.location.hash === '#founder-raed') {
+                    switchHeroFounder('raed');
+                }
+            } catch(e) {}
             startHeroLivingAutoTimer();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHeroLiving);
+        } else {
+            initHeroLiving();
         }
 
         if ('serviceWorker' in navigator) {

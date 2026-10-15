@@ -8747,6 +8747,13 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const founder = params.get('founder');
+                if (founder === 'raed' || window.location.hash === '#founder-raed') {
+                    switchHeroFounderEn('raed');
+                }
+            } catch(e) {}
             restartExecTimerEn();
             startHeroLivingAutoTimerEn();
         });
