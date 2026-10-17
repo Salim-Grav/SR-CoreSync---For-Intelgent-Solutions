@@ -296,12 +296,17 @@
             position: fixed;
             inset: 0;
             background: rgba(1, 9, 7, 0.96);
+            -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
             z-index: 999999;
             display: none;
             align-items: center;
             justify-content: center;
             padding: 24px;
+        }
+
+        .is-hidden {
+            display: none !important;
         }
 
         .sr-lightbox-modal.active {
@@ -414,7 +419,7 @@
         </div>
 
         <!-- مسرح العرض الفردي: أ. محمد رائد كعكة -->
-        <div id="viewRaed" class="showcase-single-view" style="display: none;">
+        <div id="viewRaed" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
                 <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP')">
                     <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" loading="eager">
@@ -443,7 +448,7 @@
         </div>
 
         <!-- مسرح العرض المزدوج: البانران جنباً إلى جنب -->
-        <div id="viewDual" class="showcase-dual-grid" style="display: none;">
+        <div id="viewDual" class="showcase-dual-grid is-hidden">
             <!-- بانر سليم -->
             <div class="showcase-banner-card">
                 <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
@@ -508,21 +513,16 @@
             const tDual = document.getElementById('tabDual');
 
             [tSalim, tRaed, tDual].forEach(t => t.classList.remove('active'));
+            [vSalim, vRaed, vDual].forEach(v => v.classList.add('is-hidden'));
 
             if (mode === 'salim') {
-                vSalim.style.display = 'block';
-                vRaed.style.display = 'none';
-                vDual.style.display = 'none';
+                vSalim.classList.remove('is-hidden');
                 tSalim.classList.add('active');
             } else if (mode === 'raed') {
-                vSalim.style.display = 'none';
-                vRaed.style.display = 'block';
-                vDual.style.display = 'none';
+                vRaed.classList.remove('is-hidden');
                 tRaed.classList.add('active');
             } else if (mode === 'dual') {
-                vSalim.style.display = 'none';
-                vRaed.style.display = 'none';
-                vDual.style.display = 'grid';
+                vDual.classList.remove('is-hidden');
                 tDual.classList.add('active');
             }
         }
