@@ -1,19 +1,20 @@
 @echo off
-title S&R CoreSync Solutions - Local Server & Edge
+title "S&R CoreSync Solutions - Local Server & Edge"
 chcp 65001 >nul
 cd /d "%~dp0"
 
 echo ======================================================================
-echo   S&R CoreSync Solutions - تشغيل السيرفر المحلي والمنفذ في Edge
+echo   S^&R CoreSync Solutions - تشغيل السيرفر المحلي والمنفذ في Edge
 echo ======================================================================
 echo.
+
 :: 1. فحص ما إذا كان السيرفر على المنفذ 3000 يعمل بالفعل
 powershell -NoProfile -Command "$conn = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue; if ($conn) { exit 0 } else { exit 1 }"
 if %errorlevel% equ 0 (
-    echo [✓] السيرفر المحلي يعمل بالفعل مسبقاً على: http://localhost:3000
+    echo [✓] السيرفر المحلي يعمل مسبقاً على: http://localhost:3000
     echo [✓] جاري فتح الموقع في Microsoft Edge مباشرة...
     start msedge http://localhost:3000/index.html
-    timeout /t 3 >nul
+    ping 127.0.0.1 -n 3 >nul
     exit /b 0
 )
 
@@ -30,11 +31,11 @@ if %errorlevel% equ 0 (
 )
 
 :: مهلة ثانية للاستعداد
-timeout /t 1 >nul
+ping 127.0.0.1 -n 2 >nul
 
 :: 3. فتح الموقع في Edge
 echo [2] فتح الموقع في Microsoft Edge...
 start msedge http://localhost:3000/index.html
 echo.
 echo [✓] تم تشغيل الموقع والسيرفر بنجاح!
-timeout /t 3 >nul
+ping 127.0.0.1 -n 3 >nul
