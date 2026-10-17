@@ -7,20 +7,34 @@ echo ======================================================================
 echo   S&R CoreSync Solutions - تشغيل السيرفر المحلي والمنفذ في Edge
 echo ======================================================================
 echo.
-echo [1] فحص السيرفر على المنفذ: http://localhost:3000
-echo [2] تشغيل Microsoft Edge تلقائياً...
-echo.
+:: 1. فحص ما إذا كان السيرفر على المنفذ 3000 يعمل بالفعل
+powershell -NoProfile -Command "$conn = Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue; if ($conn) { exit 0 } else { exit 1 }"
+if %errorlevel% equ 0 (
+    echo [✓] السيرفر المحلي يعمل بالفعل مسبقاً على: http://localhost:3000
+    echo [✓] جاري فتح الموقع في Microsoft Edge مباشرة...
+    start msedge http://localhost:3000/index.html
+    timeout /t 3 >nul
+    exit /b 0
+)
 
-:: فتح الرابط المحلي في متصفح Microsoft Edge
-start msedge http://localhost:3000/index.html
+:: 2. تشغيل السيرفر في الخلفية إذا لم يكن قيد التشغيل
+echo [1] جاري تشغيل السيرفر المحلي على المنفذ: http://localhost:3000 ...
 
-:: تشغيل السيرفر المحلي عبر Python أو PowerShell
 where python >nul 2>&1
 if %errorlevel% equ 0 (
-    echo [✓] تشغيل السيرفر المحلي عبر Python على المنفذ 3000...
-    python serve.py
+    echo [✓] تشغيل السيرفر عبر Python...
+    start /b python serve.py >nul 2>&1
 ) else (
-    echo [✓] تشغيل السيرفر المحلي عبر PowerShell على المنفذ 3000...
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "$port = 3000; $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://localhost:' + $port + '/'); try { $listener.Start(); Write-Host '[✓] يعمل الآن على: http://localhost:'$port -ForegroundColor Green; while ($listener.IsListening) { $ctx = $listener.GetContext(); $p = $ctx.Request.Url.LocalPath.TrimStart('/'); if ([string]::IsNullOrEmpty($p)) { $p = 'index.html' }; $f = Join-Path (Get-Location).Path $p; if (Test-Path $f -PathType Leaf) { $b = [System.IO.File]::ReadAllBytes($f); $ext = [System.IO.Path]::GetExtension($f).ToLower(); $m = switch ($ext) { '.html' {'text/html; charset=utf-8'} '.css' {'text/css'} '.js' {'application/javascript'} '.json' {'application/json'} '.svg' {'image/svg+xml'} default {'application/octet-stream'} }; $ctx.Response.ContentType = $m; $ctx.Response.ContentLength64 = $b.Length; $ctx.Response.OutputStream.Write($b, 0, $b.Length) } else { $ctx.Response.StatusCode = 404 }; $ctx.Response.OutputStream.Close() } } catch { Write-Host 'المنفذ يعمل بالفعل أو مشغول.' }"
+    echo [✓] تشغيل السيرفر عبر PowerShell...
+    start /b powershell -NoProfile -ExecutionPolicy Bypass -Command "$port = 3000; $listener = New-Object System.Net.HttpListener; $listener.Prefixes.Add('http://localhost:' + $port + '/'); try { $listener.Start(); while ($listener.IsListening) { $ctx = $listener.GetContext(); $p = $ctx.Request.Url.LocalPath.TrimStart('/'); if ([string]::IsNullOrEmpty($p)) { $p = 'index.html' }; $f = Join-Path (Get-Location).Path $p; if (Test-Path $f -PathType Leaf) { $b = [System.IO.File]::ReadAllBytes($f); $ext = [System.IO.Path]::GetExtension($f).ToLower(); $m = switch ($ext) { '.html' {'text/html; charset=utf-8'} '.css' {'text/css'} '.js' {'application/javascript'} '.json' {'application/json'} '.svg' {'image/svg+xml'} default {'application/octet-stream'} }; $ctx.Response.ContentType = $m; $ctx.Response.ContentLength64 = $b.Length; $ctx.Response.OutputStream.Write($b, 0, $b.Length) } else { $ctx.Response.StatusCode = 404 }; $ctx.Response.OutputStream.Close() } } catch {}" >nul 2>&1
 )
-pause
+
+:: مهلة ثانية للاستعداد
+timeout /t 1 >nul
+
+:: 3. فتح الموقع في Edge
+echo [2] فتح الموقع في Microsoft Edge...
+start msedge http://localhost:3000/index.html
+echo.
+echo [✓] تم تشغيل الموقع والسيرفر بنجاح!
+timeout /t 3 >nul
