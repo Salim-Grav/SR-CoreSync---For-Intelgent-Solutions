@@ -269,20 +269,36 @@
         .showcase-slider-viewport {
             position: relative;
             width: 100%;
-            overflow: hidden;
             border-radius: 20px;
         }
 
         .showcase-slides-track {
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
             width: 100%;
+            min-height: 400px;
         }
 
         .showcase-slide-item {
-            flex: 0 0 100%;
             width: 100%;
-            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.985);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .showcase-slide-item.active {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            pointer-events: auto;
+            z-index: 2;
         }
 
         /* أسهم التنقل السريعة */
@@ -567,7 +583,7 @@
             <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
                 <div class="showcase-slides-track" id="slidesTrack">
                     <!-- الشريحة 1: م. محمد سليم عزيزة -->
-                    <div class="showcase-slide-item">
+                    <div class="showcase-slide-item active">
                         <div class="showcase-banner-card">
                             <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
                                 <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" loading="eager">
@@ -774,12 +790,14 @@
         let isPlaying = true;
 
         function updateSlideUI() {
-            const track = document.getElementById('slidesTrack');
-            // في اللغة العربية RTL، التحريك موجب
-            const offset = currentSlideIndex * 100;
-            if (track) {
-                track.style.transform = `translateX(${offset}%)`;
-            }
+            const slides = document.querySelectorAll('#slidesTrack .showcase-slide-item');
+            slides.forEach((slide, idx) => {
+                if (idx === currentSlideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
 
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.getElementById(`slideDot${i}`);
@@ -961,10 +979,14 @@
         window.addEventListener('DOMContentLoaded', () => {
             const p = new URLSearchParams(window.location.search);
             const v = p.get('view');
+            const s = p.get('slide');
             if (v) {
                 setShowcaseView(v);
             } else {
                 setShowcaseView('slider');
+            }
+            if (s !== null) {
+                goToSlide(parseInt(s, 10));
             }
         });
     </script>
