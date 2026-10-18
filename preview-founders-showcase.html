@@ -1477,6 +1477,13 @@
             if (s !== null) {
                 goToSlide(parseInt(s, 10));
             }
+            const m = p.get('modal');
+            const f = p.get('founder');
+            if (m === 'qr') {
+                setTimeout(() => openQrModal(f || 'salim'), 150);
+            } else if (m === 'lightbox') {
+                setTimeout(() => openLightbox(f || 'assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة'), 150);
+            }
         });
     </script>
 </body>
