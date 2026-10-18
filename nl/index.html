@@ -4350,7 +4350,7 @@
                             <div class="header-col-nav">
                                 <div class="box-navigation">
                                     <ul class="nav-menu-main">
-                                        <li class="menu-item"><a href="#work" class="item-link link text-caption"><span>01 /</span>PROJECTEN</a></li>
+                                        <li class="menu-item"><a href="#founders-showcase" class="item-link link text-caption gold-accent"><span>01 /</span>DIRECTIE</a></li>
                                         <li class="menu-item"><a href="#service" class="item-link link text-caption"><span>02 /</span>DIENSTEN</a></li>
                                         <li class="menu-item"><a href="#about" class="item-link link text-caption"><span>03 /</span>Over Ons</a></li>
                                         <li class="menu-item"><a href="#pricing" class="item-link link text-caption"><span>04 /</span>Tarieven</a></li>
@@ -9780,6 +9780,211 @@
             </div>
         </div>
     </div>
+
+    <!-- Founders Showcase Lightbox Modal -->
+    <div id="foundersLightboxModal" class="founders-lightbox-modal" onclick="closeFoundersLightbox()">
+        <button type="button" class="founders-lightbox-close" onclick="closeFoundersLightbox()" title="Sluiten">&times;</button>
+        <div class="founders-lightbox-box" onclick="event.stopPropagation()">
+            <img id="foundersLightboxImg" src="" alt="" class="founders-lightbox-img">
+        </div>
+    </div>
+
+    <!-- Executive Leadership & Founders Showcase Script -->
+    <script>
+        (function() {
+            let currentSlideIndex = 0;
+            const totalSlides = 2;
+            let progressInterval = null;
+            const slideDuration = 6000;
+            let progressPercent = 0;
+            let isPlaying = true;
+
+            window.updateSlideUI = function() {
+                const slides = document.querySelectorAll('#slidesTrack .showcase-slide-item');
+                slides.forEach((slide, idx) => {
+                    if (idx === currentSlideIndex) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.getElementById(`slideDot${i}`);
+                    if (dot) {
+                        if (i === currentSlideIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    }
+                }
+                window.resetProgressBar && window.resetProgressBar();
+            };
+
+            window.nextSlide = function() {
+                currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+                window.updateSlideUI();
+            };
+
+            window.prevSlide = function() {
+                currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+                window.updateSlideUI();
+            };
+
+            window.goToSlide = function(index) {
+                currentSlideIndex = index;
+                window.updateSlideUI();
+            };
+
+            window.resetProgressBar = function() {
+                progressPercent = 0;
+                const bar = document.getElementById('sliderProgressBar');
+                if (bar) bar.style.width = '0%';
+            };
+
+            window.startAutoPlay = function() {
+                window.stopAutoPlay();
+                progressPercent = 0;
+                const stepMs = 50;
+                const stepIncrement = (stepMs / slideDuration) * 100;
+
+                progressInterval = setInterval(() => {
+                    if (!isPlaying) return;
+                    progressPercent += stepIncrement;
+                    const bar = document.getElementById('sliderProgressBar');
+                    if (bar) bar.style.width = `${Math.min(progressPercent, 100)}%`;
+
+                    if (progressPercent >= 100) {
+                        window.nextSlide();
+                    }
+                }, stepMs);
+            };
+
+            window.stopAutoPlay = function() {
+                if (progressInterval) clearInterval(progressInterval);
+            };
+
+            window.pauseSliderAutoPlay = function() {
+                isPlaying = false;
+                window.updatePlaybackBtnState && window.updatePlaybackBtnState();
+            };
+
+            window.resumeSliderAutoPlay = function() {
+                const viewSlider = document.getElementById('viewSlider');
+                if (viewSlider && !viewSlider.classList.contains('showcase-is-hidden')) {
+                    isPlaying = true;
+                    window.updatePlaybackBtnState && window.updatePlaybackBtnState();
+                }
+            };
+
+            window.togglePlayback = function() {
+                isPlaying = !isPlaying;
+                window.updatePlaybackBtnState && window.updatePlaybackBtnState();
+            };
+
+            window.updatePlaybackBtnState = function() {
+                const icon = document.getElementById('playbackIcon');
+                const text = document.getElementById('playbackText');
+                if (icon && text) {
+                    if (isPlaying) {
+                        icon.textContent = '⏸';
+                        text.textContent = 'Pauze';
+                    } else {
+                        icon.textContent = '▶';
+                        text.textContent = 'Afspelen';
+                    }
+                }
+            };
+
+            // Touch Swipe Support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const viewport = document.getElementById('sliderViewport');
+            if (viewport) {
+                viewport.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const swipeDistance = touchEndX - touchStartX;
+                    if (Math.abs(swipeDistance) > 40) {
+                        if (swipeDistance > 0) {
+                            window.prevSlide();
+                        } else {
+                            window.nextSlide();
+                        }
+                    }
+                }, { passive: true });
+            }
+
+            // View Switcher
+            window.setShowcaseView = function(mode) {
+                const vSlider = document.getElementById('viewSlider');
+                const vSalim = document.getElementById('viewSalim');
+                const vRaed = document.getElementById('viewRaed');
+                const vDual = document.getElementById('viewDual');
+
+                const tSlider = document.getElementById('tabSlider');
+                const tSalim = document.getElementById('tabSalim');
+                const tRaed = document.getElementById('tabRaed');
+                const tDual = document.getElementById('tabDual');
+
+                [tSlider, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
+                [vSlider, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('showcase-is-hidden'); });
+
+                if (mode === 'slider') {
+                    if (vSlider) vSlider.classList.remove('showcase-is-hidden');
+                    if (tSlider) tSlider.classList.add('active');
+                    isPlaying = true;
+                    window.startAutoPlay();
+                } else {
+                    window.stopAutoPlay();
+                    if (mode === 'salim') {
+                        if (vSalim) vSalim.classList.remove('showcase-is-hidden');
+                        if (tSalim) tSalim.classList.add('active');
+                    } else if (mode === 'raed') {
+                        if (vRaed) vRaed.classList.remove('showcase-is-hidden');
+                        if (tRaed) tRaed.classList.add('active');
+                    } else if (mode === 'dual') {
+                        if (vDual) vDual.classList.remove('showcase-is-hidden');
+                        if (tDual) tDual.classList.add('active');
+                    }
+                }
+            };
+
+            // Lightbox Modal
+            window.openFoundersLightbox = function(src, alt) {
+                const modal = document.getElementById('foundersLightboxModal');
+                const img = document.getElementById('foundersLightboxImg');
+                if (modal && img) {
+                    img.src = src;
+                    img.alt = alt;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            };
+
+            window.closeFoundersLightbox = function() {
+                const modal = document.getElementById('foundersLightboxModal');
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') window.closeFoundersLightbox();
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => { window.setShowcaseView('slider'); });
+            } else {
+                window.setShowcaseView('slider');
+            }
+        })();
+    </script>
 
     <script src="../api/lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
