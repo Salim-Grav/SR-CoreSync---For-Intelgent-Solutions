@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S&R CoreSync — استوديو ومحرر الهوية البصرية والشعار المعتمد</title>
+
+  <!-- Google Fonts: Arabic & Tech Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Playfair+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- JSZip Local Engine -->
+  <script src="./js/jszip.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #09090b;
+      --card: #121217;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --gold-royal: #c5a880;
+    }
+    body {
+      background-color: var(--bg);
+      color: #f4f4f5;
+      font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-tech {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-brand {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .font-serif-luxury {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .glow-cyan {
+      box-shadow: 0 0 45px rgba(6, 182, 212, 0.15);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    .card-3d-custom-wrap {
+      background: radial-gradient(circle at 80% 20%, rgba(197, 168, 128, 0.25) 0%, #0d0d12 70%);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+    .card-sheen-gradient {
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);
+    }
+    .font-alexandria {
+      font-family: 'Alexandria', sans-serif;
+    }
+    .print-card-front-bg {
+      background: radial-gradient(circle at 85% 15%, #2a241b 0%, #0d0d12 75%);
+    }
+    .print-card-back-bg {
+      background: radial-gradient(circle at 15% 85%, #051d28 0%, #09090e 75%);
+    }
+    .print-header-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-align: center;
+      margin-bottom: 10mm;
+    }
+    .print-header-title {
+      font-size: 16pt;
+      margin: 0;
+      color: #111111;
+    }
+    .print-header-sub {
+      font-size: 9pt;
+      color: #666666;
+      margin: 3mm 0 0;
+    }
+    .print-sheet-row {
+      display: flex;
+      flex-direction: row;
+      gap: 12mm;
+      justify-content: center;
+    }
+    .print-sheet-card-front {
+      width: 85mm;
+      height: 55mm;
+      border: 1px dashed #bbb;
+      padding: 5mm;
+      background: #0d0d12;
+      color: #ffffff;
+      border-radius: 4mm;
+      box-sizing: border-box;
+    }
+    .print-sheet-card-back {
+      width: 85mm;
+      height: 55mm;
+      border: 1px dashed #bbb;
+      padding: 5mm;
+      background: #09090e;
+      color: #ffffff;
+      border-radius: 4mm;
+      box-sizing: border-box;
+    }
+  
+    /* تنسيقات الطباعة الدقيقة لبطاقات الأعمال */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #print-area, #print-area * {
+        visibility: visible !important;
+      }
+      #print-area {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        padding: 20mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15mm !important;
+        z-index: 999999 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+  </style>
+</head>
+<body class="min-h-screen text-zinc-200 antialiased selection:bg-cyan-500 selection:text-black">
+
+  <header class="border-b border-white/10 sticky top-0 bg-[#09090b]/85 backdrop-blur-xl z-50 px-6 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-3 text-inherit no-underline">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-500 to-emerald-400 p-[1.5px] flex items-center justify-center shadow-lg shadow-cyan-500/10">
+            <div class="w-full h-full bg-[#09090b] rounded-[10px] flex items-center justify-center font-bold text-white text-xs font-brand tracking-wider">
+              S&amp;R
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-white text-base font-tech tracking-tight">S&amp;R</span>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 font-tech font-extrabold text-base">CoreSync</span>
+              <span class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800/40 px-2 py-0.5 rounded-full font-code">التصميم الأول المعتمد</span>
+            </div>
+            <p class="text-xs text-zinc-400">استوديو تحرير الشعار وهوية الشركة المعتمدة</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 text-xs font-medium flex items-center gap-1.5 transition">
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          العودة للموقع الرئيسي
+        </a>
+        <button type="button" onclick="scrollToEditor()" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-xs font-bold font-tech flex items-center gap-2 transition shadow-md shadow-cyan-500/20">
+          <i data-lucide="sliders" class="w-4 h-4"></i>
+          محرر الشعار المباشر
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+
+    <!-- كارت الاعتماد الرسمي: التصميم الأول المعتمد لـ S&R CoreSync Solutions وإلغاء كافة المقترحات البديلة -->
+    <section class="mb-10 bg-gradient-to-r from-cyan-950/40 via-zinc-900 to-emerald-950/30 border border-cyan-500/30 rounded-2xl p-6 shadow-xl shadow-cyan-950/20">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-1">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white mb-1.5 flex items-center gap-2">
+              <span>الهوية البصرية الرسمية المعتمدة (التصميم الأول)</span>
+              <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-700/50 px-2 py-0.5 rounded-full font-code">تم الإلغاء والاعتماد ✓</span>
+            </h3>
+            <p class="text-xs text-zinc-300 leading-relaxed max-w-2xl">
+              تم اعتماد <span class="text-cyan-400 font-bold">التصميم الأول الأصلي (The Quantum Orbital &amp; Sync Orb)</span> كشعار رسمي نهائي لشركة <span class="text-white font-bold">S&amp;R CoreSync Solutions</span>، مع إلغاء الاقتراحات الثلاثة البديلة بالكامل، والاحتفاظ بخياري الفيكتور الأصلي والنمط النيوني الذهبي الملكي.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="text-xs text-cyan-300 bg-cyan-950/70 border border-cyan-500/40 px-3.5 py-1.5 rounded-lg font-code">
+            SVG Vector جاهز للويب والتطبيق
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- القسم التفاعلي: محرر ومعاين الشعار المباشر (Live Logo Customizer) -->
+    <section id="interactive-editor" class="mb-14 scroll-mt-24">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="palette" class="w-5 h-5 text-cyan-400"></i>
+            المحرر الحي للشعار المعتمد (Live Logo Studio)
+          </h2>
+          <p class="text-xs text-zinc-400">خصص الألوان، النصوص، ونمط الرمز، وشاهد التغيير فوراً مع إمكانية تحميل الـ SVG النقي.</p>
+        </div>
+        <div class="flex items-center gap-2 bg-zinc-900 border border-white/10 p-1 rounded-xl">
+          <button type="button" onclick="setThemeBg('dark')" id="bg-btn-dark" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-white flex items-center gap-1.5 transition">
+            <i data-lucide="moon" class="w-3.5 h-3.5"></i> خلفية داكنة
+          </button>
+          <button type="button" onclick="setThemeBg('light')" id="bg-btn-light" class="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 hover:text-white flex items-center gap-1.5 transition">
+            <i data-lucide="sun" class="w-3.5 h-3.5"></i> خلفية فاتحة
+          </button>
+          <button type="button" onclick="setThemeBg('navy')" id="bg-btn-navy" class="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 hover:text-white flex items-center gap-1.5 transition">
+            <i data-lucide="layers" class="w-3.5 h-3.5"></i> كحلي عميق
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- لوحة التحكم بالتخصيص (Controls Panel) -->
+        <div class="lg:col-span-4 bg-[#121217] border border-white/10 rounded-2xl p-6 flex flex-col justify-between">
+          <div class="space-y-5">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-2">طراز الشعار المعتمد (التصميم الأول):</label>
+              <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" onclick="selectVariant(0)" id="var-btn-0" class="p-3 rounded-xl border border-cyan-500 bg-cyan-500/20 text-cyan-300 text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition ring-1 ring-cyan-400 shadow-md shadow-cyan-500/10">
+                  <i data-lucide="atom" class="w-4 h-4"></i>
+                  <span>التصميم الأول (الكمي المداري) ★</span>
+                </button>
+                <button type="button" onclick="selectVariant(4)" id="var-btn-4" class="p-3 rounded-xl border border-white/10 bg-white/5 text-zinc-400 hover:text-white text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                  <span>النمط النيوني الذهبي الملكي</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="input-brand-name" class="block text-xs font-semibold text-zinc-300 mb-1.5">اسم الشركة الأساسي:</label>
+              <input type="text" id="input-brand-name" value="S&R" oninput="updateLogo()" class="w-full bg-[#09090b] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 font-brand" title="اسم الشركة الأساسي" placeholder="S&R" />
+            </div>
+
+            <div>
+              <label for="input-sub-name" class="block text-xs font-semibold text-zinc-300 mb-1.5">اسم النظام (Core):</label>
+              <input type="text" id="input-sub-name" value="CoreSync" oninput="updateLogo()" class="w-full bg-[#09090b] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 font-brand" title="اسم النظام" placeholder="CoreSync" />
+            </div>
+
+            <div>
+              <label for="input-tagline" class="block text-xs font-semibold text-zinc-300 mb-1.5">الشعار اللفظي (Slogan):</label>
+              <input type="text" id="input-tagline" value="Solutions" oninput="updateLogo()" class="w-full bg-[#09090b] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 font-mono text-xs tracking-wider" title="الشعار اللفظي" placeholder="Solutions" />
+            </div>
+
+            <!-- ألوان التدرج -->
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-2">لوحات الألوان المعتمدة:</label>
+              <div class="grid grid-cols-5 gap-2">
+                <button type="button" onclick="setColorTheme('#0ea5e9', '#0284c7')" class="h-8 rounded-lg bg-gradient-to-r from-[#0ea5e9] to-[#0284c7] border border-cyan-400 hover:scale-105 transition shadow-sm shadow-cyan-500/30" title="Quantum Azure (الأصلي المعتمد)" aria-label="Quantum Azure"></button>
+                <button type="button" onclick="setColorTheme('#c5a880', '#e6ca9f')" class="h-8 rounded-lg bg-gradient-to-r from-[#c5a880] to-[#e6ca9f] border border-amber-300 hover:scale-105 transition shadow-sm shadow-amber-400/30" title="Royal Champagne Gold (الذهبي الملكي)" aria-label="Royal Champagne Gold"></button>
+                <button type="button" onclick="setColorTheme('#06b6d4', '#10b981')" class="h-8 rounded-lg bg-gradient-to-r from-[#06b6d4] to-[#10b981] border border-white/20 hover:scale-105 transition" title="Cyber Cyan & Emerald" aria-label="Cyber Cyan & Emerald"></button>
+                <button type="button" onclick="setColorTheme('#6366f1', '#06b6d4')" class="h-8 rounded-lg bg-gradient-to-r from-[#6366f1] to-[#06b6d4] border border-white/20 hover:scale-105 transition" title="Indigo & Cyan" aria-label="Indigo & Cyan"></button>
+                <button type="button" onclick="setColorTheme('#3b82f6', '#8b5cf6')" class="h-8 rounded-lg bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] border border-white/20 hover:scale-105 transition" title="Blue & Purple AI" aria-label="Blue & Purple AI"></button>
+              </div>
+            </div>
+
+            <!-- التحكم اليدوي بالألوان -->
+            <div class="grid grid-cols-2 gap-3 pt-1">
+              <div>
+                <label for="color-picker-1" class="text-[11px] text-zinc-400 block mb-1">اللون الأساسي 1:</label>
+                <div class="flex items-center gap-2 bg-[#09090b] p-1.5 rounded-lg border border-white/10">
+                  <input type="color" id="color-picker-1" value="#0ea5e9" oninput="manualColorChange()" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="اللون الأساسي 1" aria-label="اللون الأساسي 1" />
+                  <span id="color-hex-1" class="text-xs font-code text-zinc-300 uppercase">#0ea5e9</span>
+                </div>
+              </div>
+              <div>
+                <label for="color-picker-2" class="text-[11px] text-zinc-400 block mb-1">اللون الثانوي 2:</label>
+                <div class="flex items-center gap-2 bg-[#09090b] p-1.5 rounded-lg border border-white/10">
+                  <input type="color" id="color-picker-2" value="#0284c7" oninput="manualColorChange()" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="اللون الثانوي 2" aria-label="اللون الثانوي 2" />
+                  <span id="color-hex-2" class="text-xs font-code text-zinc-300 uppercase">#0284c7</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+            <!-- محرك توهج النيون والـ Bloom المتقدم (Advanced Glow Controls) -->
+            <div class="pt-2 border-t border-white/10 space-y-3">
+              <label class="block text-xs font-semibold text-zinc-300 flex items-center justify-between">
+                <span class="flex items-center gap-1.5"><i data-lucide="sun-medium" class="w-3.5 h-3.5 text-amber-400"></i> شدة توهج النيون والـ Bloom:</span>
+                <span id="glow-val-label" class="text-[11px] font-code text-cyan-400 font-bold">12px</span>
+              </label>
+              <input type="range" id="glow-slider" min="2" max="30" value="12" oninput="changeGlowIntensity(this.value)" class="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-cyan-400" title="شدة توهج النيون" />
+
+              <div class="flex items-center justify-between pt-1">
+                <span class="text-xs text-zinc-300 flex items-center gap-1.5"><i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400"></i> نبض النيون البطيء (Pulse):</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="pulse-toggle" checked onchange="togglePulseGlow(this.checked)" class="sr-only peer" title="تفعيل نبض النيون البطيء" aria-label="تفعيل نبض النيون البطيء" />
+                  <div class="w-9 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
+                </label>
+              </div>
+            </div>
+
+            <!-- أزرار التصدير -->
+          <div class="pt-6 border-t border-white/10 space-y-2 mt-6">
+            <button type="button" onclick="downloadSvg()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-400 hover:from-cyan-400 hover:to-emerald-300 text-black text-xs font-bold font-tech flex items-center justify-center gap-2 transition shadow-lg shadow-cyan-500/10">
+              <i data-lucide="download" class="w-4 h-4"></i>
+              تحميل ملف الشعار المباشر (SVG Vector)
+            </button>
+            <button type="button" onclick="copyCurrentSvgCode()" class="w-full py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-medium flex items-center justify-center gap-2 transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5 text-cyan-400"></i>
+              نسخ كود SVG لاستخدامه في الكود
+            </button>
+          </div>
+        </div>
+
+        <!-- مساحة العرض التفاعلية (Visual Stage) -->
+        <div class="lg:col-span-8 flex flex-col gap-4">
+          <div id="canvas-stage" class="h-[460px] rounded-2xl border border-white/10 bg-[#09090b] grid-pattern relative flex flex-col items-center justify-center p-8 transition-colors duration-300 overflow-hidden group">
+            
+            <!-- هالة ضوئية خلف الشعار -->
+            <div id="ambient-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,233,0.15)_0%,transparent_65%)] pointer-events-none transition-all duration-500"></div>
+
+            <!-- حاوية الـ SVG الحي القابل للتخصيص -->
+            <div id="svg-render-container" class="relative z-10 flex flex-col items-center justify-center transform transition-transform duration-300 hover:scale-105">
+              <!-- SVG سينشأ هنا ديناميكياً بواسطة جافاسكربت -->
+            </div>
+
+            <!-- وسم الدقة في زاوية الشاشة -->
+            <div class="absolute bottom-4 left-4 text-[11px] font-code text-zinc-500 bg-black/60 backdrop-blur px-2.5 py-1 rounded-md border border-white/5">
+              Vector 100% • Infinite Scale • No Pixels
+            </div>
+          </div>
+
+          <!-- شريط المعاينة السياقية المصغرة (Mockups) -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <!-- 1. ترويسة الموقع (Navbar Preview) -->
+            <div class="bg-[#121217] border border-white/10 rounded-xl p-3">
+              <div class="text-[10px] text-zinc-400 mb-2 font-mono flex items-center gap-1.5">
+                <i data-lucide="layout" class="w-3 h-3 text-cyan-400"></i> في شريط الموقع (Navbar):
+              </div>
+              <div class="bg-[#09090b] border border-white/5 rounded-lg p-2 flex items-center justify-between">
+                <div class="flex items-center gap-2" id="mini-logo-nav">
+                  <!-- مصغر الشعار -->
+                </div>
+                <div class="flex gap-2 text-[9px] text-zinc-500 font-mono">
+                  <span>الأعمال</span>
+                  <span>الخدمات</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. أيقونة التطبيق (App Icon) -->
+            <div class="bg-[#121217] border border-white/10 rounded-xl p-3">
+              <div class="text-[10px] text-zinc-400 mb-2 font-mono flex items-center gap-1.5">
+                <i data-lucide="smartphone" class="w-3 h-3 text-emerald-400"></i> أيقونة الموبايل والـ Favicon:
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-[#09090b] border border-white/10 flex items-center justify-center p-1.5" id="mini-app-icon">
+                  <!-- أيقونة الرمز فقط -->
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">S&amp;R Mobile</div>
+                  <div class="text-[10px] text-zinc-500 font-code">64x64 Retina</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. المطبوعات والفواتير (Invoice Header) -->
+            <div class="bg-[#121217] border border-white/10 rounded-xl p-3">
+              <div class="text-[10px] text-zinc-400 mb-2 font-mono flex items-center gap-1.5">
+                <i data-lucide="file-text" class="w-3 h-3 text-indigo-400"></i> ترويسة فواتير هولندية (B2B):
+              </div>
+              <div class="bg-zinc-950 border border-white/5 rounded-lg p-2 text-right">
+                <div class="text-xs font-bold text-zinc-200">Factuur / Invoice</div>
+                <div class="text-[9px] text-zinc-500 font-mono">KVK &amp; BTW Compliant</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- استعراض التصميم الأول المعتمد بأنماطه الرسمية -->
+    <section class="mb-14">
+      <div class="mb-6">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <i data-lucide="award" class="w-5 h-5 text-cyan-400"></i>
+          دلالات ومواصفات التصميم الأول المعتمد (Official Adopted Design)
+        </h3>
+        <p class="text-xs text-zinc-400">يجسد التصميم الأول الأصلي التوازن بين القوة البرمجية وهندسة الـ ERP المحاسبية المتقدمة:</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- بطاقة التصميم الأول الأصلي المعتمد (The Official Quantum Orbital & Sync Orb) -->
+        <div class="bg-gradient-to-b from-cyan-950/30 to-[#121217] border-2 border-cyan-500/60 rounded-2xl p-6 shadow-xl shadow-cyan-500/10 group relative cursor-pointer" onclick="selectVariant(0)">
+          <div class="absolute -top-3 right-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-black font-tech font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
+            التصميم الأول المعتمد ★
+          </div>
+          <div class="h-48 bg-[#040c18] rounded-xl border border-cyan-500/30 flex items-center justify-center p-4 relative mb-4">
+            <img src="./assets/logo-icon.svg" alt="S&R CoreSync Official Icon" class="w-32 h-32 object-contain" />
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-base font-bold text-white">Quantum Orbital &amp; Sync Orb (الأصلي)</h4>
+            <span class="text-[10px] bg-cyan-900/60 text-cyan-200 border border-cyan-700/50 px-2.5 py-0.5 rounded-full font-code">الرمز الأساسي</span>
+          </div>
+          <p class="text-xs text-zinc-300 leading-relaxed">
+            النموذج الرسمي الأول المعتمد؛ يجمع بين عمق الكرة الكونية المضيئة، العقد المدارية لتزامن البيانات، والمونوغرام السيريف الكلاسيكي الملكي (S&amp;R). يعبر عن الرسوخ الهندسي والاعتمادية للمؤسسات والشركات الكبرى.
+          </p>
+        </div>
+
+        <!-- بطاقة النمط النيوني الذهبي الملكي (Royal Neon & Star Edition) -->
+        <div class="bg-gradient-to-b from-amber-950/30 to-[#121217] border-2 border-amber-500/60 rounded-2xl p-6 shadow-xl shadow-amber-500/10 group relative cursor-pointer" onclick="selectVariant(4)">
+          <div class="absolute -top-3 right-4 bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-tech font-extrabold text-[11px] px-3 py-0.5 rounded-full shadow">
+            النمط النيوني الذهبي
+          </div>
+          <div class="h-48 bg-[#0a0601] rounded-xl border border-amber-500/30 flex items-center justify-center p-4 relative mb-4">
+            <img src="./assets/logo-neon-icon.svg" alt="Royal Neon Gold S&R CoreSync Emblem" class="w-32 h-32 object-contain" />
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <h4 class="text-base font-bold text-amber-300">Royal Neon &amp; Star Edition</h4>
+            <span class="text-[10px] bg-amber-900/60 text-amber-200 border border-amber-700/50 px-2.5 py-0.5 rounded-full font-code">إصدار الويب الفاخر</span>
+          </div>
+          <p class="text-xs text-zinc-300 leading-relaxed">
+            النسخة النيونية الملكية للتصميم الأول؛ مدارات وأقمار دوارة 360 درجة، ونجمة متلألئة، مع تدرجات ذهبية شامبانية دافئة متوافقة بالكامل مع نمط الموقع الرئيسي.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    
+    <!-- ======================================================== -->
+    <!-- معرض النماذج الواقعية التفاعلي ثلاثي الأبعاد (3D Realistic Mockups) -->
+    <!-- ======================================================== -->
+    <section class="mb-14">
+      <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>
+            معرض النماذج الواقعية التفاعلي (Interactive 3D Realistic Mockup Showcase)
+          </h3>
+          <p class="text-xs text-zinc-400">حرك الفأرة فوق بطاقة الأعمال لرؤية تأثير الإمالة ثلاثي الأبعاد والانعكاس الذهبي الحقيقي.</p>
+        </div>
+        <span class="text-xs bg-amber-500/10 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-full font-code self-start">
+          Physical Luxury Rendering 3D
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- 1. بطاقة الأعمال الذكية NFC الفاخرة ذات التفاعل ثلاثي الأبعاد -->
+        <div class="bg-[#121217] border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-between">
+          <div class="w-full flex items-center justify-between text-xs text-zinc-400 mb-4 font-mono">
+            <span>01. بطاقة الأعمال الذكية (Smart NFC)</span>
+            <span class="text-amber-400">Black Matte & Gold</span>
+          </div>
+
+          <!-- حاوية البطاقة ثلاثية الأبعاد -->
+          <div id="card-3d-wrap" class="card-3d-custom-wrap w-full h-56 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden transition-transform duration-150 ease-out cursor-pointer shadow-2xl border border-amber-500/30"
+               onmousemove="handleCard3dMove(event, this)" onmouseleave="resetCard3d(this)">
+            
+            <!-- لمعان الإضاءة المتحرك -->
+            <div id="card-sheen" class="card-sheen-gradient absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay transition-opacity"></div>
+
+            <div class="flex items-center justify-between z-10">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-amber-400/20 border border-amber-400/50 flex items-center justify-center p-1">
+                  <img src="./assets/logo-neon-icon.svg" class="w-full h-full object-contain" alt="Emblem">
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white font-tech tracking-tight">S&R CoreSync</div>
+                  <div class="text-[9px] text-amber-300/80 font-code tracking-wider">SOLUTIONS B.V.</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5 text-amber-400 text-[10px] font-code">
+                <i data-lucide="wifi" class="w-4 h-4 rotate-90"></i>
+                <span>NFC</span>
+              </div>
+            </div>
+
+            <div class="z-10 my-auto text-right">
+              <div class="text-sm font-bold text-white">Eng. Mohammad Salim Aziza</div>
+              <div class="text-[10px] text-amber-400 font-code">Co-Founder & CTO // Cloud Architect</div>
+              <div class="text-xs font-bold text-zinc-300 mt-1">Mr. Mohammad Raed Kaakeh</div>
+              <div class="text-[10px] text-amber-400/80 font-code">Co-Founder & CFO // Financial ERP</div>
+            </div>
+
+            <div class="flex items-center justify-between text-[9px] text-zinc-400 font-mono z-10 pt-2 border-t border-white/10">
+              <span>Keizersgracht 482, Amsterdam</span>
+              <span class="text-amber-400 font-bold">KVK: 84920194</span>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-zinc-400 mt-3 text-center">انعكاس ضوئي متجاوب بزاوية الماوس 360°</div>
+          
+          <!-- أزرار تصدير وطباعة بطاقة الأعمال -->
+          <div class="w-full mt-3 pt-3 border-t border-white/10 flex flex-col gap-2">
+            <button type="button" onclick="openCardPrintModal()" class="w-full py-2 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/50 text-amber-300 text-xs font-bold font-tech flex items-center justify-center gap-2 transition hover:scale-[1.02]">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>تصدير وطباعة بطاقة الأعمال (Print Ready PDF / 85x55mm)</span>
+            </button>
+            <div class="flex items-center justify-between text-[10px] text-zinc-400 px-1 font-mono">
+              <span>قياس أوروبي معتمد: 85×55 mm</span>
+              <span class="text-amber-400 font-bold">NFC + Dynamic QR</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. شاشة Apple Pro Display XDR (واجهة الـ ERP في الشاشة) -->
+        <div class="bg-[#121217] border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-between">
+          <div class="w-full flex items-center justify-between text-xs text-zinc-400 mb-4 font-mono">
+            <span>02. شاشة العمل (Apple Pro Display)</span>
+            <span class="text-cyan-400">Retina 6K Frame</span>
+          </div>
+
+          <!-- شاشة الجهاز -->
+          <div class="w-full h-56 rounded-xl bg-black border-4 border-zinc-800 p-2 flex flex-col justify-between relative shadow-2xl overflow-hidden group">
+            <div class="h-3 bg-zinc-900 rounded-t flex items-center px-2 gap-1 mb-1">
+              <div class="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+              <div class="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+              <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+              <span class="text-[8px] text-zinc-500 mx-auto font-code">coresync.cloud/dashboard</span>
+            </div>
+            
+            <div class="flex-1 bg-[#010907] rounded p-2 flex flex-col justify-between border border-cyan-500/20 relative">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-4 h-4 rounded bg-cyan-500/20 flex items-center justify-center p-0.5">
+                    <img src="./assets/logo-neon-icon.svg" class="w-full h-full object-contain" alt="Icon">
+                  </div>
+                  <span class="text-[10px] font-bold text-white font-tech">ERP Live Portal</span>
+                </div>
+                <span class="text-[8px] bg-emerald-500/20 text-emerald-300 px-1.5 rounded">Active 99.9%</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1.5 my-1">
+                <div class="bg-zinc-900/80 p-1.5 rounded border border-white/5">
+                  <span class="text-[8px] text-zinc-400 block">إيرادات الربع</span>
+                  <strong class="text-[10px] text-amber-400 font-num">€ 842,500</strong>
+                </div>
+                <div class="bg-zinc-900/80 p-1.5 rounded border border-white/5">
+                  <span class="text-[8px] text-zinc-400 block">معاملات ERP</span>
+                  <strong class="text-[10px] text-cyan-400 font-num">1,428</strong>
+                </div>
+              </div>
+              <div class="h-6 w-full bg-gradient-to-r from-amber-500/20 via-cyan-500/20 to-emerald-500/20 rounded flex items-center justify-center text-[8px] text-zinc-300 font-mono">
+                مزامنة فورية عبر خوادم أمستردام
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-zinc-400 mt-3 text-center">تناغم الهوية مع الشاشات والمواقع المؤسسية</div>
+        </div>
+
+        <!-- 3. الترويسات الرسمية والختم الرقمي المشفر (Official Documents & Seal) -->
+        <div class="bg-[#121217] border border-white/10 rounded-2xl p-6 flex flex-col items-center justify-between">
+          <div class="w-full flex items-center justify-between text-xs text-zinc-400 mb-4 font-mono">
+            <span>03. المعاملات الرسمية والختم المعتمد</span>
+            <span class="text-emerald-400">Legal Certificate</span>
+          </div>
+
+          <!-- ورقة المستند الرسمي -->
+          <div class="w-full h-56 bg-zinc-900 border border-white/15 rounded-xl p-4 flex flex-col justify-between relative shadow-xl">
+            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+              <div>
+                <div class="text-xs font-bold text-white">S&R CORESYNC SOLUTIONS</div>
+                <div class="text-[9px] text-zinc-400 font-mono">Enterprise Software Systems</div>
+              </div>
+              <div class="w-7 h-7 rounded-full bg-amber-400/20 border border-amber-400 flex items-center justify-center p-1">
+                <img src="./assets/logo-neon-icon.svg" class="w-full h-full object-contain" alt="Emblem">
+              </div>
+            </div>
+
+            <div class="space-y-1.5 my-auto">
+              <div class="h-2 w-3/4 bg-zinc-800 rounded"></div>
+              <div class="h-2 w-full bg-zinc-800 rounded"></div>
+              <div class="h-2 w-5/6 bg-zinc-800 rounded"></div>
+            </div>
+
+            <!-- الختم الذهبي المشفر -->
+            <div class="flex items-center justify-between pt-2 border-t border-white/10">
+              <div class="text-[9px] text-zinc-500 font-mono">Certified Document • GDPR Ready</div>
+              <div class="w-10 h-10 rounded-full border-2 border-amber-400 bg-amber-400/10 flex flex-col items-center justify-center text-[7px] text-amber-300 font-bold text-center leading-tight shadow-lg shadow-amber-400/20 transform rotate-12">
+                <span>S&R</span>
+                <span>SEAL</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] text-zinc-400 mt-3 text-center">أختام ووثائق معتمدة طبقاً للمواصفات الأوروبية</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- حزمة الهوية البصرية الرسمية ودليل العلامة (Brand Guidelines & Kit) -->
+    <!-- ======================================================== -->
+    <section class="mb-14 bg-gradient-to-b from-[#121217] to-[#09090b] border border-white/10 rounded-2xl p-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i data-lucide="book-open" class="w-5 h-5 text-cyan-400"></i>
+            حزمة الهوية البصرية ودليل البراند (Official Brand Guidelines & Kit)
+          </h3>
+          <p class="text-xs text-zinc-400">المعايير الرسمية المعتمدة للألوان، الخطوط، وأصول العلامة التجارية للاستخدام المؤسسي والمطبعي والويب.</p>
+        </div>
+        <div class="flex items-center flex-wrap gap-3">
+          <button type="button" onclick="downloadAssetsZipPack()" id="btn-zip-pack" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-black text-xs font-bold font-tech flex items-center gap-2 transition shadow-lg shadow-cyan-500/20 hover:scale-105">
+            <i data-lucide="package" class="w-4 h-4"></i>
+            <span id="zip-btn-text">تنزيل حزمة الهوية الكاملة (Instant ZIP Pack)</span>
+          </button>
+          <button type="button" onclick="exportBrandBookPdf()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black text-xs font-bold font-tech flex items-center gap-2 transition shadow-lg shadow-amber-400/20 hover:scale-105">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            تصدير وطباعة دليل الهوية (Brand Book Sheet)
+          </button>
+        </div>
+      </div>
+
+      <!-- شبكة الألوان المعتمدة مع النسخ الفوري -->
+      <div class="mb-8">
+        <h4 class="text-xs font-bold text-zinc-300 mb-3 flex items-center gap-1.5">
+          <i data-lucide="droplet" class="w-3.5 h-3.5 text-amber-400"></i> باليت الألوان الرسمية المعتمدة (انقر على أي كود لنسخه):
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-[#09090b] border border-white/10 rounded-xl p-3 cursor-pointer hover:border-amber-400/50 transition group" onclick="copyColorCode('#c5a880')">
+            <div class="h-14 rounded-lg bg-[#c5a880] mb-2 shadow-md"></div>
+            <div class="text-xs font-bold text-white">الذهب الملكي (Royal Gold)</div>
+            <div class="text-[11px] font-code text-amber-300 mt-1 flex items-center justify-between">
+              <span>#c5a880</span>
+              <i data-lucide="copy" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+          </div>
+          <div class="bg-[#09090b] border border-white/10 rounded-xl p-3 cursor-pointer hover:border-cyan-400/50 transition group" onclick="copyColorCode('#38bdf8')">
+            <div class="h-14 rounded-lg bg-[#38bdf8] mb-2 shadow-md"></div>
+            <div class="text-xs font-bold text-white">التيتانيوم السيبراني (Cyber Cyan)</div>
+            <div class="text-[11px] font-code text-cyan-300 mt-1 flex items-center justify-between">
+              <span>#38bdf8</span>
+              <i data-lucide="copy" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+          </div>
+          <div class="bg-[#09090b] border border-white/10 rounded-xl p-3 cursor-pointer hover:border-emerald-400/50 transition group" onclick="copyColorCode('#10b981')">
+            <div class="h-14 rounded-lg bg-[#10b981] mb-2 shadow-md"></div>
+            <div class="text-xs font-bold text-white">الزمرد المالي (Fintech Emerald)</div>
+            <div class="text-[11px] font-code text-emerald-300 mt-1 flex items-center justify-between">
+              <span>#10b981</span>
+              <i data-lucide="copy" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+          </div>
+          <div class="bg-[#09090b] border border-white/10 rounded-xl p-3 cursor-pointer hover:border-zinc-500 transition group" onclick="copyColorCode('#010907')">
+            <div class="h-14 rounded-lg bg-[#010907] border border-white/20 mb-2 shadow-md"></div>
+            <div class="text-xs font-bold text-white">الأسود الداكن (Obsidian Black)</div>
+            <div class="text-[11px] font-code text-zinc-400 mt-1 flex items-center justify-between">
+              <span>#010907</span>
+              <i data-lucide="copy" class="w-3 h-3 opacity-0 group-hover:opacity-100 transition"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- التيبوغرافيا والخطوط الرسمية -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/10">
+        <div class="bg-[#09090b] border border-white/10 rounded-xl p-4">
+          <div class="text-xs font-bold text-amber-400 mb-1 font-mono">الخط العربي المعتمد:</div>
+          <div class="font-alexandria text-base font-bold text-white mb-2">Alexandria & IBM Plex Sans Arabic</div>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            يُستخدم بوزن 800 و900 للعناوين الرئيسية الفخمة، وبوزن 400 و500 للنصوص والمحتوى التشغيلي.
+          </p>
+        </div>
+        <div class="bg-[#09090b] border border-white/10 rounded-xl p-4">
+          <div class="text-xs font-bold text-cyan-400 mb-1 font-mono">الخط اللاتيني والأرقام:</div>
+          <div class="text-base font-bold text-white mb-2 font-tech">Plus Jakarta Sans & Space Grotesk</div>
+          <p class="text-xs text-zinc-400 leading-relaxed font-tech">
+            المعتمد للأرقام المالية، الأكواد البرمجية، وشاشات الـ ERP بفضل وضوحه العالي في الأحجام المصغرة.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- كود SVG المباشر المتاح للنسخ السريع لمطور الموقع -->
+    <section class="bg-[#121217] border border-white/10 rounded-2xl p-6">
+      <div class="flex items-center justify-between mb-3">
+        <h4 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="code" class="w-4 h-4 text-cyan-400"></i>
+          كود الـ SVG النظيف المخصص للشعار الأول المعتمد (Ready for Tailwind / Next.js / HTML):
+        </h4>
+        <button type="button" onclick="copyRawCode()" class="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1.5">
+          <i data-lucide="clipboard-copy" class="w-3.5 h-3.5"></i> نسخ الكود
+        </button>
+      </div>
+      <pre class="bg-[#09090b] border border-white/5 rounded-xl p-4 text-[11px] font-code text-zinc-400 overflow-x-auto custom-scroll leading-relaxed" id="code-display">
+      </pre>
+    </section>
+
+  </main>
+
+  
+  <!-- ======================================================== -->
+  <!-- مودال تصدير وطباعة بطاقات الأعمال المطبعية (Print Card Modal) -->
+  <!-- ======================================================== -->
+  <div id="card-print-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#121217] border border-white/15 rounded-2xl max-w-4xl w-full p-6 text-right relative shadow-2xl my-8">
+      
+      <!-- رأس المودال -->
+      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+        <div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="credit-card" class="w-5 h-5 text-amber-400"></i>
+            تصدير وطباعة بطاقات الأعمال المعتمدة (S&R CoreSync Executive NFC Cards)
+          </h3>
+          <p class="text-xs text-zinc-400 mt-1">النموذج المطبعي القياسي الأوروبي المعتمد (85mm × 55mm) مع خطوط القص (Bleed 3mm) وشيفرة الـ QR الذكية.</p>
+        </div>
+        <button type="button" onclick="closeCardPrintModal()" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition" title="إغلاق النافذة" aria-label="إغلاق النافذة">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- مساحة عرض وجهي البطاقة (Front & Back) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        
+        <!-- 1. الوجه الأمامي (Front Face) -->
+        <div class="flex flex-col items-center">
+          <div class="text-xs font-mono text-amber-400 mb-2 flex items-center justify-between w-full px-2">
+            <span>الوجه الأمامي (Front Face)</span>
+            <span>Matt Black & Hot Foil Gold</span>
+          </div>
+          <div id="print-card-front" class="print-card-front-bg w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-amber-500/40">
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-amber-400/20 border border-amber-400 flex items-center justify-center p-1">
+                  <img src="./assets/logo-neon-icon.svg" class="w-full h-full object-contain" alt="Emblem">
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white font-tech">S&R CORESYNC</div>
+                  <div class="text-[9px] text-amber-300 font-code tracking-wider">SOLUTIONS B.V.</div>
+                </div>
+              </div>
+              <div class="text-[10px] text-amber-400 font-code flex items-center gap-1">
+                <i data-lucide="wifi" class="w-3.5 h-3.5 rotate-90"></i>
+                <span>NFC CHIP</span>
+              </div>
+            </div>
+
+            <div class="my-auto text-right">
+              <div class="text-sm font-bold text-white">Eng. Mohammad Salim Aziza</div>
+              <div class="text-[10px] text-amber-400 font-code">Co-Founder & CTO // Cloud Architect</div>
+              <div class="text-xs font-bold text-zinc-200 mt-1">Mr. Mohammad Raed Kaakeh</div>
+              <div class="text-[10px] text-amber-400/80 font-code">Co-Founder & CFO // Financial ERP</div>
+            </div>
+
+            <div class="flex items-center justify-between text-[9px] text-zinc-400 font-mono pt-2 border-t border-white/10">
+              <span>Keizersgracht 482, Amsterdam</span>
+              <span class="text-amber-400 font-bold">KVK: 84920194</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. الوجه الخلفي مع الـ QR Code (Back Face) -->
+        <div class="flex flex-col items-center">
+          <div class="text-xs font-mono text-cyan-400 mb-2 flex items-center justify-between w-full px-2">
+            <span>الوجه الخلفي (Back Face)</span>
+            <span>Security Seal & Dynamic QR</span>
+          </div>
+          <div id="print-card-back" class="print-card-back-bg w-full max-w-[380px] h-[220px] rounded-xl p-5 flex flex-col justify-between relative overflow-hidden shadow-2xl border border-cyan-500/40">
+            
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] text-cyan-300 font-mono tracking-wider">ENTERPRISE SYSTEM CONNECT</span>
+              <span class="text-[9px] text-zinc-400 font-mono">BTW: NL863920194B01</span>
+            </div>
+
+            <div class="flex items-center justify-between my-auto px-2">
+              <div class="space-y-1 text-right">
+                <div class="text-xs font-bold text-white font-tech">Scan or Tap to Connect</div>
+                <div class="text-[10px] text-zinc-300">امسح الكود لزيارة المنصة</div>
+                <div class="text-[9px] text-cyan-400 font-code">coresync.cloud</div>
+                <div class="text-[8px] text-zinc-500 font-mono mt-1">Amsterdam • Frankfurt • Riyadh</div>
+              </div>
+
+              <!-- SVG Dynamic QR Code Box -->
+              <div class="w-20 h-20 bg-white rounded-lg p-1.5 shadow-lg flex items-center justify-center">
+                <svg viewBox="0 0 100 100" class="w-full h-full" fill="#000000">
+                  <!-- Simplified High Quality Geometric QR Code Shape -->
+                  <rect x="0" y="0" width="30" height="30" fill="#000" rx="3" />
+                  <rect x="5" y="5" width="20" height="20" fill="#fff" rx="2" />
+                  <rect x="9" y="9" width="12" height="12" fill="#c5a880" rx="1" />
+                  
+                  <rect x="70" y="0" width="30" height="30" fill="#000" rx="3" />
+                  <rect x="75" y="5" width="20" height="20" fill="#fff" rx="2" />
+                  <rect x="79" y="9" width="12" height="12" fill="#c5a880" rx="1" />
+
+                  <rect x="0" y="70" width="30" height="30" fill="#000" rx="3" />
+                  <rect x="5" y="75" width="20" height="20" fill="#fff" rx="2" />
+                  <rect x="9" y="79" width="12" height="12" fill="#c5a880" rx="1" />
+
+                  <!-- Pattern dots -->
+                  <rect x="36" y="8" width="8" height="8" fill="#000" />
+                  <rect x="48" y="14" width="8" height="8" fill="#000" />
+                  <rect x="58" y="8" width="8" height="8" fill="#000" />
+                  <rect x="36" y="24" width="8" height="8" fill="#000" />
+                  <rect x="48" y="36" width="12" height="12" fill="#0284c7" />
+                  <rect x="14" y="42" width="8" height="8" fill="#000" />
+                  <rect x="24" y="48" width="8" height="8" fill="#000" />
+                  <rect x="68" y="42" width="10" height="10" fill="#000" />
+                  <rect x="84" y="48" width="8" height="8" fill="#000" />
+                  <rect x="36" y="62" width="8" height="8" fill="#000" />
+                  <rect x="48" y="72" width="10" height="10" fill="#000" />
+                  <rect x="64" y="66" width="8" height="8" fill="#000" />
+                  <rect x="78" y="76" width="10" height="10" fill="#000" />
+                  <rect x="64" y="84" width="8" height="8" fill="#000" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[8px] text-zinc-500 font-mono pt-2 border-t border-white/10">
+              <span>Encrypted NFC CoreSync Tag</span>
+              <span class="text-emerald-400">Security Verified</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- شريط بطاقات الاتصال الرقمية الذكية (Digital vCard / .vcf) -->
+      <div class="bg-[#09090b] border border-white/10 rounded-xl p-3 mb-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <i data-lucide="smartphone" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white">بطاقة الاتصال الرقمية الذكية للمؤسسين (Digital vCard / Apple & Android Contacts)</div>
+            <div class="text-[10px] text-zinc-400">حفظ جهة الاتصال مباشرة بنقرة واحدة في دليل الهاتف مع أرقام الهواتف والمقر وموقع الشركة:</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button type="button" onclick="downloadFounderVCard('salim')" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+            <span>Eng. Salim Aziza (.vcf)</span>
+          </button>
+          <button type="button" onclick="downloadFounderVCard('raed')" class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+            <span>Mr. Raed Kaakeh (.vcf)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- شريط أدوات التصدير -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+        <label class="flex items-center gap-2 text-xs text-zinc-300 cursor-pointer">
+          <input type="checkbox" id="toggle-bleed" checked onchange="toggleBleedGuide(this.checked)" class="rounded bg-zinc-800 border-white/20 text-amber-500 focus:ring-0">
+          <span>إظهار إرشادات وهوامش القص المطبعي القياسية (3mm Bleed Marks)</span>
+        </label>
+
+        <div class="flex items-center gap-2.5 w-full sm:w-auto">
+          <button type="button" onclick="downloadCardsAsSvg()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-semibold flex items-center justify-center gap-2 transition">
+            <i data-lucide="download" class="w-4 h-4 text-cyan-400"></i>
+            تنزيل بصيغة SVG
+          </button>
+          <button type="button" onclick="triggerCardPrint()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black text-xs font-bold font-tech flex items-center justify-center gap-2 transition shadow-lg shadow-amber-400/20 hover:scale-105">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            طباعة البطاقة فورياً / حفظ كـ PDF
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- منطقة الطباعة المخصصة المعزولة (Isolated Print Sheet Area) -->
+  <div id="print-area" class="hidden">
+    <div class="print-header-text">
+      <h2 class="print-header-title">S&R CORESYNC SOLUTIONS B.V. — OFFICIAL BUSINESS CARDS</h2>
+      <p class="print-header-sub">Standard Euro Spec: 85x55 mm • 300 DPI High-Precision Vectors</p>
+    </div>
+    <div class="print-sheet-row">
+      <div id="print-sheet-front" class="print-sheet-card-front"></div>
+      <div id="print-sheet-back" class="print-sheet-card-back"></div>
+    </div>
+  </div>
+
+  <!-- رسالة التنبيه العائمة (Toast Notification) -->
+  <div id="toast" class="fixed bottom-6 left-6 bg-cyan-500 text-black px-4 py-2.5 rounded-xl text-xs font-bold shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <i data-lucide="check" class="w-4 h-4"></i>
+    <span id="toast-text">تم النسخ بنجاح!</span>
+  </div>
+
+  <script>
+    // الحالة الافتراضية: التصميم الأول المعتمد
+    let currentVariant = 0;
+    let color1 = "#0ea5e9";
+    let color2 = "#0284c7";
+
+    // دوال التهيئة الأولية
+    window.onload = function() {
+      lucide.createIcons();
+      updateLogo();
+    };
+
+    
+    // ==========================================
+    // محرك التحكم بشدة التوهج والنبض (Glow Controls)
+    // ==========================================
+    let currentGlow = 12;
+    let isPulseActive = true;
+
+    function changeGlowIntensity(val) {
+      currentGlow = parseInt(val);
+      document.getElementById('glow-val-label').textContent = val + 'px';
+      updateLogo();
+    }
+
+    function togglePulseGlow(checked) {
+      isPulseActive = checked;
+      updateLogo();
+    }
+
+    // ==========================================
+    // تفاعل بطاقة الأعمال ثلاثية الأبعاد (3D Card Tilt)
+    // ==========================================
+    function handleCard3dMove(e, card) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -16;
+      const rotateY = ((x - centerX) / centerX) * 16;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.04, 1.04, 1.04)`;
+
+      const sheen = document.getElementById('card-sheen');
+      if (sheen) {
+        sheen.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.4) 0%, transparent 65%)`;
+      }
+    }
+
+    function resetCard3d(card) {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      const sheen = document.getElementById('card-sheen');
+      if (sheen) {
+        sheen.style.background = 'linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%)';
+      }
+    }
+
+    function copyColorCode(hex) {
+      copyToClipboard(hex);
+      showToast(`تم نسخ كود اللون: ${hex}`);
+    }
+
+    function exportBrandBookPdf() {
+      window.print();
+    }
+
+    function selectVariant(id) {
+      currentVariant = id;
+      const btn0 = document.getElementById('var-btn-0');
+      const btn4 = document.getElementById('var-btn-4');
+
+      if (id === 0) {
+        if (btn0) btn0.className = "p-3 rounded-xl border border-cyan-500 bg-cyan-500/20 text-cyan-300 text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition ring-1 ring-cyan-400 shadow-md shadow-cyan-500/10";
+        if (btn4) btn4.className = "p-3 rounded-xl border border-white/10 bg-white/5 text-zinc-400 hover:text-white text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition";
+        if (color1 === '#facc15' || color1 === '#c5a880') {
+          setColorTheme('#0ea5e9', '#0284c7');
+        }
+      } else if (id === 4) {
+        if (btn0) btn0.className = "p-3 rounded-xl border border-white/10 bg-white/5 text-zinc-400 hover:text-white text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition";
+        if (btn4) btn4.className = "p-3 rounded-xl border border-amber-400 bg-amber-500/20 text-amber-300 text-xs font-semibold flex flex-col items-center justify-center gap-1.5 transition ring-1 ring-amber-400 shadow-md shadow-amber-500/10";
+        if (color1 !== '#facc15' && color1 !== '#c5a880') {
+          setColorTheme('#c5a880', '#e6ca9f');
+        }
+      }
+      updateLogo();
+    }
+
+    function setColorTheme(c1, c2) {
+      color1 = c1;
+      color2 = c2;
+      document.getElementById('color-picker-1').value = c1;
+      document.getElementById('color-picker-2').value = c2;
+      document.getElementById('color-hex-1').textContent = c1;
+      document.getElementById('color-hex-2').textContent = c2;
+      updateLogo();
+    }
+
+    function manualColorChange() {
+      color1 = document.getElementById('color-picker-1').value;
+      color2 = document.getElementById('color-picker-2').value;
+      document.getElementById('color-hex-1').textContent = color1;
+      document.getElementById('color-hex-2').textContent = color2;
+      updateLogo();
+    }
+
+    // توليد كود SVG حسب الإعدادات
+    function generateSvgString(showText = true, size = 180) {
+      const brand = document.getElementById('input-brand-name').value || "S&R";
+      const sub = document.getElementById('input-sub-name').value || "CoreSync";
+      const tag = document.getElementById('input-tagline').value || "Solutions";
+
+      let iconSvg = '';
+
+      if (currentVariant === 0) {
+        // The Official Quantum Orbital & Sync Orb (التصميم الأول المعتمد)
+        iconSvg = `
+          <g>
+            <defs>
+              <radialGradient id="officialOrbGrad" cx="45%" cy="38%" r="62%">
+                <stop offset="0%" stop-color="${color1}" stop-opacity="0.95" />
+                <stop offset="40%" stop-color="${color2}" stop-opacity="0.9" />
+                <stop offset="75%" stop-color="#033054" stop-opacity="0.98" />
+                <stop offset="100%" stop-color="#021a30" stop-opacity="1" />
+              </radialGradient>
+              <linearGradient id="officialBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="${color1}" stop-opacity="0.9" />
+                <stop offset="100%" stop-color="${color2}" stop-opacity="0.5" />
+              </linearGradient>
+            </defs>
+            <!-- الحلقة المدارية الخارجية الدقيقة -->
+            <circle cx="50" cy="50" r="44" fill="none" stroke="${color1}" stroke-opacity="0.45" stroke-width="0.75" />
+            
+            <!-- عقدتان متزامنتان على المحيط -->
+            <g transform="rotate(-35 50 50) translate(94, 50)">
+              <circle cx="0" cy="0" r="2.4" fill="${color1}" stroke="#ffffff" stroke-width="0.4" />
+            </g>
+            <g transform="rotate(145 50 50) translate(94, 50)">
+              <circle cx="0" cy="0" r="2.4" fill="${color1}" stroke="#ffffff" stroke-width="0.4" />
+            </g>
+
+            <!-- مدارات التزامن الثنائية المائلة -->
+            <ellipse cx="50" cy="50" rx="43" ry="18" transform="rotate(35 50 50)" fill="none" stroke="${color1}" stroke-opacity="0.35" stroke-width="0.8" />
+            <ellipse cx="50" cy="50" rx="43" ry="18" transform="rotate(-35 50 50)" fill="none" stroke="${color1}" stroke-opacity="0.35" stroke-width="0.8" />
+
+            <!-- الكرة المركزية الزرقاء المضيئة -->
+            <circle cx="50" cy="50" r="33.5" fill="url(#officialOrbGrad)" stroke="url(#officialBorderGrad)" stroke-width="1.25" />
+
+            <!-- النجمة الملكية ثلاثية الأبعاد (3D Faceted Star) -->
+            <g transform="translate(50, 28) scale(0.22)" filter="drop-shadow(0 1px 2px rgba(0,0,0,0.7))">
+              <polygon points="0,0 0,-30 -7.8,-9.5" fill="#ffffff" />
+              <polygon points="0,0 0,-30 7.8,-9.5" fill="${color2}" />
+              <polygon points="0,0 28.5,-9.3 7.8,-9.5" fill="#ffffff" />
+              <polygon points="0,0 28.5,-9.3 17.6,5.8" fill="${color2}" />
+              <polygon points="0,0 17.6,24.3 17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 17.6,24.3 0,11.5" fill="${color2}" />
+              <polygon points="0,0 -17.6,24.3 0,11.5" fill="${color2}" />
+              <polygon points="0,0 -17.6,24.3 -17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 -28.5,-9.3 -17.6,5.8" fill="${color1}" />
+              <polygon points="0,0 -28.5,-9.3 -7.8,-9.5" fill="#ffffff" />
+            </g>
+
+            <!-- المونوغرام S&R بالخط الكلاسيكي الفاخر المتناسق بتباعد متوازن -->
+            <text x="35" y="56" font-family="'Playfair Display', 'Times New Roman', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">S</text>
+            <text x="49.5" y="51.5" font-family="'Playfair Display', 'Times New Roman', serif" font-style="italic" font-size="16" font-weight="700" fill="${color1}" text-anchor="middle">&amp;</text>
+            <text x="64.5" y="56" font-family="'Playfair Display', 'Times New Roman', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">R</text>
+
+            <!-- عبارة CORESYNC الرسمية أسفل الأحرف -->
+            <text x="50" y="68.5" font-family="'Playfair Display', 'Cinzel', serif" font-size="4.2" font-weight="700" letter-spacing="1.2px" fill="${color1}" text-anchor="middle">CORESYNC</text>
+          </g>
+        `;
+      } else if (currentVariant === 4) {
+        // Royal Neon Gold & Kinetic Star (النسخة النيونية الملكية للتصميم الأول)
+        iconSvg = `
+          <g>
+            <defs>
+              <style>
+                @keyframes orbitSlow4 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                @keyframes counterOrbit4 { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+                @keyframes neonPulse4 {
+                  0%, 100% { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 4px ${color1}) drop-shadow(0 0 10px ${color2}); opacity: 1; }
+                  50% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 6px ${color1}) drop-shadow(0 0 16px ${color2}); opacity: 0.92; }
+                }
+                @keyframes starGlint4 {
+                  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+                  50% { transform: scale(1.3) rotate(45deg); opacity: 0.8; }
+                }
+                .orb-rot-4 { transform-origin: 50px 50px; animation: orbitSlow4 24s linear infinite; }
+                .orb-rot-sat-4 { transform-origin: 50px 50px; animation: orbitSlow4 14s linear infinite; }
+                .orb-rot-c-4 { transform-origin: 50px 50px; animation: counterOrbit4 30s linear infinite; }
+                .neon-pulse-4 { animation: neonPulse4 3s ease-in-out infinite; }
+                .star-glint-4 { transform-origin: 50px 25px; animation: starGlint4 2.2s ease-in-out infinite; }
+              
+    /* تنسيقات الطباعة الدقيقة لبطاقات الأعمال */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #print-area, #print-area * {
+        visibility: visible !important;
+      }
+      #print-area {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        padding: 20mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15mm !important;
+        z-index: 999999 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+  </style>
+              <radialGradient id="neonOrbGrad4" cx="45%" cy="38%" r="65%">
+                <stop offset="0%" stop-color="#2a1a00" stop-opacity="0.95" />
+                <stop offset="60%" stop-color="#120b00" stop-opacity="0.98" />
+                <stop offset="100%" stop-color="#000000" stop-opacity="1" />
+              </radialGradient>
+              <filter id="bloom4" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="2.5" result="b1"/>
+                <feGaussianBlur stdDeviation="6" result="b2"/>
+                <feMerge><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <circle cx="50" cy="50" r="44" fill="none" stroke="${color1}" stroke-opacity="0.8" stroke-width="0.9" filter="url(#bloom4)" />
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="0.3" />
+
+            <g class="orb-rot-sat-4">
+              <g transform="rotate(0 50 50) translate(94 50)"><circle cx="0" cy="0" r="2.8" fill="${color1}" filter="url(#bloom4)"/><circle cx="0" cy="0" r="1.5" fill="#ffffff"/></g>
+              <g transform="rotate(180 50 50) translate(94 50)"><circle cx="0" cy="0" r="2.8" fill="${color1}" filter="url(#bloom4)"/><circle cx="0" cy="0" r="1.5" fill="#ffffff"/></g>
+            </g>
+
+            <g class="orb-rot-4">
+              <ellipse cx="50" cy="50" rx="43" ry="18" fill="none" stroke="${color1}" stroke-opacity="0.45" stroke-width="0.7" />
+              <ellipse cx="50" cy="50" rx="43" ry="18" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="0.3" stroke-dasharray="4 40" />
+            </g>
+            <g class="orb-rot-c-4">
+              <ellipse cx="50" cy="50" rx="18" ry="43" fill="none" stroke="${color2}" stroke-opacity="0.45" stroke-width="0.7" />
+              <ellipse cx="50" cy="50" rx="18" ry="43" fill="none" stroke="#ffffff" stroke-opacity="0.7" stroke-width="0.3" stroke-dasharray="4 40" />
+            </g>
+
+            <g class="neon-pulse-4">
+              <circle cx="50" cy="50" r="33.5" fill="url(#neonOrbGrad4)" stroke="${color1}" stroke-width="1.2" filter="url(#bloom4)" />
+              <circle cx="50" cy="50" r="33" fill="none" stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.8" />
+            </g>
+
+            <g class="neon-pulse-4">
+              <g filter="url(#bloom4)">
+                <text x="35" y="56" font-family="'Playfair Display', serif" font-size="27" font-weight="800" fill="#ffffff" stroke="${color1}" stroke-width="1.2" text-anchor="middle">S</text>
+                <text x="49.5" y="51.5" font-family="'Playfair Display', serif" font-style="italic" font-size="16" font-weight="700" fill="${color1}" stroke="${color2}" stroke-width="0.8" text-anchor="middle">&amp;</text>
+                <text x="64.5" y="56" font-family="'Playfair Display', serif" font-size="27" font-weight="800" fill="#ffffff" stroke="${color1}" stroke-width="1.2" text-anchor="middle">R</text>
+              </g>
+              <text x="35" y="56" font-family="'Playfair Display', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">S</text>
+              <text x="49.5" y="51.5" font-family="'Playfair Display', serif" font-style="italic" font-size="16" font-weight="700" fill="${color1}" text-anchor="middle">&amp;</text>
+              <text x="64.5" y="56" font-family="'Playfair Display', serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle">R</text>
+            </g>
+
+            <!-- عبارة CORESYNC الرسمية أسفل الأحرف -->
+            <text x="50" y="68.5" font-family="'Playfair Display', 'Cinzel', serif" font-size="4.2" font-weight="700" letter-spacing="1.2px" fill="${color1}" text-anchor="middle">CORESYNC</text>
+
+            <g class="star-glint-4">
+              <g transform="translate(50, 27) scale(0.22)" filter="url(#bloom4)">
+                <polygon points="0,0 0,-30 -7.8,-9.5" fill="#ffffff" />
+                <polygon points="0,0 0,-30 7.8,-9.5" fill="${color2}" />
+                <polygon points="0,0 28.5,-9.3 7.8,-9.5" fill="#ffffff" />
+                <polygon points="0,0 28.5,-9.3 17.6,5.8" fill="${color2}" />
+                <polygon points="0,0 17.6,24.3 17.6,5.8" fill="${color1}" />
+                <polygon points="0,0 17.6,24.3 0,11.5" fill="${color2}" />
+                <polygon points="0,0 -17.6,24.3 0,11.5" fill="${color2}" />
+                <polygon points="0,0 -17.6,24.3 -17.6,5.8" fill="${color1}" />
+                <polygon points="0,0 -28.5,-9.3 -17.6,5.8" fill="${color1}" />
+                <polygon points="0,0 -28.5,-9.3 -7.8,-9.5" fill="#ffffff" />
+              </g>
+            </g>
+          </g>
+        `;
+      }
+
+      if (!showText) {
+        return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" fill="none" xmlns="http://www.w3.org/2000/svg">${iconSvg}</svg>`;
+      }
+
+      if (currentVariant === 4) {
+        return `
+          <svg viewBox="0 0 100 145" width="${size}" height="${size * 1.45}" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+                @keyframes textGlow4 {
+                  0%, 100% { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 5px ${color1}) drop-shadow(0 0 12px ${color2}); }
+                  50% { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 3px ${color1}) drop-shadow(0 0 8px ${color2}); }
+                }
+                .neon-txt-4 { animation: textGlow4 3s ease-in-out infinite; }
+              
+    /* تنسيقات الطباعة الدقيقة لبطاقات الأعمال */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #print-area, #print-area * {
+        visibility: visible !important;
+      }
+      #print-area {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        padding: 20mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15mm !important;
+        z-index: 999999 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+  </style>
+            </defs>
+            ${iconSvg}
+            <g class="neon-txt-4">
+              <text x="50" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.3">
+                ${brand} <tspan fill="${color1}">${sub}</tspan>
+              </text>
+              <text x="50" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="${color1}" text-anchor="middle" letter-spacing="3.5">
+                ${tag.toUpperCase()}
+              </text>
+            </g>
+          </svg>
+        `;
+      }
+
+      // النمط الافتراضي للتصميم الأول
+      return `
+        <svg viewBox="0 0 100 138" width="${size}" height="${size * 1.38}" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+            
+    /* تنسيقات الطباعة الدقيقة لبطاقات الأعمال */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #print-area, #print-area * {
+        visibility: visible !important;
+      }
+      #print-area {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #ffffff !important;
+        padding: 20mm !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15mm !important;
+        z-index: 999999 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+
+  </style>
+          </defs>
+          ${iconSvg}
+          <text x="50" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.2" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.2">
+            ${brand} <tspan fill="${color1}">${sub}</tspan>
+          </text>
+          <text x="50" y="130" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.8" font-weight="700" fill="#94a3b8" text-anchor="middle" letter-spacing="3">
+            ${tag.toUpperCase()}
+          </text>
+        </svg>
+      `;
+    }
+
+    // تحديث الشعار في كل الأماكن الحية
+    function updateLogo() {
+      const container = document.getElementById('svg-render-container');
+      const fullSvg = generateSvgString(true, 200);
+      container.innerHTML = fullSvg;
+
+      // تحديث المصغر في Navbar
+      const brand = document.getElementById('input-brand-name').value || "S&R";
+      const sub = document.getElementById('input-sub-name').value || "CoreSync";
+      const miniNav = document.getElementById('mini-logo-nav');
+      miniNav.innerHTML = `
+        <div class="w-6 h-6 flex items-center justify-center">${generateSvgString(false, 24)}</div>
+        <div class="text-xs font-tech font-bold text-white tracking-tight leading-none">${brand} <span style="color:${color1}">${sub}</span></div>
+      `;
+
+      // تحديث أيقونة التطبيق
+      document.getElementById('mini-app-icon').innerHTML = generateSvgString(false, 34);
+
+      // تحديث هالة الضوء
+      document.getElementById('ambient-glow').style.background = `radial-gradient(circle at center, ${color1}25 0%, transparent 65%)`;
+
+      // تحديث كود المعاينة النصي
+      document.getElementById('code-display').textContent = fullSvg.trim();
+    }
+
+    // تغيير خلفية المسرح
+    function setThemeBg(type) {
+      const stage = document.getElementById('canvas-stage');
+      const b1 = document.getElementById('bg-btn-dark');
+      const b2 = document.getElementById('bg-btn-light');
+      const b3 = document.getElementById('bg-btn-navy');
+
+      [b1, b2, b3].forEach(b => {
+        b.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 hover:text-white flex items-center gap-1.5 transition";
+      });
+
+      if (type === 'dark') {
+        stage.style.backgroundColor = '#09090b';
+        b1.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-white flex items-center gap-1.5 transition";
+      } else if (type === 'light') {
+        stage.style.backgroundColor = '#ffffff';
+        b2.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-white flex items-center gap-1.5 transition";
+      } else if (type === 'navy') {
+        stage.style.backgroundColor = '#0b1329';
+        b3.className = "px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-800 text-white flex items-center gap-1.5 transition";
+      }
+    }
+
+    // تحميل ملف SVG
+    function downloadSvg() {
+      const svgData = generateSvgString(true, 400);
+      const blob = new Blob([svgData], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `sr-coresync-official-logo.svg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast("تم تنزيل ملف SVG للتصميم الأول بدقة لا نهائية!");
+    }
+
+    // نسخ الكود
+    function copyCurrentSvgCode() {
+      const svgData = generateSvgString(true, 240);
+      copyToClipboard(svgData);
+      showToast("تم نسخ كود الـ SVG إلى الحافظة!");
+    }
+
+    function copyRawCode() {
+      const code = document.getElementById('code-display').textContent;
+      copyToClipboard(code);
+      showToast("تم نسخ كود SVG للاستخدام البرمجي!");
+    }
+
+    function copyToClipboard(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const txt = document.getElementById('toast-text');
+      txt.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    
+    // ==========================================
+    // 6. مودال وطباعة بطاقات الأعمال المعتمدة (Business Card Print & Export)
+    // ==========================================
+    function openCardPrintModal() {
+      const modal = document.getElementById('card-print-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        lucide.createIcons();
+      }
+    }
+
+    function closeCardPrintModal() {
+      const modal = document.getElementById('card-print-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function toggleBleedGuide(show) {
+      const front = document.getElementById('print-card-front');
+      const back = document.getElementById('print-card-back');
+      if (show) {
+        front.style.outline = '2px dashed rgba(245, 158, 11, 0.4)';
+        back.style.outline = '2px dashed rgba(6, 182, 212, 0.4)';
+      } else {
+        front.style.outline = 'none';
+        back.style.outline = 'none';
+      }
+    }
+
+    function triggerCardPrint() {
+      // نسخ المحتوى إلى منطقة الطباعة المخصصة
+      const frontSrc = document.getElementById('print-card-front').innerHTML;
+      const backSrc = document.getElementById('print-card-back').innerHTML;
+      const sheetFront = document.getElementById('print-sheet-front');
+      const sheetBack = document.getElementById('print-sheet-back');
+      
+      if (sheetFront && sheetBack) {
+        sheetFront.innerHTML = frontSrc;
+        sheetBack.innerHTML = backSrc;
+      }
+      
+      const printArea = document.getElementById('print-area');
+      printArea.classList.remove('hidden');
+      window.print();
+      printArea.classList.add('hidden');
+    }
+
+    function downloadCardsAsSvg() {
+      const frontSvg = generateBusinessCardSvg('front');
+      const blob = new Blob([frontSvg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'SR-CoreSync-Business-Card-85x55mm.svg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('تم تنزيل بطاقة الأعمال بدقة متجهة SVG عالية النقاء!');
+    }
+
+    function generateBusinessCardSvg(face = 'front') {
+      if (face === 'front') {
+        return `<svg viewBox="0 0 850 550" width="850" height="550" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="cardGrad" cx="85%" cy="15%" r="75%">
+              <stop offset="0%" stop-color="#2a241b"/>
+              <stop offset="75%" stop-color="#0d0d12"/>
+            </radialGradient>
+          </defs>
+          <rect width="850" height="550" rx="30" fill="url(#cardGrad)" stroke="#c5a880" stroke-width="4"/>
+          <text x="60" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="28" font-weight="800" fill="#ffffff">S&amp;R CORESYNC</text>
+          <text x="60" y="110" font-family="'JetBrains Mono', monospace" font-size="16" fill="#c5a880" letter-spacing="4">SOLUTIONS B.V.</text>
+          
+          <text x="60" y="270" font-family="'Plus Jakarta Sans', sans-serif" font-size="34" font-weight="800" fill="#ffffff">Eng. Mohammad Salim Aziza</text>
+          <text x="60" y="305" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f59e0b">Co-Founder &amp; CTO // Cloud Architect</text>
+          
+          <text x="60" y="380" font-family="'Plus Jakarta Sans', sans-serif" font-size="30" font-weight="800" fill="#e4e4e7">Mr. Mohammad Raed Kaakeh</text>
+          <text x="60" y="415" font-family="'JetBrains Mono', monospace" font-size="18" fill="#d97706">Co-Founder &amp; CFO // Financial ERP</text>
+          
+          <line x1="60" y1="465" x2="790" y2="465" stroke="#333" stroke-width="2"/>
+          <text x="60" y="505" font-family="'JetBrains Mono', monospace" font-size="16" fill="#a1a1aa">Keizersgracht 482, Amsterdam</text>
+          <text x="650" y="505" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="700" fill="#c5a880">KVK: 84920194</text>
+        </svg>`;
+      }
+      return '';
+    }
+
+    // ==========================================
+    // 7. محرك توليد وتنزيل حزمة أصول الهوية بالكامل (Instant ZIP Pack Generator)
+    // ==========================================
+    async function downloadAssetsZipPack() {
+      const btn = document.getElementById('btn-zip-pack');
+      const btnText = document.getElementById('zip-btn-text');
+      
+      if (typeof JSZip === 'undefined') {
+        showToast('جاري تجهيز محرك الضغط... يرجى الانتظار ثانية.');
+        return;
+      }
+
+      if (btnText) btnText.textContent = 'جاري تجميع الملفات (ZIP)...';
+      if (btn) btn.disabled = true;
+
+      try {
+        const zip = new JSZip();
+
+        // 1. الشعار الأول المعتمد (SVG)
+        const svgQuantum = generateSvgString(true, 300);
+        zip.file("01-Logo-Official-Quantum-Orb.svg", svgQuantum);
+
+        // 2. الشعار النيوني الذهبي الملكي (SVG)
+        const currentTmp = currentVariant;
+        currentVariant = 4;
+        const colorTmp1 = color1;
+        const colorTmp2 = color2;
+        color1 = '#c5a880';
+        color2 = '#e6ca9f';
+        const svgRoyalGold = generateSvgString(true, 300);
+        zip.file("02-Logo-Royal-Neon-Gold.svg", svgRoyalGold);
+        
+        // استعادة الحالة
+        currentVariant = currentTmp;
+        color1 = colorTmp1;
+        color2 = colorTmp2;
+
+        // 3. رمز الشعار المستقل (Icon Only Vector)
+        const svgIconOnly = generateSvgString(false, 180);
+        zip.file("03-Logo-Emblem-Icon-Only.svg", svgIconOnly);
+
+        // 4. بطاقة الأعمال الفاخرة (SVG Vector 85x55mm)
+        zip.file("04-Founders-Business-Card-85x55mm.svg", generateBusinessCardSvg('front'));
+        zip.file("05-Eng-Mohammad-Salim-Aziza.vcf", generateVCardContent('salim'));
+        zip.file("06-Mr-Mohammad-Raed-Kaakeh.vcf", generateVCardContent('raed'));
+
+        // 5. ملف أكواد الألوان والتوكنز الرسمية (JSON)
+        const tokensJson = {
+          brand: "S&R CoreSync Solutions B.V.",
+          headquarters: "Keizersgracht 482, Amsterdam, The Netherlands",
+          kvk: "84920194",
+          btw: "NL863920194B01",
+          colors: {
+            royalGold: { hex: "#c5a880", rgb: "rgb(197, 168, 128)", usage: "Primary Luxury Brand & High-Tier Assets" },
+            cyberCyan: { hex: "#38bdf8", rgb: "rgb(56, 189, 248)", usage: "Cloud Architecture & Tech Interfaces" },
+            fintechEmerald: { hex: "#10b981", rgb: "rgb(16, 185, 129)", usage: "Financial Metrics & Positive Trends" },
+            obsidianBlack: { hex: "#010907", rgb: "rgb(1, 9, 7)", usage: "Deep Background Canvas" }
+          },
+          typography: {
+            arabic: "Alexandria, IBM Plex Sans Arabic",
+            latin: "Plus Jakarta Sans, Space Grotesk",
+            monogram: "Playfair Display"
+          }
+        };
+        zip.file("05-Brand-Design-Tokens.json", JSON.stringify(tokensJson, null, 2));
+
+        // 6. ملف متغيرات التصميم للمطورين (CSS Variables)
+        const cssVariables = `/* S&R CoreSync Solutions - Official Brand Tokens */
+:root {
+  --sr-royal-gold: #c5a880;
+  --sr-royal-gold-hover: #e0c59e;
+  --sr-cyber-cyan: #38bdf8;
+  --sr-fintech-emerald: #10b981;
+  --sr-obsidian-black: #010907;
+  --sr-font-brand: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --sr-font-arabic: 'Alexandria', 'IBM Plex Sans Arabic', sans-serif;
+  --sr-border-glow: 0 0 25px rgba(197, 168, 128, 0.25);
+}
+`;
+        zip.file("06-Brand-Design-Tokens.css", cssVariables);
+
+        // 7. دليل إرشادات الاستخدام المعتمد (README)
+        const readmeContent = `=====================================================
+S&R CORESYNC SOLUTIONS B.V. — OFFICIAL BRAND KIT
+=====================================================
+Company: S&R CoreSync Solutions B.V.
+Address: Keizersgracht 482, 1016 EG Amsterdam, The Netherlands
+Commercial Register (KVK): 84920194
+VAT Number (BTW): NL863920194B01
+
+Founders & Executive Team:
+- Eng. Mohammad Salim Aziza (CTO & Co-Founder // Cloud Architect)
+- Mr. Mohammad Raed Kaakeh (CEO & Co-Founder // Financial ERP Director)
+
+FILES INCLUDED IN THIS PACKAGE:
+1. 01-Logo-Official-Quantum-Orb.svg  -> The Primary Adopted Logo (Orbital Quantum)
+2. 02-Logo-Royal-Neon-Gold.svg       -> The Luxury Royal Neon & Star Edition
+3. 03-Logo-Emblem-Icon-Only.svg      -> Pure 100x100 Vector Emblem Icon
+4. 04-Founders-Business-Card-85x55mm.svg -> Print-ready 85x55mm European Card
+5. 05-Brand-Design-Tokens.json       -> Structured Design Tokens for Web & Apps
+6. 06-Brand-Design-Tokens.css        -> CSS Custom Properties for Developers
+7. README.txt                         -> Official Brand Licensing & Usage Rules
+
+USAGE RULES:
+- Minimum clear space around the emblem must be at least 25% of the emblem width.
+- Do not alter the monogram ligature proportions (S&R).
+- For financial and enterprise portals, use Royal Gold (#c5a880) or Titanium Cyan (#38bdf8).
+
+(c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
+`;
+        zip.file("README-Brand-Kit.txt", readmeContent);
+
+        // توليد ملف الـ ZIP وتنزيله
+        const zipBlob = await zip.generateAsync({ type: "blob" });
+        const downloadUrl = URL.createObjectURL(zipBlob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "SR-CoreSync-Official-Brand-Kit.zip";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+
+        showToast("🎉 تم توليد وتنزيل حزمة الهوية الكاملة (ZIP) بنجاح!");
+      } catch (err) {
+        console.error("ZIP Generation error:", err);
+        showToast("حدث خطأ أثناء تجميع ملف ZIP، يرجى إعادة المحاولة.");
+      } finally {
+        if (btnText) btnText.textContent = "تنزيل حزمة الهوية الكاملة (Instant ZIP Pack)";
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    
+    // ==========================================
+    // 8. محرك توليد بطاقات الاتصال الذكية للمؤسسين (vCard 3.0 Engine)
+    // ==========================================
+    function generateVCardContent(founder) {
+      if (founder === 'salim') {
+        return [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          'N:Aziza;Mohammad Salim;;Eng.;',
+          'FN:Eng. Mohammad Salim Aziza',
+          'ORG:S&R CoreSync Solutions B.V.',
+          'TITLE:Co-Founder & CTO // Cloud Architect',
+          'TEL;TYPE=CELL,VOICE;VALUE=uri:tel:+31208943000',
+          'EMAIL;TYPE=WORK,INTERNET:salim@coresync.cloud',
+          'URL:https://coresync.cloud',
+          'ADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;North Holland;1016 EG;Netherlands',
+          'NOTE:S&R CoreSync Solutions B.V. - Enterprise Cloud ERP & Financial Intelligence. KVK: 84920194, BTW: NL863920194B01',
+          'END:VCARD'
+        ].join('\r\n');
+      } else {
+        return [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          'N:Kaakeh;Mohammad Raed;;Mr.;',
+          'FN:Mr. Mohammad Raed Kaakeh',
+          'ORG:S&R CoreSync Solutions B.V.',
+          'TITLE:Co-Founder & CFO // Financial ERP Director',
+          'TEL;TYPE=CELL,VOICE;VALUE=uri:tel:+31208943000',
+          'EMAIL;TYPE=WORK,INTERNET:raed@coresync.cloud',
+          'URL:https://coresync.cloud',
+          'ADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;North Holland;1016 EG;Netherlands',
+          'NOTE:S&R CoreSync Solutions B.V. - Enterprise Cloud ERP & Financial Intelligence. KVK: 84920194, BTW: NL863920194B01',
+          'END:VCARD'
+        ].join('\r\n');
+      }
+    }
+
+    function downloadFounderVCard(founder) {
+      const vcardData = generateVCardContent(founder);
+      const filename = founder === 'salim' ? 'Eng_Mohammad_Salim_Aziza_CTO.vcf' : 'Mr_Mohammad_Raed_Kaakeh_CFO.vcf';
+      const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      const name = founder === 'salim' ? 'Eng. Mohammad Salim Aziza' : 'Mr. Mohammad Raed Kaakeh';
+      showToast(`📱 تم تنزيل بطاقة الاتصال الذكية لـ (${name})! جاهزة للحفظ في جهات اتصال الهاتف.`);
+    }
+
+    function scrollToEditor() {
+      document.getElementById('interactive-editor').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

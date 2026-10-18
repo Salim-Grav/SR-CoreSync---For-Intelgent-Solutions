@@ -4,8 +4,8 @@ for S&R CoreSync Solutions.
 """
 
 import os
-import qrcode
-from PIL import Image, ImageDraw, ImageFont
+import qrcode  # type: ignore
+from PIL import Image, ImageDraw, ImageFont  # type: ignore
 
 PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
 ASSETS_DIR = os.path.join(PROJECT_DIR, "assets")
