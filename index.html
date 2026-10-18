@@ -5388,6 +5388,42 @@
             gap: 14px;
         }
 
+        .showcase-footer-avatar.avatar-crown {
+            background: linear-gradient(135deg, #c5a880, #f3dfba);
+            color: #050706;
+            font-weight: 900;
+        }
+
+        .showcase-tab-btn-pdf {
+            border-color: rgba(243, 223, 186, 0.6) !important;
+            background: rgba(197, 168, 128, 0.15) !important;
+            text-decoration: none !important;
+        }
+
+        .showcase-tab-btn-pdf .showcase-tab-dot {
+            background: #f3dfba !important;
+        }
+
+        .showcase-tab-btn-nfc {
+            border-color: rgba(16, 185, 129, 0.5) !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+            text-decoration: none !important;
+        }
+
+        .showcase-tab-btn-nfc .showcase-tab-dot {
+            background: #10b981 !important;
+        }
+
+        .live-dot.dot-gold {
+            background: #c5a880 !important;
+            box-shadow: 0 0 8px #c5a880 !important;
+        }
+
+        .live-dot.dot-cyan {
+            background: #38bdf8 !important;
+            box-shadow: 0 0 8px #38bdf8 !important;
+        }
+
         .showcase-footer-avatar {
             width: 40px;
             height: 40px;
@@ -6222,12 +6258,12 @@
                             <span class="showcase-tab-dot"></span>
                             <span>عرض البانرات معاً (Full Showcase)</span>
                         </button>
-                        <a href="assets/SR-CoreSync-Corporate-Profile-2026.pdf" download="SR-CoreSync-Corporate-Profile-2026.pdf" class="showcase-tab-btn" style="border-color: rgba(243, 223, 186, 0.6); background: rgba(197, 168, 128, 0.15); text-decoration: none;" title="تحميل الملف التعريفي المؤسسي المعتمد PDF">
-                            <span class="showcase-tab-dot" style="background: #f3dfba;"></span>
+                        <a href="assets/SR-CoreSync-Corporate-Profile-2026.pdf" download="SR-CoreSync-Corporate-Profile-2026.pdf" class="showcase-tab-btn showcase-tab-btn-pdf" title="تحميل الملف التعريفي المؤسسي المعتمد PDF">
+                            <span class="showcase-tab-dot"></span>
                             <span>الملف التعريفي المؤسسي (PDF) 📄</span>
                         </a>
-                        <a href="card.html" target="_blank" class="showcase-tab-btn" style="border-color: rgba(16, 185, 129, 0.5); background: rgba(16, 185, 129, 0.1); text-decoration: none;" title="عرض وتجربة بطاقة الهوية الرقمية وتقنية NFC">
-                            <span class="showcase-tab-dot" style="background: #10b981;"></span>
+                        <a href="card.html" target="_blank" class="showcase-tab-btn showcase-tab-btn-nfc" title="عرض وتجربة بطاقة الهوية الرقمية وتقنية NFC">
+                            <span class="showcase-tab-dot"></span>
                             <span>بطاقة NFC الذكية 📲</span>
                         </a>
                     </div>
@@ -6250,7 +6286,7 @@
                                     </div>
                                     <div class="showcase-banner-footer">
                                         <div class="showcase-footer-meta">
-                                            <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                            <div class="showcase-footer-avatar avatar-crown">👑</div>
                                             <div>
                                                 <div class="showcase-footer-title">S&amp;R CoreSync Solutions • الشعار الرسمي المعتمد</div>
                                                 <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
@@ -6391,7 +6427,7 @@
                         </div>
                         <div class="showcase-banner-footer">
                             <div class="showcase-footer-meta">
-                                <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                <div class="showcase-footer-avatar avatar-crown">👑</div>
                                 <div>
                                     <div class="showcase-footer-title">S&amp;R CoreSync Solutions • الشعار الرسمي المعتمد</div>
                                     <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
@@ -6503,7 +6539,7 @@
                         </div>
                         <div class="showcase-banner-footer">
                             <div class="showcase-footer-meta">
-                                <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                <div class="showcase-footer-avatar avatar-crown">👑</div>
                                 <div>
                                     <div class="showcase-footer-title">S&amp;R CoreSync Solutions</div>
                                     <div class="showcase-footer-role">الشعار الرسمي المعتمد • For Intelligent Solutions</div>
@@ -9798,12 +9834,12 @@
                         liveBadge.style.borderColor = 'rgba(16, 185, 129, 0.45)';
                         liveBadge.style.background = 'rgba(16, 185, 129, 0.15)';
                     } else if (currentWorkCategory === 'identity') {
-                        liveBadge.innerHTML = '<span class="live-dot" style="background:#c5a880;box-shadow:0 0 8px #c5a880;"></span> هوية وشعار موثّق / Verified';
+                        liveBadge.innerHTML = '<span class="live-dot dot-gold"></span> هوية وشعار موثّق / Verified';
                         liveBadge.style.color = '#c5a880';
                         liveBadge.style.borderColor = 'rgba(197, 168, 128, 0.45)';
                         liveBadge.style.background = 'rgba(197, 168, 128, 0.15)';
                     } else {
-                        liveBadge.innerHTML = '<span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px #38bdf8;"></span> نظام موثّق / Verified';
+                        liveBadge.innerHTML = '<span class="live-dot dot-cyan"></span> نظام موثّق / Verified';
                         liveBadge.style.color = '#38bdf8';
                         liveBadge.style.borderColor = 'rgba(56, 189, 248, 0.45)';
                         liveBadge.style.background = 'rgba(6, 182, 212, 0.12)';
