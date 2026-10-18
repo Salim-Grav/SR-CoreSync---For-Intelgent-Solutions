@@ -4615,8 +4615,42 @@
                     <!-- Slides Track -->
                     <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
                         <div class="showcase-slides-track" id="slidesTrack">
-                            <!-- Slide 1: Eng. Mohammad Salim Aziza -->
+                            <!-- Slide 0: S&R CoreSync Luxury Official Emblem -->
                             <div class="showcase-slide-item active">
+                                <div class="showcase-banner-card">
+                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Official Corporate Emblem')">
+                                        <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Solutions Official Luxury Emblem" class="showcase-img" loading="eager">
+                                    </div>
+                                    <div class="showcase-banner-footer">
+                                        <div class="showcase-footer-meta">
+                                            <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                            <div>
+                                                <div class="showcase-footer-title">S&amp;R CoreSync Solutions • Official Corporate Emblem</div>
+                                                <div class="showcase-footer-role">For Intelligent Solutions • Cloud Architecture, AI &amp; Enterprise ERP Systems</div>
+                                                <div class="showcase-credentials-badges">
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Certified Corporate Emblem</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Enterprise Innovation Symbol</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Amsterdam, Netherlands</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-footer-actions">
+                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Official Emblem')">
+                                                <span>Inspect Full HD 🔍</span>
+                                            </button>
+                                            <a href="../assets/sr-emblem-gold-luxury.jpg" download="SR-CoreSync-Luxury-Emblem.jpg" class="showcase-action-btn">
+                                                <span>Download Emblem 📥</span>
+                                            </a>
+                                            <a href="#services" class="showcase-action-btn">
+                                                <span>Explore Services 🚀</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 1: Eng. Mohammad Salim Aziza -->
+                            <div class="showcase-slide-item">
                                 <div class="showcase-banner-card">
                                     <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza - Chief Technology Officer & Principal Cloud & AI Architect')">
                                         <img src="../assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" loading="lazy">
@@ -4690,9 +4724,13 @@
                         <div class="showcase-dots-group">
                             <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
                                 <span class="showcase-dot-indicator"></span>
-                                <span>Eng. Mohammad Salim Aziza (CTO)</span>
+                                <span>Corporate Emblem 👑</span>
                             </button>
                             <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                                <span class="showcase-dot-indicator"></span>
+                                <span>Eng. Mohammad Salim Aziza (CTO)</span>
+                            </button>
+                            <button type="button" class="showcase-dot-item" id="slideDot2" onclick="goToSlide(2)">
                                 <span class="showcase-dot-indicator"></span>
                                 <span>Mr. Mohammad Raed Kaaka (CFO)</span>
                             </button>
@@ -4706,6 +4744,40 @@
                             <span id="playbackIcon">⏸</span>
                             <span id="playbackText">Pause</span>
                         </button>
+                    </div>
+                </div>
+
+                <!-- Single View: Official Corporate Emblem -->
+                <div id="viewEmblem" class="showcase-single-view showcase-is-hidden">
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Official Corporate Emblem')">
+                            <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Solutions Official Luxury Emblem" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                <div>
+                                    <div class="showcase-footer-title">S&amp;R CoreSync Solutions • Official Corporate Emblem</div>
+                                    <div class="showcase-footer-role">For Intelligent Solutions • Cloud Architecture, AI &amp; Enterprise ERP Systems</div>
+                                    <div class="showcase-credentials-badges">
+                                        <span class="cred-badge"><i class="badge-dot"></i> Certified Corporate Emblem</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> Enterprise Innovation Symbol</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> Amsterdam, Netherlands</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Official Emblem')">
+                                    <span>Inspect Full HD 🔍</span>
+                                </button>
+                                <a href="../assets/sr-emblem-gold-luxury.jpg" download="SR-CoreSync-Luxury-Emblem.jpg" class="showcase-action-btn">
+                                    <span>Download Emblem 📥</span>
+                                </a>
+                                <a href="#services" class="showcase-action-btn">
+                                    <span>Explore Services 🚀</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -9803,7 +9875,7 @@
     <script>
         (function() {
             let currentSlideIndex = 0;
-            const totalSlides = 2;
+            const totalSlides = 3;
             let progressInterval = null;
             const slideDuration = 6000;
             let progressPercent = 0;
@@ -9932,17 +10004,19 @@
             // View Switcher
             window.setShowcaseView = function(mode) {
                 const vSlider = document.getElementById('viewSlider');
+                const vEmblem = document.getElementById('viewEmblem');
                 const vSalim = document.getElementById('viewSalim');
                 const vRaed = document.getElementById('viewRaed');
                 const vDual = document.getElementById('viewDual');
 
                 const tSlider = document.getElementById('tabSlider');
+                const tEmblem = document.getElementById('tabEmblem');
                 const tSalim = document.getElementById('tabSalim');
                 const tRaed = document.getElementById('tabRaed');
                 const tDual = document.getElementById('tabDual');
 
-                [tSlider, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
-                [vSlider, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('showcase-is-hidden'); });
+                [tSlider, tEmblem, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
+                [vSlider, vEmblem, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('showcase-is-hidden'); });
 
                 if (mode === 'slider') {
                     if (vSlider) vSlider.classList.remove('showcase-is-hidden');
@@ -9951,7 +10025,10 @@
                     window.startAutoPlay();
                 } else {
                     window.stopAutoPlay();
-                    if (mode === 'salim') {
+                    if (mode === 'emblem') {
+                        if (vEmblem) vEmblem.classList.remove('showcase-is-hidden');
+                        if (tEmblem) tEmblem.classList.add('active');
+                    } else if (mode === 'salim') {
                         if (vSalim) vSalim.classList.remove('showcase-is-hidden');
                         if (tSalim) tSalim.classList.add('active');
                     } else if (mode === 'raed') {
