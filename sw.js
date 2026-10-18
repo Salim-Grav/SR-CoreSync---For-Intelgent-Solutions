@@ -1,11 +1,26 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v4
-const CACHE_NAME = 'coresync-prerender-v4';
+// Version: coresync-prerender-v5-smarttv
+const CACHE_NAME = 'coresync-prerender-v5-smarttv';
 
-// Core pre-rendered pages and critical assets for sub-50ms international TTFB
-const PRECACHE_ASSETS = [
+// 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
+const CRITICAL_ASSETS = [
   './',
   './index.html',
+  './manifest.json',
+  './assets/sr-core-emblem.svg?v=sovereign2026',
+  './assets/logo-neon-icon.svg',
+  './assets/sr-emblem-gold-luxury.jpg',
+  './assets/founder-banner-salim.jpg',
+  './assets/founder-banner-raed.jpg',
+  './assets/founder-salim.png?v=color_v2',
+  './assets/founder-raed.png?v=color_v2',
+  './css/dananajmah-bundle.min.css',
+  './css/enterprise-suite.min.css',
+  './css/enterprise-suite.min.js'
+];
+
+// 2. Secondary assets: Cached gently in an idle background queue without choking Smart TV connections
+const SECONDARY_ASSETS = [
   './en/',
   './en/index.html',
   './nl/',
@@ -14,10 +29,6 @@ const PRECACHE_ASSETS = [
   './corporate-profile.html',
   './preview-founders-showcase.html',
   './demo.html',
-  './manifest.json',
-  './assets/SR-CoreSync-Corporate-Profile-2026.pdf',
-  './assets/sr-core-emblem.svg?v=sovereign2026',
-  './assets/logo-neon-icon.svg',
   './assets/nfc-card-salim-spec.png',
   './assets/nfc-card-raed-spec.png',
   './assets/qr-founder-salim.png',
@@ -25,24 +36,19 @@ const PRECACHE_ASSETS = [
   './assets/work-1.webp',
   './assets/work-2.webp',
   './assets/work-3.webp',
-  './assets/founder-salim.png?v=color_v2',
-  './assets/founder-raed.png?v=color_v2',
-  './css/dananajmah-bundle.min.css',
-  './css/enterprise-suite.min.css',
-  './css/enterprise-suite.min.js',
-  './css/enterprise-suite.css',
-  './css/enterprise-suite.js',
   './css/demo-portal.css',
   './api/lead-dispatcher.js'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('[SW] Non-critical precache asset warning:', err);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Pre-cache only critical assets immediately so banners load instantly
+      await cache.addAll(CRITICAL_ASSETS).catch((err) => {
+        console.warn('[SW] Critical precache notice:', err);
       });
-    }).then(() => self.skipWaiting())
+      return self.skipWaiting();
+    })
   );
 });
 
@@ -57,7 +63,17 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    }).then(() => self.clients.claim())
+    }).then(async () => {
+      await self.clients.claim();
+      // Cache secondary assets in a staggered idle queue to protect Smart TV bandwidth
+      caches.open(CACHE_NAME).then((cache) => {
+        SECONDARY_ASSETS.forEach((asset, idx) => {
+          setTimeout(() => {
+            cache.add(asset).catch(() => {});
+          }, 2000 + (idx * 250));
+        });
+      });
+    })
   );
 });
 

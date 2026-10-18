@@ -6530,6 +6530,68 @@ html[data-sr-font-size] .tf-btn-tab {
     }
 }
 
+/* ==========================================================================
+   SMART TV & LOW-POWER HARDWARE PERFORMANCE OPTIMIZATION
+   Accelerates rendering on Android TV, Smart TVs, and lower-power GPUs.
+   Eliminates GPU stalls by replacing expensive multi-pass backdrop blurs
+   with hardware-accelerated translucent solid backgrounds.
+   ========================================================================== */
+
+@media (hover: none) and (min-width: 768px), (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+    .header, 
+    .nav-menu-main, 
+    .showcase-banner-card, 
+    .showcase-banner-footer,
+    .showcase-slider-timeline,
+    .showcase-tab-btn,
+    .sr-lightbox-modal,
+    .sr-lightbox-box,
+    .sr-qr-modal,
+    .sr-qr-box,
+    .card-glass,
+    .tf-modal,
+    .modal-content {
+        background-color: rgba(4, 12, 9, 0.96) !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
+    }
+}
+
+html.smart-tv-hardware *,
+html.smart-tv-hardware *::before,
+html.smart-tv-hardware *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+}
+
+html.smart-tv-hardware .header,
+html.smart-tv-hardware .showcase-banner-card,
+html.smart-tv-hardware .showcase-banner-footer,
+html.smart-tv-hardware .showcase-slider-timeline,
+html.smart-tv-hardware .showcase-tab-btn,
+html.smart-tv-hardware .sr-lightbox-modal,
+html.smart-tv-hardware .sr-lightbox-box,
+html.smart-tv-hardware .sr-qr-modal,
+html.smart-tv-hardware .sr-qr-box,
+html.smart-tv-hardware .card-glass,
+html.smart-tv-hardware .tf-modal,
+html.smart-tv-hardware .modal-content {
+    background-color: rgba(4, 12, 9, 0.96) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
+}
+
+html.smart-tv-hardware img,
+html.smart-tv-hardware .showcase-img {
+    image-rendering: auto !important;
+    transform: translateZ(0);
+    will-change: auto !important;
+}
+
+
 
 
 
