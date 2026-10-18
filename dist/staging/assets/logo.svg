@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 660" width="100%" height="100%">
+  <defs>
+    <!-- أنماط الخطوط الفاخرة المعتمدة للشعار -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap');
+      .sr-serif {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #ffffff;
+      }
+      .sr-amp {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #38bdf8;
+      }
+      .sr-brand-text {
+        font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+        font-weight: 700;
+        fill: #ffffff;
+        letter-spacing: 0.5px;
+      }
+    </style>
+
+    <!-- التدرجات الضوئية للهالة والكرة المركزية -->
+    <radialGradient id="spaceBackground" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#0d2544" />
+      <stop offset="60%" stop-color="#081528" />
+      <stop offset="100%" stop-color="#040c18" />
+    </radialGradient>
+
+    <!-- تدرج الكرة المركزية الأساسية (The Luminous Orb) -->
+    <radialGradient id="orbGlow" cx="45%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.95" />
+      <stop offset="35%" stop-color="#0284c7" stop-opacity="0.85" />
+      <stop offset="70%" stop-color="#034975" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#02213d" stop-opacity="1" />
+    </radialGradient>
+
+    <!-- تدرج إضاءة الإطار الخارجي للكرة -->
+    <linearGradient id="orbBorderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#0284c7" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- تدرج العقد والمدارات الكوكبية -->
+    <radialGradient id="nodeGlow" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="40%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </radialGradient>
+
+    <!-- توهج ناعم خلف الرمز -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="nodeDropGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- خلفية داكنة متطابقة (اختيارية شفافة أو كحلية عميقة) -->
+  <rect width="100%" height="100%" rx="32" fill="url(#spaceBackground)" />
+
+  <!-- مجموعة الرمز الأيقوني بالكامل -->
+  <g transform="translate(300, 245)">
+    <!-- 1. هالة خارجية خافتة لعمق الفضاء الرقمي -->
+    <circle cx="0" cy="0" r="195" fill="none" stroke="#38bdf8" stroke-opacity="0.08" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="185" fill="#0284c7" fill-opacity="0.06" filter="url(#softGlow)" />
+
+    <!-- 2. الحلقة المدارية الخارجية الدقيقة (Outer Thin Orbital Ring) -->
+    <circle cx="0" cy="0" r="172" fill="none" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1.6" />
+
+    <!-- عقدتان متزامنتان على المحيط الخارجي (Sync Satellite Nodes) -->
+    <!-- العقدة العلوية اليمنى (زاوية ~35 درجة) -->
+    <g transform="rotate(-35) translate(172, 0)">
+      <circle cx="0" cy="0" r="12" fill="#38bdf8" fill-opacity="0.25" filter="url(#nodeDropGlow)" />
+      <circle cx="0" cy="0" r="7.5" fill="url(#nodeGlow)" stroke="#bae6fd" stroke-width="1" />
+    </g>
+    <!-- العقدة السفلية اليسرى (زاوية ~215 درجة) -->
+    <g transform="rotate(145) translate(172, 0)">
+      <circle cx="0" cy="0" r="12" fill="#38bdf8" fill-opacity="0.25" filter="url(#nodeDropGlow)" />
+      <circle cx="0" cy="0" r="7.5" fill="url(#nodeGlow)" stroke="#bae6fd" stroke-width="1" />
+    </g>
+
+    <!-- 3. المدارات البيضاوية المتداخلة المتزامنة (CoreSync Dual Orbitals) -->
+    <!-- المدار الأول المائل لليمين (+35 deg) -->
+    <ellipse cx="0" cy="0" rx="168" ry="72" transform="rotate(35)" fill="none" stroke="#38bdf8" stroke-opacity="0.32" stroke-width="1.8" />
+    
+    <!-- المدار الثاني المائل لليسار (-35 deg) -->
+    <ellipse cx="0" cy="0" rx="168" ry="72" transform="rotate(-35)" fill="none" stroke="#38bdf8" stroke-opacity="0.32" stroke-width="1.8" />
+
+    <!-- 4. الكرة المركزية الزرقاء المضيئة (The Luminous Core Sphere) -->
+    <circle cx="0" cy="0" r="132" fill="url(#orbGlow)" stroke="url(#orbBorderGrad)" stroke-width="2.5" />
+    
+    <!-- حلقة داخلية خافتة تمنح الكرة بعداً ثلاثي الأبعاد -->
+    <circle cx="0" cy="0" r="122" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1" />
+
+    <!-- 5. مونوغرام S&R بالخط الكلاسيكي الفاخر المتناسق -->
+    <g id="monogram" text-anchor="middle" dominant-baseline="central">
+      <!-- حرف S -->
+      <text x="-56" y="-3" font-size="114" class="sr-serif">S</text>
+      
+      <!-- علامة الربط & باللون السماوي المضيء متداخلة في الوسط -->
+      <text x="-6" y="8" font-size="56" class="sr-amp">&amp;</text>
+      
+      <!-- حرف R -->
+      <text x="50" y="-3" font-size="114" class="sr-serif">R</text>
+    </g>
+  </g>
+
+  <!-- 6. الاسم التجاري المعتمد أسفل الشعار بالخط الحديث الصريح -->
+  <text x="300" y="555" text-anchor="middle" font-size="34" class="sr-brand-text">
+    S&amp;R CoreSync Solutions
+  </text>
+</svg>
