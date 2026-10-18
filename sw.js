@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v5-smarttv
-const CACHE_NAME = 'coresync-prerender-v5-smarttv';
+// Version: coresync-prerender-v6-webp
+const CACHE_NAME = 'coresync-prerender-v6-webp';
 
 // 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
 const CRITICAL_ASSETS = [
@@ -9,8 +9,11 @@ const CRITICAL_ASSETS = [
   './manifest.json',
   './assets/sr-core-emblem.svg?v=sovereign2026',
   './assets/logo-neon-icon.svg',
+  './assets/sr-emblem-gold-luxury.webp',
   './assets/sr-emblem-gold-luxury.jpg',
+  './assets/founder-banner-salim.webp',
   './assets/founder-banner-salim.jpg',
+  './assets/founder-banner-raed.webp',
   './assets/founder-banner-raed.jpg',
   './assets/founder-salim.png?v=color_v2',
   './assets/founder-raed.png?v=color_v2',
