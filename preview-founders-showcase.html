@@ -766,8 +766,32 @@
             </div>
         </div>
 
-        <!-- 4. مسرح العرض المزدوج: البانران جنباً إلى جنب -->
+        <!-- 4. مسرح العرض المتكامل: الشعار الرسمي والبانران معاً -->
         <div id="viewDual" class="showcase-dual-grid is-hidden">
+            <!-- بانر الشعار الفاخر -->
+            <div class="showcase-banner-card">
+                <div class="showcase-img-wrap" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync')">
+                    <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر" class="showcase-img">
+                </div>
+                <div class="showcase-banner-footer">
+                    <div class="showcase-footer-meta">
+                        <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                        <div>
+                            <div class="showcase-footer-title">S&amp;R CoreSync Solutions</div>
+                            <div class="showcase-footer-role">الشعار الرسمي المعتمد • For Intelligent Solutions</div>
+                            <div class="showcase-credentials-badges">
+                                <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية المعتمدة</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-footer-actions">
+                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر')">
+                            <span>تكبير 🔍</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- بانر سليم -->
             <div class="showcase-banner-card">
                 <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
@@ -960,17 +984,19 @@
         // كونسول التبديل بين الأوضاع
         function setShowcaseView(mode) {
             const vSlider = document.getElementById('viewSlider');
+            const vEmblem = document.getElementById('viewEmblem');
             const vSalim = document.getElementById('viewSalim');
             const vRaed = document.getElementById('viewRaed');
             const vDual = document.getElementById('viewDual');
 
             const tSlider = document.getElementById('tabSlider');
+            const tEmblem = document.getElementById('tabEmblem');
             const tSalim = document.getElementById('tabSalim');
             const tRaed = document.getElementById('tabRaed');
             const tDual = document.getElementById('tabDual');
 
-            [tSlider, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
-            [vSlider, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('is-hidden'); });
+            [tSlider, tEmblem, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
+            [vSlider, vEmblem, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('is-hidden'); });
 
             if (mode === 'slider') {
                 if (vSlider) vSlider.classList.remove('is-hidden');
@@ -979,7 +1005,10 @@
                 startAutoPlay();
             } else {
                 stopAutoPlay();
-                if (mode === 'salim') {
+                if (mode === 'emblem') {
+                    if (vEmblem) vEmblem.classList.remove('is-hidden');
+                    if (tEmblem) tEmblem.classList.add('active');
+                } else if (mode === 'salim') {
                     if (vSalim) vSalim.classList.remove('is-hidden');
                     if (tSalim) tSalim.classList.add('active');
                 } else if (mode === 'raed') {
