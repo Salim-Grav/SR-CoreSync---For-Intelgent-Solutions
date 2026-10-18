@@ -5992,6 +5992,10 @@
                             <span class="showcase-tab-dot"></span>
                             <span>سلايدر تفاعلي متحرك (Auto Slider) 🔄</span>
                         </button>
+                        <button type="button" class="showcase-tab-btn" id="tabEmblem" onclick="setShowcaseView('emblem')">
+                            <span class="showcase-tab-dot"></span>
+                            <span>شعار الهوية الفاخر (S&amp;R Emblem) 👑</span>
+                        </button>
                         <button type="button" class="showcase-tab-btn" id="tabSalim" onclick="setShowcaseView('salim')">
                             <span class="showcase-tab-dot"></span>
                             <span>م. محمد سليم عزيزة (CTO)</span>
@@ -6002,7 +6006,7 @@
                         </button>
                         <button type="button" class="showcase-tab-btn" id="tabDual" onclick="setShowcaseView('dual')">
                             <span class="showcase-tab-dot"></span>
-                            <span>عرض البانرين معاً (Dual Showcase)</span>
+                            <span>عرض البانرات معاً (Full Showcase)</span>
                         </button>
                     </div>
                 </div>
@@ -6016,8 +6020,42 @@
                     <!-- مسار الشرائح المتلاشية -->
                     <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
                         <div class="showcase-slides-track" id="slidesTrack">
-                            <!-- الشريحة 1: م. محمد سليم عزيزة -->
+                            <!-- الشريحة 0: شعار وهوية النخبة المؤسسية الفاخرة (S&R CoreSync Emblem) -->
                             <div class="showcase-slide-item active">
+                                <div class="showcase-banner-card">
+                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)')">
+                                        <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" loading="eager">
+                                    </div>
+                                    <div class="showcase-banner-footer">
+                                        <div class="showcase-footer-meta">
+                                            <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                            <div>
+                                                <div class="showcase-footer-title">S&amp;R CoreSync Solutions • الشعار الرسمي المعتمد</div>
+                                                <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
+                                                <div class="showcase-credentials-badges">
+                                                    <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية المعتمدة</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> رمز الابتكار والريادة السحابية</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> أمستردام • هولندا</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-footer-actions">
+                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر')">
+                                                <span>تكبير الشعار (Full HD) 🔍</span>
+                                            </button>
+                                            <a href="assets/sr-emblem-gold-luxury.jpg" download="SR-CoreSync-Luxury-Emblem.jpg" class="showcase-action-btn">
+                                                <span>تحميل الشعار 📥</span>
+                                            </a>
+                                            <a href="#services" class="showcase-action-btn">
+                                                <span>اكتشف المنظومة 🚀</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الشريحة 1: م. محمد سليم عزيزة -->
+                            <div class="showcase-slide-item">
                                 <div class="showcase-banner-card">
                                     <div class="showcase-img-wrap" onclick="openFoundersLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
                                         <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" loading="lazy">
@@ -6091,9 +6129,13 @@
                         <div class="showcase-dots-group">
                             <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
                                 <span class="showcase-dot-indicator"></span>
-                                <span>م. محمد سليم عزيزة (CTO)</span>
+                                <span>شعار الهوية الفاخر (S&amp;R Emblem) 👑</span>
                             </button>
                             <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                                <span class="showcase-dot-indicator"></span>
+                                <span>م. محمد سليم عزيزة (CTO)</span>
+                            </button>
+                            <button type="button" class="showcase-dot-item" id="slideDot2" onclick="goToSlide(2)">
                                 <span class="showcase-dot-indicator"></span>
                                 <span>أ. محمد رائد كعكة (CFO)</span>
                             </button>
@@ -6107,6 +6149,40 @@
                             <span id="playbackIcon">⏸</span>
                             <span id="playbackText">إيقاف مؤقت</span>
                         </button>
+                    </div>
+                </div>
+
+                <!-- مسرح العرض الفردي: شعار الهوية المؤسسية الفاخرة -->
+                <div id="viewEmblem" class="showcase-single-view showcase-is-hidden">
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)')">
+                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                <div>
+                                    <div class="showcase-footer-title">S&amp;R CoreSync Solutions • الشعار الرسمي المعتمد</div>
+                                    <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
+                                    <div class="showcase-credentials-badges">
+                                        <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية المعتمدة</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> رمز الابتكار والريادة السحابية</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> أمستردام • هولندا</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر')">
+                                    <span>تكبير الشعار (Full HD) 🔍</span>
+                                </button>
+                                <a href="assets/sr-emblem-gold-luxury.jpg" download="SR-CoreSync-Luxury-Emblem.jpg" class="showcase-action-btn">
+                                    <span>تحميل الشعار 📥</span>
+                                </a>
+                                <a href="#services" class="showcase-action-btn">
+                                    <span>اكتشف المنظومة 🚀</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -6178,8 +6254,32 @@
                     </div>
                 </div>
 
-                <!-- 4. مسرح العرض المزدوج: البانران جنباً إلى جنب -->
+                <!-- 4. مسرح العرض المتكامل: الشعار الرسمي والبانران معاً -->
                 <div id="viewDual" class="showcase-dual-grid showcase-is-hidden">
+                    <!-- بانر الشعار الفاخر -->
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync')">
+                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
+                                <div>
+                                    <div class="showcase-footer-title">S&amp;R CoreSync Solutions</div>
+                                    <div class="showcase-footer-role">الشعار الرسمي المعتمد • For Intelligent Solutions</div>
+                                    <div class="showcase-credentials-badges">
+                                        <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر')">
+                                    <span>تكبير 🔍</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- بانر سليم -->
                     <div class="showcase-banner-card">
                         <div class="showcase-img-wrap" onclick="openFoundersLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
@@ -12321,7 +12421,7 @@
     <script>
         (function() {
             let currentSlideIndex = 0;
-            const totalSlides = 2;
+            const totalSlides = 3;
             let progressInterval = null;
             const slideDuration = 6000;
             let progressPercent = 0;
@@ -12450,17 +12550,19 @@
             // التبديل بين أنماط العرض
             window.setShowcaseView = function(mode) {
                 const vSlider = document.getElementById('viewSlider');
+                const vEmblem = document.getElementById('viewEmblem');
                 const vSalim = document.getElementById('viewSalim');
                 const vRaed = document.getElementById('viewRaed');
                 const vDual = document.getElementById('viewDual');
 
                 const tSlider = document.getElementById('tabSlider');
+                const tEmblem = document.getElementById('tabEmblem');
                 const tSalim = document.getElementById('tabSalim');
                 const tRaed = document.getElementById('tabRaed');
                 const tDual = document.getElementById('tabDual');
 
-                [tSlider, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
-                [vSlider, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('showcase-is-hidden'); });
+                [tSlider, tEmblem, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
+                [vSlider, vEmblem, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('showcase-is-hidden'); });
 
                 if (mode === 'slider') {
                     if (vSlider) vSlider.classList.remove('showcase-is-hidden');
@@ -12469,7 +12571,10 @@
                     window.startAutoPlay();
                 } else {
                     window.stopAutoPlay();
-                    if (mode === 'salim') {
+                    if (mode === 'emblem') {
+                        if (vEmblem) vEmblem.classList.remove('showcase-is-hidden');
+                        if (tEmblem) tEmblem.classList.add('active');
+                    } else if (mode === 'salim') {
                         if (vSalim) vSalim.classList.remove('showcase-is-hidden');
                         if (tSalim) tSalim.classList.add('active');
                     } else if (mode === 'raed') {
