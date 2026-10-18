@@ -58,6 +58,8 @@ const rootFiles = [
   'sw.js',
   'sitemap.xml',
   'robots.txt',
+  'card.html',
+  'corporate-profile.html',
   '.htaccess',
   '.env.example'
 ];
