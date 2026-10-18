@@ -112,10 +112,16 @@ Options -Indexes
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType image/x-icon "access plus 1 year"
 
+    # Documents & vCards: 1 Month
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType text/vcard "access plus 1 month"
+    ExpiresByType text/x-vcard "access plus 1 month"
+
     # Web Fonts: 1 Year
     ExpiresByType font/ttf "access plus 1 year"
     ExpiresByType font/otf "access plus 1 year"
     ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
 </IfModule>
 
 # ------------------------------------------------------------------------------
@@ -127,8 +133,8 @@ Options -Indexes
         Header set Cache-Control "public, max-age=3600, stale-while-revalidate=86400, stale-if-error=604800"
     </FilesMatch>
 
-    # Static Immutable Assets (CSS, JS, Fonts, Images)
-    <FilesMatch "\.(css|js|woff2|woff|ttf|svg|webp|png|jpg|jpeg|ico)$">
+    # Static Immutable Assets (CSS, JS, Fonts, Images, PDF, vCard)
+    <FilesMatch "\.(css|js|woff2|woff|ttf|svg|webp|png|jpg|jpeg|ico|pdf|vcf)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
 
@@ -150,4 +156,6 @@ AddDefaultCharset UTF-8
     AddType image/webp .webp
     AddType font/woff2 .woff2
     AddType application/json .json
+    AddType application/pdf .pdf
+    AddType text/vcard .vcf
 </IfModule>
