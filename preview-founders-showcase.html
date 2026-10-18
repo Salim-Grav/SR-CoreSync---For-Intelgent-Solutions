@@ -813,6 +813,38 @@
             transform: translateY(-2px);
         }
 
+        /* SMART TV & LOW-POWER HARDWARE ACCELERATION */
+        @media (hover: none) and (min-width: 768px), (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .showcase-banner-card, .showcase-banner-footer, .showcase-slider-timeline, .showcase-tab-btn, .sr-lightbox-modal, .sr-lightbox-box, .sr-qr-modal, .sr-qr-box {
+                background-color: rgba(4, 12, 9, 0.96) !important;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
+            }
+        }
+        html.smart-tv-hardware *, html.smart-tv-hardware *::before, html.smart-tv-hardware *::after {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            text-shadow: none !important;
+        }
+        html.smart-tv-hardware .showcase-banner-card,
+        html.smart-tv-hardware .showcase-banner-footer,
+        html.smart-tv-hardware .showcase-slider-timeline,
+        html.smart-tv-hardware .showcase-tab-btn,
+        html.smart-tv-hardware .sr-lightbox-modal,
+        html.smart-tv-hardware .sr-lightbox-box,
+        html.smart-tv-hardware .sr-qr-modal,
+        html.smart-tv-hardware .sr-qr-box {
+            background-color: rgba(4, 12, 9, 0.96) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
+        }
+        html.smart-tv-hardware img, html.smart-tv-hardware .showcase-img {
+            image-rendering: auto !important;
+            transform: translateZ(0);
+            will-change: auto !important;
+        }
     </style>
 </head>
 <body>
@@ -1229,6 +1261,17 @@
     </div>
 
     <script>
+        // كاشف الشاشات الذكية وعتاد التلفاز (Smart TV / Low-Power Hardware Auto-Detector)
+        (function() {
+            const ua = (navigator.userAgent || '').toLowerCase();
+            const isTv = /smart-tv|smarttv|googletv|appletv|hbbtv|pov_tv|netcast.tv|viera|roku|aftt|aftm|firetv|tizen|webos|boxee|kylo|crkey|bravia|playstation|xbox|android.*tv/i.test(ua)
+                      || (navigator.deviceMemory && navigator.deviceMemory <= 2)
+                      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 && window.innerWidth >= 1200);
+            if (isTv) {
+                document.documentElement.classList.add('smart-tv-hardware');
+            }
+        })();
+
         // المتغيرات العامة للسلايدر
         let currentSlideIndex = 0;
         const totalSlides = 3;
@@ -1285,7 +1328,7 @@
         function startAutoPlay() {
             stopAutoPlay();
             progressPercent = 0;
-            const stepMs = 50;
+            const stepMs = 200;
             const stepIncrement = (stepMs / slideDuration) * 100;
 
             progressInterval = setInterval(() => {
