@@ -47,6 +47,7 @@ const rootFiles = [
   'preview-header.html',
   'preview-comparison.html',
   'preview-software-modal.html',
+  'preview-founders-showcase.html',
   'preview-work.html',
   'preview-booking-modal.html',
   'preview-3d-mockup.html',
