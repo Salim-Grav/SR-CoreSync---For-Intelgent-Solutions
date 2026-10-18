@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v3
-const CACHE_NAME = 'coresync-prerender-v3';
+// Version: coresync-prerender-v4
+const CACHE_NAME = 'coresync-prerender-v4';
 
 // Core pre-rendered pages and critical assets for sub-50ms international TTFB
 const PRECACHE_ASSETS = [
@@ -10,10 +10,18 @@ const PRECACHE_ASSETS = [
   './en/index.html',
   './nl/',
   './nl/index.html',
+  './card.html',
+  './corporate-profile.html',
+  './preview-founders-showcase.html',
   './demo.html',
   './manifest.json',
+  './assets/SR-CoreSync-Corporate-Profile-2026.pdf',
   './assets/sr-core-emblem.svg?v=sovereign2026',
   './assets/logo-neon-icon.svg',
+  './assets/nfc-card-salim-spec.png',
+  './assets/nfc-card-raed-spec.png',
+  './assets/qr-founder-salim.png',
+  './assets/qr-founder-raed.png',
   './assets/work-1.webp',
   './assets/work-2.webp',
   './assets/work-3.webp',
