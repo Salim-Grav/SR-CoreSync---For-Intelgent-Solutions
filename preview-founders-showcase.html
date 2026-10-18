@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معاينة قسم بانرات القيادة التنفيذية | S&R CoreSync Solutions</title>
+    <title>معاينة سلايدر وقسم بانرات القيادة التنفيذية | S&R CoreSync Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,10 +13,10 @@
             --primary-gold-bright: #e8d3b3;
             --primary-gold-dark: #8c734b;
             --bg-deep: #010907;
-            --bg-card: rgba(8, 18, 14, 0.7);
+            --bg-card: rgba(8, 18, 14, 0.75);
             --border-gold: rgba(197, 168, 128, 0.28);
-            --border-gold-glow: rgba(197, 168, 128, 0.55);
-            --text-muted: rgba(255, 255, 255, 0.7);
+            --border-gold-glow: rgba(197, 168, 128, 0.65);
+            --text-muted: rgba(255, 255, 255, 0.72);
         }
 
         * {
@@ -32,6 +32,7 @@
             line-height: 1.6;
             padding: 40px 20px;
             direction: rtl;
+            overflow-x: hidden;
         }
 
         .showcase-container {
@@ -42,7 +43,7 @@
         /* رأس القسم */
         .showcase-header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.2rem;
             position: relative;
         }
 
@@ -86,7 +87,7 @@
         .showcase-subtitle {
             font-size: clamp(0.9rem, 1.4vw, 1.05rem);
             color: var(--text-muted);
-            max-width: 780px;
+            max-width: 820px;
             margin: 0 auto 1.8rem auto;
             font-weight: 400;
         }
@@ -98,13 +99,13 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .showcase-tab-btn {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(197, 168, 128, 0.25);
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.82);
             padding: 10px 22px;
             border-radius: 999px;
             font-size: 0.9rem;
@@ -125,10 +126,10 @@
         }
 
         .showcase-tab-btn.active {
-            background: linear-gradient(135deg, rgba(197, 168, 128, 0.28) 0%, rgba(197, 168, 128, 0.12) 100%);
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.32) 0%, rgba(197, 168, 128, 0.15) 100%);
             border-color: var(--primary-gold-bright);
             color: var(--primary-gold-bright);
-            box-shadow: 0 0 20px rgba(197, 168, 128, 0.25);
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.28);
         }
 
         .showcase-tab-dot {
@@ -146,19 +147,7 @@
             box-shadow: 0 0 8px currentColor;
         }
 
-        /* مسرح العرض للبانرات */
-        .showcase-stage {
-            position: relative;
-            width: 100%;
-        }
-
-        /* نمط العرض الفردي (Single / Switcher Mode) */
-        .showcase-single-view {
-            display: block;
-            position: relative;
-            width: 100%;
-        }
-
+        /* كارت البانر المشترك */
         .showcase-banner-card {
             background: #020b08;
             border-radius: 20px;
@@ -189,18 +178,18 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .showcase-banner-card:hover .showcase-img {
-            transform: scale(1.015);
+            transform: scale(1.02);
         }
 
-        /* شريط الإجراءات أسفل البانر */
+        /* شريط الإجراءات والمعلومات أسفل البانر */
         .showcase-banner-footer {
-            padding: 16px 24px;
-            background: rgba(4, 12, 9, 0.95);
-            border-top: 1px solid rgba(197, 168, 128, 0.18);
+            padding: 18px 26px;
+            background: rgba(4, 12, 9, 0.96);
+            border-top: 1px solid rgba(197, 168, 128, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -211,12 +200,12 @@
         .showcase-footer-meta {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .showcase-footer-avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(135deg, #e8d3b3 0%, #c5a880 100%);
             color: #010907;
@@ -224,17 +213,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            box-shadow: 0 0 12px rgba(197, 168, 128, 0.4);
         }
 
         .showcase-footer-title {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
         }
 
         .showcase-footer-role {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--primary-gold-bright);
         }
 
@@ -248,9 +238,9 @@
             background: rgba(197, 168, 128, 0.1);
             border: 1px solid var(--border-gold);
             color: var(--primary-gold-bright);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 999px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -268,6 +258,165 @@
             box-shadow: 0 4px 15px rgba(197, 168, 128, 0.35);
         }
 
+        /* ============================================================ */
+        /* تصميم وضع السلايدر التفاعلي (Interactive Slider Mode) */
+        /* ============================================================ */
+        .showcase-slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .showcase-slider-viewport {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .showcase-slides-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+        }
+
+        .showcase-slide-item {
+            flex: 0 0 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* أسهم التنقل السريعة */
+        .showcase-nav-btn {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(1, 9, 7, 0.78);
+            border: 1px solid var(--border-gold);
+            color: var(--primary-gold-bright);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.25s ease;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .showcase-nav-btn:hover {
+            background: var(--primary-gold);
+            color: #010907;
+            border-color: var(--primary-gold-bright);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 25px rgba(197, 168, 128, 0.5);
+        }
+
+        .showcase-nav-prev {
+            right: 18px;
+        }
+
+        .showcase-nav-next {
+            left: 18px;
+        }
+
+        /* شريط التقدم الزمني والمؤشرات بالسلايدر */
+        .showcase-slider-timeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 1.25rem;
+            padding: 12px 20px;
+            background: rgba(8, 18, 14, 0.6);
+            border: 1px solid rgba(197, 168, 128, 0.18);
+            border-radius: 999px;
+            flex-wrap: wrap;
+        }
+
+        .showcase-dots-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .showcase-dot-item {
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .showcase-dot-item.active {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold-bright);
+        }
+
+        .showcase-dot-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .showcase-progress-bar-container {
+            flex: 1;
+            min-width: 140px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .showcase-progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-gold-dark), var(--primary-gold-bright));
+            border-radius: 999px;
+            transition: width 0.1s linear;
+        }
+
+        .showcase-slider-playback-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary-gold-bright);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .showcase-slider-playback-btn:hover {
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        /* نمط العرض الفردي (Single View) */
+        .showcase-single-view {
+            display: block;
+            width: 100%;
+        }
+
         /* نمط العرض المزدوج (Dual Grid Mode) */
         .showcase-dual-grid {
             display: grid;
@@ -276,7 +425,14 @@
             width: 100%;
         }
 
+        .is-hidden {
+            display: none !important;
+        }
+
         @media (max-width: 768px) {
+            body {
+                padding: 20px 12px;
+            }
             .showcase-dual-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -288,6 +444,18 @@
             .showcase-footer-actions {
                 width: 100%;
                 justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+            .showcase-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .showcase-slider-timeline {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+                border-radius: 14px;
             }
         }
 
@@ -303,10 +471,6 @@
             align-items: center;
             justify-content: center;
             padding: 24px;
-        }
-
-        .is-hidden {
-            display: none !important;
         }
 
         .sr-lightbox-modal.active {
@@ -372,9 +536,13 @@
                 نجمع بين هندسة السحابة المتقدمة والذكاء الاصطناعي مع الخبرة المالية والاستشارات المحاسبية ونظم ERP، لتقديم حلول أعمال استثنائية للشركات في أوروبا والشرق الأوسط.
             </p>
 
-            <!-- كونسول التبديل بين العروض -->
+            <!-- كونسول التبديل بين أنماط العرض -->
             <div class="showcase-controls">
-                <button type="button" class="showcase-tab-btn active" id="tabSalim" onclick="setShowcaseView('salim')">
+                <button type="button" class="showcase-tab-btn active" id="tabSlider" onclick="setShowcaseView('slider')">
+                    <span class="showcase-tab-dot"></span>
+                    <span>سلايدر تفاعلي متحرك (Auto Slider) 🔄</span>
+                </button>
+                <button type="button" class="showcase-tab-btn" id="tabSalim" onclick="setShowcaseView('salim')">
                     <span class="showcase-tab-dot"></span>
                     <span>م. محمد سليم عزيزة (CTO)</span>
                 </button>
@@ -389,8 +557,101 @@
             </div>
         </div>
 
-        <!-- مسرح العرض الفردي: م. محمد سليم عزيزة -->
-        <div id="viewSalim" class="showcase-single-view">
+        <!-- 1. وضع السلايدر التفاعلي (Interactive Slider Mode - الافتراضي) -->
+        <div id="viewSlider" class="showcase-slider-wrapper">
+            <!-- أزرار التنقل السريعة -->
+            <button type="button" class="showcase-nav-btn showcase-nav-prev" onclick="prevSlide()" aria-label="السابق">›</button>
+            <button type="button" class="showcase-nav-btn showcase-nav-next" onclick="nextSlide()" aria-label="التالي">‹</button>
+
+            <!-- مسار الشرائح -->
+            <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
+                <div class="showcase-slides-track" id="slidesTrack">
+                    <!-- الشريحة 1: م. محمد سليم عزيزة -->
+                    <div class="showcase-slide-item">
+                        <div class="showcase-banner-card">
+                            <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
+                                <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" loading="eager">
+                            </div>
+                            <div class="showcase-banner-footer">
+                                <div class="showcase-footer-meta">
+                                    <div class="showcase-footer-avatar">S</div>
+                                    <div>
+                                        <div class="showcase-footer-title">م. محمد سليم عزيزة</div>
+                                        <div class="showcase-footer-role">المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي & CTO</div>
+                                    </div>
+                                </div>
+                                <div class="showcase-footer-actions">
+                                    <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
+                                        <span>تكبير البانر (Full HD) 🔍</span>
+                                    </button>
+                                    <a href="assets/founder-banner-salim.jpg" download="SR-CoreSync-Founder-Salim-Aziza.jpg" class="showcase-action-btn">
+                                        <span>تحميل البانر 📥</span>
+                                    </a>
+                                    <a href="#contact" class="showcase-action-btn">
+                                        <span>حجز استشارة تقنية 👔</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الشريحة 2: أ. محمد رائد كعكة -->
+                    <div class="showcase-slide-item">
+                        <div class="showcase-banner-card">
+                            <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP')">
+                                <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" loading="eager">
+                            </div>
+                            <div class="showcase-banner-footer">
+                                <div class="showcase-footer-meta">
+                                    <div class="showcase-footer-avatar">R</div>
+                                    <div>
+                                        <div class="showcase-footer-title">أ. محمد رائد كعكة</div>
+                                        <div class="showcase-footer-role">المستشار المالي ومطور نظم ERP & CFO</div>
+                                    </div>
+                                </div>
+                                <div class="showcase-footer-actions">
+                                    <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة')">
+                                        <span>تكبير البانر (Full HD) 🔍</span>
+                                    </button>
+                                    <a href="assets/founder-banner-raed.jpg" download="SR-CoreSync-Founder-Raed-Kaaka.jpg" class="showcase-action-btn">
+                                        <span>تحميل البانر 📥</span>
+                                    </a>
+                                    <a href="#contact" class="showcase-action-btn">
+                                        <span>حجز استشارة مالية 👔</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شريط التقدم الزمني والأزرار التفاعلية للسلايدر -->
+            <div class="showcase-slider-timeline">
+                <div class="showcase-dots-group">
+                    <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
+                        <span class="showcase-dot-indicator"></span>
+                        <span>م. محمد سليم عزيزة (CTO)</span>
+                    </button>
+                    <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                        <span class="showcase-dot-indicator"></span>
+                        <span>أ. محمد رائد كعكة (CFO)</span>
+                    </button>
+                </div>
+
+                <div class="showcase-progress-bar-container" title="شريط التبديل التلقائي">
+                    <div class="showcase-progress-bar-fill" id="sliderProgressBar"></div>
+                </div>
+
+                <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" onclick="togglePlayback()">
+                    <span id="playbackIcon">⏸</span>
+                    <span id="playbackText">إيقاف مؤقت</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 2. مسرح العرض الفردي: م. محمد سليم عزيزة -->
+        <div id="viewSalim" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
                 <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
                     <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" loading="eager">
@@ -418,7 +679,7 @@
             </div>
         </div>
 
-        <!-- مسرح العرض الفردي: أ. محمد رائد كعكة -->
+        <!-- 3. مسرح العرض الفردي: أ. محمد رائد كعكة -->
         <div id="viewRaed" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
                 <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP')">
@@ -447,7 +708,7 @@
             </div>
         </div>
 
-        <!-- مسرح العرض المزدوج: البانران جنباً إلى جنب -->
+        <!-- 4. مسرح العرض المزدوج: البانران جنباً إلى جنب -->
         <div id="viewDual" class="showcase-dual-grid is-hidden">
             <!-- بانر سليم -->
             <div class="showcase-banner-card">
@@ -503,30 +764,175 @@
     </div>
 
     <script>
+        // المتغيرات العامة للسلايدر
+        let currentSlideIndex = 0;
+        const totalSlides = 2;
+        let slideInterval = null;
+        let progressInterval = null;
+        const slideDuration = 6000; // 6 ثوانٍ لكل شريحة
+        let progressPercent = 0;
+        let isPlaying = true;
+
+        function updateSlideUI() {
+            const track = document.getElementById('slidesTrack');
+            // في اللغة العربية RTL، التحريك موجب
+            const offset = currentSlideIndex * 100;
+            if (track) {
+                track.style.transform = `translateX(${offset}%)`;
+            }
+
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.getElementById(`slideDot${i}`);
+                if (dot) {
+                    if (i === currentSlideIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                }
+            }
+            resetProgressBar();
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateSlideUI();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+            updateSlideUI();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlideUI();
+        }
+
+        function resetProgressBar() {
+            progressPercent = 0;
+            const bar = document.getElementById('sliderProgressBar');
+            if (bar) bar.style.width = '0%';
+        }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            progressPercent = 0;
+            const stepMs = 50;
+            const stepIncrement = (stepMs / slideDuration) * 100;
+
+            progressInterval = setInterval(() => {
+                if (!isPlaying) return;
+                progressPercent += stepIncrement;
+                const bar = document.getElementById('sliderProgressBar');
+                if (bar) bar.style.width = `${Math.min(progressPercent, 100)}%`;
+
+                if (progressPercent >= 100) {
+                    nextSlide();
+                }
+            }, stepMs);
+        }
+
+        function stopAutoPlay() {
+            if (progressInterval) clearInterval(progressInterval);
+        }
+
+        function pauseSliderAutoPlay() {
+            isPlaying = false;
+            updatePlaybackBtnState();
+        }
+
+        function resumeSliderAutoPlay() {
+            const viewSlider = document.getElementById('viewSlider');
+            if (viewSlider && !viewSlider.classList.contains('is-hidden')) {
+                isPlaying = true;
+                updatePlaybackBtnState();
+            }
+        }
+
+        function togglePlayback() {
+            isPlaying = !isPlaying;
+            updatePlaybackBtnState();
+        }
+
+        function updatePlaybackBtnState() {
+            const icon = document.getElementById('playbackIcon');
+            const text = document.getElementById('playbackText');
+            if (icon && text) {
+                if (isPlaying) {
+                    icon.textContent = '⏸';
+                    text.textContent = 'إيقاف مؤقت';
+                } else {
+                    icon.textContent = '▶';
+                    text.textContent = 'تشغيل تلقائي';
+                }
+            }
+        }
+
+        // دعم السحب باللمس على الجوال (Touch Swipe Support)
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const viewport = document.getElementById('sliderViewport');
+        if (viewport) {
+            viewport.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            viewport.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipeGesture();
+            }, { passive: true });
+        }
+
+        function handleSwipeGesture() {
+            const swipeDistance = touchEndX - touchStartX;
+            if (Math.abs(swipeDistance) > 40) {
+                if (swipeDistance > 0) {
+                    // سحب لليمين (السابق في RTL)
+                    prevSlide();
+                } else {
+                    // سحب لليسار (التالي في RTL)
+                    nextSlide();
+                }
+            }
+        }
+
+        // كونسول التبديل بين الأوضاع
         function setShowcaseView(mode) {
+            const vSlider = document.getElementById('viewSlider');
             const vSalim = document.getElementById('viewSalim');
             const vRaed = document.getElementById('viewRaed');
             const vDual = document.getElementById('viewDual');
 
+            const tSlider = document.getElementById('tabSlider');
             const tSalim = document.getElementById('tabSalim');
             const tRaed = document.getElementById('tabRaed');
             const tDual = document.getElementById('tabDual');
 
-            [tSalim, tRaed, tDual].forEach(t => t.classList.remove('active'));
-            [vSalim, vRaed, vDual].forEach(v => v.classList.add('is-hidden'));
+            [tSlider, tSalim, tRaed, tDual].forEach(t => { if (t) t.classList.remove('active'); });
+            [vSlider, vSalim, vRaed, vDual].forEach(v => { if (v) v.classList.add('is-hidden'); });
 
-            if (mode === 'salim') {
-                vSalim.classList.remove('is-hidden');
-                tSalim.classList.add('active');
-            } else if (mode === 'raed') {
-                vRaed.classList.remove('is-hidden');
-                tRaed.classList.add('active');
-            } else if (mode === 'dual') {
-                vDual.classList.remove('is-hidden');
-                tDual.classList.add('active');
+            if (mode === 'slider') {
+                if (vSlider) vSlider.classList.remove('is-hidden');
+                if (tSlider) tSlider.classList.add('active');
+                isPlaying = true;
+                startAutoPlay();
+            } else {
+                stopAutoPlay();
+                if (mode === 'salim') {
+                    if (vSalim) vSalim.classList.remove('is-hidden');
+                    if (tSalim) tSalim.classList.add('active');
+                } else if (mode === 'raed') {
+                    if (vRaed) vRaed.classList.remove('is-hidden');
+                    if (tRaed) tRaed.classList.add('active');
+                } else if (mode === 'dual') {
+                    if (vDual) vDual.classList.remove('is-hidden');
+                    if (tDual) tDual.classList.add('active');
+                }
             }
         }
 
+        // التحكم بنافذة العرض الموسعة Lightbox
         function openLightbox(src, alt) {
             const modal = document.getElementById('lightboxModal');
             const img = document.getElementById('lightboxImg');
@@ -548,12 +954,18 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') prevSlide();
+            if (e.key === 'ArrowLeft') nextSlide();
         });
 
         window.addEventListener('DOMContentLoaded', () => {
             const p = new URLSearchParams(window.location.search);
             const v = p.get('view');
-            if (v) setShowcaseView(v);
+            if (v) {
+                setShowcaseView(v);
+            } else {
+                setShowcaseView('slider');
+            }
         });
     </script>
 </body>
