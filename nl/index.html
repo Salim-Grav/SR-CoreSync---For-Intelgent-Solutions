@@ -4480,6 +4480,242 @@
             </div>
         </div>
 
+        <!-- 1.1 Directie & Oprichtersvisie Showcase Slider -->
+        <section class="section-founders-showcase flat-spacing" id="founders-showcase" data-section>
+            <div class="showcase-container">
+                
+                <!-- Section Header -->
+                <div class="showcase-header">
+                    <div class="showcase-badge">
+                        <span class="showcase-badge-dot"></span>
+                        <span>Directie &amp; Oprichtersvisie • S&amp;R CoreSync Solutions</span>
+                    </div>
+                    <h2 class="showcase-title">
+                        Strategisch Leiderschap in <span class="gold-accent">Digitale Transformatie &amp; ERP</span>
+                    </h2>
+                    <p class="showcase-subtitle">
+                        Wij verenigen geavanceerde cloudarchitectuur en AI-innovatie met diepgaande financiële expertise, accounting intelligence en ERP-systemen voor toonaangevende bedrijven in Nederland, Europa en het Midden-Oosten.
+                    </p>
+
+                    <!-- Showcase Controls -->
+                    <div class="showcase-controls">
+                        <button type="button" class="showcase-tab-btn active" id="tabSlider" onclick="setShowcaseView('slider')">
+                            <span class="showcase-tab-dot"></span>
+                            <span>Interactieve Slider 🔄</span>
+                        </button>
+                        <button type="button" class="showcase-tab-btn" id="tabSalim" onclick="setShowcaseView('salim')">
+                            <span class="showcase-tab-dot"></span>
+                            <span>Ing. Mohammad Salim Aziza (CTO)</span>
+                        </button>
+                        <button type="button" class="showcase-tab-btn" id="tabRaed" onclick="setShowcaseView('raed')">
+                            <span class="showcase-tab-dot"></span>
+                            <span>Dhr. Mohammad Raed Kaaka (CFO)</span>
+                        </button>
+                        <button type="button" class="showcase-tab-btn" id="tabDual" onclick="setShowcaseView('dual')">
+                            <span class="showcase-tab-dot"></span>
+                            <span>Beide Oprichters Tonen</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 1. Interactive Slider Mode -->
+                <div id="viewSlider" class="showcase-slider-wrapper">
+                    <button type="button" class="showcase-nav-btn showcase-nav-prev" onclick="prevSlide()" aria-label="Vorige">‹</button>
+                    <button type="button" class="showcase-nav-btn showcase-nav-next" onclick="nextSlide()" aria-label="Volgende">›</button>
+
+                    <!-- Slides Track -->
+                    <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
+                        <div class="showcase-slides-track" id="slidesTrack">
+                            <!-- Slide 1: Ing. Mohammad Salim Aziza -->
+                            <div class="showcase-slide-item active">
+                                <div class="showcase-banner-card">
+                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza - Chief Technology Officer & Principal Cloud & AI Architect')">
+                                        <img src="../assets/founder-banner-salim.jpg" alt="Ing. Mohammad Salim Aziza Directie Banner" class="showcase-img" loading="lazy">
+                                    </div>
+                                    <div class="showcase-banner-footer">
+                                        <div class="showcase-footer-meta">
+                                            <div class="showcase-footer-avatar">S</div>
+                                            <div>
+                                                <div class="showcase-footer-title">Ing. Mohammad Salim Aziza</div>
+                                                <div class="showcase-footer-role">Chief Technology Officer &amp; Principal Cloud &amp; AI Architect &amp; CTO</div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-footer-actions">
+                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza')">
+                                                <span>Vergroot Full HD 🔍</span>
+                                            </button>
+                                            <a href="../assets/founder-banner-salim.jpg" download="SR-CoreSync-Founder-Salim-Aziza.jpg" class="showcase-action-btn">
+                                                <span>Download Banner 📥</span>
+                                            </a>
+                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('cloud')">
+                                                <span>Tech Consultatie Boeken 👔</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2: Dhr. Mohammad Raed Kaaka -->
+                            <div class="showcase-slide-item">
+                                <div class="showcase-banner-card">
+                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka - Chief Financial Officer & Financieel ERP Consultant')">
+                                        <img src="../assets/founder-banner-raed.jpg" alt="Dhr. Mohammad Raed Kaaka Directie Banner" class="showcase-img" loading="lazy">
+                                    </div>
+                                    <div class="showcase-banner-footer">
+                                        <div class="showcase-footer-meta">
+                                            <div class="showcase-footer-avatar">R</div>
+                                            <div>
+                                                <div class="showcase-footer-title">Dhr. Mohammad Raed Kaaka</div>
+                                                <div class="showcase-footer-role">Chief Financial Officer &amp; Financieel ERP Consultant &amp; CFO</div>
+                                            </div>
+                                        </div>
+                                        <div class="showcase-footer-actions">
+                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka')">
+                                                <span>Vergroot Full HD 🔍</span>
+                                            </button>
+                                            <a href="../assets/founder-banner-raed.jpg" download="SR-CoreSync-Founder-Raed-Kaaka.jpg" class="showcase-action-btn">
+                                                <span>Download Banner 📥</span>
+                                            </a>
+                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('erp')">
+                                                <span>Financieel Consult Boeken 👔</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Progress Bar & Playback -->
+                    <div class="showcase-slider-timeline">
+                        <div class="showcase-dots-group">
+                            <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
+                                <span class="showcase-dot-indicator"></span>
+                                <span>Ing. Mohammad Salim Aziza (CTO)</span>
+                            </button>
+                            <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                                <span class="showcase-dot-indicator"></span>
+                                <span>Dhr. Mohammad Raed Kaaka (CFO)</span>
+                            </button>
+                        </div>
+
+                        <div class="showcase-progress-bar-container" title="Automatische voortgang">
+                            <div class="showcase-progress-bar-fill" id="sliderProgressBar"></div>
+                        </div>
+
+                        <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" onclick="togglePlayback()">
+                            <span id="playbackIcon">⏸</span>
+                            <span id="playbackText">Pauze</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Single View: Ing. Mohammad Salim Aziza -->
+                <div id="viewSalim" class="showcase-single-view showcase-is-hidden">
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza')">
+                            <img src="../assets/founder-banner-salim.jpg" alt="Ing. Mohammad Salim Aziza" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar">S</div>
+                                <div>
+                                    <div class="showcase-footer-title">Ing. Mohammad Salim Aziza</div>
+                                    <div class="showcase-footer-role">Chief Technology Officer &amp; Principal Cloud &amp; AI Architect &amp; CTO</div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza')">
+                                    <span>Vergroot Full HD 🔍</span>
+                                </button>
+                                <a href="../assets/founder-banner-salim.jpg" download="SR-CoreSync-Founder-Salim-Aziza.jpg" class="showcase-action-btn">
+                                    <span>Download Banner 📥</span>
+                                </a>
+                                <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('cloud')">
+                                    <span>Tech Consultatie Boeken 👔</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Single View: Dhr. Mohammad Raed Kaaka -->
+                <div id="viewRaed" class="showcase-single-view showcase-is-hidden">
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka')">
+                            <img src="../assets/founder-banner-raed.jpg" alt="Dhr. Mohammad Raed Kaaka" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar">R</div>
+                                <div>
+                                    <div class="showcase-footer-title">Dhr. Mohammad Raed Kaaka</div>
+                                    <div class="showcase-footer-role">Chief Financial Officer &amp; Financieel ERP Consultant &amp; CFO</div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka')">
+                                    <span>Vergroot Full HD 🔍</span>
+                                </button>
+                                <a href="../assets/founder-banner-raed.jpg" download="SR-CoreSync-Founder-Raed-Kaaka.jpg" class="showcase-action-btn">
+                                    <span>Download Banner 📥</span>
+                                </a>
+                                <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('erp')">
+                                    <span>Financieel Consult Boeken 👔</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Dual Grid View -->
+                <div id="viewDual" class="showcase-dual-grid showcase-is-hidden">
+                    <!-- Salim Card -->
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza')">
+                            <img src="../assets/founder-banner-salim.jpg" alt="Ing. Mohammad Salim Aziza" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar">S</div>
+                                <div>
+                                    <div class="showcase-footer-title">Ing. Mohammad Salim Aziza (CTO)</div>
+                                    <div class="showcase-footer-role">Enterprise Cloud Systemen &amp; Autonome AI</div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Ing. Mohammad Salim Aziza')">
+                                    <span>Vergroot 🔍</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raed Card -->
+                    <div class="showcase-banner-card">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka')">
+                            <img src="../assets/founder-banner-raed.jpg" alt="Dhr. Mohammad Raed Kaaka" class="showcase-img" loading="lazy">
+                        </div>
+                        <div class="showcase-banner-footer">
+                            <div class="showcase-footer-meta">
+                                <div class="showcase-footer-avatar">R</div>
+                                <div>
+                                    <div class="showcase-footer-title">Dhr. Mohammad Raed Kaaka (CFO)</div>
+                                    <div class="showcase-footer-role">Geavanceerde Softwaresystemen &amp; Financiële ERP</div>
+                                </div>
+                            </div>
+                            <div class="showcase-footer-actions">
+                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Dhr. Mohammad Raed Kaaka')">
+                                    <span>Vergroot 🔍</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- 2. قسم Diensten (Services Orbit Section) -->
         <div id="service" data-section class="section-scroll-anchor" aria-hidden="true"></div>
         <section class="section-tech-stack-v2 service-orbit-section" id="services" data-section>
