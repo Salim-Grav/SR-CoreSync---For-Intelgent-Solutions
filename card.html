@@ -1054,7 +1054,8 @@
                 banner: './assets/founder-banner-salim.jpg',
                 avatar: './assets/founder-salim.png',
                 vcf: './assets/salim-aziza.vcf',
-                qr: './assets/qr-founder-salim.png'
+                qr: './assets/qr-founder-salim.png',
+                vcfRaw: "BEGIN:VCARD\r\nVERSION:3.0\r\nN:عزيزة;محمد سليم;م.;;\r\nFN:م. محمد سليم عزيزة (Mohammad Salim Aziza)\r\nORG:S&R CoreSync Solutions\r\nTITLE:Chief Technology Officer & Principal Cloud & AI Architect\r\nEMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com\r\nTEL;TYPE=CELL,WORK:+31618111116\r\nADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;;1016 GD;Netherlands\r\nURL:https://sr-coresync.com\r\nNOTE:S&R CoreSync Solutions - Enterprise Cloud Architecture, AI Automation & Digital Systems\r\nREV:2026-10-18T10:00:00Z\r\nEND:VCARD\r\n"
             },
             raed: {
                 ar: {
@@ -1084,7 +1085,8 @@
                 banner: './assets/founder-banner-raed.jpg',
                 avatar: './assets/founder-raed.png',
                 vcf: './assets/raed-kaaka.vcf',
-                qr: './assets/qr-founder-raed.png'
+                qr: './assets/qr-founder-raed.png',
+                vcfRaw: "BEGIN:VCARD\r\nVERSION:3.0\r\nN:كعكة;محمد رائد;أ.;;\r\nFN:أ. محمد رائد كعكة (Mohammad Raed Kaaka)\r\nORG:S&R CoreSync Solutions\r\nTITLE:Chief Financial Officer & Senior Financial ERP Consultant\r\nEMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com\r\nTEL;TYPE=CELL,WORK:+31618111116\r\nADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;;1016 GD;Netherlands\r\nURL:https://sr-coresync.com\r\nNOTE:S&R CoreSync Solutions - Advanced ERP Systems, Financial Consulting & Enterprise Automation\r\nREV:2026-10-18T10:00:00Z\r\nEND:VCARD\r\n"
             },
             company: {
                 ar: {
@@ -1114,7 +1116,8 @@
                 banner: './assets/sr-emblem-gold-luxury.jpg',
                 avatar: './assets/sr-emblem-gold-luxury.jpg',
                 vcf: './assets/sr-coresync.vcf',
-                qr: './assets/qr-company-emblem.png'
+                qr: './assets/qr-company-emblem.png',
+                vcfRaw: "BEGIN:VCARD\r\nVERSION:3.0\r\nN:Solutions;S&R CoreSync;;;\r\nFN:S&R CoreSync Solutions\r\nORG:S&R CoreSync Solutions\r\nTITLE:Enterprise Cloud & Financial ERP Systems\r\nEMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com\r\nTEL;TYPE=WORK:+31618111116\r\nADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;;1016 GD;Netherlands\r\nURL:https://sr-coresync.com\r\nNOTE:For Intelligent Solutions - Cloud Computing, AI Automation & ERP Systems\r\nREV:2026-10-18T10:00:00Z\r\nEND:VCARD\r\n"
             }
         };
 
@@ -1124,7 +1127,9 @@
                 lang: 'ar',
                 font: "'Cairo', system-ui, sans-serif",
                 nfcActive: 'NFC متصل • مفعّل 🟢',
-                saveContact: 'حفظ جهة الاتصال في الهاتف',
+                saveContact: 'حفظ جهة الاتصال في الهاتف (vCard)',
+                btnNfcProgramTxt: 'برمجة NFC في 3 ثوانٍ',
+                btnOfflineStatusTxt: 'وضع عدم الاتصال (Offline)',
                 wa: 'واتساب',
                 call: 'اتصال',
                 mail: 'البريد',
@@ -1137,6 +1142,8 @@
                 font: "'Plus Jakarta Sans', system-ui, sans-serif",
                 nfcActive: 'NFC Connected • Live 🟢',
                 saveContact: 'Add Contact to Phone (vCard)',
+                btnNfcProgramTxt: 'Write NFC in 3 Secs',
+                btnOfflineStatusTxt: 'Offline Ready (PWA)',
                 wa: 'WhatsApp',
                 call: 'Call',
                 mail: 'Email',
@@ -1149,6 +1156,8 @@
                 font: "'Plus Jakarta Sans', system-ui, sans-serif",
                 nfcActive: 'NFC Verbonden • Actief 🟢',
                 saveContact: 'Contact Opslaan op Telefoon',
+                btnNfcProgramTxt: 'NFC Schrijven (3 sec)',
+                btnOfflineStatusTxt: 'Offline Modus (PWA)',
                 wa: 'WhatsApp',
                 call: 'Bellen',
                 mail: 'E-mail',
@@ -1159,6 +1168,20 @@
 
         let currentProfileKey = 'salim';
         let currentLangKey = 'ar';
+
+        function getCardDirectUrl() {
+            const loc = window.location;
+            const baseUrl = (loc.origin && loc.origin !== 'null' && !loc.origin.startsWith('file:')) 
+                ? loc.origin + loc.pathname.replace(/\/[^\/]*$/, '/card.html') 
+                : 'https://sr-coresync.com/card.html';
+            return `${baseUrl}?id=${currentProfileKey}&lang=${currentLangKey}`;
+        }
+
+        function updateNfcModalUrl() {
+            const url = getCardDirectUrl();
+            const input = document.getElementById('nfcProgramUrlInput');
+            if (input) input.value = url;
+        }
 
         function renderProfile() {
             const p = profiles[currentProfileKey] || profiles.salim;
@@ -1196,6 +1219,8 @@
             // UI strings
             document.getElementById('txtNfcActive').textContent = ui.nfcActive;
             document.getElementById('txtSaveContact').textContent = ui.saveContact;
+            document.getElementById('btnNfcProgramTxt').textContent = ui.btnNfcProgramTxt;
+            document.getElementById('btnOfflineStatusTxt').textContent = ui.btnOfflineStatusTxt;
             document.getElementById('lblWa').textContent = ui.wa;
             document.getElementById('lblCall').textContent = ui.call;
             document.getElementById('lblMail').textContent = ui.mail;
@@ -1203,6 +1228,8 @@
             document.getElementById('txtQrTitle').textContent = langData.qrTitle;
             document.getElementById('txtQrSub').textContent = langData.qrSub;
             document.getElementById('txtQrDl').textContent = ui.qrDl;
+
+            updateNfcModalUrl();
 
             // Lang buttons
             ['btnAr', 'btnEn', 'btnNl'].forEach(id => {
@@ -1225,6 +1252,113 @@
 
         function closeQrLightbox() {
             document.getElementById('qrLightbox').classList.remove('active');
+        }
+
+        function openNfcProgramModal() {
+            updateNfcModalUrl();
+            document.getElementById('nfcProgramModal').classList.add('active');
+        }
+
+        function closeNfcProgramModal() {
+            document.getElementById('nfcProgramModal').classList.remove('active');
+        }
+
+        function openOfflineModal() {
+            document.getElementById('offlineModal').classList.add('active');
+        }
+
+        function closeOfflineModal() {
+            document.getElementById('offlineModal').classList.remove('active');
+        }
+
+        /* 100% Offline in-memory vCard Generation */
+        function downloadOfflineVCard(event) {
+            if (event) event.preventDefault();
+            const p = profiles[currentProfileKey] || profiles.salim;
+            const langData = p[currentLangKey] || p.ar;
+            const vcardContent = p.vcfRaw;
+            
+            // Create Blob in browser RAM - zero network required!
+            const blob = new Blob([vcardContent], { type: 'text/vcard;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const tempLink = document.createElement('a');
+            tempLink.href = url;
+            tempLink.setAttribute('download', langData.vcfName || 'contact.vcf');
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+            const toastMsg = currentLangKey === 'ar' 
+                ? '✅ تم تنزيل جهة الاتصال محلياً بنجاح (جاهز دون إنترنت)!' 
+                : (currentLangKey === 'en' ? '✅ Contact downloaded offline successfully!' : '✅ Contact succesvol offline opgeslagen!');
+            showToast(toastMsg);
+        }
+
+        function copyNfcUrl() {
+            const input = document.getElementById('nfcProgramUrlInput');
+            if (!input) return;
+            input.select();
+            input.setSelectionRange(0, 99999);
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(input.value).then(() => {
+                    showToast(currentLangKey === 'ar' ? '📋 تم نسخ الرابط! جاهز للصق في تطبيق NFC Tools' : '📋 Link copied! Ready for NFC Tools');
+                }).catch(() => fallbackCopy(input.value));
+            } else {
+                fallbackCopy(input.value);
+            }
+        }
+
+        function fallbackCopy(text) {
+            try {
+                document.execCommand('copy');
+                showToast(currentLangKey === 'ar' ? '📋 تم نسخ الرابط بنجاح!' : '📋 Link copied successfully!');
+            } catch (e) {
+                prompt(currentLangKey === 'ar' ? 'انسخ الرابط يدوياً:' : 'Copy link manually:', text);
+            }
+        }
+
+        async function writeWebNFC() {
+            const targetUrl = getCardDirectUrl();
+            if ('NDEFReader' in window) {
+                try {
+                    showToast(currentLangKey === 'ar' ? '📲 قرّب بطاقة NFC من ظهر الهاتف الآن...' : '📲 Approach NFC card to back of phone now...');
+                    const ndef = new NDEFReader();
+                    await ndef.write({
+                        records: [{ recordType: 'url', data: targetUrl }]
+                    });
+                    showToast(currentLangKey === 'ar' ? '🎉 تمت برمجة البطاقة بنجاح عبر المتصفح!' : '🎉 NFC Card programmed successfully via browser!');
+                } catch (err) {
+                    console.warn('[WebNFC] Error:', err);
+                    showToast(currentLangKey === 'ar' ? '⚠️ تعذر الكتابة: ' + err.message : '⚠️ Web NFC error: ' + err.message);
+                }
+            } else {
+                showToast(currentLangKey === 'ar' ? '💡 خاصية المتصفح تتطلب Chrome على Android. استخدم تطبيق NFC Tools (مجاني 100%)' : '💡 Web NFC requires Chrome on Android. Please use NFC Tools app.');
+            }
+        }
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const toast = document.getElementById('nfcToast');
+            if (!toast) return;
+            toast.textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // تسجيل Service Worker للعمل في وضع عدم الاتصال PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then(reg => {
+                    console.log('[SW] PWA Offline cache active:', reg.scope);
+                }).catch(err => {
+                    console.log('[SW] ServiceWorker info:', err);
+                });
+            });
         }
 
         window.addEventListener('DOMContentLoaded', () => {
