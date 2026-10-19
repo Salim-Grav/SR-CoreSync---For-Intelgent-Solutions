@@ -13662,6 +13662,71 @@
             } else {
                 window.setShowcaseView('slider');
             }
+
+            // ================================================================
+            // تفاعل الشعار الملكي ثلاثي الأبعاد مع مؤشر الماوس واللمس (3D Hero Emblem Parallax & Glare)
+            // ================================================================
+            (function initHeroEmblem3D() {
+                const card = document.getElementById('heroEmblemCard');
+                const stage = document.getElementById('heroEmblemStage');
+                if (!card || !stage) return;
+
+                let rafId = null;
+                let targetX = 0, targetY = 0;
+                let currentX = 0, currentY = 0;
+                const maxTilt = 18;
+
+                function updateCard() {
+                    currentX += (targetX - currentX) * 0.12;
+                    currentY += (targetY - currentY) * 0.12;
+
+                    card.style.setProperty('--tilt-x', `${currentX.toFixed(2)}deg`);
+                    card.style.setProperty('--tilt-y', `${currentY.toFixed(2)}deg`);
+
+                    if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+                        rafId = requestAnimationFrame(updateCard);
+                    } else {
+                        rafId = null;
+                    }
+                }
+
+                function onPointerMove(e) {
+                    const rect = stage.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    const normX = Math.max(-1, Math.min(1, (e.clientX - centerX) / (rect.width / 2)));
+                    const normY = Math.max(-1, Math.min(1, (e.clientY - centerY) / (rect.height / 2)));
+
+                    targetX = -normY * maxTilt;
+                    targetY = normX * maxTilt;
+
+                    const glareX = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+                    const glareY = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+                    card.style.setProperty('--mouse-x', `${glareX.toFixed(1)}%`);
+                    card.style.setProperty('--mouse-y', `${glareY.toFixed(1)}%`);
+
+                    if (!rafId) rafId = requestAnimationFrame(updateCard);
+                }
+
+                function onPointerLeave() {
+                    targetX = 0;
+                    targetY = 0;
+                    card.style.setProperty('--mouse-x', '50%');
+                    card.style.setProperty('--mouse-y', '50%');
+                    if (!rafId) rafId = requestAnimationFrame(updateCard);
+                }
+
+                stage.addEventListener('mousemove', onPointerMove, { passive: true });
+                stage.addEventListener('mouseleave', onPointerLeave, { passive: true });
+
+                stage.addEventListener('touchmove', (e) => {
+                    if (e.touches.length > 0) {
+                        onPointerMove(e.touches[0]);
+                    }
+                }, { passive: true });
+                stage.addEventListener('touchend', onPointerLeave, { passive: true });
+            })();
         })();
     </script>
 
