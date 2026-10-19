@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v7-nfc-offline
-const CACHE_NAME = 'coresync-prerender-v7-nfc-offline';
+// Version: coresync-prerender-v8-nfc-offline-pwa
+const CACHE_NAME = 'coresync-prerender-v8-nfc-offline-pwa';
 
 // 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
 const CRITICAL_ASSETS = [
