@@ -939,10 +939,12 @@
     <!-- نافذة مودال: برمجة بطاقة NFC في 3 ثوانٍ -->
     <div id="nfcProgramModal" class="nfc-modal" onclick="closeNfcProgramModal()">
         <div class="nfc-modal-box" onclick="event.stopPropagation()">
-            <button type="button" class="nfc-modal-close" onclick="closeNfcProgramModal()">&times;</button>
-            <div class="nfc-modal-title">
-                <span>⚡</span>
-                <span id="txtNfcModalTitle">برمجة بطاقات NFC عبر الهاتف (3 ثوانٍ)</span>
+            <div class="nfc-modal-header">
+                <div class="nfc-modal-title">
+                    <span>⚡</span>
+                    <span id="txtNfcModalTitle">برمجة بطاقات NFC عبر الهاتف (3 ثوانٍ)</span>
+                </div>
+                <button type="button" class="nfc-modal-close-btn" onclick="closeNfcProgramModal()">&times;</button>
             </div>
             <p class="nfc-modal-sub" id="txtNfcModalSub">
                 يمكنك كتابة رابط الهوية الرقمية على أي بطاقة NFC خام (NTAG213 / 215 / 216) باستخدام هاتفك الذكي وتطبيق <strong>NFC Tools</strong> خلال 3 ثوانٍ فقط:
@@ -992,10 +994,12 @@
     <!-- نافذة مودال: وضع عدم الاتصال الحقيقي (Offline Mode) -->
     <div id="offlineModal" class="nfc-modal" onclick="closeOfflineModal()">
         <div class="nfc-modal-box" onclick="event.stopPropagation()">
-            <button type="button" class="nfc-modal-close" onclick="closeOfflineModal()">&times;</button>
-            <div class="nfc-modal-title">
-                <span>💾</span>
-                <span id="txtOfflineModalTitle">جاهزية العمل دون إنترنت <bdi dir="ltr">(Offline Mode)</bdi></span>
+            <div class="nfc-modal-header">
+                <div class="nfc-modal-title">
+                    <span>💾</span>
+                    <span id="txtOfflineModalTitle">جاهزية العمل دون إنترنت <bdi dir="ltr">(Offline Mode)</bdi></span>
+                </div>
+                <button type="button" class="nfc-modal-close-btn" onclick="closeOfflineModal()">&times;</button>
             </div>
             <p class="nfc-modal-sub" id="txtOfflineModalSub">
                 تم تزويد بطاقة الهوية الرقمية ببروتوكول PWA متقدم مع Service Worker نشط وتوليد لحظي للبيانات، مما يضمن:
