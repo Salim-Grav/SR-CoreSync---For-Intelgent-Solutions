@@ -214,8 +214,10 @@
 
         /* المحتوى الداخلي للكرت */
         .nfc-body {
-            padding: 24px 22px 28px 22px;
+            padding: 22px 14px 26px 14px;
             text-align: center;
+            box-sizing: border-box;
+            width: 100%;
         }
 
         .nfc-avatar-holder {
@@ -226,13 +228,14 @@
         }
 
         .nfc-avatar {
-            width: 90px;
-            height: 90px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
             border: 3px solid var(--primary-gold-bright);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 20px rgba(197, 168, 128, 0.4);
             background: #040807;
             object-fit: cover;
+            object-position: center;
             display: block;
         }
 
@@ -328,23 +331,28 @@
         .nfc-actions-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 24px;
+            gap: 6px;
+            margin-bottom: 22px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .nfc-action-tile {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(197, 168, 128, 0.25);
-            border-radius: 16px;
-            padding: 12px 6px;
+            border-radius: 14px;
+            padding: 10px 2px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
             text-decoration: none;
             color: #ffffff;
             transition: all 0.25s ease;
+            box-sizing: border-box;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .nfc-action-tile:hover {
@@ -363,7 +371,7 @@
         }
 
         .nfc-tile-icon {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             line-height: 1;
         }
 
@@ -377,11 +385,13 @@
             background: rgba(0, 0, 0, 0.4);
             border: 1px dashed var(--border-gold);
             border-radius: 18px;
-            padding: 16px;
+            padding: 12px;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             text-align: right;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         [dir="ltr"] .nfc-qr-box {
@@ -531,7 +541,7 @@
             <!-- جسم الكرت والبيانات -->
             <div class="nfc-body">
                 <div class="nfc-avatar-holder">
-                    <img id="cardAvatarImg" src="./assets/founder-banner-salim.jpg" alt="Executive Portrait" class="nfc-avatar">
+                    <img id="cardAvatarImg" src="./assets/founder-salim.png" alt="Executive Portrait" class="nfc-avatar">
                     <span class="nfc-verified-badge" title="موثق رسمياً">✓</span>
                 </div>
 
@@ -638,7 +648,7 @@
                     qrSub: 'Klik om te vergroten of download QR'
                 },
                 banner: './assets/founder-banner-salim.jpg',
-                avatar: './assets/founder-banner-salim.jpg',
+                avatar: './assets/founder-salim.png',
                 vcf: './assets/salim-aziza.vcf',
                 qr: './assets/qr-founder-salim.png'
             },
@@ -668,7 +678,7 @@
                     qrSub: 'Klik om te vergroten of download QR'
                 },
                 banner: './assets/founder-banner-raed.jpg',
-                avatar: './assets/founder-banner-raed.jpg',
+                avatar: './assets/founder-raed.png',
                 vcf: './assets/raed-kaaka.vcf',
                 qr: './assets/qr-founder-raed.png'
             },
