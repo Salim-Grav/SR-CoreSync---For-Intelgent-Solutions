@@ -6339,25 +6339,28 @@
         /* استجابة الشاشات الصغيرة والمتوسطة للشعار */
         @media (max-width: 991px) {
             .hero-reference__grid {
-                grid-template-columns: 1fr;
-                gap: 2.2rem;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 2.2rem !important;
             }
             .hero-reference__copy {
-                text-align: center;
-                order: 2;
+                text-align: center !important;
+                order: 2 !important;
             }
             .hero-reference__emblem-col {
-                order: 1;
+                order: 1 !important;
+                width: 100% !important;
             }
             .hero-emblem-card-3d {
-                width: 280px;
-                height: 280px;
+                width: 280px !important;
+                height: 280px !important;
             }
             .hero-emblem-badge--left {
-                left: 0;
+                left: 0 !important;
             }
             .hero-emblem-badge--top {
-                right: 0;
+                right: 0 !important;
             }
             .hero-reference__actions {
                 justify-content: center !important;
@@ -6366,15 +6369,15 @@
 
         @media (max-width: 480px) {
             .hero-emblem-card-3d {
-                width: 240px;
-                height: 240px;
+                width: 230px !important;
+                height: 230px !important;
             }
             .hero-emblem-badge {
-                font-size: 0.7rem;
-                padding: 5px 10px;
+                font-size: 0.68rem !important;
+                padding: 4px 10px !important;
             }
             .hero-emblem-badge--left {
-                display: none;
+                display: none !important;
             }
         }
 
@@ -6563,7 +6566,7 @@
             <div class="section-hero-v1 hero-reference">
                 <div class="overlay"></div>
                 <div class="content-wrap">
-                    <div class="container">
+                    <div class="container container-hero-luxury">
                         <div class="hero-reference__grid">
                             <div class="hero-reference__copy">
                                 <p class="hero-availability hero-intro">
