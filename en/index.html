@@ -4996,6 +4996,135 @@
             }
         }
 
+        /* ============================================================ */
+        /* Corporate Brand Presenter, Motion Canvas & Ambient Sound */
+        /* ============================================================ */
+        .hero-motion-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        .hero-top-meta-row {
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-brand-presenter {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 18px;
+            background: rgba(197, 168, 128, 0.08);
+            border: 1px solid rgba(197, 168, 128, 0.38);
+            border-radius: 999px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(197, 168, 128, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        .hero-brand-presenter:hover {
+            border-color: rgba(243, 223, 186, 0.85);
+            background: rgba(197, 168, 128, 0.16);
+            box-shadow: 0 6px 25px rgba(197, 168, 128, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-brand-presenter__logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #ffffff 10%, #f3dfba 55%, #c5a880 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(197, 168, 128, 0.35);
+        }
+
+        .hero-brand-presenter__tag {
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            color: #6ee7b7;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-vision-lead {
+            font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.88);
+            margin-bottom: 1.35rem;
+            max-width: 740px;
+        }
+
+        .hero-vision-lead strong {
+            color: #f3dfba;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(243, 223, 186, 0.3);
+        }
+
+        .hero-audio-ctrl-row {
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-sound-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 18px;
+            background: rgba(4, 14, 10, 0.75);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            border-radius: 999px;
+            color: #f3dfba;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .hero-sound-toggle-btn:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: #f3dfba;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(197, 168, 128, 0.3);
+        }
+
+        .hero-sound-toggle-btn.is-active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(197, 168, 128, 0.3));
+            border-color: #6ee7b7;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .hero-sound-toggle-btn .sound-wave-icon {
+            display: inline-block;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .hero-sound-toggle-btn.is-active .sound-wave-icon {
+            animation: soundWavePulse 1.2s infinite ease-in-out alternate;
+        }
+
+        @keyframes soundWavePulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px #6ee7b7); }
+            100% { transform: scale(1.22); filter: drop-shadow(0 0 10px #6ee7b7); }
+        }
+
     </style>
 </head>
 
