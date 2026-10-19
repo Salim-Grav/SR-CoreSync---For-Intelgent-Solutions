@@ -472,28 +472,28 @@
                     <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab active" onclick="switchWorkTab('websites', this)">
                         <span class="dot-active"></span>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
-                        مواقع ومتاجر إلكترونية
+                        <bdi>مواقع ومتاجر إلكترونية</bdi>
                     </button>
                 </li>
                 <li role="presentation">
                     <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('identity', this)">
                         <span class="dot-active"></span>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/><path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/></svg>
-                        هويات بصرية وشعارات
+                        <bdi>هويات بصرية وشعارات</bdi>
                     </button>
                 </li>
                 <li role="presentation">
                     <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('erp', this)">
                         <span class="dot-active"></span>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        أنظمة سحابية وERP
+                        <bdi>أنظمة سحابية و ERP</bdi>
                     </button>
                 </li>
                 <li role="presentation">
                     <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab" onclick="switchWorkTab('apps', this)">
                         <span class="dot-active"></span>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-                        تطبيقات ذكية وAI
+                        <bdi>تطبيقات ذكية ونظم AI</bdi>
                     </button>
                 </li>
             </ul>
@@ -865,25 +865,113 @@
             erp: [
                 {
                     id: "coresync",
-                    name: "CoreSync Cloud ERP",
-                    subtitle: "نظام إدارة الموارد وتتبع العمليات وسلاسل الإمداد السحابي",
+                    name: "CoreSync Enterprise ERP",
+                    subtitle: "نظام إدارة الموارد وتتبع العمليات وسلاسل الإمداد السحابي المتكامل",
                     heroImg: "./assets/service-website-3d.jpg",
-                    tags: ["نظام ERP سحابي", "إدارة سلاسل التوريد", "أتمتة الأعمال"],
+                    tags: ["سحابة مؤسسية", "إدارة سلاسل التوريد", "أتمتة العمليات", "Odoo & Microservices"],
                     year: "2026",
-                    kpiConversion: '+240%', kpiSpeed: '0.25s', kpiSales: '+5.0x كفاءة',
+                    client: "Global Logistics Group BV",
+                    type: "نظام ERP سحابي متعدد الفروع",
+                    loc: "أمستردام، هولندا",
+                    preview: "http://localhost:3000/preview-software.html",
+                    previewLabel: "erp.sr-coresync.com/cloud",
+                    desc: "منظومة سحابية متقدمة مبنية على معمارية الخدمات المصغرة ومحرك Odoo Enterprise المخصص. تدعم إدارة العمليات المتعددة في 14 مستودعاً وميناءً أوروبياً مع تزامن لحظي للمخزون ومطابقة الفواتير الضريبية تلقائياً وفق المعايير الهولندية والأوروبية.",
+                    quote: "وفّر النظام أكثر من 320 ساعة عمل شهرياً في الجرد وألغى تماماً أخطاء الفوترة اليدوية بين الفروع.",
+                    kpiConversion: '+240%', kpiSpeed: '0.22s', kpiSales: '+5.0x كفاءة',
+                    techs: ['Python / FastApi', 'Odoo 18 Core', 'PostgreSQL Cluster', 'Redis Sentinel', 'Docker / K8s'],
                     gallery: ["./assets/service-website-3d.jpg", "./assets/work-1.webp"]
+                },
+                {
+                    id: "atlas-logistics",
+                    name: "Atlas Freight & Customs",
+                    subtitle: "منظومة الشحن السريع وإدارة التخليص الجمركي الأوروبي الذكي",
+                    heroImg: "./assets/service-ecommerce-3d.jpg",
+                    tags: ["لوجستيات وسلاسل إمداد", "ربط بوابات الجمارك", "تتبع لحظي للأسطول"],
+                    year: "2025",
+                    client: "Atlas Trans Europe",
+                    type: "منصة ERP للنقل والجمارك",
+                    loc: "روتردام، هولندا",
+                    preview: "http://localhost:3000/preview-software.html",
+                    previewLabel: "atlas-freight.eu/dispatch",
+                    desc: "تطوير نظام تشغيلي مركزي لأسطول النقل والشحن الدولي، يربط مباشرة مع بوابات التخليص الجمركي لميناء روتردام ويصدر وثائق الشحن (CMR) رقمياً مع تتبع لحظي عبر GPS وأجهزة الاستشعار عبر الحاويات.",
+                    quote: "سرّع إجراءات التخليص الجمركي بنسبة 65% مع تتبع دقيق وشفافية مطلقة مع خطوط الشحن العالمية.",
+                    kpiConversion: '+185%', kpiSpeed: '0.19s', kpiSales: '+3.4x عمليات الشحن',
+                    techs: ['Go Microservices', 'Next.js Dashboard', 'Kafka Streams', 'Dutch Customs API', 'PostGIS'],
+                    gallery: ["./assets/service-ecommerce-3d.jpg", "./assets/work-2.webp"]
+                },
+                {
+                    id: "zenith-finance",
+                    name: "Zenith Multi-Entity Suite",
+                    subtitle: "منظومة التقارير المالية الموحدة والامتثال الضريبي الأوروبي IFRS",
+                    heroImg: "./assets/service-website-3d.jpg",
+                    tags: ["فوترة إلكترونية", "توحيد مالي", "امتثال ضريبي EU", "SEPA Banking"],
+                    year: "2026",
+                    client: "Zenith Capital Partners",
+                    type: "منظومة محاسبية واستشارات مالية",
+                    loc: "فرانكفورت، ألمانيا",
+                    preview: "http://localhost:3000/preview-software.html",
+                    previewLabel: "finance.zenith-group.de",
+                    desc: "بنية تحتية مالية متطورة تتيح التوحيد المالي التلقائي لخمس كيانات تجارية بأربع عملات رئيسية، مع الربط المباشر مع شبكات البنوك عبر SEPA B2B ومطابقة القيود المحاسبية بنقرة واحدة.",
+                    quote: "حقق امتثالاً صارماً مع معايير التدقيق المالي الألماني وتكامل مع كافة البنوك الأوروبية بسلاسة تامة.",
+                    kpiConversion: '+290%', kpiSpeed: '0.28s', kpiSales: '+4.5x سرعة الإغلاق المالي',
+                    techs: ['Spring Boot', 'Next.js 15', 'SEPA Bank Gateway', 'Automated Reconciliation', 'Vault HS'],
+                    gallery: ["./assets/service-website-3d.jpg", "./assets/work-3.webp"]
                 }
             ],
             apps: [
                 {
                     id: "visionai",
                     name: "VisionAI Inspector",
-                    subtitle: "نظام الرؤية الحاسوبية وفحص جودة خطوط الإنتاج بالذكاء الاصطناعي",
+                    subtitle: "نظام الرؤية الحاسوبية وفحص جودة خطوط الإنتاج والفرز الصناعي بالذكاء الاصطناعي",
                     heroImg: "./assets/service-ecommerce-3d.jpg",
-                    tags: ["ذكاء اصطناعي", "رؤية حاسوبية", "أتمتة صناعية"],
+                    tags: ["رؤية حاسوبية", "أتمتة صناعية", "TensorFlow & Edge TPU", "كشف العيوب الفوري"],
                     year: "2026",
-                    kpiConversion: '+310%', kpiSpeed: '0.18s', kpiSales: '+85% دقة',
+                    client: "Nordic Packaging Solutions",
+                    type: "نظام رؤية حاسوبية ذكي",
+                    loc: "أيندهوفن، هولندا",
+                    preview: "http://localhost:3000/preview-software.html",
+                    previewLabel: "vision-ai.coresync.cloud",
+                    desc: "نظام ذكاء اصطناعي مدمج على حافة الشبكة (Edge AI) يعالج أكثر من 45 إطاراً في الثانية للكشف عن عيوب التغليف والطباعة الصناعية بدقة 99.4%، مع إرسال إشارات إيقاف فورية للروبوتات وتوليد تقارير جودة لحظية.",
+                    quote: "خفّض معدل الهدر في خطوط التعبئة بنسبة 82% وحقق عائداً على الاستثمار في أقل من 4 أشهر.",
+                    kpiConversion: '+310%', kpiSpeed: '0.04s', kpiSales: '99.4% دقة الفحص',
+                    techs: ['Python', 'YOLOv10', 'PyTorch / TensorRT', 'WebSockets', 'NVIDIA Jetson / Edge'],
                     gallery: ["./assets/service-ecommerce-3d.jpg", "./assets/work-2.webp"]
+                },
+                {
+                    id: "smartagent",
+                    name: "CoreSync Enterprise Copilot",
+                    subtitle: "مساعد الذكاء الاصطناعي المؤسسي السيادي لاستخراج وتحليل الوثائق والعقود",
+                    heroImg: "./assets/service-website-3d.jpg",
+                    tags: ["نماذج LLMs محلية", "استخراج وثائق ذكي", "أمن بيانات GDPR", "RAG Pipeline"],
+                    year: "2026",
+                    client: "Hansa Legal & Consulting",
+                    type: "منظومة وكلاء الذكاء الاصطناعي",
+                    loc: "أمستردام، هولندا",
+                    preview: "http://localhost:3000/preview-software.html",
+                    previewLabel: "copilot.sr-coresync.com",
+                    desc: "منصة ذكاء اصطناعي مؤسسية مخصصة تعمل داخل خوادم العميل المشفرة (On-Premises / Private Cloud) بدون إرسال أي بيانات لأطراف خارجية، تقوم بفهرسة وتحليل العقود ومقارنة البنود وتوليد التقارير بلغات متعددة خلال ثوانٍ.",
+                    quote: "ثورة في إنتاجية الفريق القانوني والمالي مع ضمان كامل لسرية وخصوصية بيانات العملاء وفق GDPR.",
+                    kpiConversion: '+380%', kpiSpeed: '0.15s', kpiSales: '+6.2x سرعة تحليل العقود',
+                    techs: ['Llama-3 Enterprise', 'Qdrant Vector DB', 'FastAPI', 'LangChain', 'AES-256 Encryption'],
+                    gallery: ["./assets/service-website-3d.jpg", "./assets/work-1.webp"]
+                },
+                {
+                    id: "flowscan",
+                    name: "FlowScan Mobile NFC",
+                    subtitle: "تطبيق الجوال السحابي للمستودعات وإدارة الأصول بتقنية NFC و Barcode الفورية",
+                    heroImg: "./assets/service-ecommerce-3d.jpg",
+                    tags: ["تطبيق هاتف هجين", "قراءة NFC فورية", "Offline-First Sync", "إدارة أصول"],
+                    year: "2025",
+                    client: "VanderLinde Logistics",
+                    type: "تطبيق موبايل للأعمال",
+                    loc: "أوترخت، هولندا",
+                    preview: "http://localhost:3000/card.html",
+                    previewLabel: "flowscan.app/warehouse",
+                    desc: "تطبيق جوال فائق الخفة متوافق مع نظامي iOS وأندرويد يتيح مسح بطاقات الأصول وأجهزة المستودعات عبر رقائق NFC والباركود ثنائي الأبعاد، مع العمل الكامل بدون إنترنت وتزامن تلقائي بمجرد استعادة الشبكة.",
+                    quote: "أصبح جرد المستودعات الضخمة يتم في ساعات معدودة بدلاً من أيام بفضل سرعة القراءة والاستجابة.",
+                    kpiConversion: '+220%', kpiSpeed: '0.08s', kpiSales: '+4.0x سرعة الجرد',
+                    techs: ['Flutter', 'NFC Core API', 'SQLite Offline DB', 'GraphQL Sync', 'Biometric Auth'],
+                    gallery: ["./assets/service-ecommerce-3d.jpg", "./assets/work-3.webp"]
                 }
             ]
         };
