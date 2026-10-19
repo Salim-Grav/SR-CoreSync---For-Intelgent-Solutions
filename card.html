@@ -858,11 +858,23 @@
                     <span class="nfc-badge-pill">+12 عاماً خبرة 🌟</span>
                 </div>
 
-                <!-- زر حفظ جهة الاتصال الأساسي -->
-                <a id="cardSaveVcfBtn" href="./assets/salim-aziza.vcf" download="Mohammad-Salim-Aziza-CoreSync.vcf" class="nfc-save-btn">
+                <!-- زر حفظ جهة الاتصال الأساسي (يدعم التوليد المحلي أوفلاين 100%) -->
+                <a id="cardSaveVcfBtn" href="./assets/salim-aziza.vcf" download="Mohammad-Salim-Aziza-CoreSync.vcf" class="nfc-save-btn" onclick="downloadOfflineVCard(event)">
                     <span>📇</span>
-                    <span id="txtSaveContact">حفظ جهة الاتصال في الهاتف</span>
+                    <span id="txtSaveContact">حفظ جهة الاتصال في الهاتف (vCard)</span>
                 </a>
+
+                <!-- أزرار الدعم المتقدمة: برمجة NFC ووضع عدم الاتصال -->
+                <div class="nfc-secondary-actions">
+                    <button type="button" class="nfc-sub-btn" onclick="openNfcProgramModal()">
+                        <span>⚡</span>
+                        <span id="btnNfcProgramTxt">برمجة NFC في 3 ثوانٍ</span>
+                    </button>
+                    <button type="button" class="nfc-sub-btn" onclick="openOfflineModal()">
+                        <span>💾</span>
+                        <span id="btnOfflineStatusTxt">وضع عدم الاتصال (Offline)</span>
+                    </button>
+                </div>
 
                 <!-- شبكة الإجراءات السريعة -->
                 <div class="nfc-actions-grid">
@@ -916,6 +928,101 @@
             </a>
         </div>
     </div>
+
+    <!-- نافذة مودال: برمجة بطاقة NFC في 3 ثوانٍ -->
+    <div id="nfcProgramModal" class="nfc-modal" onclick="closeNfcProgramModal()">
+        <div class="nfc-modal-box" onclick="event.stopPropagation()">
+            <button type="button" class="nfc-modal-close" onclick="closeNfcProgramModal()">&times;</button>
+            <div class="nfc-modal-title">
+                <span>⚡</span>
+                <span id="txtNfcModalTitle">برمجة بطاقات NFC عبر الهاتف (3 ثوانٍ)</span>
+            </div>
+            <p class="nfc-modal-sub" id="txtNfcModalSub">
+                يمكنك كتابة رابط الهوية الرقمية على أي بطاقة NFC خام (NTAG213 / 215 / 216) باستخدام هاتفك الذكي وتطبيق <strong>NFC Tools</strong> خلال 3 ثوانٍ فقط:
+            </p>
+
+            <!-- صندوق رابط البطاقة المباشر والنسخ السريع -->
+            <div class="nfc-step-head">
+                <span class="nfc-step-num">1</span>
+                <span id="txtStep1Head">انسخ الرابط المباشر للبطاقة:</span>
+            </div>
+            <div class="nfc-url-copy-box">
+                <input type="text" id="nfcProgramUrlInput" class="nfc-url-input" readonly value="https://sr-coresync.com/card.html?id=salim">
+                <button type="button" class="nfc-url-copy-btn" onclick="copyNfcUrl()">
+                    <span id="btnCopyUrlTxt">📋 نسخ الرابط</span>
+                </button>
+            </div>
+
+            <!-- خطوات تطبيق NFC Tools -->
+            <div class="nfc-step-card">
+                <div class="nfc-step-head">
+                    <span class="nfc-step-num">2</span>
+                    <span id="txtStep2Head">في تطبيق NFC Tools (iOS أو Android):</span>
+                </div>
+                <div class="nfc-step-desc" id="txtStep2Desc">
+                    اختر <strong>Write (كتابة)</strong> &larr; ثم <strong>Add a record (إضافة سجل)</strong> &larr; اختر <strong>Custom URL / URI</strong> والصق الرابط المنسوخ أعلاه.
+                </div>
+            </div>
+
+            <div class="nfc-step-card">
+                <div class="nfc-step-head">
+                    <span class="nfc-step-num">3</span>
+                    <span id="txtStep3Head">الملامسة والكتابة الفورية:</span>
+                </div>
+                <div class="nfc-step-desc" id="txtStep3Desc">
+                    اضغط زر <strong>Write</strong> في التطبيق وقرّب البطاقة الخام من ظهر الهاتف لمدة ثانية واحدة حتى تسمع نغمة التأكيد 🔔 وتظهر علامة <strong>✓ Write Complete</strong>.
+                </div>
+            </div>
+
+            <!-- زر الكتابة المباشرة من المتصفح Web NFC للأجهزة المدعومة -->
+            <button type="button" class="nfc-webnfc-btn" onclick="writeWebNFC()">
+                <span>📲</span>
+                <span id="btnWebNfcTxt">كتابة مباشرة على البطاقة عبر المتصفح (Web NFC)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- نافذة مودال: وضع عدم الاتصال الحقيقي (Offline Mode) -->
+    <div id="offlineModal" class="nfc-modal" onclick="closeOfflineModal()">
+        <div class="nfc-modal-box" onclick="event.stopPropagation()">
+            <button type="button" class="nfc-modal-close" onclick="closeOfflineModal()">&times;</button>
+            <div class="nfc-modal-title">
+                <span>💾</span>
+                <span id="txtOfflineModalTitle">جاهزية العمل دون إنترنت (Offline Mode)</span>
+            </div>
+            <p class="nfc-modal-sub" id="txtOfflineModalSub">
+                تم تزويد بطاقة الهوية الرقمية ببروتوكول PWA متقدم مع Service Worker نشط وتوليد لحظي للبيانات، مما يضمن:
+            </p>
+
+            <div class="nfc-step-card">
+                <div class="nfc-step-head">
+                    <span class="nfc-step-num">✓</span>
+                    <span>توليد محلي فوري لملف الـ vCard (Zero-Network):</span>
+                </div>
+                <div class="nfc-step-desc">
+                    يتم إنشاء بيانات جهة الاتصال داخلياً بصيغة Blob UTF-8 مباشرة في ذاكرة المتصفح دون الحاجة لأي اتصال بالخادم.
+                </div>
+            </div>
+
+            <div class="nfc-step-card">
+                <div class="nfc-step-head">
+                    <span class="nfc-step-num">✓</span>
+                    <span>تخزين تلقائي للصور والخطوط (Cache Storage):</span>
+                </div>
+                <div class="nfc-step-desc">
+                    تعمل الصفحة ورموز الـ QR وشعارات المؤسسة فورياً حتى في وضع الطيران (Airplane Mode).
+                </div>
+            </div>
+
+            <button type="button" class="nfc-webnfc-btn" style="background: linear-gradient(135deg, #c5a880, #8c734b); color: #030806;" onclick="downloadOfflineVCard(event)">
+                <span>📥</span>
+                <span>اختبار حفظ ملف جهة الاتصال (Offline vCard Test)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- إشعار التنبيه اللحظي (Toast Notification) -->
+    <div id="nfcToast" class="nfc-toast">تم النسخ بنجاح!</div>
 
     <script>
         const profiles = {
