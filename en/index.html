@@ -5288,23 +5288,39 @@
                 </div>
             </header>
 
-            <!-- المحتوى التحريري الرئيسي للبانر (Hero Banner Content) -->
+            <!-- Hero Banner Content -->
             <div class="section-hero-v1 hero-reference">
+                <!-- Interactive Dynamic Motion Canvas -->
+                <canvas id="heroMotionCanvas" class="hero-motion-canvas" aria-hidden="true"></canvas>
                 <div class="overlay"></div>
                 <div class="content-wrap">
                     <div class="container container-hero-luxury">
                         <div class="hero-reference__grid">
                             <div class="hero-reference__copy">
-                                <p class="hero-availability hero-intro">
-                                    <span class="hero-availability__dot"></span>
-                                    Available for New Enterprise Architecture Engagements 2026
-                                </p>
+                                <div class="hero-top-meta-row d-flex flex-wrap align-items-center gap-3">
+                                    <div class="hero-brand-presenter">
+                                        <span class="hero-brand-presenter__logo">S&amp;R CoreSync Solutions</span>
+                                        <span class="hero-brand-presenter__tag">PRESENTS</span>
+                                    </div>
+                                    <p class="hero-availability hero-intro m-0">
+                                        <span class="hero-availability__dot"></span>
+                                        Available for New Enterprise Architecture Engagements 2026
+                                    </p>
+                                </div>
                                 <h1 class="hero-reference__title">
                                     <span class="hero-title-line"><span class="hero-title-line__text">Enterprise Systems</span></span>
                                     <span class="hero-title-line"><span class="hero-title-line__text">&amp; <span class="hero-title-accent">Autonomous AI</span> Architectures</span></span>
                                 </h1>
                                 <div class="hero-reference__bottom hero-intro">
-                                    <p>We engineer bespoke cloud platforms, mobile ecosystems, automated ERP financial bridges, and enterprise AI workflows empowering organizations across Europe and the Middle East to lead.</p>
+                                    <p class="hero-vision-lead"><strong>Integrated Software Systems &amp; AI Solutions</strong> engineered with sovereign cloud resilience and automated financial ERP workflows for modern global enterprises across Europe and the Middle East.</p>
+                                    
+                                    <!-- Hero Ambient Soundscape Controller -->
+                                    <div class="hero-audio-ctrl-row">
+                                        <button type="button" class="hero-sound-toggle-btn" id="heroSoundToggle" onclick="toggleHeroAmbientSound()" aria-label="Toggle Ambient Audio Experience" title="Toggle Ambient Audio Experience">
+                                            <span class="sound-wave-icon" id="heroSoundIcon">🔊</span>
+                                            <span class="sound-label" id="heroSoundLabel">Ambient Audio Experience (Click to Play)</span>
+                                        </button>
+                                    </div>
                                     <div class="hero-reference__actions d-flex flex-wrap gap-2">
                                         <a href="#contact" class="tf-btn hero-reference__action">Get in Touch</a>
                                         <button type="button" class="tf-btn hero-reference__action hero-btn-vip" onclick="openExecutiveBookingModal()">
