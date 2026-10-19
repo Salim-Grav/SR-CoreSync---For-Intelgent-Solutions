@@ -6665,6 +6665,112 @@ html.smart-tv-hardware .cinematic-emblem-img {
     transform: translateZ(0) !important;
 }
 
+/* =========================================================================
+   6. Hero Primary Conversion CTA & Enterprise Trust Metrics Strip
+   ========================================================================= */
+.hero-reference__actions .hero-btn-primary-highlight {
+    background: linear-gradient(135deg, #f5b846 0%, #d4af37 50%, #c5a880 100%) !important;
+    border: 1px solid #ffe699 !important;
+    color: #04100c !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 18px rgba(245, 184, 70, 0.35), 0 0 0 1px rgba(255, 230, 153, 0.2) !important;
+    animation: heroPulseGlow 3s infinite ease-in-out;
+}
+
+.hero-reference__actions .hero-btn-primary-highlight span {
+    color: #04100c !important;
+    font-weight: 700 !important;
+}
+
+.hero-reference__actions .hero-btn-primary-highlight:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f5b846 60%, #d4af37 100%) !important;
+    color: #000000 !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 28px rgba(245, 184, 70, 0.55), 0 0 16px rgba(255, 255, 255, 0.4) !important;
+}
+
+.hero-reference__actions .hero-btn-primary-highlight:hover span {
+    color: #000000 !important;
+}
+
+@keyframes heroPulseGlow {
+    0%, 100% {
+        box-shadow: 0 4px 18px rgba(245, 184, 70, 0.35);
+    }
+    50% {
+        box-shadow: 0 6px 26px rgba(245, 184, 70, 0.6), 0 0 12px rgba(245, 184, 70, 0.3);
+    }
+}
+
+.hero-trust-metrics-strip {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 10px 20px;
+    background: rgba(8, 20, 16, 0.7);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.trust-metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+html[lang="ar"] .trust-metric-item {
+    align-items: flex-start;
+    text-align: right;
+}
+
+html[lang="en"] .trust-metric-item,
+html[lang="nl"] .trust-metric-item {
+    align-items: flex-start;
+    text-align: left;
+}
+
+.trust-metric-item .metric-val {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.98rem;
+    color: #f5b846;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.trust-metric-item .metric-lbl {
+    font-size: 0.73rem;
+    color: rgba(220, 235, 228, 0.75);
+    line-height: 1.2;
+}
+
+.trust-metric-separator {
+    width: 1px;
+    height: 24px;
+    background: rgba(197, 168, 128, 0.2);
+}
+
+@media (max-width: 767px) {
+    .hero-trust-metrics-strip {
+        gap: 12px;
+        padding: 8px 14px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .trust-metric-separator {
+        display: none;
+    }
+    .trust-metric-item {
+        flex: 1 1 45%;
+    }
+}
+
 
 
 
