@@ -7245,6 +7245,186 @@ html[lang="nl"] .trust-metric-item {
     }
 }
 
+/* ==========================================================================
+   FAQ ACCORDION & EXECUTIVE CONVERSION CARD STYLES
+   ========================================================================== */
+.section-faq .accordion-faq_item {
+    margin-bottom: 12px;
+    border: 1px solid rgba(197, 168, 128, 0.22) !important;
+    border-radius: 14px;
+    background: rgba(10, 15, 20, 0.75) !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.section-faq .accordion-faq_item:hover {
+    border-color: rgba(197, 168, 128, 0.45) !important;
+    box-shadow: 0 6px 20px rgba(197, 168, 128, 0.15);
+}
+
+.section-faq .accordion-action {
+    cursor: pointer;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: background 0.25s ease;
+    user-select: none;
+}
+
+.section-faq .accordion-action:hover {
+    background: rgba(197, 168, 128, 0.05);
+}
+
+.section-faq .accordion-action:not(.collapsed) {
+    color: #dfc49c !important;
+}
+
+.section-faq .accordion-action:not(.collapsed) .ic-wrap svg {
+    transform: rotate(180deg);
+    stroke: #dfc49c;
+}
+
+.section-faq .accordion-order {
+    color: #c5a880;
+    font-weight: 700;
+    font-size: 0.95rem;
+    font-family: inherit;
+    flex-shrink: 0;
+}
+
+.section-faq .accordion-text {
+    flex: 1;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.02rem;
+    line-height: 1.5;
+}
+
+.section-faq .accordion-collapse-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 24px;
+}
+
+.section-faq .accordion-collapse-body.is-open {
+    max-height: 500px;
+    padding: 0 24px 22px 24px;
+}
+
+.section-faq .accordion-content {
+    line-height: 1.75;
+    font-size: 0.94rem;
+    color: rgba(255, 255, 255, 0.78) !important;
+    margin: 0;
+}
+
+.faq-executive-cta {
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.12) 0%, rgba(10, 15, 20, 0.95) 100%);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 20px;
+    padding: 36px 30px;
+    margin-top: 48px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.faq-executive-cta::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(197, 168, 128, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.faq-cta-badge span {
+    display: inline-block;
+    background: rgba(197, 168, 128, 0.15);
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    color: #e6ca9f;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+}
+
+.faq-cta-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.faq-cta-desc {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.92rem;
+    max-width: 580px;
+    margin: 0 auto 24px auto;
+    line-height: 1.6;
+}
+
+.faq-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.faq-btn-gold {
+    background: linear-gradient(135deg, #dfc49c 0%, #c5a880 100%);
+    color: #0b0e14 !important;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 18px rgba(197, 168, 128, 0.4);
+}
+
+.faq-btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(197, 168, 128, 0.6);
+    filter: brightness(1.08);
+}
+
+.faq-btn-outline {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    color: #e6ca9f;
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.faq-btn-outline:hover {
+    background: rgba(197, 168, 128, 0.16);
+    border-color: #c5a880;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+
 
 
 
