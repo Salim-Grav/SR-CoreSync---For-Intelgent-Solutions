@@ -6376,9 +6376,133 @@
                 font-size: 0.68rem !important;
                 padding: 4px 10px !important;
             }
-            .hero-emblem-badge--left {
-                display: none !important;
-            }
+        /* ============================================================ */
+        /* تصميم شارة تقديم الشركة المؤسسية والكانفاس والصوت التفاعلي */
+        /* ============================================================ */
+        .hero-motion-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        .hero-top-meta-row {
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-brand-presenter {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 18px;
+            background: rgba(197, 168, 128, 0.08);
+            border: 1px solid rgba(197, 168, 128, 0.38);
+            border-radius: 999px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), 0 0 15px rgba(197, 168, 128, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        .hero-brand-presenter:hover {
+            border-color: rgba(243, 223, 186, 0.85);
+            background: rgba(197, 168, 128, 0.16);
+            box-shadow: 0 6px 25px rgba(197, 168, 128, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-brand-presenter__logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #ffffff 10%, #f3dfba 55%, #c5a880 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(197, 168, 128, 0.35);
+        }
+
+        .hero-brand-presenter__tag {
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            color: #6ee7b7;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-vision-lead {
+            font-size: clamp(0.98rem, 1.25vw, 1.15rem);
+            line-height: 1.85;
+            color: rgba(255, 255, 255, 0.88);
+            margin-bottom: 1.35rem;
+            max-width: 740px;
+        }
+
+        .hero-vision-lead strong {
+            color: #f3dfba;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(243, 223, 186, 0.3);
+        }
+
+        .hero-audio-ctrl-row {
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-sound-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 18px;
+            background: rgba(4, 14, 10, 0.75);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            border-radius: 999px;
+            color: #f3dfba;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .hero-sound-toggle-btn:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: #f3dfba;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(197, 168, 128, 0.3);
+        }
+
+        .hero-sound-toggle-btn.is-active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(197, 168, 128, 0.3));
+            border-color: #6ee7b7;
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .hero-sound-toggle-btn .sound-wave-icon {
+            display: inline-block;
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .hero-sound-toggle-btn.is-active .sound-wave-icon {
+            animation: soundWavePulse 1.2s infinite ease-in-out alternate;
+        }
+
+        @keyframes soundWavePulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px #6ee7b7); }
+            100% { transform: scale(1.22); filter: drop-shadow(0 0 10px #6ee7b7); }
         }
 
     </style>
@@ -6564,21 +6688,37 @@
 
             <!-- المحتوى التحريري الرئيسي للبانر (Hero Banner Content - التصميم الأول الأصلي) -->
             <div class="section-hero-v1 hero-reference">
+                <!-- كانفاس الحركة الضوئية التفاعلية لخلفية الهيرو -->
+                <canvas id="heroMotionCanvas" class="hero-motion-canvas" aria-hidden="true"></canvas>
                 <div class="overlay"></div>
                 <div class="content-wrap">
                     <div class="container container-hero-luxury">
                         <div class="hero-reference__grid">
                             <div class="hero-reference__copy">
-                                <p class="hero-availability hero-intro">
-                                    <span class="hero-availability__dot"></span>
-                                    متاحون لبدء مشاريع التحول الرقمي والـ ERP لعام 2026
-                                </p>
+                                <div class="hero-top-meta-row d-flex flex-wrap align-items-center gap-3">
+                                    <div class="hero-brand-presenter">
+                                        <span class="hero-brand-presenter__logo">S&amp;R CoreSync Solutions</span>
+                                        <span class="hero-brand-presenter__tag">تُـقـدّم</span>
+                                    </div>
+                                    <p class="hero-availability hero-intro m-0">
+                                        <span class="hero-availability__dot"></span>
+                                        متاحون لبدء مشاريع التحول الرقمي والـ ERP لعام 2026
+                                    </p>
+                                </div>
                                 <h1 class="hero-reference__title">
                                     <span class="hero-title-line"><span class="hero-title-line__text">أنظمة برمجية متقدمة</span></span>
-                                    <span class="hero-title-line"><span class="hero-title-line__text">وحلول <span class="hero-title-accent">ERP وذكاء اصطناعي</span> ذكية</span></span>
+                                    <span class="hero-title-line"><span class="hero-title-line__text">وحلول <span class="hero-title-accent">ERP وذكاء اصطناعي</span></span></span>
                                 </h1>
                                 <div class="hero-reference__bottom hero-intro">
-                                    <p>نبتكر حلولاً برمجية مخصصة، تطبيقات سحابية، وتكامل أنظمة الـ ERP والمحاسبة وأتمتة الذكاء الاصطناعي لمساعدة الشركات في أوروبا والشرق الأوسط على التوسع والريادة.</p>
+                                    <p class="hero-vision-lead"><strong>أنظمة برمجية متكاملة وحلول ذكاء اصطناعي</strong> تبتكرها كوادرنا وفق أرقى المعايير الهندسية السحابية لدعم التحول الرقمي وإدارة الموارد للشركات والمؤسسات الكبرى في أوروبا والشرق الأوسط.</p>
+                                    
+                                    <!-- زر التجربة الصوتية المحيطية الفاخرة -->
+                                    <div class="hero-audio-ctrl-row">
+                                        <button type="button" class="hero-sound-toggle-btn" id="heroSoundToggle" onclick="toggleHeroAmbientSound()" aria-label="تشغيل / كتم الصوت المحيطي" title="تشغيل تجربة الصوت السينمائي المحيطي">
+                                            <span class="sound-wave-icon" id="heroSoundIcon">🔊</span>
+                                            <span class="sound-label" id="heroSoundLabel">تجربة الصوت المحيطي (اضغط للتشغيل)</span>
+                                        </button>
+                                    </div>
                                     <div class="hero-reference__actions d-flex flex-wrap gap-2">
                                         <a href="#contact" class="tf-btn hero-reference__action">تواصـــل معنا</a>
                                         <button type="button" class="tf-btn hero-reference__action hero-btn-vip" onclick="openExecutiveBookingModal()">
@@ -13742,6 +13882,283 @@
                     }
                 }, { passive: true });
                 stage.addEventListener('touchend', onPointerLeave, { passive: true });
+            })();
+
+            // ================================================================
+            // محرك الجزيئات والأمواج الضوئية التفاعلية لخلفية الهيرو (Hero Motion Canvas)
+            // ================================================================
+            (function initHeroMotionCanvas() {
+                const canvas = document.getElementById('heroMotionCanvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                let width = 0, height = 0;
+                let particles = [];
+                let animId = null;
+                let mouse = { x: null, y: null, radius: 140 };
+
+                function resize() {
+                    const parent = canvas.parentElement;
+                    if (!parent) return;
+                    width = canvas.width = parent.clientWidth;
+                    height = canvas.height = parent.clientHeight;
+                    createParticles();
+                }
+
+                function createParticles() {
+                    particles = [];
+                    const count = Math.min(55, Math.floor((width * height) / 22000));
+                    for (let i = 0; i < count; i++) {
+                        particles.push({
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            vx: (Math.random() - 0.5) * 0.45,
+                            vy: (Math.random() - 0.5) * 0.45,
+                            radius: Math.random() * 2.2 + 1,
+                            color: Math.random() > 0.4 ? 'rgba(197, 168, 128, ' : 'rgba(110, 231, 183, ',
+                            alpha: Math.random() * 0.5 + 0.25,
+                            pulse: Math.random() * Math.PI
+                        });
+                    }
+                }
+
+                function draw() {
+                    ctx.clearRect(0, 0, width, height);
+
+                    // رسم الروابط بين الجزيئات المتقاربة
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist < 115) {
+                                const lineAlpha = (1 - dist / 115) * 0.22;
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = `rgba(197, 168, 128, ${lineAlpha})`;
+                                ctx.lineWidth = 0.85;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // تحديث ورسم الجزيئات
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        if (p.x < 0) p.x = width;
+                        if (p.x > width) p.x = 0;
+                        if (p.y < 0) p.y = height;
+                        if (p.y > height) p.y = 0;
+
+                        // تفاعل لطيف مع الماوس
+                        if (mouse.x !== null && mouse.y !== null) {
+                            const mdx = mouse.x - p.x;
+                            const mdy = mouse.y - p.y;
+                            const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                            if (mdist < mouse.radius) {
+                                const force = (1 - mdist / mouse.radius) * 1.5;
+                                p.x -= (mdx / mdist) * force;
+                                p.y -= (mdy / mdist) * force;
+                            }
+                        }
+
+                        p.pulse += 0.03;
+                        const currentAlpha = p.alpha + Math.sin(p.pulse) * 0.15;
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color + Math.max(0.1, currentAlpha) + ')';
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = 'rgba(197, 168, 128, 0.4)';
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
+
+                    animId = requestAnimationFrame(draw);
+                }
+
+                window.addEventListener('resize', resize, { passive: true });
+                window.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                        mouse.x = e.clientX - rect.left;
+                        mouse.y = e.clientY - rect.top;
+                    } else {
+                        mouse.x = null;
+                        mouse.y = null;
+                    }
+                }, { passive: true });
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        if (animId) cancelAnimationFrame(animId);
+                    } else {
+                        animId = requestAnimationFrame(draw);
+                    }
+                });
+
+                resize();
+                animId = requestAnimationFrame(draw);
+            })();
+
+            // ================================================================
+            // نظام الصوت المحيطي والتأثيرات الصوتية الذكية (Hero Ambient Sound Engine)
+            // ================================================================
+            (function initHeroAmbientSound() {
+                let audioCtx = null;
+                let masterGain = null;
+                let isPlaying = false;
+                let nodes = [];
+                let filterNode = null;
+                let lfoNode = null;
+
+                function setupAudio() {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContextClass) return null;
+                    if (!audioCtx) {
+                        audioCtx = new AudioContextClass();
+                    }
+                    if (audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                    return audioCtx;
+                }
+
+                function startAmbient() {
+                    const ctx = setupAudio();
+                    if (!ctx) return;
+
+                    masterGain = ctx.createGain();
+                    masterGain.gain.setValueAtTime(0.001, ctx.currentTime);
+                    masterGain.gain.exponentialRampToValueAtTime(0.14, ctx.currentTime + 2.5);
+
+                    // مرشح تردد منخفض لإعطاء طابع فضائي ناعم ودافئ
+                    filterNode = ctx.createBiquadFilter();
+                    filterNode.type = 'lowpass';
+                    filterNode.frequency.setValueAtTime(420, ctx.currentTime);
+                    filterNode.Q.setValueAtTime(2, ctx.currentTime);
+
+                    // مذبذب بطيء لتعديل تردد المرشح (Breathing LFO)
+                    lfoNode = ctx.createOscillator();
+                    lfoNode.frequency.setValueAtTime(0.12, ctx.currentTime);
+                    const lfoGain = ctx.createGain();
+                    lfoGain.gain.setValueAtTime(160, ctx.currentTime);
+                    lfoNode.connect(lfoGain);
+                    lfoGain.connect(filterNode.frequency);
+                    lfoNode.start();
+
+                    // نغمات متوافقة في السلم الخماسي الدافئ (A-Major 9th chord: A2, E3, A3, C#4, G#4)
+                    const freqs = [110.00, 164.81, 220.00, 277.18, 415.30];
+                    nodes = [];
+
+                    freqs.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+                        const detuneOsc = ctx.createOscillator();
+                        detuneOsc.frequency.setValueAtTime(0.2 + idx * 0.05, ctx.currentTime);
+                        const detuneGain = ctx.createGain();
+                        detuneGain.gain.setValueAtTime(1.8, ctx.currentTime);
+                        detuneOsc.connect(detuneGain);
+                        detuneGain.connect(osc.frequency);
+                        detuneOsc.start();
+
+                        const voiceGain = ctx.createGain();
+                        voiceGain.gain.setValueAtTime(idx === 0 ? 0.28 : 0.16, ctx.currentTime);
+
+                        osc.connect(voiceGain);
+                        voiceGain.connect(filterNode);
+                        osc.start();
+
+                        nodes.push(osc, detuneOsc);
+                    });
+
+                    filterNode.connect(masterGain);
+                    masterGain.connect(ctx.destination);
+                    isPlaying = true;
+                    updateUI(true);
+                }
+
+                function stopAmbient() {
+                    if (!audioCtx || !masterGain || !isPlaying) return;
+                    const ctx = audioCtx;
+                    masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+                    masterGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+
+                    setTimeout(() => {
+                        nodes.forEach(n => {
+                            try { n.stop(); n.disconnect(); } catch (e) {}
+                        });
+                        nodes = [];
+                        if (lfoNode) {
+                            try { lfoNode.stop(); lfoNode.disconnect(); } catch (e) {}
+                        }
+                        isPlaying = false;
+                        updateUI(false);
+                    }, 1250);
+                }
+
+                function updateUI(active) {
+                    const btn = document.getElementById('heroSoundToggle');
+                    const label = document.getElementById('heroSoundLabel');
+                    const icon = document.getElementById('heroSoundIcon');
+                    if (!btn || !label || !icon) return;
+
+                    const lang = document.documentElement.getAttribute('data-page-language') || 'ar';
+
+                    if (active) {
+                        btn.classList.add('is-active');
+                        icon.textContent = '🔊';
+                        if (lang === 'en') label.textContent = 'Ambient Audio: Active';
+                        else if (lang === 'nl') label.textContent = 'Ambient Geluid: Actief';
+                        else label.textContent = 'الصوت المحيطي: نَشِط';
+                    } else {
+                        btn.classList.remove('is-active');
+                        icon.textContent = '🔈';
+                        if (lang === 'en') label.textContent = 'Ambient Audio Experience (Click to Play)';
+                        else if (lang === 'nl') label.textContent = 'Ambient Geluidservaring (Klik om te starten)';
+                        else label.textContent = 'تجربة الصوت المحيطي (اضغط للتشغيل)';
+                    }
+                }
+
+                window.toggleHeroAmbientSound = function() {
+                    if (isPlaying) {
+                        stopAmbient();
+                    } else {
+                        startAmbient();
+                    }
+                };
+
+                window.playHeroMicroTone = function(freq = 660, type = 'sine', duration = 0.25) {
+                    if (!isPlaying) return;
+                    const ctx = setupAudio();
+                    if (!ctx) return;
+                    try {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = type;
+                        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start();
+                        osc.stop(ctx.currentTime + duration);
+                    } catch (e) {}
+                };
+
+                const emblemCard = document.getElementById('heroEmblemCard');
+                if (emblemCard) {
+                    emblemCard.addEventListener('mouseenter', () => {
+                        window.playHeroMicroTone(880, 'sine', 0.35);
+                    });
+                }
             })();
         })();
     </script>
