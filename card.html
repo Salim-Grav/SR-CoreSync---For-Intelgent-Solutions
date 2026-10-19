@@ -640,37 +640,43 @@
             overflow-y: auto;
         }
 
-        .nfc-modal-close {
-            position: absolute;
-            top: 14px;
-            left: 14px;
+        .nfc-modal-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .nfc-modal-title {
+            color: var(--primary-gold-bright);
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.35;
+        }
+
+        .nfc-modal-close-btn {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid var(--border-gold);
             color: #fff;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
 
-        .nfc-modal-close:hover {
+        .nfc-modal-close-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-        }
-
-        .nfc-modal-title {
             color: var(--primary-gold-bright);
-            font-size: 1.15rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-left: 40px;
         }
 
         .nfc-modal-sub {
