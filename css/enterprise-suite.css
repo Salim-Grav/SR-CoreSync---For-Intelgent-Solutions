@@ -6591,6 +6591,83 @@ html.smart-tv-hardware .showcase-img {
     will-change: auto !important;
 }
 
+/* ==========================================================================
+   Supreme Corporate Emblem Hero (Zero-Lag Smart TV & High-End Identity)
+   ========================================================================== */
+.cinematic-emblem-picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+}
+
+.cinematic-emblem-img {
+    position: absolute;
+    top: 50%;
+    height: 115%;
+    width: auto;
+    max-width: none;
+    display: block;
+    filter: brightness(0.95) contrast(1.08);
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+html[lang="ar"] .cinematic-emblem-img {
+    left: -6%;
+    right: auto;
+    transform: translateY(-50%) !important;
+}
+
+html[lang="en"] .cinematic-emblem-img,
+html[lang="nl"] .cinematic-emblem-img {
+    right: -6%;
+    left: auto;
+    transform: translateY(-50%) !important;
+}
+
+@media (max-width: 991px) {
+    html[lang="ar"] .cinematic-emblem-img,
+    html[lang="en"] .cinematic-emblem-img,
+    html[lang="nl"] .cinematic-emblem-img {
+        left: 50% !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        height: auto !important;
+        width: 120% !important;
+        max-width: 800px !important;
+        opacity: 0.22 !important;
+    }
+}
+
+.cinematic-emblem-ambient {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+html[lang="ar"] .cinematic-emblem-ambient {
+    background: linear-gradient(270deg, #010907 0%, rgba(1, 9, 7, 0.98) 42%, rgba(1, 9, 7, 0.7) 62%, transparent 85%),
+                radial-gradient(circle at 18% 50%, rgba(245, 184, 70, 0.1) 0%, transparent 55%);
+}
+
+html[lang="en"] .cinematic-emblem-ambient,
+html[lang="nl"] .cinematic-emblem-ambient {
+    background: linear-gradient(90deg, #010907 0%, rgba(1, 9, 7, 0.98) 42%, rgba(1, 9, 7, 0.7) 62%, transparent 85%),
+                radial-gradient(circle at 82% 50%, rgba(245, 184, 70, 0.1) 0%, transparent 55%);
+}
+
+html.smart-tv-hardware .cinematic-emblem-img {
+    filter: brightness(0.9) !important;
+    transform: translateZ(0) !important;
+}
+
+
+
+
 
 
 
