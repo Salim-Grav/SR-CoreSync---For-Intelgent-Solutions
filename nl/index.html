@@ -4620,6 +4620,378 @@
             transform: translateY(-2px);
         }
 
+        /* ================================================================
+           Interactive 3D Luxury Hero Banner & Emblem Showcase (Nederlands)
+           ================================================================ */
+        .hero-cinematic {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #010907;
+            overflow: hidden;
+            contain: layout style;
+        }
+
+        .cinematic-viewport {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .cinematic-scene {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cinematic-emblem-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.28;
+            filter: blur(2px) saturate(130%) brightness(0.9);
+            transform: scale(1.05);
+            transition: transform 10s ease-out;
+            will-change: transform;
+        }
+
+        .cinematic-emblem-ambient {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 25% 45%, rgba(197, 168, 128, 0.18) 0%, rgba(1, 9, 7, 0.65) 50%, #010907 90%),
+                        linear-gradient(180deg, rgba(1, 9, 7, 0.4) 0%, rgba(1, 9, 7, 0.8) 70%, #010907 100%);
+            mix-blend-mode: multiply;
+        }
+
+        .section-hero-v1.hero-reference {
+            position: relative;
+            z-index: 2;
+            padding: clamp(120px, 14vh, 180px) 0 clamp(60px, 8vh, 100px);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .section-hero-v1 .content-wrap {
+            width: 100%;
+        }
+
+        .container-hero-luxury {
+            max-width: 1540px !important;
+            width: 100% !important;
+            padding-left: clamp(16px, 3.5vw, 48px) !important;
+            padding-right: clamp(16px, 3.5vw, 48px) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .hero-reference__grid {
+            display: grid !important;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr) !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: clamp(2rem, 4vw, 5rem) !important;
+            width: 100% !important;
+        }
+
+        .hero-reference__copy {
+            position: relative !important;
+            z-index: 3 !important;
+            text-align: left !important;
+            direction: ltr !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+
+        .hero-reference__title {
+            font-size: clamp(1.85rem, 3.2vw, 3.2rem) !important;
+            line-height: 1.25 !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* 3D Interactive Emblem Stage Container */
+        .hero-reference__emblem-col {
+            position: relative !important;
+            z-index: 3 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+        }
+
+        .hero-emblem-interactive-stage {
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 520px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .hero-emblem-card-3d {
+            position: relative;
+            width: clamp(280px, 34vw, 460px);
+            height: clamp(280px, 34vw, 460px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+            background: radial-gradient(circle at 50% 50%, rgba(14, 26, 21, 0.85) 0%, rgba(2, 8, 6, 0.96) 80%);
+            border: 2px solid rgba(197, 168, 128, 0.45);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 50px rgba(197, 168, 128, 0.3), inset 0 0 35px rgba(197, 168, 128, 0.2);
+            animation: heroEmblemFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes heroEmblemFloat {
+            0%, 100% {
+                transform: translateY(0px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+            }
+            50% {
+                transform: translateY(-12px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+            }
+        }
+
+        .hero-emblem-card-3d:hover {
+            border-color: rgba(243, 223, 186, 0.85);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95), 0 0 70px rgba(197, 168, 128, 0.55), inset 0 0 45px rgba(197, 168, 128, 0.35);
+        }
+
+        .hero-emblem-aura {
+            position: absolute;
+            inset: -25%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 168, 128, 0.32) 0%, rgba(212, 175, 55, 0.14) 40%, transparent 70%);
+            filter: blur(24px);
+            pointer-events: none;
+            z-index: 1;
+            animation: heroAuraBreath 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroAuraBreath {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1.08); }
+        }
+
+        .hero-emblem-orbit {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-emblem-orbit--outer {
+            inset: -14px;
+            border: 1px dashed rgba(197, 168, 128, 0.35);
+            animation: heroOrbitSpin 28s linear infinite;
+        }
+
+        .hero-emblem-orbit--inner {
+            inset: -32px;
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            animation: heroOrbitSpinRev 42s linear infinite;
+        }
+
+        @keyframes heroOrbitSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes heroOrbitSpinRev {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .orbit-satellite {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 12px #fff, 0 0 24px var(--primary-gold);
+            transform: translateX(-50%);
+        }
+
+        .hero-emblem-frame {
+            position: relative;
+            z-index: 3;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transform: translateZ(35px);
+        }
+
+        .hero-emblem-render-picture {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-emblem-render-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 30px rgba(197, 168, 128, 0.5));
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero-emblem-card-3d:hover .hero-emblem-render-img {
+            filter: drop-shadow(0 0 45px rgba(243, 223, 186, 0.8));
+            transform: scale(1.03);
+        }
+
+        .hero-emblem-glare {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.38) 0%, rgba(197, 168, 128, 0.16) 35%, transparent 68%);
+            opacity: 0.75;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 4;
+        }
+
+        .hero-emblem-card-3d:hover .hero-emblem-glare {
+            opacity: 1;
+        }
+
+        .hero-emblem-badge {
+            position: absolute;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 15px;
+            border-radius: 999px;
+            background: rgba(3, 12, 9, 0.88);
+            border: 1px solid rgba(197, 168, 128, 0.45);
+            color: #f3dfba;
+            font-size: 0.76rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), 0 0 15px rgba(197, 168, 128, 0.2);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            white-space: nowrap;
+            pointer-events: none;
+            transform: translateZ(55px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .hero-emblem-badge--top {
+            top: -16px;
+            right: 12px;
+            animation: heroBadgeFloat1 5s ease-in-out infinite alternate;
+        }
+
+        .hero-emblem-badge--left {
+            bottom: 24px;
+            left: -20px;
+            animation: heroBadgeFloat2 6s ease-in-out infinite alternate;
+        }
+
+        .hero-emblem-badge--bottom {
+            bottom: -18px;
+            right: 25%;
+            background: rgba(197, 168, 128, 0.18);
+            border-color: rgba(243, 223, 186, 0.65);
+            color: #ffffff;
+            animation: heroBadgeFloat3 5.5s ease-in-out infinite alternate;
+        }
+
+        .badge-dot-gold {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #f3dfba;
+            box-shadow: 0 0 8px #f3dfba;
+            flex-shrink: 0;
+        }
+
+        @keyframes heroBadgeFloat1 {
+            0% { transform: translateZ(55px) translateY(0); }
+            100% { transform: translateZ(55px) translateY(-8px); }
+        }
+        @keyframes heroBadgeFloat2 {
+            0% { transform: translateZ(55px) translateY(0); }
+            100% { transform: translateZ(55px) translateY(8px); }
+        }
+        @keyframes heroBadgeFloat3 {
+            0% { transform: translateZ(55px) translateY(0); }
+            100% { transform: translateZ(55px) translateY(-6px); }
+        }
+
+        /* Mobile & Tablet Responsiveness */
+        @media (max-width: 991px) {
+            .hero-reference__grid {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 2.2rem !important;
+            }
+            .hero-reference__copy {
+                text-align: center !important;
+                order: 2 !important;
+            }
+            .hero-reference__emblem-col {
+                order: 1 !important;
+                width: 100% !important;
+            }
+            .hero-emblem-card-3d {
+                width: 280px !important;
+                height: 280px !important;
+            }
+            .hero-emblem-badge--left {
+                left: 0 !important;
+            }
+            .hero-emblem-badge--top {
+                right: 0 !important;
+            }
+            .hero-reference__actions {
+                justify-content: center !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-emblem-card-3d {
+                width: 230px !important;
+                height: 230px !important;
+            }
+            .hero-emblem-badge {
+                font-size: 0.68rem !important;
+                padding: 4px 10px !important;
+            }
+            .hero-emblem-badge--left {
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
 
