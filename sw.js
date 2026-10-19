@@ -1,12 +1,17 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v6-webp
-const CACHE_NAME = 'coresync-prerender-v6-webp';
+// Version: coresync-prerender-v7-nfc-offline
+const CACHE_NAME = 'coresync-prerender-v7-nfc-offline';
 
 // 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
 const CRITICAL_ASSETS = [
   './',
   './index.html',
+  './card.html',
   './manifest.json',
+  './assets/salim-aziza.vcf',
+  './assets/raed-kaaka.vcf',
+  './assets/founder-salim.png',
+  './assets/founder-raed.png',
   './assets/sr-core-emblem.svg?v=sovereign2026',
   './assets/logo-neon-icon.svg',
   './assets/sr-emblem-gold-luxury.webp',
@@ -15,8 +20,6 @@ const CRITICAL_ASSETS = [
   './assets/founder-banner-salim.jpg',
   './assets/founder-banner-raed.webp',
   './assets/founder-banner-raed.jpg',
-  './assets/founder-salim.png?v=color_v2',
-  './assets/founder-raed.png?v=color_v2',
   './css/dananajmah-bundle.min.css',
   './css/enterprise-suite.min.css',
   './css/enterprise-suite.min.js'
