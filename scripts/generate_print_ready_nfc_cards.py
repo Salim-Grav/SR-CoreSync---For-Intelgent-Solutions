@@ -188,9 +188,9 @@ if __name__ == "__main__":
     create_front_card(
         "salim",
         "Eng. Mohammad Salim Aziza",
-        "م. محمد سليم عزيزة",
+        "",
         "Chief Technology Officer & Cloud Architect",
-        "المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي",
+        "EXECUTIVE LEADERSHIP • SOVEREIGN AI & CLOUD SYSTEMS",
         "+31 6 18111116",
         "info@sr-coresync.com",
         "founder-salim.png",
@@ -203,9 +203,9 @@ if __name__ == "__main__":
     create_front_card(
         "raed",
         "Mr. Mohammad Raed Kaaka",
-        "أ. محمد رائد كعكة",
+        "",
         "Chief Financial Officer & Senior ERP Consultant",
-        "المسؤول المالي ومطور نظم ERP والاستشارات الأوروبية",
+        "EXECUTIVE LEADERSHIP • FINANCIAL ERP & EU COMPLIANCE",
         "+31 6 18111116",
         "info@sr-coresync.com",
         "founder-raed.png",
