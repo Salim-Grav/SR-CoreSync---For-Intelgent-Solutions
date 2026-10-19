@@ -7,7 +7,7 @@ import os
 import qrcode  # type: ignore
 from PIL import Image, ImageDraw, ImageFont  # type: ignore
 
-PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ASSETS_DIR = os.path.join(PROJECT_DIR, "assets")
 
 def generate_branded_qr(data_url, out_filename, title, subtitle):

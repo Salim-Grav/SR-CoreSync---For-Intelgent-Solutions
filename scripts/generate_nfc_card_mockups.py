@@ -6,7 +6,7 @@ for Eng. Mohammad Salim Aziza and Mr. Mohammad Raed Kaaka.
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 ASSETS_DIR = os.path.join(PROJECT_DIR, "assets")
 
 def create_card_mockup(name, title, qr_file, out_file, founder_id="salim"):
