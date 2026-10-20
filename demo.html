@@ -27,14 +27,11 @@
 
     <!-- شريط التنقل العلوي -->
     <header class="portal-header">
-        <a href="index.html" class="portal-brand" style="direction: ltr !important; unicode-bidi: isolate !important;" title="العودة للصفحة الرئيسية - S&R CoreSync Solutions">
-            <img src="./assets/sr-core-emblem-official.png?v=sovereign2026_fixed" alt="S&R CoreSync Sovereign 3D Emblem" class="portal-brand-emblem" width="54" height="54" style="border-radius:50% !important; object-fit:contain; transform:none !important;" />
-            <div class="portal-brand-text" style="direction: ltr !important; unicode-bidi: isolate !important;">
-                <div class="portal-brand-title" style="direction: ltr !important; unicode-bidi: isolate !important;">
-                    <span class="brand-sr-text">S&amp;R</span>
-                    <span class="brand-sub-text">CoreSync</span>
-                </div>
-                <span class="portal-brand-tag">CLOUD ERP &amp; FINANCIAL INTELLIGENCE</span>
+        <a href="index.html" class="portal-brand brand-logo-site" style="direction: ltr !important; unicode-bidi: isolate !important;" title="العودة للصفحة الرئيسية - S&R CoreSync Solutions">
+            <img src="./assets/sr-core-emblem-official.png?v=sovereign2026_fixed" alt="S&R CoreSync Official Sovereign Emblem" class="portal-brand-emblem brand-emblem-img" width="64" height="64" style="border-radius:50% !important; object-fit:contain; transform:none !important;" />
+            <div class="brand-logo-site-logo" style="direction: ltr !important; unicode-bidi: isolate !important;">
+                <span class="brand-sr-text">S&amp;R</span>
+                <span class="brand-sub-text">CoreSync</span>
             </div>
         </a>
 
@@ -1684,9 +1681,9 @@
             const name = customName || document.getElementById('clientBrandNameInput')?.value || 'S&R CORESYNC';
             
             // 1. Update brand text in header
-            const brandH1 = document.querySelector('.portal-brand-text h1');
-            if (brandH1) {
-                brandH1.innerHTML = `<span>${name}</span> ERP`;
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">${name}</span> <span class="brand-sub-text">ERP</span>`;
             }
 
             // 2. Update user card
@@ -1732,7 +1729,10 @@
             if (input) input.value = 'مجموعة الرياض للخدمات اللوجستية';
 
             applyThemeColor('gold', null, false);
-            document.querySelector('.portal-brand-text h1').innerHTML = `<span>S&R</span> CORESYNC`;
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">S&amp;R</span> <span class="brand-sub-text">CoreSync</span>`;
+            }
             document.querySelector('.sidebar-user-card .user-name').innerText = 'جلسة معاينة تفاعلية';
             document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
             document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
