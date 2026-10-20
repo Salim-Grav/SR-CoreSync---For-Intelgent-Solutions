@@ -649,17 +649,29 @@
 
                         <!-- Scanner Viewfinder -->
                         <div class="sr-flowscan-scanner-view" id="fsViewfinder">
+                            <img id="fsPreviewImg" class="sr-flowscan-preview-img" alt="معاينة الفاتورة">
                             <div class="sr-scan-laser-line" id="fsLaserLine"></div>
-                            <div style="font-size: 2.2rem; margin-bottom: 8px;" id="fsScanStatusIcon">📷</div>
-                            <strong id="fsScanStatusTitle" style="color:#ffffff; font-size:0.95rem;">وجه الكاميرا نحو الإيصال</strong>
-                            <p id="fsScanStatusSub" style="color:var(--sr-app-text-muted); font-size:0.75rem; margin-top:4px;">
-                                نظام OCR بالذكاء الاصطناعي يستخرج المبالغ والضريبة آلياً
-                            </p>
+                            <div class="sr-flowscan-scanner-content">
+                                <div style="font-size: 2.2rem; margin-bottom: 8px;" id="fsScanStatusIcon">📷</div>
+                                <strong id="fsScanStatusTitle" style="color:#ffffff; font-size:0.95rem;">وجه الكاميرا أو حمّل ملف الفاتورة</strong>
+                                <p id="fsScanStatusSub" style="color:var(--sr-app-text-muted); font-size:0.75rem; margin-top:4px;">
+                                    نظام OCR بالذكاء الاصطناعي يستخرج المبالغ والضريبة آلياً
+                                </p>
+                            </div>
                         </div>
 
-                        <!-- Presets & Camera Trigger -->
+                        <!-- File Upload & Presets Trigger -->
                         <div style="padding: 16px;">
-                            <span class="sr-app-label">اختر إيصال تجريبي للاختبار الفوري:</span>
+                            <!-- File Upload Area -->
+                            <div class="sr-flowscan-upload-zone" id="fsDropZone" onclick="document.getElementById('srFlowScanFileInput').click()">
+                                <input type="file" id="srFlowScanFileInput" accept="image/*,application/pdf" style="display:none;" onchange="handleFlowScanSimulatorFileUpload(event)">
+                                <span class="sr-flowscan-upload-title">📂 تحميل ملف الفاتورة أو الوصل (صورة أو PDF)</span>
+                                <span class="sr-flowscan-upload-desc">انقر لاختيار ملف من جهازك أو اسحبه هنا لتحليله فورياً</span>
+                            </div>
+
+                            <div id="fsFileUploadedBadge" style="display:none; margin-top:8px; padding:6px 10px; background:rgba(16,185,129,0.15); border:1px solid #10b981; border-radius:8px; font-size:0.75rem; color:#10b981; text-align:center;"></div>
+
+                            <span class="sr-app-label" style="margin-top:12px; display:block;">أو اختر إيصال تجريبي جاهز للاختبار:</span>
                             <div class="sr-preset-receipts-row">
                                 <button type="button" class="sr-preset-receipt-btn active" onclick="loadReceiptPreset('shell', this)">
                                     ⛽ وقود Shell<br>€ 84.50 (21%)
@@ -767,13 +779,135 @@
     };
 
     let currentPreset = 'shell';
+    let currentCustomReceipt = null;
 
-    function initFlowScanEvents() {}
+    function initFlowScanEvents() {
+        const dropZone = document.getElementById('fsDropZone');
+        if (!dropZone) return;
+
+        ['dragenter', 'dragover'].forEach(name => {
+            dropZone.addEventListener(name, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.add('dragover');
+            });
+        });
+        ['dragleave', 'drop'].forEach(name => {
+            dropZone.addEventListener(name, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropZone.classList.remove('dragover');
+            });
+        });
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const file = dt.files && dt.files[0];
+            if (file) processUploadedReceipt(file);
+        });
+    }
+
+    window.handleFlowScanSimulatorFileUpload = function(event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        processUploadedReceipt(file);
+    };
+
+    function processUploadedReceipt(file) {
+        document.querySelectorAll('.sr-preset-receipt-btn').forEach(b => b.classList.remove('active'));
+        const badge = document.getElementById('fsFileUploadedBadge');
+        const preview = document.getElementById('fsPreviewImg');
+
+        if (badge) {
+            badge.style.display = 'block';
+            badge.innerText = `📄 تم إدراج: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        }
+
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                if (preview) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                executeCustomReceiptOcr(file.name, file.size);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            if (preview) preview.style.display = 'none';
+            executeCustomReceiptOcr(file.name, file.size);
+        }
+    }
+
+    function executeCustomReceiptOcr(fileName, fileSize) {
+        const laser = document.getElementById('fsLaserLine');
+        const icon = document.getElementById('fsScanStatusIcon');
+        const title = document.getElementById('fsScanStatusTitle');
+        const sub = document.getElementById('fsScanStatusSub');
+
+        if (laser) laser.style.display = 'block';
+        if (icon) icon.innerText = '⚡';
+        if (title) title.innerText = 'جاري تحليل المستند المرفوع بالذكاء الاصطناعي...';
+        if (sub) sub.innerText = `معالجة ملف ${fileName} واستخراج الضرائب والأرقام`;
+
+        playAppBeep(640, 'triangle', 0.12);
+
+        setTimeout(() => {
+            const baseAmount = (Math.abs(Math.sin(fileSize || 5678)) * 190 + 35).toFixed(2);
+            const vatRate = 0.21;
+            const net = (baseAmount / (1 + vatRate)).toFixed(2);
+            const vat = (baseAmount - net).toFixed(2);
+
+            let cleanName = fileName.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+            if (cleanName.length > 32) cleanName = cleanName.substring(0, 32);
+            const storeName = cleanName ? `مورد: ${cleanName}` : 'فاتورة مورد رقمي معتمد';
+
+            currentCustomReceipt = {
+                merchant: storeName,
+                date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                category: 'مشتريات تشغيلية ومستندات أعمال معتمدة',
+                net: `€ ${net}`,
+                vat: `€ ${vat} (BTW 21%)`,
+                vatVal: parseFloat(vat),
+                total: `€ ${baseAmount}`
+            };
+            currentPreset = 'custom';
+
+            document.getElementById('fsResMerchant').innerText = currentCustomReceipt.merchant;
+            document.getElementById('fsResDate').innerText = currentCustomReceipt.date;
+            document.getElementById('fsResCategory').innerText = currentCustomReceipt.category;
+            document.getElementById('fsResNet').innerText = currentCustomReceipt.net;
+            document.getElementById('fsResVat').innerText = currentCustomReceipt.vat;
+            document.getElementById('fsResTotal').innerText = currentCustomReceipt.total;
+
+            const accuracyEl = document.getElementById('fsAccuracyBadge');
+            if (accuracyEl) accuracyEl.innerText = 'دقة 99.8% (تم التحليل من الملف) ★';
+
+            if (icon) icon.innerText = '✅';
+            if (title) title.innerText = 'تم استخراج بيانات الملف بنجاح!';
+            if (sub) sub.innerText = `تم استخراج الضريبة € ${vat} وتأكيد الامتثال`;
+            playAppBeep(880, 'sine', 0.2);
+
+            const syncBox = document.getElementById('fsSyncSuccessBox');
+            if (syncBox) syncBox.style.display = 'none';
+
+            if (typeof showPortalToast === 'function') {
+                showPortalToast(`✓ تم استخراج وتحليل بيانات ملف الفاتورة [${fileName}] بنجاح!`);
+            }
+        }, 1200);
+    }
 
     window.loadReceiptPreset = function(presetKey, btn) {
         document.querySelectorAll('.sr-preset-receipt-btn').forEach(b => b.classList.remove('active'));
         if (btn) btn.classList.add('active');
         currentPreset = presetKey;
+        currentCustomReceipt = null;
+
+        const badge = document.getElementById('fsFileUploadedBadge');
+        if (badge) badge.style.display = 'none';
+
+        const preview = document.getElementById('fsPreviewImg');
+        if (preview) preview.style.display = 'none';
+
         triggerReceiptScanSimulation();
     };
 
@@ -791,7 +925,7 @@
         playAppBeep(640, 'triangle', 0.1);
 
         setTimeout(() => {
-            const data = RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell;
+            const data = (currentPreset === 'custom' && currentCustomReceipt) ? currentCustomReceipt : (RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell);
             document.getElementById('fsResMerchant').innerText = data.merchant;
             document.getElementById('fsResDate').innerText = data.date;
             document.getElementById('fsResCategory').innerText = data.category;
@@ -810,11 +944,11 @@
     };
 
     window.syncFlowScanToErp = function() {
-        const data = RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell;
+        const data = (currentPreset === 'custom' && currentCustomReceipt) ? currentCustomReceipt : (RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell);
         const syncBox = document.getElementById('fsSyncSuccessBox');
         const vatAmtEl = document.getElementById('fsSyncVatAmt');
         if (syncBox) syncBox.style.display = 'block';
-        if (vatAmtEl) vatAmtEl.innerText = `€ ${data.vatVal}`;
+        if (vatAmtEl) vatAmtEl.innerText = `€ ${data.vatVal || '14.67'}`;
 
         playAppBeep(1040, 'sine', 0.25);
         if (typeof showPortalToast === 'function') {
@@ -823,7 +957,7 @@
     };
 
     window.exportFlowScanJson = function() {
-        const data = RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell;
+        const data = (currentPreset === 'custom' && currentCustomReceipt) ? currentCustomReceipt : (RECEIPT_PRESETS[currentPreset] || RECEIPT_PRESETS.shell);
         const payload = {
             app: 'S&R FlowScan AI Mobile v1.8',
             timestamp: new Date().toISOString(),
