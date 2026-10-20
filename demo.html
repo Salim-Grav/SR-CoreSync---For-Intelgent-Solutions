@@ -1831,7 +1831,11 @@
 
             <label class="text-caption text-white-64 d-block mb-1">اختر البنك الهولندي (Dutch Banking Partner):</label>
             <div class="bank-select-grid">
-                <div class="bank-option selected" onclick="selectBank(this)">
+                <div class="bank-option wise-active selected" onclick="selectBank(this)">
+                    <div class="bank-badge font-num bank-color-wise">WISE</div>
+                    <div class="bank-name">Wise Europe SA (المعتمد)</div>
+                </div>
+                <div class="bank-option" onclick="selectBank(this)">
                     <div class="bank-badge font-num bank-color-ing">ING</div>
                     <div class="bank-name">ING Bank</div>
                 </div>
@@ -1842,10 +1846,6 @@
                 <div class="bank-option" onclick="selectBank(this)">
                     <div class="bank-badge font-num bank-color-rabo">RABO</div>
                     <div class="bank-name">Rabobank</div>
-                </div>
-                <div class="bank-option" onclick="selectBank(this)">
-                    <div class="bank-badge font-num bank-color-bunq">BNQ</div>
-                    <div class="bank-name">Bunq Digital</div>
                 </div>
             </div>
 
@@ -1878,7 +1878,8 @@
                     <div>
                         <h4 class="fw-bold text-white mb-1" id="invIssuerName">S&R CoreSync Solutions B.V.</h4>
                         <div class="text-caption text-white-64" id="invIssuerSub">KVK: 84920194 | VAT ID: NL849201942B01</div>
-                        <div class="text-caption text-white-64" id="invIssuerAddress">Keizersgracht 482, 1016 EG Amsterdam, Netherlands</div>
+                        <div class="text-caption text-white-64" id="invIssuerAddress">Meester Beerninkplantsoen 208, 2286MP Rijswijk, Netherlands</div>
+                        <div class="text-caption text-white-64 font-num mt-1" id="invIssuerBank">Bank: Wise Europe SA · Account: MOHAMMAD SALIM AZIZA · Ref: 56067674</div>
                     </div>
                     <div class="inv-qr-block" title="EPC-QR / ZATCA Cryptographic Stamp">
                         <svg viewBox="0 0 100 100" fill="#010907">
@@ -3724,6 +3725,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div id="gwInput-ideal" class="payment-input-group">
                 <label for="idealBankSelect" class="text-caption text-white-64 mb-1 d-block">اختر البنك الهولندي (Kies uw bank):</label>
                 <select id="idealBankSelect" class="form-select-dark">
+                    <option value="wise" selected>Wise Europe SA (Account: MOHAMMAD SALIM AZIZA)</option>
                     <option value="ing">ING Bank</option>
                     <option value="rabobank">Rabobank</option>
                     <option value="abnamro">ABN AMRO</option>
@@ -3733,22 +3735,22 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <option value="asn">ASN Bank</option>
                 </select>
                 <div class="text-caption text-white-64 mt-2 ds-u40">
-                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect.
+                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect & Wise Direct.
                 </div>
             </div>
 
             <!-- 2. Stripe Card fields -->
             <div id="gwInput-card" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية:</label>
-                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة المعتمدة (Wise Visa Debit):</label>
+                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4569 •••• •••• 3884" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
                 <div class="row g-2">
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardExpiry">تاريخ الانتهاء:</label>
-                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="12/28" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
+                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="09/30" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
                     </div>
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardCvc">رمز الأمان CVC:</label>
-                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="888" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
+                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="672" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
                     </div>
                 </div>
             </div>
@@ -3758,7 +3760,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان للشركة (Business IBAN):</label>
                 <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="رقم الآيبان للشركة (IBAN)" placeholder="IBAN" aria-label="رقم الآيبان للشركة">
                 <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم الحساب التجاري (Bedrijfsnaam):</label>
-                <input type="text" id="chkSepaName" class="ai-chat-input" value="S&R B2B Enterprise Client" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="MOHAMMAD SALIM AZIZA (S&R CoreSync)" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
             </div>
 
             <!-- حالة النجاح بعد الدفع (Success State) -->
