@@ -1183,18 +1183,18 @@
                 </div>
 
                 <!-- تفاصيل الحساب البنكي الرسمي المعتمد للسداد -->
-                <div class="bank-details-box" style="background: rgba(15, 23, 42, 0.03); border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 7px 12px; margin-top: 6px; margin-bottom: 6px; font-size: 8pt;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
-                        <span style="font-weight: 700; color: #0f172a;">🏦 تفاصيل الحساب البنكي الرسمي المعتمد للسداد (Officiële Bankgegevens & Betalingen):</span>
-                        <span style="background: #9fe870; color: #163300; font-weight: 800; padding: 1px 7px; border-radius: 4px; font-size: 7pt;">Wise Europe SA ✓</span>
+                <div class="bank-details-box">
+                    <div class="bank-details-header">
+                        <span class="bank-details-title">🏦 تفاصيل الحساب البنكي الرسمي المعتمد للسداد (Officiële Bankgegevens & Betalingen):</span>
+                        <span class="bank-details-badge">Wise Europe SA ✓</span>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
+                    <div class="bank-details-grid">
                         <div><strong>المصرف:</strong> Wise Europe SA</div>
                         <div><strong>صاحب الحساب:</strong> Mohammad Salim Aziza</div>
                         <div><strong>الآيبان (IBAN):</strong> BE45 9056 5913 2989</div>
                         <div><strong>السويفت (BIC):</strong> TRWIBEB1XXX</div>
                     </div>
-                    <div style="margin-top: 3px; color: #475569; font-size: 7pt;">
+                    <div class="bank-details-footer">
                         <strong>العنوان المسجل:</strong> Meester Beerninkplantsoen 208, 2286MP Rijswijk, The Netherlands · قنوات الدفع: iDEAL, SEPA Instant Bank Transfer, وبطاقات Wise Visa Business.
                     </div>
                 </div>
@@ -1255,10 +1255,10 @@
             <!-- تذييل الصفحة 2 مع رمز التحقق المشفر -->
             <footer class="page-footer">
                 <div>
-                    <a href="verify.html?doc=OF-2026-1021" target="_blank" style="text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 6px;">
-                        <span style="display:inline-block; width:7px; height:7px; border-radius:50%; background:#10b981;"></span>
-                        Security Hash: <strong style="font-family: monospace; color: #0284c7; text-decoration: underline;">NL-CORP-2026-1021-AUTH-OK</strong>
-                        <span style="background: rgba(16, 185, 129, 0.15); color: #047857; padding: 1px 6px; border-radius: 4px; font-size: 6.5pt;">✓ فحص الاعتماد الرقمي</span>
+                    <a href="verify.html?doc=OF-2026-1021" target="_blank" class="footer-verify-link">
+                        <span class="footer-verify-dot"></span>
+                        Security Hash: <strong class="footer-verify-hash">NL-CORP-2026-1021-AUTH-OK</strong>
+                        <span class="footer-verify-badge">✓ فحص الاعتماد الرقمي</span>
                     </a>
                 </div>
                 <div><strong>Doc Ref: OF-2026-1021</strong> · Pagina 2 van 2 · Wettelijk Bindend Document</div>
@@ -1270,37 +1270,37 @@
     <!-- نافذة معاينة قالب البريد الإلكتروني الفاخر (Email Template Modal) -->
     <div class="modal-overlay" id="emailModal" onclick="if(event.target === this) closeEmailPreviewModal()">
         <div class="email-modal-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 10px;">
-                <h3 style="margin: 0; color: #fbf5b7; font-size: 15px;">✉️ قالب البريد الإلكتروني الفاخر (جاهز للإرسال أو النسخ لـ Gmail)</h3>
-                <button type="button" style="background: none; border: none; color: #fff; font-size: 18px; cursor: pointer;" onclick="closeEmailPreviewModal()">✕</button>
+            <div class="email-modal-header">
+                <h3 class="email-modal-title">✉️ قالب البريد الإلكتروني الفاخر (جاهز للإرسال أو النسخ لـ Gmail)</h3>
+                <button type="button" class="email-modal-close" onclick="closeEmailPreviewModal()">✕</button>
             </div>
             
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 15px;">
+            <p class="email-modal-desc">
                 يمكنك نسخ المحتوى أدناه بكامل تنسيقه ولصقه مباشرة في بريدك (Gmail أو Outlook)، أو فتحه مباشرة في تطبيق البريد الخاص بك.
             </p>
 
-            <div id="emailPreviewContent" style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 16px; font-size: 12px; line-height: 1.5; direction: rtl; max-height: 380px; overflow-y: auto;">
-                <div style="border-bottom: 2px solid #b38728; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div id="emailPreviewContent" class="email-preview-container">
+                <div class="email-header-bar">
                     <div>
-                        <strong style="font-size: 14px; color: #0b192c;">S&amp;R CoreSync Solutions &amp; Engineering</strong>
-                        <div style="font-size: 11px; color: #aa771c;">وثيقة العقد التجاري الرسمي (مرجع: OF-2026-1021)</div>
+                        <strong class="email-corp-title">S&amp;R CoreSync Solutions &amp; Engineering</strong>
+                        <div class="email-doc-ref">وثيقة العقد التجاري الرسمي (مرجع: OF-2026-1021)</div>
                     </div>
-                    <div style="font-size: 11px; color: #64748b; direction: ltr;">20 Oktober 2026</div>
+                    <div class="email-date-badge">20 Oktober 2026</div>
                 </div>
 
                 <p>السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،<br>تحية طيبة وبعد،</p>
                 <p>يسرنا في شركة S&amp;R CoreSync Solutions &amp; Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد لتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".</p>
                 
-                <table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11px;">
-                    <tr style="background: #f1f5f9;"><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: right;">البيان</th><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: left;">القيمة</th></tr>
-                    <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">تكلفة أعمال التأسيس البرمجي (5 مراحل)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 21,000.00</td></tr>
-                    <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 4,410.00</td></tr>
-                    <tr style="background: #fefce8; font-weight: bold;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الإجمالي التعاقدي الشامل للضريبة</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #059669;">€ 25,410.00</td></tr>
-                    <tr style="background: #ecfdf5;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الدفعة الأولى المستحقة (30% مقدمة التأسيس)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #047857; font-weight: bold;">€ 7,623.00</td></tr>
+                <table class="email-table">
+                    <tr class="email-table-header-row"><th>البيان</th><th>القيمة</th></tr>
+                    <tr><td>تكلفة أعمال التأسيس البرمجي (5 مراحل)</td><td class="email-table-price-ltr">€ 21,000.00</td></tr>
+                    <tr><td>ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td class="email-table-price-ltr">€ 4,410.00</td></tr>
+                    <tr class="email-table-row-warning"><td>الإجمالي التعاقدي الشامل للضريبة</td><td class="email-table-price-green">€ 25,410.00</td></tr>
+                    <tr class="email-table-row-success"><td>الدفعة الأولى المستحقة (30% مقدمة التأسيس)</td><td class="email-table-price-bold-green">€ 7,623.00</td></tr>
                 </table>
 
                 <p>يمكنكم معاينة وتوقيع العقد رقمياً وسداد الدفعة الأولى مباشرة عبر الرابط التفاعلي التالي:<br>
-                <a id="emailModalLink" href="https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: bold; text-decoration: underline;">
+                <a id="emailModalLink" href="https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices" target="_blank" rel="noopener noreferrer" class="email-link-highlight">
                     https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices
                 </a></p>
 
@@ -1309,7 +1309,7 @@
                 S&amp;R CoreSync Solutions &amp; Engineering — The Netherlands</p>
             </div>
 
-            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;">
+            <div class="email-modal-footer">
                 <button type="button" class="btn-action btn-action-primary" onclick="copyRichEmailContent()">
                     📋 نسخ القالب المرئي لـ Gmail (Ctrl+V)
                 </button>
