@@ -1691,7 +1691,1057 @@ var response = await client.PostAsync("https://api.coresync.eu/v1/tax/calculate-
     };
 
     // -------------------------------------------------------------
-    // 12. Auto-Trigger via URL Query Params
+    // 12. Multilingual User Documentation & Manual Database (6 Languages)
+    // -------------------------------------------------------------
+    const SOFTWARE_DOCS = {
+        ar: {
+            guideBadge: 'دليل الاستخدام والتشغيل المعتمد • 2026',
+            guideTitle: 'دليل تشغيل واستخدام برمجيات S&R CoreSync',
+            allOverview: 'نظرة عامة على المنظومة',
+            printBtn: '🖨️ طباعة الدليل',
+            copyKeyBtn: '📋 نسخ مفتاح تجريبي',
+            launchBtn: '⚡ تشغيل فوري في المتصفح',
+            downloadBtn: '📥 تحميل النسخة أوفلاين',
+            sections: {
+                overview: '📌 الهدف والوظيفة الأساسية',
+                hardware: '💻 الأجهزة والمدخلات المدعومة',
+                steps: '🚀 خطوات الاستخدام والتشغيل خطوة بخطوة',
+                compliance: '🛡️ الأمان والامتثال والضرائب الأوروبية',
+                faq: '❓ الأسئلة الشائعة وحلول المشكلات'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'نظام حساب الضرائب الهولندية والخليجية وتوليد إقرارات Digipoort XML',
+                    overview: 'برنامج محاسبي وضريبي مستقل ومكتبي (Offline-First) مصمم لحساب ضريبة القيمة المضافة BTW (21% و 9% و 0%) والضريبة الخليجية 15%، مع توليد فوري لإقرارات Digipoort XML الرسمية المعتمدة لدى مصلحة الضرائب الهولندية (Belastingdienst) وتصدير فواتير EN 16931 المشفرة محلياً.',
+                    hardware: [
+                        { name: '🖥️ أنظمة التشغيل', desc: 'يعمل على حواسيب Windows 11/10 و macOS Monterey+ و Linux Ubuntu دون قيود.' },
+                        { name: '🌐 بيئة التشغيل', desc: 'يعمل كتطبيق سطح مكتب مستقل أو داخل المتصفح كـ PWA مع تشغيل كامل بدون اتصال بالإنترنت.' },
+                        { name: '🔒 تخزين البيانات', desc: 'جميع الحسابات والفواتير تشفر وتخزن محلياً على جهازك ولا ترسل لأي سيرفر خارجي.' }
+                    ],
+                    steps: [
+                        { title: 'اختيار النظام الضريبي', desc: 'حدد النظام الضريبي المناسب (BTW 21% العام، أو 9% المخفض، أو 15% الخليجي).' },
+                        { title: 'إدخال المبالغ والمصروفات', desc: 'أدخل المبالغ الأساسية أو استورد ملفات الفواتير والمشتريات لحساب الضريبة تلقائياً.' },
+                        { title: 'توليد ملف الإقرار الرسمي', desc: 'اضغط على "توليد إقرار Digipoort XML" للحصول على الملف الجاهز للإرسال لمصلحة الضرائب.' },
+                        { title: 'طباعة الفاتورة والتقارير', desc: 'قم بتصدير الفواتير الرسمية بصيغة PDF المشفرة مع رمز التحقق الرقمي المعتمد.' }
+                    ],
+                    compliance: 'متوافق 100% مع المادة 52 من القانون العام للضرائب الهولندي (AWR Art. 52)، ومعايير معالجة البيانات الأوروبية GDPR Art. 32.',
+                    faq: [
+                        { q: 'هل يعمل البرنامج بدون إنترنت نهائياً؟', a: 'نعم، النظام مبني بمعمارية Offline-First، حيث تتم جميع العمليات الحسابية والتشفير وتوليد الملفات محلياً داخل جهازك.' },
+                        { q: 'كيف أقوم بتفعيل النسخة الكاملة؟', a: 'يمكنك إدخال مفتاح الترخيص المكون من 16 خانة المشفر عبر زر تفعيل الترخيص أو تجربة النسخة التجريبية المجانية لمدة 14 يوماً.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'تطبيق المسح الضوئي الذكي للإيصالات والفواتير بالذكاء الاصطناعي والكاميرا',
+                    overview: 'تطبيق هاتف ذكي يعتمد على خوارزميات الرؤية الحاسوبية والذكاء الاصطناعي (OCR AI) لمسح الفواتير والإيصالات الورقية بكاميرا الهاتف أو اللابتوب، واستخراج أسماء الموردين، وأرقام السجل الضريبي KvK/BTW، والتواريخ، والمبالغ، ونسب الضريبة بدقة 99.4% مع ترحيل فوري لنظام الـ ERP.',
+                    hardware: [
+                        { name: '📱 كاميرات الهواتف الذكية', desc: 'دعم كامل لكاميرات هواتف iPhone (iOS 17+) وأجهزة Android 14+ مع التركيز التلقائي.' },
+                        { name: '💻 كاميرات الحواسيب المحمولة', desc: 'إمكانية التقاط ومسح الفواتير عبر كاميرا الويب (Webcam) المدمجة باللابتوب مباشرة.' },
+                        { name: '📁 تحميل الصور والمستندات', desc: 'دعم سحب وإفلات صور الإيصالات (PNG, JPG, PDF) مباشرة للمعالجة الفورية.' }
+                    ],
+                    steps: [
+                        { title: 'فتح الكاميرا ومحاذاة الإيصال', desc: 'اضغط على زر فتح الكاميرا ووجه عدسة الهاتف نحو الإيصال أو الفاتورة داخل إطار المسح.' },
+                        { title: 'التقاط الصورة والمعالجة', desc: 'التقط الصورة ليبدأ محرك الذكاء الاصطناعي بالتعرف الضوئي واستخراج الحقول في 800 ميلي ثانية.' },
+                        { title: 'مراجعة البيانات المستخرجة', desc: 'تحقق من المبالغ، والضريبة المحتسبة، وتصنيف المصروف (وقود، ضيافة، تشغيل).' },
+                        { title: 'الترحيل الفوري لنظام ERP', desc: 'اضغط على "ترحيل للـ ERP" لتسجيل المصروف وتحديث التدفق النقدي للشركة لحظياً.' }
+                    ],
+                    compliance: 'معالجة مشفرة بالكامل عبر قنوات TLS 1.3 مع تخزين معزول في خوادم أمستردام AMS-IX متوافق مع معايير التدقيق المالي الأوروبية.',
+                    faq: [
+                        { q: 'هل يستطيع قراءة الفواتير المطوية أو باهتة الطباعة؟', a: 'نعم، يتضمن محرك FlowScan فلاتر ذكية لتعديل التباين وإزالة التشويش وتصحيح زوايا المستند آلياً قبل استخراج النصوص.' }
+                    ]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'محطة كاشير ونقاط بيع ذكية مع دعم مسح الباركود بكاميرا الموبايل واللابتوب',
+                    overview: 'نظام نقاط بيع وكاشير سحابي خفيف وفائق السرعة، يربط المتاجر والمطاعم والفعاليات المتنقلة بنظام إدارة المخازن والمحاسبة لحظياً. يتميز بقدرته الفريدة على مسح الباركود مباشرة عبر كاميرا الهاتف أو اللابتوب دون الحاجة لأجهزة سكانر إضافية، إلى جانب دعمه الكامل لأجهزة الباركود الخارجية وطابعات الفواتير الحرارية.',
+                    hardware: [
+                        { name: '📷 كاميرا الموبايل واللابتوب (بدون سكانر خارجي)', desc: 'قراءة ومسح باركود المنتجات (EAN-13, QR, Code-128) مباشرة عبر كاميرا الهاتف أو كاميرا الويب المدمجة باللابتوب بدقة فائقة وبشكل مجاني تماماً.' },
+                        { name: '🔫 أجهزة قراءة الباركود الخارجية (Scanner Gun)', desc: 'توافق كامل وبشكل فوري Plug-and-Play مع جميع أجهزة قارئ الباركود السلكية (USB) واللاسلكية (Bluetooth / 2.4GHz).' },
+                        { name: '🧾 طابعات الفواتير الحرارية (Thermal POS)', desc: 'دعم بروتوكولات طابعات الإيصالات الحرارية ESC/POS بمقاسات 80mm و 58mm مع طباعة سريعة ورمز QR الفاتورة.' },
+                        { name: '🖥️ شاشات اللمس والأجهزة', desc: 'تصميم متجاوب بالكامل مع شاشات اللمس للكاشير، وحواسيب Windows POS، والأجهزة اللوحية (iPad/Android Tablets).' }
+                    ],
+                    steps: [
+                        { title: 'فتح شاشة الكاشير والمبيعات', desc: 'شغل التطبيق من المتصفح أو التطبيق المستقل لتظهر لك واجهة البيع السريع وكتالوج الأصناف.' },
+                        { title: 'مسح الباركود (بالكاميرا أو السكانر)', desc: 'اضغط على "📷 مسح الباركود بكاميرا الجهاز" ووجه الكاميرا نحو باركود المنتج، أو استخدم السكانر الخارجي، أو انقر على المنتج من الشاشة.' },
+                        { title: 'تحديد الكميات وطريقة الدفع', desc: 'يتم احتساب الإجمالي والضريبة فورياً. اختر وسيلة الدفع (نقد / كاش، بطاقة ائتمان، iDEAL / PIN).' },
+                        { title: 'طباعة الإيصال وتحديث المخزون', desc: 'اضغط "إتمام البيع وطباعة الفاتورة" لطباعة الإيصال الحراري وخصم الكمية من المخزون المركزي فوراً.' }
+                    ],
+                    compliance: 'متوافق مع معايير السجلات النقدية الأوروبية المقاومة للتلاعب (Cash Register Audit Trail) وقوانين الفاتورة الإلكترونية الموحدة.',
+                    faq: [
+                        { q: 'هل يمكنني استخدام كاميرا الموبايل أو اللابتوب كقارئ باركود بدلاً من شراء جهاز سكانر؟', a: 'نعم بكل تأكيد وبنسبة 100%! يتيح لك تطبيق S&R CloudPOS مسح الباركود مباشرة وبدقة فائقة باستخدام كاميرا هاتفك المحمول أو كاميرا اللابتوب العادية دون دفع أي تكاليف لأجهزة إضافية.' },
+                        { q: 'ماذا يحدث إذا انقطع الإنترنت أثناء البيع في المحل؟', a: 'يواصل التطبيق عمله بشكل طبيعي أوفلاين ويخزن جميع العمليات في الذاكرة المحلية المشفرة، وبمجرد عودة الإنترنت تتم مزامنة المبيعات والمخزون تلقائياً.' }
+                    ]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'برمجية التشفير العسكري AES-256 GCM لحماية قواعد البيانات والمستندات الحساسة',
+                    overview: 'أداة أمن سيبراني وتشفير متقدمة تعمل محلياً داخل المتصفح بمعيار AES-256 GCM المعتمد لدى المؤسسات العسكرية والمالية، تتيح للمؤسسات تشفير النسخ الاحتياطية والعقود وسجلات الموظفين قبل رفعها أو إرسالها دون أي إمكانية لفك تشفيرها بدون المفتاح السري.',
+                    hardware: [
+                        { name: '💻 بيئات التشغيل', desc: 'متوافق مع جميع الحواسيب وأنظمة التشغيل (Windows, Mac, Linux, Mobile).' },
+                        { name: '🛡️ محرك التشفير', desc: 'يعتمد على Web Cryptography API للأجهزة الحديثة مع تسريع عتادي (Hardware Acceleration).' },
+                        { name: '💾 التخزين الآمن', desc: 'تصدير ملفات مشفرة بامتداد .srvault معزولة تماماً عن الوصول غير المصرح به.' }
+                    ],
+                    steps: [
+                        { title: 'اختيار الملف أو النص الحساس', desc: 'قم بسحب وإفلات الملف أو كتابة البيانات السرية داخل صندوق التشفير الآمن.' },
+                        { title: 'تعيين كلمة المرور والمفتاح', desc: 'أدخل كلمة مرور قوية لتوليد مفتاح تشفير 256-bit باستخدام خوارزمية PBKDF2/Argon2.' },
+                        { title: 'تنفيذ التشفير وتنزيل الملف', desc: 'اضغط على "تشفير وحفظ محلياً" لتحميل النسخة المشفرة الآمنة مباشرة.' },
+                        { title: 'فك التشفير عند الحاجة', desc: 'يمكنك فك التشفير في أي وقت عبر إدخال نفس كلمة المرور على أي جهاز بدون إنترنت.' }
+                    ],
+                    compliance: 'متوافق 100% مع المادة 32 من لائحة حماية البيانات العامة الأوروبية (GDPR Art. 32) ومعيار FIPS 140-2 للتشفير المعتمد.',
+                    faq: [
+                        { q: 'هل تستطيع الشركة أو الخادم الاطلاع على بياناتي المشفرة؟', a: 'مستحيل تماماً؛ التشفير يتم محلياً (Zero-Knowledge Client-Side) داخل متصفح جهازك ولا يصل المفتاح أو البيانات غير المشفرة لأي خادم.' }
+                    ]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'وحدة المطورين والـ REST APIs لدمج الضرائب والذكاء الاصطناعي المالي',
+                    overview: 'بوابة تفاعلية وحزمة أدوات برمجية (SDK) مخصصة للشركات البرمجية والمطورين لدمج محركات حساب الضرائب الأوروبية، والتنبؤ المالي، والفوترة الإلكترونية داخل تطبيقاتهم الخاصة بسهولة عبر واجهات برمجة التطبيقات REST APIs.',
+                    hardware: [
+                        { name: '🌐 لغات البرمجة المدعومة', desc: 'مكتبات وأكواد جاهزة للغات Python و Node.js و C# و PHP و cURL.' },
+                        { name: '⚡ منصات الخوادم', desc: 'متوافقة مع بيئات Docker و Kubernetes و Cloud Functions و Lambda.' },
+                        { name: '🔑 إدارة التراخيص', desc: 'توليد فوري لمفاتيح الـ API مع نظام مراقبة استهلاك ومعدل طلبات Rate Limiting.' }
+                    ],
+                    steps: [
+                        { title: 'توليد مفتاح الـ API', desc: 'احصل على مفتاح الوصول الخاص بتطبيقك من لوحة تحكم المطورين.' },
+                        { title: 'اختيار نقطة الاتصال (Endpoint)', desc: 'اختر الواجهة المطلوبة (مثل: حساب ضريبة BTW، أو توقع السيولة، أو التحقق من الفواتير).' },
+                        { title: 'تجربة الطلب في الـ Sandbox', desc: 'أرسل نموذج تجريبي وشاهد رد السيرفر الفوري بصيغة JSON مع كود الاستجابة HTTP 200.' },
+                        { title: 'نسخ الكود الجاهز لمشروعك', desc: 'انسخ كود الدمج بلغتك البرمجية المفضلة بضغطة زر وأضفه إلى نظامك مباشرة.' }
+                    ],
+                    compliance: 'مبنية وفق معايير OpenAPI 3.0 مع تشفير كامل TLS 1.3 وتوافق مع لوائح التراخيص البرمجية B2B.',
+                    faq: [
+                        { q: 'هل تتوفر بيئة تجريبية Sandbox مجانية؟', a: 'نعم، توفر المنصة 500 مكالمة تجريبية مجانية يومياً لكل مطور لاختبار التطبيقات قبل الانتقال للإنتاج.' }
+                    ]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'لوحة مراقبة الخوادم والحاويات وحالة الميكروسيرفس السحابية',
+                    overview: 'أداة خفيفة لمراقبة البنية التحتية السحابية والخوادم، تتتبع نبضات الخدمات (Heartbeats)، واستهلاك المعالج والذاكرة، ومعدلات استجابة قواعد البيانات، مع أدوات تحكم مباشرة لإعادة تشغيل الخدمات تلقائياً عند أي طارئ.',
+                    hardware: [
+                        { name: '☁️ الخوادم السحابية', desc: 'دعم مراقبة خوادم Linux (Ubuntu/Debian) و Windows Server و Cloud VMs.' },
+                        { name: '📦 الحاويات والميكروسيرفس', desc: 'تكامل كامل مع بيئات Docker Containers و Kubernetes Pods.' },
+                        { name: '📡 بروتوكولات المراقبة', desc: 'مراقبة عبر WebSocket و gRPC مع تنبيهات فورية بالبريد والـ Webhooks.' }
+                    ],
+                    steps: [
+                        { title: 'ربط وكيل المراقبة (Agent)', desc: 'قم بتثبيت الوكيل السحابي عبر أمر تشغيل سطر واحد في خادمك.' },
+                        { title: 'متابعة المؤشرات الحيوية', desc: 'شاهد الرسم البياني الحي لاستهلاك المعالج، والذاكرة، والـ Latency في خوادم أمستردام.' },
+                        { title: 'ضبط التنبيهات الذكية', desc: 'حدد عتبات التنبيه التلقائية عند تجاوز استهلاك الموارد للنسب المحددة.' },
+                        { title: 'الإدارة السريعة للخدمات', desc: 'قم بإعادة تشغيل أو تنظيف الكاش لأي ميكروسيرفس بنقرة واحدة من لوحة التحكم.' }
+                    ],
+                    compliance: 'سجلات تدقيق أمنية معتمدة وفق ISO 27001 واتصال مشفر متبادل mTLS.',
+                    faq: [
+                        { q: 'ما هو حجم استهلاك الوكيل لموارد الخادم؟', a: 'الوكيل خفيف جداً، يستهلك أقل من 15 ميجابايت من الذاكرة وأقل من 0.2% من المعالج.' }
+                    ]
+                }
+            }
+        },
+        en: {
+            guideBadge: 'OFFICIAL OPERATOR & USER MANUAL • 2026',
+            guideTitle: 'S&R CoreSync Software Operational Guides & Manuals',
+            allOverview: 'System Overview & Suite Catalog',
+            printBtn: '🖨️ Print Guide',
+            copyKeyBtn: '📋 Copy Trial Key',
+            launchBtn: '⚡ Instant Browser Launch',
+            downloadBtn: '📥 Download Offline Package',
+            sections: {
+                overview: '📌 Purpose & System Overview',
+                hardware: '💻 Supported Devices & Input Hardware',
+                steps: '🚀 Step-by-Step Quick Start Guide',
+                compliance: '🛡️ Security, Cryptography & EU Compliance',
+                faq: '❓ Frequently Asked Questions & Troubleshooting'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'Dutch & Gulf VAT calculation and official Digipoort XML filing system',
+                    overview: 'A standalone, offline-first accounting and taxation platform designed for calculating Dutch BTW (21%, 9%, 0%) and Gulf VAT (15%). It generates official Digipoort XML tax returns certified for the Dutch Tax Authority (Belastingdienst) and exports compliant encrypted EN 16931 invoices.',
+                    hardware: [
+                        { name: '🖥️ Operating Systems', desc: 'Runs natively on Windows 11/10 (64-bit), macOS Monterey+, and Linux Ubuntu/Debian.' },
+                        { name: '🌐 Runtime Environment', desc: 'Operates as an offline-first desktop application or as an in-browser progressive web app.' },
+                        { name: '🔒 Local Data Storage', desc: 'All figures and invoices are encrypted and stored locally without leaving your machine.' }
+                    ],
+                    steps: [
+                        { title: 'Select Tax Regime', desc: 'Choose standard BTW 21%, reduced BTW 9%, or Gulf VAT 15%.' },
+                        { title: 'Input Transactions', desc: 'Enter amounts manually or import invoices to compute taxes automatically.' },
+                        { title: 'Generate XML Return', desc: 'Click "Generate Digipoort XML" to prepare your official filing for Belastingdienst.' },
+                        { title: 'Export & Print', desc: 'Export official encrypted PDF invoices with compliant QR verification codes.' }
+                    ],
+                    compliance: '100% compliant with Dutch Tax Law (AWR Art. 52) and European GDPR Art. 32 local encryption standards.',
+                    faq: [
+                        { q: 'Does it require an active internet connection?', a: 'No, it is 100% Offline-First. All computations and file exports happen locally on your device.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'AI-powered mobile receipt and invoice scanner with live camera OCR',
+                    overview: 'A mobile smartphone and tablet application leveraging computer vision and on-device OCR AI to scan paper receipts and invoices using device cameras, extracting vendor names, KvK/BTW tax numbers, dates, amounts, and tax brackets with 99.4% precision and instant ERP synchronization.',
+                    hardware: [
+                        { name: '📱 Mobile Phone Cameras', desc: 'Full support for iPhone (iOS 17+) and Android 14+ cameras with auto-focus.' },
+                        { name: '💻 Laptop Webcams', desc: 'Directly scan paper documents using your integrated laptop webcam.' },
+                        { name: '📁 Document Upload', desc: 'Drag and drop receipt images (PNG, JPG, PDF) for instant OCR parsing.' }
+                    ],
+                    steps: [
+                        { title: 'Open Camera & Align', desc: 'Launch camera scanner and align receipt inside the optical viewfinder frame.' },
+                        { title: 'Capture & Process', desc: 'Snap photo to trigger AI OCR extraction within 800 milliseconds.' },
+                        { title: 'Review Fields', desc: 'Verify extracted vendor, total amount, and expense categorization.' },
+                        { title: 'Sync to ERP', desc: 'Tap "Sync to ERP" to record expenses and update cashflows in real time.' }
+                    ],
+                    compliance: 'Encrypted via TLS 1.3 channels with isolated Amsterdam AMS-IX storage compliant with EU audit standards.',
+                    faq: [
+                        { q: 'Can it scan wrinkled or faded receipts?', a: 'Yes, FlowScan features automated contrast normalization, noise removal, and perspective correction.' }
+                    ]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'Smart Cloud POS terminal with smartphone & laptop camera barcode scanning',
+                    overview: 'A high-speed, lightweight cloud point of sale and cashier terminal that links retail shops, dining venues, and mobile sales booths directly to inventory and accounting. Features native barcode reading through mobile and laptop cameras without extra hardware, alongside full support for external barcode guns and thermal printers.',
+                    hardware: [
+                        { name: '📷 Phone & Laptop Cameras (No Hardware Scanner Required)', desc: 'Scan product barcodes (EAN-13, QR, Code-128) directly via your mobile phone camera or laptop webcam with zero extra hardware cost!' },
+                        { name: '🔫 External Barcode Scanner Guns', desc: 'Instant plug-and-play compatibility with USB, wireless 2.4G, and Bluetooth 1D/2D laser scanners.' },
+                        { name: '🧾 Thermal Receipt Printers (POS)', desc: 'Direct ESC/POS protocol support for 80mm and 58mm thermal rolls with fast receipt printing and QR codes.' },
+                        { name: '🖥️ Touchscreens & Devices', desc: 'Fully responsive for touch terminals, Windows POS PCs, and iPad/Android tablets.' }
+                    ],
+                    steps: [
+                        { title: 'Launch Cashier Screen', desc: 'Open terminal from browser or standalone app to display sales catalog and cart.' },
+                        { title: 'Scan Barcodes (Camera or Scanner)', desc: 'Click "📷 Scan Barcode with Camera" and point your phone/laptop camera at the product, or use a hardware scanner gun, or click catalog items.' },
+                        { title: 'Adjust Quantities & Pay', desc: 'Totals and tax calculate instantly. Choose Cash, Credit Card, or iDEAL / PIN.' },
+                        { title: 'Print Receipt & Sync Stock', desc: 'Complete checkout to print thermal ticket and decrement cloud inventory in real time.' }
+                    ],
+                    compliance: 'Compliant with European anti-tamper cash register audit trail regulations and EN 16931 receipt formatting.',
+                    faq: [
+                        { q: 'Can I scan barcodes using my mobile phone or laptop camera without buying a dedicated scanner gun?', a: 'YES, absolutely 100%! S&R CloudPOS features a built-in optical camera scanner that turns any smartphone or laptop webcam into a professional barcode reader immediately with zero additional equipment needed.' },
+                        { q: 'What happens if the internet disconnects during store hours?', a: 'The app continues operating offline without interruption, buffering transactions locally and synchronizing them automatically once connection returns.' }
+                    ]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'Military-grade AES-256 GCM encryption for sensitive databases and backups',
+                    overview: 'Advanced client-side cybersecurity encryption tool running entirely in the browser using military AES-256 GCM standards. Allows businesses to encrypt database backups, contracts, and confidential records before upload with zero knowledge architecture.',
+                    hardware: [
+                        { name: '💻 System Platforms', desc: 'Compatible across Windows, Mac, Linux, and mobile browsers.' },
+                        { name: '🛡️ Crypto Engine', desc: 'Leverages hardware-accelerated Web Cryptography API.' },
+                        { name: '💾 Secure Storage', desc: 'Exports encrypted .srvault files protected against unauthorized access.' }
+                    ],
+                    steps: [
+                        { title: 'Select File or Record', desc: 'Drag and drop files or paste confidential data into the secure vault vault box.' },
+                        { title: 'Set Passphrase', desc: 'Provide a strong passphrase to derive a 256-bit key using PBKDF2/Argon2.' },
+                        { title: 'Encrypt & Download', desc: 'Click "Encrypt & Secure" to download your protected .srvault file.' },
+                        { title: 'Decrypt Anywhere', desc: 'Decrypt anytime using your secret passphrase even completely offline.' }
+                    ],
+                    compliance: '100% compliant with EU GDPR Article 32 and FIPS 140-2 certified encryption algorithms.',
+                    faq: [
+                        { q: 'Can S&R servers read my encrypted files?', a: 'Never. Encryption occurs strictly on your client device (Zero-Knowledge) and keys never leave your machine.' }
+                    ]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'Developer API Console for European tax logic and financial algorithms',
+                    overview: 'An interactive developer suite and REST API SDK enabling software teams to embed European tax computation, liquidity forecasting, and e-invoicing directly into their internal ERPs and web applications.',
+                    hardware: [
+                        { name: '🌐 Supported Languages', desc: 'Pre-built snippets for Python, Node.js, C#, PHP, and cURL.' },
+                        { name: '⚡ Cloud Environments', desc: 'Compatible with Docker, Kubernetes, AWS Lambda, and Azure Functions.' },
+                        { name: '🔑 Key Management', desc: 'Instant API key generation with usage tracking and rate-limiting.' }
+                    ],
+                    steps: [
+                        { title: 'Generate API Token', desc: 'Obtain your unique application key from the developer dashboard.' },
+                        { title: 'Select Endpoint', desc: 'Pick desired REST endpoint (e.g. /v1/tax/calculate-btw).' },
+                        { title: 'Test in Sandbox', desc: 'Run requests live and inspect JSON response with HTTP 200 verification.' },
+                        { title: 'Integrate Code', desc: 'Copy client snippets in your language of choice into your codebase.' }
+                    ],
+                    compliance: 'OpenAPI 3.0 compliant specifications with TLS 1.3 encryption and enterprise SLA.',
+                    faq: [
+                        { q: 'Is there a free sandbox for testing?', a: 'Yes, each developer account receives 500 free sandbox calls daily for prototyping.' }
+                    ]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'Real-time telemetry and microservices management console',
+                    overview: 'A lightweight cloud telemetry agent tracking CPU, memory, database latency, and service heartbeats across Amsterdam AMS-IX clusters with automated self-healing and remote restarts.',
+                    hardware: [
+                        { name: '☁️ Cloud Hosts', desc: 'Supports Linux (Ubuntu/Debian), Windows Server, and cloud VMs.' },
+                        { name: '📦 Containers', desc: 'Seamless integration with Docker and Kubernetes clusters.' },
+                        { name: '📡 Protocols', desc: 'Real-time monitoring via WebSocket and gRPC with instant webhook alerting.' }
+                    ],
+                    steps: [
+                        { title: 'Install Agent', desc: 'Deploy agent daemon with a one-line terminal command on your server.' },
+                        { title: 'Monitor Health', desc: 'Observe live charts for CPU, memory, and latency in Amsterdam node.' },
+                        { title: 'Configure Alerts', desc: 'Set resource threshold triggers for email and webhook notifications.' },
+                        { title: 'Manage Services', desc: 'Restart or flush cache on any service with a single click.' }
+                    ],
+                    compliance: 'ISO 27001 certified security logs and mutual mTLS communication channels.',
+                    faq: [
+                        { q: 'How much overhead does the agent introduce?', a: 'Minimal overhead: uses less than 15MB RAM and under 0.2% CPU.' }
+                    ]
+                }
+            }
+        },
+        nl: {
+            guideBadge: 'OFFICIËLE HANDLEIDING & GEBRUIKERSGIDS • 2026',
+            guideTitle: 'S&R CoreSync Software Handleidingen en Instructies',
+            allOverview: 'Overzicht van het Systeem & Suite',
+            printBtn: '🖨️ Handleiding Afdrukken',
+            copyKeyBtn: '📋 Proeflicentie Kopiëren',
+            launchBtn: '⚡ Direct Starten in Browser',
+            downloadBtn: '📥 Offline Versie Downloaden',
+            sections: {
+                overview: '📌 Doel en Systeemoverzicht',
+                hardware: '💻 Ondersteunde Hardware en Apparaten',
+                steps: '🚀 Stapsgewijze Snelle Handleiding',
+                compliance: '🛡️ Veiligheid, Cryptografie & Belastingdienst',
+                faq: '❓ Veelgestelde Vragen & Probleemoplossing'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'Nederlandse BTW-berekening en officiële Digipoort XML-aangiftes',
+                    overview: 'Een zelfstandig, offline-first boekhoudkundig en fiscaal platform voor het berekenen van Nederlandse BTW (21%, 9%, 0%) en golfregio BTW. Genereert officiële Digipoort XML-aangiftes conform Belastingdienst en exporteert gecodeerde EN 16931 facturen.',
+                    hardware: [
+                        { name: '🖥️ Besturingssystemen', desc: 'Werkt op Windows 11/10, macOS Monterey+ en Linux Ubuntu.' },
+                        { name: '🌐 Omgeving', desc: 'Functioneert volledig zonder internetverbinding (Offline-First).' },
+                        { name: '🔒 Gegevensopslag', desc: 'Alle gegevens worden lokaal versleuteld opgeslagen conform AVG / GDPR.' }
+                    ],
+                    steps: [
+                        { title: 'BTW-tarief Selecteren', desc: 'Kies tussen 21% algemeen, 9% verlaagd of 0% verlegd tarief.' },
+                        { title: 'Bedragen Invoeren', desc: 'Voer omzet en kosten in voor automatische voorbelastingberekening.' },
+                        { title: 'XML-Aangifte Genereren', desc: 'Maak met één klik het officiële Digipoort XML-bestand gereed voor verzending.' },
+                        { title: 'Factuur Exporteren', desc: 'Print of exporteer officiële PDF-facturen met verificatiecode.' }
+                    ],
+                    compliance: 'Volledig conform AWR Art. 52 en de richtlijnen van de Belastingdienst.',
+                    faq: [
+                        { q: 'Werkt het programma zonder internet?', a: 'Ja, 100% Offline-First. Uw gegevens blijven veilig op uw eigen computer.' }
+                    ]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'Slimme POS Kassa met Barcode Scannen via Telefoon- en Laptopcamera',
+                    overview: 'Een modern kassasysteem dat winkels en horeca direct koppelt aan voorraadbeheer en boekhouding. Kan barcodes direct scannen via de ingebouwde camera van smartphone of laptop, zonder dure handscanners aan te hoeven schaffen.',
+                    hardware: [
+                        { name: '📷 Camera van Telefoon & Laptop (Geen Handscanner Nodig)', desc: 'Scan barcodes (EAN-13, QR, Code-128) direct via uw mobiele camera of webcam zonder extra hardware!' },
+                        { name: '🔫 Externe Barcodescanners', desc: 'Ondersteunt USB, Bluetooth en draadloze 2.4GHz barcode pistolen plug-and-play.' },
+                        { name: '🧾 Thermische Bonprinters', desc: 'Directe ESC/POS thermische bonprint op 80mm en 58mm papierrollen.' }
+                    ],
+                    steps: [
+                        { title: 'Kassa Openen', desc: 'Start de kassa-omgeving vanuit de browser of de standalone app.' },
+                        { title: 'Barcode Scannen', desc: 'Klik op "📷 Barcode scannen met camera" of richt uw externe scanner op het product.' },
+                        { title: 'Afrekenen', desc: 'Selecteer contant, bankkaart of iDEAL / PIN voor directe verwerking.' },
+                        { title: 'Bon Afdrukken', desc: 'Print direct de kassabon en de voorraad wordt realtime bijgewerkt.' }
+                    ],
+                    compliance: 'Voldoet aan de Europese auditvereisten voor kassa- en voorraadtransacties.',
+                    faq: [
+                        { q: 'Kan ik barcodes scannen met mijn telefoon- of laptopcamera zonder een externe scanner te kopen?', a: 'Ja, absoluut 100%! Met S&R CloudPOS gebruikt u direct uw eigen camera als professionele barcodescanner, volledig kosteloos en zonder extra apparaten.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'Mobiele AI bonscanner met automatische tekstherkenning',
+                    overview: 'Mobiele applicatie voor het scannen van bonnetjes en facturen via de camera met 99.4% nauwkeurigheid en automatische BTW-uitsplitsing.',
+                    hardware: [{ name: '📱 Mobiel', desc: 'Geschikt voor iOS en Android smartphones en laptop webcams.' }],
+                    steps: [
+                        { title: 'Foto maken', desc: 'Lijn het bonnetje uit binnen het camerakader.' },
+                        { title: 'AI analyse', desc: 'Gegevens worden binnen 800ms geëxtraheerd.' },
+                        { title: 'Synchroniseren', desc: 'Boek de uitgave direct in uw ERP-systeem.' }
+                    ],
+                    compliance: 'Volledig versleuteld conform AVG / GDPR normen in Amsterdam AMS-IX.',
+                    faq: [{ q: 'Werkt het bij slecht licht?', a: 'Ja, de AI past automatisch contrast en belichting aan.' }]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'Militaire AES-256 GCM encryptie voor bedrijfsgegevens',
+                    overview: 'Beveiligingsapplicatie die bestanden lokaal in de browser versleutelt met AES-256 GCM voordat ze worden opgeslagen.',
+                    hardware: [{ name: '💻 Universeel', desc: 'Ondersteund op alle moderne browsers en apparaten.' }],
+                    steps: [
+                        { title: 'Bestand kiezen', desc: 'Selecteer het gevoelige document.' },
+                        { title: 'Wachtwoord invoeren', desc: 'Genereer een 256-bit cryptografische sleutel.' },
+                        { title: 'Versleutelen', desc: 'Download het beveiligde .srvault bestand.' }
+                    ],
+                    compliance: 'Voldoet aan AVG / GDPR Artikel 32 en FIPS 140-2 encryptiestandaarden.',
+                    faq: [{ q: 'Heeft iemand anders toegang?', a: 'Nee, Zero-Knowledge encryptie op uw eigen toestel.' }]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'REST API console voor fiscale en financiële automatisering',
+                    overview: 'API console voor softwareontwikkelaars om BTW-berekening en facturatie in eigen software te integreren.',
+                    hardware: [{ name: '🌐 APIs', desc: 'Geschikt voor Python, Node.js, C#, PHP en cURL.' }],
+                    steps: [
+                        { title: 'API Key aanmaken', desc: 'Genereer uw ontwikkelaarsleutel.' },
+                        { title: 'Testen', desc: 'Test live endpoints in de sandbox omgeving.' },
+                        { title: 'Integreren', desc: 'Kopieer kant-en-klare code naar uw project.' }
+                    ],
+                    compliance: 'OpenAPI 3.0 specificatie met TLS 1.3 beveiliging.',
+                    faq: [{ q: 'Is er een gratis sandbox?', a: 'Ja, 500 gratis calls per dag voor ontwikkelaars.' }]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'Realtime servermonitoring en microservices beheer',
+                    overview: 'Lichtgewicht monitoringsagent voor CPU, geheugen en responstijden in Amsterdamse datacenters.',
+                    hardware: [{ name: '☁️ Servers', desc: 'Geschikt voor Linux, Windows Server en Docker clusters.' }],
+                    steps: [
+                        { title: 'Agent installeren', desc: 'Installeer met één terminalopdracht.' },
+                        { title: 'Monitoren', desc: 'Bekijk realtime grafieken en metrics.' },
+                        { title: 'Beheren', desc: 'Herstart services met één klik bij incidenten.' }
+                    ],
+                    compliance: 'ISO 27001 gecertificeerde logs en mTLS communicatie.',
+                    faq: [{ q: 'Belast dit de server?', a: 'Nee, verbruikt minder dan 15MB geheugen en 0.2% CPU.' }]
+                }
+            }
+        },
+        de: {
+            guideBadge: 'OFFIZIELLES BEDIENUNGSHANDBUCH • 2026',
+            guideTitle: 'S&R CoreSync Software Benutzerhandbücher & Dokumentation',
+            allOverview: 'Systemübersicht & Gesamtkatalog',
+            printBtn: '🖨️ Handbuch Drucken',
+            copyKeyBtn: '📋 Testlizenz Kopieren',
+            launchBtn: '⚡ Sofort im Browser Starten',
+            downloadBtn: '📥 Offline-Version Herunterladen',
+            sections: {
+                overview: '📌 Zweck & Systemüberblick',
+                hardware: '💻 Unterstützte Hardware & Eingabegeräte',
+                steps: '🚀 Schritt-für-Schritt Schnellstartanleitung',
+                compliance: '🛡️ Sicherheit, Kryptographie & EU-Konformität',
+                faq: '❓ Häufig gestellte Fragen & Fehlerbehebung'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'EU- & Niederlande-Steuerrechner mit Digipoort XML-Generierung',
+                    overview: 'Eigenständiges, Offline-First Finanz- und Steuerberechnungsprogramm für die niederländische BTW (21%, 9%, 0%) sowie europäische Steuerstandards mit verschlüsselten EN 16931 Rechnungen.',
+                    hardware: [{ name: '🖥️ Betriebssysteme', desc: 'Windows 11/10, macOS und Linux. 100% offline nutzbar.' }],
+                    steps: [
+                        { title: 'Steuersatz wählen', desc: 'Wählen Sie den gewünschten BTW-Satz aus.' },
+                        { title: 'Beträge erfassen', desc: 'Erfassen Sie Beträge für die sofortige Steuerberechnung.' },
+                        { title: 'XML exportieren', desc: 'Erstellen Sie die offizielle Digipoort XML-Meldung.' },
+                        { title: 'Rechnung drucken', desc: 'Drucken Sie die konforme PDF-Rechnung mit Prüfcode.' }
+                    ],
+                    compliance: 'Konform mit niederländischem Steuerrecht AWR Art. 52 und DSGVO Art. 32.',
+                    faq: [{ q: 'Funktioniert es offline?', a: 'Ja, 100% Offline-First. Ihre Daten verbleiben auf Ihrem Rechner.' }]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'Cloud-Kassensystem mit Barcode-Scan über Smartphone- & Laptop-Kamera',
+                    overview: 'Intelligentes Kassensystem, das Barcodes direkt über die Kamera von Smartphone oder Laptop erfasst – ganz ohne teure externe Scannerpistolen.',
+                    hardware: [
+                        { name: '📷 Smartphone- & Laptop-Kamera (Kein externer Scanner nötig)', desc: 'Barcodes (EAN-13, QR, Code-128) direkt über Handykamera oder Laptop-Webcam blitzschnell scannen!' },
+                        { name: '🔫 Externe Scannerpistolen', desc: 'Kompatibel mit USB-, Bluetooth- und 2.4GHz Barcode-Scannern.' },
+                        { name: '🧾 Thermobondrucker', desc: 'Unterstützung für ESC/POS 80mm und 58mm Bonrollen.' }
+                    ],
+                    steps: [
+                        { title: 'Kasse öffnen', desc: 'Starten Sie das Terminal im Browser oder als App.' },
+                        { title: 'Barcode scannen', desc: 'Klicken Sie auf "📷 Barcode mit Kamera scannen" oder nutzen Sie Ihre Scannerpistole.' },
+                        { title: 'Bezahlen', desc: 'Wählen Sie Bar, Karte oder PIN/iDEAL.' },
+                        { title: 'Bon drucken', desc: 'Kassenzettel drucken und Lagerbestand in Echtzeit aktualisieren.' }
+                    ],
+                    compliance: 'Erfüllt europäische Richtlinien für Kassenführung und GoBD/EU-Standards.',
+                    faq: [
+                        { q: 'Kann ich Barcodes mit der Handykamera oder Laptopkamera scannen ohne einen Scanner zu kaufen?', a: 'Ja, absolut zu 100%! Mit S&R CloudPOS nutzen Sie einfach Ihre vorhandene Kamera als hochpräzisen Barcode-Scanner – komplett kostenlos und ohne Zusatzgeräte.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'Intelligente Beleg- und Rechnungserfassung per Smartphone-Kamera',
+                    overview: 'Mobile Anwendung zur automatischen optischen Zeichenerkennung (OCR AI) von Rechnungen und Quittungen mit direkter ERP-Übertragung.',
+                    hardware: [{ name: '📱 Mobilgeräte', desc: 'iPhone (iOS 17+), Android 14+ sowie Laptop-Webcams.' }],
+                    steps: [
+                        { title: 'Kamera ausrichten', desc: 'Halten Sie den Beleg in das Scanfenster.' },
+                        { title: 'Erfassen', desc: 'Das KI-Modell liest Beträge und Steuern in 800ms aus.' },
+                        { title: 'Synchronisieren', desc: 'Übertragen Sie die Ausgabe direkt ins ERP.' }
+                    ],
+                    compliance: 'Vollständig verschlüsselt nach DSGVO im Rechenzentrum Amsterdam AMS-IX.',
+                    faq: [{ q: 'Werden zerknitterte Belege erkannt?', a: 'Ja, intelligente Filter korrigieren Kontrast und Neigungswinkel automatisch.' }]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'Militärische AES-256 GCM Verschlüsselung für Unternehmensdaten',
+                    overview: 'Verschlüsselt Datenbanken und sensible Dokumente direkt im Browser nach AES-256 GCM Standards.',
+                    hardware: [{ name: '💻 Plattformunabhängig', desc: 'Funktioniert in jedem modernen Webbrowser.' }],
+                    steps: [
+                        { title: 'Datei wählen', desc: 'Dokument auswählen oder Text eingeben.' },
+                        { title: 'Passwort setzen', desc: '256-Bit Schlüssel über PBKDF2 ableiten.' },
+                        { title: 'Verschlüsseln', desc: 'Geschützte .srvault Datei lokal abspeichern.' }
+                    ],
+                    compliance: 'DSGVO Artikel 32 und FIPS 140-2 konform.',
+                    faq: [{ q: 'Können Dritte die Daten einsehen?', a: 'Nein, echtes Zero-Knowledge auf Ihrem eigenen Endgerät.' }]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'Entwickler-REST-APIs für Steuern und Finanzlogik',
+                    overview: 'API-Konsole zur Einbindung von Steuerberechnung und Rechnungsstellung in Ihre eigenen Softwaresysteme.',
+                    hardware: [{ name: '🌐 Sprachen', desc: 'Python, Node.js, C#, PHP und cURL Vorlagen.' }],
+                    steps: [
+                        { title: 'API-Schlüssel abrufen', desc: 'Schlüssel im Dashboard generieren.' },
+                        { title: 'Sandbox testen', desc: 'Endpoints direkt im Browser ausprobieren.' },
+                        { title: 'Integrieren', desc: 'Code direkt in Ihr Projekt kopieren.' }
+                    ],
+                    compliance: 'OpenAPI 3.0 und TLS 1.3 Standard.',
+                    faq: [{ q: 'Gibt es ein kostenloses Kontingent?', a: 'Ja, 500 kostenlose API-Aufrufe täglich.' }]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'Server- und Microservices-Überwachung in Echtzeit',
+                    overview: 'Schlanker Monitoring-Agent für CPU, Speicher und Datenbank-Latenzen mit Fernwartung.',
+                    hardware: [{ name: '☁️ Server', desc: 'Linux, Windows Server und Docker Container.' }],
+                    steps: [
+                        { title: 'Agent einrichten', desc: 'Befehl im Server-Terminal ausführen.' },
+                        { title: 'Überwachen', desc: 'Echtzeitmetriken im Dashboard verfolgen.' },
+                        { title: 'Dienste steuern', desc: 'Neustarts bei Ausfällen mit einem Klick ausführen.' }
+                    ],
+                    compliance: 'ISO 27001 zertifizierte Auditprotokolle.',
+                    faq: [{ q: 'Wie hoch ist die Last?', a: 'Minimal: unter 15MB RAM und 0.2% CPU-Auslastung.' }]
+                }
+            }
+        },
+        sv: {
+            guideBadge: 'OFFICIELL DRIFTHANDBOK & BRUKSANVISNING • 2026',
+            guideTitle: 'S&R CoreSync Programvaruhandböcker och Bruksanvisningar',
+            allOverview: 'Systemöversikt och Programkatalog',
+            printBtn: '🖨️ Skriv ut Guide',
+            copyKeyBtn: '📋 Kopiera Provlicens',
+            launchBtn: '⚡ Starta Direkt i Webbläsare',
+            downloadBtn: '📥 Ladda ner Offline-version',
+            sections: {
+                overview: '📌 Syfte & Systemöversikt',
+                hardware: '💻 Maskinvara och Inmatningsenheter',
+                steps: '🚀 Steg-för-steg Snabbstartsguide',
+                compliance: '🛡️ Säkerhet, Kryptografi & EU-efterlevnad',
+                faq: '❓ Vanliga Frågor & Felsökning'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'Nederländsk och europeisk skatteräknare med Digipoort XML-stöd',
+                    overview: 'Fristående offline-first skatteprogram för BTW/momsberäkning och generering av officiella Digipoort XML-deklarationer.',
+                    hardware: [{ name: '🖥️ System', desc: 'Windows 11/10, macOS och Linux. Fungerar 100% offline.' }],
+                    steps: [
+                        { title: 'Välj momssats', desc: 'Välj 21%, 9% eller 0% momssats.' },
+                        { title: 'Mata in belopp', desc: 'Beräkna skatten och avdragsgill moms automatiskt.' },
+                        { title: 'Skapa deklaration', desc: 'Generera officiell Digipoort XML-fil.' },
+                        { title: 'Skriv ut', desc: 'Exportera krypterad PDF-faktura enligt EN 16931.' }
+                    ],
+                    compliance: 'Uppfyller nederländsk skattelag AWR Art. 52 och GDPR Art. 32.',
+                    faq: [{ q: 'Fungerar det offline?', a: 'Ja, 100% Offline-First. Alla data förblir på din dator.' }]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'Molnbaserat kassasystem med streckkodsläsning via mobil- och datorkamera',
+                    overview: 'Modernt och snabbt kassasystem med direkt stöd för streckkodsläsning via mobil- eller bärbar datorkamera utan behov av extern skanner.',
+                    hardware: [
+                        { name: '📷 Mobil- och Datorkamera (Ingen extern skanner behövs)', desc: 'Skanna streckkoder (EAN-13, QR, Code-128) direkt med mobilkameran eller webbkameran helt utan extra kostnad!' },
+                        { name: '🔫 Extern Streckkodsläsare', desc: 'Full Plug-and-Play-kompatibilitet med USB och trådlösa skannrar.' },
+                        { name: '🧾 Kvittoskrivare', desc: 'Direktstöd för ESC/POS 80mm och 58mm termokvitton.' }
+                    ],
+                    steps: [
+                        { title: 'Öppna kassan', desc: 'Starta terminalen i webbläsaren eller som app.' },
+                        { title: 'Skanna streckkod', desc: 'Klicka på "📷 Skanna streckkod med kamera" eller använd din skanner.' },
+                        { title: 'Betala', desc: 'Välj kontant, kort eller direktbetalning.' },
+                        { title: 'Skriv ut kvitto', desc: 'Skriv ut kvittot och lagret uppdateras i realtid.' }
+                    ],
+                    compliance: 'Uppfyller europeiska krav på kassaregister och spårbarhet.',
+                    faq: [
+                        { q: 'Kan jag skanna streckkoder med mobilkameran utan att köpa en separat skanner?', a: 'Ja, absolut till 100%! Med S&R CloudPOS förvandlas din mobil eller bärbara dator direkt till en komplett kassaterminal utan extra hårdvara.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'Mobil AI-kvittoavläsare med automatisk OCR',
+                    overview: 'Skanna kvitton med mobilkameran och extrahera belopp och moms automatiskt till affärssystemet.',
+                    hardware: [{ name: '📱 Mobil', desc: 'Stöder iOS, Android och bärbara webbkameror.' }],
+                    steps: [
+                        { title: 'Fotografera', desc: 'Rikta kameran mot kvittot.' },
+                        { title: 'AI-bearbetning', desc: 'Text och siffror läses av på 800 ms.' },
+                        { title: 'Synkronisera', desc: 'Bokför utgiften direkt i affärssystemet.' }
+                    ],
+                    compliance: 'Krypterad och GDPR-kompatibel i Amsterdam AMS-IX.',
+                    faq: [{ q: 'Fungerar det vid otydliga kvitton?', a: 'Ja, inbyggd bildförbättring optimerar läsbarheten automatiskt.' }]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'Militär AES-256 GCM kryptering av företagsdata',
+                    overview: 'Klientbaserad kryptering i webbläsaren som skyddar databaser och känsliga dokument.',
+                    hardware: [{ name: '💻 Webbläsare', desc: 'Kompatibel med alla moderna enheter och webbläsare.' }],
+                    steps: [
+                        { title: 'Välj fil', desc: 'Dra och släpp dokumentet i valvet.' },
+                        { title: 'Ange lösenord', desc: 'Generera en stark 256-bitars krypteringsnyckel.' },
+                        { title: 'Kryptera', desc: 'Ladda ner den säkra .srvault-filen.' }
+                    ],
+                    compliance: 'Uppfyller GDPR Artikel 32 och FIPS 140-2.',
+                    faq: [{ q: 'Kan någon annan dekryptera mina filer?', a: 'Nej, äkta Zero-Knowledge på din egen enhet.' }]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'REST API-konsol för skatte- och finansutveckling',
+                    overview: 'Utvecklarkonsol för att integrera momsberäkning och fakturering i egna applikationer.',
+                    hardware: [{ name: '🌐 Språk', desc: 'Färdig kod för Python, Node.js, C#, PHP och cURL.' }],
+                    steps: [
+                        { title: 'Skapa API-nyckel', desc: 'Hämta nyckel från instrumentpanelen.' },
+                        { title: 'Testa i sandbox', desc: 'Skicka testanrop direkt i webbläsaren.' },
+                        { title: 'Integrera', desc: 'Kopiera koden direkt till ditt projekt.' }
+                    ],
+                    compliance: 'OpenAPI 3.0 och TLS 1.3 säkerhet.',
+                    faq: [{ q: 'Finns gratis testmiljö?', a: 'Ja, 500 kostnadsfria anrop per dag.' }]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'Realtidsövervakning av servrar och mikrotjänster',
+                    overview: 'Lätt övervakningsagent för CPU, minne och svarstider med fjärromstart.',
+                    hardware: [{ name: '☁️ Servrar', desc: 'Stöd för Linux, Windows Server och Docker.' }],
+                    steps: [
+                        { title: 'Installera agent', desc: 'Kör kommandot i din serverterminal.' },
+                        { title: 'Övervaka', desc: 'Följ grafer i realtid från Amsterdam-noden.' },
+                        { title: 'Hantera', desc: 'Starta om tjänster direkt vid behov.' }
+                    ],
+                    compliance: 'ISO 27001 certifierad loggning.',
+                    faq: [{ q: 'Hur mycket resurser krävs?', a: 'Mycket lite: under 15MB RAM och 0.2% CPU.' }]
+                }
+            }
+        },
+        tr: {
+            guideBadge: 'RESMİ KULLANIM & İŞLETİM KILAVUZU • 2026',
+            guideTitle: 'S&R CoreSync Yazılım Kullanım Kılavuzları & Dokümantasyon',
+            allOverview: 'Sistem Genel Bakışı ve Katalog',
+            printBtn: '🖨️ Kılavuzu Yazdır',
+            copyKeyBtn: '📋 Deneme Anahtarı Kopyala',
+            launchBtn: '⚡ Tarayıcıda Anında Başlat',
+            downloadBtn: '📥 Çevrimdışı İndir',
+            sections: {
+                overview: '📌 Amaç ve Sistem Özeti',
+                hardware: '💻 Desteklenen Donanım ve Giriş Aygıtları',
+                steps: '🚀 Adım Adım Hızlı Başlangıç Kılavuzu',
+                compliance: '🛡️ Güvenlik, Kriptografi & AB Uyumluluğu',
+                faq: '❓ Sıkça Sorulan Sorular ve Sorun Giderme'
+            },
+            apps: {
+                taxsync: {
+                    title: 'S&R TaxSync Desktop / Web',
+                    subtitle: 'Hollanda & Körfez KDV hesaplayıcı ve resmi Digipoort XML beyan sistemi',
+                    overview: 'Hollanda BTW (%21, %9, %0) ve Körfez KDV hesaplamaları için geliştirilmiş bağımsız, çevrimdışı öncelikli muhasebe yazılımı. Digipoort XML beyannameleri ve şifreli faturalar üretir.',
+                    hardware: [{ name: '🖥️ İşletim Sistemleri', desc: 'Windows 11/10, macOS ve Linux. İnternetsiz %100 çalışır.' }],
+                    steps: [
+                        { title: 'Vergi Oranını Seçin', desc: 'BTW %21, %9 veya %0 oranını belirleyin.' },
+                        { title: 'Tutarları Girin', desc: 'Vergi ve indirimleri anında hesaplayın.' },
+                        { title: 'XML Beyannamesi Üretin', desc: 'Belastingdienst için resmi Digipoort XML dosyasını oluşturun.' },
+                        { title: 'Faturayı Yazdırın', desc: 'EN 16931 uyumlu doğrulanabilir PDF faturayı dışa aktarın.' }
+                    ],
+                    compliance: 'Hollanda Vergi Kanunu AWR Madde 52 ve GDPR Madde 32 ile tam uyumludur.',
+                    faq: [{ q: 'İnternetsiz çalışır mı?', a: 'Evet, %100 Çevrimdışı-Öncelikli (Offline-First) mimariye sahiptir.' }]
+                },
+                cloudpos: {
+                    title: 'S&R CloudPOS Connector',
+                    subtitle: 'Akıllı Bulut Kasa & Cep Telefonu/Laptop Kamerasıyla Barkod Okuma',
+                    overview: 'Mağaza ve restoranları bulut ERP sistemine bağlayan hızlı kasa terminali. Ekstra barkod okuyucu tabancaya gerek olmadan doğrudan cep telefonu veya laptop kamerasıyla barkod okuma desteği sunar.',
+                    hardware: [
+                        { name: '📷 Telefon & Laptop Kamerası (Barkod Okuyucuya Gerek Yok)', desc: 'Ürün barkodlarını (EAN-13, QR, Code-128) doğrudan telefon kameranız veya laptop web kameranız ile anında ve ücretsiz tarayın!' },
+                        { name: '🔫 Harici Barkod Okuyucular (Tabanca)', desc: 'USB, Bluetooth ve 2.4GHz kablosuz el terminalleri ile tak-çalıştır uyumluluk.' },
+                        { name: '🧾 Termal Fiş Yazıcıları', desc: '80mm ve 58mm termal rulo yazıcılar için doğrudan ESC/POS protokol desteği.' }
+                    ],
+                    steps: [
+                        { title: 'Kasa Ekranını Açın', desc: 'Uygulamayı tarayıcıdan veya bağımsız olarak başlatın.' },
+                        { title: 'Barkodu Okutun', desc: '"📷 Kamerayla Barkod Tara" butonuna basarak kameranızı barkoda tutun veya el okuyucunuzu kullanın.' },
+                        { title: 'Ödemeyi Alın', desc: 'Nakit, Kredi Kartı veya iDEAL / PIN seçeneğini belirleyin.' },
+                        { title: 'Fiş Yazdırın ve Stoğu Güncelleyin', desc: 'Satışı tamamlayarak fişi yazdırın, stok bulutta anında düşsün.' }
+                    ],
+                    compliance: 'Avrupa yazar kasa denetim standartlarına ve fiş mevzuatına tam uyumludur.',
+                    faq: [
+                        { q: 'Harici bir barkod okuyucu almadan telefon veya laptop kameramla barkod okutabilir miyim?', a: 'Evet, kesinlikle ve %100! S&R CloudPOS içindeki optik barkod okuyucu sayesinde cep telefonunuzu veya laptop kameranızı anında profesyonel bir barkod okuyucuya dönüştürebilirsiniz.' }
+                    ]
+                },
+                flowscan: {
+                    title: 'S&R FlowScan AI Mobile',
+                    subtitle: 'Yapay Zeka Destekli Mobil Fatura ve Fiş Tarayıcı',
+                    overview: 'Mobil kamera ile fatura ve fişleri tarayıp tutarları ve vergi oranlarını %99.4 doğrulukla ERP sistemine aktarır.',
+                    hardware: [{ name: '📱 Mobil Cihazlar', desc: 'iPhone (iOS 17+), Android 14+ ve laptop web kameraları.' }],
+                    steps: [
+                        { title: 'Kamerayı Hizalayın', desc: 'Fişi tarama çerçevesinin içine yerleştirin.' },
+                        { title: 'Yakala ve Tara', desc: 'Yapay zeka verileri 800 milisaniyede okur.' },
+                        { title: 'ERP\'ye Aktar', desc: 'Masrafı tek tıkla şirket sistemine kaydedin.' }
+                    ],
+                    compliance: 'Amsterdam AMS-IX veri merkezinde GDPR uyumlu şifreli saklama.',
+                    faq: [{ q: 'Buruşuk fişleri okur mu?', a: 'Evet, akıllı filtreler kontrast ve netliği otomatik düzenler.' }]
+                },
+                vault: {
+                    title: 'S&R SecureVault B2B',
+                    subtitle: 'Askeri Seviye AES-256 GCM Veri Şifreleme',
+                    overview: 'Veritabanı yedeklerini ve hassas belgeleri tarayıcıda askeri standartta şifreler.',
+                    hardware: [{ name: '💻 Tarayıcı', desc: 'Tüm modern tarayıcılarda istemci tarafında çalışır.' }],
+                    steps: [
+                        { title: 'Dosya Seçin', desc: 'Belgeyi şifreleme alanına bırakın.' },
+                        { title: 'Parola Belirleyin', desc: '256-bit güçlü anahtar türetin.' },
+                        { title: 'Şifreleyin', desc: 'Güvenli .srvault dosyasını cihazınıza indirin.' }
+                    ],
+                    compliance: 'GDPR Madde 32 ve FIPS 140-2 şifreleme standartlarına uygundur.',
+                    faq: [{ q: 'Başkaları dosyamı görebilir mi?', a: 'Hayır, Zero-Knowledge istemci tarafı şifreleme uygulanır.' }]
+                },
+                sdk: {
+                    title: 'S&R Financial AI SDK Console',
+                    subtitle: 'Geliştiriciler İçin REST API ve Vergi Algoritmaları',
+                    overview: 'Yazılım ekiplerinin vergi hesaplama ve e-fatura altyapısını kendi yazılımlarına entegre etmesini sağlayan konsol.',
+                    hardware: [{ name: '🌐 Diller', desc: 'Python, Node.js, C#, PHP ve cURL hazır kodları.' }],
+                    steps: [
+                        { title: 'API Anahtarı Alın', desc: 'Geliştirici panelinden anahtarınızı üretin.' },
+                        { title: 'Sandbox\'ta Test Edin', desc: 'Tarayıcıda anlık test istekleri gönderin.' },
+                        { title: 'Kodu Ekleyin', desc: 'Hazır kodu kopyalayarak projenize dahil edin.' }
+                    ],
+                    compliance: 'OpenAPI 3.0 ve TLS 1.3 standartları.',
+                    faq: [{ q: 'Ücretsiz deneme var mı?', a: 'Evet, günlük 500 ücretsiz test isteği sunulmaktadır.' }]
+                },
+                terminal: {
+                    title: 'S&R Cloud Terminal Agent',
+                    subtitle: 'Gerçek Zamanlı Sunucu ve Mikroservis İzleme',
+                    overview: 'Amsterdam sunucularında CPU, RAM ve veritabanı yanıt sürelerini izleyen hafif telemetri ajanı.',
+                    hardware: [{ name: '☁️ Sunucular', desc: 'Linux, Windows Server ve Docker konteynerleri.' }],
+                    steps: [
+                        { title: 'Ajanı Kurun', desc: 'Sunucuda tek satırlık terminal komutu çalıştırın.' },
+                        { title: 'İzleyin', desc: 'Anlık metrikleri ve gecikme grafiklerini takip edin.' },
+                        { title: 'Yönetin', desc: 'Olası kilitlenmelerde servisleri tek tıkla yeniden başlatın.' }
+                    ],
+                    compliance: 'ISO 27001 onaylı güvenlik günlükleri ve mTLS bağlantı.',
+                    faq: [{ q: 'Sunucuyu yorar mı?', a: 'Hayır, 15MB\'tan az RAM ve %0.2\'den az CPU tüketir.' }]
+                }
+            }
+        }
+    };
+
+    let activeDocsLang = 'ar';
+    let activeDocsAppId = 'cloudpos';
+
+    // -------------------------------------------------------------
+    // 13. Multilingual Docs Modal Injector & Controller
+    // -------------------------------------------------------------
+    function ensureDocsModalInDom() {
+        let overlay = document.getElementById('srSoftwareDocsModal');
+        if (overlay) return overlay;
+
+        overlay = document.createElement('div');
+        overlay.id = 'srSoftwareDocsModal';
+        overlay.className = 'sr-docs-modal-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+
+        overlay.innerHTML = `
+            <div class="sr-docs-dialog" id="srDocsDialog">
+                <!-- Header with Title & Language Switcher -->
+                <div class="sr-docs-header">
+                    <div class="sr-docs-header-left">
+                        <span class="sr-docs-header-icon" id="srDocsAppIcon">📖</span>
+                        <div class="sr-docs-header-titles">
+                            <h3 id="srDocsHeaderTitle">دليل تشغيل واستخدام برمجيات S&R CoreSync</h3>
+                            <p id="srDocsHeaderBadge">دليل الاستخدام والتشغيل المعتمد • 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- 6-Language Switcher Bar -->
+                    <div class="sr-docs-lang-bar">
+                        <button type="button" class="sr-docs-lang-btn active" data-lang="ar" onclick="setDocsLanguage('ar')">🇸🇦 العربية</button>
+                        <button type="button" class="sr-docs-lang-btn" data-lang="en" onclick="setDocsLanguage('en')">🇬🇧 English</button>
+                        <button type="button" class="sr-docs-lang-btn" data-lang="nl" onclick="setDocsLanguage('nl')">🇳🇱 Nederlands</button>
+                        <button type="button" class="sr-docs-lang-btn" data-lang="de" onclick="setDocsLanguage('de')">🇩🇪 Deutsch</button>
+                        <button type="button" class="sr-docs-lang-btn" data-lang="sv" onclick="setDocsLanguage('sv')">🇸🇪 Svenska</button>
+                        <button type="button" class="sr-docs-lang-btn" data-lang="tr" onclick="setDocsLanguage('tr')">🇹🇷 Türkçe</button>
+                    </div>
+
+                    <button type="button" class="sr-docs-close-btn" onclick="closeSoftwareDocsModal()" title="إغلاق">✕</button>
+                </div>
+
+                <!-- Application Tabs inside Docs -->
+                <div class="sr-docs-app-tabs" id="srDocsAppTabs">
+                    <button type="button" class="sr-docs-app-tab" data-app="taxsync" onclick="setDocsActiveApp('taxsync')">💻 TaxSync Desktop</button>
+                    <button type="button" class="sr-docs-app-tab" data-app="flowscan" onclick="setDocsActiveApp('flowscan')">📱 FlowScan AI Mobile</button>
+                    <button type="button" class="sr-docs-app-tab active" data-app="cloudpos" onclick="setDocsActiveApp('cloudpos')">⚡ CloudPOS (الكاميرا & POS)</button>
+                    <button type="button" class="sr-docs-app-tab" data-app="vault" onclick="setDocsActiveApp('vault')">🛡️ SecureVault B2B</button>
+                    <button type="button" class="sr-docs-app-tab" data-app="sdk" onclick="setDocsActiveApp('sdk')">🧩 Financial AI SDK</button>
+                    <button type="button" class="sr-docs-app-tab" data-app="terminal" onclick="setDocsActiveApp('terminal')">⚙️ Cloud Terminal</button>
+                </div>
+
+                <!-- Scrollable Guide Body -->
+                <div class="sr-docs-body" id="srDocsBody">
+                    <!-- Injected dynamically by renderDocsModalContent() -->
+                </div>
+
+                <!-- Footer with Action Buttons -->
+                <div class="sr-docs-footer">
+                    <div class="sr-docs-footer-left">
+                        <button type="button" class="sr-hero-btn sr-hero-btn-primary" id="srDocsLaunchBtn" onclick="launchAppFromDocs()">
+                            ⚡ تشغيل فوري في المتصفح
+                        </button>
+                        <a href="downloads/SR-CloudPOS-Terminal.html" id="srDocsDownloadLink" download class="sr-hero-btn sr-hero-btn-secondary">
+                            📥 تحميل النسخة أوفلاين
+                        </a>
+                    </div>
+                    <div class="sr-docs-footer-right">
+                        <button type="button" class="btn-software-guide" onclick="copyTrialKeyFromDocs()">
+                            📋 نسخ مفتاح تجريبي
+                        </button>
+                        <button type="button" class="btn-software-guide" onclick="window.print()">
+                            🖨️ طباعة الدليل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) closeSoftwareDocsModal();
+        });
+
+        document.body.appendChild(overlay);
+        return overlay;
+    }
+
+    window.openSoftwareDocsModal = function(appId = 'cloudpos', lang = null) {
+        if (appId && appId !== 'all' && SOFTWARE_APPS[appId]) {
+            activeDocsAppId = appId;
+        } else if (!activeDocsAppId) {
+            activeDocsAppId = 'cloudpos';
+        }
+
+        if (lang && SOFTWARE_DOCS[lang]) {
+            activeDocsLang = lang;
+        } else {
+            // Check page language or current locale
+            const htmlLang = (document.documentElement.getAttribute('lang') || 'ar').toLowerCase();
+            if (SOFTWARE_DOCS[htmlLang]) activeDocsLang = htmlLang;
+        }
+
+        const overlay = ensureDocsModalInDom();
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        renderDocsModalContent();
+        playAppBeep(640, 'sine', 0.12);
+    };
+
+    window.closeSoftwareDocsModal = function() {
+        const overlay = document.getElementById('srSoftwareDocsModal');
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        playAppBeep(340, 'triangle', 0.08);
+    };
+
+    window.setDocsLanguage = function(lang) {
+        if (!SOFTWARE_DOCS[lang]) return;
+        activeDocsLang = lang;
+        renderDocsModalContent();
+        playAppBeep(720, 'sine', 0.09);
+    };
+
+    window.setDocsActiveApp = function(appId) {
+        if (!SOFTWARE_APPS[appId]) return;
+        activeDocsAppId = appId;
+        renderDocsModalContent();
+        playAppBeep(580, 'sine', 0.09);
+    };
+
+    function renderDocsModalContent() {
+        const docPack = SOFTWARE_DOCS[activeDocsLang] || SOFTWARE_DOCS.ar;
+        const appDoc = docPack.apps[activeDocsAppId] || docPack.apps.cloudpos;
+        const appMeta = SOFTWARE_APPS[activeDocsAppId] || SOFTWARE_APPS.cloudpos;
+
+        // Update Header Titles
+        const headerTitle = document.getElementById('srDocsHeaderTitle');
+        const headerBadge = document.getElementById('srDocsHeaderBadge');
+        const appIcon = document.getElementById('srDocsAppIcon');
+        if (headerTitle) headerTitle.innerText = `${appDoc.title} • ${docPack.guideTitle}`;
+        if (headerBadge) headerBadge.innerText = docPack.guideBadge;
+        if (appIcon) appIcon.innerText = appMeta.icon || '📖';
+
+        // Update Language Buttons Active State
+        document.querySelectorAll('.sr-docs-lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === activeDocsLang) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update App Tabs Active State
+        document.querySelectorAll('.sr-docs-app-tab').forEach(btn => {
+            if (btn.getAttribute('data-app') === activeDocsAppId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update Footer Buttons
+        const launchBtn = document.getElementById('srDocsLaunchBtn');
+        const downloadLink = document.getElementById('srDocsDownloadLink');
+        if (launchBtn) launchBtn.innerHTML = `⚡ ${docPack.launchBtn} (${appDoc.title})`;
+        if (downloadLink) {
+            downloadLink.innerHTML = `📥 ${docPack.downloadBtn}`;
+            downloadLink.href = appMeta.offlineFile || 'downloads/SR-CloudPOS-Terminal.html';
+            downloadLink.setAttribute('download', (appMeta.offlineFile || '').split('/').pop() || 'download.html');
+        }
+
+        // Render Body Sections
+        const bodyEl = document.getElementById('srDocsBody');
+        if (!bodyEl) return;
+
+        let hwHtml = '';
+        if (appDoc.hardware && appDoc.hardware.length) {
+            hwHtml = `
+                <div class="sr-docs-section-card">
+                    <div class="sr-docs-section-header">
+                        <span class="sr-docs-section-icon">💻</span>
+                        <h4 class="sr-docs-section-title">${docPack.sections.hardware}</h4>
+                    </div>
+                    <div class="sr-docs-hw-grid">
+                        ${appDoc.hardware.map(h => `
+                            <div class="sr-docs-hw-item">
+                                <span class="sr-docs-hw-name">${h.name}</span>
+                                <span class="sr-docs-hw-desc">${h.desc}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        let stepsHtml = '';
+        if (appDoc.steps && appDoc.steps.length) {
+            stepsHtml = `
+                <div class="sr-docs-section-card">
+                    <div class="sr-docs-section-header">
+                        <span class="sr-docs-section-icon">🚀</span>
+                        <h4 class="sr-docs-section-title">${docPack.sections.steps}</h4>
+                    </div>
+                    <div class="sr-docs-steps-list">
+                        ${appDoc.steps.map((s, idx) => `
+                            <div class="sr-docs-step-item">
+                                <div class="sr-docs-step-number">${idx + 1}</div>
+                                <div class="sr-docs-step-content">
+                                    <h4>${s.title}</h4>
+                                    <p>${s.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        let faqHtml = '';
+        if (appDoc.faq && appDoc.faq.length) {
+            faqHtml = `
+                <div class="sr-docs-section-card">
+                    <div class="sr-docs-section-header">
+                        <span class="sr-docs-section-icon">❓</span>
+                        <h4 class="sr-docs-section-title">${docPack.sections.faq}</h4>
+                    </div>
+                    <div>
+                        ${appDoc.faq.map(f => `
+                            <div class="sr-docs-faq-item">
+                                <div class="sr-docs-faq-q">❓ ${f.q}</div>
+                                <p class="sr-docs-faq-a">💡 ${f.a}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        bodyEl.innerHTML = `
+            <!-- Overview Card -->
+            <div class="sr-docs-section-card">
+                <div class="sr-docs-section-header">
+                    <span class="sr-docs-section-icon">📌</span>
+                    <h4 class="sr-docs-section-title">${docPack.sections.overview}</h4>
+                </div>
+                <h3 style="color: var(--sr-app-gold); margin: 0 0 8px 0; font-size: 1.15rem;">${appDoc.title}</h3>
+                <p style="color: #94a3b8; font-size: 0.86rem; margin-bottom: 12px; font-weight: 600;">${appDoc.subtitle}</p>
+                <p class="sr-docs-text">${appDoc.overview}</p>
+            </div>
+
+            ${hwHtml}
+            ${stepsHtml}
+
+            <!-- Compliance Card -->
+            <div class="sr-docs-section-card">
+                <div class="sr-docs-section-header">
+                    <span class="sr-docs-section-icon">🛡️</span>
+                    <h4 class="sr-docs-section-title">${docPack.sections.compliance}</h4>
+                </div>
+                <p class="sr-docs-text">${appDoc.compliance}</p>
+            </div>
+
+            ${faqHtml}
+        `;
+    }
+
+    window.launchAppFromDocs = function() {
+        const appToOpen = activeDocsAppId || 'cloudpos';
+        closeSoftwareDocsModal();
+        setTimeout(() => {
+            if (typeof openSoftwareLiveApp === 'function') {
+                openSoftwareLiveApp(appToOpen);
+            }
+        }, 150);
+    };
+
+    window.copyTrialKeyFromDocs = function() {
+        const appMeta = SOFTWARE_APPS[activeDocsAppId] || SOFTWARE_APPS.taxsync;
+        const key = appMeta.defaultKey || 'SRTX-PRO-2026-TRIAL-KEY';
+        navigator.clipboard.writeText(key).then(() => {
+            if (typeof showPortalToast === 'function') {
+                showPortalToast(`🔑 تم نسخ مفتاح الترخيص التجريبي: ${key}`);
+            } else {
+                alert(`تم نسخ المفتاح: ${key}`);
+            }
+        }).catch(() => {
+            alert(`المفتاح: ${key}`);
+        });
+    };
+
+    // -------------------------------------------------------------
+    // 14. Real-time Search and Filter for Software Marketplace
+    // -------------------------------------------------------------
+    window.filterSoftwareBySearch = function(query) {
+        const clean = (query || '').trim().toLowerCase();
+        const clearBtn = document.getElementById('srSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = clean ? 'block' : 'none';
+
+        const cards = document.querySelectorAll('#softwareGridContainer .software-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const text = (card.innerText || '').toLowerCase();
+            const category = (card.getAttribute('data-category') || '').toLowerCase();
+            const matches = !clean || text.includes(clean) || category.includes(clean);
+
+            if (matches) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Handle no results feedback
+        let noResEl = document.getElementById('srSoftwareNoResults');
+        if (visibleCount === 0) {
+            if (!noResEl) {
+                noResEl = document.createElement('div');
+                noResEl.id = 'srSoftwareNoResults';
+                noResEl.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 40px; color: #94a3b8; font-size: 1rem;';
+                noResEl.innerHTML = `🔍 لم يتم العثور على برمجيات تطابق البحث: <strong>"${clean}"</strong>`;
+                const container = document.getElementById('softwareGridContainer');
+                if (container) container.appendChild(noResEl);
+            } else {
+                noResEl.style.display = 'block';
+                noResEl.innerHTML = `🔍 لم يتم العثور على برمجيات تطابق البحث: <strong>"${clean}"</strong>`;
+            }
+        } else if (noResEl) {
+            noResEl.style.display = 'none';
+        }
+    };
+
+    window.clearSoftwareSearch = function() {
+        const input = document.getElementById('srSoftwareSearchInput');
+        if (input) input.value = '';
+        filterSoftwareBySearch('');
+    };
+
+    // -------------------------------------------------------------
+    // 15. Auto-Trigger via URL Query Params
     // -------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -1701,6 +2751,13 @@ var response = await client.PostAsync("https://api.coresync.eu/v1/tax/calculate-
                 openSoftwareLiveApp(appParam);
             }, 400);
         }
+        const docsParam = urlParams.get('docs') || urlParams.get('manual') || urlParams.get('guide');
+        if (docsParam) {
+            setTimeout(() => {
+                openSoftwareDocsModal(docsParam === '1' ? 'cloudpos' : docsParam);
+            }, 500);
+        }
     });
 
 })();
+
