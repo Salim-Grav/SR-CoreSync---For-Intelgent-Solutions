@@ -57,7 +57,7 @@ async function capture() {
       const card = document.getElementById('hotlinePopoverCard');
       return {
         classes: w.className,
-        cardDisplay: window.getComputedStyle(card).display,
+        cardDisplay: window.getComputedStyle(card).display, opacity: window.getComputedStyle(card).opacity, visibility: window.getComputedStyle(card).visibility, zIndex: window.getComputedStyle(card).zIndex, bg: window.getComputedStyle(card).backgroundColor,
         cardRect: { x: card.getBoundingClientRect().x, y: card.getBoundingClientRect().y, w: card.getBoundingClientRect().width, h: card.getBoundingClientRect().height }
       };
     })()`,
