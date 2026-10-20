@@ -121,7 +121,7 @@
             <h3>📷 قارئ باركود الكاميرا</h3>
             <p class="header-subtitle">وجّه كاميرا الهاتف أو اللابتوب نحو الباركود</p>
             <div class="cam-view">
-                <video id="webcamVideo" class="cam-video" autoplay playsinline muted></video>
+                <video id="webcamVideo" class="cam-video" autoplay muted></video>
                 <div class="cam-reticle">
                     <div class="cam-laser"></div>
                 </div>
@@ -191,6 +191,8 @@
                     .then(stream => {
                         streamObj = stream;
                         const v = document.getElementById('webcamVideo');
+                        v.setAttribute('playsinline', '');
+                        v.playsInline = true;
                         v.srcObject = stream;
                         v.play().catch(() => {});
                     }).catch(() => {});
