@@ -1,0 +1,45 @@
+const fs = require('fs');
+const vm = require('vm');
+
+const html = fs.readFileSync('fr/demo.html', 'utf8');
+const lines = html.split('\n');
+
+// Find all <script>...</script> blocks
+let inScript = false;
+let scriptLines = [];
+let startLine = 0;
+
+for (let i = 0; i < lines.length; i++) {
+  const line = lines[i];
+  if (line.includes('<script') && !line.includes('src=')) {
+    inScript = true;
+    scriptLines = [];
+    startLine = i + 1;
+    continue;
+  }
+  if (line.includes('</script>') && inScript) {
+    inScript = false;
+    const code = scriptLines.join('\n');
+    console.log(`Checking script from line ${startLine} (${code.length} chars)...`);
+    try {
+      new vm.Script(code);
+      console.log(`✅ Script from line ${startLine} is valid JS!`);
+    } catch (err) {
+      console.log(`❌ Script from line ${startLine} error at relative line ${err.stack.split('\n')[0]}:`);
+      console.log(err.message);
+      // print line around error
+      const lineMatch = err.stack.match(/evalmachine\.<anonymous>:(\d+)/);
+      if (lineMatch) {
+        const errRelLine = parseInt(lineMatch[1], 10);
+        console.log(`Actual file line approx: ${startLine + errRelLine - 1}`);
+        for (let j = Math.max(0, errRelLine - 3); j <= Math.min(scriptLines.length - 1, errRelLine + 2); j++) {
+          console.log(`  ${startLine + j}: ${scriptLines[j]}`);
+        }
+      }
+    }
+    continue;
+  }
+  if (inScript) {
+    scriptLines.push(line);
+  }
+}
