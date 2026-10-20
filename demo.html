@@ -75,9 +75,15 @@
 
     <link rel="stylesheet" href="./css/demo-portal.css?v=sovereign2026_fixed">
     <!-- S&R CoreSync Zero-Warnings Validated Build -->
-
-    
-
+    <style>
+        .nav-link-verify { text-decoration: none; color: inherit; }
+        .table-action-verify { text-decoration: none; border-color: #10b981; color: #34d399; }
+        .table-action-verify-flex { text-decoration: none; border-color: #10b981; color: #34d399; display: inline-flex; align-items: center; gap: 4px; }
+        .tracker-readiness-highlight { font-size: 1.05rem; }
+        .tracker-val-sprint { color: #34d399; }
+        .tracker-val-deposit { color: #c5a880; }
+        .tracker-val-compliance { color: #38bdf8; }
+    </style>
 </head>
 <body>
 
@@ -488,7 +494,7 @@
                 <span>مراحل المشروع (Sprint Tracker)</span>
             </div>
 
-            <a href="verify.html?doc=OF-2026-1021" target="_blank" class="nav-item" style="text-decoration: none; color: inherit;">
+            <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="nav-item nav-link-verify">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 <span>التحقق من الوثائق (Verify)</span>
             </a>
@@ -831,7 +837,7 @@
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026Modal()">💻 عرض وتوقيع العقد التقني</button>
-                                            <a href="verify.html?doc=OF-2026-1021" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399;">🛡️ التحقق الرقمي</a>
+                                            <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">سداد iDEAL</button>
                                         </div>
                                     </td>
@@ -846,7 +852,7 @@
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026FinModal()">📊 عرض وتوقيع العقد المالي</button>
-                                            <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399;">🛡️ التحقق الرقمي</a>
+                                            <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">سداد iDEAL</button>
                                         </div>
                                     </td>
@@ -1535,7 +1541,7 @@
                         <button type="button" class="btn-cert-print" onclick="openContractOf2026FinModal()">
                             📊 العقد المالي (استرداد 4,410 €)
                         </button>
-                        <a href="verify.html?doc=OF-2026-1021" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399; display: inline-flex; align-items: center; gap: 4px;">
+                        <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify-flex">
                             🛡️ فحص التوثيق المشفر
                         </a>
                     </div>
@@ -1543,7 +1549,7 @@
 
                 <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
                     <span>مؤشر الجاهزية الإجمالية للمشروع (Overall Architecture & Development Readiness):</span>
-                    <strong class="text-gold font-num" style="font-size: 1.05rem;">78% مكتمل</strong>
+                    <strong class="text-gold font-num tracker-readiness-highlight">78% مكتمل</strong>
                 </div>
                 <div class="tracker-progress-bar-wrap">
                     <div class="tracker-progress-bar-fill"></div>
@@ -1556,15 +1562,15 @@
                     </div>
                     <div class="tracker-stat-box">
                         <div class="tracker-stat-lbl">المرحلة النشطة الحالية</div>
-                        <div class="tracker-stat-val" style="color: #34d399;">المرحلة 1 &amp; 2 (Sprint 1)</div>
+                        <div class="tracker-stat-val tracker-val-sprint">المرحلة 1 &amp; 2 (Sprint 1)</div>
                     </div>
                     <div class="tracker-stat-box">
                         <div class="tracker-stat-lbl">الدفعة المستحقة لبدء التأسيس</div>
-                        <div class="tracker-stat-val" style="color: #c5a880;">€ 7,623 (30%)</div>
+                        <div class="tracker-stat-val tracker-val-deposit">€ 7,623 (30%)</div>
                     </div>
                     <div class="tracker-stat-box">
                         <div class="tracker-stat-lbl">الامتثال الأوروبي والضريبي</div>
-                        <div class="tracker-stat-val" style="color: #38bdf8;">GDPR &amp; BTW 100%</div>
+                        <div class="tracker-stat-val tracker-val-compliance">GDPR &amp; BTW 100%</div>
                     </div>
                 </div>
             </div>
