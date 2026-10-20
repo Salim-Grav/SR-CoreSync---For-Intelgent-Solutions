@@ -27,27 +27,33 @@
         .slip-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
         .slip-total { border-top: 1px solid #111; padding-top: 6px; margin-top: 6px; font-weight: 800; font-size: 1.05rem; }
         .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; margin-top: 12px; font-size: 0.95rem; }
+        .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
+        .header-title { font-size: 1.25rem; font-weight: 800; }
+        .header-subtitle { font-size: 0.8rem; color: var(--text-dim); }
+        .header-status { color: var(--emerald); font-weight: 700; font-size: 0.85rem; }
+        .card-title { font-size: 1rem; color: var(--gold); margin-bottom: 12px; }
+        .barcode { text-align: center; margin-top: 8px; font-size: 0.75rem; font-family: monospace; letter-spacing: 2px; }
     </style>
 </head>
 <body>
     <header>
         <div>
-            <h1 style="font-size:1.25rem;">⚡ S&R CloudPOS Connector v3.1</h1>
-            <span style="font-size:0.8rem; color:var(--text-dim);">محطة كاشير ونقاط بيع متصلة بالـ ERP أوفلاين وسحابياً</span>
+            <h1 class="header-title">⚡ S&R CloudPOS Connector v3.1</h1>
+            <span class="header-subtitle">محطة كاشير ونقاط بيع متصلة بالـ ERP أوفلاين وسحابياً</span>
         </div>
-        <span style="color:var(--emerald); font-weight:700; font-size:0.85rem;">● متصل بالسحابة (AMS-01)</span>
+        <span class="header-status">● متصل بالسحابة (AMS-01)</span>
     </header>
 
     <div class="grid">
         <div class="card">
-            <h3 style="font-size:1rem; color:var(--gold); margin-bottom:12px;">قائمة المنتجات (انقر للإضافة):</h3>
+            <h3 class="card-title">قائمة المنتجات (انقر للإضافة):</h3>
             <div class="products-grid">
                 <button class="prod-btn" onclick="add('قهوة اسبريسو', 3.50, 0.09)">☕ قهوة<br><strong>€ 3.50</strong></button>
                 <button class="prod-btn" onclick="add('شطيرة غداء', 7.50, 0.09)">🥪 غداء<br><strong>€ 7.50</strong></button>
                 <button class="prod-btn" onclick="add('استشارة محاسبية', 120.00, 0.21)">💼 استشارة<br><strong>€ 120.00</strong></button>
                 <button class="prod-btn" onclick="add('محطة كاشير POS', 250.00, 0.21)">🖥️ كاشير<br><strong>€ 250.00</strong></button>
             </div>
-            <button class="btn" style="background:rgba(255,255,255,0.08); border:1px solid var(--border);" onclick="clearCart()">إفراغ السلة 🗑️</button>
+            <button class="btn btn-secondary" onclick="clearCart()">إفراغ السلة 🗑️</button>
         </div>
 
         <div class="card">
@@ -63,7 +69,7 @@
                     <span>المجموع الإجمالي:</span>
                     <strong id="slipTot">€ 7.00</strong>
                 </div>
-                <div style="text-align:center; margin-top:8px; font-size:0.75rem;">||| | |||| | ||| ||||</div>
+                <div class="barcode">||| | |||| | ||| ||||</div>
             </div>
             <button class="btn" onclick="pay()">إتمام الدفع وطباعة الإيصال 🖨️</button>
         </div>
