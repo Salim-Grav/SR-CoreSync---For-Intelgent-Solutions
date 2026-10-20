@@ -528,6 +528,26 @@
     padding: 16px;
 }
 
+.sr-flowscan-preview-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: contrast(1.1);
+    display: none;
+    z-index: 1;
+}
+
+.sr-flowscan-scanner-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .sr-scan-laser-line {
     position: absolute;
     top: 0;
@@ -537,11 +557,47 @@
     background: linear-gradient(90deg, transparent, #10b981, #34d399, transparent);
     box-shadow: 0 0 12px #10b981, 0 0 24px #34d399;
     animation: srScanMove 2.5s ease-in-out infinite alternate;
+    z-index: 3;
 }
 
 @keyframes srScanMove {
     0% { top: 5%; }
     100% { top: 92%; }
+}
+
+.sr-flowscan-upload-zone {
+    border: 1px dashed rgba(197, 168, 128, 0.4);
+    background: rgba(197, 168, 128, 0.05);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.sr-flowscan-upload-zone:hover,
+.sr-flowscan-upload-zone.dragover {
+    border-color: var(--sr-app-emerald);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.sr-flowscan-upload-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sr-flowscan-upload-desc {
+    font-size: 0.7rem;
+    color: var(--sr-app-text-muted);
 }
 
 .sr-preset-receipts-row {
