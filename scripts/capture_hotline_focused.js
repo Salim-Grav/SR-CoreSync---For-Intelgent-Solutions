@@ -63,7 +63,7 @@ async function capture() {
     })()`,
     returnByValue: true
   });
-  console.log('Eval result:', evalRes.result.value);
+  console.log('Eval result:', evalRes.result.result.value);
 
   await new Promise(r => setTimeout(r, 1200));
 
