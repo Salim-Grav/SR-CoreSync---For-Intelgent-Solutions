@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="el" dir="ltr" data-page-language="en">
 <head>
+    <meta charset="UTF-8">
 
     <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
     <script id="srLangAutoDetect">
@@ -53,7 +54,6 @@
     })();
     </script>
 
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -122,7 +122,7 @@
         <span class="sovereign-lang-current-label">EL</span>
         <svg class="sovereign-lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
-    <div class="sovereign-lang-menu" id="sovereignLangMenu" role="menu">
+    <div class="sovereign-lang-menu" id="sovereignLangMenu">
         <div class="sovereign-lang-search-box">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input type="text" class="sovereign-lang-search-input" id="sovereignLangSearch" placeholder="Search language / Wählen Sie Sprache..." autocomplete="off">
@@ -878,7 +878,7 @@
                     <div class="ai-prompt-chips">
                         <div class="prompt-chip" onclick="askAiPrompt('Analyze October cash flow and projected profit margin')">📊 October Cash Flow Telemetry Analysis</div>
                         <div class="prompt-chip" onclick="askAiPrompt('Which pending invoices are nearing maturity?')">⏳ Overdue Invoices</div>
-                        <div class="prompt-chip" onclick="askAiPrompt('Provide recommendations to optimize inventory holding costs based on last week's telemetry')">💡 Warehouse Holding Cost Optimization</div>
+                        <div class="prompt-chip" onclick="askAiPrompt('Provide recommendations to optimize inventory holding costs based on recent weekly telemetry')">💡 Warehouse Holding Cost Optimization</div>
                     </div>
 
                     <div class="ai-chat-input-bar">
@@ -1334,7 +1334,7 @@
                             <span>👥 Team Size / Employees</span>
                             <span class="roi-val-display font-num" id="dispRoiTeam">20 staff</span>
                         </div>
-                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" oninput="calcPortalRoi()" />
+                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" oninput="calcPortalRoi()" / title="Team Size / Employees" aria-label="Team Size / Employees">
                     </div>
 
                     <div class="roi-slider-box">
@@ -1342,7 +1342,7 @@
                             <span>⏱️ Manual Tasks / Hours per Week</span>
                             <span class="roi-val-display font-num" id="dispRoiHours">18 hrs/wk</span>
                         </div>
-                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" oninput="calcPortalRoi()" />
+                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" oninput="calcPortalRoi()" / title="Manual Hours per Week" aria-label="Manual Hours per Week">
                     </div>
 
                     <div class="roi-slider-box">
@@ -1350,7 +1350,7 @@
                             <span>💶 Average Hourly Rate (€)</span>
                             <span class="roi-val-display font-num" id="dispRoiCost">€ 45 / hr</span>
                         </div>
-                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" oninput="calcPortalRoi()" />
+                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" oninput="calcPortalRoi()" / title="Average Hourly Cost" aria-label="Average Hourly Cost">
                     </div>
                 </div>
 
@@ -2387,9 +2387,9 @@
             });
         }
 
-        // =========================================================================
+        // -----------------------------------------------------====================
         // Enterprise CoreSync Engine Logic
-        // =========================================================================
+        // -----------------------------------------------------====================
         let currentCurrency = 'EUR';
         let currentVatRate = 0.21;
         const currencyConfig = {
@@ -2452,9 +2452,9 @@
             }
         }
 
-        // =========================================================================
+        // -----------------------------------------------------====================
         // Enterprise CoreSync Engine Logic
-        // =========================================================================
+        // -----------------------------------------------------====================
         const tourSteps = [
             {
                 targetId: 'currencyVatSimulatorBar',
@@ -2575,9 +2575,9 @@
             if (card) card.style.display = 'none';
         }
 
-        // =========================================================================
+        // -----------------------------------------------------====================
         // Enterprise CoreSync Engine Logic
-        // =========================================================================
+        // -----------------------------------------------------====================
         function openExecutivePdfModal() {
             updateGlobalFinancials();
             const dateEl = document.getElementById('pdfDateDisplay');
@@ -2609,9 +2609,9 @@
             const key = document.getElementById('modalSwKey').innerText;
 
             // Enterprise CoreSync Engine Logic
-            const fileContent = `=====================================================
+            const fileContent = `-----------------------------------------------------
 ${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
-=====================================================
+-----------------------------------------------------
 Publisher: S&R CoreSync Solutions B.V. (Amsterdam, Netherlands)
 License Key: ${key}
 Issued: 2026-10-06
@@ -2624,7 +2624,7 @@ INSTALLATION INSTRUCTIONS:
 
 Support & Documentation: https://coresync.cloud/docs
 Direct Founders Contact: info@coresync.cloud
-=====================================================
+-----------------------------------------------------
 (c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
 `;
             const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
@@ -2723,9 +2723,9 @@ Direct Founders Contact: info@coresync.cloud
         }
 
         
-        /* =========================================================
+        /* -----------------------------------------------------====
            Desktop Software Interactive OS Simulator
-           ========================================================= */
+           -----------------------------------------------------==== */
         let currentSimApp = 'taxsync';
         let generatedDigipoortXml = '';
 
@@ -2884,9 +2884,9 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             showPortalToast('📁 Official Digipoort XML file downloaded to your device!');
         }
 
-        /* =========================================================
+        /* -----------------------------------------------------====
            International Payment Gateway & Digital Licensing (Mollie iDEAL & Stripe)
-           ========================================================= */
+           -----------------------------------------------------==== */
         let currentCheckoutApp = 'taxsync';
         let selectedGateway = 'ideal';
 
@@ -3725,7 +3725,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <div class="hotline-popover-card" id="hotlinePopoverCard">
             <div class="hotline-header-row">
                 <span class="hotline-header-title">Direct Executive Hotline</span>
-                <button type="button" class="btn-modal-close-sm font-num" onclick="toggleHotlineWidget(event)" style="background:none;border:none;color:#c5a880;cursor:pointer;font-size:16px;">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="toggleHotlineWidget(event)" aria-label="Close">✕</button>
             </div>
             
             <div class="hotline-founder-box">
@@ -3737,7 +3737,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
                 <div class="hotline-actions">
-                    <a href="https://wa.me/31618111116" target="_blank" class="hotline-btn-wa" id="btnHotlineWaSalim">
+                    <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaSalim">
                         <span>WhatsApp</span>
                     </a>
                     <a href="tel:+31618111116" class="hotline-btn-call">
@@ -3755,7 +3755,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
                 <div class="hotline-actions">
-                    <a href="https://wa.me/31687710290" target="_blank" class="hotline-btn-wa" id="btnHotlineWaRaed">
+                    <a href="https://wa.me/31687710290" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaRaed">
                         <span>WhatsApp</span>
                     </a>
                     <a href="tel:+31687710290" class="hotline-btn-call">
