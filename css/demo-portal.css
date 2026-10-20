@@ -3516,4 +3516,197 @@ html[dir="rtl"] .hotline-popover-card {
     line-height: 1.35;
 }
 
+/* ==========================================================================
+   Project Milestone & Sprint Tracker Styles (Feature 2 & Suggestions)
+   ========================================================================== */
+.tracker-header-box {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+.tracker-header-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c5a880, #38bdf8, #10b981);
+}
+.tracker-project-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+.tracker-project-sub {
+    font-size: 0.84rem;
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+.tracker-top-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+.tracker-stat-box {
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 12px;
+    padding: 12px 16px;
+}
+.tracker-stat-lbl {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+.tracker-stat-val {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #38bdf8;
+    font-family: 'Inter', sans-serif;
+    margin-top: 2px;
+}
+.tracker-progress-bar-wrap {
+    background: rgba(2, 6, 23, 0.8);
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+    margin: 12px 0 6px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+}
+.tracker-progress-bar-fill {
+    height: 100%;
+    width: 78%;
+    background: linear-gradient(90deg, #38bdf8, #10b981, #c5a880);
+    border-radius: 999px;
+    transition: width 1s ease-in-out;
+}
+.tracker-stages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+.tracker-stage-card {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.tracker-stage-card:hover {
+    border-color: rgba(197, 168, 128, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+.tracker-stage-card.completed {
+    border-color: rgba(16, 185, 129, 0.35);
+}
+.tracker-stage-card.in-progress {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(15, 23, 42, 0.9);
+}
+.tracker-stage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.tracker-stage-badge {
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+.tracker-stage-badge.done {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid #10b981;
+}
+.tracker-stage-badge.active {
+    background: rgba(56, 189, 248, 0.2);
+    color: #7dd3fc;
+    border: 1px solid #38bdf8;
+}
+.tracker-stage-badge.upcoming {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+}
+.tracker-stage-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+.tracker-stage-desc {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin-bottom: 14px;
+}
+.tracker-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 14px;
+    font-size: 0.75rem;
+}
+.tracker-items-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: #cbd5e1;
+}
+.tracker-items-list li.done-item {
+    color: #34d399;
+}
+.tracker-items-list li.done-item::before {
+    content: '✓';
+    font-weight: bold;
+    color: #10b981;
+}
+.tracker-items-list li.pending-item::before {
+    content: '⏳';
+    font-size: 0.7rem;
+}
+.tracker-stage-footer {
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+}
+.tracker-stage-fee {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    color: #c5a880;
+}
+.tracker-sizing-card {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 24px;
+}
+.tracker-sizing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+}
+
+
 
