@@ -1,0 +1,87 @@
+const { spawn } = require('child_process');
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const edgePath = fs.existsSync('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe')
+  ? 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+  : 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe';
+
+const artifactDir = 'C:\\Users\\msali\\.gemini\\antigravity-ide\\brain\\eda8867d-4637-48b6-b108-cbac02b9a95e';
+
+async function captureUrl(url, outName) {
+  const port = 9335;
+  const userDataDir = path.join(process.env.TEMP, 'edge_cap_demo_' + Date.now());
+  const edge = spawn(edgePath, [
+    '--headless=new',
+    '--remote-debugging-port=' + port,
+    '--user-data-dir=' + userDataDir,
+    '--window-size=1440,900',
+    url
+  ]);
+
+  try {
+    await new Promise(r => setTimeout(r, 2500));
+    const pages = await new Promise((res, rej) => {
+      http.get('http://127.0.0.1:' + port + '/json', r => {
+        let d = '';
+        r.on('data', c => d += c);
+        r.on('end', () => res(JSON.parse(d)));
+      }).on('error', rej);
+    });
+
+    const targetPage = pages.find(p => p.url && p.url.includes('localhost:8092'));
+    if (!targetPage) throw new Error('Target page not found');
+
+    const ws = new WebSocket(targetPage.webSocketDebuggerUrl);
+    await new Promise(r => ws.onopen = r);
+
+    let id = 1;
+    const call = (method, params = {}) => new Promise(res => {
+      const curId = id++;
+      const handler = (evt) => {
+        const m = JSON.parse(evt.data);
+        if (m.id === curId) {
+          ws.removeEventListener('message', handler);
+          res(m);
+        }
+      };
+      ws.addEventListener('message', handler);
+      ws.send(JSON.stringify({ id: curId, method, params }));
+    });
+
+    await call('Runtime.enable');
+    await call('Page.enable');
+
+    // Wait 1.5 seconds for Chart.js rendering
+    await new Promise(r => setTimeout(r, 1500));
+
+    const shot = await call('Page.captureScreenshot', { format: 'png' });
+    const outPath = path.join(artifactDir, outName);
+    fs.writeFileSync(outPath, Buffer.from(shot.result.data, 'base64'));
+    console.log(`Saved screenshot: ${outPath} (${shot.result.data.length} bytes base64)`);
+
+    ws.close();
+  } finally {
+    edge.kill();
+    try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
+  }
+}
+
+async function main() {
+  console.log('Capturing AR demo...');
+  await captureUrl('http://localhost:8092/demo.html', 'ar_demo_portal.png');
+
+  console.log('Capturing EN demo...');
+  await captureUrl('http://localhost:8092/en/demo.html', 'en_demo_portal.png');
+
+  console.log('Capturing NL demo...');
+  await captureUrl('http://localhost:8092/nl/demo.html', 'nl_demo_portal.png');
+
+  console.log('All screenshots captured successfully!');
+}
+
+main().catch(err => {
+  console.error('Error during capture:', err);
+  process.exit(1);
+});
