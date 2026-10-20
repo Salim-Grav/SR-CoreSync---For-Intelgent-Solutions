@@ -4570,8 +4570,19 @@ function calcMigrationEstimator() {
 }
 
 // -------------------------------------------------------------
-// Official Contract OF-2026-1021 Logic (NL bil Arabi - Mudar Abu Fasheh)
+// Official Contracts Logic (NL bil Arabi - Mudar Abu Fasheh)
+// Technical: OF-2026-1021 | Financial: OF-2026-1022-FIN
 // -------------------------------------------------------------
+function switchContractModal(type) {
+    if (type === 'fin') {
+        closeContractOf2026Modal();
+        openContractOf2026FinModal();
+    } else {
+        closeContractOf2026FinModal();
+        openContractOf2026Modal();
+    }
+}
+
 function openContractOf2026Modal() {
     const modal = document.getElementById('contractOf2026Modal');
     if (modal) modal.classList.add('active');
@@ -4597,7 +4608,7 @@ function signContractDigitally() {
         statusBadge.innerText = 'تم التوقيع والاعتماد رقمياً ✓';
     }
 
-    showPortalToast('✓ تم اعتماد وتوقيع العقد رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
+    showPortalToast('✓ تم اعتماد وتوقيع العقد التقني رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
 }
 
 function shareContractViaWhatsApp() {
@@ -4622,6 +4633,61 @@ function shareContractViaEmail() {
 function printOfficialContractPdf() {
     const signedParam = isContractOf2026Signed ? 'true' : 'false';
     const printUrl = `contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&signed=${signedParam}&print=true`;
+    window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
+}
+
+// -------------------------------------------------------------
+// Official Financial Contract OF-2026-1022-FIN Logic
+// -------------------------------------------------------------
+function openContractOf2026FinModal() {
+    const modal = document.getElementById('contractOf2026FinModal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeContractOf2026FinModal() {
+    const modal = document.getElementById('contractOf2026FinModal');
+    if (modal) modal.classList.remove('active');
+}
+
+let isContractOf2026FinSigned = false;
+
+function signContractFinDigitally() {
+    isContractOf2026FinSigned = true;
+    const unsignedBox = document.getElementById('clientFinUnsignedBox');
+    const signedBox = document.getElementById('clientFinSignedBox');
+    if (unsignedBox) unsignedBox.classList.add('d-none');
+    if (signedBox) signedBox.classList.remove('d-none');
+
+    const statusBadge = document.getElementById('status-badge-inv-1022');
+    if (statusBadge) {
+        statusBadge.className = 'status-badge status-completed';
+        statusBadge.innerText = 'تم التوقيع والاعتماد رقمياً ✓';
+    }
+
+    showPortalToast('✓ تم اعتماد وتوقيع العقد المالي والضريبي رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
+}
+
+function shareContractFinViaWhatsApp() {
+    const url = window.location.origin + window.location.pathname + '?client=mudar&contract=OF-2026-1022-FIN#invoices';
+    const text = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد ضريبة الـ BTW (4,410 €) بتخفيض حصري 50% عبر بوابة S&R CoreSync.\nيمكنك مراجعة وتوقيع العقد المالي وسداد الحزمة مباشرة عبر الرابط:\n${url}`);
+    window.open(`https://wa.me/31687710290?text=${text}`, '_blank', 'noopener,noreferrer');
+}
+
+function shareContractFinViaEmail() {
+    const portalUrl = window.location.origin + window.location.pathname + '?client=mudar&contract=OF-2026-1022-FIN#invoices';
+    const subject = encodeURIComponent("وثيقة العقد المالي والضريبي الرسمي (OF-2026-1022-FIN) - منصة NL بالعربي | S&R CoreSync");
+    const body = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية بهولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\nرابط معاينة وتوقيع العقد المالي:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(portalUrl).catch(() => {});
+    }
+    showPortalToast('📧 جاري فتح برنامج البريد الإلكتروني، وتم نسخ رابط العقد المالي للحافظة');
+    window.location.href = `mailto:mudar@nl-bilarabi.nl?subject=${subject}&body=${body}`;
+}
+
+function printOfficialContractFinPdf() {
+    const signedParam = isContractOf2026FinSigned ? 'true' : 'false';
+    const printUrl = `contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN&signed=${signedParam}&print=true`;
     window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
 }
 
@@ -4666,7 +4732,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check URL parameters for contract activation
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('contract') === 'OF-2026-1021' || urlParams.get('client') === 'mudar' || urlParams.get('client') === 'NL_bil_Arabi') {
+    const contractParam = urlParams.get('contract');
+    if (contractParam === 'OF-2026-1022-FIN') {
+        const clientInput = document.getElementById('quickClientNameInput');
+        if (clientInput) clientInput.value = 'منصة NL بالعربي (السيد مضر أبو فاشة - العقد المالي)';
+        if (typeof switchPortalTab === 'function') switchPortalTab('invoices');
+        setTimeout(openContractOf2026FinModal, 400);
+    } else if (contractParam === 'OF-2026-1021' || urlParams.get('client') === 'mudar' || urlParams.get('client') === 'NL_bil_Arabi') {
         const clientInput = document.getElementById('quickClientNameInput');
         if (clientInput) clientInput.value = 'منصة NL بالعربي (السيد مضر أبو فاشة)';
         if (typeof switchPortalTab === 'function') switchPortalTab('invoices');
