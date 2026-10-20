@@ -58,7 +58,7 @@ async function test() {
     })()`,
     returnByValue: true
   });
-  console.log('Hotline element info:', res.result.value);
+  console.log('Full res:', JSON.stringify(res));
   ws.close();
   edge.kill();
 }
