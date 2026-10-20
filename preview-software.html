@@ -296,6 +296,101 @@
                 padding: 12px;
             }
         }
+        .exec-modal-main-icon {
+            font-size: 28px;
+        }
+        .exec-modal-top-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: #dfc299;
+            border: 1px solid rgba(197, 168, 128, 0.35);
+        }
+        .exec-modal-title {
+            color: #ffffff;
+            margin: 4px 0 0 0;
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+        .exec-target-context-badge {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 14px;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .exec-target-product-label {
+            color: #dfc299;
+        }
+        .exec-routing-notice {
+            font-size: 0.76rem;
+            color: #10b981;
+            font-weight: 700;
+        }
+        .exec-advisor-section {
+            margin-top: 18px;
+        }
+        .exec-advisor-section-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+        .exec-advisor-avatar-raed {
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+        .exec-advisor-phone-raed {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 0.72rem;
+            color: #10b981;
+            font-weight: 700;
+        }
+        .exec-advisor-avatar-salim {
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+        }
+        .exec-advisor-phone-salim {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 0.72rem;
+            color: #38bdf8;
+            font-weight: 700;
+        }
+        .exec-notes-section {
+            margin-top: 14px;
+        }
+        .exec-notes-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+        .exec-notes-textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 0.86rem;
+            outline: none;
+            font-family: inherit;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        .exec-modal-footer-note {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.76rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
     </style>
 </head>
 <body>
@@ -1095,54 +1190,54 @@
             <button type="button" class="sw-modal-close-btn" onclick="closeExecutiveContactModal()" aria-label="إغلاق النافذة">&times;</button>
 
             <div class="d-flex align-items-center gap-3 mb-2">
-                <span style="font-size: 28px;" id="execModalMainIcon">🏛️</span>
+                <span class="exec-modal-main-icon" id="execModalMainIcon">🏛️</span>
                 <div>
-                    <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); color: #dfc299; border: 1px solid rgba(197, 168, 128, 0.35);">
+                    <span class="sw-badge exec-modal-top-badge">
                         بوابة التوجيه والتواصل التنفيذي المباشر • Executive Direct Desk
                     </span>
-                    <h3 id="execContactModalTitle" style="color: #ffffff; margin: 4px 0 0 0; font-size: 1.25rem; font-weight: 800;">
+                    <h3 id="execContactModalTitle" class="exec-modal-title">
                         استشارة تنفيذية خاصة ومباشرة
                     </h3>
                 </div>
             </div>
 
-            <div id="execTargetContextBadge" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: 0.85rem; color: #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
-                <span>🎯 الموضوع / النظام المستهدف: <strong id="execTargetProductLabel" style="color: #dfc299;">S&R TaxSync Desktop</strong></span>
-                <span id="execRoutingNotice" style="font-size: 0.76rem; color: #10b981; font-weight: 700;">✓ موجه للمستشار المختص</span>
+            <div id="execTargetContextBadge" class="exec-target-context-badge">
+                <span>🎯 الموضوع / النظام المستهدف: <strong id="execTargetProductLabel" class="exec-target-product-label">S&R TaxSync Desktop</strong></span>
+                <span id="execRoutingNotice" class="exec-routing-notice">✓ موجه للمستشار المختص</span>
             </div>
 
-            <div style="margin-top: 18px;">
-                <label style="display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+            <div class="exec-advisor-section">
+                <label class="exec-advisor-section-label">
                     اختر الشريك المؤسس المطلوب للتحدث معه:
                 </label>
                 <div class="exec-advisor-toggle-grid">
                     <!-- كرت رائد كعكة -->
                     <div id="execCardRaed" class="exec-advisor-toggle-card active raed" onclick="setExecutiveContactAdvisor('raed')">
-                        <div class="exec-advisor-avatar" style="border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399;">📊</div>
+                        <div class="exec-advisor-avatar exec-advisor-avatar-raed">📊</div>
                         <div class="exec-advisor-info">
                             <h4>أ. محمد رائد كعكة</h4>
                             <p>CFO &amp; MD • استشاري الأنظمة المحاسبية والـ ERP والضرائب</p>
-                            <span style="display: inline-block; margin-top: 4px; font-size: 0.72rem; color: #10b981; font-weight: 700;">📱 +31 6 8771 0290 (واتساب شخصي)</span>
+                            <span class="exec-advisor-phone-raed">📱 +31 6 8771 0290 (واتساب شخصي)</span>
                         </div>
                     </div>
 
                     <!-- كرت سليم عزيزة -->
                     <div id="execCardSalim" class="exec-advisor-toggle-card salim" onclick="setExecutiveContactAdvisor('salim')">
-                        <div class="exec-advisor-avatar" style="border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8;">💻</div>
+                        <div class="exec-advisor-avatar exec-advisor-avatar-salim">💻</div>
                         <div class="exec-advisor-info">
                             <h4>م. محمد سليم عزيزة</h4>
                             <p>CTO &amp; Architect • كبير مهندسي السحابة والمطورين والـ API</p>
-                            <span style="display: inline-block; margin-top: 4px; font-size: 0.72rem; color: #38bdf8; font-weight: 700;">📱 +31 6 1811 1116 (واتساب شخصي)</span>
+                            <span class="exec-advisor-phone-salim">📱 +31 6 1811 1116 (واتساب شخصي)</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="margin-top: 14px;">
-                <label for="execQuickUserNotes" style="display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 6px;">
+            <div class="exec-notes-section">
+                <label for="execQuickUserNotes" class="exec-notes-label">
                     ملاحظاتك أو استفسارك المخصص (اختياري - سيتم تضمينه في الرسالة):
                 </label>
-                <textarea id="execQuickUserNotes" rows="2" style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 10px; padding: 10px 14px; color: #ffffff; font-size: 0.86rem; outline: none; font-family: inherit; resize: vertical;" placeholder="أرغب بمناقشة تفاصيل الترخيص أو التكامل الفني..."></textarea>
+                <textarea id="execQuickUserNotes" rows="2" class="exec-notes-textarea" placeholder="أرغب بمناقشة تفاصيل الترخيص أو التكامل الفني..."></textarea>
             </div>
 
             <!-- أزرار الإجراءات الرئيسية المباشرة -->
@@ -1160,7 +1255,7 @@
                 </button>
             </div>
 
-            <div style="text-align: center; margin-top: 16px; font-size: 0.76rem; color: rgba(255, 255, 255, 0.55);">
+            <div class="exec-modal-footer-note">
                 🛡️ قنوات اتصال رسمية ومباشرة مع الإدارة التنفيذية لشركة S&R CoreSync Solutions • أمستردام، هولندا
             </div>
         </div>
