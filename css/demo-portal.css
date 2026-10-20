@@ -51,9 +51,11 @@
         .portal-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
             color: #fff;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
         }
 
         .brand-badge {
@@ -70,10 +72,20 @@
         }
 
         .portal-brand-emblem {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.45));
+            border-radius: 50% !important;
+            filter: drop-shadow(0 0 14px rgba(197, 168, 128, 0.55));
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.25);
+            flex-shrink: 0;
+            display: block;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .portal-brand:hover .portal-brand-emblem {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 22px rgba(197, 168, 128, 0.8));
         }
 
         .portal-brand-text {
