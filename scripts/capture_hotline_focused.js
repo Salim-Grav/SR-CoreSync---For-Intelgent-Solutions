@@ -58,7 +58,7 @@ async function capture() {
       return {
         classes: w.className,
         cardDisplay: window.getComputedStyle(card).display,
-        cardRect: card.getBoundingClientRect()
+        cardRect: { x: card.getBoundingClientRect().x, y: card.getBoundingClientRect().y, w: card.getBoundingClientRect().width, h: card.getBoundingClientRect().height }
       };
     })()`,
     returnByValue: true
