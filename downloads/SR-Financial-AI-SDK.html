@@ -22,28 +22,30 @@
         label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
         select, textarea, input { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: #fff; font-size: 0.85rem; margin-bottom: 12px; }
         .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.95rem; }
-        pre { background: #020604; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px; color: #34d399; font-family: monospace; font-size: 0.8rem; overflow-x: auto; max-height: 250px; }
+        .header-title { font-size: 1.25rem; font-weight: 800; }
+        .header-subtitle { font-size: 0.8rem; color: var(--text-dim); }
+        .header-status { color: var(--emerald); font-weight: 700; font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <header>
         <div>
-            <h1 style="font-size:1.25rem;">🧩 S&R Financial AI SDK Console v1.2</h1>
-            <span style="font-size:0.8rem; color:var(--text-dim);">لوحة المطورين لتجربة وتكامل الـ REST APIs</span>
+            <h1 class="header-title">🧩 S&R Financial AI SDK Console v1.2</h1>
+            <span class="header-subtitle">لوحة المطورين لتجربة وتكامل الـ REST APIs</span>
         </div>
-        <span style="color:var(--emerald); font-weight:700; font-size:0.85rem;">● وضع المطورين (Offline/Online)</span>
+        <span class="header-status">● وضع المطورين (Offline/Online)</span>
     </header>
 
     <div class="grid">
         <div class="card">
-            <label>API Endpoint:</label>
-            <select id="ep">
+            <label for="ep">API Endpoint:</label>
+            <select id="ep" title="اختيار نقطة النهاية البرمجية API Endpoint" aria-label="اختيار نقطة النهاية البرمجية">
                 <option value="tax">POST /api/v1/tax/calculate-btw</option>
                 <option value="invoice">POST /api/v1/invoices/validate-en16931</option>
             </select>
 
-            <label>Request JSON:</label>
-            <textarea id="body" rows="6">{
+            <label for="body">Request JSON:</label>
+            <textarea id="body" rows="6" title="محتوى الطلب بصيغة JSON" placeholder="أدخل محتوى الطلب بصيغة JSON" aria-label="محتوى الطلب بصيغة JSON">{
   "client": "Rotterdam Logistics B.V.",
   "base_amount": 15000.00,
   "vat_regime": "STANDARD_21"
