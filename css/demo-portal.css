@@ -2484,14 +2484,17 @@ html[dir="rtl"] .sovereign-hotline-widget {
     display: none;
     flex-direction: column;
     gap: 14px;
-    animation: sovereignMenuFadeIn 0.25s ease;
+    animation: sovereignMenuFadeIn 0.25s ease forwards;
+    opacity: 1;
 }
 html[dir="rtl"] .hotline-popover-card {
     right: auto;
     left: 0;
 }
 .sovereign-hotline-widget.open .hotline-popover-card {
-    display: flex;
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 .hotline-header-row {
     display: flex;
