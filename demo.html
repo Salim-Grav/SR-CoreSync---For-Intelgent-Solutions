@@ -530,7 +530,7 @@
                         <h2>محرك العلامة البيضاء وتخصيص هوية العميل (White-Label Studio)</h2>
                         <div class="d-flex align-items-center gap-2 mt-1">
                             <p class="mb-0">شاهد كيف تتحول لوحة تحكم الـ ERP السحابية فورياً لتلائم هوية شركتك وشعارك وألوانك المؤسسية</p>
-                            <span id="storageBadge" style="display:none; font-size:11px; padding:2px 8px; border-radius:12px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#34d399;">● محفوظ في المتصفح</span>
+                            <span class="ds-u1" id="storageBadge">● محفوظ في المتصفح</span>
                         </div>
                     </div>
                     <button type="button" class="btn-return-main" onclick="resetBrandIdentity()">
@@ -684,34 +684,34 @@
                             </ul>
 
                             <!-- حاسبة الضريبة الفورية التفاعلية (Mini BTW/VAT Calculator Widget) -->
-                            <div class="quick-tax-calc-box" style="margin: 10px 0; padding: 10px 12px; background: rgba(1, 9, 7, 0.75); border: 1px solid rgba(197, 168, 128, 0.28); border-radius: 10px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <span style="font-size:0.75rem; font-weight:800; color:var(--gold);">⚡ حاسبة ضريبة فورية:</span>
-                                    <select id="quickTaxRate" onchange="calcQuickTax()" title="اختيار نسبة الضريبة للحاسبة السريعة" aria-label="اختيار نسبة الضريبة للحاسبة السريعة" style="background:#02150f; border:1px solid rgba(197,168,128,0.4); color:#fff; font-size:0.7rem; border-radius:6px; padding:2px 8px; font-family:'Alexandria', sans-serif; cursor:pointer;">
+                            <div class="quick-tax-calc-box ds-u2">
+                                <div class="ds-u3">
+                                    <span class="ds-u4">⚡ حاسبة ضريبة فورية:</span>
+                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="اختيار نسبة الضريبة للحاسبة السريعة" aria-label="اختيار نسبة الضريبة للحاسبة السريعة">
                                         <option value="0.21">BTW هولندي 21%</option>
                                         <option value="0.09">BTW مخفض 9%</option>
                                         <option value="0.15">ضريبة خليجية 15%</option>
                                     </select>
                                 </div>
-                                <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-                                    <span style="font-size:0.72rem; color:var(--text-muted); white-space:nowrap;">المبلغ (€):</span>
-                                    <input type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" style="width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#fff; font-size:0.8rem; padding:4px 8px; font-family:'JetBrains Mono', monospace;" placeholder="المبلغ" />
+                                <div class="ds-u6">
+                                    <span class="ds-u7">المبلغ (€):</span>
+                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" placeholder="المبلغ" />
                                 </div>
-                                <div style="display:flex; justify-content:space-between; font-size:0.73rem; background:rgba(197,168,128,0.1); padding:6px 10px; border-radius:6px;">
-                                    <span>الضريبة: <strong id="quickTaxVat" style="color:var(--gold);">€ 210.00</strong></span>
-                                    <span>الإجمالي: <strong id="quickTaxTotal" style="color:#10b981;">€ 1,210.00</strong></span>
+                                <div class="ds-u9">
+                                    <span>الضريبة: <strong class="ds-u10" id="quickTaxVat">€ 210.00</strong></span>
+                                    <span>الإجمالي: <strong class="ds-u11" id="quickTaxTotal">€ 1,210.00</strong></span>
                                 </div>
                             </div>
 
                             <!-- مولد مفتاح الترخيص التجريبي الفوري (Instant Trial License Key Generator) -->
-                            <div class="trial-key-bar" id="taxsyncTrialBar" style="margin-bottom: 10px; background: rgba(16,185,129,0.09); border: 1px dashed rgba(16,185,129,0.4); border-radius: 8px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                                <div style="min-width: 0;">
-                                    <div style="font-size: 0.65rem; color: #a7f3d0; font-weight: 700;">مفتاح تجريبي فوري (14 يوماً):</div>
-                                    <div id="quickTrialKeyDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">SRTX-2026-TRIAL-8849</div>
+                            <div class="trial-key-bar ds-u12" id="taxsyncTrialBar">
+                                <div class="ds-u13">
+                                    <div class="ds-u14">مفتاح تجريبي فوري (14 يوماً):</div>
+                                    <div class="ds-u15" id="quickTrialKeyDisplay">SRTX-2026-TRIAL-8849</div>
                                 </div>
-                                <div style="display: flex; gap: 4px; flex-shrink: 0;">
-                                    <button type="button" onclick="generateNewQuickKey()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: #fff; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; cursor: pointer; transition: 0.2s;" title="توليد مفتاح جديد">🔄</button>
-                                    <button type="button" onclick="copyQuickTrialKey()" style="background: var(--gold); border: none; color: #000; font-weight: 800; border-radius: 6px; padding: 4px 10px; font-size: 0.72rem; cursor: pointer; transition: 0.2s;" title="نسخ المفتاح">📋 نسخ</button>
+                                <div class="ds-u16">
+                                    <button class="ds-u17" type="button" onclick="generateNewQuickKey()" title="توليد مفتاح جديد">🔄</button>
+                                    <button class="ds-u18" type="button" onclick="copyQuickTrialKey()" title="نسخ المفتاح">📋 نسخ</button>
                                 </div>
                             </div>
                         </div>
@@ -721,7 +721,7 @@
                                 <span class="software-price-unit">ترخيص سنوي / جهاز</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox" onclick="openDesktopSimulatorModal('taxsync')" style="background:rgba(212,175,55,0.15); border:1px solid var(--gold); color:var(--gold); border-radius:8px; padding:6px 10px; font-size:0.75rem; font-weight:700; cursor:pointer;" title="محاكاة حية فورية داخل المتصفح">محاكي حي ⚡</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openDesktopSimulatorModal('taxsync')" title="محاكاة حية فورية داخل المتصفح">محاكي حي ⚡</button>
                                 <button type="button" class="btn-software-trial" onclick="openSoftwareModal('taxsync', 'trial')">تجربة 14 يوماً</button>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">شراء الترخيص</button>
                             </div>
@@ -730,10 +730,10 @@
 
                     <!-- 2. تطبيق S&R FlowScan AI Mobile -->
                     <div class="software-card" data-category="mobile">
-                        <span class="software-card-badge" style="background:linear-gradient(135deg, #38bdf8, #0284c7); color:#fff;">ذكاء اصطناعي OCR</span>
+                        <span class="software-card-badge ds-u20">ذكاء اصطناعي OCR</span>
                         <div>
                             <div class="software-card-top">
-                                <div class="software-icon-wrap" style="color:#38bdf8; background:rgba(56,189,248,0.12);">📱</div>
+                                <div class="software-icon-wrap ds-u21">📱</div>
                                 <div>
                                     <div class="software-info-title">S&R FlowScan AI Mobile</div>
                                     <div class="software-info-version">
@@ -773,10 +773,10 @@
 
                     <!-- 3. أداة S&R CloudPOS Connector -->
                     <div class="software-card" data-category="pos">
-                        <span class="software-card-badge" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;">ربط نقاط البيع POS</span>
+                        <span class="software-card-badge ds-u22">ربط نقاط البيع POS</span>
                         <div>
                             <div class="software-card-top">
-                                <div class="software-icon-wrap" style="color:#10b981; background:rgba(16,185,129,0.12);">⚡</div>
+                                <div class="software-icon-wrap ds-u23">⚡</div>
                                 <div>
                                     <div class="software-info-title">S&R CloudPOS Connector</div>
                                     <div class="software-info-version">
@@ -815,10 +815,10 @@
 
                     <!-- 4. برنامج S&R SecureVault B2B -->
                     <div class="software-card" data-category="desktop">
-                        <span class="software-card-badge" style="background:linear-gradient(135deg, #a855f7, #7c3aed); color:#fff;">حماية ونسخ احتياطي</span>
+                        <span class="software-card-badge ds-u24">حماية ونسخ احتياطي</span>
                         <div>
                             <div class="software-card-top">
-                                <div class="software-icon-wrap" style="color:#a855f7; background:rgba(168,85,247,0.12);">🛡️</div>
+                                <div class="software-icon-wrap ds-u25">🛡️</div>
                                 <div>
                                     <div class="software-info-title">S&R SecureVault B2B</div>
                                     <div class="software-info-version">
@@ -943,7 +943,7 @@
                         <option value="استشارات مالية وحوكمة">استشارات مالية وحوكمة</option>
                     </select>
                 </div>
-                            <button type="button" class="table-action-btn w-100 justify-content-center mb-3" onclick="closeSoftwareModal(); openDesktopSimulatorModal(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');" style="background:rgba(212,175,55,0.12); border-color:var(--gold); color:var(--gold); font-size:0.85rem; padding:10px; font-weight:700;">
+                            <button type="button" class="table-action-btn w-100 justify-content-center mb-3 ds-u26" onclick="closeSoftwareModal(); openDesktopSimulatorModal(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');">
                 🖥️ تشغيل المحاكي التفاعلي داخل المتصفح (Live Desktop Sandbox)
             </button>
             <div class="modal-form-actions">
@@ -1046,9 +1046,9 @@
         <div class="modal-invoice-card">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <img src="./assets/sr-core-emblem-official.png" id="invModalHeaderEmblem" width="34" height="34" alt="Emblem" style="border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 6px rgba(197,168,128,0.4));">
+                    <img class="ds-u27" src="./assets/sr-core-emblem-official.png" id="invModalHeaderEmblem" width="34" height="34" alt="Emblem">
                     <h3 class="fw-bold mb-0 text-white invoice-preview-title">فاتورة إلكترونية رسمية (e-Invoice)</h3>
-                    <span id="invWhiteLabelBadge" style="display:none; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:rgba(197,168,128,0.2); border:1px solid var(--gold); color:var(--gold);">White-Label Branded</span>
+                    <span class="ds-u28" id="invWhiteLabelBadge">White-Label Branded</span>
                 </div>
                 <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeInvoicePreviewModal()">✕</button>
             </div>
@@ -2216,7 +2216,7 @@ Direct Founders Contact: info@coresync.cloud
             newCard.className = 'software-card';
             newCard.setAttribute('data-category', cat);
             newCard.innerHTML = `
-                <span class="software-card-badge" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;">جديد مُضاف بواسطة المؤسس ★</span>
+                <span class="software-card-badge ds-u22">جديد مُضاف بواسطة المؤسس ★</span>
                 <div>
                     <div class="software-card-top">
                         <div class="software-icon-wrap">${softwareCatalog[id].icon}</div>
@@ -2580,10 +2580,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     
     <!-- نافذة تفاصيل وتحميل وترخيص البرمجيات (Software Modal) -->
     <div class="modal-overlay" id="softwareModal" onclick="if(event.target === this) closeSoftwareModal()">
-        <div class="modal-card" style="max-width: 600px;">
+        <div class="modal-card ds-u29">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="software-icon-wrap" id="modalSwIcon" style="width:38px; height:38px; font-size:1.1rem;">💻</div>
+                    <div class="software-icon-wrap ds-u30" id="modalSwIcon">💻</div>
                     <div>
                         <h4 class="fw-bold mb-0 text-white" id="modalSwTitle">S&R TaxSync Desktop</h4>
                         <span class="text-caption text-white-64" id="modalSwVersion">v2.4 Pro • Verified Build</span>
@@ -2596,7 +2596,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 برنامج سطح مكتب محاسبي وضريبي متكامل يعمل بدون اتصال بالإنترنت.
             </p>
 
-            <div class="glass-box p-3 mb-3" style="background:rgba(255,255,255,0.02);">
+            <div class="glass-box p-3 mb-3 ds-u31">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="text-caption text-white-64">مفتاح الترخيص الرقمي (Digital License Key):</span>
                     <span class="status-badge status-completed" id="modalSwLicBadge">نشط 14 يوماً</span>
@@ -2626,7 +2626,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
     <!-- نافذة نشر برنامج جديد من قبل المؤسس/المطور (Publish Software Modal) -->
     <div class="modal-overlay" id="publishSoftwareModal" onclick="if(event.target === this) closePublishSoftwareModal()">
-        <div class="modal-card" style="max-width: 580px;">
+        <div class="modal-card ds-u32">
             <h3 class="text-white mb-2 fw-bold">نشر وتوزيع برنامج جديد عبر المنصة</h3>
             <p class="text-caption text-white-64 mb-4">بصفتك مطوراً ومهندساً للبرمجيات، يمكنك إضافة حلولك وتطبيقاتك الحصرية للبيع والتوزيع:</p>
             
@@ -2646,18 +2646,18 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         </select>
                     </div>
                     <div class="d-flex gap-2">
-                        <div style="flex:1;">
+                        <div class="ds-u33">
                             <label class="text-caption text-white-64 mb-1 d-block" for="pubVersion">رقم الإصدار</label>
                             <input type="text" id="pubVersion" required class="ai-chat-input modal-form-input font-num" placeholder="v1.0" value="v1.0" title="رقم الإصدار">
                         </div>
-                        <div style="flex:1;">
+                        <div class="ds-u33">
                             <label class="text-caption text-white-64 mb-1 d-block" for="pubPrice">سعر الترخيص باليورو (€)</label>
                             <input type="number" id="pubPrice" required class="ai-chat-input modal-form-input font-num" placeholder="149" value="149" title="سعر الترخيص">
                         </div>
                     </div>
                     <div>
                         <label class="text-caption text-white-64 mb-1 d-block" for="pubDesc">وصف موجز ومميزات البرنامج</label>
-                        <textarea id="pubDesc" required class="ai-chat-input modal-form-input" style="height:70px; resize:none;" placeholder="اكتب وصفاً موجزاً لما يقوم به البرنامج وكيف يساعد العملاء..." title="الوصف"></textarea>
+                        <textarea id="pubDesc" required class="ai-chat-input modal-form-input ds-u34" placeholder="اكتب وصفاً موجزاً لما يقوم به البرنامج وكيف يساعد العملاء..." title="الوصف"></textarea>
                     </div>
                 </div>
 
@@ -2680,14 +2680,14 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <!-- شريط نافذة نظام التشغيل (OS Window Bar) -->
             <div class="os-window-header">
                 <div class="os-window-controls">
-                    <span class="os-dot red" onclick="closeDesktopSimulatorModal()" style="cursor:pointer;" title="إغلاق"></span>
+                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="إغلاق"></span>
                     <span class="os-dot yellow" title="تصغير"></span>
                     <span class="os-dot green" title="تكبير"></span>
                 </div>
                 <div class="os-window-title">
                     <span>💻</span>
                     <span id="simAppTitle">S&R TaxSync Desktop v2.4 Pro</span>
-                    <span class="status-badge status-completed" style="font-size:0.68rem; padding:1px 6px;">SANDBOX RUNNING</span>
+                    <span class="status-badge status-completed ds-u36">SANDBOX RUNNING</span>
                 </div>
                 <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeDesktopSimulatorModal()">✕</button>
             </div>
@@ -2706,8 +2706,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="os-app-ribbon">
                 <span>📁 ملف (Bestand)</span>
                 <span>📊 مبيعات وضرائب (Omzet & BTW)</span>
-                <span onclick="runAiComplianceAudit()" style="color:var(--gold); font-weight:600;">🛡️ فحص الامتثال AWR (Audit)</span>
-                <span onclick="exportDigipoortXml()" style="color:#38bdf8;">⚡ تصدير Digipoort XML</span>
+                <span class="ds-u37" onclick="runAiComplianceAudit()">🛡️ فحص الامتثال AWR (Audit)</span>
+                <span class="ds-u38" onclick="exportDigipoortXml()">⚡ تصدير Digipoort XML</span>
                 <span>⚙️ إعدادات الأمان (AES-256)</span>
             </div>
 
@@ -2724,10 +2724,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="os-sidebar-btn" id="simSide-xml" onclick="exportDigipoortXml()">
                         <span>📄</span> تصدير Digipoort XML
                     </button>
-                    <div style="margin-top:auto; padding:10px; background:rgba(0,0,0,0.3); border-radius:8px; border:1px solid rgba(255,255,255,0.06);">
-                        <div class="text-caption text-white-64" style="font-size:0.7rem;">محرك الحسابات:</div>
-                        <div style="font-size:0.78rem; font-weight:700; color:var(--gold);">S&R BTW Engine v2.4</div>
-                        <div class="text-caption text-white-64" style="font-size:0.68rem;">وضع العمل: Offline 100%</div>
+                    <div class="ds-u39">
+                        <div class="text-caption text-white-64 ds-u40">محرك الحسابات:</div>
+                        <div class="ds-u41">S&R BTW Engine v2.4</div>
+                        <div class="text-caption text-white-64 ds-u42">وضع العمل: Offline 100%</div>
                     </div>
                 </div>
 
@@ -2735,7 +2735,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <div class="os-main-stage">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
-                            <h4 class="fw-bold mb-1 text-white" style="font-size:1.05rem;">نموذج حساب ضريبة القيمة المضافة (Aangifte Omzetbelasting Q3 2026)</h4>
+                            <h4 class="fw-bold mb-1 text-white ds-u43">نموذج حساب ضريبة القيمة المضافة (Aangifte Omzetbelasting Q3 2026)</h4>
                             <p class="text-caption text-white-64 mb-0">جرب إدخال الأرقام أدناه لمشاهدة الاحتساب الآلي وتوليد الإقرار الهولندي والخليجي فورياً</p>
                         </div>
                         <span class="status-badge status-completed" id="simStatusBadge">جاهز للاحتساب ✓</span>
@@ -2764,45 +2764,45 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
 
                     <!-- بطاقات نتائج الاحتساب المالي الفوري -->
-                    <div class="glass-box p-3 mb-3" style="background:rgba(212,175,55,0.04); border-color:rgba(212,175,55,0.25);">
+                    <div class="glass-box p-3 mb-3 ds-u44">
                         <div class="row text-center g-2">
                             <div class="col-3">
-                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">ضريبة 21% (Hoog)</span>
-                                <span class="fw-bold text-white font-num" id="simResBtw21" style="font-size:0.95rem;">€ 3,885.00</span>
+                                <span class="text-caption text-white-64 d-block ds-u45">ضريبة 21% (Hoog)</span>
+                                <span class="fw-bold text-white font-num ds-u46" id="simResBtw21">€ 3,885.00</span>
                             </div>
                             <div class="col-3">
-                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">ضريبة 9% (Laag)</span>
-                                <span class="fw-bold text-white font-num" id="simResBtw9" style="font-size:0.95rem;">€ 378.00</span>
+                                <span class="text-caption text-white-64 d-block ds-u45">ضريبة 9% (Laag)</span>
+                                <span class="fw-bold text-white font-num ds-u46" id="simResBtw9">€ 378.00</span>
                             </div>
                             <div class="col-3">
-                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">الخصم المسموح (Voorb.)</span>
-                                <span class="fw-bold text-danger font-num" id="simResDeduct" style="font-size:0.95rem;">- € 2,150.00</span>
+                                <span class="text-caption text-white-64 d-block ds-u45">الخصم المسموح (Voorb.)</span>
+                                <span class="fw-bold text-danger font-num ds-u46" id="simResDeduct">- € 2,150.00</span>
                             </div>
-                            <div class="col-3" style="border-right:1px solid rgba(255,255,255,0.1);">
-                                <span class="text-caption text-white-64 d-block" style="font-size:0.72rem;">صافي الضريبة الواجبة السداد</span>
-                                <span class="fw-bold font-num" id="simResNetPay" style="font-size:1.1rem; color:var(--gold);">€ 2,113.00</span>
+                            <div class="col-3 ds-u47">
+                                <span class="text-caption text-white-64 d-block ds-u45">صافي الضريبة الواجبة السداد</span>
+                                <span class="fw-bold font-num ds-u48" id="simResNetPay">€ 2,113.00</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- أزرار الإجراءات داخل المحاكي -->
                     <div class="d-flex gap-2 flex-wrap mb-3">
-                        <button type="button" class="table-action-btn" onclick="runAiComplianceAudit()" style="background:rgba(16,185,129,0.15); border-color:#10b981; color:#34d399;">
+                        <button type="button" class="table-action-btn ds-u49" onclick="runAiComplianceAudit()">
                             🛡️ فحص الامتثال المحاسبي AWR
                         </button>
-                        <button type="button" class="table-action-btn" onclick="exportDigipoortXml()" style="background:rgba(56,189,248,0.15); border-color:#38bdf8; color:#38bdf8;">
+                        <button type="button" class="table-action-btn ds-u50" onclick="exportDigipoortXml()">
                             📄 توليد ملف Digipoort XML
                         </button>
-                        <button type="button" class="action-cta-btn" onclick="openSoftwareCheckoutModal('taxsync')" style="margin-right:auto; padding:6px 16px; font-size:0.8rem;">
+                        <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
                             💳 ترقية للنسخة الكاملة (€ 189)
                         </button>
                     </div>
 
                     <!-- منطقة نتائج الفحص والتصدير (Console output) -->
-                    <div id="simConsoleBox" style="display:none;" class="mb-3">
+                    <div id="simConsoleBox" class="mb-3 ds-u52">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="text-caption text-white-64" id="simConsoleTitle">تقرير تدقيق الامتثال:</span>
-                            <button type="button" class="btn-return-main font-num btn-modal-close-sm" style="font-size:0.7rem; padding:2px 8px;" onclick="downloadGeneratedTaxXml()">تنزيل ملف .xml</button>
+                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" onclick="downloadGeneratedTaxXml()">تنزيل ملف .xml</button>
                         </div>
                         <div class="xml-preview-box" id="simXmlContent"></div>
                     </div>
@@ -2810,11 +2810,11 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <!-- تبويب 2: بطاقة المواصفات والمعمارية التقنية -->
-            <div id="simContent-specs" class="os-content-pane" style="display:none; grid-template-columns:1fr; padding:24px; max-height:520px; overflow-y:auto;">
+            <div id="simContent-specs" class="os-content-pane ds-u54">
                 <div class="row g-4">
                     <div class="col-md-6">
                         <div class="glass-box p-3 h-100">
-                            <h5 class="fw-bold text-white mb-2" style="font-size:0.95rem; color:var(--gold) !important;">معمارية الخصوصية والأمان (Zero-Cloud Privacy)</h5>
+                            <h5 class="fw-bold text-white mb-2 ds-u55">معمارية الخصوصية والأمان (Zero-Cloud Privacy)</h5>
                             <p class="text-caption text-white-64">
                                 تم تصميم البرنامج ليعمل بمعمارية محلية بحتة (Offline-First Engine)، حيث تُخزن قواعد البيانات محلياً عبر محرك SQLite مشفر بخوارزمية AES-256 بت، مما يضمن سرية البيانات المحاسبية بنسبة 100% دون أي تسريب سحابي.
                             </p>
@@ -2827,11 +2827,11 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                     <div class="col-md-6">
                         <div class="glass-box p-3 h-100">
-                            <h5 class="fw-bold text-white mb-2" style="font-size:0.95rem; color:var(--gold) !important;">التوافق والتكامل (Digipoort & PEPPOL)</h5>
+                            <h5 class="fw-bold text-white mb-2 ds-u55">التوافق والتكامل (Digipoort & PEPPOL)</h5>
                             <p class="text-caption text-white-64">
                                 يدعم الربط المباشر مع بوابة مصلحة الضرائب الهولندية (Digipoort SBR) وبروتوكول الفوترة الأوروبية الموحدة PEPPOL BIS 3.0.
                             </p>
-                            <div class="p-2 mb-2" style="background:#090e0b; border-radius:8px; border:1px solid rgba(255,255,255,0.06); font-family:'JetBrains Mono',monospace; font-size:0.75rem;">
+                            <div class="p-2 mb-2 ds-u56">
                                 <div class="text-white-64">SBR / XBRL Taxonomy: NL-2026.1</div>
                                 <div class="text-white-64">Supported OS: Windows 11/10 (x64) • macOS Apple Silicon</div>
                                 <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
@@ -2854,7 +2854,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <!-- الهيدر -->
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-2">
-                    <div class="software-icon-wrap" id="chkAppIcon" style="width:38px; height:38px; font-size:1.1rem;">💻</div>
+                    <div class="software-icon-wrap ds-u30" id="chkAppIcon">💻</div>
                     <div>
                         <h4 class="fw-bold mb-0 text-white" id="chkAppTitle">S&R TaxSync Desktop</h4>
                         <span class="text-caption text-white-64" id="chkAppLicenseType">ترخيص تجاري مؤسسي سنوي • Commercial B2B</span>
@@ -2875,7 +2875,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
                 <div class="order-summary-row total">
                     <span>الإجمالي المستحق للسداد (Total Incl. BTW):</span>
-                    <span class="font-num" id="chkTotalPrice" style="color:var(--gold);">€ 228.69</span>
+                    <span class="font-num ds-u10" id="chkTotalPrice">€ 228.69</span>
                 </div>
             </div>
 
@@ -2883,18 +2883,18 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="text-caption text-white-64 mb-1">اختر طريقة الدفع المعتمدة:</div>
             <div class="gateway-selector">
                 <div class="gateway-card selected" id="gwCard-ideal" onclick="selectPaymentGateway('ideal')">
-                    <div style="font-size:1.3rem;">🇳🇱</div>
-                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">Mollie iDEAL</div>
+                    <div class="ds-u57">🇳🇱</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">Mollie iDEAL</div>
                     <span class="gateway-badge">هولندا وأوروبا</span>
                 </div>
                 <div class="gateway-card" id="gwCard-card" onclick="selectPaymentGateway('card')">
-                    <div style="font-size:1.3rem;">💳</div>
-                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">Stripe Card</div>
+                    <div class="ds-u57">💳</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">Stripe Card</div>
                     <span class="gateway-badge">Visa / Mastercard</span>
                 </div>
                 <div class="gateway-card" id="gwCard-sepa" onclick="selectPaymentGateway('sepa')">
-                    <div style="font-size:1.3rem;">🏦</div>
-                    <div class="fw-bold text-white mt-1" style="font-size:0.85rem;">SEPA B2B</div>
+                    <div class="ds-u57">🏦</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">SEPA B2B</div>
                     <span class="gateway-badge">تحويل بنكي مباشر</span>
                 </div>
             </div>
@@ -2912,41 +2912,41 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <option value="sns">SNS Bank</option>
                     <option value="asn">ASN Bank</option>
                 </select>
-                <div class="text-caption text-white-64 mt-2" style="font-size:0.7rem;">
+                <div class="text-caption text-white-64 mt-2 ds-u40">
                     🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect.
                 </div>
             </div>
 
             <!-- 2. Stripe Card fields -->
-            <div id="gwInput-card" class="payment-input-group" style="display:none;">
+            <div id="gwInput-card" class="payment-input-group ds-u52">
                 <label class="text-caption text-white-64 mb-1 d-block">رقم البطاقة الائتمانية:</label>
-                <input type="text" class="ai-chat-input mb-2" value="4242 •••• •••• 4242" style="font-family:'JetBrains Mono',monospace;">
+                <input type="text" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242">
                 <div class="row g-2">
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block">تاريخ الانتهاء:</label>
-                        <input type="text" class="ai-chat-input" value="12/28" style="font-family:'JetBrains Mono',monospace;">
+                        <input type="text" class="ai-chat-input ds-u59" value="12/28">
                     </div>
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block">رمز الأمان CVC:</label>
-                        <input type="text" class="ai-chat-input" value="888" style="font-family:'JetBrains Mono',monospace;">
+                        <input type="text" class="ai-chat-input ds-u59" value="888">
                     </div>
                 </div>
             </div>
 
             <!-- 3. SEPA Direct Debit -->
-            <div id="gwInput-sepa" class="payment-input-group" style="display:none;">
+            <div id="gwInput-sepa" class="payment-input-group ds-u52">
                 <label class="text-caption text-white-64 mb-1 d-block">رقم الآيبان للشركة (Business IBAN):</label>
-                <input type="text" class="ai-chat-input mb-2" value="NL91 ABNA 0417 1641 00" style="font-family:'JetBrains Mono',monospace;">
+                <input type="text" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00">
                 <label class="text-caption text-white-64 mb-1 d-block">اسم الحساب التجاري (Bedrijfsnaam):</label>
                 <input type="text" class="ai-chat-input" value="S&R B2B Enterprise Client">
             </div>
 
             <!-- حالة النجاح بعد الدفع (Success State) -->
-            <div id="chkSuccessBox" style="display:none; background:rgba(16,185,129,0.1); border:1px solid #10b981; border-radius:12px; padding:16px; margin-bottom:16px;">
+            <div class="ds-u60" id="chkSuccessBox">
                 <div class="d-flex align-items-center gap-2 mb-2">
-                    <span style="font-size:1.4rem;">🎉</span>
+                    <span class="ds-u61">🎉</span>
                     <div>
-                        <h5 class="fw-bold text-white mb-0" style="font-size:0.95rem;">تم إتمام عملية الدفع بنجاح!</h5>
+                        <h5 class="fw-bold text-white mb-0 ds-u46">تم إتمام عملية الدفع بنجاح!</h5>
                         <span class="text-caption text-white-64">تم تفعيل الترخيص التجاري وإصدار الفاتورة الضريبية الرسمية</span>
                     </div>
                 </div>
@@ -2955,10 +2955,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="table-action-btn" onclick="navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('تم نسخ مفتاح الترخيص!');">نسخ</button>
                 </div>
                 <div class="d-flex gap-2 flex-wrap mt-2">
-                    <button type="button" class="action-cta-btn" id="chkBtnViewInvoice" style="font-size:0.8rem; padding:7px 14px;">
+                    <button type="button" class="action-cta-btn ds-u62" id="chkBtnViewInvoice">
                         📄 معاينة الفاتورة الصادرة
                     </button>
-                    <button type="button" class="table-action-btn" onclick="triggerSoftwareDownload()" style="font-size:0.8rem; padding:7px 14px;">
+                    <button type="button" class="table-action-btn ds-u62" onclick="triggerSoftwareDownload()">
                         📦 تنزيل حزمة التثبيت
                     </button>
                 </div>
@@ -2966,7 +2966,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- زر الدفع الرئيسي -->
             <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" onclick="executeCheckoutPayment()">
-                <span id="chkBtnSpinner" style="display:none;">⏳</span>
+                <span class="ds-u52" id="chkBtnSpinner">⏳</span>
                 <span id="chkBtnText">تأكيد الدفع الآمن وإصدار الفاتورة (€ 228.69)</span>
             </button>
             <div class="d-flex justify-content-between align-items-center text-caption text-white-64 mt-2">
@@ -2975,8 +2975,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
         </div>
     <!-- حاوية الجولة الإرشادية التفاعلية للزبائن (Spotlight Guided Tour) -->
-    <div id="tourBackdrop" class="tour-backdrop" style="display:none;" onclick="endGuidedTour()"></div>
-    <div id="tourCard" class="tour-card" style="display:none;">
+    <div id="tourBackdrop" class="tour-backdrop ds-u52" onclick="endGuidedTour()"></div>
+    <div id="tourCard" class="tour-card ds-u52">
         <div class="tour-card-header">
             <span class="tour-step-badge" id="tourStepBadge">خطوة 1 من 5</span>
             <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="إغلاق الجولة">✕</button>
@@ -2991,110 +2991,110 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
     <!-- نافذة تصدير ملخص العرض التنفيذي للزبائن (One-Click Executive PDF) -->
     <div class="modal-overlay" id="executivePdfModal" onclick="if(event.target === this) closeExecutivePdfModal()">
-        <div class="modal-card exec-pdf-card" style="max-width:880px; width:95%; max-height:92vh; overflow-y:auto; background:#02100b; border:1.5px solid var(--gold); border-radius:18px; padding:2.2rem; box-shadow:0 25px 70px rgba(0,0,0,0.9); color:#fff;">
-            <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(197,168,128,0.25); padding-bottom:1rem; margin-bottom:1.5rem;">
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <img src="./assets/sr-core-emblem-official.png" style="height:46px; width:46px; border-radius:50%; object-fit:contain; filter:drop-shadow(0 0 10px rgba(197,168,128,0.45));" alt="S&R CoreSync" />
+        <div class="modal-card exec-pdf-card ds-u63">
+            <div class="no-print ds-u64">
+                <div class="ds-u65">
+                    <img class="ds-u66" src="./assets/sr-core-emblem-official.png" alt="S&R CoreSync" />
                     <div>
-                        <h3 style="margin:0; font-size:1.25rem; color:var(--gold);">S&R CORESYNC SOLUTIONS B.V.</h3>
-                        <span style="font-size:0.75rem; color:var(--text-muted);">Executive Capability Brief & Digital Quotation (Official Dossier)</span>
+                        <h3 class="ds-u67">S&R CORESYNC SOLUTIONS B.V.</h3>
+                        <span class="ds-u68">Executive Capability Brief & Digital Quotation (Official Dossier)</span>
                     </div>
                 </div>
-                <div style="display:flex; gap:8px;">
-                    <button type="button" onclick="printExecutiveBrief()" style="background:linear-gradient(135deg, var(--gold), #10b981); color:#000; font-weight:800; border:none; border-radius:8px; padding:9px 18px; font-size:0.82rem; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 4px 15px rgba(212,175,55,0.35);">
+                <div class="ds-u69">
+                    <button class="ds-u70" type="button" onclick="printExecutiveBrief()">
                         🖨️ طباعة / حفظ كـ PDF
                     </button>
-                    <button type="button" onclick="closeExecutivePdfModal()" style="background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.18); border-radius:8px; padding:9px 14px; font-size:0.82rem; cursor:pointer;">
+                    <button class="ds-u71" type="button" onclick="closeExecutivePdfModal()">
                         إغلاق ✕
                     </button>
                 </div>
             </div>
 
             <!-- شريط تخصيص اسم شركة العميل (Personalized Client Input) -->
-            <div class="no-print" style="margin-bottom: 1.2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(197,168,128,0.25); border-radius: 10px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
-                <div style="display:flex; align-items:center; gap:8px; flex:1; min-width:280px;">
-                    <span style="font-size:0.8rem; color:var(--gold); font-weight:700; white-space:nowrap;">🏢 مخصص لشركة (Client Enterprise):</span>
-                    <input type="text" id="pdfClientNameInput" oninput="updatePdfClientName(this.value)" placeholder="أدخل اسم شركة العميل..." value="مجموعة الشريك التجاري المستهدف" style="flex:1; background:#02150f; border:1px solid rgba(197,168,128,0.4); color:#fff; border-radius:6px; padding:6px 12px; font-size:0.8rem; font-family:'Alexandria', sans-serif;" />
+            <div class="no-print ds-u72">
+                <div class="ds-u73">
+                    <span class="ds-u74">🏢 مخصص لشركة (Client Enterprise):</span>
+                    <input class="ds-u75" type="text" id="pdfClientNameInput" oninput="updatePdfClientName(this.value)" placeholder="أدخل اسم شركة العميل..." value="مجموعة الشريك التجاري المستهدف" />
                 </div>
-                <span style="font-size:0.72rem; color:var(--text-muted);">ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة</span>
+                <span class="ds-u76">ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة</span>
             </div>
 
             <!-- محتوى التقرير للطباعة والمعاينة -->
-            <div id="printableExecutiveBrief" style="font-family:'Alexandria', sans-serif; line-height:1.6; color:#ffffff;">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #c5a880; padding-bottom:14px; margin-bottom:16px;">
+            <div class="ds-u77" id="printableExecutiveBrief">
+                <div class="ds-u78">
                     <div>
-                        <h2 style="margin:0; font-size:1.6rem; color:#c5a880; font-weight:900;">ملخص العرض التنفيذي والجاهزية المؤسسية</h2>
-                        <span style="font-size:0.85rem; color:#94a3b8;">S&R Enterprise Architecture • Netherlands Headquarters</span>
+                        <h2 class="ds-u79">ملخص العرض التنفيذي والجاهزية المؤسسية</h2>
+                        <span class="ds-u80">S&R Enterprise Architecture • Netherlands Headquarters</span>
                     </div>
-                    <div style="text-align:left; font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:#cbd5e1;">
-                        <div>REF: <strong style="color:#c5a880;">SR-EXEC-2026-Q4</strong></div>
+                    <div class="ds-u81">
+                        <div>REF: <strong class="ds-u82">SR-EXEC-2026-Q4</strong></div>
                         <div>DATE: <strong id="pdfDateDisplay">2026-10-12</strong></div>
-                        <div>STATUS: <strong style="color:#34d399;">VERIFIED & ACTIVE</strong></div>
+                        <div>STATUS: <strong class="ds-u83">VERIFIED & ACTIVE</strong></div>
                     </div>
                 </div>
 
                 <!-- بطاقة تخصيص العميل المستهدف -->
-                <div style="background: rgba(197,168,128,0.08); border-right: 4px solid #c5a880; padding: 10px 14px; margin-bottom: 18px; border-radius: 0 8px 8px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                <div class="ds-u84">
                     <div>
-                        <span style="font-size:0.75rem; color:#94a3b8;">إعداد وتخصيص الملف التنفيذي إلى (Presented To):</span>
-                        <div id="pdfClientNameDisplay" style="font-size:1.15rem; font-weight:900; color:#c5a880;">مجموعة الشريك التجاري المستهدف</div>
+                        <span class="ds-u85">إعداد وتخصيص الملف التنفيذي إلى (Presented To):</span>
+                        <div class="ds-u86" id="pdfClientNameDisplay">مجموعة الشريك التجاري المستهدف</div>
                     </div>
-                    <div style="font-size:0.75rem; color:#34d399; font-weight:700; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); padding:4px 10px; border-radius:6px;">
+                    <div class="ds-u87">
                         ✓ عرض استشاري مخصص (Bespoke Enterprise Dossier)
                     </div>
                 </div>
 
                 <!-- نبذة عن الحل السحابي -->
-                <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,168,128,0.2); border-radius:12px; padding:16px; margin-bottom:18px;">
-                    <h4 style="margin:0 0 8px 0; color:#fff; font-size:1rem;">🌟 نظرة عامة على حلول S&R CoreSync</h4>
-                    <p style="margin:0; font-size:0.84rem; color:rgba(255,255,255,0.8); line-height:1.7;">
+                <div class="ds-u88">
+                    <h4 class="ds-u89">🌟 نظرة عامة على حلول S&R CoreSync</h4>
+                    <p class="ds-u90">
                         منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر.
                     </p>
                 </div>
 
                 <!-- جدول المؤشرات المالية المعتمدة بالعملة والضريبة المختارة -->
-                <div style="margin-bottom:18px;">
-                    <h4 style="margin:0 0 10px 0; color:#c5a880; font-size:0.95rem;">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>
-                    <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:right;">
+                <div class="ds-u91">
+                    <h4 class="ds-u92">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>
+                    <table class="ds-u93">
                         <thead>
-                            <tr style="background:rgba(197,168,128,0.15); border-bottom:1px solid #c5a880;">
-                                <th style="padding:10px; color:#fff;">البند المالي</th>
-                                <th style="padding:10px; color:#fff;">القيمة المعتمدة</th>
-                                <th style="padding:10px; color:#fff;">الحالة والامتثال</th>
+                            <tr class="ds-u94">
+                                <th class="ds-u95">البند المالي</th>
+                                <th class="ds-u95">القيمة المعتمدة</th>
+                                <th class="ds-u95">الحالة والامتثال</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:10px;">إجمالي الإيرادات السنوية التقديرية</td>
-                                <td style="padding:10px; font-weight:800; color:#c5a880;" id="pdfRevVal">€ 842,500.00</td>
-                                <td style="padding:10px; color:#34d399;">متحقق سحابياً (+18.4%)</td>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">إجمالي الإيرادات السنوية التقديرية</td>
+                                <td class="ds-u98" id="pdfRevVal">€ 842,500.00</td>
+                                <td class="ds-u99">متحقق سحابياً (+18.4%)</td>
                             </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:10px;">التدفقات النقدية الصافية المحققة</td>
-                                <td style="padding:10px; font-weight:800; color:#fff;" id="pdfCashVal">€ 318,920.00</td>
-                                <td style="padding:10px; color:#34d399;">هامش ربحية 9.2%</td>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">التدفقات النقدية الصافية المحققة</td>
+                                <td class="ds-u100" id="pdfCashVal">€ 318,920.00</td>
+                                <td class="ds-u99">هامش ربحية 9.2%</td>
                             </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:10px;">نظام الضريبة المطبق في الجلسة</td>
-                                <td style="padding:10px; font-weight:800; color:#fff;" id="pdfVatScheme">BTW هولندي (21%)</td>
-                                <td style="padding:10px; color:#38bdf8;">متوافق مع AWR Art. 52</td>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">نظام الضريبة المطبق في الجلسة</td>
+                                <td class="ds-u100" id="pdfVatScheme">BTW هولندي (21%)</td>
+                                <td class="ds-u101">متوافق مع AWR Art. 52</td>
                             </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:10px;">الضريبة المقدرة المحتسبة</td>
-                                <td style="padding:10px; font-weight:800; color:#34d399;" id="pdfVatVal">€ 176,925.00</td>
-                                <td style="padding:10px;">Digipoort XML جاهز</td>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">الضريبة المقدرة المحتسبة</td>
+                                <td class="ds-u102" id="pdfVatVal">€ 176,925.00</td>
+                                <td class="ds-u97">Digipoort XML جاهز</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- رسم بياني مصغر لمؤشرات التدفق والسيولة (Mini Executive Print Chart) -->
-                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(197,168,128,0.25); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h5 style="margin:0; font-size:0.88rem; color:#c5a880; font-weight:800;">📈 مخطط مسار الإيرادات والسيولة المتوقعة (2026 Trend Simulation):</h5>
-                        <span style="font-size:0.72rem; color:#94a3b8; font-family:'JetBrains Mono', monospace;">Q1 - Q4 Projections</span>
+                <div class="ds-u103">
+                    <div class="ds-u104">
+                        <h5 class="ds-u105">📈 مخطط مسار الإيرادات والسيولة المتوقعة (2026 Trend Simulation):</h5>
+                        <span class="ds-u106">Q1 - Q4 Projections</span>
                     </div>
-                    <svg viewBox="0 0 700 130" style="width:100%; height:auto; overflow:visible;" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="ds-u107" viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg">
                         <!-- خطوط الشبكة -->
                         <line x1="40" y1="20" x2="680" y2="20" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
                         <line x1="40" y1="60" x2="680" y2="60" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
@@ -3135,36 +3135,36 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <text x="460" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q3 Acceleration</text>
                         <text x="650" y="118" fill="#c5a880" font-size="11" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q4 Scale Peak</text>
                     </svg>
-                    <div style="display:flex; justify-content:center; gap:20px; margin-top:8px; font-size:0.75rem;">
-                        <span style="display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:3px; background:#c5a880;"></span> إجمالي الإيرادات (Gross Revenue)</span>
-                        <span style="display:flex; align-items:center; gap:6px;"><span style="display:inline-block; width:12px; height:3px; background:#10b981;"></span> التدفق النقدي الصافي (Net Cash Flow)</span>
+                    <div class="ds-u108">
+                        <span class="ds-u109"><span class="ds-u110"></span> إجمالي الإيرادات (Gross Revenue)</span>
+                        <span class="ds-u109"><span class="ds-u111"></span> التدفق النقدي الصافي (Net Cash Flow)</span>
                     </div>
                 </div>
 
                 <!-- حزم البرمجيات الموصى بها -->
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:22px;">
-                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px;">
-                        <div style="font-weight:800; color:#fff; font-size:0.9rem; margin-bottom:4px;">💻 S&R TaxSync Desktop (v2.4 Pro)</div>
-                        <div style="font-size:0.78rem; color:#94a3b8;">تطبيق سطح مكتب مستقل (Offline-First) لحساب BTW وتوليد ملفات إقرارات الضرائب المشفرة.</div>
+                <div class="ds-u112">
+                    <div class="ds-u113">
+                        <div class="ds-u114">💻 S&R TaxSync Desktop (v2.4 Pro)</div>
+                        <div class="ds-u115">تطبيق سطح مكتب مستقل (Offline-First) لحساب BTW وتوليد ملفات إقرارات الضرائب المشفرة.</div>
                     </div>
-                    <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px;">
-                        <div style="font-weight:800; color:#fff; font-size:0.9rem; margin-bottom:4px;">🤖 S&R CoreSync AI Assistant</div>
-                        <div style="font-size:0.78rem; color:#94a3b8;">محرك تحليل ذكاء اصطناعي محلي مع معالجة مستندات الفواتير بدقة 99.4%.</div>
+                    <div class="ds-u113">
+                        <div class="ds-u114">🤖 S&R CoreSync AI Assistant</div>
+                        <div class="ds-u115">محرك تحليل ذكاء اصطناعي محلي مع معالجة مستندات الفواتير بدقة 99.4%.</div>
                     </div>
                 </div>
 
                 <!-- توقيع المؤسسين الرسمي -->
-                <div style="border-top:1px dashed rgba(197,168,128,0.4); padding-top:16px; display:flex; justify-content:space-between; align-items:center;">
+                <div class="ds-u116">
                     <div>
-                        <div style="font-weight:800; font-size:0.88rem; color:#fff;">Eng. Mohammad Salim Aziza</div>
-                        <div style="font-size:0.75rem; color:#94a3b8;">Co-Founder & CTO // Lead Cloud Architect</div>
+                        <div class="ds-u117">Eng. Mohammad Salim Aziza</div>
+                        <div class="ds-u85">Co-Founder & CTO // Lead Cloud Architect</div>
                     </div>
-                    <div style="text-align:center;">
-                        <div style="font-size:0.75rem; color:#c5a880; font-weight:800; border:1px solid #c5a880; padding:4px 10px; border-radius:6px;">ختم الاعتماد الرقمي (Verified SHA-256)</div>
+                    <div class="ds-u118">
+                        <div class="ds-u119">ختم الاعتماد الرقمي (Verified SHA-256)</div>
                     </div>
-                    <div style="text-align:left;">
-                        <div style="font-weight:800; font-size:0.88rem; color:#fff;">Mr. Mohammad Raed Kaakeh</div>
-                        <div style="font-size:0.75rem; color:#94a3b8;">Co-Founder & CFO // Financial ERP Architect</div>
+                    <div class="ds-u120">
+                        <div class="ds-u117">Mr. Mohammad Raed Kaakeh</div>
+                        <div class="ds-u85">Co-Founder & CFO // Financial ERP Architect</div>
                     </div>
                 </div>
             </div>
@@ -3172,8 +3172,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- إشعار التخصيص العائم (Portal Floating Toast) -->
-    <div id="portal-toast" style="position:fixed; bottom:24px; left:24px; z-index:9999; background:rgba(9,9,11,0.92); backdrop-filter:blur(12px); border:1px solid var(--gold); border-radius:12px; padding:12px 18px; color:#fff; font-size:13px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:0 12px 32px rgba(0,0,0,0.6); transform:translateY(100px); opacity:0; transition:all 0.35s ease; pointer-events:none;">
-        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--gold);"></span>
+    <div class="ds-u121" id="portal-toast">
+        <span class="ds-u122"></span>
         <span id="portal-toast-msg">تم تطبيق الإعدادات بنجاح</span>
     </div>
 
