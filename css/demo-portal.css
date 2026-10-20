@@ -49,13 +49,15 @@
         }
 
         .portal-brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-            color: #fff;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 14px !important;
+            text-decoration: none !important;
+            color: #fff !important;
             direction: ltr !important;
             unicode-bidi: isolate !important;
+            transform: none !important;
+            -webkit-transform: none !important;
         }
 
         .brand-badge {
@@ -72,42 +74,67 @@
         }
 
         .portal-brand-emblem {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
+            width: 52px !important;
+            height: 52px !important;
+            object-fit: contain !important;
             border-radius: 50% !important;
-            filter: drop-shadow(0 0 14px rgba(197, 168, 128, 0.55));
-            box-shadow: 0 0 18px rgba(197, 168, 128, 0.25);
-            flex-shrink: 0;
-            display: block;
+            filter: drop-shadow(0 0 16px rgba(197, 168, 128, 0.55)) !important;
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.25) !important;
+            flex-shrink: 0 !important;
+            display: block !important;
+            transform: none !important;
+            -webkit-transform: none !important;
             transition: transform 0.3s ease, filter 0.3s ease;
         }
 
         .portal-brand:hover .portal-brand-emblem {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 22px rgba(197, 168, 128, 0.8));
+            transform: scale(1.06) !important;
+            filter: drop-shadow(0 0 24px rgba(197, 168, 128, 0.85)) !important;
         }
 
         .portal-brand-text {
-            display: flex;
-            flex-direction: column;
+            display: flex !important;
+            flex-direction: column !important;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
+            transform: none !important;
+            -webkit-transform: none !important;
         }
 
-        .portal-brand-text h1 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            margin: 0;
-            line-height: 1.1;
+        .portal-brand-title {
+            display: inline-flex !important;
+            align-items: baseline !important;
+            gap: 6px !important;
+            direction: ltr !important;
+            unicode-bidi: isolate !important;
+            transform: none !important;
+            -webkit-transform: none !important;
+            line-height: 1.1 !important;
         }
 
-        .portal-brand-text h1 span {
-            color: var(--gold);
+        .portal-brand-title .brand-sr-text {
+            font-size: 1.35rem !important;
+            font-weight: 900 !important;
+            color: #ffffff !important;
+            font-family: 'Playfair Display', serif !important;
+            letter-spacing: 0.5px !important;
+        }
+
+        .portal-brand-title .brand-sub-text {
+            font-size: 1.05rem !important;
+            font-weight: 700 !important;
+            color: #c5a880 !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
         }
 
         .portal-brand-tag {
             font-size: 0.65rem;
             color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+        }
             letter-spacing: 0.5px;
         }
 
