@@ -3211,6 +3211,27 @@ html[dir="rtl"] .hotline-popover-card {
     background: #1ebd57;
     color: #04100c !important;
 }
+.btn-share-email {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.btn-share-email:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    color: #ffffff !important;
+}
 
 @media (max-width: 800px) {
     .contract-parties-grid {
@@ -3221,6 +3242,42 @@ html[dir="rtl"] .hotline-popover-card {
     }
     .contract-signatures-box {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Print Rules for Contract Modal */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #contractOf2026Modal, #contractOf2026Modal * {
+        visibility: visible;
+    }
+    #contractOf2026Modal {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+    .contract-modal-card {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
+        max-width: 100% !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 10mm !important;
+    }
+    .btn-share-wa, .btn-share-email, .btn-cert-print, .btn-cert-close, .btn-sign-contract, .btn-modal-close-sm {
+        display: none !important;
     }
 }
 
