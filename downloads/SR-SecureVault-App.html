@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&R SecureVault B2B v2.0 // Standalone AES-256 Crypto App</title>
+    <style>
+        :root {
+            --bg-deep: #030806;
+            --bg-card: #081410;
+            --gold: #c5a880;
+            --cyan: #38bdf8;
+            --border: rgba(197, 168, 128, 0.22);
+            --text-dim: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: var(--bg-deep); color: #fff; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        .frame { max-width: 680px; width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+        .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 18px; }
+        h1 { font-size: 1.25rem; font-weight: 800; color: #fff; }
+        label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
+        textarea, input { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: #fff; font-size: 0.9rem; margin-bottom: 14px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #030806; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.95rem; margin-bottom: 14px; }
+        .cipher-box { background: #020604; border: 1px solid rgba(56,189,248,0.4); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--cyan); word-break: break-all; margin-bottom: 16px; max-height: 120px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="header">
+            <h1>🛡️ S&R SecureVault B2B v2.0</h1>
+            <span style="font-size:0.75rem; color:var(--cyan);">Web Crypto AES-256 GCM</span>
+        </div>
+
+        <label>البيانات الحساسة للتشفير:</label>
+        <textarea id="plain" rows="3">DATABASE_SECRET="SR2026_Enterprise_Secure_Token"</textarea>
+
+        <label>مفتاح التشفير السري (Passphrase):</label>
+        <input type="password" id="pass" value="Salim-Raed-Vault-Key">
+
+        <button class="btn" onclick="encrypt()">🔒 تشفير فوري بمعيار AES-256</button>
+
+        <label>الشفرة المشفرة الناتجة (Ciphertext):</label>
+        <div class="cipher-box" id="cipherDisp">اضغط تشفير لتوليد الشفرة...</div>
+
+        <button class="btn" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;" onclick="decrypt()">🔓 فك التشفير واسترجاع النص الأصلي</button>
+
+        <label>البيانات بعد فك التشفير:</label>
+        <textarea id="decrypted" rows="3" readonly></textarea>
+    </div>
+
+    <script>
+        async function getKey(pass, salt) {
+            const enc = new TextEncoder();
+            const mat = await crypto.subtle.importKey('raw', enc.encode(pass), { name: 'PBKDF2' }, false, ['deriveKey']);
+            return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' }, mat, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+        }
+
+        async function encrypt() {
+            const text = document.getElementById('plain').value;
+            const pass = document.getElementById('pass').value;
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await getKey(pass, salt);
+            const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(text));
+            const res = { salt: btoa(String.fromCharCode(...salt)), iv: btoa(String.fromCharCode(...iv)), data: btoa(String.fromCharCode(...new Uint8Array(cipher))) };
+            document.getElementById('cipherDisp').innerText = 'SRVLT-AES256:' + btoa(JSON.stringify(res));
+        }
+
+        async function decrypt() {
+            try {
+                const armored = document.getElementById('cipherDisp').innerText.replace('SRVLT-AES256:', '');
+                const pass = document.getElementById('pass').value;
+                const p = JSON.parse(atob(armored));
+                const salt = Uint8Array.from(atob(p.salt), c => c.charCodeAt(0));
+                const iv = Uint8Array.from(atob(p.iv), c => c.charCodeAt(0));
+                const data = Uint8Array.from(atob(p.data), c => c.charCodeAt(0));
+                const key = await getKey(pass, salt);
+                const dec = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+                document.getElementById('decrypted').value = new TextDecoder().decode(dec);
+            } catch(e) {
+                alert('فشل فك التشفير: تأكد من صحة المفتاح!');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&R TaxSync Desktop / Web v2.4 Pro // Standalone Offline App</title>
+    <style>
+        :root {
+            --bg-deep: #030806;
+            --bg-card: #081410;
+            --gold: #c5a880;
+            --gold-bright: #e7cfad;
+            --emerald: #10b981;
+            --text-dim: #94a3b8;
+            --border: rgba(197, 168, 128, 0.22);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: var(--bg-deep); color: #ffffff; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 24px; }
+        .logo-wrap { display: flex; align-items: center; gap: 14px; }
+        .emblem { width: 44px; height: 44px; background: linear-gradient(135deg, #10b981, #c5a880); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #030806; font-size: 1.2rem; }
+        h1 { font-size: 1.25rem; font-weight: 800; color: #fff; }
+        .sub { font-size: 0.8rem; color: var(--text-dim); }
+        .badge { background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald); color: var(--emerald); padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { font-size: 1.05rem; color: var(--gold-bright); margin-bottom: 16px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 8px; }
+        .group { margin-bottom: 14px; }
+        label { display: block; font-size: 0.82rem; color: var(--text-dim); margin-bottom: 6px; }
+        input, select { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: #fff; font-size: 0.95rem; }
+        input:focus, select:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.1); }
+        .calc-box { background: rgba(0,0,0,0.45); border: 1px solid var(--gold); border-radius: 10px; padding: 16px; margin-top: 16px; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
+        .row.total { font-size: 1.15rem; font-weight: 800; color: var(--gold-bright); border-top: 1px solid rgba(197,168,128,0.3); padding-top: 10px; margin-top: 10px; }
+        .btn { background: linear-gradient(135deg, #c5a880, #8f6834); color: #030806; border: none; border-radius: 8px; padding: 12px 18px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.92rem; text-decoration: none; }
+        .btn:hover { filter: brightness(1.15); }
+        .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+        .btn-sec { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; }
+        .btn-sec:hover { background: rgba(255,255,255,0.16); }
+        footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-dim); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-wrap">
+            <div class="emblem">S&R</div>
+            <div>
+                <h1>S&R TaxSync Desktop / Web v2.4 Pro</h1>
+                <p class="sub">الحل الضريبي والمحاسبي المستقل أوفلاين // Official Dutch & European Tax Suite</p>
+            </div>
+        </div>
+        <div class="badge">● تشغيل أوفلاين فوري (Zero Friction)</div>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h2>1. مدخلات الفاتورة والضريبة (BTW/VAT Input)</h2>
+            <div class="group">
+                <label>اسم العميل / المؤسسة التجارية:</label>
+                <input type="text" id="clientName" value="Apex Global Logistics B.V.">
+            </div>
+            <div class="group">
+                <label>الرقم الضريبي الهولندي (BTW ID):</label>
+                <input type="text" id="taxId" value="NL884920153B01">
+            </div>
+            <div class="group">
+                <label>المبيعات الخاضعة للضريبة الأساسية 21% (€):</label>
+                <input type="number" id="base21" value="12500" oninput="calculate()">
+            </div>
+            <div class="group">
+                <label>المبيعات الخاضعة للضريبة المخفضة 9% (€):</label>
+                <input type="number" id="base9" value="3400" oninput="calculate()">
+            </div>
+            <div class="group">
+                <label>ضريبة المدخلات المستردة (Voorbelasting 5b - €):</label>
+                <input type="number" id="inputVat" value="1120" oninput="calculate()">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>2. الحسابات الضريبية والإقرار الرسمي (Tax Declaration)</h2>
+            <div class="calc-box">
+                <div class="row">
+                    <span>ضريبة 21% (Rubriek 1a):</span>
+                    <strong id="dispVat21">€ 2,625.00</strong>
+                </div>
+                <div class="row">
+                    <span>ضريبة 9% (Rubriek 1b):</span>
+                    <strong id="dispVat9">€ 306.00</strong>
+                </div>
+                <div class="row">
+                    <span>ضريبة المدخلات المستردة (5b):</span>
+                    <strong id="dispInputVat" style="color:#ef4444;">- € 1,120.00</strong>
+                </div>
+                <div class="row total">
+                    <span>صافي الضريبة الواجب سدادها (Te Betalen):</span>
+                    <strong id="dispNetVat">€ 1,811.00</strong>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-emerald" onclick="exportXml()">
+                <span>تصدير إقرار Digipoort XML الرسمي 📄</span>
+            </button>
+            <button type="button" class="btn btn-sec" onclick="window.print()">
+                <span>طباعة فاتورة ضريبية رسمية (EN 16931 Print) 🖨️</span>
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <div>S&R CoreSync Solutions B.V. • Amsterdam HQ • تطوير وإشراف م. سليم عزيزة وأ. رائد كعكة</div>
+        <div>كود الترخيص المفعل: <strong style="color:var(--gold);">SRTX-PRO-2026-X892-OFFLINE</strong></div>
+    </footer>
+
+    <script>
+        function calculate() {
+            const b21 = parseFloat(document.getElementById('base21').value) || 0;
+            const b9 = parseFloat(document.getElementById('base9').value) || 0;
+            const inVat = parseFloat(document.getElementById('inputVat').value) || 0;
+
+            const vat21 = b21 * 0.21;
+            const vat9 = b9 * 0.09;
+            const net = (vat21 + vat9) - inVat;
+
+            const fmt = v => `€ ${v.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('dispVat21').innerText = fmt(vat21);
+            document.getElementById('dispVat9').innerText = fmt(vat9);
+            document.getElementById('dispInputVat').innerText = `- ${fmt(inVat)}`;
+            document.getElementById('dispNetVat').innerText = fmt(net);
+        }
+
+        function exportXml() {
+            const client = document.getElementById('clientName').value;
+            const taxId = document.getElementById('taxId').value;
+            const b21 = parseFloat(document.getElementById('base21').value) || 0;
+            const b9 = parseFloat(document.getElementById('base9').value) || 0;
+            const inVat = parseFloat(document.getElementById('inputVat').value) || 0;
+            const net = ((b21 * 0.21) + (b9 * 0.09) - inVat).toFixed(2);
+
+            const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<BelastingdienstAangifte xmlns="http://xml.coresync.eu/tax/2026/btw">
+    <Header>
+        <Vendor>S&amp;R CoreSync Solutions B.V.</Vendor>
+        <Product>TaxSync Desktop / Web v2.4 Pro</Product>
+        <Timestamp>${new Date().toISOString()}</Timestamp>
+    </Header>
+    <Declarant>
+        <CompanyName>${client}</CompanyName>
+        <FiscalNumber>${taxId}</FiscalNumber>
+        <Period>2026-Q4</Period>
+    </Declarant>
+    <Rubrieken>
+        <Rubriek1aOmzet>${b21.toFixed(2)}</Rubriek1aOmzet>
+        <Rubriek1aBTW>${(b21 * 0.21).toFixed(2)}</Rubriek1aBTW>
+        <Rubriek1bOmzet>${b9.toFixed(2)}</Rubriek1bOmzet>
+        <Rubriek1bBTW>${(b9 * 0.09).toFixed(2)}</Rubriek1bBTW>
+        <Rubriek5bVoorbelasting>${inVat.toFixed(2)}</Rubriek5bVoorbelasting>
+        <Rubriek5TotalTebetalen>${net}</Rubriek5TotalTebetalen>
+    </Rubrieken>
+</BelastingdienstAangifte>`;
+
+            const blob = new Blob([xml], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `BTW_Aangifte_${taxId}_2026.xml`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            alert('✅ تم تصدير وتنزيل إقرار الـ XML بنجاح!');
+        }
+        calculate();
+    </script>
+</body>
+</html>
