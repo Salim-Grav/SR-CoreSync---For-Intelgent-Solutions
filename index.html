@@ -12637,10 +12637,16 @@
                     </div>
                 </div>
 
-                <button type="submit" class="sr-exec-submit-btn">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
-                    <span>تأكيد وإرسال طلب جلسة الـ VIP عبر الواتساب المباشر</span>
-                </button>
+                <div class="d-flex flex-column gap-2 mt-3">
+                    <button type="submit" class="sr-exec-submit-btn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+                        <span id="bookingSubmitBtnLabel">تأكيد وإرسال طلب جلسة الـ VIP عبر الواتساب المباشر</span>
+                    </button>
+                    <button type="button" class="sr-exec-submit-btn" style="background: rgba(197, 168, 128, 0.15); color: #dfc299; border: 1px solid rgba(197, 168, 128, 0.4);" onclick="submitExecutiveBooking(event, 'email')" title="إرسال فوري عبر البريد الإلكتروني الرسمي">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>📧 إرسال الطلب فوراً عبر البريد الإلكتروني (info@sr-coresync.com)</span>
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -13648,6 +13654,17 @@
             if (btnRaed) btnRaed.classList.toggle('active', advisor === 'raed');
             if (btnBoth) btnBoth.classList.toggle('active', advisor === 'both');
 
+            const submitLabel = document.getElementById('bookingSubmitBtnLabel');
+            if (submitLabel) {
+                if (advisor === 'raed') {
+                    submitLabel.textContent = 'إرسال الطلب لواتساب أ. رائد كعكة الشخصي (+31 6 8771 0290)';
+                } else if (advisor === 'salim') {
+                    submitLabel.textContent = 'إرسال الطلب لواتساب م. سليم عزيزة الشخصي (+31 6 1811 1116)';
+                } else {
+                    submitLabel.textContent = 'تأكيد وإرسال طلب جلسة الـ VIP عبر الواتساب المباشر';
+                }
+            }
+
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('switch');
         }
 
@@ -13655,7 +13672,7 @@
             selectBookingAdvisor(type);
         }
 
-        function submitExecutiveBooking(e) {
+        function submitExecutiveBooking(e, channel = 'whatsapp') {
             if (e && e.preventDefault) e.preventDefault();
             const advisor = document.getElementById('selectedAdvisorField') ? document.getElementById('selectedAdvisorField').value : 'salim';
             const clientName = document.getElementById('bookingClientName') ? document.getElementById('bookingClientName').value.trim() : '';
@@ -13722,6 +13739,7 @@
                 timeSlotLabel: timeSlotLabel,
                 notes: notes || '',
                 language: 'ar',
+                channel: channel,
                 sourceUrl: window.location.href
             };
 
@@ -13740,9 +13758,30 @@
                 } catch(err) {}
             }
 
+            // التوجيه الذكي: إذا كان رائد (أو استشارة محاسبية/مالية) -> رقم رائد الشخصي (31687710290)
+            // وإذا كان سليم (أو أنظمة وبرمجيات) -> رقم سليم الشخصي (31618111116)
+            let targetPhone = '31618111116';
+            if (advisor === 'raed' || (notes && /محاسب|ضريب|مالي|btw|vat|فواتير|جدوى/i.test(notes))) {
+                targetPhone = '31687710290';
+            } else if (advisor === 'salim') {
+                targetPhone = '31618111116';
+            } else {
+                targetPhone = /محاسب|ضريب|مالي/i.test(notes) ? '31687710290' : '31618111116';
+            }
+
+            if (channel === 'email') {
+                if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('open');
+                const subject = encodeURIComponent(`طلب استشارة تنفيذية VIP - ${clientName || 'عميل'} [${advisorName}]`);
+                const body = encodeURIComponent(msg.replace(/\*/g, ''));
+                alert('تم تسجيل طلب الموعد وأرشفته بنجاح! سيتم فتح بريدك الإلكتروني الآن لإرسال التفاصيل مباشرة إلى إدارة الشركة (info@sr-coresync.com).');
+                closeExecutiveBookingModal();
+                window.location.href = `mailto:info@sr-coresync.com?subject=${subject}&body=${body}`;
+                return;
+            }
+
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('open');
-            alert('تم تسجيل طلب الموعد بنجاح! سيتم تحويلك الآن إلى واتساب الإدارة التنفيذية المباشرة لتأكيد الموعد وإرسال دعوة التقويم.');
-            const whatsappUrl = `https://wa.me/31687764998?text=${encodeURIComponent(msg)}`;
+            alert(`تم تسجيل طلب الموعد بنجاح! سيتم تحويلك الآن إلى واتساب ${advisor === 'raed' ? 'أ. رائد كعكة الشخصي (+31 6 8771 0290)' : (advisor === 'salim' ? 'م. سليم عزيزة الشخصي (+31 6 1811 1116)' : 'الإدارة التنفيذية')} لتأكيد الموعد.`);
+            const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
             closeExecutiveBookingModal();
             window.open(whatsappUrl, '_blank');
         }

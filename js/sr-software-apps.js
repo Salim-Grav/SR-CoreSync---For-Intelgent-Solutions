@@ -2769,5 +2769,41 @@ var response = await client.PostAsync("https://api.coresync.eu/v1/tax/calculate-
         }
     });
 
+    // -------------------------------------------------------------
+    // 16. Global Executive Routing Fallback Helpers
+    // -------------------------------------------------------------
+    if (!window.openExecutiveContactModal) {
+        window.openExecutiveContactModal = function(category = 'accounting', softwareName = '') {
+            const isAcct = (category === 'accounting');
+            const targetPhone = isAcct ? '31687710290' : '31618111116';
+            const advisorName = isAcct ? 'أ. محمد رائد كعكة (CFO - المحاسبة والضرائب)' : 'م. محمد سليم عزيزة (CTO - الأنظمة والبرمجيات)';
+            const msg = `*طلب استشارة تنفيذية خاصة - S&R CoreSync Solutions*\n` +
+                        `━━━━━━━━━━━━━━━━━━━━\n` +
+                        `👔 *المستشار المطلوب:* ${advisorName}\n` +
+                        `🎯 *البرنامج المستهدف:* ${softwareName || (isAcct ? 'الأنظمة المحاسبية' : 'الأنظمة السحابية')}\n` +
+                        `━━━━━━━━━━━━━━━━━━━━\n` +
+                        `_تم الإرسال عبر محاكي تطبيقات S&R CoreSync_`;
+            
+            const choice = confirm(`هل تود التحدث عبر واتساب المستشار المختص [${advisorName}]؟\n\n(اضغط OK للواتساب، أو Cancel لإرسال إيميل إلى info@sr-coresync.com)`);
+            if (choice) {
+                window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+            } else {
+                window.sendDirectInfoEmail(softwareName || advisorName);
+            }
+        };
+    }
+
+    if (!window.sendDirectInfoEmail) {
+        window.sendDirectInfoEmail = function(softwareName = '') {
+            const subject = encodeURIComponent(`استفسار رسمي حول [${softwareName || 'برمجيات وأنظمة S&R CoreSync'}]`);
+            const body = encodeURIComponent(
+                `السادة إدارة S&R CoreSync Solutions المحترمين،\n\n` +
+                `أود الاستفسار والتواصل بخصوص: ${softwareName || 'برمجيات المنصة'}.\n\n` +
+                `الاسم الكامل:\nالشركة:\nرقم الواتساب / الهاتف:\nتفاصيل الاستفسار المطلوب:\n\nمع فائق الاحترام والتقدير.`
+            );
+            window.location.href = `mailto:info@sr-coresync.com?subject=${subject}&body=${body}`;
+        };
+    }
+
 })();
 

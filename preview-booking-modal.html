@@ -308,10 +308,16 @@
                 </div>
             </div>
 
-            <button type="submit" class="sr-exec-submit-btn" id="submitBtn">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
-                <span id="btnText">تأكيد الحجز والإرسال عبر الـ Webhook والواتساب</span>
-            </button>
+            <div class="d-flex flex-column gap-2 mt-3">
+                <button type="submit" class="sr-exec-submit-btn" id="submitBtn">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+                    <span id="btnText">تأكيد الحجز والإرسال عبر الواتساب المباشر</span>
+                </button>
+                <button type="button" class="sr-exec-submit-btn" style="background: rgba(197, 168, 128, 0.15); color: #dfc299; border: 1px solid rgba(197, 168, 128, 0.4);" onclick="handlePreviewEmailSubmit(event)" title="إرسال عبر البريد الإلكتروني الرسمي">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>📧 إرسال الطلب فوراً عبر البريد الإلكتروني (info@sr-coresync.com)</span>
+                </button>
+            </div>
         </form>
 
         <div id="dispatchResultBox" class="preview-dispatch-result">
@@ -327,6 +333,17 @@
             if (type === 'salim') document.getElementById('advisorBtnSalim').classList.add('active');
             if (type === 'raed') document.getElementById('advisorBtnRaed').classList.add('active');
             if (type === 'both') document.getElementById('advisorBtnBoth').classList.add('active');
+
+            const btnText = document.getElementById('btnText');
+            if (btnText) {
+                if (type === 'raed') {
+                    btnText.textContent = 'إرسال لواتساب أ. رائد كعكة الشخصي (+31 6 8771 0290)';
+                } else if (type === 'salim') {
+                    btnText.textContent = 'إرسال لواتساب م. سليم عزيزة الشخصي (+31 6 1811 1116)';
+                } else {
+                    btnText.textContent = 'تأكيد الحجز والإرسال عبر الواتساب المباشر';
+                }
+            }
         }
 
         async function handlePreviewSubmit(e) {
@@ -336,11 +353,12 @@
             btnText.textContent = 'جاري التوجيه والأرشفة عبر الـ Webhook... ⚡';
             btn.style.opacity = '0.85';
 
+            const advisor = document.getElementById('selectedAdvisorField').value;
             const leadData = {
                 clientName: document.getElementById('bookingClientName').value,
                 companyName: document.getElementById('bookingCompanyName').value,
                 phone: document.getElementById('bookingPhone').value,
-                advisor: document.getElementById('selectedAdvisorField').value,
+                advisor: advisor,
                 sessionType: document.getElementById('bookingSessionType').value,
                 preferredDate: document.getElementById('bookingPreferredDate').value,
                 timeSlot: document.getElementById('bookingTimeSlot').value,
@@ -358,9 +376,55 @@
             document.getElementById('leadIdOutput').textContent = result.leadId;
             box.style.display = 'block';
 
+            // Smart phone destination
+            const targetPhone = (advisor === 'raed') ? '31687710290' : '31618111116';
+            const advisorName = (advisor === 'raed') ? 'أ. رائد كعكة (المحاسبة والضرائب)' : 'م. سليم عزيزة (الأنظمة والسحابة)';
+            const waMsg = `*طلب استشارة تنفيذية VIP - S&R CoreSync Solutions*\n` +
+                          `رقم الطلب: ${result.leadId}\n` +
+                          `المستشار: ${advisorName}\n` +
+                          `العميل: ${leadData.clientName} (${leadData.companyName})\n` +
+                          `المحاور: ${leadData.notes}`;
+
             setTimeout(() => {
-                alert(`🎉 تم اختبار الـ Webhook Lead Dispatcher بنجاح!\n\nرقم الحجز: ${result.leadId}\nتم الحفظ في: localStorage + config/leads-ledger.json + Webhook Channels.`);
+                alert(`🎉 تم اختبار الـ Webhook Lead Dispatcher بنجاح!\n\nرقم الحجز: ${result.leadId}\nالمستشار: ${advisorName}\nسيتم فتح محادثة الواتساب الآن.`);
+                window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(waMsg)}`, '_blank');
             }, 300);
+        }
+
+        async function handlePreviewEmailSubmit(e) {
+            if (e) e.preventDefault();
+            const advisor = document.getElementById('selectedAdvisorField').value;
+            const leadData = {
+                clientName: document.getElementById('bookingClientName').value,
+                companyName: document.getElementById('bookingCompanyName').value,
+                phone: document.getElementById('bookingPhone').value,
+                advisor: advisor,
+                sessionType: document.getElementById('bookingSessionType').value,
+                preferredDate: document.getElementById('bookingPreferredDate').value,
+                timeSlot: document.getElementById('bookingTimeSlot').value,
+                notes: document.getElementById('bookingNotes').value,
+                language: 'ar',
+                channel: 'email'
+            };
+
+            const result = await SRLeadDispatcher.dispatch(leadData);
+            const box = document.getElementById('dispatchResultBox');
+            document.getElementById('leadIdOutput').textContent = result.leadId;
+            box.style.display = 'block';
+
+            const advisorName = (advisor === 'raed') ? 'أ. رائد كعكة (المحاسبة والضرائب)' : (advisor === 'salim' ? 'م. سليم عزيزة (الأنظمة والسحابة)' : 'كلا الشريكين');
+            const subject = encodeURIComponent(`طلب استشارة VIP [${result.leadId}] - ${leadData.clientName} (${advisorName})`);
+            const body = encodeURIComponent(
+                `السادة إدارة S&R CoreSync Solutions المحترمين،\n\n` +
+                `طلب استشارة تنفيذية برقم: ${result.leadId}\n` +
+                `المستشار المطلوب: ${advisorName}\n` +
+                `الاسم: ${leadData.clientName}\n` +
+                `الشركة: ${leadData.companyName}\n` +
+                `رقم الهاتف: ${leadData.phone}\n` +
+                `تفاصيل الاستشارة: ${leadData.notes}\n\n` +
+                `مع التحية.`
+            );
+            window.location.href = `mailto:info@sr-coresync.com?subject=${subject}&body=${body}`;
         }
     </script>
 </body>
