@@ -2974,39 +2974,24 @@
 
         function triggerSoftwareDownload() {
             if (!currentActiveSoftware) return;
-            const title = currentActiveSoftware.title;
-            const key = document.getElementById('modalSwKey').innerText;
-
-            // توليد ملف حزمة التثبيت التجريبية
-            const fileContent = `-----------------------------------------------------
-${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
------------------------------------------------------
-Publisher: S&R CoreSync Solutions B.V. (Amsterdam, Netherlands)
-License Key: ${key}
-Issued: 2026-10-06
-Status: Verified Digital Signature (SHA-256)
-
-INSTALLATION INSTRUCTIONS:
-1. Run the installer matching your OS (Windows .msi or macOS .dmg).
-2. Enter the License Key provided above when prompted during first launch.
-3. For enterprise cloud sync, configure your CoreSync Tenant API URL.
-
-Support & Documentation: https://coresync.cloud/docs
-Direct Founders Contact: info@coresync.cloud
------------------------------------------------------
-(c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
-`;
-            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
+            const id = currentActiveSoftware.id || 'taxsync';
+            const title = currentActiveSoftware.title || 'S&R Software';
+            const appFiles = {
+                taxsync: 'downloads/SR-TaxSync-Web-App.html',
+                flowscan: 'downloads/SR-FlowScan-Mobile-App.html',
+                cloudpos: 'downloads/SR-CloudPOS-Terminal.html',
+                vault: 'downloads/SR-SecureVault-App.html',
+                sdk: 'downloads/SR-Financial-AI-SDK.html'
+            };
+            const downloadUrl = appFiles[id] || 'downloads/SR-TaxSync-Web-App.html';
             const a = document.createElement('a');
-            a.href = url;
-            a.download = `${title.replace(/\s+/g, '_')}_QuickStart_Package.txt`;
+            a.href = downloadUrl;
+            a.download = downloadUrl.split('/').pop();
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
 
-            showPortalToast(`⚡ بدأ تنزيل حزمة التثبيت لـ [${title}] بنجاح!`);
+            showPortalToast(`📥 بدأ تنزيل تطبيق [${title}] المستقل أوفلاين بنجاح!`);
         }
 
         function triggerSoftwareCheckout() {
