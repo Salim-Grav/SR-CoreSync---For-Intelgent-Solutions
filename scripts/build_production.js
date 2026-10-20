@@ -8,6 +8,9 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
+// Ensure working directory is always the Project root
+process.chdir(path.join(__dirname, '..'));
+
 function minifyCSS(css) {
   // Strip comments FIRST to prevent apostrophes in comments from corrupting string tokens
   let cleaned = css.replace(/\/\*[\s\S]*?\*\//g, '');
