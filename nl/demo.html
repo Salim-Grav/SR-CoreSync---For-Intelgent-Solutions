@@ -1605,7 +1605,7 @@
     </div>
 
     <script>
-        // التبديل بين الشاشات في القائمة الجانبية
+        // Enterprise CoreSync Engine Logic
         function switchPortalTab(tabId, el) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (el) {
@@ -1622,12 +1622,12 @@
             }
         }
 
-        // إعداد الرسوم البيانية التفاعلية بواسطة Chart.js
+        // Enterprise CoreSync Engine Logic
         let revenueChartInstance;
         let categoryChartInstance;
 
         document.addEventListener('DOMContentLoaded', function () {
-            // Activeren التبويب المباشر عبر الهاش (#whitelabel, #invoices, إلخ)
+            // Enterprise CoreSync Engine Logic
             if (window.location.hash) {
                 const tabName = window.location.hash.replace('#', '');
                 const targetNav = document.querySelector(`.nav-item[onclick*="'${tabName}'"]`);
@@ -1636,7 +1636,7 @@
                 }
             }
 
-            // رسم بياني الإيرادات الشهرية
+            // Enterprise CoreSync Engine Logic
             const ctxRev = document.getElementById('revenueChart').getContext('2d');
             revenueChartInstance = new Chart(ctxRev, {
                 type: 'line',
@@ -1689,7 +1689,7 @@
                 }
             });
 
-            // رسم بياني توزيع القطاعات
+            // Enterprise CoreSync Engine Logic
             const ctxCat = document.getElementById('categoryChart').getContext('2d');
             categoryChartInstance = new Chart(ctxCat, {
                 type: 'doughnut',
@@ -1718,7 +1718,7 @@
             });
         });
 
-        // المساعد المالي الذكي (AI Chat Logic)
+        // Enterprise CoreSync Engine Logic
         function askAiPrompt(text) {
             document.getElementById('aiInput').value = text;
             sendAiMessage();
@@ -1731,7 +1731,7 @@
 
             const chat = document.getElementById('aiChatMessages');
 
-            // رسالة المستخدم
+            // Enterprise CoreSync Engine Logic
             const userMsg = document.createElement('div');
             userMsg.className = 'chat-bubble chat-user';
             userMsg.innerText = query;
@@ -1739,15 +1739,15 @@
             input.value = '';
             chat.scrollTop = chat.scrollHeight;
 
-            // توليد الرد الآلي الذكي بعد ثوانٍ معدودة
+            // Enterprise CoreSync Engine Logic
             setTimeout(() => {
                 let aiResponse = "";
-                if (query.toLowerCase().includes('oktober') || query.toLowerCase().includes('cash') || query.includes('أكتوبر') || query.includes('التدفق')) {
+                if (query.toLowerCase().includes('oktober') || query.toLowerCase().includes('cash') ) {
                     aiResponse = "Op basis van het grootboek en het ERP-systeem voor oktober:
 - Gerealiseerde Bruto Omzet: €144.500 (+18% record kwartaalgroei).
 - Operationele Marge: 27,4%, boven Nederlands sectorgemiddelde.
 - Advies: Versnel incasso van openstaande vordering van €42.000 om liquiditeit te versterken.";
-                } else if (query.toLowerCase().includes('factuur') || query.toLowerCase().includes('vervallen') || query.includes('فواتير') || query.includes('المتأخرة')) {
+                } else if (query.toLowerCase().includes('factuur') || query.toLowerCase().includes('vervallen') ) {
                     aiResponse = "توجد 1 factuur معلقة بقيمة €35,000 لعميل في الرياض vervalt binnen 14 dagen مع بند Reverse Charge ضريبي سليم. لا توجد أي فواتير متعثرة تتجاوز 30 يوماً بفضل التنبيهات الآلية للواتساب والإيميل.";
                 } else {
                     aiResponse = "Uw vraag is geanalyseerd door de S&R CoreSync Financiële Engine. Boekhouding en operatie zijn gesynchroniseerd. RPA-automatisering bespaart komende maand circa 35 declarabele uren.";
@@ -1761,7 +1761,7 @@
             }, 600);
         }
 
-        // نافذة المعاملة الجديدة
+        // Enterprise CoreSync Engine Logic
         function openNewTxModal() {
             document.getElementById('newTxModal').classList.add('active');
         }
@@ -1775,7 +1775,7 @@
             const amount = parseFloat(document.getElementById('txAmount').value) || 0;
             const type = document.getElementById('txType').value;
 
-            // إضافة صف جديد للجدول
+            // Enterprise CoreSync Engine Logic
             const tbody = document.querySelector('#transactionsTable tbody');
             const tr = document.createElement('tr');
             const randomId = '#CS-' + Math.floor(1000 + Math.random() * 9000);
@@ -1791,11 +1791,11 @@
 
             tbody.prepend(tr);
 
-            // تحديث عداد الإيرادات
+            // Enterprise CoreSync Engine Logic
             const revEl = document.getElementById('stat-revenue');
             revEl.innerText = `€ ${(842500 + amount).toLocaleString()}`;
 
-            // تحديث الرسم البياني
+            // Enterprise CoreSync Engine Logic
             if (revenueChartInstance) {
                 const dataArr = revenueChartInstance.data.datasets[0].data;
                 dataArr[dataArr.length - 1] += amount;
@@ -1803,11 +1803,11 @@
             }
 
             closeNewTxModal();
-            alert('تمت إضافة المعاملة بنجاح وتحديث قيود الـ ERP والرسوم البيانية لحظياً!');
+            alert('Transaction added successfully. ERP ledger and analytics updated!');
         }
 
         // ==========================================
-        // 1. توليد ومعاينة الفواتير الإلكترونية (Feature 1)
+        // Enterprise CoreSync Engine Logic
         // ==========================================
         function openInvoiceGeneratorModal() {
             document.getElementById('newInvoiceModal').classList.add('active');
@@ -1840,14 +1840,14 @@
                 <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
                 <td><span class="status-badge status-processing" id="status-badge-${invNum}">Nieuw - Te betalen</span></td>
                 <td>
-                    <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">سداد iDEAL</button>
-                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'Openstaand', '${dateStr}', '${taxLabel}')">معاينة</button>
+                    <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">Pay via iDEAL</button>
+                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'Openstaand', '${dateStr}', '${taxLabel}')">View Invoice</button>
                 </td>
             `;
 
             tbody.prepend(tr);
 
-            // تحديث العدادات
+            // Enterprise CoreSync Engine Logic
             const pendingEl = document.getElementById('inv-stat-pending');
             const currentPending = 35000 + total;
             pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;
@@ -1867,7 +1867,7 @@
             document.getElementById('pvStatus').innerText = status;
             document.getElementById('pvDate').innerText = date || '2026-10-06';
 
-            // تطبيق الهوية المخصصة إن وجدت
+            // Enterprise CoreSync Engine Logic
             const savedBrand = localStorage.getItem('sr_custom_brand_name');
             const savedLogo = localStorage.getItem('sr_custom_brand_logo') || uploadedLogoDataUrl;
             const effectiveIssuer = customIssuerName || savedBrand || 'S&R CoreSync Solutions B.V.';
@@ -1973,7 +1973,7 @@
                 progress.style.width = '100%';
                 statusText.innerHTML = '<span class="ideal-success-msg">✓ Bedrag succesvol verrekend en bijgeschreven op de zakelijke rekening!</span>';
 
-                // تحديث حالة الفاتورة في الجدول
+                // Enterprise CoreSync Engine Logic
                 const badge = document.getElementById('status-badge-' + currentPayingInv.num) || document.getElementById('status-badge-inv-82');
                 if (badge) {
                     badge.className = 'status-badge status-completed';
@@ -1989,7 +1989,7 @@
                     targetRow.setAttribute('data-status', 'paid');
                 }
 
-                // تحديث العدادات والرسوم البيانية
+                // Enterprise CoreSync Engine Logic
                 const paidStat = document.getElementById('inv-stat-paid');
                 if (paidStat) paidStat.innerText = `€ ${(142500 + currentPayingInv.amount).toLocaleString()}`;
                 
@@ -2011,7 +2011,7 @@
         }
 
         // ==========================================
-        // 3. وضع العرض التقديمي للزبائن (Presentation Mode)
+        // Enterprise CoreSync Engine Logic
         // ==========================================
         let isPresentationActive = false;
 
@@ -2034,16 +2034,16 @@
         }
 
         // ==========================================
-        // 4. مزامنة بيانات الديمو مع استمارة التواصل (Feature 3)
+        // Enterprise CoreSync Engine Logic
         // ==========================================
         function syncDemoToConsultation() {
-            const activeTab = document.querySelector('.nav-item.active span')?.innerText || 'نظام ERP';
+            const activeTab = document.querySelector('.nav-item.active span')?.innerText || 'Cloud ERP';
             let service = 'erp';
             if (activeTab.includes('ERP')) service = 'erp';
-            else if (activeTab.includes('المالي') || activeTab.includes('القيادة')) service = 'erp';
-            else if (activeTab.includes('الذكاء') || activeTab.includes('AI')) service = 'ai';
-            else if (activeTab.includes('الخوادم')) service = 'software';
-            else if (activeTab.includes('الفواتير')) service = 'erp';
+            else if (activeTab.toLowerCase().includes('finance') || activeTab.toLowerCase().includes('overview')) service = 'erp';
+            else if (activeTab.toLowerCase().includes('ai')) service = 'ai';
+            else if (activeTab.toLowerCase().includes('cloud') || activeTab.toLowerCase().includes('server')) service = 'software';
+            else if (activeTab.toLowerCase().includes('invoice')) service = 'erp';
 
             const revText = document.getElementById('stat-revenue')?.innerText || '€ 842,500';
             const note = encodeURIComponent(`Consultaanvraag vanuit Demosessie: Doelmodule (${activeTab}), Geschat Transactievolume: ${revText}`);
@@ -2052,7 +2052,7 @@
     
 
         // ==========================================
-        // 5. محرك تخصيص الهوية والعلامة البيضاء المتقدم مع الحفظ التلقائي (White-Label & LocalStorage)
+        // Enterprise CoreSync Engine Logic
         // ==========================================
         const themePalette = {
             gold: { name: 'gold', gold: '#c5a880', hover: '#e0c59e', glow: 'rgba(197, 168, 128, 0.25)', border: 'rgba(197, 168, 128, 0.18)' },
@@ -2175,7 +2175,7 @@
             updateStorageStatusBadge();
 
             if (!isSilent) {
-                showPortalToast(`✨ تم حفظ وتطبيق هوية [${name}] على نظام الـ ERP بنجاح!`);
+                showPortalToast(`✨ Brand identity for [${name}] successfully saved and applied!`);
             }
         }
 
@@ -2229,7 +2229,7 @@
 
         
         // ==========================================
-        // 6. محرك سوق وتراخيص البرمجيات الحصرية (Software Marketplace Engine)
+        // Enterprise CoreSync Engine Logic
         // ==========================================
         const softwareCatalog = {
             taxsync: {
@@ -2320,15 +2320,15 @@
             const btnBuy = document.getElementById('modalBtnBuy');
 
             if (mode === 'trial') {
-                badge.innerText = 'ترخيص تجريبي 14 يوماً';
+                badge.innerText = '14-Day Free Trial';
                 badge.className = 'status-badge status-processing';
                 keyEl.innerText = generateCryptoLicenseKey(`TRIAL-${id.toUpperCase()}`);
-                btnBuy.innerText = `ترقية للنسخة الكاملة (€ ${sw.price})`;
+                btnBuy.innerText = `Upgrade to Full Suite (€ ${sw.price})`;
             } else {
-                badge.innerText = 'ترخيص تجاري كامل (Pro)';
+                badge.innerText = 'Commercial Enterprise (Pro)';
                 badge.className = 'status-badge status-completed';
                 keyEl.innerText = generateCryptoLicenseKey(`PRO-${id.toUpperCase()}`);
-                btnBuy.innerText = `إتمام الشراء والفوترة (€ ${sw.price})`;
+                btnBuy.innerText = `Checkout & License (€ ${sw.price})`;
             }
 
             document.getElementById('softwareModal').classList.add('active');
@@ -2347,7 +2347,7 @@
             });
         }
 
-        // حساب BTW الفورية المصغرة في بطاقة TaxSync
+        // Enterprise CoreSync Engine Logic
         function calcQuickTax() {
             const amountInput = document.getElementById('quickTaxAmount');
             const rateSelect = document.getElementById('quickTaxRate');
@@ -2362,7 +2362,7 @@
             if (totalEl) totalEl.innerText = `€ ${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         }
 
-        // توليد مفتاح تجريبي فوري جديد
+        // Enterprise CoreSync Engine Logic
         function generateNewQuickKey() {
             const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
             const randomPart = () => Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
@@ -2376,7 +2376,7 @@
             showPortalToast(`✨ Nieuwe proeflicentiesleutel gegenereerd: ${newKey}`);
         }
 
-        // Sleutel Kopiëren التجريبي الفوري للحافظة
+        // Enterprise CoreSync Engine Logic
         function copyQuickTrialKey() {
             const keyEl = document.getElementById('quickTrialKeyDisplay');
             const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
@@ -2388,7 +2388,7 @@
         }
 
         // =========================================================================
-        // 1. محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator Logic)
+        // Enterprise CoreSync Engine Logic
         // =========================================================================
         let currentCurrency = 'EUR';
         let currentVatRate = 0.21;
@@ -2437,7 +2437,7 @@
             if (vatEstEl) vatEstEl.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             if (sym1) sym1.innerText = conf.symbol;
 
-            // تحديث محتوى نافذة الـ PDF
+            // Enterprise CoreSync Engine Logic
             const pdfRev = document.getElementById('pdfRevVal');
             const pdfCash = document.getElementById('pdfCashVal');
             const pdfVat = document.getElementById('pdfVatVal');
@@ -2453,7 +2453,7 @@
         }
 
         // =========================================================================
-        // 2. الجولة الإرشادية التفاعلية (Interactive Guided Tour Logic)
+        // Enterprise CoreSync Engine Logic
         // =========================================================================
         const tourSteps = [
             {
@@ -2505,7 +2505,7 @@
             const step = tourSteps[currentTourStep];
             if (!step) return;
 
-            // التبديل إلى التبويب المطلوب إذا لزم
+            // Enterprise CoreSync Engine Logic
             const tabBtn = document.querySelector(`.nav-item[onclick*="'${step.tab}'"]`);
             if (tabBtn) {
                 switchPortalTab(step.tab, tabBtn);
@@ -2520,7 +2520,7 @@
             if (prevBtn) prevBtn.style.visibility = currentTourStep === 0 ? 'hidden' : 'visible';
             if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'Rondleiding Afronden ✓' : 'Volgende ➡️';
 
-            // تحديد وتأطير العنصر
+            // Enterprise CoreSync Engine Logic
             setTimeout(() => {
                 const target = document.getElementById(step.targetId);
                 const card = document.getElementById('tourCard');
@@ -2576,7 +2576,7 @@
         }
 
         // =========================================================================
-        // 3. تصدير ملخص العرض التنفيذي كـ PDF (One-Click Executive PDF Logic)
+        // Enterprise CoreSync Engine Logic
         // =========================================================================
         function openExecutivePdfModal() {
             updateGlobalFinancials();
@@ -2595,7 +2595,7 @@
             window.print();
         }
 
-        // تحديث اسم شركة العميل في تقرير الـ PDF المخصص
+        // Enterprise CoreSync Engine Logic
         function updatePdfClientName(name) {
             const displayEl = document.getElementById('pdfClientNameDisplay');
             if (displayEl) {
@@ -2608,7 +2608,7 @@
             const title = currentActiveSoftware.title;
             const key = document.getElementById('modalSwKey').innerText;
 
-            // توليد ملف حزمة التثبيت التجريبية
+            // Enterprise CoreSync Engine Logic
             const fileContent = `=====================================================
 ${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
 =====================================================
@@ -2663,7 +2663,7 @@ Direct Founders Contact: info@coresync.cloud
             const price = parseFloat(document.getElementById('pubPrice').value) || 99;
             const desc = document.getElementById('pubDesc').value;
 
-            // إضافة كرت جديد للحاوية ديناميكياً
+            // Enterprise CoreSync Engine Logic
             const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
@@ -2695,22 +2695,22 @@ Direct Founders Contact: info@coresync.cloud
                     <ul class="software-features-list">
                         <li class="software-feature-item">
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            ترخيص رقمي مشفر مع دعم التحديثات
+                            Encrypted Digital License with Live Updates
                         </li>
                         <li class="software-feature-item">
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            ربط مباشر عبر بوابات الدفع والفواتير
+                            Direct Gateway & Automated Invoicing Integration
                         </li>
                     </ul>
                 </div>
                 <div class="software-card-bottom">
                     <div class="software-price-wrap">
                         <span class="software-price-amount">€ ${price}</span>
-                        <span class="software-price-unit">ترخيص معتمد</span>
+                        <span class="software-price-unit">Certified License</span>
                     </div>
                     <div class="software-btn-group">
-                        <button type="button" class="btn-software-trial" onclick="openSoftwareModal('${id}', 'trial')">تجربة</button>
-                        <button type="button" class="btn-software-buy" onclick="openSoftwareModal('${id}', 'buy')">شراء</button>
+                        <button type="button" class="btn-software-trial" onclick="openSoftwareModal('${id}', 'trial')">Try Free</button>
+                        <button type="button" class="btn-software-buy" onclick="openSoftwareModal('${id}', 'buy')">Buy License</button>
                     </div>
                 </div>
             `;
@@ -2724,7 +2724,7 @@ Direct Founders Contact: info@coresync.cloud
 
         
         /* =========================================================
-           محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator JS)
+           Desktop Software Interactive OS Simulator
            ========================================================= */
         let currentSimApp = 'taxsync';
         let generatedDigipoortXml = '';
@@ -2812,7 +2812,7 @@ Direct Founders Contact: info@coresync.cloud
 ----------------------------------------------------------------------
 STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`;
             
-            showPortalToast('🛡️ اكتمل تدقيق الامتثال الضريبي بنجاح: متوافق بنسبة 100%!');
+            showPortalToast('🛡️ Tax compliance audit completed: 100% Compliant!');
         }
 
         function exportDigipoortXml() {
@@ -2865,7 +2865,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             consoleBox.style.display = 'block';
             titleEl.innerText = '📄 Gegenereerd Belastingaangiftebestand (Digipoort SBR XML):';
             contentEl.innerText = generatedDigipoortXml;
-            showPortalToast('⚡ تم توليد وتشفير ملف Digipoort XML بنجاح!');
+            showPortalToast('⚡ Digipoort XML audit payload generated and signed successfully!');
         }
 
         function downloadGeneratedTaxXml() {
@@ -2907,7 +2907,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             document.getElementById('chkTotalPrice').innerText = `€ ${total.toFixed(2)}`;
             document.getElementById('chkBtnText').innerText = `Bevestig Veilige Betaling & Facturatie (€ ${total.toFixed(2)})`;
 
-            // إعادة ضبط حالة النجاح
+            // Enterprise CoreSync Engine Logic
             document.getElementById('chkSuccessBox').style.display = 'none';
             document.getElementById('chkBtnSubmit').style.display = 'flex';
             document.getElementById('chkBtnSpinner').style.display = 'none';
@@ -2946,12 +2946,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 spinner.style.display = 'none';
                 btn.style.display = 'none';
 
-                // توليد مفتاح ترخيص تجاري
+                // Enterprise CoreSync Engine Logic
                 const proKey = generateCryptoLicenseKey(`PRO-${currentCheckoutApp.toUpperCase()}`);
                 document.getElementById('chkSuccessKey').innerText = proKey;
                 successBox.style.display = 'block';
 
-                // توليد وإضافة الفاتورة في جدول الفواتير
+                // Enterprise CoreSync Engine Logic
                 const netPrice = sw.price;
                 const vat = Math.round(netPrice * 0.21 * 100) / 100;
                 const total = Math.round((netPrice + vat) * 100) / 100;
@@ -2959,7 +2959,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 const clientName = `S&R Enterprise Licensee (${sw.title})`;
                 const gwLabel = selectedGateway === 'ideal' ? 'Mollie iDEAL ✓' : selectedGateway === 'card' ? 'Stripe Card ✓' : 'SEPA B2B Direct ✓';
 
-                // إضافة الفاتورة لجدول الفواتير في الواجهة
+                // Enterprise CoreSync Engine Logic
                 const tbody = document.getElementById('invoicesTableBody');
                 if (tbody) {
                     const tr = document.createElement('tr');
@@ -2970,7 +2970,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <td class="font-num">€ ${netPrice.toLocaleString()}</td>
                         <td class="font-num">€ ${vat.toLocaleString()} (21% BTW)</td>
                         <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
-                        <td><span class="status-badge status-completed">مدفوعة عبر ${gwLabel}</span></td>
+                        <td><span class="status-badge status-completed">Paid via ${gwLabel}</span></td>
                         <td>
                             <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${clientName}', ${netPrice}, ${vat}, ${total}, 'Betaald via ${gwLabel}', '2026-10-06', 'BTW 21%')">Factuur Bekijken</button>
                         </td>
@@ -2983,7 +2983,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     if (countPaid) countPaid.innerText = parseInt(countPaid.innerText || '2') + 1;
                 }
 
-                // ربط زر Factuur Bekijken في صندوق النجاح
+                // Enterprise CoreSync Engine Logic
                 const btnViewInv = document.getElementById('chkBtnViewInvoice');
                 btnViewInv.onclick = () => {
                     closeSoftwareCheckoutModal();
@@ -2994,7 +2994,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             }, 1200);
         }
 
-        // فحص الروابط المباشرة عند التحميل (URL Query Params Auto-Trigger)
+        // Enterprise CoreSync Engine Logic
         window.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const hash = window.location.hash;
@@ -3016,11 +3016,11 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         });
 
 
-        // استعادة التخصيص المحفوظ عند تحميل الصفحة
+        // Enterprise CoreSync Engine Logic
         window.addEventListener('DOMContentLoaded', restoreSavedBrandSettings);
 
 
-        // Activeren اختصارات لوحة المفاتيح لوضع العرض التقديمي (Key Shortcuts)
+        // Enterprise CoreSync Engine Logic
         document.addEventListener('keydown', function(e) {
             const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
             if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
@@ -3392,7 +3392,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
             </div>
 
-            <!-- 3. SEPA Direct Debit -->
+            </div>
+    <!-- 3. SEPA Direct Debit -->
             <div id="gwInput-sepa" class="payment-input-group ds-u52">
                 <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">Zakelijk IBAN (NL..):</label>
                 <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="Zakelijk IBAN" placeholder="IBAN" aria-label="Zakelijk IBAN">
