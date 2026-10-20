@@ -132,6 +132,16 @@ c_index = re.sub(r'<html lang="[^"]*" dir="[^"]*"', '<html lang="ckb" dir="rtl"'
 for ar_txt, ckb_txt in CKB_REPLACEMENTS.items():
     c_index = c_index.replace(ar_txt, ckb_txt)
 
+# Relative links update for ckb subfolder
+c_index = c_index.replace('href="./css/', 'href="../css/')
+c_index = c_index.replace('href="css/', 'href="../css/')
+c_index = c_index.replace('src="./assets/', 'src="../assets/')
+c_index = c_index.replace('src="assets/', 'src="../assets/')
+c_index = c_index.replace('href="./assets/', 'href="../assets/')
+c_index = c_index.replace('href="assets/', 'href="../assets/')
+c_index = c_index.replace('href="demo.html"', 'href="demo.html"')
+c_index = c_index.replace('href="./demo.html"', 'href="demo.html"')
+
 ckb_dropdown_index = build_dropdown_html("ckb", page_type="index", is_subfolder=True)
 start = c_index.find('id="sovereignLangDropdown"')
 if start != -1:
