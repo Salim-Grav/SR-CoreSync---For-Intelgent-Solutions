@@ -5125,6 +5125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calcPortalRoi();
     calcMigrationEstimator();
+    calcCloudSizing();
 
     // Check URL parameters for contract activation
     const urlParams = new URLSearchParams(window.location.search);
@@ -5141,6 +5142,39 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(openContractOf2026Modal, 400);
     }
 });
+
+function calcCloudSizing() {
+    const subRange = document.getElementById('slideSubscribersCount');
+    const hrRange = document.getElementById('slideStreamHours');
+    if (!subRange || !hrRange) return;
+
+    const subs = parseInt(subRange.value, 10) || 5000;
+    const hours = parseInt(hrRange.value, 10) || 10;
+
+    const dispSubs = document.getElementById('dispSubscribersCount');
+    if (dispSubs) dispSubs.innerText = subs.toLocaleString() + ' مشترك';
+
+    const dispHours = document.getElementById('dispStreamHours');
+    if (dispHours) dispHours.innerText = hours + ' ساعات/أسبوع';
+
+    let vCpu = subs > 20000 ? 16 : subs > 8000 ? 8 : 4;
+    let ram = subs > 20000 ? 64 : subs > 8000 ? 32 : 16;
+    let serverSpec = `Cloud Dedicated (${vCpu} vCPU / ${ram} GB)`;
+
+    let bwTb = ((subs * 0.25 * hours * 4 * 0.45) / 1000).toFixed(1);
+    if (parseFloat(bwTb) < 1.0) bwTb = '1.2';
+
+    let cost = Math.round(vCpu * 8 + ram * 1.2 + parseFloat(bwTb) * 4);
+
+    const specEl = document.getElementById('resCloudServerSpec');
+    if (specEl) specEl.innerText = serverSpec;
+
+    const bwEl = document.getElementById('resCloudBandwidth');
+    if (bwEl) bwEl.innerText = `${bwTb} TB / شهر`;
+
+    const costEl = document.getElementById('resCloudCost');
+    if (costEl) costEl.innerText = `€ ${cost} / شهر`;
+}
 </script>
 
 </body>
