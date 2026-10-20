@@ -1743,10 +1743,10 @@
             setTimeout(() => {
                 let aiResponse = "";
                 if (query.toLowerCase().includes('october') || query.toLowerCase().includes('cash') ) {
-                    aiResponse = "Based on October general ledgers and Cloud ERP records:
+                    aiResponse = `Based on October general ledgers and Cloud ERP records:
 - Gross Realized Revenue: €144,500 (+18% record quarterly growth).
 - Operating Margin: 27.4%, outperforming Dutch benchmarks.
-- Recommendation: Accelerate €42,000 receivable collection due October 10 to boost liquidity.";
+- Recommendation: Accelerate €42,000 receivable collection due October 10 to boost liquidity.`;
                 } else if (query.toLowerCase().includes('invoice') || query.toLowerCase().includes('overdue') ) {
                     aiResponse = "There is 1 pending invoice of €35,000 due within 14 days with verified Reverse Charge tax compliance. Zero overdue receivables beyond 30 days thanks to automated dispatch alerts.";
                 } else {
@@ -3853,9 +3853,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const triggerText = document.getElementById('hotlineTriggerText');
     if (triggerText) {
-        triggerText.innerText = '💬 Founder Hotline';
-        
-        else if (lang === 'de') triggerText.innerText = '💬 Gründer-Hotline';
+        if (lang === 'de') triggerText.innerText = '💬 Gründer-Hotline';
         else if (lang === 'fr') triggerText.innerText = '💬 Ligne Directe Fondateurs';
         else if (lang === 'tr') triggerText.innerText = '💬 Kurucu Hattı';
         else if (lang === 'nl') triggerText.innerText = '💬 Contact Oprichters';
