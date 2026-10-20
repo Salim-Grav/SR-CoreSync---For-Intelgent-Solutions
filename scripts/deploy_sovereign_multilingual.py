@@ -49,7 +49,8 @@ LANGUAGES = [
     # Regional & Middle East
     {"code": "ar", "name_native": "العربية", "name_en": "Arabic (HQ Master)", "flag": "🇸🇦", "group": "regional", "dir": "rtl", "vat": "VAT 15%"},
     {"code": "tr", "name_native": "Türkçe", "name_en": "Turkish", "flag": "🇹🇷", "group": "regional", "dir": "ltr", "vat": "KDV 20%"},
-    {"code": "ku", "name_native": "Kurdî / کوردی", "name_en": "Kurdish", "flag": "☀️", "group": "regional", "dir": "ltr", "vat": "Tax 5%"},
+    {"code": "ku", "name_native": "Kurdî (Kurmancî)", "name_en": "Kurdish (Kurmanji)", "flag": "☀️", "group": "regional", "dir": "ltr", "vat": "Tax 5%"},
+    {"code": "ckb", "name_native": "کوردی (سۆرانی)", "name_en": "Kurdish (Sorani)", "flag": "☀️", "group": "regional", "dir": "rtl", "vat": "باج ٥٪"},
 ]
 
 def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False):
