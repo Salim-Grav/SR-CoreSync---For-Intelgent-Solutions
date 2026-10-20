@@ -21,31 +21,33 @@
         label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
         textarea, input { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: #fff; font-size: 0.9rem; margin-bottom: 14px; }
         .btn { width: 100%; background: linear-gradient(135deg, #38bdf8, #0284c7); color: #030806; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.95rem; margin-bottom: 14px; }
+        .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
         .cipher-box { background: #020604; border: 1px solid rgba(56,189,248,0.4); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: var(--cyan); word-break: break-all; margin-bottom: 16px; max-height: 120px; overflow-y: auto; }
+        .vault-badge { font-size: 0.75rem; color: var(--cyan); }
     </style>
 </head>
 <body>
     <div class="frame">
         <div class="header">
             <h1>🛡️ S&R SecureVault B2B v2.0</h1>
-            <span style="font-size:0.75rem; color:var(--cyan);">Web Crypto AES-256 GCM</span>
+            <span class="vault-badge">Web Crypto AES-256 GCM</span>
         </div>
 
-        <label>البيانات الحساسة للتشفير:</label>
-        <textarea id="plain" rows="3">DATABASE_SECRET="SR2026_Enterprise_Secure_Token"</textarea>
+        <label for="plain">البيانات الحساسة للتشفير:</label>
+        <textarea id="plain" rows="3" title="البيانات الحساسة للتشفير" placeholder="أدخل البيانات المراد تشفيرها" aria-label="البيانات الحساسة للتشفير">DATABASE_SECRET="SR2026_Enterprise_Secure_Token"</textarea>
 
-        <label>مفتاح التشفير السري (Passphrase):</label>
-        <input type="password" id="pass" value="Salim-Raed-Vault-Key">
+        <label for="pass">مفتاح التشفير السري (Passphrase):</label>
+        <input type="password" id="pass" value="Salim-Raed-Vault-Key" title="مفتاح التشفير السري Passphrase" placeholder="أدخل مفتاح التشفير السري" aria-label="مفتاح التشفير السري">
 
         <button class="btn" onclick="encrypt()">🔒 تشفير فوري بمعيار AES-256</button>
 
         <label>الشفرة المشفرة الناتجة (Ciphertext):</label>
         <div class="cipher-box" id="cipherDisp">اضغط تشفير لتوليد الشفرة...</div>
 
-        <button class="btn" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;" onclick="decrypt()">🔓 فك التشفير واسترجاع النص الأصلي</button>
+        <button class="btn btn-emerald" onclick="decrypt()">🔓 فك التشفير واسترجاع النص الأصلي</button>
 
-        <label>البيانات بعد فك التشفير:</label>
-        <textarea id="decrypted" rows="3" readonly></textarea>
+        <label for="decrypted">البيانات بعد فك التشفير:</label>
+        <textarea id="decrypted" rows="3" readonly title="البيانات المسترجعة بعد فك التشفير" placeholder="ستظهر هنا البيانات المسترجعة بعد فك التشفير..." aria-label="البيانات بعد فك التشفير"></textarea>
     </div>
 
     <script>
