@@ -1885,7 +1885,7 @@
                         <h4 class="fw-bold text-white mb-1" id="invIssuerName">S&R CoreSync Solutions B.V.</h4>
                         <div class="text-caption text-white-64" id="invIssuerSub">KVK: 84920194 | VAT ID: NL849201942B01</div>
                         <div class="text-caption text-white-64" id="invIssuerAddress">Meester Beerninkplantsoen 208, 2286MP Rijswijk, Netherlands</div>
-                        <div class="text-caption text-white-64 font-num mt-1" id="invIssuerBank">Bank: Wise Europe SA · IBAN: BE45 9056 5913 2989 · BIC: TRWIBEB1XXX · Account: Mohammad Salim Aziza</div>
+                        <div class="text-caption text-white-64 font-num mt-1" id="invIssuerBank">Bank: Wise Europe SA · IBAN: BE45 •••• •••• 2989 · BIC: TRWIBEB1XXX · Account: S&amp;R CoreSync Treasury</div>
                     </div>
                     <div class="inv-qr-block" title="EPC-QR / ZATCA Cryptographic Stamp">
                         <svg viewBox="0 0 100 100" fill="#010907">
@@ -3747,26 +3747,26 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- 2. Stripe Card fields -->
             <div id="gwInput-card" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة المعتمدة (Wise Visa Debit):</label>
-                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4569 •••• •••• 3884" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية / بطاقة الخصم:</label>
+                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="" title="رقم البطاقة الائتمانية" placeholder="•••• •••• •••• ••••" aria-label="رقم البطاقة الائتمانية">
                 <div class="row g-2">
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardExpiry">تاريخ الانتهاء:</label>
-                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="09/30" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
+                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
                     </div>
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardCvc">رمز الأمان CVC:</label>
-                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="672" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
+                        <input type="password" id="chkCardCvc" class="ai-chat-input ds-u59" value="" title="رمز الأمان CVC" placeholder="•••" maxlength="4" aria-label="رمز الأمان CVC">
                     </div>
                 </div>
             </div>
 
             <!-- 3. SEPA Direct Debit -->
             <div id="gwInput-sepa" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان للشركة (Wise Belgian IBAN):</label>
-                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="BE45 9056 5913 2989" title="رقم الآيبان للشركة (IBAN)" placeholder="IBAN" aria-label="رقم الآيبان للشركة">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم الحساب التجاري (Bedrijfsnaam):</label>
-                <input type="text" id="chkSepaName" class="ai-chat-input" value="Mohammad Salim Aziza (S&R CoreSync)" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان الخاص بالمشترك (Uw IBAN):</label>
+                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="" title="رقم الآيبان للمشترك" placeholder="NL•• BANK •••• •••• ••" aria-label="رقم الآيبان للمشترك">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم صاحب الحساب (Naam Rekeninghouder):</label>
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="" title="اسم صاحب الحساب" placeholder="اسم المشترك أو شركته" aria-label="اسم صاحب الحساب">
             </div>
 
             <!-- حالة النجاح بعد الدفع (Success State) -->
