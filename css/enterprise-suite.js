@@ -665,7 +665,7 @@
         if (actions && !document.getElementById('headerLiveDemoPill')) {
             const demoBtn = document.createElement('a');
             demoBtn.id = 'headerLiveDemoPill';
-            demoBtn.href = window.location.pathname.includes('/en/') || window.location.pathname.includes('/nl/') ? '../demo.html' : 'demo.html';
+            demoBtn.href = 'demo.html';
             demoBtn.className = 'btn-live-sandbox-header';
             const lang = getPageLang();
             const label = lang === 'en' ? 'Live ERP Demo ⚡' : (lang === 'nl' ? 'Live ERP Demo ⚡' : 'تجربة ERP السحابي ⚡');
