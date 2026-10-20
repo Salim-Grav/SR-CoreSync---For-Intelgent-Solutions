@@ -2920,26 +2920,26 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- 2. Stripe Card fields -->
             <div id="gwInput-card" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block">رقم البطاقة الائتمانية:</label>
-                <input type="text" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية:</label>
+                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
                 <div class="row g-2">
                     <div class="col-6">
-                        <label class="text-caption text-white-64 mb-1 d-block">تاريخ الانتهاء:</label>
-                        <input type="text" class="ai-chat-input ds-u59" value="12/28">
+                        <label class="text-caption text-white-64 mb-1 d-block" for="chkCardExpiry">تاريخ الانتهاء:</label>
+                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="12/28" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
                     </div>
                     <div class="col-6">
-                        <label class="text-caption text-white-64 mb-1 d-block">رمز الأمان CVC:</label>
-                        <input type="text" class="ai-chat-input ds-u59" value="888">
+                        <label class="text-caption text-white-64 mb-1 d-block" for="chkCardCvc">رمز الأمان CVC:</label>
+                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="888" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
                     </div>
                 </div>
             </div>
 
             <!-- 3. SEPA Direct Debit -->
             <div id="gwInput-sepa" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block">رقم الآيبان للشركة (Business IBAN):</label>
-                <input type="text" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00">
-                <label class="text-caption text-white-64 mb-1 d-block">اسم الحساب التجاري (Bedrijfsnaam):</label>
-                <input type="text" class="ai-chat-input" value="S&R B2B Enterprise Client">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان للشركة (Business IBAN):</label>
+                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="رقم الآيبان للشركة (IBAN)" placeholder="IBAN" aria-label="رقم الآيبان للشركة">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم الحساب التجاري (Bedrijfsnaam):</label>
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="S&R B2B Enterprise Client" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
             </div>
 
             <!-- حالة النجاح بعد الدفع (Success State) -->
