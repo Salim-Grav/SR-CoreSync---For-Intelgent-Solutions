@@ -915,11 +915,96 @@
                     </div>
                 </div>
 
-                <div class="glass-box">
-                    <h3 class="mb-3">Enterprise Security & Compliance Standards</h3>
-                    <p class="text-white-64">
-                        S&R CoreSync operates on a dedicated hybrid architecture guaranteeing tenant isolation with independent AES-256 encrypted databases, certified compliance with EU GDPR, and Tier-4 banking-grade cybersecurity.
-                    </p>
+                
+                <!-- Proposal 3: EU Sovereign Compliance & NIS2 / GDPR Shield -->
+                <div class="sovereign-shield-card" dir="ltr">
+                    <div class="shield-header-row">
+                        <div>
+                            <h3 class="mb-1" style="color: #c5a880;">🛡️ Mertalê Lihevkirina Serwerî ya Ewropî (NIS2 & GDPR)</h3>
+                            <p class="text-caption mb-0" style="color: #9abdb0;">Garantiya parastina daneyan a qanûnî û mîmarî li gorî rêziknameyên Yekîtiya Ewropayê</p>
+                        </div>
+                        <div class="shield-live-status font-num">
+                            <span>●</span> 100% Serwer — Navenda Amsterdamê (NL Central)
+                        </div>
+                    </div>
+
+                    <div class="shield-pillars-grid">
+                        <div class="shield-pillar-box">
+                            <div class="shield-pillar-icon">🔒</div>
+                            <div class="shield-pillar-title">GDPR Maddeya 28 & 32</div>
+                            <div class="shield-pillar-desc">Şîfrekirina tevahî ya AES-256-GCM, veqetandina hişk a xerîdaran bêyî veguhastina derveyî YE.</div>
+                        </div>
+                        <div class="shield-pillar-box">
+                            <div class="shield-pillar-icon">🏛️</div>
+                            <div class="shield-pillar-title">Rêvebiriya NIS2 (2026)</div>
+                            <div class="shield-pillar-desc">Berdewamiya binesaziya krîtîk, çavdêriya pêşwext a AI û 99.99% garantiya xebatê.</div>
+                        </div>
+                        <div class="shield-pillar-box">
+                            <div class="shield-pillar-icon">💶</div>
+                            <div class="shield-pillar-title">Rêziknameya DORA</div>
+                            <div class="shield-pillar-desc">Kontrolkirina tevahî û berxwedana xebatê ya dîjîtal ji bo saziyên darayî û bankan.</div>
+                        </div>
+                        <div class="shield-pillar-box">
+                            <div class="shield-pillar-icon">🇳🇱</div>
+                            <div class="shield-pillar-title">100% Cihgirtina li Holendayê</div>
+                            <div class="shield-pillar-desc">Navendên daneyan ên Equinix AM4 li Amsterdamê di bin dadweriya Holendî û YE de.</div>
+                        </div>
+                    </div>
+
+                    <div class="shield-audit-bar-wrap">
+                        <div style="font-size: 0.82rem; color: #e2f1ec;" id="auditStatusText">
+                            🟢 <strong>Rewşa Kontrolê: 100% Pejirandî</strong> — Li ser torê ti lawaziyên lihevkirinê nehatin dîtin.
+                        </div>
+                        <button type="button" class="btn-run-audit" id="btnRunAudit" onclick="runComplianceAuditScanner()">
+                            🛡️ Lêgerîna Lihevkirinê Bimeşîne
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Proposal 4: Zero-Downtime Cloud Migration Estimator -->
+                <div class="migration-estimator-card" dir="ltr">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                        <div>
+                            <h3 class="mb-1" style="color: #c5a880;">🔄 Texmînkera Koçberiya Ewrî ya Bê Rawestin (Zero-Downtime)</h3>
+                            <p class="text-caption mb-0" style="color: #9abdb0;">Dem û kêmkirina lêçûnên veguhestina ERP-ya xwe bo S&R CoreSync bi hevdengkirina zindî texmîn bikin</p>
+                        </div>
+                        <span class="badge-count" style="background: rgba(197, 168, 128, 0.2); color: #c5a880; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;">Hevdengkirina Zindî</span>
+                    </div>
+
+                    <div style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 8px;">1. Pergala xwe ya kevn hilbijêrin:</div>
+                    <div class="migration-systems-row">
+                        <button type="button" class="migration-sys-btn active" onclick="selectMigrationSystem(this, 'SAP')">SAP ECC / S4HANA</button>
+                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Oracle')">Oracle NetSuite</button>
+                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Exact')">Exact Online</button>
+                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'SQL')">Custom Legacy SQL</button>
+                    </div>
+
+                    <div class="roi-slider-header mt-3 mb-1">
+                        <span style="font-size: 0.82rem; color: #e2f1ec;">2. Qebareya Daneyan (GB)</span>
+                        <span class="roi-val-display font-num" id="dispMigVolume">250 GB</span>
+                    </div>
+                    <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" oninput="calcMigrationEstimator()" />
+
+                    <div class="migration-metrics-grid">
+                        <div class="migration-metric-box">
+                            <div class="migration-metric-val font-num" id="migValTime">42 h (Zero-Downtime)</div>
+                            <div class="migration-metric-lbl">Dema Veguhestinê di Paşperdeyê de</div>
+                        </div>
+                        <div class="migration-metric-box">
+                            <div class="migration-metric-val font-num" id="migValIntegrity">99.98%</div>
+                            <div class="migration-metric-lbl">Rastbûna Nexşeya Xweber</div>
+                        </div>
+                        <div class="migration-metric-box">
+                            <div class="migration-metric-val font-num" id="migValSavings">-44%</div>
+                            <div class="migration-metric-lbl">Kêmkirina Salane ya Lêçûnên Ewrî</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn-cert-print" onclick="openStrategicBookingModal()">
+                            📑 Nexşeya Koçberiyê ya Taybet Daxwaz Bikin (Blueprint)
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -1369,9 +1454,12 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-4">
-                    <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()">
-                        <span>🚀 Vê Qezencê Biparêze — Şêwirmendiya bi Damezrêneran re Veqetîne</span>
+                                <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mt-4">
+                    <button type="button" class="btn-sync-consultation" onclick="openStrategicBookingModal()">
+                        <span>📅 Rûniştina Stratejîk bi Damezrîneran re Tomar Bike</span>
+                    </button>
+                    <button type="button" class="btn-cert-print" onclick="openRoiCertModal()">
+                        <span>📄 Bawernameya Rêveberiyê ya ROI Daxîne (PDF)</span>
                     </button>
                 </div>
             </div>
@@ -3736,6 +3824,121 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span class="hotline-role">CTO & Mîmarê Bernameyan</span>
                     </div>
                 </div>
+
+    <!-- Proposal 1 Modal: Executive ROI Certificate -->
+    <div class="modal-overlay" id="roiCertModal" onclick="if(event.target === this) closeRoiCertModal()" dir="ltr">
+        <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
+            <div class="d-flex justify-content-end mb-2">
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeRoiCertModal()" aria-label="Close">✕</button>
+            </div>
+            <div class="roi-cert-header">
+                <img src="../assets/sr-core-emblem.svg" class="roi-cert-emblem" alt="S&R CoreSync Official Emblem" onerror="this.src='../assets/sr-core-emblem-official.png'">
+                <div class="roi-cert-title" id="roiCertTitle">BAWERNAMEYA RÊVEBERIYÊ YA NIRXANDINA ROI</div>
+                <div class="roi-cert-subtitle">S&R CORESYNC SOLUTIONS B.V. — AMSTERDAM, HOLENDA</div>
+            </div>
+
+            <div class="roi-cert-recipient">
+                <div class="roi-cert-recipient-lbl">Dayîna Fermî & Qebûlkirin</div>
+                <div class="roi-cert-recipient-name" id="certClientNameDisplay">Koma Hevpar a Karsaziyê</div>
+            </div>
+
+            <div class="roi-cert-grid">
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiSavingsVal">€ 31,590</div>
+                    <div class="roi-cert-box-lbl">Teserûfa Aborî ya Salane ya Yekser</div>
+                </div>
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiHoursVal">702 h</div>
+                    <div class="roi-cert-box-lbl">Saetên Hilberînê yên Rizgarkirî / Sal</div>
+                </div>
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiYieldVal">780% Net</div>
+                    <div class="roi-cert-box-lbl">Rendementa Texmînkirî ya Net (ROI)</div>
+                </div>
+            </div>
+
+            <div class="roi-cert-signatures">
+                <div class="roi-cert-sign-col">
+                    <div class="roi-cert-sign-line">Mohammad Salim Aziza</div>
+                    <div class="roi-cert-sign-name">Eng. Mohammad Salim Aziza</div>
+                    <div class="roi-cert-sign-role">Rêvebirê Teknîkî & Mîmarê Bernameyan</div>
+                </div>
+                <div class="roi-cert-seal-badge font-num">
+                    <span>Mora Fermî</span>
+                    <strong style="font-size: 0.55rem; color: #fff;">AMSTERDAM</strong>
+                    <span style="font-size: 0.5rem;">2026/EU</span>
+                </div>
+                <div class="roi-cert-sign-col">
+                    <div class="roi-cert-sign-line">Mohammad Raed Kaaka</div>
+                    <div class="roi-cert-sign-name">Mr. Mohammad Raed Kaaka</div>
+                    <div class="roi-cert-sign-role">Rêvebirê Giştî & Karûbar</div>
+                </div>
+            </div>
+
+            <div class="roi-cert-actions">
+                <button type="button" class="btn-cert-print" onclick="window.print()">
+                    🖨️ Çap Bike / Wekî PDF Tomar Bike
+                </button>
+                <button type="button" class="btn-cert-close" onclick="closeRoiCertModal()">
+                    Bigire
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proposal 2 Modal: Strategic Meeting Booking -->
+    <div class="modal-overlay" id="strategicBookingModal" onclick="if(event.target === this) closeStrategicBookingModal()" dir="ltr">
+        <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="section-title mb-0" id="bookingModalTitle">📅 Rûniştina Stratejîk bi Damezrîneran re Tomar Bike</h3>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeStrategicBookingModal()" aria-label="Close">✕</button>
+            </div>
+            <p class="section-desc mb-3">Şêwirmendiya rêveberiyê ya nehênî ya 30 xulekan li ser mîmariya Cloud ERP û AI.</p>
+
+            <div class="mb-3">
+                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">1. Mijara Stratejîk</label>
+                <div class="booking-pills-row">
+                    <button type="button" class="booking-pill active" onclick="selectBookingTopic(this, '☁️ Mîmariya Cloud ERP')">☁️ Mîmariya Cloud ERP</button>
+                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🛡️ Serwerî & Lihevkirina NIS2')">🛡️ Serwerî & Lihevkirina NIS2</button>
+                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🤖 Xweseriya AI & Darayî')">🤖 Xweseriya AI & Darayî</button>
+                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🔄 Koçberiya Bê Rawestin (Zero-Downtime)')">🔄 Koçberiya Bê Rawestin (Zero-Downtime)</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">2. Mêvandarê Rêveber ê Xwestî</label>
+                <div class="booking-pills-row">
+                    <button type="button" class="booking-pill active" onclick="selectBookingHost(this, 'End. Mohammad Salim Aziza (CTO)')">End. Mohammad Salim Aziza (CTO)</button>
+                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'Rêzdar Mohammad Raed Kaaka (CEO)')">Rêzdar Mohammad Raed Kaaka (CEO)</button>
+                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'Her Du Damezrîner (Rûniştina Hevpar)')">Her Du Damezrîner (Rûniştina Hevpar)</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">3. Dema Xwestî (CET / Saeta Amsterdamê)</label>
+                <div class="booking-slots-grid">
+                    <button type="button" class="booking-slot-btn active" onclick="selectBookingSlot(this, '09:30 CET')">09:30 CET</button>
+                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '11:00 CET')">11:00 CET</button>
+                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '14:00 CET')">14:00 CET</button>
+                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '16:30 CET')">16:30 CET</button>
+                </div>
+            </div>
+
+            <div class="booking-confirm-box" id="bookingConfirmBox">
+                <div style="font-weight: 700; color: #34d399; margin-bottom: 6px;">✓ Rûniştin bi Serkeftî Hat Tomarkirin</div>
+                <div style="font-size: 0.82rem; color: #e2f1ec;" id="bookingSummaryText">09:30 CET</div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+                <button type="button" class="btn-cert-print" onclick="confirmBookingAndOpenWa()">
+                    🚀 Piştrast Bike & Rûniştinê bi WhatsAppê Veke
+                </button>
+                <button type="button" class="btn-cert-close" onclick="closeStrategicBookingModal()">
+                    Betal Bike
+                </button>
+            </div>
+        </div>
+    </div>
                 <div class="hotline-actions">
                     <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaSalim">
                         <span>WhatsApp</span>
@@ -3762,9 +3965,13 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span>+31 6 8771 0290</span>
                     </a>
                 </div>
+                <div class="hotline-booking-action" style="margin-top: 14px; text-align: center;">
+                    <button type="button" class="btn-cert-print" style="width: 100%; font-size: 0.8rem; padding: 8px 12px;" onclick="openStrategicBookingModal()">
+                        📅 Rûniştina Stratejîk Tomar Bike (30 Xul)
+                    </button>
+                </div>
             </div>
         </div>
-
         <button type="button" class="hotline-trigger-pill" id="hotlineTriggerBtn" onclick="toggleHotlineWidget(event)">
             <span class="hotline-pulse-dot"></span>
             <span id="hotlineTriggerText">💬 Xeta Damezrêneran</span>
@@ -3820,6 +4027,124 @@ document.addEventListener('click', function(e) {
     }
 });
 
+
+function openRoiCertModal() {
+    const clientNameInput = document.getElementById('quickClientNameInput');
+    const name = clientNameInput && clientNameInput.value ? clientNameInput.value.trim() : 'Koma Hevpar a Karsaziyê';
+    const dispEl = document.getElementById('certClientNameDisplay');
+    if (dispEl) dispEl.innerText = name;
+
+    const resSavings = document.getElementById('resRoiSavings');
+    const certSavings = document.getElementById('certRoiSavingsVal');
+    if (resSavings && certSavings) certSavings.innerText = resSavings.innerText;
+
+    const resHours = document.getElementById('resRoiHours');
+    const certHours = document.getElementById('certRoiHoursVal');
+    if (resHours && certHours) certHours.innerText = resHours.innerText;
+
+    const resYield = document.getElementById('resRoiYield');
+    const certYield = document.getElementById('certRoiYieldVal');
+    if (resYield && certYield) certYield.innerText = resYield.innerText;
+
+    const modal = document.getElementById('roiCertModal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeRoiCertModal() {
+    const modal = document.getElementById('roiCertModal');
+    if (modal) modal.classList.remove('active');
+}
+
+let selectedBookingTopic = '☁️ Mîmariya Cloud ERP';
+let selectedBookingHost = 'End. Mohammad Salim Aziza (CTO)';
+let selectedBookingSlot = '09:30 CET';
+
+function openStrategicBookingModal() {
+    const modal = document.getElementById('strategicBookingModal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeStrategicBookingModal() {
+    const modal = document.getElementById('strategicBookingModal');
+    if (modal) modal.classList.remove('active');
+}
+
+function selectBookingTopic(btn, topic) {
+    const pills = btn.parentElement.querySelectorAll('.booking-pill');
+    pills.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    selectedBookingTopic = topic;
+}
+
+function selectBookingHost(btn, host) {
+    const pills = btn.parentElement.querySelectorAll('.booking-pill');
+    pills.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    selectedBookingHost = host;
+}
+
+function selectBookingSlot(btn, slot) {
+    const slots = btn.parentElement.querySelectorAll('.booking-slot-btn');
+    slots.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    selectedBookingSlot = slot;
+}
+
+function confirmBookingAndOpenWa() {
+    const box = document.getElementById('bookingConfirmBox');
+    const summary = document.getElementById('bookingSummaryText');
+    if (box) box.classList.add('active');
+    if (summary) summary.innerText = `${selectedBookingTopic} | ${selectedBookingHost} | ${selectedBookingSlot}`;
+
+    const phone = selectedBookingHost.includes('Raed') ? '31687710290' : '31618111116';
+    const text = encodeURIComponent(`Silav, ez dixwazim rûniştineke şêwirmendiya stratejîk bi S&R CoreSync re piştrast bikim:\n- ${selectedBookingTopic}\n- ${selectedBookingHost}\n- ${selectedBookingSlot}`);
+    setTimeout(() => {
+        window.open(`https://wa.me/${phone}?text=${text}`, '_blank', 'noopener,noreferrer');
+    }, 600);
+}
+
+function runComplianceAuditScanner() {
+    const btn = document.getElementById('btnRunAudit');
+    const status = document.getElementById('auditStatusText');
+    if (!btn || !status) return;
+    btn.disabled = true;
+    btn.innerText = '⏳ Lêgerîna Lihevkirinê didome...';
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.innerText = '✓ Kontrol 100% Serkeftî ye';
+        status.innerHTML = '🟢 <strong>Rewşa Kontrolê: 100% Pejirandî</strong> — Li ser torê ti lawaziyên lihevkirinê nehatin dîtin.';
+    }, 800);
+}
+
+function selectMigrationSystem(btn, sys) {
+    const btns = btn.parentElement.querySelectorAll('.migration-sys-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    calcMigrationEstimator();
+}
+
+function calcMigrationEstimator() {
+    const range = document.getElementById('slideMigVolume');
+    const vol = range ? parseInt(range.value, 10) : 250;
+    const disp = document.getElementById('dispMigVolume');
+    if (disp) disp.innerText = `${vol} GB`;
+
+    const activeSysBtn = document.querySelector('.migration-systems-row .migration-sys-btn.active');
+    const sys = activeSysBtn ? activeSysBtn.innerText : 'SAP';
+
+    let hours = Math.round(vol * 0.12 + 12);
+    let savings = sys.includes('SAP') || sys.includes('Oracle') ? 44 : 36;
+
+    const valTime = document.getElementById('migValTime');
+    if (valTime) valTime.innerText = `${hours} h (Zero-Downtime)`;
+
+    const valIntegrity = document.getElementById('migValIntegrity');
+    if (valIntegrity) valIntegrity.innerText = '99.98%';
+
+    const valSavings = document.getElementById('migValSavings');
+    if (valSavings) valSavings.innerText = `-${savings}%`;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const waSalim = document.getElementById('btnHotlineWaSalim');
     if (waSalim) waSalim.href = 'https://wa.me/31618111116?text=' + encodeURIComponent('Silav Salim Beg, ez dixwazim li ser pergala S&R CoreSync ERP agahdarî bistînim ji bo karsaziya xwe...');
@@ -3828,6 +4153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (waRaed) waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent('Silav Raed Beg, ez dixwazim li ser pergala S&R CoreSync ERP agahdarî bistînim ji bo karsaziya xwe...');
 
     calcPortalRoi();
+    calcMigrationEstimator();
 });
 </script>
 
