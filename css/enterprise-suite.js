@@ -2983,8 +2983,9 @@
         }
     };
 
-    // Auto-inject header currency widget if not already in DOM
+    // Auto-inject header currency widget if not already in DOM (Disabled for clean luxury header)
     function injectHeaderCurrencyWidget() {
+        return; // Currency selector is kept exclusively in pricing section to prevent header clutter
         if (document.getElementById('headerCurrencyDropdown')) return;
         const actions = document.querySelector('.header-col-actions');
         if (!actions) return;
