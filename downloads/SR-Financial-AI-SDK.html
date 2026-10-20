@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&R Financial AI SDK Console v1.2 // Standalone Dev Console</title>
+    <style>
+        :root {
+            --bg-deep: #030806;
+            --bg-card: #081410;
+            --gold: #c5a880;
+            --emerald: #10b981;
+            --border: rgba(197, 168, 128, 0.22);
+            --text-dim: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: var(--bg-deep); color: #fff; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+        @media(max-width: 850px){ .grid { grid-template-columns: 1fr; } }
+        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+        label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
+        select, textarea, input { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 10px; color: #fff; font-size: 0.85rem; margin-bottom: 12px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.95rem; }
+        pre { background: #020604; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px; color: #34d399; font-family: monospace; font-size: 0.8rem; overflow-x: auto; max-height: 250px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 style="font-size:1.25rem;">🧩 S&R Financial AI SDK Console v1.2</h1>
+            <span style="font-size:0.8rem; color:var(--text-dim);">لوحة المطورين لتجربة وتكامل الـ REST APIs</span>
+        </div>
+        <span style="color:var(--emerald); font-weight:700; font-size:0.85rem;">● وضع المطورين (Offline/Online)</span>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <label>API Endpoint:</label>
+            <select id="ep">
+                <option value="tax">POST /api/v1/tax/calculate-btw</option>
+                <option value="invoice">POST /api/v1/invoices/validate-en16931</option>
+            </select>
+
+            <label>Request JSON:</label>
+            <textarea id="body" rows="6">{
+  "client": "Rotterdam Logistics B.V.",
+  "base_amount": 15000.00,
+  "vat_regime": "STANDARD_21"
+}</textarea>
+
+            <button class="btn" onclick="sendReq()">⚡ تنفيذ الطلب التجريبي (Send Request)</button>
+        </div>
+
+        <div class="card">
+            <label>JSON Response (200 OK):</label>
+            <pre id="resp">{
+  "status": "success",
+  "data": {
+    "jurisdiction": "NL Belastingdienst",
+    "net_amount": 15000.00,
+    "btw_amount": 3150.00,
+    "total": 18150.00
+  }
+}</pre>
+        </div>
+    </div>
+
+    <script>
+        function sendReq() {
+            const ep = document.getElementById('ep').value;
+            const resp = document.getElementById('resp');
+            resp.innerText = '// جاري الاستدعاء...';
+            setTimeout(() => {
+                resp.innerText = JSON.stringify({
+                    status: "success",
+                    code: 200,
+                    endpoint: `/api/v1/${ep}`,
+                    timestamp: new Date().toISOString(),
+                    result: {
+                        acknowledged: true,
+                        latency_ms: 14.5
+                    }
+                }, null, 2);
+            }, 250);
+        }
+    </script>
+</body>
+</html>
