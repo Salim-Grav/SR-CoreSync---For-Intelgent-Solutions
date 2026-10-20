@@ -374,16 +374,16 @@
         }
 
         .about-animated-badge {
-            width: clamp(170px, 16vw, 195px);
-            height: clamp(170px, 16vw, 195px);
+            width: clamp(175px, 17vw, 210px);
+            height: clamp(175px, 17vw, 210px);
             border-radius: 50%;
-            background: radial-gradient(circle at 45% 45%, rgba(197, 168, 128, 0.08) 0%, rgba(2, 9, 7, 0.94) 85%);
-            border: 1.5px solid rgba(197, 168, 128, 0.32);
-            box-shadow: 0 0 22px rgba(197, 168, 128, 0.16), 0 14px 34px rgba(0, 0, 0, 0.65), inset 0 0 16px rgba(197, 168, 128, 0.08);
+            background: radial-gradient(circle at 45% 45%, rgba(197, 168, 128, 0.12) 0%, rgba(2, 9, 7, 0.96) 85%);
+            border: 2px solid rgba(197, 168, 128, 0.45);
+            box-shadow: 0 0 28px rgba(197, 168, 128, 0.22), 0 14px 34px rgba(0, 0, 0, 0.75), inset 0 0 20px rgba(197, 168, 128, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 8px;
             position: relative;
             -webkit-backdrop-filter: blur(12px);
             backdrop-filter: blur(12px);
@@ -414,8 +414,8 @@
         }
 
         .about-animated-badge:hover {
-            box-shadow: 0 0 38px rgba(197, 168, 128, 0.38), 0 20px 42px rgba(0, 0, 0, 0.8), inset 0 0 22px rgba(197, 168, 128, 0.18);
-            border-color: rgba(197, 168, 128, 0.75);
+            box-shadow: 0 0 42px rgba(197, 168, 128, 0.48), 0 20px 42px rgba(0, 0, 0, 0.85), inset 0 0 24px rgba(197, 168, 128, 0.25);
+            border-color: rgba(197, 168, 128, 0.85);
         }
 
         .about-animated-badge img {
@@ -423,13 +423,15 @@
             height: 100%;
             display: block;
             object-fit: contain;
-            filter: drop-shadow(0 0 12px rgba(197, 168, 128, 0.2));
-            transition: filter 0.4s ease;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 18px rgba(197, 168, 128, 0.45));
+            transition: filter 0.4s ease, transform 0.4s ease;
             pointer-events: none;
         }
 
         .about-animated-badge:hover img {
-            filter: drop-shadow(0 0 18px rgba(197, 168, 128, 0.38));
+            filter: drop-shadow(0 0 28px rgba(197, 168, 128, 0.75));
+            transform: scale(1.03);
         }
 
         /* CoreSync Design Token */
