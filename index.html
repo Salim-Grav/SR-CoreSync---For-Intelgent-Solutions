@@ -12047,7 +12047,7 @@
                 <div class="es-quote-header">
                     <div class="es-quote-brand">
                         <div class="d-flex align-items-center gap-3 mb-2">
-                            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="54" height="54" class="roi-pdf-emblem-img">
+                            <img src="./assets/sr-core-emblem-official.png" alt="S&R CoreSync" width="54" height="54" class="roi-pdf-emblem-img" style="border-radius: 50%;">
                             <div>
                                 <h2 class="roi-pdf-brand-title">S&amp;R CORESYNC SOLUTIONS</h2>
                                 <p class="roi-pdf-brand-sub">Enterprise Cloud Architecture, ERP &amp; Financial Intelligence Systems</p>
@@ -12303,14 +12303,14 @@
         }
 
         function copyLogoAssetPath(btn) {
-            const fullUrl = new URL('./assets/logo-neon.svg', window.location.href).href;
+            const fullUrl = new URL('./assets/sr-emblem-gold-luxury-4k.jpg', window.location.href).href;
             LuxuryAudio.play('switch');
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(fullUrl).then(() => {
                     const txt = document.getElementById('copyAssetBtnText');
                     if (txt) {
                         const oldText = txt.textContent;
-                        txt.textContent = 'تم نسخ رابط الفيكتور ✓';
+                        txt.textContent = 'تم نسخ رابط الشعار 4K ✓';
                         setTimeout(() => { txt.textContent = oldText; }, 2200);
                     }
                 }).catch(() => {
