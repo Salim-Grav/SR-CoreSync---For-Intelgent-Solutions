@@ -1570,7 +1570,7 @@
                             <tr>
                                 <th>Omschrijving</th>
                                 <th>Nettobedrag</th>
-                                <th>BTW المحتسبة</th>
+                                <th>Berekende Btw</th>
                                 <th>Totaalbedrag</th>
                             </tr>
                         </thead>
@@ -1586,7 +1586,7 @@
                 </div>
 
                 <div class="inv-total-row">
-                    <span>Totaalbedrag المستحق والمقيد بالدفاتر:</span>
+                    <span>Totaalbedrag Verschuldigd & Geregistreerd:</span>
                     <span class="font-num" id="pvGrandTotal">€ 12,100</span>
                 </div>
             </div>
@@ -1748,7 +1748,7 @@
 - Operationele Marge: 27,4%, boven Nederlands sectorgemiddelde.
 - Advies: Versnel incasso van openstaande vordering van €42.000 om liquiditeit te versterken.";
                 } else if (query.toLowerCase().includes('factuur') || query.toLowerCase().includes('vervallen') ) {
-                    aiResponse = "توجد 1 factuur معلقة بقيمة €35,000 لعميل في الرياض vervalt binnen 14 dagen مع بند Reverse Charge ضريبي سليم. لا توجد أي فواتير متعثرة تتجاوز 30 يوماً بفضل التنبيهات الآلية للواتساب والإيميل.";
+                    aiResponse = "Er is 1 openstaande factuur van €35.000 met vervaldatum binnen 14 dagen en geldige btw-verleggingsregeling (Reverse Charge). Geen achterstallige vorderingen ouder dan 30 dagen dankzij geautomatiseerde herinneringen.";
                 } else {
                     aiResponse = "Uw vraag is geanalyseerd door de S&R CoreSync Financiële Engine. Boekhouding en operatie zijn gesynchroniseerd. RPA-automatisering bespaart komende maand circa 35 declarabele uren.";
                 }
@@ -1786,7 +1786,7 @@
                 <td class="font-num">2026-10-01</td>
                 <td class="font-num tx-amount-highlight">€ ${amount.toLocaleString()}</td>
                 <td>${type}</td>
-                <td><span class="status-badge status-completed">Gesynchroniseerd فوراً</span></td>
+                <td><span class="status-badge status-completed">Direct Gesynchroniseerd</span></td>
             `;
 
             tbody.prepend(tr);
@@ -2029,7 +2029,7 @@
                     document.exitFullscreen().catch(() => {});
                 }
                 btn.classList.remove('active');
-                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg> <span>وضع Klantpresentatie [P]</span>`;
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg> <span>Klantpresentatie [P]</span>`;
             }
         }
 
@@ -2341,9 +2341,9 @@
         function copySoftwareLicenseKey() {
             const key = document.getElementById('modalSwKey').innerText;
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 Licentiesleutel gekopieerd: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Sleutel Kopiëren: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2381,9 +2381,9 @@
             const keyEl = document.getElementById('quickTrialKeyDisplay');
             const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 تم Sleutel Kopiëren التجريبي: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Sleutel Kopiëren: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2418,7 +2418,7 @@
             const vatText = currentVatRate === 0.21 ? 'Nederlandse BTW (21%)' :
                             currentVatRate === 0.09 ? 'Verlaagd BTW-tarief (9%)' :
                             currentVatRate === 0.15 ? 'GCC Btw (15%)' : 'Vrijgesteld (0%)';
-            showPortalToast(`🏛️ تم تطبيق Belastingstelsel: ${vatText}`);
+            showPortalToast(`🏛️ Tax model updated: ${vatText}`);
         }
 
         function updateGlobalFinancials() {
@@ -2448,7 +2448,7 @@
             if (pdfVatScheme) {
                 pdfVatScheme.innerText = currentVatRate === 0.21 ? 'Nederlandse BTW (21%)' :
                                          currentVatRate === 0.09 ? 'Verlaagd BTW-tarief (9%)' :
-                                         currentVatRate === 0.15 ? 'GCC Btw (15%)' : 'معفى من BTW (0%)';
+                                         currentVatRate === 0.15 ? 'GCC Btw (15%)' : 'Vrijgesteld van btw (0%)';
             }
         }
 
@@ -2466,12 +2466,12 @@
                 targetId: 'tourStatsGrid',
                 tab: 'overview',
                 title: '📊 Executive Financieel Dashboard (Financial KPIs)',
-                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، Netto Operationele Cashflow، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+                desc: 'Accurate real-time metrics for annual revenue, operating cash flow, and cloud automation hours saved.'
             },
             {
                 targetId: 'tourNav-erp',
                 tab: 'erp',
-                title: '📦 ERP & Voorraadbeheer الذكية',
+                title: '📦 Smart Cloud ERP & Logistics',
                 desc: 'Gedistribueerd voorraadbeheer over meerdere vestigingen, realtime tracking en automatische herbestellingen.'
             },
             {
@@ -2637,7 +2637,7 @@ Direct Founders Contact: info@coresync.cloud
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            showPortalToast(`⚡ بدأ Installatiepakket Downloaden لـ [${title}] بنجاح!`);
+            showPortalToast(`⚡ Installatiepakket voor [${title}] wordt gedownload...`);
         }
 
         function triggerSoftwareCheckout() {
@@ -2990,7 +2990,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     previewInvoiceModal(invNum, clientName, netPrice, vat, total, `Betaald via ${gwLabel}`, '2026-10-06', 'BTW 21%');
                 };
 
-                showPortalToast(`🎉 تم إتمام الدفع بنجاح وإصدار الفاتورة [${invNum}] وActiveren الترخيص!`);
+                showPortalToast(`🎉 Betaling voltooid. Factuur [${invNum}] uitgegeven en licentie geactiveerd!`);
             }, 1200);
         }
 

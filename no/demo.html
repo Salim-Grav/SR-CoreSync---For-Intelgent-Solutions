@@ -2341,9 +2341,9 @@
         function copySoftwareLicenseKey() {
             const key = document.getElementById('modalSwKey').innerText;
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 Copied license key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Kopier Key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2381,9 +2381,9 @@
             const keyEl = document.getElementById('quickTrialKeyDisplay');
             const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 تم Kopier Key التجريبي: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Kopier Key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2418,7 +2418,7 @@
             const vatText = currentVatRate === 0.21 ? 'Norsk MVA (25%)' :
                             currentVatRate === 0.09 ? 'Reduced BTW (9%)' :
                             currentVatRate === 0.15 ? 'GCC VAT (15%)' : 'Exempt (0%)';
-            showPortalToast(`🏛️ تم تطبيق Skattemodell: ${vatText}`);
+            showPortalToast(`🏛️ Tax model updated: ${vatText}`);
         }
 
         function updateGlobalFinancials() {
@@ -2466,12 +2466,12 @@
                 targetId: 'tourStatsGrid',
                 tab: 'overview',
                 title: '📊 Executive Financial Dashboard (Financial KPIs)',
-                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، Netto Driftskontantstrøm، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+                desc: 'Accurate real-time metrics for annual revenue, operating cash flow, and cloud automation hours saved.'
             },
             {
                 targetId: 'tourNav-erp',
                 tab: 'erp',
-                title: '📦 ERP & Lagerstyring الذكية',
+                title: '📦 Smart Cloud ERP & Logistics',
                 desc: 'Distributed multi-branch inventory tracking, real-time dispatch monitoring, and AI reorder predictions.'
             },
             {

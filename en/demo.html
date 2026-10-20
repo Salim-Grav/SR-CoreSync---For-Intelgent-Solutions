@@ -2341,9 +2341,9 @@
         function copySoftwareLicenseKey() {
             const key = document.getElementById('modalSwKey').innerText;
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 Copied license key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Copy Key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2381,9 +2381,9 @@
             const keyEl = document.getElementById('quickTrialKeyDisplay');
             const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 تم Copy Key التجريبي: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
-                showPortalToast(`🔑 تم Copy Key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             });
         }
 
@@ -2418,7 +2418,7 @@
             const vatText = currentVatRate === 0.21 ? 'Dutch BTW (21%)' :
                             currentVatRate === 0.09 ? 'Reduced BTW (9%)' :
                             currentVatRate === 0.15 ? 'GCC VAT (15%)' : 'Exempt (0%)';
-            showPortalToast(`🏛️ تم تطبيق Tax Regime: ${vatText}`);
+            showPortalToast(`🏛️ Tax model updated: ${vatText}`);
         }
 
         function updateGlobalFinancials() {
@@ -2466,12 +2466,12 @@
                 targetId: 'tourStatsGrid',
                 tab: 'overview',
                 title: '📊 Executive Financial Dashboard (Financial KPIs)',
-                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، Net Operating Cash Flow، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+                desc: 'Accurate real-time metrics for annual revenue, operating cash flow, and cloud automation hours saved.'
             },
             {
                 targetId: 'tourNav-erp',
                 tab: 'erp',
-                title: '📦 ERP & Inventory Ops الذكية',
+                title: '📦 Smart Cloud ERP & Logistics',
                 desc: 'Distributed multi-branch inventory tracking, real-time dispatch monitoring, and AI reorder predictions.'
             },
             {
@@ -3786,13 +3786,13 @@ function calcPortalRoi() {
 
     // Display updates
     const dispTeam = document.getElementById('dispRoiTeam');
-    if (dispTeam) dispTeam.innerText = team + ' ' + (document.documentElement.lang === 'ar' ? 'موظف' : 'staff');
+    if (dispTeam) dispTeam.innerText = team + ' ' + (document.documentElement.lang === 'ar' ? 'staff' : 'staff');
 
     const dispHours = document.getElementById('dispRoiHours');
-    if (dispHours) dispHours.innerText = hours + ' ' + (document.documentElement.lang === 'ar' ? 'ساعة/أسبوع' : 'hrs/wk');
+    if (dispHours) dispHours.innerText = hours + ' ' + (document.documentElement.lang === 'ar' ? 'hrs/wk' : 'hrs/wk');
 
     const dispCost = document.getElementById('dispRoiCost');
-    if (dispCost) dispCost.innerText = '€ ' + cost + ' / ' + (document.documentElement.lang === 'ar' ? 'ساعة' : 'hr');
+    if (dispCost) dispCost.innerText = '€ ' + cost + ' / ' + (document.documentElement.lang === 'ar' ? 'hr' : 'hr');
 
     // Formulas:
     // CoreSync automates ~75% of manual operational hours
@@ -3804,7 +3804,7 @@ function calcPortalRoi() {
     if (resSavings) resSavings.innerText = '€ ' + savingsYear.toLocaleString();
 
     const resHours = document.getElementById('resRoiHours');
-    if (resHours) resHours.innerText = hoursSavedYear.toLocaleString() + ' ' + (document.documentElement.lang === 'ar' ? 'ساعة' : 'hours');
+    if (resHours) resHours.innerText = hoursSavedYear.toLocaleString() + ' ' + (document.documentElement.lang === 'ar' ? 'hours' : 'hours');
 
     const resYield = document.getElementById('resRoiYield');
     if (resYield) resYield.innerText = roiPercent + '% Net';
@@ -3835,9 +3835,9 @@ document.addEventListener('DOMContentLoaded', function() {
         'sv': 'Hej Salim, jag är intresserad av S&R CoreSync ERP-systemet för mitt företag...',
         'no': 'Hei Salim, jeg er interessert i S&R CoreSync ERP-systemet for min bedrift...',
         'ku': 'Silav Salim Beg, ez dixwazim li ser pergala S&R CoreSync ERP agahdarî bistînim ji bo karsaziya xwe...',
-        'ckb': 'سڵاو ئەندازیار سەلیم، ئارەزووی وەرگرتنی زانیاریم هەیە سەبارەت بە سیستەمی S&R CoreSync ERP بۆ کۆمپانیاکەمان...',
+        'ckb': 'Hello Eng. Salim, I would like to consult on deploying S&R CoreSync ERP for my enterprise...',
         'nl': 'Hallo Eng. Salim, ik heb interesse in het S&R CoreSync ERP-systeem voor mijn onderneming...',
-        'ar': 'مرحباً م. سليم، أود مناقشة اعتماد بنية S&R CoreSync ERP وحجز استشارة تنفيذية لشركتنا...',
+        'ar': 'Hello Eng. Salim, I would like to consult on deploying S&R CoreSync ERP for my enterprise...',
         'en': 'Hello Eng. Salim, I would like to consult on deploying S&R CoreSync ERP for my enterprise...'
     };
 
@@ -3847,14 +3847,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const waRaed = document.getElementById('btnHotlineWaRaed');
     if (waRaed) {
-        const msgRaed = msg.replace('Salim', 'Raed').replace('سليم', 'رائد');
+        const msgRaed = msg.replace('Salim', 'Raed');
         waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent(msgRaed);
     }
 
     const triggerText = document.getElementById('hotlineTriggerText');
     if (triggerText) {
-        if (lang === 'ar') triggerText.innerText = '💬 تواصل مع المؤسسين';
-        else if (lang === 'ckb') triggerText.innerText = '💬 پەیوەندی بە دامەزرێنەران';
+        triggerText.innerText = '💬 Founder Hotline';
+        
         else if (lang === 'de') triggerText.innerText = '💬 Gründer-Hotline';
         else if (lang === 'fr') triggerText.innerText = '💬 Ligne Directe Fondateurs';
         else if (lang === 'tr') triggerText.innerText = '💬 Kurucu Hattı';

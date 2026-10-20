@@ -2341,7 +2341,7 @@
         function copySoftwareLicenseKey() {
             const key = document.getElementById('modalSwKey').innerText;
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 Copied license key: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
                 showPortalToast(`🔑 License key copied: ${key}`);
             });
@@ -2381,7 +2381,7 @@
             const keyEl = document.getElementById('quickTrialKeyDisplay');
             const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
             navigator.clipboard.writeText(key).then(() => {
-                showPortalToast(`🔑 Trial license key copied: ${key}`);
+                showPortalToast(`🔑 License key copied: ${key}`);
             }).catch(() => {
                 showPortalToast(`🔑 License key copied: ${key}`);
             });
