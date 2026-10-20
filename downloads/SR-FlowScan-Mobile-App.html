@@ -46,6 +46,7 @@
         .scan-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
         .cat-pill { color: #38bdf8; }
         .feedback-pill { font-size: 0.75rem; color: var(--emerald); background: rgba(16,185,129,0.15); border: 1px solid var(--emerald); border-radius: 6px; padding: 6px 10px; margin-bottom: 12px; display: none; text-align: center; }
+        .hidden-file-input { display: none; }
     </style>
 </head>
 <body>
@@ -74,7 +75,7 @@
         <!-- File Upload Section (New Feature) -->
         <div class="upload-section">
             <div class="upload-dropzone" id="dropZone" onclick="document.getElementById('receiptFileInput').click()" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('receiptFileInput').click()" tabindex="0" role="button" aria-label="تحميل ملف الفاتورة أو الإيصال">
-                <input type="file" id="receiptFileInput" accept="image/*,application/pdf" style="display:none;" onchange="handleFileSelect(event)">
+                <input type="file" id="receiptFileInput" class="hidden-file-input" accept="image/*,application/pdf" onchange="handleFileSelect(event)">
                 <span class="upload-title">📂 تحميل ملف الفاتورة أو الوصل (صورة أو PDF)</span>
                 <span class="upload-desc">انقر لاختيار ملف من جهازك أو اسحب وأفلت الملف هنا للتحليل الفوري</span>
             </div>
