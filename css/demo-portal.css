@@ -1981,3 +1981,58 @@
 .ds-u120 { text-align:left; }
 .ds-u121 { position:fixed; bottom:24px; left:24px; z-index:9999; background:rgba(9,9,11,0.92); backdrop-filter:blur(12px); border:1px solid var(--gold); border-radius:12px; padding:12px 18px; color:#fff; font-size:13px; font-weight:600; display:flex; align-items:center; gap:10px; box-shadow:0 12px 32px rgba(0,0,0,0.6); transform:translateY(100px); opacity:0; transition:all 0.35s ease; pointer-events:none; }
 .ds-u122 { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--gold); }
+
+/* ========================================================
+   Multilingual Portal & LTR Direction Engine
+   ======================================================== */
+.portal-lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 999px;
+    padding: 3px 6px;
+    gap: 4px;
+}
+.portal-lang-btn {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.portal-lang-btn:hover {
+    color: #ffffff;
+    background: rgba(197, 168, 128, 0.15);
+}
+.portal-lang-btn.active {
+    background: #c5a880;
+    color: #04100c;
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.4);
+}
+
+html[dir="ltr"] body {
+    direction: ltr;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+html[dir="ltr"] .portal-sidebar {
+    border-left: none;
+    border-right: 1px solid var(--border-glass);
+}
+html[dir="ltr"] .btn-return-main svg {
+    transform: rotate(180deg);
+}
+html[dir="ltr"] .ds-u93 {
+    text-align: left;
+}
+html[dir="ltr"] .stat-card-top,
+html[dir="ltr"] .cur-vat-title {
+    text-align: left;
+}
+html[dir="ltr"] .currency-vat-bar {
+    text-align: left;
+}
+
