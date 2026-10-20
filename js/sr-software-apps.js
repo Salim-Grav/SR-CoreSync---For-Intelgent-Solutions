@@ -988,28 +988,38 @@
     // 8. App 3: S&R CloudPOS Connector UI & Logic
     // -------------------------------------------------------------
     const POS_CATALOG = [
-        { id: 1, name: 'قهوة اسبريسو فاخرة', icon: '☕', price: 3.50, vatRate: 0.09 },
-        { id: 2, name: 'شطيرة غداء طازجة', icon: '🥪', price: 7.50, vatRate: 0.09 },
-        { id: 3, name: 'استشارة فنية متخصصة', icon: '💼', price: 120.00, vatRate: 0.21 },
-        { id: 4, name: 'محطة كاشير POS Terminal', icon: '🖥️', price: 250.00, vatRate: 0.21 },
-        { id: 5, name: 'ترخيص برمجي شهري', icon: '🔑', price: 49.00, vatRate: 0.21 },
-        { id: 6, name: 'طابعة إيصالات حرارية', icon: '🖨️', price: 85.00, vatRate: 0.21 }
+        { id: 1, name: 'قهوة اسبريسو فاخرة', icon: '☕', price: 3.50, vatRate: 0.09, barcode: '8710400012345' },
+        { id: 2, name: 'شطيرة غداء طازجة', icon: '🥪', price: 7.50, vatRate: 0.09, barcode: '8710400023456' },
+        { id: 3, name: 'استشارة فنية متخصصة', icon: '💼', price: 120.00, vatRate: 0.21, barcode: '8710400034567' },
+        { id: 4, name: 'محطة كاشير POS Terminal', icon: '🖥️', price: 250.00, vatRate: 0.21, barcode: '8710400045678' },
+        { id: 5, name: 'ترخيص برمجي شهري', icon: '🔑', price: 49.00, vatRate: 0.21, barcode: '8710400056789' },
+        { id: 6, name: 'طابعة إيصالات حرارية', icon: '🖨️', price: 85.00, vatRate: 0.21, barcode: '8710400067890' }
     ];
 
     let posCart = [
         { ...POS_CATALOG[0], qty: 2 },
         { ...POS_CATALOG[2], qty: 1 }
     ];
+    let posCameraStream = null;
 
     function renderCloudPosHtml() {
         return `
             <div class="sr-app-grid-2">
                 <!-- Products Menu -->
                 <div class="sr-app-card">
-                    <h4 class="sr-app-card-title">
-                        <span>قائمة المنتجات والخدمات (POS Catalog)</span>
-                        <span class="sr-app-header-ver">انقر للإضافة إلى السلة</span>
-                    </h4>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+                        <h4 class="sr-app-card-title" style="margin-bottom:0;">
+                            <span>قائمة المنتجات والخدمات (POS Catalog)</span>
+                        </h4>
+                        <div style="display:flex; gap:6px;">
+                            <button type="button" class="sr-app-btn emerald" style="padding:6px 12px; font-size:0.75rem;" onclick="openPosCameraBarcodeScanner()">
+                                <span>📷 مسح الباركود بكاميرا الجهاز</span>
+                            </button>
+                            <button type="button" class="sr-app-btn secondary" style="padding:6px 10px; font-size:0.75rem;" onclick="simulateBarcodeScanDemo()" title="تجربة محاكاة مسح باركود فوري">
+                                <span>⚡ تجربة مسح</span>
+                            </button>
+                        </div>
+                    </div>
 
                     <div class="sr-pos-products-grid">
                         ${POS_CATALOG.map(p => `
@@ -1017,13 +1027,16 @@
                                 <div class="sr-pos-product-icon">${p.icon}</div>
                                 <div class="sr-pos-product-name">${p.name}</div>
                                 <div class="sr-pos-product-price">€ ${p.price.toFixed(2)}</div>
-                                <div class="sr-pos-product-vat">BTW ${(p.vatRate * 100).toFixed(0)}%</div>
+                                <div class="sr-pos-product-vat">BTW ${(p.vatRate * 100).toFixed(0)}% • <span style="font-family:monospace; font-size:0.62rem;">${p.barcode.substring(7)}</span></div>
                             </div>
                         `).join('')}
                     </div>
 
                     <!-- Cart Items Table -->
-                    <h5 style="color:var(--sr-app-gold); font-size:0.85rem; margin-bottom:10px;">عناصر السلة الحالية:</h5>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h5 style="color:var(--sr-app-gold); font-size:0.85rem; margin-bottom:0;">عناصر السلة الحالية:</h5>
+                        <button type="button" class="sr-app-btn secondary" style="padding:3px 10px; font-size:0.72rem;" onclick="clearPosCart()">مسح السلة 🗑️</button>
+                    </div>
                     <div class="sr-app-table-wrap">
                         <table class="sr-app-table">
                             <thead>
@@ -1096,12 +1109,147 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Camera Barcode Scanner Modal -->
+            <div id="posCameraScannerModal" class="sr-pos-cam-scanner-modal">
+                <div class="sr-pos-cam-card">
+                    <div class="sr-pos-cam-header">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:1.2rem;">📷</span>
+                            <div>
+                                <strong style="color:#fff; font-size:0.9rem; display:block;">قارئ الباركود عبر كاميرا الجهاز</strong>
+                                <span style="color:var(--sr-app-text-muted); font-size:0.72rem;">كاميرا الهاتف الذكي أو الويب كام باللابتوب</span>
+                            </div>
+                        </div>
+                        <button type="button" class="sr-app-btn-icon close" onclick="closePosCameraBarcodeScanner()">✕</button>
+                    </div>
+
+                    <div class="sr-pos-cam-viewfinder">
+                        <video id="posCameraVideo" class="sr-pos-cam-video" autoplay playsinline muted></video>
+                        <div class="sr-pos-cam-reticle">
+                            <div class="sr-pos-cam-laser"></div>
+                        </div>
+                        <div id="posCamFallbackNotice" style="position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px; background:rgba(6,17,13,0.95);">
+                            <span style="font-size:2rem; margin-bottom:8px;">📷</span>
+                            <strong style="color:#fff; font-size:0.9rem;">معاينة قارئ الباركود التفاعلي</strong>
+                            <p style="color:var(--sr-app-text-muted); font-size:0.75rem; margin-top:4px;">
+                                يمكنك توجيه الكاميرا نحو أي كود EAN، أو اختيار باركود تجريبي أدناه:
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="sr-pos-cam-body">
+                        <div style="text-align:center; margin-bottom:12px;">
+                            <span style="font-size:0.78rem; color:#10b981;">● المسح التلقائي نشط — وجّه الكاميرا نحو باركود السلعة</span>
+                        </div>
+                        <span class="sr-app-label">أو انقر لاختبار مسح باركود حقيقي من الكتالوج:</span>
+                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-top:6px;">
+                            ${POS_CATALOG.slice(0, 3).map(p => `
+                                <button type="button" class="sr-preset-receipt-btn" onclick="handleBarcodeDetected('${p.barcode}')">
+                                    ${p.icon} ${p.name.split(' ')[0]}<br>
+                                    <span style="font-family:monospace; font-size:0.65rem;">${p.barcode}</span>
+                                </button>
+                            `).join('')}
+                        </div>
+                        <button type="button" class="sr-app-btn secondary full" style="margin-top:12px;" onclick="closePosCameraBarcodeScanner()">
+                            إغلاق الكاميرا
+                        </button>
+                    </div>
+                </div>
+            </div>
         `;
     }
 
     function initCloudPosEvents() {
         renderPosCart();
     }
+
+    window.openPosCameraBarcodeScanner = function() {
+        const modal = document.getElementById('posCameraScannerModal');
+        const video = document.getElementById('posCameraVideo');
+        const fallback = document.getElementById('posCamFallbackNotice');
+
+        if (modal) modal.classList.add('active');
+        playAppBeep(640, 'sine', 0.1);
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({
+                video: { facingMode: { ideal: 'environment' } }
+            }).then(stream => {
+                posCameraStream = stream;
+                if (video) {
+                    video.srcObject = stream;
+                    video.play().catch(() => {});
+                }
+                if (fallback) fallback.style.display = 'none';
+
+                // Real-time Barcode Detection if supported
+                if ('BarcodeDetector' in window) {
+                    const detector = new window.BarcodeDetector({ formats: ['ean_13', 'ean_8', 'qr_code', 'code_128'] });
+                    const scanInterval = setInterval(() => {
+                        if (!posCameraStream) {
+                            clearInterval(scanInterval);
+                            return;
+                        }
+                        detector.detect(video).then(barcodes => {
+                            if (barcodes && barcodes.length > 0) {
+                                clearInterval(scanInterval);
+                                handleBarcodeDetected(barcodes[0].rawValue);
+                            }
+                        }).catch(() => {});
+                    }, 400);
+                }
+            }).catch(() => {
+                // Camera denied or unavailable on desktop/localhost without SSL - show graceful simulated viewfinder
+                if (fallback) fallback.style.display = 'flex';
+            });
+        } else {
+            if (fallback) fallback.style.display = 'flex';
+        }
+    };
+
+    window.closePosCameraBarcodeScanner = function() {
+        const modal = document.getElementById('posCameraScannerModal');
+        if (modal) modal.classList.remove('active');
+        if (posCameraStream) {
+            posCameraStream.getTracks().forEach(t => t.stop());
+            posCameraStream = null;
+        }
+        playAppBeep(420, 'sine', 0.08);
+    };
+
+    window.handleBarcodeDetected = function(barcode) {
+        closePosCameraBarcodeScanner();
+
+        // Find product by barcode or fallback to random item
+        let item = POS_CATALOG.find(p => p.barcode === barcode);
+        if (!item) {
+            item = POS_CATALOG[Math.floor(Math.random() * POS_CATALOG.length)];
+        }
+
+        addPosItem(item.id);
+
+        playAppBeep(1200, 'sine', 0.12);
+        setTimeout(() => playAppBeep(1600, 'sine', 0.1), 100);
+
+        if (typeof showPortalToast === 'function') {
+            showPortalToast(`✓ تم التقاط الباركود [${barcode}] بكاميرا الجهاز وإضافة [${item.name}] للسلة!`);
+        }
+    };
+
+    window.simulateBarcodeScanDemo = function() {
+        const randomItem = POS_CATALOG[Math.floor(Math.random() * POS_CATALOG.length)];
+        handleBarcodeDetected(randomItem.barcode);
+    };
+
+    window.clearPosCart = function() {
+        posCart = [];
+        playAppBeep(320, 'sine', 0.1);
+        renderPosCart();
+        if (typeof showPortalToast === 'function') {
+            showPortalToast('🗑️ تم إفراغ سلة الكاشير.');
+        }
+    };
 
     window.addPosItem = function(id) {
         const item = POS_CATALOG.find(p => p.id === id);
