@@ -4364,7 +4364,10 @@ function closeContractOf2026Modal() {
     if (modal) modal.classList.remove('active');
 }
 
+let isContractOf2026Signed = false;
+
 function signContractDigitally() {
+    isContractOf2026Signed = true;
     const unsignedBox = document.getElementById('clientUnsignedBox');
     const signedBox = document.getElementById('clientSignedBox');
     if (unsignedBox) unsignedBox.style.display = 'none';
@@ -4383,6 +4386,25 @@ function shareContractViaWhatsApp() {
     const url = window.location.origin + window.location.pathname + '?client=mudar&contract=OF-2026-1021#invoices';
     const text = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك رابط العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions.\nيمكنك مراجعة وتوقيع العقد وسداد الدفعة الأولى مباشرة عبر الرابط:\n${url}`);
     window.open(`https://wa.me/31618111116?text=${text}`, '_blank', 'noopener,noreferrer');
+}
+
+function shareContractViaEmail() {
+    const portalUrl = window.location.origin + window.location.pathname + '?client=mudar&contract=OF-2026-1021#invoices';
+    const subject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
+    const body = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
+    
+    // Copy link & notification
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(portalUrl).catch(() => {});
+    }
+    showPortalToast('📧 جاري فتح برنامج البريد الإلكتروني، وتم نسخ رابط العقد للحافظة');
+    window.location.href = `mailto:mudar@nl-bilarabi.nl?subject=${subject}&body=${body}`;
+}
+
+function printOfficialContractPdf() {
+    const signedParam = isContractOf2026Signed ? 'true' : 'false';
+    const printUrl = `contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&signed=${signedParam}&print=true`;
+    window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
 }
 
 document.addEventListener('DOMContentLoaded', function() {
