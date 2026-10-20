@@ -4023,6 +4023,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 closeDropdown();
             } else {
                 dropdown.classList.add('open');
+                menu.style.display = 'flex';
                 trigger.setAttribute('aria-expanded', 'true');
                 if (searchInput) {
                     setTimeout(() => searchInput.focus(), 50);
@@ -4032,6 +4033,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         
         function closeDropdown() {
             dropdown.classList.remove('open');
+            menu.style.display = 'none';
             trigger.setAttribute('aria-expanded', 'false');
             if (searchInput) {
                 searchInput.value = '';
