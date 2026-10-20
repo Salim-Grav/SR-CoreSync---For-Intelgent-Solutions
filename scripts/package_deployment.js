@@ -147,7 +147,7 @@ const reportData = {
   projectName: 'S&R CoreSync Solutions',
   version: '2.0.0-PROD',
   timestamp: new Date().toISOString(),
-  timestampArabic: 'الإثنين، 19 أكتوبر 2026 - الساعة 11:20 صباحاً',
+  timestampArabic: 'الثلاثاء، 20 أكتوبر 2026 - الساعة 06:25 صباحاً',
   package: {
     fileName: path.basename(outputZip),
     fileSizeBytes: zipSize,
