@@ -15,45 +15,85 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background: var(--bg-deep); color: #fff; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; }
+        .top-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; font-size: 0.8rem; }
+        .back-link { color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: rgba(197, 168, 128, 0.08); transition: all 0.2s; }
+        .back-link:hover { background: rgba(197, 168, 128, 0.18); border-color: var(--gold); }
         header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px; }
         .grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; flex: 1; }
         @media(max-width: 850px){ .grid { grid-template-columns: 1fr; } }
         .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+        .scanner-tools-row { display: flex; gap: 8px; margin-bottom: 14px; }
+        .btn-cam-scan { flex: 1; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 10px 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.85rem; }
+        .btn-cam-scan:hover { filter: brightness(1.15); }
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-bottom: 16px; }
-        .prod-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; padding: 12px 6px; text-align: center; color: #fff; cursor: pointer; }
-        .prod-btn:hover { background: rgba(16,185,129,0.2); border-color: var(--emerald); }
+        .prod-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 10px; padding: 12px 6px; text-align: center; color: #fff; cursor: pointer; transition: all 0.2s; }
+        .prod-btn:hover { background: rgba(16,185,129,0.2); border-color: var(--emerald); transform: translateY(-2px); }
+        .prod-barcode { font-size: 0.62rem; color: var(--text-dim); font-family: monospace; display: block; margin-top: 4px; }
         .slip { background: #fff8e7; color: #111; font-family: 'Courier New', monospace; padding: 16px; border-radius: 4px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); font-size: 0.85rem; }
         .slip-header { text-align: center; border-bottom: 1px dashed #666; padding-bottom: 8px; margin-bottom: 10px; }
         .slip-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
         .slip-total { border-top: 1px solid #111; padding-top: 6px; margin-top: 6px; font-weight: 800; font-size: 1.05rem; }
         .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; margin-top: 12px; font-size: 0.95rem; }
-        .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid var(--border); }
+        .btn-secondary { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; }
         .header-title { font-size: 1.25rem; font-weight: 800; }
         .header-subtitle { font-size: 0.8rem; color: var(--text-dim); }
         .header-status { color: var(--emerald); font-weight: 700; font-size: 0.85rem; }
         .card-title { font-size: 1rem; color: var(--gold); margin-bottom: 12px; }
         .barcode { text-align: center; margin-top: 8px; font-size: 0.75rem; font-family: monospace; letter-spacing: 2px; }
+        .cam-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
+        .cam-modal.active { display: flex; }
+        .cam-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; max-width: 440px; width: 100%; overflow: hidden; padding: 20px; text-align: center; }
+        .cam-view { position: relative; height: 260px; background: #000; border-radius: 12px; overflow: hidden; margin: 14px 0; display: flex; align-items: center; justify-content: center; }
+        .cam-video { width: 100%; height: 100%; object-fit: cover; }
+        .cam-reticle { position: absolute; width: 220px; height: 140px; border: 2px solid var(--emerald); border-radius: 12px; box-shadow: 0 0 0 9999px rgba(0,0,0,0.5); pointer-events: none; }
+        .cam-laser { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--emerald); box-shadow: 0 0 12px var(--emerald); animation: laserSweep 1.8s infinite alternate ease-in-out; }
+        @keyframes laserSweep { 0% { top: 5%; } 100% { top: 92%; } }
+        .test-barcodes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0; }
+        .test-barcode-btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: #fff; padding: 6px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; }
     </style>
 </head>
 <body>
+    <div class="top-nav">
+        <a href="../demo.html" class="back-link">⟵ العودة للمنصة التجريبية</a>
+        <span class="header-status">● متصل بالـ ERP السحابي (AMS-01)</span>
+    </div>
+
     <header>
         <div>
             <h1 class="header-title">⚡ S&R CloudPOS Connector v3.1</h1>
-            <span class="header-subtitle">محطة كاشير ونقاط بيع متصلة بالـ ERP أوفلاين وسحابياً</span>
+            <span class="header-subtitle">محطة كاشير ونقاط بيع متصلة بالـ ERP أوفلاين وسحابياً مع قارئ باركود الكاميرا</span>
         </div>
-        <span class="header-status">● متصل بالسحابة (AMS-01)</span>
     </header>
 
     <div class="grid">
         <div class="card">
-            <h3 class="card-title">قائمة المنتجات (انقر للإضافة):</h3>
-            <div class="products-grid">
-                <button class="prod-btn" onclick="add('قهوة اسبريسو', 3.50, 0.09)">☕ قهوة<br><strong>€ 3.50</strong></button>
-                <button class="prod-btn" onclick="add('شطيرة غداء', 7.50, 0.09)">🥪 غداء<br><strong>€ 7.50</strong></button>
-                <button class="prod-btn" onclick="add('استشارة محاسبية', 120.00, 0.21)">💼 استشارة<br><strong>€ 120.00</strong></button>
-                <button class="prod-btn" onclick="add('محطة كاشير POS', 250.00, 0.21)">🖥️ كاشير<br><strong>€ 250.00</strong></button>
+            <!-- Camera Scanner Action Bar -->
+            <div class="scanner-tools-row">
+                <button type="button" class="btn-cam-scan" onclick="openCamScanner()">
+                    <span>📷 مسح الباركود بكاميرا الموبايل / اللابتوب</span>
+                </button>
             </div>
-            <button class="btn btn-secondary" onclick="clearCart()">إفراغ السلة 🗑️</button>
+
+            <h3 class="card-title">قائمة المنتجات (أو انقر للإضافة):</h3>
+            <div class="products-grid">
+                <button type="button" class="prod-btn" onclick="add('قهوة اسبريسو', 3.50, 0.09, '8710400012345')">
+                    ☕ قهوة<br><strong>€ 3.50</strong>
+                    <span class="prod-barcode">8710400012345</span>
+                </button>
+                <button type="button" class="prod-btn" onclick="add('شطيرة غداء', 7.50, 0.09, '8710400023456')">
+                    🥪 غداء<br><strong>€ 7.50</strong>
+                    <span class="prod-barcode">8710400023456</span>
+                </button>
+                <button type="button" class="prod-btn" onclick="add('استشارة محاسبية', 120.00, 0.21, '8710400034567')">
+                    💼 استشارة<br><strong>€ 120.00</strong>
+                    <span class="prod-barcode">8710400034567</span>
+                </button>
+                <button type="button" class="prod-btn" onclick="add('محطة كاشير POS', 250.00, 0.21, '8710400045678')">
+                    🖥️ كاشير<br><strong>€ 250.00</strong>
+                    <span class="prod-barcode">8710400045678</span>
+                </button>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="clearCart()">إفراغ السلة 🗑️</button>
         </div>
 
         <div class="card">
@@ -71,12 +111,59 @@
                 </div>
                 <div class="barcode">||| | |||| | ||| ||||</div>
             </div>
-            <button class="btn" onclick="pay()">إتمام الدفع وطباعة الإيصال 🖨️</button>
+            <button type="button" class="btn" onclick="pay()">إتمام الدفع وطباعة الإيصال 🖨️</button>
+        </div>
+    </div>
+
+    <!-- Camera Scanner View Modal -->
+    <div id="camModal" class="cam-modal">
+        <div class="cam-box">
+            <h3>📷 قارئ باركود الكاميرا</h3>
+            <p class="header-subtitle">وجّه كاميرا الهاتف أو اللابتوب نحو الباركود</p>
+            <div class="cam-view">
+                <video id="webcamVideo" class="cam-video" autoplay playsinline muted></video>
+                <div class="cam-reticle">
+                    <div class="cam-laser"></div>
+                </div>
+            </div>
+            <p class="header-subtitle">أو انقر لاختبار مسح باركود سلعة:</p>
+            <div class="test-barcodes">
+                <button type="button" class="test-barcode-btn" onclick="scanBarcode('8710400012345')">☕ قهوة</button>
+                <button type="button" class="test-barcode-btn" onclick="scanBarcode('8710400023456')">🥪 غداء</button>
+                <button type="button" class="test-barcode-btn" onclick="scanBarcode('8710400034567')">💼 استشارة</button>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="closeCamScanner()">إلغاء وإغلاق الكاميرا</button>
         </div>
     </div>
 
     <script>
+        const catalog = [
+            { name: 'قهوة اسبريسو', price: 3.50, vat: 0.09, barcode: '8710400012345' },
+            { name: 'شطيرة غداء', price: 7.50, vat: 0.09, barcode: '8710400023456' },
+            { name: 'استشارة محاسبية', price: 120.00, vat: 0.21, barcode: '8710400034567' },
+            { name: 'محطة كاشير POS', price: 250.00, vat: 0.21, barcode: '8710400045678' }
+        ];
         let items = [{ name: 'قهوة اسبريسو', price: 3.50, qty: 2 }];
+        let streamObj = null;
+
+        function playBeep(freq = 1200) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.12);
+            } catch(e) {}
+        }
+
         function render() {
             let tot = 0;
             const container = document.getElementById('slipItems');
@@ -86,14 +173,46 @@
             }).join('');
             document.getElementById('slipTot').innerText = `€ ${tot.toFixed(2)}`;
         }
-        function add(n, p, v) {
+
+        function add(n, p, v, barcode) {
             const f = items.find(x => x.name === n);
             if (f) f.qty++;
-            else items.push({ name: n, price: p, qty: 1 });
+            else items.push({ name: n, price: p, qty: 1, barcode: barcode });
             render();
         }
+
         function clearCart() { items = []; render(); }
         function pay() { alert('🎉 تم إتمام الدفع بنجاح وترحيل القيد للـ ERP وطباعة الإيصال!'); }
+
+        function openCamScanner() {
+            document.getElementById('camModal').classList.add('active');
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
+                    .then(stream => {
+                        streamObj = stream;
+                        const v = document.getElementById('webcamVideo');
+                        v.srcObject = stream;
+                        v.play().catch(() => {});
+                    }).catch(() => {});
+            }
+        }
+
+        function closeCamScanner() {
+            document.getElementById('camModal').classList.remove('active');
+            if (streamObj) {
+                streamObj.getTracks().forEach(t => t.stop());
+                streamObj = null;
+            }
+        }
+
+        function scanBarcode(code) {
+            playBeep(1200);
+            closeCamScanner();
+            const prod = catalog.find(p => p.barcode === code) || catalog[0];
+            add(prod.name, prod.price, prod.vat, prod.barcode);
+            alert(`✓ تم مسح الباركود [${code}] وإضافة [${prod.name}] إلى سلة الكاشير!`);
+        }
+
         render();
     </script>
 </body>
