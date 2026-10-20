@@ -2013,6 +2013,210 @@
     box-shadow: 0 0 10px rgba(197, 168, 128, 0.4);
 }
 
+/* ========================================================
+   Sovereign Global Multilingual Hub (28 Languages)
+   ======================================================== */
+.sovereign-lang-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.sovereign-lang-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(14, 24, 20, 0.75);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 999px;
+    padding: 6px 14px;
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    transition: all 0.25s ease;
+    user-select: none;
+    font-family: inherit;
+}
+.sovereign-lang-trigger:hover,
+.sovereign-lang-dropdown.open .sovereign-lang-trigger {
+    background: rgba(197, 168, 128, 0.15);
+    border-color: #c5a880;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.25);
+    color: #ffffff;
+}
+.sovereign-lang-flag {
+    font-size: 1.05rem;
+    line-height: 1;
+}
+.sovereign-lang-chevron {
+    transition: transform 0.25s ease;
+}
+.sovereign-lang-dropdown.open .sovereign-lang-chevron {
+    transform: rotate(180deg);
+}
+.sovereign-lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 320px;
+    max-height: 480px;
+    background: rgba(5, 12, 10, 0.96);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(197, 168, 128, 0.15);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    padding: 12px;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    animation: sovereignMenuFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html[dir="ltr"] .sovereign-lang-menu {
+    right: auto;
+    left: 0;
+}
+@keyframes sovereignMenuFadeIn {
+    from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.sovereign-lang-dropdown.open .sovereign-lang-menu {
+    display: flex;
+}
+.sovereign-lang-search-box {
+    position: relative;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.sovereign-lang-search-box svg {
+    position: absolute;
+    right: 12px;
+    color: rgba(197, 168, 128, 0.7);
+    pointer-events: none;
+}
+html[dir="ltr"] .sovereign-lang-search-box svg {
+    right: auto;
+    left: 12px;
+}
+.sovereign-lang-search-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    border-radius: 10px;
+    padding: 8px 36px 8px 12px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.2s ease;
+}
+html[dir="ltr"] .sovereign-lang-search-input {
+    padding: 8px 12px 8px 36px;
+}
+.sovereign-lang-search-input:focus {
+    border-color: #c5a880;
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+}
+.sovereign-lang-scroll-area {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 380px;
+    padding-right: 4px;
+}
+.sovereign-lang-scroll-area::-webkit-scrollbar {
+    width: 4px;
+}
+.sovereign-lang-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(197, 168, 128, 0.35);
+    border-radius: 999px;
+}
+.sovereign-lang-category {
+    margin-bottom: 12px;
+}
+.sovereign-lang-category-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #c5a880;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+    margin-bottom: 6px;
+}
+.sovereign-lang-category-title .badge-count {
+    background: rgba(197, 168, 128, 0.15);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    border-radius: 6px;
+    padding: 1px 6px;
+    font-size: 0.65rem;
+}
+.sovereign-lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.sovereign-lang-item:hover {
+    background: rgba(197, 168, 128, 0.15);
+    color: #ffffff;
+    transform: translateX(-2px);
+}
+html[dir="ltr"] .sovereign-lang-item:hover {
+    transform: translateX(2px);
+}
+.sovereign-lang-item.active {
+    background: rgba(197, 168, 128, 0.25);
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    color: #c5a880;
+    font-weight: 700;
+}
+.sovereign-lang-item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sovereign-lang-item-flag {
+    font-size: 1.15rem;
+    line-height: 1;
+}
+.sovereign-lang-item-names {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.sovereign-lang-native {
+    font-weight: 600;
+    color: #ffffff;
+}
+.sovereign-lang-english {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+.sovereign-lang-code {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #c5a880;
+    background: rgba(197, 168, 128, 0.12);
+    border: 1px solid rgba(197, 168, 128, 0.25);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.sovereign-lang-item.hidden {
+    display: none !important;
+}
+
 html[dir="ltr"] body {
     direction: ltr;
     text-align: left;
