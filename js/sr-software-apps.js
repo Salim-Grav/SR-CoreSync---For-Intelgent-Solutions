@@ -155,6 +155,7 @@
                             <span class="sr-app-sync-dot"></span>
                             <span>جاهز أوفلاين • AMS-IX</span>
                         </div>
+                        <button type="button" class="sr-app-btn-guide" onclick="openSoftwareDocsModal(activeAppId)" title="دليل الاستخدام والتشغيل">📖 دليل الاستخدام</button>
                         <button type="button" class="sr-app-btn-icon" onclick="toggleSoftwareAppFullscreen()" title="كامل الشاشة">⛶</button>
                         <button type="button" class="sr-app-btn-icon close" onclick="closeSoftwareApp()" title="إغلاق">✕</button>
                     </div>
