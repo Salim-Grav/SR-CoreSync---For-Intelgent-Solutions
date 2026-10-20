@@ -9518,14 +9518,14 @@
         }
 
         function copyLogoAssetPath(btn) {
-            const fullUrl = new URL('./assets/logo-neon.svg', window.location.href).href;
+            const fullUrl = new URL('../assets/sr-emblem-gold-luxury-4k.jpg', window.location.href).href;
             LuxuryAudio.play('switch');
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(fullUrl).then(() => {
                     const txt = document.getElementById('copyAssetBtnText');
                     if (txt) {
                         const oldText = txt.textContent;
-                        txt.textContent = 'Vector URL Copied ✓';
+                        txt.textContent = '4K Emblem URL Copied ✓';
                         setTimeout(() => { txt.textContent = oldText; }, 2200);
                     }
                 }).catch(() => {
