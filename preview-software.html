@@ -24,6 +24,278 @@
             max-width: 1320px;
             margin: 0 auto;
         }
+
+        /* Executive Advisor Direct Contact Bars & Buttons */
+        .software-card-consult-bar {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+        .btn-consult-advisor {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .btn-advisor-raed {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+        .btn-advisor-raed:hover {
+            background: rgba(16, 185, 129, 0.22);
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+            transform: translateY(-1px);
+        }
+        .btn-advisor-salim {
+            background: rgba(56, 189, 248, 0.12);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .btn-advisor-salim:hover {
+            background: rgba(56, 189, 248, 0.22);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+            transform: translateY(-1px);
+        }
+        .btn-consult-email {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: rgba(197, 168, 128, 0.1);
+            color: #dfc299;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .btn-consult-email:hover {
+            background: rgba(197, 168, 128, 0.22);
+            border-color: #dfc299;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(197, 168, 128, 0.3);
+            transform: translateY(-1px);
+        }
+        .advisor-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .btn-advisor-raed .advisor-dot {
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+        .btn-advisor-salim .advisor-dot {
+            background: #38bdf8;
+            box-shadow: 0 0 6px #38bdf8;
+        }
+
+        /* Hero Executive Contact Strip */
+        .sr-hero-executive-contact-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 999px;
+            max-width: 980px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-bar-label {
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+        .sr-hero-contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+        .sr-hero-contact-chip.raed {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        .sr-hero-contact-chip.raed:hover {
+            background: rgba(16, 185, 129, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        }
+        .sr-hero-contact-chip.salim {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .sr-hero-contact-chip.salim:hover {
+            background: rgba(56, 189, 248, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+        .sr-hero-contact-chip.email {
+            background: rgba(197, 168, 128, 0.15);
+            color: #dfc299;
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+        .sr-hero-contact-chip.email:hover {
+            background: rgba(197, 168, 128, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(197, 168, 128, 0.4);
+        }
+
+        /* Executive Contact Modal Styling */
+        .exec-contact-modal-container {
+            max-width: 660px;
+            background: linear-gradient(150deg, #051410, #010604);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
+        }
+        .exec-advisor-toggle-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 18px 0;
+        }
+        .exec-advisor-toggle-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .exec-advisor-toggle-card.active.raed {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+        }
+        .exec-advisor-toggle-card.active.salim {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+        }
+        .exec-advisor-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+        }
+        .exec-advisor-info h4 {
+            margin: 0 0 2px 0;
+            font-size: 0.92rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .exec-advisor-info p {
+            margin: 0;
+            font-size: 0.76rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.35;
+        }
+        .exec-contact-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .exec-btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+        }
+        .exec-btn-whatsapp-raed {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+        }
+        .exec-btn-whatsapp-raed:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(16, 185, 129, 0.5);
+            color: #ffffff;
+        }
+        .exec-btn-whatsapp-salim {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35);
+        }
+        .exec-btn-whatsapp-salim:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(14, 165, 233, 0.5);
+            color: #ffffff;
+        }
+        .exec-btn-email {
+            background: rgba(197, 168, 128, 0.15);
+            color: #f1ddbf;
+            border: 1px solid rgba(197, 168, 128, 0.4);
+        }
+        .exec-btn-email:hover {
+            background: rgba(197, 168, 128, 0.3);
+            border-color: #dfc299;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.25);
+        }
+        @media (max-width: 640px) {
+            .exec-advisor-toggle-grid {
+                grid-template-columns: 1fr;
+            }
+            .sr-hero-executive-contact-bar {
+                border-radius: 16px;
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -79,6 +351,23 @@
                             <button type="button" class="sr-hero-btn sr-hero-btn-secondary" onclick="openPublishSoftwareModal()">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                 <span>🚀 نشر وتوزيع برنامج جديد (Publish)</span>
+                            </button>
+                        </div>
+
+                        <!-- شريط التوجيه والاستشارات التنفيذية المباشرة (رائد للمحاسبة / سليم للأنظمة / إيميل info) -->
+                        <div class="sr-hero-executive-contact-bar">
+                            <span class="contact-bar-label">⚡ استشارات الشركاء المؤسسين المباشرة:</span>
+                            <button type="button" class="sr-hero-contact-chip raed" onclick="openExecutiveContactModal('accounting', 'استشارة محاسبية وضريبية عامة')" title="محادثة واتساب مباشرة مع أ. محمد رائد كعكة">
+                                <span class="chip-avatar">📊</span>
+                                <span>واتساب أ. رائد كعكة (المحاسبة والضرائب)</span>
+                            </button>
+                            <button type="button" class="sr-hero-contact-chip salim" onclick="openExecutiveContactModal('systems', 'استشارة تطوير برمجيات وأنظمة سحابية')" title="محادثة واتساب مباشرة مع م. محمد سليم عزيزة">
+                                <span class="chip-avatar">💻</span>
+                                <span>واتساب م. سليم عزيزة (الأنظمة والـ API)</span>
+                            </button>
+                            <button type="button" class="sr-hero-contact-chip email" onclick="sendDirectInfoEmail('استفسار تنفيذي عام حول برمجيات S&R CoreSync')" title="إرسال بريد إلكتروني فوري لإدارة الشركة">
+                                <span class="chip-avatar">📧</span>
+                                <span>مراسلة info@sr-coresync.com</span>
                             </button>
                         </div>
                     </div>
@@ -142,6 +431,16 @@
                                     </a>
                                 </div>
                             </div>
+                            <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R TaxSync Desktop')" title="استشارة محاسبية وضريبية خاصة مع أ. محمد رائد كعكة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل خاص بالمحاسبة (أ. رائد)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R TaxSync Desktop')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -179,6 +478,16 @@
                                         <span>أوفلاين 📥</span>
                                     </a>
                                 </div>
+                            </div>
+                            <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R CloudPOS Connector')" title="استشارة نقاط البيع والربط المالي مع أ. محمد رائد كعكة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل خاص بنقاط البيع (أ. رائد)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R CloudPOS Connector')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -218,6 +527,16 @@
                                     </a>
                                 </div>
                             </div>
+                            <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R FlowScan AI Mobile')" title="استشارة أتمتة الفواتير والإيصالات مع أ. محمد رائد كعكة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل بأتمتة الفواتير (أ. رائد)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R FlowScan AI Mobile')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -255,6 +574,16 @@
                                         <span>أوفلاين 📥</span>
                                     </a>
                                 </div>
+                            </div>
+                            <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R Financial AI SDK')" title="استشارة تكامل الـ API والمكتبات البرمجية مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل بالـ API والمطورين (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R Financial AI SDK')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -294,6 +623,16 @@
                                     </a>
                                 </div>
                             </div>
+                            <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R SecureVault B2B')" title="استشارة الأمن السيبراني والتشفير السحابي مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل بالأمن والتشفير (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R SecureVault B2B')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -331,6 +670,16 @@
                                         <span>أوفلاين 📥</span>
                                     </a>
                                 </div>
+                            </div>
+                            <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R Cloud Terminal Agent')" title="استشارة مراقبة الخوادم وهندسة الـ DevOps مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 تواصل بأنظمة السحابة (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R Cloud Terminal Agent')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -381,7 +730,7 @@
                                     تواصل مباشرة مع كبير مهندسي ومطوري الأنظمة (م. سليم عزيزة) لدراسة مشروعك البرمجي، وهيكلته تجارياً، وإدراجه في المتجر الرسمي.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
-                                    <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('dev')">
+                                    <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveContactModal('systems', 'طلب إدراج وترخيص مشروع برمجي تجاري في مختبر م. سليم')">
                                         <span>تقديم طلب إدراج مشروع برمجى ←</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview w-100 justify-content-center btn-live-preview--pad">
@@ -739,6 +1088,241 @@
             </div>
         </div>
     </div>
+
+    <!-- نافذة الاستشارات التنفيذية الذكية (توجيه مباشر: رائد للمحاسبة / سليم للأنظمة / بريد info) -->
+    <div id="executiveContactModal" class="software-modal-overlay" onclick="if(event.target===this)closeExecutiveContactModal()">
+        <div class="software-modal-container exec-contact-modal-container" role="dialog" aria-modal="true" aria-labelledby="execContactModalTitle">
+            <button type="button" class="sw-modal-close-btn" onclick="closeExecutiveContactModal()" aria-label="إغلاق النافذة">&times;</button>
+
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span style="font-size: 28px;" id="execModalMainIcon">🏛️</span>
+                <div>
+                    <span class="sw-badge" style="background: rgba(197, 168, 128, 0.15); color: #dfc299; border: 1px solid rgba(197, 168, 128, 0.35);">
+                        بوابة التوجيه والتواصل التنفيذي المباشر • Executive Direct Desk
+                    </span>
+                    <h3 id="execContactModalTitle" style="color: #ffffff; margin: 4px 0 0 0; font-size: 1.25rem; font-weight: 800;">
+                        استشارة تنفيذية خاصة ومباشرة
+                    </h3>
+                </div>
+            </div>
+
+            <div id="execTargetContextBadge" style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: 0.85rem; color: #e2e8f0; display: flex; align-items: center; justify-content: space-between;">
+                <span>🎯 الموضوع / النظام المستهدف: <strong id="execTargetProductLabel" style="color: #dfc299;">S&R TaxSync Desktop</strong></span>
+                <span id="execRoutingNotice" style="font-size: 0.76rem; color: #10b981; font-weight: 700;">✓ موجه للمستشار المختص</span>
+            </div>
+
+            <div style="margin-top: 18px;">
+                <label style="display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+                    اختر الشريك المؤسس المطلوب للتحدث معه:
+                </label>
+                <div class="exec-advisor-toggle-grid">
+                    <!-- كرت رائد كعكة -->
+                    <div id="execCardRaed" class="exec-advisor-toggle-card active raed" onclick="setExecutiveContactAdvisor('raed')">
+                        <div class="exec-advisor-avatar" style="border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399;">📊</div>
+                        <div class="exec-advisor-info">
+                            <h4>أ. محمد رائد كعكة</h4>
+                            <p>CFO &amp; MD • استشاري الأنظمة المحاسبية والـ ERP والضرائب</p>
+                            <span style="display: inline-block; margin-top: 4px; font-size: 0.72rem; color: #10b981; font-weight: 700;">📱 +31 6 8771 0290 (واتساب شخصي)</span>
+                        </div>
+                    </div>
+
+                    <!-- كرت سليم عزيزة -->
+                    <div id="execCardSalim" class="exec-advisor-toggle-card salim" onclick="setExecutiveContactAdvisor('salim')">
+                        <div class="exec-advisor-avatar" style="border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8;">💻</div>
+                        <div class="exec-advisor-info">
+                            <h4>م. محمد سليم عزيزة</h4>
+                            <p>CTO &amp; Architect • كبير مهندسي السحابة والمطورين والـ API</p>
+                            <span style="display: inline-block; margin-top: 4px; font-size: 0.72rem; color: #38bdf8; font-weight: 700;">📱 +31 6 1811 1116 (واتساب شخصي)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 14px;">
+                <label for="execQuickUserNotes" style="display: block; font-size: 0.82rem; font-weight: 700; color: #cbd5e1; margin-bottom: 6px;">
+                    ملاحظاتك أو استفسارك المخصص (اختياري - سيتم تضمينه في الرسالة):
+                </label>
+                <textarea id="execQuickUserNotes" rows="2" style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 168, 128, 0.25); border-radius: 10px; padding: 10px 14px; color: #ffffff; font-size: 0.86rem; outline: none; font-family: inherit; resize: vertical;" placeholder="أرغب بمناقشة تفاصيل الترخيص أو التكامل الفني..."></textarea>
+            </div>
+
+            <!-- أزرار الإجراءات الرئيسية المباشرة -->
+            <div class="exec-contact-actions">
+                <!-- زر الواتساب الديناميكي الموجه تلقائياً -->
+                <button type="button" id="execDynamicWhatsappBtn" class="exec-btn-action exec-btn-whatsapp-raed" onclick="dispatchExecutiveWhatsapp()">
+                    <span id="execWhatsappBtnIcon">💬</span>
+                    <span id="execWhatsappBtnText">التحدث فوراً عبر واتساب أ. رائد كعكة الشخصي (+31 6 8771 0290)</span>
+                </button>
+
+                <!-- زر الإيميل المباشر إلى info@sr-coresync.com -->
+                <button type="button" class="exec-btn-action exec-btn-email" onclick="dispatchExecutiveEmail()">
+                    <span>📧</span>
+                    <span>إرسال بريد إلكتروني فوري ومباشر إلى إدارة الشركة (info@sr-coresync.com)</span>
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 16px; font-size: 0.76rem; color: rgba(255, 255, 255, 0.55);">
+                🛡️ قنوات اتصال رسمية ومباشرة مع الإدارة التنفيذية لشركة S&R CoreSync Solutions • أمستردام، هولندا
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Executive Routing Engine
+        let currentExecCategory = 'accounting';
+        let currentExecAdvisor = 'raed';
+        let currentExecSoftware = 'S&R TaxSync Desktop';
+
+        const RAED_WHATSAPP = '31687710290';
+        const RAED_FMT = '+31 6 8771 0290';
+        const SALIM_WHATSAPP = '31618111116';
+        const SALIM_FMT = '+31 6 1811 1116';
+        const COMPANY_EMAIL = 'info@sr-coresync.com';
+
+        window.openExecutiveContactModal = function(category = 'accounting', softwareName = '') {
+            currentExecCategory = category;
+            currentExecSoftware = softwareName || (category === 'accounting' ? 'الأنظمة والحلول المحاسبية' : 'الأنظمة والبرمجيات السحابية');
+            currentExecAdvisor = (category === 'accounting') ? 'raed' : 'salim';
+
+            const modal = document.getElementById('executiveContactModal');
+            const prodLabel = document.getElementById('execTargetProductLabel');
+            const routingNotice = document.getElementById('execRoutingNotice');
+
+            if (prodLabel) prodLabel.textContent = currentExecSoftware;
+            if (routingNotice) {
+                routingNotice.textContent = (currentExecAdvisor === 'raed') ? '✓ موجه للمستشار المالي (أ. رائد كعكة)' : '✓ موجه لكبير مهندسي الأنظمة (م. سليم عزيزة)';
+                routingNotice.style.color = (currentExecAdvisor === 'raed') ? '#10b981' : '#38bdf8';
+            }
+
+            updateExecutiveAdvisorUI();
+
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('open');
+            }
+        };
+
+        window.closeExecutiveContactModal = function() {
+            const modal = document.getElementById('executiveContactModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('close');
+            }
+        };
+
+        window.setExecutiveContactAdvisor = function(advisor) {
+            currentExecAdvisor = advisor;
+            updateExecutiveAdvisorUI();
+            if (typeof LuxuryAudio !== 'undefined' && LuxuryAudio.play) LuxuryAudio.play('switch');
+        };
+
+        function updateExecutiveAdvisorUI() {
+            const cardRaed = document.getElementById('execCardRaed');
+            const cardSalim = document.getElementById('execCardSalim');
+            const btn = document.getElementById('execDynamicWhatsappBtn');
+            const btnText = document.getElementById('execWhatsappBtnText');
+
+            if (cardRaed && cardSalim) {
+                if (currentExecAdvisor === 'raed') {
+                    cardRaed.classList.add('active');
+                    cardSalim.classList.remove('active');
+                } else {
+                    cardRaed.classList.remove('active');
+                    cardSalim.classList.add('active');
+                }
+            }
+
+            if (btn && btnText) {
+                if (currentExecAdvisor === 'raed') {
+                    btn.className = 'exec-btn-action exec-btn-whatsapp-raed';
+                    btnText.textContent = `التحدث فوراً عبر واتساب أ. رائد كعكة الشخصي (${RAED_FMT})`;
+                } else {
+                    btn.className = 'exec-btn-action exec-btn-whatsapp-salim';
+                    btnText.textContent = `التحدث فوراً عبر واتساب م. سليم عزيزة الشخصي (${SALIM_FMT})`;
+                }
+            }
+        }
+
+        window.dispatchExecutiveWhatsapp = function() {
+            const notes = document.getElementById('execQuickUserNotes')?.value.trim() || '';
+            const phone = (currentExecAdvisor === 'raed') ? RAED_WHATSAPP : SALIM_WHATSAPP;
+            const advisorName = (currentExecAdvisor === 'raed') ? 'أ. محمد رائد كعكة (المستشار المالي وCFO)' : 'م. محمد سليم عزيزة (كبير مهندسي الأنظمة وCTO)';
+
+            let msg = `*طلب تواصل واستشارة تنفيذية خاصة - S&R CoreSync Solutions*\n` +
+                      `━━━━━━━━━━━━━━━━━━━━\n` +
+                      `👔 *المستشار المطلوب:* ${advisorName}\n` +
+                      `🎯 *البرنامج / النظام المستهدف:* ${currentExecSoftware}\n`;
+            if (notes) {
+                msg += `📝 *ملاحظات الاستفسار:* ${notes}\n`;
+            }
+            msg += `━━━━━━━━━━━━━━━━━━━━\n` +
+                   `_تم الإرسال عبر سوق وبوابة البرمجيات الرسمية_`;
+
+            try {
+                const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
+                leads.unshift({
+                    timestamp: new Date().toISOString(),
+                    leadId: 'LEAD-SW-' + Date.now(),
+                    advisor: currentExecAdvisor,
+                    advisorName: advisorName,
+                    software: currentExecSoftware,
+                    notes: notes,
+                    channel: 'whatsapp',
+                    recipientNumber: phone
+                });
+                localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
+            } catch(e) {}
+
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+            closeExecutiveContactModal();
+            window.open(url, '_blank');
+        };
+
+        window.dispatchExecutiveEmail = function() {
+            const notes = document.getElementById('execQuickUserNotes')?.value.trim() || '';
+            const advisorName = (currentExecAdvisor === 'raed') ? 'أ. محمد رائد كعكة (المستشار المالي وCFO)' : 'م. محمد سليم عزيزة (كبير مهندسي الأنظمة وCTO)';
+
+            const subject = encodeURIComponent(`طلب استشارة واستفسار حول [${currentExecSoftware}] - S&R CoreSync Solutions`);
+            let body = `السادة إدارة S&R CoreSync Solutions المحترمين،\nتحية طيبة وبعد،\n\n` +
+                       `أود الاستفسار والتواصل بخصوص: ${currentExecSoftware}\n` +
+                       `المستشار المرغوب بالتواصل معه: ${advisorName}\n`;
+            if (notes) {
+                body += `تفاصيل الاستفسار:\n${notes}\n\n`;
+            } else {
+                body += `يرجى تزويدي بتفاصيل التراخيص، إمكانيات التكامل والربط، والعروض المتاحة.\n\n`;
+            }
+            body += `بيانات الاتصال:\nالاسم:\nاسم المنشأة:\nرقم الهاتف:\n\nمع الشكر والتقدير.`;
+
+            try {
+                const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
+                leads.unshift({
+                    timestamp: new Date().toISOString(),
+                    leadId: 'LEAD-SW-EMAIL-' + Date.now(),
+                    advisor: currentExecAdvisor,
+                    advisorName: advisorName,
+                    software: currentExecSoftware,
+                    notes: notes,
+                    channel: 'email',
+                    recipientEmail: COMPANY_EMAIL
+                });
+                localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
+            } catch(e) {}
+
+            closeExecutiveContactModal();
+            window.location.href = `mailto:${COMPANY_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
+        };
+
+        window.sendDirectInfoEmail = function(softwareName = '') {
+            const subject = encodeURIComponent(`استفسار رسمي حول [${softwareName || 'برمجيات وأنظمة S&R CoreSync'}]`);
+            const body = encodeURIComponent(
+                `السادة إدارة S&R CoreSync Solutions المحترمين،\n\n` +
+                `أود الاستفسار والتواصل بخصوص: ${softwareName || 'برمجيات المنصة'}.\n\n` +
+                `الاسم الكامل:\nالشركة:\nرقم الواتساب / الهاتف:\nتفاصيل الاستفسار المطلوب:\n\nمع فائق الاحترام والتقدير.`
+            );
+            window.location.href = `mailto:${COMPANY_EMAIL}?subject=${subject}&body=${body}`;
+        };
+    </script>
 
     <script src="./css/enterprise-suite.min.js" defer></script>
     <script src="./js/sr-software-apps.js" defer></script>
