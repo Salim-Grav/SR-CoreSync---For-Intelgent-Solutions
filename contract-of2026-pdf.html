@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وثيقة العقد الرسمي | OF-2026-1021 - منصة NL بالعربي | S&R CoreSync Solutions</title>
+    <title>وثيقة العقد التجاري الرسمي | OF-2026-1021 - منصة NL بالعربي | S&R CoreSync Solutions</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Cinzel:wght@700;800&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0a2540;
@@ -31,11 +31,11 @@
 
         body {
             font-family: 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #374151;
+            background-color: #2b3544;
             color: var(--text-dark);
-            font-size: 11pt;
-            line-height: 1.5;
-            padding: 20px 0;
+            font-size: 10.5pt;
+            line-height: 1.45;
+            padding: 30px 0 60px 0;
         }
 
         /* Floating Screen Action Bar */
@@ -45,86 +45,121 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
-            background: rgba(17, 24, 39, 0.95);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            padding: 10px 24px;
+            background: rgba(15, 23, 42, 0.96);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: 8px 18px;
             border-radius: 999px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(197, 168, 128, 0.35);
             display: flex;
             align-items: center;
-            gap: 16px;
-            direction: ltr;
+            gap: 10px;
+            direction: rtl;
+        }
+
+        .toolbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-left: 12px;
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .toolbar-brand img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+
+        .toolbar-brand span {
+            color: #fbf5b7;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
         }
 
         .btn-action {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 18px;
+            gap: 6px;
+            padding: 7px 14px;
             border-radius: 999px;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             border: none;
             transition: all 0.2s ease;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .btn-action-primary {
             background: linear-gradient(135deg, #b38728, #fbf5b7, #aa771c);
-            color: #000;
+            color: #0b0f19;
             font-weight: 800;
-            box-shadow: 0 4px 12px rgba(179, 135, 40, 0.4);
+            box-shadow: 0 4px 12px rgba(179, 135, 40, 0.35);
         }
 
         .btn-action-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(179, 135, 40, 0.6);
+            box-shadow: 0 6px 16px rgba(179, 135, 40, 0.5);
+        }
+
+        .btn-action-word {
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+            color: #ffffff;
+        }
+
+        .btn-action-excel {
+            background: linear-gradient(135deg, #047857, #10b981);
+            color: #ffffff;
+        }
+
+        .btn-action-email {
+            background: linear-gradient(135deg, #0284c7, #0ea5e9);
+            color: #ffffff;
         }
 
         .btn-action-wa {
             background: #25D366;
-            color: #fff;
-        }
-
-        .btn-action-email {
-            background: #0284c7;
-            color: #fff;
+            color: #0b1f14;
         }
 
         .btn-action-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            color: #f3f4f6;
         }
 
         .btn-action-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.22);
         }
 
         /* Paper Simulation for Screen & Print */
         .paper-page {
             width: 210mm;
-            min-height: 297mm;
-            padding: 16mm 18mm 14mm 18mm;
-            margin: 0 auto 20px auto;
+            height: 297mm;
+            max-height: 297mm;
+            padding: 13mm 16mm 11mm 16mm;
+            margin: 0 auto 25px auto;
             background: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         /* Top Official Header */
         .corp-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 2.5px solid var(--primary);
-            padding-bottom: 12px;
-            margin-bottom: 14px;
+            align-items: center;
+            border-bottom: 2px solid #b38728;
+            padding-bottom: 9px;
+            margin-bottom: 10px;
         }
 
         .corp-brand {
@@ -133,461 +168,612 @@
             gap: 12px;
         }
 
-        .corp-emblem {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        .corp-emblem-img {
+            width: 54px;
+            height: 54px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(179, 135, 40, 0.35));
         }
 
         .corp-title h1 {
-            font-size: 16pt;
-            font-weight: 900;
-            color: var(--primary);
-            line-height: 1.1;
-            letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+            font-size: 14pt;
+            font-weight: 800;
+            color: #0b192c;
+            letter-spacing: -0.3px;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .corp-title .corp-subline {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 7pt;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #aa771c;
+            margin-top: 2px;
         }
 
         .corp-title p {
-            font-size: 8.5pt;
-            color: var(--text-muted);
-            font-weight: 600;
+            font-size: 7.5pt;
+            color: #64748b;
+            margin-top: 1px;
         }
 
         .corp-meta {
             text-align: left;
             direction: ltr;
-            font-size: 8pt;
-            color: var(--text-muted);
-            line-height: 1.4;
+            font-size: 7.5pt;
+            color: #475569;
+            line-height: 1.35;
         }
 
         .corp-meta strong {
-            color: var(--primary);
+            color: #0f172a;
         }
 
         /* Document Banner */
         .doc-banner {
-            background: linear-gradient(135deg, #0a2540 0%, #1e3a5f 100%);
+            background: linear-gradient(135deg, #0b192c 0%, #1e293b 100%);
             color: #ffffff;
             border-radius: 8px;
-            padding: 10px 14px;
-            margin-bottom: 14px;
+            padding: 9px 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-right: 4px solid var(--gold);
+            margin-bottom: 10px;
+            border: 1px solid rgba(179, 135, 40, 0.35);
         }
 
         .doc-banner-info h2 {
-            font-size: 13pt;
+            font-size: 11pt;
+            color: #fbf5b7;
             font-weight: 800;
-            color: #ffffff;
             margin-bottom: 2px;
         }
 
         .doc-banner-info p {
-            font-size: 8.5pt;
+            font-size: 8pt;
             color: #cbd5e1;
+            line-height: 1.3;
         }
 
         .doc-badge-pill {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 6px 12px;
-            border-radius: 6px;
             text-align: left;
             direction: ltr;
-            font-size: 8pt;
-            line-height: 1.35;
+            font-family: 'Inter', sans-serif;
+            font-size: 7.5pt;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(251, 245, 183, 0.3);
+            white-space: nowrap;
         }
 
         .doc-badge-pill strong {
-            color: var(--gold-light);
+            color: #fbf5b7;
         }
 
         /* Parties Grid */
         .parties-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 14px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .party-box {
-            border: 1px solid var(--border-color);
-            background: var(--bg-light);
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
             border-radius: 6px;
-            padding: 10px 12px;
-            font-size: 8.5pt;
-        }
-
-        .party-box.dienstverlener {
-            border-right: 3px solid var(--primary);
+            padding: 8px 12px;
+            border-right: 3px solid #b38728;
         }
 
         .party-box.opdrachtgever {
-            border-right: 3px solid var(--gold);
+            border-right-color: #059669;
         }
 
         .party-box h3 {
-            font-size: 9.5pt;
+            font-size: 8.5pt;
+            color: #0f172a;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
         }
 
-        .party-box.dienstverlener h3 { color: var(--primary); }
-        .party-box.opdrachtgever h3 { color: var(--gold-dark); }
+        .party-box h3 .sub-dutch-role {
+            font-size: 7pt;
+            color: #64748b;
+            font-weight: 600;
+            direction: ltr;
+        }
 
         .party-detail {
-            color: var(--text-muted);
-            margin-bottom: 3px;
-        }
-
-        .party-detail strong {
-            color: var(--text-dark);
-        }
-
-        .sub-dutch-role {
-            font-size: 7.5pt;
-            font-weight: normal;
-            color: var(--text-muted);
-        }
-
-        /* Deliverables Table */
-        .section-title {
-            font-size: 10.5pt;
-            font-weight: 800;
-            color: var(--primary);
-            border-bottom: 1.5px solid var(--border-color);
-            padding-bottom: 4px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        table.contract-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 8.5pt;
-            margin-bottom: 12px;
-        }
-
-        table.contract-table th {
-            background-color: #f1f5f9;
-            color: var(--primary);
-            font-weight: 800;
-            padding: 6px 8px;
-            border: 1px solid #cbd5e1;
-            text-align: right;
-        }
-
-        table.contract-table th.text-center { text-align: center; }
-        table.contract-table th.text-left { text-align: left; }
-
-        .th-stage { width: 28%; }
-        .th-desc { width: 58%; }
-        .th-price { width: 14%; }
-
-        table.contract-table td {
-            padding: 6px 8px;
-            border: 1px solid #e2e8f0;
-            vertical-align: top;
-        }
-
-        table.contract-table td.stage-name {
-            font-weight: 700;
-            color: var(--primary);
-            white-space: nowrap;
-        }
-
-        table.contract-table td.stage-desc {
-            color: #334155;
             font-size: 8pt;
+            color: #334155;
             line-height: 1.35;
         }
 
-        table.contract-table td.stage-price {
+        .party-detail strong {
+            color: #0f172a;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 9pt;
             font-weight: 800;
-            color: var(--primary);
-            direction: ltr;
+            color: #0b192c;
+            border-bottom: 1.5px solid #cbd5e1;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title span.badge-num {
+            background: #0b192c;
+            color: #fbf5b7;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+        }
+
+        /* Contract Stages Table (Page 1) */
+        .contract-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 6px;
+            font-size: 8pt;
+        }
+
+        .contract-table th {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 6px 8px;
+            font-weight: 700;
+            text-align: right;
+            border: 1px solid #0f172a;
+        }
+
+        .contract-table th.th-price {
             text-align: left;
+            direction: ltr;
+            width: 88px;
+        }
+
+        .contract-table td {
+            padding: 6px 8px;
+            border: 1px solid #e2e8f0;
+            vertical-align: top;
+            line-height: 1.35;
+        }
+
+        .contract-table tbody tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .stage-name {
+            font-weight: 800;
+            color: #0f172a;
             white-space: nowrap;
+            width: 25%;
         }
 
         .stage-sub-dutch {
-            color: var(--text-muted);
+            display: block;
+            font-size: 6.8pt;
+            color: #64748b;
             font-weight: normal;
+            direction: ltr;
+            text-align: right;
         }
 
-        /* Financial Summary Box */
+        .stage-desc {
+            color: #334155;
+            font-size: 7.6pt;
+        }
+
+        .stage-price {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: left;
+            direction: ltr;
+            white-space: nowrap;
+        }
+
+        /* Running Header (Page 2) */
+        .running-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid #b38728;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+        }
+
+        .running-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .running-brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .running-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 11pt;
+            font-weight: 800;
+            color: #0b192c;
+        }
+
+        .running-ref {
+            font-size: 8pt;
+            color: #64748b;
+            text-align: left;
+            direction: ltr;
+        }
+
+        /* Financial Summary Card (Page 2) */
         .finance-summary-grid {
             display: grid;
-            grid-template-columns: 1.4fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 12px;
             margin-bottom: 12px;
         }
 
         .totals-card {
-            background: #f8fafc;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 10px 14px;
+            background: linear-gradient(135deg, #0b192c 0%, #1e293b 100%);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 12px 14px;
+            border: 1px solid rgba(179, 135, 40, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .total-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 0;
-            font-size: 9pt;
-            color: var(--text-muted);
-            border-bottom: 1px dashed #e2e8f0;
+            font-size: 8.5pt;
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .total-row:last-child {
+        .total-row.grand-total {
             border-bottom: none;
-            padding-top: 6px;
+            border-top: 1.5px solid #b38728;
+            padding-top: 7px;
             margin-top: 4px;
-            border-top: 2px solid var(--primary);
-            font-size: 11pt;
+            font-size: 10.5pt;
+            color: #fbf5b7;
             font-weight: 900;
-            color: var(--primary);
         }
 
         .total-row strong {
-            direction: ltr;
             font-family: 'Inter', sans-serif;
+            direction: ltr;
+            color: #ffffff;
+        }
+
+        .total-row.grand-total strong {
+            color: #34d399;
+            font-size: 13pt;
         }
 
         .tax-note {
-            font-size: 7.5pt;
-            color: #64748b;
-            margin-top: 4px;
+            font-size: 7pt;
+            color: #94a3b8;
+            margin-top: 6px;
+            line-height: 1.3;
         }
 
+        /* Installments Card */
         .installments-card {
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-            border-radius: 6px;
-            padding: 10px 12px;
-            font-size: 8pt;
-        }
-
-        .installments-card h4 {
-            font-size: 8.5pt;
-            color: #92400e;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .inst-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 3px 0;
-            border-bottom: 1px dotted #fef3c7;
-        }
-
-        .inst-item strong {
-            direction: ltr;
-            font-family: 'Inter', sans-serif;
-            color: #78350f;
-        }
-
-        /* Legal Clauses */
-        .legal-clauses {
             background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 7.5pt;
-            color: #475569;
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-
-        .legal-clauses ol {
-            padding-right: 16px;
-        }
-
-        .legal-clauses li {
-            margin-bottom: 2px;
-        }
-
-        /* Signatures Section */
-        .signatures-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1.5px solid var(--border-color);
-        }
-
-        .signature-box {
-            border: 1.5px dashed #cbd5e1;
-            border-radius: 6px;
-            padding: 10px 14px;
-            background: #ffffff;
-            min-height: 110px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .signature-box.signed {
-            border: 1.5px solid #10b981;
-            background: #f0fdf4;
-        }
-
-        .sig-header {
+        .installments-card h4 {
             font-size: 8.5pt;
             font-weight: 800;
-            color: var(--primary);
+            color: #0b192c;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 3px;
+        }
+
+        .inst-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 8pt;
+            padding: 3px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .inst-item:last-child {
+            border-bottom: none;
+        }
+
+        .inst-item strong {
+            font-family: 'Inter', sans-serif;
+            color: #059669;
+            direction: ltr;
+        }
+
+        .inst-item.active-inst {
+            background: rgba(16, 185, 129, 0.08);
+            border-radius: 4px;
+            padding: 3px 6px;
+            font-weight: 700;
+        }
+
+        /* Legal Clauses */
+        .legal-clauses {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 7.8pt;
+            color: #334155;
+            line-height: 1.45;
+        }
+
+        .legal-clauses strong.title {
+            color: #0b192c;
+            font-size: 8.5pt;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .legal-clauses ol {
+            padding-right: 18px;
+            margin: 0;
+        }
+
+        .legal-clauses li {
+            margin-bottom: 3px;
+        }
+
+        /* Signatures Grid (Page 2) */
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .signature-box {
+            border: 1.5px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 110px;
+        }
+
+        .signature-box.signed {
+            border-style: solid;
+            border-color: #059669;
+            background: rgba(5, 150, 105, 0.03);
+        }
+
+        .sig-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7.5pt;
+            font-weight: 800;
+            color: #475569;
+            margin-bottom: 4px;
         }
 
         .sig-stamp {
-            display: inline-block;
-            padding: 2px 8px;
+            font-size: 6.8pt;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 7pt;
             font-weight: 800;
+            text-transform: uppercase;
         }
 
         .stamp-official {
-            background: #0a2540;
-            color: #fbf5b7;
-            border: 1px solid var(--gold);
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
         }
 
         .stamp-digital {
-            background: #059669;
-            color: #ffffff;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
         }
 
         .sig-body {
             text-align: center;
-            margin: 6px 0;
-            min-height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 4px 0;
         }
 
         .sig-script {
-            font-family: 'Brush Script MT', cursive, sans-serif;
-            font-size: 1.5rem;
-            color: #0a2540;
-            transform: rotate(-2deg);
-        }
-
-        .sig-body.client-verified .sig-script {
-            color: #059669;
+            font-family: 'Brush Script MT', 'Playfair Display', cursive;
+            font-size: 20pt;
+            color: #aa771c;
+            line-height: 1;
         }
 
         .exec-role {
-            font-size: 8pt;
-            font-weight: 700;
-            color: #0a2540;
-        }
-
-        .sig-placeholder {
-            color: #94a3b8;
-            font-size: 8pt;
-            border-bottom: 1px dashed #cbd5e1;
-            width: 80%;
-            padding-bottom: 4px;
-        }
-
-        .sig-client-role {
-            font-size: 8pt;
-            font-weight: 700;
-            color: #065f46;
-        }
-
-        .sig-client-hash {
-            font-size: 6.5pt;
-            color: #059669;
-            font-family: monospace;
+            font-size: 7.2pt;
+            color: #64748b;
+            margin-top: 3px;
         }
 
         .sig-footer {
-            font-size: 7.5pt;
-            color: var(--text-muted);
-            border-top: 1px dotted #e2e8f0;
-            padding-top: 4px;
             display: flex;
             justify-content: space-between;
-        }
-
-        /* Footer */
-        .page-footer {
-            margin-top: 10px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 6px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 7.5pt;
+            font-size: 7pt;
             color: #94a3b8;
-            direction: ltr;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 3px;
+            margin-top: 4px;
         }
 
-        /* Print Media Styles */
+        /* Page Footer */
+        .page-footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+            font-size: 7pt;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-footer strong {
+            color: #0b192c;
+        }
+
+        /* Email Modal & Toast */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .email-modal-card {
+            background: #0f172a;
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 640px;
+            max-height: 90vh;
+            overflow-y: auto;
+            color: #ffffff;
+            padding: 22px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+        }
+
+        .toast-notify {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 10px 22px;
+            border-radius: 999px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            opacity: 0;
+        }
+
+        .toast-notify.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Print Strict Rules - 2 Exactly Separate A4 Pages */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
         @media print {
             body {
-                background: none;
-                padding: 0;
-                margin: 0;
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
 
-            .screen-toolbar {
+            .screen-toolbar, .modal-overlay, .toast-notify {
                 display: none !important;
             }
 
             .paper-page {
-                width: 100% !important;
-                min-height: 0 !important;
-                margin: 0 !important;
-                padding: 0 !important;
                 box-shadow: none !important;
-                page-break-after: avoid;
+                margin: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                overflow: hidden !important;
+                padding: 13mm 16mm 11mm 16mm !important;
             }
 
-            @page {
-                size: A4 portrait;
-                margin: 10mm 12mm 10mm 12mm;
+            .paper-page.page-2 {
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط الإجراءات العلوي التفاعلي (يختفي تلقائياً عند الطباعة أو التصدير لـ PDF) -->
+    <!-- شريط الإجراءات العلوي الفاخر -->
     <div class="screen-toolbar">
+        <div class="toolbar-brand">
+            <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem">
+            <span>S&R CoreSync · Document Hub</span>
+        </div>
+
         <button type="button" class="btn-action btn-action-primary" onclick="window.print()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            <span>حفظ كـ PDF / طباعة رسمية</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            <span>طباعة / حفظ كـ PDF (صفحتين A4)</span>
+        </button>
+
+        <button type="button" class="btn-action btn-action-word" onclick="exportTechnicalToWord()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <span>تصدير Word (DOC)</span>
+        </button>
+
+        <button type="button" class="btn-action btn-action-excel" onclick="exportTechnicalToExcel()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            <span>تصدير Excel (XLS)</span>
+        </button>
+
+        <button type="button" class="btn-action btn-action-email" onclick="openEmailPreviewModal()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>قالب الإيميل (Gmail/Outlook)</span>
         </button>
 
         <a id="btnShareWhatsApp" class="btn-action btn-action-wa" href="#" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
             <span>واتساب السيد مضر</span>
-        </a>
-
-        <a id="btnShareEmail" class="btn-action btn-action-email" href="#">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span>إرسال بالبريد الإلكتروني</span>
         </a>
 
         <button type="button" class="btn-action btn-action-secondary" onclick="window.close()">
@@ -595,212 +781,304 @@
         </button>
     </div>
 
-    <!-- الصفحة الورقية الرسمية A4 -->
-    <div class="paper-page">
-        <div>
-            <!-- ترويسة الشركة الرسمية الهولندية -->
-            <header class="corp-header">
-                <div class="corp-brand">
-                    <div class="corp-emblem">
-                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="#b38728" stroke-width="1.8" />
-                            <path d="M12 6v12M6 12h12" stroke="#fbf5b7" stroke-width="1.5" stroke-linecap="round" />
-                            <circle cx="12" cy="12" r="3" fill="#b38728" />
-                        </svg>
-                    </div>
-                    <div class="corp-title">
-                        <h1>S&amp;R CoreSync Solutions &amp; Engineering</h1>
-                        <p>Cloud Architecture · Financial ERP Systems · Custom Media &amp; AI Engines</p>
-                    </div>
-                </div>
+    <!-- حاوية المستند القابلة للتصدير (Export Container) -->
+    <div id="exportableDocument">
 
-                <div class="corp-meta">
-                    <div><strong>Headquarters:</strong> Den Haag / Rijswijk, NL</div>
-                    <div><strong>Email:</strong> info@sr-coresync.nl</div>
-                    <div><strong>KvK / BTW:</strong> Registered &amp; Compliant (NL)</div>
-                    <div><strong>Official Lead:</strong> Eng. Mohammad Salim Aziza</div>
-                </div>
-            </header>
-
-            <!-- عنوان الوثيقة والعقد التجاري -->
-            <div class="doc-banner">
-                <div class="doc-banner-info">
-                    <h2>OFFICIËLE OFFERTE &amp; OVEREENKOMST · عقد تجاري رسمي</h2>
-                    <p>تطوير المنظومة الرقمية الشاملة لمنصة NL بالعربي (منصة ويب، بث مباشر، ترجمة AI، محرك قسائم وتطبيقات هواتف)</p>
-                </div>
-                <div class="doc-badge-pill">
-                    <div><strong>Referentie:</strong> OF-2026-1021</div>
-                    <div><strong>Datum:</strong> 20 Oktober 2026</div>
-                    <div><strong>Geldigheid:</strong> 30 Dagen (Tot 19 Nov 2026)</div>
-                    <div><strong>Status:</strong> Definitief &amp; Bindend</div>
-                </div>
-            </div>
-
-            <!-- شبكة الأطراف التعاقدية -->
-            <div class="parties-grid">
-                <div class="party-box dienstverlener">
-                    <h3>
-                        <span>الطرف الأول: الجهة المنفذة</span>
-                        <span class="sub-dutch-role">Dienstverlener</span>
-                    </h3>
-                    <div class="party-detail"><strong>الشركة:</strong> S&amp;R CoreSync Solutions &amp; Engineering</div>
-                    <div class="party-detail"><strong>المفوض بالتوقيع:</strong> المهندس محمد سليم عزيزة (المدير التقني)</div>
-                    <div class="party-detail"><strong>المقر:</strong> لاهاي / رايسفايك، هولندا</div>
-                    <div class="party-detail"><strong>الموقع الرسمي:</strong> https://sr-coresync.nl</div>
-                </div>
-
-                <div class="party-box opdrachtgever">
-                    <h3>
-                        <span>الطرف الثاني: الجهة المالكة والعميل</span>
-                        <span class="sub-dutch-role">Opdrachtgever</span>
-                    </h3>
-                    <div class="party-detail"><strong>العميل الكريم:</strong> السيد مضر أبو فاشة (Mudar Abu Fasheh)</div>
-                    <div class="party-detail"><strong>المشروع:</strong> منصة NL بالعربي (NL bil Arabi Platform)</div>
-                    <div class="party-detail"><strong>المرجع:</strong> وثيقة المتطلبات الهندسية والفنية المعتمدة</div>
-                    <div class="party-detail"><strong>الموقع:</strong> هولندا (The Netherlands)</div>
-                </div>
-            </div>
-
-            <!-- جدول مراحل التطوير البرمجي والتسليمات الـ 5 -->
-            <div class="section-title">
-                <span>1. نطاق العمل ومراحل التطوير البرمجي والتسليمات (Deliverables &amp; Ontwikkelingsfasen)</span>
-            </div>
-
-            <table class="contract-table">
-                <thead>
-                    <tr>
-                        <th class="th-stage">المرحلة البرمجية (Fase)</th>
-                        <th class="th-desc">المواصفات الفنية والتسليمات المعتمدة (Specificaties &amp; Deliverables)</th>
-                        <th class="th-price text-left">القيمة (EUR)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="stage-name">المرحلة 1: المنصة الأساسية ونظام الاشتراكات<br><small class="stage-sub-dutch">Core Web &amp; Subscriptions</small></td>
-                        <td class="stage-desc">بنية تحتية سحابية هجينة متعددة اللغات (عربي RTL كامل، هولندي، إنجليزي)، مصادقة آمنة OTP وتكامل تسجيل Google و Apple، محرك باقات المشتركين (Basic 2€ / Plus 5€)، بوابة دفع هولندية أصلية iDEAL لتفادي عمولات المتاجر بنسبة 0%، نظام الرقابة الأبوية وحسابات الأطفال الآمنة.</td>
-                        <td class="stage-price">&euro; 4.800,00</td>
-                    </tr>
-                    <tr>
-                        <td class="stage-name">المرحلة 2: محرك القسائم الذكية وبوابة المتاجر<br><small class="stage-sub-dutch">Voucher Engine &amp; WhatsApp</small></td>
-                        <td class="stage-desc">توليد قسائم رقمية شهرية مشفرة برمز QR لمشتركي باقة 5€، ربط آلي مباشر مع WhatsApp Business API لإرسال القسائم والتنبيهات، بوابة مسح خفيفة للمتاجر تعمل عبر متصفح الهاتف بدون تثبيت، تخصيص صلاحيات موظفي المتاجر برمز PIN، وفواتير تسوية شهرية PDF لخصمها ضريبياً.</td>
-                        <td class="stage-price">&euro; 4.200,00</td>
-                    </tr>
-                    <tr>
-                        <td class="stage-name">المرحلة 3: البث المباشر والترجمة بالذكاء الاصطناعي<br><small class="stage-sub-dutch">Live Stream &amp; AI Audio</small></td>
-                        <td class="stage-desc">استوديو بث سحابي يدمج عدة مدخلات وهواتف في بث موحد ومتزامن، تسجيل وأرشفة تلقائية فورية للحلقات، مشغل وسائط تفاعلي يدعم 3 مسارات صوتية فورية (عربي / هولندي / إنجليزي) بمحرك ترجمة AI، ونظام رفع مقاطع الجمهور مع طابور مراجعة وموافقة الإدارة.</td>
-                        <td class="stage-price">&euro; 5.200,00</td>
-                    </tr>
-                    <tr>
-                        <td class="stage-name">المرحلة 4: لوحة الإدارة الفائقة وبوابة الإعلانات<br><small class="stage-sub-dutch">Super-Admin &amp; Ads Engine</small></td>
-                        <td class="stage-desc">لوحة تحكم إدارية مركزية للتحكم في الاشتراكات، المحتوى، والمتاجر الشريكة، محرك إعلانات ورعايات ذكي يدعم اللافتات، الفيديو التمهيدي، وتحديد الموقع الجغرافي بالمدن الهولندية (Amsterdam, Rotterdam, Den Haag...)، وتقارير تفاعلية وإحصائيات مالية دقيقة.</td>
-                        <td class="stage-price">&euro; 3.300,00</td>
-                    </tr>
-                    <tr>
-                        <td class="stage-name">المرحلة 5: تطبيقات الهواتف الذكية بنمط القارئ<br><small class="stage-sub-dutch">Mobile Apps (iOS &amp; Android)</small></td>
-                        <td class="stage-desc">تطبيق هجين موحد بنظام العرض السلس لمتاجري Apple App Store و Google Play Store (Reader App Model) لحماية الإيرادات وتفادي عمولة الـ 30% مع حصر الدفع عبر الويب، ووصول كامل للمحتوى والأرشيف والبث المباشر مع التنبيهات الفورية (Push Notifications).</td>
-                        <td class="stage-price">&euro; 3.500,00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- ملخص الحساب المالي وجدول الدفعات -->
-            <div class="finance-summary-grid">
-                <div class="totals-card">
-                    <div class="total-row">
-                        <span>إجمالي أعمال التأسيس البرمجي (5 مراحل):</span>
-                        <strong>&euro; 21.000,00</strong>
-                    </div>
-                    <div class="total-row">
-                        <span>ضريبة القيمة المضافة بهولندا (21% BTW):</span>
-                        <strong>&euro; 4.410,00</strong>
-                    </div>
-                    <div class="total-row">
-                        <span>الإجمالي التعاقدي النهائي الشامل للضريبة (Incl. BTW):</span>
-                        <strong>&euro; 25.410,00</strong>
-                    </div>
-                    <div class="tax-note">
-                        * تخصم كامل مبالغ ضريبة الـ BTW للشركات المسجلة في هولندا كمدخلات ضريبية معتمدة لدى مصلحة الضرائب Belastingdienst.
-                    </div>
-                </div>
-
-                <div class="installments-card">
-                    <h4>جدول الدفعات والشروط المالية (Betalingsvoorwaarden):</h4>
-                    <div class="inst-item">
-                        <span>الدفعة 1 (30% مقدمة التأسيس):</span>
-                        <strong>&euro; 7.623,00 (مستحقة الآن)</strong>
-                    </div>
-                    <div class="inst-item">
-                        <span>الدفعة 2 (30% بعد المنصة والقسائم):</span>
-                        <strong>&euro; 7.623,00</strong>
-                    </div>
-                    <div class="inst-item">
-                        <span>الدفعة 3 (30% بعد البث المباشر والإعلانات):</span>
-                        <strong>&euro; 7.623,00</strong>
-                    </div>
-                    <div class="inst-item">
-                        <span>الدفعة 4 (10% التسليم النهائي والتطبيقات):</span>
-                        <strong>&euro; 2.541,00</strong>
-                    </div>
-                </div>
-            </div>
-
-            <!-- الشروط والضمانات الفنية والقانونية -->
-            <div class="legal-clauses">
-                <strong>الضمانات والشروط التشغيلية العامة (Garantie &amp; Algemene Voorwaarden):</strong>
-                <ol>
-                    <li><strong>فترة الضمان الفني:</strong> 60 يوماً ضمان صيانة ودعم فني مجاني شامل فور الإطلاق التشغيلي لمعالجة أي خلل برمجي.</li>
-                    <li><strong>الملكية الفكرية والكود المصدري:</strong> تنتقل كامل حقوق الملكية الفكرية، قواعد البيانات، والتطبيقات حصرياً للسيد مضر أبو فاشة ومنصة NL بالعربي فور سداد كامل الالتزامات المالية.</li>
-                    <li><strong>البيئة التحتية السحابية:</strong> يتم بناء المنظمة على سيرفرات سحابية معزولة مطابقة لقوانين حماية البيانات الأوروبية الصارمة (GDPR / AVG).</li>
-                </ol>
-            </div>
-        </div>
-
-        <div>
-            <!-- صناديق التوقيع والاعتماد الرسمي لكلا الطرفين -->
-            <div class="signatures-grid">
-                <!-- توقيع الجهة المنفذة -->
-                <div class="signature-box signed">
-                    <div class="sig-header">
-                        <span>عن الجهة المنفذة (Dienstverlener):</span>
-                        <span class="sig-stamp stamp-official">معتمد وموقع رسمياً ✓</span>
-                    </div>
-                    <div class="sig-body">
-                        <div>
-                            <div class="sig-script">Mohammad Salim Aziza</div>
-                            <div class="exec-role">م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</div>
+        <!-- ==========================================
+             الصفحة 1 من 2: الترويسة، الأطراف، ونطاق العمل الـ 5 كامل
+             ========================================== -->
+        <div class="paper-page page-1">
+            <div>
+                <!-- ترويسة الشركة الرسمية الهولندية بالشعار المعتمد الجديد -->
+                <header class="corp-header">
+                    <div class="corp-brand">
+                        <img src="./assets/sr-core-emblem-official.png" alt="S&R CoreSync Royal Emblem" class="corp-emblem-img">
+                        <div class="corp-title">
+                            <h1>S&amp;R CoreSync Solutions &amp; Engineering</h1>
+                            <div class="corp-subline">ENTERPRISE CLOUD ARCHITECTURE · FINANCIAL ERP · AI ENGINES</div>
+                            <p>المقر الرئيسي: لاهاي / رايسفايك، هولندا · مسجلة ومعتمدة لدى KvK والضرائب</p>
                         </div>
                     </div>
-                    <div class="sig-footer">
-                        <span>S&amp;R CoreSync Solutions</span>
-                        <span>تاريخ الاعتماد: 20 أكتوبر 2026</span>
+
+                    <div class="corp-meta">
+                        <div><strong>Doc Ref:</strong> OF-2026-1021</div>
+                        <div><strong>KvK / BTW:</strong> Registered &amp; Compliant (NL)</div>
+                        <div><strong>Email:</strong> info@sr-coresync.nl</div>
+                        <div><strong>Lead CTO:</strong> Eng. Mohammad Salim Aziza</div>
+                    </div>
+                </header>
+
+                <!-- عنوان الوثيقة والعقد التجاري -->
+                <div class="doc-banner">
+                    <div class="doc-banner-info">
+                        <h2>OFFICIËLE OFFERTE &amp; OVEREENKOMST · عقد تجاري رسمي معتمد</h2>
+                        <p>تطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي" في هولندا (المنصة، البث، الترجمة AI، القسائم والتطبيقات)</p>
+                    </div>
+                    <div class="doc-badge-pill">
+                        <div><strong>Referentie:</strong> OF-2026-1021</div>
+                        <div><strong>Datum:</strong> 20 Oktober 2026</div>
+                        <div><strong>Geldigheid:</strong> 30 Dagen (Tot 19 Nov 2026)</div>
                     </div>
                 </div>
 
-                <!-- توقيع الجهة المالكة والعميل -->
-                <div class="signature-box" id="clientSigBox">
-                    <div class="sig-header">
-                        <span>عن الجهة المالكة والعميل (Opdrachtgever):</span>
-                        <span class="sig-stamp" id="clientStampBadge">في انتظار التوقيع</span>
+                <!-- شبكة الأطراف التعاقدية -->
+                <div class="parties-grid">
+                    <div class="party-box dienstverlener">
+                        <h3>
+                            <span>الطرف الأول: الجهة المنفذة</span>
+                            <span class="sub-dutch-role">Dienstverlener</span>
+                        </h3>
+                        <div class="party-detail"><strong>الشركة:</strong> S&amp;R CoreSync Solutions &amp; Engineering</div>
+                        <div class="party-detail"><strong>المفوض بالتوقيع:</strong> المهندس محمد سليم عزيزة (المدير التقني)</div>
+                        <div class="party-detail"><strong>المقر:</strong> لاهاي / رايسفايك، هولندا</div>
+                        <div class="party-detail"><strong>الموقع الرسمي:</strong> https://sr-coresync.com</div>
                     </div>
-                    <div class="sig-body" id="clientSigBody">
-                        <div class="sig-placeholder">
-                            (توقيع السيد مضر أبو فاشة - المفوض بالتوقيع والمالك)
-                        </div>
-                    </div>
-                    <div class="sig-footer">
-                        <span>منصة NL بالعربي</span>
-                        <span id="clientSigDate">التاريخ: 2026-10-20</span>
+
+                    <div class="party-box opdrachtgever">
+                        <h3>
+                            <span>الطرف الثاني: الجهة المالكة والعميل</span>
+                            <span class="sub-dutch-role">Opdrachtgever</span>
+                        </h3>
+                        <div class="party-detail"><strong>العميل الكريم:</strong> السيد مضر أبو فاشة (Mudar Abu Fasheh)</div>
+                        <div class="party-detail"><strong>المشروع:</strong> منصة NL بالعربي (NL bil Arabi Platform)</div>
+                        <div class="party-detail"><strong>المرجع:</strong> وثيقة المتطلبات الهندسية والفنية المعتمدة</div>
+                        <div class="party-detail"><strong>الموقع:</strong> هولندا (The Netherlands)</div>
                     </div>
                 </div>
+
+                <!-- جدول مراحل التطوير البرمجي والتسليمات الـ 5 (كامل بالصفحة 1) -->
+                <div class="section-title">
+                    <span>1. نطاق العمل ومراحل التطوير البرمجي والتسليمات (Deliverables &amp; Ontwikkelingsfasen)</span>
+                    <span class="badge-num">5 مراحل متكاملة</span>
+                </div>
+
+                <table class="contract-table">
+                    <thead>
+                        <tr>
+                            <th class="th-stage">المرحلة البرمجية (Fase)</th>
+                            <th class="th-desc">المواصفات الفنية والتسليمات المعتمدة (Specificaties &amp; Deliverables)</th>
+                            <th class="th-price">القيمة (EUR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="stage-name">المرحلة 1: المنصة الأساسية ونظام الاشتراكات<br><small class="stage-sub-dutch">Core Web &amp; Subscriptions</small></td>
+                            <td class="stage-desc">بنية تحتية سحابية هجينة متعددة اللغات (عربي RTL كامل، هولندي، إنجليزي)، مصادقة آمنة OTP وتكامل تسجيل Google و Apple، محرك باقات المشتركين (Basic 2€ / Plus 5€)، بوابة دفع هولندية أصلية iDEAL لتفادي عمولات المتاجر بنسبة 0%، نظام الرقابة الأبوية وحسابات الأطفال الآمنة.</td>
+                            <td class="stage-price">&euro; 4.800,00</td>
+                        </tr>
+                        <tr>
+                            <td class="stage-name">المرحلة 2: محرك القسائم الذكية وبوابة المتاجر<br><small class="stage-sub-dutch">Voucher Engine &amp; WhatsApp</small></td>
+                            <td class="stage-desc">توليد قسائم رقمية شهرية مشفرة برمز QR لمشتركي باقة 5€، ربط آلي مباشر مع WhatsApp Business API لإرسال القسائم والتنبيهات، بوابة مسح خفيفة للمتاجر تعمل عبر متصفح الهاتف بدون تثبيت، تخصيص صلاحيات موظفي المتاجر برمز PIN، وفواتير تسوية شهرية PDF لخصمها ضريبياً.</td>
+                            <td class="stage-price">&euro; 4.200,00</td>
+                        </tr>
+                        <tr>
+                            <td class="stage-name">المرحلة 3: البث المباشر والترجمة بالذكاء الاصطناعي<br><small class="stage-sub-dutch">Live Stream &amp; AI Audio</small></td>
+                            <td class="stage-desc">استوديو بث سحابي يدمج عدة مدخلات وهواتف في بث موحد ومتزامن، تسجيل وأرشفة تلقائية فورية للحلقات، مشغل وسائط تفاعلي يدعم 3 مسارات صوتية فورية (عربي / هولندي / إنجليزي) بمحرك ترجمة AI، ونظام رفع مقاطع الجمهور مع طابور مراجعة وموافقة الإدارة.</td>
+                            <td class="stage-price">&euro; 5.200,00</td>
+                        </tr>
+                        <tr>
+                            <td class="stage-name">المرحلة 4: لوحة الإدارة الفائقة وبوابة الإعلانات<br><small class="stage-sub-dutch">Super-Admin &amp; Ads Engine</small></td>
+                            <td class="stage-desc">لوحة تحكم إدارية مركزية للتحكم في الاشتراكات، المحتوى، والمتاجر الشريكة، محرك إعلانات ورعايات ذكي يدعم اللافتات، الفيديو التمهيدي، وتحديد الموقع الجغرافي بالمدن الهولندية (Amsterdam, Rotterdam, Den Haag...)، وتقارير تفاعلية وإحصائيات مالية دقيقة.</td>
+                            <td class="stage-price">&euro; 3.300,00</td>
+                        </tr>
+                        <tr>
+                            <td class="stage-name">المرحلة 5: تطبيقات الهواتف الذكية بنمط القارئ<br><small class="stage-sub-dutch">Mobile Apps (iOS &amp; Android)</small></td>
+                            <td class="stage-desc">تطبيق هجين موحد بنظام العرض السلس لمتاجري Apple App Store و Google Play Store (Reader App Model) لحماية الإيرادات وتفادي عمولة الـ 30% مع حصر الدفع عبر الويب، ووصول كامل للمحتوى والأرشيف والبث المباشر مع التنبيهات الفورية (Push Notifications).</td>
+                            <td class="stage-price">&euro; 3.500,00</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- تذييل الصفحة -->
+            <!-- تذييل الصفحة 1 -->
             <footer class="page-footer">
                 <div>S&amp;R CoreSync Solutions &amp; Engineering · Registered in The Netherlands · KvK &amp; BTW Compliant</div>
-                <div>Doc Ref: OF-2026-1021 · Page 1 of 1 · Confidential Commercial Agreement</div>
+                <div><strong>Doc Ref: OF-2026-1021</strong> · Pagina 1 van 2 · Confidential Commercial Agreement</div>
             </footer>
         </div>
+
+
+        <!-- ==========================================
+             الصفحة 2 من 2: التكلفة، جدولة الدفعات، الشروط والتواقيع
+             ========================================== -->
+        <div class="paper-page page-2">
+            <div>
+                <!-- ترويسة الصفحة الثانية المصغرة -->
+                <header class="running-header">
+                    <div class="running-brand">
+                        <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem">
+                        <div class="running-title">S&amp;R CoreSync Solutions &amp; Engineering</div>
+                    </div>
+                    <div class="running-ref">
+                        <div><strong>Document:</strong> Commercial Contract (OF-2026-1021)</div>
+                        <div><strong>Client:</strong> Mudar Abu Fasheh (NL بالعربي)</div>
+                    </div>
+                </header>
+
+                <!-- ملخص الحساب المالي وجدول الدفعات -->
+                <div class="section-title">
+                    <span>2. الحساب المالي التعاقدي وجدولة الدفعات (Financiële Afspraken &amp; Termijnen)</span>
+                    <span class="badge-num">شامل الضريبة 21%</span>
+                </div>
+
+                <div class="finance-summary-grid">
+                    <div class="totals-card">
+                        <div>
+                            <div class="total-row">
+                                <span>إجمالي أعمال التأسيس البرمجي (5 مراحل):</span>
+                                <strong>&euro; 21.000,00</strong>
+                            </div>
+                            <div class="total-row">
+                                <span>ضريبة القيمة المضافة بهولندا (21% BTW):</span>
+                                <strong>&euro; 4.410,00</strong>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>الإجمالي النهائي الشامل للضريبة (Incl. BTW):</span>
+                                <strong>&euro; 25.410,00</strong>
+                            </div>
+                        </div>
+                        <div class="tax-note">
+                            * ملاحظة ضريبية: يُخصم كامل مبلغ ضريبة الـ BTW (&euro; 4.410) للشركات المسجلة في هولندا كمدخلات ضريبية مستردة لدى مصلحة الضرائب الهولندية (Belastingdienst).
+                        </div>
+                    </div>
+
+                    <div class="installments-card">
+                        <h4>جدول الدفعات والشروط المالية (Betalingsvoorwaarden):</h4>
+                        <div class="inst-item active-inst">
+                            <span>الدفعة 1 (30% مقدمة التأسيس):</span>
+                            <strong>&euro; 7.623,00 (مستحقة الآن)</strong>
+                        </div>
+                        <div class="inst-item">
+                            <span>الدفعة 2 (30% بعد المنصة والقسائم):</span>
+                            <strong>&euro; 7.623,00</strong>
+                        </div>
+                        <div class="inst-item">
+                            <span>الدفعة 3 (30% بعد استوديو البث والإعلانات):</span>
+                            <strong>&euro; 7.623,00</strong>
+                        </div>
+                        <div class="inst-item">
+                            <span>الدفعة 4 (10% التسليم النهائي والتطبيقات):</span>
+                            <strong>&euro; 2.541,00</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الشروط والضمانات الفنية والقانونية -->
+                <div class="legal-clauses">
+                    <strong class="title">الضمانات والشروط التشغيلية العامة (Garantie &amp; Algemene Voorwaarden):</strong>
+                    <ol>
+                        <li><strong>فترة الضمان الفني:</strong> 60 يوماً ضمان صيانة ودعم فني مجاني شامل فور الإطلاق التشغيلي لمعالجة أي خلل أو أخطاء برمجية.</li>
+                        <li><strong>الملكية الفكرية والكود المصدري:</strong> تنتقل كامل حقوق الملكية الفكرية، قواعد البيانات، والتطبيقات حصرياً للسيد مضر أبو فاشة ومنصة NL بالعربي فور سداد كامل الالتزامات المالية.</li>
+                        <li><strong>البيئة التحتية السحابية:</strong> يتم بناء المنظومة على سيرفرات سحابية معزولة فائقة الأمان مطابقة لقوانين حماية البيانات الأوروبية الصارمة (GDPR / AVG).</li>
+                    </ol>
+                </div>
+
+                <!-- صناديق التوقيع والاعتماد الرسمي لكلا الطرفين -->
+                <div class="section-title">
+                    <span>3. التوقيع والاعتماد الرسمي الملزم (Ondertekening &amp; Validatie)</span>
+                </div>
+
+                <div class="signatures-grid">
+                    <!-- توقيع الجهة المنفذة -->
+                    <div class="signature-box signed">
+                        <div class="sig-header">
+                            <span>عن الجهة المنفذة (Dienstverlener):</span>
+                            <span class="sig-stamp stamp-official">معتمد وموقع رسمياً ✓</span>
+                        </div>
+                        <div class="sig-body">
+                            <div>
+                                <div class="sig-script">Mohammad Salim Aziza</div>
+                                <div class="exec-role">م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</div>
+                            </div>
+                        </div>
+                        <div class="sig-footer">
+                            <span>S&amp;R CoreSync Solutions</span>
+                            <span>تاريخ الاعتماد: 20 أكتوبر 2026</span>
+                        </div>
+                    </div>
+
+                    <!-- توقيع الجهة المالكة والعميل -->
+                    <div class="signature-box" id="clientSigBox">
+                        <div class="sig-header">
+                            <span>عن الجهة المالكة والعميل (Opdrachtgever):</span>
+                            <span class="sig-stamp" id="clientStampBadge">في انتظار التوقيع</span>
+                        </div>
+                        <div class="sig-body" id="clientSigBody">
+                            <div class="sig-placeholder">
+                                (توقيع السيد مضر أبو فاشة - المفوض بالتوقيع والمالك)
+                            </div>
+                        </div>
+                        <div class="sig-footer">
+                            <span>منصة NL بالعربي</span>
+                            <span id="clientSigDate">التاريخ: 2026-10-20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تذييل الصفحة 2 مع رمز التحقق المشفر -->
+            <footer class="page-footer">
+                <div>Security Verification Hash: <strong style="font-family: monospace;">NL-CORP-2026-1021-AUTH-OK</strong></div>
+                <div><strong>Doc Ref: OF-2026-1021</strong> · Pagina 2 van 2 · Wettelijk Bindend Document</div>
+            </footer>
+        </div>
+
     </div>
+
+    <!-- نافذة معاينة قالب البريد الإلكتروني الفاخر (Email Template Modal) -->
+    <div class="modal-overlay" id="emailModal" onclick="if(event.target === this) closeEmailPreviewModal()">
+        <div class="email-modal-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 10px;">
+                <h3 style="margin: 0; color: #fbf5b7; font-size: 15px;">✉️ قالب البريد الإلكتروني الفاخر (جاهز للإرسال أو النسخ لـ Gmail)</h3>
+                <button type="button" style="background: none; border: none; color: #fff; font-size: 18px; cursor: pointer;" onclick="closeEmailPreviewModal()">✕</button>
+            </div>
+            
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 15px;">
+                يمكنك نسخ المحتوى أدناه بكامل تنسيقه ولصقه مباشرة في بريدك (Gmail أو Outlook)، أو فتحه مباشرة في تطبيق البريد الخاص بك.
+            </p>
+
+            <div id="emailPreviewContent" style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 16px; font-size: 12px; line-height: 1.5; direction: rtl; max-height: 380px; overflow-y: auto;">
+                <div style="border-bottom: 2px solid #b38728; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="font-size: 14px; color: #0b192c;">S&amp;R CoreSync Solutions &amp; Engineering</strong>
+                        <div style="font-size: 11px; color: #aa771c;">وثيقة العقد التجاري الرسمي (مرجع: OF-2026-1021)</div>
+                    </div>
+                    <div style="font-size: 11px; color: #64748b; direction: ltr;">20 Oktober 2026</div>
+                </div>
+
+                <p>السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،<br>تحية طيبة وبعد،</p>
+                <p>يسرنا في شركة S&amp;R CoreSync Solutions &amp; Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد لتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".</p>
+                
+                <table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11px;">
+                    <tr style="background: #f1f5f9;"><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: right;">البيان</th><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: left;">القيمة</th></tr>
+                    <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">تكلفة أعمال التأسيس البرمجي (5 مراحل)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 21,000.00</td></tr>
+                    <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 4,410.00</td></tr>
+                    <tr style="background: #fefce8; font-weight: bold;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الإجمالي التعاقدي الشامل للضريبة</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #059669;">€ 25,410.00</td></tr>
+                    <tr style="background: #ecfdf5;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الدفعة الأولى المستحقة (30% مقدمة التأسيس)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #047857; font-weight: bold;">€ 7,623.00</td></tr>
+                </table>
+
+                <p>يمكنكم معاينة وتوقيع العقد رقمياً وسداد الدفعة الأولى مباشرة عبر الرابط التفاعلي التالي:<br>
+                <a id="emailModalLink" href="https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices" target="_blank" style="color: #0284c7; font-weight: bold; text-decoration: underline;">
+                    https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices
+                </a></p>
+
+                <p>وتفضلوا بقبول فائق الاحترام والتقدير،<br>
+                <strong>م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</strong><br>
+                S&amp;R CoreSync Solutions &amp; Engineering — The Netherlands</p>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px;">
+                <button type="button" class="btn-action btn-action-primary" onclick="copyRichEmailContent()">
+                    📋 نسخ القالب المرئي لـ Gmail (Ctrl+V)
+                </button>
+                <a id="btnModalLaunchMail" href="#" class="btn-action btn-action-email">
+                    🚀 فتح في تطبيق البريد
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-notify" id="toastNotify">✓ تم النسخ بنجاح!</div>
 
     <script>
         // Check URL parameters for signing state and auto-print
@@ -824,9 +1102,9 @@
                 clientBody.className = 'sig-body client-verified';
                 clientBody.innerHTML = `
                     <div>
-                        <div class="sig-script">Mudar Abu Fasheh</div>
-                        <div class="sig-client-role">السيد مضر أبو فاشة - المالك التجاري والمفوض</div>
-                        <div class="sig-client-hash">VERIFIED DIGI-HASH: NL-2026-OF1021-OK</div>
+                        <div class="sig-script" style="color: #059669;">Mudar Abu Fasheh</div>
+                        <div style="font-size: 7.2pt; color: #047857; font-weight: 700;">السيد مضر أبو فاشة - المالك التجاري والمفوض</div>
+                        <div style="font-size: 6.5pt; color: #64748b; font-family: monospace;">VERIFIED DIGI-HASH: NL-2026-OF1021-OK</div>
                     </div>
                 `;
             }
@@ -845,17 +1123,218 @@
         const waBtn = document.getElementById('btnShareWhatsApp');
         if (waBtn) waBtn.href = `https://wa.me/31618111116?text=${waMsg}`;
 
-        // Email Share Link
+        // Email Share Setup
         const emailSubject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
-        const emailBtn = document.getElementById('btnShareEmail');
-        if (emailBtn) emailBtn.href = `mailto:mudar@nl-bilarabi.nl?subject=${emailSubject}&body=${emailBody}`;
+        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
+        
+        const btnModalLaunchMail = document.getElementById('btnModalLaunchMail');
+        if (btnModalLaunchMail) btnModalLaunchMail.href = `mailto:mudar@nl-bilarabi.nl?subject=${emailSubject}&body=${emailBody}`;
+
+        const emailModalLink = document.getElementById('emailModalLink');
+        if (emailModalLink) emailModalLink.href = portalUrl;
 
         // Auto print if requested
         if (shouldAutoPrint) {
             window.addEventListener('load', () => {
                 setTimeout(() => window.print(), 500);
             });
+        }
+
+        // ==========================================
+        // 1. Export to Microsoft Word (.DOC)
+        // ==========================================
+        function exportTechnicalToWord() {
+            const htmlContent = `
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+            <head>
+                <meta charset='utf-8'>
+                <title>العقد التجاري الرسمي OF-2026-1021 - منصة NL بالعربي</title>
+                <!--[if gte mso 9]>
+                <xml>
+                <w:WordDocument>
+                <w:View>Print</w:View>
+                <w:Zoom>100</w:Zoom>
+                <w:DoNotOptimizeForBrowser/>
+                </w:WordDocument>
+                </xml>
+                <![endif]-->
+                <style>
+                    body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; direction: rtl; font-size: 11pt; line-height: 1.5; color: #1e293b; }
+                    .header-box { border-bottom: 2px solid #b38728; padding-bottom: 12px; margin-bottom: 15px; }
+                    .corp-name { font-size: 18pt; font-weight: bold; color: #0b192c; }
+                    .banner { background: #0f172a; color: #fbf5b7; padding: 12px; margin: 15px 0; font-size: 13pt; font-weight: bold; }
+                    table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+                    th, td { border: 1px solid #cbd5e1; padding: 8px 10px; font-size: 10pt; }
+                    th { background: #f1f5f9; color: #0f172a; font-weight: bold; text-align: right; }
+                    .price-col { text-align: left; direction: ltr; font-weight: bold; }
+                    .total-box { background: #f8fafc; border: 2px solid #b38728; padding: 12px; margin: 15px 0; }
+                    .sig-table td { border: 1px dashed #cbd5e1; padding: 15px; height: 100px; vertical-align: top; }
+                </style>
+            </head>
+            <body>
+                <div class="header-box">
+                    <div class="corp-name">S&R CoreSync Solutions & Engineering</div>
+                    <div>Cloud Architecture · Financial ERP Systems · Custom AI Engines (The Netherlands)</div>
+                    <div>KvK & BTW Registered | Den Haag / Rijswijk, NL | info@sr-coresync.nl</div>
+                </div>
+
+                <div class="banner">
+                    OFFICIËLE OFFERTE & OVEREENKOMST · عقد تجاري رسمي معتمد (OF-2026-1021)
+                </div>
+
+                <p><strong>الطرف الأول (Dienstverlener):</strong> S&R CoreSync Solutions & Engineering — المفوض: م. محمد سليم عزيزة</p>
+                <p><strong>الطرف الثاني (Opdrachtgever):</strong> السيد مضر أبو فاشة — مشروع: منصة NL بالعربي في هولندا</p>
+
+                <h3>1. نطاق العمل ومراحل التطوير البرمجي الـ 5:</h3>
+                <table>
+                    <thead>
+                        <tr><th>المرحلة</th><th>المواصفات الفنية والتسليمات</th><th>القيمة (EUR)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية تحتية سحابية، RTL عربي كامل، باقات 2€ و 5€، دفع iDEAL معتمد</td><td class="price-col">€ 4,800.00</td></tr>
+                        <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم رقمية QR، تكامل WhatsApp Business، بوابة مسح للمتاجر</td><td class="price-col">€ 4,200.00</td></tr>
+                        <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، 3 مسارات صوتية وترجمة فورية بالذكاء الاصطناعي</td><td class="price-col">€ 5,200.00</td></tr>
+                        <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات وإعلانات، متوافق مع GDPR</td><td class="price-col">€ 3,300.00</td></tr>
+                        <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بنظام Reader App لتفادي عمولة الـ 30% للمتاجر</td><td class="price-col">€ 3,500.00</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="total-box">
+                    <p>إجمالي أعمال التأسيس البرمجي: <strong>€ 21,000.00</strong></p>
+                    <p>ضريبة القيمة المضافة بهولندا (BTW 21%): <strong>€ 4,410.00</strong></p>
+                    <p style="font-size: 13pt; color: #059669;">الإجمالي النهائي الشامل للضريبة (Incl. BTW): <strong>€ 25,410.00</strong></p>
+                    <p><small>* تُسترد كامل الضريبة (€ 4,410) من مصلحة الضرائب الهولندية Belastingdienst كمدخلات ضريبية معتمدة.</small></p>
+                </div>
+
+                <h3>2. جدول الدفعات المالية (Betalingsvoorwaarden):</h3>
+                <p>• الدفعة الأولى (30% مقدمة التأسيس): € 7,623.00 شاملة الضريبة (تستحق عند التوقيع لبدء العمل)</p>
+                <p>• الدفعة الثانية (30% مرحلية): € 7,623.00 (بعد إنجاز المنصة ومحرك القسائم)</p>
+                <p>• الدفعة الثالثة (30% مرحلية): € 7,623.00 (بعد استوديو البث وبوابة المعلنين)</p>
+                <p>• الدفعة الرابعة (10% نهائية): € 2,541.00 (بعد إطلاق التطبيقات واستقرار المنظومة)</p>
+
+                <h3>3. الاعتماد والتوقيع الرسمي:</h3>
+                <table class="sig-table">
+                    <tr>
+                        <td width="50%">
+                            <strong>عن الجهة المنفذة: S&R CoreSync</strong><br>
+                            م. محمد سليم عزيزة (المدير التقني للشؤون الهندسية)<br>
+                            تاريخ: 2026-10-20<br>
+                            التوقيع: Mohammad Salim Aziza ✓ (معتمد وموقع رسمياً)
+                        </td>
+                        <td width="50%">
+                            <strong>عن العميل والجهة المالكة: NL بالعربي</strong><br>
+                            السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)<br>
+                            تاريخ: 2026-10-20<br>
+                            التوقيع: Mudar Abu Fasheh (معتمد وموثق رقمياً)
+                        </td>
+                    </tr>
+                </table>
+            </body>
+            </html>`;
+
+            const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'SR-CoreSync-Contract-OF-2026-1021-Mudar.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('✓ تم تصدير وتحميل مستند Word بنجاح!');
+        }
+
+        // ==========================================
+        // 2. Export to Microsoft Excel (.XLS)
+        // ==========================================
+        function exportTechnicalToExcel() {
+            const tableRows = `
+                <tr><th colspan="3" style="background:#0a2540;color:#fbf5b7;font-size:14pt;padding:10px;">S&R CoreSync Solutions — جدول التكاليف البرمجية (OF-2026-1021)</th></tr>
+                <tr><th colspan="3" style="background:#f1f5f9;color:#333;">العميل: السيد مضر أبو فاشة (منصة NL بالعربي) — التاريخ: 2026-10-20</th></tr>
+                <tr><th style="background:#1e293b;color:#fff;">المرحلة البرمجية</th><th style="background:#1e293b;color:#fff;">المواصفات الفنية والتسليمات</th><th style="background:#1e293b;color:#fff;">القيمة باليورو (EUR)</th></tr>
+                <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية تحتية سحابية، RTL عربي كامل، باقات 2€ و 5€، دفع iDEAL</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">4800.00</td></tr>
+                <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم رقمية QR، تكامل WhatsApp Business، بوابة مسح للمتاجر</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">4200.00</td></tr>
+                <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، 3 مسارات صوتية وترجمة فورية بالذكاء الاصطناعي</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">5200.00</td></tr>
+                <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات وإعلانات، متوافق مع GDPR</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">3300.00</td></tr>
+                <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بنظام Reader App لتفادي عمولة الـ 30% للمتاجر</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">3500.00</td></tr>
+                <tr><th colspan="2" style="text-align:right;background:#f8fafc;">إجمالي أعمال التأسيس البرمجي الصافي:</th><th style="text-align:left;background:#f8fafc;mso-number-format:'\\€\\#,##0\\.00'">21000.00</th></tr>
+                <tr><th colspan="2" style="text-align:right;background:#f8fafc;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;background:#f8fafc;color:#aa771c;mso-number-format:'\\€\\#,##0\\.00'">4410.00</th></tr>
+                <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;font-size:12pt;">الإجمالي النهائي الشامل للضريبة (Incl. BTW):</th><th style="text-align:left;background:#059669;color:#fff;font-size:12pt;mso-number-format:'\\€\\#,##0\\.00'">25410.00</th></tr>
+                <tr><th colspan="3" style="background:#e2e8f0;padding:8px;font-size:11pt;">جدول استحقاق الدفعات (Betalingstermijnen)</th></tr>
+                <tr><td>الدفعة 1: 30% مقدمة التأسيس</td><td>تستحق عند توقيع العقد لبدء أعمال البرمجة</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">7623.00</td></tr>
+                <tr><td>الدفعة 2: 30% مرحلية</td><td>تستحق بعد إنجاز وتسليم المنصة الأساسية ومحرك القسائم</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">7623.00</td></tr>
+                <tr><td>الدفعة 3: 30% مرحلية</td><td>تستحق بعد إنجاز استوديو البث وبوابة المعلنين</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">7623.00</td></tr>
+                <tr><td>الدفعة 4: 10% نهائية</td><td>تستحق بعد إطلاق التطبيقات واستقرار المنظومة 14 يوماً</td><td style="text-align:left;mso-number-format:'\\€\\#,##0\\.00'">2541.00</td></tr>
+            `;
+
+            let excelContent = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+            <head><meta charset="utf-8">
+            <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+            <x:Name>OF-2026-1021</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>
+            </x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+            <style>
+                body { font-family: 'Segoe UI', Arial; direction: rtl; }
+                table { border-collapse: collapse; }
+                th, td { border: 1px solid #cbd5e1; padding: 6px 10px; font-size: 10pt; }
+            </style>
+            </head><body><table>${tableRows}</table></body></html>`;
+
+            const blob = new Blob(['\ufeff', excelContent], { type: 'application/vnd.ms-excel;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'SR-CoreSync-FinancialSchedule-OF-2026-1021.xls';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('✓ تم تصدير وتحميل جدول Excel بنجاح!');
+        }
+
+        // ==========================================
+        // 3. Email Preview & Copy Handlers
+        // ==========================================
+        function openEmailPreviewModal() {
+            const modal = document.getElementById('emailModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeEmailPreviewModal() {
+            const modal = document.getElementById('emailModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        async function copyRichEmailContent() {
+            try {
+                const el = document.getElementById('emailPreviewContent');
+                if (!el) return;
+
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blobHtml = new Blob([el.innerHTML], { type: 'text/html' });
+                    const blobText = new Blob([el.innerText], { type: 'text/plain' });
+                    const item = new ClipboardItem({
+                        'text/html': blobHtml,
+                        'text/plain': blobText
+                    });
+                    await navigator.clipboard.write([item]);
+                    showToast('✓ تم نسخ القالب المنسق للحافظة! توجه لـ Gmail واضغط Ctrl+V');
+                } else {
+                    await navigator.clipboard.writeText(el.innerText);
+                    showToast('✓ تم نسخ نص البريد للحافظة!');
+                }
+            } catch (err) {
+                console.error('Copy failed', err);
+                showToast('✓ تم نسخ نص البريد');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotify');
+            if (toast) {
+                toast.innerText = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2800);
+            }
         }
     </script>
 </body>
