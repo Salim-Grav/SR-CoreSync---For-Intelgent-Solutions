@@ -1551,8 +1551,35 @@
                 const el = document.getElementById('emailPreviewContent');
                 if (!el) return;
 
+                const richHtml = `
+                <div style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 16px; font-size: 12px; line-height: 1.5; direction: rtl; font-family: Arial, Tahoma, sans-serif;">
+                    <div style="border-bottom: 2px solid #b38728; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="font-size: 14px; color: #0b192c;">S&amp;R CoreSync Solutions &amp; Engineering</strong>
+                            <div style="font-size: 11px; color: #aa771c;">وثيقة العقد التجاري الرسمي (مرجع: OF-2026-1021)</div>
+                        </div>
+                        <div style="font-size: 11px; color: #64748b; direction: ltr;">20 Oktober 2026</div>
+                    </div>
+                    <p>السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،<br>تحية طيبة وبعد،</p>
+                    <p>يسرنا في شركة S&amp;R CoreSync Solutions &amp; Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد لتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".</p>
+                    <table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11px;">
+                        <tr style="background: #f1f5f9;"><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: right;">البيان</th><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: left;">القيمة</th></tr>
+                        <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">تكلفة أعمال التأسيس البرمجي (5 مراحل)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 21,000.00</td></tr>
+                        <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 4,410.00</td></tr>
+                        <tr style="background: #fefce8; font-weight: bold;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الإجمالي التعاقدي الشامل للضريبة</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #059669;">€ 25,410.00</td></tr>
+                        <tr style="background: #ecfdf5;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الدفعة الأولى المستحقة (30% مقدمة التأسيس)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #047857; font-weight: bold;">€ 7,623.00</td></tr>
+                    </table>
+                    <p>يمكنكم معاينة وتوقيع العقد رقمياً وسداد الدفعة الأولى مباشرة عبر الرابط التفاعلي التالي:<br>
+                    <a href="${portalUrl}" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: bold; text-decoration: underline;">
+                        ${portalUrl}
+                    </a></p>
+                    <p>وتفضلوا بقبول فائق الاحترام والتقدير،<br>
+                    <strong>م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</strong><br>
+                    S&amp;R CoreSync Solutions &amp; Engineering — The Netherlands</p>
+                </div>`;
+
                 if (navigator.clipboard && window.ClipboardItem) {
-                    const blobHtml = new Blob([el.innerHTML], { type: 'text/html' });
+                    const blobHtml = new Blob([richHtml], { type: 'text/html' });
                     const blobText = new Blob([el.innerText], { type: 'text/plain' });
                     const item = new ClipboardItem({
                         'text/html': blobHtml,
