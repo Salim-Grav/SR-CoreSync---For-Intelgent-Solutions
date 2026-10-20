@@ -4,6 +4,58 @@
 
 <head>
     <meta charset="utf-8">
+
+    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
+    <script id="srLangAutoDetect">
+    (function() {
+        try {
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('noredirect') === '1') return;
+            var qLang = urlParams.get('lang');
+            var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
+            
+            // 1. User manual override from localStorage
+            var savedPref = localStorage.getItem('sr_lang_pref');
+            var targetLang = savedPref;
+            
+            // 2. Query param ?lang=xx
+            if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
+                targetLang = qLang.toLowerCase();
+                localStorage.setItem('sr_lang_pref', targetLang);
+            }
+            
+            // 3. Auto-detect from device / OS / browser
+            if (!targetLang) {
+                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+                for (var i = 0; i < browserLangs.length; i++) {
+                    var raw = (browserLangs[i] || '').toLowerCase().trim();
+                    var primary = raw.split('-')[0];
+                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
+                        targetLang = 'ckb';
+                        break;
+                    }
+                    if (supported.indexOf(primary) !== -1) {
+                        targetLang = primary;
+                        break;
+                    }
+                }
+            }
+            
+            // 4. Compare with current page language
+            var currentLang = document.documentElement.getAttribute('lang') || 'ar';
+            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
+                var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
+                var targetFile = isDemo ? 'demo.html' : 'index.html';
+                var targetPath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
+                var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
+                var prefix = isSubfolder ? '../' : './';
+                var destUrl = prefix + targetPath + window.location.search + window.location.hash;
+                window.location.replace(destUrl);
+            }
+        } catch(e) {}
+    })();
+    </script>
+
     <title>S&R CoreSync Solutions | Software Empresarial, Cloud ERP & Arquitectura IA</title>
     <meta name="author" content="S&R CoreSync Solutions">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

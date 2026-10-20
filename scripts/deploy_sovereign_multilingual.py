@@ -210,6 +210,16 @@ def build_dropdown_js():
         }
         
         trigger.addEventListener('click', toggleDropdown);
+
+        items.forEach(item => {
+            item.addEventListener('click', function() {
+                const code = this.getAttribute('data-code');
+                if (code) {
+                    localStorage.setItem('sr_lang_pref', code);
+                }
+            });
+        });
+
         
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
