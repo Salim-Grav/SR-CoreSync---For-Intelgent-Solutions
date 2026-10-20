@@ -478,6 +478,12 @@
                 <span>Software-Hub & Store</span>
             </div>
 
+            <div class="nav-item" id="tourNav-roi" onclick="switchPortalTab('roi', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12M15 9.5H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H9"></path></svg>
+                <span>Intelligenter ROI-Rechner</span>
+            </div>
+
+
             <div class="sidebar-spacer"></div>
 
             
@@ -540,6 +546,23 @@
                         <h2>Echtzeit-Finanz-Dashboard & Cashflow-Telemetrie</h2>
                         <p>Live-Simulationsplattform für automatisierte Unternehmenserlöse, Cloud-Ausgaben und Cashflow-Telemetrie</p>
                     </div>
+
+            <!-- Feature 1: VIP Branded Proposal Engine -->
+            <div class="vip-proposal-banner" dir="ltr">
+                <div class="vip-banner-content">
+                    <div class="vip-badge">✨ Enterprise-Angebotsgenerator für Unternehmen</div>
+                    <h4 class="vip-title">Offizielles Vorstands-Angebot für Ihr Unternehmen erstellen</h4>
+                    <p class="vip-desc">Geben Sie Ihren Firmennamen ein, um sofort ein maßgeschneidertes PDF-Angebot mit zertifizierten Modulen und lokaler MwSt. zu exportieren.</p>
+                </div>
+                <div class="vip-banner-actions">
+                    <input type="text" id="quickClientNameInput" class="vip-input" placeholder="Firmennamen eingeben..." oninput="updatePdfClientName(this.value)" />
+                    <button type="button" class="vip-btn-gold" onclick="openExecutivePdfModal()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        <span>Branded PDF-Briefing exportieren</span>
+                    </button>
+                </div>
+            </div>
+
                     <button class="action-cta-btn" onclick="openNewTxModal()">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         Testtransaktion buchen
@@ -1293,6 +1316,66 @@
                     </div>
                 </div>
             </section>
+
+        
+        <!-- Feature 2: Smart ROI & Cost Reduction Tab -->
+        <section class="tab-section" id="tab-roi" dir="ltr">
+            <div class="section-header">
+                <div>
+                    <h3 class="section-title">Interaktiver ROI & Kostensenkungs-Rechner</h3>
+                    <p class="section-desc">Präzise Simulation der jährlichen finanziellen Einsparungen und Arbeitsstunden beim Wechsel zur S&R CoreSync Cloud ERP-Architektur.</p>
+                </div>
+            </div>
+
+            <div class="roi-portal-card">
+                <div class="roi-sliders-grid">
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>👥 Teamgröße / Mitarbeiter</span>
+                            <span class="roi-val-display font-num" id="dispRoiTeam">20 Mitarbeiter</span>
+                        </div>
+                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" oninput="calcPortalRoi()" />
+                    </div>
+
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>⏱️ Manuelle Aufgaben / Stunden pro Woche</span>
+                            <span class="roi-val-display font-num" id="dispRoiHours">18 Std./Woche</span>
+                        </div>
+                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" oninput="calcPortalRoi()" />
+                    </div>
+
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>💶 Durchschnittlicher Stundensatz (€)</span>
+                            <span class="roi-val-display font-num" id="dispRoiCost">€ 45 / Std.</span>
+                        </div>
+                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" oninput="calcPortalRoi()" />
+                    </div>
+                </div>
+
+                <div class="roi-results-row">
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-gold font-num" id="resRoiSavings">€ 31,590</div>
+                        <div class="roi-metric-lbl">Direkte jährliche finanzielle Ersparnis</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-white font-num" id="resRoiHours">702 Stunden</div>
+                        <div class="roi-metric-lbl">Eingesparte Arbeitsstunden durch Cloud-Automatisierung</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-gold font-num" id="resRoiYield">780% Net</div>
+                        <div class="roi-metric-lbl">Geschätzte Rentabilität der Investition (Netto-ROI)</div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()">
+                        <span>🚀 Ersparnisse sichern — Beratung mit Gründern buchen</span>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         </main>
     </div>
@@ -3633,6 +3716,118 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         initSovereignLangDropdown();
     }
 })();
+</script>
+
+
+    <!-- Feature 3: Sovereign VIP Founders Hotline Widget -->
+    <div class="sovereign-hotline-widget" id="sovereignHotlineWidget">
+        <div class="hotline-popover-card" id="hotlinePopoverCard">
+            <div class="hotline-header-row">
+                <span class="hotline-header-title">Direkte Vorstands-Hotline</span>
+                <button type="button" class="btn-modal-close-sm font-num" onclick="toggleHotlineWidget(event)" style="background:none;border:none;color:#c5a880;cursor:pointer;font-size:16px;">✕</button>
+            </div>
+            
+            <div class="hotline-founder-box">
+                <div class="hotline-founder-info">
+                    <div class="hotline-avatar">SA</div>
+                    <div class="hotline-names">
+                        <span class="hotline-name">Eng. Mohammad Salim Aziza</span>
+                        <span class="hotline-role">CTO & Software-Architekt</span>
+                    </div>
+                </div>
+                <div class="hotline-actions">
+                    <a href="https://wa.me/31618111116" target="_blank" class="hotline-btn-wa" id="btnHotlineWaSalim">
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="tel:+31618111116" class="hotline-btn-call">
+                        <span>+31 6 1811 1116</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hotline-founder-box">
+                <div class="hotline-founder-info">
+                    <div class="hotline-avatar">RK</div>
+                    <div class="hotline-names">
+                        <span class="hotline-name">Mr. Mohammad Raed Kaaka</span>
+                        <span class="hotline-role">Geschäftsführer & Operations</span>
+                    </div>
+                </div>
+                <div class="hotline-actions">
+                    <a href="https://wa.me/31687710290" target="_blank" class="hotline-btn-wa" id="btnHotlineWaRaed">
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="tel:+31687710290" class="hotline-btn-call">
+                        <span>+31 6 8771 0290</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="hotline-trigger-pill" id="hotlineTriggerBtn" onclick="toggleHotlineWidget(event)">
+            <span class="hotline-pulse-dot"></span>
+            <span id="hotlineTriggerText">💬 Gründer-Hotline</span>
+        </button>
+    </div>
+
+
+<script id="sovereignFeaturesLogic">
+function calcPortalRoi() {
+    const teamEl = document.getElementById('slideRoiTeam');
+    const hoursEl = document.getElementById('slideRoiHours');
+    const costEl = document.getElementById('slideRoiCost');
+    if (!teamEl || !hoursEl || !costEl) return;
+
+    const team = parseInt(teamEl.value) || 20;
+    const hours = parseInt(hoursEl.value) || 18;
+    const cost = parseInt(costEl.value) || 45;
+
+    const dispTeam = document.getElementById('dispRoiTeam');
+    if (dispTeam) dispTeam.innerText = team + ' ' + 'Mitarbeiter';
+
+    const dispHours = document.getElementById('dispRoiHours');
+    if (dispHours) dispHours.innerText = hours + ' ' + 'Std./Woche';
+
+    const dispCost = document.getElementById('dispRoiCost');
+    if (dispCost) dispCost.innerText = '€ ' + cost + ' / Std.';
+
+    const hoursSavedYear = Math.round(hours * 52 * 0.75);
+    const savingsYear = Math.round(hoursSavedYear * cost);
+    const roiPercent = Math.min(1450, Math.max(340, Math.round((savingsYear / 4200) * 100)));
+
+    const resSavings = document.getElementById('resRoiSavings');
+    if (resSavings) resSavings.innerText = '€ ' + savingsYear.toLocaleString();
+
+    const resHours = document.getElementById('resRoiHours');
+    if (resHours) resHours.innerText = hoursSavedYear.toLocaleString() + ' ' + 'Stunden';
+
+    const resYield = document.getElementById('resRoiYield');
+    if (resYield) resYield.innerText = roiPercent + '% Net';
+}
+
+function toggleHotlineWidget(e) {
+    if (e) e.stopPropagation();
+    const widget = document.getElementById('sovereignHotlineWidget');
+    if (!widget) return;
+    widget.classList.toggle('open');
+}
+
+document.addEventListener('click', function(e) {
+    const widget = document.getElementById('sovereignHotlineWidget');
+    if (widget && !widget.contains(e.target)) {
+        widget.classList.remove('open');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const waSalim = document.getElementById('btnHotlineWaSalim');
+    if (waSalim) waSalim.href = 'https://wa.me/31618111116?text=' + encodeURIComponent('Guten Tag Eng. Salim, ich interessiere mich für das S&R CoreSync ERP-System für mein Unternehmen...');
+
+    const waRaed = document.getElementById('btnHotlineWaRaed');
+    if (waRaed) waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent('Guten Tag Eng. Raed, ich interessiere mich für das S&R CoreSync ERP-System für mein Unternehmen...');
+
+    calcPortalRoi();
+});
 </script>
 
 </body>
