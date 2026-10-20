@@ -16,6 +16,8 @@ if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+DEMO_AR_PATH = os.path.join(BASE_DIR, 'demo.html')
+DEMO_EN_PATH = os.path.join(BASE_DIR, 'en', 'demo.html')
 
 # HTML Component: Feature 1 (VIP Proposal Banner - Arabic)
 VIP_BANNER_AR = """
