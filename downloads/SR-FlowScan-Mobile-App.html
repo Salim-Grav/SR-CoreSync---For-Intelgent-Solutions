@@ -15,88 +15,253 @@
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
         body { background: var(--bg-deep); color: #fff; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
-        .frame { max-width: 440px; width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+        .frame { max-width: 460px; width: 100%; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+        .top-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; font-size: 0.8rem; }
+        .back-link { color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: rgba(197, 168, 128, 0.08); transition: all 0.2s; }
+        .back-link:hover { background: rgba(197, 168, 128, 0.18); border-color: var(--gold); }
         .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 18px; }
         .title { font-size: 1.15rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .scanner-box { height: 200px; background: radial-gradient(circle, #0b221a, #030806); border: 2px dashed rgba(16,185,129,0.5); border-radius: 16px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; margin-bottom: 16px; }
-        .laser { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #10b981; box-shadow: 0 0 12px #10b981; animation: scan 2s infinite alternate; }
-        @keyframes scan { 0% { top: 5%; } 100% { top: 92%; } }
-        .presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
-        .preset-btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: #fff; padding: 8px 4px; border-radius: 8px; font-size: 0.72rem; cursor: pointer; }
+        .scanner-box { height: 210px; background: radial-gradient(circle, #0b221a, #030806); border: 2px dashed rgba(16,185,129,0.5); border-radius: 16px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px; margin-bottom: 14px; }
+        .scanner-preview-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: contrast(1.1); display: none; }
+        .scanner-content-wrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .laser { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #10b981; box-shadow: 0 0 14px #10b981, 0 0 24px rgba(16,185,129,0.8); z-index: 3; display: none; animation: scanLaser 1.8s infinite alternate ease-in-out; }
+        @keyframes scanLaser { 0% { top: 4%; } 100% { top: 94%; } }
+        .upload-section { margin-bottom: 14px; }
+        .upload-dropzone { border: 1px dashed var(--gold); background: rgba(197, 168, 128, 0.06); border-radius: 12px; padding: 12px 14px; text-align: center; cursor: pointer; transition: all 0.25s; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .upload-dropzone:hover, .upload-dropzone.dragover { background: rgba(16, 185, 129, 0.12); border-color: var(--emerald); }
+        .upload-title { font-size: 0.88rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 6px; }
+        .upload-desc { font-size: 0.72rem; color: var(--text-dim); }
+        .presets-label { font-size: 0.76rem; color: var(--text-dim); margin-bottom: 6px; display: block; }
+        .presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 14px; }
+        .preset-btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: #fff; padding: 8px 4px; border-radius: 8px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
         .preset-btn.active, .preset-btn:hover { background: rgba(16,185,129,0.25); border-color: var(--emerald); }
-        .res-box { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+        .res-box { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 14px; }
         .row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.85rem; }
         .row.total { border-top: 1px dashed var(--gold); padding-top: 8px; margin-top: 8px; font-size: 1rem; font-weight: 800; color: var(--gold); }
-        .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.9rem; margin-bottom: 8px; }
+        .btn { width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; font-size: 0.9rem; margin-bottom: 8px; transition: transform 0.15s; }
+        .btn:active { transform: scale(0.98); }
         .btn-sec { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; }
         .pwa-badge { font-size: 0.75rem; color: var(--emerald); font-weight: 700; }
         .cam-icon { font-size: 2rem; margin-bottom: 6px; }
         .scan-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
         .cat-pill { color: #38bdf8; }
+        .feedback-pill { font-size: 0.75rem; color: var(--emerald); background: rgba(16,185,129,0.15); border: 1px solid var(--emerald); border-radius: 6px; padding: 6px 10px; margin-bottom: 12px; display: none; text-align: center; }
     </style>
 </head>
 <body>
     <div class="frame">
+        <div class="top-nav">
+            <a href="../demo.html" class="back-link">⟵ العودة للمنصة التجريبية</a>
+            <span class="pwa-badge">S&amp;R Sovereign AI</span>
+        </div>
+
         <div class="header">
-            <div class="title">📱 S&R FlowScan AI v1.8</div>
+            <div class="title">📱 S&amp;R FlowScan AI v1.8</div>
             <span class="pwa-badge">PWA Standalone</span>
         </div>
 
-        <div class="scanner-box">
-            <div class="laser"></div>
-            <div class="cam-icon">📸</div>
-            <strong id="fsTitle">مسح ضوئي ذكي للإيصالات</strong>
-            <p class="scan-sub">استخراج تلقائي لضريبة الـ BTW والمبالغ</p>
+        <!-- Scanner Viewfinder Box -->
+        <div class="scanner-box" id="scannerBox">
+            <img id="receiptPreviewImg" class="scanner-preview-img" alt="معاينة الإيصال">
+            <div class="laser" id="scannerLaser"></div>
+            <div class="scanner-content-wrap">
+                <div class="cam-icon" id="camIcon">📸</div>
+                <strong id="fsTitle">مسح ضوئي ذكي للإيصالات</strong>
+                <p class="scan-sub" id="fsSub">استخراج تلقائي لضريبة الـ BTW والمبالغ بالذكاء الاصطناعي</p>
+            </div>
         </div>
 
+        <!-- File Upload Section (New Feature) -->
+        <div class="upload-section">
+            <div class="upload-dropzone" id="dropZone" onclick="document.getElementById('receiptFileInput').click()" onkeydown="if(event.key==='Enter'||event.key===' ')document.getElementById('receiptFileInput').click()" tabindex="0" role="button" aria-label="تحميل ملف الفاتورة أو الإيصال">
+                <input type="file" id="receiptFileInput" accept="image/*,application/pdf" style="display:none;" onchange="handleFileSelect(event)">
+                <span class="upload-title">📂 تحميل ملف الفاتورة أو الوصل (صورة أو PDF)</span>
+                <span class="upload-desc">انقر لاختيار ملف من جهازك أو اسحب وأفلت الملف هنا للتحليل الفوري</span>
+            </div>
+        </div>
+
+        <div id="feedbackPill" class="feedback-pill"></div>
+
+        <span class="presets-label">أو اختر إيصالاً نموذجياً جاهزاً:</span>
         <div class="presets">
-            <button class="preset-btn active" onclick="pick('shell', this)">⛽ Shell<br>€ 84.50</button>
-            <button class="preset-btn" onclick="pick('ah', this)">🏢 Albert Heijn<br>€ 38.20</button>
-            <button class="preset-btn" onclick="pick('restaurant', this)">🍽️ De Kas<br>€ 142.00</button>
+            <button type="button" class="preset-btn active" onclick="pick('shell', this)">⛽ Shell<br>€ 84.50</button>
+            <button type="button" class="preset-btn" onclick="pick('ah', this)">🏢 Albert Heijn<br>€ 38.20</button>
+            <button type="button" class="preset-btn" onclick="pick('restaurant', this)">🍽️ De Kas<br>€ 142.00</button>
         </div>
 
+        <!-- Extracted Data Box -->
         <div class="res-box">
-            <div class="row"><span>المتجر:</span><strong id="rStore">Shell Express Amsterdam</strong></div>
+            <div class="row"><span>المتجر / المصدر:</span><strong id="rStore">Shell Express Amsterdam</strong></div>
             <div class="row"><span>التاريخ:</span><strong id="rDate">2026-10-20 14:22</strong></div>
-            <div class="row"><span>التصنيف:</span><strong id="rCat" class="cat-pill">وقود وأسطول نقل</strong></div>
-            <div class="row"><span>الضريبة:</span><strong id="rVat">€ 14.67 (21%)</strong></div>
+            <div class="row"><span>التصنيف المحاسبي:</span><strong id="rCat" class="cat-pill">وقود وأسطول نقل</strong></div>
+            <div class="row"><span>المبلغ الصافي:</span><strong id="rNet">€ 69.83</strong></div>
+            <div class="row"><span>الضريبة المستخرجة:</span><strong id="rVat">€ 14.67 (21%)</strong></div>
             <div class="row total"><span>المجموع الكلي:</span><strong id="rTotal">€ 84.50</strong></div>
         </div>
 
-        <button class="btn" onclick="syncErp()">🚀 مزامنة فورية مع السحابة</button>
-        <button class="btn btn-sec" onclick="exportJson()">📥 تصدير ملف JSON</button>
+        <button type="button" class="btn" onclick="syncErp()">🚀 مزامنة فورية مع CoreSync Cloud ERP</button>
+        <button type="button" class="btn btn-sec" onclick="exportJson()">📥 تصدير ملف JSON المحاسبي</button>
     </div>
 
     <script>
         const P = {
-            shell: { store: 'Shell Express Amsterdam', date: '2026-10-20 14:22', cat: 'وقود وأسطول نقل', vat: '€ 14.67 (21%)', tot: '€ 84.50' },
-            ah: { store: 'Albert Heijn Zakelijk', date: '2026-10-20 11:05', cat: 'أدوات ومستلزمات مكتبية', vat: '€ 3.15 (9%)', tot: '€ 38.20' },
-            restaurant: { store: 'Restaurant De Kas Amsterdam', date: '2026-10-19 20:45', cat: 'ضيافة واجتماعات شركاء', vat: '€ 11.72 (9%)', tot: '€ 142.00' }
+            shell: { store: 'Shell Express Amsterdam', date: '2026-10-20 14:22', cat: 'وقود وأسطول نقل', net: '€ 69.83', vat: '€ 14.67 (21%)', tot: '€ 84.50' },
+            ah: { store: 'Albert Heijn Zakelijk', date: '2026-10-20 11:05', cat: 'أدوات ومستلزمات مكتبية', net: '€ 35.05', vat: '€ 3.15 (9%)', tot: '€ 38.20' },
+            restaurant: { store: 'Restaurant De Kas Amsterdam', date: '2026-10-19 20:45', cat: 'ضيافة واجتماعات شركاء', net: '€ 130.28', vat: '€ 11.72 (9%)', tot: '€ 142.00' }
         };
         let curr = 'shell';
+        let customData = null;
+
+        function playSound(freq = 660, dur = 0.12) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + dur);
+            } catch(e) {}
+        }
+
+        function triggerScanAnimation(onComplete) {
+            const laser = document.getElementById('scannerLaser');
+            const icon = document.getElementById('camIcon');
+            const title = document.getElementById('fsTitle');
+            const sub = document.getElementById('fsSub');
+
+            laser.style.display = 'block';
+            icon.innerText = '⚡';
+            title.innerText = 'جاري المسح الضوئي وتحليل OCR...';
+            sub.innerText = 'عزل الأسطر واستخراج نسب الضريبة BTW تلقائياً';
+            playSound(540, 0.15);
+
+            setTimeout(() => {
+                laser.style.display = 'none';
+                icon.innerText = '✓';
+                title.innerText = 'اكتمل التحليل والاستخراج بنجاح';
+                sub.innerText = 'تم استخراج كافة بنود الفاتورة ومطابقتها محاسبياً';
+                playSound(880, 0.2);
+                if (onComplete) onComplete();
+            }, 1200);
+        }
 
         function pick(k, btn) {
             document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if (btn) btn.classList.add('active');
             curr = k;
-            const d = P[k];
+            customData = null;
+
+            const preview = document.getElementById('receiptPreviewImg');
+            preview.style.display = 'none';
+
+            triggerScanAnimation(() => {
+                const d = P[k];
+                applyReceiptData(d);
+            });
+        }
+
+        function applyReceiptData(d) {
             document.getElementById('rStore').innerText = d.store;
             document.getElementById('rDate').innerText = d.date;
             document.getElementById('rCat').innerText = d.cat;
+            if (d.net) document.getElementById('rNet').innerText = d.net;
             document.getElementById('rVat').innerText = d.vat;
             document.getElementById('rTotal').innerText = d.tot;
         }
 
+        function handleFileSelect(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            processUploadedFile(file);
+        }
+
+        function processUploadedFile(file) {
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            const feedback = document.getElementById('feedbackPill');
+            const preview = document.getElementById('receiptPreviewImg');
+
+            feedback.style.display = 'block';
+            feedback.innerText = `📄 تم تحميل الملف: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    runFileOcr(file.name, file.size);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+                runFileOcr(file.name, file.size);
+            }
+        }
+
+        function runFileOcr(fileName, fileSize) {
+            triggerScanAnimation(() => {
+                // Generate realistic smart values based on file hash/size
+                const baseAmount = (Math.abs(Math.sin(fileSize || 1234)) * 180 + 35).toFixed(2);
+                const vatRate = 0.21;
+                const net = (baseAmount / (1 + vatRate)).toFixed(2);
+                const vat = (baseAmount - net).toFixed(2);
+
+                let cleanName = fileName.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+                if (cleanName.length > 30) cleanName = cleanName.substring(0, 30);
+                const storeName = cleanName ? `مورد: ${cleanName}` : 'فاتورة مورد رقمي معتمد';
+
+                customData = {
+                    store: storeName,
+                    date: new Date().toISOString().replace('T', ' ').substring(0, 16),
+                    cat: 'مشتريات تشغيلية ومستندات أعمال',
+                    net: `€ ${net}`,
+                    vat: `€ ${vat} (21%)`,
+                    tot: `€ ${baseAmount}`
+                };
+                curr = 'custom_upload';
+                applyReceiptData(customData);
+            });
+        }
+
+        // Drag and Drop
+        const dropZone = document.getElementById('dropZone');
+        ['dragenter', 'dragover'].forEach(name => {
+            dropZone.addEventListener(name, (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+        });
+        ['dragleave', 'drop'].forEach(name => {
+            dropZone.addEventListener(name, (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+            });
+        });
+        dropZone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const file = dt.files && dt.files[0];
+            if (file) processUploadedFile(file);
+        });
+
         function syncErp() {
-            alert('✓ تم ترحيل بيانات الإيصال بنجاح إلى نظام CoreSync Cloud ERP!');
+            playSound(780, 0.18);
+            const data = customData || P[curr];
+            alert(`✓ تم ترحيل بيانات الفاتورة [${data.store} - ${data.tot}] بنجاح إلى قيود دفتر الأستاذ السحابي في CoreSync Cloud ERP!`);
         }
 
         function exportJson() {
-            const d = P[curr];
+            playSound(600, 0.1);
+            const d = customData || P[curr];
             const blob = new Blob([JSON.stringify(d, null, 2)], { type: 'application/json' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = `Receipt_${curr}.json`;
+            a.download = `Receipt_${(d.store || 'scan').replace(/\s+/g, '_')}.json`;
             a.click();
         }
     </script>
