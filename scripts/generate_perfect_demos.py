@@ -2138,17 +2138,20 @@ def clean_and_build(target_lang):
     c = c.replace('src="assets/', 'src="../assets/')
     c = c.replace('href="./assets/', 'href="../assets/')
     c = c.replace('src="./assets/', 'src="../assets/')
+    c = c.replace('href="./css/', 'href="../css/')
+    c = c.replace('src="./js/', 'src="../js/')
     c = c.replace('href="css/', 'href="../css/')
     c = c.replace('src="js/', 'src="../js/')
 
     # 3. Update Return Links
     c = c.replace('href="logo-studio.html"', 'href="../logo-studio.html"')
 
-    # 4. Remove auto-redirect query param script
-    c = re.sub(r'<!-- Language Auto-Redirect from Query Param.*?-->\s*<script>.*?</script>', '', c, flags=re.DOTALL)
+    # 4. Remove auto-redirect query param script safely
+    redirect_script_pattern = r'<!-- Language Auto-Redirect from Query Param \(\?lang=en / \?lang=nl\) -->\s*<script>\s*\(function\(\) \{[\s\S]*?\}\)\(\);\s*</script>'
+    c = re.sub(redirect_script_pattern, '', c)
 
     # 5. Remove all Arabic comments
-    c = re.sub(r'<!--.*?[\u0600-\u06FF].*?-->', '', c, flags=re.DOTALL)
+    c = re.sub(r'<!--(?!<!)[^>]*?[\u0600-\u06FF][^>]*?-->', '', c)
 
     # 6. Inject Localized Language Switcher
     if target_lang == 'en':

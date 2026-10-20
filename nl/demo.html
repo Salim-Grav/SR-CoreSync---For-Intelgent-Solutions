@@ -18,10 +18,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     
-    <script src="./js/chart.umd.min.js"></script>
+    <script src="../js/chart.umd.min.js"></script>
     <script>if (typeof Chart === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>'); }</script>
 
-    <link rel="stylesheet" href="./css/demo-portal.css?v=sovereign2026_fixed">
+    <link rel="stylesheet" href="../css/demo-portal.css?v=sovereign2026_fixed">
+    <!-- S&R CoreSync Zero-Warnings Validated Build -->
+
+    
+
+</head>
+<body>
+
     
     <header class="portal-header">
         <a href="index.html" class="portal-brand brand-logo-site" title="Terug naar Homepage - S&R CoreSync Solutions">
@@ -1069,11 +1076,1524 @@
                     <div class="inv-qr-block" title="EPC-QR / ZATCA Cryptographic Stamp">
                         <svg viewBox="0 0 100 100" fill="#010907">
                             <rect width="100" height="100" fill="#fff"/>
+                            <!-- QR Pattern Elements -->
+                            <rect x="10" y="10" width="25" height="25" fill="#010907"/>
+                            <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+                            <rect x="18" y="18" width="9" height="9" fill="#010907"/>
                             
+                            <rect x="65" y="10" width="25" height="25" fill="#010907"/>
+                            <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+                            <rect x="73" y="18" width="9" height="9" fill="#010907"/>
+
+                            <rect x="10" y="65" width="25" height="25" fill="#010907"/>
+                            <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+                            <rect x="18" y="73" width="9" height="9" fill="#010907"/>
+
+                            <rect x="42" y="18" width="8" height="8" fill="#010907"/>
+                            <rect x="42" y="42" width="16" height="16" fill="#010907"/>
+                            <rect x="70" y="55" width="12" height="8" fill="#010907"/>
+                            <rect x="65" y="75" width="18" height="12" fill="#010907"/>
+                            <rect x="42" y="75" width="10" height="10" fill="#010907"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="inv-details-grid">
+                    <div>
+                        <span class="text-white-64 d-block">Factuur Aan / Debiteur:</span>
+                        <strong class="text-white" id="pvClient">Amsterdam Tech Hub</strong>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">Factuurnummer:</span>
+                        <strong class="font-num text-white" id="pvNumber">INV-2026-081</strong>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">Factuurdatum:</span>
+                        <span class="font-num text-white" id="pvDate">2026-10-01</span>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">Betalingsstatus:</span>
+                        <span class="text-success font-num" id="pvStatus">Betaald via iDEAL ✓</span>
+                    </div>
+                </div>
+
+                <div class="data-table-wrap mb-3">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Omschrijving</th>
+                                <th>Nettobedrag</th>
+                                <th>BTW المحتسبة</th>
+                                <th>Totaalbedrag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CoreSync Cloud ERP Implementatie & Financiële Governance</td>
+                                <td class="font-num" id="pvNet">€ 10,000</td>
+                                <td class="font-num" id="pvVat">€ 2,100 (21%)</td>
+                                <td class="font-num tx-amount-highlight" id="pvTotal">€ 12,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="inv-total-row">
+                    <span>Totaalbedrag المستحق والمقيد بالدفاتر:</span>
+                    <span class="font-num" id="pvGrandTotal">€ 12,100</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="text-caption text-white-64">Digitaal gecertificeerd en conform Europese norm EN 16931</span>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn-return-main" onclick="window.print()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        Factuur Afdrukken
+                    </button>
+                    <button type="button" class="action-cta-btn" onclick="closeInvoicePreviewModal()">Gelezen & Begrepen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // التبديل بين الشاشات في القائمة الجانبية
+        function switchPortalTab(tabId, el) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const targetNav = document.querySelector(`.nav-item[onclick*="'${tabId}'"]`);
+                if (targetNav) targetNav.classList.add('active');
+            }
+
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+
+        // إعداد الرسوم البيانية التفاعلية بواسطة Chart.js
+        let revenueChartInstance;
+        let categoryChartInstance;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Activeren التبويب المباشر عبر الهاش (#whitelabel, #invoices, إلخ)
+            if (window.location.hash) {
+                const tabName = window.location.hash.replace('#', '');
+                const targetNav = document.querySelector(`.nav-item[onclick*="'${tabName}'"]`);
+                if (targetNav) {
+                    switchPortalTab(tabName, targetNav);
+                }
+            }
+
+            // رسم بياني الإيرادات الشهرية
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            revenueChartInstance = new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt'],
+                    datasets: [
+                        {
+                            label: 'Bruto Omzet (€)',
+                            data: [54000, 62000, 71000, 79000, 85000, 92000, 88000, 105000, 122000, 144500],
+                            borderColor: '#c5a880',
+                            backgroundColor: 'rgba(197, 168, 128, 0.1)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#c5a880',
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'Netto Cashflow (€)',
+                            data: [22000, 26000, 31000, 34000, 39000, 42000, 38000, 49000, 56000, 68000],
+                            borderColor: '#10b981',
+                            borderDash: [5, 5],
+                            tension: 0.35,
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.75)',
+                                font: { family: 'Alexandria', size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: 'rgba(255, 255, 255, 0.6)', font: { family: 'Alexandria' } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: 'rgba(255, 255, 255, 0.6)', font: { family: 'Plus Jakarta Sans' } }
+                        }
+                    }
+                }
+            });
+
+            // رسم بياني توزيع القطاعات
+            const ctxCat = document.getElementById('categoryChart').getContext('2d');
+            categoryChartInstance = new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: ['ERP & Financiële Koppelingen', 'Cloudsoftware & Mobiel', 'AI & Autonome Automatisering', 'Governance & Consultancy'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: ['#c5a880', '#38bdf8', '#10b981', '#f59e0b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                font: { family: 'Alexandria', size: 11 },
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // المساعد المالي الذكي (AI Chat Logic)
+        function askAiPrompt(text) {
+            document.getElementById('aiInput').value = text;
+            sendAiMessage();
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById('aiInput');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const chat = document.getElementById('aiChatMessages');
+
+            // رسالة المستخدم
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-bubble chat-user';
+            userMsg.innerText = query;
+            chat.appendChild(userMsg);
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            // توليد الرد الآلي الذكي بعد ثوانٍ معدودة
+            setTimeout(() => {
+                let aiResponse = "";
+                if (query.toLowerCase().includes('oktober') || query.toLowerCase().includes('cash') || query.includes('أكتوبر') || query.includes('التدفق')) {
+                    aiResponse = "Op basis van het grootboek en het ERP-systeem voor oktober:
+- Gerealiseerde Bruto Omzet: €144.500 (+18% record kwartaalgroei).
+- Operationele Marge: 27,4%, boven Nederlands sectorgemiddelde.
+- Advies: Versnel incasso van openstaande vordering van €42.000 om liquiditeit te versterken.";
+                } else if (query.toLowerCase().includes('factuur') || query.toLowerCase().includes('vervallen') || query.includes('فواتير') || query.includes('المتأخرة')) {
+                    aiResponse = "توجد 1 factuur معلقة بقيمة €35,000 لعميل في الرياض vervalt binnen 14 dagen مع بند Reverse Charge ضريبي سليم. لا توجد أي فواتير متعثرة تتجاوز 30 يوماً بفضل التنبيهات الآلية للواتساب والإيميل.";
+                } else {
+                    aiResponse = "Uw vraag is geanalyseerd door de S&R CoreSync Financiële Engine. Boekhouding en operatie zijn gesynchroniseerd. RPA-automatisering bespaart komende maand circa 35 declarabele uren.";
+                }
+
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-bubble chat-ai';
+                aiMsg.innerText = aiResponse;
+                chat.appendChild(aiMsg);
+                chat.scrollTop = chat.scrollHeight;
+            }, 600);
+        }
+
+        // نافذة المعاملة الجديدة
+        function openNewTxModal() {
+            document.getElementById('newTxModal').classList.add('active');
+        }
+
+        function closeNewTxModal() {
+            document.getElementById('newTxModal').classList.remove('active');
+        }
+
+        function saveNewTx() {
+            const client = document.getElementById('txClient').value;
+            const amount = parseFloat(document.getElementById('txAmount').value) || 0;
+            const type = document.getElementById('txType').value;
+
+            // إضافة صف جديد للجدول
+            const tbody = document.querySelector('#transactionsTable tbody');
+            const tr = document.createElement('tr');
+            const randomId = '#CS-' + Math.floor(1000 + Math.random() * 9000);
+
+            tr.innerHTML = `
+                <td class="font-num">${randomId}</td>
+                <td>${client}</td>
+                <td class="font-num">2026-10-01</td>
+                <td class="font-num tx-amount-highlight">€ ${amount.toLocaleString()}</td>
+                <td>${type}</td>
+                <td><span class="status-badge status-completed">Gesynchroniseerd فوراً</span></td>
+            `;
+
+            tbody.prepend(tr);
+
+            // تحديث عداد الإيرادات
+            const revEl = document.getElementById('stat-revenue');
+            revEl.innerText = `€ ${(842500 + amount).toLocaleString()}`;
+
+            // تحديث الرسم البياني
+            if (revenueChartInstance) {
+                const dataArr = revenueChartInstance.data.datasets[0].data;
+                dataArr[dataArr.length - 1] += amount;
+                revenueChartInstance.update();
+            }
+
+            closeNewTxModal();
+            alert('تمت إضافة المعاملة بنجاح وتحديث قيود الـ ERP والرسوم البيانية لحظياً!');
+        }
+
+        // ==========================================
+        // 1. توليد ومعاينة الفواتير الإلكترونية (Feature 1)
+        // ==========================================
+        function openInvoiceGeneratorModal() {
+            document.getElementById('newInvoiceModal').classList.add('active');
+        }
+
+        function closeInvoiceGeneratorModal() {
+            document.getElementById('newInvoiceModal').classList.remove('active');
+        }
+
+        function generateNewInvoice() {
+            const client = document.getElementById('invClient').value || 'Rotterdam Tech BV';
+            const netAmount = parseFloat(document.getElementById('invAmount').value) || 10000;
+            const taxPct = parseFloat(document.getElementById('invTaxRegime').value) || 0;
+            const vatAmount = Math.round(netAmount * (taxPct / 100));
+            const total = netAmount + vatAmount;
+            const invNum = 'INV-2026-0' + Math.floor(83 + Math.random() * 20);
+            const dateStr = '2026-10-06';
+            const taxLabel = taxPct > 0 ? `${taxPct}% BTW` : 'Reverse Charge 0%';
+
+            const tbody = document.getElementById('invoicesTableBody');
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-status', 'pending');
+            tr.id = 'inv-row-' + invNum;
+
+            tr.innerHTML = `
+                <td class="font-num">${invNum}</td>
+                <td>${client}</td>
+                <td class="font-num">€ ${netAmount.toLocaleString()}</td>
+                <td class="font-num">€ ${vatAmount.toLocaleString()} (${taxLabel})</td>
+                <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
+                <td><span class="status-badge status-processing" id="status-badge-${invNum}">Nieuw - Te betalen</span></td>
+                <td>
+                    <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">سداد iDEAL</button>
+                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'Openstaand', '${dateStr}', '${taxLabel}')">معاينة</button>
+                </td>
+            `;
+
+            tbody.prepend(tr);
+
+            // تحديث العدادات
+            const pendingEl = document.getElementById('inv-stat-pending');
+            const currentPending = 35000 + total;
+            pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;
+
+            updateInvoiceCounters();
+            closeInvoiceGeneratorModal();
+            previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'Openstaand', dateStr, taxLabel);
+        }
+
+        function previewInvoiceModal(num, client, net, vat, total, status, date, taxType, customIssuerName = null) {
+            document.getElementById('pvNumber').innerText = num;
+            document.getElementById('pvClient').innerText = client;
+            document.getElementById('pvNet').innerText = `€ ${net.toLocaleString()}`;
+            document.getElementById('pvVat').innerText = `€ ${vat.toLocaleString()} (${taxType || 'BTW'})`;
+            document.getElementById('pvTotal').innerText = `€ ${total.toLocaleString()}`;
+            document.getElementById('pvGrandTotal').innerText = `€ ${total.toLocaleString()}`;
+            document.getElementById('pvStatus').innerText = status;
+            document.getElementById('pvDate').innerText = date || '2026-10-06';
+
+            // تطبيق الهوية المخصصة إن وجدت
+            const savedBrand = localStorage.getItem('sr_custom_brand_name');
+            const savedLogo = localStorage.getItem('sr_custom_brand_logo') || uploadedLogoDataUrl;
+            const effectiveIssuer = customIssuerName || savedBrand || 'S&R CoreSync Solutions B.V.';
+            
+            const issuerNameEl = document.getElementById('invIssuerName');
+            const issuerEmblemEl = document.getElementById('invModalHeaderEmblem');
+            const wlBadge = document.getElementById('invWhiteLabelBadge');
+
+            if (issuerNameEl) issuerNameEl.innerText = effectiveIssuer;
+            if (issuerEmblemEl && savedLogo) issuerEmblemEl.src = savedLogo;
+            
+            if (wlBadge) {
+                if (customIssuerName || (savedBrand && savedBrand !== 'S&R CORESYNC')) {
+                    wlBadge.style.display = 'inline-block';
+                    wlBadge.innerText = `Aangepast Merk: ${effectiveIssuer}`;
+                } else {
+                    wlBadge.style.display = 'none';
+                }
+            }
+
+            document.getElementById('invoicePreviewModal').classList.add('active');
+        }
+
+        function openBrandedInvoicePreview() {
+            const currentName = document.getElementById('clientBrandNameInput')?.value || localStorage.getItem('sr_custom_brand_name') || 'Riyadh Logistics Group BV';
+            previewInvoiceModal(
+                'INV-WL-2026-099',
+                'Global Enterprise Client BV (Rotterdam)',
+                28500,
+                5985,
+                34485,
+                'Gecertificeerde Factuur - Gereed voor Incasso ✓',
+                '2026-10-06',
+                '21% BTW',
+                currentName
+            );
+            showPortalToast(`✨ Officiële factuur voor [${currentName}] gereed voor weergave en afdrukken!`);
+        }
+
+        function closeInvoicePreviewModal() {
+            document.getElementById('invoicePreviewModal').classList.remove('active');
+        }
+
+        function updateInvoiceCounters() {
+            const all = document.querySelectorAll('#invoicesTableBody tr').length;
+            const paid = document.querySelectorAll('#invoicesTableBody tr[data-status="paid"]').length;
+            const pending = document.querySelectorAll('#invoicesTableBody tr[data-status="pending"]').length;
+            if (document.getElementById('count-all')) document.getElementById('count-all').innerText = all;
+            if (document.getElementById('count-paid')) document.getElementById('count-paid').innerText = paid;
+            if (document.getElementById('count-pending')) document.getElementById('count-pending').innerText = pending;
+        }
+
+        function filterInvoices(status, el) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            const rows = document.querySelectorAll('#invoicesTableBody tr');
+            rows.forEach(r => {
+                if (status === 'all' || r.getAttribute('data-status') === status) {
+                    r.style.display = '';
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+        }
+
+        // ==========================================
+        // 2. Nederlandse iDEAL Directe Betaalsimulator
+        // ==========================================
+        let currentPayingInv = { num: '', client: '', amount: 0 };
+
+        function openIdealSimulatorModal(invNum, client, amount) {
+            currentPayingInv = { num: invNum, client: client, amount: amount };
+            document.getElementById('idealInvNum').innerText = invNum;
+            document.getElementById('idealClientName').innerText = client;
+            document.getElementById('idealTotalAmount').innerText = `€ ${amount.toLocaleString()}`;
+            document.getElementById('idealProgressFill').style.width = '0%';
+            document.getElementById('idealStatusText').innerText = 'Kies uw bank en klik op Bevestig Directe Betaling';
+            document.getElementById('btnConfirmIdeal').disabled = false;
+            document.getElementById('btnConfirmIdeal').innerText = 'Bevestig Directe Testbetaling';
+            document.getElementById('idealSimulatorModal').classList.add('active');
+        }
+
+        function closeIdealSimulatorModal() {
+            document.getElementById('idealSimulatorModal').classList.remove('active');
+        }
+
+        function selectBank(el) {
+            document.querySelectorAll('.bank-option').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function executeIdealPayment() {
+            const btn = document.getElementById('btnConfirmIdeal');
+            const progress = document.getElementById('idealProgressFill');
+            const statusText = document.getElementById('idealStatusText');
+            btn.disabled = true;
+            btn.innerText = 'Banktransactie wordt verwerkt...';
+
+            progress.style.width = '45%';
+            statusText.innerText = 'Beveiligde verbinding via iDEAL 2.0 en SEPA Instant...';
+
+            setTimeout(() => {
+                progress.style.width = '100%';
+                statusText.innerHTML = '<span class="ideal-success-msg">✓ Bedrag succesvol verrekend en bijgeschreven op de zakelijke rekening!</span>';
+
+                // تحديث حالة الفاتورة في الجدول
+                const badge = document.getElementById('status-badge-' + currentPayingInv.num) || document.getElementById('status-badge-inv-82');
+                if (badge) {
+                    badge.className = 'status-badge status-completed';
+                    badge.innerText = 'Betaald via iDEAL ✓';
+                }
+                const payBtn = document.getElementById('btn-pay-' + currentPayingInv.num) || document.getElementById('btn-pay-inv-82');
+                if (payBtn) {
+                    payBtn.style.display = 'none';
+                }
+
+                const targetRow = document.getElementById('inv-row-' + currentPayingInv.num) || document.getElementById('inv-row-2');
+                if (targetRow) {
+                    targetRow.setAttribute('data-status', 'paid');
+                }
+
+                // تحديث العدادات والرسوم البيانية
+                const paidStat = document.getElementById('inv-stat-paid');
+                if (paidStat) paidStat.innerText = `€ ${(142500 + currentPayingInv.amount).toLocaleString()}`;
+                
+                const revStat = document.getElementById('stat-revenue');
+                if (revStat) revStat.innerText = `€ ${(842500 + currentPayingInv.amount).toLocaleString()}`;
+
+                if (revenueChartInstance) {
+                    const dataArr = revenueChartInstance.data.datasets[0].data;
+                    dataArr[dataArr.length - 1] += currentPayingInv.amount;
+                    revenueChartInstance.update();
+                }
+
+                updateInvoiceCounters();
+
+                setTimeout(() => {
+                    closeIdealSimulatorModal();
+                }, 1200);
+            }, 900);
+        }
+
+        // ==========================================
+        // 3. وضع العرض التقديمي للزبائن (Presentation Mode)
+        // ==========================================
+        let isPresentationActive = false;
+
+        function togglePresentationMode() {
+            const btn = document.getElementById('btnPresentationToggle');
+            isPresentationActive = !isPresentationActive;
+            if (isPresentationActive) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+                btn.classList.add('active');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6m0 0v6m0-6L3 21m17-7h-6m0 0v6m0-6l7 7M14 4h6m-6 0v6m0-6l7-7M4 10h6m0 0V4m0 6L3 3"></path></svg> <span>Presentatie Sluiten</span>`;
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                }
+                btn.classList.remove('active');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg> <span>وضع Klantpresentatie [P]</span>`;
+            }
+        }
+
+        // ==========================================
+        // 4. مزامنة بيانات الديمو مع استمارة التواصل (Feature 3)
+        // ==========================================
+        function syncDemoToConsultation() {
+            const activeTab = document.querySelector('.nav-item.active span')?.innerText || 'نظام ERP';
+            let service = 'erp';
+            if (activeTab.includes('ERP')) service = 'erp';
+            else if (activeTab.includes('المالي') || activeTab.includes('القيادة')) service = 'erp';
+            else if (activeTab.includes('الذكاء') || activeTab.includes('AI')) service = 'ai';
+            else if (activeTab.includes('الخوادم')) service = 'software';
+            else if (activeTab.includes('الفواتير')) service = 'erp';
+
+            const revText = document.getElementById('stat-revenue')?.innerText || '€ 842,500';
+            const note = encodeURIComponent(`Consultaanvraag vanuit Demosessie: Doelmodule (${activeTab}), Geschat Transactievolume: ${revText}`);
+            window.location.href = `index.html?service=${service}&budget=3&source=demo&notes=${note}#contact`;
+        }
+    
+
+        // ==========================================
+        // 5. محرك تخصيص الهوية والعلامة البيضاء المتقدم مع الحفظ التلقائي (White-Label & LocalStorage)
+        // ==========================================
+        const themePalette = {
+            gold: { name: 'gold', gold: '#c5a880', hover: '#e0c59e', glow: 'rgba(197, 168, 128, 0.25)', border: 'rgba(197, 168, 128, 0.18)' },
+            cyan: { name: 'cyan', gold: '#38bdf8', hover: '#7dd3fc', glow: 'rgba(56, 189, 248, 0.25)', border: 'rgba(56, 189, 248, 0.2)' },
+            emerald: { name: 'emerald', gold: '#10b981', hover: '#34d399', glow: 'rgba(16, 185, 129, 0.25)', border: 'rgba(16, 185, 129, 0.2)' },
+            violet: { name: 'violet', gold: '#a855f7', hover: '#c084fc', glow: 'rgba(168, 85, 247, 0.25)', border: 'rgba(168, 85, 247, 0.2)' }
+        };
+
+        let currentActiveTheme = 'gold';
+        let uploadedLogoDataUrl = null;
+
+        function showPortalToast(msg) {
+            const toast = document.getElementById('portal-toast');
+            const msgEl = document.getElementById('portal-toast-msg');
+            if (!toast || !msgEl) return;
+            msgEl.textContent = msg;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+            clearTimeout(window.__toastTimeout);
+            window.__toastTimeout = setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+            }, 3500);
+        }
+
+        function updateStorageStatusBadge() {
+            const badge = document.getElementById('storageBadge');
+            if (!badge) return;
+            const hasCustomBrand = localStorage.getItem('sr_custom_brand_name');
+            const hasCustomTheme = localStorage.getItem('sr_custom_theme');
+            if (hasCustomBrand || (hasCustomTheme && hasCustomTheme !== 'gold')) {
+                badge.style.display = 'inline-flex';
+                badge.textContent = `● Aangepast (${hasCustomBrand || hasCustomTheme}) Lokaal Opgeslagen`;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function applyThemeColor(themeName, el, saveToStorage = true) {
+            currentActiveTheme = themeName;
+            document.querySelectorAll('.theme-preset-card').forEach(c => c.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const targetCard = document.querySelector(`.theme-preset-card[onclick*="'${themeName}'"]`);
+                if (targetCard) targetCard.classList.add('active');
+            }
+
+            const p = themePalette[themeName] || themePalette.gold;
+            document.documentElement.style.setProperty('--gold', p.gold);
+            document.documentElement.style.setProperty('--gold-hover', p.hover);
+            document.documentElement.style.setProperty('--gold-glow', p.glow);
+            document.documentElement.style.setProperty('--border-glass', p.border);
+
+            if (revenueChartInstance) {
+                revenueChartInstance.data.datasets[0].borderColor = p.gold;
+                revenueChartInstance.data.datasets[0].pointBackgroundColor = p.gold;
+                revenueChartInstance.update();
+            }
+
+            if (saveToStorage) {
+                try {
+                    localStorage.setItem('sr_custom_theme', themeName);
+                    updateStorageStatusBadge();
+                    showPortalToast(`Thema [${themeName.toUpperCase()}] toegepast en opgeslagen in browser!`);
+                } catch(e) {}
+            }
+        }
+
+        function handleClientLogoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                uploadedLogoDataUrl = evt.target.result;
+                showPortalToast('Logo succesvol geüpload! Klik op Huisstijl Toepassen om te activeren.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function applySampleClientBrand(name, iconChar) {
+            const input = document.getElementById('clientBrandNameInput');
+            if (input) input.value = name;
+            uploadedLogoDataUrl = null;
+            applyClientBrand(name, iconChar, true, false);
+        }
+
+        function applyClientBrand(customName, customIcon, saveToStorage = true, isSilent = false) {
+            const name = customName || document.getElementById('clientBrandNameInput')?.value || 'S&R CORESYNC';
+            
+            // 1. Update brand text in header
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">${name}</span> <span class="brand-sub-text">ERP</span>`;
+            }
+
+            // 2. Update user card
+            const userNameEl = document.querySelector('.sidebar-user-card .user-name');
+            if (userNameEl) userNameEl.innerText = name;
+            const userAvatar = document.querySelector('.sidebar-user-card .user-avatar');
+            if (userAvatar) {
+                userAvatar.innerText = customIcon || name.substring(0, 2).toUpperCase();
+            }
+
+            // 3. Update emblem if uploaded
+            if (uploadedLogoDataUrl) {
+                const emblem = document.querySelector('.portal-brand-emblem');
+                if (emblem) emblem.src = uploadedLogoDataUrl;
+            }
+
+            // 4. Save to LocalStorage
+            if (saveToStorage) {
+                try {
+                    localStorage.setItem('sr_custom_brand_name', name);
+                    if (customIcon) localStorage.setItem('sr_custom_brand_icon', customIcon);
+                    if (uploadedLogoDataUrl) localStorage.setItem('sr_custom_brand_logo', uploadedLogoDataUrl);
+                } catch(e) {}
+            }
+
+            updateStorageStatusBadge();
+
+            if (!isSilent) {
+                showPortalToast(`✨ تم حفظ وتطبيق هوية [${name}] على نظام الـ ERP بنجاح!`);
+            }
+        }
+
+        function resetBrandIdentity() {
+            try {
+                localStorage.removeItem('sr_custom_theme');
+                localStorage.removeItem('sr_custom_brand_name');
+                localStorage.removeItem('sr_custom_brand_icon');
+                localStorage.removeItem('sr_custom_brand_logo');
+            } catch(e) {}
+
+            uploadedLogoDataUrl = null;
+            const input = document.getElementById('clientBrandNameInput');
+            if (input) input.value = 'Riyadh Logistics Group BV';
+
+            applyThemeColor('gold', null, false);
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">S&amp;R</span> <span class="brand-sub-text">CoreSync</span>`;
+            }
+            document.querySelector('.sidebar-user-card .user-name').innerText = 'Interactieve Previewsessie';
+            document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
+            document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
+
+            updateStorageStatusBadge();
+            showPortalToast('Standaard S&R CoreSync identiteit hersteld en instellingen gewist.');
+        }
+
+        function restoreSavedBrandSettings() {
+            try {
+                const savedTheme = localStorage.getItem('sr_custom_theme');
+                if (savedTheme && themePalette[savedTheme]) {
+                    applyThemeColor(savedTheme, null, false);
+                }
+
+                const savedName = localStorage.getItem('sr_custom_brand_name');
+                const savedIcon = localStorage.getItem('sr_custom_brand_icon');
+                const savedLogo = localStorage.getItem('sr_custom_brand_logo');
+
+                if (savedName) {
+                    if (savedLogo) uploadedLogoDataUrl = savedLogo;
+                    const input = document.getElementById('clientBrandNameInput');
+                    if (input) input.value = savedName;
+                    applyClientBrand(savedName, savedIcon, false, true);
+                }
+                updateStorageStatusBadge();
+            } catch(e) {
+                console.warn('LocalStorage error:', e);
+            }
+        }
+
+        
+        // ==========================================
+        // 6. محرك سوق وتراخيص البرمجيات الحصرية (Software Marketplace Engine)
+        // ==========================================
+        const softwareCatalog = {
+            taxsync: {
+                title: 'S&R TaxSync Desktop',
+                icon: '💻',
+                version: 'v2.4 Pro (Build 2026.10)',
+                price: 189,
+                desc: 'Zelfstandige desktop boekhoud- en belastingengine (Offline-First) voor het berekenen van 21% BTW en het genereren van gevalideerde XML-aangiftes voor de Belastingdienst en GCC autoriteiten.',
+                category: 'desktop',
+                os: 'Win 11/10 (64-bit) & macOS'
+            },
+            flowscan: {
+                title: 'S&R FlowScan AI Mobile',
+                icon: '📱',
+                version: 'v1.8 AI Engine',
+                price: 9.99,
+                desc: 'Zakelijke smartphone-app voor zeer nauwkeurige OCR-scanning van papieren bonnen en facturen, directe gegevensextractie en realtime synchronisatie met CoreSync ERP.',
+                category: 'mobile',
+                os: 'iOS 17+ & Android 14+'
+            },
+            cloudpos: {
+                title: 'S&R CloudPOS Connector',
+                icon: '⚡',
+                version: 'v3.1 Agent Service',
+                price: 25,
+                desc: 'Lichtgewicht achtergronddaemon voor bestaande POS-kassasystemen, die winkelverkopen en kassa's realtime koppelt aan CoreSync Cloud ERP zonder hardwarevervanging.',
+                category: 'pos',
+                os: 'Windows POS Agent'
+            },
+            vault: {
+                title: 'S&R SecureVault B2B',
+                icon: '🛡️',
+                version: 'v2.0 Enterprise Encrypted',
+                price: 49,
+                desc: 'Encryptiesoftware voor back-ups van financiële grootboeken met militaire AES-256 versleuteling en 100% AVG/GDPR-conforme onveranderlijke opslag.',
+                category: 'desktop',
+                os: 'Win / Linux / Mac Server'
+            },
+            sdk: {
+                title: 'S&R Financial AI SDK',
+                icon: '🧩',
+                version: 'v1.2 Developer Kit',
+                price: 99,
+                desc: 'Developer SDK voor softwareontwikkelaars om financiële AI-algoritmen, e-facturatie en fiscale compliance direct in maatwerkapplicaties te integreren via REST APIs.',
+                category: 'sdk',
+                os: 'Python / Node.js / C#'
+            }
+        };
+
+        let currentActiveSoftware = null;
+
+        function filterSoftwareCategory(cat, btn) {
+            document.querySelectorAll('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const cards = document.querySelectorAll('#softwareGridContainer .software-card');
+            cards.forEach(card => {
+                if (cat === 'all' || card.getAttribute('data-category') === cat) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function generateCryptoLicenseKey(prefix = 'SR') {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            function part(len) {
+                let res = '';
+                for (let i = 0; i < len; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
+                return res;
+            }
+            return `${prefix}-${part(4)}-${part(4)}-${part(4)}-2026`;
+        }
+
+        function openSoftwareModal(id, mode = 'trial') {
+            const sw = softwareCatalog[id] || softwareCatalog.taxsync;
+            sw.id = id;
+            currentActiveSoftware = sw;
+
+            document.getElementById('modalSwTitle').innerText = sw.title;
+            document.getElementById('modalSwIcon').innerText = sw.icon;
+            document.getElementById('modalSwVersion').innerText = `${sw.version} • ${sw.os}`;
+            document.getElementById('modalSwDesc').innerText = sw.desc;
+
+            const badge = document.getElementById('modalSwLicBadge');
+            const keyEl = document.getElementById('modalSwKey');
+            const btnBuy = document.getElementById('modalBtnBuy');
+
+            if (mode === 'trial') {
+                badge.innerText = 'ترخيص تجريبي 14 يوماً';
+                badge.className = 'status-badge status-processing';
+                keyEl.innerText = generateCryptoLicenseKey(`TRIAL-${id.toUpperCase()}`);
+                btnBuy.innerText = `ترقية للنسخة الكاملة (€ ${sw.price})`;
+            } else {
+                badge.innerText = 'ترخيص تجاري كامل (Pro)';
+                badge.className = 'status-badge status-completed';
+                keyEl.innerText = generateCryptoLicenseKey(`PRO-${id.toUpperCase()}`);
+                btnBuy.innerText = `إتمام الشراء والفوترة (€ ${sw.price})`;
+            }
+
+            document.getElementById('softwareModal').classList.add('active');
+        }
+
+        function closeSoftwareModal() {
+            document.getElementById('softwareModal').classList.remove('active');
+        }
+
+        function copySoftwareLicenseKey() {
+            const key = document.getElementById('modalSwKey').innerText;
+            navigator.clipboard.writeText(key).then(() => {
+                showPortalToast(`🔑 Licentiesleutel gekopieerd: ${key}`);
+            }).catch(() => {
+                showPortalToast(`🔑 تم Sleutel Kopiëren: ${key}`);
+            });
+        }
+
+        // حساب BTW الفورية المصغرة في بطاقة TaxSync
+        function calcQuickTax() {
+            const amountInput = document.getElementById('quickTaxAmount');
+            const rateSelect = document.getElementById('quickTaxRate');
+            if (!amountInput || !rateSelect) return;
+            const amount = parseFloat(amountInput.value) || 0;
+            const rate = parseFloat(rateSelect.value) || 0.21;
+            const vat = amount * rate;
+            const total = amount + vat;
+            const vatEl = document.getElementById('quickTaxVat');
+            const totalEl = document.getElementById('quickTaxTotal');
+            if (vatEl) vatEl.innerText = `€ ${vat.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (totalEl) totalEl.innerText = `€ ${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        // توليد مفتاح تجريبي فوري جديد
+        function generateNewQuickKey() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const randomPart = () => Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+            const newKey = `SRTX-2026-TRIAL-${randomPart()}`;
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            if (keyEl) {
+                keyEl.innerText = newKey;
+                keyEl.style.color = 'var(--gold)';
+                setTimeout(() => { if (keyEl) keyEl.style.color = '#fff'; }, 350);
+            }
+            showPortalToast(`✨ Nieuwe proeflicentiesleutel gegenereerd: ${newKey}`);
+        }
+
+        // Sleutel Kopiëren التجريبي الفوري للحافظة
+        function copyQuickTrialKey() {
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
+            navigator.clipboard.writeText(key).then(() => {
+                showPortalToast(`🔑 تم Sleutel Kopiëren التجريبي: ${key}`);
+            }).catch(() => {
+                showPortalToast(`🔑 تم Sleutel Kopiëren: ${key}`);
+            });
+        }
+
+        // =========================================================================
+        // 1. محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator Logic)
+        // =========================================================================
+        let currentCurrency = 'EUR';
+        let currentVatRate = 0.21;
+        const currencyConfig = {
+            EUR: { symbol: '€', rate: 1.0, label: 'Euro (EUR)' },
+            USD: { symbol: '$', rate: 1.08, label: 'Amerikaanse Dollar (USD)' },
+            SAR: { symbol: '﷼', rate: 4.05, label: 'Saoedische Riyal (SAR)' }
+        };
+        const baseFinancials = {
+            revenue: 842500,
+            cashflow: 318920
+        };
+
+        function setCurrency(cur) {
+            if (!currencyConfig[cur]) return;
+            currentCurrency = cur;
+            document.querySelectorAll('.cur-pill').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`curPill-${cur}`);
+            if (activeBtn) activeBtn.classList.add('active');
+            updateGlobalFinancials();
+            showPortalToast(`💱 Valuta gewijzigd naar: ${currencyConfig[cur].label}`);
+        }
+
+        function setGlobalVat(rate) {
+            currentVatRate = parseFloat(rate) || 0;
+            updateGlobalFinancials();
+            const vatText = currentVatRate === 0.21 ? 'Nederlandse BTW (21%)' :
+                            currentVatRate === 0.09 ? 'Verlaagd BTW-tarief (9%)' :
+                            currentVatRate === 0.15 ? 'GCC Btw (15%)' : 'Vrijgesteld (0%)';
+            showPortalToast(`🏛️ تم تطبيق Belastingstelsel: ${vatText}`);
+        }
+
+        function updateGlobalFinancials() {
+            const conf = currencyConfig[currentCurrency];
+            const rev = baseFinancials.revenue * conf.rate;
+            const cash = baseFinancials.cashflow * conf.rate;
+            const vatEst = rev * currentVatRate;
+
+            const revEl = document.getElementById('stat-revenue');
+            const cashEl = document.getElementById('stat-cashflow');
+            const vatEstEl = document.getElementById('globalVatEst');
+            const sym1 = document.getElementById('stat-currency-sym1');
+
+            if (revEl) revEl.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (cashEl) cashEl.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (vatEstEl) vatEstEl.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (sym1) sym1.innerText = conf.symbol;
+
+            // تحديث محتوى نافذة الـ PDF
+            const pdfRev = document.getElementById('pdfRevVal');
+            const pdfCash = document.getElementById('pdfCashVal');
+            const pdfVat = document.getElementById('pdfVatVal');
+            const pdfVatScheme = document.getElementById('pdfVatScheme');
+            if (pdfRev) pdfRev.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfCash) pdfCash.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVat) pdfVat.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVatScheme) {
+                pdfVatScheme.innerText = currentVatRate === 0.21 ? 'Nederlandse BTW (21%)' :
+                                         currentVatRate === 0.09 ? 'Verlaagd BTW-tarief (9%)' :
+                                         currentVatRate === 0.15 ? 'GCC Btw (15%)' : 'معفى من BTW (0%)';
+            }
+        }
+
+        // =========================================================================
+        // 2. الجولة الإرشادية التفاعلية (Interactive Guided Tour Logic)
+        // =========================================================================
+        const tourSteps = [
+            {
+                targetId: 'currencyVatSimulatorBar',
+                tab: 'overview',
+                title: '⚡ Live Valuta & BTW Simulator Bar',
+                desc: 'Maakt realtime wisselen tussen EUR, USD en SAR mogelijk met directe herberekening van 21% BTW en 15% GCC belasting over alle widgets.'
+            },
+            {
+                targetId: 'tourStatsGrid',
+                tab: 'overview',
+                title: '📊 Executive Financieel Dashboard (Financial KPIs)',
+                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، Netto Operationele Cashflow، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+            },
+            {
+                targetId: 'tourNav-erp',
+                tab: 'erp',
+                title: '📦 ERP & Voorraadbeheer الذكية',
+                desc: 'Gedistribueerd voorraadbeheer over meerdere vestigingen, realtime tracking en automatische herbestellingen.'
+            },
+            {
+                targetId: 'tourNav-invoices',
+                tab: 'invoices',
+                title: '🧾 E-Facturatie & BTW Naleving',
+                desc: 'Versleutelde facturen conform Europese norm EN 16931, geïntegreerd met iDEAL en SEPA-overschrijvingen.'
+            },
+            {
+                targetId: 'softwareGridContainer',
+                tab: 'software',
+                title: '💻 Softwaremarktplaats & S&R TaxSync Kluis',
+                desc: 'Directe licentiesleutels, ingebouwde BTW-calculator en geverifieerde 14-dagen proeflicentie met één klik.'
+            }
+        ];
+        let currentTourStep = 0;
+
+        function startGuidedTour() {
+            currentTourStep = 0;
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'block';
+            if (card) card.style.display = 'block';
+            renderTourStep();
+            showPortalToast('🚀 Welkom bij de interactieve rondleiding!');
+        }
+
+        function renderTourStep() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+
+            const step = tourSteps[currentTourStep];
+            if (!step) return;
+
+            // التبديل إلى التبويب المطلوب إذا لزم
+            const tabBtn = document.querySelector(`.nav-item[onclick*="'${step.tab}'"]`);
+            if (tabBtn) {
+                switchPortalTab(step.tab, tabBtn);
+            }
+
+            document.getElementById('tourStepBadge').innerText = `Stap ${currentTourStep + 1} van ${tourSteps.length}`;
+            document.getElementById('tourStepTitle').innerText = step.title;
+            document.getElementById('tourStepDesc').innerText = step.desc;
+
+            const prevBtn = document.getElementById('tourPrevBtn');
+            const nextBtn = document.getElementById('tourNextBtn');
+            if (prevBtn) prevBtn.style.visibility = currentTourStep === 0 ? 'hidden' : 'visible';
+            if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'Rondleiding Afronden ✓' : 'Volgende ➡️';
+
+            // تحديد وتأطير العنصر
+            setTimeout(() => {
+                const target = document.getElementById(step.targetId);
+                const card = document.getElementById('tourCard');
+                if (target) {
+                    target.classList.add('tour-highlight-target');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    if (card) {
+                        const rect = target.getBoundingClientRect();
+                        const cardWidth = 360;
+                        let topPos = rect.bottom + 15;
+                        let leftPos = rect.left + (rect.width / 2) - (cardWidth / 2);
+
+                        if (topPos + 220 > window.innerHeight) {
+                            topPos = Math.max(20, rect.top - 230);
+                        }
+                        if (leftPos < 20) leftPos = 20;
+                        if (leftPos + cardWidth > window.innerWidth) leftPos = window.innerWidth - cardWidth - 20;
+
+                        card.style.top = `${topPos}px`;
+                        card.style.left = `${leftPos}px`;
+                    }
+                } else if (card) {
+                    card.style.top = '35%';
+                    card.style.left = 'calc(50% - 180px)';
+                }
+            }, 150);
+        }
+
+        function nextTourStep() {
+            if (currentTourStep < tourSteps.length - 1) {
+                currentTourStep++;
+                renderTourStep();
+            } else {
+                endGuidedTour();
+                showPortalToast('🎉 Rondleiding succesvol voltooid!');
+            }
+        }
+
+        function prevTourStep() {
+            if (currentTourStep > 0) {
+                currentTourStep--;
+                renderTourStep();
+            }
+        }
+
+        function endGuidedTour() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'none';
+            if (card) card.style.display = 'none';
+        }
+
+        // =========================================================================
+        // 3. تصدير ملخص العرض التنفيذي كـ PDF (One-Click Executive PDF Logic)
+        // =========================================================================
+        function openExecutivePdfModal() {
+            updateGlobalFinancials();
+            const dateEl = document.getElementById('pdfDateDisplay');
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeExecutivePdfModal() {
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function printExecutiveBrief() {
+            window.print();
+        }
+
+        // تحديث اسم شركة العميل في تقرير الـ PDF المخصص
+        function updatePdfClientName(name) {
+            const displayEl = document.getElementById('pdfClientNameDisplay');
+            if (displayEl) {
+                displayEl.innerText = name && name.trim() ? name.trim() : 'Enterprise Partnerorganisatie';
+            }
+        }
+
+        function triggerSoftwareDownload() {
+            if (!currentActiveSoftware) return;
+            const title = currentActiveSoftware.title;
+            const key = document.getElementById('modalSwKey').innerText;
+
+            // توليد ملف حزمة التثبيت التجريبية
+            const fileContent = `=====================================================
+${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
+=====================================================
+Publisher: S&R CoreSync Solutions B.V. (Amsterdam, Netherlands)
+License Key: ${key}
+Issued: 2026-10-06
+Status: Verified Digital Signature (SHA-256)
+
+INSTALLATION INSTRUCTIONS:
+1. Run the installer matching your OS (Windows .msi or macOS .dmg).
+2. Enter the License Key provided above when prompted during first launch.
+3. For enterprise cloud sync, configure your CoreSync Tenant API URL.
+
+Support & Documentation: https://coresync.cloud/docs
+Direct Founders Contact: info@coresync.cloud
+=====================================================
+(c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
+`;
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${title.replace(/\s+/g, '_')}_QuickStart_Package.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showPortalToast(`⚡ بدأ Installatiepakket Downloaden لـ [${title}] بنجاح!`);
+        }
+
+        function triggerSoftwareCheckout() {
+            if (!currentActiveSoftware) return;
+            const swId = currentActiveSoftware.id || 'taxsync';
+            closeSoftwareModal();
+            openSoftwareCheckoutModal(swId);
+        }
+
+        function openPublishSoftwareModal() {
+            document.getElementById('publishSoftwareModal').classList.add('active');
+        }
+
+        function closePublishSoftwareModal() {
+            document.getElementById('publishSoftwareModal').classList.remove('active');
+        }
+
+        function handlePublishSoftwareSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('pubTitle').value;
+            const cat = document.getElementById('pubCategory').value;
+            const ver = document.getElementById('pubVersion').value;
+            const price = parseFloat(document.getElementById('pubPrice').value) || 99;
+            const desc = document.getElementById('pubDesc').value;
+
+            // إضافة كرت جديد للحاوية ديناميكياً
+            const id = 'custom_' + Date.now();
+            softwareCatalog[id] = {
+                title: title,
+                icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
+                version: ver,
+                price: price,
+                desc: desc,
+                category: cat,
+                os: cat === 'mobile' ? 'iOS / Android' : 'Cross-Platform'
+            };
+
+            const newCard = document.createElement('div');
+            newCard.className = 'software-card';
+            newCard.setAttribute('data-category', cat);
+            newCard.innerHTML = `
+                <span class="software-card-badge ds-u22">Nieuwe Oprichtersrelease ★</span>
+                <div>
+                    <div class="software-card-top">
+                        <div class="software-icon-wrap">${softwareCatalog[id].icon}</div>
+                        <div>
+                            <div class="software-info-title">${title}</div>
+                            <div class="software-info-version">
+                                <span>${ver}</span>
+                                <span class="platform-pill">${softwareCatalog[id].os}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="software-desc">${desc}</p>
+                    <ul class="software-features-list">
+                        <li class="software-feature-item">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            ترخيص رقمي مشفر مع دعم التحديثات
+                        </li>
+                        <li class="software-feature-item">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            ربط مباشر عبر بوابات الدفع والفواتير
+                        </li>
+                    </ul>
+                </div>
+                <div class="software-card-bottom">
+                    <div class="software-price-wrap">
+                        <span class="software-price-amount">€ ${price}</span>
+                        <span class="software-price-unit">ترخيص معتمد</span>
+                    </div>
+                    <div class="software-btn-group">
+                        <button type="button" class="btn-software-trial" onclick="openSoftwareModal('${id}', 'trial')">تجربة</button>
+                        <button type="button" class="btn-software-buy" onclick="openSoftwareModal('${id}', 'buy')">شراء</button>
+                    </div>
+                </div>
+            `;
+
+            const grid = document.getElementById('softwareGridContainer');
+            grid.insertBefore(newCard, grid.firstChild);
+
+            closePublishSoftwareModal();
+            showPortalToast(`🚀 Software [${title}] succesvol gepubliceerd in de Software Hub!`);
+        }
+
+        
+        /* =========================================================
+           محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator JS)
+           ========================================================= */
+        let currentSimApp = 'taxsync';
+        let generatedDigipoortXml = '';
+
+        function openDesktopSimulatorModal(appId = 'taxsync') {
+            currentSimApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+            const titleEl = document.getElementById('simAppTitle');
+            if (titleEl) titleEl.innerText = `${sw.title} ${sw.version}`;
+
+            switchSimulatorTab('app');
+            recalcTaxSyncSimulator();
+            document.getElementById('desktopSimulatorModal').classList.add('active');
+            showPortalToast(`💻 Interactieve sandbox gestart voor [${sw.title}]!`);
+        }
+
+        function closeDesktopSimulatorModal() {
+            document.getElementById('desktopSimulatorModal').classList.remove('active');
+        }
+
+        function switchSimulatorTab(tab) {
+            const btnApp = document.getElementById('simTabBtn-app');
+            const btnSpecs = document.getElementById('simTabBtn-specs');
+            const contentApp = document.getElementById('simContent-app');
+            const contentSpecs = document.getElementById('simContent-specs');
+
+            if (tab === 'app') {
+                btnApp.classList.add('active');
+                btnSpecs.classList.remove('active');
+                contentApp.style.display = 'grid';
+                contentSpecs.style.display = 'none';
+            } else {
+                btnApp.classList.remove('active');
+                btnSpecs.classList.add('active');
+                contentApp.style.display = 'none';
+                contentSpecs.style.display = 'grid';
+            }
+        }
+
+        function switchSimSidebar(item) {
+            document.querySelectorAll('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            const target = document.getElementById(`simSide-${item}`);
+            if (target) target.classList.add('active');
+        }
+
+        function recalcTaxSyncSimulator() {
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+
+            const btw21 = omzet21 * 0.21;
+            const btw9 = omzet9 * 0.09;
+            const netPay = (btw21 + btw9) - voorb;
+
+            document.getElementById('simResBtw21').innerText = `€ ${btw21.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResBtw9').innerText = `€ ${btw9.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResDeduct').innerText = `- € ${voorb.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            const netEl = document.getElementById('simResNetPay');
+            netEl.innerText = `€ ${netPay.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (netPay < 0) {
+                netEl.style.color = '#34d399';
+                netEl.innerText = `Teruggave: € ${Math.abs(netPay).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            } else {
+                netEl.style.color = 'var(--gold)';
+            }
+        }
+
+        function runAiComplianceAudit() {
+            switchSimSidebar('audit');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '🛡️ Fiscaal Nalevingsrapport (AWR Art. 52):';
+            
+            contentEl.innerText = `[S&R AUDIT ENGINE v2.4 - EXECUTION TIME: 2026-10-06 12:45:00]
+----------------------------------------------------------------------
+[PASS] Dutch Tax Administration AWR Article 52 Ledger Validation: OK
+[PASS] VAT Identification Number Format (NL862145890B01): VALID
+[PASS] BTW Tarief Hoog (21%) & Laag (9%) Mathematical Parity: 100% MATCH
+[PASS] PEPPOL BIS Billing 3.0 Electronic Invoice Compatibility: VALIDATED
+[PASS] Zero Cloud Leakage & AES-256 Local Encryption Integrity: SECURE
+----------------------------------------------------------------------
+STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`;
+            
+            showPortalToast('🛡️ اكتمل تدقيق الامتثال الضريبي بنجاح: متوافق بنسبة 100%!');
+        }
+
+        function exportDigipoortXml() {
+            switchSimSidebar('xml');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+            const btw21 = (omzet21 * 0.21).toFixed(2);
+            const btw9 = (omzet9 * 0.09).toFixed(2);
+            const netPay = ((omzet21 * 0.21 + omzet9 * 0.09) - voorb).toFixed(2);
+
+            generatedDigipoortXml = `<?xml version="1.0" encoding="UTF-8"?>
+<AangifteOmzetbelasting xmlns="http://www.nltaxonomie.nl/sbr/2026/bd" period="2026-Q3">
+  <Header>
+    <SoftwareVendor>S&R CoreSync Solutions B.V.</SoftwareVendor>
+    <SoftwarePackage>S&R TaxSync Desktop</SoftwarePackage>
+    <SoftwareVersion>2.4 Pro</SoftwareVersion>
+    <MessageTimestamp>2026-10-06T12:45:00</MessageTimestamp>
+  </Header>
+  <Belastingplichtige>
+    <BtwNummer>NL862145890B01</BtwNummer>
+    <Handelsnaam>S&R CoreSync Solutions B.V.</Handelsnaam>
+  </Belastingplichtige>
+  <Rubrieken>
+    <!-- 1a. Leveringen/diensten belast met hoog tarief (21%) -->
     <Rubriek1a>
       <Omzet>${omzet21}</Omzet>
       <Omzetbelasting>${btw21}</Omzetbelasting>
     </Rubriek1a>
+    <!-- 1b. Leveringen/diensten belast met laag tarief (9%) -->
+    <Rubriek1b>
+      <Omzet>${omzet9}</Omzet>
+      <Omzetbelasting>${btw9}</Omzetbelasting>
+    </Rubriek1b>
+    <!-- 5b. Voorbelasting -->
+    <Rubriek5b>
+      <Voorbelasting>${voorb}</Voorbelasting>
+    </Rubriek5b>
+    <!-- 5g. Totaal te betalen / terug te vragen -->
+    <Rubriek5g>
+      <Totaal>${netPay}</Totaal>
+    </Rubriek5g>
+  </Rubrieken>
+</AangifteOmzetbelasting>`;
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '📄 Gegenereerd Belastingaangiftebestand (Digipoort SBR XML):';
+            contentEl.innerText = generatedDigipoortXml;
+            showPortalToast('⚡ تم توليد وتشفير ملف Digipoort XML بنجاح!');
+        }
+
+        function downloadGeneratedTaxXml() {
+            if (!generatedDigipoortXml) {
+                exportDigipoortXml();
+            }
+            const blob = new Blob([generatedDigipoortXml], { type: 'application/xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Belastingdienst_Aangifte_Q3_2026.xml`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showPortalToast('📁 Officieel Digipoort XML-bestand gedownload naar uw apparaat!');
+        }
+
+        /* =========================================================
+           Internationale Betaalgateway & Digitale Licenties (Mollie iDEAL & Stripe)
+           ========================================================= */
+        let currentCheckoutApp = 'taxsync';
+        let selectedGateway = 'ideal';
+
+        function openSoftwareCheckoutModal(appId = 'taxsync') {
+            currentCheckoutApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+
+            document.getElementById('chkAppTitle').innerText = sw.title;
+            document.getElementById('chkAppIcon').innerText = sw.icon;
+            document.getElementById('chkAppLicenseType').innerText = `Volledige Commerciële Licentie (${sw.version}) • Inclusief BTW-Factuur`;
+
+            const netPrice = sw.price;
+            const vat = Math.round(netPrice * 0.21 * 100) / 100;
+            const total = Math.round((netPrice + vat) * 100) / 100;
+
+            document.getElementById('chkNetPrice').innerText = `€ ${netPrice.toFixed(2)}`;
+            document.getElementById('chkVatAmount').innerText = `€ ${vat.toFixed(2)}`;
+            document.getElementById('chkTotalPrice').innerText = `€ ${total.toFixed(2)}`;
+            document.getElementById('chkBtnText').innerText = `Bevestig Veilige Betaling & Facturatie (€ ${total.toFixed(2)})`;
+
+            // إعادة ضبط حالة النجاح
+            document.getElementById('chkSuccessBox').style.display = 'none';
+            document.getElementById('chkBtnSubmit').style.display = 'flex';
+            document.getElementById('chkBtnSpinner').style.display = 'none';
+
+            selectPaymentGateway('ideal');
+            document.getElementById('softwareCheckoutModal').classList.add('active');
+        }
+
+        function closeSoftwareCheckoutModal() {
+            document.getElementById('softwareCheckoutModal').classList.remove('active');
+        }
+
+        function selectPaymentGateway(type) {
+            selectedGateway = type;
+            ['ideal', 'card', 'sepa'].forEach(gw => {
+                const card = document.getElementById(`gwCard-${gw}`);
+                const input = document.getElementById(`gwInput-${gw}`);
+                if (card) card.classList.toggle('selected', gw === type);
+                if (input) input.style.display = (gw === type) ? 'block' : 'none';
+            });
+        }
+
+        function executeCheckoutPayment() {
+            const sw = softwareCatalog[currentCheckoutApp] || softwareCatalog.taxsync;
+            const btn = document.getElementById('chkBtnSubmit');
+            const spinner = document.getElementById('chkBtnSpinner');
+            const text = document.getElementById('chkBtnText');
+            const successBox = document.getElementById('chkSuccessBox');
+
+            btn.disabled = true;
+            spinner.style.display = 'inline-block';
+            text.innerText = 'Beveiligde verbinding met betaalgateway en licentie-authenticatie...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                btn.style.display = 'none';
+
+                // توليد مفتاح ترخيص تجاري
+                const proKey = generateCryptoLicenseKey(`PRO-${currentCheckoutApp.toUpperCase()}`);
+                document.getElementById('chkSuccessKey').innerText = proKey;
+                successBox.style.display = 'block';
+
+                // توليد وإضافة الفاتورة في جدول الفواتير
+                const netPrice = sw.price;
+                const vat = Math.round(netPrice * 0.21 * 100) / 100;
+                const total = Math.round((netPrice + vat) * 100) / 100;
+                const invNum = `INV-2026-0${Math.floor(84 + Math.random() * 20)}`;
+                const clientName = `S&R Enterprise Licensee (${sw.title})`;
+                const gwLabel = selectedGateway === 'ideal' ? 'Mollie iDEAL ✓' : selectedGateway === 'card' ? 'Stripe Card ✓' : 'SEPA B2B Direct ✓';
+
+                // إضافة الفاتورة لجدول الفواتير في الواجهة
+                const tbody = document.getElementById('invoicesTableBody');
+                if (tbody) {
+                    const tr = document.createElement('tr');
+                    tr.setAttribute('data-status', 'paid');
+                    tr.innerHTML = `
+                        <td class="font-num">${invNum}</td>
+                        <td>${clientName}</td>
+                        <td class="font-num">€ ${netPrice.toLocaleString()}</td>
+                        <td class="font-num">€ ${vat.toLocaleString()} (21% BTW)</td>
+                        <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
+                        <td><span class="status-badge status-completed">مدفوعة عبر ${gwLabel}</span></td>
+                        <td>
+                            <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${clientName}', ${netPrice}, ${vat}, ${total}, 'Betaald via ${gwLabel}', '2026-10-06', 'BTW 21%')">Factuur Bekijken</button>
+                        </td>
+                    `;
+                    tbody.insertBefore(tr, tbody.firstChild);
+                    
+                    const countAll = document.getElementById('count-all');
+                    const countPaid = document.getElementById('count-paid');
+                    if (countAll) countAll.innerText = parseInt(countAll.innerText || '3') + 1;
+                    if (countPaid) countPaid.innerText = parseInt(countPaid.innerText || '2') + 1;
+                }
+
+                // ربط زر Factuur Bekijken في صندوق النجاح
+                const btnViewInv = document.getElementById('chkBtnViewInvoice');
+                btnViewInv.onclick = () => {
+                    closeSoftwareCheckoutModal();
+                    previewInvoiceModal(invNum, clientName, netPrice, vat, total, `Betaald via ${gwLabel}`, '2026-10-06', 'BTW 21%');
+                };
+
+                showPortalToast(`🎉 تم إتمام الدفع بنجاح وإصدار الفاتورة [${invNum}] وActiveren الترخيص!`);
+            }, 1200);
+        }
+
+        // فحص الروابط المباشرة عند التحميل (URL Query Params Auto-Trigger)
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            if (urlParams.get('sandbox')) {
+                const targetApp = urlParams.get('sandbox');
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openDesktopSimulatorModal(targetApp);
+            } else if (urlParams.get('checkout') || urlParams.get('action') === 'checkout') {
+                const targetApp = urlParams.get('app') || urlParams.get('checkout') || 'taxsync';
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openSoftwareCheckoutModal(targetApp);
+            } else if (hash === '#software') {
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+            } else if (urlParams.get('modal') === 'pdf' || hash === '#pdf') {
+                openExecutivePdfModal();
+            } else if (urlParams.get('tour') === '1' || hash === '#tour') {
+                setTimeout(startGuidedTour, 300);
+            }
+        });
+
+
+        // استعادة التخصيص المحفوظ عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', restoreSavedBrandSettings);
+
+
+        // Activeren اختصارات لوحة المفاتيح لوضع العرض التقديمي (Key Shortcuts)
+        document.addEventListener('keydown', function(e) {
+            const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+            if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+                return;
+            }
+            if (e.key === 'p' || e.key === 'P' || e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
+                togglePresentationMode();
+            } else if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                startGuidedTour();
+            } else if (e.key === 'Escape') {
+                if (typeof isPresentationActive !== 'undefined' && isPresentationActive) togglePresentationMode();
+                if (typeof endGuidedTour === 'function') endGuidedTour();
+                if (typeof closeExecutivePdfModal === 'function') closeExecutivePdfModal();
+            }
+        });
+    </script>
+
+    
     
     <div class="modal-overlay" id="softwareModal" onclick="if(event.target === this) closeSoftwareModal()">
         <div class="modal-card ds-u29">
@@ -1392,7 +2912,24 @@
             </div>
 
             
-            
+            <!-- 1. iDEAL bank selector -->
+            <div id="gwInput-ideal" class="payment-input-group">
+                <label for="idealBankSelect" class="text-caption text-white-64 mb-1 d-block">Kies uw Nederlandse Bank:</label>
+                <select id="idealBankSelect" class="form-select-dark">
+                    <option value="ing">ING Bank</option>
+                    <option value="rabobank">Rabobank</option>
+                    <option value="abnamro">ABN AMRO</option>
+                    <option value="bunq">bunq</option>
+                    <option value="revolut">Revolut NL</option>
+                    <option value="sns">SNS Bank</option>
+                    <option value="asn">ASN Bank</option>
+                </select>
+                <div class="text-caption text-white-64 mt-2 ds-u40">
+                    🔒 Beveiligde end-to-end versleuteling via gecertificeerd Mollie Connect bankprotocol.
+                </div>
+            </div>
+
+            <!-- 2. Stripe Card fields -->
             <div id="gwInput-card" class="payment-input-group ds-u52">
                 <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">Kaartnummer:</label>
                 <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242" title="Kaartnummer" placeholder="Kaartnummer" aria-label="Kaartnummer">
@@ -1406,6 +2943,14 @@
                         <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="888" title="CVC Beveiligingscode" placeholder="CVC" aria-label="CVC Beveiligingscode">
                     </div>
                 </div>
+            </div>
+
+            <!-- 3. SEPA Direct Debit -->
+            <div id="gwInput-sepa" class="payment-input-group ds-u52">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">Zakelijk IBAN (NL..):</label>
+                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="Zakelijk IBAN" placeholder="IBAN" aria-label="Zakelijk IBAN">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">Geregistreerde Bedrijfsnaam:</label>
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="S&R B2B Enterprise Client" title="Zakelijke Rekeningnaam" placeholder="Bedrijfsnaam" aria-label="Zakelijke Rekeningnaam">
             </div>
 
             
