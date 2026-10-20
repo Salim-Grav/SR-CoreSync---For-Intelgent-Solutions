@@ -483,6 +483,16 @@
                 <span>حاسبة التوفير والعائد (ROI)</span>
             </div>
 
+            <div class="nav-item" id="tourNav-tracker" onclick="switchPortalTab('tracker', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span>مراحل المشروع (Sprint Tracker)</span>
+            </div>
+
+            <a href="verify.html?doc=OF-2026-1021" target="_blank" class="nav-item" style="text-decoration: none; color: inherit;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>التحقق من الوثائق (Verify)</span>
+            </a>
+
 
             <div class="sidebar-spacer"></div>
 
@@ -821,6 +831,7 @@
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026Modal()">💻 عرض وتوقيع العقد التقني</button>
+                                            <a href="verify.html?doc=OF-2026-1021" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399;">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">سداد iDEAL</button>
                                         </div>
                                     </td>
@@ -835,6 +846,7 @@
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026FinModal()">📊 عرض وتوقيع العقد المالي</button>
+                                            <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399;">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">سداد iDEAL</button>
                                         </div>
                                     </td>
@@ -1497,6 +1509,232 @@
                     </button>
                 </div>
             </div>
+        </section>
+
+        <!-- 8. شاشة تتبع مراحل المشروع والسبرنتات (Project Milestone & Sprint Tracker) -->
+        <section class="tab-section" id="tab-tracker">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2>لوحة المتابعة الحية لمراحل المشروع (Live Milestone & Sprint Tracker)</h2>
+                    <p>المتابعة الهندسية اللحظية للمراحل الـ 5 المعتمدة في العقد التجاري الرسمي (OF-2026-1021)</p>
+                </div>
+            </div>
+
+            <div class="tracker-header-box">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <div>
+                        <div class="tracker-project-title">منظومة منصة NL بالعربي في هولندا (NL bil Arabi Platform)</div>
+                        <div class="tracker-project-sub">
+                            المرجع التعاقدي: <strong class="text-gold font-num">OF-2026-1021</strong> • العميل المالك: <strong>السيد مضر أبو فاشة</strong> • المقر: هولندا
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="button" class="btn-cert-print" onclick="openContractOf2026Modal()">
+                            💻 العقد التقني (€ 21k)
+                        </button>
+                        <button type="button" class="btn-cert-print" onclick="openContractOf2026FinModal()">
+                            📊 العقد المالي (استرداد 4,410 €)
+                        </button>
+                        <a href="verify.html?doc=OF-2026-1021" target="_blank" class="table-action-btn" style="text-decoration: none; border-color: #10b981; color: #34d399; display: inline-flex; align-items: center; gap: 4px;">
+                            🛡️ فحص التوثيق المشفر
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+                    <span>مؤشر الجاهزية الإجمالية للمشروع (Overall Architecture & Development Readiness):</span>
+                    <strong class="text-gold font-num" style="font-size: 1.05rem;">78% مكتمل</strong>
+                </div>
+                <div class="tracker-progress-bar-wrap">
+                    <div class="tracker-progress-bar-fill"></div>
+                </div>
+
+                <div class="tracker-top-stats">
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">إجمالي المراحل المعتمدة</div>
+                        <div class="tracker-stat-val">5 مراحل برمجية</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">المرحلة النشطة الحالية</div>
+                        <div class="tracker-stat-val" style="color: #34d399;">المرحلة 1 &amp; 2 (Sprint 1)</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">الدفعة المستحقة لبدء التأسيس</div>
+                        <div class="tracker-stat-val" style="color: #c5a880;">€ 7,623 (30%)</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">الامتثال الأوروبي والضريبي</div>
+                        <div class="tracker-stat-val" style="color: #38bdf8;">GDPR &amp; BTW 100%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شبكة بطاقات المراحل الـ 5 -->
+            <div class="tracker-stages-grid">
+                
+                <!-- المرحلة 1 -->
+                <div class="tracker-stage-card in-progress">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge active">سبرنت حالي · 85% مكتمل</span>
+                            <span class="font-num text-caption text-white-64">Sprint 1</span>
+                        </div>
+                        <div class="tracker-stage-name">1. المنصة الأساسية والاشتراكات (Core Web &amp; Subscriptions)</div>
+                        <div class="tracker-stage-desc">
+                            بنية تحتية سحابية هجينة معزولة، دعم كامل للغات الثلاث (عربي RTL، هولندي، إنجليزي)، باقات 2€ و 5€، بوابة دفع iDEAL لتفادي عمولة المتاجر.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">المعمارية السحابية وقواعد البيانات المعزولة</li>
+                            <li class="done-item">نظام باقات المشتركين والتسجيل الآمن OTP</li>
+                            <li class="done-item">بوابة iDEAL والتحويل البنكي الأوروبي SEPA</li>
+                            <li class="pending-item">اللمسات النهائية لحسابات الأطفال والرقابة الأبوية</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 4,800.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 2 -->
+                <div class="tracker-stage-card in-progress">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge active">قيد التطوير والتكامل</span>
+                            <span class="font-num text-caption text-white-64">Sprint 2</span>
+                        </div>
+                        <div class="tracker-stage-name">2. محرك القسائم الذكية وبوابة المتاجر (Vouchers &amp; WhatsApp)</div>
+                        <div class="tracker-stage-desc">
+                            توليد قسائم QR مشفرة لمشتركي باقة 5€، ربط آلي مع WhatsApp Business API، وبوابة مسح خفيفة للمتاجر تعمل عبر المتصفح بدون تطبيقات.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">خوارزمية توليد وتشفير أكواد الـ QR الشهرية</li>
+                            <li class="done-item">واجهة مسح القسائم للمتاجر عبر كاميرا الهاتف</li>
+                            <li class="pending-item">تكامل WhatsApp Business لإرسال القسائم فورياً</li>
+                            <li class="pending-item">نظام إصدار تقارير تسوية المتاجر الضريبية PDF</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 4,200.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 3 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">مجدولة للسبرنت القادم</span>
+                            <span class="font-num text-caption text-white-64">Sprint 3</span>
+                        </div>
+                        <div class="tracker-stage-name">3. استوديو البث الحي والترجمة بالذكاء الاصطناعي (Live &amp; AI)</div>
+                        <div class="tracker-stage-desc">
+                            استوديو سحابي لدمج عدة كاميرات وهواتف، مشغل تفاعلي يدعم 3 مسارات صوتية، محرك الترجمة الفورية بالذكاء الاصطناعي، وطابور موافقة مقاطع الجمهور.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">تصميم مواصفات بروتوكول البث فائق السرعة (HLS/WebRTC)</li>
+                            <li class="pending-item">برمجة استوديو البث التلفزيوني السحابي المدمج</li>
+                            <li class="pending-item">تكامل الذكاء الاصطناعي للترجمة التلقائية متعددة اللغات</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 5,200.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 4 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">مرحلة الإدارة والرعايات</span>
+                            <span class="font-num text-caption text-white-64">Sprint 4</span>
+                        </div>
+                        <div class="tracker-stage-name">4. لوحة الإدارة المركزية وبوابة المعلنين (Admin &amp; Ads)</div>
+                        <div class="tracker-stage-desc">
+                            إدارة برامج المنصة وصلاحيات فرق العمل وسجل التدقيق، التصويت الحصري لباقة 5€، وبوابة المعلنين لحجز المساحات والربط المالي الآلي.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">بنية التحقق وصلاحيات الفرق وسجلات التدقيق</li>
+                            <li class="pending-item">بوابة المعلنين والربط المحاسبي التلقائي للفواتير</li>
+                            <li class="pending-item">تطبيق الامتثال الأوروبي الصارم للخصوصية GDPR/AVG</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 3,300.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 5 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">المرحلة الإنتاجية النهائية</span>
+                            <span class="font-num text-caption text-white-64">Sprint 5</span>
+                        </div>
+                        <div class="tracker-stage-name">5. تطبيقات الهواتف الذكية (Mobile Apps - iOS &amp; Android)</div>
+                        <div class="tracker-stage-desc">
+                            تطبيق موحد بنظام Reader App لتفادي عمولة الـ 30% لمتجري آبل وجوجل، إشعارات فورية ذكية، ووصول كامل للبث والأرشيف.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">معمارية التوافق والامتثال لقوانين App Store و Play Store</li>
+                            <li class="pending-item">تطوير حزمة التطبيقات الأصلية وتجهيز ملفات النشر</li>
+                            <li class="pending-item">الإطلاق التجريبي واختبارات الاستقرار لمدة 14 يوماً</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 3,500.00</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- أداة حاسبة سعة السيرفرات والبث المباشر (Cloud Infrastructure Sizing Calculator) -->
+            <div class="tracker-sizing-card">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div>
+                        <h4 class="text-white fw-bold mb-1">☁️ حاسبة سعة الخوادم السحابية واستهلاك البث التقديري (Cloud Sizing &amp; Bandwidth)</h4>
+                        <p class="text-caption text-white-64 mb-0">قدر السيرفرات السحابية والباندويث الشهري الموصى به لمنصة NL بالعربي حسب حجم المشتركين وساعات البث الحي</p>
+                    </div>
+                    <span class="badge-status-sepa font-num">Hetzner / AWS EU (Frankfurt)</span>
+                </div>
+
+                <div class="tracker-sizing-grid">
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>👥 عدد المشتركين النشطين المتوقع</span>
+                            <span class="roi-val-display font-num" id="dispSubscribersCount">5,000 مشترك</span>
+                        </div>
+                        <input type="range" min="500" max="50000" step="500" value="5000" class="roi-range-input" id="slideSubscribersCount" title="Subscribers Count" aria-label="Subscribers Count" oninput="calcCloudSizing()" />
+                    </div>
+
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>🎥 ساعات البث المباشر أسبوعياً</span>
+                            <span class="roi-val-display font-num" id="dispStreamHours">10 ساعات/أسبوع</span>
+                        </div>
+                        <input type="range" min="2" max="50" step="2" value="10" class="roi-range-input" id="slideStreamHours" title="Streaming Hours" aria-label="Streaming Hours" oninput="calcCloudSizing()" />
+                    </div>
+                </div>
+
+                <div class="roi-results-row mt-3">
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-cyan font-num" id="resCloudServerSpec">Cloud Dedicated (8 vCPU / 32 GB)</div>
+                        <div class="roi-metric-lbl">مواصفات السيرفر السحابي الموصى به</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-white font-num" id="resCloudBandwidth">4.2 TB / شهر</div>
+                        <div class="roi-metric-lbl">استهلاك الباندويث المقدر شهرياً</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-gold font-num" id="resCloudCost">€ 85 / شهر</div>
+                        <div class="roi-metric-lbl">التكلفة السحابية الصافية التقديرية (وفر 48%)</div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         </main>
