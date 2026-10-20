@@ -99,6 +99,12 @@ for ar_txt, ckb_txt in CKB_REPLACEMENTS.items():
     c_demo = c_demo.replace(ar_txt, ckb_txt)
 
 # Relative links update for ckb subfolder
+c_demo = c_demo.replace('href="./css/', 'href="../css/')
+c_demo = c_demo.replace('href="css/', 'href="../css/')
+c_demo = c_demo.replace('src="./assets/', 'src="../assets/')
+c_demo = c_demo.replace('src="assets/', 'src="../assets/')
+c_demo = c_demo.replace('href="./assets/', 'href="../assets/')
+c_demo = c_demo.replace('href="assets/', 'href="../assets/')
 c_demo = c_demo.replace('href="demo.html"', 'href="../demo.html"')
 c_demo = c_demo.replace('href="index.html"', 'href="index.html"')
 c_demo = c_demo.replace('href="logo-studio.html"', 'href="../logo-studio.html"')
