@@ -1,0 +1,1826 @@
+[
+  [
+    9,
+    "<title>S&R CoreSync | المنصة السحابية التجريبية (Live Interactive Demo Portal)</title>"
+  ],
+  [
+    77,
+    "<div class=\"portal-lang-switcher\" aria-label=\"تبديل لغة المنصة\">"
+  ],
+  [
+    340,
+    "<p>تكامل مركزي للمخازن، المشتريات، وتتبع الأصول بين المستودعات الأوروبية والخليجية</p>"
+  ],
+  [
+    345,
+    "<div class=\"stat-label\">المستودعات المرتبطة</div>"
+  ],
+  [
+    346,
+    "<div class=\"stat-value font-num\">6 مراكز</div>"
+  ],
+  [
+    350,
+    "<div class=\"stat-label\">إجمالي الأصناف النشطة</div>"
+  ],
+  [
+    351,
+    "<div class=\"stat-value font-num\">18,450 وحدة</div>"
+  ],
+  [
+    352,
+    "<div class=\"stat-trend positive\">تتبع تلقائي بالباركود وRFID</div>"
+  ],
+  [
+    355,
+    "<div class=\"stat-label\">أوامر التوريد الجارية</div>"
+  ],
+  [
+    356,
+    "<div class=\"stat-value font-num\">34 أمر توريد</div>"
+  ],
+  [
+    357,
+    "<div class=\"stat-trend positive\">مؤتمتة مع الموردين المعتمدين</div>"
+  ],
+  [
+    361,
+    "<h3 class=\"mb-3\">خريطة تدفق السلع والطلبات التلقائية</h3>"
+  ],
+  [
+    363,
+    "يقوم محرك S&R CoreSync ERP بتحديث مستويات المخزون تلقائيًا فور صدور أي فاتورة مبيعات، وإطلاق طلبات إعادة التوريد الذكية عند بلوغ حد الأمان، مما يمنع انقطاع البضائع ويخفض تكاليف التخزين بنسبة 25%."
+  ],
+  [
+    372,
+    "<h2>الفواتير الإلكترونية والامتثال الضريبي الذكي</h2>"
+  ],
+  [
+    373,
+    "<p>مطابقة معايير الفوترة الإلكترونية المعتمدة في هولندا والاتحاد الأوروبي (UBL / PEPPOL) وهيئة الزكاة والضريبة (ZATCA)</p>"
+  ],
+  [
+    378,
+    "توليد فاتورة إلكترونية تجريبية"
+  ],
+  [
+    382,
+    "محاكاة دفع فوري عبر iDEAL"
+  ],
+  [
+    391,
+    "<span class=\"stat-label\">الفواتير المحصلة هذا الشهر</span>"
+  ],
+  [
+    395,
+    "<div class=\"stat-trend positive\"><span>100%</span> سداد فوري بالربط البنكي المباشر</div>"
+  ],
+  [
+    399,
+    "<span class=\"stat-label\">الفواتير قيد الاستحقاق</span>"
+  ],
+  [
+    405,
+    "<div class=\"stat-trend stat-trend-gold\"><span>فاتورة واحدة</span> قابلة للمحاكاة الفورية</div>"
+  ],
+  [
+    409,
+    "<span class=\"stat-label\">معدل التحصيل التلقائي</span>"
+  ],
+  [
+    415,
+    "<div class=\"stat-trend positive\">تسوية عبر SEPA وiDEAL بدون تدخل بشري</div>"
+  ],
+  [
+    422,
+    "<h3>سجل الفواتير الصادرة والواردة</h3>"
+  ],
+  [
+    423,
+    "<span class=\"text-caption text-white-64\">توليد لحظي وتوافق كامل مع المعايير المحاسبية</span>"
+  ],
+  [
+    426,
+    "<button type=\"button\" class=\"filter-btn active\" onclick=\"filterInvoices('all', this)\">الكل (<span id=\"count-all\">3</span>)</button>"
+  ],
+  [
+    427,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterInvoices('paid', this)\">المدفوعة (<span id=\"count-paid\">2</span>)</button>"
+  ],
+  [
+    428,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterInvoices('pending', this)\">المستحقة (<span id=\"count-pending\">1</span>)</button>"
+  ],
+  [
+    436,
+    "<th>العميل والجهة</th>"
+  ],
+  [
+    437,
+    "<th>Amount الصافي</th>"
+  ],
+  [
+    438,
+    "<th>الضريبة</th>"
+  ],
+  [
+    439,
+    "<th>الإجمالي</th>"
+  ],
+  [
+    440,
+    "<th>حالة السداد والربط</th>"
+  ],
+  [
+    441,
+    "<th>Actionات التفاعلية</th>"
+  ],
+  [
+    451,
+    "<td><span class=\"status-badge status-completed\">مدفوعة عبر iDEAL ✓</span></td>"
+  ],
+  [
+    453,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"previewInvoiceModal('INV-2026-081', 'Amsterdam Tech Hub (NL)', 10000, 2100, 12100, 'مدفوعة عبر iDEAL ✓', '2026-10-01', 'BTW 21%')\">Preview الفاتورة</button>"
+  ],
+  [
+    462,
+    "<td><span class=\"status-badge status-processing\" id=\"status-badge-inv-82\">تستحق خلال 14 day</span></td>"
+  ],
+  [
+    464,
+    "<button type=\"button\" class=\"table-action-btn pay-action-btn\" id=\"btn-pay-inv-82\" onclick=\"openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)\">محاكاة سداد iDEAL</button>"
+  ],
+  [
+    465,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"previewInvoiceModal('INV-2026-082', 'Gulf Logistics Partners (KSA)', 35000, 0, 35000, 'قيد الانتظار', '2026-10-03', 'Reverse Charge 0%')\">Preview الفاتورة</button>"
+  ],
+  [
+    474,
+    "<td><span class=\"status-badge status-completed\">مدفوعة بتحويل SEPA Instant ✓</span></td>"
+  ],
+  [
+    476,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"previewInvoiceModal('INV-2026-080', 'Rotterdam Maritime BV (NL)', 22000, 4620, 26620, 'مدفوعة بتحويل SEPA Instant ✓', '2026-09-28', 'BTW 21%')\">Preview الفاتورة</button>"
+  ],
+  [
+    489,
+    "<h2>المساعد المالي والتحليلي بالذكاء الاصطناعي</h2>"
+  ],
+  [
+    490,
+    "<p>توليد تقارير مالية وتنبؤات استراتيجية فورية مبنية على بيانات مؤسستك الحية</p>"
+  ],
+  [
+    500,
+    "<span class=\"text-caption text-white-64\">مدرب على المعايير المحاسبية الدولية IFRS</span>"
+  ],
+  [
+    505,
+    "مرحباً بك! أنا المساعد المالي الذكي لنظام S&R CoreSync. قمت للتو بمراجعة كافة حركات التدفق النقدي ومطابقة فواتير الشهر الحالي. كيف يمكنني مساعدتك الday؟"
+  ],
+  [
+    510,
+    "<div class=\"prompt-chip\" onclick=\"askAiPrompt('حلل التدفق المالي لشهر أكتوبر وأخبرني بهامش الأرباح المتوقع')\">📊 تحليل التدفق المالي لشهر أكتوبر</div>"
+  ],
+  [
+    511,
+    "<div class=\"prompt-chip\" onclick=\"askAiPrompt('ما هي الفواتير المعلقة التي تتجاوز مدتها 15 dayاً؟')\">⏳ الفواتير المتأخرة</div>"
+  ],
+  [
+    512,
+    "<div class=\"prompt-chip\" onclick=\"askAiPrompt('قدم لي نصيحة لتحسين كفاءة إدارة المخزون وفق بيانات الweek الماضي')\">💡 تحسين تكاليف التخزين</div>"
+  ],
+  [
+    516,
+    "<input type=\"text\" id=\"aiInput\" class=\"ai-chat-input\" placeholder=\"اكتب استفسارك المالي أو التقني هنا...\" onkeypress=\"if(event.key === 'Enter') sendAiMessage()\">"
+  ],
+  [
+    526,
+    "<h2>حالة البنية التحتية السحابية (Cloud Nodes)</h2>"
+  ],
+  [
+    527,
+    "<p>مراقبة لحظية للخوادم الموزعة في أمستردام وفرانكفورت والرياض مع نسخ احتياطي فوري</p>"
+  ],
+  [
+    533,
+    "<div class=\"stat-label\">عقدة أمستردام الرئيسية (NL)</div>"
+  ],
+  [
+    535,
+    "<div class=\"stat-trend positive\">Latency: 12ms (فائق السرعة)</div>"
+  ],
+  [
+    538,
+    "<div class=\"stat-label\">عقدة فرانكفورت الاحتياطية (DE)</div>"
+  ],
+  [
+    540,
+    "<div class=\"stat-trend positive\">نسخ متزامن ومشفّر AES-256</div>"
+  ],
+  [
+    543,
+    "<div class=\"stat-label\">بوابة الشرق الأوسط السحابية (KSA)</div>"
+  ],
+  [
+    545,
+    "<div class=\"stat-trend positive\">تكامل محلي سريع مع البنوك</div>"
+  ],
+  [
+    550,
+    "<h3 class=\"mb-3\">معايير الأمان والحماية المؤسسية</h3>"
+  ],
+  [
+    552,
+    "تعتمد منصة S&R CoreSync على بنية تحتية سحابية هجينة تضمن عزل بيانات كل عميل في قواعد بيانات مشفرة مستقلة، مع شهادات التوافق مع اللائحة العامة لحماية البيانات في الاتحاد الأوروبي (GDPR) وأنظمة الأمن السيبراني المصرفية."
+  ],
+  [
+    561,
+    "<h2>محرك العلامة البيضاء وتخصيص هوية العميل (White-Label Studio)</h2>"
+  ],
+  [
+    563,
+    "<p class=\"mb-0\">شاهد كيف تتحول لوحة تحكم الـ ERP السحابية فورياً لتلائم هوية شركتك وشعارك وألوانك المؤسسية</p>"
+  ],
+  [
+    564,
+    "<span class=\"ds-u1\" id=\"storageBadge\">● محفوظ في المتصفح</span>"
+  ],
+  [
+    568,
+    "استعادة هوية S&R الأصلية"
+  ],
+  [
+    575,
+    "<h3 class=\"mb-2\">1. اختيار السمة اللونية الفاخرة (Theme Presets)</h3>"
+  ],
+  [
+    576,
+    "<p class=\"text-caption text-white-64 mb-4\">انقر على أي سمة لمشاهدة تحول ألوان الأزرار والمخططات والإضاءات فوراً:</p>"
+  ],
+  [
+    582,
+    "<div class=\"theme-preset-title\">الذهب الملكي (Royal Gold)</div>"
+  ],
+  [
+    583,
+    "<div class=\"theme-preset-desc\">الهوية الرسمية المعتمدة لـ S&R CoreSync</div>"
+  ],
+  [
+    589,
+    "<div class=\"theme-preset-title\">التيتانday السيبراني (Titanium Cyan)</div>"
+  ],
+  [
+    590,
+    "<div class=\"theme-preset-desc\">لشركات التقنية السحابية وهندسة البيانات</div>"
+  ],
+  [
+    596,
+    "<div class=\"theme-preset-title\">الزمرد المالي (Fintech Emerald)</div>"
+  ],
+  [
+    597,
+    "<div class=\"theme-preset-desc\">للبنوك والمؤسسات المالية وحلول الامتثال</div>"
+  ],
+  [
+    603,
+    "<div class=\"theme-preset-title\">الياقوت الإمبراطوري (Imperial Violet)</div>"
+  ],
+  [
+    604,
+    "<div class=\"theme-preset-desc\">لشركات الذكاء الاصطناعي والابتكار الرقمي</div>"
+  ],
+  [
+    612,
+    "<h3 class=\"mb-2\">2. تطبيق اسم وشعار شركتك (Client Custom Brand)</h3>"
+  ],
+  [
+    613,
+    "<p class=\"text-caption text-white-64 mb-3\">أدخل اسم مؤسستك أو ارفع شعارك لPreview نظام الـ ERP باسمك:</p>"
+  ],
+  [
+    617,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"clientBrandNameInput\">اسم شركتك أو مؤسستك:</label>"
+  ],
+  [
+    618,
+    "<input type=\"text\" id=\"clientBrandNameInput\" class=\"ai-chat-input modal-form-input\" value=\"مجموعة الرياض للخدمات اللوجستية\" placeholder=\"اسم شركتك\" title=\"اسم الشركة\">"
+  ],
+  [
+    622,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"clientLogoUploadInput\">شعار الشركة (اختياري - PNG / SVG / JPG):</label>"
+  ],
+  [
+    628,
+    "<span class=\"text-caption text-white-64 d-block w-100\">أو اختر نموذجاً جاهزاً سريعاً:</span>"
+  ],
+  [
+    629,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"applySampleClientBrand('مجموعة الرياض للخدمات اللوجستية', '🇸🇦')\">مجموعة الرياض 🇸🇦</button>"
+  ],
+  [
+    631,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"applySampleClientBrand('بنك التقنية الحديثة', '🏦')\">بنك التقنية 🏦</button>"
+  ],
+  [
+    636,
+    "تطبيق الهوية فوراً على المنصة بالكامل"
+  ],
+  [
+    640,
+    "توليد وPreview فاتورة تجريبية رسمية بهوية شركتك (Branded Invoice PDF)"
+  ],
+  [
+    646,
+    "<h3 class=\"mb-2\">جاهز لإطلاق نسختك الخاصة من النظام؟</h3>"
+  ],
+  [
+    648,
+    "يمكن لشركة S&R CoreSync Solutions تخصيص نظام الـ ERP ونظام الفوترة والمحاسبة الذكية بالكامل تحت علامتك التجارية (White-Label Deployment) على نطاقك الخاص (yourcompany.com) مع خوادم معزولة بالكامل."
+  ],
+  [
+    651,
+    "طلب عرض سعر لنظام White-Label مخصص"
+  ],
+  [
+    660,
+    "<h2>سوق البرمجيات والحلول الحصرية (S&R Software Hub & Store)</h2>"
+  ],
+  [
+    661,
+    "<p>تطبيقات سطح المكتب للكمبيوتر، تطبيقات الهاتف، وأدوات الربط المطورة حصرياً بعوائد وتراخيص رقمية</p>"
+  ],
+  [
+    666,
+    "نشر برنامج جديد (Publish)"
+  ],
+  [
+    674,
+    "<button type=\"button\" class=\"filter-btn active\" onclick=\"filterSoftwareCategory('all', this)\">الكل (5)</button>"
+  ],
+  [
+    675,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterSoftwareCategory('desktop', this)\">برامج الكمبيوتر PC/Mac (2)</button>"
+  ],
+  [
+    676,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterSoftwareCategory('mobile', this)\">تطبيقات الموبايل (1)</button>"
+  ],
+  [
+    677,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterSoftwareCategory('pos', this)\">نقاط البيع POS (1)</button>"
+  ],
+  [
+    678,
+    "<button type=\"button\" class=\"filter-btn\" onclick=\"filterSoftwareCategory('sdk', this)\">أدوات المطورين SDK (1)</button>"
+  ],
+  [
+    680,
+    "<span class=\"text-caption text-white-64\">تراخيص رقمية فورية وتنزيل مباشر</span>"
+  ],
+  [
+    688,
+    "<span class=\"software-card-badge\">الأكثر طلباً للمحاسبين ★</span>"
+  ],
+  [
+    701,
+    "<p class=\"software-desc\">برنامج سطح مكتب مستقل يعمل بدون إنترنت (Offline-First) لحساب ضريبة القيمة المضافة BTW/VAT 21% وتوليد إقرارات XML لمصلحة الضرائب الهولندية والخليجية.</p>"
+  ],
+  [
+    705,
+    "تشفير البيانات محلياً على جهازك دون اتصال"
+  ],
+  [
+    709,
+    "تصدير آلي لتقارير BTW والمحاسبة بضغطة زر"
+  ],
+  [
+    713,
+    "طباعة فواتير رسمية وتوافق مع EN 16931"
+  ],
+  [
+    720,
+    "<span class=\"ds-u4\">⚡ حاسبة ضريبة فورية:</span>"
+  ],
+  [
+    721,
+    "<select class=\"ds-u5\" id=\"quickTaxRate\" onchange=\"calcQuickTax()\" title=\"اختيار Tax Rate للحاسبة السريعة\" aria-label=\"اختيار Tax Rate للحاسبة السريعة\">"
+  ],
+  [
+    722,
+    "<option value=\"0.21\">BTW هولندي 21%</option>"
+  ],
+  [
+    723,
+    "<option value=\"0.09\">BTW مخفض 9%</option>"
+  ],
+  [
+    724,
+    "<option value=\"0.15\">ضريبة خليجية 15%</option>"
+  ],
+  [
+    732,
+    "<span>الضريبة: <strong class=\"ds-u10\" id=\"quickTaxVat\">€ 210.00</strong></span>"
+  ],
+  [
+    733,
+    "<span>الإجمالي: <strong class=\"ds-u11\" id=\"quickTaxTotal\">€ 1,210.00</strong></span>"
+  ],
+  [
+    740,
+    "<div class=\"ds-u14\">مفتاح تجريبي فوري (14 dayاً):</div>"
+  ],
+  [
+    744,
+    "<button class=\"ds-u17\" type=\"button\" onclick=\"generateNewQuickKey()\" title=\"توليد مفتاح جديد\">🔄</button>"
+  ],
+  [
+    745,
+    "<button class=\"ds-u18\" type=\"button\" onclick=\"copyQuickTrialKey()\" title=\"Copy Key\">📋 نسخ</button>"
+  ],
+  [
+    752,
+    "<span class=\"software-price-unit\">ترخيص سنوي / جهاز</span>"
+  ],
+  [
+    755,
+    "<button type=\"button\" class=\"btn-software-sandbox ds-u19\" onclick=\"openDesktopSimulatorModal('taxsync')\" title=\"محاكاة حية فورية داخل المتصفح\">محاكي حي ⚡</button>"
+  ],
+  [
+    756,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('taxsync', 'trial')\">تجربة 14 dayاً</button>"
+  ],
+  [
+    757,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareCheckoutModal('taxsync')\">شراء الترخيص</button>"
+  ],
+  [
+    764,
+    "<span class=\"software-card-badge ds-u20\">ذكاء اصطناعي OCR</span>"
+  ],
+  [
+    777,
+    "<p class=\"software-desc\">تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.</p>"
+  ],
+  [
+    781,
+    "معالجة OCR فائقة السرعة بدقة 99.4%"
+  ],
+  [
+    785,
+    "فرز تلقائي لمصاريف الوقود، الضيافة، والتشغيل"
+  ],
+  [
+    789,
+    "مزامنة فورية سحابية مع لوحة تحكم الشركة"
+  ],
+  [
+    796,
+    "<span class=\"software-price-unit\">شهرياً / مستخدم</span>"
+  ],
+  [
+    799,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('flowscan', 'trial')\">تجربة مجانية</button>"
+  ],
+  [
+    800,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareCheckoutModal('flowscan')\">اشتراك</button>"
+  ],
+  [
+    819,
+    "<p class=\"software-desc\">وسيط برمجي خفيف يعمل في خلفية أجهزة الكاشير القديمة لربطها فورياً بنظام الـ ERP السحابي لمزامنة حركة المخازن والسيولة دون تغيير الأجهزة.</p>"
+  ],
+  [
+    823,
+    "تكامل فوري مع أجهزة طابعات الفواتير والباركود"
+  ],
+  [
+    827,
+    "مزامنة مبيعات أوفلاين عند انقطاع الإنترنت"
+  ],
+  [
+    831,
+    "حماية وأمان معزول للأرصدة النقدية"
+  ],
+  [
+    838,
+    "<span class=\"software-price-unit\">شهرياً / نقطة بيع</span>"
+  ],
+  [
+    841,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('cloudpos', 'trial')\">تجربة الربط</button>"
+  ],
+  [
+    842,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareCheckoutModal('cloudpos')\">تفعيل</button>"
+  ],
+  [
+    849,
+    "<span class=\"software-card-badge ds-u24\">حماية ونسخ احتياطي</span>"
+  ],
+  [
+    861,
+    "<p class=\"software-desc\">برمجية تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع تخزين متوافق 100% مع قانون GDPR الأوروبي.</p>"
+  ],
+  [
+    865,
+    "تخزين معزول في خوادم أمستردام المشفرة"
+  ],
+  [
+    869,
+    "استعادة كاملة لقواعد بيانات الـ ERP في ثوانٍ"
+  ],
+  [
+    873,
+    "تقارير امتثال وجاهزية للتدقيق القانوني"
+  ],
+  [
+    880,
+    "<span class=\"software-price-unit\">شهرياً (1TB Encrypted)</span>"
+  ],
+  [
+    883,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('vault', 'trial')\">تجربة مجانية</button>"
+  ],
+  [
+    884,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareCheckoutModal('vault')\">اشتراك</button>"
+  ],
+  [
+    891,
+    "<span class=\"software-card-badge\">للمطورين والشركات</span>"
+  ],
+  [
+    905,
+    "<p class=\"software-desc\">مكتبة برمجية للمطورين والشركات البرمجية لدمج خوارزميات الذكاء الاصطناعي المالي والفوترة والامتثال المحاسبي في تطبيقاتهم الخاصة بسهولة عبر REST APIs.</p>"
+  ],
+  [
+    909,
+    "توثيق تفاعلي كامل وكود تشغيل جاهز"
+  ],
+  [
+    913,
+    "توليد فوري لمفاتيح الـ API مع Rate Limiting"
+  ],
+  [
+    917,
+    "تحديثات دورية متوافقة مع القوانين المالية"
+  ],
+  [
+    924,
+    "<span class=\"software-price-unit\">شهرياً (50k Calls)</span>"
+  ],
+  [
+    927,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('sdk', 'trial')\">تحميل الـ SDK</button>"
+  ],
+  [
+    928,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareCheckoutModal('sdk')\">طلب الترخيص</button>"
+  ],
+  [
+    939,
+    "<h3 class=\"mb-1 text-white\">هل ترغب في برمجة ونشر برنامجك التجاري الخاص عبر المنصة؟</h3>"
+  ],
+  [
+    941,
+    "توفر شركة S&R CoreSync Solutions بنية متكاملة للمطورين لتوزيع البرمجيات مع نظام التراخيص الرقمية المشفرة وبوابات الدفع الهولندية والأوروبية والخليجية."
+  ],
+  [
+    945,
+    "إضافة برنامج جديد الآن"
+  ],
+  [
+    957,
+    "<h3 class=\"text-white mb-2 fw-bold\">Record Test Transaction في الـ ERP</h3>"
+  ],
+  [
+    958,
+    "<p class=\"text-caption text-white-64 mb-4\">أدخل بيانات المعاملة لاختبار المزامنة اللحظية في الرسم البياني والجدول</p>"
+  ],
+  [
+    962,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"txClient\">اسم الجهة أو العميل</label>"
+  ],
+  [
+    963,
+    "<input type=\"text\" id=\"txClient\" class=\"ai-chat-input modal-form-input\" value=\"شركة تجارية هولندية جديدة\" placeholder=\"اسم الجهة أو العميل\" title=\"اسم الجهة أو العميل\">"
+  ],
+  [
+    966,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"txAmount\">Amount باليورو (€)</label>"
+  ],
+  [
+    967,
+    "<input type=\"number\" id=\"txAmount\" class=\"ai-chat-input font-num modal-form-input\" value=\"15000\" placeholder=\"Amount باليورو\" title=\"Amount باليورو (€)\">"
+  ],
+  [
+    970,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"txType\">نوع الخدمة</label>"
+  ],
+  [
+    971,
+    "<select id=\"txType\" class=\"ai-chat-input modal-form-select\" title=\"نوع الخدمة\" aria-label=\"نوع الخدمة\">"
+  ],
+  [
+    972,
+    "<option value=\"ربط وتكامل ERP\">ربط وتكامل ERP</option>"
+  ],
+  [
+    973,
+    "<option value=\"تطوير برمجيات سحابية\">تطوير برمجيات سحابية</option>"
+  ],
+  [
+    974,
+    "<option value=\"استشارات مالية وحوكمة\">استشارات مالية وحوكمة</option>"
+  ],
+  [
+    978,
+    "🖥️ تشغيل المحاكي التفاعلي داخل المتصفح (Live Desktop Sandbox)"
+  ],
+  [
+    982,
+    "<button type=\"button\" class=\"action-cta-btn\" onclick=\"saveNewTx()\">حفظ ومزامنة فورية</button>"
+  ],
+  [
+    991,
+    "<h3 class=\"text-white mb-2 fw-bold\">توليد فاتورة إلكترونية معتمدة</h3>"
+  ],
+  [
+    992,
+    "<p class=\"text-caption text-white-64 mb-4\">إنشاء فاتورة سحابية متوافقة مع أنظمة الضرائب في هولندا (BTW 21%) والخليج</p>"
+  ],
+  [
+    996,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"invClient\">اسم العميل / الشركة</label>"
+  ],
+  [
+    997,
+    "<input type=\"text\" id=\"invClient\" class=\"ai-chat-input modal-form-input\" value=\"Rotterdam Tech Enterprises BV\" placeholder=\"اسم العميل\" title=\"اسم العميل\">"
+  ],
+  [
+    1000,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"invAmount\">Amount الصافي (€)</label>"
+  ],
+  [
+    1001,
+    "<input type=\"number\" id=\"invAmount\" class=\"ai-chat-input font-num modal-form-input\" value=\"18500\" placeholder=\"Amount الصافي\" title=\"Amount الصافي\">"
+  ],
+  [
+    1004,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"invTaxRegime\">النظام الضريبي والامتثال</label>"
+  ],
+  [
+    1005,
+    "<select id=\"invTaxRegime\" class=\"ai-chat-input modal-form-select\" title=\"النظام الضريبي\" aria-label=\"النظام الضريبي\">"
+  ],
+  [
+    1006,
+    "<option value=\"21\">ضريبة القيمة المضافة بهولندا (BTW 21%)</option>"
+  ],
+  [
+    1007,
+    "<option value=\"0\">إعفاء ضريبي أوروبي (Reverse Charge 0%)</option>"
+  ],
+  [
+    1008,
+    "<option value=\"15\">ضريبة القيمة المضافة السعودية (ZATCA 15%)</option>"
+  ],
+  [
+    1013,
+    "<button type=\"button\" class=\"action-cta-btn\" onclick=\"generateNewInvoice()\">إصدار الفاتورة وتوليد QR</button>"
+  ],
+  [
+    1023,
+    "<h3 class=\"text-white fw-bold mb-0\">محاكي بوابات الدفع iDEAL</h3>"
+  ],
+  [
+    1026,
+    "<p class=\"text-caption text-white-64 mb-3\">اختر البنك الهولندي لمحاكاة تسوية الفاتورة اللحظية في حساب الشركة</p>"
+  ],
+  [
+    1030,
+    "<span class=\"text-caption text-white-64\">الفاتورة المستهدفة:</span>"
+  ],
+  [
+    1034,
+    "<span class=\"text-caption text-white-64\">الجهة المسددة:</span>"
+  ],
+  [
+    1038,
+    "<span class=\"text-caption text-white-64\">Total Amount المطلوب:</span>"
+  ],
+  [
+    1043,
+    "<label class=\"text-caption text-white-64 d-block mb-1\">اختر البنك الهولندي (Dutch Banking Partner):</label>"
+  ],
+  [
+    1066,
+    "<div class=\"text-caption text-center text-white-64\" id=\"idealStatusText\">جاهز لتنفيذ أمر التحويل الفوري</div>"
+  ],
+  [
+    1070,
+    "<button type=\"button\" class=\"action-cta-btn\" id=\"btnConfirmIdeal\" onclick=\"executeIdealPayment()\">تأكيد السداد التجريبي اللحظي</button>"
+  ],
+  [
+    1081,
+    "<h3 class=\"fw-bold mb-0 text-white invoice-preview-title\">فاتورة إلكترونية رسمية (e-Invoice)</h3>"
+  ],
+  [
+    1121,
+    "<span class=\"text-white-64 d-block\">إلى السيد/الشركة:</span>"
+  ],
+  [
+    1133,
+    "<span class=\"text-white-64 d-block\">حالة السداد:</span>"
+  ],
+  [
+    1134,
+    "<span class=\"text-success font-num\" id=\"pvStatus\">مدفوعة عبر iDEAL ✓</span>"
+  ],
+  [
+    1143,
+    "<th>Amount الصافي</th>"
+  ],
+  [
+    1144,
+    "<th>الضريبة المحتسبة</th>"
+  ],
+  [
+    1145,
+    "<th>الإجمالي</th>"
+  ],
+  [
+    1150,
+    "<td>تكامل منظومة CoreSync Cloud ERP وحوكمة العمليات المالية</td>"
+  ],
+  [
+    1160,
+    "<span>الإجمالي المستحق والمقيد بالدفاتر:</span>"
+  ],
+  [
+    1166,
+    "<span class=\"text-caption text-white-64\">معتمدة رقمياً ومطابقة للمعيار الأوروبي EN 16931</span>"
+  ],
+  [
+    1172,
+    "<button type=\"button\" class=\"action-cta-btn\" onclick=\"closeInvoicePreviewModal()\">تم الإطلاع</button>"
+  ],
+  [
+    1179,
+    "// التبديل بين الشاشات في القائمة الجانبية"
+  ],
+  [
+    1196,
+    "// إعداد الرسوم البيانية التفاعلية بواسطة Chart.js"
+  ],
+  [
+    1201,
+    "// تفعيل التبويب المباشر عبر الهاش (#whitelabel, #invoices, إلخ)"
+  ],
+  [
+    1210,
+    "// رسم بياني الإيرادات الشهرية"
+  ],
+  [
+    1215,
+    "labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر'],"
+  ],
+  [
+    1218,
+    "label: 'الإيرادات الفعلية (€)',"
+  ],
+  [
+    1229,
+    "label: 'التدفق النقدي الصافي (€)',"
+  ],
+  [
+    1263,
+    "// رسم بياني توزيع القطاعات"
+  ],
+  [
+    1268,
+    "labels: ['حلول ERP والربط المالي', 'برمجيات سحابية وتطبيقات', 'أتمتة الذكاء الاصطناعي', 'استشارات وحوكمة'],"
+  ],
+  [
+    1292,
+    "// المساعد المالي الذكي (AI Chat Logic)"
+  ],
+  [
+    1305,
+    "// رسالة المستخدم"
+  ],
+  [
+    1313,
+    "// توليد الرد الآلي الذكي بعد ثوانٍ معدودة"
+  ],
+  [
+    1316,
+    "if (query.includes('أكتوبر') || query.includes('التدفق')) {"
+  ],
+  [
+    1317,
+    "aiResponse = \"بناءً على مطابقة دفاتر المحاسبة ونظام الـ ERP لشهر أكتوبر:\\n- إجمالي الإيرادات المحققة: €144,500 (+18% نمو قياسي).\\n- هامش الربح التشغيلي: 27.4% وهو أعلى من متوسط القطاع في هولندا.\\n- التوصية: تسريع تحصيل دفعة بقيمة €42,000 مستحقة في 10 أكتوبر لتعزيز السيولة المتاحة للاستثمار في البنية السحابية.\";"
+  ],
+  [
+    1318,
+    "} else if (query.includes('فواتير') || query.includes('المتأخرة')) {"
+  ],
+  [
+    1319,
+    "aiResponse = \"توجد فاتورة واحدة معلقة بقيمة €35,000 لعميل في الرياض تستحق خلال 14 dayاً مع بند Reverse Charge ضريبي سليم. لا توجد أي فواتير متعثرة تتجاوز 30 dayاً بفضل التنبيهات الآلية للواتساب والإيميل.\";"
+  ],
+  [
+    1321,
+    "aiResponse = \"تم تحليل استفسارك عبر خوارزمية S&R CoreSync المالية. الأنظمة تعمل بتناسق تام بين المحاسبة والعمليات، ويمكن لأتمتة الـ RPA توفير 35 ساعة عمل إضافية لفريقك خلال الشهر القادم عبر أرشفة الفواتير المباشرة.\";"
+  ],
+  [
+    1332,
+    "// نافذة المعاملة الجديدة"
+  ],
+  [
+    1346,
+    "// إضافة صف جديد للجدول"
+  ],
+  [
+    1357,
+    "<td><span class=\"status-badge status-completed\">Synchronized فوراً</span></td>"
+  ],
+  [
+    1362,
+    "// تحديث عداد الإيرادات"
+  ],
+  [
+    1366,
+    "// تحديث الرسم البياني"
+  ],
+  [
+    1374,
+    "alert('تمت إضافة المعاملة بنجاح وتحديث قيود الـ ERP والرسوم البيانية لحظياً!');"
+  ],
+  [
+    1378,
+    "// 1. توليد وPreview الفواتير الإلكترونية (Feature 1)"
+  ],
+  [
+    1409,
+    "<td><span class=\"status-badge status-processing\" id=\"status-badge-${invNum}\">جديدة - تستحق السداد</span></td>"
+  ],
+  [
+    1411,
+    "<button type=\"button\" class=\"table-action-btn pay-action-btn\" id=\"btn-pay-${invNum}\" onclick=\"openIdealSimulatorModal('${invNum}', '${client}', ${total})\">سداد iDEAL</button>"
+  ],
+  [
+    1412,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'قيد الانتظار', '${dateStr}', '${taxLabel}')\">Preview</button>"
+  ],
+  [
+    1418,
+    "// تحديث العدادات"
+  ],
+  [
+    1425,
+    "previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'قيد الانتظار', dateStr, taxLabel);"
+  ],
+  [
+    1438,
+    "// تطبيق الهوية المخصصة إن وجدت"
+  ],
+  [
+    1453,
+    "wlBadge.innerText = `هوية مخصصة: ${effectiveIssuer}`;"
+  ],
+  [
+    1463,
+    "const currentName = document.getElementById('clientBrandNameInput')?.value || localStorage.getItem('sr_custom_brand_name') || 'مجموعة الرياض للخدمات اللوجستية';"
+  ],
+  [
+    1470,
+    "'فاتورة معتمدة - جاهزة للتحصيل ✓',"
+  ],
+  [
+    1475,
+    "showPortalToast(`✨ تم توليد فاتورة تجريبية رسمية بهوية [${currentName}] جاهزة للPreview والطباعة!`);"
+  ],
+  [
+    1505,
+    "// 2. محاكي الدفع الفوري iDEAL الهولندي"
+  ],
+  [
+    1515,
+    "document.getElementById('idealStatusText').innerText = 'اختر البنك واضغط على تأكيد السداد الفوري';"
+  ],
+  [
+    1517,
+    "document.getElementById('btnConfirmIdeal').innerText = 'تأكيد السداد التجريبي اللحظي';"
+  ],
+  [
+    1535,
+    "btn.innerText = 'جاري المعالجة البنكية...';"
+  ],
+  [
+    1538,
+    "statusText.innerText = 'الاتصال الآمن ببروتوكول iDEAL 2.0 وSEPA Instant...';"
+  ],
+  [
+    1542,
+    "statusText.innerHTML = '<span class=\"ideal-success-msg\">✓ تمت تسوية Amount وتحويله لحساب المؤسسة بنجاح!</span>';"
+  ],
+  [
+    1544,
+    "// تحديث حالة الفاتورة في الجدول"
+  ],
+  [
+    1548,
+    "badge.innerText = 'مدفوعة عبر iDEAL ✓';"
+  ],
+  [
+    1560,
+    "// تحديث العدادات والرسوم البيانية"
+  ],
+  [
+    1582,
+    "// 3. وضع العرض التقديمي للزبائن (Presentation Mode)"
+  ],
+  [
+    1594,
+    "btn.innerHTML = `<svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M4 14h6m0 0v6m0-6L3 21m17-7h-6m0 0v6m0-6l7 7M14 4h6m-6 0v6m0-6l7-7M4 10h6m0 0V4m0 6L3 3\"></path></svg> <span>الخروج من العرض</span>`;"
+  ],
+  [
+    1600,
+    "btn.innerHTML = `<svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3\"></path></svg> <span>وضع Client View [P]</span>`;"
+  ],
+  [
+    1605,
+    "// 4. مزامنة بيانات الديمو مع استمارة التواصل (Feature 3)"
+  ],
+  [
+    1608,
+    "const activeTab = document.querySelector('.nav-item.active span')?.innerText || 'نظام ERP';"
+  ],
+  [
+    1611,
+    "else if (activeTab.includes('المالي') || activeTab.includes('القيادة')) service = 'erp';"
+  ],
+  [
+    1612,
+    "else if (activeTab.includes('الذكاء') || activeTab.includes('AI')) service = 'ai';"
+  ],
+  [
+    1613,
+    "else if (activeTab.includes('الخوادم')) service = 'software';"
+  ],
+  [
+    1614,
+    "else if (activeTab.includes('الفواتير')) service = 'erp';"
+  ],
+  [
+    1617,
+    "const note = encodeURIComponent(`طلب استشارة بناءً على الPreview التجريبية: القسم المستهدف (${activeTab})، وحجم العمليات المقدر في الجلسة: ${revText}`);"
+  ],
+  [
+    1623,
+    "// 5. محرك تخصيص الهوية والعلامة البيضاء المتقدم مع الحفظ التلقائي (White-Label & LocalStorage)"
+  ],
+  [
+    1656,
+    "badge.textContent = `● مخصص (${hasCustomBrand || hasCustomTheme}) ومحفوظ محلياً`;"
+  ],
+  [
+    1688,
+    "showPortalToast(`تم تطبيق وحفظ سمة [${themeName.toUpperCase()}] في المتصفح!`);"
+  ],
+  [
+    1699,
+    "showPortalToast('تم تحميل ملف الشعار بنجاح! انقر على زر تطبيق الهوية لحفظه.');"
+  ],
+  [
+    1746,
+    "showPortalToast(`✨ تم حفظ وتطبيق هوية [${name}] على نظام الـ ERP بنجاح!`);"
+  ],
+  [
+    1760,
+    "if (input) input.value = 'مجموعة الرياض للخدمات اللوجستية';"
+  ],
+  [
+    1772,
+    "showPortalToast('تمت استعادة هوية S&R CoreSync الأصلية ومسح التخصيص المحفوظ.');"
+  ],
+  [
+    1800,
+    "// 6. محرك سوق وتراخيص البرمجيات الحصرية (Software Marketplace Engine)"
+  ],
+  [
+    1808,
+    "desc: 'برنامج سطح مكتب محاسبي وضريبي مستقل يعمل بدون إنترنت (Offline-First) لحساب ضريبة القيمة المضافة BTW/VAT 21% وتوليد إقرارات XML لمصلحة الضرائب الهولندية والخليجية.',"
+  ],
+  [
+    1817,
+    "desc: 'تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.',"
+  ],
+  [
+    1826,
+    "desc: 'وسيط برمجي خفيف يعمل في خلفية أجهزة الكاشير القديمة لربطها فورياً بنظام الـ ERP السحابي لمزامنة حركة المخازن والسيولة دون تغيير الأجهزة.',"
+  ],
+  [
+    1835,
+    "desc: 'برمجية تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع تخزين متوافق 100% مع قانون GDPR الأوروبي.',"
+  ],
+  [
+    1844,
+    "desc: 'مكتبة برمجية للمطورين والشركات البرمجية لدمج خوارزميات الذكاء الاصطناعي المالي والفوترة والامتثال المحاسبي في تطبيقاتهم الخاصة بسهولة عبر REST APIs.',"
+  ],
+  [
+    1891,
+    "badge.innerText = 'ترخيص تجريبي 14 dayاً';"
+  ],
+  [
+    1894,
+    "btnBuy.innerText = `ترقية للنسخة الكاملة (€ ${sw.price})`;"
+  ],
+  [
+    1896,
+    "badge.innerText = 'ترخيص تجاري كامل (Pro)';"
+  ],
+  [
+    1899,
+    "btnBuy.innerText = `إتمام الشراء والفوترة (€ ${sw.price})`;"
+  ],
+  [
+    1912,
+    "showPortalToast(`🔑 تم نسخ مفتاح الترخيص: ${key}`);"
+  ],
+  [
+    1914,
+    "showPortalToast(`🔑 تم Copy Key: ${key}`);"
+  ],
+  [
+    1918,
+    "// حساب الضريبة الفورية المصغرة في بطاقة TaxSync"
+  ],
+  [
+    1933,
+    "// توليد مفتاح تجريبي فوري جديد"
+  ],
+  [
+    1944,
+    "showPortalToast(`✨ تم توليد مفتاح تجريبي جديد: ${newKey}`);"
+  ],
+  [
+    1947,
+    "// Copy Key التجريبي الفوري للحافظة"
+  ],
+  [
+    1952,
+    "showPortalToast(`🔑 تم Copy Key التجريبي: ${key}`);"
+  ],
+  [
+    1954,
+    "showPortalToast(`🔑 تم Copy Key: ${key}`);"
+  ],
+  [
+    1959,
+    "// 1. محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator Logic)"
+  ],
+  [
+    1964,
+    "EUR: { symbol: '€', rate: 1.0, label: 'يورو (EUR)' },"
+  ],
+  [
+    1965,
+    "USD: { symbol: '$', rate: 1.08, label: 'دولار أمريكي (USD)' },"
+  ],
+  [
+    1966,
+    "SAR: { symbol: '﷼', rate: 4.05, label: 'ريال سعودي (SAR)' }"
+  ],
+  [
+    1980,
+    "showPortalToast(`💱 تم التبديل إلى عملة: ${currencyConfig[cur].label}`);"
+  ],
+  [
+    1986,
+    "const vatText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :"
+  ],
+  [
+    1987,
+    "currentVatRate === 0.09 ? 'BTW مخفض (9%)' :"
+  ],
+  [
+    1988,
+    "currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى (0%)';"
+  ],
+  [
+    1989,
+    "showPortalToast(`🏛️ تم تطبيق Tax Regime: ${vatText}`);"
+  ],
+  [
+    2008,
+    "// تحديث محتوى نافذة الـ PDF"
+  ],
+  [
+    2017,
+    "pdfVatScheme.innerText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :"
+  ],
+  [
+    2018,
+    "currentVatRate === 0.09 ? 'BTW مخفض (9%)' :"
+  ],
+  [
+    2019,
+    "currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى من الضريبة (0%)';"
+  ],
+  [
+    2024,
+    "// 2. الجولة الإرشادية التفاعلية (Interactive Guided Tour Logic)"
+  ],
+  [
+    2030,
+    "title: '⚡ محاكي العملات والضرائب اللحظي (Simulator Bar)',"
+  ],
+  [
+    2031,
+    "desc: 'يتيح للزبون التبديل اللحظي بين اليورو والدولار والريال السعودي مع احتساب مباشر لضريبة القيمة المضافة BTW 21% والخليجية 15% وتحديث الأرقام فورياً.'"
+  ],
+  [
+    2036,
+    "title: '📊 لوحة القيادة والتدفق المالي (Financial KPIs)',"
+  ],
+  [
+    2037,
+    "desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، Net Operating Cash Flow، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'"
+  ],
+  [
+    2042,
+    "title: '📦 ERP & Inventory Ops الذكية',"
+  ],
+  [
+    2043,
+    "desc: 'وحدة الـ ERP الموزعة لإدارة الفروع المتعددة، تتبع سلاسل التوريد، والتنبؤ بالطلب بدقة عالية.'"
+  ],
+  [
+    2048,
+    "title: '🧾 الفواتير الإلكترونية والامتثال الضريبي الأوروبي',"
+  ],
+  [
+    2049,
+    "desc: 'إنشاء الفواتير المشفرة بنظام EN 16931 الأوروبي وتوافق كامل مع بوابات الدفع iDEAL والتحويل المصرفي SEPA.'"
+  ],
+  [
+    2054,
+    "title: '💻 سوق البرمجيات وحاسبة S&R TaxSync',"
+  ],
+  [
+    2055,
+    "desc: 'تراخيص رقمية فورية، حاسبة BTW Tax مدمجة، ومولد مفاتيح تجريبية (14 dayاً) يعمل بضغطة زر مع تنزيل فوري.'"
+  ],
+  [
+    2067,
+    "showPortalToast('🚀 مرحباً بك في الجولة الإرشادية التفاعلية!');"
+  ],
+  [
+    2076,
+    "// التبديل إلى التبويب المطلوب إذا لزم"
+  ],
+  [
+    2082,
+    "document.getElementById('tourStepBadge').innerText = `خطوة ${currentTourStep + 1} من ${tourSteps.length}`;"
+  ],
+  [
+    2089,
+    "if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'إنهاء الجولة ✓' : 'التالي ➡️';"
+  ],
+  [
+    2091,
+    "// تحديد وتأطير العنصر"
+  ],
+  [
+    2127,
+    "showPortalToast('🎉 اكتملت الجولة الإرشادية بنجاح!');"
+  ],
+  [
+    2147,
+    "// 3. تصدير ملخص العرض التنفيذي كـ PDF (One-Click Executive PDF Logic)"
+  ],
+  [
+    2166,
+    "// تحديث اسم شركة العميل في تقرير الـ PDF المخصص"
+  ],
+  [
+    2170,
+    "displayEl.innerText = name && name.trim() ? name.trim() : 'مجموعة الشريك التجاري المستهدف';"
+  ],
+  [
+    2179,
+    "// توليد ملف حزمة التثبيت التجريبية"
+  ],
+  [
+    2208,
+    "showPortalToast(`⚡ بدأ Download Installer Package لـ [${title}] بنجاح!`);"
+  ],
+  [
+    2234,
+    "// إضافة كرت جديد للحاوية ديناميكياً"
+  ],
+  [
+    2250,
+    "<span class=\"software-card-badge ds-u22\">جديد مُضاف بواسطة المؤسس ★</span>"
+  ],
+  [
+    2266,
+    "ترخيص رقمي مشفر مع دعم التحديثات"
+  ],
+  [
+    2270,
+    "ربط مباشر عبر بوابات الدفع والفواتير"
+  ],
+  [
+    2277,
+    "<span class=\"software-price-unit\">ترخيص معتمد</span>"
+  ],
+  [
+    2280,
+    "<button type=\"button\" class=\"btn-software-trial\" onclick=\"openSoftwareModal('${id}', 'trial')\">تجربة</button>"
+  ],
+  [
+    2281,
+    "<button type=\"button\" class=\"btn-software-buy\" onclick=\"openSoftwareModal('${id}', 'buy')\">شراء</button>"
+  ],
+  [
+    2290,
+    "showPortalToast(`🚀 تم نشر برنامج [${title}] بنجاح في متجر المنصة!`);"
+  ],
+  [
+    2295,
+    "محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator JS)"
+  ],
+  [
+    2309,
+    "showPortalToast(`💻 تم تشغيل المحاكي التفاعلي لـ [${sw.title}] بنجاح!`);"
+  ],
+  [
+    2358,
+    "netEl.innerText = `استرداد: € ${Math.abs(netPay).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;"
+  ],
+  [
+    2371,
+    "titleEl.innerText = '🛡️ تقرير الفحص والامتثال الضريبي الذكي (AWR Audit Report):';"
+  ],
+  [
+    2383,
+    "showPortalToast('🛡️ اكتمل تدقيق الامتثال الضريبي بنجاح: متوافق بنسبة 100%!');"
+  ],
+  [
+    2434,
+    "titleEl.innerText = '📄 ملف الإقرار الضريبي الرسمي المولد (Digipoort SBR XML):';"
+  ],
+  [
+    2436,
+    "showPortalToast('⚡ تم توليد وتشفير ملف Digipoort XML بنجاح!');"
+  ],
+  [
+    2452,
+    "showPortalToast('📁 تم تنزيل ملف Digipoort XML الرسمي على جهازك!');"
+  ],
+  [
+    2456,
+    "بوابة الدفع والتراخيص الدولية (Stripe / Mollie iDEAL Checkout JS)"
+  ],
+  [
+    2467,
+    "document.getElementById('chkAppLicenseType').innerText = `ترخيص تجاري كامل (${sw.version}) • شامل الفاتورة الضريبية`;"
+  ],
+  [
+    2476,
+    "document.getElementById('chkBtnText').innerText = `تأكيد الدفع الآمن وإصدار الفاتورة (€ ${total.toFixed(2)})`;"
+  ],
+  [
+    2478,
+    "// إعادة ضبط حالة النجاح"
+  ],
+  [
+    2510,
+    "text.innerText = 'جاري الاتصال الآمن مع بوابة الدفع وتوثيق الترخيص...';"
+  ],
+  [
+    2517,
+    "// توليد مفتاح ترخيص تجاري"
+  ],
+  [
+    2522,
+    "// توليد وإضافة الفاتورة في جدول الفواتير"
+  ],
+  [
+    2530,
+    "// إضافة الفاتورة لجدول الفواتير في الواجهة"
+  ],
+  [
+    2541,
+    "<td><span class=\"status-badge status-completed\">مدفوعة عبر ${gwLabel}</span></td>"
+  ],
+  [
+    2543,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"previewInvoiceModal('${invNum}', '${clientName}', ${netPrice}, ${vat}, ${total}, 'مدفوعة عبر ${gwLabel}', '2026-10-06', 'BTW 21%')\">Preview الفاتورة</button>"
+  ],
+  [
+    2554,
+    "// ربط زر Preview الفاتورة في صندوق النجاح"
+  ],
+  [
+    2558,
+    "previewInvoiceModal(invNum, clientName, netPrice, vat, total, `مدفوعة عبر ${gwLabel}`, '2026-10-06', 'BTW 21%');"
+  ],
+  [
+    2561,
+    "showPortalToast(`🎉 تم إتمام الدفع بنجاح وإصدار الفاتورة [${invNum}] وتفعيل الترخيص!`);"
+  ],
+  [
+    2565,
+    "// فحص الروابط المباشرة عند التحميل (URL Query Params Auto-Trigger)"
+  ],
+  [
+    2587,
+    "// استعادة التخصيص المحفوظ عند تحميل الصفحة"
+  ],
+  [
+    2591,
+    "// تفعيل اختصارات لوحة المفاتيح لوضع العرض التقديمي (Key Shortcuts)"
+  ],
+  [
+    2627,
+    "برنامج سطح مكتب محاسبي وضريبي متكامل يعمل بدون اتصال بالإنترنت."
+  ],
+  [
+    2632,
+    "<span class=\"text-caption text-white-64\">مفتاح الترخيص الرقمي (Digital License Key):</span>"
+  ],
+  [
+    2633,
+    "<span class=\"status-badge status-completed\" id=\"modalSwLicBadge\">نشط 14 dayاً</span>"
+  ],
+  [
+    2640,
+    "<span>التوافق: Windows 11/10 (64-bit), macOS 13+</span>"
+  ],
+  [
+    2641,
+    "<span>توقيع رقمي: SHA-256 Validated</span>"
+  ],
+  [
+    2649,
+    "Download Installer Package المباشرة (Installer .zip)"
+  ],
+  [
+    2652,
+    "شراء الترخيص وإصدار فاتورة"
+  ],
+  [
+    2661,
+    "<h3 class=\"text-white mb-2 fw-bold\">نشر وتوزيع برنامج جديد عبر المنصة</h3>"
+  ],
+  [
+    2662,
+    "<p class=\"text-caption text-white-64 mb-4\">بصفتك مطوراً ومهندساً للبرمجيات، يمكنك إضافة حلولك وتطبيقاتك الحصرية للبيع والتوزيع:</p>"
+  ],
+  [
+    2667,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"pubTitle\">اسم البرنامج أو التطبيق</label>"
+  ],
+  [
+    2668,
+    "<input type=\"text\" id=\"pubTitle\" required class=\"ai-chat-input modal-form-input\" placeholder=\"مثال: S&R InventorySync Pro\" title=\"اسم البرنامج\">"
+  ],
+  [
+    2671,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"pubCategory\">التصنيف والمنصة</label>"
+  ],
+  [
+    2672,
+    "<select id=\"pubCategory\" class=\"ai-chat-input modal-form-select\" title=\"التصنيف\">"
+  ],
+  [
+    2673,
+    "<option value=\"desktop\">برنامج سطح مكتب للكمبيوتر (Desktop PC/Mac)</option>"
+  ],
+  [
+    2674,
+    "<option value=\"mobile\">تطبيق هاتف ذكي (iOS / Android)</option>"
+  ],
+  [
+    2675,
+    "<option value=\"pos\">حلول ونقاط بيع (POS Agent)</option>"
+  ],
+  [
+    2676,
+    "<option value=\"sdk\">مكتبة أو حزمة مطورين (SDK / API)</option>"
+  ],
+  [
+    2681,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"pubVersion\">رقم الإصدار</label>"
+  ],
+  [
+    2682,
+    "<input type=\"text\" id=\"pubVersion\" required class=\"ai-chat-input modal-form-input font-num\" placeholder=\"v1.0\" value=\"v1.0\" title=\"رقم الإصدار\">"
+  ],
+  [
+    2685,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"pubPrice\">سعر الترخيص باليورو (€)</label>"
+  ],
+  [
+    2686,
+    "<input type=\"number\" id=\"pubPrice\" required class=\"ai-chat-input modal-form-input font-num\" placeholder=\"149\" value=\"149\" title=\"سعر الترخيص\">"
+  ],
+  [
+    2690,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"pubDesc\">وصف موجز ومميزات البرنامج</label>"
+  ],
+  [
+    2691,
+    "<textarea id=\"pubDesc\" required class=\"ai-chat-input modal-form-input ds-u34\" placeholder=\"اكتب وصفاً موجزاً لما يقوم به البرنامج وكيف يساعد العملاء...\" title=\"Description\"></textarea>"
+  ],
+  [
+    2698,
+    "نشر البرنامج فورياً في المتجر 🚀"
+  ],
+  [
+    2713,
+    "<span class=\"os-dot yellow\" title=\"تصغير\"></span>"
+  ],
+  [
+    2714,
+    "<span class=\"os-dot green\" title=\"تكبير\"></span>"
+  ],
+  [
+    2727,
+    "<span>⚡</span> محاكي واجهة البرنامج الحية (Live OS Sandbox)"
+  ],
+  [
+    2730,
+    "<span>📋</span> بطاقة المواصفات والمعمارية (Architecture & Specs)"
+  ],
+  [
+    2736,
+    "<span>📁 ملف (Bestand)</span>"
+  ],
+  [
+    2737,
+    "<span>📊 مبيعات وضرائب (Omzet & BTW)</span>"
+  ],
+  [
+    2738,
+    "<span class=\"ds-u37\" onclick=\"runAiComplianceAudit()\">🛡️ فحص الامتثال AWR (Audit)</span>"
+  ],
+  [
+    2739,
+    "<span class=\"ds-u38\" onclick=\"exportDigipoortXml()\">⚡ تصدير Digipoort XML</span>"
+  ],
+  [
+    2740,
+    "<span>⚙️ إعدادات الأمان (AES-256)</span>"
+  ],
+  [
+    2748,
+    "<span>📊</span> إقرار BTW والضرائب"
+  ],
+  [
+    2751,
+    "<span>🤖</span> تدقيق الذكاء الاصطناعي"
+  ],
+  [
+    2754,
+    "<span>📄</span> تصدير Digipoort XML"
+  ],
+  [
+    2757,
+    "<div class=\"text-caption text-white-64 ds-u40\">محرك الحسابات:</div>"
+  ],
+  [
+    2759,
+    "<div class=\"text-caption text-white-64 ds-u42\">وضع العمل: Offline 100%</div>"
+  ],
+  [
+    2767,
+    "<h4 class=\"fw-bold mb-1 text-white ds-u43\">نموذج حساب ضريبة القيمة المضافة (Aangifte Omzetbelasting Q3 2026)</h4>"
+  ],
+  [
+    2768,
+    "<p class=\"text-caption text-white-64 mb-0\">جرب إدخال الأرقام أدناه لمشاهدة الاحتساب الآلي وتوليد الإقرار الهولندي والخليجي فورياً</p>"
+  ],
+  [
+    2770,
+    "<span class=\"status-badge status-completed\" id=\"simStatusBadge\">جاهز للاحتساب ✓</span>"
+  ],
+  [
+    2777,
+    "<label for=\"simOmzet21\">المبيعات بنسبة 21% BTW (Omzet Hoog):</label>"
+  ],
+  [
+    2783,
+    "<label for=\"simOmzet9\">المبيعات بنسبة 9% BTW (Omzet Laag):</label>"
+  ],
+  [
+    2789,
+    "<label for=\"simVoorbelasting\">ضريبة المدخلات القابلة للخصم (Voorbelasting):</label>"
+  ],
+  [
+    2799,
+    "<span class=\"text-caption text-white-64 d-block ds-u45\">ضريبة 21% (Hoog)</span>"
+  ],
+  [
+    2803,
+    "<span class=\"text-caption text-white-64 d-block ds-u45\">ضريبة 9% (Laag)</span>"
+  ],
+  [
+    2807,
+    "<span class=\"text-caption text-white-64 d-block ds-u45\">الخصم المسموح (Voorb.)</span>"
+  ],
+  [
+    2811,
+    "<span class=\"text-caption text-white-64 d-block ds-u45\">صافي الضريبة الواجبة السداد</span>"
+  ],
+  [
+    2820,
+    "🛡️ فحص الامتثال المحاسبي AWR"
+  ],
+  [
+    2823,
+    "📄 توليد ملف Digipoort XML"
+  ],
+  [
+    2826,
+    "💳 ترقية للنسخة الكاملة (€ 189)"
+  ],
+  [
+    2833,
+    "<span class=\"text-caption text-white-64\" id=\"simConsoleTitle\">تقرير تدقيق الامتثال:</span>"
+  ],
+  [
+    2834,
+    "<button type=\"button\" class=\"btn-return-main font-num btn-modal-close-sm ds-u53\" onclick=\"downloadGeneratedTaxXml()\">تنزيل ملف .xml</button>"
+  ],
+  [
+    2846,
+    "<h5 class=\"fw-bold text-white mb-2 ds-u55\">معمارية الخصوصية والأمان (Zero-Cloud Privacy)</h5>"
+  ],
+  [
+    2848,
+    "تم تصميم البرنامج ليعمل بمعمارية محلية بحتة (Offline-First Engine)، حيث تُخزن قواعد البيانات محلياً عبر محرك SQLite مشفر بخوارزمية AES-256 بت، مما يضمن سرية البيانات المحاسبية بنسبة 100% دون أي تسريب سحابي."
+  ],
+  [
+    2851,
+    "<li class=\"software-feature-item\"><span>✓</span> توافق كامل مع المادة 52 من قانون الضرائب الهولندي (AWR)</li>"
+  ],
+  [
+    2852,
+    "<li class=\"software-feature-item\"><span>✓</span> حماية البيانات بموجب اللائحة الأوروبية العامة لحماية البيانات (GDPR)</li>"
+  ],
+  [
+    2853,
+    "<li class=\"software-feature-item\"><span>✓</span> توليد مفاتيح تشفير رقمية مرتبطة بالعتاد (Hardware ID Locking)</li>"
+  ],
+  [
+    2859,
+    "<h5 class=\"fw-bold text-white mb-2 ds-u55\">التوافق والتكامل (Digipoort & PEPPOL)</h5>"
+  ],
+  [
+    2861,
+    "يدعم الربط المباشر مع بوابة مصلحة الضرائب الهولندية (Digipoort SBR) وبروتوكول الفوترة الأوروبية الموحدة PEPPOL BIS 3.0."
+  ],
+  [
+    2869,
+    "شراء الترخيص التجاري الآن (€ 189 / سنة)"
+  ],
+  [
+    2887,
+    "<span class=\"text-caption text-white-64\" id=\"chkAppLicenseType\">ترخيص تجاري مؤسسي سنوي • Commercial B2B</span>"
+  ],
+  [
+    2896,
+    "<span>قيمة الترخيص البرمجي الصافي (Net Price):</span>"
+  ],
+  [
+    2900,
+    "<span>ضريبة القيمة المضافة الهولندية (BTW 21%):</span>"
+  ],
+  [
+    2904,
+    "<span>الإجمالي المستحق للسداد (Total Incl. BTW):</span>"
+  ],
+  [
+    2910,
+    "<div class=\"text-caption text-white-64 mb-1\">اختر طريقة الدفع المعتمدة:</div>"
+  ],
+  [
+    2915,
+    "<span class=\"gateway-badge\">هولندا وأوروبا</span>"
+  ],
+  [
+    2925,
+    "<span class=\"gateway-badge\">تحويل بنكي مباشر</span>"
+  ],
+  [
+    2932,
+    "<label for=\"idealBankSelect\" class=\"text-caption text-white-64 mb-1 d-block\">اختر البنك الهولندي (Kies uw bank):</label>"
+  ],
+  [
+    2943,
+    "🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect."
+  ],
+  [
+    2949,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"chkCardNumber\">رقم البطاقة الائتمانية:</label>"
+  ],
+  [
+    2950,
+    "<input type=\"text\" id=\"chkCardNumber\" class=\"ai-chat-input mb-2 ds-u59\" value=\"4242 •••• •••• 4242\" title=\"رقم البطاقة الائتمانية\" placeholder=\"رقم البطاقة الائتمانية\" aria-label=\"رقم البطاقة الائتمانية\">"
+  ],
+  [
+    2954,
+    "<input type=\"text\" id=\"chkCardExpiry\" class=\"ai-chat-input ds-u59\" value=\"12/28\" title=\"تاريخ انتهاء البطاقة MM/YY\" placeholder=\"MM/YY\" aria-label=\"تاريخ انتهاء البطاقة\">"
+  ],
+  [
+    2957,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"chkCardCvc\">رمز الأمان CVC:</label>"
+  ],
+  [
+    2958,
+    "<input type=\"text\" id=\"chkCardCvc\" class=\"ai-chat-input ds-u59\" value=\"888\" title=\"رمز الأمان CVC\" placeholder=\"CVC\" aria-label=\"رمز الأمان CVC\">"
+  ],
+  [
+    2965,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"chkSepaIban\">رقم الآيبان للشركة (Business IBAN):</label>"
+  ],
+  [
+    2966,
+    "<input type=\"text\" id=\"chkSepaIban\" class=\"ai-chat-input mb-2 ds-u59\" value=\"NL91 ABNA 0417 1641 00\" title=\"رقم الآيبان للشركة (IBAN)\" placeholder=\"IBAN\" aria-label=\"رقم الآيبان للشركة\">"
+  ],
+  [
+    2967,
+    "<label class=\"text-caption text-white-64 mb-1 d-block\" for=\"chkSepaName\">اسم الحساب التجاري (Bedrijfsnaam):</label>"
+  ],
+  [
+    2968,
+    "<input type=\"text\" id=\"chkSepaName\" class=\"ai-chat-input\" value=\"S&R B2B Enterprise Client\" title=\"اسم الحساب التجاري\" placeholder=\"اسم الشركة\" aria-label=\"اسم الحساب التجاري\">"
+  ],
+  [
+    2976,
+    "<h5 class=\"fw-bold text-white mb-0 ds-u46\">تم إتمام عملية الدفع بنجاح!</h5>"
+  ],
+  [
+    2977,
+    "<span class=\"text-caption text-white-64\">تم تفعيل الترخيص التجاري وإصدار الفاتورة الضريبية الرسمية</span>"
+  ],
+  [
+    2982,
+    "<button type=\"button\" class=\"table-action-btn\" onclick=\"navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('تم نسخ مفتاح الترخيص!');\">نسخ</button>"
+  ],
+  [
+    2986,
+    "📄 Preview الفاتورة الصادرة"
+  ],
+  [
+    2997,
+    "<span id=\"chkBtnText\">تأكيد الدفع الآمن وإصدار الفاتورة (€ 228.69)</span>"
+  ],
+  [
+    3008,
+    "<span class=\"tour-step-badge\" id=\"tourStepBadge\">خطوة 1 من 5</span>"
+  ],
+  [
+    3009,
+    "<button type=\"button\" class=\"tour-close-btn\" onclick=\"endGuidedTour()\" title=\"Close الجولة\">✕</button>"
+  ],
+  [
+    3011,
+    "<h4 id=\"tourStepTitle\" class=\"tour-step-title\">لوحة القيادة والتدفق المالي</h4>"
+  ],
+  [
+    3012,
+    "<p id=\"tourStepDesc\" class=\"tour-step-desc\">هنا يظهر الأداء المالي اللحظي للشركة مع مؤشرات الإيرادات ونسب النمو بدقة متناهية.</p>"
+  ],
+  [
+    3014,
+    "<button type=\"button\" class=\"btn-tour-nav\" id=\"tourPrevBtn\" onclick=\"prevTourStep()\">⬅️ السابق</button>"
+  ],
+  [
+    3015,
+    "<button type=\"button\" class=\"btn-tour-nav primary\" id=\"tourNextBtn\" onclick=\"nextTourStep()\">التالي ➡️</button>"
+  ],
+  [
+    3032,
+    "🖨️ طباعة / حفظ كـ PDF"
+  ],
+  [
+    3043,
+    "<span class=\"ds-u74\">🏢 مخصص لشركة (Client Enterprise):</span>"
+  ],
+  [
+    3044,
+    "<input class=\"ds-u75\" type=\"text\" id=\"pdfClientNameInput\" oninput=\"updatePdfClientName(this.value)\" placeholder=\"أدخل اسم شركة العميل...\" value=\"مجموعة الشريك التجاري المستهدف\" />"
+  ],
+  [
+    3046,
+    "<span class=\"ds-u76\">ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة</span>"
+  ],
+  [
+    3053,
+    "<h2 class=\"ds-u79\">ملخص العرض التنفيذي وUptime SLA المؤسسية</h2>"
+  ],
+  [
+    3066,
+    "<span class=\"ds-u85\">إعداد وتخصيص الملف التنفيذي إلى (Presented To):</span>"
+  ],
+  [
+    3067,
+    "<div class=\"ds-u86\" id=\"pdfClientNameDisplay\">مجموعة الشريك التجاري المستهدف</div>"
+  ],
+  [
+    3070,
+    "✓ عرض استشاري مخصص (Bespoke Enterprise Dossier)"
+  ],
+  [
+    3076,
+    "<h4 class=\"ds-u89\">🌟 نظرة عامة على حلول S&R CoreSync</h4>"
+  ],
+  [
+    3078,
+    "منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر."
+  ],
+  [
+    3084,
+    "<h4 class=\"ds-u92\">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>"
+  ],
+  [
+    3088,
+    "<th class=\"ds-u95\">البند المالي</th>"
+  ],
+  [
+    3089,
+    "<th class=\"ds-u95\">القيمة المعتمدة</th>"
+  ],
+  [
+    3095,
+    "<td class=\"ds-u97\">Annual Gross Revenue التقديرية</td>"
+  ],
+  [
+    3097,
+    "<td class=\"ds-u99\">متحقق سحابياً (+18.4%)</td>"
+  ],
+  [
+    3100,
+    "<td class=\"ds-u97\">Net Operating Cash Flow المحققة</td>"
+  ],
+  [
+    3102,
+    "<td class=\"ds-u99\">هامش ربحية 9.2%</td>"
+  ],
+  [
+    3105,
+    "<td class=\"ds-u97\">نظام الضريبة المطبق في الجلسة</td>"
+  ],
+  [
+    3106,
+    "<td class=\"ds-u100\" id=\"pdfVatScheme\">BTW هولندي (21%)</td>"
+  ],
+  [
+    3107,
+    "<td class=\"ds-u101\">متوافق مع AWR Art. 52</td>"
+  ],
+  [
+    3110,
+    "<td class=\"ds-u97\">الضريبة المقدرة المحتسبة</td>"
+  ],
+  [
+    3112,
+    "<td class=\"ds-u97\">Digipoort XML جاهز</td>"
+  ],
+  [
+    3121,
+    "<h5 class=\"ds-u105\">📈 مخطط مسار الإيرادات والسيولة المتوقعة (2026 Trend Simulation):</h5>"
+  ],
+  [
+    3166,
+    "<span class=\"ds-u109\"><span class=\"ds-u110\"></span> إجمالي الإيرادات (Gross Revenue)</span>"
+  ],
+  [
+    3167,
+    "<span class=\"ds-u109\"><span class=\"ds-u111\"></span> التدفق النقدي الصافي (Net Cash Flow)</span>"
+  ],
+  [
+    3175,
+    "<div class=\"ds-u115\">تطبيق سطح مكتب مستقل (Offline-First) لحساب BTW وتوليد ملفات إقرارات الضرائب المشفرة.</div>"
+  ],
+  [
+    3179,
+    "<div class=\"ds-u115\">محرك تحليل ذكاء اصطناعي محلي مع معالجة مستندات الفواتير بدقة 99.4%.</div>"
+  ],
+  [
+    3190,
+    "<div class=\"ds-u119\">ختم الاعتماد الرقمي (Verified SHA-256)</div>"
+  ],
+  [
+    3204,
+    "<span id=\"portal-toast-msg\">تم تطبيق الإعدادات بنجاح</span>"
+  ]
+]
