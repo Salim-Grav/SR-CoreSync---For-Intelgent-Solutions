@@ -776,6 +776,224 @@
             opacity: 1;
         }
 
+        /* Toolbar and Document Components */
+        .btn-action-verify {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #34d399;
+            text-decoration: none;
+        }
+
+        .bank-details-box {
+            background: rgba(15, 23, 42, 0.03);
+            border: 1.5px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 7px 12px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            font-size: 8pt;
+        }
+
+        .bank-details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+        }
+
+        .bank-details-title {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .bank-details-badge {
+            background: #9fe870;
+            color: #163300;
+            font-weight: 800;
+            padding: 1px 7px;
+            border-radius: 4px;
+            font-size: 7pt;
+        }
+
+        .bank-details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+
+        .bank-details-footer {
+            margin-top: 3px;
+            color: #475569;
+            font-size: 7pt;
+        }
+
+        .footer-verify-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-verify-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+
+        .footer-verify-hash {
+            font-family: monospace;
+            color: #0284c7;
+            text-decoration: underline;
+        }
+
+        .footer-verify-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: #047857;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 6.5pt;
+        }
+
+        .email-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 10px;
+        }
+
+        .email-modal-title {
+            margin: 0;
+            color: #fbf5b7;
+            font-size: 15px;
+        }
+
+        .email-modal-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .email-modal-desc {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .email-modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .email-preview-container {
+            background: #ffffff;
+            color: #0f172a;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 12px;
+            line-height: 1.5;
+            direction: rtl;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .email-header-bar {
+            border-bottom: 2px solid #b38728;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .email-corp-title {
+            font-size: 14px;
+            color: #0b192c;
+        }
+
+        .email-doc-ref {
+            font-size: 11px;
+            color: #aa771c;
+        }
+
+        .email-date-badge {
+            font-size: 11px;
+            color: #64748b;
+            direction: ltr;
+        }
+
+        .email-highlight-box {
+            background: #fffbeb;
+            border: 1.5px solid #f59e0b;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 12px 0;
+        }
+
+        .email-highlight-title {
+            color: #b45309;
+            font-size: 13px;
+        }
+
+        .email-highlight-desc {
+            font-size: 11px;
+            color: #78350f;
+        }
+
+        .email-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+
+        .email-table th, .email-table td {
+            padding: 6px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .email-table-header-row {
+            background: #f1f5f9;
+        }
+
+        .email-table th:first-child {
+            text-align: right;
+        }
+
+        .email-table th:last-child {
+            text-align: left;
+        }
+
+        .email-table-row-highlight {
+            background: #ecfdf5;
+            font-weight: bold;
+        }
+
+        .email-table-price-green {
+            text-align: left;
+            direction: ltr;
+            color: #047857;
+        }
+
+        .email-table-price-ltr {
+            text-align: left;
+            direction: ltr;
+        }
+
+        .email-link-highlight {
+            color: #0284c7;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
         /* Print Strict Rules - 2 Exactly Separate A4 Pages */
         @page {
             size: A4 portrait;
@@ -841,7 +1059,7 @@
             <span>قالب الإيميل (Gmail/Outlook)</span>
         </button>
 
-        <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="btn-action" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; text-decoration: none;">
+        <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-verify">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             <span>التحقق الرقمي (Verify)</span>
         </a>
