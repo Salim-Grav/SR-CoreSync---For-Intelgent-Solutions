@@ -1,0 +1,734 @@
+/* ==========================================================================
+   S&R CORESYNC SOLUTIONS - CLOUD WEB APPS & PWA RUNTIME ENGINE STYLES
+   Author: Eng. Salim Aziza & M. Raed Kaakeh
+   Standard: Sovereign 2026 Glassmorphic Desktop/Mobile OS Container
+   ========================================================================== */
+
+:root {
+    --sr-app-bg: #030806;
+    --sr-app-card: #081410;
+    --sr-app-card-hover: #0c1e18;
+    --sr-app-border: rgba(197, 168, 128, 0.22);
+    --sr-app-border-glow: rgba(16, 185, 129, 0.45);
+    --sr-app-gold: #c5a880;
+    --sr-app-gold-bright: #e7cfad;
+    --sr-app-emerald: #10b981;
+    --sr-app-cyan: #38bdf8;
+    --sr-app-purple: #a855f7;
+    --sr-app-red: #ef4444;
+    --sr-app-text-muted: #94a3b8;
+}
+
+/* Modal Overlay */
+.sr-app-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(1, 6, 4, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sr-app-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Application Window Frame (Desktop OS Look) */
+.sr-app-window {
+    width: 100%;
+    max-width: 1240px;
+    height: 90vh;
+    max-height: 860px;
+    background: linear-gradient(145deg, rgba(8, 20, 16, 0.98), rgba(3, 8, 6, 0.99));
+    border: 1px solid var(--sr-app-border);
+    border-radius: 18px;
+    box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.85), 0 0 50px rgba(16, 185, 129, 0.12);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.sr-app-window.fullscreen {
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+}
+
+/* OS Window Header Bar */
+.sr-app-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: rgba(4, 12, 9, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    user-select: none;
+    gap: 12px;
+}
+
+.sr-app-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.sr-os-dots {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.sr-os-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+}
+
+.sr-os-dot:hover {
+    transform: scale(1.15);
+}
+
+.sr-os-dot.red { background: #ef4444; box-shadow: 0 0 6px rgba(239, 68, 68, 0.5); }
+.sr-os-dot.yellow { background: #f59e0b; box-shadow: 0 0 6px rgba(245, 158, 11, 0.5); }
+.sr-os-dot.green { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.5); }
+
+.sr-app-title-cluster {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sr-app-header-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.sr-app-header-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: -0.2px;
+}
+
+.sr-app-header-ver {
+    font-size: 0.72rem;
+    color: var(--sr-app-gold);
+    background: rgba(197, 168, 128, 0.12);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-family: monospace;
+}
+
+.sr-app-header-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sr-app-mode-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--sr-app-text-muted);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.sr-app-mode-pill:hover,
+.sr-app-mode-pill.active {
+    background: rgba(16, 185, 129, 0.16);
+    border-color: var(--sr-app-emerald);
+    color: #ffffff;
+}
+
+.sr-app-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sr-app-sync-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--sr-app-emerald);
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.sr-app-sync-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--sr-app-emerald);
+    box-shadow: 0 0 8px var(--sr-app-emerald);
+    animation: srPulse 2s infinite;
+}
+
+@keyframes srPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.sr-app-btn-icon {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.sr-app-btn-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sr-app-btn-icon.close:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* Application Window Body */
+.sr-app-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* App Sub-Navigation Bar */
+.sr-app-subnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(8, 20, 16, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.sr-app-subnav-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sr-app-subnav-btn {
+    background: transparent;
+    border: none;
+    color: var(--sr-app-text-muted);
+    font-size: 0.84rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.sr-app-subnav-btn:hover,
+.sr-app-subnav-btn.active {
+    background: rgba(197, 168, 128, 0.16);
+    color: var(--sr-app-gold-bright);
+}
+
+.sr-app-license-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--sr-app-text-muted);
+}
+
+.sr-app-license-key-disp {
+    font-family: monospace;
+    color: var(--sr-app-gold);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(197, 168, 128, 0.25);
+}
+
+/* Grid Layout for App Panes */
+.sr-app-grid-2 {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.sr-app-grid-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Cards within the App */
+.sr-app-card {
+    background: rgba(10, 24, 19, 0.75);
+    border: 1px solid rgba(197, 168, 128, 0.18);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.sr-app-card-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--sr-app-gold-bright);
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 10px;
+}
+
+/* Forms & Inputs */
+.sr-app-form-group {
+    margin-bottom: 14px;
+}
+
+.sr-app-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sr-app-text-muted);
+    margin-bottom: 6px;
+}
+
+.sr-app-input,
+.sr-app-select,
+.sr-app-textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.sr-app-input:focus,
+.sr-app-select:focus,
+.sr-app-textarea:focus {
+    outline: none;
+    border-color: var(--sr-app-gold);
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 3px rgba(197, 168, 128, 0.15);
+}
+
+/* Interactive Action Buttons */
+.sr-app-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.sr-app-btn.primary {
+    background: linear-gradient(135deg, #c5a880, #8e6834);
+    color: #030806;
+}
+
+.sr-app-btn.primary:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+}
+
+.sr-app-btn.emerald {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+}
+
+.sr-app-btn.emerald:hover {
+    filter: brightness(1.15);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.sr-app-btn.secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.sr-app-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.sr-app-btn.full {
+    width: 100%;
+}
+
+/* Result / Calculation Box */
+.sr-app-calc-box {
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--sr-app-border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.sr-app-calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.88rem;
+}
+
+.sr-app-calc-row.total {
+    border-top: 1px dashed rgba(197, 168, 128, 0.3);
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--sr-app-gold-bright);
+}
+
+/* Table styling within Apps */
+.sr-app-table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sr-app-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    text-align: right;
+}
+
+[dir="ltr"] .sr-app-table {
+    text-align: left;
+}
+
+.sr-app-table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--sr-app-text-muted);
+    padding: 10px 14px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sr-app-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+}
+
+.sr-app-table tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ==========================================================================
+   APP SPECIFIC: FLOWSCAN AI MOBILE (PHONE MOCKUP & SCAN LASER)
+   ========================================================================== */
+.sr-flowscan-phone-frame {
+    max-width: 380px;
+    margin: 0 auto;
+    background: #000000;
+    border: 10px solid #1a2e26;
+    border-radius: 42px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.2);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 620px;
+}
+
+.sr-phone-notch {
+    width: 130px;
+    height: 22px;
+    background: #1a2e26;
+    margin: 0 auto;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sr-phone-camera-lens {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #030806;
+    border: 1px solid #10b981;
+}
+
+.sr-flowscan-scanner-view {
+    position: relative;
+    height: 260px;
+    background: radial-gradient(circle at center, #0b221a, #030806);
+    border-radius: 16px;
+    margin: 14px;
+    border: 2px dashed rgba(16, 185, 129, 0.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+}
+
+.sr-scan-laser-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #10b981, #34d399, transparent);
+    box-shadow: 0 0 12px #10b981, 0 0 24px #34d399;
+    animation: srScanMove 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes srScanMove {
+    0% { top: 5%; }
+    100% { top: 92%; }
+}
+
+.sr-preset-receipts-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sr-preset-receipt-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 8px 6px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.sr-preset-receipt-btn:hover,
+.sr-preset-receipt-btn.active {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: var(--sr-app-emerald);
+}
+
+/* ==========================================================================
+   APP SPECIFIC: CLOUDPOS CONNECTOR (CASHIER & THERMAL RECEIPT)
+   ========================================================================== */
+.sr-pos-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.sr-pos-product-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sr-pos-product-card:hover {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--sr-app-emerald);
+    transform: translateY(-2px);
+}
+
+.sr-pos-product-icon {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.sr-pos-product-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.sr-pos-product-price {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--sr-app-gold);
+    font-family: monospace;
+}
+
+.sr-pos-product-vat {
+    font-size: 0.68rem;
+    color: var(--sr-app-text-muted);
+}
+
+/* Thermal Paper Receipt */
+.sr-thermal-receipt {
+    background: #fff8e7;
+    color: #111827;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 18px 14px;
+    border-radius: 4px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+
+.sr-thermal-receipt::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(135deg, transparent 50%, #fff8e7 50%), linear-gradient(45deg, #fff8e7 50%, transparent 50%);
+    background-size: 10px 10px;
+}
+
+.sr-receipt-center {
+    text-align: center;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed #6b7280;
+    padding-bottom: 8px;
+}
+
+.sr-receipt-barcode {
+    font-family: monospace;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   APP SPECIFIC: SECUREVAULT B2B (CRYPTO PLAYGROUND)
+   ========================================================================== */
+.sr-cipher-display {
+    background: #020604;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.82rem;
+    color: #38bdf8;
+    word-break: break-all;
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+/* ==========================================================================
+   APP SPECIFIC: FINANCIAL AI SDK (DEVELOPER CONSOLE)
+   ========================================================================== */
+.sr-code-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0b1511;
+    padding: 6px 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: none;
+}
+
+.sr-code-lang-pills {
+    display: flex;
+    gap: 6px;
+}
+
+.sr-code-lang-pill {
+    background: transparent;
+    border: none;
+    color: var(--sr-app-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sr-code-lang-pill.active {
+    background: rgba(197, 168, 128, 0.25);
+    color: var(--sr-app-gold);
+}
+
+.sr-code-pre {
+    margin: 0;
+    background: #020604;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 12px;
+    color: #e2e8f0;
+    font-family: 'Consolas', monospace;
+    font-size: 0.78rem;
+    overflow-x: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .sr-app-grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .sr-app-window {
+        height: 96vh;
+        max-height: 96vh;
+    }
+}
