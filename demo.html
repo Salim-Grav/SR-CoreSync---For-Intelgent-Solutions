@@ -4370,8 +4370,8 @@ function signContractDigitally() {
     isContractOf2026Signed = true;
     const unsignedBox = document.getElementById('clientUnsignedBox');
     const signedBox = document.getElementById('clientSignedBox');
-    if (unsignedBox) unsignedBox.style.display = 'none';
-    if (signedBox) signedBox.style.display = 'block';
+    if (unsignedBox) unsignedBox.classList.add('d-none');
+    if (signedBox) signedBox.classList.remove('d-none');
 
     const statusBadge = document.getElementById('status-badge-inv-1021');
     if (statusBadge) {
