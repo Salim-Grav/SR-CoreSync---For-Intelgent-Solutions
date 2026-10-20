@@ -252,7 +252,11 @@
 
         const sw = SOFTWARE_APPS[activeAppId] || SOFTWARE_APPS.taxsync;
 
-        // Common App Sub-Nav with License Bar & Switcher
+        const isAcct = (sw.id === 'taxsync' || sw.id === 'cloudpos' || sw.id === 'flowscan');
+        const advisorName = isAcct ? 'أ. رائد كعكة (المحاسبة)' : 'م. سليم عزيزة (الأنظمة)';
+        const advisorCategory = isAcct ? 'accounting' : 'systems';
+
+        // Common App Sub-Nav with License Bar, Advisor Routing & Switcher
         let subnavHtml = `
             <div class="sr-app-subnav">
                 <div class="sr-app-subnav-links">
@@ -263,10 +267,16 @@
                     <button type="button" class="sr-app-subnav-btn ${activeAppId === 'sdk' ? 'active' : ''}" onclick="openSoftwareLiveApp('sdk', currentDeviceMode)">🧩 Dev SDK</button>
                 </div>
                 <div class="sr-app-license-pill">
-                    <span>مفتاح الترخيص المفعل:</span>
+                    <span>مفتاح الترخيص:</span>
                     <span class="sr-app-license-key-disp" id="srCurrentLicenseDisplay">${sw.defaultKey}</span>
                     <button type="button" class="sr-app-btn secondary" onclick="promptLicenseActivation('${sw.id}')" title="تفعيل مفتاح تجاري">تغيير 🔑</button>
-                    <a href="${sw.offlineFile}" download class="sr-app-btn primary" title="تحميل ملف الويب للتشغيل أوفلاين بدون نت">تحميل أوفلاين 📥</a>
+                    <a href="${sw.offlineFile}" download class="sr-app-btn primary" title="تحميل ملف الويب للتشغيل أوفلاين بدون نت">تحميل 📥</a>
+                    <button type="button" class="sr-app-btn" style="${isAcct ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(56,189,248,0.2);color:#7dd3fc;border:1px solid rgba(56,189,248,0.4);'}" onclick="window.openExecutiveContactModal('${advisorCategory}', '${sw.title}')" title="استشارة تنفيذية مباشرة">
+                        💬 ${advisorName}
+                    </button>
+                    <button type="button" class="sr-app-btn" style="background:rgba(197,168,128,0.18);color:#dfc299;border:1px solid rgba(197,168,128,0.35);" onclick="window.sendDirectInfoEmail('${sw.title}')" title="مراسلة إيميل فوري إلى info@sr-coresync.com">
+                        📧 info@
+                    </button>
                 </div>
             </div>
         `;
