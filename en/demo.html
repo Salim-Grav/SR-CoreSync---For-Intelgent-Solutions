@@ -387,7 +387,7 @@
                             </div>
                         </div>
                         <div class="stat-value font-num">98.7%</div>
-                        <div class="stat-trend positive">تسوية via SEPA & iDEAL بدون تدخل بشري</div>
+                        <div class="stat-trend positive">Reconciliation via SEPA & iDEAL without manual input</div>
                     </div>
                 </div>
 
@@ -398,9 +398,9 @@
                             <span class="text-caption text-white-64">Real-time generation and 100% accounting standard compliance</span>
                         </div>
                         <div class="filter-pill-group">
-                            <button type="button" class="filter-btn active" onclick="filterInvoices('all', this)">الكل (<span id="count-all">3</span>)</button>
-                            <button type="button" class="filter-btn" onclick="filterInvoices('paid', this)">المدفوعة (<span id="count-paid">2</span>)</button>
-                            <button type="button" class="filter-btn" onclick="filterInvoices('pending', this)">المستحقة (<span id="count-pending">1</span>)</button>
+                            <button type="button" class="filter-btn active" onclick="filterInvoices('all', this)">All (<span id="count-all">3</span>)</button>
+                            <button type="button" class="filter-btn" onclick="filterInvoices('paid', this)">Paid (<span id="count-paid">2</span>)</button>
+                            <button type="button" class="filter-btn" onclick="filterInvoices('pending', this)">Pending (<span id="count-pending">1</span>)</button>
                         </div>
                     </div>
                     <div class="data-table-wrap">
@@ -413,7 +413,7 @@
                                     <th>VAT / BTW</th>
                                     <th>Grand Total</th>
                                     <th>Settlement Status</th>
-                                    <th>Actions التفاعلية</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="invoicesTableBody">
@@ -693,7 +693,7 @@
                             <div class="quick-tax-calc-box ds-u2">
                                 <div class="ds-u3">
                                     <span class="ds-u4">⚡ Quick Tax Calculator:</span>
-                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="اختيار نسبة VAT / BTW للحاسبة السريعة" aria-label="اختيار نسبة VAT / BTW للحاسبة السريعة">
+                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="Select VAT rate for quick calculation" aria-label="Select VAT rate for quick calculation">
                                         <option value="0.21">Dutch BTW 21%</option>
                                         <option value="0.09">Reduced BTW 9%</option>
                                         <option value="0.15">GCC VAT 15%</option>
@@ -1041,7 +1041,7 @@
             <div class="text-caption text-center text-white-64" id="idealStatusText">Ready to execute instant transfer via SEPA Instant</div>
 
             <div class="modal-form-actions mt-3">
-                <button type="button" class="btn-return-main" onclick="closeIdealSimulatorModal()">إغلاق</button>
+                <button type="button" class="btn-return-main" onclick="closeIdealSimulatorModal()">Close</button>
                 <button type="button" class="action-cta-btn" id="btnConfirmIdeal" onclick="executeIdealPayment()">Confirm Instant Demo Settlement</button>
             </div>
         </div>
@@ -1108,13 +1108,13 @@
             </div>
 
             <div class="modal-form-actions">
-                <button type="button" class="btn-return-main" onclick="closeSoftwareModal()">إغلاق</button>
+                <button type="button" class="btn-return-main" onclick="closeSoftwareModal()">Close</button>
                 <button type="button" class="btn-secondary-glow" id="modalBtnDownload" onclick="triggerSoftwareDownload()">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Download Verified Installer (.zip)
                 </button>
                 <button type="button" class="action-cta-btn" id="modalBtnBuy" onclick="triggerSoftwareCheckout()">
-                    Purchase License وإصدار فاتورة
+                    Purchase License & Issue Invoice
                 </button>
             </div>
         </div>
@@ -1174,7 +1174,7 @@
             
             <div class="os-window-header">
                 <div class="os-window-controls">
-                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="إغلاق"></span>
+                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="Close"></span>
                     <span class="os-dot yellow" title="Minimize"></span>
                     <span class="os-dot green" title="Maximize"></span>
                 </div>
@@ -1331,7 +1331,7 @@
                                 <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
                             </div>
                             <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" onclick="openSoftwareCheckoutModal('taxsync')">
-                                Purchase License التجاري الآن (€ 189 / سنة)
+                                Purchase Commercial License Now (€ 189 / yr)
                             </button>
                         </div>
                     </div>
@@ -1419,11 +1419,11 @@
                 </div>
                 <div class="license-key-display my-2">
                     <span id="chkSuccessKey">PRO-SR-TAXSYNC-COMMERCIAL-2026-X98B</span>
-                    <button type="button" class="table-action-btn" onclick="navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('License key copied!');">نسخ</button>
+                    <button type="button" class="table-action-btn" onclick="navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('License key copied!');">Copy</button>
                 </div>
                 <div class="d-flex gap-2 flex-wrap mt-2">
                     <button type="button" class="action-cta-btn ds-u62" id="chkBtnViewInvoice">
-                        📄 Preview Invoice الصادرة
+                        📄 Preview Issued Invoice
                     </button>
                     <button type="button" class="table-action-btn ds-u62" onclick="triggerSoftwareDownload()">
                         📦 Download Package
@@ -1445,14 +1445,14 @@
     <div id="tourBackdrop" class="tour-backdrop ds-u52" onclick="endGuidedTour()"></div>
     <div id="tourCard" class="tour-card ds-u52">
         <div class="tour-card-header">
-            <span class="tour-step-badge" id="tourStepBadge">خطوة 1 من 5</span>
-            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="إغلاق الجولة">✕</button>
+            <span class="tour-step-badge" id="tourStepBadge">Step 1 of 5</span>
+            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="Close Tour">✕</button>
         </div>
         <h4 id="tourStepTitle" class="tour-step-title">Executive Financial Dashboard</h4>
         <p id="tourStepDesc" class="tour-step-desc">Live corporate financial performance displayed with precision revenue metrics and growth indicators.</p>
         <div class="tour-card-footer">
-            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ السابق</button>
-            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">التالي ➡️</button>
+            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ Previous</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">Next ➡️</button>
         </div>
     </div>
 
@@ -1469,10 +1469,10 @@
                 </div>
                 <div class="ds-u69">
                     <button class="ds-u70" type="button" onclick="printExecutiveBrief()">
-                        🖨️ طباعة / حفظ كـ PDF
+                        🖨️ Print / Save as PDF
                     </button>
                     <button class="ds-u71" type="button" onclick="closeExecutivePdfModal()">
-                        إغلاق ✕
+                        Close ✕
                     </button>
                 </div>
             </div>
@@ -1543,7 +1543,7 @@
                             </tr>
                             <tr class="ds-u96">
                                 <td class="ds-u97">Applied Tax Regime in Session</td>
-                                <td class="ds-u100" id="pdfVatScheme">BTW هولندي (21%)</td>
+                                <td class="ds-u100" id="pdfVatScheme">Dutch BTW (21%)</td>
                                 <td class="ds-u101">Compliant with AWR Art. 52</td>
                             </tr>
                             <tr class="ds-u96">
