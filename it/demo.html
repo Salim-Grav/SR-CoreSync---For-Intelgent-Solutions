@@ -1849,12 +1849,12 @@
 
             // Enterprise CoreSync Engine Logic
             const pendingEl = document.getElementById('inv-stat-pending');
-            const currentIn sospeso = 35000 + total;
-            pendingEl.innerText = `€ ${currentIn sospeso.toLocaleString()}`;
+            const currentPending = 35000 + total;
+            pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;
 
             updateInvoiceCounters();
             closeInvoiceGeneratorModal();
-            previewInvoiceModal(invNum, client, netImporto, vatImporto, total, 'In sospeso', dateStr, taxLabel);
+            previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'In sospeso', dateStr, taxLabel);
         }
 
         function previewInvoiceModal(num, client, net, vat, total, status, date, taxType, customIssuerName = null) {

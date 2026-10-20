@@ -1849,12 +1849,12 @@
 
             // Enterprise CoreSync Engine Logic
             const pendingEl = document.getElementById('inv-stat-pending');
-            const currentAusstehend = 35000 + total;
-            pendingEl.innerText = `€ ${currentAusstehend.toLocaleString()}`;
+            const currentPending = 35000 + total;
+            pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;
 
             updateInvoiceCounters();
             closeInvoiceGeneratorModal();
-            previewInvoiceModal(invNum, client, netBetrag, vatBetrag, total, 'Ausstehend', dateStr, taxLabel);
+            previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'Ausstehend', dateStr, taxLabel);
         }
 
         function previewInvoiceModal(num, client, net, vat, total, status, date, taxType, customIssuerName = null) {
