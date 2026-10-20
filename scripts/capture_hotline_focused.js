@@ -65,7 +65,19 @@ async function capture() {
   });
   console.log('Eval result:', evalRes.result.result.value);
 
-  await new Promise(r => setTimeout(r, 1200));
+  await new Promise(r => setTimeout(r, 600));
+
+  const checkBeforeShot = await call('Runtime.evaluate', {
+    expression: `(() => {
+      const w = document.getElementById('sovereignHotlineWidget');
+      return {
+        className: w ? w.className : null,
+        topEl: document.elementFromPoint(100, 500) ? document.elementFromPoint(100, 500).tagName + '.' + document.elementFromPoint(100, 500).className : 'none'
+      };
+    })()`,
+    returnByValue: true
+  });
+  console.log('Right before screenshot:', checkBeforeShot.result.result.value);
 
   const shot = await call('Page.captureScreenshot', { format: 'png' });
   fs.writeFileSync(path.join(artifactDir, 'feature3_hotline_open_verified.png'), Buffer.from(shot.result.data, 'base64'));
