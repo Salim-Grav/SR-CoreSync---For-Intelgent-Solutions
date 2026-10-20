@@ -4347,6 +4347,40 @@ function calcMigrationEstimator() {
     if (valSavings) valSavings.innerText = `-${savings}%`;
 }
 
+// -------------------------------------------------------------
+// Official Contract OF-2026-1021 Logic (NL bil Arabi - Mudar Abu Fasheh)
+// -------------------------------------------------------------
+function openContractOf2026Modal() {
+    const modal = document.getElementById('contractOf2026Modal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeContractOf2026Modal() {
+    const modal = document.getElementById('contractOf2026Modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function signContractDigitally() {
+    const unsignedBox = document.getElementById('clientUnsignedBox');
+    const signedBox = document.getElementById('clientSignedBox');
+    if (unsignedBox) unsignedBox.style.display = 'none';
+    if (signedBox) signedBox.style.display = 'block';
+
+    const statusBadge = document.getElementById('status-badge-inv-1021');
+    if (statusBadge) {
+        statusBadge.className = 'status-badge status-completed';
+        statusBadge.innerText = 'تم التوقيع والاعتماد رقمياً ✓';
+    }
+
+    showPortalToast('✓ تم اعتماد وتوقيع العقد رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
+}
+
+function shareContractViaWhatsApp() {
+    const url = window.location.origin + window.location.pathname + '?client=mudar&contract=OF-2026-1021#invoices';
+    const text = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك رابط العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions.\nيمكنك مراجعة وتوقيع العقد وسداد الدفعة الأولى مباشرة عبر الرابط:\n${url}`);
+    window.open(`https://wa.me/31618111116?text=${text}`, '_blank', 'noopener,noreferrer');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const lang = document.documentElement.lang || 'ar';
     const greetings = {
@@ -4385,6 +4419,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calcPortalRoi();
     calcMigrationEstimator();
+
+    // Check URL parameters for contract activation
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('contract') === 'OF-2026-1021' || urlParams.get('client') === 'mudar' || urlParams.get('client') === 'NL_bil_Arabi') {
+        const clientInput = document.getElementById('quickClientNameInput');
+        if (clientInput) clientInput.value = 'منصة NL بالعربي (السيد مضر أبو فاشة)';
+        if (typeof switchPortalTab === 'function') switchPortalTab('invoices');
+        setTimeout(openContractOf2026Modal, 400);
+    }
 });
 </script>
 
