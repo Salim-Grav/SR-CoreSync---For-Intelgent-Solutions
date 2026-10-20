@@ -1164,32 +1164,77 @@
 
             <!-- 7. سوق البرمجيات الحصرية وحلول التطبيقات (Software Hub & App Store) -->
             <section class="tab-section" id="tab-software">
-                <div class="section-header">
-                    <div class="section-title-wrap">
-                        <h2>سوق البرمجيات والحلول الحصرية (S&R Software Hub & Store)</h2>
-                        <p>تطبيقات سطح المكتب للكمبيوتر، تطبيقات الهاتف، وأدوات الربط المطورة حصرياً بعوائد وتراخيص رقمية</p>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button type="button" class="action-cta-btn" onclick="openPublishSoftwareModal()">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            نشر برنامج جديد (Publish)
-                        </button>
+                <!-- البنر الرئيسي الفخم والمتوسط هندسياً (Sovereign Centered Software Hub Banner) -->
+                <div class="sr-market-hero-banner">
+                    <div class="sr-market-hero-backdrop"></div>
+                    <div class="sr-market-hero-content">
+                        <div class="sr-market-tag-badge">
+                            <span class="sr-pulse-dot"></span>
+                            <span>S&R SOVEREIGN SOFTWARE ECOSYSTEM • AMSTERDAM AMS-IX</span>
+                        </div>
+                        <h2 class="sr-market-hero-title">
+                            سوق البرمجيات والحلول التطبيقية المبتكرة
+                        </h2>
+                        <p class="sr-market-hero-subtitle">
+                            منظومة برمجيات أوروبية متكاملة ومستقلة (Offline-First &amp; Cloud)، مطورة حصرياً بأعلى معايير الأمان والتشفير، متوافقة 100% مع الضرائب الهولندية والاتحاد الأوروبي مع تراخيص رقمية مشفرة وتثبيت فوري.
+                        </p>
+                        
+                        <!-- أشرطة الضمانات والمعايير في منتصف البنر -->
+                        <div class="sr-market-guarantees">
+                            <div class="sr-guarantee-pill">
+                                <span>🇳🇱</span>
+                                <span>سيرفرات أمستردام AMS-IX</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>🛡️</span>
+                                <span>تشفير عسكري AES-256 GCM</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>📑</span>
+                                <span>معايير Belastingdienst &amp; GDPR</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>📷</span>
+                                <span>دعم كاميرات الموبايل واللابتوب والباركود</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>⚡</span>
+                                <span>تشغيل أوفلاين وسحابي</span>
+                            </div>
+                        </div>
+
+                        <!-- أزرار الإجراءات الرئيسية في منتصف البنر -->
+                        <div class="sr-market-hero-actions">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" onclick="openSoftwareDocsModal('cloudpos', 'ar')">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
+                            </button>
+                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" onclick="openPublishSoftwareModal()">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                <span>🚀 نشر وتوزيع برنامج جديد (Publish)</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- شريط فلترة التصنيفات -->
-                <div class="glass-box mb-4 p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <!-- شريط البحث والفلترة الذكي التفاعلي -->
+                <div class="sr-market-toolbar">
+                    <div class="sr-market-search-box">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="srSoftwareSearchInput" placeholder="ابحث في البرمجيات (مثال: ضريبة, كاميرا, POS, OCR, تشفير, SDK)..." oninput="filterSoftwareBySearch(this.value)" aria-label="بحث في البرمجيات" />
+                        <button type="button" class="sr-search-clear-btn" id="srSearchClearBtn" onclick="clearSoftwareSearch()" title="مسح البحث">✕</button>
+                    </div>
+
                     <div class="filter-pill-group">
-                        <button type="button" class="filter-btn active" onclick="filterSoftwareCategory('all', this)">الكل (5)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('desktop', this)">برامج الكمبيوتر PC/Mac (2)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('mobile', this)">تطبيقات الموبايل (1)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('pos', this)">نقاط البيع POS (1)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('sdk', this)">أدوات المطورين SDK (1)</button>
+                        <button type="button" class="filter-btn active" onclick="filterSoftwareCategory('all', this)">🗂️ الكل (6)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('desktop', this)">💻 برامج الكمبيوتر PC/Mac (2)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('mobile', this)">📱 تطبيقات الموبايل (1)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('pos', this)">⚡ نقاط البيع والكاشير POS (1)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('sdk', this)">🧩 أدوات المطورين SDK (2)</button>
                     </div>
-                    <span class="text-caption text-white-64">تراخيص رقمية فورية وتنزيل مباشر</span>
                 </div>
 
-                <!-- شبكة كروت البرمجيات -->
+                <!-- شبكة كروت البرمجيات المنظمة -->
                 <div class="software-grid" id="softwareGridContainer">
                     
                     <!-- 1. برنامج S&R TaxSync Desktop -->
@@ -1262,6 +1307,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('taxsync')" title="تشغيل فوري داخل المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('taxsync', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-TaxSync-Web-App.html" download="SR-TaxSync-Web-App.html" class="btn-software-trial" title="تحميل نسخة أوفلاين كاملة">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">شراء الترخيص</button>
                             </div>
@@ -1306,6 +1352,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('flowscan', 'mobile')" title="تشغيل فوري على شاشة الهاتف بالمتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('flowscan', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-FlowScan-Mobile-App.html" download="SR-FlowScan-Mobile-App.html" class="btn-software-trial" title="تحميل تطبيق الموبايل أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('flowscan')">اشتراك</button>
                             </div>
@@ -1334,11 +1381,11 @@
                                 </li>
                                 <li class="software-feature-item">
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    مزامنة مبيعات أوفلاين عند انقطاع الإنترنت
+                                    مسح باركود مباشر بكاميرا الموبايل واللابتوب أو السكانر
                                 </li>
                                 <li class="software-feature-item">
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    حماية وأمان معزول للأرصدة النقدية
+                                    مزامنة مبيعات أوفلاين عند انقطاع الإنترنت
                                 </li>
                             </ul>
                         </div>
@@ -1349,6 +1396,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('cloudpos')" title="تشغيل شاشة الكاشير ونقاط البيع">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('cloudpos', 'ar')" title="دليل الاستخدام ومسح الباركود بالكاميرا">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudPOS-Terminal.html" class="btn-software-trial" title="تحميل شاشة الكاشير أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('cloudpos')">تفعيل</button>
                             </div>
@@ -1392,6 +1440,7 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('vault')" title="تشغيل أداة التشفير في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('vault', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-SecureVault-App.html" download="SR-SecureVault-App.html" class="btn-software-trial" title="تحميل أداة التشفير أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('vault')">اشتراك</button>
                             </div>
@@ -1437,8 +1486,55 @@
                             </div>
                             <div class="software-btn-group">
                                 <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('sdk')" title="تشغيل وحدة الـ API في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('sdk', 'ar')" title="دليل الاستخدام والـ API">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-Financial-AI-SDK.html" download="SR-Financial-AI-SDK.html" class="btn-software-trial" title="تحميل حزمة الـ SDK أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('sdk')">طلب الترخيص</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. وكيل S&R Cloud Terminal Agent -->
+                    <div class="software-card" data-category="sdk">
+                        <span class="software-card-badge">مراقبة سحابية وميكروسيرفس</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap">⚙️</div>
+                                <div>
+                                    <div class="software-info-title">S&R Cloud Terminal Agent</div>
+                                    <div class="software-info-version">
+                                        <span>v1.0 DevOps</span>
+                                        <span class="platform-pill">Docker</span>
+                                        <span class="platform-pill">Kubernetes</span>
+                                        <span class="platform-pill">Linux</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">وكيل سحابي خفيف لمراقبة البنية التحتية والخوادم، يتتبع استهلاك المعالج والذاكرة وحالة نبضات الخدمات سحابياً مع إدارة وإعادة تشغيل فورية.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    مراقبة حية بنبضات الـ Heartbeat لميكروسيرفس المنظومة
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تنبيهات فورية عند تجاوز حدود استهلاك المعالج والذاكرة
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    إعادة تشغيل ذاتية للخدمات في خوادم أمستردام AMS-IX
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 39</span>
+                                <span class="software-price-unit">شهرياً / Cluster</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('terminal')" title="تشغيل وكيل المراقبة في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('terminal', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudTerminal-Agent.html" class="btn-software-trial" title="تحميل وكيل المراقبة">أوفلاين 📥</a>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('terminal')">اشتراك</button>
                             </div>
                         </div>
                     </div>
