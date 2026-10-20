@@ -48,14 +48,16 @@
             justify-content: space-between;
         }
 
-        .portal-brand {
+        .portal-brand,
+        .brand-logo-site {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 14px !important;
+            gap: 12px !important;
             text-decoration: none !important;
-            color: #fff !important;
             direction: ltr !important;
             unicode-bidi: isolate !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
             transform: none !important;
             -webkit-transform: none !important;
         }
@@ -73,67 +75,53 @@
             box-shadow: 0 0 15px var(--gold-glow);
         }
 
-        .portal-brand-emblem {
-            width: 52px !important;
-            height: 52px !important;
+        .portal-brand-emblem,
+        .brand-emblem-img {
+            width: 64px !important;
+            height: 64px !important;
             object-fit: contain !important;
             border-radius: 50% !important;
-            filter: drop-shadow(0 0 16px rgba(197, 168, 128, 0.55)) !important;
+            filter: drop-shadow(0 0 16px rgba(197, 168, 128, 0.6)) !important;
             box-shadow: 0 0 18px rgba(197, 168, 128, 0.25) !important;
             flex-shrink: 0 !important;
             display: block !important;
             transform: none !important;
             -webkit-transform: none !important;
-            transition: transform 0.3s ease, filter 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease !important;
         }
 
-        .portal-brand:hover .portal-brand-emblem {
-            transform: scale(1.06) !important;
-            filter: drop-shadow(0 0 24px rgba(197, 168, 128, 0.85)) !important;
+        .portal-brand-emblem:hover,
+        .brand-emblem-img:hover {
+            transform: scale(1.08) !important;
+            filter: drop-shadow(0 0 22px rgba(197, 168, 128, 0.9)) !important;
         }
 
-        .portal-brand-text {
-            display: flex !important;
-            flex-direction: column !important;
-            direction: ltr !important;
-            unicode-bidi: isolate !important;
-            transform: none !important;
-            -webkit-transform: none !important;
-        }
-
-        .portal-brand-title {
+        .brand-logo-site-logo {
             display: inline-flex !important;
             align-items: baseline !important;
             gap: 6px !important;
             direction: ltr !important;
             unicode-bidi: isolate !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
             transform: none !important;
             -webkit-transform: none !important;
-            line-height: 1.1 !important;
         }
 
-        .portal-brand-title .brand-sr-text {
-            font-size: 1.35rem !important;
-            font-weight: 900 !important;
-            color: #ffffff !important;
-            font-family: 'Playfair Display', serif !important;
-            letter-spacing: 0.5px !important;
-        }
-
-        .portal-brand-title .brand-sub-text {
-            font-size: 1.05rem !important;
-            font-weight: 700 !important;
+        .brand-sr-text {
+            font-family: 'Playfair Display', 'Plus Jakarta Sans', serif, sans-serif !important;
+            font-weight: 800 !important;
+            font-size: 1.25rem !important;
             color: #c5a880 !important;
-            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            letter-spacing: -0.3px !important;
         }
 
-        .portal-brand-tag {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            margin-top: 2px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
+        .brand-sub-text {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: 1.25rem !important;
+            color: #ffffff !important;
+            letter-spacing: -0.3px !important;
         }
 
         .header-controls {
