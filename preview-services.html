@@ -39,6 +39,260 @@
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(197, 168, 128, 0.3), transparent);
         }
+
+        /* Top Executive Quick Contact Strip */
+        .sr-services-contact-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px auto 30px auto;
+            padding: 10px 18px;
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(197, 168, 128, 0.28);
+            border-radius: 999px;
+            max-width: 980px;
+        }
+        .contact-strip-label {
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+        .sr-contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+        .sr-contact-chip.raed {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        .sr-contact-chip.raed:hover {
+            background: rgba(16, 185, 129, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+        }
+        .sr-contact-chip.salim {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .sr-contact-chip.salim:hover {
+            background: rgba(56, 189, 248, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+        .sr-contact-chip.email {
+            background: rgba(197, 168, 128, 0.15);
+            color: #dfc299;
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+        .sr-contact-chip.email:hover {
+            background: rgba(197, 168, 128, 0.3);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(197, 168, 128, 0.4);
+        }
+
+        /* Card Consultation Footer Action Bars */
+        .tech-card-footer-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        .tech-btn-whatsapp-advisor {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex: 1 1 auto;
+        }
+        .tech-btn-advisor-raed {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+        .tech-btn-advisor-raed:hover {
+            background: rgba(16, 185, 129, 0.24);
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+        }
+        .tech-btn-advisor-salim {
+            background: rgba(56, 189, 248, 0.12);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+        .tech-btn-advisor-salim:hover {
+            background: rgba(56, 189, 248, 0.24);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+        }
+        .tech-btn-email {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: rgba(197, 168, 128, 0.1);
+            color: #dfc299;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .tech-btn-email:hover {
+            background: rgba(197, 168, 128, 0.22);
+            border-color: #dfc299;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(197, 168, 128, 0.3);
+        }
+        .advisor-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .tech-btn-advisor-raed .advisor-status-dot {
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+        .tech-btn-advisor-salim .advisor-status-dot {
+            background: #38bdf8;
+            box-shadow: 0 0 6px #38bdf8;
+        }
+
+        /* Executive Contact Modal Styling */
+        .exec-contact-modal-container {
+            max-width: 660px;
+            background: linear-gradient(150deg, #020d09 0%, #061812 100%);
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            border-radius: 20px;
+            color: #ffffff;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85);
+            padding: 24px;
+        }
+        .exec-advisor-picker {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .exec-advisor-option {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .exec-advisor-option:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+        .exec-advisor-option.active {
+            border-color: #c5a880;
+            background: rgba(197, 168, 128, 0.12);
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.15);
+        }
+        .exec-advisor-role {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        .exec-advisor-phone {
+            font-size: 0.76rem;
+            font-family: monospace;
+            color: #c5a880;
+            margin-top: 4px;
+            direction: ltr;
+            text-align: right;
+        }
+        .exec-routing-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-bottom: 4px;
+        }
+        .exec-routing-badge.accounting {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .exec-routing-badge.systems {
+            background: rgba(56, 189, 248, 0.15);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .exec-modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .exec-btn-submit-wa {
+            flex: 2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .exec-btn-submit-wa:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
+            transform: translateY(-1px);
+        }
+        .exec-btn-submit-email {
+            flex: 1.5;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            background: rgba(197, 168, 128, 0.15);
+            color: #dfc299;
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .exec-btn-submit-email:hover {
+            background: rgba(197, 168, 128, 0.28);
+            color: #ffffff;
+            border-color: #c5a880;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +302,20 @@
                 <h2 class="text-display-2 letter-space--3 text-center service-orbit-preview-title">
                     <span>خدماتنا المعتمدة</span>
                 </h2>
+            </div>
+
+            <!-- شريط الوصول التنفيذي المباشر والتوجيه الذكي للمؤسسين -->
+            <div class="sr-services-contact-strip">
+                <span class="contact-strip-label">⚡ استشارة مباشرة وفورية:</span>
+                <a href="https://wa.me/31687710290?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A3%D8%AE%D9%8A%20%D8%A3.%20%D8%B1%D8%A7%D8%A6%D8%AF%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B3%D8%A8%D8%A9%20%D9%88%D8%A7%D9%84%D8%B6%D8%B1%D8%A7%D8%A6%D8%A8%20%D9%88%D8%A7%D9%84%D8%A3%D9%86%D8%B8%D9%85%D8%A9%20%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%D8%A9%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="sr-contact-chip raed" title="محادثة واتساب مباشرة مع أ. محمد رائد كعكة - المحاسبة والمالية والضرائب (+31 6 8771 0290)">
+                    <span>💬 واتساب أ. رائد (محاسبة وضريبة)</span>
+                </a>
+                <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%A8%D8%B4%D9%85%D9%87%D9%86%D8%AF%D8%B3%20%D8%B3%D9%84%D9%8A%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D9%8A%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%A3%D9%86%D8%B8%D9%85%D8%A9%20%D8%A7%D9%84%D8%B3%D8%AD%D8%A7%D8%A8%D8%A9%20%D9%88%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="sr-contact-chip salim" title="محادثة واتساب مباشرة مع م. محمد سليم عزيزة - الأنظمة السحابية والبرمجيات (+31 6 1811 1116)">
+                    <span>💬 واتساب م. سليم (أنظمة وسحاب)</span>
+                </a>
+                <button type="button" class="sr-contact-chip email" onclick="sendDirectInfoEmail('استشارة عامة في باقات وخدمات S&R')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                    <span>📧 إرسال إيميل info</span>
+                </button>
             </div>
 
             <!-- مسار الهوية الرقمية والمتاجر الرقمية المستوحى من دانا نجمة 1:1 -->
