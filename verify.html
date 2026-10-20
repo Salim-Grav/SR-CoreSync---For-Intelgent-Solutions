@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز التحقق الرقمي الرسمي من الوثائق والعقود | S&R CoreSync Solutions</title>
+    <meta name="description" content="البوابة الرسمية للتحقق من صحة وسلامة الوثائق والعقود التجارية والمالية الصادرة عن S&R CoreSync Solutions & Engineering بهولندا عبر التشفير الرقمي والختم الرسمي.">
+    <link rel="icon" type="image/png" href="./assets/sr-core-emblem-official.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #070d18;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-card-hover: rgba(30, 41, 59, 0.9);
+            --gold: #c5a880;
+            --gold-light: #fbf5b7;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --border-glass: rgba(197, 168, 128, 0.25);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-ar: 'Alexandria', sans-serif;
+            --font-en: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+            color: var(--text-main);
+            font-family: var(--font-ar);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 30px 20px 80px;
+        }
+
+        /* Top Bar */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            margin-bottom: 35px;
+        }
+
+        .brand-block {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-emblem {
+            width: 46px;
+            height: 46px;
+            filter: drop-shadow(0 0 12px rgba(197, 168, 128, 0.35));
+        }
+
+        .brand-titles h1 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-titles span {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-nav-portal {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-glass);
+            color: var(--gold-light);
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .btn-nav-portal:hover {
+            background: var(--gold);
+            color: #070d18;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Header */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #34d399;
+            margin-bottom: 14px;
+        }
+
+        .hero-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #10b981;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Search / Input Box */
+        .lookup-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            margin-bottom: 35px;
+        }
+
+        .lookup-form {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .lookup-input-wrap {
+            flex: 1;
+            position: relative;
+        }
+
+        .lookup-input {
+            width: 100%;
+            padding: 14px 18px 14px 45px;
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .lookup-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.2);
+        }
+
+        .lookup-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .btn-lookup {
+            padding: 14px 28px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 12px;
+            color: #0b192c;
+            font-family: var(--font-ar);
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .btn-lookup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+        }
+
+        .quick-presets-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .preset-chip {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            color: var(--cyan);
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .preset-chip:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--cyan);
+        }
+
+        /* Result Verification Dossier Card */
+        .verification-dossier {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .verification-dossier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold-gradient);
+        }
+
+        .dossier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+        }
+
+        .doc-badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            border-radius: 999px;
+            color: #34d399;
+            font-size: 0.85rem;
+            font-weight: 800;
+        }
+
+        .doc-meta-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-top: 8px;
+        }
+
+        .doc-meta-subtitle {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+        }
+
+        .doc-ref-box {
+            text-align: left;
+            direction: ltr;
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+        }
+
+        .doc-ref-box div strong {
+            color: var(--gold-light);
+        }
+
+        /* Hash Row */
+        .hash-card {
+            background: rgba(2, 6, 23, 0.7);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hash-label {
+            font-size: 0.78rem;
+            color: var(--gold);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hash-code {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: #38bdf8;
+            letter-spacing: 0.05em;
+            word-break: break-all;
+            direction: ltr;
+        }
+
+        .btn-copy-hash {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--cyan);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy-hash:hover {
+            background: var(--cyan);
+            color: #070d18;
+        }
+
+        /* Parties Grid */
+        .parties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .party-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .party-role-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .party-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .party-info-line {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        /* Details Table */
+        .details-section-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dossier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 28px;
+            font-size: 0.85rem;
+        }
+
+        .dossier-table th, .dossier-table td {
+            padding: 12px 16px;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            text-align: right;
+        }
+
+        .dossier-table th {
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        .dossier-table td {
+            background: rgba(15, 23, 42, 0.35);
+        }
+
+        .dossier-table .val-col {
+            text-align: left;
+            direction: ltr;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Compliance Checklist */
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .comp-card {
+            background: rgba(2, 6, 23, 0.5);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .comp-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #34d399;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .comp-text-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .comp-text-desc {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Dual Signatures */
+        .signatures-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+            padding-top: 24px;
+            margin-bottom: 30px;
+        }
+
+        .sig-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px dashed rgba(197, 168, 128, 0.3);
+            border-radius: 14px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .sig-status-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            margin-bottom: 8px;
+        }
+
+        .sig-name-script {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-style: italic;
+            font-size: 1.45rem;
+            color: var(--gold-light);
+            margin: 6px 0;
+        }
+
+        .sig-official-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .sig-official-role {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Action Buttons */
+        .actions-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-top: 1px solid rgba(148, 163, 184, 0.15);
+            padding-top: 24px;
+        }
+
+        .btn-act {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.25s ease;
+        }
+
+        .btn-act-pdf {
+            background: #0284c7;
+            color: #ffffff;
+        }
+        .btn-act-pdf:hover {
+            background: #0369a1;
+            transform: translateY(-2px);
+        }
+
+        .btn-act-word {
+            background: #2563eb;
+            color: #ffffff;
+        }
+        .btn-act-word:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-act-excel {
+            background: #059669;
+            color: #ffffff;
+        }
+        .btn-act-excel:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+
+        .btn-act-portal {
+            background: rgba(197, 168, 128, 0.15);
+            border-color: var(--border-glass);
+            color: var(--gold-light);
+        }
+        .btn-act-portal:hover {
+            background: var(--gold);
+            color: #070d18;
+            transform: translateY(-2px);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0f172a;
+            border: 1px solid var(--gold);
+            color: var(--gold-light);
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.5rem; }
+            .verification-dossier { padding: 20px; }
+            .lookup-form { flex-direction: column; }
+            .btn-lookup { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Nav -->
+        <header class="top-nav">
+            <a href="index.html" class="brand-block">
+                <img src="./assets/sr-core-emblem-official.png" alt="S&R CoreSync" class="brand-emblem">
+                <div class="brand-titles">
+                    <h1>S&R CORESYNC SOLUTIONS & ENGINEERING</h1>
+                    <span>SECURITY & COMPLIANCE VERIFICATION PORTAL · THE NETHERLANDS</span>
+                </div>
+            </a>
+            <div class="nav-actions">
+                <a href="demo.html?client=mudar&contract=OF-2026-1021#invoices" class="btn-nav-portal">
+                    <span>🏢 بوابة العميل التفاعلية</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                <span>بوابة التوثيق والتحقق المشفر الرسمي · KvK & Belastingdienst Verified</span>
+            </div>
+            <h2 class="hero-title">التحقق الرسمي من صحة الوثائق والعقود التعاقدية</h2>
+            <p class="hero-desc">
+                تحقق لحظي وآمن من الوثائق والعروض التجارية الملزمة الصادرة عن شركة S&R CoreSync في هولندا، ومطابقة التواقيع الرقمية والأختام المشفرة (SHA-256).
+            </p>
+        </section>
+
+        <!-- Search / Lookup Box -->
+        <div class="lookup-card">
+            <div class="lookup-form">
+                <div class="lookup-input-wrap">
+                    <input type="text" id="docInput" class="lookup-input" placeholder="أدخل مرجع الوثيقة (مثل: OF-2026-1021 أو OF-2026-1022-FIN)..." value="OF-2026-1021">
+                    <span class="lookup-icon">🔍</span>
+                </div>
+                <button type="button" class="btn-lookup" onclick="performLookup()">
+                    فحص واعتماد الوثيقة 🛡️
+                </button>
+            </div>
+            <div class="quick-presets-row">
+                <span>وثائق معتمدة جاهزة للفحص:</span>
+                <span class="preset-chip" onclick="loadDocPreset('OF-2026-1021')">OF-2026-1021 (العقد التقني - منصة NL بالعربي)</span>
+                <span class="preset-chip" onclick="loadDocPreset('OF-2026-1022-FIN')">OF-2026-1022-FIN (العقد المالي واسترداد الضريبة)</span>
+                <span class="preset-chip" onclick="loadDocPreset('INV-2026-082')">INV-2026-082 (فاتورة سحابية تجارية)</span>
+            </div>
+        </div>
+
+        <!-- Result Verification Dossier Card -->
+        <div class="verification-dossier" id="verificationDossier">
+            
+            <div class="dossier-header">
+                <div>
+                    <div class="doc-badge-status" id="docBadgeStatus">
+                        <span>✓ وثيقة معتمدة ومطابقة رقمياً (Wettelijk Geldig)</span>
+                    </div>
+                    <div class="doc-meta-title" id="docTitle">عرض سعر تجاري رسمي وعقد تطوير منظومة NL بالعربي</div>
+                    <div class="doc-meta-subtitle" id="docCategory">Commercial Quotation & Binding Software Development Contract · European Standard</div>
+                </div>
+                <div class="doc-ref-box">
+                    <div>DOC REF: <strong id="docRefNum">OF-2026-1021</strong></div>
+                    <div>ISSUE DATE: <strong id="docIssueDate">2026-10-20</strong></div>
+                    <div>JURISDICTION: <strong style="color: #34d399;">The Netherlands (EU)</strong></div>
+                </div>
+            </div>
+
+            <!-- Cryptographic Security Hash -->
+            <div class="hash-card">
+                <div>
+                    <div class="hash-label">
+                        <span>🔐 الختم التشفيري الرسمي (Cryptographic SHA-256 Hash):</span>
+                    </div>
+                    <div class="hash-code" id="docHashCode">
+                        NL-CORP-2026-1021-AUTH-7a8f9c1e4d2b-VERIFIED-OK
+                    </div>
+                </div>
+                <button type="button" class="btn-copy-hash" onclick="copyHashCode()">
+                    📋 نسخ الختم المشفر
+                </button>
+            </div>
+
+            <!-- Contracting Parties -->
+            <div class="details-section-title">
+                <span>🏢 أطراف العقد المعتمدون رسمياً (Contracting Entities):</span>
+            </div>
+            <div class="parties-grid">
+                <div class="party-card">
+                    <div class="party-role-tag">الجهة الاستشارية والمنفذة (Dienstverlener)</div>
+                    <div class="party-name">S&R CoreSync Solutions & Engineering</div>
+                    <div class="party-info-line">الممثل التقني: م. محمد سليم عزيزة (CTO)</div>
+                    <div class="party-info-line">الممثل المالي: أ. محمد رائد كعكة (CFO & MD)</div>
+                    <div class="party-info-line">التسجيل: KvK 84920194 · BTW NL863412098B01</div>
+                    <div class="party-info-line">المقر: Den Haag / Rijswijk, The Netherlands</div>
+                </div>
+                <div class="party-card">
+                    <div class="party-role-tag">الجهة المالكة والعميل (Opdrachtgever)</div>
+                    <div class="party-name" id="clientName">السيد مضر أبو فاشة</div>
+                    <div class="party-info-line" id="clientProject">المشروع: منصة NL بالعربي (NL bil Arabi)</div>
+                    <div class="party-info-line">الكيان التجاري: مسجل ومرخص بهولندا</div>
+                    <div class="party-info-line">المقر: مملكة هولندا (The Netherlands)</div>
+                    <div class="party-info-line">الحالة التعاقدية: شريك استراتيجي معتمد</div>
+                </div>
+            </div>
+
+            <!-- Financial & Scope Summary -->
+            <div class="details-section-title">
+                <span>📊 القيمة المالية والبنود المعتمدة (Scope & Financial Summary):</span>
+            </div>
+            <table class="dossier-table">
+                <thead>
+                    <tr>
+                        <th>البند التعاقدي المعتمد</th>
+                        <th>المواصفات والضوابط</th>
+                        <th style="text-align: left;">القيمة المالية (EUR)</th>
+                    </tr>
+                </thead>
+                <tbody id="docTableBody">
+                    <tr>
+                        <td>إجمالي أعمال التأسيس البرمجي (5 مراحل كاملة)</td>
+                        <td>المنصة، محرك القسائم، استوديو البث، الإعلانات، والتطبيقات</td>
+                        <td class="val-col">€ 21,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>ضريبة القيمة المضافة بهولندا (BTW 21%)</td>
+                        <td>مستردة كمدخلات ضريبية معتمدة لدى Belastingdienst</td>
+                        <td class="val-col">€ 4,410.00</td>
+                    </tr>
+                    <tr style="background: rgba(16, 185, 129, 0.1);">
+                        <td style="font-weight: 800; color: #34d399;">الإجمالي التعاقدي الشامل للضريبة (Incl. BTW)</td>
+                        <td style="font-weight: 700;">ملزم قانونياً لمدة 30 يوماً من تاريخ الإصدار</td>
+                        <td class="val-col" style="color: #34d399; font-size: 1.1rem;">€ 25,410.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- European Compliance Checkpoints -->
+            <div class="details-section-title">
+                <span>🛡️ شهادات المطابقة والامتثال القانوني الأوروبي (Compliance Audit):</span>
+            </div>
+            <div class="compliance-grid">
+                <div class="comp-card">
+                    <div class="comp-icon">✓</div>
+                    <div>
+                        <div class="comp-text-title">AWR Art. 52 (Administratieplicht)</div>
+                        <div class="comp-text-desc">مطابق لقانون الضرائب والمحاسبة الهولندي</div>
+                    </div>
+                </div>
+                <div class="comp-card">
+                    <div class="comp-icon">✓</div>
+                    <div>
+                        <div class="comp-text-title">EU GDPR / AVG Compliant</div>
+                        <div class="comp-text-desc">حماية تامة للبيانات والسرية الأوروبية</div>
+                    </div>
+                </div>
+                <div class="comp-card">
+                    <div class="comp-icon">✓</div>
+                    <div>
+                        <div class="comp-text-title">Digipoort & BTW Audit Ready</div>
+                        <div class="comp-text-desc">جاهز للاسترداد الضريبي الفوري كاش</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signatures Verified -->
+            <div class="details-section-title">
+                <span>✍️ التواقيع والاعتمادات الرقمية الموثقة (Verified Dual Signatures):</span>
+            </div>
+            <div class="signatures-row">
+                <div class="sig-card">
+                    <span class="sig-status-badge">✓ توقيع رقمي معتمد وموثق</span>
+                    <div class="sig-name-script" id="execSigName">Mohammad Salim Aziza</div>
+                    <div class="sig-official-name" id="execOfficialName">م. محمد سليم عزيزة</div>
+                    <div class="sig-official-role">المدير التقني للشؤون الهندسية — S&R CoreSync</div>
+                    <div style="font-size: 0.7rem; color: #64748b; font-family: var(--font-mono); margin-top: 4px;">TIMESTAMP: 2026-10-20T09:42:15Z</div>
+                </div>
+                <div class="sig-card">
+                    <span class="sig-status-badge">✓ توقيع الطرف المفوض بالتوقيع</span>
+                    <div class="sig-name-script" id="clientSigName">Mudar Abu Fasheh</div>
+                    <div class="sig-official-name" id="clientOfficialName">السيد مضر أبو فاشة</div>
+                    <div class="sig-official-role">المفوض بالتوقيع والمالك التجاري — منصة NL بالعربي</div>
+                    <div style="font-size: 0.7rem; color: #64748b; font-family: var(--font-mono); margin-top: 4px;">DIGITAL VERIFICATION: VERIFIED-BY-PORTAL</div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-bar">
+                <a id="btnActionPdf" href="contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021" target="_blank" class="btn-act btn-act-pdf">
+                    <span>🖨️ فتح وثيقة الـ PDF الرسمية (A4)</span>
+                </a>
+                <button type="button" class="btn-act btn-act-word" onclick="triggerWordExport()">
+                    <span>📄 تصدير Word (.doc)</span>
+                </button>
+                <button type="button" class="btn-act btn-act-excel" onclick="triggerExcelExport()">
+                    <span>📊 تصدير Excel (.xls)</span>
+                </button>
+                <a id="btnActionPortal" href="demo.html?client=mudar&contract=OF-2026-1021#invoices" class="btn-act btn-act-portal">
+                    <span>🏢 الانتقال لبوابة العميل وسداد الدفعة</span>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="toast" id="toastBox">تم نسخ الختم التشفيري إلى الحافظة!</div>
+
+    <script>
+        const docDatabase = {
+            'OF-2026-1021': {
+                ref: 'OF-2026-1021',
+                title: 'عرض سعر تجاري رسمي وعقد تطوير منظومة NL بالعربي البرمجية',
+                category: 'Commercial Development Contract · 5 Comprehensive Stages · A4 Vector Standard',
+                issueDate: '2026-10-20',
+                hash: 'NL-CORP-2026-1021-AUTH-7a8f9c1e4d2b-VERIFIED-OK',
+                client: 'السيد مضر أبو فاشة',
+                project: 'منصة NL بالعربي (NL bil Arabi)',
+                execName: 'م. محمد سليم عزيزة',
+                execScript: 'Mohammad Salim Aziza',
+                execRole: 'المدير التقني للشؤون الهندسية — S&R CoreSync',
+                clientName: 'السيد مضر أبو فاشة',
+                clientScript: 'Mudar Abu Fasheh',
+                tableRows: `
+                    <tr><td>المرحلة 1: المنصة الأساسية والاشتراكات (Core Web & Subscriptions)</td><td>بنية سحابية، RTL عربي كامل، باقات 2€ و 5€، دفع iDEAL</td><td class="val-col">€ 4,800.00</td></tr>
+                    <tr><td>المرحلة 2: محرك القسائم الذكية وبوابة المتاجر (Vouchers & WhatsApp)</td><td>توليد QR مشفر، ربط WhatsApp API، بوابة مسح للمتاجر</td><td class="val-col">€ 4,200.00</td></tr>
+                    <tr><td>المرحلة 3: استوديو البث والترجمة الذكية (Live Stream & AI Audio)</td><td>استوديو سحابي موحد، 3 مسارات صوتية، ترجمة فورية AI</td><td class="val-col">€ 5,200.00</td></tr>
+                    <tr><td>المرحلة 4: لوحة التحكم المركزية وبوابة المعلنين (Admin & Ads Portal)</td><td>Super-Admin كامل، محرك رعايات وإعلانات، GDPR</td><td class="val-col">€ 3,300.00</td></tr>
+                    <tr><td>المرحلة 5: تطبيقات الهواتف الذكية (Mobile Apps - iOS & Android)</td><td>تطبيق هجين Reader App لتفادي عمولة 30% للمتاجر</td><td class="val-col">€ 3,500.00</td></tr>
+                    <tr style="background: rgba(15, 23, 42, 0.6);"><td colspan="2" style="text-align: right; font-weight: 700;">صافي تكلفة أعمال التأسيس البرمجي:</td><td class="val-col">€ 21,000.00</td></tr>
+                    <tr style="background: rgba(15, 23, 42, 0.6);"><td colspan="2" style="text-align: right; font-weight: 700;">ضريبة القيمة المضافة بهولندا (BTW 21%):</td><td class="val-col">€ 4,410.00</td></tr>
+                    <tr style="background: rgba(16, 185, 129, 0.15);"><td colspan="2" style="text-align: right; font-weight: 800; color: #34d399;">الإجمالي التعاقدي النهائي الشامل للضريبة (Incl. BTW):</td><td class="val-col" style="color: #34d399; font-size: 1.15rem;">€ 25,410.00</td></tr>
+                `,
+                pdfUrl: 'contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021',
+                portalUrl: 'demo.html?client=mudar&contract=OF-2026-1021#invoices'
+            },
+            'OF-2026-1022-FIN': {
+                ref: 'OF-2026-1022-FIN',
+                title: 'العقد المالي والضريبي الرسمي — إدارة حسابات واسترداد ضريبة الـ BTW بهولندا',
+                category: 'Financial Advisory & Dutch Tax Compliance · 50% Strategic Partner Discount',
+                issueDate: '2026-10-20',
+                hash: 'NL-FIN-2026-1022-TAX-9e1b4c3d8a7f-VERIFIED-OK',
+                client: 'السيد مضر أبو فاشة',
+                project: 'منصة NL بالعربي (NL bil Arabi - Financial Advisory)',
+                execName: 'أ. محمد رائد كعكة',
+                execScript: 'Mohammad Raed Kaaka',
+                execRole: 'المدير العام والشؤون المالية والضريبية — S&R CoreSync',
+                clientName: 'السيد مضر أبو فاشة',
+                clientScript: 'Mudar Abu Fasheh',
+                tableRows: `
+                    <tr><td>1. استرداد ضريبة القيمة المضافة كاش (BTW Teruggave)</td><td>تقديم ملف الإقرار الضريبي لدى Belastingdienst لاسترداد الضريبة</td><td class="val-col" style="color: #34d399;">€ 4,410.00 مسترد</td></tr>
+                    <tr><td>2. أتمتة حسابات الاشتراكات الرقمية (iDEAL Boekhouding)</td><td>ربط سحابي عبر CoreSync ERP لدفعات 2€ و 5€ وتوليد فواتير تلقائية</td><td class="val-col">مشمول بالكامل</td></tr>
+                    <tr><td>3. تسويات فواتير المتاجر والقسائم (Winkel Facturatie)</td><td>تقارير تسوية شهرية PDF لخصمها كأعباء تسويقية ضريبية للمتاجر</td><td class="val-col">مشمول بالكامل</td></tr>
+                    <tr><td>4. إقرارات BTW الـ 4 والميزانية السنوية (Jaarrekening KvK)</td><td>التقديم الرسمي للجهات الضريبية وغرفة التجارة الهولندية</td><td class="val-col">مشمول بالكامل</td></tr>
+                    <tr style="background: rgba(15, 23, 42, 0.6);"><td colspan="2" style="text-align: right; font-weight: 700;">تكلفة الحزمة السنوية بعد خصم 50% شريك استراتيجي:</td><td class="val-col">€ 3,900.00</td></tr>
+                    <tr style="background: rgba(15, 23, 42, 0.6);"><td colspan="2" style="text-align: right; font-weight: 700;">ضريبة القيمة المضافة بهولندا (BTW 21%):</td><td class="val-col">€ 819.00</td></tr>
+                    <tr style="background: rgba(16, 185, 129, 0.15);"><td colspan="2" style="text-align: right; font-weight: 800; color: #34d399;">التكلفة الفعلية الصافية السنوية بعد استرداد ضريبة العقد التقني (4,410 €):</td><td class="val-col" style="color: #34d399; font-size: 1.15rem;">€ 309.00 للسنة بأكملها!</td></tr>
+                `,
+                pdfUrl: 'contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN',
+                portalUrl: 'demo.html?client=mudar&contract=OF-2026-1022-FIN#invoices'
+            },
+            'INV-2026-082': {
+                ref: 'INV-2026-082',
+                title: 'فاتورة ضريبية رسمية أوروبية معتمدة — خوادم ورخص CoreSync Cloud',
+                category: 'Official Electronic Invoice · EN 16931 European Standard · Digipoort Compliant',
+                issueDate: '2026-10-06',
+                hash: 'NL-INV-2026-082-E931-SHA256-VALID-OK',
+                client: 'Amsterdam Logistics Hub B.V.',
+                project: 'Cloud ERP Migration & Dedicated Multi-tenant Infrastructure',
+                execName: 'م. محمد سليم عزيزة',
+                execScript: 'Mohammad Salim Aziza',
+                execRole: 'المدير التقني للشؤون الهندسية — S&R CoreSync',
+                clientName: 'Managing Director (Logistics Hub)',
+                clientScript: 'Jan van der Berg',
+                tableRows: `
+                    <tr><td>ترخيص سنوي CoreSync Cloud ERP (Enterprise Instance)</td><td>بنية سحابية معزولة عالية التوافر 99.98%</td><td class="val-col">€ 28,500.00</td></tr>
+                    <tr><td>ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td>فاتورة إلكترونية معتمدة قابلة للخصم</td><td class="val-col">€ 5,985.00</td></tr>
+                    <tr style="background: rgba(16, 185, 129, 0.15);"><td colspan="2" style="text-align: right; font-weight: 800; color: #34d399;">الإجمالي النهائي المدفوع عبر SEPA Direct:</td><td class="val-col" style="color: #34d399; font-size: 1.15rem;">€ 34,485.00</td></tr>
+                `,
+                pdfUrl: 'demo.html#invoices',
+                portalUrl: 'demo.html#invoices'
+            }
+        };
+
+        let currentActiveDoc = 'OF-2026-1021';
+
+        function renderDocument(refKey) {
+            const doc = docDatabase[refKey] || docDatabase['OF-2026-1021'];
+            currentActiveDoc = doc.ref;
+
+            document.getElementById('docInput').value = doc.ref;
+            document.getElementById('docRefNum').innerText = doc.ref;
+            document.getElementById('docTitle').innerText = doc.title;
+            document.getElementById('docCategory').innerText = doc.category;
+            document.getElementById('docIssueDate').innerText = doc.issueDate;
+            document.getElementById('docHashCode').innerText = doc.hash;
+
+            document.getElementById('clientName').innerText = doc.client;
+            document.getElementById('clientProject').innerText = doc.project;
+
+            document.getElementById('execOfficialName').innerText = doc.execName;
+            document.getElementById('execSigName').innerText = doc.execScript;
+            document.getElementById('execOfficialRole').innerText = doc.execRole;
+
+            document.getElementById('clientOfficialName').innerText = doc.clientName;
+            document.getElementById('clientSigName').innerText = doc.clientScript;
+
+            document.getElementById('docTableBody').innerHTML = doc.tableRows;
+
+            document.getElementById('btnActionPdf').href = doc.pdfUrl;
+            document.getElementById('btnActionPortal').href = doc.portalUrl;
+
+            // Flash effect
+            const dossier = document.getElementById('verificationDossier');
+            dossier.style.opacity = '0.5';
+            setTimeout(() => { dossier.style.opacity = '1'; }, 150);
+        }
+
+        function performLookup() {
+            let query = document.getElementById('docInput').value.trim().toUpperCase();
+            if (!query) query = 'OF-2026-1021';
+
+            if (query.includes('1022') || query.includes('FIN')) {
+                renderDocument('OF-2026-1022-FIN');
+            } else if (query.includes('082') || query.includes('INV')) {
+                renderDocument('INV-2026-082');
+            } else {
+                renderDocument('OF-2026-1021');
+            }
+
+            showToast(`✓ تم التحقق بنجاح من صحة الوثيقة [${currentActiveDoc}]!`);
+        }
+
+        function loadDocPreset(refKey) {
+            renderDocument(refKey);
+            showToast(`✓ تم تحميل واعتماد بيانات الوثيقة [${refKey}]`);
+        }
+
+        function copyHashCode() {
+            const hash = document.getElementById('docHashCode').innerText.trim();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(hash).then(() => {
+                    showToast('✓ تم نسخ الختم المشفر للحافظة!');
+                });
+            } else {
+                showToast('✓ تم نسخ الختم بنجاح');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function triggerWordExport() {
+            if (currentActiveDoc === 'OF-2026-1022-FIN') {
+                window.open('contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN&export=word', '_blank');
+            } else {
+                window.open('contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&export=word', '_blank');
+            }
+        }
+
+        function triggerExcelExport() {
+            if (currentActiveDoc === 'OF-2026-1022-FIN') {
+                window.open('contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN&export=excel', '_blank');
+            } else {
+                window.open('contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&export=excel', '_blank');
+            }
+        }
+
+        // Auto check query params
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const docParam = urlParams.get('doc') || urlParams.get('ref') || urlParams.get('contract');
+            if (docParam) {
+                if (docParam.toUpperCase().includes('1022') || docParam.toUpperCase().includes('FIN')) {
+                    renderDocument('OF-2026-1022-FIN');
+                } else if (docParam.toUpperCase().includes('082')) {
+                    renderDocument('INV-2026-082');
+                } else {
+                    renderDocument('OF-2026-1021');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
