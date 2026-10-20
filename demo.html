@@ -4022,7 +4022,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <img src="./assets/sr-core-emblem-official.png" width="36" height="36" alt="S&R CoreSync" />
+                    <img src="./assets/sr-core-emblem-official.png" width="48" height="48" alt="S&R CoreSync" />
                     <div>
                         <span class="contract-tag-gold">COMMERCIAL QUOTATION / OFFERTE</span>
                         <h4 class="mb-0 fw-bold text-white" id="contractModalHeaderTitle">عرض سعر تجاري رسمي — منصة NL بالعربي</h4>
@@ -4185,6 +4185,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <span>إرسال العقد عبر البريد (Email)</span>
                 </button>
+                <button type="button" class="btn-share-word" onclick="exportTechnicalContractWord()">
+                    <span>📄 تصدير Word (.doc)</span>
+                </button>
+                <button type="button" class="btn-share-excel" onclick="exportTechnicalContractExcel()">
+                    <span>📊 تصدير Excel (.xls)</span>
+                </button>
                 <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">
                     💳 سداد الدفعة الأولى (30%) عبر iDEAL
                 </button>
@@ -4210,7 +4216,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
-                    <img src="./assets/sr-core-emblem-official.png" width="36" height="36" alt="S&R CoreSync" />
+                    <img src="./assets/sr-core-emblem-official.png" width="48" height="48" alt="S&R CoreSync" />
                     <div>
                         <span class="contract-tag-gold">FINANCIAL & TAX ADVISORY · BTW TERUGGAVE</span>
                         <h4 class="mb-0 fw-bold text-white" id="contractFinModalHeaderTitle">العقد المالي والضريبي الرسمي — منصة NL بالعربي</h4>
@@ -4382,6 +4388,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <button type="button" class="btn-share-email" onclick="shareContractFinViaEmail()">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <span>إرسال العقد المالي عبر البريد (Email)</span>
+                </button>
+                <button type="button" class="btn-share-word" onclick="exportFinancialContractWord()">
+                    <span>📄 تصدير Word (.doc)</span>
+                </button>
+                <button type="button" class="btn-share-excel" onclick="exportFinancialContractExcel()">
+                    <span>📊 تصدير Excel (.xls)</span>
                 </button>
                 <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">
                     💳 سداد الحزمة السنوية (€ 4,719) عبر iDEAL
@@ -4646,6 +4658,140 @@ function printOfficialContractPdf() {
     const signedParam = isContractOf2026Signed ? 'true' : 'false';
     const printUrl = `contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&signed=${signedParam}&print=true`;
     window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
+}
+
+function exportTechnicalContractWord() {
+    const html = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+    <head><meta charset='utf-8'><title>العقد التجاري الرسمي OF-2026-1021</title>
+    <style>body{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;font-size:11pt;line-height:1.5;color:#1e293b;}table{border-collapse:collapse;width:100%;margin:15px 0;}th,td{border:1px solid #cbd5e1;padding:8px 10px;font-size:10pt;}th{background:#f1f5f9;font-weight:bold;text-align:right;}.price{direction:ltr;text-align:left;font-weight:bold;}.banner{background:#0f172a;color:#fbf5b7;padding:10px;font-weight:bold;font-size:13pt;}.total{background:#f8fafc;border:2px solid #b38728;padding:12px;margin:15px 0;}</style>
+    </head><body>
+    <h2>S&R CoreSync Solutions & Engineering (The Netherlands)</h2>
+    <div class='banner'>OFFICIËLE OFFERTE & OVEREENKOMST · عقد تجاري رسمي معتمد (OF-2026-1021)</div>
+    <p><strong>الطرف الأول:</strong> S&R CoreSync Solutions — المفوض: م. محمد سليم عزيزة</p>
+    <p><strong>الطرف الثاني:</strong> السيد مضر أبو فاشة — مشروع: منصة NL بالعربي في هولندا</p>
+    <h3>مراحل التطوير البرمجي الـ 5:</h3>
+    <table>
+    <tr><th>المرحلة</th><th>التسليمات الفنية</th><th>القيمة (EUR)</th></tr>
+    <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية تحتية سحابية، باقات 2€ و 5€، بوابة iDEAL</td><td class='price'>€ 4,800.00</td></tr>
+    <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم QR، ربط WhatsApp، بوابة مسح للمتاجر</td><td class='price'>€ 4,200.00</td></tr>
+    <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، 3 مسارات صوتية، ترجمة فورية AI</td><td class='price'>€ 5,200.00</td></tr>
+    <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات، معايير GDPR</td><td class='price'>€ 3,300.00</td></tr>
+    <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بنظام Reader App لتفادي عمولة الـ 30%</td><td class='price'>€ 3,500.00</td></tr>
+    </table>
+    <div class='total'>
+    <p>صافي التأسيس البرمجي: <strong>€ 21,000.00</strong> | ضريبة BTW 21%: <strong>€ 4,410.00</strong></p>
+    <p style='font-size:13pt;color:#059669;'>الإجمالي التعاقدي الشامل للضريبة: <strong>€ 25,410.00</strong></p>
+    <p><small>* تسترد كامل الضريبة (4,410 €) كاش من Belastingdienst.</small></p>
+    </div>
+    <p><strong>الاعتماد والتوقيع:</strong> معتمد وموقع رسمياً من م. محمد سليم عزيزة والسيد مضر أبو فاشة.</p>
+    </body></html>`;
+    const blob = new Blob(['\\ufeff', html], { type: 'application/msword;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-Contract-OF-2026-1021-Mudar.doc';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير مستند Word (.doc) بنجاح!');
+}
+
+function exportTechnicalContractExcel() {
+    const rows = `
+    <tr><th colspan="3" style="background:#0a2540;color:#fbf5b7;font-size:13pt;padding:10px;">S&R CoreSync Solutions — جدول التكاليف البرمجية (OF-2026-1021)</th></tr>
+    <tr><th colspan="3" style="background:#f1f5f9;">العميل: السيد مضر أبو فاشة (NL بالعربي) — التاريخ: 2026-10-20</th></tr>
+    <tr><th style="background:#1e293b;color:#fff;">المرحلة البرمجية</th><th style="background:#1e293b;color:#fff;">التسليمات الفنية</th><th style="background:#1e293b;color:#fff;">القيمة باليورو (EUR)</th></tr>
+    <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية سحابية، باقات 2€ و 5€، دفع iDEAL</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4800.00</td></tr>
+    <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم QR، ربط WhatsApp، بوابة مسح للمتاجر</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4200.00</td></tr>
+    <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، ترجمة AI فورية 3 لغات</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">5200.00</td></tr>
+    <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات، GDPR</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3300.00</td></tr>
+    <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بدون عمولة 30% للمتاجر</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3500.00</td></tr>
+    <tr><th colspan="2" style="text-align:right;">صافي أعمال التأسيس البرمجي:</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">21000.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4410.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;">الإجمالي الشامل للضريبة (Incl. BTW):</th><th style="text-align:left;background:#059669;color:#fff;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">25410.00</th></tr>
+    `;
+    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
+    const blob = new Blob(['\\ufeff', excel], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialSchedule-OF-2026-1021.xls';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير جدول Excel (.xls) بنجاح!');
+}
+
+function exportFinancialContractWord() {
+    const html = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+    <head><meta charset='utf-8'><title>العقد المالي والضريبي الرسمي OF-2026-1022-FIN</title>
+    <style>body{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;font-size:11pt;line-height:1.5;color:#1e293b;}table{border-collapse:collapse;width:100%;margin:15px 0;}th,td{border:1px solid #cbd5e1;padding:8px 10px;font-size:10pt;}th{background:#f1f5f9;font-weight:bold;text-align:right;}.price{direction:ltr;text-align:left;font-weight:bold;color:#059669;}.tax{background:#fffbeb;border:2px solid #f59e0b;padding:12px;margin:15px 0;}.total{background:#f8fafc;border:2px solid #059669;padding:12px;margin:15px 0;}</style>
+    </head><body>
+    <h2>S&R CoreSync Solutions & Engineering (The Netherlands)</h2>
+    <div style='background:#0f172a;color:#fbf5b7;padding:10px;font-weight:bold;font-size:13pt;'>OFFICIËLE OFFERTE · عقد الإدارة المحاسبية والضريبية الرسمي (OF-2026-1022-FIN)</div>
+    <div class='tax'>
+    <h3 style='color:#b45309;margin-top:0;'>💎 استرداد كامل ضريبة العقد البرمجي: 4,410.00 € كاش في حسابكم</h3>
+    <p>ملف الاسترداد الضريبي لدى مصلحة الضرائب الهولندية Belastingdienst يغطي كامل تكلفة المحاسبة السنوية ويوفر فائضاً نقدياً مباشراً!</p>
+    </div>
+    <p><strong>الجهة الاستشارية:</strong> S&R CoreSync Solutions — المفوض المالي: أ. محمد رائد كعكة</p>
+    <p><strong>الجهة المالكة والعميل:</strong> السيد مضر أبو فاشة — مشروع: منصة NL بالعربي في هولندا</p>
+    <h3>الخدمات المالية والمحاسبية المعتمدة:</h3>
+    <table>
+    <tr><th>محور الخدمة</th><th>التفاصيل الفنية بهولندا</th><th>القيمة المستردة</th></tr>
+    <tr><td>1. استرداد ضريبة BTW</td><td>تقديم ملف الإقرار لدى Belastingdienst لاسترداد 4,410 € كاش</td><td class='price'>€ 4,410.00 مسترد</td></tr>
+    <tr><td>2. أتمتة حسابات الاشتراكات</td><td>ربط سحابي عبر CoreSync ERP لدفعات iDEAL لباقات 2€ و 5€</td><td class='price'>مشمول بالكامل</td></tr>
+    <tr><td>3. تسويات فواتير المتاجر</td><td>تقارير تسوية شهرية PDF لتمكين المتاجر من خصم القسائم ضريبياً</td><td class='price'>مشمول بالكامل</td></tr>
+    <tr><td>4. الإقرارات والميزانية السنوية</td><td>تقديم الإقرارات الـ 4 والميزانية الختامية لدى KvK والضرائب</td><td class='price'>مشمول بالكامل</td></tr>
+    </table>
+    <div class='total'>
+    <p>تكلفة الحزمة السنوية (بعد خصم 50% شريك استراتيجي): <strong>€ 3,900.00 / سنة</strong> (325 € شهرياً)</p>
+    <p>ضريبة BTW 21%: <strong>€ 819.00</strong> | الإجمالي الشامل: <strong>€ 4,719.00</strong></p>
+    <p><strong style='color:#b45309;'>* التكلفة الفعلية الصافية: بعد خصم استرداد الضريبة (4,410 €)، لا يدفع مشروعكم سوى 309 € فقط للسنة بأكملها!</strong></p>
+    </div>
+    <p><strong>الاعتماد والتوقيع:</strong> معتمد وموقع رسمياً من أ. محمد رائد كعكة والسيد مضر أبو فاشة.</p>
+    </body></html>`;
+    const blob = new Blob(['\\ufeff', html], { type: 'application/msword;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialContract-OF-2026-1022-FIN.doc';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير عقد Word (.doc) المالي بنجاح!');
+}
+
+function exportFinancialContractExcel() {
+    const rows = `
+    <tr><th colspan="3" style="background:#0a2540;color:#fbf5b7;font-size:13pt;padding:10px;">S&R CoreSync Solutions — العرض المالي والضريبي الرسمي (OF-2026-1022-FIN)</th></tr>
+    <tr><th colspan="3" style="background:#f1f5f9;">العميل: السيد مضر أبو فاشة (NL بالعربي) — التاريخ: 2026-10-20</th></tr>
+    <tr><th style="background:#1e293b;color:#fff;">محور الخدمة المالية والمحاسبية</th><th style="background:#1e293b;color:#fff;">المعايير المعتمدة بهولندا</th><th style="background:#1e293b;color:#fff;">القيمة باليورو (EUR)</th></tr>
+    <tr><td>1. استرداد ضريبة القيمة المضافة (BTW Teruggave)</td><td>استرداد فوري كاش من Belastingdienst لضريبة العقد التقني</td><td style="text-align:left;color:#059669;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4410.00</td></tr>
+    <tr><td>2. أتمتة حسابات الاشتراكات الرقمية</td><td>معالجة سحابية لآلاف عمليات iDEAL شهرياً</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><td>3. تسويات فواتير المتاجر والقسائم QR</td><td>تقارير تسوية شهرية PDF لخصمها ضريبياً للمتاجر</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><td>4. إقرارات BTW الـ 4 والميزانية السنوية</td><td>تقديم رسمي لغرفة التجارة KvK ومصلحة الضرائب</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><th colspan="2" style="text-align:right;">تكلفة الحزمة السنوية المخفضة (خصم 50%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3900.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">819.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;">الإجمالي السنوي النهائي الشامل للضريبة:</th><th style="text-align:left;background:#059669;color:#fff;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4719.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#fef3c7;color:#92400e;">استرداد ضريبة العقد التقني الكاش المودع بحسابكم:</th><th style="text-align:left;background:#fef3c7;color:#047857;font-weight:bold;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">-4410.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#ecfdf5;color:#065f46;font-size:11pt;">التكلفة الفعلية الصافية السنوية على المشروع:</th><th style="text-align:left;background:#ecfdf5;color:#065f46;font-size:11pt;font-weight:bold;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">309.00</th></tr>
+    `;
+    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
+    const blob = new Blob(['\\ufeff', excel], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialSchedule-OF-2026-1022-FIN.xls';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير جدول Excel (.xls) المالي بنجاح!');
 }
 
 // -------------------------------------------------------------
