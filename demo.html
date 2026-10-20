@@ -4014,6 +4014,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     <!-- نافذة العقد والاتفاقية التجارية الرسمية OF-2026-1021 -->
     <div class="modal-overlay" id="contractOf2026Modal" onclick="if(event.target === this) closeContractOf2026Modal()" dir="rtl">
         <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractModalHeaderTitle">
+            <!-- ألسنة التبديل بين العقدين المالي والتقني -->
+            <div class="contract-tabs-nav">
+                <button type="button" class="contract-tab-btn active" onclick="switchContractModal('tech')">💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn" onclick="switchContractModal('fin')">📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+            </div>
+
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
                     <img src="./assets/sr-core-emblem-official.png" width="36" height="36" alt="S&R CoreSync" />
@@ -4189,6 +4195,206 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     إغلاق
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- نافذة العقد والاتفاقية المالية والضريبية الرسمية OF-2026-1022-FIN -->
+    <div class="modal-overlay" id="contractOf2026FinModal" onclick="if(event.target === this) closeContractOf2026FinModal()" dir="rtl">
+        <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractFinModalHeaderTitle">
+            
+            <!-- ألسنة التبديل بين العقدين المالي والتقني -->
+            <div class="contract-tabs-nav">
+                <button type="button" class="contract-tab-btn" onclick="switchContractModal('tech')">💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn active" onclick="switchContractModal('fin')">📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="./assets/sr-core-emblem-official.png" width="36" height="36" alt="S&R CoreSync" />
+                    <div>
+                        <span class="contract-tag-gold">FINANCIAL & TAX ADVISORY · BTW TERUGGAVE</span>
+                        <h4 class="mb-0 fw-bold text-white" id="contractFinModalHeaderTitle">العقد المالي والضريبي الرسمي — منصة NL بالعربي</h4>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeContractOf2026FinModal()" aria-label="Close">✕</button>
+            </div>
+
+            <div class="contract-header-banner">
+                <div>
+                    <span class="contract-desc-mint">حزمة الإدارة المحاسبية، الإقرارات الضريبية، واسترداد الـ BTW بهولندا</span>
+                    <div class="contract-sub-mint">تشمل إقرارات الضرائب الـ 4، الميزانية الختامية KvK، تسويات اشتراكات iDEAL، وفواتير المتاجر الضريبية.</div>
+                </div>
+                <div class="contract-ref-badge font-num">
+                    <div>مرجع: <strong class="text-gold">OF-2026-1022-FIN</strong></div>
+                    <div>التاريخ: <strong>20 أكتوبر 2026</strong></div>
+                    <div>الحالة: <strong class="text-emerald-status">Definitief / ملزم</strong> (خصم 50% شريك)</div>
+                </div>
+            </div>
+
+            <!-- بطاقة المفاجأة الاستراتيجية: استرداد ضريبة القيمة المضافة -->
+            <div class="fin-recovery-banner">
+                <div>
+                    <div class="fin-recovery-title">💎 المفاجأة الاستراتيجية: استرداد كامل ضريبة العقد التقني كاش لحسابك</div>
+                    <div class="fin-recovery-desc">نقوم بإعداد وتقديم ملف الاسترداد الضريبي الفوري لضريبة العقد البرمجي OF-2026-1021 لدى مصلحة الضرائب الهولندية (Belastingdienst)، مما يغطي كامل تكلفة الحزمة المحاسبية ويوفر لك فائضاً نقدياً مباشراً!</div>
+                </div>
+                <div class="fin-recovery-val">
+                    <div class="fin-recovery-val-num">€ 4,410.00</div>
+                    <div class="fin-recovery-val-lbl">مبلغ مسترد في حسابك (BTW Teruggave)</div>
+                </div>
+            </div>
+
+            <!-- شبكة أطراف العقد المالي -->
+            <div class="contract-parties-grid">
+                <div class="contract-party-box">
+                    <h5>الجهة الاستشارية والمنفذة (Dienstverlener):</h5>
+                    <strong class="contract-party-head">S&R CoreSync Solutions & Engineering</strong>
+                    <div class="contract-party-line-mt">المسؤول المالي: أ. محمد رائد كعكة (المدير العام والمالي)</div>
+                    <div class="contract-party-line">المسؤول التقني: م. محمد سليم عزيزة (المدير التقني)</div>
+                    <div class="contract-party-line">المقر: لاهاي / رايسفايك، هولندا</div>
+                </div>
+                <div class="contract-party-box">
+                    <h5>الجهة المالكة والعميل (Opdrachtgever):</h5>
+                    <strong class="contract-party-head">السيد مضر أبو فاشة</strong>
+                    <div class="contract-party-line-mt">المشروع: منصة NL بالعربي (NL bil Arabi)</div>
+                    <div class="contract-party-line">الكيان التجاري: مسجل في هولندا (KvK / Belastingdienst)</div>
+                    <div class="contract-party-line">الموقع: هولندا</div>
+                </div>
+            </div>
+
+            <!-- جدول التسليمات المالية والمحاسبية الـ 4 -->
+            <div class="mb-3">
+                <h5 class="contract-sec-h">1. محاور الخدمة المحاسبية والضريبية المعتمدة (Financiële Deliverables):</h5>
+                
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">1. استرداد ضريبة القيمة المضافة (BTW-Teruggave Belastingdienst)</span>
+                        <div class="contract-stage-d">إعداد ملف الإقرار الضريبي الخاص بتأسيس المنظومة البرمجية والمصاريف التشغيلية، وتقديمه لمصلحة الضرائب لاسترداد مبلغ € 4,410.00 كمدخلات ضريبية معتمدة ومودعة في الحساب البنكي للشركة.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 4,410 كاش مسترد</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">2. أتمتة حسابات الاشتراكات (Abonnementen & iDEAL Boekhouding)</span>
+                        <div class="contract-stage-d">ربط آلي سحابي مع CoreSync ERP لمعالجة آلاف الدفعات الصغيرة عبر iDEAL (باقات 2€ و 5€)، تقييد العمليات تلقائياً وتفادي أخطاء التدقيق، وإصدار فواتير رقمية آلية لكل مشترك مطابقة للاتحاد الأوروبي.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">3. تسويات فواتير المتاجر والقسائم (Winkel Facturatie & Vouchers)</span>
+                        <div class="contract-stage-d">إصدار تقارير تسوية شهرية معتمدة PDF للمتاجر الشريكة التي تقبل قسائم باقة 5€ لتمكينها من خصم القيمة كأعباء تسويق ضريبية، واحتساب عمولات منصة NL بالعربي وتوثيقها رسمياً.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">4. الإقرارات الربعية والميزانية السنوية (Kwartaalaangiften & Jaarrekening)</span>
+                        <div class="contract-stage-d">إعداد وتقديم الـ 4 إقرارات الربع سنوية لضريبة القيمة المضافة (BTW Kwartaalaangiften)، وإعداد الميزانية الختامية السنوية وتقارير الأرباح والخسائر الرسمية لتقديمها لغرفة التجارة KvK والضرائب.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+            </div>
+
+            <!-- خيارات الأسعار التنافسية المخفضة بهولندا -->
+            <h5 class="contract-sec-h">2. خطط الرسوم التنافسية المخفضة بهولندا (Concurrerende Tarieven):</h5>
+            <div class="fin-opts-grid">
+                <!-- الخيار السنوي الموصى به -->
+                <div class="fin-opt-card active">
+                    <span class="fin-opt-badge">الخيار الأوفر (خصم 50% شريك استراتيجي)</span>
+                    <div class="fin-opt-title">الحزمة السنوية الشاملة (Jaarabonnement)</div>
+                    <div class="fin-opt-price-box">
+                        <span class="fin-opt-price">€ 3,900.00</span>
+                        <span class="fin-opt-old">€ 7,800</span>
+                        <span class="fin-opt-period">/ سنوياً (+ 21% BTW)</span>
+                    </div>
+                    <div class="fin-opt-benefit">
+                        <strong>يعادل فقط € 325 شهرياً</strong> — يشمل كامل الإقرارات الـ 4 والميزانية السنوية Jaarrekening، واسترداد الضريبة الفوري. بفضل استرداد الضريبة (€ 4,410)، تكون الحزمة مجانية بالكامل للسنة الأولى مع فائض نقدي في حسابك!
+                    </div>
+                </div>
+
+                <!-- الخيار الشهري المرن -->
+                <div class="fin-opt-card">
+                    <div class="fin-opt-title">الاشتراك الشهري المرن (Maandelijks Opzegbaar)</div>
+                    <div class="fin-opt-price-box">
+                        <span class="fin-opt-price">€ 380.00</span>
+                        <span class="fin-opt-old">€ 650</span>
+                        <span class="fin-opt-period">/ شهرياً (+ 21% BTW)</span>
+                    </div>
+                    <div class="fin-opt-benefit">
+                        تخفيض 41% عن سعر السوق الهولندي. مرونة تامة في السداد شهراً بشهر مع تغطية شاملة لجميع معاملات الاشتراكات وفواتير المتاجر والإقرارات الربعية دون التزامات سنوية طويلة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- بطاقة التكلفة الإجمالية للحزمة السنوية -->
+            <div class="contract-totals-card">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-base">تكلفة الحزمة المحاسبية والضريبية السنوية (بعد خصم 50%):</span>
+                    <strong class="font-num contract-tot-base-num">€ 3,900.00</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-vat">ضريبة القيمة المضافة بهولندا (BTW 21%):</span>
+                    <span class="font-num contract-tot-vat-num">€ 819.00</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2 contract-grand-row">
+                    <span class="contract-grand-title">الإجمالي السنوي النهائي الشامل للضريبة (Incl. BTW):</span>
+                    <strong class="font-num contract-grand-num">€ 4,719.00</strong>
+                </div>
+                <div class="contract-vat-note">* بعد خصم استرداد ضريبة العقد التقني (€ 4,410.00)، تصبح التكلفة الفعلية الصافية السنوية على مشروعك فقط <strong>€ 309.00 للسنة بأكملها!</strong></div>
+            </div>
+
+            <!-- التوقيع والاعتماد الرسمي المالي -->
+            <div class="contract-signatures-box">
+                <div class="contract-sign-col">
+                    <div class="contract-stamp-signed">✓ معتمد وموقع رسمياً</div>
+                    <div class="contract-s-org">عن الإدارة المالية: S&R CoreSync</div>
+                    <div class="contract-s-raed">Mohammad Raed Kaaka</div>
+                    <div class="contract-s-role">أ. محمد رائد كعكة — المدير العام والشؤون المالية والضريبية</div>
+                    <div class="contract-s-date">تاريخ التوقيع: 20 أكتوبر 2026</div>
+                </div>
+
+                <div class="contract-sign-col" id="clientFinSignArea">
+                    <div id="clientFinUnsignedBox">
+                        <div class="contract-c-org">عن العميل والجهة المالكة: NL بالعربي</div>
+                        <div class="contract-c-desc">السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)</div>
+                        <button type="button" class="btn-sign-contract" onclick="signContractFinDigitally()">
+                            ✍️ اعتماد وتوقيع العقد المالي رقمياً (Digitale Handtekening)
+                        </button>
+                    </div>
+                    <div id="clientFinSignedBox" class="d-none">
+                        <div class="contract-stamp-signed contract-c-signed-stamp">✓ تم الاعتماد والتوقيع الرقمي بنجاح</div>
+                        <div class="contract-s-mudar">Mudar Abu Fasheh</div>
+                        <div class="contract-c-name">السيد مضر أبو فاشة</div>
+                        <div class="contract-c-stamp-date">تم التوثيق الرقمي: 2026-10-20 • ساري المفعول قانونياً</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراءات والمشاركة المباشرة -->
+            <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-2">
+                <button type="button" class="btn-share-wa" onclick="shareContractFinViaWhatsApp()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
+                    <span>إرسال العقد المالي عبر WhatsApp</span>
+                </button>
+                <button type="button" class="btn-share-email" onclick="shareContractFinViaEmail()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>إرسال العقد المالي عبر البريد (Email)</span>
+                </button>
+                <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">
+                    💳 سداد الحزمة السنوية (€ 4,719) عبر iDEAL
+                </button>
+                <button type="button" class="btn-cert-print" onclick="printOfficialContractFinPdf()">
+                    🖨️ طباعة / حفظ كـ PDF رسمي
+                </button>
+                <button type="button" class="btn-cert-close" onclick="closeContractOf2026FinModal()">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
 
