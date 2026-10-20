@@ -1631,8 +1631,37 @@
                 const el = document.getElementById('emailPreviewContent');
                 if (!el) return;
 
+                const richHtml = `
+                <div style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 16px; font-size: 12px; line-height: 1.5; direction: rtl; font-family: Arial, Tahoma, sans-serif;">
+                    <div style="border-bottom: 2px solid #b38728; padding-bottom: 10px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="font-size: 14px; color: #0b192c;">S&amp;R CoreSync Solutions &amp; Engineering</strong>
+                            <div style="font-size: 11px; color: #aa771c;">وثيقة العرض المالي والضريبي المعتمد (مرجع: OF-2026-1022-FIN)</div>
+                        </div>
+                        <div style="font-size: 11px; color: #64748b; direction: ltr;">20 Oktober 2026</div>
+                    </div>
+                    <p>السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،<br>تحية طيبة وبعد،</p>
+                    <p>يسرنا في شركة S&amp;R CoreSync Solutions &amp; Engineering - قسم الاستشارات المالية والضريبية في هولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي الرسمي المعتمد لإدارة حسابات منصة "NL بالعربي".</p>
+                    <div style="background: #fffbeb; border: 1.5px solid #f59e0b; border-radius: 6px; padding: 10px; margin: 12px 0;">
+                        <strong style="color: #b45309; font-size: 13px;">💎 استرداد كامل ضريبة العقد البرمجي: 4,410.00 € كاش في حسابكم</strong>
+                        <div style="font-size: 11px; color: #78350f;">نقوم بتقديم ملف الاسترداد الضريبي لدى مصلحة الضرائب الهولندية Belastingdienst مما يغطي كامل تكلفة المحاسبة السنوية ويوفر فائضاً نقدياً!</div>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11px;">
+                        <tr style="background: #f1f5f9;"><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: right;">الخطة المحاسبية</th><th style="padding: 6px; border: 1px solid #cbd5e1; text-align: left;">السعر بعد الخصم</th></tr>
+                        <tr style="background: #ecfdf5; font-weight: bold;"><td style="padding: 6px; border: 1px solid #cbd5e1;">الحزمة السنوية الشاملة (خصم 50% شريك)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr; color: #047857;">€ 3,900.00 / سنة (325 €/شهر)</td></tr>
+                        <tr><td style="padding: 6px; border: 1px solid #cbd5e1;">الاشتراك الشهري المرن (خصم 41%)</td><td style="padding: 6px; border: 1px solid #cbd5e1; text-align: left; direction: ltr;">€ 380.00 / شهر</td></tr>
+                    </table>
+                    <p>يمكنكم معاينة وتوقيع العقد المالي مباشرة عبر الرابط التفاعلي التالي:<br>
+                    <a href="${portalUrl}" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: bold; text-decoration: underline;">
+                        ${portalUrl}
+                    </a></p>
+                    <p>وتفضلوا بقبول فائق الاحترام والتقدير،<br>
+                    <strong>أ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية</strong><br>
+                    S&amp;R CoreSync Solutions &amp; Engineering — The Netherlands</p>
+                </div>`;
+
                 if (navigator.clipboard && window.ClipboardItem) {
-                    const blobHtml = new Blob([el.innerHTML], { type: 'text/html' });
+                    const blobHtml = new Blob([richHtml], { type: 'text/html' });
                     const blobText = new Blob([el.innerText], { type: 'text/plain' });
                     const item = new ClipboardItem({
                         'text/html': blobHtml,
