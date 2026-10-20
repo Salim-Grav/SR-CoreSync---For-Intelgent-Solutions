@@ -46,6 +46,7 @@
             transform: translateX(-50%);
             z-index: 9999;
             background: rgba(17, 24, 39, 0.95);
+            -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             padding: 10px 24px;
             border-radius: 999px;
@@ -254,6 +255,12 @@
             color: var(--text-dark);
         }
 
+        .sub-dutch-role {
+            font-size: 7.5pt;
+            font-weight: normal;
+            color: var(--text-muted);
+        }
+
         /* Deliverables Table */
         .section-title {
             font-size: 10.5pt;
@@ -286,6 +293,10 @@
         table.contract-table th.text-center { text-align: center; }
         table.contract-table th.text-left { text-align: left; }
 
+        .th-stage { width: 28%; }
+        .th-desc { width: 58%; }
+        .th-price { width: 14%; }
+
         table.contract-table td {
             padding: 6px 8px;
             border: 1px solid #e2e8f0;
@@ -310,6 +321,11 @@
             direction: ltr;
             text-align: left;
             white-space: nowrap;
+        }
+
+        .stage-sub-dutch {
+            color: var(--text-muted);
+            font-weight: normal;
         }
 
         /* Financial Summary Box */
@@ -350,6 +366,12 @@
         .total-row strong {
             direction: ltr;
             font-family: 'Inter', sans-serif;
+        }
+
+        .tax-note {
+            font-size: 7.5pt;
+            color: #64748b;
+            margin-top: 4px;
         }
 
         .installments-card {
@@ -474,6 +496,32 @@
             color: #059669;
         }
 
+        .exec-role {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #0a2540;
+        }
+
+        .sig-placeholder {
+            color: #94a3b8;
+            font-size: 8pt;
+            border-bottom: 1px dashed #cbd5e1;
+            width: 80%;
+            padding-bottom: 4px;
+        }
+
+        .sig-client-role {
+            font-size: 8pt;
+            font-weight: 700;
+            color: #065f46;
+        }
+
+        .sig-client-hash {
+            font-size: 6.5pt;
+            color: #059669;
+            font-family: monospace;
+        }
+
         .sig-footer {
             font-size: 7.5pt;
             color: var(--text-muted);
@@ -509,7 +557,7 @@
 
             .paper-page {
                 width: 100% !important;
-                min-height: auto !important;
+                min-height: 0 !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 box-shadow: none !important;
@@ -593,7 +641,7 @@
                 <div class="party-box dienstverlener">
                     <h3>
                         <span>الطرف الأول: الجهة المنفذة</span>
-                        <span style="font-size: 7.5pt; font-weight: normal; color: var(--text-muted);">Dienstverlener</span>
+                        <span class="sub-dutch-role">Dienstverlener</span>
                     </h3>
                     <div class="party-detail"><strong>الشركة:</strong> S&amp;R CoreSync Solutions &amp; Engineering</div>
                     <div class="party-detail"><strong>المفوض بالتوقيع:</strong> المهندس محمد سليم عزيزة (المدير التقني)</div>
@@ -604,7 +652,7 @@
                 <div class="party-box opdrachtgever">
                     <h3>
                         <span>الطرف الثاني: الجهة المالكة والعميل</span>
-                        <span style="font-size: 7.5pt; font-weight: normal; color: var(--text-muted);">Opdrachtgever</span>
+                        <span class="sub-dutch-role">Opdrachtgever</span>
                     </h3>
                     <div class="party-detail"><strong>العميل الكريم:</strong> السيد مضر أبو فاشة (Mudar Abu Fasheh)</div>
                     <div class="party-detail"><strong>المشروع:</strong> منصة NL بالعربي (NL bil Arabi Platform)</div>
@@ -621,34 +669,34 @@
             <table class="contract-table">
                 <thead>
                     <tr>
-                        <th style="width: 28%;">المرحلة البرمجية (Fase)</th>
-                        <th style="width: 58%;">المواصفات الفنية والتسليمات المعتمدة (Specificaties &amp; Deliverables)</th>
-                        <th style="width: 14%;" class="text-left">القيمة (EUR)</th>
+                        <th class="th-stage">المرحلة البرمجية (Fase)</th>
+                        <th class="th-desc">المواصفات الفنية والتسليمات المعتمدة (Specificaties &amp; Deliverables)</th>
+                        <th class="th-price text-left">القيمة (EUR)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="stage-name">المرحلة 1: المنصة الأساسية ونظام الاشتراكات<br><small style="color:var(--text-muted);font-weight:normal;">Core Web &amp; Subscriptions</small></td>
+                        <td class="stage-name">المرحلة 1: المنصة الأساسية ونظام الاشتراكات<br><small class="stage-sub-dutch">Core Web &amp; Subscriptions</small></td>
                         <td class="stage-desc">بنية تحتية سحابية هجينة متعددة اللغات (عربي RTL كامل، هولندي، إنجليزي)، مصادقة آمنة OTP وتكامل تسجيل Google و Apple، محرك باقات المشتركين (Basic 2€ / Plus 5€)، بوابة دفع هولندية أصلية iDEAL لتفادي عمولات المتاجر بنسبة 0%، نظام الرقابة الأبوية وحسابات الأطفال الآمنة.</td>
                         <td class="stage-price">&euro; 4.800,00</td>
                     </tr>
                     <tr>
-                        <td class="stage-name">المرحلة 2: محرك القسائم الذكية وبوابة المتاجر<br><small style="color:var(--text-muted);font-weight:normal;">Voucher Engine &amp; WhatsApp</small></td>
+                        <td class="stage-name">المرحلة 2: محرك القسائم الذكية وبوابة المتاجر<br><small class="stage-sub-dutch">Voucher Engine &amp; WhatsApp</small></td>
                         <td class="stage-desc">توليد قسائم رقمية شهرية مشفرة برمز QR لمشتركي باقة 5€، ربط آلي مباشر مع WhatsApp Business API لإرسال القسائم والتنبيهات، بوابة مسح خفيفة للمتاجر تعمل عبر متصفح الهاتف بدون تثبيت، تخصيص صلاحيات موظفي المتاجر برمز PIN، وفواتير تسوية شهرية PDF لخصمها ضريبياً.</td>
                         <td class="stage-price">&euro; 4.200,00</td>
                     </tr>
                     <tr>
-                        <td class="stage-name">المرحلة 3: البث المباشر والترجمة بالذكاء الاصطناعي<br><small style="color:var(--text-muted);font-weight:normal;">Live Stream &amp; AI Audio</small></td>
+                        <td class="stage-name">المرحلة 3: البث المباشر والترجمة بالذكاء الاصطناعي<br><small class="stage-sub-dutch">Live Stream &amp; AI Audio</small></td>
                         <td class="stage-desc">استوديو بث سحابي يدمج عدة مدخلات وهواتف في بث موحد ومتزامن، تسجيل وأرشفة تلقائية فورية للحلقات، مشغل وسائط تفاعلي يدعم 3 مسارات صوتية فورية (عربي / هولندي / إنجليزي) بمحرك ترجمة AI، ونظام رفع مقاطع الجمهور مع طابور مراجعة وموافقة الإدارة.</td>
                         <td class="stage-price">&euro; 5.200,00</td>
                     </tr>
                     <tr>
-                        <td class="stage-name">المرحلة 4: لوحة الإدارة الفائقة وبوابة الإعلانات<br><small style="color:var(--text-muted);font-weight:normal;">Super-Admin &amp; Ads Engine</small></td>
+                        <td class="stage-name">المرحلة 4: لوحة الإدارة الفائقة وبوابة الإعلانات<br><small class="stage-sub-dutch">Super-Admin &amp; Ads Engine</small></td>
                         <td class="stage-desc">لوحة تحكم إدارية مركزية للتحكم في الاشتراكات، المحتوى، والمتاجر الشريكة، محرك إعلانات ورعايات ذكي يدعم اللافتات، الفيديو التمهيدي، وتحديد الموقع الجغرافي بالمدن الهولندية (Amsterdam, Rotterdam, Den Haag...)، وتقارير تفاعلية وإحصائيات مالية دقيقة.</td>
                         <td class="stage-price">&euro; 3.300,00</td>
                     </tr>
                     <tr>
-                        <td class="stage-name">المرحلة 5: تطبيقات الهواتف الذكية بنمط القارئ<br><small style="color:var(--text-muted);font-weight:normal;">Mobile Apps (iOS &amp; Android)</small></td>
+                        <td class="stage-name">المرحلة 5: تطبيقات الهواتف الذكية بنمط القارئ<br><small class="stage-sub-dutch">Mobile Apps (iOS &amp; Android)</small></td>
                         <td class="stage-desc">تطبيق هجين موحد بنظام العرض السلس لمتاجري Apple App Store و Google Play Store (Reader App Model) لحماية الإيرادات وتفادي عمولة الـ 30% مع حصر الدفع عبر الويب، ووصول كامل للمحتوى والأرشيف والبث المباشر مع التنبيهات الفورية (Push Notifications).</td>
                         <td class="stage-price">&euro; 3.500,00</td>
                     </tr>
@@ -670,7 +718,7 @@
                         <span>الإجمالي التعاقدي النهائي الشامل للضريبة (Incl. BTW):</span>
                         <strong>&euro; 25.410,00</strong>
                     </div>
-                    <div style="font-size: 7.5pt; color: #64748b; margin-top: 4px;">
+                    <div class="tax-note">
                         * تخصم كامل مبالغ ضريبة الـ BTW للشركات المسجلة في هولندا كمدخلات ضريبية معتمدة لدى مصلحة الضرائب Belastingdienst.
                     </div>
                 </div>
@@ -719,7 +767,7 @@
                     <div class="sig-body">
                         <div>
                             <div class="sig-script">Mohammad Salim Aziza</div>
-                            <div style="font-size: 8pt; font-weight: 700; color: #0a2540;">م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</div>
+                            <div class="exec-role">م. محمد سليم عزيزة - المدير التقني للشؤون الهندسية</div>
                         </div>
                     </div>
                     <div class="sig-footer">
@@ -735,7 +783,7 @@
                         <span class="sig-stamp" id="clientStampBadge">في انتظار التوقيع</span>
                     </div>
                     <div class="sig-body" id="clientSigBody">
-                        <div style="color: #94a3b8; font-size: 8pt; border-bottom: 1px dashed #cbd5e1; width: 80%; padding-bottom: 4px;">
+                        <div class="sig-placeholder">
                             (توقيع السيد مضر أبو فاشة - المفوض بالتوقيع والمالك)
                         </div>
                     </div>
@@ -776,9 +824,9 @@
                 clientBody.className = 'sig-body client-verified';
                 clientBody.innerHTML = `
                     <div>
-                        <div class="sig-script" style="color: #059669;">Mudar Abu Fasheh</div>
-                        <div style="font-size: 8pt; font-weight: 700; color: #065f46;">السيد مضر أبو فاشة - المالك التجاري والمفوض</div>
-                        <div style="font-size: 6.5pt; color: #059669; font-family: monospace;">VERIFIED DIGI-HASH: NL-2026-OF1021-OK</div>
+                        <div class="sig-script">Mudar Abu Fasheh</div>
+                        <div class="sig-client-role">السيد مضر أبو فاشة - المالك التجاري والمفوض</div>
+                        <div class="sig-client-hash">VERIFIED DIGI-HASH: NL-2026-OF1021-OK</div>
                     </div>
                 `;
             }
