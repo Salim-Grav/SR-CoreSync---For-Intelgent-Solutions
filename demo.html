@@ -23,6 +23,20 @@
 
     <link rel="stylesheet" href="./css/demo-portal.css?v=sovereign2026_fixed">
     <!-- S&R CoreSync Zero-Warnings Validated Build -->
+
+    <!-- Language Auto-Redirect from Query Param (?lang=en / ?lang=nl) -->
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var l = (params.get('lang') || '').toLowerCase();
+        if (l === 'en') {
+            window.location.replace('en/demo.html' + (window.location.hash || ''));
+        } else if (l === 'nl') {
+            window.location.replace('nl/demo.html' + (window.location.hash || ''));
+        }
+    })();
+    </script>
+
 </head>
 <body>
 
@@ -58,6 +72,14 @@
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 <span>حجز استشارة بهذا النظام</span>
             </button>
+            
+            <!-- محول اللغة السحابي المتكامل -->
+            <div class="portal-lang-switcher" aria-label="تبديل لغة المنصة">
+                <a href="demo.html" class="portal-lang-btn active" title="العربية">🇸🇦 AR</a>
+                <a href="en/demo.html" class="portal-lang-btn" title="English">🇬🇧 EN</a>
+                <a href="nl/demo.html" class="portal-lang-btn" title="Nederlands">🇳🇱 NL</a>
+            </div>
+
             <a href="logo-studio.html" class="btn-return-main" title="استوديو ومحرر الشعار">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
                 استوديو الشعار
