@@ -38,6 +38,8 @@
         .btn-emerald { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
         .btn-sec { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; }
         .btn-sec:hover { background: rgba(255,255,255,0.16); }
+        .val-deduct { color: #ef4444; }
+        .license-active { color: var(--gold); }
         footer { margin-top: 24px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-dim); }
     </style>
 </head>
@@ -57,24 +59,24 @@
         <div class="card">
             <h2>1. مدخلات الفاتورة والضريبة (BTW/VAT Input)</h2>
             <div class="group">
-                <label>اسم العميل / المؤسسة التجارية:</label>
-                <input type="text" id="clientName" value="Apex Global Logistics B.V.">
+                <label for="clientName">اسم العميل / المؤسسة التجارية:</label>
+                <input type="text" id="clientName" value="Apex Global Logistics B.V." title="اسم العميل أو المؤسسة التجارية" placeholder="اسم العميل أو المؤسسة" aria-label="اسم العميل أو المؤسسة التجارية">
             </div>
             <div class="group">
-                <label>الرقم الضريبي الهولندي (BTW ID):</label>
-                <input type="text" id="taxId" value="NL884920153B01">
+                <label for="taxId">الرقم الضريبي الهولندي (BTW ID):</label>
+                <input type="text" id="taxId" value="NL884920153B01" title="الرقم الضريبي الهولندي BTW ID" placeholder="مثال: NL884920153B01" aria-label="الرقم الضريبي الهولندي">
             </div>
             <div class="group">
-                <label>المبيعات الخاضعة للضريبة الأساسية 21% (€):</label>
-                <input type="number" id="base21" value="12500" oninput="calculate()">
+                <label for="base21">المبيعات الخاضعة للضريبة الأساسية 21% (€):</label>
+                <input type="number" id="base21" value="12500" oninput="calculate()" title="المبيعات الخاضعة للضريبة 21%" placeholder="المبلغ باليورو" aria-label="المبيعات الخاضعة للضريبة 21%">
             </div>
             <div class="group">
-                <label>المبيعات الخاضعة للضريبة المخفضة 9% (€):</label>
-                <input type="number" id="base9" value="3400" oninput="calculate()">
+                <label for="base9">المبيعات الخاضعة للضريبة المخفضة 9% (€):</label>
+                <input type="number" id="base9" value="3400" oninput="calculate()" title="المبيعات الخاضعة للضريبة 9%" placeholder="المبلغ باليورو" aria-label="المبيعات الخاضعة للضريبة 9%">
             </div>
             <div class="group">
-                <label>ضريبة المدخلات المستردة (Voorbelasting 5b - €):</label>
-                <input type="number" id="inputVat" value="1120" oninput="calculate()">
+                <label for="inputVat">ضريبة المدخلات المستردة (Voorbelasting 5b - €):</label>
+                <input type="number" id="inputVat" value="1120" oninput="calculate()" title="ضريبة المدخلات المستردة Voorbelasting" placeholder="المبلغ المسترد باليورو" aria-label="ضريبة المدخلات المستردة">
             </div>
         </div>
 
@@ -91,7 +93,7 @@
                 </div>
                 <div class="row">
                     <span>ضريبة المدخلات المستردة (5b):</span>
-                    <strong id="dispInputVat" style="color:#ef4444;">- € 1,120.00</strong>
+                    <strong id="dispInputVat" class="val-deduct">- € 1,120.00</strong>
                 </div>
                 <div class="row total">
                     <span>صافي الضريبة الواجب سدادها (Te Betalen):</span>
@@ -110,7 +112,7 @@
 
     <footer>
         <div>S&R CoreSync Solutions B.V. • Amsterdam HQ • تطوير وإشراف م. سليم عزيزة وأ. رائد كعكة</div>
-        <div>كود الترخيص المفعل: <strong style="color:var(--gold);">SRTX-PRO-2026-X892-OFFLINE</strong></div>
+        <div>كود الترخيص المفعل: <strong class="license-active">SRTX-PRO-2026-X892-OFFLINE</strong></div>
     </footer>
 
     <script>
