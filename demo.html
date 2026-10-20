@@ -940,8 +940,8 @@
                 <div class="sovereign-shield-card" dir="rtl">
                     <div class="shield-header-row">
                         <div>
-                            <h3 class="mb-1" style="color: #c5a880;">🛡️ درع الامتثال والسيادة الأوروبية (NIS2 & RGPD)</h3>
-                            <p class="text-caption mb-0" style="color: #9abdb0;">ضمانات قانونية ومعمارية لحماية البيانات المؤسسية الحساسة وفق أعلى المعايير الأوروبية</p>
+                            <h3 class="mb-1 text-gold">🛡️ درع الامتثال والسيادة الأوروبية (NIS2 & RGPD)</h3>
+                            <p class="text-caption mb-0 text-sage-caption">ضمانات قانونية ومعمارية لحماية البيانات المؤسسية الحساسة وفق أعلى المعايير الأوروبية</p>
                         </div>
                         <div class="shield-live-status font-num">
                             <span>●</span> 100% سيادي — مركز بيانات أمستردام (NL Central)
@@ -972,7 +972,7 @@
                     </div>
 
                     <div class="shield-audit-bar-wrap">
-                        <div style="font-size: 0.82rem; color: #e2f1ec;" id="auditStatusText">
+                        <div class="audit-status-lbl" id="auditStatusText">
                             🟢 <strong>حالة التدقيق: معتمد 100%</strong> — لم يتم رصد أي ثغرات امتثال أو أمان على الشبكة.
                         </div>
                         <button type="button" class="btn-run-audit" id="btnRunAudit" onclick="runComplianceAuditScanner()">
@@ -985,13 +985,13 @@
                 <div class="migration-estimator-card" dir="rtl">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div>
-                            <h3 class="mb-1" style="color: #c5a880;">🔄 محاكي الترحيل السحابي بدون انقطاع (Zero-Downtime)</h3>
-                            <p class="text-caption mb-0" style="color: #9abdb0;">احسب مدة وتكلفة الانتقال من نظامك الحالي إلى سحابة S&R CoreSync عبر المزامنة المتوازية الفورية</p>
+                            <h3 class="mb-1 text-gold">🔄 محاكي الترحيل السحابي بدون انقطاع (Zero-Downtime)</h3>
+                            <p class="text-caption mb-0 text-sage-caption">احسب مدة وتكلفة الانتقال من نظامك الحالي إلى سحابة S&R CoreSync عبر المزامنة المتوازية الفورية</p>
                         </div>
-                        <span class="badge-count" style="background: rgba(197, 168, 128, 0.2); color: #c5a880; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;">مزامنة متوازية نشطة</span>
+                        <span class="badge-count badge-gold-subtle">مزامنة متوازية نشطة</span>
                     </div>
 
-                    <div style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 8px;">1. اختر نظامك الحالي:</div>
+                    <div class="mig-sys-lbl">1. اختر نظامك الحالي:</div>
                     <div class="migration-systems-row">
                         <button type="button" class="migration-sys-btn active" onclick="selectMigrationSystem(this, 'SAP')">SAP ECC / S4HANA</button>
                         <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Oracle')">Oracle NetSuite</button>
@@ -1000,7 +1000,7 @@
                     </div>
 
                     <div class="roi-slider-header mt-3 mb-1">
-                        <span style="font-size: 0.82rem; color: #e2f1ec;">2. حجم قاعدة البيانات (جيجابايت)</span>
+                        <span class="roi-slider-lbl">2. حجم قاعدة البيانات (جيجابايت)</span>
                         <span class="roi-val-display font-num" id="dispMigVolume">250 جيجابايت</span>
                     </div>
                     <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" oninput="calcMigrationEstimator()" />
