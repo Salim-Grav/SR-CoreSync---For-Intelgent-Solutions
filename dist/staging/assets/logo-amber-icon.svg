@@ -1,0 +1,52 @@
+<svg viewBox="0 0 100 100" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&amp;display=swap');
+      .sr-serif {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #ffffff;
+      }
+      .sr-amp {
+        font-family: 'Playfair Display', 'Times New Roman', serif;
+        font-weight: 800;
+        fill: #f59e0b;
+      }
+    </style>
+    <radialGradient id="officialOrbGradAmberIcon" cx="45%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#ef4444" stop-opacity="0.9" />
+      <stop offset="75%" stop-color="#033054" stop-opacity="0.98" />
+      <stop offset="100%" stop-color="#021a30" stop-opacity="1" />
+    </radialGradient>
+    <linearGradient id="officialBorderGradAmberIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.5" />
+    </linearGradient>
+  </defs>
+  
+  <g>
+    <!-- الحلقة المدارية الخارجية الدقيقة -->
+    <circle cx="50" cy="50" r="44" fill="none" stroke="#f59e0b" stroke-opacity="0.4" stroke-width="0.7" />
+    
+    <!-- عقدتان متزامنتان على المحيط -->
+    <g transform="rotate(-35 50 50) translate(94, 50)">
+      <circle cx="0" cy="0" r="2.2" fill="#f59e0b" stroke="#ffffff" stroke-width="0.4" />
+    </g>
+    <g transform="rotate(145 50 50) translate(94, 50)">
+      <circle cx="0" cy="0" r="2.2" fill="#f59e0b" stroke="#ffffff" stroke-width="0.4" />
+    </g>
+
+    <!-- مدارات التزامن الثنائية المائلة -->
+    <ellipse cx="50" cy="50" rx="43" ry="18" transform="rotate(35 50 50)" fill="none" stroke="#f59e0b" stroke-opacity="0.32" stroke-width="0.8" />
+    <ellipse cx="50" cy="50" rx="43" ry="18" transform="rotate(-35 50 50)" fill="none" stroke="#f59e0b" stroke-opacity="0.32" stroke-width="0.8" />
+
+    <!-- الكرة المركزية المضيئة -->
+    <circle cx="50" cy="50" r="33.5" fill="url(#officialOrbGradAmberIcon)" stroke="url(#officialBorderGradAmberIcon)" stroke-width="1.2" />
+
+    <!-- المونوغرام S&R -->
+    <text x="38" y="56.5" class="sr-serif" font-size="28" text-anchor="middle">S</text>
+    <text x="49" y="52" class="sr-amp" font-size="14" text-anchor="middle">&amp;</text>
+    <text x="61" y="56.5" class="sr-serif" font-size="28" text-anchor="middle">R</text>
+  </g>
+</svg>

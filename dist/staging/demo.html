@@ -1,0 +1,3204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>S&R CoreSync | المنصة السحابية التجريبية (Live Interactive Demo Portal)</title>
+    <link rel="icon" type="image/png" sizes="256x256" href="./assets/sr-core-emblem-256.png?v=sovereign2026_fixed">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026_fixed">
+    <link rel="alternate icon" type="image/png" href="./assets/sr-core-emblem-official.png?v=sovereign2026_fixed">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/sr-core-emblem-256.png?v=sovereign2026_fixed">
+    
+    <!-- الخطوط الرسمية الفاخرة: Alexandria + Plus Jakarta Sans + Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الرسوم البيانية Chart.js مع دعم التشغيل دون اتصال (Offline-First) -->
+    <script src="./js/chart.umd.min.js"></script>
+    <script>if (typeof Chart === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>'); }</script>
+
+    <link rel="stylesheet" href="./css/demo-portal.css?v=sovereign2026_fixed">
+    <!-- S&R CoreSync Zero-Warnings Validated Build -->
+
+    <!-- Language Auto-Redirect from Query Param (?lang=en / ?lang=nl) -->
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var l = (params.get('lang') || '').toLowerCase();
+        if (l === 'en') {
+            window.location.replace('en/demo.html' + (window.location.hash || ''));
+        } else if (l === 'nl') {
+            window.location.replace('nl/demo.html' + (window.location.hash || ''));
+        }
+    })();
+    </script>
+
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="portal-header">
+        <a href="index.html" class="portal-brand brand-logo-site" title="العودة للصفحة الرئيسية - S&R CoreSync Solutions">
+            <img src="./assets/sr-core-emblem-official.png?v=sovereign2026_fixed" alt="S&R CoreSync Official Sovereign Emblem" class="portal-brand-emblem brand-emblem-img" width="64" height="64" />
+            <div class="brand-logo-site-logo">
+                <span class="brand-sr-text">S&amp;R</span>
+                <span class="brand-sub-text">CoreSync</span>
+            </div>
+        </a>
+
+        <div class="header-controls">
+            <div class="live-status-pill">
+                <span class="live-status-dot"></span>
+                <span>النظام السحابي متصل (EU Node)</span>
+            </div>
+            <!-- زر الجولة الإرشادية التفاعلية للزبائن -->
+            <button type="button" class="btn-tour-start" id="btnStartTour" onclick="startGuidedTour()" title="بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون">
+                <span>🚀 ابدأ الجولة</span>
+            </button>
+            <!-- زر تصدير ملخص العرض بنقرة واحدة كـ PDF -->
+            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" onclick="openExecutivePdfModal()" title="تصدير بطاقة العرض التنفيذي إلى ملف PDF أنيق للعميل">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                <span>ملخص العرض (PDF)</span>
+            </button>
+            <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" onclick="togglePresentationMode()" title="وضع العرض التقديمي للزبائن (شاشة كاملة وتجربة تنفيذية)">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+                <span>عرض الزبائن [P]</span>
+            </button>
+            <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()" title="نقل تفضيلات الجلسة وحجز موعد استشاري">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                <span>حجز استشارة بهذا النظام</span>
+            </button>
+            
+            <!-- محول اللغة السحابي المتكامل -->
+            <div class="portal-lang-switcher" aria-label="تبديل لغة المنصة">
+                <a href="demo.html" class="portal-lang-btn active" title="العربية">🇸🇦 AR</a>
+                <a href="en/demo.html" class="portal-lang-btn" title="English">🇬🇧 EN</a>
+                <a href="nl/demo.html" class="portal-lang-btn" title="Nederlands">🇳🇱 NL</a>
+            </div>
+
+            <a href="logo-studio.html" class="btn-return-main" title="استوديو ومحرر الشعار">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle></svg>
+                استوديو الشعار
+            </a>
+            <a href="index.html" class="btn-return-main">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                العودة للموقع
+            </a>
+        </div>
+    </header>
+
+    <!-- الهيكل والتقسيم الداخلي -->
+    <div class="portal-layout">
+        <!-- القائمة الجانبية -->
+        <aside class="portal-sidebar">
+            <div class="nav-item active" id="tourNav-overview" onclick="switchPortalTab('overview', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>لوحة القيادة المالية</span>
+            </div>
+            <div class="nav-item" id="tourNav-erp" onclick="switchPortalTab('erp', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <span>إدارة الـ ERP والمخازن</span>
+            </div>
+            <div class="nav-item" id="tourNav-invoices" onclick="switchPortalTab('invoices', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <span>الفواتير والتدفقات النقدية</span>
+            </div>
+            <div class="nav-item" id="tourNav-ai" onclick="switchPortalTab('ai', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+                <span>المساعد المالي الذكي (AI)</span>
+            </div>
+            <div class="nav-item" id="tourNav-cloud" onclick="switchPortalTab('cloud', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
+                <span>حالة الخوادم السحابية</span>
+            </div>
+            <div class="nav-item" id="tourNav-whitelabel" onclick="switchPortalTab('whitelabel', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                <span>تخصيص الهوية (White-Label)</span>
+            </div>
+            <div class="nav-item" id="tourNav-software" onclick="switchPortalTab('software', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                <span>سوق البرمجيات (Software Hub)</span>
+            </div>
+
+            <div class="sidebar-spacer"></div>
+
+            <!-- بطاقة مزامنة الديمو مع استشارة المؤسسين -->
+            <div class="sidebar-sync-box">
+                <div class="sync-box-tag">تكامل مع الإدارة</div>
+                <div class="sync-box-title">طلب تفعيل لشركتك</div>
+                <p class="sync-box-desc">انقل تفاصيل الجلسة والسيناريوهات المجرّبة مباشرة لاستشارة المؤسسين.</p>
+                <button type="button" class="sync-box-btn" onclick="syncDemoToConsultation()">
+                    <span>حجز استشارة مخصصة</span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+
+            <div class="sidebar-user-card">
+                <div class="user-avatar font-num">SR</div>
+                <div class="user-info">
+                    <div class="user-name">جلسة معاينة تفاعلية</div>
+                    <div class="user-role">S&R Executive Demo</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- منطقة العمل الرئيسية -->
+        <main class="portal-content">
+            
+            <!-- 1. شاشة النظرة العامة والمالية -->
+            <section class="tab-section active" id="tab-overview">
+                <!-- شريط محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator) -->
+                <div class="currency-vat-bar" id="currencyVatSimulatorBar">
+                    <div class="cur-vat-title">
+                        <span class="cur-badge-pulse"></span>
+                        <strong>محاكي العملات والضرائب الحي (Live Currency & VAT Simulator):</strong>
+                    </div>
+                    <div class="cur-vat-controls">
+                        <div class="cur-selector-group">
+                            <span class="cur-label">العملة:</span>
+                            <div class="cur-pill-toggle">
+                                <button type="button" class="cur-pill active" id="curPill-EUR" onclick="setCurrency('EUR')">€ EUR</button>
+                                <button type="button" class="cur-pill" id="curPill-USD" onclick="setCurrency('USD')">$ USD</button>
+                                <button type="button" class="cur-pill" id="curPill-SAR" onclick="setCurrency('SAR')">﷼ SAR</button>
+                            </div>
+                        </div>
+                        <div class="cur-selector-group">
+                            <span class="cur-label">النظام الضريبي:</span>
+                            <select id="globalVatSelector" onchange="setGlobalVat(this.value)" class="cur-select-vat" title="اختيار النظام الضريبي المالي" aria-label="اختيار النظام الضريبي المالي">
+                                <option value="0.21" selected>🇳🇱 BTW هولندي (21%)</option>
+                                <option value="0.09">🇳🇱 BTW مخفض (9%)</option>
+                                <option value="0.15">🇸🇦 ضريبة خليجية (15%)</option>
+                                <option value="0.00">🌐 معفى ضريبياً (0%)</option>
+                            </select>
+                        </div>
+                        <div class="cur-summary-chip">
+                            <span>الضريبة المحتسبة: <strong id="globalVatEst">€ 176,925.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>لوحة القيادة والتدفق المالي اللحظي</h2>
+                        <p>نظام محاكاة حي لحركات الحسابات والإيرادات والمصروفات السحابية المؤتمتة</p>
+                    </div>
+                    <button class="action-cta-btn" onclick="openNewTxModal()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        تسجيل معاملة تجريبية
+                    </button>
+                </div>
+
+                <!-- شبكة بطاقات الأرقام -->
+                <div class="stats-grid" id="tourStatsGrid">
+                    <div class="stat-card" id="tourStatCardRevenue">
+                        <div class="stat-top">
+                            <span class="stat-label">إجمالي الإيرادات السنوية</span>
+                            <div class="stat-icon font-num" id="stat-currency-sym1">€</div>
+                        </div>
+                        <div class="stat-value font-num" id="stat-revenue">€ 842,500.00</div>
+                        <div class="stat-trend positive">
+                            <span>+18.4%</span> مقارنة بالربع السابق
+                        </div>
+                    </div>
+
+                    <div class="stat-card" id="tourStatCardCashflow">
+                        <div class="stat-top">
+                            <span class="stat-label">التدفقات النقدية الصافية</span>
+                            <div class="stat-icon" id="stat-currency-sym2">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <div class="stat-value font-num" id="stat-cashflow">€ 318,920.00</div>
+                        <div class="stat-trend positive">
+                            <span>+9.2%</span> هامش ربحية تشغيلية
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">طلبات الـ ERP المنجزة</span>
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            </div>
+                        </div>
+                        <div class="stat-value font-num" id="stat-orders">1,428</div>
+                        <div class="stat-trend positive">
+                            <span>99.8%</span> نسبة الامتثال والدقة
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">عمليات الأتمتة الموفرة</span>
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                        </div>
+                        <div class="stat-value font-num">480 ساعة</div>
+                        <div class="stat-trend positive">
+                            وفر شهري مباشر في وقت الفريق
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الرسم البياني الرئيسي وتوزيع الأصول -->
+                <div class="charts-row">
+                    <div class="glass-box">
+                        <div class="glass-box-header">
+                            <h3>حركة الإيرادات والتدفق النقدي الشهري (€)</h3>
+                            <span class="text-caption text-white-64 font-num">2026 Monthly Trend</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="glass-box">
+                        <div class="glass-box-header">
+                            <h3>توزيع العمليات حسب القطاع</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول العمليات اللحظية -->
+                <div class="glass-box">
+                    <div class="glass-box-header">
+                        <h3>سجل العمليات والربط المحاسبي المباشر</h3>
+                        <span class="text-caption text-white-64">مزامنة سحابية لحظية</span>
+                    </div>
+                    <div class="data-table-wrap">
+                        <table class="data-table" id="transactionsTable">
+                            <thead>
+                                <tr>
+                                    <th>رقم المعاملة</th>
+                                    <th>الجهة / العميل</th>
+                                    <th>التاريخ</th>
+                                    <th>المبلغ</th>
+                                    <th>نوع العملية</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-num">#CS-9842</td>
+                                    <td>مجموعة الخدمات اللوجستية (هولندا)</td>
+                                    <td class="font-num">2026-10-01</td>
+                                    <td class="font-num tx-amount-highlight">€ 24,800</td>
+                                    <td>تكامل مخازن ERP</td>
+                                    <td><span class="status-badge status-completed">تمت المزامنة</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-num">#CS-9841</td>
+                                    <td>شركة الاستشارات المالية (فرانكفورت)</td>
+                                    <td class="font-num">2026-09-30</td>
+                                    <td class="font-num tx-amount-highlight">€ 18,500</td>
+                                    <td>حوكمة دفاتر الحسابات</td>
+                                    <td><span class="status-badge status-completed">تمت المزامنة</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-num">#CS-9840</td>
+                                    <td>مجموعة التوزيع التجاري (الرياض)</td>
+                                    <td class="font-num">2026-09-29</td>
+                                    <td class="font-num tx-amount-highlight">€ 42,000</td>
+                                    <td>تطبيق مالي سحابي</td>
+                                    <td><span class="status-badge status-processing">قيد التدقيق الآلي</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-num">#CS-9839</td>
+                                    <td>سلسلة مطاعم راقية (أمستردام)</td>
+                                    <td class="font-num">2026-09-28</td>
+                                    <td class="font-num tx-amount-highlight">€ 9,450</td>
+                                    <td>ربط نقاط البيع POS</td>
+                                    <td><span class="status-badge status-completed">تمت المزامنة</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. شاشة الـ ERP والمخازن -->
+            <section class="tab-section" id="tab-erp">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>منظومة الـ ERP وإدارة سلاسل الإمداد</h2>
+                        <p>تكامل مركزي للمخازن، المشتريات، وتتبع الأصول بين المستودعات الأوروبية والخليجية</p>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">المستودعات المرتبطة</div>
+                        <div class="stat-value font-num">6 مراكز</div>
+                        <div class="stat-trend positive">أمستردام، روتردام، الرياض، دبي</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">إجمالي الأصناف النشطة</div>
+                        <div class="stat-value font-num">18,450 وحدة</div>
+                        <div class="stat-trend positive">تتبع تلقائي بالباركود وRFID</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">أوامر التوريد الجارية</div>
+                        <div class="stat-value font-num">34 أمر توريد</div>
+                        <div class="stat-trend positive">مؤتمتة مع الموردين المعتمدين</div>
+                    </div>
+                </div>
+                <div class="glass-box">
+                    <h3 class="mb-3">خريطة تدفق السلع والطلبات التلقائية</h3>
+                    <p class="text-white-64">
+                        يقوم محرك S&R CoreSync ERP بتحديث مستويات المخزون تلقائيًا فور صدور أي فاتورة مبيعات، وإطلاق طلبات إعادة التوريد الذكية عند بلوغ حد الأمان، مما يمنع انقطاع البضائع ويخفض تكاليف التخزين بنسبة 25%.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. شاشة الفواتير والتدفقات النقدية -->
+            <section class="tab-section" id="tab-invoices">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>الفواتير الإلكترونية والامتثال الضريبي الذكي</h2>
+                        <p>مطابقة معايير الفوترة الإلكترونية المعتمدة في هولندا والاتحاد الأوروبي (UBL / PEPPOL) وهيئة الزكاة والضريبة (ZATCA)</p>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="button" class="action-cta-btn" onclick="openInvoiceGeneratorModal()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                            توليد فاتورة إلكترونية تجريبية
+                        </button>
+                        <button type="button" class="btn-secondary-glow" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            محاكاة دفع فوري عبر iDEAL
+                        </button>
+                    </div>
+                </div>
+
+                <!-- إحصائيات سريعة للفوترة -->
+                <div class="stats-grid mb-4">
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">الفواتير المحصلة هذا الشهر</span>
+                            <div class="stat-icon font-num">€</div>
+                        </div>
+                        <div class="stat-value font-num" id="inv-stat-paid">€ 142,500</div>
+                        <div class="stat-trend positive"><span>100%</span> سداد فوري بالربط البنكي المباشر</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">الفواتير قيد الاستحقاق</span>
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                        </div>
+                        <div class="stat-value font-num" id="inv-stat-pending">€ 35,000</div>
+                        <div class="stat-trend stat-trend-gold"><span>فاتورة واحدة</span> قابلة للمحاكاة الفورية</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">معدل التحصيل التلقائي</span>
+                            <div class="stat-icon">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        </div>
+                        <div class="stat-value font-num">98.7%</div>
+                        <div class="stat-trend positive">تسوية عبر SEPA وiDEAL بدون تدخل بشري</div>
+                    </div>
+                </div>
+
+                <div class="glass-box">
+                    <div class="glass-box-header">
+                        <div>
+                            <h3>سجل الفواتير الصادرة والواردة</h3>
+                            <span class="text-caption text-white-64">توليد لحظي وتوافق كامل مع المعايير المحاسبية</span>
+                        </div>
+                        <div class="filter-pill-group">
+                            <button type="button" class="filter-btn active" onclick="filterInvoices('all', this)">الكل (<span id="count-all">3</span>)</button>
+                            <button type="button" class="filter-btn" onclick="filterInvoices('paid', this)">المدفوعة (<span id="count-paid">2</span>)</button>
+                            <button type="button" class="filter-btn" onclick="filterInvoices('pending', this)">المستحقة (<span id="count-pending">1</span>)</button>
+                        </div>
+                    </div>
+                    <div class="data-table-wrap">
+                        <table class="data-table" id="invoicesTable">
+                            <thead>
+                                <tr>
+                                    <th>رقم الفاتورة</th>
+                                    <th>العميل والجهة</th>
+                                    <th>المبلغ الصافي</th>
+                                    <th>الضريبة</th>
+                                    <th>الإجمالي</th>
+                                    <th>حالة السداد والربط</th>
+                                    <th>الإجراءات التفاعلية</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoicesTableBody">
+                                <tr data-status="paid" id="inv-row-1">
+                                    <td class="font-num">INV-2026-081</td>
+                                    <td>Amsterdam Tech Hub (NL)</td>
+                                    <td class="font-num">€ 10,000</td>
+                                    <td class="font-num">€ 2,100 (21% BTW)</td>
+                                    <td class="font-num tx-amount-highlight">€ 12,100</td>
+                                    <td><span class="status-badge status-completed">مدفوعة عبر iDEAL ✓</span></td>
+                                    <td>
+                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-081', 'Amsterdam Tech Hub (NL)', 10000, 2100, 12100, 'مدفوعة عبر iDEAL ✓', '2026-10-01', 'BTW 21%')">معاينة الفاتورة</button>
+                                    </td>
+                                </tr>
+                                <tr data-status="pending" id="inv-row-2">
+                                    <td class="font-num">INV-2026-082</td>
+                                    <td>Gulf Logistics Partners (KSA)</td>
+                                    <td class="font-num">€ 35,000</td>
+                                    <td class="font-num">€ 0 (Reverse Charge)</td>
+                                    <td class="font-num tx-amount-highlight">€ 35,000</td>
+                                    <td><span class="status-badge status-processing" id="status-badge-inv-82">تستحق خلال 14 يوم</span></td>
+                                    <td>
+                                        <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-82" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">محاكاة سداد iDEAL</button>
+                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-082', 'Gulf Logistics Partners (KSA)', 35000, 0, 35000, 'قيد الانتظار', '2026-10-03', 'Reverse Charge 0%')">معاينة الفاتورة</button>
+                                    </td>
+                                </tr>
+                                <tr data-status="paid" id="inv-row-3">
+                                    <td class="font-num">INV-2026-080</td>
+                                    <td>Rotterdam Maritime BV (NL)</td>
+                                    <td class="font-num">€ 22,000</td>
+                                    <td class="font-num">€ 4,620 (21% BTW)</td>
+                                    <td class="font-num tx-amount-highlight">€ 26,620</td>
+                                    <td><span class="status-badge status-completed">مدفوعة بتحويل SEPA Instant ✓</span></td>
+                                    <td>
+                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-080', 'Rotterdam Maritime BV (NL)', 22000, 4620, 26620, 'مدفوعة بتحويل SEPA Instant ✓', '2026-09-28', 'BTW 21%')">معاينة الفاتورة</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. المساعد المالي والبرمجي بالذكاء الاصطناعي (AI Copilot) -->
+            <section class="tab-section" id="tab-ai">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>المساعد المالي والتحليلي بالذكاء الاصطناعي</h2>
+                        <p>توليد تقارير مالية وتنبؤات استراتيجية فورية مبنية على بيانات مؤسستك الحية</p>
+                    </div>
+                </div>
+
+                <div class="ai-chat-box">
+                    <div class="ai-chat-header">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="live-status-dot"></span>
+                            <span class="fw-bold text-white">CoreSync AI Financial Agent v2.6</span>
+                        </div>
+                        <span class="text-caption text-white-64">مدرب على المعايير المحاسبية الدولية IFRS</span>
+                    </div>
+
+                    <div class="ai-chat-messages" id="aiChatMessages">
+                        <div class="chat-bubble chat-ai">
+                            مرحباً بك! أنا المساعد المالي الذكي لنظام S&R CoreSync. قمت للتو بمراجعة كافة حركات التدفق النقدي ومطابقة فواتير الشهر الحالي. كيف يمكنني مساعدتك اليوم؟
+                        </div>
+                    </div>
+
+                    <div class="ai-prompt-chips">
+                        <div class="prompt-chip" onclick="askAiPrompt('حلل التدفق المالي لشهر أكتوبر وأخبرني بهامش الأرباح المتوقع')">📊 تحليل التدفق المالي لشهر أكتوبر</div>
+                        <div class="prompt-chip" onclick="askAiPrompt('ما هي الفواتير المعلقة التي تتجاوز مدتها 15 يوماً؟')">⏳ الفواتير المتأخرة</div>
+                        <div class="prompt-chip" onclick="askAiPrompt('قدم لي نصيحة لتحسين كفاءة إدارة المخزون وفق بيانات الأسبوع الماضي')">💡 تحسين تكاليف التخزين</div>
+                    </div>
+
+                    <div class="ai-chat-input-bar">
+                        <input type="text" id="aiInput" class="ai-chat-input" placeholder="اكتب استفسارك المالي أو التقني هنا..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
+                        <button class="ai-send-btn" onclick="sendAiMessage()">إرسال</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. حالة الخوادم السحابية والأمان (Cloud Health) -->
+            <section class="tab-section" id="tab-cloud">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>حالة البنية التحتية السحابية (Cloud Nodes)</h2>
+                        <p>مراقبة لحظية للخوادم الموزعة في أمستردام وفرانكفورت والرياض مع نسخ احتياطي فوري</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">عقدة أمستردام الرئيسية (NL)</div>
+                        <div class="stat-value font-num stat-val-success">99.99%</div>
+                        <div class="stat-trend positive">زمن الاستجابة: 12ms (فائق السرعة)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">عقدة فرانكفورت الاحتياطية (DE)</div>
+                        <div class="stat-value font-num stat-val-success">100%</div>
+                        <div class="stat-trend positive">نسخ متزامن ومشفّر AES-256</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">بوابة الشرق الأوسط السحابية (KSA)</div>
+                        <div class="stat-value font-num stat-val-success">99.98%</div>
+                        <div class="stat-trend positive">تكامل محلي سريع مع البنوك</div>
+                    </div>
+                </div>
+
+                <div class="glass-box">
+                    <h3 class="mb-3">معايير الأمان والحماية المؤسسية</h3>
+                    <p class="text-white-64">
+                        تعتمد منصة S&R CoreSync على بنية تحتية سحابية هجينة تضمن عزل بيانات كل عميل في قواعد بيانات مشفرة مستقلة، مع شهادات التوافق مع اللائحة العامة لحماية البيانات في الاتحاد الأوروبي (GDPR) وأنظمة الأمن السيبراني المصرفية.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 6. شاشة تخصيص الهوية والعلامة البيضاء (White-Label Studio) -->
+            <section class="tab-section" id="tab-whitelabel">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>محرك العلامة البيضاء وتخصيص هوية العميل (White-Label Studio)</h2>
+                        <div class="d-flex align-items-center gap-2 mt-1">
+                            <p class="mb-0">شاهد كيف تتحول لوحة تحكم الـ ERP السحابية فورياً لتلائم هوية شركتك وشعارك وألوانك المؤسسية</p>
+                            <span class="ds-u1" id="storageBadge">● محفوظ في المتصفح</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-return-main" onclick="resetBrandIdentity()">
+                        استعادة هوية S&R الأصلية
+                    </button>
+                </div>
+
+                <div class="grid-2-cols gap-4 mb-4">
+                    <!-- لوحة اختيار السمة اللونية الفاخرة -->
+                    <div class="glass-box">
+                        <h3 class="mb-2">1. اختيار السمة اللونية الفاخرة (Theme Presets)</h3>
+                        <p class="text-caption text-white-64 mb-4">انقر على أي سمة لمشاهدة تحول ألوان الأزرار والمخططات والإضاءات فوراً:</p>
+
+                        <div class="theme-presets-grid">
+                            <div class="theme-preset-card active" onclick="applyThemeColor('gold', this)">
+                                <div class="theme-color-swatch swatch-gold"></div>
+                                <div class="theme-preset-info">
+                                    <div class="theme-preset-title">الذهب الملكي (Royal Gold)</div>
+                                    <div class="theme-preset-desc">الهوية الرسمية المعتمدة لـ S&R CoreSync</div>
+                                </div>
+                            </div>
+                            <div class="theme-preset-card" onclick="applyThemeColor('cyan', this)">
+                                <div class="theme-color-swatch swatch-cyan"></div>
+                                <div class="theme-preset-info">
+                                    <div class="theme-preset-title">التيتانيوم السيبراني (Titanium Cyan)</div>
+                                    <div class="theme-preset-desc">لشركات التقنية السحابية وهندسة البيانات</div>
+                                </div>
+                            </div>
+                            <div class="theme-preset-card" onclick="applyThemeColor('emerald', this)">
+                                <div class="theme-color-swatch swatch-emerald"></div>
+                                <div class="theme-preset-info">
+                                    <div class="theme-preset-title">الزمرد المالي (Fintech Emerald)</div>
+                                    <div class="theme-preset-desc">للبنوك والمؤسسات المالية وحلول الامتثال</div>
+                                </div>
+                            </div>
+                            <div class="theme-preset-card" onclick="applyThemeColor('violet', this)">
+                                <div class="theme-color-swatch swatch-violet"></div>
+                                <div class="theme-preset-info">
+                                    <div class="theme-preset-title">الياقوت الإمبراطوري (Imperial Violet)</div>
+                                    <div class="theme-preset-desc">لشركات الذكاء الاصطناعي والابتكار الرقمي</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- لوحة رفع الشعار وتغيير اسم الشركة -->
+                    <div class="glass-box">
+                        <h3 class="mb-2">2. تطبيق اسم وشعار شركتك (Client Custom Brand)</h3>
+                        <p class="text-caption text-white-64 mb-3">أدخل اسم مؤسستك أو ارفع شعارك لمعاينة نظام الـ ERP باسمك:</p>
+
+                        <div class="modal-form-fields mb-3">
+                            <div>
+                                <label class="text-caption text-white-64 mb-1 d-block" for="clientBrandNameInput">اسم شركتك أو مؤسستك:</label>
+                                <input type="text" id="clientBrandNameInput" class="ai-chat-input modal-form-input" value="مجموعة الرياض للخدمات اللوجستية" placeholder="اسم شركتك" title="اسم الشركة">
+                            </div>
+
+                            <div>
+                                <label class="text-caption text-white-64 mb-1 d-block" for="clientLogoUploadInput">شعار الشركة (اختياري - PNG / SVG / JPG):</label>
+                                <input type="file" id="clientLogoUploadInput" accept="image/*" class="ai-chat-input modal-form-input" onchange="handleClientLogoUpload(event)">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2 flex-wrap mb-3">
+                            <span class="text-caption text-white-64 d-block w-100">أو اختر نموذجاً جاهزاً سريعاً:</span>
+                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('مجموعة الرياض للخدمات اللوجستية', '🇸🇦')">مجموعة الرياض 🇸🇦</button>
+                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('Amsterdam Digital Trade BV', '🇳🇱')">Amsterdam BV 🇳🇱</button>
+                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('بنك التقنية الحديثة', '🏦')">بنك التقنية 🏦</button>
+                        </div>
+
+                        <button type="button" class="action-cta-btn w-100 mb-2" onclick="applyClientBrand()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
+                            تطبيق الهوية فوراً على المنصة بالكامل
+                        </button>
+                        <button type="button" class="btn-secondary-glow w-100" onclick="openBrandedInvoicePreview()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            توليد ومعاينة فاتورة تجريبية رسمية بهوية شركتك (Branded Invoice PDF)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-box">
+                    <h3 class="mb-2">جاهز لإطلاق نسختك الخاصة من النظام؟</h3>
+                    <p class="text-white-64 mb-3">
+                        يمكن لشركة S&R CoreSync Solutions تخصيص نظام الـ ERP ونظام الفوترة والمحاسبة الذكية بالكامل تحت علامتك التجارية (White-Label Deployment) على نطاقك الخاص (yourcompany.com) مع خوادم معزولة بالكامل.
+                    </p>
+                    <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()">
+                        طلب عرض سعر لنظام White-Label مخصص
+                    </button>
+                </div>
+            </section>
+
+            <!-- 7. سوق البرمجيات الحصرية وحلول التطبيقات (Software Hub & App Store) -->
+            <section class="tab-section" id="tab-software">
+                <div class="section-header">
+                    <div class="section-title-wrap">
+                        <h2>سوق البرمجيات والحلول الحصرية (S&R Software Hub & Store)</h2>
+                        <p>تطبيقات سطح المكتب للكمبيوتر، تطبيقات الهاتف، وأدوات الربط المطورة حصرياً بعوائد وتراخيص رقمية</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="action-cta-btn" onclick="openPublishSoftwareModal()">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            نشر برنامج جديد (Publish)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- شريط فلترة التصنيفات -->
+                <div class="glass-box mb-4 p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <div class="filter-pill-group">
+                        <button type="button" class="filter-btn active" onclick="filterSoftwareCategory('all', this)">الكل (5)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('desktop', this)">برامج الكمبيوتر PC/Mac (2)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('mobile', this)">تطبيقات الموبايل (1)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('pos', this)">نقاط البيع POS (1)</button>
+                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('sdk', this)">أدوات المطورين SDK (1)</button>
+                    </div>
+                    <span class="text-caption text-white-64">تراخيص رقمية فورية وتنزيل مباشر</span>
+                </div>
+
+                <!-- شبكة كروت البرمجيات -->
+                <div class="software-grid" id="softwareGridContainer">
+                    
+                    <!-- 1. برنامج S&R TaxSync Desktop -->
+                    <div class="software-card" data-category="desktop">
+                        <span class="software-card-badge">الأكثر طلباً للمحاسبين ★</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap">💻</div>
+                                <div>
+                                    <div class="software-info-title">S&R TaxSync Desktop</div>
+                                    <div class="software-info-version">
+                                        <span>v2.4 Pro</span>
+                                        <span class="platform-pill">Win 11/10</span>
+                                        <span class="platform-pill">macOS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">برنامج سطح مكتب مستقل يعمل بدون إنترنت (Offline-First) لحساب ضريبة القيمة المضافة BTW/VAT 21% وتوليد إقرارات XML لمصلحة الضرائب الهولندية والخليجية.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تشفير البيانات محلياً على جهازك دون اتصال
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تصدير آلي لتقارير BTW والمحاسبة بضغطة زر
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    طباعة فواتير رسمية وتوافق مع EN 16931
+                                </li>
+                            </ul>
+
+                            <!-- حاسبة الضريبة الفورية التفاعلية (Mini BTW/VAT Calculator Widget) -->
+                            <div class="quick-tax-calc-box ds-u2">
+                                <div class="ds-u3">
+                                    <span class="ds-u4">⚡ حاسبة ضريبة فورية:</span>
+                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="اختيار نسبة الضريبة للحاسبة السريعة" aria-label="اختيار نسبة الضريبة للحاسبة السريعة">
+                                        <option value="0.21">BTW هولندي 21%</option>
+                                        <option value="0.09">BTW مخفض 9%</option>
+                                        <option value="0.15">ضريبة خليجية 15%</option>
+                                    </select>
+                                </div>
+                                <div class="ds-u6">
+                                    <span class="ds-u7">المبلغ (€):</span>
+                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" placeholder="المبلغ" />
+                                </div>
+                                <div class="ds-u9">
+                                    <span>الضريبة: <strong class="ds-u10" id="quickTaxVat">€ 210.00</strong></span>
+                                    <span>الإجمالي: <strong class="ds-u11" id="quickTaxTotal">€ 1,210.00</strong></span>
+                                </div>
+                            </div>
+
+                            <!-- مولد مفتاح الترخيص التجريبي الفوري (Instant Trial License Key Generator) -->
+                            <div class="trial-key-bar ds-u12" id="taxsyncTrialBar">
+                                <div class="ds-u13">
+                                    <div class="ds-u14">مفتاح تجريبي فوري (14 يوماً):</div>
+                                    <div class="ds-u15" id="quickTrialKeyDisplay">SRTX-2026-TRIAL-8849</div>
+                                </div>
+                                <div class="ds-u16">
+                                    <button class="ds-u17" type="button" onclick="generateNewQuickKey()" title="توليد مفتاح جديد">🔄</button>
+                                    <button class="ds-u18" type="button" onclick="copyQuickTrialKey()" title="نسخ المفتاح">📋 نسخ</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 189</span>
+                                <span class="software-price-unit">ترخيص سنوي / جهاز</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openDesktopSimulatorModal('taxsync')" title="محاكاة حية فورية داخل المتصفح">محاكي حي ⚡</button>
+                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('taxsync', 'trial')">تجربة 14 يوماً</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">شراء الترخيص</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. تطبيق S&R FlowScan AI Mobile -->
+                    <div class="software-card" data-category="mobile">
+                        <span class="software-card-badge ds-u20">ذكاء اصطناعي OCR</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap ds-u21">📱</div>
+                                <div>
+                                    <div class="software-info-title">S&R FlowScan AI Mobile</div>
+                                    <div class="software-info-version">
+                                        <span>v1.8</span>
+                                        <span class="platform-pill">iOS 17+</span>
+                                        <span class="platform-pill">Android 14+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    معالجة OCR فائقة السرعة بدقة 99.4%
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    فرز تلقائي لمصاريف الوقود، الضيافة، والتشغيل
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    مزامنة فورية سحابية مع لوحة تحكم الشركة
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 9.99</span>
+                                <span class="software-price-unit">شهرياً / مستخدم</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('flowscan', 'trial')">تجربة مجانية</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('flowscan')">اشتراك</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. أداة S&R CloudPOS Connector -->
+                    <div class="software-card" data-category="pos">
+                        <span class="software-card-badge ds-u22">ربط نقاط البيع POS</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap ds-u23">⚡</div>
+                                <div>
+                                    <div class="software-info-title">S&R CloudPOS Connector</div>
+                                    <div class="software-info-version">
+                                        <span>v3.1 Agent</span>
+                                        <span class="platform-pill">Windows POS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">وسيط برمجي خفيف يعمل في خلفية أجهزة الكاشير القديمة لربطها فورياً بنظام الـ ERP السحابي لمزامنة حركة المخازن والسيولة دون تغيير الأجهزة.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تكامل فوري مع أجهزة طابعات الفواتير والباركود
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    مزامنة مبيعات أوفلاين عند انقطاع الإنترنت
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    حماية وأمان معزول للأرصدة النقدية
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 25</span>
+                                <span class="software-price-unit">شهرياً / نقطة بيع</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('cloudpos', 'trial')">تجربة الربط</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('cloudpos')">تفعيل</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. برنامج S&R SecureVault B2B -->
+                    <div class="software-card" data-category="desktop">
+                        <span class="software-card-badge ds-u24">حماية ونسخ احتياطي</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap ds-u25">🛡️</div>
+                                <div>
+                                    <div class="software-info-title">S&R SecureVault B2B</div>
+                                    <div class="software-info-version">
+                                        <span>v2.0 Enterprise</span>
+                                        <span class="platform-pill">Win / Linux / Mac</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">برمجية تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع تخزين متوافق 100% مع قانون GDPR الأوروبي.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تخزين معزول في خوادم أمستردام المشفرة
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    استعادة كاملة لقواعد بيانات الـ ERP في ثوانٍ
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تقارير امتثال وجاهزية للتدقيق القانوني
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 49</span>
+                                <span class="software-price-unit">شهرياً (1TB Encrypted)</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('vault', 'trial')">تجربة مجانية</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('vault')">اشتراك</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. حزمة S&R Financial AI SDK -->
+                    <div class="software-card" data-category="sdk">
+                        <span class="software-card-badge">للمطورين والشركات</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap">🧩</div>
+                                <div>
+                                    <div class="software-info-title">S&R Financial AI SDK</div>
+                                    <div class="software-info-version">
+                                        <span>v1.2 Dev</span>
+                                        <span class="platform-pill">Python</span>
+                                        <span class="platform-pill">Node.js</span>
+                                        <span class="platform-pill">C#</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">مكتبة برمجية للمطورين والشركات البرمجية لدمج خوارزميات الذكاء الاصطناعي المالي والفوترة والامتثال المحاسبي في تطبيقاتهم الخاصة بسهولة عبر REST APIs.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    توثيق تفاعلي كامل وكود تشغيل جاهز
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    توليد فوري لمفاتيح الـ API مع Rate Limiting
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تحديثات دورية متوافقة مع القوانين المالية
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 99</span>
+                                <span class="software-price-unit">شهرياً (50k Calls)</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('sdk', 'trial')">تحميل الـ SDK</button>
+                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('sdk')">طلب الترخيص</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- صندوق لوحة الشركاء والمطورين (Developer Monetization Callout) -->
+                <div class="glass-box">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <h3 class="mb-1 text-white">هل ترغب في برمجة ونشر برنامجك التجاري الخاص عبر المنصة؟</h3>
+                            <p class="text-white-64 mb-0">
+                                توفر شركة S&R CoreSync Solutions بنية متكاملة للمطورين لتوزيع البرمجيات مع نظام التراخيص الرقمية المشفرة وبوابات الدفع الهولندية والأوروبية والخليجية.
+                            </p>
+                        </div>
+                        <button type="button" class="btn-sync-consultation" onclick="openPublishSoftwareModal()">
+                            إضافة برنامج جديد الآن
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- نافذة تسجيل معاملة تجريبية منبثقة -->
+    <div class="modal-overlay" id="newTxModal" onclick="if(event.target === this) closeNewTxModal()">
+        <div class="modal-card">
+            <h3 class="text-white mb-2 fw-bold">تسجيل معاملة تجريبية في الـ ERP</h3>
+            <p class="text-caption text-white-64 mb-4">أدخل بيانات المعاملة لاختبار المزامنة اللحظية في الرسم البياني والجدول</p>
+            
+            <div class="modal-form-fields">
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="txClient">اسم الجهة أو العميل</label>
+                    <input type="text" id="txClient" class="ai-chat-input modal-form-input" value="شركة تجارية هولندية جديدة" placeholder="اسم الجهة أو العميل" title="اسم الجهة أو العميل">
+                </div>
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="txAmount">المبلغ باليورو (€)</label>
+                    <input type="number" id="txAmount" class="ai-chat-input font-num modal-form-input" value="15000" placeholder="المبلغ باليورو" title="المبلغ باليورو (€)">
+                </div>
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="txType">نوع الخدمة</label>
+                    <select id="txType" class="ai-chat-input modal-form-select" title="نوع الخدمة" aria-label="نوع الخدمة">
+                        <option value="ربط وتكامل ERP">ربط وتكامل ERP</option>
+                        <option value="تطوير برمجيات سحابية">تطوير برمجيات سحابية</option>
+                        <option value="استشارات مالية وحوكمة">استشارات مالية وحوكمة</option>
+                    </select>
+                </div>
+                            <button type="button" class="table-action-btn w-100 justify-content-center mb-3 ds-u26" onclick="closeSoftwareModal(); openDesktopSimulatorModal(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');">
+                🖥️ تشغيل المحاكي التفاعلي داخل المتصفح (Live Desktop Sandbox)
+            </button>
+            <div class="modal-form-actions">
+                    <button type="button" class="btn-return-main" onclick="closeNewTxModal()">إلغاء</button>
+                    <button type="button" class="action-cta-btn" onclick="saveNewTx()">حفظ ومزامنة فورية</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة توليد فاتورة إلكترونية تجريبية جديدة -->
+    <div class="modal-overlay" id="newInvoiceModal" onclick="if(event.target === this) closeInvoiceGeneratorModal()">
+        <div class="modal-card">
+            <h3 class="text-white mb-2 fw-bold">توليد فاتورة إلكترونية معتمدة</h3>
+            <p class="text-caption text-white-64 mb-4">إنشاء فاتورة سحابية متوافقة مع أنظمة الضرائب في هولندا (BTW 21%) والخليج</p>
+            
+            <div class="modal-form-fields">
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="invClient">اسم العميل / الشركة</label>
+                    <input type="text" id="invClient" class="ai-chat-input modal-form-input" value="Rotterdam Tech Enterprises BV" placeholder="اسم العميل" title="اسم العميل">
+                </div>
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="invAmount">المبلغ الصافي (€)</label>
+                    <input type="number" id="invAmount" class="ai-chat-input font-num modal-form-input" value="18500" placeholder="المبلغ الصافي" title="المبلغ الصافي">
+                </div>
+                <div>
+                    <label class="text-caption text-white-64 mb-1 d-block" for="invTaxRegime">النظام الضريبي والامتثال</label>
+                    <select id="invTaxRegime" class="ai-chat-input modal-form-select" title="النظام الضريبي" aria-label="النظام الضريبي">
+                        <option value="21">ضريبة القيمة المضافة بهولندا (BTW 21%)</option>
+                        <option value="0">إعفاء ضريبي أوروبي (Reverse Charge 0%)</option>
+                        <option value="15">ضريبة القيمة المضافة السعودية (ZATCA 15%)</option>
+                    </select>
+                </div>
+                <div class="modal-form-actions">
+                    <button type="button" class="btn-return-main" onclick="closeInvoiceGeneratorModal()">إلغاء</button>
+                    <button type="button" class="action-cta-btn" onclick="generateNewInvoice()">إصدار الفاتورة وتوليد QR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة محاكاة الدفع عبر بوابة iDEAL الهولندية -->
+    <div class="modal-overlay" id="idealSimulatorModal" onclick="if(event.target === this) closeIdealSimulatorModal()">
+        <div class="modal-card">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h3 class="text-white fw-bold mb-0">محاكي بوابات الدفع iDEAL</h3>
+                <span class="status-badge status-completed font-num badge-status-sepa">SEPA Instant ⚡</span>
+            </div>
+            <p class="text-caption text-white-64 mb-3">اختر البنك الهولندي لمحاكاة تسوية الفاتورة اللحظية في حساب الشركة</p>
+
+            <div class="ideal-target-card">
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="text-caption text-white-64">الفاتورة المستهدفة:</span>
+                    <strong class="font-num text-white" id="idealInvNum">INV-2026-082</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <span class="text-caption text-white-64">الجهة المسددة:</span>
+                    <strong class="text-white" id="idealClientName">Gulf Logistics Partners</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="text-caption text-white-64">المبلغ الإجمالي المطلوب:</span>
+                    <strong class="font-num ideal-amount-highlight" id="idealTotalAmount">€ 35,000</strong>
+                </div>
+            </div>
+
+            <label class="text-caption text-white-64 d-block mb-1">اختر البنك الهولندي (Dutch Banking Partner):</label>
+            <div class="bank-select-grid">
+                <div class="bank-option selected" onclick="selectBank(this)">
+                    <div class="bank-badge font-num bank-color-ing">ING</div>
+                    <div class="bank-name">ING Bank</div>
+                </div>
+                <div class="bank-option" onclick="selectBank(this)">
+                    <div class="bank-badge font-num bank-color-abn">ABN</div>
+                    <div class="bank-name">ABN AMRO</div>
+                </div>
+                <div class="bank-option" onclick="selectBank(this)">
+                    <div class="bank-badge font-num bank-color-rabo">RABO</div>
+                    <div class="bank-name">Rabobank</div>
+                </div>
+                <div class="bank-option" onclick="selectBank(this)">
+                    <div class="bank-badge font-num bank-color-bunq">BNQ</div>
+                    <div class="bank-name">Bunq Digital</div>
+                </div>
+            </div>
+
+            <div class="payment-progress-bar">
+                <div class="payment-progress-fill" id="idealProgressFill"></div>
+            </div>
+            <div class="text-caption text-center text-white-64" id="idealStatusText">جاهز لتنفيذ أمر التحويل الفوري</div>
+
+            <div class="modal-form-actions mt-3">
+                <button type="button" class="btn-return-main" onclick="closeIdealSimulatorModal()">إغلاق</button>
+                <button type="button" class="action-cta-btn" id="btnConfirmIdeal" onclick="executeIdealPayment()">تأكيد السداد التجريبي اللحظي</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة معاينة وطباعة الفاتورة الإلكترونية المعتمدة -->
+    <div class="modal-overlay" id="invoicePreviewModal" onclick="if(event.target === this) closeInvoicePreviewModal()">
+        <div class="modal-invoice-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <img class="ds-u27" src="./assets/sr-core-emblem-official.png" id="invModalHeaderEmblem" width="34" height="34" alt="Emblem">
+                    <h3 class="fw-bold mb-0 text-white invoice-preview-title">فاتورة إلكترونية رسمية (e-Invoice)</h3>
+                    <span class="ds-u28" id="invWhiteLabelBadge">White-Label Branded</span>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeInvoicePreviewModal()">✕</button>
+            </div>
+
+            <div class="inv-paper" id="printableInvoice">
+                <div class="inv-head-row">
+                    <div>
+                        <h4 class="fw-bold text-white mb-1" id="invIssuerName">S&R CoreSync Solutions B.V.</h4>
+                        <div class="text-caption text-white-64" id="invIssuerSub">KVK: 84920194 | VAT ID: NL849201942B01</div>
+                        <div class="text-caption text-white-64" id="invIssuerAddress">Keizersgracht 482, 1016 EG Amsterdam, Netherlands</div>
+                    </div>
+                    <div class="inv-qr-block" title="EPC-QR / ZATCA Cryptographic Stamp">
+                        <svg viewBox="0 0 100 100" fill="#010907">
+                            <rect width="100" height="100" fill="#fff"/>
+                            <!-- QR Pattern Elements -->
+                            <rect x="10" y="10" width="25" height="25" fill="#010907"/>
+                            <rect x="15" y="15" width="15" height="15" fill="#fff"/>
+                            <rect x="18" y="18" width="9" height="9" fill="#010907"/>
+                            
+                            <rect x="65" y="10" width="25" height="25" fill="#010907"/>
+                            <rect x="70" y="15" width="15" height="15" fill="#fff"/>
+                            <rect x="73" y="18" width="9" height="9" fill="#010907"/>
+
+                            <rect x="10" y="65" width="25" height="25" fill="#010907"/>
+                            <rect x="15" y="70" width="15" height="15" fill="#fff"/>
+                            <rect x="18" y="73" width="9" height="9" fill="#010907"/>
+
+                            <rect x="42" y="18" width="8" height="8" fill="#010907"/>
+                            <rect x="42" y="42" width="16" height="16" fill="#010907"/>
+                            <rect x="70" y="55" width="12" height="8" fill="#010907"/>
+                            <rect x="65" y="75" width="18" height="12" fill="#010907"/>
+                            <rect x="42" y="75" width="10" height="10" fill="#010907"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="inv-details-grid">
+                    <div>
+                        <span class="text-white-64 d-block">إلى السيد/الشركة:</span>
+                        <strong class="text-white" id="pvClient">Amsterdam Tech Hub</strong>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">رقم الفاتورة:</span>
+                        <strong class="font-num text-white" id="pvNumber">INV-2026-081</strong>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">تاريخ الإصدار:</span>
+                        <span class="font-num text-white" id="pvDate">2026-10-01</span>
+                    </div>
+                    <div>
+                        <span class="text-white-64 d-block">حالة السداد:</span>
+                        <span class="text-success font-num" id="pvStatus">مدفوعة عبر iDEAL ✓</span>
+                    </div>
+                </div>
+
+                <div class="data-table-wrap mb-3">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>الوصف</th>
+                                <th>المبلغ الصافي</th>
+                                <th>الضريبة المحتسبة</th>
+                                <th>الإجمالي</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>تكامل منظومة CoreSync Cloud ERP وحوكمة العمليات المالية</td>
+                                <td class="font-num" id="pvNet">€ 10,000</td>
+                                <td class="font-num" id="pvVat">€ 2,100 (21%)</td>
+                                <td class="font-num tx-amount-highlight" id="pvTotal">€ 12,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="inv-total-row">
+                    <span>الإجمالي المستحق والمقيد بالدفاتر:</span>
+                    <span class="font-num" id="pvGrandTotal">€ 12,100</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="text-caption text-white-64">معتمدة رقمياً ومطابقة للمعيار الأوروبي EN 16931</span>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn-return-main" onclick="window.print()">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        طباعة الفاتورة
+                    </button>
+                    <button type="button" class="action-cta-btn" onclick="closeInvoicePreviewModal()">تم الإطلاع</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // التبديل بين الشاشات في القائمة الجانبية
+        function switchPortalTab(tabId, el) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const targetNav = document.querySelector(`.nav-item[onclick*="'${tabId}'"]`);
+                if (targetNav) targetNav.classList.add('active');
+            }
+
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+
+        // إعداد الرسوم البيانية التفاعلية بواسطة Chart.js
+        let revenueChartInstance;
+        let categoryChartInstance;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // تفعيل التبويب المباشر عبر الهاش (#whitelabel, #invoices, إلخ)
+            if (window.location.hash) {
+                const tabName = window.location.hash.replace('#', '');
+                const targetNav = document.querySelector(`.nav-item[onclick*="'${tabName}'"]`);
+                if (targetNav) {
+                    switchPortalTab(tabName, targetNav);
+                }
+            }
+
+            // رسم بياني الإيرادات الشهرية
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            revenueChartInstance = new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر'],
+                    datasets: [
+                        {
+                            label: 'الإيرادات الفعلية (€)',
+                            data: [54000, 62000, 71000, 79000, 85000, 92000, 88000, 105000, 122000, 144500],
+                            borderColor: '#c5a880',
+                            backgroundColor: 'rgba(197, 168, 128, 0.1)',
+                            fill: true,
+                            tension: 0.35,
+                            borderWidth: 3,
+                            pointBackgroundColor: '#c5a880',
+                            pointRadius: 4
+                        },
+                        {
+                            label: 'التدفق النقدي الصافي (€)',
+                            data: [22000, 26000, 31000, 34000, 39000, 42000, 38000, 49000, 56000, 68000],
+                            borderColor: '#10b981',
+                            borderDash: [5, 5],
+                            tension: 0.35,
+                            borderWidth: 2,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.75)',
+                                font: { family: 'Alexandria', size: 12 }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: 'rgba(255, 255, 255, 0.6)', font: { family: 'Alexandria' } }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: 'rgba(255, 255, 255, 0.6)', font: { family: 'Plus Jakarta Sans' } }
+                        }
+                    }
+                }
+            });
+
+            // رسم بياني توزيع القطاعات
+            const ctxCat = document.getElementById('categoryChart').getContext('2d');
+            categoryChartInstance = new Chart(ctxCat, {
+                type: 'doughnut',
+                data: {
+                    labels: ['حلول ERP والربط المالي', 'برمجيات سحابية وتطبيقات', 'أتمتة الذكاء الاصطناعي', 'استشارات وحوكمة'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: ['#c5a880', '#38bdf8', '#10b981', '#f59e0b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                font: { family: 'Alexandria', size: 11 },
+                                boxWidth: 12
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // المساعد المالي الذكي (AI Chat Logic)
+        function askAiPrompt(text) {
+            document.getElementById('aiInput').value = text;
+            sendAiMessage();
+        }
+
+        function sendAiMessage() {
+            const input = document.getElementById('aiInput');
+            const query = input.value.trim();
+            if (!query) return;
+
+            const chat = document.getElementById('aiChatMessages');
+
+            // رسالة المستخدم
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-bubble chat-user';
+            userMsg.innerText = query;
+            chat.appendChild(userMsg);
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+
+            // توليد الرد الآلي الذكي بعد ثوانٍ معدودة
+            setTimeout(() => {
+                let aiResponse = "";
+                if (query.includes('أكتوبر') || query.includes('التدفق')) {
+                    aiResponse = "بناءً على مطابقة دفاتر المحاسبة ونظام الـ ERP لشهر أكتوبر:\n- إجمالي الإيرادات المحققة: €144,500 (+18% نمو قياسي).\n- هامش الربح التشغيلي: 27.4% وهو أعلى من متوسط القطاع في هولندا.\n- التوصية: تسريع تحصيل دفعة بقيمة €42,000 مستحقة في 10 أكتوبر لتعزيز السيولة المتاحة للاستثمار في البنية السحابية.";
+                } else if (query.includes('فواتير') || query.includes('المتأخرة')) {
+                    aiResponse = "توجد فاتورة واحدة معلقة بقيمة €35,000 لعميل في الرياض تستحق خلال 14 يوماً مع بند Reverse Charge ضريبي سليم. لا توجد أي فواتير متعثرة تتجاوز 30 يوماً بفضل التنبيهات الآلية للواتساب والإيميل.";
+                } else {
+                    aiResponse = "تم تحليل استفسارك عبر خوارزمية S&R CoreSync المالية. الأنظمة تعمل بتناسق تام بين المحاسبة والعمليات، ويمكن لأتمتة الـ RPA توفير 35 ساعة عمل إضافية لفريقك خلال الشهر القادم عبر أرشفة الفواتير المباشرة.";
+                }
+
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-bubble chat-ai';
+                aiMsg.innerText = aiResponse;
+                chat.appendChild(aiMsg);
+                chat.scrollTop = chat.scrollHeight;
+            }, 600);
+        }
+
+        // نافذة المعاملة الجديدة
+        function openNewTxModal() {
+            document.getElementById('newTxModal').classList.add('active');
+        }
+
+        function closeNewTxModal() {
+            document.getElementById('newTxModal').classList.remove('active');
+        }
+
+        function saveNewTx() {
+            const client = document.getElementById('txClient').value;
+            const amount = parseFloat(document.getElementById('txAmount').value) || 0;
+            const type = document.getElementById('txType').value;
+
+            // إضافة صف جديد للجدول
+            const tbody = document.querySelector('#transactionsTable tbody');
+            const tr = document.createElement('tr');
+            const randomId = '#CS-' + Math.floor(1000 + Math.random() * 9000);
+
+            tr.innerHTML = `
+                <td class="font-num">${randomId}</td>
+                <td>${client}</td>
+                <td class="font-num">2026-10-01</td>
+                <td class="font-num tx-amount-highlight">€ ${amount.toLocaleString()}</td>
+                <td>${type}</td>
+                <td><span class="status-badge status-completed">تمت المزامنة فوراً</span></td>
+            `;
+
+            tbody.prepend(tr);
+
+            // تحديث عداد الإيرادات
+            const revEl = document.getElementById('stat-revenue');
+            revEl.innerText = `€ ${(842500 + amount).toLocaleString()}`;
+
+            // تحديث الرسم البياني
+            if (revenueChartInstance) {
+                const dataArr = revenueChartInstance.data.datasets[0].data;
+                dataArr[dataArr.length - 1] += amount;
+                revenueChartInstance.update();
+            }
+
+            closeNewTxModal();
+            alert('تمت إضافة المعاملة بنجاح وتحديث قيود الـ ERP والرسوم البيانية لحظياً!');
+        }
+
+        // ==========================================
+        // 1. توليد ومعاينة الفواتير الإلكترونية (Feature 1)
+        // ==========================================
+        function openInvoiceGeneratorModal() {
+            document.getElementById('newInvoiceModal').classList.add('active');
+        }
+
+        function closeInvoiceGeneratorModal() {
+            document.getElementById('newInvoiceModal').classList.remove('active');
+        }
+
+        function generateNewInvoice() {
+            const client = document.getElementById('invClient').value || 'Rotterdam Tech BV';
+            const netAmount = parseFloat(document.getElementById('invAmount').value) || 10000;
+            const taxPct = parseFloat(document.getElementById('invTaxRegime').value) || 0;
+            const vatAmount = Math.round(netAmount * (taxPct / 100));
+            const total = netAmount + vatAmount;
+            const invNum = 'INV-2026-0' + Math.floor(83 + Math.random() * 20);
+            const dateStr = '2026-10-06';
+            const taxLabel = taxPct > 0 ? `${taxPct}% BTW` : 'Reverse Charge 0%';
+
+            const tbody = document.getElementById('invoicesTableBody');
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-status', 'pending');
+            tr.id = 'inv-row-' + invNum;
+
+            tr.innerHTML = `
+                <td class="font-num">${invNum}</td>
+                <td>${client}</td>
+                <td class="font-num">€ ${netAmount.toLocaleString()}</td>
+                <td class="font-num">€ ${vatAmount.toLocaleString()} (${taxLabel})</td>
+                <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
+                <td><span class="status-badge status-processing" id="status-badge-${invNum}">جديدة - تستحق السداد</span></td>
+                <td>
+                    <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">سداد iDEAL</button>
+                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'قيد الانتظار', '${dateStr}', '${taxLabel}')">معاينة</button>
+                </td>
+            `;
+
+            tbody.prepend(tr);
+
+            // تحديث العدادات
+            const pendingEl = document.getElementById('inv-stat-pending');
+            const currentPending = 35000 + total;
+            pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;
+
+            updateInvoiceCounters();
+            closeInvoiceGeneratorModal();
+            previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'قيد الانتظار', dateStr, taxLabel);
+        }
+
+        function previewInvoiceModal(num, client, net, vat, total, status, date, taxType, customIssuerName = null) {
+            document.getElementById('pvNumber').innerText = num;
+            document.getElementById('pvClient').innerText = client;
+            document.getElementById('pvNet').innerText = `€ ${net.toLocaleString()}`;
+            document.getElementById('pvVat').innerText = `€ ${vat.toLocaleString()} (${taxType || 'BTW'})`;
+            document.getElementById('pvTotal').innerText = `€ ${total.toLocaleString()}`;
+            document.getElementById('pvGrandTotal').innerText = `€ ${total.toLocaleString()}`;
+            document.getElementById('pvStatus').innerText = status;
+            document.getElementById('pvDate').innerText = date || '2026-10-06';
+
+            // تطبيق الهوية المخصصة إن وجدت
+            const savedBrand = localStorage.getItem('sr_custom_brand_name');
+            const savedLogo = localStorage.getItem('sr_custom_brand_logo') || uploadedLogoDataUrl;
+            const effectiveIssuer = customIssuerName || savedBrand || 'S&R CoreSync Solutions B.V.';
+            
+            const issuerNameEl = document.getElementById('invIssuerName');
+            const issuerEmblemEl = document.getElementById('invModalHeaderEmblem');
+            const wlBadge = document.getElementById('invWhiteLabelBadge');
+
+            if (issuerNameEl) issuerNameEl.innerText = effectiveIssuer;
+            if (issuerEmblemEl && savedLogo) issuerEmblemEl.src = savedLogo;
+            
+            if (wlBadge) {
+                if (customIssuerName || (savedBrand && savedBrand !== 'S&R CORESYNC')) {
+                    wlBadge.style.display = 'inline-block';
+                    wlBadge.innerText = `هوية مخصصة: ${effectiveIssuer}`;
+                } else {
+                    wlBadge.style.display = 'none';
+                }
+            }
+
+            document.getElementById('invoicePreviewModal').classList.add('active');
+        }
+
+        function openBrandedInvoicePreview() {
+            const currentName = document.getElementById('clientBrandNameInput')?.value || localStorage.getItem('sr_custom_brand_name') || 'مجموعة الرياض للخدمات اللوجستية';
+            previewInvoiceModal(
+                'INV-WL-2026-099',
+                'Global Enterprise Client BV (Rotterdam)',
+                28500,
+                5985,
+                34485,
+                'فاتورة معتمدة - جاهزة للتحصيل ✓',
+                '2026-10-06',
+                '21% BTW',
+                currentName
+            );
+            showPortalToast(`✨ تم توليد فاتورة تجريبية رسمية بهوية [${currentName}] جاهزة للمعاينة والطباعة!`);
+        }
+
+        function closeInvoicePreviewModal() {
+            document.getElementById('invoicePreviewModal').classList.remove('active');
+        }
+
+        function updateInvoiceCounters() {
+            const all = document.querySelectorAll('#invoicesTableBody tr').length;
+            const paid = document.querySelectorAll('#invoicesTableBody tr[data-status="paid"]').length;
+            const pending = document.querySelectorAll('#invoicesTableBody tr[data-status="pending"]').length;
+            if (document.getElementById('count-all')) document.getElementById('count-all').innerText = all;
+            if (document.getElementById('count-paid')) document.getElementById('count-paid').innerText = paid;
+            if (document.getElementById('count-pending')) document.getElementById('count-pending').innerText = pending;
+        }
+
+        function filterInvoices(status, el) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            const rows = document.querySelectorAll('#invoicesTableBody tr');
+            rows.forEach(r => {
+                if (status === 'all' || r.getAttribute('data-status') === status) {
+                    r.style.display = '';
+                } else {
+                    r.style.display = 'none';
+                }
+            });
+        }
+
+        // ==========================================
+        // 2. محاكي الدفع الفوري iDEAL الهولندي
+        // ==========================================
+        let currentPayingInv = { num: '', client: '', amount: 0 };
+
+        function openIdealSimulatorModal(invNum, client, amount) {
+            currentPayingInv = { num: invNum, client: client, amount: amount };
+            document.getElementById('idealInvNum').innerText = invNum;
+            document.getElementById('idealClientName').innerText = client;
+            document.getElementById('idealTotalAmount').innerText = `€ ${amount.toLocaleString()}`;
+            document.getElementById('idealProgressFill').style.width = '0%';
+            document.getElementById('idealStatusText').innerText = 'اختر البنك واضغط على تأكيد السداد الفوري';
+            document.getElementById('btnConfirmIdeal').disabled = false;
+            document.getElementById('btnConfirmIdeal').innerText = 'تأكيد السداد التجريبي اللحظي';
+            document.getElementById('idealSimulatorModal').classList.add('active');
+        }
+
+        function closeIdealSimulatorModal() {
+            document.getElementById('idealSimulatorModal').classList.remove('active');
+        }
+
+        function selectBank(el) {
+            document.querySelectorAll('.bank-option').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function executeIdealPayment() {
+            const btn = document.getElementById('btnConfirmIdeal');
+            const progress = document.getElementById('idealProgressFill');
+            const statusText = document.getElementById('idealStatusText');
+            btn.disabled = true;
+            btn.innerText = 'جاري المعالجة البنكية...';
+
+            progress.style.width = '45%';
+            statusText.innerText = 'الاتصال الآمن ببروتوكول iDEAL 2.0 وSEPA Instant...';
+
+            setTimeout(() => {
+                progress.style.width = '100%';
+                statusText.innerHTML = '<span class="ideal-success-msg">✓ تمت تسوية المبلغ وتحويله لحساب المؤسسة بنجاح!</span>';
+
+                // تحديث حالة الفاتورة في الجدول
+                const badge = document.getElementById('status-badge-' + currentPayingInv.num) || document.getElementById('status-badge-inv-82');
+                if (badge) {
+                    badge.className = 'status-badge status-completed';
+                    badge.innerText = 'مدفوعة عبر iDEAL ✓';
+                }
+                const payBtn = document.getElementById('btn-pay-' + currentPayingInv.num) || document.getElementById('btn-pay-inv-82');
+                if (payBtn) {
+                    payBtn.style.display = 'none';
+                }
+
+                const targetRow = document.getElementById('inv-row-' + currentPayingInv.num) || document.getElementById('inv-row-2');
+                if (targetRow) {
+                    targetRow.setAttribute('data-status', 'paid');
+                }
+
+                // تحديث العدادات والرسوم البيانية
+                const paidStat = document.getElementById('inv-stat-paid');
+                if (paidStat) paidStat.innerText = `€ ${(142500 + currentPayingInv.amount).toLocaleString()}`;
+                
+                const revStat = document.getElementById('stat-revenue');
+                if (revStat) revStat.innerText = `€ ${(842500 + currentPayingInv.amount).toLocaleString()}`;
+
+                if (revenueChartInstance) {
+                    const dataArr = revenueChartInstance.data.datasets[0].data;
+                    dataArr[dataArr.length - 1] += currentPayingInv.amount;
+                    revenueChartInstance.update();
+                }
+
+                updateInvoiceCounters();
+
+                setTimeout(() => {
+                    closeIdealSimulatorModal();
+                }, 1200);
+            }, 900);
+        }
+
+        // ==========================================
+        // 3. وضع العرض التقديمي للزبائن (Presentation Mode)
+        // ==========================================
+        let isPresentationActive = false;
+
+        function togglePresentationMode() {
+            const btn = document.getElementById('btnPresentationToggle');
+            isPresentationActive = !isPresentationActive;
+            if (isPresentationActive) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                }
+                btn.classList.add('active');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14h6m0 0v6m0-6L3 21m17-7h-6m0 0v6m0-6l7 7M14 4h6m-6 0v6m0-6l7-7M4 10h6m0 0V4m0 6L3 3"></path></svg> <span>الخروج من العرض</span>`;
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                }
+                btn.classList.remove('active');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg> <span>وضع عرض الزبائن [P]</span>`;
+            }
+        }
+
+        // ==========================================
+        // 4. مزامنة بيانات الديمو مع استمارة التواصل (Feature 3)
+        // ==========================================
+        function syncDemoToConsultation() {
+            const activeTab = document.querySelector('.nav-item.active span')?.innerText || 'نظام ERP';
+            let service = 'erp';
+            if (activeTab.includes('ERP')) service = 'erp';
+            else if (activeTab.includes('المالي') || activeTab.includes('القيادة')) service = 'erp';
+            else if (activeTab.includes('الذكاء') || activeTab.includes('AI')) service = 'ai';
+            else if (activeTab.includes('الخوادم')) service = 'software';
+            else if (activeTab.includes('الفواتير')) service = 'erp';
+
+            const revText = document.getElementById('stat-revenue')?.innerText || '€ 842,500';
+            const note = encodeURIComponent(`طلب استشارة بناءً على المعاينة التجريبية: القسم المستهدف (${activeTab})، وحجم العمليات المقدر في الجلسة: ${revText}`);
+            window.location.href = `index.html?service=${service}&budget=3&source=demo&notes=${note}#contact`;
+        }
+    
+
+        // ==========================================
+        // 5. محرك تخصيص الهوية والعلامة البيضاء المتقدم مع الحفظ التلقائي (White-Label & LocalStorage)
+        // ==========================================
+        const themePalette = {
+            gold: { name: 'gold', gold: '#c5a880', hover: '#e0c59e', glow: 'rgba(197, 168, 128, 0.25)', border: 'rgba(197, 168, 128, 0.18)' },
+            cyan: { name: 'cyan', gold: '#38bdf8', hover: '#7dd3fc', glow: 'rgba(56, 189, 248, 0.25)', border: 'rgba(56, 189, 248, 0.2)' },
+            emerald: { name: 'emerald', gold: '#10b981', hover: '#34d399', glow: 'rgba(16, 185, 129, 0.25)', border: 'rgba(16, 185, 129, 0.2)' },
+            violet: { name: 'violet', gold: '#a855f7', hover: '#c084fc', glow: 'rgba(168, 85, 247, 0.25)', border: 'rgba(168, 85, 247, 0.2)' }
+        };
+
+        let currentActiveTheme = 'gold';
+        let uploadedLogoDataUrl = null;
+
+        function showPortalToast(msg) {
+            const toast = document.getElementById('portal-toast');
+            const msgEl = document.getElementById('portal-toast-msg');
+            if (!toast || !msgEl) return;
+            msgEl.textContent = msg;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+            clearTimeout(window.__toastTimeout);
+            window.__toastTimeout = setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+            }, 3500);
+        }
+
+        function updateStorageStatusBadge() {
+            const badge = document.getElementById('storageBadge');
+            if (!badge) return;
+            const hasCustomBrand = localStorage.getItem('sr_custom_brand_name');
+            const hasCustomTheme = localStorage.getItem('sr_custom_theme');
+            if (hasCustomBrand || (hasCustomTheme && hasCustomTheme !== 'gold')) {
+                badge.style.display = 'inline-flex';
+                badge.textContent = `● مخصص (${hasCustomBrand || hasCustomTheme}) ومحفوظ محلياً`;
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function applyThemeColor(themeName, el, saveToStorage = true) {
+            currentActiveTheme = themeName;
+            document.querySelectorAll('.theme-preset-card').forEach(c => c.classList.remove('active'));
+            if (el) {
+                el.classList.add('active');
+            } else {
+                const targetCard = document.querySelector(`.theme-preset-card[onclick*="'${themeName}'"]`);
+                if (targetCard) targetCard.classList.add('active');
+            }
+
+            const p = themePalette[themeName] || themePalette.gold;
+            document.documentElement.style.setProperty('--gold', p.gold);
+            document.documentElement.style.setProperty('--gold-hover', p.hover);
+            document.documentElement.style.setProperty('--gold-glow', p.glow);
+            document.documentElement.style.setProperty('--border-glass', p.border);
+
+            if (revenueChartInstance) {
+                revenueChartInstance.data.datasets[0].borderColor = p.gold;
+                revenueChartInstance.data.datasets[0].pointBackgroundColor = p.gold;
+                revenueChartInstance.update();
+            }
+
+            if (saveToStorage) {
+                try {
+                    localStorage.setItem('sr_custom_theme', themeName);
+                    updateStorageStatusBadge();
+                    showPortalToast(`تم تطبيق وحفظ سمة [${themeName.toUpperCase()}] في المتصفح!`);
+                } catch(e) {}
+            }
+        }
+
+        function handleClientLogoUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                uploadedLogoDataUrl = evt.target.result;
+                showPortalToast('تم تحميل ملف الشعار بنجاح! انقر على زر تطبيق الهوية لحفظه.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function applySampleClientBrand(name, iconChar) {
+            const input = document.getElementById('clientBrandNameInput');
+            if (input) input.value = name;
+            uploadedLogoDataUrl = null;
+            applyClientBrand(name, iconChar, true, false);
+        }
+
+        function applyClientBrand(customName, customIcon, saveToStorage = true, isSilent = false) {
+            const name = customName || document.getElementById('clientBrandNameInput')?.value || 'S&R CORESYNC';
+            
+            // 1. Update brand text in header
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">${name}</span> <span class="brand-sub-text">ERP</span>`;
+            }
+
+            // 2. Update user card
+            const userNameEl = document.querySelector('.sidebar-user-card .user-name');
+            if (userNameEl) userNameEl.innerText = name;
+            const userAvatar = document.querySelector('.sidebar-user-card .user-avatar');
+            if (userAvatar) {
+                userAvatar.innerText = customIcon || name.substring(0, 2).toUpperCase();
+            }
+
+            // 3. Update emblem if uploaded
+            if (uploadedLogoDataUrl) {
+                const emblem = document.querySelector('.portal-brand-emblem');
+                if (emblem) emblem.src = uploadedLogoDataUrl;
+            }
+
+            // 4. Save to LocalStorage
+            if (saveToStorage) {
+                try {
+                    localStorage.setItem('sr_custom_brand_name', name);
+                    if (customIcon) localStorage.setItem('sr_custom_brand_icon', customIcon);
+                    if (uploadedLogoDataUrl) localStorage.setItem('sr_custom_brand_logo', uploadedLogoDataUrl);
+                } catch(e) {}
+            }
+
+            updateStorageStatusBadge();
+
+            if (!isSilent) {
+                showPortalToast(`✨ تم حفظ وتطبيق هوية [${name}] على نظام الـ ERP بنجاح!`);
+            }
+        }
+
+        function resetBrandIdentity() {
+            try {
+                localStorage.removeItem('sr_custom_theme');
+                localStorage.removeItem('sr_custom_brand_name');
+                localStorage.removeItem('sr_custom_brand_icon');
+                localStorage.removeItem('sr_custom_brand_logo');
+            } catch(e) {}
+
+            uploadedLogoDataUrl = null;
+            const input = document.getElementById('clientBrandNameInput');
+            if (input) input.value = 'مجموعة الرياض للخدمات اللوجستية';
+
+            applyThemeColor('gold', null, false);
+            const brandTitle = document.querySelector('.brand-logo-site-logo');
+            if (brandTitle) {
+                brandTitle.innerHTML = `<span class="brand-sr-text">S&amp;R</span> <span class="brand-sub-text">CoreSync</span>`;
+            }
+            document.querySelector('.sidebar-user-card .user-name').innerText = 'جلسة معاينة تفاعلية';
+            document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
+            document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
+
+            updateStorageStatusBadge();
+            showPortalToast('تمت استعادة هوية S&R CoreSync الأصلية ومسح التخصيص المحفوظ.');
+        }
+
+        function restoreSavedBrandSettings() {
+            try {
+                const savedTheme = localStorage.getItem('sr_custom_theme');
+                if (savedTheme && themePalette[savedTheme]) {
+                    applyThemeColor(savedTheme, null, false);
+                }
+
+                const savedName = localStorage.getItem('sr_custom_brand_name');
+                const savedIcon = localStorage.getItem('sr_custom_brand_icon');
+                const savedLogo = localStorage.getItem('sr_custom_brand_logo');
+
+                if (savedName) {
+                    if (savedLogo) uploadedLogoDataUrl = savedLogo;
+                    const input = document.getElementById('clientBrandNameInput');
+                    if (input) input.value = savedName;
+                    applyClientBrand(savedName, savedIcon, false, true);
+                }
+                updateStorageStatusBadge();
+            } catch(e) {
+                console.warn('LocalStorage error:', e);
+            }
+        }
+
+        
+        // ==========================================
+        // 6. محرك سوق وتراخيص البرمجيات الحصرية (Software Marketplace Engine)
+        // ==========================================
+        const softwareCatalog = {
+            taxsync: {
+                title: 'S&R TaxSync Desktop',
+                icon: '💻',
+                version: 'v2.4 Pro (Build 2026.10)',
+                price: 189,
+                desc: 'برنامج سطح مكتب محاسبي وضريبي مستقل يعمل بدون إنترنت (Offline-First) لحساب ضريبة القيمة المضافة BTW/VAT 21% وتوليد إقرارات XML لمصلحة الضرائب الهولندية والخليجية.',
+                category: 'desktop',
+                os: 'Win 11/10 (64-bit) & macOS'
+            },
+            flowscan: {
+                title: 'S&R FlowScan AI Mobile',
+                icon: '📱',
+                version: 'v1.8 AI Engine',
+                price: 9.99,
+                desc: 'تطبيق هاتف ذكي للمسح الضوئي الذكي للإيصالات والفواتير الورقية بالكاميرا واستخراج بيانات الضريبة والمبالغ آلياً وترحيلها لحظياً للـ ERP.',
+                category: 'mobile',
+                os: 'iOS 17+ & Android 14+'
+            },
+            cloudpos: {
+                title: 'S&R CloudPOS Connector',
+                icon: '⚡',
+                version: 'v3.1 Agent Service',
+                price: 25,
+                desc: 'وسيط برمجي خفيف يعمل في خلفية أجهزة الكاشير القديمة لربطها فورياً بنظام الـ ERP السحابي لمزامنة حركة المخازن والسيولة دون تغيير الأجهزة.',
+                category: 'pos',
+                os: 'Windows POS Agent'
+            },
+            vault: {
+                title: 'S&R SecureVault B2B',
+                icon: '🛡️',
+                version: 'v2.0 Enterprise Encrypted',
+                price: 49,
+                desc: 'برمجية تشفير وحماية النسخ الاحتياطية لقواعد البيانات والمستندات الحساسة بمعيار AES-256 العسكري مع تخزين متوافق 100% مع قانون GDPR الأوروبي.',
+                category: 'desktop',
+                os: 'Win / Linux / Mac Server'
+            },
+            sdk: {
+                title: 'S&R Financial AI SDK',
+                icon: '🧩',
+                version: 'v1.2 Developer Kit',
+                price: 99,
+                desc: 'مكتبة برمجية للمطورين والشركات البرمجية لدمج خوارزميات الذكاء الاصطناعي المالي والفوترة والامتثال المحاسبي في تطبيقاتهم الخاصة بسهولة عبر REST APIs.',
+                category: 'sdk',
+                os: 'Python / Node.js / C#'
+            }
+        };
+
+        let currentActiveSoftware = null;
+
+        function filterSoftwareCategory(cat, btn) {
+            document.querySelectorAll('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const cards = document.querySelectorAll('#softwareGridContainer .software-card');
+            cards.forEach(card => {
+                if (cat === 'all' || card.getAttribute('data-category') === cat) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function generateCryptoLicenseKey(prefix = 'SR') {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            function part(len) {
+                let res = '';
+                for (let i = 0; i < len; i++) res += chars.charAt(Math.floor(Math.random() * chars.length));
+                return res;
+            }
+            return `${prefix}-${part(4)}-${part(4)}-${part(4)}-2026`;
+        }
+
+        function openSoftwareModal(id, mode = 'trial') {
+            const sw = softwareCatalog[id] || softwareCatalog.taxsync;
+            sw.id = id;
+            currentActiveSoftware = sw;
+
+            document.getElementById('modalSwTitle').innerText = sw.title;
+            document.getElementById('modalSwIcon').innerText = sw.icon;
+            document.getElementById('modalSwVersion').innerText = `${sw.version} • ${sw.os}`;
+            document.getElementById('modalSwDesc').innerText = sw.desc;
+
+            const badge = document.getElementById('modalSwLicBadge');
+            const keyEl = document.getElementById('modalSwKey');
+            const btnBuy = document.getElementById('modalBtnBuy');
+
+            if (mode === 'trial') {
+                badge.innerText = 'ترخيص تجريبي 14 يوماً';
+                badge.className = 'status-badge status-processing';
+                keyEl.innerText = generateCryptoLicenseKey(`TRIAL-${id.toUpperCase()}`);
+                btnBuy.innerText = `ترقية للنسخة الكاملة (€ ${sw.price})`;
+            } else {
+                badge.innerText = 'ترخيص تجاري كامل (Pro)';
+                badge.className = 'status-badge status-completed';
+                keyEl.innerText = generateCryptoLicenseKey(`PRO-${id.toUpperCase()}`);
+                btnBuy.innerText = `إتمام الشراء والفوترة (€ ${sw.price})`;
+            }
+
+            document.getElementById('softwareModal').classList.add('active');
+        }
+
+        function closeSoftwareModal() {
+            document.getElementById('softwareModal').classList.remove('active');
+        }
+
+        function copySoftwareLicenseKey() {
+            const key = document.getElementById('modalSwKey').innerText;
+            navigator.clipboard.writeText(key).then(() => {
+                showPortalToast(`🔑 تم نسخ مفتاح الترخيص: ${key}`);
+            }).catch(() => {
+                showPortalToast(`🔑 تم نسخ المفتاح: ${key}`);
+            });
+        }
+
+        // حساب الضريبة الفورية المصغرة في بطاقة TaxSync
+        function calcQuickTax() {
+            const amountInput = document.getElementById('quickTaxAmount');
+            const rateSelect = document.getElementById('quickTaxRate');
+            if (!amountInput || !rateSelect) return;
+            const amount = parseFloat(amountInput.value) || 0;
+            const rate = parseFloat(rateSelect.value) || 0.21;
+            const vat = amount * rate;
+            const total = amount + vat;
+            const vatEl = document.getElementById('quickTaxVat');
+            const totalEl = document.getElementById('quickTaxTotal');
+            if (vatEl) vatEl.innerText = `€ ${vat.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (totalEl) totalEl.innerText = `€ ${total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        // توليد مفتاح تجريبي فوري جديد
+        function generateNewQuickKey() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            const randomPart = () => Array.from({length: 4}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+            const newKey = `SRTX-2026-TRIAL-${randomPart()}`;
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            if (keyEl) {
+                keyEl.innerText = newKey;
+                keyEl.style.color = 'var(--gold)';
+                setTimeout(() => { if (keyEl) keyEl.style.color = '#fff'; }, 350);
+            }
+            showPortalToast(`✨ تم توليد مفتاح تجريبي جديد: ${newKey}`);
+        }
+
+        // نسخ المفتاح التجريبي الفوري للحافظة
+        function copyQuickTrialKey() {
+            const keyEl = document.getElementById('quickTrialKeyDisplay');
+            const key = keyEl ? keyEl.innerText : 'SRTX-2026-TRIAL-8849';
+            navigator.clipboard.writeText(key).then(() => {
+                showPortalToast(`🔑 تم نسخ المفتاح التجريبي: ${key}`);
+            }).catch(() => {
+                showPortalToast(`🔑 تم نسخ المفتاح: ${key}`);
+            });
+        }
+
+        // =========================================================================
+        // 1. محاكي العملات والضرائب اللحظي (Multi-Currency & VAT Simulator Logic)
+        // =========================================================================
+        let currentCurrency = 'EUR';
+        let currentVatRate = 0.21;
+        const currencyConfig = {
+            EUR: { symbol: '€', rate: 1.0, label: 'يورو (EUR)' },
+            USD: { symbol: '$', rate: 1.08, label: 'دولار أمريكي (USD)' },
+            SAR: { symbol: '﷼', rate: 4.05, label: 'ريال سعودي (SAR)' }
+        };
+        const baseFinancials = {
+            revenue: 842500,
+            cashflow: 318920
+        };
+
+        function setCurrency(cur) {
+            if (!currencyConfig[cur]) return;
+            currentCurrency = cur;
+            document.querySelectorAll('.cur-pill').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`curPill-${cur}`);
+            if (activeBtn) activeBtn.classList.add('active');
+            updateGlobalFinancials();
+            showPortalToast(`💱 تم التبديل إلى عملة: ${currencyConfig[cur].label}`);
+        }
+
+        function setGlobalVat(rate) {
+            currentVatRate = parseFloat(rate) || 0;
+            updateGlobalFinancials();
+            const vatText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :
+                            currentVatRate === 0.09 ? 'BTW مخفض (9%)' :
+                            currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى (0%)';
+            showPortalToast(`🏛️ تم تطبيق النظام الضريبي: ${vatText}`);
+        }
+
+        function updateGlobalFinancials() {
+            const conf = currencyConfig[currentCurrency];
+            const rev = baseFinancials.revenue * conf.rate;
+            const cash = baseFinancials.cashflow * conf.rate;
+            const vatEst = rev * currentVatRate;
+
+            const revEl = document.getElementById('stat-revenue');
+            const cashEl = document.getElementById('stat-cashflow');
+            const vatEstEl = document.getElementById('globalVatEst');
+            const sym1 = document.getElementById('stat-currency-sym1');
+
+            if (revEl) revEl.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (cashEl) cashEl.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (vatEstEl) vatEstEl.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (sym1) sym1.innerText = conf.symbol;
+
+            // تحديث محتوى نافذة الـ PDF
+            const pdfRev = document.getElementById('pdfRevVal');
+            const pdfCash = document.getElementById('pdfCashVal');
+            const pdfVat = document.getElementById('pdfVatVal');
+            const pdfVatScheme = document.getElementById('pdfVatScheme');
+            if (pdfRev) pdfRev.innerText = `${conf.symbol} ${rev.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfCash) pdfCash.innerText = `${conf.symbol} ${cash.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVat) pdfVat.innerText = `${conf.symbol} ${vatEst.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (pdfVatScheme) {
+                pdfVatScheme.innerText = currentVatRate === 0.21 ? 'BTW هولندي (21%)' :
+                                         currentVatRate === 0.09 ? 'BTW مخفض (9%)' :
+                                         currentVatRate === 0.15 ? 'ضريبة خليجية (15%)' : 'معفى من الضريبة (0%)';
+            }
+        }
+
+        // =========================================================================
+        // 2. الجولة الإرشادية التفاعلية (Interactive Guided Tour Logic)
+        // =========================================================================
+        const tourSteps = [
+            {
+                targetId: 'currencyVatSimulatorBar',
+                tab: 'overview',
+                title: '⚡ محاكي العملات والضرائب اللحظي (Simulator Bar)',
+                desc: 'يتيح للزبون التبديل اللحظي بين اليورو والدولار والريال السعودي مع احتساب مباشر لضريبة القيمة المضافة BTW 21% والخليجية 15% وتحديث الأرقام فورياً.'
+            },
+            {
+                targetId: 'tourStatsGrid',
+                tab: 'overview',
+                title: '📊 لوحة القيادة والتدفق المالي (Financial KPIs)',
+                desc: 'مؤشرات مالية دقيقة للإيرادات السنوية، التدفقات النقدية الصافية، ونسبة الامتثال والأتمتة الموفرة لساعات العمل.'
+            },
+            {
+                targetId: 'tourNav-erp',
+                tab: 'erp',
+                title: '📦 إدارة الـ ERP والمخازن الذكية',
+                desc: 'وحدة الـ ERP الموزعة لإدارة الفروع المتعددة، تتبع سلاسل التوريد، والتنبؤ بالطلب بدقة عالية.'
+            },
+            {
+                targetId: 'tourNav-invoices',
+                tab: 'invoices',
+                title: '🧾 الفواتير الإلكترونية والامتثال الضريبي الأوروبي',
+                desc: 'إنشاء الفواتير المشفرة بنظام EN 16931 الأوروبي وتوافق كامل مع بوابات الدفع iDEAL والتحويل المصرفي SEPA.'
+            },
+            {
+                targetId: 'softwareGridContainer',
+                tab: 'software',
+                title: '💻 سوق البرمجيات وحاسبة S&R TaxSync',
+                desc: 'تراخيص رقمية فورية، حاسبة ضريبة BTW مدمجة، ومولد مفاتيح تجريبية (14 يوماً) يعمل بضغطة زر مع تنزيل فوري.'
+            }
+        ];
+        let currentTourStep = 0;
+
+        function startGuidedTour() {
+            currentTourStep = 0;
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'block';
+            if (card) card.style.display = 'block';
+            renderTourStep();
+            showPortalToast('🚀 مرحباً بك في الجولة الإرشادية التفاعلية!');
+        }
+
+        function renderTourStep() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+
+            const step = tourSteps[currentTourStep];
+            if (!step) return;
+
+            // التبديل إلى التبويب المطلوب إذا لزم
+            const tabBtn = document.querySelector(`.nav-item[onclick*="'${step.tab}'"]`);
+            if (tabBtn) {
+                switchPortalTab(step.tab, tabBtn);
+            }
+
+            document.getElementById('tourStepBadge').innerText = `خطوة ${currentTourStep + 1} من ${tourSteps.length}`;
+            document.getElementById('tourStepTitle').innerText = step.title;
+            document.getElementById('tourStepDesc').innerText = step.desc;
+
+            const prevBtn = document.getElementById('tourPrevBtn');
+            const nextBtn = document.getElementById('tourNextBtn');
+            if (prevBtn) prevBtn.style.visibility = currentTourStep === 0 ? 'hidden' : 'visible';
+            if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'إنهاء الجولة ✓' : 'التالي ➡️';
+
+            // تحديد وتأطير العنصر
+            setTimeout(() => {
+                const target = document.getElementById(step.targetId);
+                const card = document.getElementById('tourCard');
+                if (target) {
+                    target.classList.add('tour-highlight-target');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    if (card) {
+                        const rect = target.getBoundingClientRect();
+                        const cardWidth = 360;
+                        let topPos = rect.bottom + 15;
+                        let leftPos = rect.left + (rect.width / 2) - (cardWidth / 2);
+
+                        if (topPos + 220 > window.innerHeight) {
+                            topPos = Math.max(20, rect.top - 230);
+                        }
+                        if (leftPos < 20) leftPos = 20;
+                        if (leftPos + cardWidth > window.innerWidth) leftPos = window.innerWidth - cardWidth - 20;
+
+                        card.style.top = `${topPos}px`;
+                        card.style.left = `${leftPos}px`;
+                    }
+                } else if (card) {
+                    card.style.top = '35%';
+                    card.style.left = 'calc(50% - 180px)';
+                }
+            }, 150);
+        }
+
+        function nextTourStep() {
+            if (currentTourStep < tourSteps.length - 1) {
+                currentTourStep++;
+                renderTourStep();
+            } else {
+                endGuidedTour();
+                showPortalToast('🎉 اكتملت الجولة الإرشادية بنجاح!');
+            }
+        }
+
+        function prevTourStep() {
+            if (currentTourStep > 0) {
+                currentTourStep--;
+                renderTourStep();
+            }
+        }
+
+        function endGuidedTour() {
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            const backdrop = document.getElementById('tourBackdrop');
+            const card = document.getElementById('tourCard');
+            if (backdrop) backdrop.style.display = 'none';
+            if (card) card.style.display = 'none';
+        }
+
+        // =========================================================================
+        // 3. تصدير ملخص العرض التنفيذي كـ PDF (One-Click Executive PDF Logic)
+        // =========================================================================
+        function openExecutivePdfModal() {
+            updateGlobalFinancials();
+            const dateEl = document.getElementById('pdfDateDisplay');
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeExecutivePdfModal() {
+            const modal = document.getElementById('executivePdfModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function printExecutiveBrief() {
+            window.print();
+        }
+
+        // تحديث اسم شركة العميل في تقرير الـ PDF المخصص
+        function updatePdfClientName(name) {
+            const displayEl = document.getElementById('pdfClientNameDisplay');
+            if (displayEl) {
+                displayEl.innerText = name && name.trim() ? name.trim() : 'مجموعة الشريك التجاري المستهدف';
+            }
+        }
+
+        function triggerSoftwareDownload() {
+            if (!currentActiveSoftware) return;
+            const title = currentActiveSoftware.title;
+            const key = document.getElementById('modalSwKey').innerText;
+
+            // توليد ملف حزمة التثبيت التجريبية
+            const fileContent = `=====================================================
+${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
+=====================================================
+Publisher: S&R CoreSync Solutions B.V. (Amsterdam, Netherlands)
+License Key: ${key}
+Issued: 2026-10-06
+Status: Verified Digital Signature (SHA-256)
+
+INSTALLATION INSTRUCTIONS:
+1. Run the installer matching your OS (Windows .msi or macOS .dmg).
+2. Enter the License Key provided above when prompted during first launch.
+3. For enterprise cloud sync, configure your CoreSync Tenant API URL.
+
+Support & Documentation: https://coresync.cloud/docs
+Direct Founders Contact: info@coresync.cloud
+=====================================================
+(c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
+`;
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${title.replace(/\s+/g, '_')}_QuickStart_Package.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showPortalToast(`⚡ بدأ تنزيل حزمة التثبيت لـ [${title}] بنجاح!`);
+        }
+
+        function triggerSoftwareCheckout() {
+            if (!currentActiveSoftware) return;
+            const swId = currentActiveSoftware.id || 'taxsync';
+            closeSoftwareModal();
+            openSoftwareCheckoutModal(swId);
+        }
+
+        function openPublishSoftwareModal() {
+            document.getElementById('publishSoftwareModal').classList.add('active');
+        }
+
+        function closePublishSoftwareModal() {
+            document.getElementById('publishSoftwareModal').classList.remove('active');
+        }
+
+        function handlePublishSoftwareSubmit(e) {
+            e.preventDefault();
+            const title = document.getElementById('pubTitle').value;
+            const cat = document.getElementById('pubCategory').value;
+            const ver = document.getElementById('pubVersion').value;
+            const price = parseFloat(document.getElementById('pubPrice').value) || 99;
+            const desc = document.getElementById('pubDesc').value;
+
+            // إضافة كرت جديد للحاوية ديناميكياً
+            const id = 'custom_' + Date.now();
+            softwareCatalog[id] = {
+                title: title,
+                icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
+                version: ver,
+                price: price,
+                desc: desc,
+                category: cat,
+                os: cat === 'mobile' ? 'iOS / Android' : 'Cross-Platform'
+            };
+
+            const newCard = document.createElement('div');
+            newCard.className = 'software-card';
+            newCard.setAttribute('data-category', cat);
+            newCard.innerHTML = `
+                <span class="software-card-badge ds-u22">جديد مُضاف بواسطة المؤسس ★</span>
+                <div>
+                    <div class="software-card-top">
+                        <div class="software-icon-wrap">${softwareCatalog[id].icon}</div>
+                        <div>
+                            <div class="software-info-title">${title}</div>
+                            <div class="software-info-version">
+                                <span>${ver}</span>
+                                <span class="platform-pill">${softwareCatalog[id].os}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="software-desc">${desc}</p>
+                    <ul class="software-features-list">
+                        <li class="software-feature-item">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            ترخيص رقمي مشفر مع دعم التحديثات
+                        </li>
+                        <li class="software-feature-item">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            ربط مباشر عبر بوابات الدفع والفواتير
+                        </li>
+                    </ul>
+                </div>
+                <div class="software-card-bottom">
+                    <div class="software-price-wrap">
+                        <span class="software-price-amount">€ ${price}</span>
+                        <span class="software-price-unit">ترخيص معتمد</span>
+                    </div>
+                    <div class="software-btn-group">
+                        <button type="button" class="btn-software-trial" onclick="openSoftwareModal('${id}', 'trial')">تجربة</button>
+                        <button type="button" class="btn-software-buy" onclick="openSoftwareModal('${id}', 'buy')">شراء</button>
+                    </div>
+                </div>
+            `;
+
+            const grid = document.getElementById('softwareGridContainer');
+            grid.insertBefore(newCard, grid.firstChild);
+
+            closePublishSoftwareModal();
+            showPortalToast(`🚀 تم نشر برنامج [${title}] بنجاح في متجر المنصة!`);
+        }
+
+        
+        /* =========================================================
+           محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator JS)
+           ========================================================= */
+        let currentSimApp = 'taxsync';
+        let generatedDigipoortXml = '';
+
+        function openDesktopSimulatorModal(appId = 'taxsync') {
+            currentSimApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+            const titleEl = document.getElementById('simAppTitle');
+            if (titleEl) titleEl.innerText = `${sw.title} ${sw.version}`;
+
+            switchSimulatorTab('app');
+            recalcTaxSyncSimulator();
+            document.getElementById('desktopSimulatorModal').classList.add('active');
+            showPortalToast(`💻 تم تشغيل المحاكي التفاعلي لـ [${sw.title}] بنجاح!`);
+        }
+
+        function closeDesktopSimulatorModal() {
+            document.getElementById('desktopSimulatorModal').classList.remove('active');
+        }
+
+        function switchSimulatorTab(tab) {
+            const btnApp = document.getElementById('simTabBtn-app');
+            const btnSpecs = document.getElementById('simTabBtn-specs');
+            const contentApp = document.getElementById('simContent-app');
+            const contentSpecs = document.getElementById('simContent-specs');
+
+            if (tab === 'app') {
+                btnApp.classList.add('active');
+                btnSpecs.classList.remove('active');
+                contentApp.style.display = 'grid';
+                contentSpecs.style.display = 'none';
+            } else {
+                btnApp.classList.remove('active');
+                btnSpecs.classList.add('active');
+                contentApp.style.display = 'none';
+                contentSpecs.style.display = 'grid';
+            }
+        }
+
+        function switchSimSidebar(item) {
+            document.querySelectorAll('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            const target = document.getElementById(`simSide-${item}`);
+            if (target) target.classList.add('active');
+        }
+
+        function recalcTaxSyncSimulator() {
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+
+            const btw21 = omzet21 * 0.21;
+            const btw9 = omzet9 * 0.09;
+            const netPay = (btw21 + btw9) - voorb;
+
+            document.getElementById('simResBtw21').innerText = `€ ${btw21.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResBtw9').innerText = `€ ${btw9.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('simResDeduct').innerText = `- € ${voorb.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            const netEl = document.getElementById('simResNetPay');
+            netEl.innerText = `€ ${netPay.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            if (netPay < 0) {
+                netEl.style.color = '#34d399';
+                netEl.innerText = `استرداد: € ${Math.abs(netPay).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            } else {
+                netEl.style.color = 'var(--gold)';
+            }
+        }
+
+        function runAiComplianceAudit() {
+            switchSimSidebar('audit');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '🛡️ تقرير الفحص والامتثال الضريبي الذكي (AWR Audit Report):';
+            
+            contentEl.innerText = `[S&R AUDIT ENGINE v2.4 - EXECUTION TIME: 2026-10-06 12:45:00]
+----------------------------------------------------------------------
+[PASS] Dutch Tax Administration AWR Article 52 Ledger Validation: OK
+[PASS] VAT Identification Number Format (NL862145890B01): VALID
+[PASS] BTW Tarief Hoog (21%) & Laag (9%) Mathematical Parity: 100% MATCH
+[PASS] PEPPOL BIS Billing 3.0 Electronic Invoice Compatibility: VALIDATED
+[PASS] Zero Cloud Leakage & AES-256 Local Encryption Integrity: SECURE
+----------------------------------------------------------------------
+STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`;
+            
+            showPortalToast('🛡️ اكتمل تدقيق الامتثال الضريبي بنجاح: متوافق بنسبة 100%!');
+        }
+
+        function exportDigipoortXml() {
+            switchSimSidebar('xml');
+            const consoleBox = document.getElementById('simConsoleBox');
+            const titleEl = document.getElementById('simConsoleTitle');
+            const contentEl = document.getElementById('simXmlContent');
+
+            const omzet21 = parseFloat(document.getElementById('simOmzet21').value) || 0;
+            const omzet9 = parseFloat(document.getElementById('simOmzet9').value) || 0;
+            const voorb = parseFloat(document.getElementById('simVoorbelasting').value) || 0;
+            const btw21 = (omzet21 * 0.21).toFixed(2);
+            const btw9 = (omzet9 * 0.09).toFixed(2);
+            const netPay = ((omzet21 * 0.21 + omzet9 * 0.09) - voorb).toFixed(2);
+
+            generatedDigipoortXml = `<?xml version="1.0" encoding="UTF-8"?>
+<AangifteOmzetbelasting xmlns="http://www.nltaxonomie.nl/sbr/2026/bd" period="2026-Q3">
+  <Header>
+    <SoftwareVendor>S&R CoreSync Solutions B.V.</SoftwareVendor>
+    <SoftwarePackage>S&R TaxSync Desktop</SoftwarePackage>
+    <SoftwareVersion>2.4 Pro</SoftwareVersion>
+    <MessageTimestamp>2026-10-06T12:45:00</MessageTimestamp>
+  </Header>
+  <Belastingplichtige>
+    <BtwNummer>NL862145890B01</BtwNummer>
+    <Handelsnaam>S&R CoreSync Solutions B.V.</Handelsnaam>
+  </Belastingplichtige>
+  <Rubrieken>
+    <!-- 1a. Leveringen/diensten belast met hoog tarief (21%) -->
+    <Rubriek1a>
+      <Omzet>${omzet21}</Omzet>
+      <Omzetbelasting>${btw21}</Omzetbelasting>
+    </Rubriek1a>
+    <!-- 1b. Leveringen/diensten belast met laag tarief (9%) -->
+    <Rubriek1b>
+      <Omzet>${omzet9}</Omzet>
+      <Omzetbelasting>${btw9}</Omzetbelasting>
+    </Rubriek1b>
+    <!-- 5b. Voorbelasting -->
+    <Rubriek5b>
+      <Voorbelasting>${voorb}</Voorbelasting>
+    </Rubriek5b>
+    <!-- 5g. Totaal te betalen / terug te vragen -->
+    <Rubriek5g>
+      <Totaal>${netPay}</Totaal>
+    </Rubriek5g>
+  </Rubrieken>
+</AangifteOmzetbelasting>`;
+
+            consoleBox.style.display = 'block';
+            titleEl.innerText = '📄 ملف الإقرار الضريبي الرسمي المولد (Digipoort SBR XML):';
+            contentEl.innerText = generatedDigipoortXml;
+            showPortalToast('⚡ تم توليد وتشفير ملف Digipoort XML بنجاح!');
+        }
+
+        function downloadGeneratedTaxXml() {
+            if (!generatedDigipoortXml) {
+                exportDigipoortXml();
+            }
+            const blob = new Blob([generatedDigipoortXml], { type: 'application/xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Belastingdienst_Aangifte_Q3_2026.xml`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showPortalToast('📁 تم تنزيل ملف Digipoort XML الرسمي على جهازك!');
+        }
+
+        /* =========================================================
+           بوابة الدفع والتراخيص الدولية (Stripe / Mollie iDEAL Checkout JS)
+           ========================================================= */
+        let currentCheckoutApp = 'taxsync';
+        let selectedGateway = 'ideal';
+
+        function openSoftwareCheckoutModal(appId = 'taxsync') {
+            currentCheckoutApp = appId;
+            const sw = softwareCatalog[appId] || softwareCatalog.taxsync;
+
+            document.getElementById('chkAppTitle').innerText = sw.title;
+            document.getElementById('chkAppIcon').innerText = sw.icon;
+            document.getElementById('chkAppLicenseType').innerText = `ترخيص تجاري كامل (${sw.version}) • شامل الفاتورة الضريبية`;
+
+            const netPrice = sw.price;
+            const vat = Math.round(netPrice * 0.21 * 100) / 100;
+            const total = Math.round((netPrice + vat) * 100) / 100;
+
+            document.getElementById('chkNetPrice').innerText = `€ ${netPrice.toFixed(2)}`;
+            document.getElementById('chkVatAmount').innerText = `€ ${vat.toFixed(2)}`;
+            document.getElementById('chkTotalPrice').innerText = `€ ${total.toFixed(2)}`;
+            document.getElementById('chkBtnText').innerText = `تأكيد الدفع الآمن وإصدار الفاتورة (€ ${total.toFixed(2)})`;
+
+            // إعادة ضبط حالة النجاح
+            document.getElementById('chkSuccessBox').style.display = 'none';
+            document.getElementById('chkBtnSubmit').style.display = 'flex';
+            document.getElementById('chkBtnSpinner').style.display = 'none';
+
+            selectPaymentGateway('ideal');
+            document.getElementById('softwareCheckoutModal').classList.add('active');
+        }
+
+        function closeSoftwareCheckoutModal() {
+            document.getElementById('softwareCheckoutModal').classList.remove('active');
+        }
+
+        function selectPaymentGateway(type) {
+            selectedGateway = type;
+            ['ideal', 'card', 'sepa'].forEach(gw => {
+                const card = document.getElementById(`gwCard-${gw}`);
+                const input = document.getElementById(`gwInput-${gw}`);
+                if (card) card.classList.toggle('selected', gw === type);
+                if (input) input.style.display = (gw === type) ? 'block' : 'none';
+            });
+        }
+
+        function executeCheckoutPayment() {
+            const sw = softwareCatalog[currentCheckoutApp] || softwareCatalog.taxsync;
+            const btn = document.getElementById('chkBtnSubmit');
+            const spinner = document.getElementById('chkBtnSpinner');
+            const text = document.getElementById('chkBtnText');
+            const successBox = document.getElementById('chkSuccessBox');
+
+            btn.disabled = true;
+            spinner.style.display = 'inline-block';
+            text.innerText = 'جاري الاتصال الآمن مع بوابة الدفع وتوثيق الترخيص...';
+
+            setTimeout(() => {
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                btn.style.display = 'none';
+
+                // توليد مفتاح ترخيص تجاري
+                const proKey = generateCryptoLicenseKey(`PRO-${currentCheckoutApp.toUpperCase()}`);
+                document.getElementById('chkSuccessKey').innerText = proKey;
+                successBox.style.display = 'block';
+
+                // توليد وإضافة الفاتورة في جدول الفواتير
+                const netPrice = sw.price;
+                const vat = Math.round(netPrice * 0.21 * 100) / 100;
+                const total = Math.round((netPrice + vat) * 100) / 100;
+                const invNum = `INV-2026-0${Math.floor(84 + Math.random() * 20)}`;
+                const clientName = `S&R Enterprise Licensee (${sw.title})`;
+                const gwLabel = selectedGateway === 'ideal' ? 'Mollie iDEAL ✓' : selectedGateway === 'card' ? 'Stripe Card ✓' : 'SEPA B2B Direct ✓';
+
+                // إضافة الفاتورة لجدول الفواتير في الواجهة
+                const tbody = document.getElementById('invoicesTableBody');
+                if (tbody) {
+                    const tr = document.createElement('tr');
+                    tr.setAttribute('data-status', 'paid');
+                    tr.innerHTML = `
+                        <td class="font-num">${invNum}</td>
+                        <td>${clientName}</td>
+                        <td class="font-num">€ ${netPrice.toLocaleString()}</td>
+                        <td class="font-num">€ ${vat.toLocaleString()} (21% BTW)</td>
+                        <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
+                        <td><span class="status-badge status-completed">مدفوعة عبر ${gwLabel}</span></td>
+                        <td>
+                            <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${clientName}', ${netPrice}, ${vat}, ${total}, 'مدفوعة عبر ${gwLabel}', '2026-10-06', 'BTW 21%')">معاينة الفاتورة</button>
+                        </td>
+                    `;
+                    tbody.insertBefore(tr, tbody.firstChild);
+                    
+                    const countAll = document.getElementById('count-all');
+                    const countPaid = document.getElementById('count-paid');
+                    if (countAll) countAll.innerText = parseInt(countAll.innerText || '3') + 1;
+                    if (countPaid) countPaid.innerText = parseInt(countPaid.innerText || '2') + 1;
+                }
+
+                // ربط زر معاينة الفاتورة في صندوق النجاح
+                const btnViewInv = document.getElementById('chkBtnViewInvoice');
+                btnViewInv.onclick = () => {
+                    closeSoftwareCheckoutModal();
+                    previewInvoiceModal(invNum, clientName, netPrice, vat, total, `مدفوعة عبر ${gwLabel}`, '2026-10-06', 'BTW 21%');
+                };
+
+                showPortalToast(`🎉 تم إتمام الدفع بنجاح وإصدار الفاتورة [${invNum}] وتفعيل الترخيص!`);
+            }, 1200);
+        }
+
+        // فحص الروابط المباشرة عند التحميل (URL Query Params Auto-Trigger)
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hash = window.location.hash;
+            if (urlParams.get('sandbox')) {
+                const targetApp = urlParams.get('sandbox');
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openDesktopSimulatorModal(targetApp);
+            } else if (urlParams.get('checkout') || urlParams.get('action') === 'checkout') {
+                const targetApp = urlParams.get('app') || urlParams.get('checkout') || 'taxsync';
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+                openSoftwareCheckoutModal(targetApp);
+            } else if (hash === '#software') {
+                if (typeof switchPortalTab === 'function') switchPortalTab('software');
+            } else if (urlParams.get('modal') === 'pdf' || hash === '#pdf') {
+                openExecutivePdfModal();
+            } else if (urlParams.get('tour') === '1' || hash === '#tour') {
+                setTimeout(startGuidedTour, 300);
+            }
+        });
+
+
+        // استعادة التخصيص المحفوظ عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', restoreSavedBrandSettings);
+
+
+        // تفعيل اختصارات لوحة المفاتيح لوضع العرض التقديمي (Key Shortcuts)
+        document.addEventListener('keydown', function(e) {
+            const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+            if (activeTag === 'input' || activeTag === 'textarea' || activeTag === 'select') {
+                return;
+            }
+            if (e.key === 'p' || e.key === 'P' || e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
+                togglePresentationMode();
+            } else if (e.key === 't' || e.key === 'T') {
+                e.preventDefault();
+                startGuidedTour();
+            } else if (e.key === 'Escape') {
+                if (typeof isPresentationActive !== 'undefined' && isPresentationActive) togglePresentationMode();
+                if (typeof endGuidedTour === 'function') endGuidedTour();
+                if (typeof closeExecutivePdfModal === 'function') closeExecutivePdfModal();
+            }
+        });
+    </script>
+
+    
+    <!-- نافذة تفاصيل وتحميل وترخيص البرمجيات (Software Modal) -->
+    <div class="modal-overlay" id="softwareModal" onclick="if(event.target === this) closeSoftwareModal()">
+        <div class="modal-card ds-u29">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="software-icon-wrap ds-u30" id="modalSwIcon">💻</div>
+                    <div>
+                        <h4 class="fw-bold mb-0 text-white" id="modalSwTitle">S&R TaxSync Desktop</h4>
+                        <span class="text-caption text-white-64" id="modalSwVersion">v2.4 Pro • Verified Build</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareModal()">✕</button>
+            </div>
+
+            <p class="text-caption text-white-64 mb-3" id="modalSwDesc">
+                برنامج سطح مكتب محاسبي وضريبي متكامل يعمل بدون اتصال بالإنترنت.
+            </p>
+
+            <div class="glass-box p-3 mb-3 ds-u31">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-caption text-white-64">مفتاح الترخيص الرقمي (Digital License Key):</span>
+                    <span class="status-badge status-completed" id="modalSwLicBadge">نشط 14 يوماً</span>
+                </div>
+                <div class="license-key-display">
+                    <span id="modalSwKey">SR-TAX-2026-X89B-492A-TRIAL</span>
+                    <button type="button" class="table-action-btn" onclick="copySoftwareLicenseKey()">نسخ المفتاح</button>
+                </div>
+                <div class="d-flex justify-content-between text-caption text-white-64">
+                    <span>التوافق: Windows 11/10 (64-bit), macOS 13+</span>
+                    <span>توقيع رقمي: SHA-256 Validated</span>
+                </div>
+            </div>
+
+            <div class="modal-form-actions">
+                <button type="button" class="btn-return-main" onclick="closeSoftwareModal()">إغلاق</button>
+                <button type="button" class="btn-secondary-glow" id="modalBtnDownload" onclick="triggerSoftwareDownload()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    تنزيل حزمة التثبيت المباشرة (Installer .zip)
+                </button>
+                <button type="button" class="action-cta-btn" id="modalBtnBuy" onclick="triggerSoftwareCheckout()">
+                    شراء الترخيص وإصدار فاتورة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة نشر برنامج جديد من قبل المؤسس/المطور (Publish Software Modal) -->
+    <div class="modal-overlay" id="publishSoftwareModal" onclick="if(event.target === this) closePublishSoftwareModal()">
+        <div class="modal-card ds-u32">
+            <h3 class="text-white mb-2 fw-bold">نشر وتوزيع برنامج جديد عبر المنصة</h3>
+            <p class="text-caption text-white-64 mb-4">بصفتك مطوراً ومهندساً للبرمجيات، يمكنك إضافة حلولك وتطبيقاتك الحصرية للبيع والتوزيع:</p>
+            
+            <form onsubmit="handlePublishSoftwareSubmit(event)">
+                <div class="modal-form-fields">
+                    <div>
+                        <label class="text-caption text-white-64 mb-1 d-block" for="pubTitle">اسم البرنامج أو التطبيق</label>
+                        <input type="text" id="pubTitle" required class="ai-chat-input modal-form-input" placeholder="مثال: S&R InventorySync Pro" title="اسم البرنامج">
+                    </div>
+                    <div>
+                        <label class="text-caption text-white-64 mb-1 d-block" for="pubCategory">التصنيف والمنصة</label>
+                        <select id="pubCategory" class="ai-chat-input modal-form-select" title="التصنيف">
+                            <option value="desktop">برنامج سطح مكتب للكمبيوتر (Desktop PC/Mac)</option>
+                            <option value="mobile">تطبيق هاتف ذكي (iOS / Android)</option>
+                            <option value="pos">حلول ونقاط بيع (POS Agent)</option>
+                            <option value="sdk">مكتبة أو حزمة مطورين (SDK / API)</option>
+                        </select>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <div class="ds-u33">
+                            <label class="text-caption text-white-64 mb-1 d-block" for="pubVersion">رقم الإصدار</label>
+                            <input type="text" id="pubVersion" required class="ai-chat-input modal-form-input font-num" placeholder="v1.0" value="v1.0" title="رقم الإصدار">
+                        </div>
+                        <div class="ds-u33">
+                            <label class="text-caption text-white-64 mb-1 d-block" for="pubPrice">سعر الترخيص باليورو (€)</label>
+                            <input type="number" id="pubPrice" required class="ai-chat-input modal-form-input font-num" placeholder="149" value="149" title="سعر الترخيص">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-caption text-white-64 mb-1 d-block" for="pubDesc">وصف موجز ومميزات البرنامج</label>
+                        <textarea id="pubDesc" required class="ai-chat-input modal-form-input ds-u34" placeholder="اكتب وصفاً موجزاً لما يقوم به البرنامج وكيف يساعد العملاء..." title="الوصف"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-form-actions mt-3">
+                    <button type="button" class="btn-return-main" onclick="closePublishSoftwareModal()">إلغاء</button>
+                    <button type="submit" class="action-cta-btn">
+                        نشر البرنامج فورياً في المتجر 🚀
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+    <!-- =========================================================
+         محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator Modal)
+         ========================================================= -->
+    <div class="modal-overlay" id="desktopSimulatorModal" onclick="if(event.target === this) closeDesktopSimulatorModal()">
+        <div class="modal-card simulator-modal-card">
+            <!-- شريط نافذة نظام التشغيل (OS Window Bar) -->
+            <div class="os-window-header">
+                <div class="os-window-controls">
+                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="إغلاق"></span>
+                    <span class="os-dot yellow" title="تصغير"></span>
+                    <span class="os-dot green" title="تكبير"></span>
+                </div>
+                <div class="os-window-title">
+                    <span>💻</span>
+                    <span id="simAppTitle">S&R TaxSync Desktop v2.4 Pro</span>
+                    <span class="status-badge status-completed ds-u36">SANDBOX RUNNING</span>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeDesktopSimulatorModal()">✕</button>
+            </div>
+
+            <!-- تبويبات المحاكي (Tabs) -->
+            <div class="os-window-tabs">
+                <button type="button" class="os-tab-btn active" id="simTabBtn-app" onclick="switchSimulatorTab('app')">
+                    <span>⚡</span> محاكي واجهة البرنامج الحية (Live OS Sandbox)
+                </button>
+                <button type="button" class="os-tab-btn" id="simTabBtn-specs" onclick="switchSimulatorTab('specs')">
+                    <span>📋</span> بطاقة المواصفات والمعمارية (Architecture & Specs)
+                </button>
+            </div>
+
+            <!-- شريط قوائم البرنامج الداخلي (App Ribbon) -->
+            <div class="os-app-ribbon">
+                <span>📁 ملف (Bestand)</span>
+                <span>📊 مبيعات وضرائب (Omzet & BTW)</span>
+                <span class="ds-u37" onclick="runAiComplianceAudit()">🛡️ فحص الامتثال AWR (Audit)</span>
+                <span class="ds-u38" onclick="exportDigipoortXml()">⚡ تصدير Digipoort XML</span>
+                <span>⚙️ إعدادات الأمان (AES-256)</span>
+            </div>
+
+            <!-- تبويب 1: المحاكي التفاعلي المباشر -->
+            <div id="simContent-app" class="os-content-pane">
+                <!-- الشريط الجانبي لتطبيق سطح المكتب -->
+                <div class="os-sidebar">
+                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
+                        <span>📊</span> إقرار BTW والضرائب
+                    </button>
+                    <button type="button" class="os-sidebar-btn" id="simSide-audit" onclick="runAiComplianceAudit()">
+                        <span>🤖</span> تدقيق الذكاء الاصطناعي
+                    </button>
+                    <button type="button" class="os-sidebar-btn" id="simSide-xml" onclick="exportDigipoortXml()">
+                        <span>📄</span> تصدير Digipoort XML
+                    </button>
+                    <div class="ds-u39">
+                        <div class="text-caption text-white-64 ds-u40">محرك الحسابات:</div>
+                        <div class="ds-u41">S&R BTW Engine v2.4</div>
+                        <div class="text-caption text-white-64 ds-u42">وضع العمل: Offline 100%</div>
+                    </div>
+                </div>
+
+                <!-- مساحة العمل الرئيسية للمحاكي -->
+                <div class="os-main-stage">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h4 class="fw-bold mb-1 text-white ds-u43">نموذج حساب ضريبة القيمة المضافة (Aangifte Omzetbelasting Q3 2026)</h4>
+                            <p class="text-caption text-white-64 mb-0">جرب إدخال الأرقام أدناه لمشاهدة الاحتساب الآلي وتوليد الإقرار الهولندي والخليجي فورياً</p>
+                        </div>
+                        <span class="status-badge status-completed" id="simStatusBadge">جاهز للاحتساب ✓</span>
+                    </div>
+
+                    <!-- حقول الإدخال التفاعلية -->
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simOmzet21">المبيعات بنسبة 21% BTW (Omzet Hoog):</label>
+                                <input type="number" id="simOmzet21" value="18500" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simOmzet9">المبيعات بنسبة 9% BTW (Omzet Laag):</label>
+                                <input type="number" id="simOmzet9" value="4200" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="calc-input-box">
+                                <label for="simVoorbelasting">ضريبة المدخلات القابلة للخصم (Voorbelasting):</label>
+                                <input type="number" id="simVoorbelasting" value="2150" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- بطاقات نتائج الاحتساب المالي الفوري -->
+                    <div class="glass-box p-3 mb-3 ds-u44">
+                        <div class="row text-center g-2">
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block ds-u45">ضريبة 21% (Hoog)</span>
+                                <span class="fw-bold text-white font-num ds-u46" id="simResBtw21">€ 3,885.00</span>
+                            </div>
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block ds-u45">ضريبة 9% (Laag)</span>
+                                <span class="fw-bold text-white font-num ds-u46" id="simResBtw9">€ 378.00</span>
+                            </div>
+                            <div class="col-3">
+                                <span class="text-caption text-white-64 d-block ds-u45">الخصم المسموح (Voorb.)</span>
+                                <span class="fw-bold text-danger font-num ds-u46" id="simResDeduct">- € 2,150.00</span>
+                            </div>
+                            <div class="col-3 ds-u47">
+                                <span class="text-caption text-white-64 d-block ds-u45">صافي الضريبة الواجبة السداد</span>
+                                <span class="fw-bold font-num ds-u48" id="simResNetPay">€ 2,113.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- أزرار الإجراءات داخل المحاكي -->
+                    <div class="d-flex gap-2 flex-wrap mb-3">
+                        <button type="button" class="table-action-btn ds-u49" onclick="runAiComplianceAudit()">
+                            🛡️ فحص الامتثال المحاسبي AWR
+                        </button>
+                        <button type="button" class="table-action-btn ds-u50" onclick="exportDigipoortXml()">
+                            📄 توليد ملف Digipoort XML
+                        </button>
+                        <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
+                            💳 ترقية للنسخة الكاملة (€ 189)
+                        </button>
+                    </div>
+
+                    <!-- منطقة نتائج الفحص والتصدير (Console output) -->
+                    <div id="simConsoleBox" class="mb-3 ds-u52">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="text-caption text-white-64" id="simConsoleTitle">تقرير تدقيق الامتثال:</span>
+                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" onclick="downloadGeneratedTaxXml()">تنزيل ملف .xml</button>
+                        </div>
+                        <div class="xml-preview-box" id="simXmlContent"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تبويب 2: بطاقة المواصفات والمعمارية التقنية -->
+            <div id="simContent-specs" class="os-content-pane ds-u54">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="glass-box p-3 h-100">
+                            <h5 class="fw-bold text-white mb-2 ds-u55">معمارية الخصوصية والأمان (Zero-Cloud Privacy)</h5>
+                            <p class="text-caption text-white-64">
+                                تم تصميم البرنامج ليعمل بمعمارية محلية بحتة (Offline-First Engine)، حيث تُخزن قواعد البيانات محلياً عبر محرك SQLite مشفر بخوارزمية AES-256 بت، مما يضمن سرية البيانات المحاسبية بنسبة 100% دون أي تسريب سحابي.
+                            </p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item"><span>✓</span> توافق كامل مع المادة 52 من قانون الضرائب الهولندي (AWR)</li>
+                                <li class="software-feature-item"><span>✓</span> حماية البيانات بموجب اللائحة الأوروبية العامة لحماية البيانات (GDPR)</li>
+                                <li class="software-feature-item"><span>✓</span> توليد مفاتيح تشفير رقمية مرتبطة بالعتاد (Hardware ID Locking)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="glass-box p-3 h-100">
+                            <h5 class="fw-bold text-white mb-2 ds-u55">التوافق والتكامل (Digipoort & PEPPOL)</h5>
+                            <p class="text-caption text-white-64">
+                                يدعم الربط المباشر مع بوابة مصلحة الضرائب الهولندية (Digipoort SBR) وبروتوكول الفوترة الأوروبية الموحدة PEPPOL BIS 3.0.
+                            </p>
+                            <div class="p-2 mb-2 ds-u56">
+                                <div class="text-white-64">SBR / XBRL Taxonomy: NL-2026.1</div>
+                                <div class="text-white-64">Supported OS: Windows 11/10 (x64) • macOS Apple Silicon</div>
+                                <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
+                            </div>
+                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" onclick="openSoftwareCheckoutModal('taxsync')">
+                                شراء الترخيص التجاري الآن (€ 189 / سنة)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         نافذة إتمام الشراء والربط مع بوابات الدفع (Stripe / Mollie iDEAL Checkout Modal)
+         ========================================================= -->
+    <div class="modal-overlay" id="softwareCheckoutModal" onclick="if(event.target === this) closeSoftwareCheckoutModal()">
+        <div class="modal-card checkout-modal-card">
+            <!-- الهيدر -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="software-icon-wrap ds-u30" id="chkAppIcon">💻</div>
+                    <div>
+                        <h4 class="fw-bold mb-0 text-white" id="chkAppTitle">S&R TaxSync Desktop</h4>
+                        <span class="text-caption text-white-64" id="chkAppLicenseType">ترخيص تجاري مؤسسي سنوي • Commercial B2B</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareCheckoutModal()">✕</button>
+            </div>
+
+            <!-- ملخص الفاتورة واحتساب ضريبة BTW 21% -->
+            <div class="order-summary-box">
+                <div class="order-summary-row">
+                    <span>قيمة الترخيص البرمجي الصافي (Net Price):</span>
+                    <span class="font-num" id="chkNetPrice">€ 189.00</span>
+                </div>
+                <div class="order-summary-row">
+                    <span>ضريبة القيمة المضافة الهولندية (BTW 21%):</span>
+                    <span class="font-num" id="chkVatAmount">€ 39.69</span>
+                </div>
+                <div class="order-summary-row total">
+                    <span>الإجمالي المستحق للسداد (Total Incl. BTW):</span>
+                    <span class="font-num ds-u10" id="chkTotalPrice">€ 228.69</span>
+                </div>
+            </div>
+
+            <!-- محدد بوابة الدفع الدولية -->
+            <div class="text-caption text-white-64 mb-1">اختر طريقة الدفع المعتمدة:</div>
+            <div class="gateway-selector">
+                <div class="gateway-card selected" id="gwCard-ideal" onclick="selectPaymentGateway('ideal')">
+                    <div class="ds-u57">🇳🇱</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">Mollie iDEAL</div>
+                    <span class="gateway-badge">هولندا وأوروبا</span>
+                </div>
+                <div class="gateway-card" id="gwCard-card" onclick="selectPaymentGateway('card')">
+                    <div class="ds-u57">💳</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">Stripe Card</div>
+                    <span class="gateway-badge">Visa / Mastercard</span>
+                </div>
+                <div class="gateway-card" id="gwCard-sepa" onclick="selectPaymentGateway('sepa')">
+                    <div class="ds-u57">🏦</div>
+                    <div class="fw-bold text-white mt-1 ds-u58">SEPA B2B</div>
+                    <span class="gateway-badge">تحويل بنكي مباشر</span>
+                </div>
+            </div>
+
+            <!-- حقول الإدخال حسب البوابة المختارة -->
+            <!-- 1. iDEAL bank selector -->
+            <div id="gwInput-ideal" class="payment-input-group">
+                <label for="idealBankSelect" class="text-caption text-white-64 mb-1 d-block">اختر البنك الهولندي (Kies uw bank):</label>
+                <select id="idealBankSelect" class="form-select-dark">
+                    <option value="ing">ING Bank</option>
+                    <option value="rabobank">Rabobank</option>
+                    <option value="abnamro">ABN AMRO</option>
+                    <option value="bunq">bunq</option>
+                    <option value="revolut">Revolut NL</option>
+                    <option value="sns">SNS Bank</option>
+                    <option value="asn">ASN Bank</option>
+                </select>
+                <div class="text-caption text-white-64 mt-2 ds-u40">
+                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect.
+                </div>
+            </div>
+
+            <!-- 2. Stripe Card fields -->
+            <div id="gwInput-card" class="payment-input-group ds-u52">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية:</label>
+                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <label class="text-caption text-white-64 mb-1 d-block" for="chkCardExpiry">تاريخ الانتهاء:</label>
+                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="12/28" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
+                    </div>
+                    <div class="col-6">
+                        <label class="text-caption text-white-64 mb-1 d-block" for="chkCardCvc">رمز الأمان CVC:</label>
+                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="888" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. SEPA Direct Debit -->
+            <div id="gwInput-sepa" class="payment-input-group ds-u52">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان للشركة (Business IBAN):</label>
+                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="رقم الآيبان للشركة (IBAN)" placeholder="IBAN" aria-label="رقم الآيبان للشركة">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم الحساب التجاري (Bedrijfsnaam):</label>
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="S&R B2B Enterprise Client" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
+            </div>
+
+            <!-- حالة النجاح بعد الدفع (Success State) -->
+            <div class="ds-u60" id="chkSuccessBox">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="ds-u61">🎉</span>
+                    <div>
+                        <h5 class="fw-bold text-white mb-0 ds-u46">تم إتمام عملية الدفع بنجاح!</h5>
+                        <span class="text-caption text-white-64">تم تفعيل الترخيص التجاري وإصدار الفاتورة الضريبية الرسمية</span>
+                    </div>
+                </div>
+                <div class="license-key-display my-2">
+                    <span id="chkSuccessKey">PRO-SR-TAXSYNC-COMMERCIAL-2026-X98B</span>
+                    <button type="button" class="table-action-btn" onclick="navigator.clipboard.writeText(document.getElementById('chkSuccessKey').innerText); showPortalToast('تم نسخ مفتاح الترخيص!');">نسخ</button>
+                </div>
+                <div class="d-flex gap-2 flex-wrap mt-2">
+                    <button type="button" class="action-cta-btn ds-u62" id="chkBtnViewInvoice">
+                        📄 معاينة الفاتورة الصادرة
+                    </button>
+                    <button type="button" class="table-action-btn ds-u62" onclick="triggerSoftwareDownload()">
+                        📦 تنزيل حزمة التثبيت
+                    </button>
+                </div>
+            </div>
+
+            <!-- زر الدفع الرئيسي -->
+            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" onclick="executeCheckoutPayment()">
+                <span class="ds-u52" id="chkBtnSpinner">⏳</span>
+                <span id="chkBtnText">تأكيد الدفع الآمن وإصدار الفاتورة (€ 228.69)</span>
+            </button>
+            <div class="d-flex justify-content-between align-items-center text-caption text-white-64 mt-2">
+                <span>🔐 SSL 256-Bit Encrypted Transaction</span>
+                <span>PCI-DSS Level 1 Compliant</span>
+            </div>
+        </div>
+    <!-- حاوية الجولة الإرشادية التفاعلية للزبائن (Spotlight Guided Tour) -->
+    <div id="tourBackdrop" class="tour-backdrop ds-u52" onclick="endGuidedTour()"></div>
+    <div id="tourCard" class="tour-card ds-u52">
+        <div class="tour-card-header">
+            <span class="tour-step-badge" id="tourStepBadge">خطوة 1 من 5</span>
+            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="إغلاق الجولة">✕</button>
+        </div>
+        <h4 id="tourStepTitle" class="tour-step-title">لوحة القيادة والتدفق المالي</h4>
+        <p id="tourStepDesc" class="tour-step-desc">هنا يظهر الأداء المالي اللحظي للشركة مع مؤشرات الإيرادات ونسب النمو بدقة متناهية.</p>
+        <div class="tour-card-footer">
+            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ السابق</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">التالي ➡️</button>
+        </div>
+    </div>
+
+    <!-- نافذة تصدير ملخص العرض التنفيذي للزبائن (One-Click Executive PDF) -->
+    <div class="modal-overlay" id="executivePdfModal" onclick="if(event.target === this) closeExecutivePdfModal()">
+        <div class="modal-card exec-pdf-card ds-u63">
+            <div class="no-print ds-u64">
+                <div class="ds-u65">
+                    <img class="ds-u66" src="./assets/sr-core-emblem-official.png" alt="S&R CoreSync" />
+                    <div>
+                        <h3 class="ds-u67">S&R CORESYNC SOLUTIONS B.V.</h3>
+                        <span class="ds-u68">Executive Capability Brief & Digital Quotation (Official Dossier)</span>
+                    </div>
+                </div>
+                <div class="ds-u69">
+                    <button class="ds-u70" type="button" onclick="printExecutiveBrief()">
+                        🖨️ طباعة / حفظ كـ PDF
+                    </button>
+                    <button class="ds-u71" type="button" onclick="closeExecutivePdfModal()">
+                        إغلاق ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- شريط تخصيص اسم شركة العميل (Personalized Client Input) -->
+            <div class="no-print ds-u72">
+                <div class="ds-u73">
+                    <span class="ds-u74">🏢 مخصص لشركة (Client Enterprise):</span>
+                    <input class="ds-u75" type="text" id="pdfClientNameInput" oninput="updatePdfClientName(this.value)" placeholder="أدخل اسم شركة العميل..." value="مجموعة الشريك التجاري المستهدف" />
+                </div>
+                <span class="ds-u76">ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة</span>
+            </div>
+
+            <!-- محتوى التقرير للطباعة والمعاينة -->
+            <div class="ds-u77" id="printableExecutiveBrief">
+                <div class="ds-u78">
+                    <div>
+                        <h2 class="ds-u79">ملخص العرض التنفيذي والجاهزية المؤسسية</h2>
+                        <span class="ds-u80">S&R Enterprise Architecture • Netherlands Headquarters</span>
+                    </div>
+                    <div class="ds-u81">
+                        <div>REF: <strong class="ds-u82">SR-EXEC-2026-Q4</strong></div>
+                        <div>DATE: <strong id="pdfDateDisplay">2026-10-12</strong></div>
+                        <div>STATUS: <strong class="ds-u83">VERIFIED & ACTIVE</strong></div>
+                    </div>
+                </div>
+
+                <!-- بطاقة تخصيص العميل المستهدف -->
+                <div class="ds-u84">
+                    <div>
+                        <span class="ds-u85">إعداد وتخصيص الملف التنفيذي إلى (Presented To):</span>
+                        <div class="ds-u86" id="pdfClientNameDisplay">مجموعة الشريك التجاري المستهدف</div>
+                    </div>
+                    <div class="ds-u87">
+                        ✓ عرض استشاري مخصص (Bespoke Enterprise Dossier)
+                    </div>
+                </div>
+
+                <!-- نبذة عن الحل السحابي -->
+                <div class="ds-u88">
+                    <h4 class="ds-u89">🌟 نظرة عامة على حلول S&R CoreSync</h4>
+                    <p class="ds-u90">
+                        منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر.
+                    </p>
+                </div>
+
+                <!-- جدول المؤشرات المالية المعتمدة بالعملة والضريبة المختارة -->
+                <div class="ds-u91">
+                    <h4 class="ds-u92">📊 ملخص المؤشرات المالية والضريبية المختارة (Live Simulation Snapshot):</h4>
+                    <table class="ds-u93">
+                        <thead>
+                            <tr class="ds-u94">
+                                <th class="ds-u95">البند المالي</th>
+                                <th class="ds-u95">القيمة المعتمدة</th>
+                                <th class="ds-u95">الحالة والامتثال</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">إجمالي الإيرادات السنوية التقديرية</td>
+                                <td class="ds-u98" id="pdfRevVal">€ 842,500.00</td>
+                                <td class="ds-u99">متحقق سحابياً (+18.4%)</td>
+                            </tr>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">التدفقات النقدية الصافية المحققة</td>
+                                <td class="ds-u100" id="pdfCashVal">€ 318,920.00</td>
+                                <td class="ds-u99">هامش ربحية 9.2%</td>
+                            </tr>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">نظام الضريبة المطبق في الجلسة</td>
+                                <td class="ds-u100" id="pdfVatScheme">BTW هولندي (21%)</td>
+                                <td class="ds-u101">متوافق مع AWR Art. 52</td>
+                            </tr>
+                            <tr class="ds-u96">
+                                <td class="ds-u97">الضريبة المقدرة المحتسبة</td>
+                                <td class="ds-u102" id="pdfVatVal">€ 176,925.00</td>
+                                <td class="ds-u97">Digipoort XML جاهز</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- رسم بياني مصغر لمؤشرات التدفق والسيولة (Mini Executive Print Chart) -->
+                <div class="ds-u103">
+                    <div class="ds-u104">
+                        <h5 class="ds-u105">📈 مخطط مسار الإيرادات والسيولة المتوقعة (2026 Trend Simulation):</h5>
+                        <span class="ds-u106">Q1 - Q4 Projections</span>
+                    </div>
+                    <svg class="ds-u107" viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg">
+                        <!-- خطوط الشبكة -->
+                        <line x1="40" y1="20" x2="680" y2="20" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
+                        <line x1="40" y1="60" x2="680" y2="60" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4" />
+                        <line x1="40" y1="100" x2="680" y2="100" stroke="rgba(255,255,255,0.15)" />
+                        
+                        <!-- تدرجات الألوان -->
+                        <defs>
+                            <linearGradient id="pdfRevGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#c5a880" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#c5a880" stop-opacity="0.0"/>
+                            </linearGradient>
+                            <linearGradient id="pdfCashGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.35"/>
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- مسار الإيرادات -->
+                        <path d="M 60 90 Q 200 65, 340 50 T 660 22 L 660 100 L 60 100 Z" fill="url(#pdfRevGrad)" />
+                        <path d="M 60 90 Q 200 65, 340 50 T 660 22" fill="none" stroke="#c5a880" stroke-width="3" stroke-linecap="round" />
+                        
+                        <!-- مسار التدفق النقدي -->
+                        <path d="M 60 96 Q 200 82, 340 70 T 660 48 L 660 100 L 60 100 Z" fill="url(#pdfCashGrad)" />
+                        <path d="M 60 96 Q 200 82, 340 70 T 660 48" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" />
+                        
+                        <!-- نقاط البيانات -->
+                        <circle cx="60" cy="90" r="4" fill="#c5a880" />
+                        <circle cx="340" cy="50" r="4" fill="#c5a880" />
+                        <circle cx="660" cy="22" r="5" fill="#f3dfba" stroke="#c5a880" stroke-width="2" />
+                        
+                        <circle cx="60" cy="96" r="3.5" fill="#10b981" />
+                        <circle cx="340" cy="70" r="3.5" fill="#10b981" />
+                        <circle cx="660" cy="48" r="4.5" fill="#34d399" stroke="#10b981" stroke-width="2" />
+                        
+                        <!-- النصوص السفلية للأرباع -->
+                        <text x="60" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q1 Inception</text>
+                        <text x="260" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q2 Growth</text>
+                        <text x="460" y="118" fill="#94a3b8" font-size="11" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q3 Acceleration</text>
+                        <text x="650" y="118" fill="#c5a880" font-size="11" font-weight="bold" text-anchor="middle" font-family="'JetBrains Mono', sans-serif">Q4 Scale Peak</text>
+                    </svg>
+                    <div class="ds-u108">
+                        <span class="ds-u109"><span class="ds-u110"></span> إجمالي الإيرادات (Gross Revenue)</span>
+                        <span class="ds-u109"><span class="ds-u111"></span> التدفق النقدي الصافي (Net Cash Flow)</span>
+                    </div>
+                </div>
+
+                <!-- حزم البرمجيات الموصى بها -->
+                <div class="ds-u112">
+                    <div class="ds-u113">
+                        <div class="ds-u114">💻 S&R TaxSync Desktop (v2.4 Pro)</div>
+                        <div class="ds-u115">تطبيق سطح مكتب مستقل (Offline-First) لحساب BTW وتوليد ملفات إقرارات الضرائب المشفرة.</div>
+                    </div>
+                    <div class="ds-u113">
+                        <div class="ds-u114">🤖 S&R CoreSync AI Assistant</div>
+                        <div class="ds-u115">محرك تحليل ذكاء اصطناعي محلي مع معالجة مستندات الفواتير بدقة 99.4%.</div>
+                    </div>
+                </div>
+
+                <!-- توقيع المؤسسين الرسمي -->
+                <div class="ds-u116">
+                    <div>
+                        <div class="ds-u117">Eng. Mohammad Salim Aziza</div>
+                        <div class="ds-u85">Co-Founder & CTO // Lead Cloud Architect</div>
+                    </div>
+                    <div class="ds-u118">
+                        <div class="ds-u119">ختم الاعتماد الرقمي (Verified SHA-256)</div>
+                    </div>
+                    <div class="ds-u120">
+                        <div class="ds-u117">Mr. Mohammad Raed Kaakeh</div>
+                        <div class="ds-u85">Co-Founder & CFO // Financial ERP Architect</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار التخصيص العائم (Portal Floating Toast) -->
+    <div class="ds-u121" id="portal-toast">
+        <span class="ds-u122"></span>
+        <span id="portal-toast-msg">تم تطبيق الإعدادات بنجاح</span>
+    </div>
+
+</body>
+</html>
