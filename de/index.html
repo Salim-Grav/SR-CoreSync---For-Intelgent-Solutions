@@ -8110,7 +8110,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-civicsync-hero.jpg" alt="S&amp;R CivicSync - منصة الجاليات والمنظمات" loading="lazy" decoding="async">
+                                    <img src="../assets/work-civicsync-hero.jpg" alt="S&amp;R CivicSync - منصة الجاليات والمنظمات" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: الجالية السورية في هولندا</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -8161,7 +8161,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-healthbridge-hero.jpg" alt="S&amp;R HealthBridge - منظومة العيادات والطب عن بعد" loading="lazy" decoding="async">
+                                    <img src="../assets/work-healthbridge-hero.jpg" alt="S&amp;R HealthBridge - منظومة العيادات والطب عن بعد" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: HealthBridge Europe</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -8212,7 +8212,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-omnibakery-hero.jpg" alt="S&amp;R OmniBakery - منظومة ERP للمخابز والتوزيع" loading="lazy" decoding="async">
+                                    <img src="../assets/work-omnibakery-hero.jpg" alt="S&amp;R OmniBakery - منظومة ERP للمخابز والتوزيع" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: مخبز الملكة — هولندا</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -10360,8 +10360,8 @@
                         <span class="sr-package-hint">Selecting a package speeds up your final quote and project kickoff.</span>
                     </div>
                     <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingPreferredDatum">Preferred Datum (Optional)</label>
-                        <input type="date" id="bookingPreferredDatum" class="sr-exec-input" />
+                        <label class="sr-exec-label" for="bookingPreferredDate">Preferred Datum (Optional)</label>
+                        <input type="date" id="bookingPreferredDate" class="sr-exec-input" />
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingTimeSlot">Preferred Time Window *</label>
@@ -10520,7 +10520,7 @@
                     </div>
                     <div class="es-quote-meta">
                         <span class="es-quote-ref" id="roiPdfRef">REF-CS-ROI-2026-8942</span>
-                        <div><strong>Issue Datum:</strong> <span id="roiPdfDatum"></span></div>
+                        <div><strong>Issue Datum:</strong> <span id="roiPdfDate"></span></div>
                         <div class="roi-pdf-meta-status">Official Feasibility Study</div>
                     </div>
                 </div>
@@ -11163,7 +11163,7 @@
             const companyName = document.getElementById('bookingCompanyName') ? document.getElementById('bookingCompanyName').value.trim() : '';
             const phone = document.getElementById('bookingPhone') ? document.getElementById('bookingPhone').value.trim() : '';
             const sessionType = document.getElementById('bookingSessionType') ? document.getElementById('bookingSessionType').value : 'online';
-            const preferredDatum = document.getElementById('bookingPreferredDatum') ? document.getElementById('bookingPreferredDatum').value : '';
+            const preferredDate = document.getElementById('bookingPreferredDate') ? document.getElementById('bookingPreferredDate').value : '';
             const timeSlot = document.getElementById('bookingTimeSlot') ? document.getElementById('bookingTimeSlot').value : 'afternoon';
             const notes = document.getElementById('bookingNotes') ? document.getElementById('bookingNotes').value.trim() : '';
 
@@ -11197,7 +11197,7 @@
                       `👔 *Requested Advisor:* ${advisorName}\n` +
                       `📅 *Channel:* ${sessionLabel}\n` +
                       (pkgLabel ? `📦 *Target Package:* ${pkgLabel}\n` : '') +
-                      `🗓️ *Proposed Datum:* ${preferredDatum || 'Earliest Available'}\n` +
+                      `🗓️ *Proposed Datum:* ${preferredDate || 'Earliest Available'}\n` +
                       `⏰ *Preferred Time:* ${timeSlotLabel}\n`;
 
             if (notes) {
@@ -11217,7 +11217,7 @@
                 sessionLabel: sessionLabel,
                 package: (pkgEl && pkgEl.value) || '',
                 packageLabel: pkgLabel || '',
-                preferredDatum: preferredDatum || '',
+                preferredDate: preferredDate || '',
                 timeSlot: timeSlot || 'afternoon',
                 timeSlotLabel: timeSlotLabel,
                 notes: notes || '',
@@ -11230,13 +11230,14 @@
             } else {
                 try {
                     const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
-                    leads.unshift(Object.assign({ timestamp: new Datum().toISOString(), leadId: 'LEAD-SR-' + Datum.now() }, leadPayload));
+                    leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
                     localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
-                    fetch('/api/lead-capture.php', {
+                    const leadEndpoint = (typeof window !== 'undefined' && window.SR_LEAD_ENDPOINT) || 'https://api.sr-coresync.com/lead';
+                    fetch(leadEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(leadPayload)
-                    }).catch(() => {});
+                    }).catch((err) => console.error('[LeadCapture] Dispatch failed:', err));
                 } catch(err) {}
             }
 
@@ -11424,7 +11425,7 @@
             const effGainValEl = document.getElementById('roiPdfEffGainVal');
             const paybackValEl = document.getElementById('roiPdfPaybackVal');
             const savingsValEl = document.getElementById('roiPdfSavingsVal');
-            const dateEl = document.getElementById('roiPdfDatum');
+            const dateEl = document.getElementById('roiPdfDate');
             const refEl = document.getElementById('roiPdfRef');
 
             if (teamValEl) teamValEl.textContent = `${teamSize} Employees`;
@@ -11437,8 +11438,8 @@
             if (savingsValEl) savingsValEl.textContent = `€ ${annualSavings.toLocaleString()}`;
 
             if (dateEl) {
-                const now = new Datum();
-                dateEl.textContent = now.toLocaleDatumString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+                const now = new Date();
+                dateEl.textContent = now.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
             }
             if (refEl) {
                 refEl.textContent = 'REF-CS-ROI-2026-' + Math.floor(1000 + Math.random() * 9000);
@@ -12740,7 +12741,7 @@
         })();
     </script>
 
-    <script src="../api/lead-dispatcher.js"></script>
+    <script src="../js/sr-lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
     <script src="../js/sr-social-proof.min.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>

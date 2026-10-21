@@ -20,8 +20,68 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Verify HTML & CSS Syntax Integrity
         run: node scripts/validate.js
+
+      - name: Verify JavaScript Syntax (all non-minified modules)
+        run: |
+          set -e
+          failed=0
+          while IFS= read -r file; do
+            node --check "$file" || failed=1
+          done < <(find js workers -name '*.js' -not -path '*/node_modules/*')
+          if [ "$failed" -ne 0 ]; then exit 1; fi
+          echo "All JavaScript modules parsed successfully."
+
+      - name: Verify Inline Script & JSON-LD Syntax
+        run: node scripts/check_inline_scripts.mjs
+
+      - name: Audit JavaScript Identifier Integrity
+        run: python scripts/audit_js_identifiers.py
+
+      - name: Audit Cross-language API Parity
+        run: python scripts/audit_language_api_parity.py
+
+      - name: Test the Cloudflare Lead Capture Worker
+        run: node scripts/test_lead_worker.mjs
+
+      - name: Audit Localized Relative Paths
+        run: python scripts/audit_language_paths.py
+
+      - name: Validate GitHub Pages Publish Set
+        run: python scripts/validate_publish_set.py
+
+      - name: Build the publish artifact
+        run: python scripts/prepare_publish_set.py
+
+      - name: Browser console audit (headless Chromium)
+        run: node scripts/browser_console_audit.mjs
+
+      - name: Verify Dead PHP Gateway Is Not Referenced
+        run: |
+          set -e
+          if grep -rn --include='*.html' --include='*.js' --include='*.xml' \
+               '/api/lead-capture.php' . ; then
+            echo "::error::A page still references the dead /api/lead-capture.php gateway"
+            exit 1
+          fi
+          echo "No page references the retired PHP gateway."
+
+      - name: Verify Required Publish Artifacts Exist
+        run: |
+          set -e
+          for f in _headers .nojekyll CNAME sitemap.xml robots.txt manifest.json sw.js; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Required file missing: $f"
+              exit 1
+            fi
+          done
+          echo "Required publish artifacts present."
 
       - name: Security & GDPR Compliance Check
         run: |
@@ -29,3 +89,9 @@ jobs:
           if [ -f "manifest.json" ]; then
             echo "PWA manifest present and valid."
           fi
+          echo "Checking that server-side material stays out of the publish set..."
+          for forbidden in api config workers scripts dist .htaccess .env; do
+            if [ -e "$forbidden" ]; then
+              echo "::warning::$forbidden is tracked in the repository but is excluded by the publish workflow."
+            fi
+          done

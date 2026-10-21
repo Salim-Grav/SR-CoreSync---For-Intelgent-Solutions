@@ -6956,7 +6956,7 @@
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
                     </div>
                     <div class="sw-dot-default tf-sw-pagination"></div>
-                    <div class="nav-next-swiper lh-1 cs-pointer" onclick="testimonialSwiper.slideNästa()">
+                    <div class="nav-next-swiper lh-1 cs-pointer" onclick="testimonialSwiper.slideNext()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
                     </div>
                 </div>
@@ -8715,7 +8715,7 @@
             }
 
             // CoreSync System Controller
-            document.querySelectorAlla('video').forEach(v => {
+            document.querySelectorAll('video').forEach(v => {
                 v.setAttribute('playsinline', '');
                 v.setAttribute('webkit-playsinline', '');
             });
@@ -9076,7 +9076,7 @@
             currentWorkProjectIdx = 0;
 
             // CoreSync System Controller
-            document.querySelectorAlla('.work-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.work-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -9402,7 +9402,7 @@
 
         // CoreSync System Controller
         function switchPricingTab(category, btn) {
-            document.querySelectorAlla('.pricing-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.pricing-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -9454,8 +9454,8 @@
             const isVisible = body.classList.contains('is-open');
 
             // CoreSync System Controller
-            document.querySelectorAlla('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
-            document.querySelectorAlla('.accordion-action').forEach(a => a.classList.add('collapsed'));
+            document.querySelectorAll('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
+            document.querySelectorAll('.accordion-action').forEach(a => a.classList.add('collapsed'));
 
             if (!isVisible) {
                 body.classList.add('is-open');
@@ -9639,8 +9639,8 @@
                         <span class="sr-package-hint">Selecting a package speeds up your final quote and project kickoff.</span>
                     </div>
                     <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingPreferredDatum">Preferred Datum (Optional)</label>
-                        <input type="date" id="bookingPreferredDatum" class="sr-exec-input" />
+                        <label class="sr-exec-label" for="bookingPreferredDate">Preferred Datum (Optional)</label>
+                        <input type="date" id="bookingPreferredDate" class="sr-exec-input" />
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingTimeSlot">Preferred Time Window *</label>
@@ -9799,7 +9799,7 @@
                     </div>
                     <div class="es-quote-meta">
                         <span class="es-quote-ref" id="roiPdfRef">REF-CS-ROI-2026-8942</span>
-                        <div><strong>Issue Datum:</strong> <span id="roiPdfDatum"></span></div>
+                        <div><strong>Issue Datum:</strong> <span id="roiPdfDate"></span></div>
                         <div class="roi-pdf-meta-status">Official Feasibility Study</div>
                     </div>
                 </div>
@@ -10223,7 +10223,7 @@
             if (stage) {
                 stage.setAttribute('data-theme', theme);
             }
-            document.querySelectorAlla('.sr-theme-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sr-theme-pill').forEach(p => p.classList.remove('active'));
             if (btn) btn.classList.add('active');
             LuxuryAudio.play('switch');
         }
@@ -10261,7 +10261,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateROICalculator();
 
-            document.querySelectorAlla('.brand-logo-preview-trigger').forEach(el => {
+            document.querySelectorAll('.brand-logo-preview-trigger').forEach(el => {
                 el.addEventListener('click', (e) => {
                     openLogoLightbox(e);
                 });
@@ -10442,7 +10442,7 @@
             const companyName = document.getElementById('bookingCompanyName') ? document.getElementById('bookingCompanyName').value.trim() : '';
             const phone = document.getElementById('bookingPhone') ? document.getElementById('bookingPhone').value.trim() : '';
             const sessionType = document.getElementById('bookingSessionType') ? document.getElementById('bookingSessionType').value : 'online';
-            const preferredDatum = document.getElementById('bookingPreferredDatum') ? document.getElementById('bookingPreferredDatum').value : '';
+            const preferredDate = document.getElementById('bookingPreferredDate') ? document.getElementById('bookingPreferredDate').value : '';
             const timeSlot = document.getElementById('bookingTimeSlot') ? document.getElementById('bookingTimeSlot').value : 'afternoon';
             const notes = document.getElementById('bookingNotes') ? document.getElementById('bookingNotes').value.trim() : '';
 
@@ -10476,7 +10476,7 @@
                       `👔 *Requested Advisor:* ${advisorName}\n` +
                       `📅 *Channel:* ${sessionLabel}\n` +
                       (pkgLabel ? `📦 *Target Package:* ${pkgLabel}\n` : '') +
-                      `🗓️ *Proposed Datum:* ${preferredDatum || 'Earliest Available'}\n` +
+                      `🗓️ *Proposed Datum:* ${preferredDate || 'Earliest Available'}\n` +
                       `⏰ *Preferred Time:* ${timeSlotLabel}\n`;
 
             if (notes) {
@@ -10496,7 +10496,7 @@
                 sessionLabel: sessionLabel,
                 package: (pkgEl && pkgEl.value) || '',
                 packageLabel: pkgLabel || '',
-                preferredDatum: preferredDatum || '',
+                preferredDate: preferredDate || '',
                 timeSlot: timeSlot || 'afternoon',
                 timeSlotLabel: timeSlotLabel,
                 notes: notes || '',
@@ -10509,13 +10509,14 @@
             } else {
                 try {
                     const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
-                    leads.unshift(Object.assign({ timestamp: new Datum().toISOString(), leadId: 'LEAD-SR-' + Datum.now() }, leadPayload));
+                    leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
                     localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
-                    fetch('/api/lead-capture.php', {
+                    const leadEndpoint = (typeof window !== 'undefined' && window.SR_LEAD_ENDPOINT) || 'https://api.sr-coresync.com/lead';
+                    fetch(leadEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(leadPayload)
-                    }).catch(() => {});
+                    }).catch((err) => console.error('[LeadCapture] Dispatch failed:', err));
                 } catch(err) {}
             }
 
@@ -10703,7 +10704,7 @@
             const effGainValEl = document.getElementById('roiPdfEffGainVal');
             const paybackValEl = document.getElementById('roiPdfPaybackVal');
             const savingsValEl = document.getElementById('roiPdfSavingsVal');
-            const dateEl = document.getElementById('roiPdfDatum');
+            const dateEl = document.getElementById('roiPdfDate');
             const refEl = document.getElementById('roiPdfRef');
 
             if (teamValEl) teamValEl.textContent = `${teamSize} Employees`;
@@ -10716,8 +10717,8 @@
             if (savingsValEl) savingsValEl.textContent = `€ ${annualSavings.toLocaleString()}`;
 
             if (dateEl) {
-                const now = new Datum();
-                dateEl.textContent = now.toLocaleDatumString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+                const now = new Date();
+                dateEl.textContent = now.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
             }
             if (refEl) {
                 refEl.textContent = 'REF-CS-ROI-2026-' + Math.floor(1000 + Math.random() * 9000);
@@ -10887,14 +10888,14 @@
         }
 
         // CoreSync System Controller
-        document.querySelectorAlla('video').forEach(v => {
+        document.querySelectorAll('video').forEach(v => {
             v.setAttribute('playsinline', '');
             v.playsInline = true;
         });
 
         // CoreSync System Controller
         document.addEventListener('click', (e) => {
-            document.querySelectorAlla('.header-language').forEach(el => {
+            document.querySelectorAll('.header-language').forEach(el => {
                 if (el.hasAttribute('open') && !el.contains(e.target)) {
                     el.removeAttribute('open');
                 }
@@ -10913,14 +10914,14 @@
             });
         }, { threshold: 0.15 });
 
-        document.querySelectorAlla('video').forEach(vid => {
+        document.querySelectorAll('video').forEach(vid => {
             vid.setAttribute('playsinline', '');
             vid.playsInline = true;
             videoObserver.observe(vid);
         });
 
         // 2. Silky smooth paragraph & section navigation with sticky header offset
-        document.querySelectorAlla('a[href^="#"]').forEach(link => {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 const hash = this.getAttribute('href');
                 if (!hash || hash === '#' || hash === '#!' || hash.startsWith('#javascript')) return;
@@ -11281,7 +11282,7 @@
                     </div>
                     <div class="checkout-price-row">
                         <span>Dutch Value-Added Tax (BTW 21%):</span>
-                        <span id="checkoutVatBelopp">€ 32.80</span>
+                        <span id="checkoutVatAmount">€ 32.80</span>
                     </div>
                     <div class="checkout-price-row total-row">
                         <span>Total Due (Incl. BTW 21%):</span>
@@ -11492,7 +11493,7 @@
             let isPlaying = true;
 
             window.updateSlideUI = function() {
-                const slides = document.querySelectorAlla('#slidesTrack .showcase-slide-item');
+                const slides = document.querySelectorAll('#slidesTrack .showcase-slide-item');
                 slides.forEach((slide, idx) => {
                     if (idx === currentSlideIndex) {
                         slide.classList.add('active');
@@ -12019,7 +12020,7 @@
         })();
     </script>
 
-    <script src="../api/lead-dispatcher.js"></script>
+    <script src="../js/sr-lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
     <script src="../js/sr-social-proof.min.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>
@@ -12034,7 +12035,7 @@
         const trigger = document.getElementById('sovereignLangTrigger');
         const menu = document.getElementById('sovereignLangMenu');
         const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorAlla('.sovereign-lang-item');
+        const items = dropdown.querySelectorAll('.sovereign-lang-item');
         
         if (!trigger || !menu) return;
         

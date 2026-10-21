@@ -1,0 +1,46 @@
+name = "sr-lead-capture"
+main = "src/index.js"
+compatibility_date = "2026-01-15"
+workers_dev = true
+
+# -----------------------------------------------------------------------------
+# S&R CoreSync Solutions - Sovereign Lead Capture Worker
+# -----------------------------------------------------------------------------
+# Deploy:   npx wrangler deploy
+# Secrets:  npx wrangler secret put LEAD_WEBHOOK_URLS
+#           npx wrangler secret put NOTIFY_EMAIL
+#           npx wrangler secret put EMAIL_WEBHOOK_URL   (optional)
+#           npx wrangler secret put MAIL_FROM           (optional)
+#
+# KV namespace (optional but recommended):
+#   npx wrangler kv namespace create LEADS
+#   then paste the returned id below.
+# -----------------------------------------------------------------------------
+
+[observability]
+enabled = true
+
+[vars]
+ALLOWED_ORIGINS = "https://sr-coresync.com,https://www.sr-coresync.com,http://localhost:3000,http://127.0.0.1:3000"
+MAIL_FROM = "leads@sr-coresync.com"
+
+# [[kv_namespaces]]
+# binding = "LEADS"
+# id = "<YOUR_KV_NAMESPACE_ID>"
+
+# -----------------------------------------------------------------------------
+# Custom domain (recommended): api.sr-coresync.com
+# Uncomment after the domain is added in the Cloudflare dashboard.
+# -----------------------------------------------------------------------------
+# routes = [
+#   { pattern = "api.sr-coresync.com", custom_domain = true }
+# ]
+
+# -----------------------------------------------------------------------------
+# Alternative: same-origin route on the apex domain.
+# Requires sr-coresync.com to be proxied by Cloudflare.
+# This route takes precedence over the GitHub Pages deployment for /api/*.
+# -----------------------------------------------------------------------------
+# routes = [
+#   { pattern = "sr-coresync.com/api/*", zone_name = "sr-coresync.com" }
+# ]

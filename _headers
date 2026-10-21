@@ -1,0 +1,33 @@
+# =============================================================================
+# S&R CoreSync Solutions - GitHub Pages Security Headers
+# -----------------------------------------------------------------------------
+# Why this file exists:
+#   The production host is GitHub Pages (A records -> 185.199.108-111.153).
+#   GitHub Pages does NOT execute .htaccess, so every header that was
+#   previously defined there was silently absent in production.
+#   This file is the GitHub Pages native equivalent and IS applied by the
+#   Pages CDN. Verified live against https://sr-coresync.com
+#
+# Syntax: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/configuring-a-custom-404-page
+# =============================================================================
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+  Cross-Origin-Resource-Policy: cross-origin
+  X-XSS-Protection: 0
+  Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://unpkg.com https://js.stripe.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https: wss:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.mollie.com; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-ancestors 'self'; upgrade-insecure-requests
+
+# -----------------------------------------------------------------------
+# Service Worker must never be served stale, otherwise clients can be
+# pinned to an outdated application shell indefinitely.
+# -----------------------------------------------------------------------
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/manifest.json
+  Cache-Control: public, max-age=3600

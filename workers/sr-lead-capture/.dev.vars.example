@@ -1,0 +1,17 @@
+# -----------------------------------------------------------
+# Local development secrets for the S&R Lead Capture Worker.
+# Copy to `.dev.vars` (git-ignored) and fill in real values.
+# NEVER commit the real `.dev.vars`.
+# -----------------------------------------------------------
+
+# Comma separated HTTPS webhook endpoints (Make / n8n / Google Sheets)
+LEAD_WEBHOOK_URLS="https://hook.eu1.make.com/YOUR_MAKE_HOOK_ID"
+
+# Executive inbox that receives the lead notification
+NOTIFY_EMAIL="info@sr-coresync.com"
+
+# Optional: HTTP endpoint that relays the formatted email
+# EMAIL_WEBHOOK_URL="https://api.resend.com/emails"
+
+# Optional: sender address for the notification
+MAIL_FROM="leads@sr-coresync.com"

@@ -46,8 +46,8 @@ class EmailNotificationService {
    * Compiles the official Arabic & Multi-language Invoice/Quote Email Template
    */
   compileInvoiceQuoteTemplate(data = {}) {
-    const templatePath = path.resolve(__dirname, '../templates/invoice-quote-email.html');
-    const cssPath = path.resolve(__dirname, '../css/invoice-quote-email.css');
+    const templatePath = path.resolve(__dirname, '../../templates/invoice-quote-email.html');
+    const cssPath = path.resolve(__dirname, '../../css/invoice-quote-email.css');
     let html = fs.readFileSync(templatePath, 'utf8');
 
     // Bundle CSS
@@ -77,8 +77,8 @@ class EmailNotificationService {
    * Compiles the official Welcome & Onboarding Email Template
    */
   compileWelcomeEmailTemplate(data = {}) {
-    const templatePath = path.resolve(__dirname, '../templates/welcome-email.html');
-    const cssPath = path.resolve(__dirname, '../css/welcome-email.css');
+    const templatePath = path.resolve(__dirname, '../../templates/welcome-email.html');
+    const cssPath = path.resolve(__dirname, '../../css/welcome-email.css');
     let html = fs.readFileSync(templatePath, 'utf8');
 
     // Bundle CSS

@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v8-nfc-offline-pwa
-const CACHE_NAME = 'coresync-prerender-v8-nfc-offline-pwa';
+// Version: coresync-prerender-v9-lead-worker-migration
+const CACHE_NAME = 'coresync-prerender-v9-lead-worker-migration';
 
 // 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
 const CRITICAL_ASSETS = [
@@ -43,7 +43,7 @@ const SECONDARY_ASSETS = [
   './assets/work-2.webp',
   './assets/work-3.webp',
   './css/demo-portal.css',
-  './api/lead-dispatcher.js'
+  './js/sr-lead-dispatcher.js'
 ];
 
 self.addEventListener('install', (event) => {
@@ -94,8 +94,8 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // If request is external or a backend dynamic API call (.php), bypass cache to network
-  if (url.origin !== self.location.origin || url.pathname.endsWith('.php') || url.pathname.includes('/webhooks/')) {
+  // If request is external or a backend dynamic API call (.php / /api/lead), bypass cache to network
+  if (url.origin !== self.location.origin || url.pathname.endsWith('.php') || url.pathname.includes('/webhooks/') || url.pathname.endsWith('/api/lead')) {
     return;
   }
 

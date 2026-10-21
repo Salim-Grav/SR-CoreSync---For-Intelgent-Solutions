@@ -7,7 +7,29 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
 # Environment variables & secrets
 .env
 .env.local
 .env.*.local
+
+# ---------------------------------------------------------------------------
+# Build artifacts (regenerable - never commit binaries)
+# The production archive is 27 MB; committing it on every build bloated the
+# repository to 770 MB and pushed GitHub towards its 1 GB hard warning.
+# Regenerate with: node scripts/package_deployment.js
+# ---------------------------------------------------------------------------
+dist/*.zip
+dist/staging/
+dist/lighthouse-audit*.json
+dist/lighthouse-audit-final.report.json
+
+# ---------------------------------------------------------------------------
+# Cloudflare Worker (see workers/sr-lead-capture/README.md)
+# ---------------------------------------------------------------------------
+workers/**/node_modules/
+workers/**/.dev.vars
+workers/**/.wrangler/
+
+# Local publish staging directory used by the GitHub Pages workflow
+_site/

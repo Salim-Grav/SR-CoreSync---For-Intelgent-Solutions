@@ -21,16 +21,52 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # ---------------------------------------------------------------------
+      # Selective publish.
+      # GitHub Pages serves whatever is inside the uploaded artifact. The
+      # repository also contains server-side material (legacy PHP gateway,
+      # Cloudflare Worker sources, webhook/payment configuration, deployment
+      # tooling and the 27 MB production archive) that must NEVER be
+      # reachable from the public domain.
+      #
+      # The rules live in scripts/publish_set.py, which is also used by the
+      # CI validation job - so the verified artifact is the published one.
+      # ---------------------------------------------------------------------
+      - name: Build publish set
+        run: python scripts/prepare_publish_set.py
+
+      # ---------------------------------------------------------------------
+      # Guard: fail the deployment if anything sensitive slipped through.
+      # ---------------------------------------------------------------------
+      - name: Verify no server-side material is published
+        run: |
+          set -euo pipefail
+          forbidden=(api config workers scripts dist .htaccess .env .env.example .github)
+          failed=0
+          for entry in "${forbidden[@]}"; do
+            if [ -e "_site/$entry" ]; then
+              echo "::error::Forbidden path published: $entry"
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then exit 1; fi
+          echo "Publish guard passed."
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment

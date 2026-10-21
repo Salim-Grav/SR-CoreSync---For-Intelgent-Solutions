@@ -8715,7 +8715,7 @@
             }
 
             // CoreSync System Controller
-            document.querySelectorTodos('video').forEach(v => {
+            document.querySelectorAll('video').forEach(v => {
                 v.setAttribute('playsinline', '');
                 v.setAttribute('webkit-playsinline', '');
             });
@@ -9076,7 +9076,7 @@
             currentWorkProjectIdx = 0;
 
             // CoreSync System Controller
-            document.querySelectorTodos('.work-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.work-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -9402,7 +9402,7 @@
 
         // CoreSync System Controller
         function switchPricingTab(category, btn) {
-            document.querySelectorTodos('.pricing-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.pricing-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -9454,8 +9454,8 @@
             const isVisible = body.classList.contains('is-open');
 
             // CoreSync System Controller
-            document.querySelectorTodos('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
-            document.querySelectorTodos('.accordion-action').forEach(a => a.classList.add('collapsed'));
+            document.querySelectorAll('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
+            document.querySelectorAll('.accordion-action').forEach(a => a.classList.add('collapsed'));
 
             if (!isVisible) {
                 body.classList.add('is-open');
@@ -10223,7 +10223,7 @@
             if (stage) {
                 stage.setAttribute('data-theme', theme);
             }
-            document.querySelectorTodos('.sr-theme-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sr-theme-pill').forEach(p => p.classList.remove('active'));
             if (btn) btn.classList.add('active');
             LuxuryAudio.play('switch');
         }
@@ -10261,7 +10261,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateROICalculator();
 
-            document.querySelectorTodos('.brand-logo-preview-trigger').forEach(el => {
+            document.querySelectorAll('.brand-logo-preview-trigger').forEach(el => {
                 el.addEventListener('click', (e) => {
                     openLogoLightbox(e);
                 });
@@ -10509,13 +10509,14 @@
             } else {
                 try {
                     const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
-                    leads.unshift(Object.assign({ timestamp: new Fecha().toISOString(), leadId: 'LEAD-SR-' + Fecha.now() }, leadPayload));
+                    leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
                     localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
-                    fetch('/api/lead-capture.php', {
+                    const leadEndpoint = (typeof window !== 'undefined' && window.SR_LEAD_ENDPOINT) || 'https://api.sr-coresync.com/lead';
+                    fetch(leadEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(leadPayload)
-                    }).catch(() => {});
+                    }).catch((err) => console.error('[LeadCapture] Dispatch failed:', err));
                 } catch(err) {}
             }
 
@@ -10716,8 +10717,8 @@
             if (savingsValEl) savingsValEl.textContent = `€ ${annualSavings.toLocaleString()}`;
 
             if (dateEl) {
-                const now = new Fecha();
-                dateEl.textContent = now.toLocaleFechaString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+                const now = new Date();
+                dateEl.textContent = now.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
             }
             if (refEl) {
                 refEl.textContent = 'REF-CS-ROI-2026-' + Math.floor(1000 + Math.random() * 9000);
@@ -10887,14 +10888,14 @@
         }
 
         // CoreSync System Controller
-        document.querySelectorTodos('video').forEach(v => {
+        document.querySelectorAll('video').forEach(v => {
             v.setAttribute('playsinline', '');
             v.playsInline = true;
         });
 
         // CoreSync System Controller
         document.addEventListener('click', (e) => {
-            document.querySelectorTodos('.header-language').forEach(el => {
+            document.querySelectorAll('.header-language').forEach(el => {
                 if (el.hasAttribute('open') && !el.contains(e.target)) {
                     el.removeAttribute('open');
                 }
@@ -10913,14 +10914,14 @@
             });
         }, { threshold: 0.15 });
 
-        document.querySelectorTodos('video').forEach(vid => {
+        document.querySelectorAll('video').forEach(vid => {
             vid.setAttribute('playsinline', '');
             vid.playsInline = true;
             videoObserver.observe(vid);
         });
 
         // 2. Silky smooth paragraph & section navigation with sticky header offset
-        document.querySelectorTodos('a[href^="#"]').forEach(link => {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 const hash = this.getAttribute('href');
                 if (!hash || hash === '#' || hash === '#!' || hash.startsWith('#javascript')) return;
@@ -11492,7 +11493,7 @@
             let isPlaying = true;
 
             window.updateSlideUI = function() {
-                const slides = document.querySelectorTodos('#slidesTrack .showcase-slide-item');
+                const slides = document.querySelectorAll('#slidesTrack .showcase-slide-item');
                 slides.forEach((slide, idx) => {
                     if (idx === currentSlideIndex) {
                         slide.classList.add('active');
@@ -12019,7 +12020,7 @@
         })();
     </script>
 
-    <script src="../api/lead-dispatcher.js"></script>
+    <script src="../js/sr-lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
     <script src="../js/sr-social-proof.min.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>
@@ -12034,7 +12035,7 @@
         const trigger = document.getElementById('sovereignLangTrigger');
         const menu = document.getElementById('sovereignLangMenu');
         const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorTodos('.sovereign-lang-item');
+        const items = dropdown.querySelectorAll('.sovereign-lang-item');
         
         if (!trigger || !menu) return;
         

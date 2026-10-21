@@ -8110,7 +8110,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-civicsync-hero.jpg" alt="S&amp;R CivicSync - منصة الجاليات والمنظمات" loading="lazy" decoding="async">
+                                    <img src="../assets/work-civicsync-hero.jpg" alt="S&amp;R CivicSync - منصة الجاليات والمنظمات" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: الجالية السورية في هولندا</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -8161,7 +8161,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-healthbridge-hero.jpg" alt="S&amp;R HealthBridge - منظومة العيادات والطب عن بعد" loading="lazy" decoding="async">
+                                    <img src="../assets/work-healthbridge-hero.jpg" alt="S&amp;R HealthBridge - منظومة العيادات والطب عن بعد" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: HealthBridge Europe</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -8212,7 +8212,7 @@
                         <div class="founder-editorial-card h-100 p-4 d-flex flex-column justify-content-between software-product-card software-product-card--platform">
                             <div>
                                 <div class="sr-platform-cover">
-                                    <img src="./assets/work-omnibakery-hero.jpg" alt="S&amp;R OmniBakery - منظومة ERP للمخابز والتوزيع" loading="lazy" decoding="async">
+                                    <img src="../assets/work-omnibakery-hero.jpg" alt="S&amp;R OmniBakery - منظومة ERP للمخابز والتوزيع" loading="lazy" decoding="async">
                                     <span class="sr-platform-flag">النموذج الرائد: مخبز الملكة — هولندا</span>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -11232,11 +11232,12 @@
                     const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
                     leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
                     localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
-                    fetch('/api/lead-capture.php', {
+                    const leadEndpoint = (typeof window !== 'undefined' && window.SR_LEAD_ENDPOINT) || 'https://api.sr-coresync.com/lead';
+                    fetch(leadEndpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(leadPayload)
-                    }).catch(() => {});
+                    }).catch((err) => console.error('[LeadCapture] Dispatch failed:', err));
                 } catch(err) {}
             }
 
@@ -12740,7 +12741,7 @@
         })();
     </script>
 
-    <script src="../api/lead-dispatcher.js"></script>
+    <script src="../js/sr-lead-dispatcher.js"></script>
     <script src="../js/sr-brand-inspector.js"></script>
     <script src="../js/sr-social-proof.min.js"></script>
     <script src="../css/enterprise-suite.min.js"></script>

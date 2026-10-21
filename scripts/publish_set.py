@@ -1,0 +1,89 @@
+"""
+S&R CoreSync Solutions - Publish Set Rules
+===============================================================================
+Single source of truth for "what gets published to GitHub Pages".
+
+Both the local builder (`scripts/prepare_publish_set.py`) and the CI guard
+(`scripts/validate_publish_set.py`) import this module, so the artifact that
+CI verifies is byte-for-byte the artifact that CI publishes.
+
+The site is a static GitHub Pages deployment. Everything in EXCLUDED_DIRS or
+EXCLUDED_ROOT_FILES is server-side material that must never be reachable from
+the public domain.
+"""
+import os
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# ---------------------------------------------------------------------------
+# Directories that are never published (at any depth).
+# ---------------------------------------------------------------------------
+EXCLUDED_DIRS = {
+    '.git', '_site', '.github', '.agents', '.vscode', 'api', 'config',
+    'workers', 'scripts', 'dist', 'scratch', 'node_modules', '__pycache__'
+}
+
+# ---------------------------------------------------------------------------
+# Root level files that are never published.
+# ---------------------------------------------------------------------------
+EXCLUDED_ROOT_FILES = {
+    '.env', '.env.example', '.env.local', '.gitignore', '.htaccess', 'serve.py'
+}
+
+# Root level file suffixes that are never published.
+EXCLUDED_ROOT_SUFFIXES = ('.md', '.bat', '.url', '.ps1')
+
+# ---------------------------------------------------------------------------
+# Global file suffixes that are never published.
+# ---------------------------------------------------------------------------
+EXCLUDED_SUFFIXES = ('.pyc',)
+
+# ---------------------------------------------------------------------------
+# Paths that must never appear in the published artifact.
+# ---------------------------------------------------------------------------
+FORBIDDEN_PUBLISHED = [
+    'api', 'config', 'workers', 'scripts', 'dist',
+    '.htaccess', '.env', '.env.example', '.github'
+]
+
+# ---------------------------------------------------------------------------
+# Files that must always be present in the published artifact.
+# ---------------------------------------------------------------------------
+REQUIRED_PUBLISHED = ['_headers', '.nojekyll']
+
+
+def is_excluded(rel_path):
+    """Return True when the repository-relative path must not be published."""
+    rel = rel_path.replace('\\', '/')
+    parts = rel.split('/')
+    name = parts[-1]
+
+    if name in EXCLUDED_DIRS:
+        return True
+    if name.endswith(EXCLUDED_SUFFIXES):
+        return True
+    if len(parts) == 1:
+        if name in EXCLUDED_ROOT_FILES:
+            return True
+        if name.lower().endswith(EXCLUDED_ROOT_SUFFIXES):
+            return True
+    return False
+
+
+def iter_publish_files(root=None):
+    """Yield every repository-relative path that belongs to the publish set."""
+    base = root or ROOT
+    for dirpath, dirnames, filenames in os.walk(base):
+        dirnames[:] = sorted(d for d in dirnames if d not in EXCLUDED_DIRS)
+        rel_dir = os.path.relpath(dirpath, base).replace('\\', '/')
+        if rel_dir == '.':
+            rel_dir = ''
+        for name in sorted(filenames):
+            rel = (rel_dir + '/' + name) if rel_dir else name
+            if is_excluded(rel):
+                continue
+            yield rel
+
+
+def publish_set(root=None):
+    return list(iter_publish_files(root))

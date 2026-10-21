@@ -1,0 +1,195 @@
+/**
+ * S&R CoreSync Solutions - live browser console audit
+ * -----------------------------------------------------------------------------
+ * Loads every published page in headless Microsoft Edge via the DevTools
+ * Protocol and reports uncaught exceptions, failed network requests and
+ * console errors. This is the check that proves the pages actually run -
+ * a page can be perfectly valid HTML and still be dead in the browser.
+ *
+ * Usage: node scripts/browser_console_audit.mjs [--pages=10]
+ */
+import { spawn } from 'node:child_process';
+import { mkdtempSync, rmSync, existsSync, readFileSync, statSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, extname, resolve } from 'node:path';
+import { setTimeout as sleep } from 'node:timers/promises';
+import http from 'node:http';
+
+const BROWSER_CANDIDATES = [
+    process.env.SR_BROWSER,
+    'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium',
+    '/usr/bin/chromium-browser',
+    '/usr/bin/microsoft-edge'
+].filter(Boolean);
+
+const EDGE = BROWSER_CANDIDATES.find(p => existsSync(p));
+const PORT = 9222;
+const HTTP_PORT = 8099;
+const SITE = resolve(process.env.SR_SITE_DIR || join(process.cwd(), '_site'));
+
+const MIME = {
+    '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
+    '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8',
+    '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif',
+    '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2',
+    '.mp4': 'video/mp4', '.webm': 'video/webm', '.txt': 'text/plain; charset=utf-8',
+    '.xml': 'application/xml', '.zip': 'application/zip'
+};
+
+function startServer() {
+    const server = http.createServer((req, res) => {
+        let p = decodeURIComponent(req.url.split('?')[0]);
+        if (p.endsWith('/')) p += 'index.html';
+        const file = join(SITE, p);
+        if (!file.startsWith(SITE) || !existsSync(file) || !statSync(file).isFile()) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            res.end('not found');
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': MIME[extname(file).toLowerCase()] || 'application/octet-stream' });
+        res.end(readFileSync(file));
+    });
+    return new Promise(r => server.listen(HTTP_PORT, '127.0.0.1', () => r(server)));
+}
+
+const args = process.argv.slice(2);
+const limitArg = args.find(a => a.startsWith('--pages='));
+const LIMIT = limitArg ? parseInt(limitArg.split('=')[1], 10) : Infinity;
+
+const LANGUAGES = ['/', '/en/', '/ckb/', '/de/', '/tr/', '/ku/', '/nl/', '/fr/', '/es/',
+    '/it/', '/no/', '/sv/', '/pl/', '/ro/', '/bg/', '/cs/', '/da/', '/el/', '/et/',
+    '/fi/', '/ga/', '/hr/', '/hu/', '/lt/', '/lv/', '/mt/', '/pt/', '/sk/', '/sl/', '/hr/'];
+
+async function getJson(path) {
+    const res = await fetch(`http://127.0.0.1:${PORT}${path}`);
+    return res.json();
+}
+
+async function main() {
+    if (!EDGE) {
+        console.log('='.repeat(72));
+        console.log('SKIPPED - no Chromium based browser found on this machine.');
+        console.log('='.repeat(72));
+        return;
+    }
+    if (!existsSync(SITE)) {
+        console.log('='.repeat(72));
+        console.log('SKIPPED - publish set not built. Run: python scripts/prepare_publish_set.py');
+        console.log('='.repeat(72));
+        return;
+    }
+    const server = await startServer();
+    const profile = mkdtempSync(join(tmpdir(), 'sr-edge-'));
+    const child = spawn(EDGE, [
+        '--headless=new',
+        '--disable-gpu',
+        '--no-first-run',
+        '--no-default-browser-check',
+        '--disable-extensions',
+        '--disable-background-networking',
+        '--remote-debugging-port=' + PORT,
+        '--user-data-dir=' + profile,
+        'about:blank'
+    ], { stdio: 'ignore' });
+
+    // Wait for the debugging endpoint.
+    let ready = false;
+    for (let i = 0; i < 40; i++) {
+        try { await getJson('/json/version'); ready = true; break; }
+        catch { await sleep(250); }
+    }
+    if (!ready) {
+        child.kill();
+        throw new Error('Edge DevTools endpoint did not start');
+    }
+
+    const pages = LANGUAGES.slice(0, LIMIT);
+    const results = [];
+    let failed = 0;
+
+    for (const route of pages) {
+        const url = `http://127.0.0.1:8099${route}`;
+        const target = await fetch(`http://127.0.0.1:${PORT}/json/new?${encodeURIComponent(url)}`, { method: 'PUT' })
+            .then(r => r.json());
+
+        const errors = [];
+        const failedRequests = [];
+        const ws = new WebSocket(target.webSocketDebuggerUrl);
+        let id = 0;
+        const pending = new Map();
+
+        const send = (method, params = {}) => new Promise(resolve => {
+            const msgId = ++id;
+            pending.set(msgId, resolve);
+            ws.send(JSON.stringify({ id: msgId, method, params }));
+        });
+
+        await new Promise(resolve => ws.addEventListener('open', resolve));
+
+        ws.addEventListener('message', ev => {
+            const msg = JSON.parse(ev.data);
+            if (msg.id && pending.has(msg.id)) {
+                pending.get(msg.id)(msg.result);
+                pending.delete(msg.id);
+                return;
+            }
+            if (msg.method === 'Runtime.exceptionThrown') {
+                const d = msg.params.exceptionDetails;
+                errors.push((d.exception && d.exception.description) || d.text);
+            }
+            if (msg.method === 'Runtime.consoleAPICalled' && msg.params.type === 'error') {
+                errors.push(msg.params.args.map(a => a.value ?? a.description ?? '').join(' '));
+            }
+            if (msg.method === 'Network.loadingFailed') {
+                const reason = msg.params.errorText || '';
+                // ERR_ABORTED means the request was cancelled (navigation,
+                // tab close) - not a missing resource.
+                if (/ERR_ABORTED/.test(reason)) return;
+                failedRequests.push(reason + ' ' + (msg.params.type || ''));
+            }
+            if (msg.method === 'Network.responseReceived') {
+                const r = msg.params.response;
+                if (r.status >= 400) failedRequests.push(`${r.status} ${r.url}`);
+            }
+        });
+
+        await send('Runtime.enable');
+        await send('Network.enable');
+        await send('Page.enable');
+        await send('Page.navigate', { url });
+        await sleep(2600);
+
+        ws.close();
+        await fetch(`http://127.0.0.1:${PORT}/json/close/${target.id}`);
+
+        const real = errors.filter(e => !/favicon/i.test(e));
+        const req = failedRequests.filter(e => !/favicon/i.test(e));
+        const ok = real.length === 0 && req.length === 0;
+        if (!ok) failed++;
+        results.push({ route, ok, errors: real, requests: req });
+        console.log(`${ok ? 'PASS' : 'FAIL'}  ${route.padEnd(8)} js-errors=${real.length} failed-requests=${req.length}`);
+        real.slice(0, 4).forEach(e => console.log('        ! ' + String(e).split('\n')[0].slice(0, 160)));
+        req.slice(0, 4).forEach(e => console.log('        > ' + String(e).slice(0, 160)));
+    }
+
+    child.kill();
+    if (typeof server.closeAllConnections === 'function') server.closeAllConnections();
+    server.close();
+    try { rmSync(profile, { recursive: true, force: true }); } catch { }
+
+    console.log('='.repeat(72));
+    console.log(`Pages audited: ${results.length}   passed: ${results.length - failed}   failed: ${failed}`);
+    console.log('='.repeat(72));
+    process.exit(failed ? 1 : 0);
+}
+
+main().catch(err => { console.error(err); process.exit(1); });
+
+// Hard stop so a stuck browser connection can never hang CI.
+setTimeout(() => { console.error('Browser audit timed out.'); process.exit(2); }, 15 * 60 * 1000).unref();

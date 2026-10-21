@@ -1695,7 +1695,7 @@
     <script>
         // Enterprise CoreSync Engine Logic
         function switchPortalTab(tabId, el) {
-            document.querySelectorTutti('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (el) {
                 el.classList.add('active');
             } else {
@@ -1703,7 +1703,7 @@
                 if (targetNav) targetNav.classList.add('active');
             }
 
-            document.querySelectorTutti('.tab-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
             const target = document.getElementById('tab-' + tabId);
             if (target) {
                 target.classList.add('active');
@@ -2000,18 +2000,18 @@
         }
 
         function updateInvoiceCounters() {
-            const all = document.querySelectorTutti('#invoicesTableBody tr').length;
-            const paid = document.querySelectorTutti('#invoicesTableBody tr[data-status="paid"]').length;
-            const pending = document.querySelectorTutti('#invoicesTableBody tr[data-status="pending"]').length;
+            const all = document.querySelectorAll('#invoicesTableBody tr').length;
+            const paid = document.querySelectorAll('#invoicesTableBody tr[data-status="paid"]').length;
+            const pending = document.querySelectorAll('#invoicesTableBody tr[data-status="pending"]').length;
             if (document.getElementById('count-all')) document.getElementById('count-all').innerText = all;
             if (document.getElementById('count-paid')) document.getElementById('count-paid').innerText = paid;
             if (document.getElementById('count-pending')) document.getElementById('count-pending').innerText = pending;
         }
 
         function filterInvoices(status, el) {
-            document.querySelectorTutti('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
-            const rows = document.querySelectorTutti('#invoicesTableBody tr');
+            const rows = document.querySelectorAll('#invoicesTableBody tr');
             rows.forEach(r => {
                 if (status === 'all' || r.getAttribute('data-status') === status) {
                     r.style.display = '';
@@ -2043,7 +2043,7 @@
         }
 
         function selectBank(el) {
-            document.querySelectorTutti('.bank-option').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.bank-option').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
 
@@ -2181,7 +2181,7 @@
 
         function applyThemeColor(themeName, el, saveToStorage = true) {
             currentActiveTheme = themeName;
-            document.querySelectorTutti('.theme-preset-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.theme-preset-card').forEach(c => c.classList.remove('active'));
             if (el) {
                 el.classList.add('active');
             } else {
@@ -2286,7 +2286,7 @@
             }
             document.querySelector('.sidebar-user-card .user-name').innerText = 'Sessione di Anteprima Interattiva';
             document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
-            document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
+            document.querySelector('.portal-brand-emblem').src = '../assets/sr-core-emblem-official.png';
 
             updateStorageStatoBadge();
             showPortalToast('Restored original S&R CoreSync identity and cleared custom configuration.');
@@ -2370,10 +2370,10 @@
         let currentActiveSoftware = null;
 
         function filterSoftwareCategory(cat, btn) {
-            document.querySelectorTutti('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
 
-            const cards = document.querySelectorTutti('#softwareGridContainer .software-card');
+            const cards = document.querySelectorAll('#softwareGridContainer .software-card');
             cards.forEach(card => {
                 if (cat === 'all' || card.getAttribute('data-category') === cat) {
                     card.style.display = 'flex';
@@ -2493,7 +2493,7 @@
         function setCurrency(cur) {
             if (!currencyConfig[cur]) return;
             currentCurrency = cur;
-            document.querySelectorTutti('.cur-pill').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.cur-pill').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.getElementById(`curPill-${cur}`);
             if (activeBtn) activeBtn.classList.add('active');
             updateGlobalFinancials();
@@ -2588,7 +2588,7 @@
         }
 
         function renderTourStep() {
-            document.querySelectorTutti('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
 
             const step = tourSteps[currentTourStep];
             if (!step) return;
@@ -2656,7 +2656,7 @@
         }
 
         function endGuidedTour() {
-            document.querySelectorTutti('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
             const backdrop = document.getElementById('tourBackdrop');
             const card = document.getElementById('tourCard');
             if (backdrop) backdrop.style.display = 'none';
@@ -2669,7 +2669,7 @@
         function openExecutivePdfModal() {
             updateGlobalFinancials();
             const dateEl = document.getElementById('pdfDataDisplay');
-            if (dateEl) dateEl.innerText = new Data().toISOString().split('T')[0];
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
             const modal = document.getElementById('executivePdfModal');
             if (modal) modal.classList.add('active');
         }
@@ -2752,7 +2752,7 @@ Direct Founders Contact: info@coresync.cloud
             const desc = document.getElementById('pubDesc').value;
 
             // Enterprise CoreSync Engine Logic
-            const id = 'custom_' + Data.now();
+            const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
                 icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
@@ -2853,7 +2853,7 @@ Direct Founders Contact: info@coresync.cloud
         }
 
         function switchSimSidebar(item) {
-            document.querySelectorTutti('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
             const target = document.getElementById(`simSide-${item}`);
             if (target) target.classList.add('active');
         }
@@ -3736,7 +3736,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         const trigger = document.getElementById('sovereignLangTrigger');
         const menu = document.getElementById('sovereignLangMenu');
         const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorTutti('.sovereign-lang-item');
+        const items = dropdown.querySelectorAll('.sovereign-lang-item');
         
         if (!trigger || !menu) return;
         

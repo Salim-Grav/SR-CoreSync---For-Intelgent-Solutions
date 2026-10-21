@@ -1180,7 +1180,7 @@
                                 </div>
                                 <div class="ds-u6">
                                     <span class="ds-u7">Beløp (€):</span>
-                                    <input class="ds-u8" type="number" id="quickTaxBeløp" value="1000" oninput="calcQuickTax()" placeholder="Beløp" />
+                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" placeholder="Beløp" />
                                 </div>
                                 <div class="ds-u9">
                                     <span>VAT / BTW: <strong class="ds-u10" id="quickTaxVat">€ 210.00</strong></span>
@@ -1480,8 +1480,8 @@
                     <input type="text" id="txClient" class="ai-chat-input modal-form-input" value="Dutch Commercial Enterprise BV" placeholder="Client / Counterparty Name" title="Client / Counterparty Name">
                 </div>
                 <div>
-                    <label class="text-caption text-white-64 mb-1 d-block" for="txBeløp">Beløp in EUR (€)</label>
-                    <input type="number" id="txBeløp" class="ai-chat-input font-num modal-form-input" value="15000" placeholder="Beløp in EUR" title="Beløp in EUR (€)">
+                    <label class="text-caption text-white-64 mb-1 d-block" for="txAmount">Beløp in EUR (€)</label>
+                    <input type="number" id="txAmount" class="ai-chat-input font-num modal-form-input" value="15000" placeholder="Beløp in EUR" title="Beløp in EUR (€)">
                 </div>
                 <div>
                     <label class="text-caption text-white-64 mb-1 d-block" for="txType">Service Category</label>
@@ -1514,8 +1514,8 @@
                     <input type="text" id="invClient" class="ai-chat-input modal-form-input" value="Rotterdam Tech Enterprises BV" placeholder="Client Name" title="Client Name">
                 </div>
                 <div>
-                    <label class="text-caption text-white-64 mb-1 d-block" for="invBeløp">Net Beløp (€)</label>
-                    <input type="number" id="invBeløp" class="ai-chat-input font-num modal-form-input" value="18500" placeholder="Net Beløp" title="Net Beløp">
+                    <label class="text-caption text-white-64 mb-1 d-block" for="invAmount">Net Beløp (€)</label>
+                    <input type="number" id="invAmount" class="ai-chat-input font-num modal-form-input" value="18500" placeholder="Net Beløp" title="Net Beløp">
                 </div>
                 <div>
                     <label class="text-caption text-white-64 mb-1 d-block" for="invTaxRegime">Tax Regime & Compliance</label>
@@ -1553,7 +1553,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <span class="text-caption text-white-64">Total Beløp Due:</span>
-                    <strong class="font-num ideal-amount-highlight" id="idealTotalBeløp">€ 35,000</strong>
+                    <strong class="font-num ideal-amount-highlight" id="idealTotalAmount">€ 35,000</strong>
                 </div>
             </div>
 
@@ -1644,7 +1644,7 @@
                     </div>
                     <div>
                         <span class="text-white-64 d-block">Issue Dato:</span>
-                        <span class="font-num text-white" id="pvDato">2026-10-01</span>
+                        <span class="font-num text-white" id="pvDate">2026-10-01</span>
                     </div>
                     <div>
                         <span class="text-white-64 d-block">Payment Status:</span>
@@ -1695,7 +1695,7 @@
     <script>
         // Enterprise CoreSync Engine Logic
         function switchPortalTab(tabId, el) {
-            document.querySelectorAlle('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             if (el) {
                 el.classList.add('active');
             } else {
@@ -1703,7 +1703,7 @@
                 if (targetNav) targetNav.classList.add('active');
             }
 
-            document.querySelectorAlle('.tab-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.remove('active'));
             const target = document.getElementById('tab-' + tabId);
             if (target) {
                 target.classList.add('active');
@@ -1860,7 +1860,7 @@
 
         function saveNewTx() {
             const client = document.getElementById('txClient').value;
-            const amount = parseFloat(document.getElementById('txBeløp').value) || 0;
+            const amount = parseFloat(document.getElementById('txAmount').value) || 0;
             const type = document.getElementById('txType').value;
 
             // Enterprise CoreSync Engine Logic
@@ -1907,10 +1907,10 @@
 
         function generateNewInvoice() {
             const client = document.getElementById('invClient').value || 'Rotterdam Tech BV';
-            const netBeløp = parseFloat(document.getElementById('invBeløp').value) || 10000;
+            const netAmount = parseFloat(document.getElementById('invAmount').value) || 10000;
             const taxPct = parseFloat(document.getElementById('invTaxRegime').value) || 0;
-            const vatBeløp = Math.round(netBeløp * (taxPct / 100));
-            const total = netBeløp + vatBeløp;
+            const vatAmount = Math.round(netAmount * (taxPct / 100));
+            const total = netAmount + vatAmount;
             const invNum = 'INV-2026-0' + Math.floor(83 + Math.random() * 20);
             const dateStr = '2026-10-06';
             const taxLabel = taxPct > 0 ? `${taxPct}% BTW` : 'Reverse Charge 0%';
@@ -1923,13 +1923,13 @@
             tr.innerHTML = `
                 <td class="font-num">${invNum}</td>
                 <td>${client}</td>
-                <td class="font-num">€ ${netBeløp.toLocaleString()}</td>
-                <td class="font-num">€ ${vatBeløp.toLocaleString()} (${taxLabel})</td>
+                <td class="font-num">€ ${netAmount.toLocaleString()}</td>
+                <td class="font-num">€ ${vatAmount.toLocaleString()} (${taxLabel})</td>
                 <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
                 <td><span class="status-badge status-processing" id="status-badge-${invNum}">New - Due</span></td>
                 <td>
                     <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">Pay via iDEAL</button>
-                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netBeløp}, ${vatBeløp}, ${total}, 'Utestående', '${dateStr}', '${taxLabel}')">View Invoice</button>
+                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'Utestående', '${dateStr}', '${taxLabel}')">View Invoice</button>
                 </td>
             `;
 
@@ -1953,7 +1953,7 @@
             document.getElementById('pvTotal').innerText = `€ ${total.toLocaleString()}`;
             document.getElementById('pvGrandTotal').innerText = `€ ${total.toLocaleString()}`;
             document.getElementById('pvStatus').innerText = status;
-            document.getElementById('pvDato').innerText = date || '2026-10-06';
+            document.getElementById('pvDate').innerText = date || '2026-10-06';
 
             // Enterprise CoreSync Engine Logic
             const savedBrand = localStorage.getItem('sr_custom_brand_name');
@@ -2000,18 +2000,18 @@
         }
 
         function updateInvoiceCounters() {
-            const all = document.querySelectorAlle('#invoicesTableBody tr').length;
-            const paid = document.querySelectorAlle('#invoicesTableBody tr[data-status="paid"]').length;
-            const pending = document.querySelectorAlle('#invoicesTableBody tr[data-status="pending"]').length;
+            const all = document.querySelectorAll('#invoicesTableBody tr').length;
+            const paid = document.querySelectorAll('#invoicesTableBody tr[data-status="paid"]').length;
+            const pending = document.querySelectorAll('#invoicesTableBody tr[data-status="pending"]').length;
             if (document.getElementById('count-all')) document.getElementById('count-all').innerText = all;
             if (document.getElementById('count-paid')) document.getElementById('count-paid').innerText = paid;
             if (document.getElementById('count-pending')) document.getElementById('count-pending').innerText = pending;
         }
 
         function filterInvoices(status, el) {
-            document.querySelectorAlle('.filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
-            const rows = document.querySelectorAlle('#invoicesTableBody tr');
+            const rows = document.querySelectorAll('#invoicesTableBody tr');
             rows.forEach(r => {
                 if (status === 'all' || r.getAttribute('data-status') === status) {
                     r.style.display = '';
@@ -2030,7 +2030,7 @@
             currentPayingInv = { num: invNum, client: client, amount: amount };
             document.getElementById('idealInvNum').innerText = invNum;
             document.getElementById('idealClientName').innerText = client;
-            document.getElementById('idealTotalBeløp').innerText = `€ ${amount.toLocaleString()}`;
+            document.getElementById('idealTotalAmount').innerText = `€ ${amount.toLocaleString()}`;
             document.getElementById('idealProgressFill').style.width = '0%';
             document.getElementById('idealStatusText').innerText = 'Select your bank and click Confirm Instant Payment';
             document.getElementById('btnConfirmIdeal').disabled = false;
@@ -2043,7 +2043,7 @@
         }
 
         function selectBank(el) {
-            document.querySelectorAlle('.bank-option').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.bank-option').forEach(b => b.classList.remove('selected'));
             el.classList.add('selected');
         }
 
@@ -2181,7 +2181,7 @@
 
         function applyThemeColor(themeName, el, saveToStorage = true) {
             currentActiveTheme = themeName;
-            document.querySelectorAlle('.theme-preset-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.theme-preset-card').forEach(c => c.classList.remove('active'));
             if (el) {
                 el.classList.add('active');
             } else {
@@ -2286,7 +2286,7 @@
             }
             document.querySelector('.sidebar-user-card .user-name').innerText = 'Interaktiv Forhåndsvisning';
             document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
-            document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
+            document.querySelector('.portal-brand-emblem').src = '../assets/sr-core-emblem-official.png';
 
             updateStorageStatusBadge();
             showPortalToast('Restored original S&R CoreSync identity and cleared custom configuration.');
@@ -2370,10 +2370,10 @@
         let currentActiveSoftware = null;
 
         function filterSoftwareCategory(cat, btn) {
-            document.querySelectorAlle('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('#tab-software .filter-btn').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
 
-            const cards = document.querySelectorAlle('#softwareGridContainer .software-card');
+            const cards = document.querySelectorAll('#softwareGridContainer .software-card');
             cards.forEach(card => {
                 if (cat === 'all' || card.getAttribute('data-category') === cat) {
                     card.style.display = 'flex';
@@ -2437,7 +2437,7 @@
 
         // Enterprise CoreSync Engine Logic
         function calcQuickTax() {
-            const amountInput = document.getElementById('quickTaxBeløp');
+            const amountInput = document.getElementById('quickTaxAmount');
             const rateSelect = document.getElementById('quickTaxRate');
             if (!amountInput || !rateSelect) return;
             const amount = parseFloat(amountInput.value) || 0;
@@ -2493,7 +2493,7 @@
         function setCurrency(cur) {
             if (!currencyConfig[cur]) return;
             currentCurrency = cur;
-            document.querySelectorAlle('.cur-pill').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.cur-pill').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.getElementById(`curPill-${cur}`);
             if (activeBtn) activeBtn.classList.add('active');
             updateGlobalFinancials();
@@ -2588,7 +2588,7 @@
         }
 
         function renderTourStep() {
-            document.querySelectorAlle('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
 
             const step = tourSteps[currentTourStep];
             if (!step) return;
@@ -2604,7 +2604,7 @@
             document.getElementById('tourStepDesc').innerText = step.desc;
 
             const prevBtn = document.getElementById('tourPrevBtn');
-            const nextBtn = document.getElementById('tourNesteBtn');
+            const nextBtn = document.getElementById('tourNextBtn');
             if (prevBtn) prevBtn.style.visibility = currentTourStep === 0 ? 'hidden' : 'visible';
             if (nextBtn) nextBtn.innerText = currentTourStep === tourSteps.length - 1 ? 'Finish Tour ✓' : 'Neste ➡️';
 
@@ -2656,7 +2656,7 @@
         }
 
         function endGuidedTour() {
-            document.querySelectorAlle('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
+            document.querySelectorAll('.tour-highlight-target').forEach(el => el.classList.remove('tour-highlight-target'));
             const backdrop = document.getElementById('tourBackdrop');
             const card = document.getElementById('tourCard');
             if (backdrop) backdrop.style.display = 'none';
@@ -2668,8 +2668,8 @@
         // -----------------------------------------------------====================
         function openExecutivePdfModal() {
             updateGlobalFinancials();
-            const dateEl = document.getElementById('pdfDatoDisplay');
-            if (dateEl) dateEl.innerText = new Dato().toISOString().split('T')[0];
+            const dateEl = document.getElementById('pdfDateDisplay');
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
             const modal = document.getElementById('executivePdfModal');
             if (modal) modal.classList.add('active');
         }
@@ -2752,7 +2752,7 @@ Direct Founders Contact: info@coresync.cloud
             const desc = document.getElementById('pubDesc').value;
 
             // Enterprise CoreSync Engine Logic
-            const id = 'custom_' + Dato.now();
+            const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
                 icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
@@ -2853,7 +2853,7 @@ Direct Founders Contact: info@coresync.cloud
         }
 
         function switchSimSidebar(item) {
-            document.querySelectorAlle('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.os-sidebar-btn').forEach(btn => btn.classList.remove('active'));
             const target = document.getElementById(`simSide-${item}`);
             if (target) target.classList.add('active');
         }
@@ -2991,7 +2991,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             const total = Math.round((netPrice + vat) * 100) / 100;
 
             document.getElementById('chkNetPrice').innerText = `€ ${netPrice.toFixed(2)}`;
-            document.getElementById('chkVatBeløp').innerText = `€ ${vat.toFixed(2)}`;
+            document.getElementById('chkVatAmount').innerText = `€ ${vat.toFixed(2)}`;
             document.getElementById('chkTotalPrice').innerText = `€ ${total.toFixed(2)}`;
             document.getElementById('chkBtnText').innerText = `Confirm Secure Payment & Issue Invoice (€ ${total.toFixed(2)})`;
 
@@ -3418,7 +3418,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
                 <div class="order-summary-row">
                     <span>Dutch Value Added Tax (BTW 21%):</span>
-                    <span class="font-num" id="chkVatBeløp">€ 39.69</span>
+                    <span class="font-num" id="chkVatAmount">€ 39.69</span>
                 </div>
                 <div class="order-summary-row total">
                     <span>Total Beløp Due (Incl. BTW):</span>
@@ -3533,7 +3533,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <p id="tourStepDesc" class="tour-step-desc">Live corporate financial performance displayed with precision revenue metrics and growth indicators.</p>
         <div class="tour-card-footer">
             <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ Forrige</button>
-            <button type="button" class="btn-tour-nav primary" id="tourNesteBtn" onclick="nextTourStep()">Neste ➡️</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">Neste ➡️</button>
         </div>
     </div>
 
@@ -3576,7 +3576,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                     <div class="ds-u81">
                         <div>REF: <strong class="ds-u82">SR-EXEC-2026-Q4</strong></div>
-                        <div>DATE: <strong id="pdfDatoDisplay">2026-10-12</strong></div>
+                        <div>DATE: <strong id="pdfDateDisplay">2026-10-12</strong></div>
                         <div>STATUS: <strong class="ds-u83">VERIFIED & ACTIVE</strong></div>
                     </div>
                 </div>
@@ -3736,7 +3736,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         const trigger = document.getElementById('sovereignLangTrigger');
         const menu = document.getElementById('sovereignLangMenu');
         const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorAlle('.sovereign-lang-item');
+        const items = dropdown.querySelectorAll('.sovereign-lang-item');
         
         if (!trigger || !menu) return;
         
