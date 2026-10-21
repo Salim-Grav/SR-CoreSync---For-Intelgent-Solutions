@@ -427,6 +427,7 @@
             font-size: 0.84rem;
             font-weight: 700;
             color: rgba(255,255,255,0.8);
+            min-width: -webkit-fill-available;
             min-width: fit-content;
         }
 
@@ -1138,8 +1139,8 @@
             <p class="wl-step-sub">حدد عدد المستخدمين المتزامنين الذين يحتاجون وصولاً كاملاً للمنظومة:</p>
 
             <div class="wl-seats-control">
-                <span class="wl-seats-label">المقاعد:</span>
-                <input type="range" id="seatsSlider" class="wl-seats-slider" min="1" max="100" value="5">
+                <label for="seatsSlider" class="wl-seats-label">المقاعد:</label>
+                <input type="range" id="seatsSlider" class="wl-seats-slider" min="1" max="100" value="5" title="عدد المقاعد" aria-label="عدد المقاعد (Seats / Users)">
                 <div class="wl-seats-val" id="seatsDisplay">5</div>
             </div>
 
