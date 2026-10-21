@@ -173,7 +173,7 @@
     // ─── Path Computation ───
     function buildTargetUrl(targetLang) {
         const path = window.location.pathname.toLowerCase();
-        const isSubfolder = /\/[a-z]{2,3}\//.test(path);
+        const isSubfolder = /\/(ar|en|nl|de|fr|tr|sv|no|es|it|ku|ckb|pl|pt|da|fi|cs|el|ro|hu|bg|sk|hr|lt|sl|lv|et|ga|mt)\//.test(path);
         const prefix = isSubfolder ? '../' : './';
 
         // Determine if we're on demo.html or index.html
@@ -196,7 +196,7 @@
         if (document.getElementById(cssId)) return;
 
         const path = window.location.pathname.toLowerCase();
-        const isSubfolder = /\/[a-z]{2,3}\//.test(path);
+        const isSubfolder = /\/(ar|en|nl|de|fr|tr|sv|no|es|it|ku|ckb|pl|pt|da|fi|cs|el|ro|hu|bg|sk|hr|lt|sl|lv|et|ga|mt)\//.test(path);
         const prefix = isSubfolder ? '../' : './';
 
         const link = document.createElement('link');
