@@ -73,6 +73,42 @@
             desc: 'لوحة تفاعلية لتجربة الـ REST APIs وحساب الضرائب والتنبؤ المالي وتوليد أكواد cURL و Python و Node.js و C#.',
             offlineFile: 'downloads/SR-Financial-AI-SDK.html'
         },
+                civicsync: {
+            id: 'civicsync',
+            title: 'S&R CivicSync™ Community OS',
+            version: 'v2.6 White-Label',
+            category: 'منصات White-Label السيادية',
+            icon: '🌐',
+            defaultKey: 'SR-CIVIC-SYNC-2026-WL-PRO',
+            price: 'عرض سعر مخصص',
+            priceType: 'ترخيص مؤسسي / جهة',
+            desc: 'منظومة عامة لإدارة الجاليات والمنظمات: مساعد قانوني ذكي RAG، بطاقات عضوية رقمية QR، خزانة مستندات آمنة، ودليل فعاليات.',
+            offlineFile: 'preview-work.html#platforms-civicsync'
+        },
+        healthbridge: {
+            id: 'healthbridge',
+            title: 'S&R HealthBridge™ Telehealth Suite',
+            version: 'v3.2 Clinical Suite',
+            category: 'منصات White-Label السيادية',
+            icon: '🏥',
+            defaultKey: 'SR-HLTH-BRIDGE-2026-WL-PRO',
+            price: 'عرض سعر مخصص',
+            priceType: 'ترخيص عيادات وشبكات طبية',
+            desc: 'منظومة العيادات والطب الاتصالي: استشارات فيديو WebRTC مشفرة، فحص تداخلات الأدوية، وحجز مواعيد وامتثال GDPR.',
+            offlineFile: 'preview-work.html#platforms-healthbridge'
+        },
+        omnibakery: {
+            id: 'omnibakery',
+            title: 'S&R OmniBakery™ Fleet ERP',
+            version: 'v4.0 POS & Fleet',
+            category: 'منصات White-Label السيادية',
+            icon: '🥖',
+            defaultKey: 'SR-OMNI-BAKE-2026-WL-PRO',
+            price: 'عرض سعر مخصص',
+            priceType: 'ترخيص مخابز وتوزيع غذائي',
+            desc: 'نظام كاشير لمسي سحابي أونلاين/أوفلاين، تتبع أسطول السائقين، وفواتير ضريبية BTW 9% و 21% متوافقة مع Belastingdienst.',
+            offlineFile: 'preview-work.html#platforms-omnibakery'
+        },
         terminal: {
             id: 'terminal',
             title: 'S&R Cloud Terminal Agent',
@@ -293,6 +329,15 @@
         } else if (activeAppId === 'vault') {
             container.innerHTML = subnavHtml + renderSecureVaultHtml();
             initSecureVaultEvents();
+        } else if (activeAppId === 'civicsync') {
+            container.innerHTML = subnavHtml + renderCivicSyncHtml();
+            initCivicSyncEvents();
+        } else if (activeAppId === 'healthbridge') {
+            container.innerHTML = subnavHtml + renderHealthBridgeHtml();
+            initHealthBridgeEvents();
+        } else if (activeAppId === 'omnibakery') {
+            container.innerHTML = subnavHtml + renderOmniBakeryHtml();
+            initOmniBakeryEvents();
         } else if (activeAppId === 'sdk') {
             container.innerHTML = subnavHtml + renderSdkConsoleHtml();
             initSdkConsoleEvents();
