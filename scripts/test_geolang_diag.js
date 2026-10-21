@@ -49,26 +49,23 @@ async function run() {
   await call('Runtime.enable');
   await call('Page.enable');
 
-  // Wait 1.5s for DOMContentLoaded and BANNER_DELAY_MS
-  await new Promise(r => setTimeout(r, 1500));
+  await new Promise(r => setTimeout(r, 2500));
 
-  const res = await call('Runtime.evaluate', {
-    expression: `(() => {
-      const b = document.getElementById('srGeoLangBanner');
-      return JSON.stringify({
-        navLang: navigator.language,
-        navLangs: navigator.languages,
-        hasScript: !!document.querySelector('script[src*="sr-geo-lang"]'),
-        bannerExists: !!b,
-        bannerClass: b ? b.className : null,
-        bannerHTML: b ? b.outerHTML.substring(0, 200) : null,
-        localPref: localStorage.getItem('sr_lang_pref'),
-        dismissed: localStorage.getItem('sr_geolang_dismissed')
-      });
-    })()`
+  const bannerRes = await call('Runtime.evaluate', {
+    expression: 'document.getElementById("srGeoLangBanner") ? document.getElementById("srGeoLangBanner").className : "NOT_FOUND"'
   });
+  console.log('Banner status:', bannerRes.result.result.value);
 
-  console.log('Diagnosis Result:', JSON.parse(res.result.value));
+  const scriptRes = await call('Runtime.evaluate', {
+    expression: 'String(window.__SR_GEO_LANG_INITIALIZED__)'
+  });
+  console.log('Script initialized:', scriptRes.result.result.value);
+
+  const locRes = await call('Runtime.evaluate', {
+    expression: 'window.location.href'
+  });
+  console.log('Current URL:', locRes.result.result.value);
+
   ws.close();
   edge.kill();
   try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
