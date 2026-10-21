@@ -391,6 +391,92 @@
             font-size: 0.76rem;
             color: rgba(255, 255, 255, 0.55);
         }
+
+        /* ===== منصات S&R العامة القابلة للترخيص (White-Label Platforms) ===== */
+        .sr-platforms-heading {
+            text-align: center;
+            padding: 34px 20px 10px;
+            margin-top: 18px;
+            border-top: 1px solid rgba(197, 168, 128, 0.18);
+        }
+        .sr-platforms-eyebrow {
+            display: inline-block;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            color: #dfc299;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            background: rgba(197, 168, 128, 0.08);
+            margin-bottom: 14px;
+        }
+        .sr-platforms-title {
+            font-size: clamp(1.4rem, 2.6vw, 2rem);
+            font-weight: 800;
+            margin: 0 0 10px;
+            background: linear-gradient(135deg, #ffffff 30%, #dfc299);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .sr-platforms-sub {
+            max-width: 720px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .software-product-card--platform {
+            border-color: rgba(197, 168, 128, 0.32) !important;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .software-product-card--platform:hover {
+            transform: translateY(-6px);
+            border-color: rgba(197, 168, 128, 0.6) !important;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 34px rgba(197, 168, 128, 0.16);
+        }
+        .sr-platform-cover {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .sr-platform-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .software-product-card--platform:hover .sr-platform-cover img {
+            transform: scale(1.06);
+        }
+        .sr-platform-flag {
+            position: absolute;
+            inset-inline-start: 10px;
+            bottom: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #010907;
+            background: linear-gradient(135deg, #dfc299, #c5a880);
+            padding: 5px 10px;
+            border-radius: 999px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+        }
+        .sr-platform-price {
+            font-size: 1rem !important;
+            color: #dfc299 !important;
+        }
+        .software-filter-pill--platforms {
+            border-color: rgba(197, 168, 128, 0.45) !important;
+        }
+        .software-product-card--platform .software-card-consult-bar .btn-consult-advisor {
+            font-size: 0.74rem;
+        }
     </style>
 </head>
 <body>
@@ -472,7 +558,11 @@
                 <div class="software-filter-bar">
                     <button type="button" class="software-filter-pill active" onclick="filterSoftwareMarketplace('all', this)">
                         <span>🗂️ جميع البرمجيات والأنظمة</span>
-                        <span class="pill-count">6 منتجات</span>
+                        <span class="pill-count">9 منتجات</span>
+                    </button>
+                    <button type="button" class="software-filter-pill software-filter-pill--platforms" onclick="filterSoftwareMarketplace('platforms', this)">
+                        <span>🏛️ منصات White-Label الجاهزة</span>
+                        <span class="pill-count">3 منصات</span>
                     </button>
                     <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('accounting', this)">
                         <span>📊 الحلول المحاسبية والمالية المستقلة</span>
@@ -774,6 +864,161 @@
                                 </button>
                                 <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R Cloud Terminal Agent')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===== منصات S&R العامة القابلة للترخيص (Universal White-Label Platforms) ===== -->
+                    <div class="col-12 software-grid-item" data-category="platforms">
+                        <div class="sr-platforms-heading">
+                            <span class="sr-platforms-eyebrow">S&amp;R UNIVERSAL PLATFORMS • WHITE-LABEL</span>
+                            <h3 class="sr-platforms-title">منصات جاهزة للترخيص بهوية مؤسستك</h3>
+                            <p class="sr-platforms-sub">محركات برمجية متكاملة بنيناها وشغّلناها في نماذج حقيقية في هولندا، ونوفّرها الآن لأي جالية أو عيادة أو مخبز حول العالم — باسمك وشعارك ولغتك.</p>
+                        </div>
+                    </div>
+
+                    <!-- 7. S&R CivicSync -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="platforms">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--platform">
+                            <div>
+                                <div class="sr-platform-cover">
+                                    <img src="./assets/work-civicsync-hero.jpg" alt="S&amp;R CivicSync - منصة الجاليات والمنظمات" loading="lazy" decoding="async">
+                                    <span class="sr-platform-flag">النموذج الرائد: الجالية السورية في هولندا</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">🌐</span>
+                                    <span class="status-badge status-completed software-card-badge">Civic Tech • White-Label</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&amp;R CivicSync™</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    Web (Next.js) • iOS &amp; Android (Expo) • AR / NL / EN
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    منظومة عامة لأي جالية أو جمعية أو اتحاد: بوابة ويب وتطبيق موبايل بهويتك، لإدارة الأعضاء والفعاليات والخدمات مع مساعد ذكاء اصطناعي للأسئلة القانونية والإدارية.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ بطاقات عضوية رقمية مع رمز QR للتحقق الفوري</li>
+                                    <li>✓ مساعد AI قانوني (RAG) وخزانة مستندات آمنة</li>
+                                    <li>✓ دليل خدمات وأخبار وفعاليات وتطوع بثلاث لغات</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white fw-bold software-card-price sr-platform-price">عرض سعر مخصص</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / جهة</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <a href="./preview-work.html#platforms-civicsync" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                        <span>📄 دراسة الحالة</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R CivicSync - طلب عرض توضيحي')" title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 طلب عرض توضيحي (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R CivicSync')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. S&R HealthBridge -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="platforms">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--platform">
+                            <div>
+                                <div class="sr-platform-cover">
+                                    <img src="./assets/work-healthbridge-hero.jpg" alt="S&amp;R HealthBridge - منظومة العيادات والطب عن بعد" loading="lazy" decoding="async">
+                                    <span class="sr-platform-flag">النموذج الرائد: HealthBridge Europe</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">🏥</span>
+                                    <span class="status-badge status-completed software-card-badge">HealthTech • GDPR</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&amp;R HealthBridge™</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    Web + PWA • WebRTC • iDEAL / SEPA • AR / NL / EN
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    منظومة سحابية لأي عيادة أو شبكة أطباء أو مركز طبي: استشارات فيديو، مواعيد، صيدلية إلكترونية، ولوحات للمريض والطبيب والإدارة مع امتثال كامل لـ GDPR.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ 16 قسماً طبياً ومساعد صحي بالذكاء الاصطناعي</li>
+                                    <li>✓ تذكير بالأدوية وفحص التداخلات الدوائية</li>
+                                    <li>✓ مصادقة MFA وسجل تدقيق وأدوات خصوصية GDPR</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white fw-bold software-card-price sr-platform-price">عرض سعر مخصص</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / عيادة أو شبكة</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <a href="./preview-work.html#platforms-healthbridge" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                        <span>📄 دراسة الحالة</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R HealthBridge - طلب عرض توضيحي')" title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💬 طلب عرض توضيحي (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R HealthBridge')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                    <span>📧 إيميل info</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. S&R OmniBakery -->
+                    <div class="col-lg-4 col-md-6 software-grid-item" data-category="platforms">
+                        <div class="founder-editorial-card h-100 p-4 d-flex flex-col justify-content-between software-product-card software-product-card--platform">
+                            <div>
+                                <div class="sr-platform-cover">
+                                    <img src="./assets/work-omnibakery-hero.jpg" alt="S&amp;R OmniBakery - منظومة ERP للمخابز والتوزيع" loading="lazy" decoding="async">
+                                    <span class="sr-platform-flag">النموذج الرائد: مخبز الملكة — هولندا</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="software-card-icon">🥖</span>
+                                    <span class="status-badge status-completed software-card-badge">Bakery ERP • Fleet</span>
+                                </div>
+                                <h4 class="text-white fw-bold mb-1 software-card-title">S&amp;R OmniBakery™</h4>
+                                <div class="text-caption text-white-64 font-latin mb-2 software-card-ver">
+                                    Cloud POS • Driver Web App • HACCP • BTW 9% / 21%
+                                </div>
+                                <p class="text-white-64 software-card-desc">
+                                    منظومة ERP لأي مخبز أو سلسلة مخابز: كاشير سحابي، جدولة الإنتاج والأفران، المخزون، وتطبيق للسائقين مع مسارات التوزيع وإثبات التسليم.
+                                </p>
+                                <ul class="software-card-specs">
+                                    <li>✓ 3 ملفات تشغيل: شرقي • تركي • أوروبي حرفي</li>
+                                    <li>✓ مسارات Google Maps وإثبات تسليم رقمي</li>
+                                    <li>✓ فوترة BTW 9% / 21% وملصقات حساسية HACCP</li>
+                                </ul>
+                            </div>
+                            <div class="pt-3 border-top border-white-10 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                                <div>
+                                    <span class="text-white fw-bold software-card-price sr-platform-price">عرض سعر مخصص</span>
+                                    <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / مخبز أو سلسلة</span>
+                                </div>
+                                <div class="software-card-actions">
+                                    <a href="./preview-work.html#platforms-omnibakery" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                        <span>📄 دراسة الحالة</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- نقطة التقاء الشريكين: التقنية (م. سليم) + الفوترة الضريبية (أ. رائد) -->
+                            <div class="software-card-consult-bar">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R OmniBakery - طلب عرض توضيحي')" title="النظام ونقاط البيع والأسطول مع م. محمد سليم عزيزة">
+                                    <span class="advisor-dot"></span>
+                                    <span>💻 النظام (م. سليم)</span>
+                                </button>
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R OmniBakery - الفوترة والضرائب')" title="الفوترة وضريبة BTW مع أ. محمد رائد كعكة">
+                                    <span class="advisor-dot"></span>
+                                    <span>📊 الضرائب (أ. رائد)</span>
                                 </button>
                             </div>
                         </div>
