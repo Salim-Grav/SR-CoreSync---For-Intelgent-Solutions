@@ -24,22 +24,9 @@
                 localStorage.setItem('sr_lang_pref', targetLang);
             }
             
-            // 3. Auto-detect from device / OS / browser
-            if (!targetLang) {
-                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-                for (var i = 0; i < browserLangs.length; i++) {
-                    var raw = (browserLangs[i] || '').toLowerCase().trim();
-                    var primary = raw.split('-')[0];
-                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
-                        targetLang = 'ckb';
-                        break;
-                    }
-                    if (supported.indexOf(primary) !== -1) {
-                        targetLang = primary;
-                        break;
-                    }
-                }
-            }
+            // 3. User explicit preferences (saved in localStorage or via ?lang=) route immediately.
+            // First-time visitor discovery is politely handled by Sovereign Geo-Language Detection (sr-geo-lang.js)
+            // to provide a smooth, dignified experience without forced page jumps.
             
             // 4. Compare with current page language
             var currentLang = document.documentElement.getAttribute('lang') || 'ar';
@@ -15762,5 +15749,8 @@
 
     <!-- S&R CoreSync Sovereign Floating Quick-Dock (macOS Style) -->
     <script src="./js/sr-quick-dock.js" defer></script>
+
+    <!-- S&R CoreSync Sovereign Geo-Language Detection Banner -->
+    <script src="./js/sr-geo-lang.js" defer></script>
 </body>
 </html>
