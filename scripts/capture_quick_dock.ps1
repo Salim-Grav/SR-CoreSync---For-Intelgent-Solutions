@@ -22,5 +22,6 @@ function Capture-Url($url, $outName, $width=1440, $height=950) {
     Write-Host "Captured: $outPath"
 }
 
-Capture-Url "file:///D:/I-Ai/App/S%26R%20CoreSync%20Solutions/Project/preview-whitelabel-calculator.html#seatsSection" "dock_calculator_view.png" 1440 950
-Capture-Url "file:///D:/I-Ai/App/S%26R%20CoreSync%20Solutions/Project/preview-software.html#software-hub" "dock_software_view.png" 1440 950
+Capture-Url "file:///D:/I-Ai/App/S%26R%20CoreSync%20Solutions/Project/preview-whitelabel-calculator.html" "dock_calculator_view.png" 1440 950
+Capture-Url "file:///D:/I-Ai/App/S%26R%20CoreSync%20Solutions/Project/preview-software.html" "dock_software_view.png" 1440 950
+Capture-Url "file:///D:/I-Ai/App/S%26R%20CoreSync%20Solutions/Project/index.html" "dock_index_view.png" 1440 950

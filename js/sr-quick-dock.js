@@ -181,22 +181,30 @@
             } catch (e) {}
         }
 
-        // Smart Visibility on Scroll
+        // Smart Visibility:
+        // Dedicated app tools/calculators/hubs show dock by default; Homepage shows on scroll > 200px
+        const isToolPage = isWork || isSoftware || isWlCalc || isEstimator;
+
+        function updateVisibility() {
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+            if (isToolPage || scrollY > 200) {
+                container.classList.add('visible');
+            } else {
+                container.classList.remove('visible');
+            }
+        }
+
         let scrollTimeout;
         function handleScroll() {
             if (scrollTimeout) return;
             scrollTimeout = setTimeout(() => {
-                const scrollY = window.scrollY || document.documentElement.scrollTop;
-                if (scrollY > 260) {
-                    container.classList.add('visible');
-                } else {
-                    container.classList.remove('visible');
-                }
+                updateVisibility();
                 scrollTimeout = null;
-            }, 60);
+            }, 40);
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+        // Initial trigger
+        setTimeout(updateVisibility, 150);
     }
 })();
