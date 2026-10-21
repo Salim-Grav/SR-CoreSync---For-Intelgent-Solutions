@@ -53,24 +53,16 @@ async function run() {
 
   const res = await call('Runtime.evaluate', {
     expression: `(() => {
-      const b = document.getElementById('srGeoLangBanner');
-      if (!b) return JSON.stringify({ error: 'not found' });
-      const r = b.getBoundingClientRect();
-      const s = window.getComputedStyle(b);
+      const l = document.getElementById('sr-geo-lang-css');
       return JSON.stringify({
-        rect: { top: r.top, bottom: r.bottom, height: r.height, width: r.width },
-        display: s.display,
-        visibility: s.visibility,
-        opacity: s.opacity,
-        transform: s.transform,
-        zIndex: s.zIndex,
-        className: b.className,
-        styleCssText: b.style.cssText
+        linkExists: !!l,
+        href: l ? l.href : null,
+        sheetExists: !!l?.sheet
       });
     })()`
   });
 
-  console.log('Diagnosis Result:', JSON.parse(res.result.result.value));
+  console.log('CSS Link Result:', JSON.parse(res.result.result.value));
   ws.close();
   edge.kill();
   try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
