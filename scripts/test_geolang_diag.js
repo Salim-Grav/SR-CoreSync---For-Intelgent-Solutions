@@ -51,21 +51,26 @@ async function run() {
 
   await new Promise(r => setTimeout(r, 2500));
 
-  const bannerRes = await call('Runtime.evaluate', {
-    expression: 'document.getElementById("srGeoLangBanner") ? document.getElementById("srGeoLangBanner").className : "NOT_FOUND"'
+  const res = await call('Runtime.evaluate', {
+    expression: `(() => {
+      const b = document.getElementById('srGeoLangBanner');
+      if (!b) return JSON.stringify({ error: 'not found' });
+      const r = b.getBoundingClientRect();
+      const s = window.getComputedStyle(b);
+      return JSON.stringify({
+        rect: { top: r.top, bottom: r.bottom, height: r.height, width: r.width },
+        display: s.display,
+        visibility: s.visibility,
+        opacity: s.opacity,
+        transform: s.transform,
+        zIndex: s.zIndex,
+        className: b.className,
+        styleCssText: b.style.cssText
+      });
+    })()`
   });
-  console.log('Banner status:', bannerRes.result.result.value);
 
-  const scriptRes = await call('Runtime.evaluate', {
-    expression: 'String(window.__SR_GEO_LANG_INITIALIZED__)'
-  });
-  console.log('Script initialized:', scriptRes.result.result.value);
-
-  const locRes = await call('Runtime.evaluate', {
-    expression: 'window.location.href'
-  });
-  console.log('Current URL:', locRes.result.result.value);
-
+  console.log('Diagnosis Result:', JSON.parse(res.result.result.value));
   ws.close();
   edge.kill();
   try { fs.rmSync(userDataDir, { recursive: true, force: true }); } catch (e) {}
