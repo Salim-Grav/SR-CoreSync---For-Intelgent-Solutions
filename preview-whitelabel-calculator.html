@@ -1749,6 +1749,34 @@
                 if (e.target === this) this.classList.remove('active');
             });
 
+            // ── URL Query Parameters (Deep-linking) ──
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetPlatform = urlParams.get('platform');
+            if (targetPlatform) {
+                const targetCard = document.querySelector(`.wl-platform-card[data-platform="${targetPlatform}"]`);
+                if (targetCard) {
+                    document.querySelectorAll('.wl-platform-card').forEach(c => c.classList.remove('selected'));
+                    targetCard.classList.add('selected');
+                    state.platforms = [{
+                        key: targetCard.dataset.platform,
+                        nameAr: targetCard.dataset.nameAr,
+                        nameEn: targetCard.dataset.nameEn,
+                        base: parseInt(targetCard.dataset.base, 10)
+                    }];
+                }
+            }
+            const targetTier = urlParams.get('tier');
+            if (targetTier) {
+                const targetTierCard = document.querySelector(`.wl-tier-card[data-tier="${targetTier}"]`);
+                if (targetTierCard) {
+                    document.querySelectorAll('.wl-tier-card').forEach(c => c.classList.remove('active'));
+                    targetTierCard.classList.add('active');
+                    state.tier = targetTierCard.dataset.tier;
+                    state.tierMultiplier = parseFloat(targetTierCard.dataset.multiplier);
+                    state.tierLabel = targetTierCard.querySelector('.wl-tier-name').textContent.trim();
+                }
+            }
+
             // ── Initial Calculation ──
             calculate();
         });
