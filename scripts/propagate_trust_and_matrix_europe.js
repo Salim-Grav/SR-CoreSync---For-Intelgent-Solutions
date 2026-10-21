@@ -9,19 +9,29 @@ const PORTALS = [
     { lang: 'de', file: 'de/index.html' }
 ];
 
+const CARD_ICONS = {
+    gdpr: { isGreen: false, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' },
+    btw: { isGreen: true, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>' },
+    amsix: { isGreen: true, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>' },
+    sla: { isGreen: false, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>' },
+    iso: { isGreen: true, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' },
+    zeroknowledge: { isGreen: false, svg: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="16" r="1"></circle><rect x="3" y="10" width="18" height="12" rx="2"></rect><path d="M7 10V7a5 5 0 0 1 10 0v3"></path></svg>' }
+};
+
 const CONTENT = {
     en: {
         trust: {
             title: 'European Enterprise Compliance & <span>Sovereign Cloud Standards</span>',
             subtitle: 'Legally binding European regulatory certifications, enterprise SLA guarantees, and sovereign cloud infrastructure anchored in Amsterdam, the Netherlands.',
             clickVerify: 'Click any compliance badge to verify specifications & legal parameters',
+            verifyLinkText: 'Verify Technical Specs',
             badges: [
-                { id: 'gdpr', icon: '🛡️', code: 'EU 2016/679', title: 'General Data Protection Regulation', desc: 'Strict compliance with European privacy laws, full encryption at rest & transit, zero unauthorized telemetry.', tag: 'Certified Compliant' },
-                { id: 'btw', icon: '🏛️', code: 'Belastingdienst Fiscal', title: 'Dutch Fiscal & BTW Compliance', desc: 'Certified PEPPOL BIS Billing 3.0 e-invoicing and automated Dutch VAT (9% & 21%) accounting integration.', tag: 'Audit Compliant' },
-                { id: 'amsix', icon: '🌐', code: 'AMS-IX Infrastructure', title: 'Amsterdam Sovereign Cloud Node', desc: 'Enterprise servers hosted in Amsterdam Tier 3+ datacenter adjacent to AMS-IX for sub-5ms low latency.', tag: 'AMS-NODE-01' },
-                { id: 'sla', icon: '⚡', code: '99.98% High Availability', title: 'Enterprise Cloud SLA Guarantee', desc: 'Contractually guaranteed 99.98% uptime with active disaster recovery and sub-15 minute failover response.', tag: 'Mission Critical' },
-                { id: 'iso', icon: '🔒', code: 'ISO 27001 / SOC 2', title: 'Information Security Governance', desc: 'Rigorous alignment with ISO/IEC 27001 standards and SOC 2 Type II controls for enterprise risk governance.', tag: 'Verified Security' },
-                { id: 'zeroknowledge', icon: '🛡️', code: 'Zero-Knowledge Security', title: 'Sovereign Cryptographic Isolation', desc: 'Dedicated single-tenant databases with client-controlled keys (BYOK), eliminating third-party backdoors.', tag: 'Private Cloud' }
+                { id: 'gdpr', code: 'GDPR EU 2016/679', status: 'Certified & Compliant ✓', title: 'European Data Protection (GDPR)', desc: 'Strict compliance with European privacy laws, full encryption at rest & transit, zero unauthorized telemetry.' },
+                { id: 'btw', code: 'Belastingdienst BTW', status: 'Fiscal Compliance ✓', title: 'Dutch Fiscal & BTW Standards', desc: 'Certified PEPPOL BIS Billing 3.0 e-invoicing and automated Dutch VAT (9% & 21%) accounting integration.' },
+                { id: 'amsix', code: 'AMS-IX Tier 3+', status: 'Amsterdam Infrastructure ✓', title: 'Amsterdam Sovereign Cloud Node', desc: 'Enterprise servers hosted in Amsterdam Tier 3+ datacenter adjacent to AMS-IX for sub-5ms low latency.' },
+                { id: 'sla', code: '99.98% SLA', status: 'Mission Critical ✓', title: 'High-Availability Cloud SLA', desc: 'Contractually guaranteed 99.98% uptime with active disaster recovery and sub-15 minute failover response.' },
+                { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Information Security ✓', title: 'Security & Risk Governance', desc: 'Rigorous alignment with ISO/IEC 27001 standards and SOC 2 Type II controls for enterprise risk governance.' },
+                { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Sovereign Encryption ✓', title: 'Cryptographic Zero-Knowledge', desc: 'Dedicated single-tenant databases with client-controlled keys (BYOK), eliminating third-party backdoors.' }
             ],
             footerLegal: 'S&R CoreSync Solutions B.V. operates strictly under Dutch and European Union jurisdictions.',
             certBtn: 'Request Enterprise Compliance Dossier (PDF) →'
@@ -100,13 +110,14 @@ const CONTENT = {
             title: 'Europese Bedrijfscompliance & <span>Soevereine Cloudstandaarden</span>',
             subtitle: 'Wettelijk bindende Europese certificeringen, enterprise SLA-garanties en soevereine cloudinfrastructuur verankerd in Amsterdam, Nederland.',
             clickVerify: 'Klik op een compliance-badge om specificaties en juridische kaders te bekijken',
+            verifyLinkText: 'Bekijk Technische Specificaties',
             badges: [
-                { id: 'gdpr', icon: '🛡️', code: 'EU 2016/679', title: 'Algemene Verordening Gegevensbescherming', desc: 'Volledige naleving van de AVG, end-to-end encryptie en gegarandeerde bescherming tegen ongeautoriseerde telemetrie.', tag: 'AVG Conform' },
-                { id: 'btw', icon: '🏛️', code: 'Belastingdienst Fiscaal', title: 'Nederlandse Fiscale Compliance (BTW)', desc: 'Gecertificeerde PEPPOL BIS 3.0 e-facturatie en geautomatiseerde BTW-berekening (9% en 21%) conform de belastingwetgeving.', tag: 'Fiscaal Conform' },
-                { id: 'amsix', icon: '🌐', code: 'AMS-IX Infrastructuur', title: 'Amsterdam Soeverein Cloudknooppunt', desc: 'Bedrijfsservers direct gehost in Amsterdam Tier 3+ datacenters aan het AMS-IX internetknooppunt (< 5ms latentie).', tag: 'AMS-NODE-01' },
-                { id: 'sla', icon: '⚡', code: '99.98% Beschikbaarheid', title: 'Enterprise Cloud SLA-Garantie', desc: 'Contractueel gegarandeerde 99.98% systeembeschikbaarheid met actieve disaster recovery en < 15 min failover.', tag: 'Mission Critical' },
-                { id: 'iso', icon: '🔒', code: 'ISO 27001 / SOC 2', title: 'Informatiebeveiligingsgovernance', desc: 'Strikte conformiteit met ISO/IEC 27001-normen en SOC 2 Type II-principes voor integraal risicobeheer.', tag: 'Geverifieerd Veilig' },
-                { id: 'zeroknowledge', icon: '🛡️', code: 'Zero-Knowledge Security', title: 'Soevereine Cryptografische Isolatie', desc: 'Toegewijde databases met door de klant beheerde sleutels (BYOK), zonder achterdeuren voor derden.', tag: 'Private Cloud' }
+                { id: 'gdpr', code: 'AVG / GDPR EU 2016/679', status: 'Gecertificeerd & Conform ✓', title: 'Europese Privacybescherming (AVG)', desc: 'Volledige naleving van de AVG, end-to-end encryptie en gegarandeerde bescherming tegen ongeautoriseerde telemetrie.' },
+                { id: 'btw', code: 'Belastingdienst BTW', status: 'Fiscaal Conform ✓', title: 'Nederlandse Fiscale Normen (BTW)', desc: 'Gecertificeerde PEPPOL BIS 3.0 e-facturatie en geautomatiseerde BTW-berekening (9% en 21%) conform de belastingwetgeving.' },
+                { id: 'amsix', code: 'AMS-IX Tier 3+', status: 'Amsterdam Knooppunt ✓', title: 'Amsterdam Soevereine Cloud', desc: 'Bedrijfsservers direct gehost in Amsterdam Tier 3+ datacenters aan het AMS-IX internetknooppunt (< 5ms latentie).' },
+                { id: 'sla', code: '99.98% SLA', status: 'Mission Critical ✓', title: 'Hoge Beschikbaarheid SLA', desc: 'Contractueel gegarandeerde 99.98% systeembeschikbaarheid met actieve disaster recovery en < 15 min failover.' },
+                { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Informatiebeveiliging ✓', title: 'Beveiliging & Risicobeheer', desc: 'Strikte conformiteit met ISO/IEC 27001-normen en SOC 2 Type II-principes voor integraal risicobeheer.' },
+                { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Soevereine Versleuteling ✓', title: 'Cryptografische Zero-Knowledge', desc: 'Toegewijde databases met door de klant beheerde sleutels (BYOK), zonder achterdeuren voor derden.' }
             ],
             footerLegal: 'S&R CoreSync Solutions B.V. opereert strikt onder Nederlands en Europees recht.',
             certBtn: 'Vraag Zakelijk Compliance-Dossier Aan (PDF) →'
@@ -185,13 +196,14 @@ const CONTENT = {
             title: 'Europäische Unternehmens-Compliance & <span>Souveräne Cloud-Standards</span>',
             subtitle: 'Rechtlich verbindliche europäische Zertifizierungen, Enterprise-SLA-Garantien und souveräne Cloud-Infrastruktur mit Sitz in Amsterdam, Niederlande.',
             clickVerify: 'Klicken Sie auf ein Compliance-Siegel, um technische Parameter und Rechtsnormen einzusehen',
+            verifyLinkText: 'Technische Spezifikationen Einsehen',
             badges: [
-                { id: 'gdpr', icon: '🛡️', code: 'EU 2016/679', title: 'Datenschutz-Grundverordnung (DSGVO)', desc: 'Strikte Einhaltung der europäischen Datenschutzgesetze, lückenlose Verschlüsselung und Ausschluss unautorisierter Telemetrie.', tag: 'DSGVO Konform' },
-                { id: 'btw', icon: '🏛️', code: 'Belastingdienst Fiscal', title: 'Niederländische & EU-Steuercompliance', desc: 'Zertifizierte PEPPOL BIS 3.0 E-Rechnungen und automatisierte MwSt/BTW-Berechnung (9% & 21%) für den EU-Binnenmarkt.', tag: 'Fiskalisch Konform' },
-                { id: 'amsix', icon: '🌐', code: 'AMS-IX Infrastruktur', title: 'Amsterdam Souveräner Cloud-Knotenpunkt', desc: 'Enterprise-Server direkt am Amsterdam Internet Exchange (AMS-IX) Tier 3+ Rechenzentrum für Sub-5ms Latenz in Westeuropa.', tag: 'AMS-NODE-01' },
-                { id: 'sla', icon: '⚡', code: '99.98% Verfügbarkeit', title: 'Enterprise Cloud SLA-Garantie', desc: 'Vertraglich garantierte 99.98% Systemverfügbarkeit mit aktiver Disaster-Recovery und < 15 Min. Ausfallwiederherstellung.', tag: 'Mission Critical' },
-                { id: 'iso', icon: '🔒', code: 'ISO 27001 / SOC 2', title: 'Informationssicherheits-Governance', desc: 'Konsequente Ausrichtung an ISO/IEC 27001-Vorgaben und SOC 2 Type II-Richtlinien für unternehmensweites Risikomanagement.', tag: 'Geprüfte Sicherheit' },
-                { id: 'zeroknowledge', icon: '🛡️', code: 'Zero-Knowledge Security', title: 'Souveräne Kryptographische Isolation', desc: 'Dedizierte Datenbanken mit kundenkontrollierten Schlüsseln (BYOK), ohne jegliche Hintertüren für Dritte.', tag: 'Private Cloud' }
+                { id: 'gdpr', code: 'DSGVO EU 2016/679', status: 'Zertifiziert & Konform ✓', title: 'Europäischer Datenschutz (DSGVO)', desc: 'Strikte Einhaltung der europäischen Datenschutzgesetze, lückenlose Verschlüsselung und Ausschluss unautorisierter Telemetrie.' },
+                { id: 'btw', code: 'Belastingdienst BTW', status: 'Steuerlich Konform ✓', title: 'Niederländische & EU-Steuerstandards', desc: 'Zertifizierte PEPPOL BIS 3.0 E-Rechnungen und automatisierte MwSt/BTW-Berechnung (9% & 21%) für den EU-Binnenmarkt.' },
+                { id: 'amsix', code: 'AMS-IX Tier 3+', status: 'Amsterdam Infrastruktur ✓', title: 'Amsterdam Souveräner Cloud-Knotenpunkt', desc: 'Enterprise-Server direkt am Amsterdam Internet Exchange (AMS-IX) Tier 3+ Rechenzentrum für Sub-5ms Latenz in Westeuropa.' },
+                { id: 'sla', code: '99.98% SLA', status: 'Mission Critical ✓', title: 'Hochverfügbarkeits-SLA', desc: 'Vertraglich garantierte 99.98% Systemverfügbarkeit mit aktiver Disaster-Recovery und < 15 Min. Ausfallwiederherstellung.' },
+                { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Informationssicherheit ✓', title: 'Sicherheit & Risikomanagement', desc: 'Konsequente Ausrichtung an ISO/IEC 27001-Vorgaben und SOC 2 Type II-Richtlinien für unternehmensweites Risikomanagement.' },
+                { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Souveräne Verschlüsselung ✓', title: 'Kryptographische Zero-Knowledge', desc: 'Dedizierte Datenbanken mit kundenkontrollierten Schlüsseln (BYOK), ohne jegliche Hintertüren für Dritte.' }
             ],
             footerLegal: 'S&R CoreSync Solutions B.V. unterliegt vollumfänglich niederländischem und EU-Recht.',
             certBtn: 'Unternehmens-Compliance-Dossier Anfordern (PDF) →'
@@ -268,21 +280,29 @@ const CONTENT = {
 };
 
 function buildTrustRibbonHtml(data) {
-    const badgesHtml = data.badges.map(b => `
-                    <div class="sr-trust-card" data-compliance="${b.id}" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify ${b.code}">
-                        <div class="sr-trust-card-top">
-                            <span class="sr-trust-icon">${b.icon}</span>
-                            <span class="sr-trust-code">${b.code}</span>
+    const cardsHtml = data.badges.map(b => {
+        const iconDef = CARD_ICONS[b.id] || CARD_ICONS.gdpr;
+        const greenClass = iconDef.isGreen ? ' sr-trust-icon-box--green' : '';
+
+        return `                    <!-- Badge: ${b.code} -->
+                    <div class="sr-trust-card" data-compliance="${b.id}" role="button" tabindex="0" aria-label="Verify ${b.code}">
+                        <div class="sr-trust-icon-box${greenClass}">
+                            ${iconDef.svg}
                         </div>
-                        <h4 class="sr-trust-title">${b.title}</h4>
-                        <p class="sr-trust-desc">${b.desc}</p>
-                        <div class="sr-trust-badge-footer">
-                            <span class="sr-trust-status-dot"></span>
-                            <span class="sr-trust-status-text">${b.tag}</span>
-                            <span class="sr-trust-arrow">↗</span>
+                        <div class="sr-trust-content">
+                            <div class="sr-trust-badge-row">
+                                <span class="sr-trust-code">${b.code}</span>
+                                <span class="sr-trust-status">${b.status}</span>
+                            </div>
+                            <h3 class="sr-trust-card-title">${b.title}</h3>
+                            <p class="sr-trust-card-desc">${b.desc}</p>
+                            <span class="sr-trust-verify-link">
+                                <span>${data.verifyLinkText}</span>
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </span>
                         </div>
-                    </div>
-    `).join('\n');
+                    </div>`;
+    }).join('\n\n');
 
     return `
         <!-- European Sovereign Trust Ribbon & Compliance Suite -->
@@ -306,7 +326,7 @@ function buildTrustRibbonHtml(data) {
                 </div>
 
                 <div class="sr-trust-grid">
-${badgesHtml}
+${cardsHtml}
                 </div>
 
                 <div class="sr-trust-legal-footer">
@@ -494,80 +514,30 @@ function processPortal(portal) {
     let html = fs.readFileSync(filePath, 'utf8');
     const langData = CONTENT[portal.lang];
 
-    // 1. Inject CSS links in <head>
-    const cssLinks = `    <!-- S&R CoreSync Sovereign Trust Ribbon & Enterprise Tier Matrix -->
-    <link rel="stylesheet" href="../css/sr-trust-ribbon.css?v=20261021_trust">
-    <link rel="stylesheet" href="../css/sr-tier-matrix.css?v=20261021_matrix">`;
-
-    if (!html.includes('sr-trust-ribbon.css')) {
-        const headClose = '</head>';
-        html = html.replace(headClose, cssLinks + '\n' + headClose);
-        console.log(`[${portal.lang}] Injected CSS into <head>`);
-    }
-
-    // 2. Replace old compliance ribbon section
-    const oldComplianceRegex = /<!--\s*9\.5\.\s*[\s\S]*?-->\s*<section class="section-compliance-ribbon"[\s\S]*?<\/section>/;
-    const oldComplianceSimpleRegex = /<section class="section-compliance-ribbon"[\s\S]*?<\/section>/;
-
+    // 1. Replace existing <section class="sr-trust-ribbon-section" id="compliance" ...>
     const newTrustHtml = buildTrustRibbonHtml(langData.trust);
+    const trustRegex = /<section class="sr-trust-ribbon-section" id="compliance"[\s\S]*?<\/section>/;
 
-    if (oldComplianceRegex.test(html)) {
-        html = html.replace(oldComplianceRegex, newTrustHtml.trim());
-        console.log(`[${portal.lang}] Replaced old compliance ribbon with Sovereign Trust Ribbon`);
-    } else if (oldComplianceSimpleRegex.test(html)) {
-        html = html.replace(oldComplianceSimpleRegex, newTrustHtml.trim());
-        console.log(`[${portal.lang}] Replaced simple compliance ribbon with Sovereign Trust Ribbon`);
-    } else if (!html.includes('id="compliance"')) {
-        // Fallback: place before sr-newsletter-section
-        const newsletterMarker = '<section class="sr-newsletter-section"';
-        if (html.includes(newsletterMarker)) {
-            html = html.replace(newsletterMarker, newTrustHtml.trim() + '\n\n        ' + newsletterMarker);
-            console.log(`[${portal.lang}] Inserted Sovereign Trust Ribbon before newsletter section`);
-        }
+    if (trustRegex.test(html)) {
+        html = html.replace(trustRegex, newTrustHtml.trim());
+        console.log(`[${portal.lang}] Replaced Trust Ribbon with exact luxury design system markup`);
     }
 
-    // 3. Inject Tier Matrix at the end of pricing section
-    if (!html.includes('id="tier-matrix"')) {
-        const newMatrixHtml = buildTierMatrixHtml(langData.matrix);
-        // Find end of pricing section
-        const endPricingRegex = /<\/div>\s*<\/div>\s*<\/div>\s*<\/div>\s*<\/section>\s*<!--\s*7\.5\./;
-        if (endPricingRegex.test(html)) {
-            html = html.replace(
-                endPricingRegex,
-                `</div>\n${newMatrixHtml}\n                </div>\n            </div>\n        </section>\n\n        <!-- 7.5.`
-            );
-            console.log(`[${portal.lang}] Injected Enterprise Tier Matrix into pricing section`);
-        } else {
-            // Alternative: find </section> for id="pricing"
-            const pricingCloseMarker = '</section>';
-            const pricingIdx = html.indexOf('id="pricing"');
-            if (pricingIdx !== -1) {
-                const nextSectionClose = html.indexOf(pricingCloseMarker, pricingIdx);
-                if (nextSectionClose !== -1) {
-                    const beforeClose = html.lastIndexOf('</div>', nextSectionClose);
-                    if (beforeClose !== -1) {
-                        html = html.slice(0, beforeClose) + '\n' + newMatrixHtml + '\n' + html.slice(beforeClose);
-                        console.log(`[${portal.lang}] Injected Enterprise Tier Matrix via index fallback`);
-                    }
-                }
-            }
+    // 2. Replace existing <div class="sr-tier-matrix-section" id="tier-matrix" ...>
+    const newMatrixHtml = buildTierMatrixHtml(langData.matrix);
+    const matrixRegex = /<!-- Enterprise Tier Matrix & Institutional Calculator -->[\s\S]*?<\/div>\s*<\/div>\s*(?=<\/div>\s*<\/div>\s*<\/section>)/;
+
+    if (html.includes('id="tier-matrix"')) {
+        const matrixSimpleRegex = /<div class="sr-tier-matrix-section" id="tier-matrix"[\s\S]*?<!-- Bottom Guarantees -->[\s\S]*?<\/div>\s*<\/div>/;
+        if (matrixSimpleRegex.test(html)) {
+            html = html.replace(matrixSimpleRegex, newMatrixHtml.trim());
+            console.log(`[${portal.lang}] Updated Tier Matrix markup`);
         }
-    }
-
-    // 4. Inject JS scripts before </body>
-    const jsScripts = `    <!-- S&R CoreSync Sovereign Trust Ribbon & Tier Matrix Controllers -->
-    <script src="../js/sr-trust-ribbon.js" defer></script>
-    <script src="../js/sr-tier-matrix.js" defer></script>`;
-
-    if (!html.includes('sr-trust-ribbon.js')) {
-        const bodyClose = '</body>';
-        html = html.replace(bodyClose, jsScripts + '\n' + bodyClose);
-        console.log(`[${portal.lang}] Injected JS controllers before </body>`);
     }
 
     fs.writeFileSync(filePath, html, 'utf8');
-    console.log(`✓ Completed updates for ${portal.file}`);
+    console.log(`✓ Completed markup refresh for ${portal.file}`);
 }
 
 PORTALS.forEach(processPortal);
-console.log('All European portals propagated successfully.');
+console.log('All European portals markup refreshed.');
