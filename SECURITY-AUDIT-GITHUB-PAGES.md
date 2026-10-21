@@ -1,7 +1,7 @@
 # 🔐 تقرير تدقيق أمني — GitHub Pages
 
 **S&R CoreSync Solutions**
-**التاريخ:** الأربعاء، 21 أكتوبر 2026 — الساعة 11:52 مساءً
+**التاريخ:** الخميس، 22 أكتوبر 2026 — الساعة 12:43 فجراً
 **النطاق:** `https://sr-coresync.com` + المستودع `Salim-Grav/SR-CoreSync---For-Intelgent-Solutions`
 
 ---
@@ -14,6 +14,7 @@ LiteSpeed/cPanel، ما resulted in **طبقة أمان كاملة غير مُف
 
 | # | الفجوة | الخطورة | الحالة |
 |---|---|---|---|
+| 0 | **مصدر النشر `legacy` (من الفرع) → شجرة المستودع كاملة منشورة + `_headers` غير مُطبَّق** | 🔴 حرجة | 🔄 يحتاج تبديلاً من الواجهة |
 | 1 | `.htaccess` (161 سطر) غير مُطبَّق → **0 من 9** رؤوس أمان | 🔴 حرجة | ✅ مُصلَح |
 | 2 | PHP لا يُنفَّذ → كود PHP مكشوف + **صفر عملاء مسجَّلون** | 🔴 حرجة | ✅ مُصلَح |
 | 3 | `config/` و`api/` منشوران للعامة | 🔴 حرجة | ✅ مُصلَح |
@@ -23,6 +24,65 @@ LiteSpeed/cPanel، ما resulted in **طبقة أمان كاملة غير مُف
 | 7 | `path: '.'` ينشر 91.5 MB من أدوات التطوير | 🟠 عالية | ✅ مُصلَح |
 | 8 | `.catch(() => {})` يُخفي فشل الالتقاط | 🟡 متوسطة | ✅ مُصلَح |
 | 9 | لا `PHASE_STATUS.md` ولا توثيق للهندسة | 🟡 متوسطة | ⚠️ مفتوح |
+
+---
+
+## 0.1 الفجوة #0 — مصدر النشر: لماذا كان كل شيء معرَّضاً
+
+هذه هي **السبب الجذري** وراء الفجوتين #1 و#3، ولا تُحل بإصلاح الملفات —
+بل بإعداد المستودع على GitHub نفسه.
+
+### الاكتشاف
+
+بعد رفع الإصلاح الأول (commit `f0b3703`) والتحقق من النشر، تبيّن أن:
+
+- الـ artifact المرفوع كان صحيحاً (35.25 MB = `_site`، مقابل 91.5 MB للفرع كاملاً).
+- لكن الموقع الحيّ كان **لا يزال يقدّم شجرة الفرع**:
+  `/workers/sr-lead-capture/src/index.js` → `200`، و`/scripts/validate.js` → `200`،
+  بينما `/api/lead-capture.php` → `404` (لأنه نُقل، لا لأنه استُبعد).
+- ورؤوس الأمان التسعة **ما تزال غائبة** رغم وجود `_headers` في الجذر.
+
+### قياس تجريبي حاسم (commit `16dedde`)
+
+فُصلت مسارات استطلاع داخل الفرع، ثم قِيست حيّاً:
+
+| المسار | النتيجة | الاستنتاج |
+|---|---|---|
+| `/probe-root.txt` | `200` | ملفات الجذر تُنشر |
+| `/probe-dir/probe.txt` | `200` | المجلدات العادية تُنشر |
+| `/_probe-dir/probe.txt` | `200` | **المجلدات `_` لا تُستثنى** |
+| `/.probe-dir/probe.txt` | `200` | **الملفات `.` لا تُستثنى** |
+| `/.github/probe-dir/probe.txt` | `404` | **`.github/` وحده مستثنى** |
+| `/docs/probe.txt` | `200` | `docs/` يُنشر كما هو |
+
+> أي أن وضع «Deploy from a branch» ينشر **كل شيء** عدا `.github/`،
+> وملف `_headers` يُقدَّم كملف نصّي عادي بدل أن يطبّقه الـ CDN.
+
+### السبب
+
+`build_type` في إعداد Pages كان `legacy` (بناء من الفرع) بدل `workflow`.
+في هذا الوضع يتجاهل GitHub Pages الـ artifact المرفوع من GitHub Actions،
+وينشر شجرة الفرع حرفياً.
+
+### الحل
+
+1. `Settings ← Pages ← Build and deployment ← Source ← "GitHub Actions"` —
+   يفتح المسار published = `_site` فقط، ويُفعّل `_headers`.
+2. **حارس دائم**: مهمة `pages-source` في `.github/workflows/deploy-pages.yml`
+   تقرأ `build_type` عبر REST API وتفشل بوضوح إن لم يكن `workflow`.
+3. محاولة التحويل الآلي عبر `GITHUB_TOKEN` **محاولة وتُسجَّل النتيجة**؛
+   لكن هذا الـ token لا يملك صلاحية "manage GitHub Pages settings"
+   (صلاحية مالك المستودع)، فالتبديل النهائي يدوي.
+
+### بعد التبديل (المتوقّع، مُتحقَّق منه محلياً)
+
+| المسار | قبل التبديل | بعد التبديل |
+|---|---|---|
+| `/workers/**` (شيفرة Worker + إعدادات الدفع) | `200` | `404` |
+| `/scripts/**` (أدوات التطوير) | `200` | `404` |
+| `/_headers` | `200` (كنص) | مُطبَّق (لا يُقدَّم) |
+| 9 رؤوس أمان | `0/9` | `9/9` |
+| حجم النشر | 91.5 MB | 58.01 MB (255 ملفاً) |
 
 ---
 
@@ -218,6 +278,7 @@ dist/SR-CoreSync-...v2.0.zip = 27.04 MB × 54 التزاماً
 | `scripts/check_inline_scripts.mjs` | تحليل كل كتلة JS/JSON-LD مدمجة |
 | `scripts/browser_console_audit.mjs` | تدقيق headless: أخطاء JS + طلبات فاشلة |
 | `scripts/test_lead_worker.mjs` | 23 اختبار وحدة للـ Worker |
+| `scripts/audit_dead_gateway.py` | تدقيق بوابة PHP الميتة (يتجاهل التعليقات) |
 | `scripts/migrate_lead_endpoint.py` | ترحيل نقطة الالتقاط |
 
 ### ملفات معدَّلة
@@ -267,11 +328,35 @@ node scripts/test_lead_worker.mjs
 ## 9. Commands
 
 ```bash
-# نشر الـ Worker
-cd workers/sr-lead-capture && npm install && npx wrangler deploy
-npx wrangler secret put LEAD_WEBHOOK_URLS
-npx wrangler secret put NOTIFY_EMAIL
-npx wrangler kv namespace create LEADS
+# ---- 1) نشر الـ Worker على Cloudflare (بانتظار إنجازه) ----
+cd workers/sr-lead-capture
+npm install
+npx wrangler login                       # يفتح المتصفح لتفويض الحساب
+npx wrangler kv namespace create LEADS   # انسخ الـ id في wrangler.toml
+npx wrangler secret put LEAD_WEBHOOK_URLS   # روابط Make/n8n/Sheets مفصولة بفاصلة
+npx wrangler secret put NOTIFY_EMAIL         # بريد الاستقبال
+npx wrangler deploy
+# ثم: لوحة Cloudflare ← Workers & Pages ← sr-lead-capture ← Triggers
+#      ← Add Custom Domain ← api.sr-coresync.com ← Auto DNS
+
+# ---- 2) التحقق من النشر ----
+curl -X POST https://api.sr-coresync.com/lead \
+  -H 'Content-Type: application/json' \
+  -H 'Origin: https://sr-coresync.com' \
+  -d '{"clientName":"Test Lead","email":"test@example.com","companyName":"QA","notes":"smoke test","language":"en"}'
+# المتوقع: {"status":"success","leadId":"LEAD-SR-20261022-A1B2",...}
+
+# ---- 3) بوابة الجودة محلياً ----
+node scripts/validate.js
+node scripts/check_inline_scripts.mjs
+python scripts/audit_js_identifiers.py
+python scripts/audit_language_api_parity.py
+python scripts/audit_language_paths.py
+python scripts/validate_publish_set.py
+python scripts/prepare_publish_set.py
+python scripts/audit_dead_gateway.py
+node scripts/browser_console_audit.mjs
+node scripts/test_lead_worker.mjs
 ```
 
 ---
@@ -280,6 +365,7 @@ npx wrangler kv namespace create LEADS
 
 | # | البند | الأولوية |
 |---|---|---|
+| 0 | **تبديل Pages Source إلى "GitHub Actions"** (يوقف تسريب `workers/` و`scripts/` ويُفعّل `_headers`) | 🔴 |
 | 1 | نشر الـ Worker على `api.sr-coresync.com` (يحتاج حساب Cloudflare) | 🔴 |
 | 2 | تعبئة أسرار `LEAD_WEBHOOK_URLS` و`NOTIFY_EMAIL` | 🔴 |
 | 3 | تدوير رابط Make.com المكشوف سابقاً | 🟠 |
@@ -292,4 +378,4 @@ npx wrangler kv namespace create LEADS
 
 ---
 
-**التاريخ والوقت (بالعربية):** الأربعاء، 21 أكتوبر 2026 — الساعة 11:52 مساءً
+**التاريخ والوقت (بالعربية):** الخميس، 22 أكتوبر 2026 — الساعة 12:43 فجراً
