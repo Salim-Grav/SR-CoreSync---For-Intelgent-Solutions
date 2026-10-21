@@ -727,6 +727,58 @@
         .est-sheet-muted { color: #64748b; }
         .est-sheet-center { text-align: center; }
         .est-sheet-amount { text-align: left; font-weight: 800; }
+    
+        .est-nav-calc-btn {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--sr-gold);
+            color: var(--sr-gold-light);
+        }
+        .est-whitelabel-banner {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.14), rgba(16, 185, 129, 0.12));
+            border: 1.5px solid rgba(197, 168, 128, 0.38);
+            border-radius: 16px;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .est-whitelabel-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 820px;
+        }
+        .est-whitelabel-banner-icon {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.4));
+        }
+        .est-whitelabel-banner-title {
+            color: var(--sr-gold-light);
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .est-whitelabel-banner-desc {
+            margin: 0;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.5;
+        }
+        .est-whitelabel-banner-btn {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #010907;
+            font-weight: 900;
+            padding: 12px 22px;
+            font-size: 0.88rem;
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+    
     </style>
 </head>
 <body>
@@ -742,7 +794,7 @@
         </a>
 
         <div class="est-nav-actions">
-            <a href="./preview-whitelabel-calculator.html" class="est-btn-nav" style="background: rgba(197, 168, 128, 0.2); border-color: var(--sr-gold); color: var(--sr-gold-light);">
+            <a href="./preview-whitelabel-calculator.html" class="est-btn-nav est-nav-calc-btn">
                 <span>حاسبة تراخيص White-Label 🏛️</span>
             </a>
             <a href="./preview-software.html" class="est-btn-nav">سوق البرمجيات 💻</a>
@@ -754,15 +806,15 @@
     <!-- Main Body -->
     <main class="est-container">
         <!-- بنر توجيه ذكي لحاسبة المنصات السيادية الجاهزة للترخيص -->
-        <div style="grid-column: 1 / -1; background: linear-gradient(135deg, rgba(197, 168, 128, 0.14), rgba(16, 185, 129, 0.12)); border: 1.5px solid rgba(197, 168, 128, 0.38); border-radius: 16px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-            <div style="display: flex; align-items: center; gap: 14px; max-width: 820px;">
-                <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.4));">🏛️</span>
+        <div class="est-whitelabel-banner">
+            <div class="est-whitelabel-banner-content">
+                <span class="est-whitelabel-banner-icon">🏛️</span>
                 <div>
-                    <strong style="color: var(--sr-gold-light); font-size: 1.05rem; display: block; margin-bottom: 4px;">هل تبحث عن ترخيص إحدى منصاتنا السيادية الجاهزة (CivicSync™ / HealthBridge™ / OmniBakery™)؟</strong>
-                    <p style="margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.75); line-height: 1.5;">خصّص عدد المقاعد، نوع التثبيت (SaaS / On-Premise)، الإضافات والذكاء الاصطناعي، واستخرج فوراً عرض سعر PDF معتمد ومفصّل بهوية مؤسستك.</p>
+                    <strong class="est-whitelabel-banner-title">هل تبحث عن ترخيص إحدى منصاتنا السيادية الجاهزة (CivicSync™ / HealthBridge™ / OmniBakery™)؟</strong>
+                    <p class="est-whitelabel-banner-desc">خصّص عدد المقاعد، نوع التثبيت (SaaS / On-Premise)، الإضافات والذكاء الاصطناعي، واستخرج فوراً عرض سعر PDF معتمد ومفصّل بهوية مؤسستك.</p>
                 </div>
             </div>
-            <a href="./preview-whitelabel-calculator.html" class="est-btn-nav" style="background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark)); color: #010907; font-weight: 900; padding: 12px 22px; font-size: 0.88rem; box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35); text-decoration: none; white-space: nowrap;">
+            <a href="./preview-whitelabel-calculator.html" class="est-btn-nav est-whitelabel-banner-btn">
                 <span>فتح حاسبة تراخيص White-Label ←</span>
             </a>
         </div>
