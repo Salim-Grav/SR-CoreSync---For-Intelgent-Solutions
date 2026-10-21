@@ -1,6 +1,6 @@
 /**
  * S&R CoreSync Solutions — Enterprise Tier Matrix & Institutional Calculator
- * Dynamic billing cycle toggle, multi-entity discount, and interactive quote generator.
+ * Multilingual dynamic billing cycle toggle, multi-entity discount, and quote generator (AR, EN, NL, DE).
  */
 
 (function () {
@@ -9,38 +9,93 @@
     if (window.__SR_TIER_MATRIX_INITIALIZED__) return;
     window.__SR_TIER_MATRIX_INITIALIZED__ = true;
 
-    // Base Monthly Prices in EUR
     const BASE_PRICES = {
         starter: {
             monthly: 1490,
-            name: 'Core Starter',
-            waKey: 'Core Starter'
+            names: { ar: 'Core Starter', en: 'Core Starter', nl: 'Core Starter', de: 'Core Starter' }
         },
         pro: {
             monthly: 2890,
-            name: 'Business Pro',
-            waKey: 'Business Pro'
+            names: { ar: 'Business Pro', en: 'Business Pro', nl: 'Business Pro', de: 'Business Pro' }
         },
         enterprise: {
             monthly: 5400,
-            name: 'Sovereign Enterprise',
-            waKey: 'Sovereign Enterprise'
+            names: { ar: 'Sovereign Enterprise', en: 'Sovereign Enterprise', nl: 'Sovereign Enterprise', de: 'Sovereign Enterprise' }
         }
     };
 
-    let currentBilling = 'annual'; // 'monthly' | 'annual' (default to annual with 20% discount)
-    let currentEntities = 1;      // 1 | 2 | 4
+    const I18N = {
+        ar: {
+            period: '/ شهرياً',
+            billedAnnual: 'تُدفع سنوياً (وفّر 20%)',
+            billedMonthly: 'مرونة إلغاء شهرية',
+            comboDiscount: (pct, ent) => `خصم مجمّع ${pct}% (${ent} كيانات)`,
+            entityDiscount: (pct, ent) => `خصم مؤسسي ${pct}% (${ent} كيانات)`,
+            entitySingle: 'كيان واحد',
+            entityMultiple: (n) => `${n} كيانات مؤسسية`,
+            billingAnnualText: 'السنوية (مع خصم 20%)',
+            billingMonthlyText: 'الشهرية',
+            waMsg: (tier, bill, ent, price) =>
+                `مرحباً S&R CoreSync، أود الاستفسار وحجز باقة (${tier}) بدورة الفوترة ${bill} لعدد ${ent} بسعر استثماري معتمد €${price}/شهرياً.`
+        },
+        en: {
+            period: '/ month',
+            billedAnnual: 'Billed annually (Save 20%)',
+            billedMonthly: 'Monthly flexible billing',
+            comboDiscount: (pct, ent) => `Combined discount ${pct}% (${ent} entities)`,
+            entityDiscount: (pct, ent) => `Corporate discount ${pct}% (${ent} entities)`,
+            entitySingle: 'Single Entity',
+            entityMultiple: (n) => `${n} Corporate Entities`,
+            billingAnnualText: 'Annual (with 20% discount)',
+            billingMonthlyText: 'Monthly',
+            waMsg: (tier, bill, ent, price) =>
+                `Hello S&R CoreSync, I would like to inquire about and book the (${tier}) package on the ${bill} cycle for ${ent} at the corporate rate of €${price}/month.`
+        },
+        nl: {
+            period: '/ maand',
+            billedAnnual: 'Jaarlijks gefactureerd (Bespaar 20%)',
+            billedMonthly: 'Maandelijks opzegbaar',
+            comboDiscount: (pct, ent) => `Gecombineerde korting ${pct}% (${ent} entiteiten)`,
+            entityDiscount: (pct, ent) => `Bedrijfskorting ${pct}% (${ent} entiteiten)`,
+            entitySingle: 'Enkele entiteit',
+            entityMultiple: (n) => `${n} Zakelijke entiteiten`,
+            billingAnnualText: 'Jaarlijks (met 20% korting)',
+            billingMonthlyText: 'Maandelijks',
+            waMsg: (tier, bill, ent, price) =>
+                `Hallo S&R CoreSync, ik wil graag het (${tier}) pakket reserveren met ${bill} facturatie voor ${ent} tegen het zakelijke tarief van €${price}/maand.`
+        },
+        de: {
+            period: '/ Monat',
+            billedAnnual: 'Jährliche Abrechnung (20% sparen)',
+            billedMonthly: 'Monatlich kündbar',
+            comboDiscount: (pct, ent) => `Kombirabatt ${pct}% (${ent} Einheiten)`,
+            entityDiscount: (pct, ent) => `Unternehmensrabatt ${pct}% (${ent} Einheiten)`,
+            entitySingle: 'Einzelne Einheit',
+            entityMultiple: (n) => `${n} Unternehmenseinheiten`,
+            billingAnnualText: 'Jährlich (inkl. 20% Rabatt)',
+            billingMonthlyText: 'Monatlich',
+            waMsg: (tier, bill, ent, price) =>
+                `Hallo S&R CoreSync, ich möchte das (${tier}) Paket mit ${bill} Abrechnung für ${ent} zum Unternehmenskurs von €${price}/Monat anfragen und buchen.`
+        }
+    };
+
+    let currentBilling = 'annual';
+    let currentEntities = 1;
 
     document.addEventListener('DOMContentLoaded', initTierMatrix);
     if (document.readyState === 'interactive' || document.readyState === 'complete') {
         initTierMatrix();
     }
 
+    function getLang() {
+        const docLang = (document.documentElement.lang || 'ar').toLowerCase().slice(0, 2);
+        return I18N[docLang] ? docLang : 'en';
+    }
+
     function initTierMatrix() {
         const matrixSection = document.getElementById('tier-matrix');
         if (!matrixSection) return;
 
-        // Billing Cycle Buttons
         const billingBtns = matrixSection.querySelectorAll('.sr-tier-toggle-btn');
         billingBtns.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -51,7 +106,6 @@
             });
         });
 
-        // Entity Count Buttons
         const entityBtns = matrixSection.querySelectorAll('.sr-tier-entity-btn');
         entityBtns.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -62,14 +116,13 @@
             });
         });
 
-        // Initialize prices
         updateAllPrices();
     }
 
     function updateAllPrices() {
-        // Calculation Logic:
-        // Annual discount: 20% off base
-        // Multi-entity discount: 1 = 0%, 2 = 10%, 4 = 20%
+        const lang = getLang();
+        const dict = I18N[lang] || I18N.en;
+
         const isAnnual = currentBilling === 'annual';
         const annualDiscount = isAnnual ? 0.20 : 0.0;
         let entityDiscount = 0.0;
@@ -81,9 +134,7 @@
         ['starter', 'pro', 'enterprise'].forEach(tierKey => {
             const base = BASE_PRICES[tierKey].monthly;
             const finalMonthly = Math.round(base * totalDiscountMultiplier);
-            const billedText = isAnnual ? 'تُدفع سنوياً (وفّر 20%)' : 'تُدفع شهرياً';
 
-            // DOM Elements
             const amountEl = document.getElementById(`tier-price-${tierKey}`);
             const periodEl = document.getElementById(`tier-period-${tierKey}`);
             const originalEl = document.getElementById(`tier-orig-${tierKey}`);
@@ -95,7 +146,7 @@
             }
 
             if (periodEl) {
-                periodEl.textContent = isAnnual ? '/ شهرياً' : '/ شهرياً';
+                periodEl.textContent = dict.period;
             }
 
             if (originalEl) {
@@ -109,25 +160,22 @@
 
             if (noteEl) {
                 if (entityDiscount > 0 && isAnnual) {
-                    noteEl.textContent = `خصم مجمّع ${Math.round((1 - totalDiscountMultiplier) * 100)}% (${currentEntities} كيانات)`;
+                    noteEl.textContent = dict.comboDiscount(Math.round((1 - totalDiscountMultiplier) * 100), currentEntities);
                 } else if (entityDiscount > 0) {
-                    noteEl.textContent = `خصم مؤسسي ${Math.round(entityDiscount * 100)}% (${currentEntities} كيانات)`;
+                    noteEl.textContent = dict.entityDiscount(Math.round(entityDiscount * 100), currentEntities);
                 } else if (isAnnual) {
-                    noteEl.textContent = billedText;
+                    noteEl.textContent = dict.billedAnnual;
                 } else {
-                    noteEl.textContent = 'مرونة إلغاء شهرية';
+                    noteEl.textContent = dict.billedMonthly;
                 }
             }
 
-            // Update WhatsApp CTA Link
             if (ctaBtn) {
-                const tierName = BASE_PRICES[tierKey].name;
-                const billingName = isAnnual ? 'السنوية (مع خصم 20%)' : 'الشهرية';
-                const entityText = currentEntities === 1 ? 'كيان واحد' : `${currentEntities} كيانات مؤسسية`;
-                const msg = encodeURIComponent(
-                    `مرحباً S&R CoreSync، أود الاستفسار وحجز باقة (${tierName}) بدورة الفوترة ${billingName} لعدد ${entityText} بسعر استثماري معتمد €${formatNumber(finalMonthly)}/شهرياً.`
-                );
-                ctaBtn.href = `https://wa.me/31687764998?text=${msg}`;
+                const tierName = BASE_PRICES[tierKey].names[lang] || BASE_PRICES[tierKey].names.en;
+                const billingName = isAnnual ? dict.billingAnnualText : dict.billingMonthlyText;
+                const entityText = currentEntities === 1 ? dict.entitySingle : dict.entityMultiple(currentEntities);
+                const rawMsg = dict.waMsg(tierName, billingName, entityText, formatNumber(finalMonthly));
+                ctaBtn.href = `https://wa.me/31687764998?text=${encodeURIComponent(rawMsg)}`;
             }
         });
     }
@@ -136,7 +184,6 @@
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
-    // Expose Global Helper
     window.srSetTierMatrix = function (billing, entities) {
         if (billing) currentBilling = billing;
         if (entities) currentEntities = entities;
