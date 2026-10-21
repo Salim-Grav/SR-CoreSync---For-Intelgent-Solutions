@@ -9747,7 +9747,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / جهة</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <a href="./preview-work.html#platforms-civicsync" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                    <a href="#work" onclick="navigateToPlatformWork('civicsync'); return false;" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
@@ -9795,7 +9795,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / عيادة أو شبكة</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <a href="./preview-work.html#platforms-healthbridge" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                    <a href="#work" onclick="navigateToPlatformWork('healthbridge'); return false;" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
@@ -9843,7 +9843,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص White-Label / مخبز أو سلسلة</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <a href="./preview-work.html#platforms-omnibakery" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
+                                    <a href="#work" onclick="navigateToPlatformWork('omnibakery'); return false;" class="software-btn-download" title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
@@ -11934,6 +11934,27 @@
         }
 
         // فتح نافذة دراسة الحالة للمشروع النشط حالياً
+        
+        function navigateToPlatformWork(platformId) {
+            const platBtn = document.getElementById('tab-btn-platforms');
+            if (platBtn) {
+                switchWorkTab('platforms', platBtn);
+            }
+            const workSec = document.getElementById('work');
+            if (workSec) {
+                workSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            if (projectsDB && projectsDB.platforms) {
+                const idx = projectsDB.platforms.findIndex(p => p.id === platformId);
+                if (idx !== -1) {
+                    selectWorkProject(idx);
+                    setTimeout(() => {
+                        openCurrentProjectModal();
+                    }, 400);
+                }
+            }
+        }
+    
         function openCurrentProjectModal() {
             const list = projectsDB[currentWorkCategory] || [];
             const p = list[currentWorkProjectIdx] || list[0];
