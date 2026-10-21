@@ -1,0 +1,240 @@
+/* ==========================================================================
+   S&R CoreSync Solutions — Sovereign Floating Quick-Dock (macOS Style)
+   Ultra-luxury Sovereign Dark Dock for instant cross-platform navigation
+   ========================================================================== */
+
+:root {
+    --sr-dock-gold: #c5a880;
+    --sr-dock-gold-light: #f3dfba;
+    --sr-dock-bg: rgba(5, 12, 9, 0.88);
+    --sr-dock-border: rgba(197, 168, 128, 0.32);
+    --sr-dock-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(197, 168, 128, 0.15);
+    --sr-dock-emerald: #10b981;
+}
+
+.sr-quick-dock-container {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.sr-quick-dock-container.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sr-quick-dock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    background: var(--sr-dock-bg);
+    border: 1px solid var(--sr-dock-border);
+    border-radius: 999px;
+    box-shadow: var(--sr-dock-shadow);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+}
+
+.sr-dock-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    text-decoration: none;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.sr-dock-item svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    transition: transform 0.25s ease;
+}
+
+.sr-dock-item:hover {
+    transform: translateY(-8px) scale(1.18);
+    background: rgba(197, 168, 128, 0.2);
+    border-color: var(--sr-dock-gold);
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(197, 168, 128, 0.45);
+}
+
+.sr-dock-item:active {
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* Active indicator dot below item */
+.sr-dock-item.active {
+    background: rgba(197, 168, 128, 0.28);
+    border-color: var(--sr-dock-gold-light);
+    color: var(--sr-dock-gold-light);
+    box-shadow: 0 0 16px rgba(197, 168, 128, 0.4);
+}
+
+.sr-dock-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--sr-dock-gold-light);
+    box-shadow: 0 0 8px var(--sr-dock-gold-light);
+}
+
+/* Highlighted Special Items */
+.sr-dock-item--special {
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.25), rgba(16, 185, 129, 0.25));
+    border-color: rgba(197, 168, 128, 0.5);
+    color: var(--sr-dock-gold-light);
+}
+
+.sr-dock-item--special:hover {
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.4), rgba(16, 185, 129, 0.4));
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4), 0 0 22px rgba(197, 168, 128, 0.5);
+}
+
+.sr-dock-item--whatsapp {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #34d399;
+}
+
+.sr-dock-item--whatsapp:hover {
+    background: rgba(16, 185, 129, 0.35);
+    border-color: #10b981;
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(16, 185, 129, 0.45);
+}
+
+/* Vertical Separator Divider */
+.sr-dock-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 0 2px;
+}
+
+/* Tooltip on Hover */
+.sr-dock-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: rgba(4, 10, 7, 0.95);
+    border: 1px solid var(--sr-dock-border);
+    color: #ffffff;
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+    font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.sr-dock-item:hover .sr-dock-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Arrow for Tooltip */
+.sr-dock-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: rgba(4, 10, 7, 0.95) transparent transparent transparent;
+}
+
+/* Minimize Toggle */
+.sr-dock-toggle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.6);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.sr-dock-toggle:hover {
+    background: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+.sr-dock-toggle svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+}
+
+.sr-quick-dock-container.minimized .sr-quick-dock {
+    padding: 4px;
+}
+
+.sr-quick-dock-container.minimized .sr-dock-item,
+.sr-quick-dock-container.minimized .sr-dock-divider {
+    display: none;
+}
+
+.sr-quick-dock-container.minimized .sr-dock-toggle svg {
+    transform: rotate(180deg);
+}
+
+/* Mobile Screens */
+@media (max-width: 640px) {
+    .sr-quick-dock-container {
+        bottom: 14px;
+        width: calc(100% - 24px);
+        max-width: 390px;
+    }
+    .sr-quick-dock {
+        padding: 5px 8px;
+        gap: 5px;
+        justify-content: space-around;
+        width: 100%;
+    }
+    .sr-dock-item {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+    .sr-dock-item svg {
+        width: 17px;
+        height: 17px;
+    }
+    .sr-dock-tooltip {
+        display: none; /* Hide tooltips on touch */
+    }
+}
