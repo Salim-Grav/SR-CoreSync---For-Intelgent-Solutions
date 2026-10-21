@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <title>محرك تقييم الجاهزية الرقمية والذكاء الاصطناعي • S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="قيّم جاهزية مؤسستك الرقمية والسحابية في 5 محاور استراتيجية واحصل على تقرير تشخيصي فوري — S&R CoreSync Solutions، أمستردام.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-quick-dock.css">
+
+    <style>
+        /* ============================================================
+           S&R SOVEREIGN DESIGN TOKENS
+        ============================================================ */
+        :root {
+            --sr-gold:       #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark:  #8c734b;
+            --sr-emerald:    #10b981;
+            --sr-emerald-dim:#0d9268;
+            --sr-bg:         #040806;
+            --sr-surface:    rgba(10, 19, 14, 0.92);
+            --sr-border:     rgba(197, 168, 128, 0.22);
+            --sr-border-em:  rgba(16, 185, 129, 0.30);
+            --sr-text:       #e8e8e8;
+            --sr-text-dim:   rgba(232, 232, 232, 0.55);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--sr-bg);
+            background-image:
+                radial-gradient(ellipse 70% 50% at 15% 20%, rgba(197,168,128,0.055) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 45% at 85% 75%, rgba(16,185,129,0.04) 0%, transparent 60%);
+            color: var(--sr-text);
+            font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ============================================================
+           HEADER
+        ============================================================ */
+        .rd-header {
+            background: rgba(5, 10, 7, 0.95);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--sr-border);
+            padding: 14px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .rd-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .rd-emblem {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--sr-gold);
+            box-shadow: 0 0 14px rgba(197, 168, 128, 0.35);
+        }
+
+        .rd-brand-text h1 {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.2;
+        }
+
+        .rd-brand-text p {
+            font-size: 0.72rem;
+            color: var(--sr-text-dim);
+            letter-spacing: 0.04em;
+        }
+
+        .rd-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 20px;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--sr-border);
+            border-radius: 40px;
+            color: var(--sr-gold);
+            font-size: 0.83rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .rd-back-btn:hover {
+            background: rgba(197, 168, 128, 0.18);
+            border-color: var(--sr-gold);
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.2);
+        }
+
+        /* ============================================================
+           HERO SECTION
+        ============================================================ */
+        .rd-hero {
+            text-align: center;
+            padding: 64px 24px 40px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .rd-hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid var(--sr-border-em);
+            border-radius: 40px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--sr-emerald);
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .rd-hero-pill-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--sr-emerald);
+            border-radius: 50%;
+            animation: pulse-em 2s infinite;
+        }
+
+        @keyframes pulse-em {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.7); }
+        }
+
+        .rd-hero h2 {
+            font-size: clamp(1.9rem, 4vw, 2.9rem);
+            font-weight: 900;
+            line-height: 1.25;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .rd-hero h2 span {
+            background: linear-gradient(135deg, var(--sr-gold) 0%, var(--sr-gold-light) 60%, var(--sr-emerald) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rd-hero p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--sr-text-dim);
+            max-width: 580px;
+            margin: 0 auto 28px;
+        }
+
+        .rd-progress-bar-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .rd-progress-label {
+            font-size: 0.78rem;
+            color: var(--sr-text-dim);
+            white-space: nowrap;
+        }
+
+        .rd-progress-track {
+            flex: 1;
+            max-width: 320px;
+            height: 5px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .rd-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sr-emerald) 0%, var(--sr-gold) 100%);
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        .rd-progress-pct {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            min-width: 36px;
+        }
+
+        /* ============================================================
+           MAIN LAYOUT
+        ============================================================ */
+        .rd-main {
+            flex: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            width: 100%;
+        }
+
+        .rd-layout {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* ============================================================
+           QUESTION CARDS
+        ============================================================ */
+        .rd-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rd-q-card {
+            background: var(--sr-surface);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px 32px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rd-q-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--sr-gold), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .rd-q-card.answered {
+            border-color: rgba(197, 168, 128, 0.4);
+        }
+
+        .rd-q-card.answered::before {
+            opacity: 1;
+        }
+
+        .rd-q-card:hover {
+            box-shadow: 0 8px 40px rgba(197, 168, 128, 0.08);
+        }
+
+        .rd-q-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .rd-q-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .rd-q-icon.em {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .rd-q-meta {
+            flex: 1;
+        }
+
+        .rd-q-axis {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .rd-q-text {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.45;
+            color: var(--sr-gold-light);
+        }
+
+        .rd-q-desc {
+            font-size: 0.83rem;
+            color: var(--sr-text-dim);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* OPTIONS */
+        .rd-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rd-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 18px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            background: rgba(255,255,255,0.025);
+            user-select: none;
+        }
+
+        .rd-option:hover {
+            border-color: rgba(197, 168, 128, 0.35);
+            background: rgba(197, 168, 128, 0.05);
+        }
+
+        .rd-option.selected {
+            border-color: var(--sr-emerald);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 18px rgba(16, 185, 129, 0.12);
+        }
+
+        .rd-option-radio {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .rd-option.selected .rd-option-radio {
+            border-color: var(--sr-emerald);
+            background: var(--sr-emerald);
+        }
+
+        .rd-option.selected .rd-option-radio::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        .rd-option-content {
+            flex: 1;
+        }
+
+        .rd-option-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--sr-text);
+            display: block;
+        }
+
+        .rd-option.selected .rd-option-label {
+            color: #fff;
+        }
+
+        .rd-option-score {
+            font-size: 0.68rem;
+            color: var(--sr-text-dim);
+            margin-top: 2px;
+        }
+
+        .rd-option.selected .rd-option-score {
+            color: var(--sr-emerald);
+        }
+
+        /* ============================================================
+           SIDEBAR: RADAR + REPORT
+        ============================================================ */
+        .rd-sidebar {
+            position: sticky;
+            top: 86px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rd-radar-card {
+            background: var(--sr-surface);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px 24px 24px;
+            text-align: center;
+        }
+
+        .rd-radar-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold-light);
+            margin-bottom: 4px;
+        }
+
+        .rd-radar-subtitle {
+            font-size: 0.72rem;
+            color: var(--sr-text-dim);
+            margin-bottom: 20px;
+        }
+
+        #rd-radar-canvas {
+            width: 100%;
+            max-width: 340px;
+            height: 300px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .rd-score-badge {
+            margin-top: 16px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .rd-score-num {
+            font-size: 2.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--sr-gold) 0%, var(--sr-emerald) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .rd-score-label {
+            font-size: 0.75rem;
+            color: var(--sr-text-dim);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* REPORT CARD */
+        .rd-report-card {
+            background: var(--sr-surface);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .rd-report-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--sr-gold-light);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rd-report-axes {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .rd-axis-row {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .rd-axis-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rd-axis-name {
+            font-size: 0.78rem;
+            color: var(--sr-text-dim);
+        }
+
+        .rd-axis-val {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+        }
+
+        .rd-axis-bar {
+            height: 4px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .rd-axis-fill {
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 0%;
+        }
+
+        .rd-axis-fill.low    { background: #ef4444; }
+        .rd-axis-fill.mid    { background: #f59e0b; }
+        .rd-axis-fill.high   { background: var(--sr-emerald); }
+        .rd-axis-fill.full   { background: linear-gradient(90deg, var(--sr-emerald), var(--sr-gold)); }
+
+        /* DIAGNOSIS BOX */
+        .rd-diagnosis {
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid var(--sr-border-em);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            min-height: 80px;
+            transition: all 0.4s ease;
+        }
+
+        .rd-diagnosis-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--sr-emerald);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .rd-diagnosis-text {
+            font-size: 0.82rem;
+            color: var(--sr-text-dim);
+            line-height: 1.6;
+        }
+
+        /* CTA BUTTONS */
+        .rd-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rd-cta-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.88rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 24px rgba(22, 163, 74, 0.3);
+        }
+
+        .rd-cta-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(22, 163, 74, 0.45);
+        }
+
+        .rd-cta-reset {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--sr-border);
+            border-radius: 12px;
+            color: var(--sr-text-dim);
+            font-size: 0.83rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+
+        .rd-cta-reset:hover {
+            border-color: rgba(197, 168, 128, 0.35);
+            color: var(--sr-gold);
+        }
+
+        /* ============================================================
+           MATURITY LEVEL BANNER
+        ============================================================ */
+        .rd-maturity-banner {
+            background: rgba(10, 19, 14, 0.85);
+            border: 1px solid var(--sr-border);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .rd-maturity-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .rd-maturity-info h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 4px;
+        }
+
+        .rd-maturity-info p {
+            font-size: 0.8rem;
+            color: var(--sr-text-dim);
+            line-height: 1.5;
+        }
+
+        .rd-maturity-score-pill {
+            margin-right: auto;
+            margin-left: 0;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border: 1px solid;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .rd-footer {
+            border-top: 1px solid var(--sr-border);
+            padding: 20px 28px;
+            text-align: center;
+            font-size: 0.74rem;
+            color: var(--sr-text-dim);
+        }
+
+        .rd-footer a { color: var(--sr-gold); text-decoration: none; }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 900px) {
+            .rd-layout { grid-template-columns: 1fr; }
+            .rd-sidebar { position: static; }
+        }
+
+        @media (max-width: 600px) {
+            .rd-q-card { padding: 20px; }
+            .rd-hero { padding: 40px 16px 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ══ HEADER ══ -->
+    <header class="rd-header">
+        <a href="./index.html" class="rd-brand" aria-label="S&R CoreSync Solutions — الرئيسية">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" class="rd-emblem" onerror="this.style.display='none'">
+            <div class="rd-brand-text">
+                <h1>S&R CoreSync Solutions</h1>
+                <p>AMSTERDAM · SOVEREIGN CLOUD ARCHITECTURE · 2026</p>
+            </div>
+        </a>
+        <a href="./index.html" class="rd-back-btn">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            العودة للرئيسية
+        </a>
+    </header>
+
+    <!-- ══ HERO ══ -->
+    <section class="rd-hero">
+        <div class="rd-hero-pill">
+            <span class="rd-hero-pill-dot"></span>
+            <span>SOVEREIGN AI READINESS ENGINE · 2026</span>
+        </div>
+        <h2>قيّم <span>جاهزيتك الرقمية</span><br>في 5 محاور استراتيجية</h2>
+        <p>
+            استبيان احترافي مصمم لمؤسسات القطاعين العام والخاص في أوروبا. احصل على تقرير تشخيصي فوري،
+            رادار بياني حي، وتوصيات مخصصة من فريق S&R CoreSync Solutions.
+        </p>
+
+        <!-- Progress bar -->
+        <div class="rd-progress-bar-wrap">
+            <span class="rd-progress-label">التقدم:</span>
+            <div class="rd-progress-track">
+                <div class="rd-progress-fill" id="rd-progress-fill"></div>
+            </div>
+            <span class="rd-progress-pct" id="rd-progress-pct">0%</span>
+        </div>
+    </section>
+
+    <!-- ══ MAIN ══ -->
+    <main class="rd-main">
+
+        <!-- Maturity Banner -->
+        <div class="rd-maturity-banner" id="rd-maturity-banner">
+            <div class="rd-maturity-icon" id="rd-maturity-icon">📊</div>
+            <div class="rd-maturity-info">
+                <h3 id="rd-maturity-title">أجب على الأسئلة لرؤية نتيجتك</h3>
+                <p id="rd-maturity-desc">سيُحدَّث هذا الشريط تلقائياً مع كل إجابة. النتيجة الكاملة = 100 نقطة.</p>
+            </div>
+            <div class="rd-maturity-score-pill" id="rd-maturity-pill" style="border-color: rgba(197,168,128,0.3); color: var(--sr-gold);">
+                0 / 100
+            </div>
+        </div>
+
+        <div class="rd-layout">
+            <!-- LEFT: QUESTIONS -->
+            <div class="rd-questions" id="rd-questions-container">
+                <!-- Generated by JS -->
+            </div>
+
+            <!-- RIGHT: SIDEBAR -->
+            <aside class="rd-sidebar">
+
+                <!-- Radar Chart -->
+                <div class="rd-radar-card">
+                    <div class="rd-radar-title">رادار الجاهزية الرقمية</div>
+                    <div class="rd-radar-subtitle">يتحدث لحظياً مع كل إجابة</div>
+                    <canvas id="rd-radar-canvas" aria-label="رادار تقييم الجاهزية الرقمية"></canvas>
+                    <div class="rd-score-badge">
+                        <div class="rd-score-num" id="rd-total-score">0</div>
+                        <div class="rd-score-label">نقطة من أصل 100</div>
+                    </div>
+                </div>
+
+                <!-- Report Card -->
+                <div class="rd-report-card">
+                    <div class="rd-report-title">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        تقرير المحاور الخمسة
+                    </div>
+
+                    <div class="rd-report-axes" id="rd-axes-bars">
+                        <!-- Generated by JS -->
+                    </div>
+
+                    <!-- Diagnosis -->
+                    <div class="rd-diagnosis">
+                        <div class="rd-diagnosis-title">التشخيص الفوري</div>
+                        <div class="rd-diagnosis-text" id="rd-diagnosis-text">
+                            أجب على الأسئلة على اليسار للحصول على تشخيص مخصص لمؤسستك.
+                        </div>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="rd-cta-group">
+                        <a id="rd-wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="rd-cta-wa">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            إرسال التقرير عبر واتساب التنفيذي
+                        </a>
+                        <button class="rd-cta-reset" id="rd-reset-btn">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 .49-5.96"></path></svg>
+                            إعادة التقييم من البداية
+                        </button>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </main>
+
+    <!-- ══ FOOTER ══ -->
+    <footer class="rd-footer">
+        <p>
+            &copy; 2026 <a href="./index.html">S&R CoreSync Solutions B.V.</a> · Keizersgracht 482, Amsterdam ·
+            محرك تقييم الجاهزية الرقمية السيادي | AI Readiness Engine v1.0
+        </p>
+    </footer>
+
+    <!-- Quick Dock -->
+    <script src="./js/sr-quick-dock.js" defer></script>
+
+    <script>
+    /* ================================================================
+       S&R AI READINESS ENGINE — CORE LOGIC
+    ================================================================ */
+    (function () {
+
+        // ── DATA ──────────────────────────────────────────────────
+        const AXES = [
+            {
+                id: 'infra',
+                axis: 'المحور 1 — البنية التحتية السحابية',
+                icon: '🌐',
+                iconClass: '',
+                question: 'ما مستوى البنية التحتية الرقمية الحالية لمؤسستك؟',
+                desc: 'تشمل الخوادم، منصات الاستضافة، قواعد البيانات، وأنظمة الاحتياطي والاسترداد.',
+                options: [
+                    { label: 'لا توجد بنية تحتية رقمية — نعمل ورقياً بالكامل', score: 5 },
+                    { label: 'خوادم محلية (On-Premise) بدون سحابة', score: 25 },
+                    { label: 'سحابة مشتركة جزئياً (Microsoft 365 / Google Workspace)', score: 50 },
+                    { label: 'سحابة هجينة مع نسخ احتياطي منتظم', score: 75 },
+                    { label: 'بنية سحابية سيادية متكاملة مع SLA موثوق', score: 100 }
+                ]
+            },
+            {
+                id: 'data',
+                axis: 'المحور 2 — حوكمة البيانات والامتثال',
+                icon: '🛡️',
+                iconClass: '',
+                question: 'ما مدى التزام مؤسستك بمعايير حماية البيانات الأوروبية (GDPR)؟',
+                desc: 'يشمل سياسات الخصوصية، عقود معالجة البيانات (DPA)، وإجراءات الاستجابة للخروقات.',
+                options: [
+                    { label: 'لا توجد سياسة واضحة لحماية البيانات', score: 5 },
+                    { label: 'نعرف GDPR لكن لم نطبق إجراءات رسمية', score: 25 },
+                    { label: 'لدينا سياسة خصوصية أساسية ونماذج موافقة', score: 50 },
+                    { label: 'امتثال جزئي مع مراجعات دورية', score: 75 },
+                    { label: 'امتثال كامل + DPA موثق + تشفير AES-256 + Zero-Knowledge', score: 100 }
+                ]
+            },
+            {
+                id: 'ai',
+                axis: 'المحور 3 — اعتماد الذكاء الاصطناعي',
+                icon: '⚡',
+                iconClass: 'em',
+                question: 'ما مستوى تكامل الذكاء الاصطناعي في عمليات مؤسستك؟',
+                desc: 'يشمل أدوات الأتمتة، المساعدين الذكيين، تحليل البيانات، وعمليات اتخاذ القرار.',
+                options: [
+                    { label: 'لا نستخدم أي أدوات ذكاء اصطناعي', score: 5 },
+                    { label: 'نستخدم ChatGPT أو أدوات مماثلة بشكل شخصي غير رسمي', score: 30 },
+                    { label: 'نستخدم أتمتة أساسية (نماذج تلقائية، روبوتات دردشة بسيطة)', score: 55 },
+                    { label: 'نظام AI مدمج في عمليات محددة (خدمة عملاء، تقارير)', score: 80 },
+                    { label: 'AI مؤسسي متكامل مدرب على بيانات الشركة (RAG / Copilot)', score: 100 }
+                ]
+            },
+            {
+                id: 'ops',
+                axis: 'المحور 4 — أتمتة العمليات والكفاءة',
+                icon: '⚙️',
+                iconClass: '',
+                question: 'ما نسبة العمليات الإدارية والمالية التي تعمل بشكل آلي؟',
+                desc: 'يشمل الفوترة، الرواتب، المخزون، إدارة العملاء CRM، وتقارير الأداء.',
+                options: [
+                    { label: 'معظم العمليات يدوية (Excel + ورق)', score: 5 },
+                    { label: 'بعض التطبيقات المتخصصة غير المتكاملة', score: 30 },
+                    { label: 'نظام ERP أساسي يغطي الفوترة والمحاسبة', score: 55 },
+                    { label: 'ERP متكامل مع CRM وتقارير تلقائية', score: 80 },
+                    { label: 'أتمتة شاملة متصلة بواجهات API مع جميع الأنظمة', score: 100 }
+                ]
+            },
+            {
+                id: 'team',
+                axis: 'المحور 5 — الكوادر البشرية والثقافة الرقمية',
+                icon: '👥',
+                iconClass: 'em',
+                question: 'ما مستوى الكفاءة الرقمية لدى فريق مؤسستك؟',
+                desc: 'يشمل مستوى التدريب التقني، مقاومة التغيير، والقيادة الداعمة للتحول الرقمي.',
+                options: [
+                    { label: 'مقاومة عالية للتغيير، الفريق يفضل الأساليب التقليدية', score: 5 },
+                    { label: 'وعي محدود بالأدوات الرقمية، تدريب متفرق', score: 30 },
+                    { label: 'فريق متقبل للتغيير مع تدريب أساسي متاح', score: 55 },
+                    { label: 'ثقافة رقمية راسخة مع برامج تطوير مستمرة', score: 80 },
+                    { label: 'قيادة رقمية استراتيجية + CDO/CTO + برامج ابتكار داخلية', score: 100 }
+                ]
+            }
+        ];
+
+        const MATURITY_LEVELS = [
+            { min: 0,  max: 20,  icon: '🔴', title: 'مرحلة الانطلاق الرقمي',         color: '#ef4444', pill: 'bg: rgba(239,68,68,0.15); border-color: #ef4444; color: #ef4444;',
+              desc: 'مؤسستك في بداية رحلتها الرقمية. الفرصة ضخمة والوقت مثالي للبناء على أسس سيادية صلبة.' },
+            { min: 21, max: 40,  icon: '🟠', title: 'مرحلة التأسيس الرقمي',          color: '#f97316', pill: 'bg: rgba(249,115,22,0.15); border-color: #f97316; color: #f97316;',
+              desc: 'لديك قاعدة أولية. مع تكامل منصة S&R CoreSync ستتضاعف كفاءتك في أقل من 90 يوماً.' },
+            { min: 41, max: 60,  icon: '🟡', title: 'مرحلة النضج التدريجي',          color: '#f59e0b', pill: 'bg: rgba(245,158,11,0.15); border-color: #f59e0b; color: #f59e0b;',
+              desc: 'تقدم ملحوظ! بعض الثغرات في الامتثال أو الأتمتة. نستطيع سدها خلال مرحلة واحدة.' },
+            { min: 61, max: 80,  icon: '🟢', title: 'مرحلة التسارع المؤسسي',         color: '#10b981', pill: 'bg: rgba(16,185,129,0.15); border-color: #10b981; color: #10b981;',
+              desc: 'مؤسستك في وضع متقدم. خطوات التحسين المتبقية ستحقق ميزة تنافسية قوية في السوق الأوروبي.' },
+            { min: 81, max: 100, icon: '🏆', title: 'مرحلة السيادة الرقمية الكاملة', color: '#c5a880', pill: 'bg: rgba(197,168,128,0.15); border-color: #c5a880; color: #c5a880;',
+              desc: 'ممتاز! مؤسستك تعمل بمعايير الجيل القادم. نرشح الارتقاء لباقة Sovereign Enterprise لحماية هذا التفوق.' }
+        ];
+
+        const DIAGNOSES = {
+            infra: {
+                low:  'البنية التحتية هي الأولوية القصوى. ننصح بالبدء بحزمة Core Starter للانتقال الآمن للسحابة.',
+                mid:  'البنية الحالية تحتاج لتحديث وتوحيد. الترقية للسحابة السيادية تُحسّن الأداء بنسبة 60%.',
+                high: 'بنية تحتية متينة! ننصح بتقييم تحديث منافذ API للتكامل مع منظومة S&R CoreSync.'
+            },
+            data: {
+                low:  'الامتثال GDPR ضرورة قانونية في أوروبا. مخاطر الغرامات قد تصل لـ €20 مليون. ابدأ فوراً.',
+                mid:  'قاعدة جيدة! إضافة DPA مخصص وتشفير متقدم ستُرقّي مستواك لـ "Advanced Compliance".',
+                high: 'امتثال متقدم. ننصح بتفعيل نظام Zero-Knowledge لضمان الاستقلالية الكاملة للبيانات.'
+            },
+            ai: {
+                low:  'مؤسستك تفقد ميزة تنافسية يومياً. محرك AI RAG يمكن تفعيله خلال أسبوعين.',
+                mid:  'بداية واعدة! الانتقال لـ AI مؤسسي مدرب على بياناتك سيحدث نقلة نوعية في الإنتاجية.',
+                high: 'ريادة في AI! ننصح بتفعيل Sovereign AI Model لضمان استقلالية البيانات وزيادة الدقة.'
+            },
+            ops: {
+                low:  'الأتمتة ستوفر 40% من وقت الفريق. منصة OmniBakery ERP مصممة خصيصاً لهذا التحول.',
+                mid:  'تكامل الأنظمة الحالية مع ERP موحد سيُلغي الازدواجية ويُسرّع دورة الفوترة.',
+                high: 'أتمتة ممتازة! ننصح بتفعيل Core APIs للتكامل مع منصات الدفع الأوروبية (iDEAL/SEPA).'
+            },
+            team: {
+                low:  'الاستثمار في الكوادر هو الأهم. برامجنا التدريبية المباشرة في أمستردام تُحدث فارقاً خلال 30 يوماً.',
+                mid:  'فريقك جاهز للتعلم. جلستا Zoom التفاعليتان المشمولتان في Business Pro ستُسرّعان التبني.',
+                high: 'ثقافة رقمية راسخة. ننصح بتعيين Solutions Architect مخصص لمواصلة مسيرة الابتكار.'
+            }
+        };
+
+        // ── STATE ─────────────────────────────────────────────────
+        const scores = { infra: 0, data: 0, ai: 0, ops: 0, team: 0 };
+
+        // ── RENDER QUESTIONS ──────────────────────────────────────
+        function renderQuestions() {
+            const container = document.getElementById('rd-questions-container');
+            container.innerHTML = '';
+
+            AXES.forEach((axis, qi) => {
+                const card = document.createElement('div');
+                card.className = 'rd-q-card';
+                card.id = `rd-q-${axis.id}`;
+
+                const optionsHtml = axis.options.map((opt, oi) => `
+                    <div class="rd-option" data-axis="${axis.id}" data-score="${opt.score}" data-idx="${oi}" role="button" tabindex="0" aria-label="${opt.label}">
+                        <div class="rd-option-radio"></div>
+                        <div class="rd-option-content">
+                            <span class="rd-option-label">${opt.label}</span>
+                            <span class="rd-option-score">${opt.score === 5 ? 'مستوى أولي' : opt.score === 100 ? 'مستوى سيادي مثالي' : `${opt.score} نقطة`}</span>
+                        </div>
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="rd-q-header">
+                        <div class="rd-q-icon ${axis.iconClass}">${axis.icon}</div>
+                        <div class="rd-q-meta">
+                            <div class="rd-q-axis">${axis.axis}</div>
+                            <div class="rd-q-text">${axis.question}</div>
+                        </div>
+                    </div>
+                    <p class="rd-q-desc">${axis.desc}</p>
+                    <div class="rd-options">${optionsHtml}</div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Render axis bars
+            renderAxesBars();
+
+            // Attach events
+            document.querySelectorAll('.rd-option').forEach(opt => {
+                opt.addEventListener('click', () => selectOption(opt));
+                opt.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') selectOption(opt); });
+            });
+
+            document.getElementById('rd-reset-btn').addEventListener('click', resetAll);
+        }
+
+        function renderAxesBars() {
+            const container = document.getElementById('rd-axes-bars');
+            container.innerHTML = AXES.map(axis => `
+                <div class="rd-axis-row" id="rd-axrow-${axis.id}">
+                    <div class="rd-axis-info">
+                        <span class="rd-axis-name">${axis.icon} ${axis.axis.split('—')[1].trim()}</span>
+                        <span class="rd-axis-val" id="rd-axval-${axis.id}">—</span>
+                    </div>
+                    <div class="rd-axis-bar">
+                        <div class="rd-axis-fill" id="rd-axfill-${axis.id}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ── SELECT OPTION ─────────────────────────────────────────
+        function selectOption(el) {
+            const axisId = el.dataset.axis;
+            const score  = parseInt(el.dataset.score, 10);
+
+            // Deselect siblings
+            el.closest('.rd-options').querySelectorAll('.rd-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+
+            // Mark card answered
+            document.getElementById(`rd-q-${axisId}`).classList.add('answered');
+
+            // Update score
+            scores[axisId] = score;
+
+            // Recalculate all
+            update();
+        }
+
+        // ── UPDATE ────────────────────────────────────────────────
+        function update() {
+            const vals  = AXES.map(a => scores[a.id]);
+            const total = Math.round(vals.reduce((a, b) => a + b, 0) / AXES.length);
+            const answered = vals.filter(v => v > 0).length;
+            const pct = Math.round((answered / AXES.length) * 100);
+
+            // Progress bar
+            document.getElementById('rd-progress-fill').style.width = pct + '%';
+            document.getElementById('rd-progress-pct').textContent = pct + '%';
+
+            // Total score
+            document.getElementById('rd-total-score').textContent = total;
+
+            // Axis bars
+            AXES.forEach(axis => {
+                const s = scores[axis.id];
+                const fill = document.getElementById(`rd-axfill-${axis.id}`);
+                const val  = document.getElementById(`rd-axval-${axis.id}`);
+                fill.style.width = s + '%';
+                fill.className   = 'rd-axis-fill ' + (s === 0 ? '' : s < 30 ? 'low' : s < 60 ? 'mid' : s < 90 ? 'high' : 'full');
+                val.textContent  = s > 0 ? s + '%' : '—';
+            });
+
+            // Maturity banner
+            const level = MATURITY_LEVELS.find(l => total >= l.min && total <= l.max) || MATURITY_LEVELS[0];
+            document.getElementById('rd-maturity-icon').textContent  = level.icon;
+            document.getElementById('rd-maturity-title').textContent = level.title;
+            document.getElementById('rd-maturity-desc').textContent  = level.desc;
+            const pill = document.getElementById('rd-maturity-pill');
+            pill.textContent = total + ' / 100';
+            pill.style.cssText = `margin-right: auto; margin-left: 0; padding: 6px 16px; border-radius: 40px; font-size: 0.78rem; font-weight: 700; border: 1px solid; white-space: nowrap; flex-shrink: 0; background: rgba(0,0,0,0.3); border-color: ${level.color}; color: ${level.color};`;
+
+            // Diagnosis
+            updateDiagnosis();
+
+            // Radar
+            drawRadar(vals);
+
+            // WhatsApp link
+            updateWALink(total, level);
+        }
+
+        // ── DIAGNOSIS TEXT ────────────────────────────────────────
+        function updateDiagnosis() {
+            const answered = AXES.filter(a => scores[a.id] > 0);
+            if (answered.length === 0) {
+                document.getElementById('rd-diagnosis-text').textContent =
+                    'أجب على الأسئلة على اليسار للحصول على تشخيص مخصص لمؤسستك.';
+                return;
+            }
+
+            // Find weakest axis
+            const weakest = AXES.reduce((prev, curr) =>
+                (scores[curr.id] > 0 && scores[curr.id] < scores[prev.id] || scores[prev.id] === 0) ? curr : prev
+            );
+
+            const s = scores[weakest.id];
+            const tier = s < 30 ? 'low' : s < 70 ? 'mid' : 'high';
+            const diag = DIAGNOSES[weakest.id][tier];
+
+            const allAnswered = answered.length === AXES.length;
+            const total = Math.round(AXES.map(a => scores[a.id]).reduce((a, b) => a + b, 0) / AXES.length);
+
+            document.getElementById('rd-diagnosis-text').textContent = allAnswered
+                ? `نقطتك الإجمالية: ${total}/100. أبرز توصية: ${diag}`
+                : `الأولوية الفورية — ${weakest.axis.split('—')[1].trim()}: ${diag}`;
+        }
+
+        // ── RADAR CHART ───────────────────────────────────────────
+        function drawRadar(vals) {
+            const canvas = document.getElementById('rd-radar-canvas');
+            const ctx    = canvas.getContext('2d');
+            const W = canvas.offsetWidth || 320;
+            const H = 300;
+            canvas.width  = W * window.devicePixelRatio;
+            canvas.height = H * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const cx = W / 2, cy = H / 2 + 10;
+            const R  = Math.min(W, H) * 0.35;
+            const N  = vals.length;
+            const labels = ['بنية تحتية', 'بيانات', 'ذكاء اصطناعي', 'أتمتة', 'كوادر'];
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Draw grid rings
+            [20, 40, 60, 80, 100].forEach(ring => {
+                const r = (ring / 100) * R;
+                ctx.beginPath();
+                for (let i = 0; i < N; i++) {
+                    const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
+                    const x = cx + r * Math.cos(angle);
+                    const y = cy + r * Math.sin(angle);
+                    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = 'rgba(197, 168, 128, 0.12)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Ring label
+                ctx.fillStyle = 'rgba(197, 168, 128, 0.35)';
+                ctx.font = `${10 * 0.9}px Alexandria, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText(ring, cx + 4, cy - r + 12);
+            });
+
+            // Draw spokes
+            for (let i = 0; i < N; i++) {
+                const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + R * Math.cos(angle), cy + R * Math.sin(angle));
+                ctx.strokeStyle = 'rgba(197, 168, 128, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Draw data polygon
+            ctx.beginPath();
+            vals.forEach((v, i) => {
+                const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
+                const r = ((v || 0) / 100) * R;
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.closePath();
+
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);
+            grad.addColorStop(0, 'rgba(16, 185, 129, 0.45)');
+            grad.addColorStop(1, 'rgba(197, 168, 128, 0.15)');
+            ctx.fillStyle = grad;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.85)';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw dots
+            vals.forEach((v, i) => {
+                const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
+                const r = ((v || 0) / 100) * R;
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = v >= 80 ? '#c5a880' : '#10b981';
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            });
+
+            // Labels
+            ctx.font = `bold ${11}px Alexandria, sans-serif`;
+            ctx.fillStyle = 'rgba(232, 232, 232, 0.8)';
+            for (let i = 0; i < N; i++) {
+                const angle = (Math.PI * 2 * i / N) - Math.PI / 2;
+                const lx = cx + (R + 24) * Math.cos(angle);
+                const ly = cy + (R + 24) * Math.sin(angle);
+                ctx.textAlign = lx > cx + 5 ? 'start' : lx < cx - 5 ? 'end' : 'center';
+                ctx.fillText(labels[i], lx, ly + 4);
+            }
+        }
+
+        // ── WHATSAPP LINK ─────────────────────────────────────────
+        function updateWALink(total, level) {
+            const lines = AXES.map(a => {
+                const s = scores[a.id];
+                const name = a.axis.split('—')[1].trim();
+                return s > 0 ? `• ${name}: ${s}/100` : null;
+            }).filter(Boolean);
+
+            const msg = encodeURIComponent(
+                `مرحباً S&R CoreSync Solutions،\n\n` +
+                `أكملت تقييم الجاهزية الرقمية:\n\n` +
+                lines.join('\n') + '\n\n' +
+                `📊 النقطة الإجمالية: ${total}/100\n` +
+                `🏷️ المستوى: ${level.title}\n\n` +
+                `أودّ الاطلاع على خارطة طريق مخصصة لمؤسستي.`
+            );
+            document.getElementById('rd-wa-btn').href =
+                `https://wa.me/31687764998?text=${msg}`;
+        }
+
+        // ── RESET ─────────────────────────────────────────────────
+        function resetAll() {
+            AXES.forEach(a => { scores[a.id] = 0; });
+            renderQuestions();
+            document.getElementById('rd-progress-fill').style.width = '0%';
+            document.getElementById('rd-progress-pct').textContent = '0%';
+            document.getElementById('rd-total-score').textContent = '0';
+            document.getElementById('rd-maturity-title').textContent = 'أجب على الأسئلة لرؤية نتيجتك';
+            document.getElementById('rd-maturity-desc').textContent = 'سيُحدَّث هذا الشريط تلقائياً مع كل إجابة. النتيجة الكاملة = 100 نقطة.';
+            document.getElementById('rd-maturity-pill').textContent = '0 / 100';
+            document.getElementById('rd-diagnosis-text').textContent = 'أجب على الأسئلة على اليسار للحصول على تشخيص مخصص لمؤسستك.';
+            drawRadar([0, 0, 0, 0, 0]);
+        }
+
+        // ── INIT ──────────────────────────────────────────────────
+        renderQuestions();
+        drawRadar([0, 0, 0, 0, 0]);
+        window.addEventListener('resize', () => {
+            drawRadar(AXES.map(a => scores[a.id]));
+        });
+
+    })();
+    </script>
+</body>
+</html>
