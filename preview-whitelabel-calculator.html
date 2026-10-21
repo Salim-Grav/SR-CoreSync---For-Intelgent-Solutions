@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <title>حاسبة تراخيص White-Label ومولد عروض الأسعار الفورية • S&R CoreSync Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="حاسبة تراخيص المنصات السيادية White-Label وتوليد عروض الأسعار الرسمية PDF فوراً — CivicSync™ · HealthBridge™ · OmniBakery™ — S&R CoreSync Solutions B.V.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           S&R CoreSync Solutions — White-Label License Calculator
+           Design System v2.0 · Sovereign Dark Theme
+        ═══════════════════════════════════════════════════════════════ */
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg: #040806;
+            --sr-card: rgba(10, 19, 14, 0.92);
+            --sr-card-hover: rgba(15, 28, 20, 0.95);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-border-active: rgba(197, 168, 128, 0.6);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+            --sr-emerald-light: #6ee7b7;
+            --sr-rose: #f43f5e;
+            --sr-violet: #a78bfa;
+            --sr-amber: #f59e0b;
+            --sr-radius: 16px;
+            --sr-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            --sr-font-ar: 'Alexandria', system-ui, sans-serif;
+            --sr-font-en: 'Plus Jakarta Sans', system-ui, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--sr-bg);
+            background-image: 
+                radial-gradient(ellipse 60% 40% at 20% 10%, rgba(197,168,128,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 80% 90%, rgba(16,185,129,0.03) 0%, transparent 50%);
+            color: #ffffff;
+            font-family: var(--sr-font-ar);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* ── Header Bar ── */
+        .wl-header {
+            background: rgba(7, 13, 10, 0.96);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--sr-border);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .wl-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .wl-emblem {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--sr-gold);
+            box-shadow: 0 0 18px rgba(197,168,128,0.3);
+        }
+
+        .wl-brand-text h1 {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.2;
+        }
+
+        .wl-brand-text p {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .wl-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wl-btn-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: #fff;
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .wl-btn-nav:hover {
+            background: rgba(197,168,128,0.18);
+            border-color: var(--sr-gold);
+            color: var(--sr-gold-light);
+        }
+
+        /* ── Hero Banner ── */
+        .wl-hero {
+            text-align: center;
+            padding: 40px 20px 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wl-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(197,168,128,0.12);
+            border: 1px solid rgba(197,168,128,0.35);
+            color: var(--sr-gold-light);
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .wl-hero h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .wl-hero h2 span {
+            background: linear-gradient(135deg, var(--sr-gold-light), var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .wl-hero p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ── Main Layout ── */
+        .wl-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 28px;
+        }
+
+        @media (max-width: 1100px) {
+            .wl-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wl-card {
+            background: var(--sr-card);
+            border: 1px solid var(--sr-border);
+            border-radius: var(--sr-radius);
+            padding: 28px;
+            box-shadow: var(--sr-shadow);
+        }
+
+        .wl-step-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wl-step-sub {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .wl-divider {
+            border: none;
+            border-top: 1px solid var(--sr-border);
+            margin: 26px 0;
+        }
+
+        /* ── Step 1: Platform Cards ── */
+        .wl-platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .wl-platform-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wl-platform-card {
+            position: relative;
+            background: rgba(255,255,255,0.02);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: var(--sr-radius);
+            padding: 20px 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .wl-platform-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, var(--accent-glow, rgba(197,168,128,0.08)) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .wl-platform-card:hover::before,
+        .wl-platform-card.selected::before {
+            opacity: 1;
+        }
+
+        .wl-platform-card:hover {
+            border-color: var(--accent-color, var(--sr-gold));
+            transform: translateY(-3px);
+        }
+
+        .wl-platform-card.selected {
+            border-color: var(--accent-color, var(--sr-gold));
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 0 30px var(--accent-glow, rgba(197,168,128,0.15));
+        }
+
+        .wl-platform-card .wl-check-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all 0.25s ease;
+        }
+
+        [dir="ltr"] .wl-platform-card .wl-check-badge {
+            left: auto;
+            right: 10px;
+        }
+
+        .wl-platform-card.selected .wl-check-badge {
+            background: var(--sr-emerald);
+            border-color: var(--sr-emerald);
+            color: #010907;
+        }
+
+        .wl-plat-icon {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            display: block;
+            position: relative;
+        }
+
+        .wl-plat-name {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+            position: relative;
+        }
+
+        .wl-plat-desc {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .wl-plat-base-price {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: var(--sr-gold);
+            position: relative;
+        }
+
+        .wl-plat-base-unit {
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.45);
+            position: relative;
+        }
+
+        /* Platform accent colors */
+        .wl-platform-card[data-platform="civicsync"] {
+            --accent-color: #38bdf8;
+            --accent-glow: rgba(56,189,248,0.1);
+        }
+        .wl-platform-card[data-platform="healthbridge"] {
+            --accent-color: #10b981;
+            --accent-glow: rgba(16,185,129,0.1);
+        }
+        .wl-platform-card[data-platform="omnibakery"] {
+            --accent-color: #f59e0b;
+            --accent-glow: rgba(245,158,11,0.1);
+        }
+
+        /* ── Step 2: License Tier ── */
+        .wl-tier-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .wl-tier-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wl-tier-card {
+            background: rgba(255,255,255,0.02);
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 18px 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .wl-tier-card:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197,168,128,0.06);
+        }
+
+        .wl-tier-card.active {
+            border-color: var(--sr-gold);
+            background: linear-gradient(145deg, rgba(197,168,128,0.18), rgba(197,168,128,0.05));
+            box-shadow: 0 4px 20px rgba(197,168,128,0.15);
+        }
+
+        .wl-tier-popular {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #010907;
+            font-size: 0.62rem;
+            font-weight: 900;
+            padding: 3px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .wl-tier-name {
+            font-size: 0.92rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .wl-tier-seats {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 8px;
+        }
+
+        .wl-tier-price {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+        }
+
+        .wl-tier-period {
+            font-size: 0.66rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* ── Step 3: Seats Slider ── */
+        .wl-seats-control {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid var(--sr-border);
+            border-radius: 14px;
+            padding: 16px 20px;
+        }
+
+        .wl-seats-label {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.8);
+            min-width: fit-content;
+        }
+
+        .wl-seats-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 999px;
+            outline: none;
+        }
+
+        .wl-seats-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--sr-gold);
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(197,168,128,0.4);
+        }
+
+        .wl-seats-val {
+            min-width: 60px;
+            background: rgba(197,168,128,0.15);
+            border: 1px solid rgba(197,168,128,0.4);
+            border-radius: 10px;
+            padding: 6px 10px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            font-family: var(--sr-font-en);
+        }
+
+        /* ── Step 4: Deployment Model ── */
+        .wl-deploy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .wl-deploy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wl-deploy-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .wl-deploy-card:hover {
+            background: rgba(197,168,128,0.06);
+            border-color: rgba(197,168,128,0.4);
+        }
+
+        .wl-deploy-card.active {
+            border-color: var(--sr-cyan);
+            background: rgba(56,189,248,0.08);
+        }
+
+        .wl-deploy-icon { font-size: 1.6rem; margin-bottom: 6px; display: block; }
+        .wl-deploy-name { font-size: 0.84rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
+        .wl-deploy-sub { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+
+        /* ── Step 5: Add-on Modules ── */
+        .wl-modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px;
+        }
+
+        .wl-module-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .wl-module-box:hover {
+            background: rgba(197,168,128,0.06);
+            border-color: rgba(197,168,128,0.35);
+        }
+
+        .wl-module-box.checked {
+            background: rgba(197,168,128,0.12);
+            border-color: var(--sr-gold);
+        }
+
+        .wl-module-chk {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--sr-gold);
+            cursor: pointer;
+        }
+
+        .wl-module-info { flex: 1; }
+        .wl-module-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wl-module-fee { font-size: 0.76rem; font-weight: 800; color: var(--sr-gold); }
+        .wl-module-desc { font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+        /* ── Step 6: Support Tier ── */
+        .wl-support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .wl-support-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wl-support-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .wl-support-card:hover {
+            background: rgba(16,185,129,0.06);
+            border-color: rgba(16,185,129,0.4);
+        }
+
+        .wl-support-card.active {
+            border-color: var(--sr-emerald);
+            background: rgba(16,185,129,0.1);
+        }
+
+        .wl-support-name { font-size: 0.86rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
+        .wl-support-desc { font-size: 0.68rem; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+        .wl-support-price { font-size: 0.78rem; font-weight: 800; color: var(--sr-emerald-light); }
+
+        /* ── Sticky Summary Sidebar ── */
+        .wl-summary {
+            background: linear-gradient(180deg, #0d1a14 0%, #050d09 100%);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+
+        .wl-sum-header {
+            border-bottom: 1px solid rgba(197,168,128,0.25);
+            padding-bottom: 16px;
+        }
+
+        .wl-sum-ref {
+            display: inline-block;
+            background: rgba(197,168,128,0.15);
+            border: 1px solid rgba(197,168,128,0.4);
+            color: var(--sr-gold-light);
+            font-family: monospace;
+            font-size: 0.74rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        .wl-sum-label {
+            font-size: 0.76rem;
+            color: rgba(255,255,255,0.65);
+            font-weight: 700;
+        }
+
+        .wl-sum-total {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            line-height: 1.1;
+            font-family: var(--sr-font-en);
+            margin: 4px 0;
+        }
+
+        .wl-sum-period-tag {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+
+        .wl-sum-curr-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .wl-curr-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.7);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .wl-curr-btn.active {
+            background: var(--sr-gold);
+            color: #010907;
+            border-color: var(--sr-gold);
+            font-weight: 900;
+        }
+
+        /* KPI Row */
+        .wl-kpi-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .wl-kpi-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 10px 12px;
+            text-align: center;
+        }
+
+        .wl-kpi-val {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--sr-emerald);
+            font-family: var(--sr-font-en);
+        }
+
+        .wl-kpi-val--gold { color: var(--sr-gold-light); }
+        .wl-kpi-val--cyan { color: var(--sr-cyan); }
+        .wl-kpi-lbl { font-size: 0.66rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+        /* Selected platforms pills */
+        .wl-selected-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .wl-sel-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(197,168,128,0.12);
+            border: 1px solid rgba(197,168,128,0.35);
+            border-radius: 999px;
+            padding: 3px 10px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+        }
+
+        /* Breakdown list */
+        .wl-breakdown-heading {
+            font-size: 0.76rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 8px;
+        }
+
+        .wl-breakdown-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .wl-item-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px dashed rgba(255,255,255,0.07);
+            padding-bottom: 4px;
+        }
+
+        .wl-item-row span:last-child { font-weight: 800; color: var(--sr-gold); }
+
+        /* Client fields */
+        .wl-client-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .wl-input {
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(197,168,128,0.3);
+            border-radius: 10px;
+            padding: 9px 14px;
+            color: #fff;
+            font-size: 0.82rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .wl-input:focus { border-color: var(--sr-gold); }
+
+        /* CTA Buttons */
+        .wl-cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .wl-btn-pdf {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold) 0%, var(--sr-gold-dark) 100%);
+            color: #010907;
+            font-weight: 900;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 0.92rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 6px 20px rgba(197,168,128,0.35);
+            font-family: inherit;
+        }
+
+        .wl-btn-pdf:hover {
+            background: var(--sr-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(197,168,128,0.5);
+        }
+
+        .wl-btn-book {
+            width: 100%;
+            background: rgba(16,185,129,0.12);
+            border: 1.5px solid var(--sr-emerald);
+            color: var(--sr-emerald-light);
+            font-weight: 800;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 0.86rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .wl-btn-book:hover {
+            background: var(--sr-emerald);
+            color: #010907;
+        }
+
+        /* ═══════════════════════════════════════════════
+           PDF Quotation Modal
+        ═══════════════════════════════════════════════ */
+        .wl-quote-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .wl-quote-overlay.active { display: flex; }
+
+        .wl-quote-sheet {
+            background: #fff;
+            color: #0f172a;
+            width: 100%;
+            max-width: 900px;
+            max-height: 94vh;
+            border-radius: 16px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: var(--sr-font-en);
+        }
+
+        .wl-sheet-toolbar {
+            background: #0f172a;
+            color: #fff;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wl-sheet-toolbar-title {
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--sr-gold-light);
+        }
+
+        .wl-sheet-toolbar-actions { display: flex; gap: 8px; }
+
+        .wl-sheet-btn-print {
+            background: var(--sr-gold);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.82rem;
+        }
+
+        .wl-sheet-btn-close {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+        }
+
+        .wl-sheet-content {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
+            background: #fff;
+        }
+
+        .wl-sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .wl-sheet-brand-title { font-size: 1.35rem; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
+        .wl-sheet-brand-sub { font-size: 0.78rem; color: #64748b; margin-bottom: 2px; }
+        .wl-sheet-ref-box { text-align: left; }
+
+        .wl-sheet-ref-pill {
+            font-family: monospace;
+            font-size: 0.88rem;
+            font-weight: 900;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        .wl-sheet-meta-date { font-size: 0.8rem; color: #64748b; margin-top: 6px; }
+        .wl-sheet-meta-status { font-size: 0.8rem; color: var(--sr-emerald); font-weight: 700; }
+
+        .wl-sheet-client-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+        }
+
+        .wl-sheet-client-lbl { font-size: 0.76rem; font-weight: 700; color: #64748b; margin-bottom: 3px; }
+        .wl-sheet-client-org { font-size: 1rem; font-weight: 900; color: #0f172a; }
+        .wl-sheet-client-person { font-size: 0.82rem; color: #334155; }
+
+        .wl-sheet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .wl-sheet-table th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.78rem;
+            padding: 10px 14px;
+            text-align: right;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        [dir="ltr"] .wl-sheet-table th { text-align: left; }
+
+        .wl-sheet-table td {
+            padding: 12px 14px;
+            font-size: 0.86rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .wl-sheet-col-desc { width: 50%; }
+        .wl-sheet-col-qty { width: 15%; text-align: center; }
+        .wl-sheet-col-unit { width: 15%; text-align: center; }
+        .wl-sheet-col-val { width: 20%; text-align: left; }
+
+        .wl-sheet-totals {
+            margin-right: auto;
+            width: 340px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .wl-sheet-row-sub { display: flex; justify-content: space-between; font-size: 0.84rem; color: #64748b; margin-bottom: 6px; }
+        .wl-sheet-row-sub strong { color: #0f172a; }
+        .wl-sheet-row-tax { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--sr-emerald); margin-bottom: 8px; }
+        .wl-sheet-row-grand { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 900; color: #0f172a; border-top: 2px solid #e2e8f0; padding-top: 8px; }
+        .wl-sheet-grand-val { color: #b45309; }
+
+        .wl-sheet-terms { margin-top: 24px; font-size: 0.76rem; color: #64748b; line-height: 1.6; }
+        .wl-sheet-terms-list { padding-right: 18px; margin-top: 4px; }
+
+        .wl-sheet-sign-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+        }
+
+        .wl-sheet-sign-lbl { font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 8px; }
+        .wl-sheet-signature { font-family: serif; font-size: 1.15rem; font-weight: bold; color: #b45309; }
+        .wl-sheet-sign-sub { font-size: 0.74rem; color: #94a3b8; }
+        .wl-sheet-sign-line { height: 25px; border-bottom: 1.5px solid #cbd5e1; width: 180px; margin: 0 auto 6px; }
+
+        .wl-sheet-center { text-align: center; }
+        .wl-sheet-amount { text-align: left; font-weight: 800; }
+        .wl-sheet-muted { color: #64748b; font-size: 0.78rem; }
+
+        /* Print Styles */
+        @media print {
+            body * { visibility: hidden !important; }
+            .wl-quote-overlay,
+            .wl-quote-overlay.active,
+            .wl-quote-sheet,
+            .wl-sheet-content,
+            .wl-sheet-content * { visibility: visible !important; }
+            .wl-quote-overlay {
+                position: absolute;
+                inset: 0;
+                background: transparent;
+                padding: 0;
+                display: block !important;
+            }
+            .wl-sheet-toolbar { display: none !important; }
+            .wl-quote-sheet {
+                max-width: 100% !important;
+                max-height: none !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .wl-sheet-content { padding: 0 !important; }
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wl-card { animation: fadeUp 0.5s ease both; }
+        .wl-summary { animation: fadeUp 0.6s ease 0.1s both; }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ Header ═══ -->
+    <header class="wl-header">
+        <a href="./index.html" class="wl-brand">
+            <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R Emblem" class="wl-emblem">
+            <div class="wl-brand-text">
+                <h1>S&R CoreSync • حاسبة تراخيص White-Label</h1>
+                <p>Instant B2B License Quote Calculator & PDF Generator</p>
+            </div>
+        </a>
+        <div class="wl-nav-actions">
+            <a href="./preview-estimator.html" class="wl-btn-nav">حاسبة المشاريع 🧮</a>
+            <a href="./preview-work.html" class="wl-btn-nav">معرض الأعمال 🎨</a>
+            <a href="./index.html" class="wl-btn-nav">الرئيسية ⌂</a>
+        </div>
+    </header>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="wl-hero">
+        <span class="wl-hero-badge">🏛️ White-Label Sovereign Licensing</span>
+        <h2>احسب تكلفة ترخيص <span>المنصة السيادية</span> لمؤسستك فوراً</h2>
+        <p>اختر المنصات، حدد عدد التراخيص والمقاعد، وارفع عرض السعر الرسمي الموثق بصيغة PDF خلال ثوانٍ — بلا أي التزام مالي مسبق.</p>
+    </section>
+
+    <!-- ═══ Main Container ═══ -->
+    <main class="wl-container">
+
+        <!-- ═══ Configuration Form ═══ -->
+        <section class="wl-card">
+
+            <!-- Step 1: Select Platforms -->
+            <div class="wl-step-title">
+                <span>1️⃣ اختر المنصات السيادية المطلوبة:</span>
+            </div>
+            <p class="wl-step-sub">يمكنك اختيار أكثر من منصة واحدة — كل منصة تُرخّص بشكل مستقل تحت علامتك التجارية:</p>
+
+            <div class="wl-platform-grid">
+                <div class="wl-platform-card selected" data-platform="civicsync" data-base="2400" data-name-ar="CivicSync™ — منظومة الجاليات" data-name-en="CivicSync™ Community OS">
+                    <span class="wl-check-badge">✓</span>
+                    <span class="wl-plat-icon">🌐</span>
+                    <div class="wl-plat-name">S&R CivicSync™</div>
+                    <div class="wl-plat-desc">منظومة إدارة الجاليات والمنظمات العالمية — عضويات، مساعد AI قانوني، بطاقات NFC/QR.</div>
+                    <div class="wl-plat-base-price">€2,400</div>
+                    <div class="wl-plat-base-unit">/ ترخيص سنوي أساسي</div>
+                </div>
+
+                <div class="wl-platform-card" data-platform="healthbridge" data-base="3200" data-name-ar="HealthBridge™ — المنظومة الطبية" data-name-en="HealthBridge™ Clinical Suite">
+                    <span class="wl-check-badge">✓</span>
+                    <span class="wl-plat-icon">🏥</span>
+                    <div class="wl-plat-name">S&R HealthBridge™</div>
+                    <div class="wl-plat-desc">المنظومة السريرية والطبية — 16 قسماً، WebRTC، وصفات إلكترونية، امتثال GDPR.</div>
+                    <div class="wl-plat-base-price">€3,200</div>
+                    <div class="wl-plat-base-unit">/ ترخيص سنوي أساسي</div>
+                </div>
+
+                <div class="wl-platform-card" data-platform="omnibakery" data-base="1800" data-name-ar="OmniBakery™ — منظومة المخابز" data-name-en="OmniBakery™ Bakery ERP">
+                    <span class="wl-check-badge">✓</span>
+                    <span class="wl-plat-icon">🥖</span>
+                    <div class="wl-plat-name">S&R OmniBakery™</div>
+                    <div class="wl-plat-desc">منظومة المخابز والتوزيع الغذائي — POS لمسي، تطبيق السائقين، الفوترة الضريبية BTW.</div>
+                    <div class="wl-plat-base-price">€1,800</div>
+                    <div class="wl-plat-base-unit">/ ترخيص سنوي أساسي</div>
+                </div>
+            </div>
+
+            <hr class="wl-divider">
+
+            <!-- Step 2: License Tier -->
+            <div class="wl-step-title">
+                <span>2️⃣ باقة الترخيص (License Tier):</span>
+            </div>
+            <p class="wl-step-sub">حدد مستوى باقة الترخيص السنوي بناءً على حجم مؤسستك:</p>
+
+            <div class="wl-tier-grid">
+                <div class="wl-tier-card active" data-tier="starter" data-multiplier="1.0">
+                    <div class="wl-tier-name">Starter</div>
+                    <div class="wl-tier-seats">1 — 5 مقاعد</div>
+                    <div class="wl-tier-price">×1.0</div>
+                    <div class="wl-tier-period">السعر الأساسي</div>
+                </div>
+
+                <div class="wl-tier-card" data-tier="professional" data-multiplier="1.6">
+                    <span class="wl-tier-popular">⭐ الأكثر طلباً</span>
+                    <div class="wl-tier-name">Professional</div>
+                    <div class="wl-tier-seats">6 — 25 مقعد</div>
+                    <div class="wl-tier-price">×1.6</div>
+                    <div class="wl-tier-period">دعم أولوي + تخصيصات</div>
+                </div>
+
+                <div class="wl-tier-card" data-tier="enterprise" data-multiplier="2.5">
+                    <div class="wl-tier-name">Enterprise</div>
+                    <div class="wl-tier-seats">26+ مقعد غير محدود</div>
+                    <div class="wl-tier-price">×2.5</div>
+                    <div class="wl-tier-period">SLA خاص + بنية مخصصة</div>
+                </div>
+            </div>
+
+            <hr class="wl-divider">
+
+            <!-- Step 3: Number of Seats -->
+            <div class="wl-step-title">
+                <span>3️⃣ عدد المقاعد (Seats / Users):</span>
+            </div>
+            <p class="wl-step-sub">حدد عدد المستخدمين المتزامنين الذين يحتاجون وصولاً كاملاً للمنظومة:</p>
+
+            <div class="wl-seats-control">
+                <span class="wl-seats-label">المقاعد:</span>
+                <input type="range" id="seatsSlider" class="wl-seats-slider" min="1" max="100" value="5">
+                <div class="wl-seats-val" id="seatsDisplay">5</div>
+            </div>
+
+            <hr class="wl-divider">
+
+            <!-- Step 4: Deployment Model -->
+            <div class="wl-step-title">
+                <span>4️⃣ نموذج النشر (Deployment):</span>
+            </div>
+            <p class="wl-step-sub">اختر بيئة الاستضافة المناسبة لمتطلبات الامتثال:</p>
+
+            <div class="wl-deploy-grid">
+                <div class="wl-deploy-card active" data-deploy="saas" data-fee="0">
+                    <span class="wl-deploy-icon">☁️</span>
+                    <div class="wl-deploy-name">SaaS Cloud</div>
+                    <div class="wl-deploy-sub">استضافة AMS-IX مُدارة بالكامل — مضمن</div>
+                </div>
+
+                <div class="wl-deploy-card" data-deploy="hybrid" data-fee="1200">
+                    <span class="wl-deploy-icon">🔗</span>
+                    <div class="wl-deploy-name">Hybrid Cloud</div>
+                    <div class="wl-deploy-sub">سحابة مختلطة بين خوادمكم و AMS-IX — +€1,200</div>
+                </div>
+
+                <div class="wl-deploy-card" data-deploy="onprem" data-fee="2800">
+                    <span class="wl-deploy-icon">🏢</span>
+                    <div class="wl-deploy-name">On-Premise</div>
+                    <div class="wl-deploy-sub">نشر خاص في مركز بياناتكم — +€2,800</div>
+                </div>
+            </div>
+
+            <hr class="wl-divider">
+
+            <!-- Step 5: Add-on Modules -->
+            <div class="wl-step-title">
+                <span>5️⃣ وحدات ومكونات إضافية (Add-ons):</span>
+            </div>
+            <p class="wl-step-sub">فعّل المكونات المتقدمة لتعزيز قوة منصتك المرخّصة:</p>
+
+            <div class="wl-modules-grid">
+                <label class="wl-module-box checked">
+                    <input type="checkbox" class="wl-module-chk" checked data-fee="850" data-name="محرك الذكاء الاصطناعي (AI Engine)">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>🤖 محرك AI والأتمتة</span>
+                            <span class="wl-module-fee">+€850</span>
+                        </div>
+                        <div class="wl-module-desc">مساعد ذكي RAG + أتمتة مهام سير العمل.</div>
+                    </div>
+                </label>
+
+                <label class="wl-module-box checked">
+                    <input type="checkbox" class="wl-module-chk" checked data-fee="450" data-name="بوابات دفع أوروبية (iDEAL + Stripe)">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>💳 بوابات الدفع المعتمدة</span>
+                            <span class="wl-module-fee">+€450</span>
+                        </div>
+                        <div class="wl-module-desc">iDEAL, Bancontact, Stripe, SEPA Direct Debit.</div>
+                    </div>
+                </label>
+
+                <label class="wl-module-box">
+                    <input type="checkbox" class="wl-module-chk" data-fee="350" data-name="واجهة ثلاثية اللغات (AR/NL/EN)">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>🌍 واجهة ثلاثية اللغات</span>
+                            <span class="wl-module-fee">+€350</span>
+                        </div>
+                        <div class="wl-module-desc">توافق RTL/LTR وتبديل لغوي فوري.</div>
+                    </div>
+                </label>
+
+                <label class="wl-module-box">
+                    <input type="checkbox" class="wl-module-chk" data-fee="1800" data-name="تطبيقات هاتف أصلية (iOS & Android)">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>📱 تطبيقات الموبايل الأصلية</span>
+                            <span class="wl-module-fee">+€1,800</span>
+                        </div>
+                        <div class="wl-module-desc">iOS + Android + إشعارات Push + Biometric Auth.</div>
+                    </div>
+                </label>
+
+                <label class="wl-module-box">
+                    <input type="checkbox" class="wl-module-chk" data-fee="600" data-name="API Gateway & Webhooks">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>🔌 API Gateway & Webhooks</span>
+                            <span class="wl-module-fee">+€600</span>
+                        </div>
+                        <div class="wl-module-desc">REST/GraphQL + Webhooks + Rate Limiting.</div>
+                    </div>
+                </label>
+
+                <label class="wl-module-box">
+                    <input type="checkbox" class="wl-module-chk" data-fee="1200" data-name="ملكية الكود المصدري (Source Code Escrow)">
+                    <div class="wl-module-info">
+                        <div class="wl-module-name">
+                            <span>🔑 ملكية الكود المصدري</span>
+                            <span class="wl-module-fee">+€1,200</span>
+                        </div>
+                        <div class="wl-module-desc">ترخيص دائم + Source Code Escrow.</div>
+                    </div>
+                </label>
+            </div>
+
+            <hr class="wl-divider">
+
+            <!-- Step 6: Support Tier -->
+            <div class="wl-step-title">
+                <span>6️⃣ مستوى الدعم الفني والصيانة (SLA):</span>
+            </div>
+            <p class="wl-step-sub">اختر مستوى الدعم التقني والاستجابة لما بعد التدشين:</p>
+
+            <div class="wl-support-grid">
+                <div class="wl-support-card active" data-support="standard" data-fee="0">
+                    <div class="wl-support-name">Standard</div>
+                    <div class="wl-support-desc">بريد إلكتروني + تذاكر دعم — أيام العمل</div>
+                    <div class="wl-support-price">مضمن مجاناً</div>
+                </div>
+
+                <div class="wl-support-card" data-support="priority" data-fee="750">
+                    <div class="wl-support-name">Priority</div>
+                    <div class="wl-support-desc">استجابة خلال 4 ساعات + مدير حساب مخصص</div>
+                    <div class="wl-support-price">+€750 / سنوي</div>
+                </div>
+
+                <div class="wl-support-card" data-support="dedicated" data-fee="1800">
+                    <div class="wl-support-name">Dedicated 24/7</div>
+                    <div class="wl-support-desc">دعم على مدار الساعة + Slack Channel + SLA 99.9%</div>
+                    <div class="wl-support-price">+€1,800 / سنوي</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ═══ Live Summary Sidebar ═══ -->
+        <aside class="wl-summary">
+            <div class="wl-sum-header">
+                <span class="wl-sum-ref" id="wlRefCode">WL-LIC-2026-4721</span>
+                <div class="wl-sum-label">الاستثمار السنوي الإجمالي (Annual License):</div>
+                <div class="wl-sum-total" id="wlTotalDisplay">€3,700</div>
+                <div class="wl-sum-period-tag">/ ترخيص سنوي قابل للتجديد</div>
+
+                <div class="wl-sum-curr-row">
+                    <button type="button" class="wl-curr-btn active" data-curr="EUR">يورو (€)</button>
+                    <button type="button" class="wl-curr-btn" data-curr="SAR">ريال (SAR)</button>
+                    <button type="button" class="wl-curr-btn" data-curr="USD">دولار ($)</button>
+                    <button type="button" class="wl-curr-btn" data-curr="GBP">جنيه (£)</button>
+                </div>
+            </div>
+
+            <!-- KPIs -->
+            <div class="wl-kpi-row">
+                <div class="wl-kpi-box">
+                    <div class="wl-kpi-val" id="wlRoiVal">+320%</div>
+                    <div class="wl-kpi-lbl">العائد المتوقع (ROI)</div>
+                </div>
+                <div class="wl-kpi-box">
+                    <div class="wl-kpi-val wl-kpi-val--gold" id="wlPerSeatVal">€740</div>
+                    <div class="wl-kpi-lbl">التكلفة لكل مقعد/سنة</div>
+                </div>
+                <div class="wl-kpi-box">
+                    <div class="wl-kpi-val wl-kpi-val--cyan" id="wlPlatCountVal">1</div>
+                    <div class="wl-kpi-lbl">منصات مرخصة</div>
+                </div>
+                <div class="wl-kpi-box">
+                    <div class="wl-kpi-val" id="wlSeatsKpi">5</div>
+                    <div class="wl-kpi-lbl">مقاعد مستخدمين</div>
+                </div>
+            </div>
+
+            <!-- Selected platforms pills -->
+            <div>
+                <div class="wl-breakdown-heading">المنصات المختارة:</div>
+                <div class="wl-selected-pills" id="wlSelectedPills">
+                    <span class="wl-sel-pill">🌐 CivicSync™</span>
+                </div>
+            </div>
+
+            <!-- Breakdown -->
+            <div>
+                <div class="wl-breakdown-heading">تفصيل البنود:</div>
+                <div class="wl-breakdown-list" id="wlBreakdownList"></div>
+            </div>
+
+            <!-- Client Fields -->
+            <div class="wl-client-fields">
+                <input type="text" id="wlClientOrg" class="wl-input" placeholder="اسم المؤسسة أو الشركة الموقرة..." value="">
+                <input type="text" id="wlClientContact" class="wl-input" placeholder="اسم المسؤول أو مدير المشتريات..." value="">
+                <input type="email" id="wlClientEmail" class="wl-input" placeholder="البريد الإلكتروني الرسمي..." value="">
+            </div>
+
+            <!-- CTAs -->
+            <div class="wl-cta-buttons">
+                <button type="button" id="btnOpenWlQuote" class="wl-btn-pdf">
+                    📄 عرض وتنزيل عرض سعر التراخيص الرسمي (PDF)
+                </button>
+                <a href="./index.html#bookingModal" class="wl-btn-book">
+                    ⚡ حجز استشارة ترخيص مجانية مع المؤسسين
+                </a>
+            </div>
+        </aside>
+    </main>
+
+    <!-- ═══ Official PDF Quotation Modal ═══ -->
+    <div class="wl-quote-overlay" id="wlQuoteModal">
+        <div class="wl-quote-sheet">
+            <div class="wl-sheet-toolbar">
+                <div class="wl-sheet-toolbar-title">📜 عرض سعر تراخيص White-Label رسمي • S&R CoreSync Solutions</div>
+                <div class="wl-sheet-toolbar-actions">
+                    <button type="button" onclick="window.print()" class="wl-sheet-btn-print">🖨️ طباعة / حفظ PDF</button>
+                    <button type="button" onclick="document.getElementById('wlQuoteModal').classList.remove('active')" class="wl-sheet-btn-close">إغلاق ✕</button>
+                </div>
+            </div>
+
+            <div class="wl-sheet-content">
+                <div class="wl-sheet-header">
+                    <div>
+                        <h2 class="wl-sheet-brand-title">S&R CoreSync Solutions B.V.</h2>
+                        <p class="wl-sheet-brand-sub">HQ: Keizersgracht 482, 1016 GD Amsterdam, Netherlands</p>
+                        <p class="wl-sheet-brand-sub">White-Label Platform Licensing • Sovereign Cloud Infrastructure</p>
+                        <p class="wl-sheet-brand-sub">KVK / Tax ID: NL-864201938B01</p>
+                    </div>
+                    <div class="wl-sheet-ref-box">
+                        <span class="wl-sheet-ref-pill" id="sheetWlRef">WL-LIC-2026-4721</span>
+                        <p class="wl-sheet-meta-date" id="sheetWlDate"></p>
+                        <p class="wl-sheet-meta-status">الحالة: عرض سعر ترخيص رسمي معتمد</p>
+                    </div>
+                </div>
+
+                <div class="wl-sheet-client-card">
+                    <div class="wl-sheet-client-lbl">مقدم إلى السادة المحترمين:</div>
+                    <div class="wl-sheet-client-org" id="sheetWlOrg">—</div>
+                    <div class="wl-sheet-client-person" id="sheetWlPerson">—</div>
+                </div>
+
+                <table class="wl-sheet-table">
+                    <thead>
+                        <tr>
+                            <th class="wl-sheet-col-desc">بيان الترخيص والخدمة</th>
+                            <th class="wl-sheet-col-qty">الكمية</th>
+                            <th class="wl-sheet-col-unit">سعر الوحدة</th>
+                            <th class="wl-sheet-col-val">القيمة الإجمالية</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sheetWlBody"></tbody>
+                </table>
+
+                <div class="wl-sheet-totals">
+                    <div class="wl-sheet-row-sub">
+                        <span>المجموع الأساسي:</span>
+                        <strong id="sheetWlSubtotal">—</strong>
+                    </div>
+                    <div class="wl-sheet-row-tax">
+                        <span>ضريبة القيمة المضافة (0% B2B Reverse Charge):</span>
+                        <span>€0.00</span>
+                    </div>
+                    <div class="wl-sheet-row-grand">
+                        <span>الإجمالي السنوي الصافي:</span>
+                        <span id="sheetWlGrand" class="wl-sheet-grand-val">—</span>
+                    </div>
+                </div>
+
+                <div class="wl-sheet-terms">
+                    <strong>شروط الترخيص والاعتماد:</strong>
+                    <ul class="wl-sheet-terms-list">
+                        <li>العرض سارٍ لمدة 30 يوماً من تاريخ إصداره، ومحمي باتفاقية عدم إفصاح (NDA).</li>
+                        <li>الترخيص سنوي قابل للتجديد التلقائي بنفس الشروط ما لم يُخطَر كتابياً قبل 60 يوماً.</li>
+                        <li>يشمل التحديثات الأمنية والتقنية المجانية طوال فترة الترخيص الفعالة.</li>
+                        <li>نظام الدفع: 100% مقدماً عند توقيع عقد الترخيص (Net-30 للمؤسسات الكبرى).</li>
+                        <li>جميع الأسعار بعملة اليورو (€) بدون ضريبة القيمة المضافة (B2B Reverse Charge).</li>
+                    </ul>
+                </div>
+
+                <div class="wl-sheet-sign-row">
+                    <div>
+                        <div class="wl-sheet-sign-lbl">اعتماد S&R CoreSync Solutions:</div>
+                        <div class="wl-sheet-signature">M. Salim Aziza</div>
+                        <div class="wl-sheet-sign-sub">م. سليم عزيزة • المؤسس والمدير التنفيذي</div>
+                    </div>
+                    <div>
+                        <div class="wl-sheet-sign-lbl">اعتماد وقبول الطرف الثاني:</div>
+                        <div class="wl-sheet-sign-line"></div>
+                        <div class="wl-sheet-sign-sub">التوقيع والختم الرسمي</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ JavaScript Engine ═══ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ── State ──
+            const state = {
+                platforms: [{ key: 'civicsync', nameAr: 'CivicSync™ — منظومة الجاليات', nameEn: 'CivicSync™ Community OS', base: 2400 }],
+                tier: 'starter',
+                tierMultiplier: 1.0,
+                tierLabel: 'Starter',
+                seats: 5,
+                seatCost: 60,
+                deploy: 'saas',
+                deployFee: 0,
+                deployLabel: 'SaaS Cloud',
+                addons: [
+                    { name: 'محرك الذكاء الاصطناعي (AI Engine)', fee: 850 },
+                    { name: 'بوابات دفع أوروبية (iDEAL + Stripe)', fee: 450 }
+                ],
+                support: 'standard',
+                supportFee: 0,
+                supportLabel: 'Standard',
+                currency: 'EUR',
+                exchange: { EUR: 1, SAR: 4.12, USD: 1.08, GBP: 0.86 },
+                symbols: { EUR: '€', SAR: 'ر.س', USD: '$', GBP: '£' }
+            };
+
+            // ── Ref Code Generator ──
+            function genRef() {
+                const num = Math.floor(1000 + Math.random() * 9000);
+                return `WL-LIC-2026-${num}`;
+            }
+            const refCode = genRef();
+            document.getElementById('wlRefCode').textContent = refCode;
+
+            // ── Calculate ──
+            function calculate() {
+                const sym = state.symbols[state.currency];
+                const rate = state.exchange[state.currency];
+
+                // Base: sum of selected platforms * tier multiplier
+                let platformsTotal = state.platforms.reduce((s, p) => s + p.base, 0);
+                let tiered = platformsTotal * state.tierMultiplier;
+
+                // Seats cost (per-seat pricing)
+                let seatsTotal = state.seats * state.seatCost;
+
+                // Addons total
+                let addonsTotal = state.addons.reduce((s, a) => s + a.fee, 0);
+
+                // Deploy fee
+                let deployTotal = state.deployFee;
+
+                // Support fee
+                let supportTotal = state.supportFee;
+
+                // Grand total in EUR
+                let grandEUR = tiered + seatsTotal + addonsTotal + deployTotal + supportTotal;
+                let converted = Math.round(grandEUR * rate);
+
+                // === Update UI ===
+                document.getElementById('wlTotalDisplay').textContent = `${sym}${converted.toLocaleString()}`;
+
+                // KPIs
+                const roiBase = Math.round(180 + (state.platforms.length * 60) + (state.seats * 4));
+                document.getElementById('wlRoiVal').textContent = `+${roiBase}%`;
+
+                const perSeat = state.seats > 0 ? Math.round((grandEUR / state.seats) * rate) : 0;
+                document.getElementById('wlPerSeatVal').textContent = `${sym}${perSeat.toLocaleString()}`;
+
+                document.getElementById('wlPlatCountVal').textContent = state.platforms.length;
+                document.getElementById('wlSeatsKpi').textContent = state.seats;
+
+                // Selected pills
+                const pillsEl = document.getElementById('wlSelectedPills');
+                pillsEl.innerHTML = '';
+                const icons = { civicsync: '🌐', healthbridge: '🏥', omnibakery: '🥖' };
+                state.platforms.forEach(p => {
+                    const pill = document.createElement('span');
+                    pill.className = 'wl-sel-pill';
+                    pill.textContent = `${icons[p.key] || '📦'} ${p.nameAr.split('—')[0].trim()}`;
+                    pillsEl.appendChild(pill);
+                });
+
+                if (state.platforms.length === 0) {
+                    pillsEl.innerHTML = '<span style="font-size:0.74rem;color:rgba(255,255,255,0.4);">لم يتم اختيار أي منصة بعد</span>';
+                }
+
+                // Breakdown
+                const list = document.getElementById('wlBreakdownList');
+                list.innerHTML = '';
+
+                state.platforms.forEach(p => {
+                    const row = document.createElement('div');
+                    row.className = 'wl-item-row';
+                    const val = Math.round(p.base * state.tierMultiplier * rate);
+                    row.innerHTML = `<span>${p.nameAr.split('—')[0].trim()} (${state.tierLabel})</span><span>${sym}${val.toLocaleString()}</span>`;
+                    list.appendChild(row);
+                });
+
+                if (seatsTotal > 0) {
+                    const rowSeats = document.createElement('div');
+                    rowSeats.className = 'wl-item-row';
+                    rowSeats.innerHTML = `<span>مقاعد المستخدمين (${state.seats} × ${sym}${Math.round(state.seatCost * rate)})</span><span>${sym}${Math.round(seatsTotal * rate).toLocaleString()}</span>`;
+                    list.appendChild(rowSeats);
+                }
+
+                state.addons.forEach(a => {
+                    const row = document.createElement('div');
+                    row.className = 'wl-item-row';
+                    row.innerHTML = `<span>+ ${a.name}</span><span>+${sym}${Math.round(a.fee * rate).toLocaleString()}</span>`;
+                    list.appendChild(row);
+                });
+
+                if (deployTotal > 0) {
+                    const rowDeploy = document.createElement('div');
+                    rowDeploy.className = 'wl-item-row';
+                    rowDeploy.innerHTML = `<span>نشر ${state.deployLabel}</span><span>+${sym}${Math.round(deployTotal * rate).toLocaleString()}</span>`;
+                    list.appendChild(rowDeploy);
+                }
+
+                if (supportTotal > 0) {
+                    const rowSupport = document.createElement('div');
+                    rowSupport.className = 'wl-item-row';
+                    rowSupport.innerHTML = `<span>دعم ${state.supportLabel}</span><span>+${sym}${Math.round(supportTotal * rate).toLocaleString()}</span>`;
+                    list.appendChild(rowSupport);
+                }
+
+                return { grandEUR, converted, sym, rate };
+            }
+
+            // ── Platform Selection (Multi-select) ──
+            document.querySelectorAll('.wl-platform-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('selected');
+
+                    // Rebuild platforms array
+                    state.platforms = [];
+                    document.querySelectorAll('.wl-platform-card.selected').forEach(c => {
+                        state.platforms.push({
+                            key: c.dataset.platform,
+                            nameAr: c.dataset.nameAr,
+                            nameEn: c.dataset.nameEn,
+                            base: parseInt(c.dataset.base, 10)
+                        });
+                    });
+
+                    calculate();
+                });
+            });
+
+            // ── Tier Selection ──
+            document.querySelectorAll('.wl-tier-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.wl-tier-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    state.tier = card.dataset.tier;
+                    state.tierMultiplier = parseFloat(card.dataset.multiplier);
+                    state.tierLabel = card.querySelector('.wl-tier-name').textContent.trim();
+                    calculate();
+                });
+            });
+
+            // ── Seats Slider ──
+            const slider = document.getElementById('seatsSlider');
+            const seatsDisp = document.getElementById('seatsDisplay');
+            slider.addEventListener('input', () => {
+                state.seats = parseInt(slider.value, 10);
+                seatsDisp.textContent = state.seats;
+                calculate();
+            });
+
+            // ── Deployment ──
+            document.querySelectorAll('.wl-deploy-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.wl-deploy-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    state.deploy = card.dataset.deploy;
+                    state.deployFee = parseInt(card.dataset.fee, 10);
+                    state.deployLabel = card.querySelector('.wl-deploy-name').textContent.trim();
+                    calculate();
+                });
+            });
+
+            // ── Module Toggles ──
+            document.querySelectorAll('.wl-module-box').forEach(box => {
+                const chk = box.querySelector('.wl-module-chk');
+                chk.addEventListener('change', () => {
+                    box.classList.toggle('checked', chk.checked);
+
+                    state.addons = [];
+                    document.querySelectorAll('.wl-module-chk:checked').forEach(c => {
+                        state.addons.push({ name: c.dataset.name, fee: parseInt(c.dataset.fee, 10) });
+                    });
+                    calculate();
+                });
+            });
+
+            // ── Support Tier ──
+            document.querySelectorAll('.wl-support-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.wl-support-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    state.support = card.dataset.support;
+                    state.supportFee = parseInt(card.dataset.fee, 10);
+                    state.supportLabel = card.querySelector('.wl-support-name').textContent.trim();
+                    calculate();
+                });
+            });
+
+            // ── Currency Switches ──
+            document.querySelectorAll('.wl-curr-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.wl-curr-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.currency = btn.dataset.curr;
+                    calculate();
+                });
+            });
+
+            // ── Open Quote Modal ──
+            document.getElementById('btnOpenWlQuote').addEventListener('click', () => {
+                const res = calculate();
+                const org = document.getElementById('wlClientOrg').value || 'المؤسسة / الشركة الموقرة';
+                const person = document.getElementById('wlClientContact').value || 'المدير المسؤول';
+
+                document.getElementById('sheetWlRef').textContent = refCode;
+                document.getElementById('sheetWlOrg').textContent = org;
+                document.getElementById('sheetWlPerson').textContent = `عناية: ${person}`;
+
+                // Date
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+                document.getElementById('sheetWlDate').textContent = `التاريخ: ${dateStr}`;
+
+                // Table body
+                const tbody = document.getElementById('sheetWlBody');
+                tbody.innerHTML = '';
+
+                // Platform rows
+                state.platforms.forEach(p => {
+                    const unitPrice = Math.round(p.base * state.tierMultiplier * res.rate);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${p.nameEn}</strong><br><small class="wl-sheet-muted">${p.nameAr} • باقة ${state.tierLabel}</small></td>
+                        <td class="wl-sheet-center">1</td>
+                        <td class="wl-sheet-center">${res.sym}${unitPrice.toLocaleString()}</td>
+                        <td class="wl-sheet-amount">${res.sym}${unitPrice.toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Seats row
+                if (state.seats > 0) {
+                    const seatUnit = Math.round(state.seatCost * res.rate);
+                    const seatTotal = Math.round(state.seats * state.seatCost * res.rate);
+                    const trSeats = document.createElement('tr');
+                    trSeats.innerHTML = `
+                        <td>مقاعد المستخدمين (User Seats)</td>
+                        <td class="wl-sheet-center">${state.seats}</td>
+                        <td class="wl-sheet-center">${res.sym}${seatUnit.toLocaleString()}</td>
+                        <td class="wl-sheet-amount">${res.sym}${seatTotal.toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(trSeats);
+                }
+
+                // Addons rows
+                state.addons.forEach(a => {
+                    const val = Math.round(a.fee * res.rate);
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>+ ${a.name}</td>
+                        <td class="wl-sheet-center">1</td>
+                        <td class="wl-sheet-center">${res.sym}${val.toLocaleString()}</td>
+                        <td class="wl-sheet-amount">${res.sym}${val.toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Deploy row
+                if (state.deployFee > 0) {
+                    const dVal = Math.round(state.deployFee * res.rate);
+                    const trDeploy = document.createElement('tr');
+                    trDeploy.innerHTML = `
+                        <td>نموذج النشر: ${state.deployLabel}</td>
+                        <td class="wl-sheet-center">1</td>
+                        <td class="wl-sheet-center">${res.sym}${dVal.toLocaleString()}</td>
+                        <td class="wl-sheet-amount">${res.sym}${dVal.toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(trDeploy);
+                }
+
+                // Support row
+                if (state.supportFee > 0) {
+                    const sVal = Math.round(state.supportFee * res.rate);
+                    const trSupport = document.createElement('tr');
+                    trSupport.innerHTML = `
+                        <td>دعم تقني: ${state.supportLabel}</td>
+                        <td class="wl-sheet-center">1</td>
+                        <td class="wl-sheet-center">${res.sym}${sVal.toLocaleString()}</td>
+                        <td class="wl-sheet-amount">${res.sym}${sVal.toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(trSupport);
+                }
+
+                // Totals
+                document.getElementById('sheetWlSubtotal').textContent = `${res.sym}${res.converted.toLocaleString()}`;
+                document.getElementById('sheetWlGrand').textContent = `${res.sym}${res.converted.toLocaleString()}`;
+
+                document.getElementById('wlQuoteModal').classList.add('active');
+            });
+
+            // Close modal on overlay click
+            document.getElementById('wlQuoteModal').addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+
+            // ── Initial Calculation ──
+            calculate();
+        });
+    </script>
+</body>
+</html>
