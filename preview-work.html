@@ -102,6 +102,12 @@
             background: #010907;
         }
 
+        .work-tab_btn .tf-btn-tab--platforms:not(.active) {
+            border-color: rgba(197, 168, 128, 0.55);
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.16), rgba(197, 168, 128, 0.04));
+            color: #dfc299;
+        }
+
         .dot-active {
             width: 8px;
             height: 8px;
@@ -1329,6 +1335,24 @@
 
         // تشغيل فوري
         renderActiveWork();
+
+        // روابط مباشرة مثل #platforms أو #platforms-healthbridge لفتح التبويب والمشروع مباشرة
+        function openWorkFromHash() {
+            const hash = decodeURIComponent((location.hash || '').replace('#', ''));
+            if (!hash) return;
+            const [cat, projectId] = hash.split('-');
+            if (!projectsDB[cat]) return;
+            switchWorkTab(cat);
+            if (projectId) {
+                const idx = projectsDB[cat].findIndex(p => p.id === projectId);
+                if (idx >= 0) {
+                    currentWorkProjectIdx = idx;
+                    renderActiveWork();
+                }
+            }
+        }
+        openWorkFromHash();
+        window.addEventListener('hashchange', openWorkFromHash);
     </script>
 
     <!-- نافذة فحص دقة 4K الفائقة والتكبير والتنقل التفاعلي (4K Vector & Brand Zoom Inspector) -->
