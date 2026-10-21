@@ -1,6 +1,6 @@
 /**
  * S&R CoreSync Solutions — European Trust Ribbon & Compliance Verification Engine
- * Interactive modal verification for European enterprise standards.
+ * Multilingual interactive modal verification (AR, EN, NL, DE).
  */
 
 (function () {
@@ -10,77 +10,305 @@
     window.__SR_TRUST_RIBBON_INITIALIZED__ = true;
 
     const COMPLIANCE_SPECS = {
-        gdpr: {
-            code: 'EU 2016/679',
-            title: 'اللائحة العامة لحماية البيانات (GDPR)',
-            icon: '🛡️',
-            desc: 'امتثال تام وصارم لجميع متطلبات حماية الخصوصية للشركات والمستخدمين في الاتحاد الأوروبي، مع تشفير شامل وعزل تام لقواعد البيانات.',
-            specs: [
-                { key: 'المعيار القانوني', val: 'Regulation (EU) 2016/679' },
-                { key: 'مستوى التشفير', val: 'AES-256 (At Rest) / TLS 1.3 (In Transit)' },
-                { key: 'موقع تخزين البيانات', val: 'مراكز بيانات سيادية داخل أمستردام (هولندا)' },
-                { key: 'حقوق المستخدم', val: 'حق الحذف الكامل (Right to be Forgotten) فوري' }
-            ]
+        ar: {
+            modalBtn: 'إغلاق والمتابعة ✓',
+            gdpr: {
+                code: 'EU 2016/679',
+                title: 'اللائحة العامة لحماية البيانات (GDPR)',
+                icon: '🛡️',
+                desc: 'امتثال تام وصارم لجميع متطلبات حماية الخصوصية للشركات والمستخدمين في الاتحاد الأوروبي، مع تشفير شامل وعزل تام لقواعد البيانات.',
+                specs: [
+                    { key: 'المعيار القانوني', val: 'Regulation (EU) 2016/679' },
+                    { key: 'مستوى التشفير', val: 'AES-256 (At Rest) / TLS 1.3 (In Transit)' },
+                    { key: 'موقع تخزين البيانات', val: 'مراكز بيانات سيادية داخل أمستردام (هولندا)' },
+                    { key: 'حقوق المستخدم', val: 'حق الحذف الكامل (Right to be Forgotten) فوري' }
+                ]
+            },
+            btw: {
+                code: 'Belastingdienst Fiscal',
+                title: 'الامتثال الضريبي الهولندي (BTW)',
+                icon: '🏛️',
+                desc: 'توافق كامل مع أنظمة الفوترة الإلكترونية المعتمدة لدى مصلحة الضرائب الهولندية (Belastingdienst)، وحساب لحظي لشرائح BTW (9% و 21%).',
+                specs: [
+                    { key: 'الجهة التنظيمية', val: 'Belastingdienst (وزارة المالية الهولندية)' },
+                    { key: 'معايير الفاتورة الرقمية', val: 'PEPPOL BIS Billing 3.0 / UBL 2.1 XML' },
+                    { key: 'حساب الضرائب', val: 'آلي 100% وفق شرائح BTW الهولندية' },
+                    { key: 'الأرشفة المحاسبية', val: 'حفظ آمن لمدة 7 سنوات وفق القانون الهولندي' }
+                ]
+            },
+            amsix: {
+                code: 'AMS-IX Infrastructure',
+                title: 'بنية استضافة سيادية في أمستردام (AMS-IX)',
+                icon: '🌐',
+                desc: 'استضافة الأنظمة السحابية بجوار نقطة تبادل الإنترنت العالمية في أمستردام AMS-IX، لضمان أدنى زمن استجابة وأعلى موثوقية في أوروبا.',
+                specs: [
+                    { key: 'مركز البيانات', val: 'AMS-NODE-01 (Amsterdam Tier 3+ Facility)' },
+                    { key: 'زمن الاستجابة (Latency)', val: '< 5ms عبر عموم غرب أوروبا' },
+                    { key: 'الاتصال بالإنترنت', val: 'Direct Multi-100Gbps Peering' },
+                    { key: 'مصدر الطاقة', val: '100% طاقة خضراء متجددة ومولدات طوارئ' }
+                ]
+            },
+            sla: {
+                code: '99.98% High Availability',
+                title: 'اتفاقية مستوى الخدمة السحابية (SLA)',
+                icon: '⚡',
+                desc: 'ضمان تعاقدي لاستمرارية تشغيل الأنظمة بنسبة 99.98% مع منظومة تعافي فوري من الكوارث ونسخ احتياطي لحظي متعدد المراكز.',
+                specs: [
+                    { key: 'نسبة الجاهزية المضمونة', val: '99.98% تشغيل مستمر سنوياً' },
+                    { key: 'زمن التعافي المستهدف (RTO)', val: 'أقل من 15 دقيقة (Hot Standby)' },
+                    { key: 'نقطة الاسترجاع المستهدفة (RPO)', val: 'أقل من 5 دقائق من حركة البيانات' },
+                    { key: 'المراقبة الاستباقية', val: 'رصد لحظي 24/7/365 مع إنذار تلقائي' }
+                ]
+            },
+            iso: {
+                code: 'ISO 27001 / SOC 2',
+                title: 'حوكمة أمن المعلومات والامتثال المؤسسي',
+                icon: '🔒',
+                desc: 'تطبيق معايير ISO/IEC 27001 الدولية وضوابط SOC 2 Type II لضمان أعلى مستويات إدارة المخاطر السيبرانية وحماية الأصول.',
+                specs: [
+                    { key: 'المعايير الدولية', val: 'ISO/IEC 27001:2022 & SOC 2 Type II Readiness' },
+                    { key: 'سجلات التدقيق (Audit Logs)', val: 'مشفرة وغير قابلة للتعديل أو الحذف (Immutable)' },
+                    { key: 'التحكم بالوصول', val: 'Role-Based Access Control (RBAC) + WebAuthn' },
+                    { key: 'اختبارات الاختراق', val: 'فحص دوري كل 6 أشهر بواسطة خبراء مستقلين' }
+                ]
+            },
+            zeroknowledge: {
+                code: 'Zero-Knowledge Architecture',
+                title: 'التشفير السيادي المعزول (Zero-Knowledge)',
+                icon: '🛡️',
+                desc: 'عزل تام لقواعد البيانات وبيئات العملاء ومفاتيح التشفير، مما يمنع حتى مهندسي الاستضافة من الاطلاع على البيانات الحساسة.',
+                specs: [
+                    { key: 'نموذج التشفير', val: 'Client-Side Key Management (BYOK Supported)' },
+                    { key: 'عزل المستأجرين', val: 'Dedicated Tenant Isolation (VPC / Private DB)' },
+                    { key: 'الأبواب الخلفية', val: 'حظر مطلق لأي وصول خلفي أو جمع بيانات خفي' },
+                    { key: 'السيادة الرقمية', val: 'بياناتك ملك حصري لمؤسستك دون أي مشاركة' }
+                ]
+            }
         },
-        btw: {
-            code: 'Belastingdienst Fiscal',
-            title: 'الامتثال الضريبي الهولندي (BTW)',
-            icon: '🏛️',
-            desc: 'توافق كامل مع أنظمة الفوترة الإلكترونية المعتمدة لدى مصلحة الضرائب الهولندية (Belastingdienst)، وحساب لحظي لشرائح BTW (9% و 21%).',
-            specs: [
-                { key: 'الجهة التنظيمية', val: 'Belastingdienst (وزارة المالية الهولندية)' },
-                { key: 'معايير الفاتورة الرقمية', val: 'PEPPOL BIS Billing 3.0 / UBL 2.1 XML' },
-                { key: 'حساب الضرائب', val: 'آلي 100% وفق شرائح BTW الهولندية' },
-                { key: 'الأرشفة المحاسبية', val: 'حفظ آمن لمدة 7 سنوات وفق القانون الهولندي' }
-            ]
+        en: {
+            modalBtn: 'Close & Continue ✓',
+            gdpr: {
+                code: 'EU 2016/679',
+                title: 'General Data Protection Regulation (GDPR)',
+                icon: '🛡️',
+                desc: 'Strict and comprehensive compliance with European privacy requirements for enterprises and end-users, with end-to-end encryption and total database isolation.',
+                specs: [
+                    { key: 'Regulatory Standard', val: 'Regulation (EU) 2016/679' },
+                    { key: 'Encryption Standard', val: 'AES-256 (At Rest) / TLS 1.3 (In Transit)' },
+                    { key: 'Data Residency', val: 'Sovereign Tier 3+ Data Centers in Amsterdam, NL' },
+                    { key: 'User Rights', val: 'Instant Right to be Forgotten & Export' }
+                ]
+            },
+            btw: {
+                code: 'Belastingdienst Fiscal',
+                title: 'Dutch Tax & Fiscal Compliance (BTW)',
+                icon: '🏛️',
+                desc: 'Native compliance with Dutch Tax Authority (Belastingdienst) electronic invoicing standards, with automated BTW (9% & 21%) calculation and reporting.',
+                specs: [
+                    { key: 'Regulatory Authority', val: 'Belastingdienst (Dutch Ministry of Finance)' },
+                    { key: 'E-Invoicing Standard', val: 'PEPPOL BIS Billing 3.0 / UBL 2.1 XML' },
+                    { key: 'Tax Calculation', val: '100% Automated according to Dutch BTW Tiers' },
+                    { key: 'Fiscal Archiving', val: 'Secure 7-year audit retention per Dutch Law' }
+                ]
+            },
+            amsix: {
+                code: 'AMS-IX Infrastructure',
+                title: 'Amsterdam Sovereign Cloud (AMS-IX)',
+                icon: '🌐',
+                desc: 'Cloud nodes hosted adjacent to Amsterdam Internet Exchange (AMS-IX), delivering sub-5ms ultra-low latency and peak European interconnectivity.',
+                specs: [
+                    { key: 'Datacenter Node', val: 'AMS-NODE-01 (Amsterdam Tier 3+ Facility)' },
+                    { key: 'Network Latency', val: '< 5ms across Western European Metros' },
+                    { key: 'Upstream Peering', val: 'Direct Multi-100Gbps Carrier-Neutral Peering' },
+                    { key: 'Green Energy', val: '100% Renewable Wind Energy with N+1 Backup' }
+                ]
+            },
+            sla: {
+                code: '99.98% High Availability',
+                title: 'Cloud Service Level Agreement (SLA)',
+                icon: '⚡',
+                desc: 'Contractually guaranteed 99.98% system uptime with active multi-zone disaster recovery and continuous data replication.',
+                specs: [
+                    { key: 'Guaranteed Availability', val: '99.98% Annual Continuous Uptime' },
+                    { key: 'Recovery Time (RTO)', val: '< 15 Minutes (Hot-Standby Automated Failover)' },
+                    { key: 'Recovery Point (RPO)', val: '< 5 Minutes Transaction Window' },
+                    { key: 'Health Monitoring', val: '24/7/365 Proactive Telemetry & Real-Time Alerts' }
+                ]
+            },
+            iso: {
+                code: 'ISO 27001 / SOC 2',
+                title: 'Information Security Governance & SOC 2',
+                icon: '🔒',
+                desc: 'Alignment with ISO/IEC 27001:2022 standards and SOC 2 Type II security principles for enterprise cybersecurity and risk governance.',
+                specs: [
+                    { key: 'Security Framework', val: 'ISO/IEC 27001:2022 & SOC 2 Type II Readiness' },
+                    { key: 'Audit Trail', val: 'Cryptographically Sealed Immutable Audit Logs' },
+                    { key: 'Access Governance', val: 'Role-Based Access Control (RBAC) + WebAuthn FIDO2' },
+                    { key: 'Penetration Testing', val: 'Semi-annual independent third-party assessments' }
+                ]
+            },
+            zeroknowledge: {
+                code: 'Zero-Knowledge Architecture',
+                title: 'Sovereign Zero-Knowledge Cryptography',
+                icon: '🛡️',
+                desc: 'Strict isolation of databases, execution environments, and tenant KMS keys, preventing even infrastructure engineers from viewing sensitive records.',
+                specs: [
+                    { key: 'Key Management', val: 'Client-Controlled BYOK (Bring Your Own Key)' },
+                    { key: 'Tenant Isolation', val: 'Dedicated Tenant Isolation (VPC / Dedicated DB)' },
+                    { key: 'Backdoor Policy', val: 'Zero Backdoors, Zero Telemetry Harvesting' },
+                    { key: 'Data Sovereignty', val: '100% Exclusive Corporate Data Ownership' }
+                ]
+            }
         },
-        amsix: {
-            code: 'AMS-IX Infrastructure',
-            title: 'بنية استضافة سيادية في أمستردام (AMS-IX)',
-            icon: '🌐',
-            desc: 'استضافة الأنظمة السحابية بجوار نقطة تبادل الإنترنت العالمية في أمستردام AMS-IX، لضمان أدنى زمن استجابة وأعلى موثوقية في أوروبا.',
-            specs: [
-                { key: 'مركز البيانات', val: 'AMS-NODE-01 (Amsterdam Tier 3+ Facility)' },
-                { key: 'زمن الاستجابة (Latency)', val: '< 5ms عبر عموم غرب أوروبا' },
-                { key: 'الاتصال بالإنترنت', val: 'Direct Multi-100Gbps Peering' },
-                { key: 'مصدر الطاقة', val: '100% طاقة خضراء متجددة ومولدات طوارئ' }
-            ]
+        nl: {
+            modalBtn: 'Sluiten & Doorgaan ✓',
+            gdpr: {
+                code: 'EU 2016/679',
+                title: 'Algemene Verordening Gegevensbescherming (AVG / GDPR)',
+                icon: '🛡️',
+                desc: 'Volledige en strikte naleving van de Europese privacywetgeving voor ondernemingen en consumenten, inclusief end-to-end encryptie en database-isolatie.',
+                specs: [
+                    { key: 'Wettelijke Norm', val: 'Verordening (EU) 2016/679 (AVG)' },
+                    { key: 'Encryptiestandaard', val: 'AES-256 (In Rust) / TLS 1.3 (Onderweg)' },
+                    { key: 'Data-opslaglocatie', val: 'Soevereine Tier 3+ datacenters in Amsterdam (NL)' },
+                    { key: 'Gebruikersrechten', val: 'Direct recht op vergetelheid & export (AVG Art. 17)' }
+                ]
+            },
+            btw: {
+                code: 'Belastingdienst Fiscaal',
+                title: 'Nederlandse Fiscale Compliance (BTW & Facturatie)',
+                icon: '🏛️',
+                desc: 'Volledig compatibel met de digitale facturatienormen van de Belastingdienst, inclusief automatische berekening van BTW-tarieven (9% en 21%).',
+                specs: [
+                    { key: 'Toezichthouder', val: 'Belastingdienst (Ministerie van Financiën)' },
+                    { key: 'E-facturatienorm', val: 'PEPPOL BIS Billing 3.0 / UBL 2.1 XML' },
+                    { key: 'BTW-berekening', val: '100% Geautomatiseerd volgens Nederlandse tarieven' },
+                    { key: 'Fiscaal Bewaarplicht', val: 'Veilige 7-jarige bewaartermijn conform de AWR' }
+                ]
+            },
+            amsix: {
+                code: 'AMS-IX Infrastructuur',
+                title: 'Amsterdam Soevereine Cloud (AMS-IX)',
+                icon: '🌐',
+                desc: 'Cloudservers gehost direct naast het Amsterdam Internet Exchange (AMS-IX) knooppunt voor minimale latentie (< 5ms) en maximale betrouwbaarheid.',
+                specs: [
+                    { key: 'Datacenterknooppunt', val: 'AMS-NODE-01 (Amsterdam Tier 3+ Faciliteit)' },
+                    { key: 'Netwerklatentie', val: '< 5ms in heel West-Europa' },
+                    { key: 'Internetpeering', val: 'Directe Multi-100Gbps Carrier-Neutrale Peering' },
+                    { key: 'Duurzame Energie', val: '100% Hernieuwbare Nederlandse windenergie' }
+                ]
+            },
+            sla: {
+                code: '99.98% High Availability',
+                title: 'Cloud Service Level Agreement (SLA)',
+                icon: '⚡',
+                desc: 'Contractueel gegarandeerde 99.98% systeembeschikbaarheid met actieve multi-zone disaster recovery en realtime datareplicatie.',
+                specs: [
+                    { key: 'Gegarandeerde Uptime', val: '99.98% Continue Jaarlijkse Beschikbaarheid' },
+                    { key: 'Hersteltijd (RTO)', val: '< 15 Minuten (Geautomatiseerde Failover)' },
+                    { key: 'Herstelpunt (RPO)', val: '< 5 Minuten Dataverlieslimiet' },
+                    { key: 'Monitoring', val: '24/7/365 Proactieve Telemetrie & Directe Alarmen' }
+                ]
+            },
+            iso: {
+                code: 'ISO 27001 / SOC 2',
+                title: 'Informatiebeveiliging & Governance (ISO 27001)',
+                icon: '🔒',
+                desc: 'Toepassing van internationale ISO/IEC 27001:2022-normen en SOC 2 Type II-principes voor cyberbeveiliging en bedrijfscontinuïteit.',
+                specs: [
+                    { key: 'Beveiligingsnorm', val: 'ISO/IEC 27001:2022 & SOC 2 Type II Gereedheid' },
+                    { key: 'Auditlogs', val: 'Cryptografisch verzegeld & onwijzigbaar (WORM)' },
+                    { key: 'Toegangsbeheer', val: 'Role-Based Access Control (RBAC) + WebAuthn FIDO2' },
+                    { key: 'Penetratietesten', val: 'Halfjaarlijkse onafhankelijke audits door derden' }
+                ]
+            },
+            zeroknowledge: {
+                code: 'Zero-Knowledge Architectuur',
+                title: 'Soevereine Zero-Knowledge Versleuteling',
+                icon: '🛡️',
+                desc: 'Volledige isolatie van databases, runtime-omgevingen en encryptiesleutels, zodat zelfs hosting-engineers geen toegang hebben tot data.',
+                specs: [
+                    { key: 'Sleutelbeheer', val: 'Client-Side Key Management (BYOK ondersteund)' },
+                    { key: 'Tenant-isolatie', val: 'Toegewijde Single-Tenant Isolatie (VPC / Privé-DB)' },
+                    { key: 'Achterdeurbeleid', val: 'Strikte afwezigheid van backdoors of data-harvesting' },
+                    { key: 'Digitale Soevereiniteit', val: '100% Exclusief eigendom van uw bedrijfsdata' }
+                ]
+            }
         },
-        sla: {
-            code: '99.98% High Availability',
-            title: 'اتفاقية مستوى الخدمة السحابية (SLA)',
-            icon: '⚡',
-            desc: 'ضمان تعاقدي لاستمرارية تشغيل الأنظمة بنسبة 99.98% مع منظومة تعافي فوري من الكوارث ونسخ احتياطي لحظي متعدد المراكز.',
-            specs: [
-                { key: 'نسبة الجاهزية المضمونة', val: '99.98% تشغيل مستمر سنوياً' },
-                { key: 'زمن التعافي المستهدف (RTO)', val: 'أقل من 15 دقيقة (Hot Standby)' },
-                { key: 'نقطة الاسترجاع المستهدفة (RPO)', val: 'أقل من 5 دقائق من حركة البيانات' },
-                { key: 'المراقبة الاستباقية', val: 'رصد لحظي 24/7/365 مع إنذار تلقائي' }
-            ]
-        },
-        iso: {
-            code: 'ISO 27001 & SOC 2',
-            title: 'حوكمة أمن المعلومات والأمن السيبراني',
-            icon: '🔒',
-            desc: 'تطبيق إطار العمل الدولي لأمن المعلومات وضوابط الوصول المشددة لمنع أي اختراق أو تسريب في بيئة العمل السحابية.',
-            specs: [
-                { key: 'إطار العمل', val: 'ISO/IEC 27001:2022 ISMS Controls' },
-                { key: 'إدارة الهويات والوصول', val: 'RBAC / MFA / WebAuthn Hardware Tokens' },
-                { key: 'فحص الثغرات الدوري', val: 'Penetration Testing & Static Code SAST' },
-                { key: 'سجلات المراجعة (Audit)', val: 'Immutable Audit Logs مشفرة ضد التعديل' }
-            ]
-        },
-        zeroknowledge: {
-            code: 'Zero-Knowledge Security',
-            title: 'بنية التشفير السيادي المعزول',
-            icon: '🛡️',
-            desc: 'عزل تام لقواعد بيانات كل مؤسسة مع مفاتيح تشفير مستقلة، تضمن عدم إمكانية اطلاع أي طرف خارجي أو تقني على بياناتك.',
-            specs: [
-                { key: 'ملكية المفاتيح', val: 'Client-Controlled Encryption Keys' },
-                { key: 'عزل البيانات (Tenancy)', val: 'Strict Multi-Tenant Database Isolation' },
-                { key: 'سياسة الأبواب الخلفية', val: 'ممنوعة ومستحيلة برمجياً (No Backdoors)' },
-                { key: 'عقد السرية (NDA)', val: 'محمي بالقانون التجاري الهولندي والأوروبي' }
-            ]
+        de: {
+            modalBtn: 'Schließen & Weiter ✓',
+            gdpr: {
+                code: 'EU 2016/679',
+                title: 'Datenschutz-Grundverordnung (DSGVO / GDPR)',
+                icon: '🛡️',
+                desc: 'Strenge und vollständige Einhaltung aller europäischen Datenschutzanforderungen für Unternehmen, mit lückenloser Verschlüsselung und Datenbankisolierung.',
+                specs: [
+                    { key: 'Rechtsgrundlage', val: 'Verordnung (EU) 2016/679 (DSGVO)' },
+                    { key: 'Verschlüsselungsgrad', val: 'AES-256 (At Rest) / TLS 1.3 (In Transit)' },
+                    { key: 'Datenstandort', val: 'Souveräne Tier 3+ Rechenzentren in Amsterdam (NL)' },
+                    { key: 'Nutzerrechte', val: 'Recht auf Vergessenwerden & Datenexport nach Art. 17' }
+                ]
+            },
+            btw: {
+                code: 'Belastingdienst Fiscal',
+                title: 'Steuerliche & Fiskalische Compliance (BTW/MwSt)',
+                icon: '🏛️',
+                desc: 'Vollständige Konformität mit niederländischen und europäischen E-Invoicing-Standards sowie automatischer Berechnung von MwSt/BTW-Sätzen.',
+                specs: [
+                    { key: 'Aufsichtsbehörde', val: 'Belastingdienst (Niederländisches Finanzministerium)' },
+                    { key: 'E-Rechnungsstandard', val: 'PEPPOL BIS Billing 3.0 / UBL 2.1 XML' },
+                    { key: 'Steuerberechnung', val: '100% Automatisiert nach geltenden Steuersätzen' },
+                    { key: 'Aufbewahrungspflicht', val: 'Sichere 7-jährige Archivierung nach Handelsrecht' }
+                ]
+            },
+            amsix: {
+                code: 'AMS-IX Infrastruktur',
+                title: 'Amsterdam Souveräne Cloud (AMS-IX)',
+                icon: '🌐',
+                desc: 'Hosting direkt am globalen Internetknotenpunkt AMS-IX in Amsterdam für minimale Latenzzeiten (< 5ms) und höchste Ausfallsicherheit.',
+                specs: [
+                    { key: 'Rechenzentrumsknoten', val: 'AMS-NODE-01 (Amsterdam Tier 3+ Anlage)' },
+                    { key: 'Latenzzeit', val: '< 5ms im gesamten westeuropäischen Raum' },
+                    { key: 'Peering-Kapazität', val: 'Direktes Multi-100Gbps Carrier-Neutrales Peering' },
+                    { key: 'Grüne Energie', val: '100% Erneuerbare Windenergie mit N+1 Notstrom' }
+                ]
+            },
+            sla: {
+                code: '99.98% High Availability',
+                title: 'Cloud Service Level Agreement (SLA)',
+                icon: '⚡',
+                desc: 'Vertraglich garantierte 99.98% Systemverfügbarkeit mit aktiver Multi-Zone Notfallwiederherstellung und kontinuierlicher Datenreplikation.',
+                specs: [
+                    { key: 'Garantierte Verfügbarkeit', val: '99.98% Jährliche Dauerverfügbarkeit' },
+                    { key: 'Wiederherstellungszeit (RTO)', val: '< 15 Minuten (Automatisches Failover)' },
+                    { key: 'Wiederherstellungspunkt (RPO)', val: '< 5 Minuten Transaktionsverlustgrenze' },
+                    { key: 'Telemetrie & Überwachung', val: '24/7/365 Proaktives Monitoring & Sofortalarme' }
+                ]
+            },
+            iso: {
+                code: 'ISO 27001 / SOC 2',
+                title: 'Informationssicherheits-Governance & SOC 2',
+                icon: '🔒',
+                desc: 'Einhaltung internationaler ISO/IEC 27001:2022-Normen und SOC 2 Type II-Richtlinien für ganzheitliches Risikomanagement.',
+                specs: [
+                    { key: 'Sicherheitsstandard', val: 'ISO/IEC 27001:2022 & SOC 2 Type II Konformität' },
+                    { key: 'Audit-Protokolle', val: 'Kryptografisch versiegelt & revisionssicher (WORM)' },
+                    { key: 'Zugriffskontrolle', val: 'Role-Based Access Control (RBAC) + WebAuthn FIDO2' },
+                    { key: 'Penetrationstests', val: 'Halbjährliche unabhängige Drittanbieter-Prüfungen' }
+                ]
+            },
+            zeroknowledge: {
+                code: 'Zero-Knowledge Architektur',
+                title: 'Souveräne Zero-Knowledge-Verschlüsselung',
+                icon: '🛡️',
+                desc: 'Strikte Trennung von Mandanten-Datenbanken und Verschlüsselungsschlüsseln, sodass selbst Systemadministratoren keinen Zugriff haben.',
+                specs: [
+                    { key: 'Schlüsselverwaltung', val: 'Client-Controlled BYOK (Bring Your Own Key)' },
+                    { key: 'Mandantenisolation', val: 'Dedizierte Single-Tenant-Isolation (VPC / Private DB)' },
+                    { key: 'Hintertür-Richtlinie', val: 'Absolute Freiheit von Backdoors oder Datenanalyse' },
+                    { key: 'Datensouveränität', val: '100% Exklusives Eigentum an Ihren Unternehmensdaten' }
+                ]
+            }
         }
     };
 
@@ -89,73 +317,92 @@
         initTrustRibbon();
     }
 
+    function getLang() {
+        const docLang = (document.documentElement.lang || 'ar').toLowerCase().slice(0, 2);
+        return COMPLIANCE_SPECS[docLang] ? docLang : 'en';
+    }
+
     function initTrustRibbon() {
-        const cards = document.querySelectorAll('.sr-trust-card[data-compliance]');
-        if (!cards.length) return;
+        const ribbonSection = document.getElementById('compliance');
+        if (!ribbonSection) return;
 
-        // Create modal if not exists
-        createTrustModal();
+        createModalIfNotExists();
 
+        // Attach click listeners to cards
+        const cards = ribbonSection.querySelectorAll('.sr-trust-card');
         cards.forEach(card => {
-            card.addEventListener('click', function (e) {
-                e.preventDefault();
-                const key = this.getAttribute('data-compliance');
-                openTrustModal(key);
+            card.addEventListener('click', function () {
+                const badgeKey = this.getAttribute('data-compliance');
+                if (badgeKey) {
+                    openModal(badgeKey);
+                }
+            });
+
+            card.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const badgeKey = this.getAttribute('data-compliance');
+                    if (badgeKey) openModal(badgeKey);
+                }
             });
         });
     }
 
-    function createTrustModal() {
+    function createModalIfNotExists() {
         if (document.getElementById('srTrustModal')) return;
 
+        const lang = getLang();
+        const dict = COMPLIANCE_SPECS[lang] || COMPLIANCE_SPECS.en;
+
         const modal = document.createElement('div');
-        modal.className = 'sr-trust-modal';
         modal.id = 'srTrustModal';
+        modal.className = 'sr-trust-modal';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
-        modal.setAttribute('aria-labelledby', 'srTrustModalTitle');
+        modal.setAttribute('aria-hidden', 'true');
 
         modal.innerHTML = `
-            <div class="sr-trust-modal-box">
-                <button type="button" class="sr-trust-modal-close" id="srTrustModalClose" aria-label="إغلاق النافذة">
+            <div class="sr-trust-modal-card">
+                <button type="button" class="sr-trust-modal-close" id="srTrustModalClose" aria-label="Close">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
-                <div class="sr-trust-modal-header">
-                    <div class="sr-trust-modal-icon" id="srTrustModalIcon">🛡️</div>
-                    <div>
-                        <span class="sr-trust-modal-code" id="srTrustModalCode">EU 2016/679</span>
-                        <h3 class="sr-trust-modal-title" id="srTrustModalTitle">شهادة الاعتماد</h3>
-                    </div>
-                </div>
-                <div class="sr-trust-modal-body">
-                    <p id="srTrustModalDesc"></p>
-                    <div class="sr-trust-spec-list" id="srTrustModalSpecs"></div>
-                    <button type="button" class="sr-trust-modal-btn" onclick="window.srCloseTrustModal()">
-                        <span>إغلاق والمتابعة ✓</span>
-                    </button>
-                </div>
+                <div class="sr-trust-modal-icon" id="srTrustModalIcon">🛡️</div>
+                <div class="sr-trust-modal-code" id="srTrustModalCode">EU 2016/679</div>
+                <h3 class="sr-trust-modal-title" id="srTrustModalTitle"></h3>
+                <p class="sr-trust-modal-desc" id="srTrustModalDesc"></p>
+                <div class="sr-trust-spec-list" id="srTrustModalSpecs"></div>
+                <button type="button" class="sr-trust-modal-btn" id="srTrustModalConfirm">
+                    ${dict.modalBtn}
+                </button>
             </div>
         `;
 
         document.body.appendChild(modal);
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) window.srCloseTrustModal();
+        // Event Listeners for dismiss
+        const closeBtn = document.getElementById('srTrustModalClose');
+        const confirmBtn = document.getElementById('srTrustModalConfirm');
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (confirmBtn) confirmBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                closeModal();
+            }
         });
 
-        document.getElementById('srTrustModalClose').addEventListener('click', () => {
-            window.srCloseTrustModal();
-        });
-
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && modal.classList.contains('active')) {
-                window.srCloseTrustModal();
+                closeModal();
             }
         });
     }
 
-    function openTrustModal(key) {
-        const data = COMPLIANCE_SPECS[key];
+    function openModal(badgeKey) {
+        const lang = getLang();
+        const dict = COMPLIANCE_SPECS[lang] || COMPLIANCE_SPECS.en;
+        const data = dict[badgeKey];
         if (!data) return;
 
         const modal = document.getElementById('srTrustModal');
@@ -174,15 +421,24 @@
             </div>
         `).join('');
 
+        const confirmBtn = document.getElementById('srTrustModalConfirm');
+        if (confirmBtn) confirmBtn.textContent = dict.modalBtn;
+
         modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
     }
 
-    window.srCloseTrustModal = function () {
+    function closeModal() {
         const modal = document.getElementById('srTrustModal');
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    };
+        if (!modal) return;
+
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // Global Expose for programmatic verification
+    window.srOpenComplianceModal = openModal;
+    window.srCloseComplianceModal = closeModal;
 })();
