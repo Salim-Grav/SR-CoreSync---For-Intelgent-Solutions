@@ -15,6 +15,58 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # -----------------------------------------------------------------------
+  # Reports the publishing source of the Pages site.
+  #
+  # With the legacy "Deploy from a branch" build type, GitHub publishes the
+  # branch tree verbatim: server-side material becomes publicly reachable and
+  # the _headers file is served as a plain file instead of being applied by
+  # the CDN.  This job makes the current state visible in the Actions UI.
+  # -----------------------------------------------------------------------
+  pages-source:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: read
+    steps:
+      - name: Read the Pages publishing source
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          python3 - <<'PY'
+          import json, os, urllib.error, urllib.request
+
+          token = os.environ["GH_TOKEN"]
+          api = f"https://api.github.com/repos/{os.environ['GH_REPO']}/pages"
+          req = urllib.request.Request(api, headers={
+              "Authorization": f"Bearer {token}",
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+          })
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  data = json.loads(resp.read().decode())
+          except urllib.error.HTTPError as exc:
+              print(f"Could not read the Pages configuration: HTTP {exc.code}")
+              raise SystemExit(0)
+
+          build_type = data.get("build_type")
+          cname = data.get("cname")
+          source = data.get("source") or {}
+          print(f"build_type = {build_type}")
+          print(f"cname      = {cname}")
+          print(f"source     = {source.get('branch')} {source.get('path')}")
+          if build_type != "workflow":
+              print("::error::The Pages site is still built from the branch. "
+                    "Everything in the branch - including server-side material - "
+                    "is published, and _headers is not applied. Switch Settings > "
+                    "Pages > Build and deployment > Source to 'GitHub Actions'.")
+              raise SystemExit(1)
+          print("Publishing source is 'GitHub Actions': the selective publish set "
+                "is served and _headers is applied by the CDN.")
+          PY
+
   deploy:
     environment:
       name: github-pages

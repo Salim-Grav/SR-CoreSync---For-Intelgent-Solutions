@@ -65,14 +65,7 @@ jobs:
         run: node scripts/browser_console_audit.mjs
 
       - name: Verify Dead PHP Gateway Is Not Referenced
-        run: |
-          set -e
-          if grep -rn --include='*.html' --include='*.js' --include='*.xml' \
-               '/api/lead-capture.php' . ; then
-            echo "::error::A page still references the dead /api/lead-capture.php gateway"
-            exit 1
-          fi
-          echo "No page references the retired PHP gateway."
+        run: python scripts/audit_dead_gateway.py
 
       - name: Verify Required Publish Artifacts Exist
         run: |
