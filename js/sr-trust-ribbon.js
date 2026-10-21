@@ -169,8 +169,8 @@
         const specsContainer = document.getElementById('srTrustModalSpecs');
         specsContainer.innerHTML = data.specs.map(s => `
             <div class="sr-trust-spec-row">
-                <span class="sr-trust-spec-key">${s.key}:</span>
-                <span class="sr-trust-spec-val">${s.val}</span>
+                <span class="sr-trust-spec-key">${s.key}</span>
+                <span class="sr-trust-spec-val" dir="ltr">${s.val}</span>
             </div>
         `).join('');
 
