@@ -18,7 +18,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Node 22+ ships a global WebSocket, required by the DevTools
+          # protocol client used in the browser console audit.
+          node-version: '22'
 
       - name: Setup Python
         uses: actions/setup-python@v5

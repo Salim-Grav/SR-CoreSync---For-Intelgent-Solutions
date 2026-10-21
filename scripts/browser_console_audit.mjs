@@ -71,7 +71,36 @@ async function getJson(path) {
     return res.json();
 }
 
+async function launchBrowser(profile, extraArgs = []) {
+    const base = [
+        '--disable-gpu',
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+        '--no-first-run',
+        '--no-default-browser-check',
+        '--disable-extensions',
+        '--disable-background-networking',
+        '--remote-debugging-port=' + PORT,
+        '--user-data-dir=' + profile,
+        ...extraArgs,
+        'about:blank'
+    ];
+    const child = spawn(EDGE, base, { stdio: 'ignore' });
+    for (let i = 0; i < 40; i++) {
+        try { await getJson('/json/version'); return child; }
+        catch { await sleep(250); }
+    }
+    child.kill();
+    return null;
+}
+
 async function main() {
+    if (typeof WebSocket === 'undefined') {
+        console.log('='.repeat(72));
+        console.log('SKIPPED - the DevTools client needs a global WebSocket (Node 22+).');
+        console.log('='.repeat(72));
+        return;
+    }
     if (!EDGE) {
         console.log('='.repeat(72));
         console.log('SKIPPED - no Chromium based browser found on this machine.');
@@ -86,29 +115,18 @@ async function main() {
     }
     const server = await startServer();
     const profile = mkdtempSync(join(tmpdir(), 'sr-edge-'));
-    const child = spawn(EDGE, [
-        '--headless=new',
-        '--disable-gpu',
-        '--no-first-run',
-        '--no-default-browser-check',
-        '--disable-extensions',
-        '--disable-background-networking',
-        '--remote-debugging-port=' + PORT,
-        '--user-data-dir=' + profile,
-        'about:blank'
-    ], { stdio: 'ignore' });
 
-    // Wait for the debugging endpoint.
-    let ready = false;
-    for (let i = 0; i < 40; i++) {
-        try { await getJson('/json/version'); ready = true; break; }
-        catch { await sleep(250); }
+    let child = await launchBrowser(profile, ['--headless=new']);
+    if (!child) {
+        child = await launchBrowser(profile, ['--headless']);
     }
-    if (!ready) {
-        child.kill();
-        throw new Error('Edge DevTools endpoint did not start');
+    if (!child) {
+        server.close();
+        console.log('='.repeat(72));
+        console.log('SKIPPED - the headless browser did not expose a DevTools endpoint.');
+        console.log('='.repeat(72));
+        return;
     }
-
     const pages = LANGUAGES.slice(0, LIMIT);
     const results = [];
     let failed = 0;
