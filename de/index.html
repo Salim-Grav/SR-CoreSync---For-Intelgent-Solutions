@@ -5173,6 +5173,9 @@
         }
 
     </style>
+    <!-- S&R CoreSync Sovereign Trust Ribbon & Enterprise Tier Matrix -->
+    <link rel="stylesheet" href="../css/sr-trust-ribbon.css?v=20261021_trust">
+    <link rel="stylesheet" href="../css/sr-tier-matrix.css?v=20261021_matrix">
 </head>
 
 <body class="counter-scroll preloader-complete">
@@ -7332,7 +7335,336 @@
                                 </div>
                             </div>
                         </div>
+
+                <!-- Enterprise Tier Matrix & Institutional Calculator -->
+                <div class="sr-tier-matrix-section" id="tier-matrix" aria-label="Enterprise Tier Matrix & Institutional Comparison">
+                    <div class="sr-tier-header">
+                        <div class="sr-tier-pill">
+                            <span class="sr-tier-pill-dot"></span>
+                            <span>Vollständige Architektur- und Leistungsmatrix 2026</span>
+                        </div>
+                        <h3 class="sr-tier-title">
+                            Vergleichen Sie <span>Enterprise-Cloud-Tarife</span> mit Präzision
+                        </h3>
+                        <p class="sr-tier-subtitle">
+                            Wählen Sie die ideale Cloud-Architektur für Ihr Unternehmen in Europa. Sparen Sie 20% bei jährlicher Zahlungsweise plus Konzernrabatte für Holding-Strukturen.
+                        </p>
                     </div>
+
+                    <!-- Controls Hub: Billing cycle + Entity discount -->
+                    <div class="sr-tier-controls-hub">
+                        <div class="sr-tier-billing-toggle">
+                            <button type="button" class="sr-tier-toggle-btn active" data-billing="annual">
+                                <span>Jährliche Abrechnung</span>
+                                <span class="sr-tier-save-badge">20% Sparen</span>
+                            </button>
+                            <button type="button" class="sr-tier-toggle-btn" data-billing="monthly">
+                                <span>Monatliche Abrechnung</span>
+                            </button>
+                        </div>
+
+                        <div class="sr-tier-entities-picker">
+                            <span class="sr-tier-entities-label">Unternehmen / Einheiten:</span>
+                            <div class="sr-tier-entities-btns">
+                                <button type="button" class="sr-tier-entity-btn active" data-entities="1">Einzelne Einheit</button>
+                                <button type="button" class="sr-tier-entity-btn" data-entities="2">2 - 3 Einheiten (-10%)</button>
+                                <button type="button" class="sr-tier-entity-btn" data-entities="4">Holding 4+ (-20%)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="sr-tier-table-wrapper">
+                        <table class="sr-tier-table">
+                            <thead>
+                                <tr>
+                                    <th class="sr-tier-th-features">
+                                        <div class="sr-tier-features-heading">Architekturspezifikationen & Standards</div>
+                                        <div class="sr-tier-features-sub">Detaillierter Vergleich über Infrastruktur, Compliance, KI und Enterprise SLAs</div>
+                                    </th>
+
+                                    <!-- Tier 1: Starter -->
+                                    <th class="sr-tier-th-col">
+                                        <div class="sr-tier-card-head">
+                                            <h4 class="sr-tier-name">Core Starter</h4>
+                                            <p class="sr-tier-desc">Für aufstrebende Unternehmen und fokussierte Einzelprojekte</p>
+                                            <div class="sr-tier-price-box">
+                                                <div class="sr-tier-price-main">
+                                                    <span class="sr-tier-currency">€</span>
+                                                    <span id="tier-price-starter">1,192</span>
+                                                    <span class="sr-tier-period" id="tier-period-starter">/ month</span>
+                                                </div>
+                                                <span class="sr-tier-original-price" id="tier-orig-starter">€1,490</span>
+                                                <div class="sr-tier-billed-note" id="tier-note-starter">20% Sparen</div>
+                                            </div>
+                                            <a href="https://wa.me/31687764998" id="tier-cta-starter" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                                <span>Tarif via VIP WhatsApp buchen</span>
+                                            </a>
+                                        </div>
+                                    </th>
+
+                                    <!-- Tier 2: Pro (Featured) -->
+                                    <th class="sr-tier-th-col featured">
+                                        <div class="sr-tier-ribbon-badge">Beliebteste Wahl // Flagship</div>
+                                        <div class="sr-tier-card-head">
+                                            <h4 class="sr-tier-name">Business Pro</h4>
+                                            <p class="sr-tier-desc">Für mittelständische Firmen und expandierende Organisationen</p>
+                                            <div class="sr-tier-price-box">
+                                                <div class="sr-tier-price-main">
+                                                    <span class="sr-tier-currency">€</span>
+                                                    <span id="tier-price-pro">2,312</span>
+                                                    <span class="sr-tier-period" id="tier-period-pro">/ month</span>
+                                                </div>
+                                                <span class="sr-tier-original-price" id="tier-orig-pro">€2,890</span>
+                                                <div class="sr-tier-billed-note" id="tier-note-pro">20% Sparen</div>
+                                            </div>
+                                            <a href="https://wa.me/31687764998" id="tier-cta-pro" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--primary">
+                                                <span>Cloud-Bereitstellung jetzt starten ★</span>
+                                            </a>
+                                        </div>
+                                    </th>
+
+                                    <!-- Tier 3: Enterprise -->
+                                    <th class="sr-tier-th-col">
+                                        <div class="sr-tier-card-head">
+                                            <h4 class="sr-tier-name">Sovereign Enterprise</h4>
+                                            <p class="sr-tier-desc">Für Konzerne und Holdings mit höchsten Souveränitätsansprüchen</p>
+                                            <div class="sr-tier-price-box">
+                                                <div class="sr-tier-price-main">
+                                                    <span class="sr-tier-currency">€</span>
+                                                    <span id="tier-price-enterprise">4,320</span>
+                                                    <span class="sr-tier-period" id="tier-period-enterprise">/ month</span>
+                                                </div>
+                                                <span class="sr-tier-original-price" id="tier-orig-enterprise">€5,400</span>
+                                                <div class="sr-tier-billed-note" id="tier-note-enterprise">20% Sparen</div>
+                                            </div>
+                                            <a href="https://wa.me/31687764998" id="tier-cta-enterprise" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                                <span>Souveräne Architekturberatung anfordern 🛡️</span>
+                                            </a>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr class="sr-tier-category-row">
+                                    <td colspan="4">
+                                        🌐 1. Cloud-Infrastruktur & AMS-IX Hosting
+                                    </td>
+                                </tr>
+        
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Rechenzentrumsknoten & Serverstandort</span>
+                                        <span class="sr-tier-feature-tooltip">Primärer Hosting-Standort für souveräne Cloud-Workloads</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Amsterdam Tier 3+ (Geteilt)</td>
+                                    <td class="sr-tier-val-col featured">Amsterdam Dedizierter VPS-Knoten</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Souveränes Isoliertes Cluster (Physisch)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Hochgeschwindigkeits-NVMe Cloud-Speicher</span>
+                                        <span class="sr-tier-feature-tooltip">Schneller Speicher für Unternehmensdaten und Datenbanken</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">50 GB NVMe</td>
+                                    <td class="sr-tier-val-col featured">250 GB Ultraschnelle NVMe</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Unbegrenzt (Scale-on-Demand)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Monatlicher Datentransfer & Globales CDN</span>
+                                        <span class="sr-tier-feature-tooltip">Inkludiertes Datenvolumen und europäisches Caching</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">100.000 Aufrufe / Monat</td>
+                                    <td class="sr-tier-val-col featured">500.000 Aufrufe + Europa-CDN</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Unbegrenzt + Global Anycast CDN</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Mandanten-Architekturmodell</span>
+                                        <span class="sr-tier-feature-tooltip">Grad der Datenbankunabhängigkeit und Datentrennung</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Logische Software-Isolation</td>
+                                    <td class="sr-tier-val-col featured">Dedizierte Private Datenbank</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Dedizierte Single-Tenant 100%</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-category-row">
+                                    <td colspan="4">
+                                        🛡️ 2. Sicherheit & Regulatorische Compliance
+                                    </td>
+                                </tr>
+        
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">EU-Datenschutz-Grundverordnung (DSGVO)</span>
+                                        <span class="sr-tier-feature-tooltip">Einhaltung der VO (EU) 2016/679 und individuelle AVVs</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">✓ Zertifizierter Standard</td>
+                                    <td class="sr-tier-val-col featured">✓ Erweitert + Individueller AV-Vertrag</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">✓ Souveräne Zero-Knowledge</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Steuerliche Konformität (MwSt / BTW)</span>
+                                        <span class="sr-tier-feature-tooltip">Automatisierte Steuerberechnung und PEPPOL-Rechnungen</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Digitale Basis-Rechnungen</td>
+                                    <td class="sr-tier-val-col featured">Automatisierte MwSt + PEPPOL BIS Billing</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Vollständige ERP- & Bankanbindung</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Kryptographisches Schlüsselmanagement</span>
+                                        <span class="sr-tier-feature-tooltip">Eigentum und Kontrolle über Verschlüsselungsschlüssel</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">AES-256 Geteilte Architektur</td>
+                                    <td class="sr-tier-val-col featured">TLS 1.3 + Gehobene SSL-Zertifikate</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Kunden-Eigene KMS-Schlüssel (BYOK)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Notfallwiederherstellung & Redundanz</span>
+                                        <span class="sr-tier-feature-tooltip">Geografische Replikation und Wiederherstellungsgeschwindigkeit</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Wöchentliches Cloud-Backup</td>
+                                    <td class="sr-tier-val-col featured">Tägliches Multi-Zone Backup</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Echtzeit-Kontinuierlich (RPO < 5 Min.)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-category-row">
+                                    <td colspan="4">
+                                        ⚡ 3. Enterprise KI & Systemintegrationen
+                                    </td>
+                                </tr>
+        
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Enterprise KI-Assistent (Copilot RAG)</span>
+                                        <span class="sr-tier-feature-tooltip">Trainiertes Sprachmodell auf Basis interner Dokumente</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">—</td>
+                                    <td class="sr-tier-val-col featured">✓ Standard Kundenservice RAG</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">✓ Souveränes Modell auf Ihren Unternehmensdaten</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Europäische Zahlungsmethoden</span>
+                                        <span class="sr-tier-feature-tooltip">Unterstützte Zahlungsanbieter und Gateways</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Stripe + Kreditkarten</td>
+                                    <td class="sr-tier-val-col featured">Stripe + Mollie + iDEAL + Bancontact</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Alle Gateways + SEPA-Firmenlastschrift</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">System-APIs & Webhooks Zugriff</span>
+                                        <span class="sr-tier-feature-tooltip">Schnittstellen zu Drittsystemen und Legacy-Software</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Basis Webhooks</td>
+                                    <td class="sr-tier-val-col featured">Vollständige REST APIs & Dokumentation</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Vollständige Core APIs + Custom Services</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">White-Label Branding-Rechte</span>
+                                        <span class="sr-tier-feature-tooltip">Nutzung unter eigenem Markenauftritt ohne Plattformverweis</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">"Powered by CoreSync" Siegel</td>
+                                    <td class="sr-tier-val-col featured">Eigene Farben, Logo & Domain</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">100% White-Label (Keine CoreSync Referenz)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-category-row">
+                                    <td colspan="4">
+                                        🤝 4. SLA & Vorstands-Concierge
+                                    </td>
+                                </tr>
+        
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Vertraglich Garantierte Uptime (SLA)</span>
+                                        <span class="sr-tier-feature-tooltip">Garantierte Verfügbarkeit mit Konventionalstrafen</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">99.5% Standardverfügbarkeit</td>
+                                    <td class="sr-tier-val-col featured">99.9% Hohe Verfügbarkeit</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">99.98% Mission-Critical SLA</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Reaktionszeiten Technischer Support</span>
+                                        <span class="sr-tier-feature-tooltip">Maximaler Zeitrahmen bis zur Bearbeitung kritischer Anfragen</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Innerhalb von 24 Std. (Tickets)</td>
+                                    <td class="sr-tier-val-col featured">Innerhalb von 4 Std. (E-Mail + WhatsApp)</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Innerhalb von 15 Min. (24/7 VIP-Hotline)</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Mitarbeiterschulung & Wissenstransfer</span>
+                                        <span class="sr-tier-feature-tooltip">Praktische Einführung und Workshops für Teams</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">Digitale Dokumentationssuite</td>
+                                    <td class="sr-tier-val-col featured">2 Interaktive Live-Zoom-Sessions</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Unbegrenzt vor Ort in Amsterdam oder Remote</span></td>
+                                </tr>
+            
+                                <tr class="sr-tier-row">
+                                    <td>
+                                        <span class="sr-tier-feature-label">Dedizierter Solutions Architect</span>
+                                        <span class="sr-tier-feature-tooltip">Fester technischer Experte für die digitale Weiterentwicklung</span>
+                                    </td>
+                                    <td class="sr-tier-val-col">—</td>
+                                    <td class="sr-tier-val-col featured">Halbjährliches Architektur-Audit</td>
+                                    <td class="sr-tier-val-col"><span class="sr-tier-val-highlight">Senior Enterprise Solutions Architect</span></td>
+                                </tr>
+            
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Bottom Guarantees -->
+                    <div class="sr-tier-bottom-bar">
+                        <div class="sr-tier-guarantee-items">
+
+                            <div class="sr-tier-guarantee-item">
+                                <span class="sr-tier-guarantee-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                                <span>14-Tage Geld-zurück-Garantie bei Unzufriedenheit</span>
+                            </div>
+    
+
+                            <div class="sr-tier-guarantee-item">
+                                <span class="sr-tier-guarantee-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                                <span>Offizieller niederländischer Rechtsvertrag zum Schutz aller IP-Rechte</span>
+                            </div>
+    
+
+                            <div class="sr-tier-guarantee-item">
+                                <span class="sr-tier-guarantee-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                                <span>Jederzeitige Skalierbarkeit und Tarifwechsel ohne Ausfallzeiten</span>
+                            </div>
+    
+                        </div>
+
+                        <a href="https://wa.me/31687764998?text=Hello%20S%26R%20CoreSync%2C%20we%20are%20requesting%20a%20custom%20B2B%20Enterprise%20Quotation." target="_blank" rel="noopener noreferrer" class="sr-tier-custom-quote-btn">
+                            <span>Individuelles Enterprise-Angebot Anfordern (B2B) →</span>
+                        </a>
+                    </div>
+                </div>
+    
                 </div>
             </div>
         </section>
@@ -8163,49 +8495,125 @@
             </div>
         </section>
 
-        <!-- 9.5. شريط الامتثال والأمان والاعتماد الأوروبي (Enterprise Compliance & Trust Ribbon) -->
-        <section class="section-compliance-ribbon" id="compliance" data-section>
+        <!-- European Sovereign Trust Ribbon & Compliance Suite -->
+        <section class="sr-trust-ribbon-section" id="compliance" aria-label="European Enterprise Trust & Compliance Suite">
             <div class="container">
-                <div class="compliance-grid">
-                    <div class="compliance-card">
-                        <div class="compliance-icon-wrap" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </div>
-                        <div>
-                            <div class="compliance-title">European GDPR / AVG Compliance</div>
-                            <p class="compliance-desc">Strict European data protection, local EU cloud storage, and privacy by design.</p>
-                        </div>
+                <div class="sr-trust-header">
+                    <div class="sr-trust-pill">
+                        <span class="sr-trust-pill-dot"></span>
+                        <span>SOVEREIGN CLOUD ARCHITECTURE // AMSTERDAM 2026</span>
                     </div>
+                    <h2 class="sr-trust-heading">
+                        Europäische Unternehmens-Compliance & <span>Souveräne Cloud-Standards</span>
+                    </h2>
+                    <p class="sr-trust-subheading">
+                        Rechtlich verbindliche europäische Zertifizierungen, Enterprise-SLA-Garantien und souveräne Cloud-Infrastruktur mit Sitz in Amsterdam, Niederlande.
+                    </p>
+                    <div class="sr-trust-click-hint">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>Klicken Sie auf ein Compliance-Siegel, um technische Parameter und Rechtsnormen einzusehen</span>
+                    </div>
+                </div>
 
-                    <div class="compliance-card">
-                        <div class="compliance-icon-wrap" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <div>
-                            <div class="compliance-title">Dutch Chamber of Commerce (KvK)</div>
-                            <p class="compliance-desc">KvK Registration: 84920183 | Fully registered Dutch legal entity in Amsterdam.</p>
-                        </div>
-                    </div>
+                <div class="sr-trust-grid">
 
-                    <div class="compliance-card">
-                        <div class="compliance-icon-wrap" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <div class="sr-trust-card" data-compliance="gdpr" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify EU 2016/679">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">🛡️</span>
+                            <span class="sr-trust-code">EU 2016/679</span>
                         </div>
-                        <div>
-                            <div class="compliance-title">Bank-Grade AES-256 Encryption</div>
-                            <p class="compliance-desc">End-to-end encryption across financial rails, sensitive databases, and API integrations.</p>
+                        <h4 class="sr-trust-title">Datenschutz-Grundverordnung (DSGVO)</h4>
+                        <p class="sr-trust-desc">Strikte Einhaltung der europäischen Datenschutzgesetze, lückenlose Verschlüsselung und Ausschluss unautorisierter Telemetrie.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">DSGVO Konform</span>
+                            <span class="sr-trust-arrow">↗</span>
                         </div>
                     </div>
+    
 
-                    <div class="compliance-card">
-                        <div class="compliance-icon-wrap" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <div class="sr-trust-card" data-compliance="btw" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify Belastingdienst Fiscal">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">🏛️</span>
+                            <span class="sr-trust-code">Belastingdienst Fiscal</span>
                         </div>
-                        <div>
-                            <div class="compliance-title">99.98% High Availability SLA</div>
-                            <p class="compliance-desc">Tier-3+ datacenters in Amsterdam (AMS-01) with DDoS protection and 24/7 monitoring.</p>
+                        <h4 class="sr-trust-title">Niederländische & EU-Steuercompliance</h4>
+                        <p class="sr-trust-desc">Zertifizierte PEPPOL BIS 3.0 E-Rechnungen und automatisierte MwSt/BTW-Berechnung (9% & 21%) für den EU-Binnenmarkt.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">Fiskalisch Konform</span>
+                            <span class="sr-trust-arrow">↗</span>
                         </div>
                     </div>
+    
+
+                    <div class="sr-trust-card" data-compliance="amsix" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify AMS-IX Infrastruktur">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">🌐</span>
+                            <span class="sr-trust-code">AMS-IX Infrastruktur</span>
+                        </div>
+                        <h4 class="sr-trust-title">Amsterdam Souveräner Cloud-Knotenpunkt</h4>
+                        <p class="sr-trust-desc">Enterprise-Server direkt am Amsterdam Internet Exchange (AMS-IX) Tier 3+ Rechenzentrum für Sub-5ms Latenz in Westeuropa.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">AMS-NODE-01</span>
+                            <span class="sr-trust-arrow">↗</span>
+                        </div>
+                    </div>
+    
+
+                    <div class="sr-trust-card" data-compliance="sla" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify 99.98% Verfügbarkeit">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">⚡</span>
+                            <span class="sr-trust-code">99.98% Verfügbarkeit</span>
+                        </div>
+                        <h4 class="sr-trust-title">Enterprise Cloud SLA-Garantie</h4>
+                        <p class="sr-trust-desc">Vertraglich garantierte 99.98% Systemverfügbarkeit mit aktiver Disaster-Recovery und < 15 Min. Ausfallwiederherstellung.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">Mission Critical</span>
+                            <span class="sr-trust-arrow">↗</span>
+                        </div>
+                    </div>
+    
+
+                    <div class="sr-trust-card" data-compliance="iso" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify ISO 27001 / SOC 2">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">🔒</span>
+                            <span class="sr-trust-code">ISO 27001 / SOC 2</span>
+                        </div>
+                        <h4 class="sr-trust-title">Informationssicherheits-Governance</h4>
+                        <p class="sr-trust-desc">Konsequente Ausrichtung an ISO/IEC 27001-Vorgaben und SOC 2 Type II-Richtlinien für unternehmensweites Risikomanagement.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">Geprüfte Sicherheit</span>
+                            <span class="sr-trust-arrow">↗</span>
+                        </div>
+                    </div>
+    
+
+                    <div class="sr-trust-card" data-compliance="zeroknowledge" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Verify Zero-Knowledge Security">
+                        <div class="sr-trust-card-top">
+                            <span class="sr-trust-icon">🛡️</span>
+                            <span class="sr-trust-code">Zero-Knowledge Security</span>
+                        </div>
+                        <h4 class="sr-trust-title">Souveräne Kryptographische Isolation</h4>
+                        <p class="sr-trust-desc">Dedizierte Datenbanken mit kundenkontrollierten Schlüsseln (BYOK), ohne jegliche Hintertüren für Dritte.</p>
+                        <div class="sr-trust-badge-footer">
+                            <span class="sr-trust-status-dot"></span>
+                            <span class="sr-trust-status-text">Private Cloud</span>
+                            <span class="sr-trust-arrow">↗</span>
+                        </div>
+                    </div>
+    
+                </div>
+
+                <div class="sr-trust-legal-footer">
+                    <span class="sr-trust-legal-icon">⚖️</span>
+                    <span class="sr-trust-legal-text">S&R CoreSync Solutions B.V. unterliegt vollumfänglich niederländischem und EU-Recht.</span>
+                    <a href="https://wa.me/31687764998?text=Hello%20S%26R%20CoreSync%2C%20we%20would%20like%20to%20request%20the%20official%20Corporate%20Compliance%20Dossier." target="_blank" rel="noopener noreferrer" class="sr-trust-audit-link">
+                        Unternehmens-Compliance-Dossier Anfordern (PDF) →
+                    </a>
                 </div>
             </div>
         </section>
@@ -12384,5 +12792,8 @@
 
     <!-- S&R CoreSync Sovereign Geo-Language Detection Banner -->
     <script src="../js/sr-geo-lang.js" defer></script>
+    <!-- S&R CoreSync Sovereign Trust Ribbon & Tier Matrix Controllers -->
+    <script src="../js/sr-trust-ribbon.js" defer></script>
+    <script src="../js/sr-tier-matrix.js" defer></script>
 </body>
 </html>
