@@ -12388,21 +12388,25 @@ let currentFoundersTarget = 'salim';
     </script>
     <script src="../js/sr-software-apps.js"></script>
 <script>
-/* sr-contact-webhook */
+/* sr-contact-endpoint v2 */
+window.__SR_CONTACT_ENDPOINT__ = 'https://api.sr-coresync.com/lead';
+window.__SR_CONTACT_FALLBACK__ = 'http://localhost:5678/webhook/Contact';
+
 window.submitContactForm = async function (event) {
     if (event && event.preventDefault) event.preventDefault();
     var form = (event && event.target) || document.querySelector('form.form-cta');
     if (!form) return;
+
     var btn = form.querySelector('button[type="submit"], input[type="submit"]');
     var label = btn ? (btn.innerHTML || btn.value) : '';
-    if (btn) { btn.disabled = true; }
+    if (btn) btn.disabled = true;
 
     function val(id, name) {
         var el = document.getElementById(id) || form.querySelector('[name="' + name + '"]');
-        return el ? el.value : '';
+        return el ? String(el.value || '').trim() : '';
     }
 
-    var payload = {
+    var raw = {
         name: val('contact-name', 'name'),
         email: val('contact-email', 'email'),
         country: val('contact-country', 'country'),
@@ -12410,26 +12414,70 @@ window.submitContactForm = async function (event) {
         service: val('contact-service', 'service'),
         budget: val('contact-budget', 'budget'),
         message: val('contact-details', 'details') || val('', 'message'),
-        source: location.pathname,
-        page: document.title,
         lang: document.documentElement.lang || 'ar',
-        timestamp: new Date().toISOString()
+        sourceUrl: location.href
     };
 
-    try {
-        var res = await fetch('http://localhost:5678/webhook/Contact', {
+    // Worker schema (whitelisted fields).
+    var workerPayload = {
+        clientName: raw.name,
+        email: raw.email,
+        phone: raw.phone,
+        companyName: raw.country,
+        language: (raw.lang || 'ar').slice(0, 8),
+        channel: 'contact-form',
+        sourceUrl: raw.sourceUrl,
+        notes: [
+            raw.service ? ('Service: ' + raw.service) : '',
+            raw.budget ? ('Budget: ' + raw.budget) : '',
+            raw.message ? ('Details: ' + raw.message) : ''
+        ].filter(Boolean).join(' | '),
+        website: ''
+    };
+
+    async function post(url, body) {
+        var res = await fetch(url, {
             method: 'POST',
+            mode: 'cors',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(body)
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res;
+    }
+
+    var sent = false;
+    try {
+        await post(window.__SR_CONTACT_ENDPOINT__, workerPayload);
+        sent = true;
+    } catch (primaryError) {
+        console.warn('Primary contact endpoint failed:', primaryError.message);
+        try {
+            await post(window.__SR_CONTACT_FALLBACK__, raw);
+            sent = true;
+        } catch (fallbackError) {
+            console.error('Contact endpoints unavailable:', fallbackError.message);
+        }
+    }
+
+    if (btn) { btn.disabled = false; if (btn.tagName === 'BUTTON') btn.innerHTML = label; else btn.value = label; }
+
+    if (sent) {
         alert('\u0634\u0643\u0631\u0627\u064b \u0644\u062a\u0648\u0627\u0635\u0644\u0643 \u0645\u0639 S&R CoreSync Solutions! \u062a\u0645 \u0627\u0633\u062a\u0644\u0627\u0645 \u0637\u0644\u0628\u0643 \u0648\u0633\u064a\u062a\u0648\u0627\u0635\u0644 \u0645\u0639\u0643 \u0627\u0644\u0634\u0631\u064a\u0643\u0627\u0646 \u0627\u0644\u0645\u0624\u0633\u0633\u0627\u0646 \u0642\u0631\u064a\u0628\u0627\u064b.');
         form.reset();
-    } catch (err) {
-        console.error('Webhook Error:', err);
-        alert('\u062a\u0639\u0630\u0631 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0628\u0627\u0644\u062e\u0627\u062f\u0645. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0644\u0627\u062d\u0642\u0627\u064b \u0623\u0648 \u0627\u0644\u062a\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 info@sr-coresync.com');
-    } finally {
-        if (btn) { btn.disabled = false; if (btn.tagName === 'BUTTON') btn.innerHTML = label; else btn.value = label; }
+    } else {
+        var line = [
+            '\u0627\u0644\u0627\u0633\u0645: ' + raw.name,
+            '\u0627\u0644\u0628\u0631\u064a\u062f: ' + raw.email,
+            '\u0627\u0644\u0647\u0627\u062a\u0641: ' + raw.phone,
+            '\u0627\u0644\u062f\u0648\u0644\u0629: ' + raw.country,
+            '\u0627\u0644\u062e\u062f\u0645\u0629: ' + raw.service,
+            '\u0627\u0644\u0645\u064a\u0632\u0627\u0646\u064a\u0629: ' + raw.budget,
+            '\u0627\u0644\u062a\u0641\u0627\u0635\u064a\u0644: ' + raw.message
+        ].join('\n');
+        window.location.href = 'mailto:info@sr-coresync.com?subject=' +
+            encodeURIComponent('S&R CoreSync contact request') +
+            '&body=' + encodeURIComponent(line);
     }
 };
 
