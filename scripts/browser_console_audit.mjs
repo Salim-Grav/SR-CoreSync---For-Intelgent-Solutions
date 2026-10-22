@@ -14,6 +14,7 @@ import { tmpdir } from 'node:os';
 import { join, extname, resolve } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 import http from 'node:http';
+import net from 'node:net';
 
 const BROWSER_CANDIDATES = [
     process.env.SR_BROWSER,
@@ -28,9 +29,28 @@ const BROWSER_CANDIDATES = [
 ].filter(Boolean);
 
 const EDGE = BROWSER_CANDIDATES.find(p => existsSync(p));
-const PORT = 9222;
-const HTTP_PORT = 8099;
+let PORT = 9222;
+let HTTP_PORT = 8099;
 const SITE = resolve(process.env.SR_SITE_DIR || join(process.cwd(), '_site'));
+
+// The DevTools port must be free before the browser is started. If another
+// browser already owns it, the launch silently attaches to that foreign
+// instance and the audit hangs on /json/new.
+async function findFreePort(preferred) {
+    const candidates = [preferred, 0].filter(v => v !== undefined);
+    for (const wanted of candidates) {
+        const port = await new Promise(resolve => {
+            const probe = net.createServer();
+            probe.once('error', () => resolve(-1));
+            probe.listen(wanted, '127.0.0.1', () => {
+                const found = probe.address().port;
+                probe.close(() => resolve(found));
+            });
+        });
+        if (port > 0) return port;
+    }
+    throw new Error('No free DevTools port available.');
+}
 
 const MIME = {
     '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
@@ -70,7 +90,6 @@ async function getJson(path) {
     const res = await fetch(`http://127.0.0.1:${PORT}${path}`);
     return res.json();
 }
-
 async function launchBrowser(profile, extraArgs = []) {
     const base = [
         '--disable-gpu',
@@ -94,6 +113,39 @@ async function launchBrowser(profile, extraArgs = []) {
     return null;
 }
 
+const HANDLER_AUDIT = `(() => {
+    const names = new Set();
+    const attrs = ['onclick','oninput','onchange','onsubmit','onload','onfocus',
+                   'onblur','onkeydown','onkeyup','onerror','onmouseover',
+                   'onmouseenter','onmouseleave','oncontextmenu','ondragend',
+                   'onanimationend','ontoggle','onwheel'];
+    document.querySelectorAll('*').forEach(el => {
+        attrs.forEach(a => {
+            const raw = el.getAttribute(a);
+            if (!raw) return;
+            // Drop string literals first: a caption such as
+            // openFoundersLightbox('... S&R CoreSync (For ...)') must not be
+            // mistaken for a call to a global named CoreSync.
+            const v = raw.replace(/'[^']*'/g, "''").replace(/"[^"]*"/g, '""');
+            const re = /(^|[^.\\w$])([A-Za-z_$][\\w$]*)\\s*\\(/g;
+            let m;
+            while ((m = re.exec(v)) !== null) names.add(m[2]);
+        });
+    });
+    const blocked = new Set(['if','for','while','switch','catch','return','typeof',
+        'function','new','await','async','delete','void','in','of','do','else','try',
+        'finally','throw','case','default','break','continue','class','extends',
+        'super','this','import','export','let','const','var','yield','instanceof']);
+    const missing = [];
+    Array.from(names).forEach(n => {
+        if (blocked.has(n)) return;
+        try {
+            if (new Function('return typeof ' + n)() === 'undefined') missing.push(n);
+        } catch (e) { /* not resolvable - ignore */ }
+    });
+    return missing.sort().join(',');
+})()`;
+
 async function main() {
     if (typeof WebSocket === 'undefined') {
         console.log('='.repeat(72));
@@ -113,6 +165,9 @@ async function main() {
         console.log('='.repeat(72));
         return;
     }
+    PORT = await findFreePort(9222);
+    HTTP_PORT = await findFreePort(8099);
+    console.log(`DevTools port ${PORT}, site server port ${HTTP_PORT}`);
     const server = await startServer();
     const profile = mkdtempSync(join(tmpdir(), 'sr-edge-'));
 
@@ -132,7 +187,7 @@ async function main() {
     let failed = 0;
 
     for (const route of pages) {
-        const url = `http://127.0.0.1:8099${route}`;
+        const url = `http://127.0.0.1:${HTTP_PORT}${route}`;
         const target = await fetch(`http://127.0.0.1:${PORT}/json/new?${encodeURIComponent(url)}`, { method: 'PUT' })
             .then(r => r.json());
 
@@ -183,17 +238,39 @@ async function main() {
         await send('Page.navigate', { url });
         await sleep(2600);
 
+        // ---------------------------------------------------------------
+        // Undefined inline event handlers.
+        //
+        // A localized page can keep the markup of a feature while losing
+        // the function that backs it (e.g. the ROI sliders survived the
+        // translation pass but updateROICalculator() never did). Nothing
+        // breaks at load time - the control is simply dead until someone
+        // drags it, and then it throws ReferenceError.
+        // ---------------------------------------------------------------
+        let deadHandlers = [];
+        try {
+            const probe = await send('Runtime.evaluate', {
+                expression: HANDLER_AUDIT,
+                returnByValue: true,
+            });
+            const value = probe && probe.result && probe.result.value;
+            if (value) deadHandlers = value.split(',').filter(Boolean);
+        } catch (e) { /* evaluation failed - skip */ }
+
         ws.close();
         await fetch(`http://127.0.0.1:${PORT}/json/close/${target.id}`);
 
         const real = errors.filter(e => !/favicon/i.test(e));
         const req = failedRequests.filter(e => !/favicon/i.test(e));
-        const ok = real.length === 0 && req.length === 0;
+        const ok = real.length === 0 && req.length === 0 && deadHandlers.length === 0;
         if (!ok) failed++;
-        results.push({ route, ok, errors: real, requests: req });
-        console.log(`${ok ? 'PASS' : 'FAIL'}  ${route.padEnd(8)} js-errors=${real.length} failed-requests=${req.length}`);
+        results.push({ route, ok, errors: real, requests: req, deadHandlers });
+        console.log(`${ok ? 'PASS' : 'FAIL'}  ${route.padEnd(8)} js-errors=${real.length} failed-requests=${req.length} dead-handlers=${deadHandlers.length}`);
         real.slice(0, 4).forEach(e => console.log('        ! ' + String(e).split('\n')[0].slice(0, 160)));
         req.slice(0, 4).forEach(e => console.log('        > ' + String(e).slice(0, 160)));
+        if (deadHandlers.length) {
+            console.log('        x undefined handlers: ' + deadHandlers.join(', ').slice(0, 400));
+        }
     }
 
     child.kill();

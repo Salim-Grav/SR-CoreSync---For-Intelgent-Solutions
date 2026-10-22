@@ -2896,7 +2896,7 @@ var response = await client.PostAsync("https://api.coresync.eu/v1/tax/calculate-
                         <div style="position:absolute;top:-20px;right:-20px;width:100px;height:100px;background:radial-gradient(circle,rgba(197,168,128,0.2),transparent 70%);pointer-events:none;"></div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
                             <div style="display:flex;align-items:center;gap:8px;">
-                                <img src="./assets/sr-core-emblem.svg" width="24" height="24" alt="CivicSync">
+                                <img src="assets/sr-core-emblem.svg" data-sr-emblem width="24" height="24" alt="CivicSync">
                                 <span style="font-size:0.85rem;font-weight:800;color:#dfc299;">S&R CivicSync™ Member</span>
                             </div>
                             <span style="font-size:0.7rem;font-weight:700;background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);padding:2px 8px;border-radius:99px;">عضوية نشطة ✓</span>
