@@ -76,11 +76,18 @@ npx wrangler deploy
 ### 4.3 الأسرار (Secrets)
 
 ```bash
-npx wrangler secret put LEAD_WEBHOOK_URLS   # روابط Make / n8n / Sheets مفصولة بفاصلة
-npx wrangler secret put NOTIFY_EMAIL         # بريد التنفيذ، مثال info@sr-coresync.com
+npx wrangler secret put NOTIFY_EMAIL         # بريد استقبال التنبيهات
+npx wrangler secret put RESEND_API_KEY       # تنبيه بريدي عبر Resend (اختر واحداً)
+npx wrangler secret put BREVO_API_KEY        # تنبيه بريدي عبر Brevo  (اختر واحداً)
+npx wrangler secret put LEAD_WEBHOOK_URLS    # اختياري: روابط Make / n8n / Sheets
 npx wrangler secret put EMAIL_WEBHOOK_URL    # اختياري: endpoint يرسل البريد
-npx wrangler secret put MAIL_FROM            # اختياري
 ```
+
+ترتيب إرسال البريد: `SEND_EMAIL` (Cloudflare Email Routing) ← `RESEND_API_KEY`
+← `BREVO_API_KEY` ← `EMAIL_WEBHOOK_URL`. أول خيار متاح يُستخدم فقط.
+
+**متى يعمل `SEND_EMAIL`؟** بعد نقل النطاق إلى Cloudflare وتفعيل Email Routing؛
+وقتها لا تحتاج أي مزوّد خارجي ولا أي مفتاح API.
 
 ### 4.4 مساحة تخزين KV (موصى به)
 
@@ -147,7 +154,10 @@ npx wrangler tail
 | `LEAD_WEBHOOK_URLS` | secret | روابط relay (Make / n8n / Sheets) |
 | `NOTIFY_EMAIL` | secret | بريد الاستقبال |
 | `MAIL_FROM` | var | مرسل البريد |
+| `RESEND_API_KEY` | secret | مفتاح Resend لإرسال التنبيهات |
+| `BREVO_API_KEY` | secret | مفتاح Brevo لإرسال التنبيهات |
 | `EMAIL_WEBHOOK_URL` | secret | مُرحِّل بريد اختياري |
+| `SEND_EMAIL` | binding | إرسال عبر Cloudflare Email Routing (بعد نقل النطاق) |
 | `LEADS` | KV | تخزين العملاء المحتملين |
 
 ---

@@ -7,10 +7,14 @@ workers_dev = true
 # S&R CoreSync Solutions - Sovereign Lead Capture Worker
 # -----------------------------------------------------------------------------
 # Deploy:   npx wrangler deploy
-# Secrets:  npx wrangler secret put LEAD_WEBHOOK_URLS
-#           npx wrangler secret put NOTIFY_EMAIL
-#           npx wrangler secret put EMAIL_WEBHOOK_URL   (optional)
-#           npx wrangler secret put MAIL_FROM           (optional)
+# Secrets:  npx wrangler secret put NOTIFY_EMAIL
+#           npx wrangler secret put RESEND_API_KEY      (email alerts, option A)
+#           npx wrangler secret put BREVO_API_KEY       (email alerts, option B)
+#           npx wrangler secret put LEAD_WEBHOOK_URLS   (relay to n8n/Make, optional)
+#           npx wrangler secret put EMAIL_WEBHOOK_URL   (generic email relay, optional)
+#
+# Email delivery order: SEND_EMAIL binding -> RESEND_API_KEY -> BREVO_API_KEY -> EMAIL_WEBHOOK_URL
+# The SEND_EMAIL binding (Cloudflare Email Routing) needs the domain on Cloudflare.
 #
 # KV namespace (optional but recommended):
 #   npx wrangler kv namespace create LEADS

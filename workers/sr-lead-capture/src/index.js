@@ -287,6 +287,40 @@ async function notifyByEmail(lead, env, ctx) {
             });
             return;
         }
+        if (env.RESEND_API_KEY) {
+            const res = await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + env.RESEND_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    from: env.MAIL_FROM || 'S&R CoreSync <onboarding@resend.dev>',
+                    to: [env.NOTIFY_EMAIL],
+                    subject: 'New Lead ' + lead.leadId,
+                    html: buildNotificationHtml(lead)
+                })
+            });
+            if (!res.ok) console.error('[LeadWorker] Resend rejected:', res.status, await res.text());
+            return;
+        }
+        if (env.BREVO_API_KEY) {
+            const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'api-key': env.BREVO_API_KEY,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sender: { email: env.MAIL_FROM || 'leads@sr-coresync.com', name: 'S&R CoreSync' },
+                    to: [{ email: env.NOTIFY_EMAIL }],
+                    subject: 'New Lead ' + lead.leadId,
+                    htmlContent: buildNotificationHtml(lead)
+                })
+            });
+            if (!res.ok) console.error('[LeadWorker] Brevo rejected:', res.status, await res.text());
+            return;
+        }
         if (env.EMAIL_WEBHOOK_URL) {
             await fetch(env.EMAIL_WEBHOOK_URL, {
                 method: 'POST',
