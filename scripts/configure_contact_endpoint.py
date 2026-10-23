@@ -128,7 +128,7 @@ OLD_MARK = "/* sr-contact-webhook */"
 
 paths = ["index.html"]
 for d in sorted(os.listdir(".")):
-    if re.match(r"^[a-z]{2}$", d) and os.path.isfile(os.path.join(d, "index.html")):
+    if re.match(r"^[a-z]{2,3}$", d) and os.path.isfile(os.path.join(d, "index.html")):
         paths.append(os.path.join(d, "index.html"))
 
 changed = 0
