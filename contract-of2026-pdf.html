@@ -1313,8 +1313,11 @@
                 <button type="button" class="btn-action btn-action-primary" onclick="copyRichEmailContent()">
                     📋 نسخ القالب المرئي لـ Gmail (Ctrl+V)
                 </button>
+                <a id="btnModalLaunchGmail" href="#" target="_blank" class="btn-action" style="background:#ea4335;color:#fff;border-color:#ea4335;">
+                    🚀 فتح في Gmail مباشرة
+                </a>
                 <a id="btnModalLaunchMail" href="#" class="btn-action btn-action-email">
-                    🚀 فتح في تطبيق البريد
+                    ✉️ فتح في تطبيق البريد
                 </a>
             </div>
         </div>
@@ -1359,18 +1362,45 @@
         const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const baseOrigin = isLocalHost ? 'https://sr-coresync.com' : window.location.origin;
         const portalUrl = baseOrigin + window.location.pathname.replace('contract-of2026-pdf.html', 'demo.html') + '?client=mudar&contract=OF-2026-1021#invoices';
-        
+        const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+
+        function getMudarClientPhone() {
+            let phone = localStorage.getItem('sr_client_phone_mudar');
+            if (!phone) {
+                phone = prompt('يرجى إدخال رقم واتساب العميل (السيد مضر أبو فاشة) مع الرمز الدولي (مثال: 31612345678):', '316');
+                if (phone && phone.trim()) {
+                    phone = phone.replace(/[^0-9]/g, '');
+                    localStorage.setItem('sr_client_phone_mudar', phone);
+                }
+            }
+            return phone || '';
+        }
+
         // WhatsApp Share Link
         const waMsg = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions.\n\nيمكنك مراجعة وتوقيع العقد وسداد الدفعة الأولى مباشرة عبر الرابط:\n${portalUrl}\n`);
         const waBtn = document.getElementById('btnShareWhatsApp');
-        if (waBtn) waBtn.href = `https://wa.me/31618111116?text=${waMsg}`;
+        if (waBtn) {
+            waBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const phone = getMudarClientPhone();
+                const waUrl = phone ? `https://wa.me/${phone}?text=${waMsg}` : `https://wa.me/?text=${waMsg}`;
+                window.open(waUrl, '_blank', 'noopener,noreferrer');
+            });
+        }
 
         // Email Share Setup
         const emailSubject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
+        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وععرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
         
+        const btnModalLaunchGmail = document.getElementById('btnModalLaunchGmail');
+        if (btnModalLaunchGmail) {
+            btnModalLaunchGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${emailSubject}&body=${emailBody}`;
+        }
+
         const btnModalLaunchMail = document.getElementById('btnModalLaunchMail');
-        if (btnModalLaunchMail) btnModalLaunchMail.href = `mailto:mudar@nl-bilarabi.nl?subject=${emailSubject}&body=${emailBody}`;
+        if (btnModalLaunchMail) {
+            btnModalLaunchMail.href = `mailto:${CLIENT_MUDAR_EMAIL}?subject=${emailSubject}&body=${emailBody}`;
+        }
 
         const emailModalLink = document.getElementById('emailModalLink');
         if (emailModalLink) emailModalLink.href = portalUrl;

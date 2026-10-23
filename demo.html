@@ -4984,23 +4984,44 @@ function getOfficialShareUrl(contractRef) {
     return `${baseOrigin}${path}?client=mudar&contract=${contractRef}#invoices`;
 }
 
+const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+
+function getMudarClientPhone() {
+    let phone = localStorage.getItem('sr_client_phone_mudar');
+    if (!phone) {
+        phone = prompt('يرجى إدخال رقم واتساب العميل (السيد مضر أبو فاشة) مع الرمز الدولي (مثال: 31612345678):', '316');
+        if (phone && phone.trim()) {
+            phone = phone.replace(/[^0-9]/g, '');
+            localStorage.setItem('sr_client_phone_mudar', phone);
+        }
+    }
+    return phone || '';
+}
+
 function shareContractViaWhatsApp() {
     const url = getOfficialShareUrl('OF-2026-1021');
     const text = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك رابط العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions.\n\nيمكنك مراجعة وتوقيع العقد وسداد الدفعة الأولى مباشرة عبر الرابط:\n${url}\n`);
-    window.open(`https://wa.me/31618111116?text=${text}`, '_blank', 'noopener,noreferrer');
+    const phone = getMudarClientPhone();
+    const waUrl = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
 function shareContractViaEmail() {
     const portalUrl = getOfficialShareUrl('OF-2026-1021');
     const subject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-    const body = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
+    const bodyText = `السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`;
+    const body = encodeURIComponent(bodyText);
     
-    // Copy link & notification
     if (navigator.clipboard) {
-        navigator.clipboard.writeText(portalUrl).catch(() => {});
+        navigator.clipboard.writeText(bodyText).catch(() => {});
     }
-    showPortalToast('📧 جاري فتح برنامج البريد الإلكتروني، وتم نسخ رابط العقد للحافظة');
-    window.location.href = `mailto:mudar@nl-bilarabi.nl?subject=${subject}&body=${body}`;
+    showPortalToast(`📧 جاري فتح بريد Gmail الموجه لـ ${CLIENT_MUDAR_EMAIL}، وتم نسخ نص الرسالة للحافظة!`);
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${subject}&body=${body}`;
+    const mailWin = window.open(gmailUrl, '_blank');
+    if (!mailWin || mailWin.closed || typeof mailWin.closed === 'undefined') {
+        window.location.href = `mailto:${CLIENT_MUDAR_EMAIL}?subject=${subject}&body=${body}`;
+    }
 }
 
 function printOfficialContractPdf() {
@@ -5177,19 +5198,27 @@ function signContractFinDigitally() {
 function shareContractFinViaWhatsApp() {
     const url = getOfficialShareUrl('OF-2026-1022-FIN');
     const text = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد ضريبة الـ BTW (4,410 €) بتخفيض حصري 50% عبر بوابة S&R CoreSync.\n\nيمكنك مراجعة وتوقيع العقد المالي وسداد الحزمة مباشرة عبر الرابط:\n${url}\n`);
-    window.open(`https://wa.me/31687710290?text=${text}`, '_blank', 'noopener,noreferrer');
+    const phone = getMudarClientPhone();
+    const waUrl = phone ? `https://wa.me/${phone}?text=${text}` : `https://wa.me/?text=${text}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
 function shareContractFinViaEmail() {
     const portalUrl = getOfficialShareUrl('OF-2026-1022-FIN');
     const subject = encodeURIComponent("وثيقة العقد المالي والضريبي الرسمي (OF-2026-1022-FIN) - منصة NL بالعربي | S&R CoreSync");
-    const body = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية بهولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\nرابط معاينة وتوقيع العقد المالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`);
+    const bodyText = `السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية بهولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\nرابط معاينة وتوقيع العقد المالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`;
+    const body = encodeURIComponent(bodyText);
     
     if (navigator.clipboard) {
-        navigator.clipboard.writeText(portalUrl).catch(() => {});
+        navigator.clipboard.writeText(bodyText).catch(() => {});
     }
-    showPortalToast('📧 جاري فتح برنامج البريد الإلكتروني، وتم نسخ رابط العقد المالي للحافظة');
-    window.location.href = `mailto:mudar@nl-bilarabi.nl?subject=${subject}&body=${body}`;
+    showPortalToast(`📧 جاري فتح بريد Gmail الموجه لـ ${CLIENT_MUDAR_EMAIL}، وتم نسخ نص الرسالة للحافظة!`);
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${subject}&body=${body}`;
+    const mailWin = window.open(gmailUrl, '_blank');
+    if (!mailWin || mailWin.closed || typeof mailWin.closed === 'undefined') {
+        window.location.href = `mailto:${CLIENT_MUDAR_EMAIL}?subject=${subject}&body=${body}`;
+    }
 }
 
 function printOfficialContractFinPdf() {

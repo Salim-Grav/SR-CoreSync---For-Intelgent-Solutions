@@ -1066,7 +1066,7 @@
 
         <a id="btnShareWhatsApp" class="btn-action btn-action-wa" href="#" target="_blank" rel="noopener">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
-            <span>واتساب أ. رائد كعكة</span>
+            <span>واتساب السيد مضر</span>
         </a>
 
         <button type="button" class="btn-action btn-action-secondary" onclick="window.close()">
@@ -1403,8 +1403,11 @@
                 <button type="button" class="btn-action btn-action-primary" onclick="copyRichFinEmailContent()">
                     📋 نسخ القالب المرئي لـ Gmail (Ctrl+V)
                 </button>
+                <a id="btnModalLaunchGmail" href="#" target="_blank" class="btn-action" style="background:#ea4335;color:#fff;border-color:#ea4335;">
+                    🚀 فتح في Gmail مباشرة
+                </a>
                 <a id="btnModalLaunchMail" href="#" class="btn-action btn-action-email">
-                    🚀 فتح في تطبيق البريد
+                    ✉️ فتح في تطبيق البريد
                 </a>
             </div>
         </div>
@@ -1446,16 +1449,43 @@
         const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const baseOrigin = isLocalHost ? 'https://sr-coresync.com' : window.location.origin;
         const portalUrl = baseOrigin + window.location.pathname.replace('contract-of2026-fin-pdf.html', 'demo.html') + '?client=mudar&contract=OF-2026-1022-FIN#invoices';
+        const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+
+        function getMudarClientPhone() {
+            let phone = localStorage.getItem('sr_client_phone_mudar');
+            if (!phone) {
+                phone = prompt('يرجى إدخال رقم واتساب العميل (السيد مضر أبو فاشة) مع الرمز الدولي (مثال: 31612345678):', '316');
+                if (phone && phone.trim()) {
+                    phone = phone.replace(/[^0-9]/g, '');
+                    localStorage.setItem('sr_client_phone_mudar', phone);
+                }
+            }
+            return phone || '';
+        }
 
         const waMsg = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد ضريبة الـ BTW (4,410 €) بتخفيض حصري يصل إلى 50% عبر بوابة S&R CoreSync.\n\nيمكنك مراجعة وتوقيع العقد المالي مباشرة عبر الرابط:\n${portalUrl}\n`);
         const waBtn = document.getElementById('btnShareWhatsApp');
-        if (waBtn) waBtn.href = `https://wa.me/31687710290?text=${waMsg}`;
+        if (waBtn) {
+            waBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const phone = getMudarClientPhone();
+                const waUrl = phone ? `https://wa.me/${phone}?text=${waMsg}` : `https://wa.me/?text=${waMsg}`;
+                window.open(waUrl, '_blank', 'noopener,noreferrer');
+            });
+        }
 
         const emailSubject = encodeURIComponent("وثيقة العقد المالي والضريبي الرسمي (OF-2026-1022-FIN) - منصة NL بالعربي | S&R CoreSync");
         const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية في هولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي الرسمي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\nرابط معاينة وتوقيع العقد المالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`);
         
+        const btnModalLaunchGmail = document.getElementById('btnModalLaunchGmail');
+        if (btnModalLaunchGmail) {
+            btnModalLaunchGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${emailSubject}&body=${emailBody}`;
+        }
+
         const btnModalLaunchMail = document.getElementById('btnModalLaunchMail');
-        if (btnModalLaunchMail) btnModalLaunchMail.href = `mailto:mudar@nl-bilarabi.nl?subject=${emailSubject}&body=${emailBody}`;
+        if (btnModalLaunchMail) {
+            btnModalLaunchMail.href = `mailto:${CLIENT_MUDAR_EMAIL}?subject=${emailSubject}&body=${emailBody}`;
+        }
 
         const emailModalLink = document.getElementById('emailModalLink');
         if (emailModalLink) emailModalLink.href = portalUrl;
