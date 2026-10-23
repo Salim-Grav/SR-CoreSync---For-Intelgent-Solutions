@@ -136,6 +136,13 @@ for path in paths:
     html = io.open(path, encoding="utf-8", errors="ignore").read()
     original = html
 
+    # Repair stray text that an older script glued onto the form tag.
+    html = re.sub(
+        r'(onsubmit="submitContactForm\(event\)")\s*[^>]*?(?=data-success-msg=)',
+        r"\1 ",
+        html,
+    )
+
     # Drop every previously injected variant of the block.
     html = re.sub(
         r"<script>\s*/\* sr-contact-(?:webhook|endpoint v2) \*/.*?</script>\s*",
