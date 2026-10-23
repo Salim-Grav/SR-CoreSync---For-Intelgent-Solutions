@@ -5012,20 +5012,75 @@ function shareContractViaWhatsApp() {
     showPortalToast('✓ جاري فتح واتساب مع السيد مضر (+31631069433) وتم نسخ نص الرسالة والرابط للحافظة!');
 }
 
-function shareContractViaEmail() {
-    const portalUrl = getOfficialShareUrl('OF-2026-1021');
-    const contractPdfUrl = getOfficialPdfUrl('OF-2026-1021');
-    const subject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-    const bodyText = `السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\n📄 رابط معاينة العقد الرسمي (نسخة A4 موثقة):\n${contractPdfUrl}\n\n✍️ رابط التوقيع الرقمي وسداد الدفعة الأولى عبر iDEAL:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`;
-    const body = encodeURIComponent(bodyText);
-    
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(bodyText).catch(() => {});
+const SR_CONTRACT_ENDPOINT = 'https://sr-lead-capture.sr-coresync.workers.dev/contract';
+
+function extractContractBodyText(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return '';
+    const card = modal.querySelector('.contract-modal-card') || modal;
+    const clone = card.cloneNode(true);
+    clone.querySelectorAll('button, .contract-tabs-nav, script, style').forEach(function (node) {
+        if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    return (clone.innerText || clone.textContent || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+}
+
+async function deliverContractEmail(ref, modalId, heading, subjectLine) {
+    const bodyText = extractContractBodyText(modalId);
+    if (bodyText.length < 40) {
+        showPortalToast('⚠️ تعذّر قراءة نص العقد. افتح تبويب العقد ثم أعد المحاولة.');
+        return;
     }
-    showPortalToast(`📧 جاري فتح بريد Gmail الموجه لـ ${CLIENT_MUDAR_EMAIL}، وتم نسخ نص الرسالة للحافظة!`);
-    
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${subject}&body=${body}`;
+
+    const fullText = heading + '\n' + '='.repeat(52) + '\n\n' + bodyText +
+        '\n\n— — —\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl';
+    const subject = subjectLine + ' (' + ref + ')';
+    showPortalToast('⏳ جاري إرسال نص العقد كاملاً إلى ' + CLIENT_MUDAR_EMAIL + ' …');
+
+    let sent = false;
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(function () { controller.abort(); }, 15000);
+        const res = await fetch(SR_CONTRACT_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ to: CLIENT_MUDAR_EMAIL, subject: subject, text: fullText, contractRef: ref }),
+            signal: controller.signal
+        });
+        clearTimeout(timer);
+        const data = await res.json().catch(function () { return {}; });
+        sent = res.ok && data.status === 'success';
+        if (!sent) console.warn('Contract email rejected:', res.status, data.reason || data.message);
+    } catch (err) {
+        console.warn('Contract email failed:', err && err.message);
+    }
+
+    if (sent) {
+        showPortalToast('✅ تم إرسال نص العقد كاملاً إلى ' + CLIENT_MUDAR_EMAIL + ' بنجاح.');
+        return;
+    }
+
+    try {
+        if (navigator.clipboard) await navigator.clipboard.writeText(fullText);
+    } catch (e) { /* ignore */ }
+
+    const shortBody = 'نص العقد الكامل منسوخ في الحافظة — اضغط Ctrl+V داخل هذا البريد للصقه كاملاً.\n\n' +
+        'معاينة العقد: ' + getOfficialPdfUrl(ref) + '\n' +
+        'بوابة التوقيع: ' + getOfficialShareUrl(ref);
+    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(CLIENT_MUDAR_EMAIL) +
+        '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(shortBody);
     window.open(gmailUrl, '_blank');
+    showPortalToast('📋 نُسخ نص العقد كاملاً. في نافذة Gmail اضغط Ctrl+V ثم أرسل.');
+}
+
+function shareContractViaEmail() {
+    deliverContractEmail('OF-2026-1021', 'contractOf2026Modal',
+        'وثيقة العقد التجاري الرسمي المعتمد — منصة NL بالعربي',
+        'وثيقة العقد التجاري الرسمي المعتمد');
 }
 
 function printOfficialContractPdf() {

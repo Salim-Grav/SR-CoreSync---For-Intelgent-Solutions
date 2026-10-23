@@ -34,6 +34,8 @@ const DEFAULT_ALLOWED_ORIGINS = [
 ];
 
 const MAX_BODY_BYTES = 16 * 1024;
+const MAX_CONTRACT_BYTES = 96 * 1024;
+const MAX_CONTRACT_TEXT = 60000;
 const RATE_LIMIT_WINDOW_SEC = 600;
 const RATE_LIMIT_MAX = 8;
 
@@ -274,6 +276,79 @@ function buildNotificationHtml(lead) {
         '<table style="border-collapse:collapse;width:100%;font-size:14px;">' + rows + '</table></div></div></body></html>';
 }
 
+async function deliverEmail(env, to, subject, html, text) {
+    if (!env) return { ok: false, reason: 'no-env' };
+    const sender = env.MAIL_FROM || 'leads@sr-coresync.com';
+
+    if (env.SEND_EMAIL && typeof env.SEND_EMAIL.send === 'function') {
+        await env.SEND_EMAIL.send({ to: to, from: sender, subject: subject, html: html, text: text });
+        return { ok: true, provider: 'cloudflare-email' };
+    }
+
+    if (env.RESEND_API_KEY) {
+        const res = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + env.RESEND_API_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ from: 'S&R CoreSync <' + sender + '>', to: [to], subject: subject, html: html, text: text })
+        });
+        if (!res.ok) {
+            console.error('[LeadWorker] Resend rejected:', res.status, await res.text());
+            return { ok: false, reason: 'resend-' + res.status };
+        }
+        return { ok: true, provider: 'resend' };
+    }
+
+    if (env.BREVO_API_KEY) {
+        const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+            method: 'POST',
+            headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sender: { email: sender, name: 'S&R CoreSync' },
+                to: [{ email: to }],
+                subject: subject,
+                htmlContent: html,
+                textContent: text
+            })
+        });
+        if (!res.ok) {
+            console.error('[LeadWorker] Brevo rejected:', res.status, await res.text());
+            return { ok: false, reason: 'brevo-' + res.status };
+        }
+        return { ok: true, provider: 'brevo' };
+    }
+
+    if (env.EMAIL_WEBHOOK_URL) {
+        const res = await fetch(env.EMAIL_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ to: to, subject: subject, html: html, text: text })
+        });
+        if (!res.ok) return { ok: false, reason: 'webhook-' + res.status };
+        return { ok: true, provider: 'webhook' };
+    }
+
+    return { ok: false, reason: 'no-email-provider' };
+}
+
+function contractRecipients(env) {
+    const raw = (env && env.CONTRACT_RECIPIENTS) || 'mudar@nlbilarabi.nl,info@sr-coresync.com';
+    return raw.split(',').map(function (s) { return s.trim().toLowerCase(); }).filter(Boolean);
+}
+
+function buildContractHtml(text) {
+    const safe = escapeHtml(text).replace(/\n/g, '<br>');
+    return '<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8">' +
+        '<title>S&R CoreSync — Contract</title></head>' +
+        '<body style="margin:0;padding:24px;background:#f6f1e6;">' +
+        '<div style="max-width:720px;margin:auto;background:#fff;border:1px solid #d9c9a3;border-radius:12px;overflow:hidden;">' +
+        '<div style="background:#010907;color:#c5a880;padding:18px 24px;font-size:18px;">S&amp;R CoreSync Solutions &amp; Engineering</div>' +
+        '<div style="padding:24px;font-family:Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.9;color:#0b1a14;">' +
+        safe + '</div></div></body></html>';
+}
+
 async function notifyByEmail(lead, env, ctx) {
     if (!env || !env.NOTIFY_EMAIL) return { sent: false, reason: 'no-recipient' };
 
@@ -378,13 +453,65 @@ export default {
                 version: '1.0.0',
                 time: new Date().toISOString(),
                 kv: !!(env && env.LEADS),
-                webhooks: parseWebhookUrls(env).length
+                webhooks: parseWebhookUrls(env).length,
+                email: !!(env && (env.SEND_EMAIL || env.RESEND_API_KEY || env.BREVO_API_KEY || env.EMAIL_WEBHOOK_URL))
             }, 200, cors);
         }
 
         // ---- CORS preflight ------------------------------------------------
         if (request.method === 'OPTIONS') {
             return new Response(null, { status: 204, headers: cors });
+        }
+
+        // ---- Contract delivery: full template text in the email body -------
+        if (path === '/contract') {
+            if (request.method !== 'POST') {
+                return jsonResponse({ status: 'error', message: 'Method not allowed. Use POST.' }, 405, cors);
+            }
+            const origin = request.headers.get('Origin') || '';
+            if (resolveAllowedOrigins(env).indexOf(origin) === -1) {
+                return jsonResponse({ status: 'error', message: 'Origin not allowed' }, 403, cors);
+            }
+            if (Number(request.headers.get('Content-Length') || '0') > MAX_CONTRACT_BYTES) {
+                return jsonResponse({ status: 'error', message: 'Payload too large' }, 413, cors);
+            }
+            let contractRaw;
+            try { contractRaw = await request.text(); } catch (e) { contractRaw = ''; }
+            if (!contractRaw || contractRaw.length > MAX_CONTRACT_BYTES) {
+                return jsonResponse({ status: 'error', message: 'Invalid or oversized payload' }, 400, cors);
+            }
+            let body;
+            try { body = JSON.parse(contractRaw); } catch (e) { return jsonResponse({ status: 'error', message: 'Invalid JSON payload' }, 400, cors); }
+            if (!body || typeof body !== 'object' || Array.isArray(body)) {
+                return jsonResponse({ status: 'error', message: 'Invalid JSON payload' }, 400, cors);
+            }
+
+            const to = cleanText(body.to, 160).toLowerCase();
+            if (!to || contractRecipients(env).indexOf(to) === -1) {
+                return jsonResponse({ status: 'error', message: 'Recipient not allowed' }, 403, cors);
+            }
+
+            const subject = cleanText(body.subject, 160) || 'S&R CoreSync — Official Contract';
+            const text = String(body.text || '')
+                .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+                .trim()
+                .slice(0, MAX_CONTRACT_TEXT);
+            if (text.length < 40) {
+                return jsonResponse({ status: 'error', message: 'Contract text is too short' }, 422, cors);
+            }
+
+            const limit = await checkRateLimit(request, env);
+            if (!limit.allowed) {
+                return jsonResponse({ status: 'error', message: 'Too many requests. Please try again later.' },
+                    429, Object.assign({}, cors, { 'Retry-After': String(limit.retryAfter || 60) }));
+            }
+
+            const delivered = await deliverEmail(env, to, subject, buildContractHtml(text), text);
+            console.log('[LeadWorker] Contract delivery', to, 'ok=' + delivered.ok, delivered.provider || delivered.reason);
+            if (!delivered.ok) {
+                return jsonResponse({ status: 'error', message: 'Email provider unavailable', reason: delivered.reason }, 502, cors);
+            }
+            return jsonResponse({ status: 'success', provider: delivered.provider, to: to, chars: text.length }, 200, cors);
         }
 
         // ---- Only POST is accepted on the capture routes -------------------
