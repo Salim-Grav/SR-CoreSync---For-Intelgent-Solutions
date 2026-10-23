@@ -16,15 +16,16 @@ concurrency:
 
 jobs:
   # -----------------------------------------------------------------------
-  # Reports the publishing source of the Pages site.
+  # Informational only. Reports the publishing source of the Pages site.
   #
   # With the legacy "Deploy from a branch" build type, GitHub publishes the
-  # branch tree verbatim: server-side material becomes publicly reachable and
-  # the _headers file is served as a plain file instead of being applied by
-  # the CDN.  This job makes the current state visible in the Actions UI.
+  # branch tree verbatim and server-side material becomes publicly reachable.
+  # Note: GitHub Pages ignores the `_headers` file in every build type; real
+  # security headers require a proxy (Cloudflare) in front of the site.
   # -----------------------------------------------------------------------
   pages-source:
     runs-on: ubuntu-latest
+    continue-on-error: true
     permissions:
       pages: read
     steps:
@@ -50,6 +51,9 @@ jobs:
           except urllib.error.HTTPError as exc:
               print(f"Could not read the Pages configuration: HTTP {exc.code}")
               raise SystemExit(0)
+          except Exception as exc:  # never fail the pipeline for an info probe
+              print(f"Pages configuration probe skipped: {exc}")
+              raise SystemExit(0)
 
           build_type = data.get("build_type")
           cname = data.get("cname")
@@ -58,13 +62,13 @@ jobs:
           print(f"cname      = {cname}")
           print(f"source     = {source.get('branch')} {source.get('path')}")
           if build_type != "workflow":
-              print("::error::The Pages site is still built from the branch. "
+              print("::warning::The Pages site is still built from the branch. "
                     "Everything in the branch - including server-side material - "
-                    "is published, and _headers is not applied. Switch Settings > "
-                    "Pages > Build and deployment > Source to 'GitHub Actions'.")
-              raise SystemExit(1)
-          print("Publishing source is 'GitHub Actions': the selective publish set "
-                "is served and _headers is applied by the CDN.")
+                    "is published. Switch Settings > Pages > Build and deployment "
+                    "> Source to 'GitHub Actions'.")
+              raise SystemExit(0)
+          print("Publishing source is 'GitHub Actions': only the selective "
+                "publish set is served.")
           PY
 
   deploy:

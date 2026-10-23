@@ -136,6 +136,32 @@ curl -X POST https://api.sr-coresync.com/lead \
 { "status": "success", "leadId": "LEAD-SR-20261021-A1B2", "recorded": true, "dispatched": 1 }
 ```
 
+### 4.7 إرسال العقد بالبريد (`POST /contract`)
+
+يرسل نص العقد كاملاً في جسم الرسالة **مع ملف PDF مرفق**، ويتجنّب رابط Gmail
+الطويل الذي كان يجمّد المتصفح.
+
+```bash
+curl -X POST https://sr-lead-capture.sr-coresync.workers.dev/contract \
+  -H 'Content-Type: application/json' \
+  -H 'Origin: https://sr-coresync.com' \
+  -d '{"to":"mudar@nlbilarabi.nl","subject":"العقد OF-2026-1021","text":"<نص العقد>","contractRef":"OF-2026-1021","attach":true}'
+```
+
+- المستقبِل يجب أن يكون داخل `CONTRACT_RECIPIENTS` وإلا يُرفض بـ 403.
+- ملف الـPDF يُقرأ من KV بالمفتاح `contract:<ref>` (Base64).
+- لتوليد PDFs وتحديثها بعد أي تغيير في صفحات العقد:
+
+```bash
+node scripts/generate_contract_pdfs.mjs <outDir>
+# ثم ارفع كل ملف بعد تحويله إلى Base64:
+node "node_modules/wrangler/bin/wrangler.js" kv key put "contract:OF-2026-1021" \
+  --path <outDir>/OF-2026-1021.b64 --namespace-id <ID> --remote
+```
+
+- يتطلب مزوّد بريد مُهيّأ (`SEND_EMAIL` أو `RESEND_API_KEY` أو `BREVO_API_KEY`)،
+  وإلا يعيد `502` مع `reason: no-email-provider`.
+
 ---
 
 ## 5. سجل المراقبة
