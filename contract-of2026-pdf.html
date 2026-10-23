@@ -1569,20 +1569,86 @@
         }
 
         // Email Share Setup
-        const emailSubject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\n📄 رابط معاينة العقد الرسمي (نسخة A4 موثقة):\n${contractPdfUrl}\n\n✍️ رابط التوقيع الرقمي وسداد الدفعة الأولى عبر iDEAL:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
-        
+        const emailSubjectRaw = "وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions";
+        const emailSubject = encodeURIComponent(emailSubjectRaw);
+        // Rich HTML template for clipboard paste into Gmail
+        const richEmailHtml = `<div style="background:#fff;color:#0f172a;padding:18px;font-size:12px;line-height:1.6;direction:rtl;font-family:Arial,Tahoma,sans-serif;max-width:640px;">
+  <div style="border-bottom:2px solid #b38728;padding-bottom:10px;margin-bottom:14px;">
+    <strong style="font-size:15px;color:#0b192c;">S&amp;R CoreSync Solutions &amp; Engineering</strong><br>
+    <span style="font-size:11px;color:#aa771c;">وثيقة العقد التجاري الرسمي &mdash; مرجع: OF-2026-1021</span>
+  </div>
+  <p>السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،<br>تحية طيبة وبعد،</p>
+  <p>يسرنا في شركة S&amp;R CoreSync Solutions &amp; Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة &ldquo;NL بالعربي&rdquo;.</p>
+  <table style="width:100%;border-collapse:collapse;margin:12px 0;font-size:11px;">
+    <tr style="background:#f1f5f9;"><th style="padding:7px 9px;border:1px solid #cbd5e1;text-align:right;">البيان</th><th style="padding:7px 9px;border:1px solid #cbd5e1;text-align:left;">القيمة (EUR)</th></tr>
+    <tr><td style="padding:7px 9px;border:1px solid #cbd5e1;">تكلفة أعمال التأسيس البرمجي (5 مراحل)</td><td style="padding:7px 9px;border:1px solid #cbd5e1;text-align:left;direction:ltr;">&euro; 21,000.00</td></tr>
+    <tr><td style="padding:7px 9px;border:1px solid #cbd5e1;">ضريبة القيمة المضافة بهولندا (BTW 21%)</td><td style="padding:7px 9px;border:1px solid #cbd5e1;text-align:left;direction:ltr;">&euro; 4,410.00</td></tr>
+    <tr style="background:#fefce8;font-weight:bold;"><td style="padding:7px 9px;border:1px solid #cbd5e1;">الإجمالي التعاقدي الشامل للضريبة</td><td style="padding:7px 9px;border:1px solid #cbd5e1;text-align:left;direction:ltr;color:#059669;">&euro; 25,410.00</td></tr>
+    <tr style="background:#ecfdf5;"><td style="padding:7px 9px;border:1px solid #cbd5e1;">الدفعة الأولى المستحقة (30% مقدمة التأسيس)</td><td style="padding:7px 9px;border:1px solid #cbd5e1;text-align:left;direction:ltr;color:#047857;font-weight:bold;">&euro; 7,623.00</td></tr>
+  </table>
+  <p>يمكنكم معاينة وتوقيع العقد رقمياً وسداد الدفعة الأولى مباشرة عبر الرابط التفاعلي التالي:<br>
+  <a href="${portalUrl}" style="color:#0284c7;font-weight:bold;text-decoration:underline;">${portalUrl}</a></p>
+  <p>وتفضلوا بقبول فائق الاحترام والتقدير،<br>
+  <strong>م. محمد سليم عزيزة &mdash; المدير التقني للشؤون الهندسية</strong><br>
+  S&amp;R CoreSync Solutions &amp; Engineering &mdash; Den Haag / Rijswijk, The Netherlands<br>
+  info@sr-coresync.nl</p>
+</div>`;
+
+        async function copyAndOpenGmail() {
+            // Step 1: Copy rich HTML template to clipboard
+            try {
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blobHtml = new Blob([richEmailHtml], { type: 'text/html' });
+                    const blobText = new Blob([
+                        `السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي (مرجع: OF-2026-1021).\n\n• التكلفة الإجمالية: € 25,410.00 (شاملة BTW)\n• الدفعة الأولى (30%): € 7,623.00\n\nرابط التوقيع والسداد: ${portalUrl}\n\nم. محمد سليم عزيزة — S&R CoreSync Solutions`
+                    ], { type: 'text/plain' });
+                    await navigator.clipboard.write([new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobText })]);
+                } else {
+                    await navigator.clipboard.writeText(`رابط العقد: ${portalUrl}`);
+                }
+            } catch(e) { console.warn('Clipboard write failed:', e); }
+
+            // Step 2: Open Gmail with only To + Subject (NO body= → prevents freeze & plain-text issue)
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${emailSubject}`;
+            window.open(gmailUrl, '_blank');
+
+            // Step 3: Show paste instruction
+            showToast('✅ تم فتح Gmail! اضغط Ctrl+V في حقل الرسالة للصق قالب العقد المنسق كاملاً');
+        }
+
+        async function copyAndOpenOutlook() {
+            try {
+                if (navigator.clipboard && window.ClipboardItem) {
+                    const blobHtml = new Blob([richEmailHtml], { type: 'text/html' });
+                    const blobText = new Blob([`رابط العقد: ${portalUrl}`], { type: 'text/plain' });
+                    await navigator.clipboard.write([new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobText })]);
+                } else {
+                    await navigator.clipboard.writeText(`رابط العقد: ${portalUrl}`);
+                }
+            } catch(e) {}
+            const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${CLIENT_MUDAR_EMAIL}&subject=${emailSubject}`;
+            window.open(outlookUrl, '_blank');
+            showToast('✅ تم فتح Outlook! اضغط Ctrl+V في حقل الرسالة للصق قالب العقد المنسق');
+        }
+
         const btnModalLaunchGmail = document.getElementById('btnModalLaunchGmail');
         if (btnModalLaunchGmail) {
-            btnModalLaunchGmail.href = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${emailSubject}&body=${emailBody}`;
+            btnModalLaunchGmail.removeAttribute('href');
+            btnModalLaunchGmail.style.cursor = 'pointer';
+            btnModalLaunchGmail.addEventListener('click', function(e) {
+                e.preventDefault();
+                copyAndOpenGmail();
+            });
         }
 
         const btnModalLaunchMail = document.getElementById('btnModalLaunchMail');
         if (btnModalLaunchMail) {
-            // Use Outlook Web compose — avoids the Windows "Which browser?" mailto prompt
-            const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${CLIENT_MUDAR_EMAIL}&subject=${emailSubject}&body=${emailBody}`;
-            btnModalLaunchMail.href = outlookUrl;
-            btnModalLaunchMail.target = '_blank';
+            btnModalLaunchMail.removeAttribute('href');
+            btnModalLaunchMail.style.cursor = 'pointer';
+            btnModalLaunchMail.addEventListener('click', function(e) {
+                e.preventDefault();
+                copyAndOpenOutlook();
+            });
         }
 
         const emailModalLink = document.getElementById('emailModalLink');
