@@ -5281,19 +5281,9 @@ function shareContractFinViaWhatsApp() {
 }
 
 function shareContractFinViaEmail() {
-    const portalUrl = getOfficialShareUrl('OF-2026-1022-FIN');
-    const contractPdfUrl = getOfficialPdfUrl('OF-2026-1022-FIN');
-    const subject = encodeURIComponent("وثيقة العقد المالي والضريبي الرسمي (OF-2026-1022-FIN) - منصة NL بالعربي | S&R CoreSync");
-    const bodyText = `السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية بهولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`;
-    const body = encodeURIComponent(bodyText);
-    
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(bodyText).catch(() => {});
-    }
-    showPortalToast(`📧 جاري فتح بريد Gmail الموجه لـ ${CLIENT_MUDAR_EMAIL}، وتم نسخ نص الرسالة للحافظة!`);
-    
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${CLIENT_MUDAR_EMAIL}&su=${subject}&body=${body}`;
-    window.open(gmailUrl, '_blank');
+    deliverContractEmail('OF-2026-1022-FIN', 'contractOf2026FinModal',
+        'وثيقة العقد المالي والضريبي الرسمي — منصة NL بالعربي',
+        'وثيقة العقد المالي والضريبي الرسمي');
 }
 
 function printOfficialContractFinPdf() {
