@@ -13,7 +13,7 @@ import io
 import os
 import re
 
-WORKER_ENDPOINT = "https://api.sr-coresync.com/lead"
+WORKER_ENDPOINT = "https://sr-lead-capture.sr-coresync.workers.dev/lead"
 N8N_ENDPOINT = "http://localhost:5678/webhook/Contact"
 MARK = "/* sr-contact-endpoint v2 */"
 
