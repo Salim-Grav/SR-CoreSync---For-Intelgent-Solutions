@@ -4985,17 +4985,10 @@ function getOfficialShareUrl(contractRef) {
 }
 
 const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+const CLIENT_MUDAR_PHONE = '31631069433'; // +31 6 31069433 (السيد مضر أبو فاشة)
 
 function getMudarClientPhone() {
-    let phone = localStorage.getItem('sr_client_phone_mudar');
-    if (!phone) {
-        phone = prompt('يرجى إدخال رقم واتساب العميل (السيد مضر أبو فاشة) مع الرمز الدولي (مثال: 31612345678):', '316');
-        if (phone && phone.trim()) {
-            phone = phone.replace(/[^0-9]/g, '');
-            localStorage.setItem('sr_client_phone_mudar', phone);
-        }
-    }
-    return phone || '';
+    return localStorage.getItem('sr_client_phone_mudar') || CLIENT_MUDAR_PHONE;
 }
 
 function shareContractViaWhatsApp() {
