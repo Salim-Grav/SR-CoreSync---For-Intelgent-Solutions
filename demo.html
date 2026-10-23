@@ -5048,7 +5048,7 @@ async function deliverContractEmail(ref, modalId, heading, subjectLine) {
         const res = await fetch(SR_CONTRACT_ENDPOINT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ to: CLIENT_MUDAR_EMAIL, subject: subject, text: fullText, contractRef: ref }),
+            body: JSON.stringify({ to: CLIENT_MUDAR_EMAIL, subject: subject, text: fullText, contractRef: ref, attach: true }),
             signal: controller.signal
         });
         clearTimeout(timer);
@@ -5060,7 +5060,7 @@ async function deliverContractEmail(ref, modalId, heading, subjectLine) {
     }
 
     if (sent) {
-        showPortalToast('✅ تم إرسال نص العقد كاملاً إلى ' + CLIENT_MUDAR_EMAIL + ' بنجاح.');
+        showPortalToast('✅ تم إرسال نص العقد كاملاً + ملف PDF إلى ' + CLIENT_MUDAR_EMAIL + ' بنجاح.');
         return;
     }
 
