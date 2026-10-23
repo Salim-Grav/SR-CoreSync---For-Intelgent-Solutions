@@ -1450,17 +1450,10 @@
         const baseOrigin = isLocalHost ? 'https://sr-coresync.com' : window.location.origin;
         const portalUrl = baseOrigin + window.location.pathname.replace('contract-of2026-fin-pdf.html', 'demo.html') + '?client=mudar&contract=OF-2026-1022-FIN#invoices';
         const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+        const CLIENT_MUDAR_PHONE = '31631069433'; // +31 6 31069433 (السيد مضر أبو فاشة)
 
         function getMudarClientPhone() {
-            let phone = localStorage.getItem('sr_client_phone_mudar');
-            if (!phone) {
-                phone = prompt('يرجى إدخال رقم واتساب العميل (السيد مضر أبو فاشة) مع الرمز الدولي (مثال: 31612345678):', '316');
-                if (phone && phone.trim()) {
-                    phone = phone.replace(/[^0-9]/g, '');
-                    localStorage.setItem('sr_client_phone_mudar', phone);
-                }
-            }
-            return phone || '';
+            return localStorage.getItem('sr_client_phone_mudar') || CLIENT_MUDAR_PHONE;
         }
 
         const waMsg = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد ضريبة الـ BTW (4,410 €) بتخفيض حصري يصل إلى 50% عبر بوابة S&R CoreSync.\n\nيمكنك مراجعة وتوقيع العقد المالي مباشرة عبر الرابط:\n${portalUrl}\n`);
