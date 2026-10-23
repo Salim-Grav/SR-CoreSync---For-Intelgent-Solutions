@@ -276,23 +276,31 @@ function buildNotificationHtml(lead) {
         '<table style="border-collapse:collapse;width:100%;font-size:14px;">' + rows + '</table></div></div></body></html>';
 }
 
-async function deliverEmail(env, to, subject, html, text) {
+async function deliverEmail(env, to, subject, html, text, attachment) {
     if (!env) return { ok: false, reason: 'no-env' };
     const sender = env.MAIL_FROM || 'leads@sr-coresync.com';
+    const attachmentName = attachment && attachment.filename ? attachment.filename : '';
+    const attachmentB64 = attachment && attachment.base64 ? attachment.base64 : '';
 
     if (env.SEND_EMAIL && typeof env.SEND_EMAIL.send === 'function') {
-        await env.SEND_EMAIL.send({ to: to, from: sender, subject: subject, html: html, text: text });
+        const message = { to: to, from: sender, subject: subject, html: html, text: text };
+        if (attachmentB64) {
+            message.attachments = [{ filename: attachmentName, content: attachmentB64, type: 'application/pdf', disposition: 'attachment' }];
+        }
+        await env.SEND_EMAIL.send(message);
         return { ok: true, provider: 'cloudflare-email' };
     }
 
     if (env.RESEND_API_KEY) {
+        const payload = { from: 'S&R CoreSync <' + sender + '>', to: [to], subject: subject, html: html, text: text };
+        if (attachmentB64) payload.attachments = [{ filename: attachmentName, content: attachmentB64 }];
         const res = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + env.RESEND_API_KEY,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ from: 'S&R CoreSync <' + sender + '>', to: [to], subject: subject, html: html, text: text })
+            body: JSON.stringify(payload)
         });
         if (!res.ok) {
             console.error('[LeadWorker] Resend rejected:', res.status, await res.text());
@@ -302,16 +310,18 @@ async function deliverEmail(env, to, subject, html, text) {
     }
 
     if (env.BREVO_API_KEY) {
+        const payload = {
+            sender: { email: sender, name: 'S&R CoreSync' },
+            to: [{ email: to }],
+            subject: subject,
+            htmlContent: html,
+            textContent: text
+        };
+        if (attachmentB64) payload.attachment = [{ name: attachmentName, content: attachmentB64 }];
         const res = await fetch('https://api.brevo.com/v3/smtp/email', {
             method: 'POST',
             headers: { 'api-key': env.BREVO_API_KEY, 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                sender: { email: sender, name: 'S&R CoreSync' },
-                to: [{ email: to }],
-                subject: subject,
-                htmlContent: html,
-                textContent: text
-            })
+            body: JSON.stringify(payload)
         });
         if (!res.ok) {
             console.error('[LeadWorker] Brevo rejected:', res.status, await res.text());
@@ -324,13 +334,30 @@ async function deliverEmail(env, to, subject, html, text) {
         const res = await fetch(env.EMAIL_WEBHOOK_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ to: to, subject: subject, html: html, text: text })
+            body: JSON.stringify({
+                to: to, subject: subject, html: html, text: text,
+                attachments: attachmentB64 ? [{ filename: attachmentName, content_base64: attachmentB64, mime: 'application/pdf' }] : []
+            })
         });
         if (!res.ok) return { ok: false, reason: 'webhook-' + res.status };
         return { ok: true, provider: 'webhook' };
     }
 
     return { ok: false, reason: 'no-email-provider' };
+}
+
+async function loadContractPdf(env, ref) {
+    if (!env || !env.LEADS || !ref) return null;
+    const id = String(ref).replace(/[^A-Za-z0-9-]/g, '').slice(0, 40);
+    if (!id) return null;
+    try {
+        const base64 = await env.LEADS.get('contract:' + id);
+        if (!base64) return null;
+        return { filename: 'S&R-CoreSync-' + id + '.pdf', base64: base64 };
+    } catch (err) {
+        console.error('[LeadWorker] Contract PDF lookup failed:', err);
+        return null;
+    }
 }
 
 function contractRecipients(env) {
@@ -506,12 +533,20 @@ export default {
                     429, Object.assign({}, cors, { 'Retry-After': String(limit.retryAfter || 60) }));
             }
 
-            const delivered = await deliverEmail(env, to, subject, buildContractHtml(text), text);
-            console.log('[LeadWorker] Contract delivery', to, 'ok=' + delivered.ok, delivered.provider || delivered.reason);
+            const attachPdf = body.attach !== false;
+            const pdf = attachPdf ? await loadContractPdf(env, body.contractRef || to) : null;
+            const delivered = await deliverEmail(env, to, subject, buildContractHtml(text), text, pdf);
+            console.log('[LeadWorker] Contract delivery', to, 'ok=' + delivered.ok, delivered.provider || delivered.reason, 'pdf=' + !!pdf);
             if (!delivered.ok) {
                 return jsonResponse({ status: 'error', message: 'Email provider unavailable', reason: delivered.reason }, 502, cors);
             }
-            return jsonResponse({ status: 'success', provider: delivered.provider, to: to, chars: text.length }, 200, cors);
+            return jsonResponse({
+                status: 'success',
+                provider: delivered.provider,
+                to: to,
+                chars: text.length,
+                attached: pdf ? pdf.filename : null
+            }, 200, cors);
         }
 
         // ---- Only POST is accepted on the capture routes -------------------
