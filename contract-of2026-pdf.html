@@ -920,6 +920,157 @@
             text-decoration: underline;
         }
 
+        /* Mobile & Tablet Responsive View for Smartphones */
+        @media screen and (max-width: 900px) {
+            body {
+                padding: 75px 8px 40px 8px !important;
+                background-color: #0b111e !important;
+                font-size: 9.5pt !important;
+            }
+
+            .screen-toolbar {
+                width: calc(100% - 16px) !important;
+                left: 8px !important;
+                transform: none !important;
+                top: 8px !important;
+                padding: 8px 12px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                white-space: nowrap !important;
+                justify-content: flex-start !important;
+                border-radius: 12px !important;
+                scrollbar-width: none !important;
+            }
+
+            .screen-toolbar::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .paper-page {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                height: auto !important;
+                max-height: none !important;
+                min-height: unset !important;
+                padding: 16px 12px !important;
+                margin: 0 0 16px 0 !important;
+                border-radius: 14px !important;
+                overflow: visible !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .corp-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+
+            .corp-brand {
+                gap: 10px !important;
+            }
+
+            .corp-emblem-img {
+                width: 44px !important;
+                height: 44px !important;
+            }
+
+            .corp-title h1 {
+                font-size: 12pt !important;
+            }
+
+            .corp-meta {
+                width: 100% !important;
+                text-align: right !important;
+                direction: rtl !important;
+                border-top: 1px dashed rgba(179, 135, 40, 0.3) !important;
+                padding-top: 8px !important;
+                font-size: 7.2pt !important;
+            }
+
+            .doc-banner {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+                padding: 10px 12px !important;
+            }
+
+            .doc-banner-info h2 {
+                font-size: 10pt !important;
+            }
+
+            .doc-badge-pill {
+                align-self: flex-start !important;
+                font-size: 7pt !important;
+            }
+
+            .parties-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .party-box {
+                padding: 10px !important;
+            }
+
+            .contract-table {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                border-radius: 8px !important;
+            }
+
+            .contract-table th, .contract-table td {
+                font-size: 8pt !important;
+                padding: 6px 5px !important;
+            }
+
+            .total-highlight-row {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 6px !important;
+            }
+
+            .sig-parties-row {
+                flex-direction: column !important;
+                gap: 14px !important;
+            }
+
+            .sig-col {
+                width: 100% !important;
+            }
+
+            .sig-box-inner {
+                min-height: 90px !important;
+            }
+
+            .corp-footer-bar {
+                flex-direction: column !important;
+                gap: 4px !important;
+                text-align: center !important;
+                font-size: 6.8pt !important;
+            }
+
+            .email-modal-card {
+                width: 95% !important;
+                max-width: 95% !important;
+                padding: 16px 12px !important;
+                max-height: 90vh !important;
+                overflow-y: auto !important;
+            }
+
+            .email-modal-footer {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .email-modal-footer .btn-action {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+        }
+
         /* Print Strict Rules - 2 Exactly Separate A4 Pages */
         @page {
             size: A4 portrait;
@@ -1358,32 +1509,50 @@
             }
         }
 
-        // Dynamic Official Share Link (uses official domain on local so WhatsApp activates it)
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const baseOrigin = isLocalHost ? 'https://sr-coresync.com' : window.location.origin;
-        const portalUrl = baseOrigin + window.location.pathname.replace('contract-of2026-pdf.html', 'demo.html') + '?client=mudar&contract=OF-2026-1021#invoices';
+        // Verified Public Production Links (Works on all mobile phones & PCs worldwide)
+        const portalUrl = 'https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1021#invoices';
+        const contractPdfUrl = 'https://sr-coresync.com/contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021';
         const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
         const CLIENT_MUDAR_PHONE = '31631069433'; // +31 6 31069433 (السيد مضر أبو فاشة)
 
-        function getMudarClientPhone() {
-            return localStorage.getItem('sr_client_phone_mudar') || CLIENT_MUDAR_PHONE;
-        }
+        // WhatsApp Share Link & Message
+        const waRawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions في هولندا.\n\n📄 رابط معاينة العقد الرسمي (نسخة A4 موثقة):\n${contractPdfUrl}\n\n✍️ رابط التوقيع الرقمي وسداد الدفعة الأولى عبر iDEAL:\n${portalUrl}\n\nمع أطيب التحيات،\nم. محمد سليم عزيزة - S&R CoreSync Solutions`;
+        const waMsg = encodeURIComponent(waRawMsg);
 
-        // WhatsApp Share Link
-        const waMsg = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions.\n\nيمكنك مراجعة وتوقيع العقد وسداد الدفعة الأولى مباشرة عبر الرابط:\n${portalUrl}\n`);
         const waBtn = document.getElementById('btnShareWhatsApp');
         if (waBtn) {
             waBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const phone = getMudarClientPhone();
-                const waUrl = phone ? `https://wa.me/${phone}?text=${waMsg}` : `https://wa.me/?text=${waMsg}`;
-                window.open(waUrl, '_blank', 'noopener,noreferrer');
+                // Copy text to clipboard
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(waRawMsg).catch(() => {});
+                }
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                if (isMobile) {
+                    window.location.href = `whatsapp://send?phone=${CLIENT_MUDAR_PHONE}&text=${waMsg}`;
+                    setTimeout(() => {
+                        window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${waMsg}`, '_blank');
+                    }, 600);
+                } else {
+                    // Open WhatsApp Web directly with Mudar
+                    const waWebUrl = `https://web.whatsapp.com/send?phone=${CLIENT_MUDAR_PHONE}&text=${waMsg}`;
+                    const win = window.open(waWebUrl, '_blank');
+                    if (!win || win.closed) {
+                        window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${waMsg}`, '_blank');
+                    }
+                }
+                const toast = document.getElementById('toastNotify');
+                if (toast) {
+                    toast.innerText = '✓ جاري فتح واتساب مع السيد مضر (+31631069433) وتم نسخ نص الرسالة والرابط للحافظة!';
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 4000);
+                }
             });
         }
 
         // Email Share Setup
         const emailSubject = encodeURIComponent("وثيقة العقد التجاري الرسمي المعتمد (OF-2026-1021) - منصة NL بالعربي | S&R CoreSync Solutions");
-        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وععرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\nيمكنكم معاينة الوثيقة وتوقيعها رقمياً وسداد الدفعة الأولى عبر بوابة iDEAL مباشرة عبر الرابط التفاعلي التالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
+        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering في هولندا أن نرفق لحضرتكم وثيقة العقد التجاري الرسمي وعرض السعر المعتمد (مرجع: OF-2026-1021) الخاص بتطوير المنظومة الرقمية الشاملة لمنصة "NL بالعربي".\n\nتفاصيل العقد والمراحل البرمجية الـ 5:\n• المرجع التعاقدي: OF-2026-1021\n• التكلفة الإجمالية: 21,000.00 € (بدون ضريبة) | 25,410.00 € (شاملة ضريبة BTW 21%)\n• الدفعة الأولى المستحقة (30% مقدمة التأسيس): 7,623.00 € شاملة الضريبة\n\n📄 رابط معاينة العقد الرسمي (نسخة A4 موثقة):\n${contractPdfUrl}\n\n✍️ رابط التوقيع الرقمي وسداد الدفعة الأولى عبر iDEAL:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\nم. محمد سليم عزيزة - المدير التقني للشؤون الهندسية\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl`);
         
         const btnModalLaunchGmail = document.getElementById('btnModalLaunchGmail');
         if (btnModalLaunchGmail) {

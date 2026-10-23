@@ -994,6 +994,164 @@
             text-decoration: underline;
         }
 
+        /* Mobile & Tablet Responsive View for Smartphones */
+        @media screen and (max-width: 900px) {
+            body {
+                padding: 75px 8px 40px 8px !important;
+                background-color: #0b111e !important;
+                font-size: 9.5pt !important;
+            }
+
+            .screen-toolbar {
+                width: calc(100% - 16px) !important;
+                left: 8px !important;
+                transform: none !important;
+                top: 8px !important;
+                padding: 8px 12px !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                white-space: nowrap !important;
+                justify-content: flex-start !important;
+                border-radius: 12px !important;
+                scrollbar-width: none !important;
+            }
+
+            .screen-toolbar::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            .paper-page {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 0 !important;
+                height: auto !important;
+                max-height: none !important;
+                min-height: unset !important;
+                padding: 16px 12px !important;
+                margin: 0 0 16px 0 !important;
+                border-radius: 14px !important;
+                overflow: visible !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            .corp-header {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+            }
+
+            .corp-brand {
+                gap: 10px !important;
+            }
+
+            .corp-emblem-img {
+                width: 44px !important;
+                height: 44px !important;
+            }
+
+            .corp-title h1 {
+                font-size: 12pt !important;
+            }
+
+            .corp-meta {
+                width: 100% !important;
+                text-align: right !important;
+                direction: rtl !important;
+                border-top: 1px dashed rgba(179, 135, 40, 0.3) !important;
+                padding-top: 8px !important;
+                font-size: 7.2pt !important;
+            }
+
+            .doc-banner {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+                padding: 10px 12px !important;
+            }
+
+            .doc-banner-info h2 {
+                font-size: 10pt !important;
+            }
+
+            .doc-badge-pill {
+                align-self: flex-start !important;
+                font-size: 7pt !important;
+            }
+
+            .parties-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .party-box {
+                padding: 10px !important;
+            }
+
+            .tax-recovery-banner {
+                flex-direction: column !important;
+                gap: 8px !important;
+                padding: 10px 12px !important;
+            }
+
+            .contract-table, .fin-pricing-table {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                border-radius: 8px !important;
+            }
+
+            .contract-table th, .contract-table td,
+            .fin-pricing-table th, .fin-pricing-table td {
+                font-size: 8pt !important;
+                padding: 6px 5px !important;
+            }
+
+            .total-highlight-row, .fin-summary-box {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 6px !important;
+            }
+
+            .sig-parties-row {
+                flex-direction: column !important;
+                gap: 14px !important;
+            }
+
+            .sig-col {
+                width: 100% !important;
+            }
+
+            .sig-box-inner {
+                min-height: 90px !important;
+            }
+
+            .corp-footer-bar {
+                flex-direction: column !important;
+                gap: 4px !important;
+                text-align: center !important;
+                font-size: 6.8pt !important;
+            }
+
+            .email-modal-card {
+                width: 95% !important;
+                max-width: 95% !important;
+                padding: 16px 12px !important;
+                max-height: 90vh !important;
+                overflow-y: auto !important;
+            }
+
+            .email-modal-footer {
+                flex-direction: column !important;
+                gap: 8px !important;
+            }
+
+            .email-modal-footer .btn-action {
+                width: 100% !important;
+                justify-content: center !important;
+            }
+        }
+
         /* Print Strict Rules - 2 Exactly Separate A4 Pages */
         @page {
             size: A4 portrait;
@@ -1446,29 +1604,46 @@
             }
         }
 
-        const isLocalHost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const baseOrigin = isLocalHost ? 'https://sr-coresync.com' : window.location.origin;
-        const portalUrl = baseOrigin + window.location.pathname.replace('contract-of2026-fin-pdf.html', 'demo.html') + '?client=mudar&contract=OF-2026-1022-FIN#invoices';
+        // Verified Public Production Links (Works on all mobile phones & PCs worldwide)
+        const portalUrl = 'https://sr-coresync.com/demo.html?client=mudar&contract=OF-2026-1022-FIN#invoices';
+        const contractPdfUrl = 'https://sr-coresync.com/contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN';
         const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
         const CLIENT_MUDAR_PHONE = '31631069433'; // +31 6 31069433 (السيد مضر أبو فاشة)
 
-        function getMudarClientPhone() {
-            return localStorage.getItem('sr_client_phone_mudar') || CLIENT_MUDAR_PHONE;
-        }
+        const waRawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد كامل ضريبة الـ BTW (4,410 €) كاش من Belastingdienst بتخفيض شريك استثنائي 50%.\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nمع أطيب التحيات،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية\nS&R CoreSync Solutions & Engineering\n+31 6 8771 0290`;
+        const waMsg = encodeURIComponent(waRawMsg);
 
-        const waMsg = encodeURIComponent(`السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد ضريبة الـ BTW (4,410 €) بتخفيض حصري يصل إلى 50% عبر بوابة S&R CoreSync.\n\nيمكنك مراجعة وتوقيع العقد المالي مباشرة عبر الرابط:\n${portalUrl}\n`);
         const waBtn = document.getElementById('btnShareWhatsApp');
         if (waBtn) {
             waBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const phone = getMudarClientPhone();
-                const waUrl = phone ? `https://wa.me/${phone}?text=${waMsg}` : `https://wa.me/?text=${waMsg}`;
-                window.open(waUrl, '_blank', 'noopener,noreferrer');
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(waRawMsg).catch(() => {});
+                }
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                if (isMobile) {
+                    window.location.href = `whatsapp://send?phone=${CLIENT_MUDAR_PHONE}&text=${waMsg}`;
+                    setTimeout(() => {
+                        window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${waMsg}`, '_blank');
+                    }, 600);
+                } else {
+                    const waWebUrl = `https://web.whatsapp.com/send?phone=${CLIENT_MUDAR_PHONE}&text=${waMsg}`;
+                    const win = window.open(waWebUrl, '_blank');
+                    if (!win || win.closed) {
+                        window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${waMsg}`, '_blank');
+                    }
+                }
+                const toast = document.getElementById('toastNotify');
+                if (toast) {
+                    toast.innerText = '✓ جاري فتح واتساب مع السيد مضر (+31631069433) وتم نسخ نص الرسالة والرابط للحافظة!';
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 4000);
+                }
             });
         }
 
         const emailSubject = encodeURIComponent("وثيقة العقد المالي والضريبي الرسمي (OF-2026-1022-FIN) - منصة NL بالعربي | S&R CoreSync");
-        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية في هولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي الرسمي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\nرابط معاينة وتوقيع العقد المالي:\n\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`);
+        const emailBody = encodeURIComponent(`السيد مضر أبو فاشة المحترم (منصة NL بالعربي)،\nتحية طيبة وبعد،\n\nيسرنا في شركة S&R CoreSync Solutions & Engineering - قسم الاستشارات المالية والضريبية في هولندا بإشراف أ. محمد رائد كعكة، أن نرفق لحضرتكم وثيقة العرض المالي والمحاسبي الرسمي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة المنظومة المالية لمنصة "NL بالعربي".\n\nالمزايا الاستراتيجية:\n1. استرداد كامل ضريبة العقد البرمجي (4,410.00 €) كاش من مصلحة الضرائب الهولندية Belastingdienst.\n2. أتمتة كامل اشتراكات الـ iDEAL وإصدار فواتير تسوية المتاجر الضريبية.\n3. التقديم الرسمي للإقرارات الربع سنوية والميزانية السنوية لدى KvK والضرائب.\n4. تخفيض شريك استثنائي 50% بسعر 3,900 € سنوياً (يعادل 325 € شهرياً فقط).\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nوتفضلوا بقبول فائق الاحترام،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية والضريبية\nS&R CoreSync Solutions & Engineering\nfinance@sr-coresync.nl`);
         
         const btnModalLaunchGmail = document.getElementById('btnModalLaunchGmail');
         if (btnModalLaunchGmail) {
