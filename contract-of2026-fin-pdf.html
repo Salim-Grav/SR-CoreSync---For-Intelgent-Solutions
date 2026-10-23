@@ -1113,6 +1113,25 @@
                 gap: 6px !important;
             }
 
+            .finance-summary-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .pricing-options-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+
+            .fin-total-card {
+                border-radius: 8px !important;
+            }
+
+            .bank-details-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 6px !important;
+            }
+
             .sig-parties-row {
                 flex-direction: column !important;
                 gap: 14px !important;
@@ -1564,8 +1583,8 @@
                 <a id="btnModalLaunchGmail" href="#" target="_blank" class="btn-action" style="background:#ea4335;color:#fff;border-color:#ea4335;">
                     🚀 فتح في Gmail مباشرة
                 </a>
-                <a id="btnModalLaunchMail" href="#" class="btn-action btn-action-email">
-                    ✉️ فتح في تطبيق البريد
+                <a id="btnModalLaunchMail" href="#" target="_blank" class="btn-action btn-action-email">
+                    📬 فتح في Outlook (ويب)
                 </a>
             </div>
         </div>
@@ -1652,7 +1671,10 @@
 
         const btnModalLaunchMail = document.getElementById('btnModalLaunchMail');
         if (btnModalLaunchMail) {
-            btnModalLaunchMail.href = `mailto:${CLIENT_MUDAR_EMAIL}?subject=${emailSubject}&body=${emailBody}`;
+            // Use Outlook Web compose — avoids the Windows "Which browser?" mailto prompt
+            const outlookUrl = `https://outlook.live.com/mail/0/deeplink/compose?to=${CLIENT_MUDAR_EMAIL}&subject=${emailSubject}&body=${emailBody}`;
+            btnModalLaunchMail.href = outlookUrl;
+            btnModalLaunchMail.target = '_blank';
         }
 
         const emailModalLink = document.getElementById('emailModalLink');
