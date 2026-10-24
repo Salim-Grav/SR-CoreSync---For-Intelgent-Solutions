@@ -101,6 +101,8 @@ async function run() {
     assert('POST valid lead returns a leadId', /^LEAD-SR-\d{8}-[A-Z0-9]{4}$/.test(body.leadId || ''), body.leadId);
     assert('POST valid lead is persisted in KV', body.recorded === true);
     assert('POST valid lead is relayed to the webhook', body.dispatched === 1, `got ${body.dispatched}`);
+    assert('a relayed lead counts as announced without telegram',
+        body.announced === 'sent:webhook', String(body.announced));
     assert('Webhook received the sanitized payload', relayed.length === 1 && relayed[0].body.includes('Ahmed'));
 
     // 4. Stored payload must not carry HTML -----------------------------------

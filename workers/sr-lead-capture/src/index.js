@@ -533,7 +533,7 @@ async function buildDigest(env) {
             recent = (rows && rows.results) || [];
             const bad = await env.DB.prepare(
                 "SELECT COUNT(*) AS n FROM leads WHERE notify_status IS NULL "
-                + "OR notify_status NOT IN ('sent','resent')"
+                + "OR notify_status NOT IN ('sent','resent','sent:webhook')"
             ).first();
             unannounced = Number((bad && bad.n) || 0);
         } catch (err) {
@@ -566,7 +566,7 @@ function digestText(digest) {
         lines.push('Recent:');
         digest.recent.forEach(function (row) {
             const when = String(row.received_at || '').slice(0, 16).replace('T', ' ');
-            const announced = row.notify_status === 'sent' || row.notify_status === 'resent';
+            const announced = ['sent', 'resent', 'sent:webhook'].indexOf(row.notify_status) !== -1;
             const flag = announced ? '' : ' (no alert)';
             lines.push('  \u2022 ' + (row.client_name || 'unknown') + ' \u2014 ' + when + flag);
         });
@@ -1046,7 +1046,7 @@ export default {
             const rows = await env.DB.prepare(
                 "SELECT lead_id, client_name, company_name, email, phone, package, notes, "
                 + "language, source_url, received_at FROM leads WHERE notify_status IS NULL "
-                + "OR notify_status NOT IN ('sent','resent') ORDER BY received_at ASC LIMIT 20"
+                + "OR notify_status NOT IN ('sent','resent','sent:webhook') ORDER BY received_at ASC LIMIT 20"
             ).all();
             const pending = (rows && rows.results) || [];
             let resent = 0;
@@ -1254,8 +1254,12 @@ export default {
         const stored = await persistLead(lead, env);
         const relayed = await relayToWebhooks(lead, env, ctx);
         const telegram = await sendTelegram(lead, env);
-        await markNotified(env, lead.leadId,
-            telegram && telegram.ok ? 'sent' : ('failed:' + ((telegram && telegram.reason) || 'unknown')));
+        // The webhook relay is the independent second channel: if Telegram is
+        // down but the relay delivered, the lead did reach a human.
+        const announce = (telegram && telegram.ok) ? 'sent'
+            : ((relayed && relayed.dispatched > 0) ? 'sent:webhook'
+                : ('failed:' + ((telegram && telegram.reason) || 'unknown')));
+        await markNotified(env, lead.leadId, announce);
         await notifyByEmail(lead, env, ctx);
 
         console.log('[LeadWorker] Lead captured', lead.leadId, 'stored=' + stored.stored,
@@ -1269,6 +1273,7 @@ export default {
             stored: stored.stored,
             durable: persistedD1,
             dispatched: relayed.dispatched,
+            announced: announce,
             timestamp: lead.receivedAt
         }, 200, cors);
     }

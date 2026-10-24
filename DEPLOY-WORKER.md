@@ -136,3 +136,29 @@ node node_modules/wrangler/bin/wrangler.js tail --format json   # راقب سج�
 
 > **أمان:** التوكن يُدخَل مخفيًا ولا يُكتب في أي ملف، ويُستخدم في رابط الـ API فقط.
 > إن ظهر التوكن في أي محادثة أو سجل، أبطله من BotFather (`/revoke`) وأعد التنفيذ.
+
+---
+
+## القناة الثانية المستقلة (relay)
+
+Telegram قناة واحدة؛ لو تعطّلت (توكن مبطَل، حجب، انقطاع) يبقى الاستفسار محفوظًا
+بلا تنبيه. `LEAD_WEBHOOK_URLS` هو المسار المستقل: يستقبل كل استفسار ويحوّله إلى
+أي خدمة (Make / n8n / Slack / بريد عبر خدمة أخرى) — بلا كود إضافي.
+
+**تفعيله بأمر واحد:**
+```powershell
+python scripts/configure_lead_webhook.py --url https://hook.eu1.make.com/xxxxxxxx
+# عدة وجهات: --url "https://a..., https://b..."
+python scripts/configure_lead_webhook.py --show     # الحالة الحالية
+python scripts/configure_lead_webhook.py --remove   # التعطيل
+```
+
+الأمر يكتب المتغيّر في `wrangler.toml`، يعيد النشر، ويطبع `webhooks=N` من `/health`.
+
+**كيف يظهر أثره:**
+- إذا نجح Telegram → `announced: "sent"`.
+- إذا فشل Telegram ونجح الـ relay → `announced: "sent:webhook"` (لا يُحتسب متأخرًا).
+- إذا فشل الاثنان → `announced: "failed:<السبب>"` ويظهر في عدّاد `NOT ALERTED`.
+
+استجابة `POST /lead` تحتوي الآن `announced` صراحةً، فيمكن لأي مراقب معرفة ما حدث
+دون قراءة سجلات.
