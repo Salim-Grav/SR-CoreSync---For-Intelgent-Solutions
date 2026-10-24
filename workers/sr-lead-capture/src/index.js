@@ -446,6 +446,67 @@ async function notifyByEmail(lead, env, ctx) {
     return { sent: true };
 }
 
+// ---------------------------------------------------------------------------
+// Public, identity-free signals for the on-site notification stream.
+// The previous UI invented "a client in Rotterdam downloaded the kit" events.
+// These builders only ever expose aggregates and a generic label.
+// ---------------------------------------------------------------------------
+
+const PUBLIC_SOURCE_LABELS = {
+    booking: 'Consultation',
+    vip: 'VIP consultation',
+    contact: 'Contact request',
+    whatsapp: 'WhatsApp enquiry',
+    quote: 'Quotation request'
+};
+
+async function buildPublicStats(env) {
+    const empty = { available: false, consultations30d: null, updatedAt: new Date().toISOString() };
+    if (!env || !env.LEADS) return empty;
+    try {
+        const index = await env.LEADS.get('lead:index', 'json');
+        const list = Array.isArray(index) ? index : [];
+        const now = Date.now();
+        const within = (days) => list.filter((entry) => {
+            const t = Date.parse(entry && entry.at);
+            return Number.isFinite(t) && (now - t) <= days * 86400000;
+        }).length;
+        return {
+            available: true,
+            consultations30d: within(30),
+            consultations7d: within(7),
+            total: list.length,
+            updatedAt: new Date().toISOString()
+        };
+    } catch (err) {
+        console.error('[LeadWorker] stats failed:', err);
+        return empty;
+    }
+}
+
+async function buildRecentEvents(env, limit) {
+    if (!env || !env.LEADS) return [];
+    let list = [];
+    try {
+        list = (await env.LEADS.get('lead:index', 'json')) || [];
+    } catch (err) {
+        return [];
+    }
+    const items = [];
+    for (const entry of list.slice(0, Math.max(limit * 2, limit))) {
+        if (items.length >= limit) break;
+        if (!entry || !entry.id || !entry.at) continue;
+        let lead = null;
+        try { lead = await env.LEADS.get('lead:' + entry.id, 'json'); } catch (err) { lead = null; }
+        const source = String((lead && lead.source) || '').toLowerCase();
+        items.push({
+            label: PUBLIC_SOURCE_LABELS[source] || 'Consultation',
+            at: (lead && lead.receivedAt) || entry.at
+        });
+    }
+    return items;
+}
+
 async function persistLead(lead, env) {
     if (!env || !env.LEADS) return { stored: false, reason: 'no-kv-binding' };
     try {
@@ -488,6 +549,29 @@ export default {
         // ---- CORS preflight ------------------------------------------------
         if (request.method === 'OPTIONS') {
             return new Response(null, { status: 204, headers: cors });
+        }
+
+        // ---- Public trust statistics ----------------------------------------
+        // Aggregates only: counts derived from the KV index timestamps. No name,
+        // e-mail, phone or city ever leaves this worker through these routes.
+        if (request.method === 'GET' && (path === '/stats' || path === '/api/stats')) {
+            const stats = await buildPublicStats(env);
+            return jsonResponse(stats, 200, Object.assign({}, cors, {
+                'Cache-Control': 'public, max-age=900, stale-while-revalidate=3600'
+            }));
+        }
+
+        // ---- Sanitised recent activity (opt-in, identity-free) ----------------
+        if (request.method === 'GET' && (path === '/events/recent' || path === '/api/events/recent')) {
+            if (String(env.EVENTS_PUBLIC || '') !== '1') {
+                return jsonResponse({ enabled: false, items: [] }, 200, Object.assign({}, cors, {
+                    'Cache-Control': 'public, max-age=300'
+                }));
+            }
+            const items = await buildRecentEvents(env, 3);
+            return jsonResponse({ enabled: true, items }, 200, Object.assign({}, cors, {
+                'Cache-Control': 'public, max-age=300, stale-while-revalidate=900'
+            }));
         }
 
         // ---- Contract delivery: full template text in the email body -------

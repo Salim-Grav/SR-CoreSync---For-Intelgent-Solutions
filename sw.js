@@ -1,40 +1,44 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v9-lead-worker-migration
-const CACHE_NAME = 'coresync-prerender-v9-lead-worker-migration';
+// Version: coresync-prerender-v12-live-feed
+const CACHE_NAME = 'coresync-prerender-v12-live-feed';
 
-// 1. Critical assets: Loaded immediately on install with highest priority (Under 1.2MB total)
+// 1. Critical assets: everything the first screen needs to paint.
+// Anything that is only reachable after a scroll (founder banners, portraits,
+// NFC cards, e-mail/portal documents) belongs in SECONDARY_ASSETS instead:
+// precaching it on install made the first visit pull ~3.5 MB and starved the
+// LCP request on mobile connections.
 const CRITICAL_ASSETS = [
-  './',
   './index.html',
-  './card.html',
   './manifest.json',
+  './assets/sr-core-emblem.svg?v=sovereign2026',
+  './assets/sr-core-emblem-official.webp',
+  './assets/logo-neon-icon.svg',
+  './assets/sr-emblem-gold-luxury.webp',
+  './assets/about-founder-poster.webp',
+  './css/dananajmah-bundle.min.css',
+  './css/enterprise-suite.min.css',
+  './js/enterprise-suite.min.js'
+];
+
+// 2. Secondary assets: Cached gently in an idle background queue without choking Smart TV connections.
+// One entry per resource: './en/' and './en/index.html' are the same document,
+// so only the explicit file is listed.
+const SECONDARY_ASSETS = [
+  './card.html',
+  './en/index.html',
+  './nl/index.html',
+  './corporate-profile.html',
+  './preview-founders-showcase.html',
+  './demo.html',
   './assets/salim-aziza.vcf',
   './assets/raed-kaaka.vcf',
   './assets/founder-salim.png',
   './assets/founder-raed.png',
-  './assets/sr-core-emblem.svg?v=sovereign2026',
-  './assets/logo-neon-icon.svg',
-  './assets/sr-emblem-gold-luxury.webp',
   './assets/sr-emblem-gold-luxury.jpg',
   './assets/founder-banner-salim.webp',
   './assets/founder-banner-salim.jpg',
   './assets/founder-banner-raed.webp',
   './assets/founder-banner-raed.jpg',
-  './css/dananajmah-bundle.min.css',
-  './css/enterprise-suite.min.css',
-  './css/enterprise-suite.min.js'
-];
-
-// 2. Secondary assets: Cached gently in an idle background queue without choking Smart TV connections
-const SECONDARY_ASSETS = [
-  './en/',
-  './en/index.html',
-  './nl/',
-  './nl/index.html',
-  './card.html',
-  './corporate-profile.html',
-  './preview-founders-showcase.html',
-  './demo.html',
   './assets/nfc-card-salim-spec.png',
   './assets/nfc-card-raed-spec.png',
   './assets/qr-founder-salim.png',
@@ -43,7 +47,8 @@ const SECONDARY_ASSETS = [
   './assets/work-2.webp',
   './assets/work-3.webp',
   './css/demo-portal.css',
-  './js/sr-lead-dispatcher.js'
+  './js/sr-lead-dispatcher.js',
+  './js/sr-live-feed.js'
 ];
 
 self.addEventListener('install', (event) => {
