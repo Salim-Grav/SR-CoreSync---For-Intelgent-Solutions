@@ -5,6 +5,22 @@
 > **حالة التحقق في Purelymail (17:20):** `MX ✗ | SPF ✗ | DKIM ✓ | DMARC ✓`
 > أي أن الأربعة CNAME (DKIM ×3 + DMARC) منشورة ومتحقَّق منها. المتبقي: MX و SPF فقط.
 
+## المستخدمون (Users)
+
+مُنشأ في Purelymail حتى الآن (17:25):
+
+| العنوان | الحالة |
+|---|---|
+| `salimgrav@purelymail.com` | admin الحساب |
+| `info@sr-coresync.com` | ✓ منشأ |
+| `salim@sr-coresync.com` | ✓ منشأ |
+| `raed@sr-coresync.com` | ✓ منشأ |
+| `support@sr-coresync.com` | **مطلوب** — يظهر 31 مرة في الموقع |
+| `billing@sr-coresync.com` | **مطلوب** — يظهر 11 مرة (الفواتير) |
+
+> بديل اختياري: `Routing rules` أو `catch-all` لتوجيه كل العناوين غير المنشأة إلى صندوق `info@`
+> بدلًا من إنشاء مستخدم لكل عنوان (كل مستخدم = صندوق مستقل بتسجيل دخول منفصل).
+
 ## الحساب
 | البند | القيمة |
 |---|---|
