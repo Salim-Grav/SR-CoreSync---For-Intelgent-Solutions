@@ -1624,7 +1624,7 @@ CLIENT_WISE_IBAN="BE45 •••• •••• 2989"</textarea>
                                 <button type="button" class="sr-code-lang-pill" onclick="switchSdkLang('csharp', this)">C#</button>
                             </div>
                         </div>
-                        <pre class="sr-code-pre" id="sdkCodeSnippet">curl -X POST "https://api.coresync.eu/v1/tax/calculate-btw" \\
+                        <pre class="sr-code-pre" id="sdkCodeSnippet">curl -X POST "https://api.sr-coresync.com/tax" \\
   -H "Authorization: Bearer sr_live_9481_ams" \\
   -H "Content-Type: application/json" \\
   -d '{"base_amount": 15000.00, "vat_regime": "STANDARD_21"}'</pre>
@@ -1698,7 +1698,7 @@ CLIENT_WISE_IBAN="BE45 •••• •••• 2989"</textarea>
         if (lang === 'python') {
             pre.innerText = `import requests
 
-url = "https://api.coresync.eu/v1/tax/calculate-btw"
+url = "https://api.sr-coresync.com/tax"
 headers = {"Authorization": "Bearer sr_live_9481_ams"}
 data = {"base_amount": 15000.0, "vat_regime": "STANDARD_21"}
 
@@ -1707,7 +1707,7 @@ print(response.json())`;
         } else if (lang === 'node') {
             pre.innerText = `const axios = require('axios');
 
-const res = await axios.post('https://api.coresync.eu/v1/tax/calculate-btw', {
+const res = await axios.post('https://api.sr-coresync.com/tax', {
   base_amount: 15000.0,
   vat_regime: 'STANDARD_21'
 }, {
@@ -1719,9 +1719,9 @@ console.log(res.data);`;
 client.DefaultRequestHeaders.Add("Authorization", "Bearer sr_live_9481_ams");
 var json = "{\\"base_amount\\": 15000.0, \\"vat_regime\\": \\"STANDARD_21\\"}";
 var content = new StringContent(json, Encoding.UTF8, "application/json");
-var response = await client.PostAsync("https://api.coresync.eu/v1/tax/calculate-btw", content);`;
+var response = await client.PostAsync("https://api.sr-coresync.com/tax", content);`;
         } else {
-            pre.innerText = `curl -X POST "https://api.coresync.eu/v1/tax/calculate-btw" \\
+            pre.innerText = `curl -X POST "https://api.sr-coresync.com/tax" \\
   -H "Authorization: Bearer sr_live_9481_ams" \\
   -H "Content-Type: application/json" \\
   -d '{"base_amount": 15000.00, "vat_regime": "STANDARD_21"}'`;

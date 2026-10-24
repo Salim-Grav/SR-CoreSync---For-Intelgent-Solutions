@@ -187,6 +187,91 @@ async function run() {
     assert('Disallowed origin receives no CORS grant',
         res.headers.get('Access-Control-Allow-Origin') === null);
 
+    // 14. VAT calculator (replaces the dead api.coresync.eu) ----------------------
+    res = await worker.fetch(req('/tax', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 100, rate: 21 })
+    }), env, {});
+    body = await res.json();
+    assert('POST /tax exclusive returns 200', res.status === 200, `got ${res.status}`);
+    assert('exclusive: net 100 -> vat 21 -> gross 121',
+        body.net === 100 && body.vat === 21 && body.gross === 121,
+        JSON.stringify(body));
+
+    res = await worker.fetch(req('/tax', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 121, rate: 21, mode: 'inclusive' })
+    }), env, {});
+    body = await res.json();
+    assert('inclusive: gross 121 -> net 100 / vat 21',
+        body.net === 100 && body.vat === 21 && body.gross === 121,
+        JSON.stringify(body));
+
+    res = await worker.fetch(req('/tax', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: 1234.56, rate: 9 })
+    }), env, {});
+    body = await res.json();
+    assert('9% rate rounds to cents (1234.56 -> 111.11 vat)',
+        body.vat === 111.11 && body.gross === 1345.67, JSON.stringify(body));
+
+    res = await worker.fetch(req('/tax', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: -5 })
+    }), env, {});
+    assert('negative amount is rejected with 422', res.status === 422, `got ${res.status}`);
+
+    res = await worker.fetch(req('/tax', { method: 'GET' }), env, {});
+    assert('GET /tax returns 405', res.status === 405, `got ${res.status}`);
+
+    // 15. Payment webhook ---------------------------------------------------------
+    res = await worker.fetch(req('/pay/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: 'tr_123456' })
+    }), env, {});
+    assert('Mollie webhook without a key returns 503', res.status === 503, `got ${res.status}`);
+
+    const stripeEnv = Object.assign({}, env, { STRIPE_WEBHOOK_SECRET: 'whsec_test_secret' });
+    const goodPayload = JSON.stringify({ id: 'evt_1', type: 'payment_intent.succeeded',
+        data: { object: { id: 'pi_1', amount_total: 5455, currency: 'eur' } } });
+    const ts = Math.floor(Date.now() / 1000);
+    const key = await crypto.subtle.importKey('raw', new TextEncoder().encode('whsec_test_secret'),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(ts + '.' + goodPayload));
+    const sig = Array.from(new Uint8Array(mac)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+    res = await worker.fetch(req('/pay/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Stripe-Signature': `t=${ts},v1=deadbeef` },
+        body: goodPayload
+    }), stripeEnv, {});
+    assert('Stripe webhook with a bad signature returns 401', res.status === 401, `got ${res.status}`);
+
+    res = await worker.fetch(req('/pay/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Stripe-Signature': `t=${ts},v1=${sig}` },
+        body: goodPayload
+    }), stripeEnv, {});
+    body = await res.json();
+    assert('Stripe webhook with a valid signature returns 200', res.status === 200, `got ${res.status}`);
+    assert('valid Stripe event is recorded in KV',
+        [...kvStore.keys()].some(k => k === 'payment:stripe:evt_1'));
+
+    const staleTs = ts - 900;
+    const staleMac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(staleTs + '.' + goodPayload));
+    const staleSig = Array.from(new Uint8Array(staleMac)).map(b => b.toString(16).padStart(2, '0')).join('');
+    res = await worker.fetch(req('/pay/webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Stripe-Signature': `t=${staleTs},v1=${staleSig}` },
+        body: goodPayload
+    }), stripeEnv, {});
+    assert('replayed Stripe event (>5 min) is rejected', res.status === 400, `got ${res.status}`);
+
     console.log('='.repeat(64));
     console.log(`RESULT: ${passed} passed, ${failed} failed`);
     console.log('='.repeat(64));

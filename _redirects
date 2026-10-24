@@ -1,0 +1,14 @@
+# Cloudflare Pages redirects — 301 for every product page that was renamed.
+# GitHub Pages cannot issue a 301, which is why the old paths currently answer
+# with a canonical + meta-refresh stub. On Pages these become real redirects.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+/preview-software.html              /software.html               301
+/preview-work.html                  /work.html                   301
+/preview-estimator.html             /estimator.html              301
+/preview-whitelabel-calculator.html /whitelabel-calculator.html  301
+/preview-3d-mockup.html             /3d-mockup.html              301
+
+# Legacy aliases some e-mails and PDFs still point at.
+/quote.html                         /estimator.html              301
+/portfolio.html                     /work.html                   301

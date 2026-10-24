@@ -28,10 +28,27 @@ enabled = true
 ALLOWED_ORIGINS = "https://sr-coresync.com,https://www.sr-coresync.com,https://salim-grav.github.io,http://localhost:3000,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:8080"
 MAIL_FROM = "leads@sr-coresync.com"
 CONTRACT_RECIPIENTS = "mudar@nlbilarabi.nl,info@sr-coresync.com,info@sr-coresync.nl,finance@sr-coresync.nl"
+# Public activity stream on the site. Leave unset (off) until the feed is ready.
+# EVENTS_PUBLIC = "1"
+# Turnstile: soft-fail until the widget ships, then flip to hard enforcement.
+# TURNSTILE_ENFORCE = "1"
 
 [[kv_namespaces]]
 binding = "LEADS"
 id = "d23f177169fb4501b854056e67d21ed5"
+
+# -----------------------------------------------------------------------------
+# D1 - durable system of record for leads, payments and consent evidence.
+# Create it once, paste the returned id, then apply migrations/0001_init.sql:
+#   npx wrangler d1 create sr-coresync
+#   npx wrangler d1 execute sr-coresync --remote --file=migrations/0001_init.sql
+# The worker writes to D1 only when this binding exists, so it stays safe to
+# deploy without it.
+# -----------------------------------------------------------------------------
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "sr-coresync"
+# database_id = "<paste-from-create>"
 
 # -----------------------------------------------------------------------------
 # Custom domain (recommended): api.sr-coresync.com

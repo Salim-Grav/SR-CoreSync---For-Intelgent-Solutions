@@ -507,6 +507,200 @@ async function buildRecentEvents(env, limit) {
     return items;
 }
 
+// ---------------------------------------------------------------------------
+// Money, payment signatures and bot protection
+// ---------------------------------------------------------------------------
+
+function roundMoney(value) {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+}
+
+function calculateVat(amount, rate, mode) {
+    var net, vat, gross;
+    if (mode === 'inclusive') {
+        gross = roundMoney(amount);
+        net = roundMoney(gross / (1 + rate / 100));
+        vat = roundMoney(gross - net);
+    } else {
+        net = roundMoney(amount);
+        vat = roundMoney(net * rate / 100);
+        gross = roundMoney(net + vat);
+    }
+    return {
+        amount: roundMoney(amount), rate: rate, mode: mode,
+        base_amount: net, vat_amount: vat, total_amount: gross,
+        net: net, vat: vat, gross: gross, currency: 'EUR'
+    };
+}
+
+async function readBodyLimited(request, limit) {
+    var text;
+    try { text = await request.text(); } catch (err) { return ''; }
+    if (typeof text !== 'string') return '';
+    if (text.length > limit) return null;
+    return text;
+}
+
+function timingSafeEqual(a, b) {
+    if (typeof a !== 'string' || typeof b !== 'string') return false;
+    if (a.length !== b.length) return false;
+    var diff = 0;
+    for (var i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+    return diff === 0;
+}
+
+async function hmacHex(secret, payload) {
+    const key = await crypto.subtle.importKey(
+        'raw', new TextEncoder().encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+    return Array.from(new Uint8Array(sig)).map(function (b) {
+        return b.toString(16).padStart(2, '0');
+    }).join('');
+}
+
+async function handleStripeWebhook(raw, header, env) {
+    const secret = env && env.STRIPE_WEBHOOK_SECRET;
+    if (!secret) return { ok: false, status: 503, provider: 'stripe', reason: 'stripe-not-configured' };
+
+    var timestamp = null;
+    const signatures = [];
+    header.split(',').forEach(function (part) {
+        const pair = part.split('=');
+        const name = (pair[0] || '').trim();
+        const value = (pair[1] || '').trim();
+        if (name === 't') timestamp = value;
+        if (name === 'v1') signatures.push(value);
+    });
+    if (!timestamp || !signatures.length) {
+        return { ok: false, status: 400, provider: 'stripe', reason: 'malformed-signature' };
+    }
+    const age = Math.abs(Math.floor(Date.now() / 1000) - Number(timestamp));
+    if (!Number.isFinite(age) || age > 300) {
+        return { ok: false, status: 400, provider: 'stripe', reason: 'timestamp-out-of-range' };
+    }
+
+    const expected = await hmacHex(secret, timestamp + '.' + raw);
+    const valid = signatures.some(function (sig) { return timingSafeEqual(sig, expected); });
+    if (!valid) return { ok: false, status: 401, provider: 'stripe', reason: 'signature-mismatch' };
+
+    var event = null;
+    try { event = JSON.parse(raw); } catch (err) { event = null; }
+    const id = (event && (event.id || (event.data && event.data.object && event.data.object.id))) || 'unknown';
+    await recordPayment(env, 'stripe', id, {
+        type: event && event.type,
+        amount: event && event.data && event.data.object && event.data.object.amount_total,
+        currency: event && event.data && event.data.object && event.data.object.currency
+    });
+    return { ok: true, provider: 'stripe', id: id };
+}
+
+async function handleMollieWebhook(raw, env) {
+    const apiKey = env && env.MOLLIE_API_KEY;
+    if (!apiKey) return { ok: false, status: 503, provider: 'mollie', reason: 'mollie-not-configured' };
+
+    var id = null;
+    try {
+        const parsed = JSON.parse(raw);
+        id = parsed && parsed.id ? String(parsed.id) : null;
+    } catch (err) {
+        // Mollie also posts application/x-www-form-urlencoded: id=tr_xxx
+        const match = /(?:^|&)id=([^&]+)/.exec(raw);
+        id = match ? decodeURIComponent(match[1]) : null;
+    }
+    if (!id || !/^[a-zA-Z0-9_]{4,64}$/.test(id)) {
+        return { ok: false, status: 400, provider: 'mollie', reason: 'missing-payment-id' };
+    }
+
+    // The posted id is untrusted: the payment state is read back from Mollie.
+    const res = await fetch('https://api.mollie.com/v2/payments/' + encodeURIComponent(id), {
+        headers: { Authorization: 'Bearer ' + apiKey }
+    });
+    if (!res.ok) {
+        return { ok: false, status: 502, provider: 'mollie', reason: 'mollie-' + res.status, id: id };
+    }
+    const payment = await res.json().catch(function () { return null; });
+    if (!payment) return { ok: false, status: 502, provider: 'mollie', reason: 'unreadable-payment', id: id };
+
+    await recordPayment(env, 'mollie', id, {
+        status: payment.status,
+        amount: payment.amount && payment.amount.value,
+        currency: payment.amount && payment.amount.currency,
+        method: payment.method
+    });
+    return { ok: true, provider: 'mollie', id: id };
+}
+
+async function recordPayment(env, provider, id, detail) {
+    const record = {
+        provider: provider,
+        id: String(id),
+        detail: detail || {},
+        receivedAt: new Date().toISOString()
+    };
+    if (env && env.LEADS) {
+        try {
+            await env.LEADS.put('payment:' + provider + ':' + id, JSON.stringify(record),
+                { expirationTtl: 60 * 60 * 24 * 365 });
+        } catch (err) {
+            console.error('[LeadWorker] payment KV write failed:', err);
+        }
+    }
+    if (env && env.DB) {
+        try {
+            await env.DB.prepare(
+                'INSERT OR REPLACE INTO payments (provider, payment_id, status, amount, currency, payload, received_at) ' +
+                'VALUES (?, ?, ?, ?, ?, ?, ?)')
+                .bind(provider, String(id), String((detail && detail.status) || 'received'),
+                    detail && detail.amount !== undefined ? String(detail.amount) : null,
+                    (detail && detail.currency) || null,
+                    JSON.stringify(detail || {}), record.receivedAt)
+                .run();
+        } catch (err) {
+            console.error('[LeadWorker] payment D1 write failed:', err);
+        }
+    }
+}
+
+async function verifyTurnstile(token, request, env) {
+    const secret = env && env.TURNSTILE_SECRET;
+    if (!secret) return { ok: true, skipped: true };
+    if (!token) return { ok: false, reason: 'missing-token' };
+    try {
+        const form = new FormData();
+        form.append('secret', secret);
+        form.append('response', String(token));
+        const ip = request.headers.get('CF-Connecting-IP');
+        if (ip) form.append('remoteip', ip);
+        const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST', body: form
+        });
+        const data = await res.json().catch(function () { return {}; });
+        return { ok: !!data.success, reason: (data['error-codes'] || []).join(',') || null };
+    } catch (err) {
+        return { ok: false, reason: 'siteverify-failed' };
+    }
+}
+
+async function persistLeadD1(lead, env) {
+    if (!env || !env.DB) return false;
+    try {
+        await env.DB.prepare(
+            'INSERT OR REPLACE INTO leads (lead_id, client_name, company_name, email, phone, package, notes, language, channel, source_url, received_at) ' +
+            'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+            .bind(
+                lead.leadId, lead.clientName || null, lead.companyName || null,
+                lead.email || null, lead.phone || null, lead.package || null,
+                lead.notes || null, lead.language || null, lead.channel || null,
+                lead.sourceUrl || null, lead.receivedAt || new Date().toISOString())
+            .run();
+        return true;
+    } catch (err) {
+        console.error('[LeadWorker] D1 persistence failed:', err);
+        return false;
+    }
+}
+
 async function persistLead(lead, env) {
     if (!env || !env.LEADS) return { stored: false, reason: 'no-kv-binding' };
     try {
@@ -549,6 +743,60 @@ export default {
         // ---- CORS preflight ------------------------------------------------
         if (request.method === 'OPTIONS') {
             return new Response(null, { status: 204, headers: cors });
+        }
+
+        // ---- VAT / BTW calculation --------------------------------------------
+        // Replaces api.coresync.eu, which never resolved. Pure arithmetic, no PII.
+        if (path === '/tax' || path === '/api/tax') {
+            if (request.method !== 'POST') {
+                return jsonResponse({ status: 'error', message: 'Method not allowed. Use POST.' }, 405, cors);
+            }
+            let body;
+            try { body = await request.json(); } catch (err) {
+                return jsonResponse({ status: 'error', message: 'Invalid JSON payload' }, 400, cors);
+            }
+            const amount = Number(body && (body.amount !== undefined ? body.amount : body.base_amount));
+            let rate = body && body.rate !== undefined ? Number(body.rate) : null;
+            if (rate === null || rate === undefined || Number.isNaN(rate)) {
+                // Legacy shape used by the public SDK snippets: { base_amount, vat_regime }
+                const regimes = { STANDARD_21: 21, REDUCED_9: 9, ZERO_0: 0, STANDARD: 21, REDUCED: 9, ZERO: 0 };
+                const regime = body && body.vat_regime ? String(body.vat_regime).toUpperCase() : '';
+                rate = regimes[regime] !== undefined ? regimes[regime] : 21;
+            }
+            const mode = (body && (body.mode === 'inclusive' || body.amount_type === 'inclusive')) ? 'inclusive' : 'exclusive';
+            if (!Number.isFinite(amount) || amount < 0 || amount > 1e9) {
+                return jsonResponse({ status: 'error', message: 'amount must be a number between 0 and 1e9' }, 422, cors);
+            }
+            if (!Number.isFinite(rate) || rate < 0 || rate > 100) {
+                return jsonResponse({ status: 'error', message: 'rate must be between 0 and 100' }, 422, cors);
+            }
+            return jsonResponse(calculateVat(amount, rate, mode), 200,
+                Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+        }
+
+        // ---- Payment webhook ---------------------------------------------------
+        // Stripe: HMAC-SHA256 over "timestamp.payload". Mollie: no signature, so the
+        // payment is fetched from the API with the secret key and trusted from there.
+        if (path === '/pay/webhook' || path === '/api/pay/webhook') {
+            if (request.method !== 'POST') {
+                return jsonResponse({ status: 'error', message: 'Method not allowed. Use POST.' }, 405, cors);
+            }
+            const raw = await readBodyLimited(request, MAX_BODY_BYTES);
+            if (raw === null) {
+                return jsonResponse({ status: 'error', message: 'Payload too large' }, 413, cors);
+            }
+            const stripeSignature = request.headers.get('stripe-signature');
+            const outcome = stripeSignature
+                ? await handleStripeWebhook(raw, stripeSignature, env)
+                : await handleMollieWebhook(raw, env);
+            const status = outcome.ok ? 200 : (outcome.status || 400);
+            console.log('[LeadWorker] payment webhook', outcome.provider || 'unknown',
+                outcome.id || '-', 'ok=' + outcome.ok, outcome.reason || '');
+            return jsonResponse({
+                received: outcome.ok,
+                provider: outcome.provider || null,
+                reason: outcome.reason || null
+            }, status, cors);
         }
 
         // ---- Public trust statistics ----------------------------------------
@@ -674,6 +922,22 @@ export default {
             return jsonResponse({ status: 'success', leadId: 'LEAD-SR-RECEIVED', recorded: false }, 200, cors);
         }
 
+        // ---- Bot protection (Cloudflare Turnstile, optional) ------------------
+        // Soft-fail by default so the form keeps working before the site sends a
+        // token; set TURNSTILE_ENFORCE=1 once the widget is live.
+        const turnstile = await verifyTurnstile(
+            payload.turnstileToken || payload['cf-turnstile-response'], request, env);
+        if (!turnstile.ok) {
+            if (String(env.TURNSTILE_ENFORCE || '') === '1') {
+                return jsonResponse({
+                    status: 'error',
+                    message: 'Bot verification failed. Please reload and try again.',
+                    reason: turnstile.reason
+                }, 403, cors);
+            }
+            console.warn('[LeadWorker] turnstile soft-fail:', turnstile.reason);
+        }
+
         // ---- Rate limiting ---------------------------------------------------
         const limit = await checkRateLimit(request, env);
         if (!limit.allowed) {
@@ -693,17 +957,20 @@ export default {
         }
 
         // ---- Persist + relay ---------------------------------------------------
+        const persistedD1 = await persistLeadD1(lead, env);
         const stored = await persistLead(lead, env);
         const relayed = await relayToWebhooks(lead, env, ctx);
         await notifyByEmail(lead, env, ctx);
 
-        console.log('[LeadWorker] Lead captured', lead.leadId, 'stored=' + stored.stored, 'dispatched=' + relayed.dispatched);
+        console.log('[LeadWorker] Lead captured', lead.leadId, 'stored=' + stored.stored,
+            'd1=' + persistedD1, 'dispatched=' + relayed.dispatched);
 
         return jsonResponse({
             status: 'success',
             leadId: lead.leadId,
-            recorded: stored.stored,
+            recorded: stored.stored || persistedD1,
             stored: stored.stored,
+            durable: persistedD1,
             dispatched: relayed.dispatched,
             timestamp: lead.receivedAt
         }, 200, cors);
