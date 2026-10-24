@@ -6,18 +6,20 @@
 > المُتحقَّق منه من الخادمين الرسميين (artemis/hermes.dns-parking.com) عبر Google + Cloudflare.
 > المتبقي: **اختبار استقبال وإرسال حقيقي** (DNS لا يستطيع إثبات وجود صندوق).
 
-## المستخدمون (Users)
+## المستخدمون (Users) — مكتمل ✓ (18:12)
 
 | العنوان | الحالة |
 |---|---|
 | `salimgrav@purelymail.com` | admin الحساب |
-| `info@sr-coresync.com` | ✓ منشأ |
-| `salim@sr-coresync.com` | ✓ منشأ |
-| `raed@sr-coresync.com` | ✓ منشأ |
-| `support@sr-coresync.com` | يظهر 31 مرة في الموقع — تحقّق من وجوده |
-| `billing@sr-coresync.com` | يظهر 11 مرة (الفواتير) — تحقّق من وجوده |
+| `info@sr-coresync.com` | ✓ |
+| `support@sr-coresync.com` | ✓ (يظهر في 58 ملفًا على الموقع) |
+| `billing@sr-coresync.com` | ✓ (يظهر في ملفين) |
+| `salim@sr-coresync.com` | ✓ |
+| `raed@sr-coresync.com` | ✓ |
 
-> بديل: `Routing rules` أو `catch-all` لتوجيه العناوين غير المنشأة إلى `info@`.
+الخمسة المنشورة على الموقع كلها موجودة، فلا عنوان ظاهر للزائر بلا صندوق.
+سبعة عناوين أخرى (`security@` · `dmarc@` · `dmarc-reports@` · `tlsrpt@` ·
+`leads@` · `client-audit@` · `onboarding-test@`) ترد في ملفات تشغيلية فقط ولا يراها الزائر.
 
 ## الحساب
 | البند | القيمة |
@@ -69,7 +71,7 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | Webmail | `https://inbox.purelymail.com` — **ليس** `purelymail.com/webmail` (يعطي 404) | — |
 
 ## ما تبقّى — اختبار حقيقي
-DNS لا يثبت وجود صندوق. طريقتان:
+DNS مكتمل والصناديق الخمسة موجودة. المتبقي فقط اختبار رسالة فعلية:
 
 1. **من Gmail** → أرسل إلى `info@sr-coresync.com` ثم افتح Webmail على **`https://inbox.purelymail.com`**.
    يجب أن يظهر في Inbox لا في Spam. (`purelymail.com/webmail` مسار غير موجود → 404؛
