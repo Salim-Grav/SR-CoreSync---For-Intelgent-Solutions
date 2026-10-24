@@ -16,7 +16,14 @@
 (function () {
   'use strict';
 
-  var BASE = (typeof window !== 'undefined' && window.SR_FEED_BASE ? String(window.SR_FEED_BASE) : '').replace(/\/+$/, '');
+  var BASE = (function () {
+    var fromGlobal = (typeof window !== 'undefined' && window.SR_FEED_BASE) ? String(window.SR_FEED_BASE) : '';
+    if (fromGlobal) return fromGlobal.replace(/\/+$/, '');
+    // Configuration lives in a meta tag so the page needs no inline <script>,
+    // which is what a strict script-src would otherwise block.
+    var meta = document.querySelector('meta[name="sr-feed-base"]');
+    return meta ? String(meta.getAttribute('content') || '').replace(/\/+$/, '') : '';
+  })();
   var DISMISS_KEY = 'sr_live_feed_dismissed_at';
   var BACKOFF_KEY = 'sr_live_feed_backoff_at';
   var BACKOFF_HOURS = 6;

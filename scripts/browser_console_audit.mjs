@@ -29,6 +29,28 @@ const BROWSER_CANDIDATES = [
 ].filter(Boolean);
 
 const EDGE = BROWSER_CANDIDATES.find(p => existsSync(p));
+
+// --csp[=policy] serves every page with Content-Security-Policy-Report-Only and
+// reports the violations instead of auditing handlers. GitHub Pages cannot send
+// headers, so this is the only honest way to measure what a strict policy would
+// block tonight.
+const CSP_ARG = process.argv.find(a => a.startsWith('--csp'));
+const CSP_MODE = Boolean(CSP_ARG);
+// The target policy: same host allowlist the live _headers file declares, but
+// with 'unsafe-inline' removed from script-src and style-src. Anything reported
+// here is therefore a genuine blocker, not a missing allowlist entry.
+const DEFAULT_CSP = [
+    "default-src 'self'",
+    "script-src 'self' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://unpkg.com https://js.stripe.com",
+    "style-src 'self' https://fonts.googleapis.com https://cdn.tailwindcss.com",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data: https://fonts.gstatic.com",
+    "connect-src 'self' https://sr-lead-capture.sr-coresync.workers.dev https://fonts.googleapis.com",
+    "object-src 'none'",
+    "base-uri 'self'"
+].join('; ');
+const CSP_POLICY = CSP_ARG && CSP_ARG.includes('=') ? CSP_ARG.slice(CSP_ARG.indexOf('=') + 1) : DEFAULT_CSP;
+
 let PORT = 9222;
 let HTTP_PORT = 8099;
 const SITE = resolve(process.env.SR_SITE_DIR || join(process.cwd(), '_site'));
@@ -72,7 +94,9 @@ function startServer() {
             res.end('not found');
             return;
         }
-        res.writeHead(200, { 'Content-Type': MIME[extname(file).toLowerCase()] || 'application/octet-stream' });
+        const headers = { 'Content-Type': MIME[extname(file).toLowerCase()] || 'application/octet-stream' };
+        if (CSP_MODE) headers['Content-Security-Policy-Report-Only'] = CSP_POLICY;
+        res.writeHead(200, headers);
         res.end(readFileSync(file));
     });
     return new Promise(r => server.listen(HTTP_PORT, '127.0.0.1', () => r(server)));
@@ -184,6 +208,7 @@ async function main() {
     }
     const pages = LANGUAGES.slice(0, LIMIT);
     const results = [];
+const cspAll = [];
     let failed = 0;
 
     for (const route of pages) {
@@ -193,6 +218,7 @@ async function main() {
 
         const errors = [];
         const failedRequests = [];
+        const cspViolations = [];
         const ws = new WebSocket(target.webSocketDebuggerUrl);
         let id = 0;
         const pending = new Map();
@@ -219,6 +245,12 @@ async function main() {
             if (msg.method === 'Runtime.consoleAPICalled' && msg.params.type === 'error') {
                 errors.push(msg.params.args.map(a => a.value ?? a.description ?? '').join(' '));
             }
+            if (CSP_MODE && msg.method === 'Log.entryAdded') {
+                const entry = msg.params.entry || {};
+                if (entry.source === 'security') {
+                    cspViolations.push((entry.text || '').replace(/\s+/g, ' ').trim().slice(0, 220));
+                }
+            }
             if (msg.method === 'Network.loadingFailed') {
                 const reason = msg.params.errorText || '';
                 // ERR_ABORTED means the request was cancelled (navigation,
@@ -235,6 +267,7 @@ async function main() {
         await send('Runtime.enable');
         await send('Network.enable');
         await send('Page.enable');
+        if (CSP_MODE) await send('Log.enable');
         await send('Page.navigate', { url });
         await sleep(2600);
 
@@ -248,7 +281,7 @@ async function main() {
         // drags it, and then it throws ReferenceError.
         // ---------------------------------------------------------------
         let deadHandlers = [];
-        try {
+        if (!CSP_MODE) try {
             const probe = await send('Runtime.evaluate', {
                 expression: HANDLER_AUDIT,
                 returnByValue: true,
@@ -262,6 +295,18 @@ async function main() {
 
         const real = errors.filter(e => !/favicon/i.test(e));
         const req = failedRequests.filter(e => !/favicon/i.test(e));
+
+        if (CSP_MODE) {
+            const unique = [...new Set(cspViolations)];
+            unique.forEach(v => cspAll.push({ route, text: v }));
+            const ok = unique.length === 0;
+            if (!ok) failed++;
+            results.push({ route, ok, violations: unique });
+            console.log(`${ok ? 'PASS' : 'FAIL'}  ${route.padEnd(8)} csp-violations=${unique.length}`);
+            unique.slice(0, 3).forEach(v => console.log('        > ' + v.slice(0, 170)));
+            continue;
+        }
+
         const ok = real.length === 0 && req.length === 0 && deadHandlers.length === 0;
         if (!ok) failed++;
         results.push({ route, ok, errors: real, requests: req, deadHandlers });
@@ -279,7 +324,33 @@ async function main() {
     try { rmSync(profile, { recursive: true, force: true }); } catch { }
 
     console.log('='.repeat(72));
-    console.log(`Pages audited: ${results.length}   passed: ${results.length - failed}   failed: ${failed}`);
+    if (CSP_MODE) {
+    // Group the violations so the next refactor targets causes, not symptoms.
+    const byRule = {};
+    const byBlocked = {};
+    for (const item of cspAll) {
+        const rule = (item.text.match(/violates the following Content Security Policy directive: "?([^"\s]+)/i) || [])[1]
+            || (item.text.match(/(script-src|style-src|img-src|connect-src|font-src|default-src)/) || [])[1]
+            || 'unknown';
+        byRule[rule] = (byRule[rule] || 0) + 1;
+        const blocked = (item.text.match(/blocked the (?:loading|execution) of (?:the )?([^\s.]+)/i) || [])[1] || 'inline';
+        byBlocked[blocked] = (byBlocked[blocked] || 0) + 1;
+    }
+    console.log('-'.repeat(72));
+    console.log('CSP report-only summary');
+    console.log('policy: ' + CSP_POLICY);
+    console.log('violations: ' + cspAll.length + ' across ' + new Set(cspAll.map(v => v.route)).size + ' route(s)');
+    Object.entries(byRule).sort((a, b) => b[1] - a[1]).slice(0, 10)
+        .forEach(([rule, count]) => console.log('  ' + String(count).padStart(5) + '  ' + rule));
+    if (Object.keys(byBlocked).length) {
+        console.log('blocked resources:');
+        Object.entries(byBlocked).sort((a, b) => b[1] - a[1]).slice(0, 8)
+            .forEach(([what, count]) => console.log('  ' + String(count).padStart(5) + '  ' + what));
+    }
+    console.log('-'.repeat(72));
+}
+
+console.log(`Pages audited: ${results.length}   passed: ${results.length - failed}   failed: ${failed}`);
     console.log('='.repeat(72));
     process.exit(failed ? 1 : 0);
 }

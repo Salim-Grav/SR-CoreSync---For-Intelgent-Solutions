@@ -24,7 +24,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_BASE = 'https://api.sr-coresync.com'
 SKIP_DIRS = {'_site', '.git', 'node_modules', '__pycache__', 'workers', 'dist'}
 
-CONFIG_RE = re.compile(r'[ \t]*<script>\s*window\.SR_FEED_BASE\s*=\s*[^<]*?</script>\r?\n?', re.I)
+CONFIG_RE = re.compile(
+    r'[ \t]*<script>\s*window\.SR_FEED_BASE\s*=\s*[^<]*?</script>\r?\n?'
+    r'|[ \t]*<meta\s+name="sr-feed-base"[^>]*>\r?\n?', re.I)
 MODULE_RE = re.compile(r'(?P<indent>[ \t]*)<script src="(?P<prefix>(?:\.\./|\./)?)js/sr-live-feed\.js"')
 
 
@@ -63,7 +65,7 @@ def main():
         if CONFIG_RE.search(doc) and doc.index('window.SR_FEED_BASE') < doc.index('sr-live-feed.js'):
             continue  # already configured
 
-        line = '%s<script>window.SR_FEED_BASE = \'%s\';</script>\n' % (match.group('indent'), base)
+        line = '%s<meta name="sr-feed-base" content="%s">\n' % (match.group('indent'), base)
         doc_new = stripped[:match.start()] + line + stripped[match.start():]
         if doc_new != doc:
             with io.open(path, 'w', encoding='utf-8', newline='') as fh:
