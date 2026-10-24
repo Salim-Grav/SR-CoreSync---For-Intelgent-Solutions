@@ -376,6 +376,47 @@ function buildContractHtml(text) {
         safe + '</div></div></body></html>';
 }
 
+async function sendTelegram(lead, env) {
+    const token = env && env.TELEGRAM_BOT_TOKEN;
+    const chatId = env && env.TELEGRAM_CHAT_ID;
+    if (!token || !chatId) return { ok: false, reason: 'telegram-not-configured' };
+
+    const lines = [
+        '\u{1F514} New lead \u2014 ' + (lead.leadId || ''),
+        '',
+        'Name    : ' + (lead.clientName || '-') + (lead.companyName ? ' (' + lead.companyName + ')' : ''),
+        'Phone   : ' + (lead.phone || '-'),
+        'Email   : ' + (lead.email || '-'),
+        'Package : ' + (lead.packageLabel || lead.package || '-'),
+        'Advisor : ' + (lead.advisorName || lead.advisor || '-'),
+        'Lang    : ' + (lead.language || '-'),
+        'When    : ' + (lead.preferredDate || '-') + ' ' + (lead.timeSlotLabel || lead.timeSlot || ''),
+        'Source  : ' + (lead.sourceUrl || '-')
+    ];
+    if (lead.notes) lines.push('Notes   : ' + String(lead.notes).slice(0, 400));
+
+    try {
+        const res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: lines.join('\n'),
+                disable_web_page_preview: true
+            })
+        });
+        if (!res.ok) {
+            const detail = await res.text().catch(function () { return ''; });
+            console.error('[LeadWorker] Telegram rejected:', res.status, detail.slice(0, 200));
+            return { ok: false, reason: 'telegram-' + res.status };
+        }
+        return { ok: true, provider: 'telegram' };
+    } catch (err) {
+        console.error('[LeadWorker] Telegram failed:', err);
+        return { ok: false, reason: 'telegram-error' };
+    }
+}
+
 async function notifyByEmail(lead, env, ctx) {
     if (!env || !env.NOTIFY_EMAIL) return { sent: false, reason: 'no-recipient' };
 
@@ -775,7 +816,8 @@ export default {
                 d1: !!(env && env.DB),
                 turnstile: (env && env.TURNSTILE_SECRET)
                     ? (String(env.TURNSTILE_ENFORCE || '') === '1' ? 'enforcing' : 'soft') : 'off',
-                eventsPublic: String((env && env.EVENTS_PUBLIC) || '') === '1'
+                eventsPublic: String((env && env.EVENTS_PUBLIC) || '') === '1',
+                telegram: !!(env && env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID)
             }, 200, cors);
         }
 
@@ -999,10 +1041,12 @@ export default {
         const persistedD1 = await persistLeadD1(lead, env);
         const stored = await persistLead(lead, env);
         const relayed = await relayToWebhooks(lead, env, ctx);
+        const telegram = await sendTelegram(lead, env);
         await notifyByEmail(lead, env, ctx);
 
         console.log('[LeadWorker] Lead captured', lead.leadId, 'stored=' + stored.stored,
-            'd1=' + persistedD1, 'dispatched=' + relayed.dispatched);
+            'd1=' + persistedD1, 'dispatched=' + relayed.dispatched,
+            'telegram=' + (telegram && telegram.ok ? 'sent' : (telegram && telegram.reason) || 'no'));
 
         return jsonResponse({
             status: 'success',

@@ -208,6 +208,47 @@ async function run() {
         Object.assign({}, env, { BREVO_API_KEY: 'x' }), {})).json();
     assert('health falls back to brevo alone', body.emailChannel === 'brevo', body.emailChannel);
 
+    // 13c. Telegram notifier (zero-DNS notification path) -------------------------
+    let telegramCalls = [];
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url, init) => {
+        if (typeof url === 'string' && url.includes('api.telegram.org')) {
+            telegramCalls.push({ url, body: init && init.body });
+            return new Response(JSON.stringify({ ok: true }), { status: 200 });
+        }
+        return originalFetch(url, init);
+    };
+
+    body = await (await worker.fetch(req('/health'), env, {})).json();
+    assert('health reports telegram off without secrets', body.telegram === false);
+
+    const tgEnv = Object.assign({}, env, {
+        TELEGRAM_BOT_TOKEN: '123:TEST',
+        TELEGRAM_CHAT_ID: '-100123'
+    });
+    body = await (await worker.fetch(req('/health'), tgEnv, {})).json();
+    assert('health reports telegram on with secrets', body.telegram === true);
+
+    telegramCalls = [];
+    res = await worker.fetch(req('/lead', {
+        method: 'POST',
+        ip: '7.7.7.7',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            clientName: 'Telegram Probe',
+            phone: '+31600000001',
+            notes: 'ping'
+        })
+    }), tgEnv, {});
+    assert('lead accepted with telegram configured', res.status === 200, `got ${res.status}`);
+    assert('telegram was called exactly once', telegramCalls.length === 1, `calls=${telegramCalls.length}`);
+    assert('telegram payload carries the phone number',
+        (telegramCalls[0] || {}).body && telegramCalls[0].body.includes('+31600000001'));
+    assert('telegram payload never leaks the token in the body',
+        (telegramCalls[0] || {}).body && !telegramCalls[0].body.includes('123:TEST'));
+
+    globalThis.fetch = originalFetch;
+
     // 14. VAT calculator (replaces the dead api.coresync.eu) ----------------------
     res = await worker.fetch(req('/tax', {
         method: 'POST',
