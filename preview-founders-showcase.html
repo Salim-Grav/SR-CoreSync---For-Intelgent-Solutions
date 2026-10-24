@@ -907,11 +907,11 @@
         <!-- 1. وضع السلايدر التفاعلي (Interactive Slider Mode - الافتراضي) -->
         <div id="viewSlider" class="showcase-slider-wrapper">
             <!-- أزرار التنقل السريعة -->
-            <button type="button" class="showcase-nav-btn showcase-nav-prev" onclick="prevSlide()" aria-label="السابق">›</button>
-            <button type="button" class="showcase-nav-btn showcase-nav-next" onclick="nextSlide()" aria-label="التالي">‹</button>
+            <button type="button" class="showcase-nav-btn showcase-nav-prev" data-sr-call="prevSlide" aria-label="السابق">›</button>
+            <button type="button" class="showcase-nav-btn showcase-nav-next" data-sr-call="nextSlide" aria-label="التالي">‹</button>
 
             <!-- مسار الشرائح -->
-            <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
+            <div class="showcase-slider-viewport" id="sliderViewport" data-sr-call="pauseSliderAutoPlay" data-sr-on="mouseenter" data-sr-call="resumeSliderAutoPlay" data-sr-on="mouseleave">
                 <div class="showcase-slides-track" id="slidesTrack">
                     <!-- الشريحة 0: شعار وهوية النخبة المؤسسية الفاخرة (S&R CoreSync Emblem) -->
                     <div class="showcase-slide-item active">
@@ -1046,7 +1046,7 @@
                     <div class="showcase-progress-bar-fill" id="sliderProgressBar"></div>
                 </div>
 
-                <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" onclick="togglePlayback()">
+                <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" data-sr-call="togglePlayback">
                     <span id="playbackIcon">⏸</span>
                     <span id="playbackText">إيقاف مؤقت</span>
                 </button>
@@ -1244,8 +1244,8 @@
     </div>
 
     <!-- نافذة الزووم الكبيرة Lightbox مع شريط التحميل والـ QR -->
-    <div id="lightboxModal" class="sr-lightbox-modal" onclick="closeLightbox()">
-        <button type="button" class="sr-lightbox-close" onclick="closeLightbox()" title="إغلاق">&times;</button>
+    <div id="lightboxModal" class="sr-lightbox-modal" data-sr-call="closeLightbox">
+        <button type="button" class="sr-lightbox-close" data-sr-call="closeLightbox" title="إغلاق">&times;</button>
         <div class="sr-lightbox-box" onclick="event.stopPropagation()">
             <img id="lightboxImg" src="" alt="" class="sr-lightbox-img">
             <div class="sr-lightbox-toolbar" id="lightboxToolbar">
@@ -1255,7 +1255,7 @@
                 <a id="lightboxDownloadHd" href="#" download="" class="sr-lightbox-tool-btn" title="تحميل دقة الويب المعتمدة">
                     <span>تحميل ويب HD 📥</span>
                 </a>
-                <button type="button" id="lightboxQrBtn" class="sr-lightbox-tool-btn" onclick="openQrFromLightbox()" title="عرض بطاقة الاتصال الرقمية">
+                <button type="button" id="lightboxQrBtn" class="sr-lightbox-tool-btn" data-sr-call="openQrFromLightbox" title="عرض بطاقة الاتصال الرقمية">
                     <span>بطاقة اتصال رقمية (QR vCard) 📲</span>
                 </button>
             </div>
@@ -1263,9 +1263,9 @@
     </div>
 
     <!-- نافذة البطاقة الرقمية الذكية (Smart vCard & QR Modal) -->
-    <div id="qrModal" class="sr-qr-modal" onclick="closeQrModal()">
+    <div id="qrModal" class="sr-qr-modal" data-sr-call="closeQrModal">
         <div class="sr-qr-card" onclick="event.stopPropagation()">
-            <button type="button" class="sr-qr-close" onclick="closeQrModal()" title="إغلاق">&times;</button>
+            <button type="button" class="sr-qr-close" data-sr-call="closeQrModal" title="إغلاق">&times;</button>
             
             <div class="sr-qr-header">
                 <div class="sr-qr-badge">👑 بطاقة الاتصال الرقمية المعتمدة • Smart vCard</div>
@@ -1608,5 +1608,6 @@
             }
         });
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

@@ -106,19 +106,19 @@
                 <span>النظام السحابي متصل (EU Node)</span>
             </div>
             <!-- زر الجولة الإرشادية التفاعلية للزبائن -->
-            <button type="button" class="btn-tour-start" id="btnStartTour" onclick="startGuidedTour()" title="بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون">
+            <button type="button" class="btn-tour-start" id="btnStartTour" data-sr-call="startGuidedTour" title="بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون">
                 <span>🚀 ابدأ الجولة</span>
             </button>
             <!-- زر تصدير ملخص العرض بنقرة واحدة كـ PDF -->
-            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" onclick="openExecutivePdfModal()" title="تصدير بطاقة العرض التنفيذي إلى ملف PDF أنيق للعميل">
+            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" data-sr-call="openExecutivePdfModal" title="تصدير بطاقة العرض التنفيذي إلى ملف PDF أنيق للعميل">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                 <span>ملخص العرض (PDF)</span>
             </button>
-            <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" onclick="togglePresentationMode()" title="وضع العرض التقديمي للزبائن (شاشة كاملة وتجربة تنفيذية)">
+            <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" data-sr-call="togglePresentationMode" title="وضع العرض التقديمي للزبائن (شاشة كاملة وتجربة تنفيذية)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
                 <span>عرض الزبائن [P]</span>
             </button>
-            <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()" title="نقل تفضيلات الجلسة وحجز موعد استشاري">
+            <button type="button" class="btn-sync-consultation" data-sr-call="syncDemoToConsultation" title="نقل تفضيلات الجلسة وحجز موعد استشاري">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 <span>حجز استشارة بهذا النظام</span>
             </button>
@@ -510,7 +510,7 @@
                 <div class="sync-box-tag">تكامل مع الإدارة</div>
                 <div class="sync-box-title">طلب تفعيل لشركتك</div>
                 <p class="sync-box-desc">انقل تفاصيل الجلسة والسيناريوهات المجرّبة مباشرة لاستشارة المؤسسين.</p>
-                <button type="button" class="sync-box-btn" onclick="syncDemoToConsultation()">
+                <button type="button" class="sync-box-btn" data-sr-call="syncDemoToConsultation">
                     <span>حجز استشارة مخصصة</span>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
@@ -575,14 +575,14 @@
                 </div>
                 <div class="vip-banner-actions">
                     <input type="text" id="quickClientNameInput" class="vip-input" placeholder="أدخل اسم شركتك هنا..." oninput="updatePdfClientName(this.value)" />
-                    <button type="button" class="vip-btn-gold" onclick="openExecutivePdfModal()">
+                    <button type="button" class="vip-btn-gold" data-sr-call="openExecutivePdfModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                         <span>تصدير عرض السعر (PDF)</span>
                     </button>
                 </div>
             </div>
 
-                    <button class="action-cta-btn" onclick="openNewTxModal()">
+                    <button class="action-cta-btn" data-sr-call="openNewTxModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         تسجيل معاملة تجريبية
                     </button>
@@ -761,7 +761,7 @@
                         <p>مطابقة معايير الفوترة الإلكترونية المعتمدة في هولندا والاتحاد الأوروبي (UBL / PEPPOL) وهيئة الزكاة والضريبة (ZATCA)</p>
                     </div>
                     <div class="d-flex gap-2 flex-wrap">
-                        <button type="button" class="action-cta-btn" onclick="openInvoiceGeneratorModal()">
+                        <button type="button" class="action-cta-btn" data-sr-call="openInvoiceGeneratorModal">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                             توليد فاتورة إلكترونية تجريبية
                         </button>
@@ -839,7 +839,7 @@
                                     <td><span class="status-badge status-processing" id="status-badge-inv-1021">الدفعة 1 (30%) - تستحق لبدء التأسيس</span></td>
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
-                                            <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026Modal()">💻 عرض وتوقيع العقد التقني</button>
+                                            <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026Modal">💻 عرض وتوقيع العقد التقني</button>
                                             <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">سداد iDEAL</button>
                                         </div>
@@ -854,7 +854,7 @@
                                     <td><span class="status-badge status-processing" id="status-badge-inv-1022">حزمة المحاسبة السنوية + استرداد 4,410 € ضريبة</span></td>
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
-                                            <button type="button" class="table-action-btn btn-gold-action" onclick="openContractOf2026FinModal()">📊 عرض وتوقيع العقد المالي</button>
+                                            <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026FinModal">📊 عرض وتوقيع العقد المالي</button>
                                             <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
                                             <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">سداد iDEAL</button>
                                         </div>
@@ -932,7 +932,7 @@
 
                     <div class="ai-chat-input-bar">
                         <input type="text" id="aiInput" class="ai-chat-input" placeholder="اكتب استفسارك المالي أو التقني هنا..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
-                        <button class="ai-send-btn" onclick="sendAiMessage()">إرسال</button>
+                        <button class="ai-send-btn" data-sr-call="sendAiMessage">إرسال</button>
                     </div>
                 </div>
             </section>
@@ -1010,7 +1010,7 @@
                         <div class="audit-status-lbl" id="auditStatusText">
                             🟢 <strong>حالة التدقيق: معتمد 100%</strong> — لم يتم رصد أي ثغرات امتثال أو أمان على الشبكة.
                         </div>
-                        <button type="button" class="btn-run-audit" id="btnRunAudit" onclick="runComplianceAuditScanner()">
+                        <button type="button" class="btn-run-audit" id="btnRunAudit" data-sr-call="runComplianceAuditScanner">
                             🛡️ إعادة تشغيل فحص الامتثال
                         </button>
                     </div>
@@ -1038,7 +1038,7 @@
                         <span class="roi-slider-lbl">2. حجم قاعدة البيانات (جيجابايت)</span>
                         <span class="roi-val-display font-num" id="dispMigVolume">250 جيجابايت</span>
                     </div>
-                    <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" oninput="calcMigrationEstimator()" />
+                    <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" data-sr-call="calcMigrationEstimator" data-sr-on="input" />
 
                     <div class="migration-metrics-grid">
                         <div class="migration-metric-box">
@@ -1056,7 +1056,7 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <button type="button" class="btn-cert-print" onclick="openStrategicBookingModal()">
+                        <button type="button" class="btn-cert-print" data-sr-call="openStrategicBookingModal">
                             📑 طلب خطة الترحيل المخصصة (Blueprint)
                         </button>
                     </div>
@@ -1073,7 +1073,7 @@
                             <span class="ds-u1" id="storageBadge">● محفوظ في المتصفح</span>
                         </div>
                     </div>
-                    <button type="button" class="btn-return-main" onclick="resetBrandIdentity()">
+                    <button type="button" class="btn-return-main" data-sr-call="resetBrandIdentity">
                         استعادة هوية S&R الأصلية
                     </button>
                 </div>
@@ -1140,11 +1140,11 @@
                             <button type="button" class="filter-btn" onclick="applySampleClientBrand('بنك التقنية الحديثة', '🏦')">بنك التقنية 🏦</button>
                         </div>
 
-                        <button type="button" class="action-cta-btn w-100 mb-2" onclick="applyClientBrand()">
+                        <button type="button" class="action-cta-btn w-100 mb-2" data-sr-call="applyClientBrand">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
                             تطبيق الهوية فوراً على المنصة بالكامل
                         </button>
-                        <button type="button" class="btn-secondary-glow w-100" onclick="openBrandedInvoicePreview()">
+                        <button type="button" class="btn-secondary-glow w-100" data-sr-call="openBrandedInvoicePreview">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             توليد ومعاينة فاتورة تجريبية رسمية بهوية شركتك (Branded Invoice PDF)
                         </button>
@@ -1156,7 +1156,7 @@
                     <p class="text-white-64 mb-3">
                         يمكن لشركة S&R CoreSync Solutions تخصيص نظام الـ ERP ونظام الفوترة والمحاسبة الذكية بالكامل تحت علامتك التجارية (White-Label Deployment) على نطاقك الخاص (yourcompany.com) مع خوادم معزولة بالكامل.
                     </p>
-                    <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()">
+                    <button type="button" class="btn-sync-consultation" data-sr-call="syncDemoToConsultation">
                         طلب عرض سعر لنظام White-Label مخصص
                     </button>
                 </div>
@@ -1209,7 +1209,7 @@
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                                 <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
                             </button>
-                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" onclick="openPublishSoftwareModal()">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" data-sr-call="openPublishSoftwareModal">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                 <span>🚀 نشر وتوزيع برنامج جديد (Publish)</span>
                             </button>
@@ -1222,7 +1222,7 @@
                     <div class="sr-market-search-box">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         <input type="text" id="srSoftwareSearchInput" placeholder="ابحث في البرمجيات (مثال: ضريبة, كاميرا, POS, OCR, تشفير, SDK)..." oninput="filterSoftwareBySearch(this.value)" aria-label="بحث في البرمجيات" />
-                        <button type="button" class="sr-search-clear-btn" id="srSearchClearBtn" onclick="clearSoftwareSearch()" title="مسح البحث">✕</button>
+                        <button type="button" class="sr-search-clear-btn" id="srSearchClearBtn" data-sr-call="clearSoftwareSearch" title="مسح البحث">✕</button>
                     </div>
 
                     <div class="filter-pill-group">
@@ -1272,7 +1272,7 @@
                             <div class="quick-tax-calc-box ds-u2">
                                 <div class="ds-u3">
                                     <span class="ds-u4">⚡ حاسبة ضريبة فورية:</span>
-                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="اختيار نسبة الضريبة للحاسبة السريعة" aria-label="اختيار نسبة الضريبة للحاسبة السريعة">
+                                    <select class="ds-u5" id="quickTaxRate" data-sr-call="calcQuickTax" data-sr-on="change" title="اختيار نسبة الضريبة للحاسبة السريعة" aria-label="اختيار نسبة الضريبة للحاسبة السريعة">
                                         <option value="0.21">BTW هولندي 21%</option>
                                         <option value="0.09">BTW مخفض 9%</option>
                                         <option value="0.15">ضريبة خليجية 15%</option>
@@ -1280,7 +1280,7 @@
                                 </div>
                                 <div class="ds-u6">
                                     <span class="ds-u7">المبلغ (€):</span>
-                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" placeholder="المبلغ" />
+                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" data-sr-call="calcQuickTax" data-sr-on="input" placeholder="المبلغ" />
                                 </div>
                                 <div class="ds-u9">
                                     <span>الضريبة: <strong class="ds-u10" id="quickTaxVat">€ 210.00</strong></span>
@@ -1295,8 +1295,8 @@
                                     <div class="ds-u15" id="quickTrialKeyDisplay">SRTX-2026-TRIAL-8849</div>
                                 </div>
                                 <div class="ds-u16">
-                                    <button class="ds-u17" type="button" onclick="generateNewQuickKey()" title="توليد مفتاح جديد">🔄</button>
-                                    <button class="ds-u18" type="button" onclick="copyQuickTrialKey()" title="نسخ المفتاح">📋 نسخ</button>
+                                    <button class="ds-u17" type="button" data-sr-call="generateNewQuickKey" title="توليد مفتاح جديد">🔄</button>
+                                    <button class="ds-u18" type="button" data-sr-call="copyQuickTrialKey" title="نسخ المفتاح">📋 نسخ</button>
                                 </div>
                             </div>
                         </div>
@@ -1550,7 +1550,7 @@
                                 توفر شركة S&R CoreSync Solutions بنية متكاملة للمطورين لتوزيع البرمجيات مع نظام التراخيص الرقمية المشفرة وبوابات الدفع الهولندية والأوروبية والخليجية.
                             </p>
                         </div>
-                        <button type="button" class="btn-sync-consultation" onclick="openPublishSoftwareModal()">
+                        <button type="button" class="btn-sync-consultation" data-sr-call="openPublishSoftwareModal">
                             إضافة برنامج جديد الآن
                         </button>
                     </div>
@@ -1574,7 +1574,7 @@
                             <span>👥 حجم الفريق / الموظفين</span>
                             <span class="roi-val-display" id="dispRoiTeam">20 موظف</span>
                         </div>
-                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" title="Team Size / Employees" aria-label="Team Size / Employees" oninput="calcPortalRoi()" />
+                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" title="Team Size / Employees" aria-label="Team Size / Employees" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
@@ -1582,7 +1582,7 @@
                             <span>⏱️ ساعات المعاملات اليدوية / أسبوعياً</span>
                             <span class="roi-val-display" id="dispRoiHours">18 ساعة/أسبوع</span>
                         </div>
-                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" title="Manual Hours per Week" aria-label="Manual Hours per Week" oninput="calcPortalRoi()" />
+                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" title="Manual Hours per Week" aria-label="Manual Hours per Week" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
@@ -1590,7 +1590,7 @@
                             <span>💶 متوسط تكلفة الساعة للكوادر (€)</span>
                             <span class="roi-val-display" id="dispRoiCost">€ 45 / ساعة</span>
                         </div>
-                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" title="Average Hourly Cost" aria-label="Average Hourly Cost" oninput="calcPortalRoi()" />
+                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" title="Average Hourly Cost" aria-label="Average Hourly Cost" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -1610,10 +1610,10 @@
                 </div>
 
                                 <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mt-4">
-                    <button type="button" class="btn-sync-consultation" onclick="openStrategicBookingModal()">
+                    <button type="button" class="btn-sync-consultation" data-sr-call="openStrategicBookingModal">
                         <span>📅 حجز جلسة استراتيجية مع المؤسسين</span>
                     </button>
-                    <button type="button" class="btn-cert-print" onclick="openRoiCertModal()">
+                    <button type="button" class="btn-cert-print" data-sr-call="openRoiCertModal">
                         <span>📄 تحميل الشهادة التنفيذية للجدوى (ROI PDF)</span>
                     </button>
                 </div>
@@ -1638,10 +1638,10 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2 flex-wrap">
-                        <button type="button" class="btn-cert-print" onclick="openContractOf2026Modal()">
+                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026Modal">
                             💻 العقد التقني (€ 21k)
                         </button>
-                        <button type="button" class="btn-cert-print" onclick="openContractOf2026FinModal()">
+                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026FinModal">
                             📊 العقد المالي (استرداد 4,410 €)
                         </button>
                         <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify-flex">
@@ -1816,7 +1816,7 @@
                             <span>👥 عدد المشتركين النشطين المتوقع</span>
                             <span class="roi-val-display font-num" id="dispSubscribersCount">5,000 مشترك</span>
                         </div>
-                        <input type="range" min="500" max="50000" step="500" value="5000" class="roi-range-input" id="slideSubscribersCount" title="Subscribers Count" aria-label="Subscribers Count" oninput="calcCloudSizing()" />
+                        <input type="range" min="500" max="50000" step="500" value="5000" class="roi-range-input" id="slideSubscribersCount" title="Subscribers Count" aria-label="Subscribers Count" data-sr-call="calcCloudSizing" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
@@ -1824,7 +1824,7 @@
                             <span>🎥 ساعات البث المباشر أسبوعياً</span>
                             <span class="roi-val-display font-num" id="dispStreamHours">10 ساعات/أسبوع</span>
                         </div>
-                        <input type="range" min="2" max="50" step="2" value="10" class="roi-range-input" id="slideStreamHours" title="Streaming Hours" aria-label="Streaming Hours" oninput="calcCloudSizing()" />
+                        <input type="range" min="2" max="50" step="2" value="10" class="roi-range-input" id="slideStreamHours" title="Streaming Hours" aria-label="Streaming Hours" data-sr-call="calcCloudSizing" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -1876,8 +1876,8 @@
                 🖥️ تشغيل المحاكي التفاعلي داخل المتصفح (Live Desktop Sandbox)
             </button>
             <div class="modal-form-actions">
-                    <button type="button" class="btn-return-main" onclick="closeNewTxModal()">إلغاء</button>
-                    <button type="button" class="action-cta-btn" onclick="saveNewTx()">حفظ ومزامنة فورية</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closeNewTxModal">إلغاء</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="saveNewTx">حفظ ومزامنة فورية</button>
                 </div>
             </div>
         </div>
@@ -1907,8 +1907,8 @@
                     </select>
                 </div>
                 <div class="modal-form-actions">
-                    <button type="button" class="btn-return-main" onclick="closeInvoiceGeneratorModal()">إلغاء</button>
-                    <button type="button" class="action-cta-btn" onclick="generateNewInvoice()">إصدار الفاتورة وتوليد QR</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closeInvoiceGeneratorModal">إلغاء</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="generateNewInvoice">إصدار الفاتورة وتوليد QR</button>
                 </div>
             </div>
         </div>
@@ -1964,8 +1964,8 @@
             <div class="text-caption text-center text-white-64" id="idealStatusText">جاهز لتنفيذ أمر التحويل الفوري</div>
 
             <div class="modal-form-actions mt-3">
-                <button type="button" class="btn-return-main" onclick="closeIdealSimulatorModal()">إغلاق</button>
-                <button type="button" class="action-cta-btn" id="btnConfirmIdeal" onclick="executeIdealPayment()">تأكيد السداد التجريبي اللحظي</button>
+                <button type="button" class="btn-return-main" data-sr-call="closeIdealSimulatorModal">إغلاق</button>
+                <button type="button" class="action-cta-btn" id="btnConfirmIdeal" data-sr-call="executeIdealPayment">تأكيد السداد التجريبي اللحظي</button>
             </div>
         </div>
     </div>
@@ -1979,7 +1979,7 @@
                     <h3 class="fw-bold mb-0 text-white invoice-preview-title">فاتورة إلكترونية رسمية (e-Invoice)</h3>
                     <span class="ds-u28" id="invWhiteLabelBadge">White-Label Branded</span>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeInvoicePreviewModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeInvoicePreviewModal">✕</button>
             </div>
 
             <div class="inv-paper" id="printableInvoice">
@@ -2068,7 +2068,7 @@
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         طباعة الفاتورة
                     </button>
-                    <button type="button" class="action-cta-btn" onclick="closeInvoicePreviewModal()">تم الإطلاع</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="closeInvoicePreviewModal">تم الإطلاع</button>
                 </div>
             </div>
         </div>
@@ -3513,7 +3513,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span class="text-caption text-white-64" id="modalSwVersion">v2.4 Pro • Verified Build</span>
                     </div>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeSoftwareModal">✕</button>
             </div>
 
             <p class="text-caption text-white-64 mb-3" id="modalSwDesc">
@@ -3527,7 +3527,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
                 <div class="license-key-display">
                     <span id="modalSwKey">SR-TAX-2026-X89B-492A-TRIAL</span>
-                    <button type="button" class="table-action-btn" onclick="copySoftwareLicenseKey()">نسخ المفتاح</button>
+                    <button type="button" class="table-action-btn" data-sr-call="copySoftwareLicenseKey">نسخ المفتاح</button>
                 </div>
                 <div class="d-flex justify-content-between text-caption text-white-64">
                     <span>التوافق: Windows 11/10 (64-bit), macOS 13+</span>
@@ -3536,15 +3536,15 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="modal-form-actions">
-                <button type="button" class="btn-return-main" onclick="closeSoftwareModal()">إغلاق</button>
+                <button type="button" class="btn-return-main" data-sr-call="closeSoftwareModal">إغلاق</button>
                 <button type="button" class="btn-secondary-glow" onclick="closeSoftwareModal(); openSoftwareLiveApp(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');">
                     ⚡ تشغيل فوري في المتصفح
                 </button>
-                <button type="button" class="btn-secondary-glow" id="modalBtnDownload" onclick="triggerSoftwareDownload()">
+                <button type="button" class="btn-secondary-glow" id="modalBtnDownload" data-sr-call="triggerSoftwareDownload">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     تنزيل أوفلاين (Single HTML App)
                 </button>
-                <button type="button" class="action-cta-btn" id="modalBtnBuy" onclick="triggerSoftwareCheckout()">
+                <button type="button" class="action-cta-btn" id="modalBtnBuy" data-sr-call="triggerSoftwareCheckout">
                     شراء الترخيص وإصدار فاتورة
                 </button>
             </div>
@@ -3589,7 +3589,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
 
                 <div class="modal-form-actions mt-3">
-                    <button type="button" class="btn-return-main" onclick="closePublishSoftwareModal()">إلغاء</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closePublishSoftwareModal">إلغاء</button>
                     <button type="submit" class="action-cta-btn">
                         نشر البرنامج فورياً في المتجر 🚀
                     </button>
@@ -3607,7 +3607,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <!-- شريط نافذة نظام التشغيل (OS Window Bar) -->
             <div class="os-window-header">
                 <div class="os-window-controls">
-                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="إغلاق"></span>
+                    <span class="os-dot red ds-u35" data-sr-call="closeDesktopSimulatorModal" title="إغلاق"></span>
                     <span class="os-dot yellow" title="تصغير"></span>
                     <span class="os-dot green" title="تكبير"></span>
                 </div>
@@ -3616,7 +3616,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <span id="simAppTitle">S&R TaxSync Desktop v2.4 Pro</span>
                     <span class="status-badge status-completed ds-u36">SANDBOX RUNNING</span>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeDesktopSimulatorModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeDesktopSimulatorModal">✕</button>
             </div>
 
             <!-- تبويبات المحاكي (Tabs) -->
@@ -3633,8 +3633,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="os-app-ribbon">
                 <span>📁 ملف (Bestand)</span>
                 <span>📊 مبيعات وضرائب (Omzet & BTW)</span>
-                <span class="ds-u37" onclick="runAiComplianceAudit()">🛡️ فحص الامتثال AWR (Audit)</span>
-                <span class="ds-u38" onclick="exportDigipoortXml()">⚡ تصدير Digipoort XML</span>
+                <span class="ds-u37" data-sr-call="runAiComplianceAudit">🛡️ فحص الامتثال AWR (Audit)</span>
+                <span class="ds-u38" data-sr-call="exportDigipoortXml">⚡ تصدير Digipoort XML</span>
                 <span>⚙️ إعدادات الأمان (AES-256)</span>
             </div>
 
@@ -3645,10 +3645,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
                         <span>📊</span> إقرار BTW والضرائب
                     </button>
-                    <button type="button" class="os-sidebar-btn" id="simSide-audit" onclick="runAiComplianceAudit()">
+                    <button type="button" class="os-sidebar-btn" id="simSide-audit" data-sr-call="runAiComplianceAudit">
                         <span>🤖</span> تدقيق الذكاء الاصطناعي
                     </button>
-                    <button type="button" class="os-sidebar-btn" id="simSide-xml" onclick="exportDigipoortXml()">
+                    <button type="button" class="os-sidebar-btn" id="simSide-xml" data-sr-call="exportDigipoortXml">
                         <span>📄</span> تصدير Digipoort XML
                     </button>
                     <div class="ds-u39">
@@ -3673,19 +3673,19 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simOmzet21">المبيعات بنسبة 21% BTW (Omzet Hoog):</label>
-                                <input type="number" id="simOmzet21" value="18500" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simOmzet21" value="18500" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simOmzet9">المبيعات بنسبة 9% BTW (Omzet Laag):</label>
-                                <input type="number" id="simOmzet9" value="4200" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simOmzet9" value="4200" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simVoorbelasting">ضريبة المدخلات القابلة للخصم (Voorbelasting):</label>
-                                <input type="number" id="simVoorbelasting" value="2150" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simVoorbelasting" value="2150" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                     </div>
@@ -3714,10 +3714,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
                     <!-- أزرار الإجراءات داخل المحاكي -->
                     <div class="d-flex gap-2 flex-wrap mb-3">
-                        <button type="button" class="table-action-btn ds-u49" onclick="runAiComplianceAudit()">
+                        <button type="button" class="table-action-btn ds-u49" data-sr-call="runAiComplianceAudit">
                             🛡️ فحص الامتثال المحاسبي AWR
                         </button>
-                        <button type="button" class="table-action-btn ds-u50" onclick="exportDigipoortXml()">
+                        <button type="button" class="table-action-btn ds-u50" data-sr-call="exportDigipoortXml">
                             📄 توليد ملف Digipoort XML
                         </button>
                         <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
@@ -3729,7 +3729,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div id="simConsoleBox" class="mb-3 ds-u52">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="text-caption text-white-64" id="simConsoleTitle">تقرير تدقيق الامتثال:</span>
-                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" onclick="downloadGeneratedTaxXml()">تنزيل ملف .xml</button>
+                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" data-sr-call="downloadGeneratedTaxXml">تنزيل ملف .xml</button>
                         </div>
                         <div class="xml-preview-box" id="simXmlContent"></div>
                     </div>
@@ -3787,7 +3787,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span class="text-caption text-white-64" id="chkAppLicenseType">ترخيص تجاري مؤسسي سنوي • Commercial B2B</span>
                     </div>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareCheckoutModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeSoftwareCheckoutModal">✕</button>
             </div>
 
             <!-- ملخص الفاتورة واحتساب ضريبة BTW 21% -->
@@ -3886,14 +3886,14 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="action-cta-btn ds-u62" id="chkBtnViewInvoice">
                         📄 معاينة الفاتورة الصادرة
                     </button>
-                    <button type="button" class="table-action-btn ds-u62" onclick="triggerSoftwareDownload()">
+                    <button type="button" class="table-action-btn ds-u62" data-sr-call="triggerSoftwareDownload">
                         📦 تنزيل حزمة التثبيت
                     </button>
                 </div>
             </div>
 
             <!-- زر الدفع الرئيسي -->
-            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" onclick="executeCheckoutPayment()">
+            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" data-sr-call="executeCheckoutPayment">
                 <span class="ds-u52" id="chkBtnSpinner">⏳</span>
                 <span id="chkBtnText">تأكيد الدفع الآمن وإصدار الفاتورة (€ 228.69)</span>
             </button>
@@ -3904,17 +3904,17 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         </div>
     </div>
     <!-- حاوية الجولة الإرشادية التفاعلية للزبائن (Spotlight Guided Tour) -->
-    <div id="tourBackdrop" class="tour-backdrop ds-u52" onclick="endGuidedTour()"></div>
+    <div id="tourBackdrop" class="tour-backdrop ds-u52" data-sr-call="endGuidedTour"></div>
     <div id="tourCard" class="tour-card ds-u52">
         <div class="tour-card-header">
             <span class="tour-step-badge" id="tourStepBadge">خطوة 1 من 5</span>
-            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="إغلاق الجولة">✕</button>
+            <button type="button" class="tour-close-btn" data-sr-call="endGuidedTour" title="إغلاق الجولة">✕</button>
         </div>
         <h4 id="tourStepTitle" class="tour-step-title">لوحة القيادة والتدفق المالي</h4>
         <p id="tourStepDesc" class="tour-step-desc">هنا يظهر الأداء المالي اللحظي للشركة مع مؤشرات الإيرادات ونسب النمو بدقة متناهية.</p>
         <div class="tour-card-footer">
-            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ السابق</button>
-            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">التالي ➡️</button>
+            <button type="button" class="btn-tour-nav" id="tourPrevBtn" data-sr-call="prevTourStep">⬅️ السابق</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" data-sr-call="nextTourStep">التالي ➡️</button>
         </div>
     </div>
 
@@ -3930,10 +3930,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
                 <div class="ds-u69">
-                    <button class="ds-u70" type="button" onclick="printExecutiveBrief()">
+                    <button class="ds-u70" type="button" data-sr-call="printExecutiveBrief">
                         🖨️ طباعة / حفظ كـ PDF
                     </button>
-                    <button class="ds-u71" type="button" onclick="closeExecutivePdfModal()">
+                    <button class="ds-u71" type="button" data-sr-call="closeExecutivePdfModal">
                         إغلاق ✕
                     </button>
                 </div>
@@ -4234,7 +4234,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </a>
                 </div>
                 <div class="hotline-booking-action mt-3 text-center">
-                    <button type="button" class="btn-cert-print btn-booking-full" onclick="openStrategicBookingModal()">
+                    <button type="button" class="btn-cert-print btn-booking-full" data-sr-call="openStrategicBookingModal">
                         📅 حجز جلسة استراتيجية (30 دقيقة)
                     </button>
                 </div>
@@ -4250,7 +4250,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     <div class="modal-overlay" id="roiCertModal" onclick="if(event.target === this) closeRoiCertModal()" dir="rtl">
         <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
             <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeRoiCertModal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
             </div>
             <div class="roi-cert-header">
                 <img src="./assets/sr-core-emblem.svg" class="roi-cert-emblem" alt="S&R CoreSync Official Emblem" onerror="this.src='./assets/sr-core-emblem-official.png'">
@@ -4300,7 +4300,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <button type="button" class="btn-cert-print" onclick="window.print()">
                     🖨️ طباعة / حفظ كملف PDF
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeRoiCertModal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
                     إغلاق
                 </button>
             </div>
@@ -4312,7 +4312,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="section-title mb-0" id="bookingModalTitle">📅 حجز جلسة استشارية استراتيجية مع المؤسسين</h3>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeStrategicBookingModal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeStrategicBookingModal" aria-label="Close">✕</button>
             </div>
             <p class="section-desc mb-3">استشارة تنفيذية سرية لمدة 30 دقيقة مع إدارة S&R CoreSync حول معمارية السحابة وخارطة طريق الذكاء الاصطناعي.</p>
 
@@ -4351,10 +4351,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="d-flex justify-content-center gap-3">
-                <button type="button" class="btn-cert-print" onclick="confirmBookingAndOpenWa()">
+                <button type="button" class="btn-cert-print" data-sr-call="confirmBookingAndOpenWa">
                     🚀 تأكيد وفتح الجلسة عبر واتساب
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeStrategicBookingModal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeStrategicBookingModal">
                     إلغاء
                 </button>
             </div>
@@ -4377,7 +4377,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <h4 class="mb-0 fw-bold text-white" id="contractModalHeaderTitle">عرض سعر تجاري رسمي — منصة NL بالعربي</h4>
                     </div>
                 </div>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeContractOf2026Modal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeContractOf2026Modal" aria-label="Close">✕</button>
             </div>
 
             <div class="contract-header-banner">
@@ -4511,7 +4511,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div id="clientUnsignedBox">
                         <div class="contract-c-org">عن العميل والجهة المالكة: NL بالعربي</div>
                         <div class="contract-c-desc">السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)</div>
-                        <button type="button" class="btn-sign-contract" onclick="signContractDigitally()">
+                        <button type="button" class="btn-sign-contract" data-sr-call="signContractDigitally">
                             ✍️ اعتماد وتوقيع العقد رقمياً (Digitale Handtekening)
                         </button>
                     </div>
@@ -4526,27 +4526,27 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- أزرار الإجراءات والمشاركة المباشرة مع السيد مضر -->
             <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-2">
-                <button type="button" class="btn-share-wa" onclick="shareContractViaWhatsApp()">
+                <button type="button" class="btn-share-wa" data-sr-call="shareContractViaWhatsApp">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
                     <span>إرسال العقد عبر WhatsApp</span>
                 </button>
-                <button type="button" class="btn-share-email" onclick="shareContractViaEmail()">
+                <button type="button" class="btn-share-email" data-sr-call="shareContractViaEmail">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <span>إرسال العقد عبر البريد (Email)</span>
                 </button>
-                <button type="button" class="btn-share-word" onclick="exportTechnicalContractWord()">
+                <button type="button" class="btn-share-word" data-sr-call="exportTechnicalContractWord">
                     <span>📄 تصدير Word (.doc)</span>
                 </button>
-                <button type="button" class="btn-share-excel" onclick="exportTechnicalContractExcel()">
+                <button type="button" class="btn-share-excel" data-sr-call="exportTechnicalContractExcel">
                     <span>📊 تصدير Excel (.xls)</span>
                 </button>
                 <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">
                     💳 سداد الدفعة الأولى (30%) عبر iDEAL
                 </button>
-                <button type="button" class="btn-cert-print" onclick="printOfficialContractPdf()">
+                <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractPdf">
                     🖨️ طباعة / حفظ كـ PDF رسمي
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeContractOf2026Modal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeContractOf2026Modal">
                     إغلاق
                 </button>
             </div>
@@ -4571,7 +4571,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <h4 class="mb-0 fw-bold text-white" id="contractFinModalHeaderTitle">العقد المالي والضريبي الرسمي — منصة NL بالعربي</h4>
                     </div>
                 </div>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeContractOf2026FinModal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeContractOf2026FinModal" aria-label="Close">✕</button>
             </div>
 
             <div class="contract-header-banner">
@@ -4715,7 +4715,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div id="clientFinUnsignedBox">
                         <div class="contract-c-org">عن العميل والجهة المالكة: NL بالعربي</div>
                         <div class="contract-c-desc">السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)</div>
-                        <button type="button" class="btn-sign-contract" onclick="signContractFinDigitally()">
+                        <button type="button" class="btn-sign-contract" data-sr-call="signContractFinDigitally">
                             ✍️ اعتماد وتوقيع العقد المالي رقمياً (Digitale Handtekening)
                         </button>
                     </div>
@@ -4730,27 +4730,27 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- أزرار الإجراءات والمشاركة المباشرة -->
             <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-2">
-                <button type="button" class="btn-share-wa" onclick="shareContractFinViaWhatsApp()">
+                <button type="button" class="btn-share-wa" data-sr-call="shareContractFinViaWhatsApp">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
                     <span>إرسال العقد المالي عبر WhatsApp</span>
                 </button>
-                <button type="button" class="btn-share-email" onclick="shareContractFinViaEmail()">
+                <button type="button" class="btn-share-email" data-sr-call="shareContractFinViaEmail">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <span>إرسال العقد المالي عبر البريد (Email)</span>
                 </button>
-                <button type="button" class="btn-share-word" onclick="exportFinancialContractWord()">
+                <button type="button" class="btn-share-word" data-sr-call="exportFinancialContractWord">
                     <span>📄 تصدير Word (.doc)</span>
                 </button>
-                <button type="button" class="btn-share-excel" onclick="exportFinancialContractExcel()">
+                <button type="button" class="btn-share-excel" data-sr-call="exportFinancialContractExcel">
                     <span>📊 تصدير Excel (.xls)</span>
                 </button>
                 <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">
                     💳 سداد الحزمة السنوية (€ 4,719) عبر iDEAL
                 </button>
-                <button type="button" class="btn-cert-print" onclick="printOfficialContractFinPdf()">
+                <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractFinPdf">
                     🖨️ طباعة / حفظ كـ PDF رسمي
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeContractOf2026FinModal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeContractOf2026FinModal">
                     إغلاق
                 </button>
             </div>
@@ -5383,5 +5383,6 @@ function calcCloudSizing() {
 </script>
 <script src="./js/sr-software-apps.js"></script>
 
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

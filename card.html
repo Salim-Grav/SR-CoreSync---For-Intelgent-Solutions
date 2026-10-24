@@ -879,11 +879,11 @@
 
                 <!-- أزرار الدعم المتقدمة: برمجة NFC ووضع عدم الاتصال -->
                 <div class="nfc-secondary-actions">
-                    <button type="button" class="nfc-sub-btn" onclick="openNfcProgramModal()">
+                    <button type="button" class="nfc-sub-btn" data-sr-call="openNfcProgramModal">
                         <span>⚡</span>
                         <span id="btnNfcProgramTxt">برمجة NFC في 3 ثوانٍ</span>
                     </button>
-                    <button type="button" class="nfc-sub-btn" onclick="openOfflineModal()">
+                    <button type="button" class="nfc-sub-btn" data-sr-call="openOfflineModal">
                         <span>💾</span>
                         <span id="btnOfflineStatusTxt">وضع عدم الاتصال (Offline)</span>
                     </button>
@@ -911,7 +911,7 @@
 
                 <!-- صندوق الـ QR للمسح السريع المتبادل -->
                 <div class="nfc-qr-box">
-                    <img id="cardQrThumb" src="./assets/qr-founder-salim.png" alt="QR Code" class="nfc-qr-thumb" onclick="openQrLightbox()">
+                    <img id="cardQrThumb" src="./assets/qr-founder-salim.png" alt="QR Code" class="nfc-qr-thumb" data-sr-call="openQrLightbox">
                     <div>
                         <div class="nfc-qr-info-title" id="txtQrTitle">رمز الـ QR الذكي للاتصال</div>
                         <div class="nfc-qr-info-sub" id="txtQrSub">انقر للتكبير أو حمّل الرمز للمطبوعات</div>
@@ -932,9 +932,9 @@
     </div>
 
     <!-- نافذة معاينة وتكبير رمز QR الذكي -->
-    <div id="qrLightbox" class="nfc-qr-lightbox" onclick="closeQrLightbox()">
+    <div id="qrLightbox" class="nfc-qr-lightbox" data-sr-call="closeQrLightbox">
         <div class="nfc-qr-lightbox-box" onclick="event.stopPropagation()">
-            <button type="button" class="nfc-qr-lightbox-close" onclick="closeQrLightbox()">&times;</button>
+            <button type="button" class="nfc-qr-lightbox-close" data-sr-call="closeQrLightbox">&times;</button>
             <img id="qrLightboxImg" src="./assets/qr-founder-salim.png" alt="QR Code" class="nfc-qr-lightbox-img">
             <a id="qrLightboxDl" href="./assets/qr-founder-salim.png" download="QR-Code.png" class="nfc-save-btn">
                 <span>📥 حفظ الرمز بالهاتف</span>
@@ -943,14 +943,14 @@
     </div>
 
     <!-- نافذة مودال: برمجة بطاقة NFC في 3 ثوانٍ -->
-    <div id="nfcProgramModal" class="nfc-modal" onclick="closeNfcProgramModal()">
+    <div id="nfcProgramModal" class="nfc-modal" data-sr-call="closeNfcProgramModal">
         <div class="nfc-modal-box" onclick="event.stopPropagation()">
             <div class="nfc-modal-header">
                 <div class="nfc-modal-title">
                     <span>⚡</span>
                     <span id="txtNfcModalTitle">برمجة بطاقات NFC عبر الهاتف (3 ثوانٍ)</span>
                 </div>
-                <button type="button" class="nfc-modal-close-btn" onclick="closeNfcProgramModal()">&times;</button>
+                <button type="button" class="nfc-modal-close-btn" data-sr-call="closeNfcProgramModal">&times;</button>
             </div>
             <p class="nfc-modal-sub" id="txtNfcModalSub">
                 يمكنك كتابة رابط الهوية الرقمية على أي بطاقة NFC خام (NTAG213 / 215 / 216) باستخدام هاتفك الذكي وتطبيق <strong>NFC Tools</strong> خلال 3 ثوانٍ فقط:
@@ -963,7 +963,7 @@
             </div>
             <div class="nfc-url-copy-box">
                 <input type="text" id="nfcProgramUrlInput" class="nfc-url-input" readonly value="https://sr-coresync.com/card.html?id=salim">
-                <button type="button" class="nfc-url-copy-btn" onclick="copyNfcUrl()">
+                <button type="button" class="nfc-url-copy-btn" data-sr-call="copyNfcUrl">
                     <span id="btnCopyUrlTxt">📋 نسخ الرابط</span>
                 </button>
             </div>
@@ -990,7 +990,7 @@
             </div>
 
             <!-- زر الكتابة المباشرة من المتصفح Web NFC للأجهزة المدعومة -->
-            <button type="button" class="nfc-webnfc-btn" onclick="writeWebNFC()">
+            <button type="button" class="nfc-webnfc-btn" data-sr-call="writeWebNFC">
                 <span>📲</span>
                 <span id="btnWebNfcTxt">كتابة مباشرة على البطاقة عبر المتصفح (Web NFC)</span>
             </button>
@@ -998,14 +998,14 @@
     </div>
 
     <!-- نافذة مودال: وضع عدم الاتصال الحقيقي (Offline Mode) -->
-    <div id="offlineModal" class="nfc-modal" onclick="closeOfflineModal()">
+    <div id="offlineModal" class="nfc-modal" data-sr-call="closeOfflineModal">
         <div class="nfc-modal-box" onclick="event.stopPropagation()">
             <div class="nfc-modal-header">
                 <div class="nfc-modal-title">
                     <span>💾</span>
                     <span id="txtOfflineModalTitle">جاهزية العمل دون إنترنت <bdi dir="ltr">(Offline Mode)</bdi></span>
                 </div>
-                <button type="button" class="nfc-modal-close-btn" onclick="closeOfflineModal()">&times;</button>
+                <button type="button" class="nfc-modal-close-btn" data-sr-call="closeOfflineModal">&times;</button>
             </div>
             <p class="nfc-modal-sub" id="txtOfflineModalSub">
                 تم تزويد بطاقة الهوية الرقمية ببروتوكول PWA متقدم مع Service Worker نشط وتوليد لحظي للبيانات، مما يضمن:
@@ -1387,5 +1387,6 @@
             renderProfile();
         });
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

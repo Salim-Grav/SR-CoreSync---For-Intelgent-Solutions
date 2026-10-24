@@ -560,7 +560,7 @@
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                                 <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
                             </button>
-                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" onclick="openPublishSoftwareModal()">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" data-sr-call="openPublishSoftwareModal">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                 <span>🚀 نشر وتوزيع برنامج جديد (Publish)</span>
                             </button>
@@ -1080,7 +1080,7 @@
                                 <span>🚀 مختبر وبوابة نشر وترخيص البرمجيات التجارية الحصرية</span>
                             </div>
                             <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                <button type="button" class="btn-open-license-manager" onclick="openSalimLicenseManagerModal()" title="إدارة وتوليد تراخيص البرمجيات للمؤسس م. سليم">
+                                <button type="button" class="btn-open-license-manager" data-sr-call="openSalimLicenseManagerModal" title="إدارة وتوليد تراخيص البرمجيات للمؤسس م. سليم">
                                     <span>🔑 لوحة تحكم التراخيص للمؤسس (Salim's Console)</span>
                                 </button>
                             </div>
@@ -1138,7 +1138,7 @@
     <!-- نافذة تحميل وتثبيت البرمجيات الحقيقية مع التراخيص الرقمية -->
     <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
         <div class="software-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareDownloadModal()" aria-label="إغلاق النافذة">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareDownloadModal" aria-label="إغلاق النافذة">&times;</button>
             
             <div class="sw-dl-header-row">
                 <span id="swDlIcon" class="sw-dl-header-icon">💻</span>
@@ -1172,9 +1172,9 @@
                 </div>
                 <div class="sw-key-box">
                     <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
-                    <button type="button" class="sw-btn-copy-key" onclick="copySoftwareLicenseKey()">نسخ المفتاح 📋</button>
-                    <button type="button" class="sw-btn-copy-key sw-btn-gen-dynamic" onclick="generateDynamicKeyForCurrentSoftware()" title="توليد مفتاح ترخيص فريد جديد لجهازك">توليد مفتاح جديد مشفر ⚡</button>
-                    <button type="button" class="sw-btn-copy-key sw-btn-dl-cert" onclick="downloadLicenseCertificate()" title="تحميل شهادة الترخيص الرسمية كملف .key">تحميل الشهادة (.key) 📄</button>
+                    <button type="button" class="sw-btn-copy-key" data-sr-call="copySoftwareLicenseKey">نسخ المفتاح 📋</button>
+                    <button type="button" class="sw-btn-copy-key sw-btn-gen-dynamic" data-sr-call="generateDynamicKeyForCurrentSoftware" title="توليد مفتاح ترخيص فريد جديد لجهازك">توليد مفتاح جديد مشفر ⚡</button>
+                    <button type="button" class="sw-btn-copy-key sw-btn-dl-cert" data-sr-call="downloadLicenseCertificate" title="تحميل شهادة الترخيص الرسمية كملف .key">تحميل الشهادة (.key) 📄</button>
                 </div>
             </div>
 
@@ -1219,7 +1219,7 @@
     <!-- Suggestion 1: لوحة تحكم وإدارة وتوليد التراخيص الرقمية للمؤسس م. سليم عزيزة -->
     <div id="salimLicenseManagerModal" class="software-modal-overlay" onclick="if(event.target===this)closeSalimLicenseManagerModal()">
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSalimLicenseManagerModal()" aria-label="إغلاق النافذة">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSalimLicenseManagerModal" aria-label="إغلاق النافذة">&times;</button>
 
             <div class="salim-lm-header-bar">
                 <div class="salim-lm-header-title-wrap">
@@ -1334,7 +1334,7 @@
     <!-- Suggestion 3: بوابة الدفع والترخيص الفوري (Mollie & Stripe Checkout) -->
     <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareCheckoutModal()" aria-label="إغلاق النافذة">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareCheckoutModal" aria-label="إغلاق النافذة">&times;</button>
 
             <div id="checkoutFormView">
                 <div class="checkout-header-row">
@@ -1478,7 +1478,7 @@
     <!-- نافذة الاستشارات التنفيذية الذكية (توجيه مباشر: رائد للمحاسبة / سليم للأنظمة / بريد info) -->
     <div id="executiveContactModal" class="software-modal-overlay" onclick="if(event.target===this)closeExecutiveContactModal()">
         <div class="software-modal-container exec-contact-modal-container" role="dialog" aria-modal="true" aria-labelledby="execContactModalTitle">
-            <button type="button" class="sw-modal-close-btn" onclick="closeExecutiveContactModal()" aria-label="إغلاق النافذة">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeExecutiveContactModal" aria-label="إغلاق النافذة">&times;</button>
 
             <div class="d-flex align-items-center gap-3 mb-2">
                 <span class="exec-modal-main-icon" id="execModalMainIcon">🏛️</span>
@@ -1534,13 +1534,13 @@
             <!-- أزرار الإجراءات الرئيسية المباشرة -->
             <div class="exec-contact-actions">
                 <!-- زر الواتساب الديناميكي الموجه تلقائياً -->
-                <button type="button" id="execDynamicWhatsappBtn" class="exec-btn-action exec-btn-whatsapp-raed" onclick="dispatchExecutiveWhatsapp()">
+                <button type="button" id="execDynamicWhatsappBtn" class="exec-btn-action exec-btn-whatsapp-raed" data-sr-call="dispatchExecutiveWhatsapp">
                     <span id="execWhatsappBtnIcon">💬</span>
                     <span id="execWhatsappBtnText">التحدث فوراً عبر واتساب أ. رائد كعكة الشخصي (+31 6 8771 0290)</span>
                 </button>
 
                 <!-- زر الإيميل المباشر إلى info@sr-coresync.com -->
-                <button type="button" class="exec-btn-action exec-btn-email" onclick="dispatchExecutiveEmail()">
+                <button type="button" class="exec-btn-action exec-btn-email" data-sr-call="dispatchExecutiveEmail">
                     <span>📧</span>
                     <span>إرسال بريد إلكتروني فوري ومباشر إلى إدارة الشركة (info@sr-coresync.com)</span>
                 </button>
@@ -1721,6 +1721,7 @@
     <script src="./js/sr-quick-dock.js" defer></script>
     <!-- S&R CoreSync Sovereign Geo-Language Detection Banner -->
     <script src="./js/sr-geo-lang.js" defer></script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>
 

@@ -97,19 +97,19 @@
                 <span>Cloud Node Online (EU Centraal)</span>
             </div>
             
-            <button type="button" class="btn-tour-start" id="btnStartTour" onclick="startGuidedTour()" title="Start interactieve stapsgewijze rondleiding langs de ERP-architectuur">
+            <button type="button" class="btn-tour-start" id="btnStartTour" data-sr-call="startGuidedTour" title="Start interactieve stapsgewijze rondleiding langs de ERP-architectuur">
                 <span>🚀 Start Rondleiding</span>
             </button>
             
-            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" onclick="openExecutivePdfModal()" title="Exporteer zakelijk voorsteloverzicht naar een elegante PDF">
+            <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" data-sr-call="openExecutivePdfModal" title="Exporteer zakelijk voorsteloverzicht naar een elegante PDF">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                 <span>Offerte Overzicht (PDF)</span>
             </button>
-            <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" onclick="togglePresentationMode()" title="Klantpresentatiemodus (Volledig scherm en executive ervaring)">
+            <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" data-sr-call="togglePresentationMode" title="Klantpresentatiemodus (Volledig scherm en executive ervaring)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
                 <span>Klantpresentatie [P]</span>
             </button>
-            <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()" title="Draag sessie-instellingen over en plan oprichtersconsult">
+            <button type="button" class="btn-sync-consultation" data-sr-call="syncDemoToConsultation" title="Draag sessie-instellingen over en plan oprichtersconsult">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
                 <span>Plan Consult met dit Systeem</span>
             </button>
@@ -491,7 +491,7 @@
                 <div class="sync-box-tag">Zakelijk Consult</div>
                 <div class="sync-box-title">Vraag Bedrijfsactivatie Aan</div>
                 <p class="sync-box-desc">Draag sessie-inzichten en geteste scenario's direct over naar het oprichtersconsult.</p>
-                <button type="button" class="sync-box-btn" onclick="syncDemoToConsultation()">
+                <button type="button" class="sync-box-btn" data-sr-call="syncDemoToConsultation">
                     <span>Plan Maatwerk Consult</span>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
@@ -556,14 +556,14 @@
                 </div>
                 <div class="vip-banner-actions">
                     <input type="text" id="quickClientNameInput" class="vip-input" placeholder="Voer uw bedrijfsnaam in..." oninput="updatePdfClientName(this.value)" />
-                    <button type="button" class="vip-btn-gold" onclick="openExecutivePdfModal()">
+                    <button type="button" class="vip-btn-gold" data-sr-call="openExecutivePdfModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
                         <span>Exporteer Zakelijke PDF Brief</span>
                     </button>
                 </div>
             </div>
 
-                    <button class="action-cta-btn" onclick="openNewTxModal()">
+                    <button class="action-cta-btn" data-sr-call="openNewTxModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         Registreer Testtransactie
                     </button>
@@ -742,7 +742,7 @@
                         <p>Volledig conform Europese e-facturatiestandaarden (UBL / PEPPOL BIS 3.0), Nederlandse Belastingdienst (AWR) en GCC ZATCA Fase 2</p>
                     </div>
                     <div class="d-flex gap-2 flex-wrap">
-                        <button type="button" class="action-cta-btn" onclick="openInvoiceGeneratorModal()">
+                        <button type="button" class="action-cta-btn" data-sr-call="openInvoiceGeneratorModal">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                             Voorbeeldfactuur Genereren
                         </button>
@@ -883,7 +883,7 @@
 
                     <div class="ai-chat-input-bar">
                         <input type="text" id="aiInput" class="ai-chat-input" placeholder="Typ hier uw financiële of operationele vraag..." onkeypress="if(event.key === 'Enter') sendAiMessage()">
-                        <button class="ai-send-btn" onclick="sendAiMessage()">Versturen</button>
+                        <button class="ai-send-btn" data-sr-call="sendAiMessage">Versturen</button>
                     </div>
                 </div>
             </section>
@@ -961,7 +961,7 @@
                         <div class="u-text-mint-light" id="auditStatusText">
                             🟢 <strong>Auditstatus: 100% Geverifieerd</strong> — Geen nalevingskwetsbaarheden gedetecteerd op het netwerk.
                         </div>
-                        <button type="button" class="btn-run-audit" id="btnRunAudit" onclick="runComplianceAuditScanner()">
+                        <button type="button" class="btn-run-audit" id="btnRunAudit" data-sr-call="runComplianceAuditScanner">
                             🛡️ Start Nalevingsscan
                         </button>
                     </div>
@@ -989,7 +989,7 @@
                         <span class="u-text-mint-light">2. Databasevolume (GB)</span>
                         <span class="roi-val-display font-num" id="dispMigVolume">250 GB</span>
                     </div>
-                    <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" oninput="calcMigrationEstimator()" />
+                    <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" data-sr-call="calcMigrationEstimator" data-sr-on="input" />
 
                     <div class="migration-metrics-grid">
                         <div class="migration-metric-box">
@@ -1007,7 +1007,7 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <button type="button" class="btn-cert-print" onclick="openStrategicBookingModal()">
+                        <button type="button" class="btn-cert-print" data-sr-call="openStrategicBookingModal">
                             📑 Vraag Aangepast Migratieplan Aan (Blueprint)
                         </button>
                     </div>
@@ -1024,7 +1024,7 @@
                             <span class="ds-u1" id="storageBadge">● Opgeslagen in browser</span>
                         </div>
                     </div>
-                    <button type="button" class="btn-return-main" onclick="resetBrandIdentity()">
+                    <button type="button" class="btn-return-main" data-sr-call="resetBrandIdentity">
                         Standaard S&R Huisstijl Herstellen
                     </button>
                 </div>
@@ -1091,11 +1091,11 @@
                             <button type="button" class="filter-btn" onclick="applySampleClientBrand('Moderne Tech Bank BV', '🏦')">Tech Bank 🏦</button>
                         </div>
 
-                        <button type="button" class="action-cta-btn w-100 mb-2" onclick="applyClientBrand()">
+                        <button type="button" class="action-cta-btn w-100 mb-2" data-sr-call="applyClientBrand">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"></path></svg>
                             Huisstijl Direct Toepassen op Portaal
                         </button>
-                        <button type="button" class="btn-secondary-glow w-100" onclick="openBrandedInvoicePreview()">
+                        <button type="button" class="btn-secondary-glow w-100" data-sr-call="openBrandedInvoicePreview">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             Officiële Factuur met Uw Bedrijfsidentiteit Bekijken
                         </button>
@@ -1107,7 +1107,7 @@
                     <p class="text-white-64 mb-3">
                         S&R CoreSync Solutions levert kant-en-klare white-label implementaties op uw eigen domein (bijv. portaal.uwbedrijf.nl) met dedicated soevereine databases en volledige merkisolatie.
                     </p>
-                    <button type="button" class="btn-sync-consultation" onclick="syncDemoToConsultation()">
+                    <button type="button" class="btn-sync-consultation" data-sr-call="syncDemoToConsultation">
                         Offerte voor White-Label Aanvragen
                     </button>
                 </div>
@@ -1121,7 +1121,7 @@
                         <p>Desktop software, mobiele scan-apps en developer SDKs met directe versleutelde licenties</p>
                     </div>
                     <div class="d-flex gap-2">
-                        <button type="button" class="action-cta-btn" onclick="openPublishSoftwareModal()">
+                        <button type="button" class="action-cta-btn" data-sr-call="openPublishSoftwareModal">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                             Nieuwe Software Publiceren
                         </button>
@@ -1178,7 +1178,7 @@
                             <div class="quick-tax-calc-box ds-u2">
                                 <div class="ds-u3">
                                     <span class="ds-u4">⚡ Snelle BTW Calculator:</span>
-                                    <select class="ds-u5" id="quickTaxRate" onchange="calcQuickTax()" title="Selecteer BTW-tarief voor snelle berekening" aria-label="Selecteer BTW-tarief voor snelle berekening">
+                                    <select class="ds-u5" id="quickTaxRate" data-sr-call="calcQuickTax" data-sr-on="change" title="Selecteer BTW-tarief voor snelle berekening" aria-label="Selecteer BTW-tarief voor snelle berekening">
                                         <option value="0.21">Nederlandse BTW 21%</option>
                                         <option value="0.09">Verlaagde BTW 9%</option>
                                         <option value="0.15">GCC Btw 15%</option>
@@ -1186,7 +1186,7 @@
                                 </div>
                                 <div class="ds-u6">
                                     <span class="ds-u7">Bedrag (€):</span>
-                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" oninput="calcQuickTax()" placeholder="Bedrag" />
+                                    <input class="ds-u8" type="number" id="quickTaxAmount" value="1000" data-sr-call="calcQuickTax" data-sr-on="input" placeholder="Bedrag" />
                                 </div>
                                 <div class="ds-u9">
                                     <span>BTW: <strong class="ds-u10" id="quickTaxVat">€ 210.00</strong></span>
@@ -1201,8 +1201,8 @@
                                     <div class="ds-u15" id="quickTrialKeyDisplay">SRTX-2026-TRIAL-8849</div>
                                 </div>
                                 <div class="ds-u16">
-                                    <button class="ds-u17" type="button" onclick="generateNewQuickKey()" title="Nieuwe Sleutel Genereren">🔄</button>
-                                    <button class="ds-u18" type="button" onclick="copyQuickTrialKey()" title="Sleutel Kopiëren">📋 Kopiëren</button>
+                                    <button class="ds-u17" type="button" data-sr-call="generateNewQuickKey" title="Nieuwe Sleutel Genereren">🔄</button>
+                                    <button class="ds-u18" type="button" data-sr-call="copyQuickTrialKey" title="Sleutel Kopiëren">📋 Kopiëren</button>
                                 </div>
                             </div>
                         </div>
@@ -1401,7 +1401,7 @@
                                 S&R CoreSync Solutions biedt een complete distributie-infrastructuur met versleutelde licenties, Europese en GCC betaalkoppelingen en geautomatiseerde facturatie.
                             </p>
                         </div>
-                        <button type="button" class="btn-sync-consultation" onclick="openPublishSoftwareModal()">
+                        <button type="button" class="btn-sync-consultation" data-sr-call="openPublishSoftwareModal">
                             Zakelijke Software Nu Publiceren
                         </button>
                     </div>
@@ -1425,7 +1425,7 @@
                             <span>👥 Teamgrootte / Medewerkers</span>
                             <span class="roi-val-display font-num" id="dispRoiTeam">20 medewerkers</span>
                         </div>
-                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" title="Team Size / Employees" aria-label="Team Size / Employees" oninput="calcPortalRoi()" />
+                        <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" title="Team Size / Employees" aria-label="Team Size / Employees" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
@@ -1433,7 +1433,7 @@
                             <span>⏱️ Handmatige Taken / Uren per Week</span>
                             <span class="roi-val-display font-num" id="dispRoiHours">18 uur/wk</span>
                         </div>
-                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" title="Manual Hours per Week" aria-label="Manual Hours per Week" oninput="calcPortalRoi()" />
+                        <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" title="Manual Hours per Week" aria-label="Manual Hours per Week" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
@@ -1441,7 +1441,7 @@
                             <span>💶 Gemiddeld Uurtarief (€)</span>
                             <span class="roi-val-display font-num" id="dispRoiCost">€ 45 / uur</span>
                         </div>
-                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" title="Average Hourly Cost" aria-label="Average Hourly Cost" oninput="calcPortalRoi()" />
+                        <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" title="Average Hourly Cost" aria-label="Average Hourly Cost" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -1461,10 +1461,10 @@
                 </div>
 
                                 <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mt-4">
-                    <button type="button" class="btn-sync-consultation" onclick="openStrategicBookingModal()">
+                    <button type="button" class="btn-sync-consultation" data-sr-call="openStrategicBookingModal">
                         <span>📅 Plan Strategische Sessie met Oprichters</span>
                     </button>
-                    <button type="button" class="btn-cert-print" onclick="openRoiCertModal()">
+                    <button type="button" class="btn-cert-print" data-sr-call="openRoiCertModal">
                         <span>📄 Download Uitvoerend ROI Certificaat (PDF)</span>
                     </button>
                 </div>
@@ -1501,8 +1501,8 @@
                 🖥️ Interactieve Desktop Sandbox in Browser Starten
             </button>
             <div class="modal-form-actions">
-                    <button type="button" class="btn-return-main" onclick="closeNewTxModal()">Annuleren</button>
-                    <button type="button" class="action-cta-btn" onclick="saveNewTx()">Opslaan & Direct Synchroniseren</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closeNewTxModal">Annuleren</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="saveNewTx">Opslaan & Direct Synchroniseren</button>
                 </div>
             </div>
         </div>
@@ -1532,8 +1532,8 @@
                     </select>
                 </div>
                 <div class="modal-form-actions">
-                    <button type="button" class="btn-return-main" onclick="closeInvoiceGeneratorModal()">Annuleren</button>
-                    <button type="button" class="action-cta-btn" onclick="generateNewInvoice()">Factuur Uitgeven & QR Genereren</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closeInvoiceGeneratorModal">Annuleren</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="generateNewInvoice">Factuur Uitgeven & QR Genereren</button>
                 </div>
             </div>
         </div>
@@ -1589,8 +1589,8 @@
             <div class="text-caption text-center text-white-64" id="idealStatusText">Gereed voor directe overboeking via SEPA Instant</div>
 
             <div class="modal-form-actions mt-3">
-                <button type="button" class="btn-return-main" onclick="closeIdealSimulatorModal()">Sluiten</button>
-                <button type="button" class="action-cta-btn" id="btnConfirmIdeal" onclick="executeIdealPayment()">Bevestig Directe Testbetaling</button>
+                <button type="button" class="btn-return-main" data-sr-call="closeIdealSimulatorModal">Sluiten</button>
+                <button type="button" class="action-cta-btn" id="btnConfirmIdeal" data-sr-call="executeIdealPayment">Bevestig Directe Testbetaling</button>
             </div>
         </div>
     </div>
@@ -1604,7 +1604,7 @@
                     <h3 class="fw-bold mb-0 text-white invoice-preview-title">Officiële E-Factuur (e-Factuur)</h3>
                     <span class="ds-u28" id="invWhiteLabelBadge">White-Label Branded</span>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeInvoicePreviewModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeInvoicePreviewModal">✕</button>
             </div>
 
             <div class="inv-paper" id="printableInvoice">
@@ -1692,7 +1692,7 @@
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         Factuur Afdrukken
                     </button>
-                    <button type="button" class="action-cta-btn" onclick="closeInvoicePreviewModal()">Gelezen & Begrepen</button>
+                    <button type="button" class="action-cta-btn" data-sr-call="closeInvoicePreviewModal">Gelezen & Begrepen</button>
                 </div>
             </div>
         </div>
@@ -3143,7 +3143,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span class="text-caption text-white-64" id="modalSwVersion">v2.4 Pro • Verified Build</span>
                     </div>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeSoftwareModal">✕</button>
             </div>
 
             <p class="text-caption text-white-64 mb-3" id="modalSwDesc">
@@ -3157,7 +3157,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
                 <div class="license-key-display">
                     <span id="modalSwKey">SR-TAX-2026-X89B-492A-TRIAL</span>
-                    <button type="button" class="table-action-btn" onclick="copySoftwareLicenseKey()">Sleutel Kopiëren</button>
+                    <button type="button" class="table-action-btn" data-sr-call="copySoftwareLicenseKey">Sleutel Kopiëren</button>
                 </div>
                 <div class="d-flex justify-content-between text-caption text-white-64">
                     <span>Compatibiliteit: Windows 11/10 (64-bit), macOS 13+</span>
@@ -3166,12 +3166,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="modal-form-actions">
-                <button type="button" class="btn-return-main" onclick="closeSoftwareModal()">Sluiten</button>
-                <button type="button" class="btn-secondary-glow" id="modalBtnDownload" onclick="triggerSoftwareDownload()">
+                <button type="button" class="btn-return-main" data-sr-call="closeSoftwareModal">Sluiten</button>
+                <button type="button" class="btn-secondary-glow" id="modalBtnDownload" data-sr-call="triggerSoftwareDownload">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Geverifieerde Installer Downloaden (.zip)
                 </button>
-                <button type="button" class="action-cta-btn" id="modalBtnBuy" onclick="triggerSoftwareCheckout()">
+                <button type="button" class="action-cta-btn" id="modalBtnBuy" data-sr-call="triggerSoftwareCheckout">
                     Licentie Aanschaffen & Factuur Ontvangen
                 </button>
             </div>
@@ -3216,7 +3216,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
 
                 <div class="modal-form-actions mt-3">
-                    <button type="button" class="btn-return-main" onclick="closePublishSoftwareModal()">Annuleren</button>
+                    <button type="button" class="btn-return-main" data-sr-call="closePublishSoftwareModal">Annuleren</button>
                     <button type="submit" class="action-cta-btn">
                         Publiceer Software in Store 🚀
                     </button>
@@ -3232,7 +3232,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             
             <div class="os-window-header">
                 <div class="os-window-controls">
-                    <span class="os-dot red ds-u35" onclick="closeDesktopSimulatorModal()" title="Sluiten"></span>
+                    <span class="os-dot red ds-u35" data-sr-call="closeDesktopSimulatorModal" title="Sluiten"></span>
                     <span class="os-dot yellow" title="Minimaliseren"></span>
                     <span class="os-dot green" title="Maximaliseren"></span>
                 </div>
@@ -3241,7 +3241,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <span id="simAppTitle">S&R TaxSync Desktop v2.4 Pro</span>
                     <span class="status-badge status-completed ds-u36">SANDBOX RUNNING</span>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeDesktopSimulatorModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeDesktopSimulatorModal">✕</button>
             </div>
 
             
@@ -3258,8 +3258,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="os-app-ribbon">
                 <span>📁 Bestand</span>
                 <span>📊 Omzet & BTW</span>
-                <span class="ds-u37" onclick="runAiComplianceAudit()">🛡️ AWR Boekhoudcontrole</span>
-                <span class="ds-u38" onclick="exportDigipoortXml()">⚡ Digipoort XML Exporteren</span>
+                <span class="ds-u37" data-sr-call="runAiComplianceAudit">🛡️ AWR Boekhoudcontrole</span>
+                <span class="ds-u38" data-sr-call="exportDigipoortXml">⚡ Digipoort XML Exporteren</span>
                 <span>⚙️ Beveiligingsinstellingen (AES-256)</span>
             </div>
 
@@ -3270,10 +3270,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
                         <span>📊</span> BTW-Aangifte & Belastingen
                     </button>
-                    <button type="button" class="os-sidebar-btn" id="simSide-audit" onclick="runAiComplianceAudit()">
+                    <button type="button" class="os-sidebar-btn" id="simSide-audit" data-sr-call="runAiComplianceAudit">
                         <span>🤖</span> AI Autonome Controle
                     </button>
-                    <button type="button" class="os-sidebar-btn" id="simSide-xml" onclick="exportDigipoortXml()">
+                    <button type="button" class="os-sidebar-btn" id="simSide-xml" data-sr-call="exportDigipoortXml">
                         <span>📄</span> Digipoort XML Exporteren
                     </button>
                     <div class="ds-u39">
@@ -3298,19 +3298,19 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simOmzet21">Omzet Hoog (21% BTW):</label>
-                                <input type="number" id="simOmzet21" value="18500" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simOmzet21" value="18500" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simOmzet9">Omzet Laag (9% BTW):</label>
-                                <input type="number" id="simOmzet9" value="4200" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simOmzet9" value="4200" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="calc-input-box">
                                 <label for="simVoorbelasting">Voorbelasting (Aftrekbare BTW):</label>
-                                <input type="number" id="simVoorbelasting" value="2150" oninput="recalcTaxSyncSimulator()" placeholder="€ 0.00">
+                                <input type="number" id="simVoorbelasting" value="2150" data-sr-call="recalcTaxSyncSimulator" data-sr-on="input" placeholder="€ 0.00">
                             </div>
                         </div>
                     </div>
@@ -3339,10 +3339,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
                     
                     <div class="d-flex gap-2 flex-wrap mb-3">
-                        <button type="button" class="table-action-btn ds-u49" onclick="runAiComplianceAudit()">
+                        <button type="button" class="table-action-btn ds-u49" data-sr-call="runAiComplianceAudit">
                             🛡️ AWR Boekhoudcontrole Uitvoeren
                         </button>
-                        <button type="button" class="table-action-btn ds-u50" onclick="exportDigipoortXml()">
+                        <button type="button" class="table-action-btn ds-u50" data-sr-call="exportDigipoortXml">
                             📄 Genereer Digipoort XML
                         </button>
                         <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
@@ -3354,7 +3354,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div id="simConsoleBox" class="mb-3 ds-u52">
                         <div class="d-flex justify-content-between align-items-center mb-1">
                             <span class="text-caption text-white-64" id="simConsoleTitle">Compliance Auditrapport:</span>
-                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" onclick="downloadGeneratedTaxXml()">Download .xml Bestand</button>
+                            <button type="button" class="btn-return-main font-num btn-modal-close-sm ds-u53" data-sr-call="downloadGeneratedTaxXml">Download .xml Bestand</button>
                         </div>
                         <div class="xml-preview-box" id="simXmlContent"></div>
                     </div>
@@ -3410,7 +3410,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span class="text-caption text-white-64" id="chkAppLicenseType">Jaarlijkse Bedrijfslicentie • Zakelijk B2B</span>
                     </div>
                 </div>
-                <button type="button" class="btn-return-main font-num btn-modal-close-sm" onclick="closeSoftwareCheckoutModal()">✕</button>
+                <button type="button" class="btn-return-main font-num btn-modal-close-sm" data-sr-call="closeSoftwareCheckoutModal">✕</button>
             </div>
 
             
@@ -3509,14 +3509,14 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <button type="button" class="action-cta-btn ds-u62" id="chkBtnViewInvoice">
                         📄 Gegenereerde Factuur Bekijken
                     </button>
-                    <button type="button" class="table-action-btn ds-u62" onclick="triggerSoftwareDownload()">
+                    <button type="button" class="table-action-btn ds-u62" data-sr-call="triggerSoftwareDownload">
                         📦 Installatiepakket Downloaden
                     </button>
                 </div>
             </div>
 
             
-            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" onclick="executeCheckoutPayment()">
+            <button type="button" class="checkout-pay-btn" id="chkBtnSubmit" data-sr-call="executeCheckoutPayment">
                 <span class="ds-u52" id="chkBtnSpinner">⏳</span>
                 <span id="chkBtnText">Bevestig Veilige Betaling & Facturatie (€ 228.69)</span>
             </button>
@@ -3526,17 +3526,17 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
         </div>
     
-    <div id="tourBackdrop" class="tour-backdrop ds-u52" onclick="endGuidedTour()"></div>
+    <div id="tourBackdrop" class="tour-backdrop ds-u52" data-sr-call="endGuidedTour"></div>
     <div id="tourCard" class="tour-card ds-u52">
         <div class="tour-card-header">
             <span class="tour-step-badge" id="tourStepBadge">Stap 1 van 5</span>
-            <button type="button" class="tour-close-btn" onclick="endGuidedTour()" title="Rondleiding Sluiten">✕</button>
+            <button type="button" class="tour-close-btn" data-sr-call="endGuidedTour" title="Rondleiding Sluiten">✕</button>
         </div>
         <h4 id="tourStepTitle" class="tour-step-title">Executive Financieel Dashboard</h4>
         <p id="tourStepDesc" class="tour-step-desc">Live bedrijfsprestaties weergegeven met nauwkeurige omzetstatistieken en groei-indicatoren.</p>
         <div class="tour-card-footer">
-            <button type="button" class="btn-tour-nav" id="tourPrevBtn" onclick="prevTourStep()">⬅️ Vorige</button>
-            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" onclick="nextTourStep()">Volgende ➡️</button>
+            <button type="button" class="btn-tour-nav" id="tourPrevBtn" data-sr-call="prevTourStep">⬅️ Vorige</button>
+            <button type="button" class="btn-tour-nav primary" id="tourNextBtn" data-sr-call="nextTourStep">Volgende ➡️</button>
         </div>
     </div>
 
@@ -3552,10 +3552,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
                 <div class="ds-u69">
-                    <button class="ds-u70" type="button" onclick="printExecutiveBrief()">
+                    <button class="ds-u70" type="button" data-sr-call="printExecutiveBrief">
                         🖨️ Afdrukken / Opslaan als PDF
                     </button>
-                    <button class="ds-u71" type="button" onclick="closeExecutivePdfModal()">
+                    <button class="ds-u71" type="button" data-sr-call="closeExecutivePdfModal">
                         Sluiten ✕
                     </button>
                 </div>
@@ -3832,7 +3832,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     <div class="modal-overlay" id="roiCertModal" onclick="if(event.target === this) closeRoiCertModal()" dir="ltr">
         <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
             <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeRoiCertModal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
             </div>
             <div class="roi-cert-header">
                 <img src="../assets/sr-core-emblem.svg" class="roi-cert-emblem" alt="S&R CoreSync Official Emblem" onerror="this.src='../assets/sr-core-emblem-official.png'">
@@ -3882,7 +3882,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <button type="button" class="btn-cert-print" onclick="window.print()">
                     🖨️ Afdrukken / Opslaan als PDF
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeRoiCertModal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
                     Sluiten
                 </button>
             </div>
@@ -3894,7 +3894,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="section-title mb-0" id="bookingModalTitle">📅 Plan Strategische Sessie met de Oprichters</h3>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="closeStrategicBookingModal()" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeStrategicBookingModal" aria-label="Close">✕</button>
             </div>
             <p class="section-desc mb-3">Vertrouwelijk uitvoerend consult van 30 minuten over Cloud ERP-architectuur en AI-strategie.</p>
 
@@ -3933,10 +3933,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="d-flex justify-content-center gap-3">
-                <button type="button" class="btn-cert-print" onclick="confirmBookingAndOpenWa()">
+                <button type="button" class="btn-cert-print" data-sr-call="confirmBookingAndOpenWa">
                     🚀 Bevestig & Open Sessie via WhatsApp
                 </button>
-                <button type="button" class="btn-cert-close" onclick="closeStrategicBookingModal()">
+                <button type="button" class="btn-cert-close" data-sr-call="closeStrategicBookingModal">
                     Annuleren
                 </button>
             </div>
@@ -3969,7 +3969,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </a>
                 </div>
                 <div class="hotline-booking-action u-hotline-booking-action">
-                    <button type="button" class="btn-cert-print u-btn-booking-full" onclick="openStrategicBookingModal()">
+                    <button type="button" class="btn-cert-print u-btn-booking-full" data-sr-call="openStrategicBookingModal">
                         📅 Plan Strategische Sessie (30 Min)
                     </button>
                 </div>
@@ -4160,5 +4160,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script src="../js/sr-events.js" defer></script>
 </body>
 </html>

@@ -572,7 +572,7 @@
                             </div>
                         </div>
                         <div class="work-actions-row">
-                            <button type="button" class="work-explore-btn" onclick="openCurrentProjectModal()">
+                            <button type="button" class="work-explore-btn" data-sr-call="openCurrentProjectModal">
                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                                 <span>دراسة الحالة الكاملة</span>
                             </button>
@@ -600,7 +600,7 @@
                                     <span class="live-dot"></span> مباشر / Live
                                 </div>
                             </div>
-                            <div class="work-card-media cs-pointer" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
+                            <div class="work-card-media cs-pointer" id="work-main-card-trigger" data-sr-call="openCurrentProjectModal">
                                 <img id="work-main-image" src="./assets/work-web-hintham.webp" alt="معاينة العمل" class="work-card-img">
                                 <div class="work-card-badge-gold" title="استعراض التفاصيل">
                                     <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -634,10 +634,10 @@
 
     <!-- نافذة تفاصيل دراسة الحالة والمشاريع المنبثقة -->
     <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
-        <div class="project-modal__backdrop" onclick="closeProjectModal()"></div>
+        <div class="project-modal__backdrop" data-sr-call="closeProjectModal"></div>
         
         <!-- زر الإغلاق الدائري الفاخر -->
-        <button type="button" class="project-modal__close" onclick="closeProjectModal()" aria-label="إغلاق تفاصيل المشروع" title="إغلاق">
+        <button type="button" class="project-modal__close" data-sr-call="closeProjectModal" aria-label="إغلاق تفاصيل المشروع" title="إغلاق">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -645,7 +645,7 @@
         </button>
 
         <!-- زر التوسيع / العرض الأوسع في الزاوية السفلية -->
-        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" onclick="toggleWideView()" aria-label="تبديل العرض الأوسع">
+        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" data-sr-call="toggleWideView" aria-label="تبديل العرض الأوسع">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
             </svg>
@@ -739,7 +739,7 @@
                             <h4 class="brand-kit-heading" id="brandKitHeadingText">حزمة أصول الشعار والهوية المعتمدة</h4>
                             <p class="brand-kit-sub" id="brandKitSubText">تحميل الأصول المتجهة الفيكتور بدقة غير محدودة مع كود الألوان ودليل الاستخدام.</p>
                             <div class="brand-kit-actions-group">
-                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
+                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" data-sr-call="downloadCurrentBrandKit">
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                     <span id="brandKitBtnText">تحميل ملفات الشعار (ZIP)</span>
                                 </button>
@@ -754,7 +754,7 @@
                     <div class="project-modal-techs" id="projectModalTechPills"></div>
                     <!-- شريط أزرار الرجوع السريع أسفل تفاصيل المشروع -->
                     <div class="project-modal-bottom-actions">
-                        <button type="button" class="btn-modal-return" onclick="closeProjectModal()" title="إغلاق المعاينة والعودة لقائمة المنصات">
+                        <button type="button" class="btn-modal-return" data-sr-call="closeProjectModal" title="إغلاق المعاينة والعودة لقائمة المنصات">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                             <span>رجوع إلى قائمة المنصات</span>
                         </button>
@@ -1406,7 +1406,7 @@
 
     <!-- نافذة فحص دقة 4K الفائقة والتكبير والتنقل التفاعلي (4K Vector & Brand Zoom Inspector) -->
     <div class="sr-zoom-modal" id="srImageZoomModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="فاحص الدقة الفائقة 4K">
-        <div class="sr-zoom-backdrop" onclick="closeImageZoom()"></div>
+        <div class="sr-zoom-backdrop" data-sr-call="closeImageZoom"></div>
         
         <!-- شريط التحكم العلوي العائم -->
         <div class="sr-zoom-toolbar">
@@ -1416,21 +1416,21 @@
             </div>
             
             <div class="sr-zoom-actions">
-                <button type="button" class="sr-zoom-btn" onclick="zoomIn()" title="تكبير (+)" aria-label="Zoom In">
+                <button type="button" class="sr-zoom-btn" data-sr-call="zoomIn" title="تكبير (+)" aria-label="Zoom In">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 </button>
                 <span class="sr-zoom-level-pill" id="srZoomLevelText">100%</span>
-                <button type="button" class="sr-zoom-btn" onclick="zoomOut()" title="تصغير (-)" aria-label="Zoom Out">
+                <button type="button" class="sr-zoom-btn" data-sr-call="zoomOut" title="تصغير (-)" aria-label="Zoom Out">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 </button>
-                <button type="button" class="sr-zoom-btn" onclick="resetZoom()" title="إعادة الضبط (1:1)" aria-label="Reset Zoom">
+                <button type="button" class="sr-zoom-btn" data-sr-call="resetZoom" title="إعادة الضبط (1:1)" aria-label="Reset Zoom">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
                 </button>
                 <div class="sr-zoom-hint">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
                     <span id="srZoomHintText">اسحب للتحريك • انقر مرتين للتكبير</span>
                 </div>
-                <button type="button" class="sr-zoom-close-btn" onclick="closeImageZoom()" title="إغلاق (Esc)" aria-label="Close">
+                <button type="button" class="sr-zoom-close-btn" data-sr-call="closeImageZoom" title="إغلاق (Esc)" aria-label="Close">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
@@ -1455,5 +1455,6 @@
     <script src="./js/sr-quick-dock.js" defer></script>
     <!-- S&R CoreSync Sovereign Geo-Language Detection Banner -->
     <script src="./js/sr-geo-lang.js" defer></script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

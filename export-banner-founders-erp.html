@@ -1043,10 +1043,10 @@
                         <button type="button" class="hero-stage-btn hero-stage-btn-glass" onclick="openExecutiveBookingModal('stage')">
                             <span>حجز استشارة VIP 👔</span>
                         </button>
-                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" onclick="openRoiCalculatorModal()">
+                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" data-sr-call="openRoiCalculatorModal">
                             <span>حاسبة التوفير (ROI) 📊</span>
                         </button>
-                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" onclick="openLiveDemoQuickModal()">
+                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" data-sr-call="openLiveDemoQuickModal">
                             <span>النظام التجريبي (Live Demo)</span>
                         </button>
                     </div>
@@ -1110,7 +1110,7 @@
 
     <!-- 1. نافذة حجز استشارة VIP للقيادات التنفيذية (Executive Booking Modal) -->
     <div class="sr-exec-modal" id="executiveBookingModal" role="dialog" aria-modal="true" aria-labelledby="execBookingTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeExecutiveBookingModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeExecutiveBookingModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -1121,7 +1121,7 @@
                     <h3 class="sr-exec-modal-title" id="execBookingTitle">جلسة استراتيجية مغلقة مع الشركاء المؤسسين</h3>
                     <p class="sr-exec-modal-subtitle">حدد مستشارك التنفيذي واطرح تحديات شركتك التقنية والمالية لمناقشتها مباشرة.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeExecutiveBookingModal()" aria-label="إغلاق">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeExecutiveBookingModal" aria-label="إغلاق">&times;</button>
             </div>
 
             <!-- اختيار المستشار -->
@@ -1195,7 +1195,7 @@
 
     <!-- 2. نافذة حاسبة التوفير والعائد الاستثماري (Interactive ROI Calculator Modal) -->
     <div class="sr-exec-modal" id="roiCalculatorModal" role="dialog" aria-modal="true" aria-labelledby="roiModalTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeRoiCalculatorModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeRoiCalculatorModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -1206,7 +1206,7 @@
                     <h3 class="sr-exec-modal-title" id="roiModalTitle">حاسبة التوفير المالي وهندسة الكفاءة لشركتك</h3>
                     <p class="sr-exec-modal-subtitle">حساب فوري تقديري لمقدار التوفير المالي والوقتي السنوي بعد تطبيق حلول S&R CoreSync.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeRoiCalculatorModal()" aria-label="إغلاق">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeRoiCalculatorModal" aria-label="إغلاق">&times;</button>
             </div>
 
             <div class="sr-roi-inputs-box">
@@ -1216,7 +1216,7 @@
                         <span class="text-white">التكاليف التشغيلية والإدارية والمحاسبية الحالية (شهرياً):</span>
                         <span class="sr-roi-val-badge" id="roiCostDisplay">€ 6,500</span>
                     </div>
-                    <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" oninput="updateRoiCalc()" />
+                    <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
                 </div>
 
                 <!-- شريط عدد الموظفين -->
@@ -1225,7 +1225,7 @@
                         <span class="text-white">حجم فريق العمل الإداري والمالي (عدد الموظفين):</span>
                         <span class="sr-roi-val-badge" id="roiTeamDisplay">12 موظف</span>
                     </div>
-                    <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" oninput="updateRoiCalc()" />
+                    <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
                 </div>
 
                 <!-- مستوى الأتمتة الحالي -->
@@ -1233,7 +1233,7 @@
                     <div class="sr-roi-slider-header">
                         <span class="text-white">مستوى الأنظمة والأتمتة المعتمد حالياً في شركتك:</span>
                     </div>
-                    <select id="roiSystemLevel" class="sr-exec-select" onchange="updateRoiCalc()">
+                    <select id="roiSystemLevel" class="sr-exec-select" data-sr-call="updateRoiCalc" data-sr-on="change">
                         <option value="0.36">عمل يدوي أو ملفات Excel مبعثرة (إمكانية توفير قصوى 36%)</option>
                         <option value="0.25" selected>برامج محاسبية تقليدية غير مترابطة مع السحابة (توفير 25%)</option>
                         <option value="0.16">نظام سحابي جزئي تنقصه الأتمتة المتقدمة (توفير 16%)</option>
@@ -1263,20 +1263,20 @@
 
             <!-- خيارات مشاركة وإرسال تقرير التوفير والعائد المالي المباشرة -->
             <div class="sr-roi-share-box">
-                <button type="button" class="sr-exec-submit-btn sr-roi-export-pdf-btn" onclick="exportRoiPdfReport()">
+                <button type="button" class="sr-exec-submit-btn sr-roi-export-pdf-btn" data-sr-call="exportRoiPdfReport">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     <span>تحميل تقرير الجدوى المالي المعتمد (PDF Report) 📄</span>
                 </button>
-                <button type="button" class="sr-exec-submit-btn sr-roi-whatsapp-btn" onclick="sendRoiDirectWhatsApp()">
+                <button type="button" class="sr-exec-submit-btn sr-roi-whatsapp-btn" data-sr-call="sendRoiDirectWhatsApp">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     <span>إرسال تقرير الأرقام مباشرة لواتساب الاستشاري المالي</span>
                 </button>
                 <div class="sr-roi-actions-grid">
-                    <button type="button" class="sr-exec-submit-btn sr-roi-sub-btn-vip" onclick="applyRoiToConsultation()">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-sub-btn-vip" data-sr-call="applyRoiToConsultation">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <span>حجز جلسة VIP مفصلة بالأرقام</span>
                     </button>
-                    <button type="button" class="sr-exec-submit-btn sr-roi-sub-btn-email" onclick="sendRoiDirectEmail()">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-sub-btn-email" data-sr-call="sendRoiDirectEmail">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         <span>إرسال التقرير عبر البريد</span>
                     </button>
@@ -1287,7 +1287,7 @@
 
     <!-- 3. نافذة العرض الحي السريع للنظام (Live Demo Quick Showcase Modal) -->
     <div class="sr-exec-modal" id="liveDemoQuickModal" role="dialog" aria-modal="true" aria-labelledby="liveDemoTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeLiveDemoQuickModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeLiveDemoQuickModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -1298,7 +1298,7 @@
                     <h3 class="sr-exec-modal-title" id="liveDemoTitle">استعراض حلول S&R CoreSync السحابية والمحاسبية</h3>
                     <p class="sr-exec-modal-subtitle">نظرة سريعة على أهم محاور النظام قبل الانتقال للبيئة التجريبية الكاملة.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeLiveDemoQuickModal()" aria-label="إغلاق">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeLiveDemoQuickModal" aria-label="إغلاق">&times;</button>
             </div>
 
             <!-- تبويبات العرض التجريبي -->
@@ -1845,5 +1845,6 @@
             restartTimer();
         });
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

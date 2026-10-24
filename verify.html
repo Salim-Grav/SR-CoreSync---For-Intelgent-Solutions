@@ -709,7 +709,7 @@
                     <input type="text" id="docInput" class="lookup-input" placeholder="أدخل مرجع الوثيقة (مثل: OF-2026-1021 أو OF-2026-1022-FIN)..." value="OF-2026-1021">
                     <span class="lookup-icon">🔍</span>
                 </div>
-                <button type="button" class="btn-lookup" onclick="performLookup()">
+                <button type="button" class="btn-lookup" data-sr-call="performLookup">
                     فحص واعتماد الوثيقة 🛡️
                 </button>
             </div>
@@ -749,7 +749,7 @@
                         NL-CORP-2026-1021-AUTH-7a8f9c1e4d2b-VERIFIED-OK
                     </div>
                 </div>
-                <button type="button" class="btn-copy-hash" onclick="copyHashCode()">
+                <button type="button" class="btn-copy-hash" data-sr-call="copyHashCode">
                     📋 نسخ الختم المشفر
                 </button>
             </div>
@@ -870,10 +870,10 @@
                 <a id="btnActionPdf" href="contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="btn-act btn-act-pdf">
                     <span>🖨️ فتح وثيقة الـ PDF الرسمية (A4)</span>
                 </a>
-                <button type="button" class="btn-act btn-act-word" onclick="triggerWordExport()">
+                <button type="button" class="btn-act btn-act-word" data-sr-call="triggerWordExport">
                     <span>📄 تصدير Word (.doc)</span>
                 </button>
-                <button type="button" class="btn-act btn-act-excel" onclick="triggerExcelExport()">
+                <button type="button" class="btn-act btn-act-excel" data-sr-call="triggerExcelExport">
                     <span>📊 تصدير Excel (.xls)</span>
                 </button>
                 <a id="btnActionPortal" href="demo.html?client=mudar&contract=OF-2026-1021#invoices" class="btn-act btn-act-portal">
@@ -1068,5 +1068,6 @@
             }
         });
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

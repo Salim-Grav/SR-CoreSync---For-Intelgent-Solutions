@@ -555,7 +555,7 @@
 </div>
 
                                 <!-- Mobile / Tablet Menu Button -->
-                                <button type="button" class="btn-mobile-menu" onclick="openMobileMenu()" aria-label="Open Navigation Menu">
+                                <button type="button" class="btn-mobile-menu" data-sr-call="openMobileMenu" aria-label="Open Navigation Menu">
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                                     <span>Menu</span>
                                 </button>
@@ -593,7 +593,7 @@
                                     
                                     <!-- Hero Ambient Soundscape Controller -->
                                     <div class="hero-audio-ctrl-row">
-                                        <button type="button" class="hero-sound-toggle-btn" id="heroSoundToggle" onclick="toggleHeroAmbientSound()" aria-label="Toggle Ambient Audio Experience" title="Toggle Ambient Audio Experience">
+                                        <button type="button" class="hero-sound-toggle-btn" id="heroSoundToggle" data-sr-call="toggleHeroAmbientSound" aria-label="Toggle Ambient Audio Experience" title="Toggle Ambient Audio Experience">
                                             <span class="sound-wave-icon" id="heroSoundIcon">🔊</span>
                                             <span class="sound-label" id="heroSoundLabel">Ambient Audio Experience (Click to Play)</span>
                                         </button>
@@ -602,7 +602,7 @@
                                         <a href="demo.html" class="tf-btn hero-reference__action hero-btn-demo hero-btn-primary-highlight" title="Test Live Cloud ERP Platform Now">
                                             <span>⚡ Live Cloud ERP Demo</span>
                                         </a>
-                                        <button type="button" class="tf-btn hero-reference__action hero-btn-vip" onclick="openExecutiveBookingModal()" title="Request Executive VIP Consultation">
+                                        <button type="button" class="tf-btn hero-reference__action hero-btn-vip" data-sr-call="openExecutiveBookingModal" title="Request Executive VIP Consultation">
                                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                             <span>Request VIP Session 👔</span>
                                         </button>
@@ -705,11 +705,11 @@
 
                 <!-- 1. Interactive Slider Mode -->
                 <div id="viewSlider" class="showcase-slider-wrapper">
-                    <button type="button" class="showcase-nav-btn showcase-nav-prev" onclick="prevSlide()" aria-label="Zurück">‹</button>
-                    <button type="button" class="showcase-nav-btn showcase-nav-next" onclick="nextSlide()" aria-label="Weiter">›</button>
+                    <button type="button" class="showcase-nav-btn showcase-nav-prev" data-sr-call="prevSlide" aria-label="Zurück">‹</button>
+                    <button type="button" class="showcase-nav-btn showcase-nav-next" data-sr-call="nextSlide" aria-label="Weiter">›</button>
 
                     <!-- Slides Track -->
-                    <div class="showcase-slider-viewport" id="sliderViewport" onmouseenter="pauseSliderAutoPlay()" onmouseleave="resumeSliderAutoPlay()">
+                    <div class="showcase-slider-viewport" id="sliderViewport" data-sr-call="pauseSliderAutoPlay" data-sr-on="mouseenter" data-sr-call="resumeSliderAutoPlay" data-sr-on="mouseleave">
                         <div class="showcase-slides-track" id="slidesTrack">
                             <!-- Slide 0: S&R CoreSync Luxury Official Emblem -->
                             <div class="showcase-slide-item active">
@@ -854,7 +854,7 @@
                             <div class="showcase-progress-bar-fill" id="sliderProgressBar"></div>
                         </div>
 
-                        <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" onclick="togglePlayback()">
+                        <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" data-sr-call="togglePlayback">
                             <span id="playbackIcon">⏸</span>
                             <span id="playbackText">Pause</span>
                         </button>
@@ -1446,10 +1446,10 @@
                             <button type="button" class="exec-stage-btn exec-stage-btn-glass" onclick="openExecutiveBookingModal('stage')">
                                 <span>VIP Consultation 👔</span>
                             </button>
-                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" onclick="openRoiCalculatorModal()">
+                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" data-sr-call="openRoiCalculatorModal">
                                 <span>ROI Savings Calculator 📊</span>
                             </button>
-                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" onclick="openLiveDemoQuickModal()">
+                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" data-sr-call="openLiveDemoQuickModal">
                                 <span>Live Demo Sandbox</span>
                             </button>
                         </div>
@@ -1602,7 +1602,7 @@
                                                 </div>
                                             </div>
                                             <div class="work-actions-row">
-                                                <button type="button" class="work-explore-btn" onclick="openCurrentProjectModal()" title="Click to view comprehensive case study">
+                                                <button type="button" class="work-explore-btn" data-sr-call="openCurrentProjectModal" title="Click to view comprehensive case study">
                                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                                                     <span>Full Case Study</span>
                                                 </button>
@@ -1632,7 +1632,7 @@
                                                     <span class="live-dot"></span> Live / Online
                                                 </div>
                                             </div>
-                                            <div class="image work-project-trigger main-mouse-hover cs-pointer work-card-media" id="work-main-card-trigger" onclick="openCurrentProjectModal()">
+                                            <div class="image work-project-trigger main-mouse-hover cs-pointer work-card-media" id="work-main-card-trigger" data-sr-call="openCurrentProjectModal">
                                                 <img id="work-main-image" loading="lazy" width="1256" height="706" src="../assets/work-web-hintham.webp" alt="Project Preview" class="work-card-img">
                                                 <div class="tf-mouse work-card-badge-gold" title="Click to view full case study">
                                                     <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -2693,7 +2693,7 @@
                                         <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">Mid-Market (45)</button>
                                         <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">Enterprise (100+)</button>
                                     </div>
-                                    <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" oninput="updateROICalculator()">
+                                    <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                                     <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
                                         <span>3 employees</span>
                                         <span>75 employees</span>
@@ -2706,7 +2706,7 @@
                                         <span>Routine Manual Hours / week per person:</span>
                                         <span class="roi-label-badge" id="roiManualHoursVal">8 hrs / week</span>
                                     </label>
-                                    <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" oninput="updateROICalculator()">
+                                    <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                                     <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
                                         <span>2 hrs (light)</span>
                                         <span>12 hrs (moderate)</span>
@@ -2719,7 +2719,7 @@
                                         <span>Estimated Hourly Cost per Employee:</span>
                                         <span class="roi-label-badge" id="roiAvgSalaryVal">€28 / hr</span>
                                     </label>
-                                    <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" oninput="updateROICalculator()">
+                                    <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                                     <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1" id="roiSalaryScaleLabels">
                                         <span>€15</span>
                                         <span>€45</span>
@@ -2731,7 +2731,7 @@
                                     <label for="roiSolutionType" class="roi-label">
                                         <span>Target Architectural Solution:</span>
                                     </label>
-                                    <select class="roi-select-custom w-100" id="roiSolutionType" title="Target Solution Type" aria-label="Target Solution Type" onchange="updateROICalculator()">
+                                    <select class="roi-select-custom w-100" id="roiSolutionType" title="Target Solution Type" aria-label="Target Solution Type" data-sr-call="updateROICalculator" data-sr-on="change">
                                         <option value="0.75" selected>Full ERP Integration + Accounting Automation (up to 75% savings)</option>
                                         <option value="0.60">Custom Cloud Platform + Executive Dashboards (60% savings)</option>
                                         <option value="0.85">Enterprise AI Agents + End-to-End Automation (up to 85% savings)</option>
@@ -2771,7 +2771,7 @@
                                 <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('roi')">
                                     <span>Schedule Free Executive Roadmap Session ←</span>
                                 </button>
-                                <button type="button" class="roi-pdf-btn w-100 justify-content-center" onclick="openRoiPdfModal()">
+                                <button type="button" class="roi-pdf-btn w-100 justify-content-center" data-sr-call="openRoiPdfModal">
                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
                                     <span>Export Feasibility Report as PDF 📄</span>
                                 </button>
@@ -4062,10 +4062,10 @@
 
     <!-- نافذة تفاصيل دراسة الحالة والمشاريع المنبثقة (Project Case Study Modal - 1:1 Matching Dana Najmah) -->
     <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
-        <div class="project-modal__backdrop" onclick="closeProjectModal()"></div>
+        <div class="project-modal__backdrop" data-sr-call="closeProjectModal"></div>
         
         <!-- زر الSchließen الدائري الفاخر -->
-        <button type="button" class="project-modal__close" onclick="closeProjectModal()" aria-label="Schließen Project Details" title="Schließen">
+        <button type="button" class="project-modal__close" data-sr-call="closeProjectModal" aria-label="Schließen Project Details" title="Schließen">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -4073,7 +4073,7 @@
         </button>
 
         <!-- زر التوسيع / العرض الأوسع في الزاوية السفلية (كما في موقع دانا نجمة والصورة) -->
-        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" onclick="toggleWideView()" aria-label="Toggle Wide View">
+        <button type="button" class="project-modal__expand-btn" id="projectModalExpandBtn" data-sr-call="toggleWideView" aria-label="Toggle Wide View">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
             </svg>
@@ -4151,7 +4151,7 @@
                             <h4 class="brand-kit-heading" id="brandKitHeadingText">Certified Master Brand Kit</h4>
                             <p class="brand-kit-sub" id="brandKitSubText">Download infinite resolution vector assets, color palette specs, and official guidelines.</p>
                             <div class="brand-kit-actions-group">
-                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" onclick="downloadCurrentBrandKit()">
+                                <button type="button" class="brand-kit-download-action-btn" id="brandKitDownloadBtn" data-sr-call="downloadCurrentBrandKit">
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                     <span id="brandKitBtnText">Download Brand Kit (ZIP)</span>
                                 </button>
@@ -4163,7 +4163,7 @@
                     </div>
 
                     <div class="project-modal-cta mt-4">
-                        <a href="#contact" onclick="closeProjectModal()" class="tf-btn w-100 justify-content-center project-modal-order-btn">
+                        <a href="#contact" data-sr-call="closeProjectModal" class="tf-btn w-100 justify-content-center project-modal-order-btn">
                             <span>Request Similar Project</span>
                         </a>
                     </div>
@@ -4175,7 +4175,7 @@
     <!-- نافذة الاتصال المباشر الفوري (Direct Call Modal) -->
     <div class="call-modal-overlay" id="directCallModal" onclick="if(event.target === this) closeDirectCallModal()">
         <div class="call-modal-box">
-            <button type="button" onclick="closeDirectCallModal()" aria-label="Schließen Direct Call Modal" title="Schließen" class="modal-btn-close-sm">
+            <button type="button" data-sr-call="closeDirectCallModal" aria-label="Schließen Direct Call Modal" title="Schließen" class="modal-btn-close-sm">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="text-center mb-4">
@@ -4229,19 +4229,19 @@
                 <img src="../assets/sr-core-emblem-official.webp" alt="S&amp;R CoreSync Logo" class="brand-emblem-img-sm" width="42" height="42" />
                 <div class="logo-text-title"><span>S&amp;R</span> CORESYNC</div>
             </div>
-            <button type="button" class="mobile-menu-close-btn" onclick="closeMobileMenu()" aria-label="Schließen Menu" title="Schließen">
+            <button type="button" class="mobile-menu-close-btn" data-sr-call="closeMobileMenu" aria-label="Schließen Menu" title="Schließen">
                 ✕
             </button>
         </div>
         <ul class="nav-menu-mobile">
-            <li><a href="#work" onclick="closeMobileMenu()"><span class="menu-label">Selected Works</span><span class="mobile-menu-num">01 /</span></a></li>
-            <li><a href="#service" onclick="closeMobileMenu()"><span class="menu-label">Services</span><span class="mobile-menu-num">02 /</span></a></li>
-            <li><a href="#about" onclick="closeMobileMenu()"><span class="menu-label">About Us</span><span class="mobile-menu-num">03 /</span></a></li>
-            <li><a href="#pricing" onclick="closeMobileMenu()"><span class="menu-label">Pricing Packages</span><span class="mobile-menu-num">04 /</span></a></li>
-            <li><a href="#roi-calculator" class="gold-accent" onclick="closeMobileMenu()"><span class="menu-label">ROI Calculator</span><span class="mobile-menu-num">05 /</span></a></li>
-            <li><a href="#faq" onclick="closeMobileMenu()"><span class="menu-label">FAQ</span><span class="mobile-menu-num">06 /</span></a></li>
-            <li><a href="#contact" onclick="closeMobileMenu()"><span class="menu-label">Contact Us</span><span class="mobile-menu-num">07 /</span></a></li>
-            <li><a href="demo.html" class="gold-accent" onclick="closeMobileMenu()"><span class="menu-label">Live System Demo</span><span class="mobile-menu-num">08 /</span></a></li>
+            <li><a href="#work" data-sr-call="closeMobileMenu"><span class="menu-label">Selected Works</span><span class="mobile-menu-num">01 /</span></a></li>
+            <li><a href="#service" data-sr-call="closeMobileMenu"><span class="menu-label">Services</span><span class="mobile-menu-num">02 /</span></a></li>
+            <li><a href="#about" data-sr-call="closeMobileMenu"><span class="menu-label">About Us</span><span class="mobile-menu-num">03 /</span></a></li>
+            <li><a href="#pricing" data-sr-call="closeMobileMenu"><span class="menu-label">Pricing Packages</span><span class="mobile-menu-num">04 /</span></a></li>
+            <li><a href="#roi-calculator" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">ROI Calculator</span><span class="mobile-menu-num">05 /</span></a></li>
+            <li><a href="#faq" data-sr-call="closeMobileMenu"><span class="menu-label">FAQ</span><span class="mobile-menu-num">06 /</span></a></li>
+            <li><a href="#contact" data-sr-call="closeMobileMenu"><span class="menu-label">Contact Us</span><span class="mobile-menu-num">07 /</span></a></li>
+            <li><a href="demo.html" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">Live System Demo</span><span class="mobile-menu-num">08 /</span></a></li>
         </ul>
         <div class="offcanvas-resizer-box">
             <span class="text-caption fw-medium text-white-64 d-flex align-items-center gap-2">
@@ -5212,7 +5212,7 @@
     <!-- نافذة تثبيت التطبيق على ويندوز والموبايل (Cross-Platform Install Modal) -->
     <div class="call-modal-overlay" id="installModal" onclick="if(event.target === this) closeInstallModal()">
         <div class="call-modal-box call-modal-box-wide">
-            <button type="button" onclick="closeInstallModal()" aria-label="Schließen Installation Window" title="Schließen" class="modal-btn-close-sm">
+            <button type="button" data-sr-call="closeInstallModal" aria-label="Schließen Installation Window" title="Schließen" class="modal-btn-close-sm">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <div class="text-center mb-4">
@@ -5248,11 +5248,11 @@
             </div>
 
             <div class="d-flex flex-column gap-2">
-                <button type="button" id="btnPwaInstallAction" class="action-cta-btn justify-content-center w-100 btn-pwa-cta" onclick="triggerPwaInstall()">
+                <button type="button" id="btnPwaInstallAction" class="action-cta-btn justify-content-center w-100 btn-pwa-cta" data-sr-call="triggerPwaInstall">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <span>Install App Now on Your Device</span>
                 </button>
-                <button type="button" class="btn-return-main justify-content-center btn-modal-close-action" onclick="closeInstallModal()">
+                <button type="button" class="btn-return-main justify-content-center btn-modal-close-action" data-sr-call="closeInstallModal">
                     Schließen
                 </button>
             </div>
@@ -5261,7 +5261,7 @@
 
     <!-- 1. Executive VIP Consultation Booking Modal -->
     <div class="sr-exec-modal" id="executiveBookingModal" role="dialog" aria-modal="true" aria-labelledby="execBookingTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeExecutiveBookingModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeExecutiveBookingModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -5272,7 +5272,7 @@
                     <h3 class="sr-exec-modal-title" id="execBookingTitle">Strategic Advisory Session with Founding Partners</h3>
                     <p class="sr-exec-modal-subtitle">Choose your executive advisor to address your software architecture, cloud platforms, and ERP roadmap directly.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeExecutiveBookingModal()" aria-label="Schließen">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeExecutiveBookingModal" aria-label="Schließen">&times;</button>
             </div>
 
             <!-- Advisor Selection -->
@@ -5310,7 +5310,7 @@
                     </div>
                     <div class="sr-exec-form-group">
                         <label class="sr-exec-label" for="bookingSessionType">Consultation Type / Channel *</label>
-                        <select id="bookingSessionType" class="sr-exec-select" title="Consultation Session Type" aria-label="Consultation Session Type" onchange="togglePackageField()">
+                        <select id="bookingSessionType" class="sr-exec-select" title="Consultation Session Type" aria-label="Consultation Session Type" data-sr-call="togglePackageField" data-sr-on="change">
                             <option value="creative">Visual Identity / Website / E-Commerce Store Request</option>
                             <option value="online">Online Video Conference (Google Meet / Teams)</option>
                             <option value="phone">Direct WhatsApp / Phone Call</option>
@@ -5357,7 +5357,7 @@
 
     <!-- 2. Interactive ROI Savings Calculator Modal -->
     <div class="sr-exec-modal" id="roiCalculatorModal" role="dialog" aria-modal="true" aria-labelledby="roiModalTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeRoiCalculatorModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeRoiCalculatorModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -5368,7 +5368,7 @@
                     <h3 class="sr-exec-modal-title" id="roiModalTitle">Enterprise Financial Savings &amp; Efficiency Engine</h3>
                     <p class="sr-exec-modal-subtitle">Real-time simulation of financial and operational hours saved after deploying S&R CoreSync architectures.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeRoiCalculatorModal()" aria-label="Schließen">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeRoiCalculatorModal" aria-label="Schließen">&times;</button>
             </div>
 
             <div class="sr-roi-inputs-box">
@@ -5380,7 +5380,7 @@
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
-                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" oninput="updateRoiCalc()" />
+                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -5392,7 +5392,7 @@
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 employees</div>
-                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" oninput="updateRoiCalc()" />
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -5401,7 +5401,7 @@
                     <div class="sr-roi-slider-header">
                         <span class="text-white">Current Software &amp; Workflow Maturity Level:</span>
                     </div>
-                    <select id="roiSystemLevel" class="sr-exec-select" title="System Automation Level" aria-label="System Automation Level" onchange="updateRoiCalc()">
+                    <select id="roiSystemLevel" class="sr-exec-select" title="System Automation Level" aria-label="System Automation Level" data-sr-call="updateRoiCalc" data-sr-on="change">
                         <option value="0.36">Manual workflows or scattered spreadsheets (Up to 36% savings potential)</option>
                         <option value="0.25" selected>Legacy accounting software without cloud synchronization (25% savings)</option>
                         <option value="0.16">Partial cloud setup lacking autonomous AI workflows (16% savings)</option>
@@ -5431,20 +5431,20 @@
 
             <!-- Multi-channel action triggers -->
             <div class="sr-roi-actions-wrapper">
-                <button type="button" class="sr-exec-submit-btn sr-roi-export-pdf-btn" onclick="openRoiPdfModal()">
+                <button type="button" class="sr-exec-submit-btn sr-roi-export-pdf-btn" data-sr-call="openRoiPdfModal">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     <span>Export Official ROI Feasibility Report (PDF) 📄</span>
                 </button>
-                <button type="button" class="sr-exec-submit-btn sr-roi-btn-whatsapp" onclick="sendRoiDirectWhatsApp()">
+                <button type="button" class="sr-exec-submit-btn sr-roi-btn-whatsapp" data-sr-call="sendRoiDirectWhatsApp">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     <span>Send ROI Metrics to Senior Financial Advisor on WhatsApp</span>
                 </button>
                 <div class="sr-roi-grid-actions">
-                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-gold" onclick="applyRoiToConsultation()">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-gold" data-sr-call="applyRoiToConsultation">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <span>Book VIP Audit with These Figures</span>
                     </button>
-                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-ghost" onclick="sendRoiDirectEmail()">
+                    <button type="button" class="sr-exec-submit-btn sr-roi-btn-ghost" data-sr-call="sendRoiDirectEmail">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                         <span>Email Savings Report</span>
                     </button>
@@ -5455,7 +5455,7 @@
 
     <!-- 2.5. Executive ROI Feasibility PDF Report Modal (EN) -->
     <div class="sr-exec-modal" id="roiPdfModal" role="dialog" aria-modal="true" aria-labelledby="roiPdfTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeRoiPdfModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeRoiPdfModal"></div>
         <div class="sr-exec-modal-container roi-pdf-container">
             <div class="es-quote-toolbar mb-3">
                 <div class="es-quote-toolbar-title" id="roiPdfTitle">
@@ -5467,10 +5467,10 @@
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         <span>Drucken / Als PDF speichern 🖨️</span>
                     </button>
-                    <button type="button" class="es-btn-tool roi-pdf-btn-whatsapp" onclick="shareRoiPdfWhatsApp()">
+                    <button type="button" class="es-btn-tool roi-pdf-btn-whatsapp" data-sr-call="shareRoiPdfWhatsApp">
                         <span>Share via WhatsApp 📱</span>
                     </button>
-                    <button type="button" class="es-btn-tool es-btn-tool-close" onclick="closeRoiPdfModal()">Schließen &times;</button>
+                    <button type="button" class="es-btn-tool es-btn-tool-close" data-sr-call="closeRoiPdfModal">Schließen &times;</button>
                 </div>
             </div>
 
@@ -5582,7 +5582,7 @@
 
     <!-- 3. Live Demo Quick Showcase Modal -->
     <div class="sr-exec-modal" id="liveDemoQuickModal" role="dialog" aria-modal="true" aria-labelledby="liveDemoTitle">
-        <div class="sr-exec-modal-backdrop" onclick="closeLiveDemoQuickModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeLiveDemoQuickModal"></div>
         <div class="sr-exec-modal-container">
             <div class="sr-exec-modal-header">
                 <div>
@@ -5593,7 +5593,7 @@
                     <h3 class="sr-exec-modal-title" id="liveDemoTitle">Explore S&amp;R CoreSync Cloud &amp; ERP Solutions</h3>
                     <p class="sr-exec-modal-subtitle">A concise walkthrough of our key enterprise modules before entering the complete sandbox.</p>
                 </div>
-                <button type="button" class="sr-exec-modal-close" onclick="closeLiveDemoQuickModal()" aria-label="Schließen">&times;</button>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeLiveDemoQuickModal" aria-label="Schließen">&times;</button>
             </div>
 
             <!-- Demo Tabs -->
@@ -5637,7 +5637,7 @@
                     </span>
                     <h3 id="clientPortalTitle" class="text-white fw-bold mb-0">Client Cloud Portal // Workspace</h3>
                 </div>
-                <button type="button" class="btn text-white-64 p-0 fs-3 lh-1 link" onclick="closeClientPortalModal()" aria-label="Schließen">&times;</button>
+                <button type="button" class="btn text-white-64 p-0 fs-3 lh-1 link" data-sr-call="closeClientPortalModal" aria-label="Schließen">&times;</button>
             </div>
 
             <!-- مؤشرات حالة السيرفرات الحية -->
@@ -5711,7 +5711,7 @@
                         </div>
 
                         <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 text-center">
-                            <span class="text-caption text-white-64">Need a dedicated workspace for your enterprise? <a href="#contact" onclick="closeClientPortalModal()" class="gold-accent text-decoration-none fw-bold">Contact us to initialize an account</a></span>
+                            <span class="text-caption text-white-64">Need a dedicated workspace for your enterprise? <a href="#contact" data-sr-call="closeClientPortalModal" class="gold-accent text-decoration-none fw-bold">Contact us to initialize an account</a></span>
                         </div>
                     </div>
                 </div>
@@ -5731,7 +5731,7 @@
                     </span>
                     <h3 id="brandLogoModalTitle" class="sr-logo-modal-title">S&amp;R CoreSync Solutions Brand Emblem</h3>
                 </div>
-                <button type="button" class="sr-logo-modal-close" onclick="closeLogoLightbox()" aria-label="Schließen Lightbox" title="Schließen (Esc)">
+                <button type="button" class="sr-logo-modal-close" data-sr-call="closeLogoLightbox" aria-label="Schließen Lightbox" title="Schließen (Esc)">
                     &times;
                 </button>
             </div>
@@ -5803,7 +5803,7 @@
                         <span id="copyAssetBtnText">Kopieren Vector Asset URL</span>
                     </button>
                 </div>
-                <button type="button" class="sr-modal-btn-dismiss" onclick="closeLogoLightbox()">
+                <button type="button" class="sr-modal-btn-dismiss" data-sr-call="closeLogoLightbox">
                     Schließen (Esc)
                 </button>
             </div>
@@ -6750,7 +6750,7 @@
          -----------------------------------------------------===================== -->
     <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
         <div class="software-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareDownloadModal()" aria-label="Schließen modal">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareDownloadModal" aria-label="Schließen modal">&times;</button>
             
             <div class="sw-dl-header-row">
                 <span id="swDlIcon" class="sw-dl-header-icon">⚡</span>
@@ -6783,9 +6783,9 @@
                 </div>
                 <div class="sw-key-box">
                     <span id="swDlKey" class="sw-key-code">SRTX-PRO-2026-X892-OFFLINE</span>
-                    <button type="button" class="sw-btn-copy-key" onclick="copySoftwareLicenseKey()">Kopieren Key 📋</button>
-                    <button type="button" class="sw-btn-copy-key sw-btn-gen-dynamic" onclick="generateDynamicKeyForCurrentSoftware()" title="Generate unique machine license key">Generate New Key ⚡</button>
-                    <button type="button" class="sw-btn-copy-key sw-btn-dl-cert" onclick="downloadLicenseCertificate()" title="Download official license certificate file">Download Cert (.key) 📄</button>
+                    <button type="button" class="sw-btn-copy-key" data-sr-call="copySoftwareLicenseKey">Kopieren Key 📋</button>
+                    <button type="button" class="sw-btn-copy-key sw-btn-gen-dynamic" data-sr-call="generateDynamicKeyForCurrentSoftware" title="Generate unique machine license key">Generate New Key ⚡</button>
+                    <button type="button" class="sw-btn-copy-key sw-btn-dl-cert" data-sr-call="downloadLicenseCertificate" title="Download official license certificate file">Download Cert (.key) 📄</button>
                 </div>
             </div>
 
@@ -6824,7 +6824,7 @@
          -----------------------------------------------------===================== -->
     <div id="salimLicenseManagerModal" class="software-modal-overlay" onclick="if(event.target===this)closeSalimLicenseManagerModal()">
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSalimLicenseManagerModal()" aria-label="Schließen modal">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSalimLicenseManagerModal" aria-label="Schließen modal">&times;</button>
 
             <div class="salim-lm-header-bar">
                 <div class="salim-lm-header-title-wrap">
@@ -6944,7 +6944,7 @@
          -----------------------------------------------------===================== -->
     <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
-            <button type="button" class="sw-modal-close-btn" onclick="closeSoftwareCheckoutModal()" aria-label="Schließen modal">&times;</button>
+            <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareCheckoutModal" aria-label="Schließen modal">&times;</button>
 
             <!-- 1. Checkout Form View -->
             <div id="checkoutFormView">
@@ -7126,7 +7126,7 @@
     </script>
     <!-- 4K Ultra-HD Inspector Window (4K Vector & Brand Zoom Inspector - English) -->
     <div class="sr-zoom-modal" id="srImageZoomModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="4K Ultra-HD Inspector">
-        <div class="sr-zoom-backdrop" onclick="closeImageZoom()"></div>
+        <div class="sr-zoom-backdrop" data-sr-call="closeImageZoom"></div>
         
         <!-- Floating Control Toolbar -->
         <div class="sr-zoom-toolbar">
@@ -7136,21 +7136,21 @@
             </div>
             
             <div class="sr-zoom-actions">
-                <button type="button" class="sr-zoom-btn" onclick="zoomIn()" title="Zoom In (+)" aria-label="Zoom In">
+                <button type="button" class="sr-zoom-btn" data-sr-call="zoomIn" title="Zoom In (+)" aria-label="Zoom In">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 </button>
                 <span class="sr-zoom-level-pill" id="srZoomLevelText">100%</span>
-                <button type="button" class="sr-zoom-btn" onclick="zoomOut()" title="Zoom Out (-)" aria-label="Zoom Out">
+                <button type="button" class="sr-zoom-btn" data-sr-call="zoomOut" title="Zoom Out (-)" aria-label="Zoom Out">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                 </button>
-                <button type="button" class="sr-zoom-btn" onclick="resetZoom()" title="Reset (1:1)" aria-label="Reset">
+                <button type="button" class="sr-zoom-btn" data-sr-call="resetZoom" title="Reset (1:1)" aria-label="Reset">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
                 </button>
                 <div class="sr-zoom-hint">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
                     <span id="srZoomHintText">Drag to pan • Double-click to zoom</span>
                 </div>
-                <button type="button" class="sr-zoom-close-btn" onclick="closeImageZoom()" title="Schließen (Esc)" aria-label="Schließen">
+                <button type="button" class="sr-zoom-close-btn" data-sr-call="closeImageZoom" title="Schließen (Esc)" aria-label="Schließen">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
@@ -7165,8 +7165,8 @@
     </div>
 
     <!-- Founders Showcase Lightbox Modal -->
-    <div id="foundersLightboxModal" class="founders-lightbox-modal" onclick="closeFoundersLightbox()">
-        <button type="button" class="founders-lightbox-close" onclick="closeFoundersLightbox()" title="Schließen">&times;</button>
+    <div id="foundersLightboxModal" class="founders-lightbox-modal" data-sr-call="closeFoundersLightbox">
+        <button type="button" class="founders-lightbox-close" data-sr-call="closeFoundersLightbox" title="Schließen">&times;</button>
         <div class="founders-lightbox-box" onclick="event.stopPropagation()">
             <img id="foundersLightboxImg" alt="" class="founders-lightbox-img">
         </div>
@@ -7175,9 +7175,9 @@
     
 
 <!-- نافذة البطاقة الرقمية الذكية (Smart vCard & QR Modal) -->
-    <div id="foundersQrModal" class="founders-qr-modal" onclick="closeFoundersQrModal()">
+    <div id="foundersQrModal" class="founders-qr-modal" data-sr-call="closeFoundersQrModal">
         <div class="founders-qr-card" onclick="event.stopPropagation()">
-            <button type="button" class="founders-qr-close" onclick="closeFoundersQrModal()" title="إغلاق">&times;</button>
+            <button type="button" class="founders-qr-close" data-sr-call="closeFoundersQrModal" title="إغلاق">&times;</button>
             
             <div class="founders-qr-header">
                 <div class="founders-qr-badge">👑 بطاقة الاتصال الرقمية المعتمدة • Smart vCard</div>
@@ -8189,5 +8189,6 @@ if (typeof window.openPublishSoftwareModal !== 'function') {
     };
 }
 </script>
+<script src="../js/sr-events.js" defer></script>
 </body>
 </html>

@@ -396,7 +396,7 @@
                             <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">مؤسسة متوسطة (45)</button>
                             <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">شركة كبرى (100+)</button>
                         </div>
-                        <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" oninput="updateROICalculator()">
+                        <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                         <div class="roi-scale-labels">
                             <span>3 موظفين</span>
                             <span>75 موظف</span>
@@ -409,7 +409,7 @@
                             <span>ساعات العمل اليدوي الروتينية / أسبوعياً لكل موظف:</span>
                             <span class="roi-label-badge" id="roiManualHoursVal">8 ساعات / أسبوع</span>
                         </label>
-                        <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" oninput="updateROICalculator()">
+                        <input type="range" class="roi-range-slider" id="roiManualHours" min="2" max="25" value="8" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                         <div class="roi-scale-labels">
                             <span>2 ساعة (بسيط)</span>
                             <span>12 ساعة (متوسط)</span>
@@ -422,7 +422,7 @@
                             <span>متوسط تكلفة ساعة العمل التقديرية:</span>
                             <span class="roi-label-badge" id="roiAvgSalaryVal">€28 / ساعة</span>
                         </label>
-                        <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" oninput="updateROICalculator()">
+                        <input type="range" class="roi-range-slider" id="roiAvgSalary" min="15" max="80" value="28" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                         <div class="roi-scale-labels" id="roiSalaryScaleLabels">
                             <span>€15</span>
                             <span>€45</span>
@@ -434,7 +434,7 @@
                         <label for="roiSolutionType" class="roi-label">
                             <span>نوع الحل المنشود تطبيقه:</span>
                         </label>
-                        <select class="roi-select-custom" id="roiSolutionType" onchange="updateROICalculator()">
+                        <select class="roi-select-custom" id="roiSolutionType" data-sr-call="updateROICalculator" data-sr-on="change">
                             <option value="0.75" selected>تكامل ERP كامل + أتمتة محاسبية (وفر حتى 75%)</option>
                             <option value="0.60">نظام سحابي مخصص + لوحات قيادة (وفر 60%)</option>
                             <option value="0.85">أتمتة ذكاء اصطناعي شاملة + ربط عمليات (وفر حتى 85%)</option>
@@ -471,11 +471,11 @@
 
                 <div class="d-flex flex-column gap-2 mt-3">
                     <!-- 2. زر حجز الاستشارة المربوط تلقائياً ببيانات الحاسبة -->
-                    <button type="button" class="tf-btn" onclick="openRoiConsultationAlert()">
+                    <button type="button" class="tf-btn" data-sr-call="openRoiConsultationAlert">
                         <span>← احجز جلسة مراجعة مالية وتقنية مجانية</span>
                     </button>
                     <!-- 1. زر تصدير دراسة الجدوى كملف PDF مخصص -->
-                    <button type="button" class="roi-pdf-btn" onclick="openRoiPdfModal()">
+                    <button type="button" class="roi-pdf-btn" data-sr-call="openRoiPdfModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
                         <span>تصدير دراسة الجدوى كملف PDF مخصص 📄</span>
                     </button>
@@ -489,7 +489,7 @@
 
     <!-- نافذة تقرير دراسة الجدوى الاستثمارية المعتمدة للطباعة والتصدير كـ PDF -->
     <div class="sr-exec-modal" id="roiPdfModal" role="dialog" aria-modal="true">
-        <div class="sr-exec-modal-backdrop" onclick="closeRoiPdfModal()"></div>
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeRoiPdfModal"></div>
         <div class="sr-exec-modal-container">
             <div class="es-quote-toolbar mb-3 roi-pdf-toolbar-wrap">
                 <div class="es-quote-toolbar-title roi-pdf-toolbar-title-box">
@@ -497,13 +497,13 @@
                     <span>تقرير دراسة الجدوى الاستثمارية والوفر السنوي المعتمد // Executive ROI Report</span>
                 </div>
                 <div class="es-toolbar-actions roi-pdf-toolbar-actions">
-                    <button type="button" class="es-btn-tool roi-pdf-btn-print" onclick="printRoiReport()">
+                    <button type="button" class="es-btn-tool roi-pdf-btn-print" data-sr-call="printRoiReport">
                         <span>طباعة / حفظ كـ PDF 🖨️</span>
                     </button>
-                    <button type="button" class="es-btn-tool roi-pdf-btn-whatsapp" onclick="shareRoiPdfWhatsApp()">
+                    <button type="button" class="es-btn-tool roi-pdf-btn-whatsapp" data-sr-call="shareRoiPdfWhatsApp">
                         <span>واتساب 📱</span>
                     </button>
-                    <button type="button" class="roi-pdf-btn-close" onclick="closeRoiPdfModal()">&times;</button>
+                    <button type="button" class="roi-pdf-btn-close" data-sr-call="closeRoiPdfModal">&times;</button>
                 </div>
             </div>
 
@@ -817,5 +817,6 @@
         });
         window.addEventListener('load', updateROICalculator);
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>
