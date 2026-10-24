@@ -901,6 +901,32 @@ export default {
             }, status, cors);
         }
 
+        // ---- Telegram self-check ---------------------------------------------
+        // Presence of a secret is not validity: after a /revoke the stored token
+        // answers 401 and every notification is lost. This route asks Telegram.
+        if (request.method === 'GET' && (path === '/notify/check' || path === '/api/notify/check')) {
+            const token = env && env.TELEGRAM_BOT_TOKEN;
+            const chat = env && env.TELEGRAM_CHAT_ID;
+            if (!token || !chat) {
+                return jsonResponse({ configured: false, ok: false, reason: 'telegram-not-configured' },
+                    200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+            }
+            try {
+                const res = await fetch('https://api.telegram.org/bot' + token + '/getMe');
+                const payload = await res.json().catch(function () { return {}; });
+                return jsonResponse({
+                    configured: true,
+                    ok: !!payload.ok,
+                    status: res.status,
+                    bot: payload.ok && payload.result ? '@' + payload.result.username : null,
+                    reason: payload.ok ? null : (payload.description || 'telegram-' + res.status)
+                }, 200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+            } catch (err) {
+                return jsonResponse({ configured: true, ok: false, reason: 'telegram-unreachable' },
+                    200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+            }
+        }
+
         // ---- Public trust statistics ----------------------------------------
         // Aggregates only: counts derived from the KV index timestamps. No name,
         // e-mail, phone or city ever leaves this worker through these routes.
