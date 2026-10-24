@@ -19,9 +19,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Directories that are never published (at any depth).
 # ---------------------------------------------------------------------------
 EXCLUDED_DIRS = {
-    '.git', '_site', '.github', '.agents', '.vscode', 'api', 'config',
+    '.git', '_site', '.github', '.agents', '.vscode', '.zwork', 'api', 'config',
     'workers', 'scripts', 'dist', 'scratch', 'node_modules', '__pycache__'
 }
+
+# Any other dot-directory is tooling state (editor caches, agent artefacts), not
+# site content. Excluding the whole class stops the next tool from leaking a
+# screenshot into the published artefact the way .zwork nearly did.
+ALLOWED_DOT_DIRS = {'.nojekyll', '.well-known'}
 
 # ---------------------------------------------------------------------------
 # Root level files that are never published.
@@ -81,6 +86,8 @@ def is_excluded(rel_path):
     name = parts[-1]
 
     if name in EXCLUDED_DIRS:
+        return True
+    if name.startswith('.') and name not in ALLOWED_DOT_DIRS and len(parts) > 1:
         return True
     if name.endswith(EXCLUDED_SUFFIXES):
         return True
