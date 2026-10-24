@@ -135,3 +135,44 @@ Resolve-DnsName -Name resend._domainkey.send.sr-coresync.com -Type CNAME
 
 **قبل تفعيل DMARC:** تأكد أن كل عنوان من هذه العناوين يستقبل فعلًا (أرسل إليه
 رسالة من خارج النطاق). تقارير DMARC المرسلة إلى صندوق غير موجود = صفر رؤية.
+
+---
+
+## 6. تشغيل بريد التنبيه عبر Resend — خطوة بخطوة (لبريدك أنت)
+
+> الوضع الحالي: `emailChannel: none` — الاستفسار يُحفظ ولا يُبلَّغ أحد.
+
+**أ) في لوحة Resend**
+1. أنشئ حسابًا (Free) → **Domains → Add Domain** → اكتب `send.sr-coresync.com`
+2. سيعرض لك ثلاثة سجلات. لا تنسخها من هنا — القيم خاصة بحسابك.
+
+**ب) في Hostinger (hPanel → DNS Zone Editor)** — أضف ما يعرضه Resend، وبأسماء مضيف كما يلي:
+
+| النوع | الاسم في Hostinger | القيمة |
+|---|---|---|
+| `TXT` | `send` | `v=spf1 include:amazonses.com ~all` |
+| `TXT` أو `CNAME` | `resend._domainkey.send` | القيمة من لوحة Resend |
+| `MX` (اختياري) | `send` | أولوية 10 → `feedback-smtp.eu-west-1.amazonses.com` |
+
+> **مهم:** لا تلمس سجلات `MX` الحالية (`mx1/mx2.improvmx.com`) ولا SPF الجذر. هذه إضافات على النطاق الفرعي فقط.
+
+**ج) في Resend:** اضغط **Verify** — يتحول إلى Verified خلال دقائق.
+
+**د) خزّن المفتاح (بنفسك، ولا يظهر في أي محادثة)**
+```powershell
+cd "workers/sr-lead-capture"
+node node_modules/wrangler/bin/wrangler.js secret put RESEND_API_KEY
+# الصق المفتاح (re_...) ثم Enter
+node node_modules/wrangler/bin/wrangler.js deploy
+```
+
+**هـ) تحقّق (أمران)**
+```powershell
+python scripts/verify_email_channel.py
+# يجب أن يتحول emailChannel إلى resend
+
+python scripts/verify_email_channel.py --send info@sr-coresync.com
+# يرسل استفسارًا تجريبيًا حقيقيًا → افتح الصندوق
+```
+
+**و) بعد التأكد:** أضف DMARC تدريجيًا (القسم 2/د) — يبدأ `p=none` ثم `quarantine`.
