@@ -57,7 +57,7 @@ def notify_check():
 
 def wrangler(args, stdin_text=None):
     res = subprocess.run(['node', WRANGLER] + args, cwd=WORKER_DIR,
-                         input=stdin_text, capture_output=True, text=True)
+                         input=stdin_text, capture_output=True, text=True, encoding='utf-8', errors='replace')
     return res.returncode, (res.stdout or '') + (res.stderr or '')
 
 

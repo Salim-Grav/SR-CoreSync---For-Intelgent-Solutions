@@ -28,7 +28,7 @@ def run(sql, as_json=False):
     args = ['node', WRANGLER, 'd1', 'execute', DB, '--remote', '--command', sql, '--yes']
     if as_json:
         args.append('--json')
-    res = subprocess.run(args, cwd=WORKER, capture_output=True, text=True)
+    res = subprocess.run(args, cwd=WORKER, capture_output=True, text=True, encoding='utf-8', errors='replace')
     if res.returncode != 0:
         raise SystemExit('D1 failed:\n%s' % (res.stderr or res.stdout)[-500:])
     return res.stdout

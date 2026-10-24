@@ -61,7 +61,7 @@ def set_var(value):
 
 def deploy():
     res = subprocess.run(['node', WRANGLER, 'deploy'], cwd=WORKER,
-                         capture_output=True, text=True)
+                         capture_output=True, text=True, encoding='utf-8', errors='replace')
     tail = (res.stdout or '') + (res.stderr or '')
     return res.returncode == 0, tail.strip().splitlines()[-1] if tail.strip() else ''
 
@@ -102,6 +102,12 @@ def main():
         bad = [u for u in urls if not u.startswith('https://')]
         if bad:
             raise SystemExit('Only https endpoints are accepted: %s' % ', '.join(bad))
+        placeholder = [u for u in urls if 'xxxx' in u.lower() or u.rstrip('/').endswith('/your-hook')]
+        if placeholder:
+            raise SystemExit(
+                'That looks like the example from the docs, not a real hook:\n  %s\n'
+                'Create the scenario in Make/n8n and copy the URL it gives you.'
+                % ', '.join(placeholder))
         set_var(', '.join(urls))
         print('  set %d endpoint(s)' % len(urls))
 
@@ -118,9 +124,42 @@ def main():
         except Exception:
             pass
     print('=' * 68)
-    print('Test: submit a lead and watch notify_status become sent:webhook')
-    print('      when Telegram is unavailable.')
+    if ok and not args.no_deploy and not args.remove:
+        relay_test()
     return 0 if ok else 1
+
+
+def relay_test():
+    """Send one labelled lead and report which channel carried it."""
+    import json
+
+    payload = json.dumps({
+        'clientName': 'TEST — relay check',
+        'email': 'test@example.com',
+        'notes': 'Automated relay verification. Safe to delete.',
+        'language': 'en',
+        'sourceUrl': 'https://sr-coresync.com/index.html'
+    }).encode('utf-8')
+    req = urllib.request.Request(
+        HEALTH.replace('/health', '/lead'), data=payload,
+        headers={'Content-Type': 'application/json'}, method='POST')
+    try:
+        with urllib.request.urlopen(req, timeout=25) as res:
+            body = json.loads(res.read().decode('utf-8'))
+    except Exception as err:
+        print('  relay test      : FAILED to reach the worker (%s)' % err)
+        return
+
+    announced = body.get('announced') or 'unknown'
+    print('  relay test      : announced=%s  dispatched=%s'
+          % (announced, body.get('dispatched')))
+    if announced == 'sent:webhook':
+        print('  -> the relay carried the lead; your automation should show it.')
+    elif announced == 'sent':
+        print('  -> Telegram answered first, so the relay was not what carried it.')
+        print('     Disable Telegram for a minute if you want to isolate the relay.')
+    else:
+        print('  -> NEITHER channel worked. Check the hook URL in Make/n8n.')
 
 
 if __name__ == '__main__':

@@ -29,7 +29,7 @@ DB = 'sr-coresync'
 def query(sql):
     res = subprocess.run(
         ['node', WRANGLER, 'd1', 'execute', DB, '--remote', '--command', sql, '--json'],
-        cwd=WORKER, capture_output=True, text=True)
+        cwd=WORKER, capture_output=True, text=True, encoding='utf-8', errors='replace')
     if res.returncode != 0:
         raise SystemExit('D1 query failed:\n%s' % (res.stderr or res.stdout)[-600:])
     out = res.stdout

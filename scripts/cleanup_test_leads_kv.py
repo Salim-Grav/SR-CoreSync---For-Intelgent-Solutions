@@ -25,7 +25,7 @@ MARKERS = ('test', 'telegram probe', 'rate test')
 
 def run(args):
     res = subprocess.run(['node', WRANGLER] + args, cwd=WORKER,
-                         capture_output=True, text=True)
+                         capture_output=True, text=True, encoding='utf-8', errors='replace')
     if res.returncode != 0:
         raise SystemExit('wrangler failed: %s\n%s' % (' '.join(args), (res.stderr or res.stdout)[-400:]))
     return res.stdout

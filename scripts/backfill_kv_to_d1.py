@@ -31,7 +31,7 @@ DB = 'sr-coresync'
 
 def wrangler(args):
     cmd = ['node', WRANGLER] + args
-    res = subprocess.run(cmd, cwd=WORKER, capture_output=True, text=True)
+    res = subprocess.run(cmd, cwd=WORKER, capture_output=True, text=True, encoding='utf-8', errors='replace')
     if res.returncode != 0:
         raise SystemExit('wrangler failed: %s\n%s' % (' '.join(args), res.stderr[-600:]))
     return res.stdout
