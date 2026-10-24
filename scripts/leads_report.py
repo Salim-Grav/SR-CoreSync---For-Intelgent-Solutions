@@ -66,7 +66,8 @@ def main():
         by_lang[row.get('language') or '-'] = by_lang.get(row.get('language') or '-', 0) + 1
     print('  by language    : %s' % ', '.join('%s=%d' % kv for kv in sorted(by_lang.items(), key=lambda x: -x[1])))
     print('-' * 78)
-    unannounced = [r for r in rows if (r.get('notify_status') or '') != 'sent']
+    announced_states = ('sent', 'resent')
+    unannounced = [r for r in rows if (r.get('notify_status') or '') not in announced_states]
     print('  alerted        : %d of %d' % (len(rows) - len(unannounced), len(rows)))
     if unannounced:
         print('  NOT ALERTED    : %d  <-- these leads reached nobody' % len(unannounced))

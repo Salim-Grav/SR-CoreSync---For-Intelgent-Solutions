@@ -504,6 +504,22 @@ const PUBLIC_SOURCE_LABELS = {
     quote: 'Quotation request'
 };
 
+function leadTextFromRow(row) {
+    const lines = [
+        '\u{1F514} Lead reminder',
+        '',
+        'Name    : ' + (row.client_name || '-') + (row.company_name ? ' (' + row.company_name + ')' : ''),
+        'Phone   : ' + (row.phone || '-'),
+        'Email   : ' + (row.email || '-'),
+        'Package : ' + (row.package || '-'),
+        'Lang    : ' + (row.language || '-'),
+        'Received: ' + String(row.received_at || '').slice(0, 16).replace('T', ' ')
+    ];
+    if (row.notes) lines.push('Notes   : ' + String(row.notes).slice(0, 400));
+    if (row.source_url) lines.push('Source  : ' + row.source_url);
+    return lines.join('\n');
+}
+
 async function buildDigest(env) {
     const stats = await buildPublicStats(env);
     var recent = [];
@@ -516,7 +532,8 @@ async function buildDigest(env) {
             ).all();
             recent = (rows && rows.results) || [];
             const bad = await env.DB.prepare(
-                "SELECT COUNT(*) AS n FROM leads WHERE notify_status IS NULL OR notify_status != 'sent'"
+                "SELECT COUNT(*) AS n FROM leads WHERE notify_status IS NULL "
+                + "OR notify_status NOT IN ('sent','resent')"
             ).first();
             unannounced = Number((bad && bad.n) || 0);
         } catch (err) {
@@ -549,7 +566,8 @@ function digestText(digest) {
         lines.push('Recent:');
         digest.recent.forEach(function (row) {
             const when = String(row.received_at || '').slice(0, 16).replace('T', ' ');
-            const flag = row.notify_status === 'sent' ? '' : ' (no alert)';
+            const announced = row.notify_status === 'sent' || row.notify_status === 'resent';
+            const flag = announced ? '' : ' (no alert)';
             lines.push('  \u2022 ' + (row.client_name || 'unknown') + ' \u2014 ' + when + flag);
         });
     }
@@ -833,7 +851,7 @@ async function markNotified(env, leadId, outcome) {
     try {
         await env.DB.prepare(
             'UPDATE leads SET notify_status = ?, notified_at = ? WHERE lead_id = ?'
-        ).bind(outcome, outcome === 'sent' ? new Date().toISOString() : null, leadId).run();
+        ).bind(outcome, (outcome === 'sent' || outcome === 'resent') ? new Date().toISOString() : null, leadId).run();
     } catch (err) {
         console.error('[LeadWorker] notify status write failed:', err);
     }
@@ -1007,6 +1025,45 @@ export default {
                 reason: result.reason || null,
                 digest: digest
             }, 200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+        }
+
+        // ---- Re-announce leads whose alert never left -------------------------
+        // Same trade-off as /digest: reachable without a shared secret so a
+        // scheduled job can call it, throttled to once an hour in KV, and it can
+        // only ever message the configured owner chat.
+        if (request.method === 'GET' && (path === '/notify/resend' || path === '/api/notify/resend')) {
+            if (!env || !env.DB) {
+                return jsonResponse({ resent: 0, reason: 'no-d1-binding' }, 503, cors);
+            }
+            const lastKey = 'resend:last';
+            const last = env.LEADS ? await env.LEADS.get(lastKey) : null;
+            const now = Date.now();
+            if (last && (now - Number(last)) < 3600 * 1000) {
+                return jsonResponse({ resent: 0, reason: 'throttled' }, 200,
+                    Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+            }
+
+            const rows = await env.DB.prepare(
+                "SELECT lead_id, client_name, company_name, email, phone, package, notes, "
+                + "language, source_url, received_at FROM leads WHERE notify_status IS NULL "
+                + "OR notify_status NOT IN ('sent','resent') ORDER BY received_at ASC LIMIT 20"
+            ).all();
+            const pending = (rows && rows.results) || [];
+            let resent = 0;
+            for (const row of pending) {
+                const result = await sendTelegramText(leadTextFromRow(row), env);
+                if (!result.ok) {
+                    return jsonResponse({ resent: resent, reason: result.reason, remaining: pending.length - resent },
+                        200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+                }
+                await markNotified(env, row.lead_id, 'resent');
+                resent++;
+            }
+            if (env.LEADS && resent > 0) {
+                await env.LEADS.put(lastKey, String(now), { expirationTtl: 7 * 86400 });
+            }
+            return jsonResponse({ resent: resent, remaining: pending.length - resent }, 200,
+                Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
         }
 
         // ---- Telegram self-check ---------------------------------------------
