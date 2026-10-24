@@ -555,7 +555,28 @@ async function buildPublicStats(env) {
 }
 
 async function buildRecentEvents(env, limit) {
-    if (!env || !env.LEADS) return [];
+    if (!env) return [];
+
+    // D1 first: it is the system of record, so a deleted lead disappears from
+    // the public feed immediately instead of lingering in the KV index.
+    if (env.DB) {
+        try {
+            const rows = await env.DB.prepare(
+                'SELECT received_at, channel FROM leads ORDER BY received_at DESC LIMIT ?1'
+            ).bind(limit).all();
+            const records = (rows && rows.results) || [];
+            if (records.length) {
+                return records.map(function (row) {
+                    return { label: 'Consultation', at: row.received_at };
+                });
+            }
+            return [];
+        } catch (err) {
+            console.error('[LeadWorker] D1 events failed, falling back to KV:', err);
+        }
+    }
+
+    if (!env.LEADS) return [];
     let list = [];
     try {
         list = (await env.LEADS.get('lead:index', 'json')) || [];
