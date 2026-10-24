@@ -59,6 +59,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--apply', action='store_true')
     ap.add_argument('--test', action='store_true')
+    ap.add_argument('--token-env', metavar='VAR', help='read the token from this environment variable instead of prompting')
     args = ap.parse_args()
 
     if args.test:
@@ -72,7 +73,14 @@ def main():
     print('Telegram alerts' + (' — applying' if args.apply else ' — setup info'))
     print('=' * 68)
 
-    token = getpass.getpass('Paste bot token from @BotFather (hidden): ').strip()
+    env_name = args.token_env
+    if env_name:
+        token = (os.environ.get(env_name) or '').strip()
+        if not token:
+            raise SystemExit('Environment variable %s is empty.' % env_name)
+        print('  token source       : $%s' % env_name)
+    else:
+        token = getpass.getpass('Paste bot token from @BotFather (hidden): ').strip()
     if ':' not in token:
         raise SystemExit('Not a bot token (expected something like 123456:ABC-…).')
 
