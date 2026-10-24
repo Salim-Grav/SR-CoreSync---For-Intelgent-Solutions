@@ -1378,6 +1378,44 @@ export default {
             return jsonResponse(Object.assign(body, probe), probe.ok ? 200 : 502, headers);
         }
 
+        // ---- One real message, to prove the mailbox sends ---------------------
+        // /mail/check authenticates; this actually delivers. Throttled ten
+        // minutes in KV so a crawler cannot turn it into a mail bomb, and it only
+        // ever posts to the address the owner configured.
+        if (request.method === 'GET' && (path === '/mail/selftest' || path === '/api/mail/selftest')) {
+            const headers = Object.assign({}, cors, { 'Cache-Control': 'no-store' });
+            if (!smtpConfigured(env) || !env.NOTIFY_EMAIL) {
+                return jsonResponse({ ok: false, reason: 'mail-not-configured' }, 200, headers);
+            }
+            const key = 'mailselftest:last';
+            const last = env.LEADS ? await env.LEADS.get(key) : null;
+            const now = Date.now();
+            if (last && (now - Number(last)) < 10 * 60 * 1000) {
+                return jsonResponse({ ok: false, reason: 'throttled', retryInSeconds: Math.ceil((10 * 60 * 1000 - (now - Number(last))) / 1000) }, 200, headers);
+            }
+            const stamp = new Date().toISOString();
+            const result = await deliverEmail(
+                env,
+                env.NOTIFY_EMAIL,
+                'S&R CoreSync — SMTP self-test ' + stamp.slice(0, 16).replace('T', ' '),
+                '<p dir="rtl">هذه رسالة اختبار من منصة S&amp;R CoreSync Solutions.</p>'
+                + '<p>Sent at <strong>' + stamp + '</strong> from <strong>' + env.PURELYMAIL_USER + '</strong>.</p>'
+                + '<p>If SPF, DKIM and DMARC show PASS in the headers, the mail path is healthy.</p>',
+                'S&R CoreSync SMTP self-test\nSent: ' + stamp + '\nFrom: ' + env.PURELYMAIL_USER
+            );
+            if (result.ok && env.LEADS) {
+                await env.LEADS.put(key, String(now), { expirationTtl: 3600 });
+            }
+            return jsonResponse({
+                ok: !!result.ok,
+                to: env.NOTIFY_EMAIL,
+                provider: result.provider || null,
+                steps: result.steps || [],
+                reason: result.reason || null,
+                sentAt: stamp
+            }, result.ok ? 200 : 502, headers);
+        }
+
         // ---- Mail DNS, resolved server-side ----------------------------------
         if (request.method === 'GET' && (path === '/mail/dns' || path === '/api/mail/dns')) {
             const summary = await resolveMailDns(url.searchParams.get('domain') || 'sr-coresync.com');
