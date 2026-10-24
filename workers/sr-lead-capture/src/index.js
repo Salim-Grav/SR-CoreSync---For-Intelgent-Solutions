@@ -736,7 +736,17 @@ export default {
                 time: new Date().toISOString(),
                 kv: !!(env && env.LEADS),
                 webhooks: parseWebhookUrls(env).length,
-                email: !!(env && (env.SEND_EMAIL || env.RESEND_API_KEY || env.BREVO_API_KEY || env.EMAIL_WEBHOOK_URL))
+                email: !!(env && (env.SEND_EMAIL || env.RESEND_API_KEY || env.BREVO_API_KEY || env.EMAIL_WEBHOOK_URL)),
+                emailChannel: !env ? 'none'
+                    : (env.SEND_EMAIL ? 'cloudflare-email'
+                        : (env.RESEND_API_KEY ? 'resend'
+                            : (env.BREVO_API_KEY ? 'brevo'
+                                : (env.EMAIL_WEBHOOK_URL ? 'webhook' : 'none')))),
+                mailFrom: (env && env.MAIL_FROM) || null,
+                d1: !!(env && env.DB),
+                turnstile: (env && env.TURNSTILE_SECRET)
+                    ? (String(env.TURNSTILE_ENFORCE || '') === '1' ? 'enforcing' : 'soft') : 'off',
+                eventsPublic: String((env && env.EVENTS_PUBLIC) || '') === '1'
             }, 200, cors);
         }
 

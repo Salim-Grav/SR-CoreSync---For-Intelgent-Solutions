@@ -187,6 +187,27 @@ async function run() {
     assert('Disallowed origin receives no CORS grant',
         res.headers.get('Access-Control-Allow-Origin') === null);
 
+    // 13b. Health must report the mail channel honestly ---------------------------
+    body = await (await worker.fetch(req('/health'), env, {})).json();
+    assert('health reports no mail channel when unconfigured',
+        body.emailChannel === 'none' && body.email === false,
+        JSON.stringify({ channel: body.emailChannel, email: body.email }));
+    assert('health reports the D1 binding state', body.d1 === false);
+    assert('health reports the Turnstile state', body.turnstile === 'off');
+
+    body = await (await worker.fetch(req('/health'),
+        Object.assign({}, env, { RESEND_API_KEY: 're_test' }), {})).json();
+    assert('health reports resend once the key exists',
+        body.emailChannel === 'resend' && body.email === true, body.emailChannel);
+
+    body = await (await worker.fetch(req('/health'),
+        Object.assign({}, env, { BREVO_API_KEY: 'x', RESEND_API_KEY: 're_test' }), {})).json();
+    assert('health prefers resend when both keys exist', body.emailChannel === 'resend', body.emailChannel);
+
+    body = await (await worker.fetch(req('/health'),
+        Object.assign({}, env, { BREVO_API_KEY: 'x' }), {})).json();
+    assert('health falls back to brevo alone', body.emailChannel === 'brevo', body.emailChannel);
+
     // 14. VAT calculator (replaces the dead api.coresync.eu) ----------------------
     res = await worker.fetch(req('/tax', {
         method: 'POST',
