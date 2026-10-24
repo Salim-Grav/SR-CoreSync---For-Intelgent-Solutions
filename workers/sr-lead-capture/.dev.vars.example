@@ -15,3 +15,14 @@ NOTIFY_EMAIL="info@sr-coresync.com"
 
 # Optional: sender address for the notification
 MAIL_FROM="leads@sr-coresync.com"
+
+# -----------------------------------------------------------
+# Outbound mail through our own Purelymail mailbox (no extra vendor).
+# The Worker talks SMTP to smtp.purelymail.com:587 with STARTTLS, which is the
+# only submission path Cloudflare allows (port 25 is blocked by the runtime).
+# PURELYMAIL_USER must be a real mailbox on the domain: it is also the From.
+# -----------------------------------------------------------
+PURELYMAIL_USER="info@sr-coresync.com"
+PURELYMAIL_PASS="the-mailbox-password"
+MAIL_FROM_NAME="S&R CoreSync Solutions"
+# MAIL_REPLY_TO="info@sr-coresync.com"

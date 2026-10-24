@@ -42,11 +42,15 @@ CHECKS = [
     ('purelymail2._domainkey.' + DOMAIN, 'CNAME'),
     ('purelymail3._domainkey.' + DOMAIN, 'CNAME'),
     ('_dmarc.' + DOMAIN, 'CNAME'),
+    # Optional client-autoconfiguration records; guarded once they exist.
+    ('autoconfig.' + DOMAIN, 'CNAME'),
+    ('_autodiscover._tcp.' + DOMAIN, 'SRV'),
 ]
 
 
-def dns(name, rtype):
-    values = []
+def dns_per_resolver(name, rtype):
+    """One set of answers per resolver, so caches can be told apart from truth."""
+    per_resolver = []
     for template, extra in RESOLVERS:
         try:
             headers = dict(UA)
@@ -56,17 +60,44 @@ def dns(name, rtype):
                 payload = json.loads(res.read().decode('utf-8'))
         except Exception:
             continue
+        values = set()
         for answer in payload.get('Answer', []) or []:
             data = answer.get('data', '').strip('"')
-            if data and data not in values:
-                values.append(data)
-    return sorted(values)
+            if data:
+                values.add(data)
+        per_resolver.append(values)
+    return per_resolver
 
 
-def collect():
+def dns(name, rtype):
+    """Union: a record seen anywhere counts as present, so no false alarm."""
+    merged = set()
+    for values in dns_per_resolver(name, rtype):
+        merged |= values
+    return sorted(merged)
+
+
+def dns_consensus(name, rtype):
+    """Intersection: what every resolver agrees on.
+
+    --save uses this. A resolver still holding yesterday's MX or the retired
+    SPF would otherwise be written into the baseline, and the very next run
+    would then report the *correct* state as drift.
+    """
+    per_resolver = dns_per_resolver(name, rtype)
+    if not per_resolver:
+        return []
+    common = set(per_resolver[0])
+    for values in per_resolver[1:]:
+        common &= values
+    return sorted(common)
+
+
+def collect(consensus=False):
     state = {}
+    pick = dns_consensus if consensus else dns
     for name, rtype in CHECKS:
-        state['%s %s' % (rtype, name)] = dns(name, rtype)
+        state['%s %s' % (rtype, name)] = pick(name, rtype)
     return state
 
 
@@ -76,13 +107,14 @@ def main():
     ap.add_argument('--verbose', action='store_true')
     args = ap.parse_args()
 
-    current = collect()
+    current = collect(consensus=args.save)
 
     if args.save:
         with open(SNAPSHOT, 'w', encoding='utf-8', newline='\n') as fh:
             json.dump({'domain': DOMAIN, 'records': current}, fh, indent=2, ensure_ascii=False)
             fh.write('\n')
         print('snapshot written: dns-snapshot.json (%d groups)' % len(current))
+        print('  (only records both resolvers agree on; cache-only answers are skipped)')
         for key, values in current.items():
             print('  %-28s %d record(s)' % (key, len(values)))
         return 0

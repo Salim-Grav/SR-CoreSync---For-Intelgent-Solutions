@@ -8,8 +8,34 @@
 |---|---|---|
 | 1 | حساب Cloudflare (Free) | الاستضافة + النطاق المخصّص |
 | 2 | `sr-coresync.com` مُدار من Cloudflare | لازم للنطاق `api.` ولتفعيل رؤوس الأمان |
-| 3 | مفتاح **Resend** أو **Brevo** | إرسال بريد التنبيه (الـ Worker يستخدم أيهما وُجد) |
+| 3 | صندوق Purelymail (info@) | إرسال بريد التنبيه من نطاقنا نفسه، بلا مزوّد إضافي |
 | 4 | Node 18+ و npx | تشغيل wrangler |
+
+> لم تعد هناك حاجة إلى Resend أو Brevo: الـ Worker يرسل عبر SMTP الخاص بصندوقنا
+> (`smtp.purelymail.com:587` + STARTTLS). Cloudflare يحجب المنفذ 25 فقط، والمنفذ 587 مسموح.
+> تبقى القنوات القديمة مدعومة تلقائيًا إن أضفت مفاتيحها لاحقًا.
+
+## 0. أسرار البريد (مطلوبة لتفعيل الإشعارات)
+```powershell
+cd "workers/sr-lead-capture"
+npx wrangler secret put PURELYMAIL_USER    # info@sr-coresync.com
+npx wrangler secret put PURELYMAIL_PASS    # كلمة مرور الصندوق
+npx wrangler secret put NOTIFY_EMAIL       # info@sr-coresync.com (مستلم التنبيه)
+```
+أو من لوحة Cloudflare: Workers → sr-lead-capture → Settings → Variables and Secrets.
+
+### التحقق بعد الإضافة
+```powershell
+# هل الأسرار موجودة؟
+Invoke-RestMethod "https://sr-lead-capture.sr-coresync.workers.dev/health"
+# هل كلمة المرور تعمل فعلًا؟ (مصادقة حقيقية، بلا إرسال رسالة)
+Invoke-RestMethod "https://sr-lead-capture.sr-coresync.workers.dev/mail/check?deep=1"
+# هل سجلات DNS صحيحة كما تراها الخدمة؟
+Invoke-RestMethod "https://sr-lead-capture.sr-coresync.workers.dev/mail/dns"
+```
+`/health` يعطي `purelymail: on|off` للوجود فقط، و`/mail/check?deep=1` هو ما يثبت الصلاحية
+(محدود مرة كل 5 دقائق عبر KV لكيلا يُستنزف الصندوق).
+
 
 ## 1. التحضير
 ```powershell

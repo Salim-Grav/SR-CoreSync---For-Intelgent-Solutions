@@ -83,6 +83,31 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | POP3 | `pop3.purelymail.com` | 995 (SSL) |
 | Webmail | `https://inbox.purelymail.com` — **ليس** `purelymail.com/webmail` (يعطي 404) | — |
 
+## إشعارات بريدية من المنصة (بعد الترحيل)
+الـ Worker صار يرسل بنفسه عبر `smtp.purelymail.com:587` بـ STARTTLS (Cloudflare يحجب 25 فقط).
+
+| المسار | ما يفعله |
+|---|---|
+| `/health` | يعرض `emailChannel` و`purelymail: on\|off` (وجود الأسرار فقط) |
+| `/mail/check` | هل الأسرار موجودة |
+| `/mail/check?deep=1` | مصادقة SMTP حقيقية بلا إرسال — محدود مرة/5 دقائق |
+| `/mail/dns` | يقرأ MX/SPF/DKIM/DMARC عبر DoH ويعيد حكمًا واحدًا |
+
+الأسرار المطلوبة: `PURELYMAIL_USER` · `PURELYMAIL_PASS` · `NOTIFY_EMAIL` (واختياريًا `MAIL_FROM_NAME` · `MAIL_REPLY_TO`) —
+التفاصيل في `DEPLOY-WORKER.md`. حتى تُضاف: `emailChannel: none` والإشعارات تبقى على Telegram فقط.
+
+## صفحة الحالة
+`status.html` تقرأ الحالة من الخدمة نفسها: `/health` · `/mail/dns` · `/mail/check?deep=1`،
+بلسانين (AR/EN)، ومربوطة من تذييل الصفحة الرئيسية ومن `sitemap.xml`.
+
+## سجلات اختيارية لم تُضف بعد
+| النوع | الاسم | القيمة | الفائدة |
+|---|---|---|---|
+| `CNAME` | `autoconfig` | `autoconfig.purelymail.com` | إعداد تلقائي في Thunderbird وأمثاله |
+| `SRV` | `_autodiscover._tcp` | `autodiscover.purelymail.com` · 0 · 0 · **443** | إعداد تلقائي في Outlook والجوال |
+
+بعد إضافتهما: `python scripts/snapshot_dns.py --save` لكي يحرسهما فحص الانحراف.
+
 ## ما تبقّى — اختبار حقيقي ✅ تم
 رسالة واحدة من Webmail إلى Gmail أثبتت كل شيء:
 
@@ -108,8 +133,9 @@ python scripts/probe_recipients.py --all-default
 python scripts/check_mail_setup.py --guide purelymail
 ```
 
-`dns-snapshot.json` يحرس الآن 9 مجموعات: A · MX · TXT · www · _dmarc TXT ·
-DKIM ×3 (CNAME) · _dmarc CNAME.
+`dns-snapshot.json` يحرس الآن 11 مجموعة: A · MX · TXT · www · _dmarc TXT ·
+DKIM ×3 (CNAME) · _dmarc CNAME · autoconfig · SRV. ومنذ 24/10 يُسجّل الأساس
+بإجماع المُحلّلين (تقاطع Google وCloudflare) كي لا يدخل كاشٌ قديم في الأساس.
 
 ## تحذيرات مستخلصة من حادثة اليوم
 1. **لا تضغط «إعادة تعيين سجلات DNS»** في Hostinger — مسح كل السجلات وأوقف الموقع والبريد.

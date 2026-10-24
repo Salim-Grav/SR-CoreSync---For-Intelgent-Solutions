@@ -83,6 +83,7 @@ features = [
     ("whitelabel-calculator.html", "0.75", "monthly"),
     ("3d-mockup.html", "0.70", "monthly"),
     ("logo-studio.html", "0.75", "monthly"),
+    ("status.html", "0.60", "daily"),
 ]
 
 for feat, prio, freq in features:

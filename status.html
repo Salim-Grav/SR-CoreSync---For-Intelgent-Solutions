@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حالة المنصة | S&amp;R CoreSync Solutions</title>
+<meta name="description" content="حالة مباشرة لمنصة S&amp;R CoreSync Solutions: الموقع، واجهة الاستفسارات، قاعدة البيانات، البريد (SPF · DKIM · DMARC) وصندوق المؤسسة — تُفحص من المصدر نفسه لا من صفحة ثابتة.">
+<link rel="canonical" href="https://sr-coresync.com/status.html">
+<link rel="alternate" hreflang="ar" href="https://sr-coresync.com/status.html">
+<link rel="alternate" hreflang="en" href="https://sr-coresync.com/status.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://sr-coresync.com/status.html">
+<link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="حالة المنصة — S&amp;R CoreSync Solutions">
+<meta property="og:description" content="فحص مباشر للموقع والبريد والبنية التحتية، من داخل الخدمة نفسها.">
+<meta property="og:url" content="https://sr-coresync.com/status.html">
+<style>
+  :root{
+    --obsidian:#07080a;
+    --panel:#0e1014;
+    --panel-2:#12151b;
+    --gold:#d8b25e;
+    --gold-soft:#f0d79a;
+    --text:#e9e6df;
+    --muted:#9aa0aa;
+    --line:rgba(216,178,94,.22);
+    --ok:#3fbf8f;
+    --warn:#e0a850;
+    --bad:#e2695f;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 520px at 50% -10%, rgba(216,178,94,.10), transparent 70%),
+      radial-gradient(700px 380px at 88% 108%, rgba(216,178,94,.06), transparent 70%),
+      var(--obsidian);
+    color:var(--text);
+    font-family:"Alexandria","Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.7;
+    min-height:100vh;
+    padding:28px 18px 56px;
+  }
+  .wrap{width:100%;max-width:1000px;margin:0 auto}
+  header.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .emblem{width:44px;height:44px;filter:drop-shadow(0 0 18px rgba(216,178,94,.32))}
+  .brand{font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:0}
+  .brand b{color:var(--gold-soft);letter-spacing:.1em}
+  .spacer{flex:1}
+  .langbtns{display:flex;gap:8px}
+  .langbtns button{
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    border-radius:999px;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;
+    transition:color .18s,border-color .18s,background .18s;
+  }
+  .langbtns button[aria-pressed="true"]{color:#0b0d10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .langbtns button:hover{border-color:var(--gold);color:var(--gold-soft)}
+  .langbtns button[aria-pressed="true"]:hover{color:#0b0d10}
+
+  h1{font-size:clamp(24px,4.6vw,34px);line-height:1.35;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+  .lead{color:var(--muted);font-size:15px;margin:0 0 26px;max-width:70ch}
+
+  .banner{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+    background:linear-gradient(180deg,rgba(216,178,94,.07),rgba(216,178,94,.02));
+    box-shadow:var(--shadow);margin-bottom:22px;
+  }
+  .banner .dot{width:14px;height:14px;border-radius:50%;background:var(--warn);flex:0 0 auto;
+    box-shadow:0 0 0 6px rgba(224,168,80,.12);animation:pulse 2.4s ease-in-out infinite}
+  .banner[data-state="ok"] .dot{background:var(--ok);box-shadow:0 0 0 6px rgba(63,191,143,.14)}
+  .banner[data-state="bad"] .dot{background:var(--bad);box-shadow:0 0 0 6px rgba(226,105,95,.14)}
+  .banner h2{margin:0;font-size:17px;font-weight:700}
+  .banner p{margin:2px 0 0;color:var(--muted);font-size:13px}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  @media (prefers-reduced-motion:reduce){ .banner .dot{animation:none} }
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px;margin:0 0 26px}
+  .card{
+    border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px 18px;
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    position:relative;overflow:hidden;
+  }
+  .card::after{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:3px;background:var(--warn);opacity:.85}
+  .card[data-state="ok"]::after{background:var(--ok)}
+  .card[data-state="bad"]::after{background:var(--bad)}
+  .card .k{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .card .name{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .card .led{width:10px;height:10px;border-radius:50%;background:var(--warn);flex:0 0 auto;
+    box-shadow:0 0 0 4px rgba(224,168,80,.11);transition:background .25s,box-shadow .25s}
+  .card[data-state="ok"] .led{background:var(--ok);box-shadow:0 0 0 4px rgba(63,191,143,.14),0 0 10px rgba(63,191,143,.55)}
+  .card[data-state="bad"] .led{background:var(--bad);box-shadow:0 0 0 4px rgba(226,105,95,.14),0 0 10px rgba(226,105,95,.55)}
+  .card .value{font-size:15px;font-weight:700;margin:0 0 4px;word-break:break-word}
+  .card .detail{font-size:12.5px;color:var(--muted);margin:0;word-break:break-word}
+
+  section.panel{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:20px 22px;margin-bottom:22px}
+  section.panel h3{margin:0 0 4px;font-size:16px;font-weight:700}
+  section.panel .sub{color:var(--muted);font-size:12.5px;margin:0 0 16px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:start;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06)}
+  th{color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  tr:last-child td{border-bottom:0}
+  td.val{direction:ltr;text-align:start;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;color:#cbd0d8;word-break:break-all}
+  .tag{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+  .tag.ok{color:#0d1b15;background:var(--ok)}
+  .tag.warn{color:#231a08;background:var(--warn)}
+  .tag.bad{color:#2a0f0c;background:var(--bad)}
+  .tag.idle{color:var(--muted);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.08)}
+
+  .foot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12.5px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 18px;
+    border:1px solid var(--line);background:rgba(216,178,94,.08);color:var(--gold-soft);
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;
+    transition:background .18s,border-color .18s,transform .18s;
+  }
+  .btn:hover{background:rgba(216,178,94,.16);border-color:var(--gold);transform:translateY(-1px)}
+  .btn[disabled]{opacity:.55;cursor:progress;transform:none}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+  .hint{border-inline-start:3px solid var(--warn);background:rgba(224,168,80,.07);border-radius:8px;
+    padding:12px 14px;font-size:13px;color:#dcc9a6;margin:16px 0 0}
+  .hint[data-tone="ok"]{border-color:var(--ok);background:rgba(63,191,143,.07);color:#bfe8d8}
+  .hint[data-tone="bad"]{border-color:var(--bad);background:rgba(226,105,95,.07);color:#f0c7c2}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+  .skeleton{color:transparent;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,255,255,.11),rgba(255,255,255,.05));
+    background-size:200% 100%;border-radius:6px;animation:shimmer 1.4s linear infinite}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  @media (prefers-reduced-motion:reduce){ .skeleton{animation:none} }
+  @media (max-width:560px){
+    .banner{padding:16px}
+    section.panel{padding:16px}
+    th:nth-child(3),td:nth-child(3){display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <img class="emblem" src="./assets/sr-core-emblem.svg" alt="" width="44" height="44">
+    <p class="brand">S&amp;R <b>CoreSync</b> Solutions</p>
+    <span class="spacer"></span>
+    <div class="langbtns" role="group" aria-label="Language / اللغة">
+      <button type="button" data-lang="ar" aria-pressed="true">العربية</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <h1 data-i18n="h1">حالة المنصة</h1>
+  <p class="lead" data-i18n="lead">كل ما تراه هنا مقروء الآن من الخدمة نفسها: الواجهة البرمجية، وقاعدة البيانات، وسجلات البريد الحقيقية. لا أرقام مكتوبة يدويًا ولا شارات تجميلية.</p>
+
+  <div class="banner" id="banner" data-state="checking" role="status" aria-live="polite">
+    <span class="dot" aria-hidden="true"></span>
+    <div>
+      <h2 id="bannerTitle" data-i18n="checking">جارٍ الفحص…</h2>
+      <p id="bannerSub" data-i18n="checkingSub">يتم سؤال الخدمات الآن.</p>
+    </div>
+  </div>
+
+  <div class="grid" id="cards">
+    <article class="card" data-key="site" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.site">الموقع</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="siteValue">—</p>
+      <p class="detail" id="siteDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+    <article class="card" data-key="api" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.api">واجهة الاستفسارات</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="apiValue">—</p>
+      <p class="detail" id="apiDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+    <article class="card" data-key="db" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.db">قاعدة البيانات</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="dbValue">—</p>
+      <p class="detail" id="dbDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+    <article class="card" data-key="alerts" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.alerts">الإشعارات</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="alertsValue">—</p>
+      <p class="detail" id="alertsDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+    <article class="card" data-key="mail" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.mail">بريد المؤسسة</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="mailValue">—</p>
+      <p class="detail" id="mailDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+    <article class="card" data-key="mailbox" data-state="checking">
+      <div class="k"><span class="name" data-i18n="card.mailbox">صندوق الإرسال</span><span class="led" aria-hidden="true"></span></div>
+      <p class="value skeleton" id="mailboxValue">—</p>
+      <p class="detail" id="mailboxDetail" data-i18n="waiting">جارٍ الفحص</p>
+    </article>
+  </div>
+
+  <section class="panel">
+    <h3 data-i18n="dnsTitle">سجلات البريد العامة</h3>
+    <p class="sub" data-i18n="dnsSub">مقروءة عبر DNS-over-HTTPS من خادمنا، لا من متصفحك — فلا تعتمد على ذاكرة مؤقتة محلية.</p>
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="th.record">السجل</th>
+          <th data-i18n="th.value">القيمة المنشورة</th>
+          <th data-i18n="th.state">الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MX</td>
+          <td class="val" id="rowMx">—</td>
+          <td><span class="tag idle" id="tagMx">—</span></td>
+        </tr>
+        <tr>
+          <td>SPF</td>
+          <td class="val" id="rowSpf">—</td>
+          <td><span class="tag idle" id="tagSpf">—</span></td>
+        </tr>
+        <tr>
+          <td>DKIM</td>
+          <td class="val" id="rowDkim">—</td>
+          <td><span class="tag idle" id="tagDkim">—</span></td>
+        </tr>
+        <tr>
+          <td>DMARC</td>
+          <td class="val" id="rowDmarc">—</td>
+          <td><span class="tag idle" id="tagDmarc">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="hint" id="dnsHint" hidden></div>
+  </section>
+
+  <section class="panel">
+    <div class="foot">
+      <button class="btn" type="button" id="refresh">↻ <span data-i18n="refresh">إعادة الفحص</span></button>
+      <span id="stamp" data-i18n="never">لم يُفحص بعد</span>
+      <span class="spacer"></span>
+      <span data-i18n="auto">تحديث تلقائي كل 60 ثانية</span>
+    </div>
+    <p class="sub" id="localNote" style="margin:14px 0 0"></p>
+  </section>
+
+  <div class="links">
+    <a class="btn" href="./" data-i18n="home">الصفحة الرئيسية</a>
+    <a class="btn" href="./index.html#contact" data-i18n="contact">تواصل معنا</a>
+    <a class="btn" href="mailto:info@sr-coresync.com">info@sr-coresync.com</a>
+  </div>
+
+  <noscript>
+    <p class="hint">هذه الصفحة تقرأ الحالة مباشرة من الخدمة، لذلك تحتاج JavaScript. بدونه: راسلنا على info@sr-coresync.com وسنجيبك بحالة الخدمات.</p>
+  </noscript>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var API = 'https://sr-lead-capture.sr-coresync.workers.dev';
+  var T = {
+    ar: {
+      h1: 'حالة المنصة',
+      lead: 'كل ما تراه هنا مقروء الآن من الخدمة نفسها: الواجهة البرمجية، وقاعدة البيانات، وسجلات البريد الحقيقية. لا أرقام مكتوبة يدويًا ولا شارات تجميلية.',
+      waiting: 'جارٍ الفحص',
+      'card.site': 'الموقع', 'card.api': 'واجهة الاستفسارات', 'card.db': 'قاعدة البيانات',
+      'card.alerts': 'الإشعارات', 'card.mail': 'بريد المؤسسة', 'card.mailbox': 'صندوق الإرسال',
+      dnsTitle: 'سجلات البريد العامة',
+      dnsSub: 'مقروءة عبر DNS-over-HTTPS من خادمنا، لا من متصفحك — فلا تعتمد على ذاكرة مؤقتة محلية.',
+      'th.record': 'السجل', 'th.value': 'القيمة المنشورة', 'th.state': 'الحالة',
+      refresh: 'إعادة الفحص', never: 'لم يُفحص بعد', auto: 'تحديث تلقائي كل 60 ثانية',
+      home: 'الصفحة الرئيسية', contact: 'تواصل معنا',
+      allOk: 'كل الأنظمة تعمل',
+      allOkSub: 'الموقع والبريد والإشعارات تعمل الآن.',
+      degraded: 'بعض الخدمات تحتاج انتباهًا',
+      degradedSub: 'الموقع يعمل، لكن عنصرًا واحدًا على الأقل لا يستجيب كما ينبغي. التفاصيل أدناه.',
+      down: 'لا يمكن قراءة الحالة',
+      downSub: 'تعذّر الوصول إلى واجهة الفحص. إن كنت تقرأ هذه الصفحة فالموقع نفسه يعمل.',
+      checking: 'جارٍ الفحص…', checkingSub: 'يتم سؤال الخدمات الآن.',
+      up: 'يعمل', downv: 'متوقف', on: 'مفعّل', off: 'غير مفعّل', active: 'مفعّل', inactive: 'غير مفعّل',
+      siteDetail: 'الصفحة التي تقرأها الآن',
+      apiDetail: 'النسخة {v} · D1 {d1}',
+      dbDetail: 'سجلات الاستفسارات محفوظة',
+      alertsDetail: 'تيليجرام {t} · بريد {e}',
+      mailDetail: 'أساسي: {mx}',
+      mailboxDetail: 'SMTP smtp.purelymail.com:587',
+      verified: 'تم التحقق', unverified: 'غير مُتحقَّق', verifiedRecently: 'مفعّل ومُتحقَّق حديثًا',
+      stampNow: 'آخر فحص: {t}',
+      localOk: 'الفحص يجري من هذه الصفحة عبر HTTPS، وليس من جهازك.',
+      pass: 'سليم', missing: 'مفقود', partial: 'جزئي',
+      hintOk: 'السجلات الأربعة منشورة ومتطابقة: الرسائل تُوقَّع وتُتحقَّق.',
+      hintBad: 'سجل واحد على الأقل ناقص أو غير مطابق. راجع MAIL-MIGRATION-STATE.md قبل أي تعديل على DNS.'
+    },
+    en: {
+      h1: 'Platform status',
+      lead: 'Everything here is read live from the services themselves: the API, the database and the real mail records. No hand-written numbers, no decorative badges.',
+      waiting: 'Checking',
+      'card.site': 'Website', 'card.api': 'Lead API', 'card.db': 'Database',
+      'card.alerts': 'Alerts', 'card.mail': 'Corporate mail', 'card.mailbox': 'Sending mailbox',
+      dnsTitle: 'Public mail records',
+      dnsSub: 'Resolved over DNS-over-HTTPS by our server, not your browser — so no local cache is involved.',
+      'th.record': 'Record', 'th.value': 'Published value', 'th.state': 'State',
+      refresh: 'Check again', never: 'Not checked yet', auto: 'Refreshes every 60 seconds',
+      home: 'Home', contact: 'Contact us',
+      allOk: 'All systems operational',
+      allOkSub: 'Website, mail and alerts are working right now.',
+      degraded: 'Some services need attention',
+      degradedSub: 'The site is up, but at least one component is not answering as it should. Details below.',
+      down: 'Status cannot be read',
+      downSub: 'The status API is unreachable. If you can read this, the website itself is fine.',
+      checking: 'Checking…', checkingSub: 'Asking the services now.',
+      up: 'Operational', downv: 'Down', on: 'on', off: 'off', active: 'Active', inactive: 'Not configured',
+      siteDetail: 'The page you are reading',
+      apiDetail: 'version {v} · D1 {d1}',
+      dbDetail: 'Enquiry records are stored',
+      alertsDetail: 'Telegram {t} · email {e}',
+      mailDetail: 'primary: {mx}',
+      mailboxDetail: 'SMTP smtp.purelymail.com:587',
+      verified: 'Verified', unverified: 'Not verified', verifiedRecently: 'Alive, checked recently',
+      stampNow: 'Last check: {t}',
+      localOk: 'This check runs from the page over HTTPS, not from your device.',
+      pass: 'Authenticated', missing: 'Missing', partial: 'Partial',
+      hintOk: 'All four records are published and aligned: mail is signed and authenticated.',
+      hintBad: 'At least one record is missing or misaligned. Read MAIL-MIGRATION-STATE.md before touching DNS.'
+    }
+  };
+
+  var lang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ar';
+
+  function t(key, vars) {
+    var value = (T[lang] && T[lang][key]) || (T.ar[key]) || key;
+    if (vars) {
+      Object.keys(vars).forEach(function (name) {
+        value = value.replace('{' + name + '}', vars[name]);
+      });
+    }
+    return value;
+  }
+
+  function applyLang(next) {
+    lang = next === 'en' ? 'en' : 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(function (node) {
+      var key = node.getAttribute('data-i18n');
+      if (T[lang] && T[lang][key]) node.textContent = T[lang][key];
+    });
+    document.querySelectorAll('.langbtns button').forEach(function (button) {
+      button.setAttribute('aria-pressed', String(button.getAttribute('data-lang') === lang));
+    });
+    document.title = (lang === 'ar' ? 'حالة المنصة' : 'Platform status') + ' | S&R CoreSync Solutions';
+    var description = document.querySelector('meta[name="description"]');
+    if (description) {
+      description.setAttribute('content', lang === 'ar'
+        ? 'حالة مباشرة لمنصة S&R CoreSync Solutions: الموقع، واجهة الاستفسارات، قاعدة البيانات، البريد (SPF · DKIM · DMARC) وصندوق المؤسسة.'
+        : 'Live status of the S&R CoreSync Solutions platform: website, lead API, database, mail authentication (SPF · DKIM · DMARC) and the corporate mailbox.');
+    }
+    var url = new URL(location.href);
+    if (lang === 'en') url.searchParams.set('lang', 'en');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url);
+    if (lastState) render(lastState);
+  }
+
+  function setCard(key, state, value, detail) {
+    var card = document.querySelector('.card[data-key="' + key + '"]');
+    if (!card) return;
+    card.setAttribute('data-state', state);
+    var valueNode = card.querySelector('.value');
+    valueNode.classList.remove('skeleton');
+    valueNode.textContent = value;
+    if (detail) card.querySelector('.detail').textContent = detail;
+  }
+
+  function tag(id, state, label) {
+    var node = document.getElementById(id);
+    if (!node) return;
+    node.className = 'tag ' + (state === 'ok' ? 'ok' : state === 'warn' ? 'warn' : state === 'bad' ? 'bad' : 'idle');
+    node.textContent = label;
+  }
+
+  var lastState = null;
+
+  function render(state) {
+    lastState = state;
+    var banner = document.getElementById('banner');
+    banner.setAttribute('data-state', state.level);
+    document.getElementById('bannerTitle').textContent = t(state.level === 'ok' ? 'allOk' : state.level === 'bad' ? 'down' : 'degraded');
+    document.getElementById('bannerSub').textContent = t(state.level === 'ok' ? 'allOkSub' : state.level === 'bad' ? 'downSub' : 'degradedSub');
+
+    setCard('site', state.site.ok ? 'ok' : 'bad', state.site.ok ? t('up') : t('downv'), t('siteDetail'));
+    setCard('api', state.api.ok ? 'ok' : 'bad', state.api.value, state.api.detail);
+    setCard('db', state.db.ok ? 'ok' : 'bad', state.db.ok ? t('up') : t('downv'), t('dbDetail'));
+    setCard('alerts', state.alerts.ok ? 'ok' : 'warn', state.alerts.value, state.alerts.detail);
+    setCard('mail', state.mail.ok ? 'ok' : 'bad', state.mail.ok ? t('pass') : t('missing'), t('mailDetail', { mx: state.mail.primary || '—' }));
+    setCard('mailbox', state.mailbox.state, state.mailbox.value, t('mailboxDetail'));
+
+    var dns = state.dns || {};
+    document.getElementById('rowMx').textContent = dns.mx || '—';
+    document.getElementById('rowSpf').textContent = dns.spf || '—';
+    document.getElementById('rowDkim').textContent = dns.dkim || '—';
+    document.getElementById('rowDmarc').textContent = dns.dmarc || '—';
+    tag('tagMx', dns.mxOk ? 'ok' : 'bad', dns.mxOk ? t('pass') : t('missing'));
+    tag('tagSpf', dns.spfOk ? 'ok' : 'bad', dns.spfOk ? t('pass') : t('missing'));
+    tag('tagDkim', dns.dkimOk ? 'ok' : 'bad', dns.dkimOk ? t('pass') : t('missing'));
+    tag('tagDmarc', dns.dmarcOk ? 'ok' : 'bad', dns.dmarcOk ? t('pass') : t('missing'));
+
+    var hint = document.getElementById('dnsHint');
+    if (state.dns) {
+      hint.hidden = false;
+      hint.setAttribute('data-tone', state.mail.ok ? 'ok' : 'bad');
+      hint.textContent = t(state.mail.ok ? 'hintOk' : 'hintBad');
+    }
+
+    var stamp = new Date(state.at);
+    document.getElementById('stamp').textContent = t('stampNow', {
+      t: stamp.toLocaleTimeString(lang === 'ar' ? 'ar-NL' : 'en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    });
+  }
+
+  async function getJSON(url) {
+    var res = await fetch(url, { cache: 'no-store', mode: 'cors' });
+    if (!res.ok) throw new Error('http-' + res.status);
+    return res.json();
+  }
+
+  async function checkSite() {
+    try {
+      // HEAD on our own origin: proves the Pages deployment is serving HTML.
+      var res = await fetch('./?status-probe=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+      return { ok: res.ok };
+    } catch (err) {
+      return { ok: false };
+    }
+  }
+
+  async function run() {
+    var button = document.getElementById('refresh');
+    button.disabled = true;
+
+    var health = null;
+    var dns = null;
+    var mailbox = null;
+    var site = await checkSite();
+
+    try { health = await getJSON(API + '/health'); } catch (err) { health = null; }
+    try { dns = await getJSON(API + '/mail/dns?domain=sr-coresync.com'); } catch (err) { dns = null; }
+    try { mailbox = await getJSON(API + '/mail/check?deep=1'); } catch (err) { mailbox = null; }
+
+    var apiOk = !!(health && health.status === 'ok');
+    var dbOk = !!(health && health.d1);
+    var alertsOk = !!(health && health.telegram === 'on');
+    var dnsData = dns ? {
+      mx: (dns.mx || []).map(function (row) { return row.priority + ' ' + row.host; }).join(' · ') || null,
+      spf: dns.spf, dkim: dns.dkim, dmarc: dns.dmarc,
+      mxOk: !!dns.primaryMx && dns.primaryMx.indexOf('purelymail') !== -1,
+      spfOk: !!dns.spf && dns.spf.indexOf('_spf.purelymail.com') !== -1,
+      dkimOk: !!dns.dkim,
+      dmarcOk: !!dns.dmarc && dns.dmarc.indexOf('v=DMARC1') === 0
+    } : {};
+    var mailOk = !!(dns && dns.ok);
+
+    var mailboxState = 'warn';
+    var mailboxValue = t('unverified');
+    if (mailbox && mailbox.configured && mailbox.verified) {
+      mailboxState = 'ok';
+      mailboxValue = t('verified');
+    } else if (mailbox && mailbox.configured && mailbox.reason === 'throttled') {
+      // Someone authenticated within the last five minutes: alive, not re-proven now.
+      mailboxState = 'ok';
+      mailboxValue = t('verifiedRecently');
+    } else if (mailbox && mailbox.configured) {
+      mailboxState = 'bad';
+      mailboxValue = t('unverified');
+    } else {
+      mailboxState = 'warn';
+      mailboxValue = t('inactive');
+    }
+
+    var level = 'ok';
+    if (!site.ok || !apiOk) level = 'bad';
+    else if (!dbOk || !mailOk) level = 'degraded';
+
+    render({
+      at: Date.now(),
+      level: level,
+      site: site,
+      api: {
+        ok: apiOk,
+        value: apiOk ? t('up') : t('downv'),
+        detail: apiOk ? t('apiDetail', { v: health.version, d1: health.d1 ? t('active') : t('inactive') }) : '—'
+      },
+      db: { ok: dbOk },
+      alerts: {
+        ok: alertsOk,
+        value: alertsOk ? t('active') : t('inactive'),
+        detail: health ? t('alertsDetail', {
+          t: health.telegram === 'on' ? t('active') : t('inactive'),
+          e: health.emailChannel && health.emailChannel !== 'none' ? health.emailChannel : t('inactive')
+        }) : '—'
+      },
+      mail: { ok: mailOk, primary: dns && dns.primaryMx },
+      mailbox: { state: mailboxState, value: mailboxValue },
+      dns: dnsData
+    });
+
+    document.getElementById('localNote').textContent = t('localOk');    button.disabled = false;
+  }
+
+  document.querySelectorAll('.langbtns button').forEach(function (button) {
+    button.addEventListener('click', function () { applyLang(button.getAttribute('data-lang')); });
+  });
+  document.getElementById('refresh').addEventListener('click', run);
+
+  applyLang(lang);
+  run();
+  setInterval(run, 60000);
+})();
+</script>
+</body>
+</html>

@@ -20,7 +20,10 @@
  * Deploy:  npx wrangler deploy
  * Secrets: npx wrangler secret put LEAD_WEBHOOK_URLS
  *          npx wrangler secret put NOTIFY_EMAIL
+ *          npx wrangler secret put PURELYMAIL_PASS   (send through our own mailbox)
  */
+
+import { connect } from 'cloudflare:sockets';
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -276,6 +279,261 @@ function buildNotificationHtml(lead) {
         '<table style="border-collapse:collapse;width:100%;font-size:14px;">' + rows + '</table></div></div></body></html>';
 }
 
+// ---------------------------------------------------------------------------
+// Outbound mail through our own Purelymail mailbox
+// ---------------------------------------------------------------------------
+// Workers cannot open port 25, but submission on 587 with STARTTLS is allowed,
+// so the worker speaks SMTP to Purelymail directly. That keeps alerts on the
+// mailbox the domain already pays for ($10/year, unlimited addresses) instead
+// of adding another email vendor, and every message leaves DKIM-signed with the
+// keys the DNS already publishes.
+
+const SMTP_HOST = 'smtp.purelymail.com';
+const SMTP_PORT = 587;
+
+function smtpConfigured(env) {
+    return !!(env && env.PURELYMAIL_USER && env.PURELYMAIL_PASS);
+}
+
+// btoa() only takes Latin-1; go through UTF-8 bytes so Arabic survives.
+function b64(text) {
+    const bytes = new TextEncoder().encode(text);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+}
+
+function buildMime(opts) {
+    const boundary = 'sr-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    const from = opts.fromName ? opts.fromName + ' <' + opts.from + '>' : opts.from;
+    const headers = [
+        'From: ' + from,
+        'To: ' + opts.to,
+        'Subject: =?UTF-8?B?' + b64(opts.subject) + '?=',
+        'Date: ' + new Date().toUTCString().replace('GMT', '+0000'),
+        'Message-ID: <' + Date.now().toString(36) + '.' + Math.random().toString(36).slice(2, 10) + '@' + opts.from.split('@')[1] + '>',
+        'MIME-Version: 1.0',
+        'Auto-Submitted: auto-generated'
+    ];
+    if (opts.replyTo) headers.push('Reply-To: ' + opts.replyTo);
+    const wrap = function (value) { return value.replace(/(.{76})/g, '$1\r\n'); };
+
+    // Text and HTML travel as alternative views; a single one needs no wrapper.
+    let entityType;
+    let entityBody;
+    if (opts.text && opts.html) {
+        entityType = 'multipart/alternative; boundary="alt-' + boundary + '"';
+        entityBody = [
+            '--alt-' + boundary,
+            'Content-Type: text/plain; charset=UTF-8',
+            'Content-Transfer-Encoding: base64',
+            '',
+            wrap(b64(opts.text)),
+            '--alt-' + boundary,
+            'Content-Type: text/html; charset=UTF-8',
+            'Content-Transfer-Encoding: base64',
+            '',
+            wrap(b64(opts.html)),
+            '--alt-' + boundary + '--'
+        ].join('\r\n');
+    } else if (opts.html) {
+        entityType = 'text/html; charset=UTF-8';
+        entityBody = wrap(b64(opts.html));
+    } else {
+        entityType = 'text/plain; charset=UTF-8';
+        entityBody = wrap(b64(opts.text || ''));
+    }
+
+    const attachmentName = (opts.attachmentName || '').replace(/"/g, '');
+    const attachmentData = opts.attachmentB64;
+    if (!attachmentName || !attachmentData) {
+        return headers.concat('Content-Type: ' + entityType).join('\r\n') + '\r\n\r\n' + entityBody;
+    }
+
+    // A PDF rides along: wrap the entity above into multipart/mixed.
+    const mixed = [
+        '--mix-' + boundary,
+        'Content-Type: ' + entityType,
+        '',
+        entityBody,
+        '--mix-' + boundary,
+        'Content-Type: application/pdf; name="' + attachmentName + '"',
+        'Content-Transfer-Encoding: base64',
+        'Content-Disposition: attachment; filename="' + attachmentName + '"',
+        '',
+        wrap(String(attachmentData)),
+        '--mix-' + boundary + '--'
+    ].join('\r\n');
+    headers.push('Content-Type: multipart/mixed; boundary="mix-' + boundary + '"');
+    return headers.join('\r\n') + '\r\n\r\n' + mixed;
+}
+
+function smtpChannel(socket) {
+    let active = socket;
+    let writer = active.writable.getWriter();
+    let reader = active.readable.getReader();
+    const decoder = new TextDecoder();
+    const encoder = new TextEncoder();
+    let buffer = '';
+
+    async function readReply() {
+        for (;;) {
+            const lines = buffer.split('\r\n');
+            for (let i = 0; i < lines.length; i++) {
+                if (/^\d{3} /.test(lines[i])) {
+                    const code = Number(lines[i].slice(0, 3));
+                    const text = lines.slice(0, i + 1).join(' | ');
+                    buffer = lines.slice(i + 1).join('\r\n');
+                    return { code: code, text: text };
+                }
+            }
+            const chunk = await reader.read();
+            if (chunk.done) return { code: 0, text: buffer || 'connection closed' };
+            buffer += decoder.decode(chunk.value, { stream: true });
+        }
+    }
+
+    async function write(line) {
+        await writer.write(encoder.encode(line + '\r\n'));
+    }
+
+    async function command(line, expect) {
+        if (line !== null) await write(line);
+        const reply = await readReply();
+        if (expect && reply.code !== expect) {
+            const label = line === null ? 'greeting' : line.split(' ')[0].split('<')[0];
+            throw new Error('SMTP ' + label + ' rejected: ' + reply.code + ' ' + String(reply.text).slice(0, 120));
+        }
+        return reply;
+    }
+
+    function upgrade() {
+        // STARTTLS returns a new socket; the old streams are dead from here on.
+        active = socket.startTls();
+        writer = active.writable.getWriter();
+        reader = active.readable.getReader();
+        buffer = '';
+        return active;
+    }
+
+    function close() {
+        try { active.close(); } catch (err) { /* already closed */ }
+    }
+
+    return { readReply: readReply, write: write, command: command, upgrade: upgrade, close: close };
+}
+
+async function sendViaPurelymail(env, from, to, raw) {
+    const steps = [];
+    let smtp = null;
+    try {
+        smtp = smtpChannel(connect(
+            { hostname: SMTP_HOST, port: SMTP_PORT },
+            { secureTransport: 'starttls' }));
+        await smtp.command(null, 220);
+        steps.push('connected');
+        await smtp.command('EHLO sr-coresync.com', 250);
+        await smtp.command('STARTTLS', 220);
+        smtp.upgrade();
+        await smtp.command('EHLO sr-coresync.com', 250);
+        steps.push('tls');
+        await smtp.command('AUTH LOGIN', 334);
+        await smtp.command(b64(env.PURELYMAIL_USER), 334);
+        await smtp.command(b64(env.PURELYMAIL_PASS), 235);
+        steps.push('auth');
+        await smtp.command('MAIL FROM:<' + from + '>', 250);
+        await smtp.command('RCPT TO:<' + to + '>', 250);
+        await smtp.command('DATA', 354);
+        // dot-stuffing: a line starting with '.' would end the message early
+        await smtp.write(raw.replace(/\r\n\./g, '\r\n..') + '\r\n.');
+        await smtp.command(null, 250);
+        steps.push('sent');
+        await smtp.command('QUIT', null).catch(function () { return null; });
+        return { ok: true, provider: 'purelymail-smtp', steps: steps };
+    } catch (err) {
+        return { ok: false, provider: 'purelymail-smtp', reason: String((err && err.message) || err), steps: steps };
+    } finally {
+        if (smtp) smtp.close();
+    }
+}
+
+// Authenticate only: proves the mailbox password works without sending anything.
+async function probeSmtp(env) {
+    const steps = [];
+    let smtp = null;
+    try {
+        smtp = smtpChannel(connect(
+            { hostname: SMTP_HOST, port: SMTP_PORT },
+            { secureTransport: 'starttls' }));
+        await smtp.command(null, 220);
+        steps.push('connected');
+        await smtp.command('EHLO sr-coresync.com', 250);
+        await smtp.command('STARTTLS', 220);
+        smtp.upgrade();
+        await smtp.command('EHLO sr-coresync.com', 250);
+        steps.push('tls');
+        await smtp.command('AUTH LOGIN', 334);
+        await smtp.command(b64(env.PURELYMAIL_USER), 334);
+        await smtp.command(b64(env.PURELYMAIL_PASS), 235);
+        steps.push('auth');
+        await smtp.command('QUIT', null).catch(function () { return null; });
+        return { ok: true, verified: true, steps: steps };
+    } catch (err) {
+        return { ok: false, verified: false, reason: String((err && err.message) || err), steps: steps };
+    } finally {
+        if (smtp) smtp.close();
+    }
+}
+
+// DNS over HTTPS, so the status page can show the mail records without
+// loosening the site CSP to allow browser DNS queries.
+async function doh(name, type) {
+    const res = await fetch('https://dns.google/resolve?name=' + encodeURIComponent(name) + '&type=' + type,
+        { headers: { accept: 'application/dns-json' } });
+    if (!res.ok) throw new Error('doh-' + res.status);
+    const payload = await res.json();
+    return (payload.Answer || []).map(function (a) { return String(a.data); });
+}
+
+async function resolveMailDns(domain) {
+    if (!/^[a-z0-9.-]{4,253}$/i.test(domain)) {
+        return { ok: false, reason: 'invalid-domain' };
+    }
+    try {
+        const results = await Promise.all([
+            doh(domain, 'MX').catch(function () { return []; }),
+            doh(domain, 'TXT').catch(function () { return []; }),
+            doh('_dmarc.' + domain, 'TXT').catch(function () { return []; }),
+            doh('purelymail1._domainkey.' + domain, 'CNAME').catch(function () { return []; })
+        ]);
+        const mx = results[0]
+            .map(function (row) {
+                const parts = row.trim().split(/\s+/);
+                return { priority: Number(parts[0]), host: String(parts[parts.length - 1]).replace(/\.$/, '') };
+            })
+            .filter(function (row) { return row.host; })
+            .sort(function (a, b) { return a.priority - b.priority; });
+        const spf = results[1].map(function (t) { return t.replace(/"/g, ''); })
+            .find(function (t) { return t.toLowerCase().indexOf('v=spf1') === 0; }) || null;
+        const dmarc = results[2].map(function (t) { return t.replace(/"/g, ''); })
+            .find(function (t) { return t.toLowerCase().indexOf('v=dmarc1') === 0; }) || null;
+        const dkim = results[3].length > 0 ? results[3][0].replace(/\.$/, '') : null;
+        const primary = mx.length ? mx[0].host : null;
+        return {
+            ok: !!(primary && primary.indexOf('purelymail') !== -1 && spf && dmarc && dkim),
+            domain: domain,
+            mx: mx,
+            primaryMx: primary,
+            spf: spf,
+            dmarc: dmarc,
+            dkim: dkim,
+            checkedAt: new Date().toISOString()
+        };
+    } catch (err) {
+        return { ok: false, reason: String((err && err.message) || err) };
+    }
+}
+
 async function deliverEmail(env, to, subject, html, text, attachment) {
     if (!env) return { ok: false, reason: 'no-env' };
     const sender = env.MAIL_FROM || 'leads@sr-coresync.com';
@@ -289,6 +547,24 @@ async function deliverEmail(env, to, subject, html, text, attachment) {
         }
         await env.SEND_EMAIL.send(message);
         return { ok: true, provider: 'cloudflare-email' };
+    }
+
+    if (smtpConfigured(env)) {
+        // Our own mailbox first: no extra vendor, and DKIM comes from the keys
+        // the domain already publishes.
+        const from = env.PURELYMAIL_USER;
+        const raw = buildMime({
+            from: from,
+            fromName: env.MAIL_FROM_NAME || 'S&R CoreSync Solutions',
+            to: to,
+            subject: subject,
+            html: html,
+            text: text,
+            replyTo: env.MAIL_REPLY_TO || from,
+            attachmentName: attachmentName,
+            attachmentB64: attachmentB64
+        });
+        return await sendViaPurelymail(env, from, to, raw);
     }
 
     if (env.RESEND_API_KEY) {
@@ -423,63 +699,35 @@ async function sendTelegram(lead, env) {
 async function notifyByEmail(lead, env, ctx) {
     if (!env || !env.NOTIFY_EMAIL) return { sent: false, reason: 'no-recipient' };
 
-    const work = (async function () {
-        if (env.SEND_EMAIL && typeof env.SEND_EMAIL.send === 'function') {
-            await env.SEND_EMAIL.send({
-                to: env.NOTIFY_EMAIL,
-                from: env.MAIL_FROM || 'leads@sr-coresync.com',
-                subject: 'New Consultation Lead ' + lead.leadId,
-                html: buildNotificationHtml(lead)
-            });
-            return;
+    const lines = [
+        'New consultation lead \u2014 ' + (lead.leadId || ''),
+        '',
+        'Name    : ' + (lead.clientName || '-') + (lead.companyName ? ' (' + lead.companyName + ')' : ''),
+        'Phone   : ' + (lead.phone || '-'),
+        'Email   : ' + (lead.email || '-'),
+        'Package : ' + (lead.packageLabel || lead.package || '-'),
+        'Advisor : ' + (lead.advisorName || lead.advisor || '-'),
+        'Lang    : ' + (lead.language || '-'),
+        'When    : ' + (lead.preferredDate || '-') + ' ' + (lead.timeSlotLabel || lead.timeSlot || ''),
+        'Source  : ' + (lead.sourceUrl || '-')
+    ];
+    if (lead.notes) lines.push('Notes   : ' + String(lead.notes).slice(0, 400));
+
+    // One delivery path, not four: deliverEmail already knows every provider.
+    const work = deliverEmail(
+        env,
+        env.NOTIFY_EMAIL,
+        'New Consultation Lead ' + (lead.leadId || ''),
+        buildNotificationHtml(lead),
+        lines.join('\n')
+    ).then(function (result) {
+        if (!result || !result.ok) {
+            console.error('[LeadWorker] Email notification failed:', (result && result.reason) || 'unknown');
         }
-        if (env.RESEND_API_KEY) {
-            const res = await fetch('https://api.resend.com/emails', {
-                method: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + env.RESEND_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    from: env.MAIL_FROM || 'S&R CoreSync <onboarding@resend.dev>',
-                    to: [env.NOTIFY_EMAIL],
-                    subject: 'New Lead ' + lead.leadId,
-                    html: buildNotificationHtml(lead)
-                })
-            });
-            if (!res.ok) console.error('[LeadWorker] Resend rejected:', res.status, await res.text());
-            return;
-        }
-        if (env.BREVO_API_KEY) {
-            const res = await fetch('https://api.brevo.com/v3/smtp/email', {
-                method: 'POST',
-                headers: {
-                    'api-key': env.BREVO_API_KEY,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    sender: { email: env.MAIL_FROM || 'leads@sr-coresync.com', name: 'S&R CoreSync' },
-                    to: [{ email: env.NOTIFY_EMAIL }],
-                    subject: 'New Lead ' + lead.leadId,
-                    htmlContent: buildNotificationHtml(lead)
-                })
-            });
-            if (!res.ok) console.error('[LeadWorker] Brevo rejected:', res.status, await res.text());
-            return;
-        }
-        if (env.EMAIL_WEBHOOK_URL) {
-            await fetch(env.EMAIL_WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    to: env.NOTIFY_EMAIL,
-                    subject: 'New Consultation Lead ' + lead.leadId,
-                    html: buildNotificationHtml(lead)
-                })
-            });
-        }
-    })().catch(function (err) {
-        console.error('[LeadWorker] Notification failed:', err);
+        return result;
+    }).catch(function (err) {
+        console.error('[LeadWorker] Email notification threw:', err);
+        return { ok: false, reason: 'exception' };
     });
 
     if (ctx && typeof ctx.waitUntil === 'function') {
@@ -924,13 +1172,16 @@ export default {
                 time: new Date().toISOString(),
                 kv: !!(env && env.LEADS),
                 webhooks: parseWebhookUrls(env).length,
-                email: !!(env && (env.SEND_EMAIL || env.RESEND_API_KEY || env.BREVO_API_KEY || env.EMAIL_WEBHOOK_URL)),
+                email: !!(env && (env.SEND_EMAIL || env.RESEND_API_KEY || env.BREVO_API_KEY || env.EMAIL_WEBHOOK_URL || smtpConfigured(env))),
                 emailChannel: !env ? 'none'
                     : (env.SEND_EMAIL ? 'cloudflare-email'
+                        : (smtpConfigured(env) ? 'purelymail-smtp'
                         : (env.RESEND_API_KEY ? 'resend'
                             : (env.BREVO_API_KEY ? 'brevo'
-                                : (env.EMAIL_WEBHOOK_URL ? 'webhook' : 'none')))),
-                mailFrom: (env && env.MAIL_FROM) || null,
+                                : (env.EMAIL_WEBHOOK_URL ? 'webhook' : 'none'))))),
+                mailFrom: (env && (env.PURELYMAIL_USER || env.MAIL_FROM)) || null,
+                // Presence only; /mail/check?deep=1 is what proves the password.
+                purelymail: smtpConfigured(env) ? 'on' : 'off',
                 d1: !!(env && env.DB),
                 turnstile: (env && env.TURNSTILE_SECRET)
                     ? (String(env.TURNSTILE_ENFORCE || '') === '1' ? 'enforcing' : 'soft') : 'off',
@@ -1090,6 +1341,49 @@ export default {
                 return jsonResponse({ configured: true, ok: false, reason: 'telegram-unreachable' },
                     200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
             }
+        }
+
+        // ---- Mail self-check -------------------------------------------------
+        // Same rule as Telegram: two stored variables are not proof. With ?deep=1
+        // the worker opens a real STARTTLS session and authenticates, so the
+        // answer is "the mailbox works" rather than "the secrets exist".
+        if (request.method === 'GET' && (path === '/mail/check' || path === '/api/mail/check')) {
+            const headers = Object.assign({}, cors, { 'Cache-Control': 'no-store' });
+            const configured = smtpConfigured(env);
+            const body = {
+                configured: configured,
+                channel: configured ? 'purelymail-smtp' : 'none',
+                user: (env && env.PURELYMAIL_USER) || null,
+                recipient: (env && env.NOTIFY_EMAIL) || null,
+                smtp: SMTP_HOST + ':' + SMTP_PORT
+            };
+            if (!configured) {
+                return jsonResponse(Object.assign(body, { ok: false, reason: 'purelymail-not-configured' }), 200, headers);
+            }
+            if (url.searchParams.get('deep') !== '1') {
+                return jsonResponse(Object.assign(body, {
+                    ok: true, verified: false, hint: 'add ?deep=1 to authenticate for real'
+                }), 200, headers);
+            }
+            const key = 'mailcheck:last';
+            const last = env.LEADS ? await env.LEADS.get(key) : null;
+            const now = Date.now();
+            if (last && (now - Number(last)) < 5 * 60 * 1000) {
+                return jsonResponse(Object.assign(body, { ok: true, verified: false, reason: 'throttled' }), 200, headers);
+            }
+            const probe = await probeSmtp(env);
+            if (probe.ok && env.LEADS) {
+                await env.LEADS.put(key, String(now), { expirationTtl: 3600 });
+            }
+            return jsonResponse(Object.assign(body, probe), probe.ok ? 200 : 502, headers);
+        }
+
+        // ---- Mail DNS, resolved server-side ----------------------------------
+        if (request.method === 'GET' && (path === '/mail/dns' || path === '/api/mail/dns')) {
+            const summary = await resolveMailDns(url.searchParams.get('domain') || 'sr-coresync.com');
+            return jsonResponse(summary, summary.ok ? 200 : 503, Object.assign({}, cors, {
+                'Cache-Control': 'public, max-age=600, stale-while-revalidate=1800'
+            }));
         }
 
         // ---- Public trust statistics ----------------------------------------
