@@ -48,7 +48,7 @@ LITERAL_SAFE = re.compile(r"""^[\s'"[\]{}\d.,:eE+\-truefalsnul]*$""")
 def parse_args(raw):
     """Return a list of literals, or None when the arguments are not literal."""
     text = raw.strip()
-    if not text:
+    if not text or text == ',':
         return []
     try:
         tree = ast.parse('(' + text + ')', mode='eval')
@@ -103,6 +103,7 @@ def main():
 
     converted_zero = 0
     converted_args = 0
+    converted_this = 0
     files = 0
     left = 0
     remaining = 0
@@ -113,12 +114,24 @@ def main():
         original = doc
 
         def repl(match):
-            nonlocal converted_zero, converted_args, left
+            nonlocal converted_zero, converted_args, converted_this, left
             name = match.group('name')
             raw = match.group('args')
             if name not in safe:
                 left += 1
                 return match.group(0)
+            pass_element = False
+            stripped = raw.lstrip()
+            if stripped.startswith('this'):
+                remainder = stripped[4:]
+                if remainder.strip() == '':
+                    raw, pass_element = '', True
+                elif remainder.lstrip().startswith(','):
+                    raw, pass_element = remainder.lstrip()[1:], True
+                else:
+                    left += 1
+                    return match.group(0)
+
             values = parse_args(raw)
             if values is None:
                 left += 1
@@ -132,6 +145,9 @@ def main():
             else:
                 out = ' data-sr-call="%s"' % name
                 converted_zero += 1
+            if pass_element:
+                out += ' data-sr-this="1"'
+                converted_this += 1
             if event != 'click':
                 out += ' data-sr-on="%s"' % event
             return out
@@ -175,6 +191,7 @@ def main():
     print('safe functions        : %d' % len(safe))
     print('converted (no args)   : %d' % converted_zero)
     print('converted (with args) : %d' % converted_args)
+    print('converted (this-aware): %d' % converted_this)
     print('files touched         : %d' % files)
     print('handlers left inline  : %d' % remaining)
     print('=' * 72)

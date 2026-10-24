@@ -1028,10 +1028,10 @@
 
                     <div class="mig-sys-lbl">1. اختر نظامك الحالي:</div>
                     <div class="migration-systems-row">
-                        <button type="button" class="migration-sys-btn active" onclick="selectMigrationSystem(this, 'SAP')">SAP ECC / S4HANA</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Oracle')">Oracle NetSuite</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Exact')">Exact Online</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'SQL')">Custom Legacy SQL</button>
+                        <button type="button" class="migration-sys-btn active" data-sr-call="selectMigrationSystem" data-sr-args='["SAP"]' data-sr-this="1">SAP ECC / S4HANA</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["Oracle"]' data-sr-this="1">Oracle NetSuite</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["Exact"]' data-sr-this="1">Exact Online</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["SQL"]' data-sr-this="1">Custom Legacy SQL</button>
                     </div>
 
                     <div class="roi-slider-header mt-3 mb-1">
@@ -1940,19 +1940,19 @@
 
             <label class="text-caption text-white-64 d-block mb-1">اختر البنك الهولندي (Dutch Banking Partner):</label>
             <div class="bank-select-grid">
-                <div class="bank-option wise-active selected" onclick="selectBank(this)">
+                <div class="bank-option wise-active selected" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-wise">WISE</div>
                     <div class="bank-name">Wise Europe SA (المعتمد)</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-ing">ING</div>
                     <div class="bank-name">ING Bank</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-abn">ABN</div>
                     <div class="bank-name">ABN AMRO</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-rabo">RABO</div>
                     <div class="bank-name">Rabobank</div>
                 </div>
@@ -4319,29 +4319,29 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="mb-3">
                 <label class="form-label text-mint-label">1. المحور الاستراتيجي للجلسة</label>
                 <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" onclick="selectBookingTopic(this, '☁️ معمارية Cloud ERP السحابية')">☁️ معمارية Cloud ERP السحابية</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🛡️ السيادة الرقمية وتوافق NIS2')">🛡️ السيادة الرقمية وتوافق NIS2</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🤖 أتمتة الذكاء الاصطناعي والمالية')">🤖 أتمتة الذكاء الاصطناعي والمالية</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🔄 الترحيل بدون توقف (Zero-Downtime)')">🔄 الترحيل بدون توقف (Zero-Downtime)</button>
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingTopic" data-sr-args='["☁️ معمارية Cloud ERP السحابية"]' data-sr-this="1">☁️ معمارية Cloud ERP السحابية</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🛡️ السيادة الرقمية وتوافق NIS2"]' data-sr-this="1">🛡️ السيادة الرقمية وتوافق NIS2</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🤖 أتمتة الذكاء الاصطناعي والمالية"]' data-sr-this="1">🤖 أتمتة الذكاء الاصطناعي والمالية</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🔄 الترحيل بدون توقف (Zero-Downtime)"]' data-sr-this="1">🔄 الترحيل بدون توقف (Zero-Downtime)</button>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label text-mint-label">2. المضيف التنفيذي المطلوب</label>
                 <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" onclick="selectBookingHost(this, 'م. محمد سليم عزيزة (CTO)')">م. محمد سليم عزيزة (CTO)</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'أ. محمد رائد كعكة (CEO)')">أ. محمد رائد كعكة (CEO)</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'كلا المؤسسين (جلسة مشتركة)')">كلا المؤسسين (جلسة مشتركة)</button>
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingHost" data-sr-args='["م. محمد سليم عزيزة (CTO)"]' data-sr-this="1">م. محمد سليم عزيزة (CTO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["أ. محمد رائد كعكة (CEO)"]' data-sr-this="1">أ. محمد رائد كعكة (CEO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["كلا المؤسسين (جلسة مشتركة)"]' data-sr-this="1">كلا المؤسسين (جلسة مشتركة)</button>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label text-mint-label">3. الموعد المفضل (بتوقيت أمستردام CET)</label>
                 <div class="booking-slots-grid">
-                    <button type="button" class="booking-slot-btn active" onclick="selectBookingSlot(this, '09:30 CET')">09:30 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '11:00 CET')">11:00 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '14:00 CET')">14:00 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '16:30 CET')">16:30 CET</button>
+                    <button type="button" class="booking-slot-btn active" data-sr-call="selectBookingSlot" data-sr-args='["09:30 CET"]' data-sr-this="1">09:30 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["11:00 CET"]' data-sr-this="1">11:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["14:00 CET"]' data-sr-this="1">14:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["16:30 CET"]' data-sr-this="1">16:30 CET</button>
                 </div>
             </div>
 

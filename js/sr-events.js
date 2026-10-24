@@ -48,6 +48,11 @@
       }
       if (!Array.isArray(args)) args = [args];
     }
+    // data-sr-this reproduces onclick="fn(this, ...)": the element becomes the
+    // first argument, exactly as the inline handler passed it.
+    if (el.hasAttribute('data-sr-this')) {
+      args = [el].concat(args);
+    }
     if (el.hasAttribute('data-sr-prevent') && event && event.preventDefault) {
       event.preventDefault();
     }

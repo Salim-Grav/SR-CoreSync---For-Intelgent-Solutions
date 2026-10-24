@@ -979,10 +979,10 @@
 
                     <div class="u-migration-step-label">1. Selecteer uw huidige legacy-systeem:</div>
                     <div class="migration-systems-row">
-                        <button type="button" class="migration-sys-btn active" onclick="selectMigrationSystem(this, 'SAP')">SAP ECC / S4HANA</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Oracle')">Oracle NetSuite</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'Exact')">Exact Online</button>
-                        <button type="button" class="migration-sys-btn" onclick="selectMigrationSystem(this, 'SQL')">Custom Legacy SQL</button>
+                        <button type="button" class="migration-sys-btn active" data-sr-call="selectMigrationSystem" data-sr-args='["SAP"]' data-sr-this="1">SAP ECC / S4HANA</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["Oracle"]' data-sr-this="1">Oracle NetSuite</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["Exact"]' data-sr-this="1">Exact Online</button>
+                        <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["SQL"]' data-sr-this="1">Custom Legacy SQL</button>
                     </div>
 
                     <div class="roi-slider-header mt-3 mb-1">
@@ -1565,19 +1565,19 @@
 
             <label class="text-caption text-white-64 d-block mb-1">Kies uw Nederlandse Bank (iDEAL 2.0):</label>
             <div class="bank-select-grid">
-                <div class="bank-option selected" onclick="selectBank(this)">
+                <div class="bank-option selected" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-ing">ING</div>
                     <div class="bank-name">ING Bank</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-abn">ABN</div>
                     <div class="bank-name">ABN AMRO</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-rabo">RABO</div>
                     <div class="bank-name">Rabobank</div>
                 </div>
-                <div class="bank-option" onclick="selectBank(this)">
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-bunq">BNQ</div>
                     <div class="bank-name">Bunq Digital</div>
                 </div>
@@ -3901,29 +3901,29 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div class="mb-3">
                 <label class="form-label u-booking-label">1. Strategisch Onderwerp</label>
                 <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" onclick="selectBookingTopic(this, '☁️ Cloud ERP Architectuur')">☁️ Cloud ERP Architectuur</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🛡️ NIS2 & Soevereine Naleving')">🛡️ NIS2 & Soevereine Naleving</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🤖 AI Automatisering & Financiën')">🤖 AI Automatisering & Financiën</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingTopic(this, '🔄 Zero-Downtime Migratie')">🔄 Zero-Downtime Migratie</button>
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingTopic" data-sr-args='["☁️ Cloud ERP Architectuur"]' data-sr-this="1">☁️ Cloud ERP Architectuur</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🛡️ NIS2 & Soevereine Naleving"]' data-sr-this="1">🛡️ NIS2 & Soevereine Naleving</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🤖 AI Automatisering & Financiën"]' data-sr-this="1">🤖 AI Automatisering & Financiën</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🔄 Zero-Downtime Migratie"]' data-sr-this="1">🔄 Zero-Downtime Migratie</button>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label u-booking-label">2. Gewenste Gesprekspartner</label>
                 <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" onclick="selectBookingHost(this, 'Ir. Mohammad Salim Aziza (CTO)')">Ir. Mohammad Salim Aziza (CTO)</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'Dhr. Mohammad Raed Kaaka (CEO)')">Dhr. Mohammad Raed Kaaka (CEO)</button>
-                    <button type="button" class="booking-pill" onclick="selectBookingHost(this, 'Beide Oprichters (Gezamenlijke Sessie)')">Beide Oprichters (Gezamenlijke Sessie)</button>
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingHost" data-sr-args='["Ir. Mohammad Salim Aziza (CTO)"]' data-sr-this="1">Ir. Mohammad Salim Aziza (CTO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["Dhr. Mohammad Raed Kaaka (CEO)"]' data-sr-this="1">Dhr. Mohammad Raed Kaaka (CEO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["Beide Oprichters (Gezamenlijke Sessie)"]' data-sr-this="1">Beide Oprichters (Gezamenlijke Sessie)</button>
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label u-booking-label">3. Voorkeurstijdslot (CET / Amsterdamse Tijd)</label>
                 <div class="booking-slots-grid">
-                    <button type="button" class="booking-slot-btn active" onclick="selectBookingSlot(this, '09:30 CET')">09:30 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '11:00 CET')">11:00 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '14:00 CET')">14:00 CET</button>
-                    <button type="button" class="booking-slot-btn" onclick="selectBookingSlot(this, '16:30 CET')">16:30 CET</button>
+                    <button type="button" class="booking-slot-btn active" data-sr-call="selectBookingSlot" data-sr-args='["09:30 CET"]' data-sr-this="1">09:30 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["11:00 CET"]' data-sr-this="1">11:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["14:00 CET"]' data-sr-this="1">14:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["16:30 CET"]' data-sr-this="1">16:30 CET</button>
                 </div>
             </div>
 
