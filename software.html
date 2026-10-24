@@ -556,7 +556,7 @@
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
                                 <span>حاسبة تراخيص <bdi>White-Label</bdi> وعروض الأسعار الفورية 🧮</span>
                             </a>
-                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" onclick="openSoftwareDocsModal('taxsync', 'ar')">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" data-sr-call="openSoftwareDocsModal" data-sr-args='["taxsync", "ar"]'>
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                                 <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
                             </button>
@@ -569,15 +569,15 @@
                         <!-- شريط التوجيه والاستشارات التنفيذية المباشرة (رائد للمحاسبة / سليم للأنظمة / إيميل info) -->
                         <div class="sr-hero-executive-contact-bar">
                             <span class="contact-bar-label">⚡ استشارات الشركاء المؤسسين المباشرة:</span>
-                            <button type="button" class="sr-hero-contact-chip raed" onclick="openExecutiveContactModal('accounting', 'استشارة محاسبية وضريبية عامة')" title="محادثة واتساب مباشرة مع أ. محمد رائد كعكة">
+                            <button type="button" class="sr-hero-contact-chip raed" data-sr-call="openExecutiveContactModal" data-sr-args='["accounting", "استشارة محاسبية وضريبية عامة"]' title="محادثة واتساب مباشرة مع أ. محمد رائد كعكة">
                                 <span class="chip-avatar">📊</span>
                                 <span>واتساب أ. رائد كعكة (المحاسبة والضرائب)</span>
                             </button>
-                            <button type="button" class="sr-hero-contact-chip salim" onclick="openExecutiveContactModal('systems', 'استشارة تطوير برمجيات وأنظمة سحابية')" title="محادثة واتساب مباشرة مع م. محمد سليم عزيزة">
+                            <button type="button" class="sr-hero-contact-chip salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "استشارة تطوير برمجيات وأنظمة سحابية"]' title="محادثة واتساب مباشرة مع م. محمد سليم عزيزة">
                                 <span class="chip-avatar">💻</span>
                                 <span>واتساب م. سليم عزيزة (الأنظمة والـ API)</span>
                             </button>
-                            <button type="button" class="sr-hero-contact-chip email" onclick="sendDirectInfoEmail('استفسار تنفيذي عام حول برمجيات S&R CoreSync')" title="إرسال بريد إلكتروني فوري لإدارة الشركة">
+                            <button type="button" class="sr-hero-contact-chip email" data-sr-call="sendDirectInfoEmail" data-sr-args='["استفسار تنفيذي عام حول برمجيات S&R CoreSync"]' title="إرسال بريد إلكتروني فوري لإدارة الشركة">
                                 <span class="chip-avatar">📧</span>
                                 <span>مراسلة info@sr-coresync.com</span>
                             </button>
@@ -639,7 +639,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">ترخيص سنوي / جهاز</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('taxsync')" title="تشغيل البرنامج فوري في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["taxsync"]' title="تشغيل البرنامج فوري في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-TaxSync-Web-App.html" download="SR-TaxSync-Web-App.html" class="btn-live-preview software-btn-sim" title="تحميل التطبيق للتشغيل أوفلاين">
@@ -649,11 +649,11 @@
                             </div>
                             <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R TaxSync Desktop')" title="استشارة محاسبية وضريبية خاصة مع أ. محمد رائد كعكة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" data-sr-call="openExecutiveContactModal" data-sr-args='["accounting", "S&R TaxSync Desktop"]' title="استشارة محاسبية وضريبية خاصة مع أ. محمد رائد كعكة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل خاص بالمحاسبة (أ. رائد)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R TaxSync Desktop')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R TaxSync Desktop"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -687,7 +687,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / نقطة بيع</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('cloudpos')" title="تشغيل محطة الكاشير ونقاط البيع في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["cloudpos"]' title="تشغيل محطة الكاشير ونقاط البيع في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudPOS-Terminal.html" class="btn-live-preview software-btn-sim" title="تحميل محطة الكاشير للتشغيل أوفلاين">
@@ -697,11 +697,11 @@
                             </div>
                             <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R CloudPOS Connector')" title="استشارة نقاط البيع والربط المالي مع أ. محمد رائد كعكة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" data-sr-call="openExecutiveContactModal" data-sr-args='["accounting", "S&R CloudPOS Connector"]' title="استشارة نقاط البيع والربط المالي مع أ. محمد رائد كعكة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل خاص بنقاط البيع (أ. رائد)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R CloudPOS Connector')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R CloudPOS Connector"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -735,7 +735,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / مستخدم</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('flowscan', 'mobile')" title="تشغيل ماسح الإيصالات في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["flowscan", "mobile"]' title="تشغيل ماسح الإيصالات في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-FlowScan-Mobile-App.html" download="SR-FlowScan-Mobile-App.html" class="btn-live-preview software-btn-sim" title="تحميل التطبيق للتشغيل أوفلاين">
@@ -745,11 +745,11 @@
                             </div>
                             <!-- شريط التواصل والاستشارة المحاسبية الخاصة مع أ. رائد كعكة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R FlowScan AI Mobile')" title="استشارة أتمتة الفواتير والإيصالات مع أ. محمد رائد كعكة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" data-sr-call="openExecutiveContactModal" data-sr-args='["accounting", "S&R FlowScan AI Mobile"]' title="استشارة أتمتة الفواتير والإيصالات مع أ. محمد رائد كعكة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل بأتمتة الفواتير (أ. رائد)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R FlowScan AI Mobile')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R FlowScan AI Mobile"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -783,7 +783,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (50k API Calls)</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('sdk')" title="تشغيل كونسول تجربة الـ API في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["sdk"]' title="تشغيل كونسول تجربة الـ API في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-Financial-AI-SDK.html" download="SR-Financial-AI-SDK.html" class="btn-live-preview software-btn-sim" title="تحميل كونسول المطورين أوفلاين">
@@ -793,11 +793,11 @@
                             </div>
                             <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R Financial AI SDK')" title="استشارة تكامل الـ API والمكتبات البرمجية مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R Financial AI SDK"]' title="استشارة تكامل الـ API والمكتبات البرمجية مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل بالـ API والمطورين (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R Financial AI SDK')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R Financial AI SDK"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -831,7 +831,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً (1TB Encrypted)</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('vault')" title="تشغيل أداة التشفير في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["vault"]' title="تشغيل أداة التشفير في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-SecureVault-App.html" download="SR-SecureVault-App.html" class="btn-live-preview software-btn-sim" title="تحميل أداة التشفير أوفلاين">
@@ -841,11 +841,11 @@
                             </div>
                             <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R SecureVault B2B')" title="استشارة الأمن السيبراني والتشفير السحابي مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R SecureVault B2B"]' title="استشارة الأمن السيبراني والتشفير السحابي مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل بالأمن والتشفير (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R SecureVault B2B')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R SecureVault B2B"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -879,7 +879,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">شهرياً / عقدة سحابية</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareLiveApp('sdk')" title="تشغيل الوكيل السحابي في المتصفح">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["sdk"]' title="تشغيل الوكيل السحابي في المتصفح">
                                         <span>⚡ تشغيل فوري</span>
                                     </button>
                                     <a href="downloads/SR-Financial-AI-SDK.html" download="SR-Financial-AI-SDK.html" class="btn-live-preview software-btn-sim" title="تحميل الوكيل السحابي أوفلاين">
@@ -889,11 +889,11 @@
                             </div>
                             <!-- شريط التواصل واستشارة الأنظمة والبرمجيات مع م. سليم عزيزة وإيميل info -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R Cloud Terminal Agent')" title="استشارة مراقبة الخوادم وهندسة الـ DevOps مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R Cloud Terminal Agent"]' title="استشارة مراقبة الخوادم وهندسة الـ DevOps مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 تواصل بأنظمة السحابة (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R Cloud Terminal Agent')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R Cloud Terminal Agent"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -949,17 +949,17 @@
                                     <a href="./whitelabel-calculator.html?platform=civicsync" class="btn-live-preview software-btn-sim software-btn-calc" title="حساب تكلفة ترخيص CivicSync الفورية">
                                         <span>حساب السعر 🧮</span>
                                     </a>
-                                    <a type="button" class="software-btn-download" onclick="openSoftwareLiveApp('civicsync')" title="استعراض دراسة الحالة الكاملة">
+                                    <a type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["civicsync"]' title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R CivicSync - طلب عرض توضيحي')" title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R CivicSync - طلب عرض توضيحي"]' title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 طلب عرض توضيحي (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R CivicSync')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R CivicSync"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -1000,17 +1000,17 @@
                                     <a href="./whitelabel-calculator.html?platform=healthbridge" class="btn-live-preview software-btn-sim software-btn-calc" title="حساب تكلفة ترخيص HealthBridge الفورية">
                                         <span>حساب السعر 🧮</span>
                                     </a>
-                                    <a type="button" class="software-btn-download" onclick="openSoftwareLiveApp('healthbridge')" title="استعراض دراسة الحالة الكاملة">
+                                    <a type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["healthbridge"]' title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
                             </div>
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R HealthBridge - طلب عرض توضيحي')" title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R HealthBridge - طلب عرض توضيحي"]' title="طلب عرض توضيحي مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💬 طلب عرض توضيحي (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-email" onclick="sendDirectInfoEmail('S&R HealthBridge')" title="إرسال إيميل فوري إلى info@sr-coresync.com">
+                                <button type="button" class="btn-consult-email" data-sr-call="sendDirectInfoEmail" data-sr-args='["S&R HealthBridge"]' title="إرسال إيميل فوري إلى info@sr-coresync.com">
                                     <span>📧 إيميل info</span>
                                 </button>
                             </div>
@@ -1051,18 +1051,18 @@
                                     <a href="./whitelabel-calculator.html?platform=omnibakery" class="btn-live-preview software-btn-sim software-btn-calc" title="حساب تكلفة ترخيص OmniBakery الفورية">
                                         <span>حساب السعر 🧮</span>
                                     </a>
-                                    <a type="button" class="software-btn-download" onclick="openSoftwareLiveApp('omnibakery')" title="استعراض دراسة الحالة الكاملة">
+                                    <a type="button" class="software-btn-download" data-sr-call="openSoftwareLiveApp" data-sr-args='["omnibakery"]' title="استعراض دراسة الحالة الكاملة">
                                         <span>📄 دراسة الحالة</span>
                                     </a>
                                 </div>
                             </div>
                             <!-- نقطة التقاء الشريكين: التقنية (م. سليم) + الفوترة الضريبية (أ. رائد) -->
                             <div class="software-card-consult-bar">
-                                <button type="button" class="btn-consult-advisor btn-advisor-salim" onclick="openExecutiveContactModal('systems', 'S&R OmniBakery - طلب عرض توضيحي')" title="النظام ونقاط البيع والأسطول مع م. محمد سليم عزيزة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-salim" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "S&R OmniBakery - طلب عرض توضيحي"]' title="النظام ونقاط البيع والأسطول مع م. محمد سليم عزيزة">
                                     <span class="advisor-dot"></span>
                                     <span>💻 النظام (م. سليم)</span>
                                 </button>
-                                <button type="button" class="btn-consult-advisor btn-advisor-raed" onclick="openExecutiveContactModal('accounting', 'S&R OmniBakery - الفوترة والضرائب')" title="الفوترة وضريبة BTW مع أ. محمد رائد كعكة">
+                                <button type="button" class="btn-consult-advisor btn-advisor-raed" data-sr-call="openExecutiveContactModal" data-sr-args='["accounting", "S&R OmniBakery - الفوترة والضرائب"]' title="الفوترة وضريبة BTW مع أ. محمد رائد كعكة">
                                     <span class="advisor-dot"></span>
                                     <span>📊 الضرائب (أ. رائد)</span>
                                 </button>
@@ -1116,7 +1116,7 @@
                                     تواصل مباشرة مع كبير مهندسي ومطوري الأنظمة (م. سليم عزيزة) لدراسة مشروعك البرمجي، وهيكلته تجارياً، وإدراجه في المتجر الرسمي.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
-                                    <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveContactModal('systems', 'طلب إدراج وترخيص مشروع برمجي تجاري في مختبر م. سليم')">
+                                    <button type="button" class="tf-btn w-100 justify-content-center" data-sr-call="openExecutiveContactModal" data-sr-args='["systems", "طلب إدراج وترخيص مشروع برمجي تجاري في مختبر م. سليم"]'>
                                         <span>تقديم طلب إدراج مشروع برمجى ←</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview w-100 justify-content-center btn-live-preview--pad">
@@ -1503,7 +1503,7 @@
                 </label>
                 <div class="exec-advisor-toggle-grid">
                     <!-- كرت رائد كعكة -->
-                    <div id="execCardRaed" class="exec-advisor-toggle-card active raed" onclick="setExecutiveContactAdvisor('raed')">
+                    <div id="execCardRaed" class="exec-advisor-toggle-card active raed" data-sr-call="setExecutiveContactAdvisor" data-sr-args='["raed"]'>
                         <div class="exec-advisor-avatar exec-advisor-avatar-raed">📊</div>
                         <div class="exec-advisor-info">
                             <h4>أ. محمد رائد كعكة</h4>
@@ -1513,7 +1513,7 @@
                     </div>
 
                     <!-- كرت سليم عزيزة -->
-                    <div id="execCardSalim" class="exec-advisor-toggle-card salim" onclick="setExecutiveContactAdvisor('salim')">
+                    <div id="execCardSalim" class="exec-advisor-toggle-card salim" data-sr-call="setExecutiveContactAdvisor" data-sr-args='["salim"]'>
                         <div class="exec-advisor-avatar exec-advisor-avatar-salim">💻</div>
                         <div class="exec-advisor-info">
                             <h4>م. محمد سليم عزيزة</h4>

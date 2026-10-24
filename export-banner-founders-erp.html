@@ -1040,7 +1040,7 @@
                     <!-- أزرار الإجراءات مرتبة من اليمين إلى اليسار -->
                     <div class="hero-stage-actions">
                         <a href="index.html#contact" class="hero-stage-btn hero-stage-btn-primary">تواصـــل معنا</a>
-                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" onclick="openExecutiveBookingModal('stage')">
+                        <button type="button" class="hero-stage-btn hero-stage-btn-glass" data-sr-call="openExecutiveBookingModal" data-sr-args='["stage"]'>
                             <span>حجز استشارة VIP 👔</span>
                         </button>
                         <button type="button" class="hero-stage-btn hero-stage-btn-glass" data-sr-call="openRoiCalculatorModal">
@@ -1059,11 +1059,11 @@
                                 القيادة المباشرة:
                             </span>
                             <div class="hero-stage-capsule" role="tablist" aria-label="تبديل عرض القيادة التنفيذية">
-                                <button type="button" role="tab" aria-selected="true" class="hero-stage-tab active" id="btnSwitchSalim" onclick="switchStage('salim')">
+                                <button type="button" role="tab" aria-selected="true" class="hero-stage-tab active" id="btnSwitchSalim" data-sr-call="switchStage" data-sr-args='["salim"]'>
                                     <span class="hero-stage-tab-dot"></span>
                                     <span>م. محمد سليم عزيزة (CTO)</span>
                                 </button>
-                                <button type="button" role="tab" aria-selected="false" class="hero-stage-tab" id="btnSwitchRaed" onclick="switchStage('raed')">
+                                <button type="button" role="tab" aria-selected="false" class="hero-stage-tab" id="btnSwitchRaed" data-sr-call="switchStage" data-sr-args='["raed"]'>
                                     <span class="hero-stage-tab-dot"></span>
                                     <span>أ. محمد رائد كعكة (CFO)</span>
                                 </button>
@@ -1127,15 +1127,15 @@
             <!-- اختيار المستشار -->
             <label class="sr-exec-label mb-2 d-block">اختر المستشار التنفيذي المطلوب للجلسة:</label>
             <div class="sr-advisor-select-grid" role="radiogroup">
-                <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" onclick="selectBookingAdvisor('salim')">
+                <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" data-sr-call="selectBookingAdvisor" data-sr-args='["salim"]'>
                     <span class="name">م. محمد سليم عزيزة</span>
                     <span class="role">كبير مهندسي السحابة والذكاء الاصطناعي // CTO</span>
                 </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" onclick="selectBookingAdvisor('raed')">
+                <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" data-sr-call="selectBookingAdvisor" data-sr-args='["raed"]'>
                     <span class="name">أ. محمد رائد كعكة</span>
                     <span class="role">خبير الأنظمة المحاسبية والـ ERP والضرائب // CFO</span>
                 </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" onclick="selectBookingAdvisor('both')">
+                <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" data-sr-call="selectBookingAdvisor" data-sr-args='["both"]'>
                     <span class="name">كلا الشريكين معاً (VIP)</span>
                     <span class="role">جلسة استراتيجية شاملة (هندسة برمجية + حوكمة مالية)</span>
                 </button>
@@ -1303,13 +1303,13 @@
 
             <!-- تبويبات العرض التجريبي -->
             <div class="sr-demo-tab-list" role="tablist">
-                <button type="button" role="tab" aria-selected="true" class="sr-demo-tab-btn active" id="demoTabBtnErp" onclick="switchDemoModalTab('erp')">
+                <button type="button" role="tab" aria-selected="true" class="sr-demo-tab-btn active" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 منظومة ERP والمحاسبة الذكية (CFO Hub)
                 </button>
-                <button type="button" role="tab" aria-selected="false" class="sr-demo-tab-btn" id="demoTabBtnCloud" onclick="switchDemoModalTab('cloud')">
+                <button type="button" role="tab" aria-selected="false" class="sr-demo-tab-btn" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
                     ⚡ المحرك السحابي وأتمتة الذكاء الاصطناعي (CTO Core)
                 </button>
-                <button type="button" role="tab" aria-selected="false" class="sr-demo-tab-btn" id="demoTabBtnGov" onclick="switchDemoModalTab('gov')">
+                <button type="button" role="tab" aria-selected="false" class="sr-demo-tab-btn" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
                     🛡️ الامتثال والأمان والربط الضريبي
                 </button>
             </div>

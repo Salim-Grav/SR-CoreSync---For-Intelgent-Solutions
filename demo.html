@@ -540,9 +540,9 @@
                         <div class="cur-selector-group">
                             <span class="cur-label">العملة:</span>
                             <div class="cur-pill-toggle">
-                                <button type="button" class="cur-pill active" id="curPill-EUR" onclick="setCurrency('EUR')">€ EUR</button>
-                                <button type="button" class="cur-pill" id="curPill-USD" onclick="setCurrency('USD')">$ USD</button>
-                                <button type="button" class="cur-pill" id="curPill-SAR" onclick="setCurrency('SAR')">﷼ SAR</button>
+                                <button type="button" class="cur-pill active" id="curPill-EUR" data-sr-call="setCurrency" data-sr-args='["EUR"]'>€ EUR</button>
+                                <button type="button" class="cur-pill" id="curPill-USD" data-sr-call="setCurrency" data-sr-args='["USD"]'>$ USD</button>
+                                <button type="button" class="cur-pill" id="curPill-SAR" data-sr-call="setCurrency" data-sr-args='["SAR"]'>﷼ SAR</button>
                             </div>
                         </div>
                         <div class="cur-selector-group">
@@ -765,7 +765,7 @@
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                             توليد فاتورة إلكترونية تجريبية
                         </button>
-                        <button type="button" class="btn-secondary-glow" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">
+                        <button type="button" class="btn-secondary-glow" data-sr-call="openIdealSimulatorModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners", 35000]'>
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                             محاكاة دفع فوري عبر iDEAL
                         </button>
@@ -841,7 +841,7 @@
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026Modal">💻 عرض وتوقيع العقد التقني</button>
                                             <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
-                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">سداد iDEAL</button>
+                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1021-T1", "السيد مضر أبو فاشة (NL بالعربي)", 7623]'>سداد iDEAL</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -856,7 +856,7 @@
                                         <div class="d-flex gap-1 flex-wrap">
                                             <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026FinModal">📊 عرض وتوقيع العقد المالي</button>
                                             <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
-                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">سداد iDEAL</button>
+                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1022-FIN", "السيد مضر أبو فاشة (NL بالعربي - العقد المالي)", 4719]'>سداد iDEAL</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -868,7 +868,7 @@
                                     <td class="font-num tx-amount-highlight">€ 12,100</td>
                                     <td><span class="status-badge status-completed">مدفوعة عبر iDEAL ✓</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-081', 'Amsterdam Tech Hub (NL)', 10000, 2100, 12100, 'مدفوعة عبر iDEAL ✓', '2026-10-01', 'BTW 21%')">معاينة الفاتورة</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-081", "Amsterdam Tech Hub (NL)", 10000, 2100, 12100, "مدفوعة عبر iDEAL ✓", "2026-10-01", "BTW 21%"]'>معاينة الفاتورة</button>
                                     </td>
                                 </tr>
                                 <tr data-status="pending" id="inv-row-2">
@@ -879,8 +879,8 @@
                                     <td class="font-num tx-amount-highlight">€ 35,000</td>
                                     <td><span class="status-badge status-processing" id="status-badge-inv-82">تستحق خلال 14 يوم</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-82" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">محاكاة سداد iDEAL</button>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-082', 'Gulf Logistics Partners (KSA)', 35000, 0, 35000, 'قيد الانتظار', '2026-10-03', 'Reverse Charge 0%')">معاينة الفاتورة</button>
+                                        <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-82" data-sr-call="openIdealSimulatorModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners", 35000]'>محاكاة سداد iDEAL</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners (KSA)", 35000, 0, 35000, "قيد الانتظار", "2026-10-03", "Reverse Charge 0%"]'>معاينة الفاتورة</button>
                                     </td>
                                 </tr>
                                 <tr data-status="paid" id="inv-row-3">
@@ -891,7 +891,7 @@
                                     <td class="font-num tx-amount-highlight">€ 26,620</td>
                                     <td><span class="status-badge status-completed">مدفوعة بتحويل SEPA Instant ✓</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-080', 'Rotterdam Maritime BV (NL)', 22000, 4620, 26620, 'مدفوعة بتحويل SEPA Instant ✓', '2026-09-28', 'BTW 21%')">معاينة الفاتورة</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-080", "Rotterdam Maritime BV (NL)", 22000, 4620, 26620, "مدفوعة بتحويل SEPA Instant ✓", "2026-09-28", "BTW 21%"]'>معاينة الفاتورة</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -925,9 +925,9 @@
                     </div>
 
                     <div class="ai-prompt-chips">
-                        <div class="prompt-chip" onclick="askAiPrompt('حلل التدفق المالي لشهر أكتوبر وأخبرني بهامش الأرباح المتوقع')">📊 تحليل التدفق المالي لشهر أكتوبر</div>
-                        <div class="prompt-chip" onclick="askAiPrompt('ما هي الفواتير المعلقة التي تتجاوز مدتها 15 يوماً؟')">⏳ الفواتير المتأخرة</div>
-                        <div class="prompt-chip" onclick="askAiPrompt('قدم لي نصيحة لتحسين كفاءة إدارة المخزون وفق بيانات الأسبوع الماضي')">💡 تحسين تكاليف التخزين</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["حلل التدفق المالي لشهر أكتوبر وأخبرني بهامش الأرباح المتوقع"]'>📊 تحليل التدفق المالي لشهر أكتوبر</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["ما هي الفواتير المعلقة التي تتجاوز مدتها 15 يوماً؟"]'>⏳ الفواتير المتأخرة</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["قدم لي نصيحة لتحسين كفاءة إدارة المخزون وفق بيانات الأسبوع الماضي"]'>💡 تحسين تكاليف التخزين</div>
                     </div>
 
                     <div class="ai-chat-input-bar">
@@ -1135,9 +1135,9 @@
 
                         <div class="d-flex gap-2 flex-wrap mb-3">
                             <span class="text-caption text-white-64 d-block w-100">أو اختر نموذجاً جاهزاً سريعاً:</span>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('مجموعة الرياض للخدمات اللوجستية', '🇸🇦')">مجموعة الرياض 🇸🇦</button>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('Amsterdam Digital Trade BV', '🇳🇱')">Amsterdam BV 🇳🇱</button>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('بنك التقنية الحديثة', '🏦')">بنك التقنية 🏦</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["مجموعة الرياض للخدمات اللوجستية", "🇸🇦"]'>مجموعة الرياض 🇸🇦</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["Amsterdam Digital Trade BV", "🇳🇱"]'>Amsterdam BV 🇳🇱</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["بنك التقنية الحديثة", "🏦"]'>بنك التقنية 🏦</button>
                         </div>
 
                         <button type="button" class="action-cta-btn w-100 mb-2" data-sr-call="applyClientBrand">
@@ -1205,7 +1205,7 @@
 
                         <!-- أزرار الإجراءات الرئيسية في منتصف البنر -->
                         <div class="sr-market-hero-actions">
-                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" onclick="openSoftwareDocsModal('cloudpos', 'ar')">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" data-sr-call="openSoftwareDocsModal" data-sr-args='["cloudpos", "ar"]'>
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                                 <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
                             </button>
@@ -1306,10 +1306,10 @@
                                 <span class="software-price-unit">ترخيص سنوي / جهاز</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('taxsync')" title="تشغيل فوري داخل المتصفح">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('taxsync', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["taxsync"]' title="تشغيل فوري داخل المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["taxsync", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-TaxSync-Web-App.html" download="SR-TaxSync-Web-App.html" class="btn-software-trial" title="تحميل نسخة أوفلاين كاملة">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">شراء الترخيص</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>شراء الترخيص</button>
                             </div>
                         </div>
                     </div>
@@ -1351,10 +1351,10 @@
                                 <span class="software-price-unit">شهرياً / مستخدم</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('flowscan', 'mobile')" title="تشغيل فوري على شاشة الهاتف بالمتصفح">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('flowscan', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["flowscan", "mobile"]' title="تشغيل فوري على شاشة الهاتف بالمتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["flowscan", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-FlowScan-Mobile-App.html" download="SR-FlowScan-Mobile-App.html" class="btn-software-trial" title="تحميل تطبيق الموبايل أوفلاين">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('flowscan')">اشتراك</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["flowscan"]'>اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -1395,10 +1395,10 @@
                                 <span class="software-price-unit">شهرياً / نقطة بيع</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('cloudpos')" title="تشغيل شاشة الكاشير ونقاط البيع">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('cloudpos', 'ar')" title="دليل الاستخدام ومسح الباركود بالكاميرا">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["cloudpos"]' title="تشغيل شاشة الكاشير ونقاط البيع">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["cloudpos", "ar"]' title="دليل الاستخدام ومسح الباركود بالكاميرا">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudPOS-Terminal.html" class="btn-software-trial" title="تحميل شاشة الكاشير أوفلاين">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('cloudpos')">تفعيل</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["cloudpos"]'>تفعيل</button>
                             </div>
                         </div>
                     </div>
@@ -1439,10 +1439,10 @@
                                 <span class="software-price-unit">شهرياً (1TB Encrypted)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('vault')" title="تشغيل أداة التشفير في المتصفح">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('vault', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["vault"]' title="تشغيل أداة التشفير في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["vault", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-SecureVault-App.html" download="SR-SecureVault-App.html" class="btn-software-trial" title="تحميل أداة التشفير أوفلاين">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('vault')">اشتراك</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["vault"]'>اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -1485,10 +1485,10 @@
                                 <span class="software-price-unit">شهرياً (50k Calls)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('sdk')" title="تشغيل وحدة الـ API في المتصفح">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('sdk', 'ar')" title="دليل الاستخدام والـ API">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["sdk"]' title="تشغيل وحدة الـ API في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["sdk", "ar"]' title="دليل الاستخدام والـ API">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-Financial-AI-SDK.html" download="SR-Financial-AI-SDK.html" class="btn-software-trial" title="تحميل حزمة الـ SDK أوفلاين">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('sdk')">طلب الترخيص</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["sdk"]'>طلب الترخيص</button>
                             </div>
                         </div>
                     </div>
@@ -1531,10 +1531,10 @@
                                 <span class="software-price-unit">شهرياً / Cluster</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openSoftwareLiveApp('terminal')" title="تشغيل وكيل المراقبة في المتصفح">⚡ تشغيل فوري</button>
-                                <button type="button" class="btn-software-guide" onclick="openSoftwareDocsModal('terminal', 'ar')" title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["terminal"]' title="تشغيل وكيل المراقبة في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["terminal", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
                                 <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudTerminal-Agent.html" class="btn-software-trial" title="تحميل وكيل المراقبة">أوفلاين 📥</a>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('terminal')">اشتراك</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["terminal"]'>اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -3621,10 +3621,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <!-- تبويبات المحاكي (Tabs) -->
             <div class="os-window-tabs">
-                <button type="button" class="os-tab-btn active" id="simTabBtn-app" onclick="switchSimulatorTab('app')">
+                <button type="button" class="os-tab-btn active" id="simTabBtn-app" data-sr-call="switchSimulatorTab" data-sr-args='["app"]'>
                     <span>⚡</span> محاكي واجهة البرنامج الحية (Live OS Sandbox)
                 </button>
-                <button type="button" class="os-tab-btn" id="simTabBtn-specs" onclick="switchSimulatorTab('specs')">
+                <button type="button" class="os-tab-btn" id="simTabBtn-specs" data-sr-call="switchSimulatorTab" data-sr-args='["specs"]'>
                     <span>📋</span> بطاقة المواصفات والمعمارية (Architecture & Specs)
                 </button>
             </div>
@@ -3642,7 +3642,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div id="simContent-app" class="os-content-pane">
                 <!-- الشريط الجانبي لتطبيق سطح المكتب -->
                 <div class="os-sidebar">
-                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
+                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" data-sr-call="switchSimSidebar" data-sr-args='["btw"]'>
                         <span>📊</span> إقرار BTW والضرائب
                     </button>
                     <button type="button" class="os-sidebar-btn" id="simSide-audit" data-sr-call="runAiComplianceAudit">
@@ -3720,7 +3720,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <button type="button" class="table-action-btn ds-u50" data-sr-call="exportDigipoortXml">
                             📄 توليد ملف Digipoort XML
                         </button>
-                        <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
+                        <button type="button" class="action-cta-btn ds-u51" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>
                             💳 ترقية للنسخة الكاملة (€ 189)
                         </button>
                     </div>
@@ -3763,7 +3763,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                                 <div class="text-white-64">Supported OS: Windows 11/10 (x64) • macOS Apple Silicon</div>
                                 <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
                             </div>
-                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" onclick="openSoftwareCheckoutModal('taxsync')">
+                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>
                                 شراء الترخيص التجاري الآن (€ 189 / سنة)
                             </button>
                         </div>
@@ -3809,17 +3809,17 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <!-- محدد بوابة الدفع الدولية -->
             <div class="text-caption text-white-64 mb-1">اختر طريقة الدفع المعتمدة:</div>
             <div class="gateway-selector">
-                <div class="gateway-card selected" id="gwCard-ideal" onclick="selectPaymentGateway('ideal')">
+                <div class="gateway-card selected" id="gwCard-ideal" data-sr-call="selectPaymentGateway" data-sr-args='["ideal"]'>
                     <div class="ds-u57">🇳🇱</div>
                     <div class="fw-bold text-white mt-1 ds-u58">Mollie iDEAL</div>
                     <span class="gateway-badge">هولندا وأوروبا</span>
                 </div>
-                <div class="gateway-card" id="gwCard-card" onclick="selectPaymentGateway('card')">
+                <div class="gateway-card" id="gwCard-card" data-sr-call="selectPaymentGateway" data-sr-args='["card"]'>
                     <div class="ds-u57">💳</div>
                     <div class="fw-bold text-white mt-1 ds-u58">Stripe Card</div>
                     <span class="gateway-badge">Visa / Mastercard</span>
                 </div>
-                <div class="gateway-card" id="gwCard-sepa" onclick="selectPaymentGateway('sepa')">
+                <div class="gateway-card" id="gwCard-sepa" data-sr-call="selectPaymentGateway" data-sr-args='["sepa"]'>
                     <div class="ds-u57">🏦</div>
                     <div class="fw-bold text-white mt-1 ds-u58">SEPA B2B</div>
                     <span class="gateway-badge">تحويل بنكي مباشر</span>
@@ -4365,8 +4365,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractModalHeaderTitle">
             <!-- ألسنة التبديل بين العقدين المالي والتقني -->
             <div class="contract-tabs-nav">
-                <button type="button" class="contract-tab-btn active" onclick="switchContractModal('tech')">💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
-                <button type="button" class="contract-tab-btn" onclick="switchContractModal('fin')">📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+                <button type="button" class="contract-tab-btn active" data-sr-call="switchContractModal" data-sr-args='["tech"]'>💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn" data-sr-call="switchContractModal" data-sr-args='["fin"]'>📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -4540,7 +4540,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <button type="button" class="btn-share-excel" data-sr-call="exportTechnicalContractExcel">
                     <span>📊 تصدير Excel (.xls)</span>
                 </button>
-                <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1021-T1', 'السيد مضر أبو فاشة (NL بالعربي)', 7623)">
+                <button type="button" class="btn-cert-print" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1021-T1", "السيد مضر أبو فاشة (NL بالعربي)", 7623]'>
                     💳 سداد الدفعة الأولى (30%) عبر iDEAL
                 </button>
                 <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractPdf">
@@ -4559,8 +4559,8 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             
             <!-- ألسنة التبديل بين العقدين المالي والتقني -->
             <div class="contract-tabs-nav">
-                <button type="button" class="contract-tab-btn" onclick="switchContractModal('tech')">💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
-                <button type="button" class="contract-tab-btn active" onclick="switchContractModal('fin')">📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+                <button type="button" class="contract-tab-btn" data-sr-call="switchContractModal" data-sr-args='["tech"]'>💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn active" data-sr-call="switchContractModal" data-sr-args='["fin"]'>📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-2">
@@ -4744,7 +4744,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 <button type="button" class="btn-share-excel" data-sr-call="exportFinancialContractExcel">
                     <span>📊 تصدير Excel (.xls)</span>
                 </button>
-                <button type="button" class="btn-cert-print" onclick="openIdealSimulatorModal('OF-2026-1022-FIN', 'السيد مضر أبو فاشة (NL بالعربي - العقد المالي)', 4719)">
+                <button type="button" class="btn-cert-print" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1022-FIN", "السيد مضر أبو فاشة (NL بالعربي - العقد المالي)", 4719]'>
                     💳 سداد الحزمة السنوية (€ 4,719) عبر iDEAL
                 </button>
                 <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractFinPdf">

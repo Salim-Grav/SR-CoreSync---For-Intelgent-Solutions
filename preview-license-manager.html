@@ -163,8 +163,8 @@
                         <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('lifetime', this)">دائم</button>
                     </div>
                     <div class="salim-lm-export-wrap">
-                        <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('csv')" title="تصدير السجل بتنسيق CSV">تصدير CSV 📥</button>
-                        <button type="button" class="salim-lm-export-btn" onclick="exportSalimLedger('json')" title="تصدير السجل بتنسيق JSON">تصدير JSON 🔒</button>
+                        <button type="button" class="salim-lm-export-btn" data-sr-call="exportSalimLedger" data-sr-args='["csv"]' title="تصدير السجل بتنسيق CSV">تصدير CSV 📥</button>
+                        <button type="button" class="salim-lm-export-btn" data-sr-call="exportSalimLedger" data-sr-args='["json"]' title="تصدير السجل بتنسيق JSON">تصدير JSON 🔒</button>
                     </div>
                 </div>
 
@@ -239,5 +239,6 @@
             }, 50);
         });
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

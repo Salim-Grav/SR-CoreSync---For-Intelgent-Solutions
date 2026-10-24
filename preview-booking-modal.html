@@ -260,15 +260,15 @@
         <!-- اختيار المستشار -->
         <label class="sr-exec-label mb-2 d-block">اختر المستشار التنفيذي المطلوب للجلسة:</label>
         <div class="sr-advisor-select-grid" role="radiogroup">
-            <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" onclick="selectAdvisor('salim')">
+            <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" data-sr-call="selectAdvisor" data-sr-args='["salim"]'>
                 <span class="name">م. محمد سليم عزيزة</span>
                 <span class="role">كبير مهندسي السحابة والذكاء الاصطناعي // CTO</span>
             </button>
-            <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" onclick="selectAdvisor('raed')">
+            <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" data-sr-call="selectAdvisor" data-sr-args='["raed"]'>
                 <span class="name">أ. محمد رائد كعكة</span>
                 <span class="role">خبير الأنظمة المحاسبية والـ ERP والضرائب // CFO</span>
             </button>
-            <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" onclick="selectAdvisor('both')">
+            <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" data-sr-call="selectAdvisor" data-sr-args='["both"]'>
                 <span class="name">كلا الشريكين معاً (VIP)</span>
                 <span class="role">جلسة استراتيجية شاملة (هندسة برمجية + حوكمة مالية)</span>
             </button>
@@ -436,5 +436,6 @@
             window.location.href = `mailto:info@sr-coresync.com?subject=${subject}&body=${body}`;
         }
     </script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

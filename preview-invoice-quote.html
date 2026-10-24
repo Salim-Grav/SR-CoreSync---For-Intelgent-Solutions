@@ -202,13 +202,13 @@
 
         <div class="actions-group">
             <div class="toggle-group">
-                <button type="button" class="toggle-btn active" id="btnQuote" onclick="switchDocType('quote')">📜 عرض سعر</button>
-                <button type="button" class="toggle-btn" id="btnInvoice" onclick="switchDocType('invoice')">💳 فاتورة رسمية</button>
+                <button type="button" class="toggle-btn active" id="btnQuote" data-sr-call="switchDocType" data-sr-args='["quote"]'>📜 عرض سعر</button>
+                <button type="button" class="toggle-btn" id="btnInvoice" data-sr-call="switchDocType" data-sr-args='["invoice"]'>💳 فاتورة رسمية</button>
             </div>
 
             <div class="toggle-group">
-                <button type="button" class="toggle-btn active" id="btnDesktop" onclick="setDevice('desktop')">💻 سطح المكتب</button>
-                <button type="button" class="toggle-btn" id="btnMobile" onclick="setDevice('mobile')">📱 الهاتف</button>
+                <button type="button" class="toggle-btn active" id="btnDesktop" data-sr-call="setDevice" data-sr-args='["desktop"]'>💻 سطح المكتب</button>
+                <button type="button" class="toggle-btn" id="btnMobile" data-sr-call="setDevice" data-sr-args='["mobile"]'>📱 الهاتف</button>
             </div>
 
             <button type="button" class="btn btn-gold" data-sr-call="copyVisualEmail" title="نسخ محتوى الفاتورة/العرض بكامل تنسيقه للصقه فوراً في Gmail">

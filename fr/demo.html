@@ -521,9 +521,9 @@
                         <div class="cur-selector-group">
                             <span class="cur-label">Devise :</span>
                             <div class="cur-pill-toggle">
-                                <button type="button" class="cur-pill active" id="curPill-EUR" onclick="setCurrency('EUR')">€ EUR</button>
-                                <button type="button" class="cur-pill" id="curPill-USD" onclick="setCurrency('USD')">$ USD</button>
-                                <button type="button" class="cur-pill" id="curPill-SAR" onclick="setCurrency('SAR')">﷼ SAR</button>
+                                <button type="button" class="cur-pill active" id="curPill-EUR" data-sr-call="setCurrency" data-sr-args='["EUR"]'>€ EUR</button>
+                                <button type="button" class="cur-pill" id="curPill-USD" data-sr-call="setCurrency" data-sr-args='["USD"]'>$ USD</button>
+                                <button type="button" class="cur-pill" id="curPill-SAR" data-sr-call="setCurrency" data-sr-args='["SAR"]'>﷼ SAR</button>
                             </div>
                         </div>
                         <div class="cur-selector-group">
@@ -746,7 +746,7 @@
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
                             Generate Sample E-Invoice
                         </button>
-                        <button type="button" class="btn-secondary-glow" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">
+                        <button type="button" class="btn-secondary-glow" data-sr-call="openIdealSimulatorModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners", 35000]'>
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
                             Simulate Instant iDEAL Settlement
                         </button>
@@ -819,7 +819,7 @@
                                     <td class="font-num tx-amount-highlight">€ 12,100</td>
                                     <td><span class="status-badge status-completed">Payé via iDEAL ✓</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-081', 'Amsterdam Tech Hub (NL)', 10000, 2100, 12100, 'Payé via iDEAL ✓', '2026-10-01', 'BTW 21%')">Preview Invoice</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-081", "Amsterdam Tech Hub (NL)", 10000, 2100, 12100, "Payé via iDEAL ✓", "2026-10-01", "BTW 21%"]'>Preview Invoice</button>
                                     </td>
                                 </tr>
                                 <tr data-status="pending" id="inv-row-2">
@@ -830,8 +830,8 @@
                                     <td class="font-num tx-amount-highlight">€ 35,000</td>
                                     <td><span class="status-badge status-processing" id="status-badge-inv-82">Due in 14 days</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-82" onclick="openIdealSimulatorModal('INV-2026-082', 'Gulf Logistics Partners', 35000)">Simulate iDEAL</button>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-082', 'Gulf Logistics Partners (KSA)', 35000, 0, 35000, 'En attente', '2026-10-03', 'Reverse Charge 0%')">Preview Invoice</button>
+                                        <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-82" data-sr-call="openIdealSimulatorModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners", 35000]'>Simulate iDEAL</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-082", "Gulf Logistics Partners (KSA)", 35000, 0, 35000, "En attente", "2026-10-03", "Reverse Charge 0%"]'>Preview Invoice</button>
                                     </td>
                                 </tr>
                                 <tr data-status="paid" id="inv-row-3">
@@ -842,7 +842,7 @@
                                     <td class="font-num tx-amount-highlight">€ 26,620</td>
                                     <td><span class="status-badge status-completed">Payé via SEPA Instant ✓</span></td>
                                     <td>
-                                        <button type="button" class="table-action-btn" onclick="previewInvoiceModal('INV-2026-080', 'Rotterdam Maritime BV (NL)', 22000, 4620, 26620, 'Payé via SEPA Instant ✓', '2026-09-28', 'BTW 21%')">Preview Invoice</button>
+                                        <button type="button" class="table-action-btn" data-sr-call="previewInvoiceModal" data-sr-args='["INV-2026-080", "Rotterdam Maritime BV (NL)", 22000, 4620, 26620, "Payé via SEPA Instant ✓", "2026-09-28", "BTW 21%"]'>Preview Invoice</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -876,9 +876,9 @@
                     </div>
 
                     <div class="ai-prompt-chips">
-                        <div class="prompt-chip" onclick="askAiPrompt('Analyze October cash flow and projected profit margin')">📊 October Cash Flow Telemetry Analysis</div>
-                        <div class="prompt-chip" onclick="askAiPrompt('Which pending invoices are nearing maturity?')">⏳ Overdue Invoices</div>
-                        <div class="prompt-chip" onclick="askAiPrompt('Provide recommendations to optimize inventory holding costs based on recent weekly telemetry')">💡 Warehouse Holding Cost Optimization</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["Analyze October cash flow and projected profit margin"]'>📊 October Cash Flow Telemetry Analysis</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["Which pending invoices are nearing maturity?"]'>⏳ Overdue Invoices</div>
+                        <div class="prompt-chip" data-sr-call="askAiPrompt" data-sr-args='["Provide recommendations to optimize inventory holding costs based on recent weekly telemetry"]'>💡 Warehouse Holding Cost Optimization</div>
                     </div>
 
                     <div class="ai-chat-input-bar">
@@ -1079,9 +1079,9 @@
 
                         <div class="d-flex gap-2 flex-wrap mb-3">
                             <span class="text-caption text-white-64 d-block w-100">Or choose a pre-configured enterprise profile:</span>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('Riyadh Logistics Group BV', '🇸🇦')">Riyadh Group 🇸🇦</button>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('Amsterdam Digital Trade BV', '🇳🇱')">Amsterdam BV 🇳🇱</button>
-                            <button type="button" class="filter-btn" onclick="applySampleClientBrand('Modern Tech Bank BV', '🏦')">Tech Bank 🏦</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["Riyadh Logistics Group BV", "🇸🇦"]'>Riyadh Group 🇸🇦</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["Amsterdam Digital Trade BV", "🇳🇱"]'>Amsterdam BV 🇳🇱</button>
+                            <button type="button" class="filter-btn" data-sr-call="applySampleClientBrand" data-sr-args='["Modern Tech Bank BV", "🏦"]'>Tech Bank 🏦</button>
                         </div>
 
                         <button type="button" class="action-cta-btn w-100 mb-2" data-sr-call="applyClientBrand">
@@ -1205,9 +1205,9 @@
                                 <span class="software-price-unit">Annual license / workstation</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" onclick="openDesktopSimulatorModal('taxsync')" title="Live in-browser simulation sandbox">Live Sandbox ⚡</button>
-                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('taxsync', 'trial')">14-Day Trial</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('taxsync')">Purchase License</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openDesktopSimulatorModal" data-sr-args='["taxsync"]' title="Live in-browser simulation sandbox">Live Sandbox ⚡</button>
+                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["taxsync", "trial"]'>14-Day Trial</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>Purchase License</button>
                             </div>
                         </div>
                     </div>
@@ -1249,8 +1249,8 @@
                                 <span class="software-price-unit">monthly / user</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('flowscan', 'trial')">Free Trial</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('flowscan')">Subscribe</button>
+                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["flowscan", "trial"]'>Free Trial</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["flowscan"]'>Subscribe</button>
                             </div>
                         </div>
                     </div>
@@ -1291,8 +1291,8 @@
                                 <span class="software-price-unit">monthly / terminal</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('cloudpos', 'trial')">Test Integration</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('cloudpos')">Activate</button>
+                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["cloudpos", "trial"]'>Test Integration</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["cloudpos"]'>Activate</button>
                             </div>
                         </div>
                     </div>
@@ -1333,8 +1333,8 @@
                                 <span class="software-price-unit">monthly (1TB Encrypted)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('vault', 'trial')">Free Trial</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('vault')">Subscribe</button>
+                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["vault", "trial"]'>Free Trial</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["vault"]'>Subscribe</button>
                             </div>
                         </div>
                     </div>
@@ -1377,8 +1377,8 @@
                                 <span class="software-price-unit">monthly (50k calls)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" onclick="openSoftwareModal('sdk', 'trial')">Download SDK</button>
-                                <button type="button" class="btn-software-buy" onclick="openSoftwareCheckoutModal('sdk')">Request License</button>
+                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["sdk", "trial"]'>Download SDK</button>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["sdk"]'>Request License</button>
                             </div>
                         </div>
                     </div>
@@ -3242,10 +3242,10 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             
             <div class="os-window-tabs">
-                <button type="button" class="os-tab-btn active" id="simTabBtn-app" onclick="switchSimulatorTab('app')">
+                <button type="button" class="os-tab-btn active" id="simTabBtn-app" data-sr-call="switchSimulatorTab" data-sr-args='["app"]'>
                     <span>⚡</span> Live OS Desktop Sandbox
                 </button>
-                <button type="button" class="os-tab-btn" id="simTabBtn-specs" onclick="switchSimulatorTab('specs')">
+                <button type="button" class="os-tab-btn" id="simTabBtn-specs" data-sr-call="switchSimulatorTab" data-sr-args='["specs"]'>
                     <span>📋</span> Architecture Specifications & Technical Brief
                 </button>
             </div>
@@ -3263,7 +3263,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div id="simContent-app" class="os-content-pane">
                 
                 <div class="os-sidebar">
-                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" onclick="switchSimSidebar('btw')">
+                    <button type="button" class="os-sidebar-btn active" id="simSide-btw" data-sr-call="switchSimSidebar" data-sr-args='["btw"]'>
                         <span>📊</span> BTW & Tax Filing
                     </button>
                     <button type="button" class="os-sidebar-btn" id="simSide-audit" data-sr-call="runAiComplianceAudit">
@@ -3341,7 +3341,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <button type="button" class="table-action-btn ds-u50" data-sr-call="exportDigipoortXml">
                             📄 Generate Digipoort XML
                         </button>
-                        <button type="button" class="action-cta-btn ds-u51" onclick="openSoftwareCheckoutModal('taxsync')">
+                        <button type="button" class="action-cta-btn ds-u51" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>
                             💳 Upgrade to Full License (€ 189)
                         </button>
                     </div>
@@ -3384,7 +3384,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                                 <div class="text-white-64">Supported OS: Windows 11/10 (x64) • macOS Apple Silicon</div>
                                 <div class="text-white-64">Distribution: Signed MSIX Package / Apple Notarized DMG</div>
                             </div>
-                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" onclick="openSoftwareCheckoutModal('taxsync')">
+                            <button type="button" class="action-cta-btn w-100 justify-content-center mt-3" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>
                                 Purchase Licence Commerciale Now (€ 189 / yr)
                             </button>
                         </div>
@@ -3428,17 +3428,17 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             
             <div class="text-caption text-white-64 mb-1">Select Verified Payment Method:</div>
             <div class="gateway-selector">
-                <div class="gateway-card selected" id="gwCard-ideal" onclick="selectPaymentGateway('ideal')">
+                <div class="gateway-card selected" id="gwCard-ideal" data-sr-call="selectPaymentGateway" data-sr-args='["ideal"]'>
                     <div class="ds-u57">🇳🇱</div>
                     <div class="fw-bold text-white mt-1 ds-u58">Mollie iDEAL</div>
                     <span class="gateway-badge">Netherlands & EU</span>
                 </div>
-                <div class="gateway-card" id="gwCard-card" onclick="selectPaymentGateway('card')">
+                <div class="gateway-card" id="gwCard-card" data-sr-call="selectPaymentGateway" data-sr-args='["card"]'>
                     <div class="ds-u57">💳</div>
                     <div class="fw-bold text-white mt-1 ds-u58">Stripe Card</div>
                     <span class="gateway-badge">Visa / Mastercard</span>
                 </div>
-                <div class="gateway-card" id="gwCard-sepa" onclick="selectPaymentGateway('sepa')">
+                <div class="gateway-card" id="gwCard-sepa" data-sr-call="selectPaymentGateway" data-sr-args='["sepa"]'>
                     <div class="ds-u57">🏦</div>
                     <div class="fw-bold text-white mt-1 ds-u58">SEPA B2B</div>
                     <span class="gateway-badge">Direct Bank Transfer</span>

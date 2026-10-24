@@ -371,11 +371,11 @@
             <!-- 3. محدد العملات المتعددة اللحظي -->
             <div class="roi-currency-bar">
                 <span class="roi-currency-label">عملة الحساب المالي:</span>
-                <button type="button" class="roi-currency-pill active" data-currency="EUR" onclick="switchCurrency('EUR')">🇪🇺 EUR (€)</button>
-                <button type="button" class="roi-currency-pill" data-currency="USD" onclick="switchCurrency('USD')">🇺🇸 USD ($)</button>
-                <button type="button" class="roi-currency-pill" data-currency="SAR" onclick="switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
-                <button type="button" class="roi-currency-pill" data-currency="AED" onclick="switchCurrency('AED')">🇦🇪 AED (د.إ)</button>
-                <button type="button" class="roi-currency-pill" data-currency="GBP" onclick="switchCurrency('GBP')">🇬🇧 GBP (£)</button>
+                <button type="button" class="roi-currency-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
+                <button type="button" class="roi-currency-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
+                <button type="button" class="roi-currency-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                <button type="button" class="roi-currency-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (د.إ)</button>
+                <button type="button" class="roi-currency-pill" data-currency="GBP" data-sr-call="switchCurrency" data-sr-args='["GBP"]'>🇬🇧 GBP (£)</button>
             </div>
         </div>
 
@@ -391,10 +391,10 @@
                             <span class="roi-label-badge" id="roiCompanySizeVal">15 موظفاً</span>
                         </div>
                         <div class="d-flex gap-2 flex-wrap mb-2">
-                            <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(5)">فريق ناشئ (5)</button>
-                            <button type="button" class="roi-preset-btn active" onclick="setRoiTeamPreset(15)">شركة نامية (15)</button>
-                            <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">مؤسسة متوسطة (45)</button>
-                            <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">شركة كبرى (100+)</button>
+                            <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[5]'>فريق ناشئ (5)</button>
+                            <button type="button" class="roi-preset-btn active" data-sr-call="setRoiTeamPreset" data-sr-args='[15]'>شركة نامية (15)</button>
+                            <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[45]'>مؤسسة متوسطة (45)</button>
+                            <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[100]'>شركة كبرى (100+)</button>
                         </div>
                         <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                         <div class="roi-scale-labels">

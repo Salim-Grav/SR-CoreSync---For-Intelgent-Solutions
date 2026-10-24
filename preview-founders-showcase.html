@@ -873,23 +873,23 @@
 
             <!-- كونسول التبديل بين أنماط العرض -->
             <div class="showcase-controls">
-                <button type="button" class="showcase-tab-btn active" id="tabSlider" onclick="setShowcaseView('slider')">
+                <button type="button" class="showcase-tab-btn active" id="tabSlider" data-sr-call="setShowcaseView" data-sr-args='["slider"]'>
                     <span class="showcase-tab-dot"></span>
                     <span>سلايدر تفاعلي متحرك (Auto Slider) 🔄</span>
                 </button>
-                <button type="button" class="showcase-tab-btn" id="tabEmblem" onclick="setShowcaseView('emblem')">
+                <button type="button" class="showcase-tab-btn" id="tabEmblem" data-sr-call="setShowcaseView" data-sr-args='["emblem"]'>
                     <span class="showcase-tab-dot"></span>
                     <span>شعار الهوية الفاخر (S&amp;R Emblem) 👑</span>
                 </button>
-                <button type="button" class="showcase-tab-btn" id="tabSalim" onclick="setShowcaseView('salim')">
+                <button type="button" class="showcase-tab-btn" id="tabSalim" data-sr-call="setShowcaseView" data-sr-args='["salim"]'>
                     <span class="showcase-tab-dot"></span>
                     <span>م. محمد سليم عزيزة (CTO)</span>
                 </button>
-                <button type="button" class="showcase-tab-btn" id="tabRaed" onclick="setShowcaseView('raed')">
+                <button type="button" class="showcase-tab-btn" id="tabRaed" data-sr-call="setShowcaseView" data-sr-args='["raed"]'>
                     <span class="showcase-tab-dot"></span>
                     <span>أ. محمد رائد كعكة (CFO)</span>
                 </button>
-                <button type="button" class="showcase-tab-btn" id="tabDual" onclick="setShowcaseView('dual')">
+                <button type="button" class="showcase-tab-btn" id="tabDual" data-sr-call="setShowcaseView" data-sr-args='["dual"]'>
                     <span class="showcase-tab-dot"></span>
                     <span>عرض البانرات معاً (Full Showcase)</span>
                 </button>
@@ -916,7 +916,7 @@
                     <!-- الشريحة 0: شعار وهوية النخبة المؤسسية الفاخرة (S&R CoreSync Emblem) -->
                     <div class="showcase-slide-item active">
                         <div class="showcase-banner-card">
-                            <div class="showcase-img-wrap" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)')">
+                            <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)"]'>
                                 <picture>
                                     <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
                                     <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" width="1024" height="576" loading="eager">
@@ -936,13 +936,13 @@
                                     </div>
                                 </div>
                                 <div class="showcase-footer-actions">
-                                    <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر', 'emblem')">
+                                    <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر", "emblem"]'>
                                         <span>تكبير 🔍</span>
                                     </button>
                                     <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار بدقة 4K فائقة">
                                         <span>تحميل 4K 🌟</span>
                                     </a>
-                                    <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('emblem')" title="عرض رمز QR المؤسسي المعتمد">
+                                    <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["emblem"]' title="عرض رمز QR المؤسسي المعتمد">
                                         <span>بطاقة QR 📲</span>
                                     </button>
                                     <a href="#services" class="showcase-action-btn">
@@ -956,7 +956,7 @@
                     <!-- الشريحة 1: م. محمد سليم عزيزة -->
                     <div class="showcase-slide-item">
                         <div class="showcase-banner-card">
-                            <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
+                            <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي"]'>
                                 <picture>
                                     <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
                                     <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="1024" height="576" loading="eager">
@@ -971,13 +971,13 @@
                                     </div>
                                 </div>
                                 <div class="showcase-footer-actions">
-                                    <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة', 'salim')">
+                                    <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة", "salim"]'>
                                         <span>تكبير 🔍</span>
                                     </button>
                                     <a href="assets/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل البانر بدقة 4K فائقة (3840×2160)">
                                         <span>تحميل 4K 🌟</span>
                                     </a>
-                                    <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('salim')" title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
+                                    <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["salim"]' title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
                                         <span>بطاقة QR 📲</span>
                                     </button>
                                     <a href="#contact" class="showcase-action-btn">
@@ -991,7 +991,7 @@
                     <!-- الشريحة 2: أ. محمد رائد كعكة -->
                     <div class="showcase-slide-item">
                         <div class="showcase-banner-card">
-                            <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP')">
+                            <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP"]'>
                                 <picture>
                                     <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
                                     <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="1024" height="576" loading="eager">
@@ -1006,13 +1006,13 @@
                                     </div>
                                 </div>
                                 <div class="showcase-footer-actions">
-                                    <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة', 'raed')">
+                                    <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة", "raed"]'>
                                         <span>تكبير 🔍</span>
                                     </button>
                                     <a href="assets/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل البانر بدقة 4K فائقة (3840×2160)">
                                         <span>تحميل 4K 🌟</span>
                                     </a>
-                                    <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('raed')" title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
+                                    <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["raed"]' title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
                                         <span>بطاقة QR 📲</span>
                                     </button>
                                     <a href="#contact" class="showcase-action-btn">
@@ -1028,15 +1028,15 @@
             <!-- شريط التقدم الزمني والأزرار التفاعلية للسلايدر -->
             <div class="showcase-slider-timeline">
                 <div class="showcase-dots-group">
-                    <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
+                    <button type="button" class="showcase-dot-item active" id="slideDot0" data-sr-call="goToSlide" data-sr-args='[0]'>
                         <span class="showcase-dot-indicator"></span>
                         <span>شعار الهوية الفاخر (S&amp;R Emblem) 👑</span>
                     </button>
-                    <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                    <button type="button" class="showcase-dot-item" id="slideDot1" data-sr-call="goToSlide" data-sr-args='[1]'>
                         <span class="showcase-dot-indicator"></span>
                         <span>م. محمد سليم عزيزة (CTO)</span>
                     </button>
-                    <button type="button" class="showcase-dot-item" id="slideDot2" onclick="goToSlide(2)">
+                    <button type="button" class="showcase-dot-item" id="slideDot2" data-sr-call="goToSlide" data-sr-args='[2]'>
                         <span class="showcase-dot-indicator"></span>
                         <span>أ. محمد رائد كعكة (CFO)</span>
                     </button>
@@ -1056,7 +1056,7 @@
         <!-- 1. مسرح العرض الفردي: شعار الهوية المؤسسية الفاخرة -->
         <div id="viewEmblem" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)"]'>
                     <picture>
                         <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
                         <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1076,13 +1076,13 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر', 'emblem')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر", "emblem"]'>
                             <span>تكبير 🔍</span>
                         </button>
                         <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار بدقة 4K فائقة">
                             <span>تحميل 4K 🌟</span>
                         </a>
-                        <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('emblem')" title="عرض رمز QR المؤسسي المعتمد">
+                        <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["emblem"]' title="عرض رمز QR المؤسسي المعتمد">
                             <span>بطاقة QR 📲</span>
                         </button>
                         <a href="#services" class="showcase-action-btn">
@@ -1096,7 +1096,7 @@
         <!-- 2. مسرح العرض الفردي: م. محمد سليم عزيزة -->
         <div id="viewSalim" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي"]'>
                     <picture>
                         <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
                         <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1111,13 +1111,13 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة', 'salim')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة", "salim"]'>
                             <span>تكبير 🔍</span>
                         </button>
                         <a href="assets/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل البانر بدقة 4K فائقة">
                             <span>تحميل 4K 🌟</span>
                         </a>
-                        <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('salim')" title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
+                        <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["salim"]' title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
                             <span>بطاقة QR 📲</span>
                         </button>
                         <a href="#contact" class="showcase-action-btn">
@@ -1131,7 +1131,7 @@
         <!-- 3. مسرح العرض الفردي: أ. محمد رائد كعكة -->
         <div id="viewRaed" class="showcase-single-view is-hidden">
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP"]'>
                     <picture>
                         <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
                         <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1146,13 +1146,13 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة', 'raed')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة", "raed"]'>
                             <span>تكبير 🔍</span>
                         </button>
                         <a href="assets/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل البانر بدقة 4K فائقة">
                             <span>تحميل 4K 🌟</span>
                         </a>
-                        <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openQrModal('raed')" title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
+                        <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openQrModal" data-sr-args='["raed"]' title="عرض بطاقة الاتصال الرقمية الذكية (vCard)">
                             <span>بطاقة QR 📲</span>
                         </button>
                         <a href="#contact" class="showcase-action-btn">
@@ -1167,7 +1167,7 @@
         <div id="viewDual" class="showcase-dual-grid is-hidden">
             <!-- بانر الشعار الفاخر -->
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync"]'>
                     <picture>
                         <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
                         <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1185,7 +1185,7 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/sr-emblem-gold-luxury.jpg', 'شعار الهوية المؤسسية الفاخر')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر"]'>
                             <span>تكبير 🔍</span>
                         </button>
                     </div>
@@ -1194,7 +1194,7 @@
 
             <!-- بانر سليم -->
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة"]'>
                     <picture>
                         <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
                         <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1209,7 +1209,7 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-salim.jpg', 'م. محمد سليم عزيزة')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-salim.jpg", "م. محمد سليم عزيزة"]'>
                             <span>تكبير 🔍</span>
                         </button>
                     </div>
@@ -1218,7 +1218,7 @@
 
             <!-- بانر رائد -->
             <div class="showcase-banner-card">
-                <div class="showcase-img-wrap" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة')">
+                <div class="showcase-img-wrap" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة"]'>
                     <picture>
                         <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
                         <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1233,7 +1233,7 @@
                         </div>
                     </div>
                     <div class="showcase-footer-actions">
-                        <button type="button" class="showcase-action-btn" onclick="openLightbox('assets/founder-banner-raed.jpg', 'أ. محمد رائد كعكة')">
+                        <button type="button" class="showcase-action-btn" data-sr-call="openLightbox" data-sr-args='["assets/founder-banner-raed.jpg", "أ. محمد رائد كعكة"]'>
                             <span>تكبير 🔍</span>
                         </button>
                     </div>

@@ -682,23 +682,23 @@
 
                     <!-- Showcase Controls -->
                     <div class="showcase-controls">
-                        <button type="button" class="showcase-tab-btn active" id="tabSlider" onclick="setShowcaseView('slider')">
+                        <button type="button" class="showcase-tab-btn active" id="tabSlider" data-sr-call="setShowcaseView" data-sr-args='["slider"]'>
                             <span class="showcase-tab-dot"></span>
                             <span>Interactive Auto Slider 🔄</span>
                         </button>
-                        <button type="button" class="showcase-tab-btn" id="tabEmblem" onclick="setShowcaseView('emblem')">
+                        <button type="button" class="showcase-tab-btn" id="tabEmblem" data-sr-call="setShowcaseView" data-sr-args='["emblem"]'>
                             <span class="showcase-tab-dot"></span>
                             <span>Corporate Emblem 👑</span>
                         </button>
-                        <button type="button" class="showcase-tab-btn" id="tabSalim" onclick="setShowcaseView('salim')">
+                        <button type="button" class="showcase-tab-btn" id="tabSalim" data-sr-call="setShowcaseView" data-sr-args='["salim"]'>
                             <span class="showcase-tab-dot"></span>
                             <span>Eng. Mohammad Salim Aziza (CTO)</span>
                         </button>
-                        <button type="button" class="showcase-tab-btn" id="tabRaed" onclick="setShowcaseView('raed')">
+                        <button type="button" class="showcase-tab-btn" id="tabRaed" data-sr-call="setShowcaseView" data-sr-args='["raed"]'>
                             <span class="showcase-tab-dot"></span>
                             <span>Mr. Mohammad Raed Kaaka (CFO)</span>
                         </button>
-                        <button type="button" class="showcase-tab-btn" id="tabDual" onclick="setShowcaseView('dual')">
+                        <button type="button" class="showcase-tab-btn" id="tabDual" data-sr-call="setShowcaseView" data-sr-args='["dual"]'>
                             <span class="showcase-tab-dot"></span>
                             <span>Full Suite Showcase</span>
                         </button>
@@ -724,7 +724,7 @@
                             <!-- Slide 0: S&R CoreSync Luxury Official Emblem -->
                             <div class="showcase-slide-item active">
                                 <div class="showcase-banner-card">
-                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Official Corporate Emblem')">
+                                    <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Solutions • Official Corporate Emblem"]'>
                                         <picture>
                                             <source srcset="../assets/sr-emblem-gold-luxury.webp" type="image/webp">
                                             <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="eager">
@@ -744,13 +744,13 @@
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Official Emblem', 'emblem')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem", "emblem"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Emblem">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('emblem')" title="View Corporate Contact Card QR">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="View Corporate Contact Card QR">
                                                 <span>vCard QR 📲</span>
                                             </button>
                                             <a href="#services" class="showcase-action-btn">
@@ -764,7 +764,7 @@
                             <!-- Slide 1: Eng. Mohammad Salim Aziza -->
                             <div class="showcase-slide-item">
                                 <div class="showcase-banner-card">
-                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza - Chief Technology Officer & Principal Cloud & AI Architect')">
+                                    <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza - Chief Technology Officer & Principal Cloud & AI Architect"]'>
                                         <picture>
                                             <source srcset="../assets/founder-banner-salim.webp" type="image/webp">
                                             <img src="../assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="eager">
@@ -784,16 +784,16 @@
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza', 'salim')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza", "salim"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('salim')" title="View Smart Digital Contact Card (vCard)">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["salim"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
                                             </button>
-                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('cloud')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                                 <span>Consultation 👔</span>
                                             </button>
                                         </div>
@@ -804,7 +804,7 @@
                             <!-- Slide 2: Mr. Mohammad Raed Kaaka -->
                             <div class="showcase-slide-item">
                                 <div class="showcase-banner-card">
-                                    <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka - Chief Financial Officer & Financial ERP Systems Architect')">
+                                    <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka - Chief Financial Officer & Financial ERP Systems Architect"]'>
                                         <picture>
                                             <source srcset="../assets/founder-banner-raed.webp" type="image/webp">
                                             <img src="../assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka Executive Banner" class="showcase-img" width="1024" height="576" loading="eager">
@@ -824,16 +824,16 @@
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka', 'raed')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka", "raed"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('raed')" title="View Smart Digital Contact Card (vCard)">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["raed"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
                                             </button>
-                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('erp')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openExecutiveBookingModal" data-sr-args='["erp"]'>
                                                 <span>Consultation 👔</span>
                                             </button>
                                         </div>
@@ -846,15 +846,15 @@
                     <!-- Timeline Progress Bar & Playback -->
                     <div class="showcase-slider-timeline">
                         <div class="showcase-dots-group">
-                            <button type="button" class="showcase-dot-item active" id="slideDot0" onclick="goToSlide(0)">
+                            <button type="button" class="showcase-dot-item active" id="slideDot0" data-sr-call="goToSlide" data-sr-args='[0]'>
                                 <span class="showcase-dot-indicator"></span>
                                 <span>Corporate Emblem 👑</span>
                             </button>
-                            <button type="button" class="showcase-dot-item" id="slideDot1" onclick="goToSlide(1)">
+                            <button type="button" class="showcase-dot-item" id="slideDot1" data-sr-call="goToSlide" data-sr-args='[1]'>
                                 <span class="showcase-dot-indicator"></span>
                                 <span>Eng. Mohammad Salim Aziza (CTO)</span>
                             </button>
-                            <button type="button" class="showcase-dot-item" id="slideDot2" onclick="goToSlide(2)">
+                            <button type="button" class="showcase-dot-item" id="slideDot2" data-sr-call="goToSlide" data-sr-args='[2]'>
                                 <span class="showcase-dot-indicator"></span>
                                 <span>Mr. Mohammad Raed Kaaka (CFO)</span>
                             </button>
@@ -874,7 +874,7 @@
                 <!-- Single View: Official Corporate Emblem -->
                 <div id="viewEmblem" class="showcase-single-view showcase-is-hidden">
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Official Corporate Emblem')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/sr-emblem-gold-luxury.webp" type="image/webp">
                                 <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -894,13 +894,13 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Official Emblem', 'emblem')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem", "emblem"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Emblem">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('emblem')" title="View Corporate Contact Card QR">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="View Corporate Contact Card QR">
                                                 <span>vCard QR 📲</span>
                                             </button>
                                             <a href="#services" class="showcase-action-btn">
@@ -914,7 +914,7 @@
                 <!-- 2. Single View: Eng. Mohammad Salim Aziza -->
                 <div id="viewSalim" class="showcase-single-view showcase-is-hidden">
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/founder-banner-salim.webp" type="image/webp">
                                 <img src="../assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -934,16 +934,16 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza', 'salim')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza", "salim"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('salim')" title="View Smart Digital Contact Card (vCard)">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["salim"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
                                             </button>
-                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('cloud')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                                 <span>Consultation 👔</span>
                                             </button>
                                         </div>
@@ -954,7 +954,7 @@
                 <!-- 3. Single View: Mr. Mohammad Raed Kaaka -->
                 <div id="viewRaed" class="showcase-single-view showcase-is-hidden">
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/founder-banner-raed.webp" type="image/webp">
                                 <img src="../assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -974,16 +974,16 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka', 'raed')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka", "raed"]'>
                                                 <span>Inspect 🔍</span>
                                             </button>
                                             <a href="../assets/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
                                                 <span>Download 4K 🌟</span>
                                             </a>
-                                            <button type="button" class="showcase-action-btn showcase-action-qr" onclick="openFoundersQrModal('raed')" title="View Smart Digital Contact Card (vCard)">
+                                            <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["raed"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
                                             </button>
-                                            <button type="button" class="showcase-action-btn" onclick="openExecutiveBookingModal('erp')">
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openExecutiveBookingModal" data-sr-args='["erp"]'>
                                                 <span>Consultation 👔</span>
                                             </button>
                                         </div>
@@ -995,7 +995,7 @@
                 <div id="viewDual" class="showcase-dual-grid showcase-is-hidden">
                     <!-- Emblem Card -->
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Official Corporate Emblem')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/sr-emblem-gold-luxury.webp" type="image/webp">
                                 <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1013,7 +1013,7 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Official Emblem')">
+                                <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem"]'>
                                     <span>Inspect 🔍</span>
                                 </button>
                             </div>
@@ -1022,7 +1022,7 @@
 
                     <!-- Salim Card -->
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/founder-banner-salim.webp" type="image/webp">
                                 <img src="../assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1042,7 +1042,7 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-salim.jpg', 'Eng. Mohammad Salim Aziza')">
+                                <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                                     <span>Inspect 🔍</span>
                                 </button>
                             </div>
@@ -1051,7 +1051,7 @@
 
                     <!-- Raed Card -->
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka')">
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/founder-banner-raed.webp" type="image/webp">
                                 <img src="../assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
@@ -1071,7 +1071,7 @@
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                <button type="button" class="showcase-action-btn" onclick="openFoundersLightbox('../assets/founder-banner-raed.jpg', 'Mr. Mohammad Raed Kaaka')">
+                                <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                                     <span>Inspect 🔍</span>
                                 </button>
                             </div>
@@ -1280,7 +1280,7 @@
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
-                            <button type="button" class="tech-btn-consult" onclick="openExecutiveBookingModal('cloud')">
+                            <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>Book Consultation 📅</span>
                             </button>
                             <a href="https://wa.me/31687764998?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Custom%20Cloud%20Software%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
@@ -1307,7 +1307,7 @@
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
-                            <button type="button" class="tech-btn-consult" onclick="openExecutiveBookingModal('web')">
+                            <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["web"]'>
                                 <span>Book Consultation 📅</span>
                             </button>
                             <a href="https://wa.me/31687764998?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Mobile%20and%20Web%20Apps%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
@@ -1361,7 +1361,7 @@
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
-                            <button type="button" class="tech-btn-consult" onclick="openExecutiveBookingModal('cloud')">
+                            <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>Book Consultation 📅</span>
                             </button>
                             <a href="https://wa.me/31687764998?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20AI%20and%20Automation%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
@@ -1415,7 +1415,7 @@
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
-                            <button type="button" class="tech-btn-consult" onclick="openExecutiveBookingModal('cloud')">
+                            <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>Book Consultation 📅</span>
                             </button>
                             <a href="https://wa.me/31687764998?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Cloud%20Infrastructure%20and%20Cybersecurity%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
@@ -1453,7 +1453,7 @@
                         <!-- Action Buttons -->
                         <div class="exec-stage-actions">
                             <a href="#contact" class="exec-stage-btn exec-stage-btn-primary">Get in Touch</a>
-                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" onclick="openExecutiveBookingModal('stage')">
+                            <button type="button" class="exec-stage-btn exec-stage-btn-glass" data-sr-call="openExecutiveBookingModal" data-sr-args='["stage"]'>
                                 <span>VIP Consultation 👔</span>
                             </button>
                             <button type="button" class="exec-stage-btn exec-stage-btn-glass" data-sr-call="openRoiCalculatorModal">
@@ -1472,11 +1472,11 @@
                                     Direct Executive:
                                 </span>
                                 <div class="exec-stage-capsule" role="tablist" aria-label="Toggle Executive Leadership">
-                                    <button type="button" role="tab" aria-selected="true" class="exec-stage-tab active" id="execBtnSalim" onclick="switchExecStage('salim')">
+                                    <button type="button" role="tab" aria-selected="true" class="exec-stage-tab active" id="execBtnSalim" data-sr-call="switchExecStage" data-sr-args='["salim"]'>
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>Eng. Salim Azizah (CTO)</span>
                                     </button>
-                                    <button type="button" role="tab" aria-selected="false" class="exec-stage-tab" id="execBtnRaed" onclick="switchExecStage('raed')">
+                                    <button type="button" role="tab" aria-selected="false" class="exec-stage-tab" id="execBtnRaed" data-sr-call="switchExecStage" data-sr-args='["raed"]'>
                                         <span class="exec-stage-tab-dot"></span>
                                         <span>Mr. Raed Kaakeh (CFO)</span>
                                     </button>
@@ -1660,11 +1660,11 @@
                                 <!-- أزرار التنقل بين مشاريع القسم -->
                                 <div class="col-md-4 text-center my-3 my-md-0">
                                     <div class="group-btn-slider d-inline-flex gap-3 align-items-center">
-                                        <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" onclick="cycleProject(-1)" aria-label="Önceki Project">
+                                        <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" data-sr-call="cycleProject" data-sr-args='[-1]' aria-label="Önceki Project">
                                             ← Önceki
                                         </button>
                                         <span class="work-counter-badge" id="work-project-counter">01 / 04</span>
-                                        <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" onclick="cycleProject(1)" aria-label="Sonraki Project">
+                                        <button type="button" class="btn-nav-swiper cs-pointer text-caption fw-medium link" data-sr-call="cycleProject" data-sr-args='[1]' aria-label="Sonraki Project">
                                             Sonraki →
                                         </button>
                                     </div>
@@ -2348,10 +2348,10 @@
                                         <span class="roi-label-badge" id="roiCompanySizeVal">15 employees</span>
                                     </div>
                                     <div class="d-flex flex-wrap gap-2 mb-2">
-                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(5)">Startup (5)</button>
-                                        <button type="button" class="roi-preset-btn active" onclick="setRoiTeamPreset(15)">Growing (15)</button>
-                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(45)">Mid-Market (45)</button>
-                                        <button type="button" class="roi-preset-btn" onclick="setRoiTeamPreset(100)">Enterprise (100+)</button>
+                                        <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[5]'>Startup (5)</button>
+                                        <button type="button" class="roi-preset-btn active" data-sr-call="setRoiTeamPreset" data-sr-args='[15]'>Growing (15)</button>
+                                        <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[45]'>Mid-Market (45)</button>
+                                        <button type="button" class="roi-preset-btn" data-sr-call="setRoiTeamPreset" data-sr-args='[100]'>Enterprise (100+)</button>
                                     </div>
                                     <input type="range" class="roi-range-slider" id="roiCompanySize" min="3" max="150" value="15" step="1" data-sr-call="updateROICalculator" data-sr-on="input">
                                     <div class="d-flex justify-content-between text-caption text-white-64 roi-scale-labels mt-1">
@@ -2428,7 +2428,7 @@
                             </div>
 
                             <div class="d-flex flex-column gap-2 mt-3">
-                                <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('roi')">
+                                <button type="button" class="tf-btn w-100 justify-content-center" data-sr-call="openExecutiveBookingModal" data-sr-args='["roi"]'>
                                     <span>Schedule Free Executive Roadmap Session ←</span>
                                 </button>
                                 <button type="button" class="roi-pdf-btn w-100 justify-content-center" data-sr-call="openRoiPdfModal">
@@ -2512,7 +2512,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Annual License / Device</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('taxsync')" title="Download and install offline software package">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["taxsync"]' title="Download and install offline software package">
                                         <span>Download App 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="Test in interactive cloud sandbox">
@@ -2550,7 +2550,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Monthly / Register Terminal</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('cloudpos')" title="Download POS Terminal Agent">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["cloudpos"]' title="Download POS Terminal Agent">
                                         <span>Download Agent 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="Test POS bridge in sandbox">
@@ -2588,7 +2588,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Monthly / User Seat</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('flowscan')" title="Download Mobile App Package">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["flowscan"]' title="Download Mobile App Package">
                                         <span>Download App 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="Launch Mobile OCR Simulator">
@@ -2626,7 +2626,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Monthly (50k API Calls)</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('sdk')" title="Download SDK Package">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["sdk"]' title="Download SDK Package">
                                         <span>Download SDK 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="SDK API Sandbox">
@@ -2664,7 +2664,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Monthly (1TB Encrypted)</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('vault')" title="Download SecureVault Utility">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["vault"]' title="Download SecureVault Utility">
                                         <span>Download Vault 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="Vault Test Environment">
@@ -2702,7 +2702,7 @@
                                     <span class="text-caption text-white-64 d-block software-card-license-type">Monthly / Cloud Node</span>
                                 </div>
                                 <div class="software-card-actions">
-                                    <button type="button" class="software-btn-download" onclick="openSoftwareDownloadModal('terminal')" title="Download Cloud Terminal Agent">
+                                    <button type="button" class="software-btn-download" data-sr-call="openSoftwareDownloadModal" data-sr-args='["terminal"]' title="Download Cloud Terminal Agent">
                                         <span>Download Agent 📥</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview software-btn-sim" title="Monitor Simulator">
@@ -2754,7 +2754,7 @@
                                     Connect directly with Lead Systems Architect Eng. Salim Aziza to review your system, define commercial licensing tiers, and publish it on our marketplace.
                                 </p>
                                 <div class="d-flex flex-column gap-3">
-                                    <button type="button" class="tf-btn w-100 justify-content-center" onclick="openExecutiveBookingModal('dev')">
+                                    <button type="button" class="tf-btn w-100 justify-content-center" data-sr-call="openExecutiveBookingModal" data-sr-args='["dev"]'>
                                         <span>Apply to Publish Your Software Project ←</span>
                                     </button>
                                     <a href="demo.html#software" class="btn-live-preview w-100 justify-content-center btn-live-preview--pad">
@@ -4558,15 +4558,15 @@
             <!-- Advisor Selection -->
             <label class="sr-exec-label mb-2 d-block">Select Executive Advisor for the Session:</label>
             <div class="sr-advisor-select-grid" role="radiogroup">
-                <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" onclick="selectBookingAdvisor('salim')">
+                <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" data-sr-call="selectBookingAdvisor" data-sr-args='["salim"]'>
                     <span class="name">Eng. Salim Azizah</span>
                     <span class="role">Chief Cloud &amp; AI Architect // CTO</span>
                 </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" onclick="selectBookingAdvisor('raed')">
+                <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" data-sr-call="selectBookingAdvisor" data-sr-args='["raed"]'>
                     <span class="name">Mr. Raed Kaakeh</span>
                     <span class="role">Financial Systems &amp; ERP Consultant // CFO</span>
                 </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" onclick="selectBookingAdvisor('both')">
+                <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" data-sr-call="selectBookingAdvisor" data-sr-args='["both"]'>
                     <span class="name">Joint Board (VIP)</span>
                     <span class="role">Comprehensive (Software Engineering + Financial Governance)</span>
                 </button>
@@ -4878,13 +4878,13 @@
 
             <!-- Demo Tabs -->
             <div class="sr-demo-tab-list" role="tablist">
-                <button type="button" class="sr-demo-tab-btn active" id="demoTabBtnErp" onclick="switchDemoModalTab('erp')">
+                <button type="button" class="sr-demo-tab-btn active" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 Financial ERP (CFO Hub)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnCloud" onclick="switchDemoModalTab('cloud')">
+                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
                     ⚡ Cloud &amp; AI Core (CTO)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnGov" onclick="switchDemoModalTab('gov')">
+                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
                     🛡️ Compliance &amp; Security
                 </button>
             </div>
