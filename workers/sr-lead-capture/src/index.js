@@ -1381,8 +1381,10 @@ export default {
         // ---- Mail DNS, resolved server-side ----------------------------------
         if (request.method === 'GET' && (path === '/mail/dns' || path === '/api/mail/dns')) {
             const summary = await resolveMailDns(url.searchParams.get('domain') || 'sr-coresync.com');
+            // A failed lookup must never be cached: a single slow DoH call would
+            // otherwise show as a ten-minute outage on the status page.
             return jsonResponse(summary, summary.ok ? 200 : 503, Object.assign({}, cors, {
-                'Cache-Control': 'public, max-age=600, stale-while-revalidate=1800'
+                'Cache-Control': summary.ok ? 'public, max-age=180, stale-while-revalidate=600' : 'no-store'
             }));
         }
 

@@ -416,7 +416,10 @@
 
   async function getJSON(url) {
     var res = await fetch(url, { cache: 'no-store', mode: 'cors' });
-    if (!res.ok) throw new Error('http-' + res.status);
+    // 503 still carries a JSON body (ok:false + whatever resolved), and showing
+    // that is better than blanking the whole panel on one slow lookup.
+    var type = res.headers.get('content-type') || '';
+    if (type.indexOf('json') === -1) throw new Error('http-' + res.status);
     return res.json();
   }
 
