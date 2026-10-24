@@ -73,12 +73,16 @@ for lang in LANGUAGES:
 xml.append('  <!-- ========================================================')
 xml.append('       3. Executive Suites & Software Hub')
 xml.append('       ======================================================== -->')
+# Only pages that are actually published AND linked from a public page may be
+# listed here: an orphan URL in the sitemap just tells Google to index a page
+# the navigation never reaches.
 features = [
-    ("preview-software.html", "0.90", "weekly"),
-    ("preview-roi.html", "0.80", "monthly"),
+    ("software.html", "0.90", "weekly"),
+    ("work.html", "0.85", "weekly"),
+    ("estimator.html", "0.80", "monthly"),
+    ("whitelabel-calculator.html", "0.75", "monthly"),
+    ("3d-mockup.html", "0.70", "monthly"),
     ("logo-studio.html", "0.75", "monthly"),
-    ("preview-founders-showcase.html", "0.85", "monthly"),
-    ("preview-services.html", "0.85", "monthly")
 ]
 
 for feat, prio, freq in features:

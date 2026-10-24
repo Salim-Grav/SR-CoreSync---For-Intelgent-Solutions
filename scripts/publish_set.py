@@ -34,6 +34,28 @@ EXCLUDED_ROOT_FILES = {
 EXCLUDED_ROOT_SUFFIXES = ('.md', '.bat', '.url', '.ps1')
 
 # ---------------------------------------------------------------------------
+# Root level development artifacts that must never be published.
+# They are internal component / e-mail / modal mock-ups and debug harnesses:
+# no published page links to them, they carry no `noindex`, and publishing
+# them exposed 13 stale duplicates of the real portals to search engines.
+# ---------------------------------------------------------------------------
+EXCLUDED_DEV_PAGES = {
+    'debug_header.html',
+    'preview_emblem_tuning.html',
+    'preview_new_official_emblem.html',
+    'preview_roi_modal.html',
+    'preview-booking-modal.html',
+    'preview-checkout.html',
+    'preview-client-portal.html',
+    'preview-comparison.html',
+    'preview-header.html',
+    'preview-invoice-quote.html',
+    'preview-license-manager.html',
+    'preview-software-modal.html',
+    'preview-welcome-email.html',
+}
+
+# ---------------------------------------------------------------------------
 # Global file suffixes that are never published.
 # ---------------------------------------------------------------------------
 EXCLUDED_SUFFIXES = ('.pyc',)
@@ -64,6 +86,8 @@ def is_excluded(rel_path):
         return True
     if len(parts) == 1:
         if name in EXCLUDED_ROOT_FILES:
+            return True
+        if name in EXCLUDED_DEV_PAGES:
             return True
         if name.lower().endswith(EXCLUDED_ROOT_SUFFIXES):
             return True

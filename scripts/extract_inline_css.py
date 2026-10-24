@@ -30,6 +30,8 @@ SKIP_DIRS = {'_site', '.git', 'node_modules', '__pycache__', 'workers', 'dist', 
 
 def portals():
     for name in sorted(os.listdir(ROOT)):
+        if name in SKIP_DIRS or name in ('downloads', 'js', 'css', 'assets', 'bg'):
+            continue
         path = os.path.join(ROOT, name, 'index.html')
         if os.path.isdir(os.path.join(ROOT, name)) and os.path.isfile(path):
             yield name, path

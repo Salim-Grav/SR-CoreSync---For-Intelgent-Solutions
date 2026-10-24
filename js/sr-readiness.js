@@ -421,7 +421,7 @@
         const complete = answered === AXES.length;
 
         if (quoteBtn) {
-            quoteBtn.href = `${ROOT}preview-whitelabel-calculator.html?platform=${rec.platform}&tier=${rec.tier}&source=readiness&score=${total}`;
+            quoteBtn.href = `${ROOT}whitelabel-calculator.html?platform=${rec.platform}&tier=${rec.tier}&source=readiness&score=${total}`;
             quoteBtn.classList.toggle('visible', complete);
         }
         if (box) {

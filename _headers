@@ -1,14 +1,23 @@
 # =============================================================================
-# S&R CoreSync Solutions - GitHub Pages Security Headers
+# S&R CoreSync Solutions - Content Security Policy & response headers
 # -----------------------------------------------------------------------------
-# Why this file exists:
-#   The production host is GitHub Pages (A records -> 185.199.108-111.153).
-#   GitHub Pages does NOT execute .htaccess, so every header that was
-#   previously defined there was silently absent in production.
-#   This file is the GitHub Pages native equivalent and IS applied by the
-#   Pages CDN. Verified live against https://sr-coresync.com
+# IMPORTANT - read before trusting this file:
+#   GitHub Pages does NOT apply `_headers`. This file is honoured only by hosts
+#   that implement the Netlify/Cloudflare `_headers` convention (Cloudflare
+#   Pages, Netlify, GitLab Pages-with-proxy). On github.io / GitHub Pages the
+#   header block below is inert and is served as a plain text file.
+#   See CLOUDFLARE-SECURITY-HEADERS.md for the live-enablement path and for the
+#   exact values to paste into Cloudflare Transform Rules.
 #
-# Syntax: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/configuring-a-custom-404-page
+# CSP notes (measured on the current tree, 2026-10):
+#   * 'unsafe-eval' is NOT required: 0 `eval(`, 0 `new Function(` in the pages,
+#     and the only bundle hit (jszip.min.js) is guarded at runtime.
+#   * 'unsafe-inline' IS still required for scripts: 429 inline <script> blocks
+#     and 11,909 inline event handlers across the portals. Removing it needs an
+#     event-delegation refactor first; until then a hash/nonce policy would
+#     break the site.
+#   * The former blanket `https:` in default-src is replaced by an explicit
+#     host allowlist (verified against every external URL in the tree).
 # =============================================================================
 
 /*
@@ -20,7 +29,7 @@
   Cross-Origin-Opener-Policy: same-origin-allow-popups
   Cross-Origin-Resource-Policy: cross-origin
   X-XSS-Protection: 0
-  Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://unpkg.com https://js.stripe.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https: wss:; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.mollie.com; object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-ancestors 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' blob: https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://unpkg.com https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://api.coresync.eu https://api.coresync.solutions https://api.sr-coresync.com https://api.telegram.org https://api.mollie.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; child-src 'self' blob:; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.mollie.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'self'; manifest-src 'self'; upgrade-insecure-requests
 
 # -----------------------------------------------------------------------
 # Service Worker must never be served stale, otherwise clients can be

@@ -83,7 +83,7 @@
             price: 'عرض سعر مخصص',
             priceType: 'ترخيص مؤسسي / جهة',
             desc: 'منظومة عامة لإدارة الجاليات والمنظمات: مساعد قانوني ذكي RAG، بطاقات عضوية رقمية QR، خزانة مستندات آمنة، ودليل فعاليات.',
-            offlineFile: 'preview-work.html#platforms-civicsync'
+            offlineFile: 'work.html#platforms-civicsync'
         },
         healthbridge: {
             id: 'healthbridge',
@@ -95,7 +95,7 @@
             price: 'عرض سعر مخصص',
             priceType: 'ترخيص عيادات وشبكات طبية',
             desc: 'منظومة العيادات والطب الاتصالي: استشارات فيديو WebRTC مشفرة، فحص تداخلات الأدوية، وحجز مواعيد وامتثال GDPR.',
-            offlineFile: 'preview-work.html#platforms-healthbridge'
+            offlineFile: 'work.html#platforms-healthbridge'
         },
         omnibakery: {
             id: 'omnibakery',
@@ -107,7 +107,7 @@
             price: 'عرض سعر مخصص',
             priceType: 'ترخيص مخابز وتوزيع غذائي',
             desc: 'نظام كاشير لمسي سحابي أونلاين/أوفلاين، تتبع أسطول السائقين، وفواتير ضريبية BTW 9% و 21% متوافقة مع Belastingdienst.',
-            offlineFile: 'preview-work.html#platforms-omnibakery'
+            offlineFile: 'work.html#platforms-omnibakery'
         },
         terminal: {
             id: 'terminal',

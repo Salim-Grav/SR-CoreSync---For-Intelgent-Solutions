@@ -116,24 +116,24 @@
                     <span class="sr-dock-tooltip">${t.home}</span>
                 </a>
 
-                <a href="${prefix}preview-work.html#platforms" class="sr-dock-item ${isWork ? 'active' : ''}" data-target="work" aria-label="${t.work}">
+                <a href="${prefix}work.html#platforms" class="sr-dock-item ${isWork ? 'active' : ''}" data-target="work" aria-label="${t.work}">
                     <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                     <span class="sr-dock-tooltip">${t.work}</span>
                 </a>
 
-                <a href="${prefix}preview-software.html" class="sr-dock-item ${isSoftware ? 'active' : ''}" data-target="software" aria-label="${t.software}">
+                <a href="${prefix}software.html" class="sr-dock-item ${isSoftware ? 'active' : ''}" data-target="software" aria-label="${t.software}">
                     <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                     <span class="sr-dock-tooltip">${t.software}</span>
                 </a>
 
                 <div class="sr-dock-divider" aria-hidden="true"></div>
 
-                <a href="${prefix}preview-whitelabel-calculator.html" class="sr-dock-item sr-dock-item--special ${isWlCalc ? 'active' : ''}" data-target="whitelabel" aria-label="${t.whitelabel}">
+                <a href="${prefix}whitelabel-calculator.html" class="sr-dock-item sr-dock-item--special ${isWlCalc ? 'active' : ''}" data-target="whitelabel" aria-label="${t.whitelabel}">
                     <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
                     <span class="sr-dock-tooltip">${t.whitelabel}</span>
                 </a>
 
-                <a href="${prefix}preview-estimator.html" class="sr-dock-item ${isEstimator ? 'active' : ''}" data-target="estimator" aria-label="${t.estimator}">
+                <a href="${prefix}estimator.html" class="sr-dock-item ${isEstimator ? 'active' : ''}" data-target="estimator" aria-label="${t.estimator}">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     <span class="sr-dock-tooltip">${t.estimator}</span>
                 </a>
