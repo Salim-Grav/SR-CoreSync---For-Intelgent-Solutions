@@ -1850,7 +1850,7 @@
     </div>
 
     <!-- نافذة تسجيل معاملة تجريبية منبثقة -->
-    <div class="modal-overlay" id="newTxModal" onclick="if(event.target === this) closeNewTxModal()">
+    <div class="modal-overlay" id="newTxModal" data-sr-backdrop-call="closeNewTxModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">تسجيل معاملة تجريبية في الـ ERP</h3>
             <p class="text-caption text-white-64 mb-4">أدخل بيانات المعاملة لاختبار المزامنة اللحظية في الرسم البياني والجدول</p>
@@ -1884,7 +1884,7 @@
     </div>
 
     <!-- نافذة توليد فاتورة إلكترونية تجريبية جديدة -->
-    <div class="modal-overlay" id="newInvoiceModal" onclick="if(event.target === this) closeInvoiceGeneratorModal()">
+    <div class="modal-overlay" id="newInvoiceModal" data-sr-backdrop-call="closeInvoiceGeneratorModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">توليد فاتورة إلكترونية معتمدة</h3>
             <p class="text-caption text-white-64 mb-4">إنشاء فاتورة سحابية متوافقة مع أنظمة الضرائب في هولندا (BTW 21%) والخليج</p>
@@ -1915,7 +1915,7 @@
     </div>
 
     <!-- نافذة محاكاة الدفع عبر بوابة iDEAL الهولندية -->
-    <div class="modal-overlay" id="idealSimulatorModal" onclick="if(event.target === this) closeIdealSimulatorModal()">
+    <div class="modal-overlay" id="idealSimulatorModal" data-sr-backdrop-call="closeIdealSimulatorModal">
         <div class="modal-card">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <h3 class="text-white fw-bold mb-0">محاكي بوابات الدفع iDEAL</h3>
@@ -1971,7 +1971,7 @@
     </div>
 
     <!-- نافذة معاينة وطباعة الفاتورة الإلكترونية المعتمدة -->
-    <div class="modal-overlay" id="invoicePreviewModal" onclick="if(event.target === this) closeInvoicePreviewModal()">
+    <div class="modal-overlay" id="invoicePreviewModal" data-sr-backdrop-call="closeInvoicePreviewModal">
         <div class="modal-invoice-card">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
@@ -2064,7 +2064,7 @@
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <span class="text-caption text-white-64">معتمدة رقمياً ومطابقة للمعيار الأوروبي EN 16931</span>
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn-return-main" onclick="window.print()">
+                    <button type="button" class="btn-return-main" data-sr-call="print" data-sr-ctx="window">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         طباعة الفاتورة
                     </button>
@@ -3552,7 +3552,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- نافذة نشر برنامج جديد من قبل المؤسس/المطور (Publish Software Modal) -->
-    <div class="modal-overlay" id="publishSoftwareModal" onclick="if(event.target === this) closePublishSoftwareModal()">
+    <div class="modal-overlay" id="publishSoftwareModal" data-sr-backdrop-call="closePublishSoftwareModal">
         <div class="modal-card ds-u32">
             <h3 class="text-white mb-2 fw-bold">نشر وتوزيع برنامج جديد عبر المنصة</h3>
             <p class="text-caption text-white-64 mb-4">بصفتك مطوراً ومهندساً للبرمجيات، يمكنك إضافة حلولك وتطبيقاتك الحصرية للبيع والتوزيع:</p>
@@ -3602,7 +3602,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     <!-- -----------------------------------------------------====
          محاكي واجهة برمجيات سطح المكتب التفاعلي (Desktop OS Simulator Modal)
          -----------------------------------------------------==== -->
-    <div class="modal-overlay" id="desktopSimulatorModal" onclick="if(event.target === this) closeDesktopSimulatorModal()">
+    <div class="modal-overlay" id="desktopSimulatorModal" data-sr-backdrop-call="closeDesktopSimulatorModal">
         <div class="modal-card simulator-modal-card">
             <!-- شريط نافذة نظام التشغيل (OS Window Bar) -->
             <div class="os-window-header">
@@ -3919,7 +3919,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- نافذة تصدير ملخص العرض التنفيذي للزبائن (One-Click Executive PDF) -->
-    <div class="modal-overlay" id="executivePdfModal" onclick="if(event.target === this) closeExecutivePdfModal()">
+    <div class="modal-overlay" id="executivePdfModal" data-sr-backdrop-call="closeExecutivePdfModal">
         <div class="modal-card exec-pdf-card ds-u63">
             <div class="no-print ds-u64">
                 <div class="ds-u65">
@@ -4247,7 +4247,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- Proposal 1 Modal: Executive ROI Certificate -->
-    <div class="modal-overlay" id="roiCertModal" onclick="if(event.target === this) closeRoiCertModal()" dir="rtl">
+    <div class="modal-overlay" id="roiCertModal" data-sr-backdrop-call="closeRoiCertModal" dir="rtl">
         <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
             <div class="d-flex justify-content-end mb-2">
                 <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
@@ -4297,7 +4297,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="roi-cert-actions">
-                <button type="button" class="btn-cert-print" onclick="window.print()">
+                <button type="button" class="btn-cert-print" data-sr-call="print" data-sr-ctx="window">
                     🖨️ طباعة / حفظ كملف PDF
                 </button>
                 <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
@@ -4308,7 +4308,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- Proposal 2 Modal: Strategic Meeting Booking -->
-    <div class="modal-overlay" id="strategicBookingModal" onclick="if(event.target === this) closeStrategicBookingModal()" dir="rtl">
+    <div class="modal-overlay" id="strategicBookingModal" data-sr-backdrop-call="closeStrategicBookingModal" dir="rtl">
         <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="section-title mb-0" id="bookingModalTitle">📅 حجز جلسة استشارية استراتيجية مع المؤسسين</h3>
@@ -4361,7 +4361,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         </div>
     </div>
     <!-- نافذة العقد والاتفاقية التجارية الرسمية OF-2026-1021 -->
-    <div class="modal-overlay" id="contractOf2026Modal" onclick="if(event.target === this) closeContractOf2026Modal()" dir="rtl">
+    <div class="modal-overlay" id="contractOf2026Modal" data-sr-backdrop-call="closeContractOf2026Modal" dir="rtl">
         <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractModalHeaderTitle">
             <!-- ألسنة التبديل بين العقدين المالي والتقني -->
             <div class="contract-tabs-nav">
@@ -4554,7 +4554,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- نافذة العقد والاتفاقية المالية والضريبية الرسمية OF-2026-1022-FIN -->
-    <div class="modal-overlay" id="contractOf2026FinModal" onclick="if(event.target === this) closeContractOf2026FinModal()" dir="rtl">
+    <div class="modal-overlay" id="contractOf2026FinModal" data-sr-backdrop-call="closeContractOf2026FinModal" dir="rtl">
         <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractFinModalHeaderTitle">
             
             <!-- ألسنة التبديل بين العقدين المالي والتقني -->

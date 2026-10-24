@@ -92,7 +92,18 @@ def parse_arguments(raw):
     return literals, special
 
 
+WINDOW_CTX_FUNCS = set()
+
+NATIVES = {'print', 'close', 'scrollTo', 'scrollBy', 'focus', 'blur', 'alert'}
+
+
 def safe_functions():
+    """Names that may be delegated, split into element- and window-context.
+
+    A plain inline call `fn(x)` runs fn with `this` = window (sloppy mode), not
+    the element. Functions whose bodies read `this` are therefore converted with
+    data-sr-ctx="window" so the binding stays identical.
+    """
     src = audit.js_sources()
     candidates = set()
     for path in audit.html_files():
@@ -107,15 +118,33 @@ def safe_functions():
             win = re.match(r'^window\.([A-Za-z_$][\w$]*)\s*\(', value)
             if win:
                 candidates.add(win.group(1))
+            # Statements such as `event.stopPropagation(); fn('x')` or
+            # `if(event.target === this) fn()` hide the callee from CALL, so
+            # collect every callable name in the value as well.
+            for inner in re.finditer(r'(?<![.\w$])([A-Za-z_$][\w$]*)\s*\(', value):
+                name = inner.group(1)
+                if name not in ('if', 'for', 'while', 'switch', 'catch', 'function',
+                                'return', 'typeof', 'new', 'this', 'event', 'window',
+                                'document', 'navigator', 'alert', 'parseInt', 'String',
+                                'Number', 'Boolean', 'JSON', 'Math', 'Object', 'Array'):
+                    candidates.add(name)
 
-    safe = set()
+    safe = set(NATIVES)
+    WINDOW_CTX_FUNCS.clear()
+    WINDOW_CTX_FUNCS.update(NATIVES)
     for name in candidates:
         body = audit.function_body(src, name)
         if body is None:
+            # Defined in a minified bundle we cannot read. An inline call still
+            # ran fn with `this` = window, so window context is the faithful
+            # choice rather than a guess.
+            WINDOW_CTX_FUNCS.add(name)
+            safe.add(name)
             continue
         if re.search(r'\bthis\b', body):
-            continue
+            WINDOW_CTX_FUNCS.add(name)
         safe.add(name)
+    safe |= WINDOW_CTX_FUNCS
     return safe
 
 
@@ -127,7 +156,10 @@ def build_attributes(event, value, safe):
     if backdrop:
         name = backdrop.group(1)
         if name in safe:
-            return ' data-sr-backdrop-call="%s"' % name
+            out = ' data-sr-backdrop-call="%s"' % name
+            if name in WINDOW_CTX_FUNCS:
+                out += ' data-sr-ctx="window"'
+            return out
         return None
 
     stopped = False
@@ -156,6 +188,8 @@ def build_attributes(event, value, safe):
         out += ' data-sr-event="1"'
     elif special:
         out += ' data-sr-this="%s"' % special
+    if name in WINDOW_CTX_FUNCS:
+        out += ' data-sr-ctx="window"'
     if stopped:
         out += ' data-sr-stop="1"'
     if event != 'click':

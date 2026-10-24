@@ -1469,7 +1469,7 @@
     </div>
 
     
-    <div class="modal-overlay" id="newTxModal" onclick="if(event.target === this) closeNewTxModal()">
+    <div class="modal-overlay" id="newTxModal" data-sr-backdrop-call="closeNewTxModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">Registra Transazione di Test in ERP</h3>
             <p class="text-caption text-white-64 mb-4">Enter transaction details to simulate real-time ledger synchronization across charts and tables</p>
@@ -1503,7 +1503,7 @@
     </div>
 
     
-    <div class="modal-overlay" id="newInvoiceModal" onclick="if(event.target === this) closeInvoiceGeneratorModal()">
+    <div class="modal-overlay" id="newInvoiceModal" data-sr-backdrop-call="closeInvoiceGeneratorModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">Generate Certified E-Invoice</h3>
             <p class="text-caption text-white-64 mb-4">Generate compliant cloud e-invoices with IVA Italiana (22%), EU Reverse Charge, and GCC VAT</p>
@@ -1534,7 +1534,7 @@
     </div>
 
     
-    <div class="modal-overlay" id="idealSimulatorModal" onclick="if(event.target === this) closeIdealSimulatorModal()">
+    <div class="modal-overlay" id="idealSimulatorModal" data-sr-backdrop-call="closeIdealSimulatorModal">
         <div class="modal-card">
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <h3 class="text-white fw-bold mb-0">iDEAL Instant Payment Simulator</h3>
@@ -1590,7 +1590,7 @@
     </div>
 
     
-    <div class="modal-overlay" id="invoicePreviewModal" onclick="if(event.target === this) closeInvoicePreviewModal()">
+    <div class="modal-overlay" id="invoicePreviewModal" data-sr-backdrop-call="closeInvoicePreviewModal">
         <div class="modal-invoice-card">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="d-flex align-items-center gap-2">
@@ -1682,7 +1682,7 @@
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <span class="text-caption text-white-64">Digitally certified and compliant with European Standard EN 16931</span>
                 <div class="d-flex gap-2">
-                    <button type="button" class="btn-return-main" onclick="window.print()">
+                    <button type="button" class="btn-return-main" data-sr-call="print" data-sr-ctx="window">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         Print Invoice
                     </button>
@@ -3176,7 +3176,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     
-    <div class="modal-overlay" id="publishSoftwareModal" onclick="if(event.target === this) closePublishSoftwareModal()">
+    <div class="modal-overlay" id="publishSoftwareModal" data-sr-backdrop-call="closePublishSoftwareModal">
         <div class="modal-card ds-u32">
             <h3 class="text-white mb-2 fw-bold">Publish & Distribute Enterprise App</h3>
             <p class="text-caption text-white-64 mb-4">As an enterprise software engineer, you can publish exclusive commercial solutions for sale and distribution:</p>
@@ -3224,7 +3224,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
     
     
-    <div class="modal-overlay" id="desktopSimulatorModal" onclick="if(event.target === this) closeDesktopSimulatorModal()">
+    <div class="modal-overlay" id="desktopSimulatorModal" data-sr-backdrop-call="closeDesktopSimulatorModal">
         <div class="modal-card simulator-modal-card">
             
             <div class="os-window-header">
@@ -3538,7 +3538,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     
-    <div class="modal-overlay" id="executivePdfModal" onclick="if(event.target === this) closeExecutivePdfModal()">
+    <div class="modal-overlay" id="executivePdfModal" data-sr-backdrop-call="closeExecutivePdfModal">
         <div class="modal-card exec-pdf-card ds-u63">
             <div class="no-print ds-u64">
                 <div class="ds-u65">
@@ -3826,7 +3826,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
 
     <!-- Proposal 1 Modal: Executive ROI Certificate -->
-    <div class="modal-overlay" id="roiCertModal" onclick="if(event.target === this) closeRoiCertModal()" dir="ltr">
+    <div class="modal-overlay" id="roiCertModal" data-sr-backdrop-call="closeRoiCertModal" dir="ltr">
         <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
             <div class="d-flex justify-content-end mb-2">
                 <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
@@ -3876,7 +3876,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             </div>
 
             <div class="roi-cert-actions">
-                <button type="button" class="btn-cert-print" onclick="window.print()">
+                <button type="button" class="btn-cert-print" data-sr-call="print" data-sr-ctx="window">
                     🖨️ Print / Save as PDF
                 </button>
                 <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
@@ -3887,7 +3887,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     <!-- Proposal 2 Modal: Strategic Meeting Booking -->
-    <div class="modal-overlay" id="strategicBookingModal" onclick="if(event.target === this) closeStrategicBookingModal()" dir="ltr">
+    <div class="modal-overlay" id="strategicBookingModal" data-sr-backdrop-call="closeStrategicBookingModal" dir="ltr">
         <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="section-title mb-0" id="bookingModalTitle">📅 Prenota Sessione Strategica con i Fondatori</h3>

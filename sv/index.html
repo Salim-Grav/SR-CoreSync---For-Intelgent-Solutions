@@ -1143,7 +1143,7 @@
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
-                                <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('identity')">
+                                <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["identity"]' data-sr-stop="1">
                                     <span>Book Session 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20Visual%20Identity%20Package%20(%E2%82%AC590)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20the%20complete%20visual%20identity%20package." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
@@ -1186,7 +1186,7 @@
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
-                                <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('website')">
+                                <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["website"]' data-sr-stop="1">
                                     <span>Book Session 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20Website%20Design%20Package%20(%E2%82%AC980)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20the%20high-performance%20website%20design%20package." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
@@ -1239,7 +1239,7 @@
                                 <span class="dana-pay-badge" title="Apple Pay"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.150 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.66zM14.1 5.84c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.75-.96 2.79 1.02.08 2.05-.52 2.68-1.27z"/></svg>Apple&nbsp;Pay</span>
                             </div>
                             <div class="dana-card-actions-row">
-                                <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('store')">
+                                <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["store"]' data-sr-stop="1">
                                     <span>Book Session 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20E-Commerce%20Store%20Package%20(%E2%82%AC1,450)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20an%20intuitive%20online%20store%20with%20seamless%20checkout." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
@@ -3556,7 +3556,7 @@
     </div>
 
     <!-- نافذة الاتصال المباشر الفوري (Direct Call Modal) -->
-    <div class="call-modal-overlay" id="directCallModal" onclick="if(event.target === this) closeDirectCallModal()">
+    <div class="call-modal-overlay" id="directCallModal" data-sr-backdrop-call="closeDirectCallModal">
         <div class="call-modal-box">
             <button type="button" data-sr-call="closeDirectCallModal" aria-label="Stäng Direct Call Modal" title="Stäng" class="modal-btn-close-sm">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -4491,7 +4491,7 @@
     </script>
 
     <!-- نافذة تثبيت التطبيق على ويندوز والموبايل (Cross-Platform Install Modal) -->
-    <div class="call-modal-overlay" id="installModal" onclick="if(event.target === this) closeInstallModal()">
+    <div class="call-modal-overlay" id="installModal" data-sr-backdrop-call="closeInstallModal">
         <div class="call-modal-box call-modal-box-wide">
             <button type="button" data-sr-call="closeInstallModal" aria-label="Stäng Installation Window" title="Stäng" class="modal-btn-close-sm">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -4908,7 +4908,7 @@
     </div>
 
     <!-- نافذة بوابة العملاء وسيرفرات الدعم المباشرة (Client Portal & Infrastructure Hub Modal) -->
-    <div class="sr-portal-modal-overlay" id="clientPortalModal" role="dialog" aria-modal="true" aria-labelledby="clientPortalTitle" onclick="if(event.target === this) closeClientPortalModal()">
+    <div class="sr-portal-modal-overlay" id="clientPortalModal" role="dialog" aria-modal="true" aria-labelledby="clientPortalTitle" data-sr-backdrop-call="closeClientPortalModal">
         <div class="sr-portal-modal-card">
             <!-- رأس النافذة -->
             <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary border-opacity-25">
@@ -5001,7 +5001,7 @@
     </div>
 
     <!-- نافذة استعراض الشعار الرسمي الفاخر (S&R CoreSync Official Brandmark Lightbox) -->
-    <div class="sr-logo-lightbox-overlay" id="brandLogoLightboxModal" role="dialog" aria-modal="true" aria-labelledby="brandLogoModalTitle" onclick="if(event.target === this) closeLogoLightbox()">
+    <div class="sr-logo-lightbox-overlay" id="brandLogoLightboxModal" role="dialog" aria-modal="true" aria-labelledby="brandLogoModalTitle" data-sr-backdrop-call="closeLogoLightbox">
         <div class="sr-logo-modal-card">
             <!-- رأس النافذة -->
             <div class="sr-logo-modal-header">
@@ -6103,7 +6103,7 @@
     <!-- -----------------------------------------------------=====================
          Suggestion 1: Salim's Software License Manager Portal (EN)
          -----------------------------------------------------===================== -->
-    <div id="salimLicenseManagerModal" class="software-modal-overlay" onclick="if(event.target===this)closeSalimLicenseManagerModal()">
+    <div id="salimLicenseManagerModal" class="software-modal-overlay" data-sr-backdrop-call="closeSalimLicenseManagerModal">
         <div class="software-modal-container salim-lm-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSalimLicenseManagerModal" aria-label="Stäng modal">&times;</button>
 

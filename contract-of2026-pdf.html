@@ -1134,7 +1134,7 @@
             <span>S&R CoreSync · Document Hub</span>
         </div>
 
-        <button type="button" class="btn-action btn-action-primary" onclick="window.print()">
+        <button type="button" class="btn-action btn-action-primary" data-sr-call="print" data-sr-ctx="window">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
             <span>طباعة / حفظ كـ PDF (صفحتين A4)</span>
         </button>
@@ -1164,7 +1164,7 @@
             <span>واتساب السيد مضر</span>
         </a>
 
-        <button type="button" class="btn-action btn-action-secondary" onclick="window.close()">
+        <button type="button" class="btn-action btn-action-secondary" data-sr-call="close" data-sr-ctx="window">
             <span>✕ إغلاق</span>
         </button>
     </div>
@@ -1437,7 +1437,7 @@
     </div>
 
     <!-- نافذة معاينة قالب البريد الإلكتروني الفاخر (Email Template Modal) -->
-    <div class="modal-overlay" id="emailModal" onclick="if(event.target === this) closeEmailPreviewModal()">
+    <div class="modal-overlay" id="emailModal" data-sr-backdrop-call="closeEmailPreviewModal">
         <div class="email-modal-card">
             <div class="email-modal-header">
                 <h3 class="email-modal-title">✉️ قالب البريد الإلكتروني الفاخر (جاهز للإرسال أو النسخ لـ Gmail)</h3>

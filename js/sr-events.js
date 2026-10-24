@@ -61,7 +61,10 @@
     if (el.hasAttribute('data-sr-prevent') && event && event.preventDefault) {
       event.preventDefault();
     }
-    fn.apply(el, args);
+    // An inline handler calls fn(x) as a plain function, so inside a sloppy-mode
+    // fn `this` is the window - never the element. data-sr-ctx="window" keeps
+    // that contract for the few functions that actually read `this`.
+    fn.apply(el.getAttribute('data-sr-ctx') === 'window' ? window : el, args);
   }
 
   function handler(event) {
@@ -76,7 +79,7 @@
     if (backdrop) {
       if (event.target !== el) return;
       var targetFn = resolve(backdrop);
-      if (targetFn) targetFn.apply(el, []);
+      if (targetFn) targetFn.apply(el.getAttribute('data-sr-ctx') === 'window' ? window : el, []);
       return;
     }
 
