@@ -1,5 +1,16 @@
 # الانتقال الجذري إلى Cloudflare — دليل التنفيذ
 
+> ## ⚠️ قرار مالك المشروع (2026-10-24): **لا نقل للنطاق**
+> Nameservers تبقى عند Hostinger. لذلك هذا الدليل ينقسم إلى قسمين:
+>
+> **ما يعمل بدون أي تغيير في DNS (منفَّذ ومُختبَر):**
+> - الـ Worker على `*.workers.dev` → استفسارات محفوظة + بريد + إشعارات حقيقية + `/pay/webhook` + `/tax`.
+> - ربط الموقع به: `python scripts/configure_api_base.py --base https://<worker>.<sub>.workers.dev`
+>
+> **ما لا يمكن بدون نقل النطاق:** رؤوس الأمان الحقيقية (CSP/HSTS)، 301 على GitHub Pages،
+> والنطاق `api.sr-coresync.com`. البديل الوحيد بلا نقل NS هو استضافة تدعم `_headers`
+> وتُربط بسجل **CNAME واحد** (Netlify/Vercel) — انظر القسم 8.
+
 > الغاية: إنهاء حالة «موقع بلا خادم». بعد هذا الدليل تصبح الاستفسارات محفوظة،
 > والإشعارات حقيقية، والدفع مُتحقَّقًا منه خادميًا، والرؤوس مُطبَّقة، والروابط
 > القديمة تُحوَّل بـ 301 حقيقي.
@@ -150,3 +161,31 @@ node scripts/test_lead_worker.mjs      # 34 اختبارًا
 | رؤوس الأمان | غير مُطبَّقة | CSP/HSTS فعليان |
 | 301 | meta refresh | تحويل حقيقي |
 | حماية النموذج | honeypot فقط | + Turnstile |
+
+---
+
+## 8. إذا رفضت نقل النطاق (الوضع الحالي)
+
+**يعمل اليوم بلا لمس DNS:**
+```powershell
+cd workers/sr-lead-capture && npx wrangler deploy
+npx wrangler whoami      # يعطي subdomain الحساب
+python scripts/configure_api_base.py --base https://sr-lead-capture.<sub>.workers.dev
+```
+
+**لا يعمل بدون نقل NS:**
+
+| البند | السبب | البديل الوحيد |
+|---|---|---|
+| `api.sr-coresync.com` | Cloudflare يمنح Custom Domain للنطاقات الموجودة في حسابه فقط | استخدام رابط `workers.dev` مباشرة |
+| HSTS / CSP حقيقية | GitHub Pages لا يقرأ `_headers` | استضافة تدعم `_headers` وتُربط بـ **CNAME واحد** (Netlify) |
+| 301 حقيقي | GitHub Pages لا يدعم التحويلات | نفس البديل أعلاه عبر `_redirects` |
+| `frame-ancestors` | لا يعمل في `<meta>` | لا بديل بلا رأس HTTP |
+
+> **الفرق الجوهري:** نقل *النطاق* (Nameservers) شيء، وإضافة **سجل CNAME واحد** شيء آخر.
+> الثاني لا يمسّ البريد ولا الحساب، ويكفي لإغلاق فجوة الرؤوس والـ301 عبر Netlify.
+
+**ما يبقى متاحًا فورًا حتى بلا أي منهما:**
+- صيغة CSP في `<meta http-equiv>`: تقيّد `default-src` و`connect-src` (تحدّ من تسريب
+  البيانات) لكنها لا تغني عن الرأس في `frame-ancestors` ولا توفّر HSTS.
+- إزالة `onclick` (مستمرة) — وهي المتطلب الحقيقي لأي CSP صارم لاحقًا.
