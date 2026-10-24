@@ -48,15 +48,18 @@ PROFILES = {
         'spf_include': 'purelymail',
         'dkim_selector': None,
         'guide': [
-            ('MX', '@', 'mx1.purelymail.com', 'priority 10 - copy the exact host from the panel'),
-            ('MX', '@', 'mx2.purelymail.com', 'priority 20 - copy the exact host from the panel'),
-            ('TXT', '@', 'v=spf1 include:_spf.purelymail.com ~all', 'copy the exact SPF the panel shows'),
+            ('MX', '@', 'mailserver.purelymail.com', 'priority 50 - this is what the panel shows'),
+            ('MX', '@', 'mx1.improvmx.com', 'keep at priority 90 for one week as a fallback'),
+            ('MX', '@', 'mx2.improvmx.com', 'keep at priority 100 for one week as a fallback'),
+            ('TXT', '@', 'v=spf1 include:_spf.purelymail.com ~all', 'EDIT the existing SPF - never add a second one'),
             ('TXT', '@', 'purelymail_ownership_proof=<value>', 'from Add Domain'),
-            ('TXT', '<selector>._domainkey', '<value>', 'three DKIM records, copy each selector'),
-            ('TXT', '_dmarc', 'v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; pct=100', 'start with monitoring'),
+            ('CNAME', 'purelymail1._domainkey', 'key1.dkimroot.purelymail.com', 'DKIM 1'),
+            ('CNAME', 'purelymail2._domainkey', 'key2.dkimroot.purelymail.com', 'DKIM 2'),
+            ('CNAME', 'purelymail3._domainkey', 'key3.dkimroot.purelymail.com', 'DKIM 3'),
+            ('CNAME', '_dmarc', 'dmarcroot.purelymail.com', 'DMARC (the panel serves p=reject)'),
         ],
         'note': 'IMAP imap.purelymail.com:993 (SSL) - SMTP smtp.purelymail.com:587 (STARTTLS)',
-        'note2': 'POP3 pop3.purelymail.com:995. Verify each DKIM selector with --dkim-selector.',
+        'note2': 'POP3 pop3.purelymail.com:995. Create the users BEFORE moving MX, or mail bounces.',
     },
     'hostinger': {
         'label': 'Hostinger Email',
@@ -208,6 +211,9 @@ def main():
 
     selector = args.dkim_selector or profile['dkim_selector']
     if selector:
+        # panels show the bare selector ("purelymail1"); the DNS name needs ._domainkey
+        if '._domainkey' not in selector:
+            selector += '._domainkey'
         dkim = txt(selector + '.' + DOMAIN) or dns(selector + '.' + DOMAIN, 'CNAME')
         checks.append(('%s publishes DKIM' % selector, bool(dkim), 'present' if dkim else 'missing'))
     else:

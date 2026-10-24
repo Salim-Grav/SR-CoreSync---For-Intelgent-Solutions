@@ -8,16 +8,32 @@
       "185.199.111.153"
     ],
     "MX sr-coresync.com": [
-      "10 mx1.improvmx.com.",
-      "20 mx2.improvmx.com."
+      "100 mx2.improvmx.com.",
+      "50 mailserver.purelymail.com.",
+      "90 mx1.improvmx.com."
     ],
     "TXT sr-coresync.com": [
-      "purelymail_ownership_proof=7cc6acfb76ed800e73c57f78eec7cea843de55ccd7ef579a3b80150ac82b805801c4634fd87d3683dfd9f91a875b54b1723c1557695dae1d761f117d91a9cff2",
-      "v=spf1 include:spf.improvmx.com ~all"
+      "purelymail_ownership_proof=7cc6acfb76ed800e73c57f78eec7cea843de55ccd7ef579a3b80150ac82b805861c4634fd87d3683dfd9f91a875b54b1723c1557695dae1d761f117d91a9cff2",
+      "v=spf1 include:_spf.purelymail.com ~all"
     ],
     "CNAME www.sr-coresync.com": [
       "salim-grav.github.io."
     ],
-    "TXT _dmarc.sr-coresync.com": []
+    "TXT _dmarc.sr-coresync.com": [
+      "dmarcroot.purelymail.com.",
+      "v=DMARC1; p=reject; ruf=mailto:dmarc@purelymail.com"
+    ],
+    "CNAME purelymail1._domainkey.sr-coresync.com": [
+      "key1.dkimroot.purelymail.com."
+    ],
+    "CNAME purelymail2._domainkey.sr-coresync.com": [
+      "key2.dkimroot.purelymail.com."
+    ],
+    "CNAME purelymail3._domainkey.sr-coresync.com": [
+      "key3.dkimroot.purelymail.com."
+    ],
+    "CNAME _dmarc.sr-coresync.com": [
+      "dmarcroot.purelymail.com."
+    ]
   }
 }

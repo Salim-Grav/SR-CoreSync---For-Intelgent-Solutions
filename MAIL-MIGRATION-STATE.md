@@ -1,13 +1,12 @@
 # حالة ترحيل البريد إلى Purelymail — مرجع تشغيلي
 
-آخر تحديث: السبت 24 أكتوبر 2026 — 17:20
+آخر تحديث: السبت 24 أكتوبر 2026 — 17:40
 
-> **حالة التحقق في Purelymail (17:20):** `MX ✗ | SPF ✗ | DKIM ✓ | DMARC ✓`
-> أي أن الأربعة CNAME (DKIM ×3 + DMARC) منشورة ومتحقَّق منها. المتبقي: MX و SPF فقط.
+> **الحالة: DNS مكتمل ✓** — `MX ✓ | SPF ✓ | DKIM ✓ | DMARC ✓`
+> المُتحقَّق منه من الخادمين الرسميين (artemis/hermes.dns-parking.com) عبر Google + Cloudflare.
+> المتبقي: **اختبار استقبال وإرسال حقيقي** (DNS لا يستطيع إثبات وجود صندوق).
 
 ## المستخدمون (Users)
-
-مُنشأ في Purelymail حتى الآن (17:25):
 
 | العنوان | الحالة |
 |---|---|
@@ -15,11 +14,10 @@
 | `info@sr-coresync.com` | ✓ منشأ |
 | `salim@sr-coresync.com` | ✓ منشأ |
 | `raed@sr-coresync.com` | ✓ منشأ |
-| `support@sr-coresync.com` | **مطلوب** — يظهر 31 مرة في الموقع |
-| `billing@sr-coresync.com` | **مطلوب** — يظهر 11 مرة (الفواتير) |
+| `support@sr-coresync.com` | يظهر 31 مرة في الموقع — تحقّق من وجوده |
+| `billing@sr-coresync.com` | يظهر 11 مرة (الفواتير) — تحقّق من وجوده |
 
-> بديل اختياري: `Routing rules` أو `catch-all` لتوجيه كل العناوين غير المنشأة إلى صندوق `info@`
-> بدلًا من إنشاء مستخدم لكل عنوان (كل مستخدم = صندوق مستقل بتسجيل دخول منفصل).
+> بديل: `Routing rules` أو `catch-all` لتوجيه العناوين غير المنشأة إلى `info@`.
 
 ## الحساب
 | البند | القيمة |
@@ -34,92 +32,69 @@
 ```
 purelymail_ownership_proof=7cc6acfb76ed800e73c57f78eec7cea843de55ccd7ef579a3b80150ac82b805861c4634fd87d3683dfd9f91a875b54b1723c1557695dae1d761f117d91a9cff2
 ```
-> تم التحقق من تطابقه (155 حرفًا) على Google DNS و Cloudflare DNS في 16:55.
+> تم التحقق من تطابقه (155 حرفًا) على Google DNS و Cloudflare DNS.
 
-## السجلات المطلوبة من Purelymail
+## DNS المنشور والمتحقَّق منه ✅ (17:40)
 
-### أ) منشورة ومتحقَّق منها ✅
 | النوع | الاسم | القيمة |
 |---|---|---|
+| `MX` | `@` | **50** `mailserver.purelymail.com` ← أساسي |
+| `MX` | `@` | **90** `mx1.improvmx.com` ← احتياطي (احذفه بعد أسبوع) |
+| `MX` | `@` | **100** `mx2.improvmx.com` ← احتياطي |
+| `TXT` | `@` | `v=spf1 include:_spf.purelymail.com ~all` |
 | `TXT` | `@` | سجل الملكية أعلاه |
-
-### ب) يجب إضافتها (لا تمسّ الاستقبال الحالي)
-| النوع | الاسم في Hostinger | القيمة |
-|---|---|---|
 | `CNAME` | `purelymail1._domainkey` | `key1.dkimroot.purelymail.com` |
 | `CNAME` | `purelymail2._domainkey` | `key2.dkimroot.purelymail.com` |
 | `CNAME` | `purelymail3._domainkey` | `key3.dkimroot.purelymail.com` |
-| `CNAME` | `_dmarc` | `dmarcroot.purelymail.com` |
-| `CNAME` | `autoconfig` (اختياري) | `autoconfig.purelymail.com` |
-| `SRV` | `_autodiscover._tcp` (اختياري) | `autodiscover.purelymail.com` · 0 · 0 · 443 |
+| `CNAME` | `_dmarc` | `dmarcroot.purelymail.com` → يخدم `p=reject; ruf=mailto:dmarc@purelymail.com` |
+| `A` | `@` | 185.199.108.153 · .109.153 · .110.153 · .111.153 (GitHub Pages) |
+| `CNAME` | `www` | `salim-grav.github.io` |
 
-### ج) تحويل الاستقبال (المرحلة الأخيرة)
+اختياريان لم يُضافا بعد: `CNAME autoconfig → autoconfig.purelymail.com` ·
+`SRV _autodiscover._tcp → autodiscover.purelymail.com (0 0 443)`.
 
-> **شرط مسبق إلزامي:** أنشئ المستخدمين الثلاثة أولًا (Users → Add user): `info` · `support` · `billing`.
-> لو غيّرت MX قبل إنشاء الصناديق، سيرفض Purelymail الرسائل (لا يوجد مستخدم) وترتد.
-
-حقول النموذج في Hostinger:
-
-| السجل | النوع | الاسم | خادم البريد / القيمة | الأولوية |
-|---|---|---|---|---|
-| Purelymail | `MX` | `@` | `mailserver.purelymail.com` | **50** |
-| ImprovMX (احتياطي) | `MX` | `@` | `mx1.improvmx.com` (عدّل الأولوية فقط) | **90** |
-| ImprovMX (احتياطي) | `MX` | `@` | `mx2.improvmx.com` (عدّل الأولوية فقط) | **100** |
-| SPF | `TXT` | `@` | `v=spf1 include:_spf.purelymail.com ~all` (عدّل السجل الحالي — لا تُضف ثانيًا) | — |
-
-> سجلان SPF معًا يُبطلان كلاهما. عدّل السجل الذي يبدأ بـ `v=spf1` فقط، واترك سجل الملكية كما هو.
-
-## حالة DNS الحالية (سليمة — لا تمسّها إلا بالخطوات أعلاه)
+### التحقق من DKIM (سلسلة CNAME ثم مفتاح عام حقيقي)
 ```
-A      : 185.199.108.153 · .109.153 · .110.153 · .111.153   (GitHub Pages)
-CNAME  : www → salim-grav.github.io
-MX     : 10 mx1.improvmx.com · 20 mx2.improvmx.com            (تحويل البريد الحالي)
-TXT    : v=spf1 include:spf.improvmx.com ~all
-TXT    : سجل ملكية Purelymail
-DMARC  : غير موجود
+purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
+   ثم TXT: v=DKIM1; k=rsa; t=s; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A…
 ```
-أسماء النواقل: `artemis.dns-parking.com` · `hermes.dns-parking.com` (Hostinger)
+> هذا يفيد أن التوقيع يعمل فعلًا، لا أن السجل موجود فقط.
 
-## كيف تُدخل السجل في لوحة Hostinger (نموذج "إضافة سجل")
-
-النموذج فيه أربعة حقول بهذا الترتيب، واللوحة تضيف النطاق تلقائيًا بجانب حقل الاسم:
-
-| الحقل في اللوحة | ماذا تكتب | ملاحظة |
-|---|---|---|
-| **النوع** | `CNAME` (أو `TXT` / `MX` حسب السجل) | من القائمة المنسدلة |
-| **الاسم** | `purelymail1._domainkey` | بلا `@` وبلا `.sr-coresync.com` — اللوحة تعرض النطاق بجانب الحقل بلون رمادي |
-| **القيمة** | `key1.dkimroot.purelymail.com` | أو ما يطلبه السجل |
-| **TTL** | `3600` | أو اتركه |
-
-قيم حقل الاسم للسجلات الأربعة:
-
-| السجل | الاسم الذي تكتبه | القيمة |
-|---|---|---|
-| DKIM 1 | `purelymail1._domainkey` | `key1.dkimroot.purelymail.com` |
-| DKIM 2 | `purelymail2._domainkey` | `key2.dkimroot.purelymail.com` |
-| DKIM 3 | `purelymail3._domainkey` | `key3.dkimroot.purelymail.com` |
-| DMARC | `_dmarc` | `dmarcroot.purelymail.com` |
-| AutoConfig | `autoconfig` | `autoconfig.purelymail.com` |
-
-> استثناء واحد فقط: سجلات MX وSPF التابعة للنطاق نفسه تُكتب باسم `@` (كما فُعل مع سجلات A).
-> السجلات أعلاه كلها أسماء فرعية، فلا `@` فيها.
-
-## إعدادات الأجهزة بعد إنشاء الصناديق
+## إعدادات الأجهزة
 | الخدمة | الخادم | المنفذ |
 |---|---|---|
 | IMAP | `imap.purelymail.com` | 993 (SSL) |
 | SMTP | `smtp.purelymail.com` | 587 (STARTTLS) |
 | POP3 | `pop3.purelymail.com` | 995 (SSL) |
+| Webmail | `purelymail.com/webmail` | — |
 
-## تحذيرات مستخلصة من حادثة اليوم
-1. **لا تضغط «إعادة تعيين سجلات DNS»** في لوحة Hostinger — مسح كل السجلات في 16:20 وأوقف الموقع (صفحة Parking) والبريد.
-2. أدوات الفحص تقرأ من Google + Cloudflare معًا، لأن كاش خادم واحد أعطى نتيجة خاطئة.
-3. `python scripts/snapshot_dns.py --verbose` يكشف أي اختفاء للسجلات؛ اللقطة محفوظة في `dns-snapshot.json`.
-4. سجل الملكية يجب أن يُنسخ بـ**زر النسخ** لا يدويًا — خطأ حرف واحد (0 بدل 6) كلّف جولة كاملة.
+## ما تبقّى — اختبار حقيقي
+DNS لا يثبت وجود صندوق. طريقتان:
 
-## الأوامر المرجعية
+1. **من Gmail** → أرسل إلى `info@sr-coresync.com` ثم افتح Webmail. يجب أن يظهر في Inbox لا في Spam.
+2. **من Webmail** → أرسل إلى Gmail، ثم في Gmail: «إظهار الأصل» وتحقق من
+   `SPF: PASS` · `DKIM: PASS` · `DMARC: PASS`.
+
+`scripts/probe_recipients.py` يفحص وجود الصناديق على المنفذ 25 دون إرسال رسالة،
+لكن مزوّد الإنترنت هنا يحجب المنفذ 25 (انتهى بمهلة) — يُشغَّل من VPS أو GitHub Action.
+
+## أدوات
 ```powershell
 python scripts/check_mail_setup.py --profile purelymail --dkim-selector purelymail1
-python scripts/snapshot_dns.py --verbose
+python scripts/snapshot_dns.py            # يقارن مع dns-snapshot.json
+python scripts/snapshot_dns.py --save     # يحدّث الأساس بعد تغيير مقصود
+python scripts/probe_recipients.py --all-default
 python scripts/check_mail_setup.py --guide purelymail
 ```
+
+`dns-snapshot.json` يحرس الآن 9 مجموعات: A · MX · TXT · www · _dmarc TXT ·
+DKIM ×3 (CNAME) · _dmarc CNAME.
+
+## تحذيرات مستخلصة من حادثة اليوم
+1. **لا تضغط «إعادة تعيين سجلات DNS»** في Hostinger — مسح كل السجلات وأوقف الموقع والبريد.
+2. أدوات الفحص تقرأ من Google + Cloudflare معًا، لأن كاش خادم واحد يعطي نتيجة خاطئة أو قديمة.
+3. سجل الملكية يُنسخ بـ**زر النسخ** لا يدويًا — خطأ حرف واحد (`0` بدل `6`) كلّف جولة كاملة.
+4. `check_mail_setup.py` كان يفحص `purelymail1.sr-coresync.com` بدل `purelymail1._domainkey…`
+   فيُبلّغ «DKIM missing» كذبًا — أُصلح: يضيف `._domainkey` تلقائيًا.
+5. بعد propagation، قد تُظهر بعض المخدمات MX القديمة (10/20) من الكاش لساعات — السلطة على
+   `artemis/hermes.dns-parking.com` هي المرجع.

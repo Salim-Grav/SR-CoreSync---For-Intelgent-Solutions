@@ -36,6 +36,12 @@ CHECKS = [
     (DOMAIN, 'TXT'),
     ('www.' + DOMAIN, 'CNAME'),
     ('_dmarc.' + DOMAIN, 'TXT'),
+    # DKIM is published as a CNAME to Purelymail's key host; losing these
+    # silently breaks outbound signing, so they are guarded too.
+    ('purelymail1._domainkey.' + DOMAIN, 'CNAME'),
+    ('purelymail2._domainkey.' + DOMAIN, 'CNAME'),
+    ('purelymail3._domainkey.' + DOMAIN, 'CNAME'),
+    ('_dmarc.' + DOMAIN, 'CNAME'),
 ]
 
 
