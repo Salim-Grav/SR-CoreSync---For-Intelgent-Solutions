@@ -66,12 +66,14 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | IMAP | `imap.purelymail.com` | 993 (SSL) |
 | SMTP | `smtp.purelymail.com` | 587 (STARTTLS) |
 | POP3 | `pop3.purelymail.com` | 995 (SSL) |
-| Webmail | `purelymail.com/webmail` | — |
+| Webmail | `https://inbox.purelymail.com` — **ليس** `purelymail.com/webmail` (يعطي 404) | — |
 
 ## ما تبقّى — اختبار حقيقي
 DNS لا يثبت وجود صندوق. طريقتان:
 
-1. **من Gmail** → أرسل إلى `info@sr-coresync.com` ثم افتح Webmail. يجب أن يظهر في Inbox لا في Spam.
+1. **من Gmail** → أرسل إلى `info@sr-coresync.com` ثم افتح Webmail على **`https://inbox.purelymail.com`**.
+   يجب أن يظهر في Inbox لا في Spam. (`purelymail.com/webmail` مسار غير موجود → 404؛
+   وروابط الموقع العلوية «WEBMAIL» تشير إلى النطاق الفرعي `inbox`.)
 2. **من Webmail** → أرسل إلى Gmail، ثم في Gmail: «إظهار الأصل» وتحقق من
    `SPF: PASS` · `DKIM: PASS` · `DMARC: PASS`.
 
