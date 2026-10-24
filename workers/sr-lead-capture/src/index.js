@@ -376,6 +376,28 @@ function buildContractHtml(text) {
         safe + '</div></div></body></html>';
 }
 
+async function sendTelegramText(text, env) {
+    const token = env && env.TELEGRAM_BOT_TOKEN;
+    const chatId = env && env.TELEGRAM_CHAT_ID;
+    if (!token || !chatId) return { ok: false, reason: 'telegram-not-configured' };
+    try {
+        const res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: text, disable_web_page_preview: true })
+        });
+        if (!res.ok) {
+            const detail = await res.text().catch(function () { return ''; });
+            console.error('[LeadWorker] Telegram rejected:', res.status, detail.slice(0, 200));
+            return { ok: false, reason: 'telegram-' + res.status };
+        }
+        return { ok: true, provider: 'telegram' };
+    } catch (err) {
+        console.error('[LeadWorker] Telegram failed:', err);
+        return { ok: false, reason: 'telegram-error' };
+    }
+}
+
 async function sendTelegram(lead, env) {
     const token = env && env.TELEGRAM_BOT_TOKEN;
     const chatId = env && env.TELEGRAM_CHAT_ID;
@@ -395,26 +417,7 @@ async function sendTelegram(lead, env) {
     ];
     if (lead.notes) lines.push('Notes   : ' + String(lead.notes).slice(0, 400));
 
-    try {
-        const res = await fetch('https://api.telegram.org/bot' + token + '/sendMessage', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: lines.join('\n'),
-                disable_web_page_preview: true
-            })
-        });
-        if (!res.ok) {
-            const detail = await res.text().catch(function () { return ''; });
-            console.error('[LeadWorker] Telegram rejected:', res.status, detail.slice(0, 200));
-            return { ok: false, reason: 'telegram-' + res.status };
-        }
-        return { ok: true, provider: 'telegram' };
-    } catch (err) {
-        console.error('[LeadWorker] Telegram failed:', err);
-        return { ok: false, reason: 'telegram-error' };
-    }
+    return sendTelegramText(lines.join('\n'), env);
 }
 
 async function notifyByEmail(lead, env, ctx) {
@@ -500,6 +503,58 @@ const PUBLIC_SOURCE_LABELS = {
     whatsapp: 'WhatsApp enquiry',
     quote: 'Quotation request'
 };
+
+async function buildDigest(env) {
+    const stats = await buildPublicStats(env);
+    var recent = [];
+    var unannounced = 0;
+    if (env && env.DB) {
+        try {
+            const rows = await env.DB.prepare(
+                "SELECT client_name, received_at, notify_status FROM leads " +
+                "WHERE received_at >= datetime('now', '-7 days') ORDER BY received_at DESC LIMIT 5"
+            ).all();
+            recent = (rows && rows.results) || [];
+            const bad = await env.DB.prepare(
+                "SELECT COUNT(*) AS n FROM leads WHERE notify_status IS NULL OR notify_status != 'sent'"
+            ).first();
+            unannounced = Number((bad && bad.n) || 0);
+        } catch (err) {
+            console.error('[LeadWorker] digest query failed:', err);
+        }
+    }
+    return {
+        week: stats.consultations7d || 0,
+        month: stats.consultations30d || 0,
+        total: stats.total || 0,
+        unannounced: unannounced,
+        recent: recent
+    };
+}
+
+function digestText(digest) {
+    const lines = [
+        '\u{1F4CA} S&R CoreSync \u2014 weekly lead digest',
+        '',
+        'Last 7 days : ' + digest.week,
+        'Last 30 days: ' + digest.month,
+        'All time    : ' + digest.total
+    ];
+    if (digest.unannounced > 0) {
+        lines.push('');
+        lines.push('\u26A0 ' + digest.unannounced + ' lead(s) were never announced.');
+    }
+    if (digest.recent && digest.recent.length) {
+        lines.push('');
+        lines.push('Recent:');
+        digest.recent.forEach(function (row) {
+            const when = String(row.received_at || '').slice(0, 16).replace('T', ' ');
+            const flag = row.notify_status === 'sent' ? '' : ' (no alert)';
+            lines.push('  \u2022 ' + (row.client_name || 'unknown') + ' \u2014 ' + when + flag);
+        });
+    }
+    return lines.join('\n');
+}
 
 async function buildPublicStats(env) {
     const empty = { available: false, consultations30d: null, updatedAt: new Date().toISOString() };
@@ -926,6 +981,32 @@ export default {
                 provider: outcome.provider || null,
                 reason: outcome.reason || null
             }, status, cors);
+        }
+
+        // ---- Weekly digest to Telegram ---------------------------------------
+        // Public on purpose (a scheduled job has to reach it) but throttled in KV
+        // to once every six hours, so the worst an abuser can do is make the
+        // owner receive the same summary a little more often.
+        if (request.method === 'GET' && (path === '/digest' || path === '/api/digest')) {
+            if (!env || !env.LEADS) {
+                return jsonResponse({ sent: false, reason: 'no-kv-binding' }, 503, cors);
+            }
+            const last = await env.LEADS.get('digest:last');
+            const now = Date.now();
+            if (last && (now - Number(last)) < 6 * 3600 * 1000) {
+                return jsonResponse({ sent: false, reason: 'throttled' }, 200,
+                    Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
+            }
+            const digest = await buildDigest(env);
+            const result = await sendTelegramText(digestText(digest), env);
+            if (result.ok) {
+                await env.LEADS.put('digest:last', String(now), { expirationTtl: 7 * 86400 });
+            }
+            return jsonResponse({
+                sent: !!result.ok,
+                reason: result.reason || null,
+                digest: digest
+            }, 200, Object.assign({}, cors, { 'Cache-Control': 'no-store' }));
         }
 
         // ---- Telegram self-check ---------------------------------------------

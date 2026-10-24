@@ -259,6 +259,41 @@ async function run() {
 
     globalThis.fetch = originalFetch;
 
+    // 13d. Weekly digest -------------------------------------------------------
+    res = await worker.fetch(req('/digest'), { ALLOWED_ORIGINS: env.ALLOWED_ORIGINS }, {});
+    assert('/digest without KV returns 503', res.status === 503, `got ${res.status}`);
+
+    res = await worker.fetch(req('/digest'), env, {});
+    body = await res.json();
+    assert('/digest without a telegram channel reports sent=false',
+        body.sent === false && body.reason === 'telegram-not-configured', JSON.stringify(body));
+    assert('/digest returns the counts even when it cannot send',
+        typeof body.digest.week === 'number' && typeof body.digest.total === 'number');
+
+    telegramCalls = [];
+    globalThis.fetch = async (url, init) => {
+        if (typeof url === 'string' && url.includes('api.telegram.org')) {
+            telegramCalls.push({ url, body: init && init.body });
+            return new Response(JSON.stringify({ ok: true }), { status: 200 });
+        }
+        return originalFetch(url, init);
+    };
+    res = await worker.fetch(req('/digest'), Object.assign({}, env, {
+        TELEGRAM_BOT_TOKEN: '123:TEST', TELEGRAM_CHAT_ID: '-100123'
+    }), {});
+    body = await res.json();
+    assert('/digest sends once when the channel works', body.sent === true, JSON.stringify(body));
+    assert('/digest message mentions the window',
+        telegramCalls.length === 1 && telegramCalls[0].body.includes('Last 7 days'));
+
+    res = await worker.fetch(req('/digest'), Object.assign({}, env, {
+        TELEGRAM_BOT_TOKEN: '123:TEST', TELEGRAM_CHAT_ID: '-100123'
+    }), {});
+    body = await res.json();
+    assert('/digest is throttled immediately afterwards',
+        body.sent === false && body.reason === 'throttled', JSON.stringify(body));
+    globalThis.fetch = originalFetch;
+
     // 14. VAT calculator (replaces the dead api.coresync.eu) ----------------------
     res = await worker.fetch(req('/tax', {
         method: 'POST',
