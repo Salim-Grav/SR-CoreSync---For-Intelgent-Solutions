@@ -52,6 +52,30 @@ DMARC  : غير موجود
 ```
 أسماء النواقل: `artemis.dns-parking.com` · `hermes.dns-parking.com` (Hostinger)
 
+## كيف تُدخل السجل في لوحة Hostinger (نموذج "إضافة سجل")
+
+النموذج فيه أربعة حقول بهذا الترتيب، واللوحة تضيف النطاق تلقائيًا بجانب حقل الاسم:
+
+| الحقل في اللوحة | ماذا تكتب | ملاحظة |
+|---|---|---|
+| **النوع** | `CNAME` (أو `TXT` / `MX` حسب السجل) | من القائمة المنسدلة |
+| **الاسم** | `purelymail1._domainkey` | بلا `@` وبلا `.sr-coresync.com` — اللوحة تعرض النطاق بجانب الحقل بلون رمادي |
+| **القيمة** | `key1.dkimroot.purelymail.com` | أو ما يطلبه السجل |
+| **TTL** | `3600` | أو اتركه |
+
+قيم حقل الاسم للسجلات الأربعة:
+
+| السجل | الاسم الذي تكتبه | القيمة |
+|---|---|---|
+| DKIM 1 | `purelymail1._domainkey` | `key1.dkimroot.purelymail.com` |
+| DKIM 2 | `purelymail2._domainkey` | `key2.dkimroot.purelymail.com` |
+| DKIM 3 | `purelymail3._domainkey` | `key3.dkimroot.purelymail.com` |
+| DMARC | `_dmarc` | `dmarcroot.purelymail.com` |
+| AutoConfig | `autoconfig` | `autoconfig.purelymail.com` |
+
+> استثناء واحد فقط: سجلات MX وSPF التابعة للنطاق نفسه تُكتب باسم `@` (كما فُعل مع سجلات A).
+> السجلات أعلاه كلها أسماء فرعية، فلا `@` فيها.
+
 ## إعدادات الأجهزة بعد إنشاء الصناديق
 | الخدمة | الخادم | المنفذ |
 |---|---|---|
