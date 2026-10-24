@@ -7,14 +7,15 @@ workers_dev = true
 # S&R CoreSync Solutions - Sovereign Lead Capture Worker
 # -----------------------------------------------------------------------------
 # Deploy:   npx wrangler deploy
-# Secrets:  npx wrangler secret put NOTIFY_EMAIL
-#           npx wrangler secret put RESEND_API_KEY      (email alerts, option A)
-#           npx wrangler secret put BREVO_API_KEY       (email alerts, option B)
+# Secrets:  npx wrangler secret put PURELYMAIL_PASS   (mailbox password - the only secret needed)
 #           npx wrangler secret put LEAD_WEBHOOK_URLS   (relay to n8n/Make, optional)
-#           npx wrangler secret put EMAIL_WEBHOOK_URL   (generic email relay, optional)
+#           npx wrangler secret put RESEND_API_KEY      (fallback provider, optional)
+#           npx wrangler secret put BREVO_API_KEY       (fallback provider, optional)
+#           npx wrangler secret put EMAIL_WEBHOOK_URL   (generic relay, optional)
 #
-# Email delivery order: SEND_EMAIL binding -> RESEND_API_KEY -> BREVO_API_KEY -> EMAIL_WEBHOOK_URL
-# The SEND_EMAIL binding (Cloudflare Email Routing) needs the domain on Cloudflare.
+# Email delivery order: SEND_EMAIL binding -> Purelymail SMTP -> Resend -> Brevo -> webhook
+# Purelymail SMTP (smtp.purelymail.com:587, STARTTLS) needs no extra vendor: port 25 is
+# blocked in Workers, 587 is not. PURELYMAIL_USER is both the login and the From address.
 #
 # KV namespace (optional but recommended):
 #   npx wrangler kv namespace create LEADS
@@ -27,7 +28,11 @@ enabled = true
 [vars]
 LEAD_WEBHOOK_URLS = "https://hook.eu1.make.com/الرابط-الحقيقي"
 ALLOWED_ORIGINS = "https://sr-coresync.com,https://www.sr-coresync.com,https://salim-grav.github.io,http://localhost:3000,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:8080,http://127.0.0.1:8099,http://localhost:8099"
-MAIL_FROM = "leads@sr-coresync.com"
+MAIL_FROM = "info@sr-coresync.com"
+# Mailbox that sends alerts. Its password is the PURELYMAIL_PASS secret.
+PURELYMAIL_USER = "info@sr-coresync.com"
+# Where lead alerts land. A plain address is not sensitive, so it lives here.
+NOTIFY_EMAIL = "info@sr-coresync.com"
 CONTRACT_RECIPIENTS = "mudar@nlbilarabi.nl,info@sr-coresync.com,info@sr-coresync.nl,finance@sr-coresync.nl"
 # Public activity stream on the site. Leave unset (off) until the feed is ready.
 EVENTS_PUBLIC = "1"

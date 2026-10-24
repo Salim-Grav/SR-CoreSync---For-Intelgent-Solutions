@@ -15,14 +15,15 @@
 > (`smtp.purelymail.com:587` + STARTTLS). Cloudflare يحجب المنفذ 25 فقط، والمنفذ 587 مسموح.
 > تبقى القنوات القديمة مدعومة تلقائيًا إن أضفت مفاتيحها لاحقًا.
 
-## 0. أسرار البريد (مطلوبة لتفعيل الإشعارات)
+## 0. أسرار البريد (مطلوب لتفعيل الإشعارات)
+المتغيّران العاديان `PURELYMAIL_USER` و`NOTIFY_EMAIL` صارا في `wrangler.toml` (ليسا سرّين)،
+فلم يبقَ إلا كلمة مرور الصندوق:
 ```powershell
 cd "workers/sr-lead-capture"
-npx wrangler secret put PURELYMAIL_USER    # info@sr-coresync.com
-npx wrangler secret put PURELYMAIL_PASS    # كلمة مرور الصندوق
-npx wrangler secret put NOTIFY_EMAIL       # info@sr-coresync.com (مستلم التنبيه)
+npx wrangler secret put PURELYMAIL_PASS    # كلمة مرور info@sr-coresync.com
 ```
-أو من لوحة Cloudflare: Workers → sr-lead-capture → Settings → Variables and Secrets.
+أو من لوحة Cloudflare: Workers → sr-lead-capture → Settings → Variables and Secrets
+→ أضف `PURELYMAIL_PASS` بنوع **Secret** (وإن أضفت `PURELYMAIL_USER` هناك فالقيمة نفسها).
 
 ### التحقق بعد الإضافة
 ```powershell

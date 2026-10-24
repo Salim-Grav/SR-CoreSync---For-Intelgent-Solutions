@@ -93,12 +93,12 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | `/mail/check?deep=1` | مصادقة SMTP حقيقية بلا إرسال — محدود مرة/5 دقائق |
 | `/mail/dns` | يقرأ MX/SPF/DKIM/DMARC عبر DoH ويعيد حكمًا واحدًا |
 
-الأسرار المطلوبة: `PURELYMAIL_USER` · `PURELYMAIL_PASS` · `NOTIFY_EMAIL` (واختياريًا `MAIL_FROM_NAME` · `MAIL_REPLY_TO`) —
+المطلوب سرّ واحد فقط: `PURELYMAIL_PASS` — أما `PURELYMAIL_USER` و`NOTIFY_EMAIL` فصارا في `wrangler.toml` (ليسا سرّين).
 التفاصيل في `DEPLOY-WORKER.md`. حتى تُضاف: `emailChannel: none` والإشعارات تبقى على Telegram فقط.
 
 ## صفحة الحالة
 `status.html` تقرأ الحالة من الخدمة نفسها: `/health` · `/mail/dns` · `/mail/check?deep=1`،
-بلسانين (AR/EN)، ومربوطة من تذييل الصفحة الرئيسية ومن `sitemap.xml`.
+بلسانين (AR/EN)، ومربوطة من تذييل البوابات الـ29: العربية من الجذر، والـ28 الباقية إلى `?lang=en`.
 
 ## سجلات اختيارية لم تُضف بعد
 | النوع | الاسم | القيمة | الفائدة |
