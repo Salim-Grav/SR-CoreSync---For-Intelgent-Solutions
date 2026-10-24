@@ -462,7 +462,35 @@ const PUBLIC_SOURCE_LABELS = {
 
 async function buildPublicStats(env) {
     const empty = { available: false, consultations30d: null, updatedAt: new Date().toISOString() };
-    if (!env || !env.LEADS) return empty;
+    if (!env) return empty;
+
+    // D1 is the system of record: exact counts, including leads older than the
+    // KV index window (which is capped at 500 entries).
+    if (env.DB) {
+        try {
+            const now = Date.now();
+            const iso = (days) => new Date(now - days * 86400000).toISOString();
+            const row = await env.DB.prepare(
+                'SELECT COUNT(*) AS total, ' +
+                'SUM(CASE WHEN received_at >= ?1 THEN 1 ELSE 0 END) AS d30, ' +
+                'SUM(CASE WHEN received_at >= ?2 THEN 1 ELSE 0 END) AS d7 FROM leads'
+            ).bind(iso(30), iso(7)).first();
+            if (row) {
+                return {
+                    available: true,
+                    source: 'd1',
+                    consultations30d: Number(row.d30 || 0),
+                    consultations7d: Number(row.d7 || 0),
+                    total: Number(row.total || 0),
+                    updatedAt: new Date().toISOString()
+                };
+            }
+        } catch (err) {
+            console.error('[LeadWorker] D1 stats failed, falling back to KV:', err);
+        }
+    }
+
+    if (!env.LEADS) return empty;
     try {
         const index = await env.LEADS.get('lead:index', 'json');
         const list = Array.isArray(index) ? index : [];
@@ -473,6 +501,7 @@ async function buildPublicStats(env) {
         }).length;
         return {
             available: true,
+            source: 'kv',
             consultations30d: within(30),
             consultations7d: within(7),
             total: list.length,
