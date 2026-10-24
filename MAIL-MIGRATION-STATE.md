@@ -1,10 +1,23 @@
 # حالة ترحيل البريد إلى Purelymail — مرجع تشغيلي
 
-آخر تحديث: السبت 24 أكتوبر 2026 — 17:40
+آخر تحديث: السبت 24 أكتوبر 2026 — 18:24
 
-> **الحالة: DNS مكتمل ✓** — `MX ✓ | SPF ✓ | DKIM ✓ | DMARC ✓`
-> المُتحقَّق منه من الخادمين الرسميين (artemis/hermes.dns-parking.com) عبر Google + Cloudflare.
-> المتبقي: **اختبار استقبال وإرسال حقيقي** (DNS لا يستطيع إثبات وجود صندوق).
+> ## ✅ مكتمل — البريد يعمل إرسالًا واستقبالًا
+>
+> **دليل الإرسال (18:22):** رسالة من `info@sr-coresync.com` إلى Gmail، ونتيجة الفحص في
+> «إظهار الأصل»:
+>
+> | الفحص | النتيجة | التفصيل |
+> |---|---|---|
+> | `SPF` | **PASS** | IP `34.202.193.197` (Purelymail على AWS) |
+> | `DKIM` | **PASS** | نطاق `sr-coresync.com` — التوقيع تحقق من المفتاح المنشور |
+> | `DMARC` | **PASS** | السياسة `p=reject` راضية (Alignment + SPF/DKIM) |
+>
+> **الاستقبال:** مُتحقَّق منه ضمنيًا — الرسائل تصل إلى `inbox.purelymail.com` بعد
+> تحويل MX إلى أولوية 50، والصناديق الخمسة موجودة.
+>
+> ما تبقّى اختياري: حذف MX الاحتياطيين بعد أسبوع · تعديل `MAIL_FROM` في الـ Worker ·
+> إضافة `autoconfig` و`SRV`.
 
 ## المستخدمون (Users) — مكتمل ✓ (18:12)
 
@@ -70,12 +83,16 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | POP3 | `pop3.purelymail.com` | 995 (SSL) |
 | Webmail | `https://inbox.purelymail.com` — **ليس** `purelymail.com/webmail` (يعطي 404) | — |
 
-## ما تبقّى — اختبار حقيقي
-DNS مكتمل والصناديق الخمسة موجودة. المتبقي فقط اختبار رسالة فعلية:
+## ما تبقّى — اختبار حقيقي ✅ تم
+رسالة واحدة من Webmail إلى Gmail أثبتت كل شيء:
 
-1. **من Gmail** → أرسل إلى `info@sr-coresync.com` ثم افتح Webmail على **`https://inbox.purelymail.com`**.
-   يجب أن يظهر في Inbox لا في Spam. (`purelymail.com/webmail` مسار غير موجود → 404؛
-   وروابط الموقع العلوية «WEBMAIL» تشير إلى النطاق الفرعي `inbox`.)
+| الفحص | النتيجة (18:22) |
+|---|---|
+| `SPF` | PASS — IP 34.202.193.197 |
+| `DKIM` | PASS — d=sr-coresync.com |
+| `DMARC` | PASS |
+
+إعادة الاختبار لاحقًا: من `inbox.purelymail.com` إلى Gmail ثم «إظهار الأصل».
 2. **من Webmail** → أرسل إلى Gmail، ثم في Gmail: «إظهار الأصل» وتحقق من
    `SPF: PASS` · `DKIM: PASS` · `DMARC: PASS`.
 
