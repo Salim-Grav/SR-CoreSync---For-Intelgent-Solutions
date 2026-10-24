@@ -773,6 +773,17 @@ async function verifyTurnstile(token, request, env) {
     }
 }
 
+async function markNotified(env, leadId, outcome) {
+    if (!env || !env.DB || !leadId) return;
+    try {
+        await env.DB.prepare(
+            'UPDATE leads SET notify_status = ?, notified_at = ? WHERE lead_id = ?'
+        ).bind(outcome, outcome === 'sent' ? new Date().toISOString() : null, leadId).run();
+    } catch (err) {
+        console.error('[LeadWorker] notify status write failed:', err);
+    }
+}
+
 async function persistLeadD1(lead, env) {
     if (!env || !env.DB) return false;
     try {
@@ -785,6 +796,8 @@ async function persistLeadD1(lead, env) {
                 lead.notes || null, lead.language || null, lead.channel || null,
                 lead.sourceUrl || null, lead.receivedAt || new Date().toISOString())
             .run();
+        await env.DB.prepare('UPDATE leads SET notify_status = ? WHERE lead_id = ?')
+            .bind('pending', lead.leadId).run();
         return true;
     } catch (err) {
         console.error('[LeadWorker] D1 persistence failed:', err);
@@ -1103,6 +1116,8 @@ export default {
         const stored = await persistLead(lead, env);
         const relayed = await relayToWebhooks(lead, env, ctx);
         const telegram = await sendTelegram(lead, env);
+        await markNotified(env, lead.leadId,
+            telegram && telegram.ok ? 'sent' : ('failed:' + ((telegram && telegram.reason) || 'unknown')));
         await notifyByEmail(lead, env, ctx);
 
         console.log('[LeadWorker] Lead captured', lead.leadId, 'stored=' + stored.stored,

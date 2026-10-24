@@ -45,7 +45,7 @@ def main():
 
     rows = query(
         'SELECT lead_id, client_name, company_name, email, phone, language, '
-        'source_url, received_at FROM leads '
+        'source_url, received_at, notify_status FROM leads '
         "WHERE received_at >= datetime('now', '-%d days') "
         'ORDER BY received_at DESC' % args.days)
 
@@ -66,12 +66,18 @@ def main():
         by_lang[row.get('language') or '-'] = by_lang.get(row.get('language') or '-', 0) + 1
     print('  by language    : %s' % ', '.join('%s=%d' % kv for kv in sorted(by_lang.items(), key=lambda x: -x[1])))
     print('-' * 78)
-    print('  %-24s %-24s %-26s %s' % ('lead id', 'name', 'email', 'received'))
+    unannounced = [r for r in rows if (r.get('notify_status') or '') != 'sent']
+    print('  alerted        : %d of %d' % (len(rows) - len(unannounced), len(rows)))
+    if unannounced:
+        print('  NOT ALERTED    : %d  <-- these leads reached nobody' % len(unannounced))
+    print('-' * 78)
+    print('  %-24s %-22s %-24s %-10s %s' % ('lead id', 'name', 'email', 'alert', 'received'))
     for row in rows:
-        print('  %-24s %-24s %-26s %s' % (
+        print('  %-24s %-22s %-24s %-10s %s' % (
             (row.get('lead_id') or '')[:24],
-            (row.get('client_name') or '')[:24],
-            (row.get('email') or '')[:26],
+            (row.get('client_name') or '')[:22],
+            (row.get('email') or '')[:24],
+            (row.get('notify_status') or 'never')[:10],
             (row.get('received_at') or '')[:19]))
     print('=' * 78)
 
