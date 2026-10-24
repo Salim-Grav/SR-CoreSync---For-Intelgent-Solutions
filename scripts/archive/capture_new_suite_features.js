@@ -95,13 +95,13 @@ async function captureAll() {
         const targets = [
             {
                 name: 'live_3d_mockup_viewer.png',
-                url: `http://127.0.0.1:${srvPort}/preview-3d-mockup.html`,
+                url: `http://127.0.0.1:${srvPort}/3d-mockup.html`,
                 waitMs: 2200,
                 action: null
             },
             {
                 name: 'live_project_estimator.png',
-                url: `http://127.0.0.1:${srvPort}/preview-estimator.html`,
+                url: `http://127.0.0.1:${srvPort}/estimator.html`,
                 waitMs: 1800,
                 action: null
             },

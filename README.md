@@ -74,7 +74,7 @@ runtime templating. Generation lives in `scripts/build_all_multilingual_portals.
 | `sr-geo-lang.js` | Browser-language detection with polite banner |
 | `sr-lead-dispatcher.js` | Lead capture client (targets the Cloudflare Worker) |
 | `sr-brand-inspector.js` | 4K logo inspector + Brand Kit ZIP export |
-| `sr-social-proof.min.js` | Glassmorphic enterprise notification stream |
+| `sr-live-feed.js` | Live trust feed — real, aggregated worker data only (never fabricated) |
 | `sr-mockup-3d.min.js` | Zero-dependency WebGL 3D mockup viewer |
 | `chart.umd.min.js` · `jszip.min.js` | Vendored third-party libraries |
 

@@ -20,7 +20,7 @@ const targetFiles = [
   'preview-header.html',
   'preview-services.html',
   'preview-roi.html',
-  'preview-software.html',
+  'software.html',
   'manifest.json',
   'api/email-notification-service.js'
 ];

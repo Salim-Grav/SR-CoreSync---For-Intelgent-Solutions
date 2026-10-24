@@ -119,7 +119,7 @@ async function testPage(url, outShot, pageName) {
 
 async function main() {
     await testPage(
-        'http://localhost:8000/preview-work.html',
+        'http://localhost:8000/work.html',
         'C:\\Users\\msali\\.gemini\\antigravity-ide\\brain\\1778519a-9b5a-4358-b8ed-35a118f691af\\live_preview_work_identity.png',
         'PREVIEW-WORK'
     );

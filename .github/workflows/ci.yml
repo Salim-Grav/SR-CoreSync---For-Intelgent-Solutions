@@ -61,6 +61,12 @@ jobs:
       - name: Build the publish artifact
         run: python scripts/prepare_publish_set.py
 
+      - name: Build & Verify Transactional E-mails
+        run: python scripts/build_email_templates.py
+
+      - name: Check Local Link Integrity (publish set)
+        run: python scripts/check_site_links.py
+
       - name: Browser console audit (headless Chromium)
         run: node scripts/browser_console_audit.mjs
 

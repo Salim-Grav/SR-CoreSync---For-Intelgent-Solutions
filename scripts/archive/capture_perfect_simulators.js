@@ -9,19 +9,21 @@ const edgePath = fs.existsSync('C:\\Program Files (x86)\\Microsoft\\Edge\\Applic
 
 const artDir = 'C:\\Users\\msali\\.gemini\\antigravity-ide\\brain\\fb165293-a382-4790-9d97-89e32247a0a7';
 
-async function testClick(slug, filename) {
-  const port = 9380 + Math.floor(Math.random() * 20);
-  const userDataDir = path.join(process.env.TEMP, 'test_click_' + slug + '_' + Date.now());
+async function captureSimulator(appId, outName) {
+  const port = 9390 + Math.floor(Math.random() * 20);
+  const userDataDir = path.join(process.env.TEMP, 'edge_sim_' + appId + '_' + Date.now());
+
   const edge = spawn(edgePath, [
     '--headless=new',
     '--remote-debugging-port=' + port,
     '--user-data-dir=' + userDataDir,
     '--window-size=1440,960',
-    'http://127.0.0.1:8765/preview-software.html'
+    'http://127.0.0.1:8765/software.html'
   ]);
 
   try {
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r => setTimeout(r, 2200));
+
     const pages = await new Promise((res, rej) => {
       http.get('http://127.0.0.1:' + port + '/json', r => {
         let d = '';
@@ -51,36 +53,38 @@ async function testClick(slug, filename) {
     await call('Runtime.enable');
     await call('Page.enable');
 
-    // Click simulator button directly
+    // 1. Dismiss cookies/banners
+    await call('Runtime.evaluate', {
+      expression: `
+        try {
+          localStorage.setItem('coresync_gdpr_status', 'accepted');
+          document.querySelectorAll('.sr-gdpr-banner, [class*="gdpr"], [class*="cookie"]').forEach(el => el.remove());
+        } catch(e) {}
+      `
+    });
+
+    // 2. Open live app
     const res = await call('Runtime.evaluate', {
       expression: `
-        (() => {
-          const banner = document.querySelector('.sr-gdpr-banner, [class*="gdpr"]');
-          if (banner) banner.remove();
-
-          const btn = document.querySelector("button[onclick*='${slug}']");
-          if (btn) {
-            btn.click();
-            return 'CLICKED_BUTTON_SUCCESS';
-          }
-          if (typeof openSoftwareLiveApp === 'function') {
-            openSoftwareLiveApp('${slug}');
-            return 'CALLED_FUNCTION_DIRECTLY';
-          }
-          return 'NOT_FOUND';
-        })()
+        try {
+          window.openSoftwareLiveApp('${appId}');
+          const modal = document.getElementById('srSoftwareAppModal');
+          modal ? modal.className : 'NOT_FOUND';
+        } catch(e) {
+          e.message;
+        }
       `,
       returnByValue: true
     });
-
-    console.log('Click result for ' + slug + ':', res.result ? res.result.value : res);
+    console.log(`[${appId}] modal class:`, res.result?.result?.value || res.result?.value);
 
     await new Promise(r => setTimeout(r, 1200));
 
+    // 3. Capture screenshot
     const shot = await call('Page.captureScreenshot', { format: 'png' });
-    const outImg = path.join(artDir, filename);
+    const outImg = path.join(artDir, outName);
     fs.writeFileSync(outImg, Buffer.from(shot.result.data, 'base64'));
-    console.log('Saved screenshot to ' + outImg);
+    console.log(`[${appId}] SUCCESS -> ${outImg}`);
 
     ws.close();
   } finally {
@@ -91,8 +95,14 @@ async function testClick(slug, filename) {
   }
 }
 
-async function main() {
-  await testClick('omnibakery', 'test_omnibakery_sim.png');
-  await testClick('civicsync', 'test_civicsync_sim.png');
+async function run() {
+  await captureSimulator('omnibakery', 'simulator_omnibakery_live_clean.png');
+  await captureSimulator('civicsync', 'simulator_civicsync_live_clean.png');
+  await captureSimulator('healthbridge', 'simulator_healthbridge_live_clean.png');
+  console.log('ALL THREE PLATFORM SIMULATORS CAPTURED!');
 }
-main();
+
+run().catch(err => {
+  console.error('Run error:', err);
+  process.exit(1);
+});

@@ -12,7 +12,7 @@ const artDir = 'C:\\Users\\msali\\.gemini\\antigravity-ide\\brain\\fb165293-a382
 async function captureApp(appId, outFilename) {
   const port = 9340 + Math.floor(Math.random() * 50);
   const userDataDir = path.join(process.env.TEMP, 'edge_sim_' + appId + '_' + Date.now());
-  const url = `http://127.0.0.1:8765/preview-software.html`;
+  const url = `http://127.0.0.1:8765/software.html`;
 
   const edge = spawn(edgePath, [
     '--headless=new',
