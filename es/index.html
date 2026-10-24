@@ -215,7 +215,7 @@
                         <div class="header-row-layout align-items-center">
                             <!-- 1. Brand & Emblem (Left in LTR) -->
                             <div class="header-col-brand">
-                                <a href="./index.html" class="brand-logo-site brand-logo-preview-trigger" onclick="openLogoLightbox(event)" title="S&R CoreSync Solutions - Click to view full brand identity" aria-label="S&R CoreSync Solutions Official Brandmark">
+                                <a href="./index.html" class="brand-logo-site brand-logo-preview-trigger" data-sr-call="openLogoLightbox" data-sr-event="1" title="S&R CoreSync Solutions - Click to view full brand identity" aria-label="S&R CoreSync Solutions Official Brandmark">
                                     <img src="../assets/sr-core-emblem-official.webp" alt="S&R CoreSync Official Sovereign Emblem" class="brand-emblem-img" width="64" height="64" />
                                     <div class="brand-logo-site-logo brand-logo-flex">
                                         <span class="brand-sr-text">S&amp;R</span>
@@ -622,7 +622,7 @@
                             <!-- Right Column: Interactive 3D Luxury Master Emblem Showcase -->
                             <div class="hero-reference__emblem-col">
                                 <div class="hero-emblem-interactive-stage" id="heroEmblemStage">
-                                    <div class="hero-emblem-card-3d" id="heroEmblemCard" onclick="openLogoLightbox(event)" title="Click to inspect certified 4K Ultra-DPI Brand Seal & Kit" role="button" tabindex="0" aria-label="Inspect official S&R CoreSync emblem in 4K">
+                                    <div class="hero-emblem-card-3d" id="heroEmblemCard" data-sr-call="openLogoLightbox" data-sr-event="1" title="Click to inspect certified 4K Ultra-DPI Brand Seal & Kit" role="button" tabindex="0" aria-label="Inspect official S&R CoreSync emblem in 4K">
                                         <!-- Orbital Gold Radiance & Satellite -->
                                         <div class="hero-emblem-aura" aria-hidden="true"></div>
                                         <div class="hero-emblem-orbit hero-emblem-orbit--outer" aria-hidden="true">
@@ -1534,35 +1534,35 @@
                     </div>
                     <ul class="work-tab_btn" role="tablist" aria-label="Featured Project Categories">
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" onclick="switchWorkTab('websites', this)">
+                            <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" data-sr-call="switchWorkTab" data-sr-args='["websites"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
                                 Web Platforms
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('identity', this)">
+                            <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["identity"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/><path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/></svg>
                                 Brand Identities
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('erp', this)">
+                            <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["erp"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                                 Cloud & ERP Systems
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('apps', this)">
+                            <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["apps"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
                                 Smart Apps & AI
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-commerce" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('commerce', this)">
+                            <button type="button" role="tab" id="tab-btn-commerce" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["commerce"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                                 Identity & E-Commerce
@@ -1709,7 +1709,7 @@
                         <div class="col-right">
                             <!-- شعار اللوغو المتحرك الذهبي الملكي أعلى النص ليتوسط الشريكين (انقر للاستعراض الكامل) -->
                             <div class="about-logo-badge-wrapper">
-                                <div class="about-animated-badge brand-logo-preview-trigger" id="founderCentralBadge" role="button" tabindex="0" onclick="openLogoLightbox(event)" title="Click to view official S&amp;R CoreSync Solutions Brand Emblem in high resolution" aria-label="Official S&amp;R CoreSync Solutions Brand Emblem">
+                                <div class="about-animated-badge brand-logo-preview-trigger" id="founderCentralBadge" role="button" tabindex="0" data-sr-call="openLogoLightbox" data-sr-event="1" title="Click to view official S&amp;R CoreSync Solutions Brand Emblem in high resolution" aria-label="Official S&amp;R CoreSync Solutions Brand Emblem">
                                     <div class="badge-sheen-glare" aria-hidden="true"></div>
                                     <img loading="lazy" decoding="async" width="180" height="180" src="../assets/sr-core-emblem-official.webp" alt="S&amp;R CoreSync Solutions - Official Sovereign Emblem 2026">
                                     <span class="badge-zoom-hint" aria-hidden="true">
@@ -1982,28 +1982,28 @@
                 <!-- تبويبات الفئات -->
                 <ul class="pricing-tab_btn" role="tablist" aria-label="Select Pricing Category">
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" onclick="switchPricingTab('dev', this)">
+                        <button type="button" role="tab" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" data-sr-call="switchPricingTab" data-sr-args='["dev"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
                             Custom Software & Platforms
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" id="tab-btn-pricing-creative" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('creative', this)">
+                        <button type="button" id="tab-btn-pricing-creative" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["creative"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
                             Creative &amp; E-Commerce
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('erp', this)">
+                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["erp"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                             Cloud ERP & Financial Bridges
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('care', this)">
+                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["care"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="m13.5 2-8 12h6l-1 8 8-12h-6z"/></svg>
                             CoreCare & Continuous Optimization
@@ -2464,19 +2464,19 @@
 
                 <!-- Category Filtering Bar -->
                 <div class="software-filter-bar">
-                    <button type="button" class="software-filter-pill active" onclick="filterSoftwareMarketplace('all', this)">
+                    <button type="button" class="software-filter-pill active" data-sr-call="filterSoftwareMarketplace" data-sr-args='["all"]' data-sr-this="last">
                         <span>🗂️ Todos Software &amp; Systems</span>
                         <span class="pill-count">6 Products</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('accounting', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["accounting"]' data-sr-this="last">
                         <span>📊 Financial &amp; Tax Solutions</span>
                         <span class="pill-count">3 Solutions</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('developer', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["developer"]' data-sr-this="last">
                         <span>💻 Developer Tools &amp; Cloud SDK</span>
                         <span class="pill-count">3 Tools</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('lab', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["lab"]' data-sr-this="last">
                         <span>🚀 Founder Eng. Salim's Lab</span>
                         <span class="pill-count">Exclusive</span>
                     </button>
@@ -2882,7 +2882,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <form class="form-cta" onsubmit="submitContactForm(event)" data-success-msg="Thank you for contacting S&R CoreSync Solutions! Your inquiry has been received. Our executive partners will respond within a few hours." data-error-msg="An error occurred while sending. Please try again or contact info@sr-coresync.com">
+                        <form class="form-cta" data-sr-call="submitContactForm" data-sr-event="1" data-sr-on="submit" data-success-msg="Thank you for contacting S&R CoreSync Solutions! Your inquiry has been received. Our executive partners will respond within a few hours." data-error-msg="An error occurred while sending. Please try again or contact info@sr-coresync.com">
                             <div class="form-content">
                                 <div class="tf-grid-layout sm-col-2">
                                     <fieldset class="tf-field">
@@ -3031,7 +3031,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-5 mt-4 mt-lg-0">
-                            <form class="sr-newsletter-form" id="newsletterFormEn" onsubmit="handleNewsletterSubmitEn(event)">
+                            <form class="sr-newsletter-form" id="newsletterFormEn" data-sr-call="handleNewsletterSubmitEn" data-sr-event="1" data-sr-on="submit">
                                 <div class="sr-newsletter-input-wrap">
                                     <input type="email" id="subscriberEmailEn" class="sr-newsletter-input" placeholder="Enter corporate email (name@company.com)" required aria-label="Corporate Email Address" />
                                     <button type="submit" class="sr-newsletter-btn" id="newsletterBtnSubmitEn">
@@ -3388,7 +3388,7 @@
     </div>
 </div>
             <a href="../logo-studio.html" class="link letter-space--2 h5 gold-accent">Logo Studio</a></li>
-                                <li><a href="#brandLogoLightboxModal" onclick="openLogoLightbox(event)" class="link letter-space--2 h5 gold-accent">Brand Identity & Emblem 🔍</a></li>
+                                <li><a href="#brandLogoLightboxModal" data-sr-call="openLogoLightbox" data-sr-event="1" class="link letter-space--2 h5 gold-accent">Brand Identity & Emblem 🔍</a></li>
                             </ul>
                         </div>
                         <div class="col-12 col-md-4 footer-col">
@@ -4573,7 +4573,7 @@
             </div>
 
             <!-- Booking Form -->
-            <form id="executiveBookingForm" onsubmit="submitExecutiveBooking(event)">
+            <form id="executiveBookingForm" data-sr-call="submitExecutiveBooking" data-sr-event="1" data-sr-on="submit">
                 <input type="hidden" id="selectedAdvisorField" value="salim" />
                 <div class="sr-exec-form-grid">
                     <div class="sr-exec-form-group">
@@ -5023,16 +5023,16 @@
                     Preview brandmark across diverse ambient backdrops:
                 </span>
                 <div class="sr-theme-pills">
-                    <button type="button" class="sr-theme-pill active" data-theme="obsidian" onclick="switchStageTheme('obsidian', this)">
+                    <button type="button" class="sr-theme-pill active" data-theme="obsidian" data-sr-call="switchStageTheme" data-sr-args='["obsidian"]' data-sr-this="last">
                         <span class="theme-color-dot dot-obsidian"></span> Obsidian (Dark)
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="emerald" onclick="switchStageTheme('emerald', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="emerald" data-sr-call="switchStageTheme" data-sr-args='["emerald"]' data-sr-this="last">
                         <span class="theme-color-dot dot-emerald"></span> Royal Emerald
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="navy" onclick="switchStageTheme('navy', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="navy" data-sr-call="switchStageTheme" data-sr-args='["navy"]' data-sr-this="last">
                         <span class="theme-color-dot dot-navy"></span> Midnight Navy
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="charcoal" onclick="switchStageTheme('charcoal', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="charcoal" data-sr-call="switchStageTheme" data-sr-args='["charcoal"]' data-sr-this="last">
                         <span class="theme-color-dot dot-charcoal"></span> Imperial Charcoal
                     </button>
                 </div>
@@ -6028,7 +6028,7 @@
     <!-- -----------------------------------------------------=====================
          Real Software Download & Digital License Key Modal (EN)
          -----------------------------------------------------===================== -->
-    <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
+    <div id="softwareDownloadModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareDownloadModal">
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareDownloadModal" aria-label="Cerrar modal">&times;</button>
             
@@ -6144,7 +6144,7 @@
                 <h4 class="salim-lm-form-title">
                     <span>⚡ Generate New Cryptographic License Key</span>
                 </h4>
-                <form onsubmit="generateSalimLicense(event)">
+                <form data-sr-call="generateSalimLicense" data-sr-event="1" data-sr-on="submit">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label class="salim-lm-field-label">Target Product / Solution:</label>
@@ -6222,7 +6222,7 @@
     <!-- -----------------------------------------------------=====================
          Suggestion 3: European Payment Gateway & Instant License (EN)
          -----------------------------------------------------===================== -->
-    <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
+    <div id="softwareCheckoutModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareCheckoutModal">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareCheckoutModal" aria-label="Cerrar modal">&times;</button>
 
@@ -6260,17 +6260,17 @@
                     </div>
                 </div>
 
-                <form onsubmit="processSoftwareCheckout(event)">
+                <form data-sr-call="processSoftwareCheckout" data-sr-event="1" data-sr-on="submit">
                     <!-- Payment Methods -->
                     <div class="checkout-section-subtitle">Select Payment Method:</div>
                     <div class="checkout-tabs">
-                        <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
+                        <button type="button" class="checkout-tab-btn active" data-sr-call="switchCheckoutMethod" data-sr-args='["ideal"]' data-sr-this="last">
                             <span>🏦 iDEAL (Netherlands)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('card', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["card"]' data-sr-this="last">
                             <span>💳 Credit Card (Visa/Mastercard)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('sepa', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["sepa"]' data-sr-this="last">
                             <span>🇪🇺 SEPA Bank Transfer</span>
                         </button>
                     </div>
@@ -6279,12 +6279,12 @@
                     <div id="checkoutIdealBox" class="checkout-ideal-box">
                         <label class="salim-lm-field-label">Select Your Dutch Bank:</label>
                         <div class="checkout-bank-grid">
-                            <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('ABN AMRO', this)">🛡️ ABN AMRO</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('bunq', this)">🌈 bunq</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('SNS', this)">🏦 SNS Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Revolut', this)">⚡ Revolut</div>
+                            <div class="checkout-bank-pill active" data-sr-call="selectIdealBank" data-sr-args='["ING"]' data-sr-this="last">🦁 ING Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Rabobank"]' data-sr-this="last">🌾 Rabobank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["ABN AMRO"]' data-sr-this="last">🛡️ ABN AMRO</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["bunq"]' data-sr-this="last">🌈 bunq</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["SNS"]' data-sr-this="last">🏦 SNS Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Revolut"]' data-sr-this="last">⚡ Revolut</div>
                         </div>
                     </div>
 

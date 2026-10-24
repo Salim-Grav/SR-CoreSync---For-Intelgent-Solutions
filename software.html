@@ -587,23 +587,23 @@
 
                 <!-- شريط التبويب والفصل المعماري المستقل -->
                 <div class="software-filter-bar">
-                    <button type="button" class="software-filter-pill active" onclick="filterSoftwareMarketplace('all', this)">
+                    <button type="button" class="software-filter-pill active" data-sr-call="filterSoftwareMarketplace" data-sr-args='["all"]' data-sr-this="last">
                         <span>🗂️ جميع البرمجيات والأنظمة</span>
                         <span class="pill-count">9 منتجات</span>
                     </button>
-                    <button type="button" class="software-filter-pill software-filter-pill--platforms" onclick="filterSoftwareMarketplace('platforms', this)">
+                    <button type="button" class="software-filter-pill software-filter-pill--platforms" data-sr-call="filterSoftwareMarketplace" data-sr-args='["platforms"]' data-sr-this="last">
                         <span>🏛️ منصات White-Label الجاهزة</span>
                         <span class="pill-count">3 منصات</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('accounting', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["accounting"]' data-sr-this="last">
                         <span>📊 الحلول المحاسبية والمالية المستقلة</span>
                         <span class="pill-count">3 حلول</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('developer', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["developer"]' data-sr-this="last">
                         <span>💻 برمجيات المطورين والسحابة والـ SDK</span>
                         <span class="pill-count">3 أدوات</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('lab', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["lab"]' data-sr-this="last">
                         <span>🚀 مختبر مشاريع المؤسس م. سليم</span>
                         <span class="pill-count">حصري</span>
                     </button>
@@ -1136,7 +1136,7 @@
     </div>
 
     <!-- نافذة تحميل وتثبيت البرمجيات الحقيقية مع التراخيص الرقمية -->
-    <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
+    <div id="softwareDownloadModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareDownloadModal">
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareDownloadModal" aria-label="إغلاق النافذة">&times;</button>
             
@@ -1257,7 +1257,7 @@
                 <h4 class="salim-lm-form-title">
                     <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
                 </h4>
-                <form onsubmit="generateSalimLicense(event)">
+                <form data-sr-call="generateSalimLicense" data-sr-event="1" data-sr-on="submit">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label class="salim-lm-field-label">البرنامج أو النظام المستهدف:</label>
@@ -1332,7 +1332,7 @@
     </div>
 
     <!-- Suggestion 3: بوابة الدفع والترخيص الفوري (Mollie & Stripe Checkout) -->
-    <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
+    <div id="softwareCheckoutModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareCheckoutModal">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareCheckoutModal" aria-label="إغلاق النافذة">&times;</button>
 
@@ -1368,16 +1368,16 @@
                     </div>
                 </div>
 
-                <form onsubmit="processSoftwareCheckout(event)">
+                <form data-sr-call="processSoftwareCheckout" data-sr-event="1" data-sr-on="submit">
                     <div class="checkout-section-subtitle">اختر وسيلة الدفع:</div>
                     <div class="checkout-tabs">
-                        <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
+                        <button type="button" class="checkout-tab-btn active" data-sr-call="switchCheckoutMethod" data-sr-args='["ideal"]' data-sr-this="last">
                             <span>🏦 iDEAL (هولندا)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('card', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["card"]' data-sr-this="last">
                             <span>💳 بطاقة بنكية (Visa/Mastercard)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('sepa', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["sepa"]' data-sr-this="last">
                             <span>🇪🇺 تحويل SEPA البنكي</span>
                         </button>
                     </div>
@@ -1385,12 +1385,12 @@
                     <div id="checkoutIdealBox" class="checkout-ideal-box">
                         <label class="checkout-field-label">اختر المصرف الهولندي التابع له:</label>
                         <div class="checkout-bank-grid">
-                            <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('ABN AMRO', this)">🛡️ ABN AMRO</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('bunq', this)">🌈 bunq</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('SNS', this)">🏦 SNS Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Revolut', this)">⚡ Revolut</div>
+                            <div class="checkout-bank-pill active" data-sr-call="selectIdealBank" data-sr-args='["ING"]' data-sr-this="last">🦁 ING Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Rabobank"]' data-sr-this="last">🌾 Rabobank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["ABN AMRO"]' data-sr-this="last">🛡️ ABN AMRO</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["bunq"]' data-sr-this="last">🌈 bunq</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["SNS"]' data-sr-this="last">🏦 SNS Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Revolut"]' data-sr-this="last">⚡ Revolut</div>
                         </div>
                     </div>
 

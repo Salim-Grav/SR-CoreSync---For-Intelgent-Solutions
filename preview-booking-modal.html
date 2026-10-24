@@ -274,7 +274,7 @@
             </button>
         </div>
 
-        <form id="previewBookingForm" onsubmit="handlePreviewSubmit(event)">
+        <form id="previewBookingForm" data-sr-call="handlePreviewSubmit" data-sr-event="1" data-sr-on="submit">
             <input type="hidden" id="selectedAdvisorField" value="salim" />
             <div class="sr-exec-form-grid">
                 <div class="sr-exec-form-group">
@@ -322,7 +322,7 @@
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                     <span id="btnText">تأكيد الحجز والإرسال عبر الواتساب المباشر</span>
                 </button>
-                <button type="button" class="sr-exec-submit-btn sr-exec-submit-btn-email" onclick="handlePreviewEmailSubmit(event)" title="إرسال عبر البريد الإلكتروني الرسمي">
+                <button type="button" class="sr-exec-submit-btn sr-exec-submit-btn-email" data-sr-call="handlePreviewEmailSubmit" data-sr-event="1" title="إرسال عبر البريد الإلكتروني الرسمي">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     <span>📧 إرسال الطلب فوراً عبر البريد الإلكتروني (info@sr-coresync.com)</span>
                 </button>

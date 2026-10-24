@@ -18,7 +18,7 @@
   'use strict';
 
   var EVENTS = ['click', 'input', 'change', 'submit', 'keypress', 'mousemove'];
-  var SELECTOR = '[data-sr-call],[data-sr-stop]';
+  var SELECTOR = '[data-sr-call],[data-sr-stop],[data-sr-backdrop-call]';
 
   function resolve(name) {
     if (!name) return null;
@@ -48,10 +48,15 @@
       }
       if (!Array.isArray(args)) args = [args];
     }
-    // data-sr-this reproduces onclick="fn(this, ...)": the element becomes the
-    // first argument, exactly as the inline handler passed it.
-    if (el.hasAttribute('data-sr-this')) {
-      args = [el].concat(args);
+    // data-sr-event reproduces onclick="fn(event)".
+    if (el.hasAttribute('data-sr-event')) {
+      args = args.concat([event || null]);
+    }
+    // data-sr-this reproduces onclick="fn(this, ...)" (first) and
+    // onclick="fn('literal', this)" (last), exactly as the inline handler did.
+    var thisPos = (el.getAttribute('data-sr-this') || '').toLowerCase();
+    if (thisPos) {
+      args = thisPos === 'last' ? args.concat([el]) : [el].concat(args);
     }
     if (el.hasAttribute('data-sr-prevent') && event && event.preventDefault) {
       event.preventDefault();
@@ -64,6 +69,17 @@
     if (!target || !target.closest) return;
     var el = target.closest(SELECTOR);
     if (!el) return;
+
+    // onclick="if(event.target===this)close()" - a backdrop click, not a click
+    // on the dialog content inside it.
+    var backdrop = el.getAttribute('data-sr-backdrop-call');
+    if (backdrop) {
+      if (event.target !== el) return;
+      var targetFn = resolve(backdrop);
+      if (targetFn) targetFn.apply(el, []);
+      return;
+    }
+
     var wanted = (el.getAttribute('data-sr-on') || 'click').toLowerCase();
     if (wanted !== event.type) return;
     invoke(el, event);

@@ -227,7 +227,7 @@
                         <div class="header-row-layout align-items-center">
                             <!-- 1. الشعار الرسمي للشركة -->
                             <div class="header-col-brand">
-                                <a href="./index.html" class="brand-logo-site brand-logo-preview-trigger" onclick="openLogoLightbox(event)" title="S&R CoreSync Solutions - انقر لعرض الهوية البصرية والشعار بالكامل" aria-label="عرض شعار S&R CoreSync Solutions بدقة فائقة">
+                                <a href="./index.html" class="brand-logo-site brand-logo-preview-trigger" data-sr-call="openLogoLightbox" data-sr-event="1" title="S&R CoreSync Solutions - انقر لعرض الهوية البصرية والشعار بالكامل" aria-label="عرض شعار S&R CoreSync Solutions بدقة فائقة">
                                     <img src="./assets/sr-core-emblem-official.webp" alt="S&R CoreSync Official Sovereign Emblem" class="brand-emblem-img" width="64" height="64" />
                                     <div class="brand-logo-site-logo brand-logo-flex">
                                         <span class="brand-sr-text">S&amp;R</span>
@@ -658,7 +658,7 @@
                             <!-- العمود الأيسر: بنر الشعار الرسمي الكبير ثلاثي الأبعاد التفاعلي والمتحرك -->
                             <div class="hero-reference__emblem-col">
                                 <div class="hero-emblem-interactive-stage" id="heroEmblemStage">
-                                    <div class="hero-emblem-card-3d" id="heroEmblemCard" onclick="openLogoLightbox(event)" title="انقر لعرض وفحص الشعار والهوية البصرية بدقة 4K فائقة" role="button" tabindex="0" aria-label="فحص شعار S&R CoreSync الرسمي بدقة 4K">
+                                    <div class="hero-emblem-card-3d" id="heroEmblemCard" data-sr-call="openLogoLightbox" data-sr-event="1" title="انقر لعرض وفحص الشعار والهوية البصرية بدقة 4K فائقة" role="button" tabindex="0" aria-label="فحص شعار S&R CoreSync الرسمي بدقة 4K">
                                         <!-- هالات الإشعاع الذهبية المدارية -->
                                         <div class="hero-emblem-aura" aria-hidden="true"></div>
                                         <div class="hero-emblem-orbit hero-emblem-orbit--outer" aria-hidden="true">
@@ -1563,35 +1563,35 @@
                     </div>
                     <ul class="work-tab_btn" role="tablist" aria-label="نوع الأعمال">
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" onclick="switchWorkTab('websites', this)">
+                            <button type="button" role="tab" id="tab-btn-websites" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" data-sr-call="switchWorkTab" data-sr-args='["websites"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
                                 مواقع ومتاجر إلكترونية
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('identity', this)">
+                            <button type="button" role="tab" id="tab-btn-identity" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["identity"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/><path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/></svg>
                                 هويات بصرية وشعارات
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('erp', this)">
+                            <button type="button" role="tab" id="tab-btn-erp" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["erp"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
                                 أنظمة سحابية وERP
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchWorkTab('apps', this)">
+                            <button type="button" role="tab" id="tab-btn-apps" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["apps"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="5" y="5" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg>
                                 تطبيقات ذكية وAI
                             </button>
                         </li>
                         <li class="nav-tab-item" role="presentation">
-                            <button type="button" role="tab" id="tab-btn-platforms" aria-selected="false" class="tf-btn-tab tf-btn-tab--platforms fw-medium letter-space--1" onclick="switchWorkTab('platforms', this)">
+                            <button type="button" role="tab" id="tab-btn-platforms" aria-selected="false" class="tf-btn-tab tf-btn-tab--platforms fw-medium letter-space--1" data-sr-call="switchWorkTab" data-sr-args='["platforms"]' data-sr-this="last">
                                 <span class="dot-active" aria-hidden="true"></span>
                                 <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2l10 5H2l10-5z"/></svg>
                                 منصات S&amp;R الجاهزة ★
@@ -1839,7 +1839,7 @@
                         <div class="col-right">
                             <!-- شعار اللوغو المتحرك الذهبي الملكي أعلى النص ليتوسط الشريكين (انقر للاستعراض الكامل) -->
                             <div class="about-logo-badge-wrapper">
-                                <div class="about-animated-badge brand-logo-preview-trigger" id="founderCentralBadge" role="button" tabindex="0" onclick="openLogoLightbox(event)" title="انقر لعرض شعار S&amp;R CoreSync Solutions الرسمي بدقة فائقة" aria-label="عرض شعار S&amp;R CoreSync Solutions الرسمي">
+                                <div class="about-animated-badge brand-logo-preview-trigger" id="founderCentralBadge" role="button" tabindex="0" data-sr-call="openLogoLightbox" data-sr-event="1" title="انقر لعرض شعار S&amp;R CoreSync Solutions الرسمي بدقة فائقة" aria-label="عرض شعار S&amp;R CoreSync Solutions الرسمي">
                                     <div class="badge-sheen-glare" aria-hidden="true"></div>
                                     <img loading="lazy" decoding="async" width="180" height="180" src="./assets/sr-core-emblem-official.webp" alt="S&amp;R CoreSync Solutions - الشعار السيادي المعتمد 2026">
                                     <span class="badge-zoom-hint" aria-hidden="true">
@@ -2139,28 +2139,28 @@
                 <!-- تبويبات الفئات -->
                 <ul class="pricing-tab_btn" role="tablist" aria-label="اختر فئة الباقات">
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" onclick="switchPricingTab('dev', this)">
+                        <button type="button" role="tab" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" data-sr-call="switchPricingTab" data-sr-args='["dev"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
                             تطوير الأنظمة والتطبيقات
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" id="tab-btn-pricing-creative" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('creative', this)">
+                        <button type="button" id="tab-btn-pricing-creative" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["creative"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
                             الهوية والمتاجر الرقمية
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('erp', this)">
+                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["erp"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                             أنظمة ERP والربط المالي
                         </button>
                     </li>
                     <li class="nav-tab-item" role="presentation">
-                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" onclick="switchPricingTab('care', this)">
+                        <button type="button" role="tab" aria-selected="false" class="tf-btn-tab fw-medium letter-space--1" data-sr-call="switchPricingTab" data-sr-args='["care"]' data-sr-this="last">
                             <span class="dot-active" aria-hidden="true"></span>
                             <svg class="pricing-tab__icon" viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="m13.5 2-8 12h6l-1 8 8-12h-6z"/></svg>
                             التحسين والدعم المستمر
@@ -3229,23 +3229,23 @@
 
                 <!-- شريط التبويب والفصل المعماري المستقل -->
                 <div class="software-filter-bar">
-                    <button type="button" class="software-filter-pill active" onclick="filterSoftwareMarketplace('all', this)">
+                    <button type="button" class="software-filter-pill active" data-sr-call="filterSoftwareMarketplace" data-sr-args='["all"]' data-sr-this="last">
                         <span>🗂️ جميع البرمجيات والأنظمة</span>
                         <span class="pill-count">9 منتجات</span>
                     </button>
-                    <button type="button" class="software-filter-pill software-filter-pill--platforms" onclick="filterSoftwareMarketplace('platforms', this)">
+                    <button type="button" class="software-filter-pill software-filter-pill--platforms" data-sr-call="filterSoftwareMarketplace" data-sr-args='["platforms"]' data-sr-this="last">
                         <span>🏛️ منصات White-Label الجاهزة</span>
                         <span class="pill-count">3 منصات</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('accounting', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["accounting"]' data-sr-this="last">
                         <span>📊 الحلول المحاسبية والمالية المستقلة</span>
                         <span class="pill-count">3 حلول</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('developer', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["developer"]' data-sr-this="last">
                         <span>💻 برمجيات المطورين والسحابة والـ SDK</span>
                         <span class="pill-count">3 أدوات</span>
                     </button>
-                    <button type="button" class="software-filter-pill" onclick="filterSoftwareMarketplace('lab', this)">
+                    <button type="button" class="software-filter-pill" data-sr-call="filterSoftwareMarketplace" data-sr-args='["lab"]' data-sr-this="last">
                         <span>🚀 مختبر مشاريع المؤسس م. سليم</span>
                         <span class="pill-count">حصري</span>
                     </button>
@@ -3998,7 +3998,7 @@
                             </div>
                             <button type="button" class="demo-sync-close" onclick="document.getElementById('demo-sync-banner').style.display='none'" aria-label="إغلاق">✕</button>
                         </div>
-                        <form class="form-cta" onsubmit="submitContactForm(event)" data-success-msg="شكرًا لتواصلك مع S&R CoreSync Solutions! تم استلام طلبك وسيتواصل معك الشريكان المؤسسان خلال ساعات قليلة." data-error-msg="حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل عبر info@sr-coresync.com">
+                        <form class="form-cta" data-sr-call="submitContactForm" data-sr-event="1" data-sr-on="submit" data-success-msg="شكرًا لتواصلك مع S&R CoreSync Solutions! تم استلام طلبك وسيتواصل معك الشريكان المؤسسان خلال ساعات قليلة." data-error-msg="حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو التواصل عبر info@sr-coresync.com">
                             <div class="form-content">
                                 <div class="tf-grid-layout sm-col-2">
                                     <fieldset class="tf-field">
@@ -4234,7 +4234,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-lg-5 mt-4 mt-lg-0">
-                            <form class="sr-newsletter-form" id="newsletterForm" onsubmit="handleNewsletterSubmit(event)">
+                            <form class="sr-newsletter-form" id="newsletterForm" data-sr-call="handleNewsletterSubmit" data-sr-event="1" data-sr-on="submit">
                                 <div class="sr-newsletter-input-wrap">
                                     <input type="email" id="subscriberEmail" class="sr-newsletter-input" placeholder="أدخل بريدك المؤسسي (name@company.com)" required aria-label="البريد الإلكتروني المؤسسي" />
                                     <button type="submit" class="sr-newsletter-btn" id="newsletterBtnSubmit">
@@ -4317,7 +4317,7 @@
                             <li><a href="#pricing">باقات التراخيص والأسعار</a></li>
                             <li><a href="#faq">الأسئلة الشائعة والمعايير</a></li>
                             <li><a href="./logo-studio.html">استوديو الشعار والهوية 🎨</a></li>
-                            <li><a href="#brandLogoLightboxModal" onclick="openLogoLightbox(event)">فحص الشعار الرسمي 4K 🔍</a></li>
+                            <li><a href="#brandLogoLightboxModal" data-sr-call="openLogoLightbox" data-sr-event="1">فحص الشعار الرسمي 4K 🔍</a></li>
                         </ul>
                     </div>
 
@@ -6161,12 +6161,12 @@
                 جلسة مغلقة مدتها 30 دقيقة مع الشركاء المؤسسين لمراجعة البنية التقنية لشركتك، خطط التكامل المالي، وفرص الأتمتة لخفض التكاليف ومضاعفة العوائد.
             </p>
 
-            <form id="legacyExecutiveBookingForm" onsubmit="dispatchVIPBooking(event)">
+            <form id="legacyExecutiveBookingForm" data-sr-call="dispatchVIPBooking" data-sr-event="1" data-sr-on="submit">
                 <div class="mb-4">
                     <label class="form-label text-white fw-bold mb-2">اختر المستشار التنفيذي للجلسة:</label>
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <div class="advisor-select-card active" onclick="selectAdvisor('joint', this)">
+                            <div class="advisor-select-card active" data-sr-call="selectAdvisor" data-sr-args='["joint"]' data-sr-this="last">
                                 <div class="d-flex align-items-center gap-1">
                                     <img src="./assets/founder-salim.png?v=color_v2" alt="م. سليم" class="advisor-avatar-dual-1">
                                     <img src="./assets/founder-raed.png?v=color_v2" alt="أ. رائد" class="advisor-avatar-dual-2">
@@ -6178,7 +6178,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="advisor-select-card" onclick="selectAdvisor('salim', this)">
+                            <div class="advisor-select-card" data-sr-call="selectAdvisor" data-sr-args='["salim"]' data-sr-this="last">
                                 <img src="./assets/founder-salim.png?v=color_v2" alt="م. محمد سليم" class="advisor-avatar-sm">
                                 <div>
                                     <div class="fw-bold text-white fs-6">م. محمد سليم</div>
@@ -6187,7 +6187,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="advisor-select-card" onclick="selectAdvisor('raed', this)">
+                            <div class="advisor-select-card" data-sr-call="selectAdvisor" data-sr-args='["raed"]' data-sr-this="last">
                                 <img src="./assets/founder-raed.png?v=color_v2" alt="أ. محمد رائد" class="advisor-avatar-sm">
                                 <div>
                                     <div class="fw-bold text-white fs-6">أ. محمد رائد</div>
@@ -6372,16 +6372,16 @@
                     معاينة الشعار على بيئات وخلفيات مختلفة:
                 </span>
                 <div class="sr-theme-pills">
-                    <button type="button" class="sr-theme-pill active" data-theme="obsidian" onclick="switchStageTheme('obsidian', this)">
+                    <button type="button" class="sr-theme-pill active" data-theme="obsidian" data-sr-call="switchStageTheme" data-sr-args='["obsidian"]' data-sr-this="last">
                         <span class="theme-color-dot dot-obsidian"></span> أوبسيديان (داكن)
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="emerald" onclick="switchStageTheme('emerald', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="emerald" data-sr-call="switchStageTheme" data-sr-args='["emerald"]' data-sr-this="last">
                         <span class="theme-color-dot dot-emerald"></span> زمردي ملكي
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="navy" onclick="switchStageTheme('navy', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="navy" data-sr-call="switchStageTheme" data-sr-args='["navy"]' data-sr-this="last">
                         <span class="theme-color-dot dot-navy"></span> كحلي ليلي
                     </button>
-                    <button type="button" class="sr-theme-pill" data-theme="charcoal" onclick="switchStageTheme('charcoal', this)">
+                    <button type="button" class="sr-theme-pill" data-theme="charcoal" data-sr-call="switchStageTheme" data-sr-args='["charcoal"]' data-sr-this="last">
                         <span class="theme-color-dot dot-charcoal"></span> فحمي ملكي (تيتانيوم)
                     </button>
                 </div>
@@ -6572,7 +6572,7 @@
             </div>
 
             <!-- حقول الحجز -->
-            <form id="executiveBookingForm" onsubmit="submitExecutiveBooking(event)">
+            <form id="executiveBookingForm" data-sr-call="submitExecutiveBooking" data-sr-event="1" data-sr-on="submit">
                 <input type="hidden" id="selectedAdvisorField" value="salim" />
                 <div class="sr-exec-form-grid">
                     <div class="sr-exec-form-group">
@@ -6631,7 +6631,7 @@
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
                         <span id="bookingSubmitBtnLabel">تأكيد وإرسال طلب جلسة الـ VIP عبر الواتساب المباشر</span>
                     </button>
-                    <button type="button" class="sr-exec-submit-btn sr-exec-submit-btn-email" onclick="submitExecutiveBooking(event, 'email')" title="إرسال فوري عبر البريد الإلكتروني الرسمي">
+                    <button type="button" class="sr-exec-submit-btn sr-exec-submit-btn-email" data-sr-call="submitExecutiveBooking" data-sr-args='["email"]' data-sr-event="1" title="إرسال فوري عبر البريد الإلكتروني الرسمي">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                         <span>📧 إرسال الطلب فوراً عبر البريد الإلكتروني (info@sr-coresync.com)</span>
                     </button>
@@ -8246,7 +8246,7 @@
     <!-- -----------------------------------------------------=====================
          نافذة تحميل وتثبيت البرمجيات الحقيقية مع التراخيص الرقمية ومثبت EXE
          -----------------------------------------------------===================== -->
-    <div id="softwareDownloadModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareDownloadModal()">
+    <div id="softwareDownloadModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareDownloadModal">
         <div class="software-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareDownloadModal" aria-label="إغلاق النافذة">&times;</button>
             
@@ -8362,7 +8362,7 @@
                 <h4 class="salim-lm-form-title">
                     <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
                 </h4>
-                <form onsubmit="generateSalimLicense(event)">
+                <form data-sr-call="generateSalimLicense" data-sr-event="1" data-sr-on="submit">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label class="salim-lm-field-label">البرنامج أو النظام المستهدف:</label>
@@ -8440,7 +8440,7 @@
     <!-- -----------------------------------------------------=====================
          Suggestion 3: بوابة الدفع والترخيص الفوري (Mollie & Stripe Checkout)
          -----------------------------------------------------===================== -->
-    <div id="softwareCheckoutModal" class="software-modal-overlay" onclick="if(event.target===this)closeSoftwareCheckoutModal()">
+    <div id="softwareCheckoutModal" class="software-modal-overlay" data-sr-backdrop-call="closeSoftwareCheckoutModal">
         <div class="software-modal-container checkout-modal-container" role="dialog" aria-modal="true">
             <button type="button" class="sw-modal-close-btn" data-sr-call="closeSoftwareCheckoutModal" aria-label="إغلاق النافذة">&times;</button>
 
@@ -8478,17 +8478,17 @@
                     </div>
                 </div>
 
-                <form onsubmit="processSoftwareCheckout(event)">
+                <form data-sr-call="processSoftwareCheckout" data-sr-event="1" data-sr-on="submit">
                     <!-- تبويبات وسائل الدفع -->
                     <div class="checkout-section-subtitle">اختر وسيلة الدفع:</div>
                     <div class="checkout-tabs">
-                        <button type="button" class="checkout-tab-btn active" onclick="switchCheckoutMethod('ideal', this)">
+                        <button type="button" class="checkout-tab-btn active" data-sr-call="switchCheckoutMethod" data-sr-args='["ideal"]' data-sr-this="last">
                             <span>🏦 iDEAL (هولندا)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('card', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["card"]' data-sr-this="last">
                             <span>💳 بطاقة بنكية (Visa/Mastercard)</span>
                         </button>
-                        <button type="button" class="checkout-tab-btn" onclick="switchCheckoutMethod('sepa', this)">
+                        <button type="button" class="checkout-tab-btn" data-sr-call="switchCheckoutMethod" data-sr-args='["sepa"]' data-sr-this="last">
                             <span>🇪🇺 تحويل SEPA البنكي</span>
                         </button>
                     </div>
@@ -8497,12 +8497,12 @@
                     <div id="checkoutIdealBox" class="checkout-ideal-box">
                         <label class="salim-lm-field-label">اختر المصرف الهولندي التابع له:</label>
                         <div class="checkout-bank-grid">
-                            <div class="checkout-bank-pill active" onclick="selectIdealBank('ING', this)">🦁 ING Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Rabobank', this)">🌾 Rabobank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('ABN AMRO', this)">🛡️ ABN AMRO</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('bunq', this)">🌈 bunq</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('SNS', this)">🏦 SNS Bank</div>
-                            <div class="checkout-bank-pill" onclick="selectIdealBank('Revolut', this)">⚡ Revolut</div>
+                            <div class="checkout-bank-pill active" data-sr-call="selectIdealBank" data-sr-args='["ING"]' data-sr-this="last">🦁 ING Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Rabobank"]' data-sr-this="last">🌾 Rabobank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["ABN AMRO"]' data-sr-this="last">🛡️ ABN AMRO</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["bunq"]' data-sr-this="last">🌈 bunq</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["SNS"]' data-sr-this="last">🏦 SNS Bank</div>
+                            <div class="checkout-bank-pill" data-sr-call="selectIdealBank" data-sr-args='["Revolut"]' data-sr-this="last">⚡ Revolut</div>
                         </div>
                     </div>
 

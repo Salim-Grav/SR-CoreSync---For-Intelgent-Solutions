@@ -101,7 +101,7 @@
                 <h4 class="salim-lm-form-title">
                     <span>⚡ توليد ترخيص تجاري رقمي جديد وفوري</span>
                 </h4>
-                <form onsubmit="generateSalimLicense(event)">
+                <form data-sr-call="generateSalimLicense" data-sr-event="1" data-sr-on="submit">
                     <div class="salim-lm-grid-2 mb-3">
                         <div>
                             <label class="salim-lm-field-label">البرنامج أو النظام المستهدف:</label>
@@ -157,10 +157,10 @@
                         <input type="text" class="salim-lm-search-input" placeholder="🔍 ابحث بالعميل، النظام، أو المفتاح..." oninput="onSalimLicenseSearch(this.value)" aria-label="بحث في التراخيص">
                     </div>
                     <div class="salim-lm-filter-btns">
-                        <button type="button" class="salim-lm-filter-btn active" onclick="filterSalimLicenses('all', this)">الكل</button>
-                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('annual', this)">سنوي</button>
-                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('monthly', this)">شهري</button>
-                        <button type="button" class="salim-lm-filter-btn" onclick="filterSalimLicenses('lifetime', this)">دائم</button>
+                        <button type="button" class="salim-lm-filter-btn active" data-sr-call="filterSalimLicenses" data-sr-args='["all"]' data-sr-this="last">الكل</button>
+                        <button type="button" class="salim-lm-filter-btn" data-sr-call="filterSalimLicenses" data-sr-args='["annual"]' data-sr-this="last">سنوي</button>
+                        <button type="button" class="salim-lm-filter-btn" data-sr-call="filterSalimLicenses" data-sr-args='["monthly"]' data-sr-this="last">شهري</button>
+                        <button type="button" class="salim-lm-filter-btn" data-sr-call="filterSalimLicenses" data-sr-args='["lifetime"]' data-sr-this="last">دائم</button>
                     </div>
                     <div class="salim-lm-export-wrap">
                         <button type="button" class="salim-lm-export-btn" data-sr-call="exportSalimLedger" data-sr-args='["csv"]' title="تصدير السجل بتنسيق CSV">تصدير CSV 📥</button>

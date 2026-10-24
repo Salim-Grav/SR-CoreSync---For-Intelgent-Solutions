@@ -449,36 +449,36 @@
     <div class="portal-layout">
         
         <aside class="portal-sidebar">
-            <div class="nav-item active" id="tourNav-overview" onclick="switchPortalTab('overview', this)">
+            <div class="nav-item active" id="tourNav-overview" data-sr-call="switchPortalTab" data-sr-args='["overview"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 <span>Executive Dashboard</span>
             </div>
-            <div class="nav-item" id="tourNav-erp" onclick="switchPortalTab('erp', this)">
+            <div class="nav-item" id="tourNav-erp" data-sr-call="switchPortalTab" data-sr-args='["erp"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 <span>ERP & Voorraadbeheer</span>
             </div>
-            <div class="nav-item" id="tourNav-invoices" onclick="switchPortalTab('invoices', this)">
+            <div class="nav-item" id="tourNav-invoices" data-sr-call="switchPortalTab" data-sr-args='["invoices"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
                 <span>E-Facturatie & BTW</span>
             </div>
-            <div class="nav-item" id="tourNav-ai" onclick="switchPortalTab('ai', this)">
+            <div class="nav-item" id="tourNav-ai" data-sr-call="switchPortalTab" data-sr-args='["ai"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
                 <span>AI Financiële Copilot</span>
             </div>
-            <div class="nav-item" id="tourNav-cloud" onclick="switchPortalTab('cloud', this)">
+            <div class="nav-item" id="tourNav-cloud" data-sr-call="switchPortalTab" data-sr-args='["cloud"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
                 <span>Cloud Serverstatus</span>
             </div>
-            <div class="nav-item" id="tourNav-whitelabel" onclick="switchPortalTab('whitelabel', this)">
+            <div class="nav-item" id="tourNav-whitelabel" data-sr-call="switchPortalTab" data-sr-args='["whitelabel"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
                 <span>White-Label Personalisatie</span>
             </div>
-            <div class="nav-item" id="tourNav-software" onclick="switchPortalTab('software', this)">
+            <div class="nav-item" id="tourNav-software" data-sr-call="switchPortalTab" data-sr-args='["software"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                 <span>Software Hub & Marktplaats</span>
             </div>
 
-            <div class="nav-item" id="tourNav-roi" onclick="switchPortalTab('roi', this)">
+            <div class="nav-item" id="tourNav-roi" data-sr-call="switchPortalTab" data-sr-args='["roi"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12M15 9.5H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H9"></path></svg>
                 <span>Slimme ROI Calculator</span>
             </div>
@@ -792,9 +792,9 @@
                             <span class="text-caption text-white-64">Directe aanmaak en 100% conform boekhoudstandaarden</span>
                         </div>
                         <div class="filter-pill-group">
-                            <button type="button" class="filter-btn active" onclick="filterInvoices('all', this)">Alle (<span id="count-all">3</span>)</button>
-                            <button type="button" class="filter-btn" onclick="filterInvoices('paid', this)">Betaald (<span id="count-paid">2</span>)</button>
-                            <button type="button" class="filter-btn" onclick="filterInvoices('pending', this)">Openstaand (<span id="count-pending">1</span>)</button>
+                            <button type="button" class="filter-btn active" data-sr-call="filterInvoices" data-sr-args='["all"]' data-sr-this="last">Alle (<span id="count-all">3</span>)</button>
+                            <button type="button" class="filter-btn" data-sr-call="filterInvoices" data-sr-args='["paid"]' data-sr-this="last">Betaald (<span id="count-paid">2</span>)</button>
+                            <button type="button" class="filter-btn" data-sr-call="filterInvoices" data-sr-args='["pending"]' data-sr-this="last">Openstaand (<span id="count-pending">1</span>)</button>
                         </div>
                     </div>
                     <div class="data-table-wrap">
@@ -1036,28 +1036,28 @@
                         <p class="text-caption text-white-64 mb-4">Klik op een thema om UI-accenten, grafieken en sfeerverlichting direct te transformeren:</p>
 
                         <div class="theme-presets-grid">
-                            <div class="theme-preset-card active" onclick="applyThemeColor('gold', this)">
+                            <div class="theme-preset-card active" data-sr-call="applyThemeColor" data-sr-args='["gold"]' data-sr-this="last">
                                 <div class="theme-color-swatch swatch-gold"></div>
                                 <div class="theme-preset-info">
                                     <div class="theme-preset-title">Koninklijk Goud (Prestige)</div>
                                     <div class="theme-preset-desc">Officiële standaardidentiteit van S&R CoreSync</div>
                                 </div>
                             </div>
-                            <div class="theme-preset-card" onclick="applyThemeColor('cyan', this)">
+                            <div class="theme-preset-card" data-sr-call="applyThemeColor" data-sr-args='["cyan"]' data-sr-this="last">
                                 <div class="theme-color-swatch swatch-cyan"></div>
                                 <div class="theme-preset-info">
                                     <div class="theme-preset-title">Titanium Cyaan (Tech Innovatie)</div>
                                     <div class="theme-preset-desc">Voor cloudsoftware- & databedrijven</div>
                                 </div>
                             </div>
-                            <div class="theme-preset-card" onclick="applyThemeColor('emerald', this)">
+                            <div class="theme-preset-card" data-sr-call="applyThemeColor" data-sr-args='["emerald"]' data-sr-this="last">
                                 <div class="theme-color-swatch swatch-emerald"></div>
                                 <div class="theme-preset-info">
                                     <div class="theme-preset-title">Fintech Smaragd (Financiële Zekerheid)</div>
                                     <div class="theme-preset-desc">Voor fintech, banken en compliancebedrijven</div>
                                 </div>
                             </div>
-                            <div class="theme-preset-card" onclick="applyThemeColor('violet', this)">
+                            <div class="theme-preset-card" data-sr-call="applyThemeColor" data-sr-args='["violet"]' data-sr-this="last">
                                 <div class="theme-color-swatch swatch-violet"></div>
                                 <div class="theme-preset-info">
                                     <div class="theme-preset-title">Keizerlijk Violet (Luxe Onderneming)</div>
@@ -1080,7 +1080,7 @@
 
                             <div>
                                 <label class="text-caption text-white-64 mb-1 d-block" for="clientLogoUploadInput">Bedrijfslogo (PNG / SVG / JPG):</label>
-                                <input type="file" id="clientLogoUploadInput" accept="image/*" class="ai-chat-input modal-form-input" onchange="handleClientLogoUpload(event)">
+                                <input type="file" id="clientLogoUploadInput" accept="image/*" class="ai-chat-input modal-form-input" data-sr-call="handleClientLogoUpload" data-sr-event="1" data-sr-on="change">
                             </div>
                         </div>
 
@@ -1131,11 +1131,11 @@
                 
                 <div class="glass-box mb-4 p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
                     <div class="filter-pill-group">
-                        <button type="button" class="filter-btn active" onclick="filterSoftwareCategory('all', this)">Alle (5)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('desktop', this)">Desktop PC/Mac (2)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('mobile', this)">Mobiele Apps (1)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('pos', this)">Kassa/POS Agents (1)</button>
-                        <button type="button" class="filter-btn" onclick="filterSoftwareCategory('sdk', this)">Developer SDKs (1)</button>
+                        <button type="button" class="filter-btn active" data-sr-call="filterSoftwareCategory" data-sr-args='["all"]' data-sr-this="last">Alle (5)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["desktop"]' data-sr-this="last">Desktop PC/Mac (2)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["mobile"]' data-sr-this="last">Mobiele Apps (1)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["pos"]' data-sr-this="last">Kassa/POS Agents (1)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["sdk"]' data-sr-this="last">Developer SDKs (1)</button>
                     </div>
                     <span class="text-caption text-white-64">Directe digitale licenties & installatiebestanden</span>
                 </div>
@@ -3133,7 +3133,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
     
     
-    <div class="modal-overlay" id="softwareModal" onclick="if(event.target === this) closeSoftwareModal()">
+    <div class="modal-overlay" id="softwareModal" data-sr-backdrop-call="closeSoftwareModal">
         <div class="modal-card ds-u29">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center gap-2">
@@ -3184,7 +3184,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <h3 class="text-white mb-2 fw-bold">Publiceer & Distribueer Zakelijke App</h3>
             <p class="text-caption text-white-64 mb-4">Als enterprise software-engineer kunt u exclusieve commerciële oplossingen publiceren voor verkoop en distributie:</p>
             
-            <form onsubmit="handlePublishSoftwareSubmit(event)">
+            <form data-sr-call="handlePublishSoftwareSubmit" data-sr-event="1" data-sr-on="submit">
                 <div class="modal-form-fields">
                     <div>
                         <label class="text-caption text-white-64 mb-1 d-block" for="pubTitle">Software- of Applicatienaam</label>
@@ -3399,7 +3399,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
     </div>
 
     
-    <div class="modal-overlay" id="softwareCheckoutModal" onclick="if(event.target === this) closeSoftwareCheckoutModal()">
+    <div class="modal-overlay" id="softwareCheckoutModal" data-sr-backdrop-call="closeSoftwareCheckoutModal">
         <div class="modal-card checkout-modal-card">
             
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -3816,7 +3816,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         <div class="hotline-popover-card" id="hotlinePopoverCard">
             <div class="hotline-header-row">
                 <span class="hotline-header-title">Directe Directie Hotline</span>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" onclick="toggleHotlineWidget(event)" aria-label="Close">✕</button>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="toggleHotlineWidget" data-sr-event="1" aria-label="Close">✕</button>
             </div>
             
             <div class="hotline-founder-box">
@@ -3975,7 +3975,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 </div>
             </div>
         </div>
-        <button type="button" class="hotline-trigger-pill" id="hotlineTriggerBtn" onclick="toggleHotlineWidget(event)">
+        <button type="button" class="hotline-trigger-pill" id="hotlineTriggerBtn" data-sr-call="toggleHotlineWidget" data-sr-event="1">
             <span class="hotline-pulse-dot"></span>
             <span id="hotlineTriggerText">💬 Contact Oprichters</span>
         </button>
