@@ -1081,10 +1081,10 @@
                     <div class="text-center">
                         <div class="dana-services-currency-bar">
                             <span class="dana-cur-label">💱 Actieve Valuta:</span>
-                            <button type="button" class="dana-cur-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
-                            <button type="button" class="dana-cur-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
-                            <button type="button" class="dana-cur-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
-                            <button type="button" class="dana-cur-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (AED)</button>
+                            <button type="button" class="dana-cur-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (AED)</button>
                         </div>
                     </div>
                 </div>
@@ -1126,7 +1126,7 @@
                                 <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('identity')">
                                     <span>Adviesgesprek 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Visuele%20Identiteit%20(%E2%82%AC590)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20de%20visuele%20identiteit%20voor%20mijn%20bedrijf%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Visuele%20Identiteit%20(%E2%82%AC590)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20de%20visuele%20identiteit%20voor%20mijn%20bedrijf%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>Aanvragen via WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -1169,7 +1169,7 @@
                                 <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('website')">
                                     <span>Adviesgesprek 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Webdesign%20Pakket%20(%E2%82%AC980)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20een%20moderne%20website%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Webdesign%20Pakket%20(%E2%82%AC980)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20een%20moderne%20website%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>Aanvragen via WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -1222,7 +1222,7 @@
                                 <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveBookingModal('store')">
                                     <span>Adviesgesprek 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Webshop%20Pakket%20(%E2%82%AC1.450)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20een%20complete%20e-commerce%20webshop%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                                <a href="https://wa.me/31618111116?text=%2AAanvraag%20Webshop%20Pakket%20(%E2%82%AC1.450)%20-%20S%26R%20CoreSync%2A%0AIk%20wil%20graag%20een%20complete%20e-commerce%20webshop%20aanvragen." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>Aanvragen via WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -1233,7 +1233,7 @@
 
                 <!-- Pakketvergelijking Knop -->
                 <div class="dana-compare-trigger-wrap">
-                    <button type="button" class="dana-btn-compare" onclick="window.openServicesComparisonModal()">
+                    <button type="button" class="dana-btn-compare" data-sr-call="openServicesComparisonModal">
                         <span>📊 Uitgebreide Pakket- &amp; Functievergelijking</span>
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
@@ -2659,11 +2659,11 @@
                     </p>
                     <div class="roi-currency-bar mt-3">
                         <span class="text-caption text-white-64 me-2">Valuta:</span>
-                        <button type="button" class="roi-currency-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
-                        <button type="button" class="roi-currency-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
-                        <button type="button" class="roi-currency-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
-                        <button type="button" class="roi-currency-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (AED)</button>
-                        <button type="button" class="roi-currency-pill" data-currency="GBP" onclick="window.switchCurrency('GBP')">🇬🇧 GBP (£)</button>
+                        <button type="button" class="roi-currency-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (AED)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="GBP" data-sr-call="switchCurrency" data-sr-args='["GBP"]'>🇬🇧 GBP (£)</button>
                     </div>
                 </div>
 
@@ -4030,13 +4030,13 @@
                                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19h16"/><path d="M7 15l5-10 5 10"/><path d="M9 11h6"/></svg>
                                     <span>Tekst:</span>
                                 </span>
-                                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" onclick="window.srAdjustFontSize(-1)" aria-label="Tekst verkleinen (A-)" title="Tekst verkleinen (A-)">
+                                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" data-sr-call="srAdjustFontSize" data-sr-args='[-1]' aria-label="Tekst verkleinen (A-)" title="Tekst verkleinen (A-)">
                                     <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">-</span>
                                 </button>
-                                <button type="button" class="sr-resizer-indicator" onclick="window.srResetFontSize()" aria-label="Standaard herstellen (100%)" title="Standaard herstellen (100%)">
+                                <button type="button" class="sr-resizer-indicator" data-sr-call="srResetFontSize" aria-label="Standaard herstellen (100%)" title="Standaard herstellen (100%)">
                                     <span class="sr-resizer-val">100%</span>
                                 </button>
-                                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" onclick="window.srAdjustFontSize(1)" aria-label="Tekst vergroten (A+)" title="Tekst vergroten (A+)">
+                                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" data-sr-call="srAdjustFontSize" data-sr-args='[1]' aria-label="Tekst vergroten (A+)" title="Tekst vergroten (A+)">
                                     <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">+</span>
                                 </button>
                             </div>
@@ -4240,13 +4240,13 @@
                 <span>Leesmodus & Lettergrootte:</span>
             </span>
             <div class="sr-text-resizer-widget" role="group" aria-label="Tekstgrootte en leesmodus">
-                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" onclick="window.srAdjustFontSize(-1)" aria-label="Tekst verkleinen (A-)" title="Tekst verkleinen (A-)">
+                <button type="button" class="sr-resizer-btn sr-resizer-btn--minus" data-sr-call="srAdjustFontSize" data-sr-args='[-1]' aria-label="Tekst verkleinen (A-)" title="Tekst verkleinen (A-)">
                     <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">-</span>
                 </button>
-                <button type="button" class="sr-resizer-indicator" onclick="window.srResetFontSize()" aria-label="Standaard herstellen (100%)" title="Standaard herstellen (100%)">
+                <button type="button" class="sr-resizer-indicator" data-sr-call="srResetFontSize" aria-label="Standaard herstellen (100%)" title="Standaard herstellen (100%)">
                     <span class="sr-resizer-val">100%</span>
                 </button>
-                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" onclick="window.srAdjustFontSize(1)" aria-label="Tekst vergroten (A+)" title="Tekst vergroten (A+)">
+                <button type="button" class="sr-resizer-btn sr-resizer-btn--plus" data-sr-call="srAdjustFontSize" data-sr-args='[1]' aria-label="Tekst vergroten (A+)" title="Tekst vergroten (A+)">
                     <span class="sr-resizer-letter">A</span><span class="sr-resizer-symbol">+</span>
                 </button>
             </div>
@@ -5750,7 +5750,7 @@
                     <span>Officieel Directierapport Financiële Haalbaarheid &amp; Jaarlijkse Besparing // Executive ROI Report</span>
                 </div>
                 <div class="es-toolbar-actions d-flex gap-2">
-                    <button type="button" class="es-btn-tool es-btn-tool-print" onclick="window.printRoiReport()">
+                    <button type="button" class="es-btn-tool es-btn-tool-print" data-sr-call="printRoiReport">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                         <span>Afdrukken / Opslaan als PDF 🖨️</span>
                     </button>
@@ -7267,7 +7267,7 @@
     <!-- Founders Showcase Lightbox Modal -->
     <div id="foundersLightboxModal" class="founders-lightbox-modal" data-sr-call="closeFoundersLightbox">
         <button type="button" class="founders-lightbox-close" data-sr-call="closeFoundersLightbox" title="Sluiten">&times;</button>
-        <div class="founders-lightbox-box" onclick="event.stopPropagation()">
+        <div class="founders-lightbox-box" data-sr-stop="1">
             <img id="foundersLightboxImg" alt="" class="founders-lightbox-img">
         </div>
     </div>
@@ -7276,7 +7276,7 @@
 
 <!-- نافذة البطاقة الرقمية الذكية (Smart vCard & QR Modal) -->
     <div id="foundersQrModal" class="founders-qr-modal" data-sr-call="closeFoundersQrModal">
-        <div class="founders-qr-card" onclick="event.stopPropagation()">
+        <div class="founders-qr-card" data-sr-stop="1">
             <button type="button" class="founders-qr-close" data-sr-call="closeFoundersQrModal" title="إغلاق">&times;</button>
             
             <div class="founders-qr-header">

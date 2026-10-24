@@ -44,7 +44,7 @@
                         <span class="es-client-label">🏢 المنشأة / العميل:</span>
                         <input type="text" id="esCompareClientName" class="es-client-input" value="شركة النخبة الدولية (Elite Global)" placeholder="أدخل اسم شركتكم لإدراجه بالتقرير (اختياري)">
                     </div>
-                    <button type="button" class="es-compare-pdf-btn" onclick="window.exportComparisonPDF()">
+                    <button type="button" class="es-compare-pdf-btn" data-sr-call="exportComparisonPDF">
                         <span>📄 تصدير جدول المقارنة PDF</span>
                     </button>
                 </div>
@@ -124,19 +124,19 @@
                     </div>
                     <div class="es-addons-grid">
                         <label class="es-addon-item">
-                            <input type="checkbox" class="es-addon-check" data-addon-price="150" checked onchange="window.recalcComparisonAddons()">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="150" checked data-sr-call="recalcComparisonAddons" data-sr-on="change">
                             <span>🌐 لغة إضافية للموقع (+€150)</span>
                         </label>
                         <label class="es-addon-item">
-                            <input type="checkbox" class="es-addon-check" data-addon-price="120" onchange="window.recalcComparisonAddons()">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="120" data-sr-call="recalcComparisonAddons" data-sr-on="change">
                             <span>💳 بوابة دفع إضافية (+€120)</span>
                         </label>
                         <label class="es-addon-item">
-                            <input type="checkbox" class="es-addon-check" data-addon-price="350" onchange="window.recalcComparisonAddons()">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="350" data-sr-call="recalcComparisonAddons" data-sr-on="change">
                             <span>🤖 شات بوت ذكاء اصطناعي RAG (+€350)</span>
                         </label>
                         <label class="es-addon-item">
-                            <input type="checkbox" class="es-addon-check" data-addon-price="180" onchange="window.recalcComparisonAddons()">
+                            <input type="checkbox" class="es-addon-check" data-addon-price="180" data-sr-call="recalcComparisonAddons" data-sr-on="change">
                             <span>🛡️ دعم فني VIP وحماية سنوية (+€180)</span>
                         </label>
                     </div>
@@ -146,5 +146,6 @@
         </div>
     </div>
     <script src="./js/enterprise-suite.min.js"></script>
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>

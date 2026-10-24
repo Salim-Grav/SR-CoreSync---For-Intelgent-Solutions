@@ -423,10 +423,10 @@
                 <p class="text-caption text-white-64 mb-0">حلول بصرية ورقمية استراتيجية مصممة للوضوح والثقة وتحويل زوارك إلى عملاء دائمين بأسعار تنافسية مدروسة</p>
                 <div class="dana-services-currency-bar">
                     <span class="dana-cur-label">💱 العملة المعروضة:</span>
-                    <button type="button" class="dana-cur-pill active" data-currency="EUR" onclick="window.switchCurrency('EUR')">🇪🇺 EUR (€)</button>
-                    <button type="button" class="dana-cur-pill" data-currency="USD" onclick="window.switchCurrency('USD')">🇺🇸 USD ($)</button>
-                    <button type="button" class="dana-cur-pill" data-currency="SAR" onclick="window.switchCurrency('SAR')">🇸🇦 SAR (﷼)</button>
-                    <button type="button" class="dana-cur-pill" data-currency="AED" onclick="window.switchCurrency('AED')">🇦🇪 AED (د.إ)</button>
+                    <button type="button" class="dana-cur-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
+                    <button type="button" class="dana-cur-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
+                    <button type="button" class="dana-cur-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                    <button type="button" class="dana-cur-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (د.إ)</button>
                 </div>
             </div>
 
@@ -466,7 +466,7 @@
                             <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveContactModal('systems', 'استوديو الهوية البصرية');">
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                 <span>طلب الخدمة عبر واتساب</span>
                                 <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                             </a>
@@ -509,7 +509,7 @@
                             <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveContactModal('systems', 'تصميم وتطوير المواقع والمنصات');">
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                 <span>طلب الخدمة عبر واتساب</span>
                                 <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                             </a>
@@ -562,7 +562,7 @@
                             <button type="button" class="dana-btn-booking" onclick="event.stopPropagation(); openExecutiveContactModal('systems', 'المتاجر الإلكترونية المتكاملة');">
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" onclick="event.stopPropagation()">
+                            <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                 <span>طلب الخدمة عبر واتساب</span>
                                 <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                             </a>
@@ -573,7 +573,7 @@
 
             <!-- زر مقارنة ميزات الباقات التفصيلي -->
             <div class="dana-compare-trigger-wrap">
-                <button type="button" class="dana-btn-compare" onclick="window.openServicesComparisonModal()">
+                <button type="button" class="dana-btn-compare" data-sr-call="openServicesComparisonModal">
                     <span>📊 مقارنة تفصيلية لميزات الباقات والأسعار</span>
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>

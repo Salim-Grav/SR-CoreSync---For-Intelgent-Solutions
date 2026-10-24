@@ -37,7 +37,7 @@ import audit_inline_handlers as audit  # noqa: E402
 ROOT = audit.ROOT
 
 HANDLER = re.compile(
-    r'\son(?P<event>[a-z]+)\s*=\s*"(?P<name>[A-Za-z_$][\w$]*)\s*\((?P<args>[^"]*)\)\s*;?\s*"',
+    r'\son(?P<event>[a-z]+)\s*=\s*"(?P<name>(?:window\.)?[A-Za-z_$][\w$]*)\s*\((?P<args>[^"]*)\)\s*;?\s*"',
     re.I)
 SCRIPT_TAG = re.compile(r'js/sr-events\.js')
 OPAQUE = re.compile(r'(?is)<script\b.*?</script>|<style\b.*?</style>|<!--.*?-->')
@@ -77,9 +77,14 @@ def safe_functions():
         with io.open(path, encoding='utf-8', errors='ignore') as fh:
             doc = fh.read()
         for match in audit.ATTR.finditer(doc):
-            call = audit.CALL.match(match.group(2).strip())
+            value = match.group(2).strip()
+            call = audit.CALL.match(value)
             if call and call.group(1) != 'if':
                 candidates.add(call.group(1))
+                continue
+            win = re.match(r'^window\.([A-Za-z_$][\w$]*)\s*\(', value)
+            if win:
+                candidates.add(win.group(1))
 
     safe = set()
     for name in candidates:
@@ -116,11 +121,20 @@ def main():
         def repl(match):
             nonlocal converted_zero, converted_args, converted_this, left
             name = match.group('name')
+            if name.startswith('window.'):
+                name = name[len('window.'):]
             raw = match.group('args')
             if name not in safe:
                 left += 1
                 return match.group(0)
             pass_element = False
+
+            # onclick="window.print()" is the same call as print(); strip the
+            # namespace so the delegated form stays identical.
+            win_ns = re.match(r'^\s*window\.([A-Za-z_$][\w$]*)\s*\(', raw)
+            if win_ns and raw.lstrip().startswith('window.'):
+                name = win_ns.group(1)
+
             stripped = raw.lstrip()
             if stripped.startswith('this'):
                 remainder = stripped[4:]
@@ -153,6 +167,10 @@ def main():
             return out
 
         def rewrite(markup):
+            # event.stopPropagation() carries no function call to delegate: the
+            # runtime only has to reproduce the stop, not preventDefault.
+            markup = re.sub(r'\son[a-z]+\s*=\s*"\s*event\.stopPropagation\(\)\s*;?\s*"',
+                            ' data-sr-stop="1"', markup, flags=re.I)
             return HANDLER.sub(repl, markup)
 
         pieces = []

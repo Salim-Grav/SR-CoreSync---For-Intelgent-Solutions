@@ -18,7 +18,7 @@
   'use strict';
 
   var EVENTS = ['click', 'input', 'change', 'submit', 'keypress', 'mousemove'];
-  var SELECTOR = '[data-sr-call]';
+  var SELECTOR = '[data-sr-call],[data-sr-stop]';
 
   function resolve(name) {
     if (!name) return null;
@@ -71,5 +71,38 @@
 
   for (var i = 0; i < EVENTS.length; i++) {
     document.addEventListener(EVENTS[i], handler, EVENTS[i] === 'submit' ? true : false);
+  }
+
+  // data-sr-stop must stop the event at the element, exactly like an inline
+  // onclick="event.stopPropagation()" did. A document-level listener is too
+  // late: the clickable ancestors would already have fired.
+  function bindStops(root) {
+    var nodes = (root || document).querySelectorAll('[data-sr-stop]:not([data-sr-stop-bound])');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('data-sr-stop-bound', '1');
+      nodes[i].addEventListener('click', function (event) {
+        if (event && event.stopPropagation) event.stopPropagation();
+      }, false);
+    }
+  }
+
+  function watchStops() {
+    bindStops(document);
+    if (typeof MutationObserver === 'function') {
+      new MutationObserver(function (records) {
+        for (var i = 0; i < records.length; i++) {
+          var added = records[i].addedNodes;
+          for (var j = 0; j < added.length; j++) {
+            if (added[j].nodeType === 1) bindStops(added[j]);
+          }
+        }
+      }).observe(document.documentElement, { childList: true, subtree: true });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', watchStops, { once: true });
+  } else {
+    watchStops();
   }
 })();
