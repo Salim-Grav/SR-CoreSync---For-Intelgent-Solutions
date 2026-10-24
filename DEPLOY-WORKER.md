@@ -111,3 +111,28 @@ node scripts/browser_console_audit.mjs
 - لا يرسل بيانات شخصية إلى المتصفح: `/stats` و`/events/recent` محسوبان من فهرس
   KV ويحتويان عددًا وطابعًا زمنيًا فقط.
 - لا يعمل بلا `LEADS`: عند غياب الرابط يظل يرسل البريد لكن دون تخزين.
+
+---
+
+## تنبيه Telegram (القناة الفعّالة حاليًا)
+
+بدل انتظار مزوّد بريد وسجلات DKIM على نطاق فرعي، يعمل التنبيه الفوري عبر بوت
+تيليجرام — **بلا DNS وبلا مزوّد خارجي**.
+
+```powershell
+# مرة واحدة: @BotFather -> /newbot -> انسخ التوكن، ثم أرسل للبوت أي رسالة
+python scripts/setup_telegram.py --apply      # يكتشف chat_id ويكتب السرّين وينشر
+python scripts/setup_telegram.py --test       # يجب أن يطبع True
+```
+
+التحقق الحقيقي:
+```powershell
+cd workers/sr-lead-capture
+node node_modules/wrangler/bin/wrangler.js tail --format json   # راقب سجلات الـ Worker
+# في نافذة أخرى أرسل استفسارًا؛ يجب أن يظهر: "telegram=sent"
+```
+
+آخر تحقق (2026-10-24 10:30): استفسار `LEAD-SR-20261024-T3TX` → `telegram=sent`.
+
+> **أمان:** التوكن يُدخَل مخفيًا ولا يُكتب في أي ملف، ويُستخدم في رابط الـ API فقط.
+> إن ظهر التوكن في أي محادثة أو سجل، أبطله من BotFather (`/revoke`) وأعد التنفيذ.
