@@ -41,6 +41,23 @@ PROFILES = {
         'note': 'Keep mx1.improvmx.com at priority 90 for one week as a fallback:',
         'note2': 'mail goes to the lowest priority first, so nothing is lost if Zoho rejects.',
     },
+    'purelymail': {
+        'label': 'Purelymail ($10/year, unlimited mailboxes)',
+        'mx': [],
+        'mx_suffix': 'purelymail.com',
+        'spf_include': 'purelymail',
+        'dkim_selector': None,
+        'guide': [
+            ('MX', '@', 'mx1.purelymail.com', 'priority 10 - copy the exact host from the panel'),
+            ('MX', '@', 'mx2.purelymail.com', 'priority 20 - copy the exact host from the panel'),
+            ('TXT', '@', 'v=spf1 include:_spf.purelymail.com ~all', 'copy the exact SPF the panel shows'),
+            ('TXT', '@', 'purelymail_ownership_proof=<value>', 'from Add Domain'),
+            ('TXT', '<selector>._domainkey', '<value>', 'three DKIM records, copy each selector'),
+            ('TXT', '_dmarc', 'v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; pct=100', 'start with monitoring'),
+        ],
+        'note': 'IMAP imap.purelymail.com:993 (SSL) - SMTP smtp.purelymail.com:587 (STARTTLS)',
+        'note2': 'POP3 pop3.purelymail.com:995. Verify each DKIM selector with --dkim-selector.',
+    },
     'hostinger': {
         'label': 'Hostinger Email',
         'mx': ['mx1.hostinger.com', 'mx2.hostinger.com'],
@@ -104,6 +121,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--profile', choices=sorted(PROFILES))
     ap.add_argument('--guide', choices=sorted(PROFILES))
+    ap.add_argument('--dkim-selector', help='verify this DKIM selector (e.g. the one the panel shows)')
     args = ap.parse_args()
 
     if args.guide:
@@ -145,10 +163,15 @@ def main():
     checks = []
 
     hosts = [host for _, host in state['mx']]
-    primary = [h for h in profile['mx'][:2] if h in hosts]
+    suffix = profile.get('mx_suffix')
+    if suffix:
+        primary = [h for h in hosts if h.endswith(suffix)]
+    else:
+        primary = [h for h in profile['mx'][:2] if h in hosts]
     checks.append(('MX points at %s' % profile['label'], len(primary) >= 1,
                    ', '.join(hosts) or 'none'))
-    stray = [h for h in hosts if h not in profile['mx'] and 'improvmx' not in h]
+    stray = [h for h in hosts if h not in profile['mx'] and 'improvmx' not in h
+             and not (suffix and h.endswith(suffix))]
     checks.append(('no foreign MX left', not stray, ', '.join(stray) or 'clean'))
     fallback = [h for h in hosts if 'improvmx' in h]
     if fallback:
@@ -160,8 +183,13 @@ def main():
     if 'improvmx' in spf:
         checks.append(('SPF no longer includes the forwarder', False, 'include:spf.improvmx.com still present'))
 
-    dkim = txt(profile['dkim_selector'] + '.' + DOMAIN) or dns(profile['dkim_selector'] + '.' + DOMAIN, 'CNAME')
-    checks.append(('%s publishes DKIM' % profile['dkim_selector'], bool(dkim), 'present' if dkim else 'missing'))
+    selector = args.dkim_selector or profile['dkim_selector']
+    if selector:
+        dkim = txt(selector + '.' + DOMAIN) or dns(selector + '.' + DOMAIN, 'CNAME')
+        checks.append(('%s publishes DKIM' % selector, bool(dkim), 'present' if dkim else 'missing'))
+    else:
+        checks.append(('a DKIM selector is given (--dkim-selector)', False,
+                       'copy one you see in the panel'))
 
     checks.append(('DMARC published', bool(state['dmarc']), (state['dmarc'] or 'missing')[:60]))
 

@@ -1,109 +1,96 @@
-# تشغيل البريد الثلاثي (info@ · support@ · billing@) — استقبال وإرسال
+# تشغيل البريد الثلاثي (info@ · support@ · billing@) — أرخص حل يعمل فعلًا
 
-> **الحالة المقيسة الآن (2026-10-24):**
+> **الحالة المقيسة (2026-10-24):**
 > ```
 > MX     : mx1.improvmx.com, mx2.improvmx.com
 > SPF    : v=spf1 include:spf.improvmx.com ~all
 > DKIM   : لا يوجد
 > DMARC  : لا يوجد
 > ```
-> **ImprovMX = تحويل فقط**: لا صناديق، لا IMAP/SMTP، ولا إرسال من النطاق.
-> أي ردّ ترسله اليوم يخرج من بريدك الشخصي باسمك لا باسم الشركة.
-
-**الخلاصة:** «كل الميزات» تعني الانتقال إلى مزوّد **صناديق بريد حقيقية**.
-وهذا **لا يحتاج نقل النطاق** — فقط تعديل سجلات DNS في hPanel، تمامًا كما رفضتَ سابقًا.
+> **ImprovMX = تحويل فقط**: لا صناديق، لا IMAP/SMTP، ولا إرسال. أي ردّ يخرج من بريدك
+> الشخصي باسمك، لا باسم الشركة.
 
 ---
 
-## الخيارات الثلاثة
+## هل يوجد حل مجاني كامل؟ — لا
 
-| | **Zoho Mail** | **Hostinger Email** | **Google Workspace / M365** |
-|---|---|---|---|
-| صناديق حقيقية | ✅ 3 (خطة مجانية: 5 صناديق) | ✅ 3 | ✅ 3 |
-| IMAP/SMTP/Webmail | ✅ | ✅ | ✅ |
-| DKIM + DMARC | ✅ | ✅ | ✅ |
-| مركز بيانات أوروبي | ✅ (zoho.eu) | ✅ (LT/NL) | ✅ |
-| التكلفة | **مجاني** (5 صناديق، 5GB) | منخفضة/صندوق (غالبًا ضمن استضافتك) | ~€6–7 لكل مستخدم شهريًا |
-| الأفضل لـ | 3 عناوين بميزانية صفر | من يريد مزوّدًا واحدًا مع الاستضافة | تكامل Gmail/Office الكامل |
+| ما يُسمّى «مجاني» | ماذا يقدّم فعلًا |
+|---|---|
+| Cloudflare Email Routing | استقبال وتحويل فقط — **لا صناديق ولا إرسال** |
+| ImprovMX (وضعك الحالي) | تحويل فقط — نفس القيد |
+| Zoho Mail Free | صناديق، لكن **IMAP/SMTP غير مشمول** للحسابات الجديدة → لا إرسال من التطبيقات |
+| DNSExit وأمثاله | «مجاني» بصندوق واحد وحدود صارمة وسمعة غير مضمونة |
 
-**توصيتي:** **Zoho Mail (EU)** — ثلاث صناديق كاملة بميزانية صفر، ودعم DKIM/DMARC،
-ولا يمسّ ملكية النطاق. إن كنت تدفع لـ Hostinger hosting، فـ **Hostinger Email**
-أبسط (مزوّد واحد ولن تنسى تجديدًا).
+**الخلاصة:** لا يوجد مزوّد مجاني يمنح صناديق حقيقية + IMAP/SMTP على نطاقك الخاص.
+أرخص ما يعمل «بكل الميزات» يبدأ من **$10 في السنة للنطاق كله** — لا لكل مستخدم.
 
 ---
 
-## 1) Zoho Mail — الخطوات والسجلات
+## المقارنة (الأسعار تقديرية، تحقّق قبل الدفع)
 
-**أ) في Zoho:** أنشئ حسابًا → `Mail Admin → Domains → Add Domain` → `sr-coresync.com`
-→ اختر数据中心 **EU (zoho.eu)** → سيطلب سجل تحقق TXT/CNAME → أنشئ الصناديق الثلاثة.
+| المزوّد | التكلفة | الصناديق | IMAP/SMTP | ملاحظة |
+|---|---|---|---|---|
+| **Purelymail** ✅ | **$10/سنة إجمالًا** | غير محدودة | ✅ | لا حدود على المستخدمين أو النطاقات أو التخزين |
+| Migadu Micro | ~$19/سنة | غير محدودة | ✅ لكن **20 رسالة/يوم** | سقف الإرسال يقيّد العمل |
+| Zoho Mail Lite | ~€1/مستخدم/شهر (≈€36/سنة لثلاثة) | 3 | ✅ | خطة مجانية بلا IMAP |
+| Google Workspace | ~€6–7/مستخدم/شهر (≈€216/سنة) | 3 | ✅ | الأفضل تكاملًا، الأغلى |
+| Cloudflare / ImprovMX | مجاني | ❌ | ❌ | تحويل فقط |
 
-**ب) في Hostinger (DNS Zone Editor):**
-
-| النوع | الاسم | القيمة | ملاحظة |
-|---|---|---|---|
-| `TXT` | `@` | `zoho-verification=...` | من لوحة Zoho (تحقّق الملكية) |
-| `MX` | `@` | `mx.zoho.eu` أولوية **10** | أساسي |
-| `MX` | `@` | `mx2.zoho.eu` أولوية **20** | احتياطي |
-| `MX` | `@` | `mx3.zoho.eu` أولوية **50** | احتياطي |
-| `TXT` | `@` | `v=spf1 include:zoho.eu ~all` | **استبدل** SPF الحالي |
-| `TXT` | `zoho._domainkey` | القيمة من لوحة Zoho | DKIM (أنشئها في Mail Admin) |
-| `TXT` | `_dmarc` | `v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; pct=100` | ابدأ بالمراقبة |
-
-> ⚠️ **الترتيب مهم:** أنشئ سجلات DKIM والتحقق **قبل** حذف MX القديمة.
-> أبقِ `mx1.improvmx.com` بأولوية **90** كشبكة أمان لأسبوع — البريد يذهب للأولوية الأقل
-> أولًا، فإن قبلها Zoho لا يصل شيء إلى ImprovMX، وإن تعطّل يعود التحويل.
-
-**ج) بعد التحقق:** أضف توقيعات المؤسسين في Zoho، وفعّل `SPF` و`DKIM` ثم ارفع DMARC
-إلى `quarantine` بعد 2–4 أسابيع من تقارير نظيفة.
+**التوصية: Purelymail — $10/سنة للنطاق بأكمله**، أي ~€0.75 شهريًا للعناوين الثلاثة.
+ملاحظة أمانة: مزوّد صغير (فريق محدود)؛ إن أردت استقرارًا مؤسسيًا أكبر فـ Zoho Lite
+أو Google، وكلاهما أغلى بثلاثة إلى عشرين ضعفًا.
 
 ---
 
-## 2) Hostinger Email
+## خطوات Purelymail
 
-| النوع | الاسم | القيمة |
+1. أنشئ حسابًا على `purelymail.com` → **Add Domain** → `sr-coresync.com`
+   (الدفع $10/سنة، بطاقة أو PayPal).
+2. ستظهر لك في الصفحة نفسها: سجل **ملكية** (TXT)، سجلا **MX**، ثلاثة سجلات **DKIM**.
+   **انسخها كما هي** — أسماء المنتقيات (selectors) خاصة بحسابك ولا تُخمَّن.
+3. في Hostinger → DNS Zone Editor أضف بالترتيب:
+   - سجل الملكية `TXT` (تحقّق فقط، لا يمسّ البريد الحالي).
+   - سجلات `DKIM` الثلاثة `TXT`.
+   - `TXT @ v=spf1 include:_spf.purelymail.com ~all` (استبدل SPF القديم).
+   - `MX @ mx1.purelymail.com` أولوية **10** و`mx2.purelymail.com` أولوية **20**
+     (أو ما يعرضه لك الحساب حرفيًا).
+   - **أبقِ `mx1.improvmx.com` بأولوية 90 أسبوعًا** — البريد يذهب للأولوية الأقل،
+     فإن رفض Purelymail يعود التحويل، فلا تُفقد رسالة.
+4. أنشئ الصناديق الثلاثة: `info@` · `support@` · `billing@`.
+5. أضف `_dmarc` = `v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; pct=100`.
+
+### إعدادات الأجهزة (موثّقة من Purelymail)
+| الخدمة | الخادم | المنفذ |
 |---|---|---|
-| `MX` | `@` | `mx1.hostinger.com` (5) · `mx2.hostinger.com` (10) |
-| `TXT` | `@` | `v=spf1 include:_spf.mail.hostinger.com ~all` |
-| `CNAME` | `hostingermail-a._domainkey` | `hostingermail-a._domainkey.hostinger.com` |
-| `CNAME` | `hostingermail-b._domainkey` | `hostingermail-b._domainkey.hostinger.com` |
-| `CNAME` | `autodiscover` | `autodiscover.mail.hostinger.com` |
-| `TXT` | `_dmarc` | كما أعلاه |
-
-الصناديق تُنشأ من hPanel → **Emails**. (هذه هي القيم التي كان المستودع يوثّقها كأنها حيّة.)
+| IMAP | `imap.purelymail.com` | 993 (SSL) |
+| SMTP | `smtp.purelymail.com` | 587 (STARTTLS) |
+| POP3 | `pop3.purelymail.com` | 995 (SSL) |
 
 ---
 
-## 3) Google Workspace / Microsoft 365
-
-- **Google:** `MX aspmx.l.google.com (1)` + `alt1–4.asp...` · `SPF include:_spf.google.com`
-  · DKIM من Admin Console → Apps → Gmail → Authenticate email (`google._domainkey`).
-- **Microsoft:** `MX <tenant>.mail.protection.outlook.com` · `SPF include:spf.protection.outlook.com`
-  · DKIM: `CNAME selector1._domainkey` و`selector2._domainkey` (القيم من مركز الإدارة).
-
----
-
-## التحقق (بعد أي خيار)
+## التحقق
 
 ```powershell
-python scripts/check_mail_setup.py
-```
-يقيس: MX · SPF · DKIM · DMARC ويقول أين أنت بالضبط.
+# بعد إضافة السجلات — يقيس MX/SPF/DKIM/DMARC بندًا بندًا
+python scripts/check_mail_setup.py --profile purelymail --dkim-selector <المنتقي الذي تراه>
 
-ثم اختبار وظيفي حقيقي:
-1. أرسل **إلى** `info@` و`support@` و`billing@` من بريد خارجي → يجب أن تظهر في الويبميل.
-2. أرسل **من** كل عنوان إلى Gmail → افحص ترويسة `Authentication-Results`:
-   يجب `spf=pass dkim=pass dmarc=pass`.
+# ورقة السجلات في أي وقت
+python scripts/check_mail_setup.py --guide purelymail
+```
+
+ثم اختبار وظيفي (DNS لا يثبت وجود صندوق):
+1. أرسل **إلى** `info@` و`support@` و`billing@` من Gmail → يجب أن تظهر في الويبميل.
+2. أرسل **من** كل عنوان إلى Gmail → افحص `Authentication-Results`:
+   `spf=pass dkim=pass dmarc=pass`.
 
 ---
 
 ## علاقة ذلك ببريد الموقع (الـ Worker)
 
-مساران مختلفان يجب الفصل بينهما:
-
 | المسار | من يرسل | يحتاج |
 |---|---|---|
-| **بريد البشر** (ردود، فواتير يدوية) | الصناديق الثلاثة | مزوّد صناديق (Zoho/Hostinger/Google) |
-| **بريد الموقع الآلي** (تنبيه استفسار، عرض سعر) | الـ Worker | مفتاح Resend/Brevo أو Send binding |
+| **بريد البشر** (ردود، فواتير) | الصناديق الثلاثة | Purelymail (أو بديل) |
+| **بريد الموقع الآلي** (تنبيه استفسار) | الـ Worker | مفتاح Resend/Brevo |
 
-تفعيل أحدهما لا يفعّل الآخر. تنبيه الاستفسارات يعمل اليوم عبر **Telegram**،
-ويحتاج Resend ليصل بالبريد أيضًا.
+مسار تنبيه الاستفسارات يعمل اليوم عبر **Telegram**؛ وتفعيل Resend يضيف البريد
+كقناة موازية. تفعيل أحدهما لا يفعّل الآخر.
