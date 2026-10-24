@@ -1,4 +1,16 @@
 /**
+ * @deprecated DO NOT WIRE THIS INTO THE CLOUDFLARE WORKER.
+ * ---------------------------------------------------------------------------
+ * This module depends on node:fs, node:path and node:tls, none of which exist
+ * in the Workers runtime - it cannot run where the lead pipeline actually runs.
+ * The live Worker sends mail through Resend/Brevo over fetch()
+ * (see workers/sr-lead-capture/src/index.js -> notifyByEmail).
+ *
+ * It is kept only as a Node reference implementation. The production message
+ * bodies are built by scripts/build_email_templates.py into dist/emails/.
+ * ---------------------------------------------------------------------------
+ */
+/**
  * S&R CoreSync Solutions - Enterprise Payment & Webhook Integration Service
  * Multi-Gateway Architecture: Mollie (iDEAL, SEPA, Bancontact) & Stripe (Cards, Apple Pay)
  * Automatic Cryptographic License Key Provisioning & BTW Invoice Delivery.

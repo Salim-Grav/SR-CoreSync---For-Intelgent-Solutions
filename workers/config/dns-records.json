@@ -1,87 +1,64 @@
 {
   "domain": "sr-coresync.com",
-  "generatedAt": "2026-10-14T06:55:00+02:00",
-  "generatedBy": "S&R CoreSync Solutions — Amsterdam Infrastructure & Security Team",
-  "dnsProvider": "Hostinger Cloud / cPanel DNS Zone Editor",
-  "records": [
-    {
-      "type": "MX",
-      "name": "@",
-      "priority": 5,
-      "value": "mx1.hostinger.com",
-      "ttl": 3600,
-      "description": "Primary Mail Server for incoming and transactional responses"
-    },
-    {
-      "type": "MX",
-      "name": "@",
-      "priority": 10,
-      "value": "mx2.hostinger.com",
-      "ttl": 3600,
-      "description": "Secondary Redundant Mail Server"
-    },
-    {
-      "type": "TXT",
-      "name": "@",
-      "value": "v=spf1 include:_spf.mail.hostinger.com include:sendgrid.net ~all",
-      "ttl": 3600,
-      "description": "SPF (Sender Policy Framework): Authorizes Hostinger SMTP and SendGrid API to dispatch emails for billing@sr-coresync.com"
-    },
-    {
-      "type": "TXT",
-      "name": "_dmarc",
-      "value": "v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@sr-coresync.com; ruf=mailto:security@sr-coresync.com; sp=quarantine; aspf=r; adkim=r; fo=1; pct=100",
-      "ttl": 3600,
-      "description": "DMARC Policy: Protects domain reputation, enforces quarantine for fraudulent spoofers, and collects forensic telemetry"
-    },
-    {
-      "type": "CNAME",
-      "name": "hostingermail-a._domainkey",
-      "value": "hostingermail-a._domainkey.hostinger.com",
-      "ttl": 3600,
-      "description": "DKIM (DomainKeys Identified Mail) Selector A: Cryptographic signature verification for outgoing emails"
-    },
-    {
-      "type": "CNAME",
-      "name": "hostingermail-b._domainkey",
-      "value": "hostingermail-b._domainkey.hostinger.com",
-      "ttl": 3600,
-      "description": "DKIM Selector B: Redundant key rotation"
-    },
-    {
-      "type": "TXT",
-      "name": "default._bimi",
-      "value": "v=BIMI1; l=https://sr-coresync.com/assets/sr-core-emblem.svg;",
-      "ttl": 3600,
-      "description": "BIMI (Brand Indicators for Message Identification): Displays official gold S&R emblem in Gmail and Apple Mail inbox avatars"
-    },
-    {
-      "type": "CNAME",
-      "name": "mail",
-      "value": "mail.hostinger.com",
-      "ttl": 3600,
-      "description": "Webmail portal alias (mail.sr-coresync.com)"
-    },
-    {
-      "type": "CNAME",
-      "name": "autodiscover",
-      "value": "autodiscover.mail.hostinger.com",
-      "ttl": 3600,
-      "description": "Microsoft Outlook and Apple Mail automated account configuration"
-    },
-    {
-      "type": "CNAME",
-      "name": "autoconfig",
-      "value": "autoconfig.mail.hostinger.com",
-      "ttl": 3600,
-      "description": "Mozilla Thunderbird auto-configuration"
-    }
-  ],
-  "securityCompliance": {
-    "spfValid": true,
-    "dkimConfigured": true,
-    "dmarcPolicy": "quarantine",
-    "bimiEmblemLinked": true,
-    "spamScoreTarget": "< 0.5 (10/10 Inbox Deliverability)"
-  }
+  "sendingSubdomain": "send.sr-coresync.com",
+  "documentedAt": "2026-10-24T10:05:00+02:00",
+  "documentedBy": "S&R CoreSync Solutions — Infrastructure",
+  "warning": "This file describes PLANNED state. The previous version documented Hostinger MX + SendGrid + BIMI as if they were live; a live DNS query on 2026-10-24 showed none of them were. Always verify against DNS, not against this file. Run: node scripts/verify_dns_records.js",
+
+  "observed": {
+    "checkedAt": "2026-10-24T10:05:00+02:00",
+    "mx": ["mx1.improvmx.com", "mx2.improvmx.com"],
+    "spf": "v=spf1 include:spf.improvmx.com ~all",
+    "dmarc": null,
+    "dkim": null,
+    "bimi": null,
+    "verdict": "No DKIM, no DMARC, and SPF authorises only the forwarding host. Transactional mail sent through Resend/Brevo fails authentication."
+  },
+
+  "inbound": {
+    "provider": "ImprovMX (forwarding)",
+    "records": [
+      { "type": "MX", "name": "@", "priority": 10, "value": "mx1.improvmx.com", "status": "live" },
+      { "type": "MX", "name": "@", "priority": 20, "value": "mx2.improvmx.com", "status": "live" },
+      { "type": "TXT", "name": "@", "value": "v=spf1 include:spf.improvmx.com ~all", "status": "live" }
+    ]
+  },
+
+  "outbound": {
+    "provider": "Resend or Brevo (Worker uses whichever API key is set)",
+    "status": "not-configured",
+    "note": "Copy the DKIM value from the provider dashboard after adding the domain. DKIM keys are per-account and must never be invented.",
+    "records": [
+      { "type": "TXT", "name": "send", "value": "v=spf1 include:<provider-spf-include> ~all", "status": "todo" },
+      { "type": "CNAME", "name": "<selector>._domainkey.send", "value": "<value from provider dashboard>", "status": "todo" }
+    ]
+  },
+
+  "dmarc": {
+    "phase1_monitor": "v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; ruf=mailto:security@sr-coresync.com; fo=1; pct=100",
+    "phase2_enforce": "v=DMARC1; p=quarantine; sp=quarantine; adkim=s; aspf=s; rua=mailto:dmarc@sr-coresync.com; pct=100",
+    "phase3_reject": "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; rua=mailto:dmarc@sr-coresync.com; pct=100",
+    "status": "todo",
+    "record": { "type": "TXT", "name": "_dmarc", "value": "v=DMARC1; p=none; rua=mailto:dmarc@sr-coresync.com; pct=100" }
+  },
+
+  "tlsReporting": {
+    "record": { "type": "TXT", "name": "_smtp._tls", "value": "v=TLSRPTv1; rua=mailto:tlsrpt@sr-coresync.com" },
+    "status": "optional"
+  },
+
+  "bimi": {
+    "status": "deferred",
+    "reason": "BIMI needs DMARC enforcement plus a paid VMC certificate and an SVG Tiny PS logo. The current sr-core-emblem.svg is not Tiny PS, and a plain SVG does not render in Gmail."
+  },
+
+  "mailboxes": [
+    { "address": "info@sr-coresync.com", "role": "primary public address", "siteReferences": 411, "verified": false },
+    { "address": "support@sr-coresync.com", "role": "support", "siteReferences": 29, "verified": false },
+    { "address": "billing@sr-coresync.com", "role": "invoices", "siteReferences": 7, "verified": false },
+    { "address": "leads@sr-coresync.com", "role": "MAIL_FROM for the Worker", "siteReferences": 3, "verified": false },
+    { "address": "security@sr-coresync.com", "role": "DMARC forensic reports", "siteReferences": 3, "verified": false },
+    { "address": "dmarc@sr-coresync.com", "role": "DMARC aggregate reports", "siteReferences": 0, "verified": false },
+    { "address": "tlsrpt@sr-coresync.com", "role": "TLS reports", "siteReferences": 0, "verified": false }
+  ]
 }

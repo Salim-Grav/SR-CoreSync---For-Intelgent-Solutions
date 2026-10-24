@@ -53,7 +53,7 @@
                                         <div class="doc-badge">
                                             عرض سعر رسمي معتمد • QUOTE
                                         </div>
-                                        <div class="doc-num" dir="ltr">#SR-2026-Q892</div>
+                                        <div class="doc-num" dir="ltr">#{{QUOTE_ID}}</div>
                                     </td>
                                 </tr>
                             </table>
@@ -68,10 +68,10 @@
                                     <!-- Client Details -->
                                     <td width="55%" valign="top" class="mobile-stack meta-col">
                                         <div class="meta-label">بيانات العميل / المفوتر إليه:</div>
-                                        <div class="client-name">شركة النخبة للاستشارات والتجارة</div>
+                                        <div class="client-name">{{CLIENT_NAME}}</div>
                                         <div class="client-desc">
-                                            عناية: الإدارة التنفيذية والمالية<br>
-                                            أمستردام / الرياض • السجل التجاري: 2026-NL-CORP
+                                            عناية: {{CLIENT_ATTN}}<br>
+                                            {{CLIENT_ADDRESS}} • السجل التجاري: {{CLIENT_REG}}
                                         </div>
                                     </td>
                                     <!-- Meta Details -->
@@ -80,15 +80,15 @@
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="meta-dates-table">
                                             <tr>
                                                 <td class="meta-td-lbl">تاريخ الإصدار:</td>
-                                                <td align="left" class="meta-td-val">13 أكتوبر 2026</td>
+                                                <td align="left" class="meta-td-val">{{ISSUE_DATE}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="meta-td-lbl">صلاحية العرض:</td>
-                                                <td align="left" class="meta-td-val-green">30 يوماً من تاريخه</td>
+                                                <td align="left" class="meta-td-val-green">{{VALID_UNTIL}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="meta-td-lbl">حالة المستند:</td>
-                                                <td align="left" class="meta-td-val-gold">بانتظار الاعتماد والسداد</td>
+                                                <td align="left" class="meta-td-val-gold">{{STATUS}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -109,47 +109,8 @@
                                     <th align="left" class="items-th-left">المبلغ (€)</th>
                                 </tr>
 
-                                <!-- Item 1 -->
-                                <tr>
-                                    <td class="item-desc-cell">
-                                        <div class="item-title">
-                                            ترخيص منظومة CoreSync Cloud ERP السحابية
-                                        </div>
-                                        <div class="item-sub">
-                                            اشتراك سنوي كامل (12 شهراً) يشمل الإدارة المالية، الفواتير الإلكترونية، والربط البنكي المباشر (SEPA / iDEAL).
-                                        </div>
-                                    </td>
-                                    <td align="center" class="item-qty-cell">1 ترخيص</td>
-                                    <td align="left" class="item-price-cell" dir="ltr">€2,800.00</td>
-                                </tr>
+                                                                {{ITEMS_ROWS}}
 
-                                <!-- Item 2 -->
-                                <tr>
-                                    <td class="item-desc-cell">
-                                        <div class="item-title">
-                                            محرك أتمتة الأعمال والذكاء الاصطناعي (AI Automation Engine)
-                                        </div>
-                                        <div class="item-sub">
-                                            تكامل الذكاء الاصطناعي لمعالجة الفواتير التلقائية، تدقيق الإقرارات الضريبية، وحاسبة التوفير ROI.
-                                        </div>
-                                    </td>
-                                    <td align="center" class="item-qty-cell">1 حزمة</td>
-                                    <td align="left" class="item-price-cell" dir="ltr">€1,400.00</td>
-                                </tr>
-
-                                <!-- Item 3 -->
-                                <tr>
-                                    <td class="item-desc-cell-last">
-                                        <div class="item-title">
-                                            جلسات الإعداد الاستشاري والتكامل التقني VIP
-                                        </div>
-                                        <div class="item-sub">
-                                            تهيئة النظام وربطه بسيرفرات الشركة وتدريب الفريق بإشراف الشريكين المؤسسين.
-                                        </div>
-                                    </td>
-                                    <td align="center" class="item-qty-cell-last">شامل</td>
-                                    <td align="left" class="item-price-cell-last" dir="ltr">€800.00</td>
-                                </tr>
 
                             </table>
                         </td>
@@ -167,7 +128,7 @@
                                             <div class="payment-card-body">
                                                 • بطاقات بنكية / iDEAL (هولندا)<br>
                                                 • تحويل بنكي أوروبي مباشر (SEPA Transfer)<br>
-                                                • حساب الشركة (Wise): <span class="payment-iban" dir="ltr">BE45 •••• •••• 2989</span>
+                                                • حساب الشركة (Wise): <span class="payment-iban" dir="ltr">{{IBAN}}</span>
                                             </div>
                                         </div>
                                     </td>
@@ -176,15 +137,15 @@
                                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="totals-table">
                                             <tr>
                                                 <td class="total-row-lbl">المجموع الفرعي (Subtotal):</td>
-                                                <td align="left" class="total-row-val" dir="ltr">€5,000.00</td>
+                                                <td align="left" class="total-row-val" dir="ltr">{{SUBTOTAL}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="total-row-lbl">خصم الشركاء الترويجي (10%):</td>
-                                                <td align="left" class="total-row-val-discount" dir="ltr">-€500.00</td>
+                                                <td align="left" class="total-row-val-discount" dir="ltr">{{DISCOUNT}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="total-row-lbl">ضريبة القيمة المضافة (BTW 21%):</td>
-                                                <td align="left" class="total-row-val" dir="ltr">€945.00</td>
+                                                <td align="left" class="total-row-val" dir="ltr">{{VAT}}</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="totals-divider-td">
@@ -193,7 +154,7 @@
                                             </tr>
                                             <tr class="totals-grand-row">
                                                 <td class="totals-grand-lbl">الإجمالي الصافي النهائي:</td>
-                                                <td align="left" class="totals-grand-val" dir="ltr">€5,445.00</td>
+                                                <td align="left" class="totals-grand-val" dir="ltr">{{TOTAL}}</td>
                                             </tr>
                                         </table>
                                     </td>
