@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
 // Version: coresync-prerender-v12-live-feed
-const CACHE_NAME = 'coresync-prerender-v12-live-feed';
+const CACHE_NAME = 'coresync-prerender-v13-status-bypass';
 
 // 1. Critical assets: everything the first screen needs to paint.
 // Anything that is only reachable after a scroll (founder banners, portraits,
@@ -101,6 +101,16 @@ self.addEventListener('fetch', (event) => {
 
   // If request is external or a backend dynamic API call (.php / /api/lead), bypass cache to network
   if (url.origin !== self.location.origin || url.pathname.endsWith('.php') || url.pathname.includes('/webhooks/') || url.pathname.endsWith('/api/lead')) {
+    return;
+  }
+
+  // The status page exists to say what is true right now. Serving it from the
+  // stale-while-revalidate cache would show yesterday's outage on today's page,
+  // so it always goes to the network and falls back to cache only when offline.
+  if (url.pathname.endsWith('/status.html') || url.pathname.endsWith('/status')) {
+    event.respondWith(
+      fetch(request).catch(() => caches.match(request).then((cached) => cached || caches.match('./404.html')))
+    );
     return;
   }
 
