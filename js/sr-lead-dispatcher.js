@@ -33,7 +33,7 @@
     const REQUEST_TIMEOUT_MS = 8000;
 
     const DEFAULT_ENDPOINTS = [
-        'https://api.sr-coresync.com/lead',
+        'https://sr-lead-capture.sr-coresync.workers.dev/lead',
         '/api/lead'
     ];
 

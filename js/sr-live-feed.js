@@ -254,7 +254,7 @@
   function showStats(stats) {
     var copy = text();
     var n = Number(stats && stats.consultations30d);
-    if (!isFinite(n) || n < 3) return;
+    if (!isFinite(n) || n < 1) return;  // show real data as soon as there is any
     injectStyles();
     var wrap = host();
     var label = copy.statsMany.replace('{n}', String(n));
