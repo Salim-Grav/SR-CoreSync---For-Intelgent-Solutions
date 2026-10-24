@@ -49,6 +49,12 @@ def health():
         return json.loads(res.read().decode('utf-8'))
 
 
+def notify_check():
+    req = urllib.request.Request(HEALTH.replace('/health', '/notify/check'), headers=UA)
+    with urllib.request.urlopen(req, timeout=20) as res:
+        return json.loads(res.read().decode('utf-8'))
+
+
 def wrangler(args, stdin_text=None):
     res = subprocess.run(['node', WRANGLER] + args, cwd=WORKER_DIR,
                          input=stdin_text, capture_output=True, text=True)
@@ -66,10 +72,19 @@ def main():
 
     if args.test:
         state = health()
-        print('telegram channel : %s' % state.get('telegram'))
+        check = notify_check()
+        print('telegram config  : %s' % state.get('telegram'))
+        print('telegram valid   : %s' % check.get('ok'))
+        print('bot              : %s' % (check.get('bot') or '-'))
+        print('reason           : %s' % (check.get('reason') or '-'))
         print('mail channel     : %s' % state.get('emailChannel'))
         print('d1               : %s' % state.get('d1'))
-        return 0 if state.get('telegram') else 1
+        if not check.get('ok'):
+            print()
+            print('The token is stored but Telegram rejects it:')
+            print('  python scripts/setup_telegram.py --verify-only   # check a new one')
+            print('  python scripts/setup_telegram.py --apply         # then store it')
+        return 0 if check.get('ok') else 1
 
     print('=' * 68)
     print('Telegram alerts' + (' — applying' if args.apply else ' — setup info'))

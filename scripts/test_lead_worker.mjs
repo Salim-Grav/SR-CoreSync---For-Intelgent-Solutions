@@ -220,14 +220,24 @@ async function run() {
     };
 
     body = await (await worker.fetch(req('/health'), env, {})).json();
-    assert('health reports telegram off without secrets', body.telegram === false);
+    assert('health reports telegram=off without secrets', body.telegram === 'off', body.telegram);
+    assert('health leaves verification null unless asked', body.telegramVerified === null);
 
     const tgEnv = Object.assign({}, env, {
         TELEGRAM_BOT_TOKEN: '123:TEST',
         TELEGRAM_CHAT_ID: '-100123'
     });
     body = await (await worker.fetch(req('/health'), tgEnv, {})).json();
-    assert('health reports telegram on with secrets', body.telegram === true);
+    assert('health reports telegram=on with secrets', body.telegram === 'on', body.telegram);
+    assert('on is not a validity claim', body.telegramVerified === null);
+
+    body = await (await worker.fetch(req('/health?deep=1'), tgEnv, {})).json();
+    assert('deep mode fills telegramVerified', typeof body.telegramVerified === 'boolean',
+        String(body.telegramVerified));
+
+    body = await (await worker.fetch(req('/notify/check'), tgEnv, {})).json();
+    assert('/notify/check reports configured and a boolean ok',
+        body.configured === true && typeof body.ok === 'boolean');
 
     telegramCalls = [];
     res = await worker.fetch(req('/lead', {

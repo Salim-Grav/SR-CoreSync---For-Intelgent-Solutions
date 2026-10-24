@@ -820,6 +820,17 @@ export default {
 
         // ---- Health probe -------------------------------------------------
         if (request.method === 'GET' && (path === '/' || path === '/health' || path === '/healthz')) {
+            // Deep mode costs one Telegram round-trip; the default stays free.
+            let telegramVerified = null;
+            if (url.searchParams.get('deep') === '1' && env && env.TELEGRAM_BOT_TOKEN) {
+                try {
+                    const res = await fetch('https://api.telegram.org/bot' + env.TELEGRAM_BOT_TOKEN + '/getMe');
+                    const payload = await res.json().catch(function () { return {}; });
+                    telegramVerified = !!payload.ok;
+                } catch (err) {
+                    telegramVerified = false;
+                }
+            }
             return jsonResponse({
                 status: 'ok',
                 service: 'sr-lead-capture',
@@ -838,7 +849,10 @@ export default {
                 turnstile: (env && env.TURNSTILE_SECRET)
                     ? (String(env.TURNSTILE_ENFORCE || '') === '1' ? 'enforcing' : 'soft') : 'off',
                 eventsPublic: String((env && env.EVENTS_PUBLIC) || '') === '1',
-                telegram: !!(env && env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID)
+                // 'on' means the secrets exist, nothing more. Validity is a
+                // different question - ask /notify/check, or /health?deep=1.
+                telegram: (env && env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) ? 'on' : 'off',
+                telegramVerified: telegramVerified
             }, 200, cors);
         }
 
