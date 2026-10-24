@@ -59,6 +59,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--apply', action='store_true')
     ap.add_argument('--test', action='store_true')
+    ap.add_argument('--verify-only', action='store_true',
+                    help='check a token against Telegram without writing anything')
     ap.add_argument('--token-env', metavar='VAR', help='read the token from this environment variable instead of prompting')
     args = ap.parse_args()
 
@@ -87,7 +89,18 @@ def main():
     try:
         me = telegram(token, 'getMe')
     except Exception as err:
-        raise SystemExit('Telegram rejected the token: %s' % err)
+        detail = str(err)
+        print('  RESULT             : INVALID')
+        print('  telegram says      : %s' % detail)
+        print('  -> the token is revoked, mistyped, or not the current one.')
+        print('  -> in @BotFather send /token, pick the bot, copy the value it prints now.')
+        raise SystemExit(1)
+
+    if args.verify_only:
+        print('  RESULT             : VALID')
+        print('  bot                : @%s' % me['result'].get('username'))
+        print('  nothing was written; run --apply to store it.')
+        return 0
     if not me.get('ok'):
         raise SystemExit('Telegram rejected the token: %s' % me)
     bot = me['result'].get('username')
