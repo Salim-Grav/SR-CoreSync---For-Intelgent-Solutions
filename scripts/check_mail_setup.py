@@ -78,11 +78,34 @@ PROFILES = {
 }
 
 
+# Two public resolvers are queried and their answers merged: one resolver's
+# negative cache reported "SPF missing" for a record that both authoritative
+# nameservers were already serving, which sent a real incident down the wrong
+# path for several minutes.
+RESOLVERS = (
+    ('https://dns.google/resolve?name=%s&type=%s', {}),
+    ('https://cloudflare-dns.com/dns-query?name=%s&type=%s', {'accept': 'application/dns-json'}),
+)
+
+
 def dns(name, rtype):
-    url = 'https://dns.google/resolve?name=%s&type=%s' % (name, rtype)
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=20) as res:
-        return json.loads(res.read().decode('utf-8')).get('Answer', []) or []
+    merged = []
+    seen = set()
+    for template, extra in RESOLVERS:
+        try:
+            headers = dict(UA)
+            headers.update(extra)
+            req = urllib.request.Request(template % (name, rtype), headers=headers)
+            with urllib.request.urlopen(req, timeout=20) as res:
+                payload = json.loads(res.read().decode('utf-8'))
+        except Exception:
+            continue
+        for answer in payload.get('Answer', []) or []:
+            data = answer.get('data')
+            if data and data not in seen:
+                seen.add(data)
+                merged.append({'data': data})
+    return merged
 
 
 def txt(name):
