@@ -7645,9 +7645,173 @@ html[dir="ltr"] .service-orbit-section .wg-tech-v2 .tech-content {
     background: linear-gradient(to right, transparent, rgba(197, 168, 128, 0.3), transparent);
 }
 
-
-
-
-
-
-
+/* ==========================================================================
+   Apple macOS Sovereign Language & Currency Dock
+   ========================================================================== */
+.apple-macos-dock-wrapper {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9998;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-macos-dock {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(12, 20, 16, 0.85);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(197, 168, 128, 0.42);
+    border-radius: 999px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.apple-dock-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    text-decoration: none !important;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
+    will-change: transform;
+}
+.apple-dock-flag {
+    width: 28px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block;
+}
+.apple-dock-dot {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981, 0 0 2px #34d399;
+    margin-top: 3px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.apple-dock-item.active .apple-dock-dot {
+    opacity: 1;
+}
+.apple-dock-item:hover {
+    transform: translateY(-8px) scale(1.32);
+}
+.apple-dock-item:hover .apple-dock-flag {
+    box-shadow: 0 6px 16px rgba(197, 168, 128, 0.5);
+    border-color: rgba(243, 223, 186, 0.8);
+}
+.apple-dock-item::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: rgba(8, 14, 11, 0.94);
+    border: 1px solid rgba(197, 168, 128, 0.45);
+    color: #f3dfba;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    z-index: 10000;
+}
+.apple-dock-item:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.apple-dock-separator {
+    width: 1px;
+    height: 22px;
+    background: rgba(197, 168, 128, 0.3);
+    margin: 0 2px;
+    flex-shrink: 0;
+}
+.apple-dock-launchpad-btn {
+    color: #f3dfba;
+    position: relative;
+}
+.apple-dock-launchpad-btn:hover {
+    color: #ffffff;
+}
+.apple-dock-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: #c5a880;
+    color: #050a08;
+    font-size: 0.6rem;
+    font-weight: 900;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+@media (max-width: 640px) {
+    .apple-macos-dock-wrapper {
+        bottom: 12px;
+        width: calc(100% - 20px);
+        max-width: 430px;
+        display: flex;
+        justify-content: center;
+        transform: translateX(-50%);
+    }
+    .apple-macos-dock {
+        gap: 5px;
+        padding: 5px 10px;
+        max-width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(197, 168, 128, 0.3);
+    }
+    .apple-dock-item {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+    }
+    .apple-dock-flag {
+        width: 24px;
+        height: 16px;
+    }
+    .apple-dock-item:hover {
+        transform: translateY(-4px) scale(1.18);
+    }
+}
+@media (max-width: 380px) {
+    .apple-macos-dock {
+        gap: 3px;
+        padding: 4px 8px;
+    }
+    .apple-dock-item {
+        width: 30px;
+        height: 30px;
+    }
+    .apple-dock-flag {
+        width: 22px;
+        height: 15px;
+    }
+}
