@@ -336,18 +336,18 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 38:
-1. **[sdk/python/coresync/client.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/coresync/client.py):** نواة حزمة الـ Python SDK الرسمية.
-2. **[sdk/python/setup.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/setup.py):** ملف إعداد وتثبيت حزمة بايثون.
-3. **[sdk/nodejs/index.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/index.js):** نواة حزمة الـ Node.js SDK الرسمية.
-4. **[sdk/nodejs/package.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/package.json):** إعدادات حزمة npm `@coresync/sdk`.
-5. **[partner-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/partner-portal.html):** بوابة شركاء الحلول والوكلاء البيضاء المتكاملة.
-6. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** إضافة قسم حزم الـ SDK وروابط التنقل وتطهير التنسيقات.
-7. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة رابط بوابة الوكلاء، وتحديث رابط لينكد إن الرسمي القياسي.
-8. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** تحديث رابط لينكد إن وزر النسخ.
-9. **البوابات اللغوية الـ 28:** تحديث الرابط في كافة ملفات `index.html` الفرعية.
-10. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 38 بنسبة 100%.
-11. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق واللقطات الحية الكاملة.
+### 7. المهمة 39: تكامل زر ورابط لينكد إن الرسمي في شريط المخطط التنفيذي ومشغل الصوت الذكي:
+- **التصميم والإدراج البصري:**
+  - إضافة زر مخصص `.sr-btn-linkedin` بتدرج أزرق ملكي متألق (`#0077b5` إلى `#0A66C2`)، وإطار متناسق وظل فاخر يطابق أزرار الواتساب والتيليجرام.
+  - إدراج رابط لينكد إن الرسمي المعتمد `https://www.linkedin.com/company/srcoresync/` بكامل سمات الأمان `target="_blank" rel="noopener noreferrer"`.
+  - إضافة شارة توثيق مصغرة مع أيقونة الـ SVG الرسمية في بطاقة مشغل الرد الصوتي التنفيذي بجانب صورة واسم المهندس محمد سليم عزيزة.
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 39:
+1. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة فئة التنسيق `.sr-btn-linkedin`، ودمج زر LinkedIn في شريط إجراءات المخطط التنفيذي، وشارة التوثيق في بطاقة الصوت الذكي.
+2. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 39 بنسبة 100%.
+3. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق المعماري وتأكيد التكامل.
 
 </div>
 
