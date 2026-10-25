@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة إطلاق وجدولة الحملات التسويقية 8K | S&R CoreSync Omnichannel Launchpad</title>
+    <meta name="description" content="منصة وجدولة الحملات التسويقية الرسمية الموحدة لشركة S&R CoreSync عبر 9 منصات تواصل اجتماعي بالمعرف الموحد @SRCoreSync بدقة 8K">
+    <link rel="icon" type="image/png" href="./assets/favicon-96.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020705;
+            --bg-card: rgba(8, 22, 17, 0.85);
+            --bg-card-hover: rgba(14, 34, 26, 0.95);
+            --gold-primary: #c5a880;
+            --gold-bright: #f3dfba;
+            --gold-glow: rgba(197, 168, 128, 0.35);
+            --border-gold: rgba(197, 168, 128, 0.25);
+            --border-hover: rgba(197, 168, 128, 0.7);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-blur: blur(14px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(197, 168, 128, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                linear-gradient(180deg, #020705 0%, #03120c 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Cairo', 'Outfit', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .hub-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 7, 5, 0.9);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 14px 24px;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .brand-emblem {
+            width: 44px;
+            height: 44px;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+        }
+
+        .brand-title {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 1px solid var(--border-gold);
+            background: rgba(197, 168, 128, 0.08);
+            color: var(--gold-bright);
+        }
+
+        .btn-action:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary), #9a7d52);
+            color: #020705;
+            border-color: var(--gold-bright);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+        }
+
+        /* Hero */
+        .hub-hero {
+            max-width: 1600px;
+            margin: 40px auto 20px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            font-size: 0.88rem;
+            color: var(--gold-bright);
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--gold-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 900px;
+            margin: 0 auto 30px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Campaign Strategy Roadmap Bar */
+        .campaign-timeline-box {
+            max-width: 1600px;
+            margin: 0 auto 40px;
+            padding: 24px 32px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(8, 26, 19, 0.9), rgba(4, 14, 10, 0.9));
+            border: 1px solid var(--border-gold);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .timeline-phase {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 168, 128, 0.15);
+        }
+
+        .timeline-phase.active {
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.1);
+        }
+
+        .timeline-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            color: #020705;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-info h4 {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            margin-bottom: 4px;
+        }
+
+        .timeline-info p {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Filter Controls */
+        .hub-controls {
+            max-width: 1600px;
+            margin: 0 auto 30px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .filter-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(6, 18, 14, 0.8);
+            border: 1px solid var(--border-gold);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gold-primary);
+            color: #020705;
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.35);
+        }
+
+        /* Campaign Cards Grid */
+        .campaign-grid {
+            max-width: 1600px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+            gap: 28px;
+        }
+
+        @media (max-width: 600px) {
+            .campaign-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .campaign-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            overflow: hidden;
+            backdrop-filter: var(--glass-blur);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 168, 128, 0.2);
+        }
+
+        .card-header {
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .card-platform-tag {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: #ffffff;
+        }
+
+        .card-handle-badge {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            border-radius: 999px;
+            color: var(--gold-bright);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            margin-bottom: 10px;
+        }
+
+        /* Lang tabs */
+        .lang-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 8px;
+        }
+
+        .lang-tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-tab-btn.active {
+            background: rgba(197, 168, 128, 0.2);
+            color: var(--gold-bright);
+        }
+
+        .post-text-box {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            min-height: 120px;
+            white-space: pre-line;
+            user-select: all;
+        }
+
+        .card-asset-preview {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(197, 168, 128, 0.06);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            margin-bottom: 18px;
+        }
+
+        .card-asset-img {
+            width: 70px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .card-asset-meta {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .card-asset-meta strong {
+            color: #ffffff;
+            display: block;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            border-top: 1px solid rgba(197, 168, 128, 0.15);
+            padding-top: 16px;
+        }
+
+        .btn-post-action {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            border: 1px solid var(--border-gold);
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+        }
+
+        .btn-post-action:hover {
+            background: rgba(197, 168, 128, 0.15);
+            color: #ffffff;
+            border-color: var(--gold-primary);
+        }
+
+        .btn-post-share {
+            background: linear-gradient(135deg, var(--gold-primary), #9a7d52);
+            color: #020705;
+            border-color: var(--gold-bright);
+        }
+
+        .btn-post-share:hover {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        /* Toast notification */
+        .toast-notify {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .toast-notify.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="hub-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-link" title="العودة للرئيسية">
+                <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="brand-emblem">
+                <div>
+                    <div class="brand-title">S&amp;R CORESYNC</div>
+                    <div class="brand-sub">Omnichannel 8K Social Campaign Launchpad</div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="social-8k-studio.html" class="btn-action">
+                    <span>استوديو الهوية 8K 🎨</span>
+                </a>
+                <button type="button" class="btn-action" onclick="exportFullCampaignSchedule()">
+                    <span>تصدير الجدول (JSON) 📑</span>
+                </button>
+                <a href="index.html" class="btn-action btn-primary">
+                    <span>البوابة الرئيسية 🌐</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hub-hero">
+        <div class="hero-pill">
+            <span>🚀 منصة جدولة وإطلاق الحملات التسويقية المؤسسية 2026 • المعرف الموحد @SRCoreSync</span>
+        </div>
+        <h1 class="hero-title">إطلاق حملات التدشين التسويقية عبر 9 منصات عالمية</h1>
+        <p class="hero-desc">
+            جدولة متكاملة للمنشورات الترويجية والبيانات الصحفية عبر شبكة القنوات التسع المعتمدة، مع صياغات موثقة بثلاث لغات (العربية، الإنجليزية، الهولندية) وربط مباشر بأصول الـ 8K وروابط النشر الفوري بنقرة واحدة.
+        </p>
+    </section>
+
+    <!-- Strategy Phases Bar -->
+    <div class="campaign-timeline-box">
+        <div class="timeline-phase active">
+            <div class="timeline-num">1</div>
+            <div class="timeline-info">
+                <h4>المرحلة الأولى: التدشين السيادي</h4>
+                <p>إعلان الهوية الرسمية وحجز المنصات التسع وإطلاق البوابة الرقمية في أمستردام.</p>
+            </div>
+        </div>
+        <div class="timeline-phase">
+            <div class="timeline-num">2</div>
+            <div class="timeline-info">
+                <h4>المرحلة الثانية: استعراض الأنظمة</h4>
+                <p>تسليط الضوء على CoreSync Cloud ERP، محرك PWA، وأتمتة الذكاء الاصطناعي للمؤسسات.</p>
+            </div>
+        </div>
+        <div class="timeline-phase">
+            <div class="timeline-num">3</div>
+            <div class="timeline-info">
+                <h4>المرحلة الثالثة: العائد الاستثماري (ROI)</h4>
+                <p>عرض مؤشرات توفير التكاليف 42% وسرعة إنجاز العمليات 3.8x وتوسيع شراكات أوروبا.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="hub-controls">
+        <div class="filter-row">
+            <button type="button" class="filter-btn active" data-filter="all">جميع المنصات (9)</button>
+            <button type="button" class="filter-btn" data-filter="b2b">منصات الأعمال B2B</button>
+            <button type="button" class="filter-btn" data-filter="visual">الهوية والفيديو 8K</button>
+            <button type="button" class="filter-btn" data-filter="messaging">التواصل المباشر VIP</button>
+        </div>
+        <div>
+            <span style="font-size:0.85rem; color:var(--text-muted);">المعرف الموحد الموثق: <strong style="color:var(--gold-bright);">@SRCoreSync</strong></span>
+        </div>
+    </div>
+
+    <!-- Campaign Cards Grid -->
+    <div class="campaign-grid" id="campaignCardsGrid">
+        <!-- Rendered via JavaScript -->
+    </div>
+
+    <div class="toast-notify" id="hubToast">✓ تم نسخ نص المنشور بنجاح إلى الحافظة!</div>
+
+    <script>
+        const campaignData = [
+            {
+                id: "linkedin",
+                category: "b2b",
+                platform: "LinkedIn",
+                handle: "@SRCoreSync",
+                color: "#0a66c2",
+                title: "الإعلان المؤسسي لشركاء الأعمال والشركات الأوروبية",
+                assetTitle: "غلاف لينكد إن المؤسسي 8K",
+                assetImg: "./assets/social-8k-branding/linkedin-8k/linkedin-company-cover-8k.webp",
+                assetFile: "./assets/social-8k-branding/linkedin-8k/linkedin-company-cover-8k.png",
+                shareUrl: "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent("https://sr-coresync.com"),
+                texts: {
+                    ar: `يسرّنا في شركة S&R CoreSync For Intelligent Solutions أن نعلن رسمياً عن إطلاق منظومتنا السحابية المتقدمة لعام 2026 من مقرنا في أمستردام.\n\nنقدم لشركاء الأعمال حلول ERP سحابية فائقة السرعة، أتمتة مالية متوافقة مع القوانين الضريبية الهولندية (BTW/Belastingdienst)، وحزم هوية رقمية بدقة 8K سيادية.\n\n🌐 استكشف المنظومة واحجز استشارتك: https://sr-coresync.com\n\n#SRCoreSync #CloudERP #DigitalTransformation #B2BInnovation #AmsterdamTech`,
+                    en: `We are officially proud to launch S&R CoreSync For Intelligent Solutions — Sovereign Cloud Software & AI Automation built in Amsterdam for high-growth enterprises.\n\nFrom high-performance ERP systems to BTW/VAT European compliant finance engines and 8K executive branding suites.\n\n🌐 Explore our ecosystem: https://sr-coresync.com\n\n#SRCoreSync #EnterpriseSoftware #SovereignCloud #AIArchitecture #FinTech`,
+                    nl: `Met trots kondigen wij de officiële lancering aan van S&R CoreSync For Intelligent Solutions vanuit Amsterdam.\n\nWij ontwikkelen geavanceerde Cloud ERP-systemen, BTW-conforme financiële automatisering en 8K digitale merkidentiteiten voor ambitieuze Europese bedrijven.\n\n🌐 Ontdek ons platform: https://sr-coresync.com\n\n#SRCoreSync #CloudERP #Digitalisering #ZakelijkGroei #Amsterdam`
+                }
+            },
+            {
+                id: "twitter",
+                category: "b2b",
+                platform: "X (Twitter)",
+                handle: "@SRCoreSync",
+                color: "#ffffff",
+                title: "ثريد الابتكار التقني: بنية السحابة السيادية 2026",
+                assetTitle: "بانر منصة X فائق الدقة 8K",
+                assetImg: "./assets/social-8k-branding/x-8k/x-banner-header-8k.webp",
+                assetFile: "./assets/social-8k-branding/x-8k/x-banner-header-8k.png",
+                shareUrl: "https://twitter.com/intent/tweet?text=" + encodeURIComponent("S&R CoreSync (@SRCoreSync) launches Sovereign Cloud Architecture & Enterprise ERP engines 2026.\nhttps://sr-coresync.com\n#SRCoreSync #TechInnovation"),
+                texts: {
+                    ar: `مستقبل البرمجيات السحابية يبدأ اليوم.\n\nتعلن شركة @SRCoreSync عن تدشين حلول الـ ERP الذكية وأتمتة العمليات بحماية مصرفية وسرعة فائقة.\n\nخطط لمشروعك بالصوت في ثوانٍ عبر محرك الذكاء الاصطناعي:\n🔗 https://sr-coresync.com\n\n#SRCoreSync #AI #CloudERP`,
+                    en: `The future of sovereign enterprise cloud starts now.\n\n@SRCoreSync officially delivers high-speed Cloud ERP, European financial automation, and 8K visual suites.\n\nPlan your tech blueprint via AI voice:\n🔗 https://sr-coresync.com\n\n#SRCoreSync #CloudTech #AI`,
+                    nl: `De toekomst van zakelijke software begint nu.\n\n@SRCoreSync lanceert innovatieve Cloud ERP en geautomatiseerde BTW-systemen vanuit Amsterdam.\n\nPlan direct uw project:\n🔗 https://sr-coresync.com\n\n#SRCoreSync #Automatisering`
+                }
+            },
+            {
+                id: "instagram",
+                category: "visual",
+                platform: "Instagram",
+                handle: "@SRCoreSync",
+                color: "#e1306c",
+                title: "استعراض الهوية الملكية 8K والأصول البصرية الفاخرة",
+                assetTitle: "منشور إنستغرام مربع 8K",
+                assetImg: "./assets/social-8k-branding/instagram-8k/instagram-square-feed-8k.webp",
+                assetFile: "./assets/social-8k-branding/instagram-8k/instagram-square-feed-8k.png",
+                shareUrl: "https://www.instagram.com/SRCoreSync",
+                texts: {
+                    ar: `الفخامة التقنية تلتقي بالدقة السيادية ✨\n\nنستعرض معكم الحزمة البصرية المعتمدة لشركة S&R CoreSync بدقة 8K فائقة (7680×4320) مع بطاقات الأعمال الذكية NFC الفاخرة.\n\nالهوية الرقمية ليست مجرد تصميم، بل هي لغة الثقة التي تجذب كبار المستثمرين.\n\nاطلب باقة التأسيس 8K لمشروعك الآن عبر الرابط في البايو 🔗\n@SRCoreSync`,
+                    en: `Executive Luxury Meets Sovereign Engineering ✨\n\nIntroducing S&R CoreSync's certified 8K visual identity suite (7680×4320) and bespoke NFC executive business cards.\n\nYour digital brand is the definitive language of enterprise trust.\n\nLink in bio 🔗 @SRCoreSync`,
+                    nl: `Luxe design ontmoet hoogwaardige technologie ✨\n\nOntdek de officiële 8K visuele merkidentiteit van S&R CoreSync (7680×4320).\n\nBouw ongeëvenaard vertrouwen op bij uw zakelijke partners.\n\nLink in bio 🔗 @SRCoreSync`
+                }
+            },
+            {
+                id: "youtube",
+                category: "visual",
+                platform: "YouTube",
+                handle: "@SRCoreSync",
+                color: "#ff0000",
+                title: "الإعلان المرئي السينمائي: هندسة المستقبل الرقمي",
+                assetTitle: "بانر قناة يوتيوب 8K",
+                assetImg: "./assets/social-8k-branding/youtube-8k/youtube-channel-banner-8k.webp",
+                assetFile: "./assets/social-8k-branding/youtube-8k/youtube-channel-banner-8k.png",
+                shareUrl: "https://youtube.com/@SRCoreSync",
+                texts: {
+                    ar: `شاهد العرض السينمائي الرسمي لشركة S&R CoreSync For Intelligent Solutions.\n\nنستعرض في هذا الفيديو بنية الأنظمة السحابية لعام 2026، كيفية إدارة وتوليد الفواتير والضرائب تلقائياً، وتجربة ديمو حي لأنظمة الـ ERP المخصصة.\n\nاشترك في القناة الرسمية: https://youtube.com/@SRCoreSync\nجرب النظام التجريبي: https://sr-coresync.com`,
+                    en: `Watch the official cinematic showcase of S&R CoreSync For Intelligent Solutions.\n\nExploring 2026 cloud infrastructure, automated European invoicing, and live enterprise ERP demonstrations.\n\nSubscribe: https://youtube.com/@SRCoreSync\nLive Demo: https://sr-coresync.com`,
+                    nl: `Bekijk de officiële presentatievideo van S&R CoreSync For Intelligent Solutions.\n\nOntdek hoe onze Cloud ERP software bedrijfsprocessen stroomlijnt.\n\nAbonneer u: https://youtube.com/@SRCoreSync\nBezoek: https://sr-coresync.com`
+                }
+            },
+            {
+                id: "tiktok",
+                category: "visual",
+                platform: "TikTok",
+                handle: "@SRCoreSync",
+                color: "#25f4ee",
+                title: "خلف الكواليس: كيف تبني نظام ERP سحابي وتطبيق PWA في دقائق",
+                assetTitle: "قالب ريلز وشورتس 9:16 مع علامة مائية",
+                assetImg: "./assets/social-8k-branding/tiktok-8k/tiktok-profile-cover-8k.webp",
+                assetFile: "./assets/social-8k-branding/tiktok-8k/tiktok-profile-cover-8k.png",
+                shareUrl: "https://tiktok.com/@SRCoreSync",
+                texts: {
+                    ar: `هل فكرت يوماً كيف تبني شركة تقنية متكاملة بـ 9 قنوات ونظام محاسبي متكامل خلال 48 ساعة؟ ⚡\n\nمعك المهندس محمد سليم عزيزة من S&R CoreSync ونشرح لك في هذا الفيديو كيف يغير الذكاء الاصطناعي والسحابة قواعد اللعبة!\n\nتابع الحساب للمزيد: @SRCoreSync`,
+                    en: `Building a sovereign enterprise stack and automated ERP system in 48 hours? ⚡\n\nEng. Mohammad Salim Aziza breaks down how modern AI and cloud engineering transform businesses in 2026.\n\nFollow @SRCoreSync for more!`,
+                    nl: `Hoe bouwt u een compleet ERP-systeem in 48 uur? ⚡\n\nEng. Mohammad Salim Aziza legt uit hoe moderne cloud architectuur uw bedrijf naar een hoger niveau tilt.\n\nVolg @SRCoreSync!`
+                }
+            },
+            {
+                id: "telegram",
+                category: "messaging",
+                platform: "Telegram",
+                handle: "@SRCoreSync",
+                color: "#229ed9",
+                title: "النشرة الإخبارية عبر قناة S&R CoreSync VIP الرسمية",
+                assetTitle: "غلاف قناة تيليجرام 8K",
+                assetImg: "./assets/social-8k-branding/telegram-8k/telegram-channel-cover-8k.webp",
+                assetFile: "./assets/social-8k-branding/telegram-8k/telegram-channel-cover-8k.png",
+                shareUrl: "https://t.me/share/url?url=" + encodeURIComponent("https://sr-coresync.com") + "&text=" + encodeURIComponent("انضم لقناة S&R CoreSync الرسمية: @SRCoreSync"),
+                texts: {
+                    ar: `مرحباً بكم في القناة الرسمية لشركة S&R CoreSync For Intelligent Solutions 🏛️\n\nستكون هذه القناة منصتكم المباشرة للحصول على:\n✓ تحديثات الأنظمة السحابية والـ ERP\n✓ نصائح وإرشادات الضرائب والفوترة الأوروبية (BTW)\n✓ عروض حصرية على حزم الهوية وتطوير البرمجيات\n\nللتواصل المباشر مع المؤسسين: https://t.me/SRCoreSync`,
+                    en: `Welcome to the official S&R CoreSync Telegram Channel 🏛️\n\nYour direct broadcast hub for sovereign cloud updates, ERP automation tips, and VIP technical consultations.\n\nOfficial channel: https://t.me/SRCoreSync`,
+                    nl: `Welkom op het officiële Telegram-kanaal van S&R CoreSync 🏛️\n\nUw directe bron voor updates over zakelijke software, BTW-automatisering en exclusieve aanbiedingen.\n\nKanaal: https://t.me/SRCoreSync`
+                }
+            },
+            {
+                id: "whatsapp",
+                category: "messaging",
+                platform: "WhatsApp Business",
+                handle: "+31 6 36279435",
+                color: "#25d366",
+                title: "تدشين كتالوج الخدمات وباقات الـ ERP والـ 8K الرسمية",
+                assetTitle: "بانر واتساب للأعمال 8K",
+                assetImg: "./assets/social-8k-branding/whatsapp-8k/whatsapp-business-banner-8k.webp",
+                assetFile: "./assets/social-8k-branding/whatsapp-8k/whatsapp-business-banner-8k.png",
+                shareUrl: "https://wa.me/31636279435?text=" + encodeURIComponent("مرحباً فريق S&R CoreSync، أود الاطلاع على باقات الأعمال والأنظمة السحابية 2026."),
+                texts: {
+                    ar: `تم تدشين حساب واتساب للأعمال المعتمد لشركة S&R CoreSync For Intelligent Solutions!\n\nيمكنكم الآن تصفح كتالوج الخدمات، طلب عروض الأسعار، وحجز جلسة تنفيذ فورية مع المؤسسين بنقرة واحدة.\n\nتواصل معنا مباشرة: https://wa.me/31636279435`,
+                    en: `Official WhatsApp Business account launched for S&R CoreSync For Intelligent Solutions!\n\nBrowse certified services, request formal quotes, and schedule immediate VIP technical sessions.\n\nMessage us: https://wa.me/31636279435`,
+                    nl: `Officieel WhatsApp Business account gelanceerd voor S&R CoreSync For Intelligent Solutions!\n\nBekijk onze diensten en plan direct een adviesgesprek in.\n\nWhatsApp: https://wa.me/31636279435`
+                }
+            },
+            {
+                id: "facebook",
+                category: "b2b",
+                platform: "Facebook",
+                handle: "@SRCoreSync",
+                color: "#1877f2",
+                title: "شراكة واستشارات التحول الرقمي للشركات والمؤسسات",
+                assetTitle: "غلاف صفحة فيسبوك 8K",
+                assetImg: "./assets/social-8k-branding/facebook-8k/facebook-page-cover-8k.webp",
+                assetFile: "./assets/social-8k-branding/facebook-8k/facebook-page-cover-8k.png",
+                shareUrl: "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://sr-coresync.com"),
+                texts: {
+                    ar: `نرحب بكم في الصفحة الرسمية لشركة S&R CoreSync For Intelligent Solutions على فيسبوك.\n\nنساعد أصحاب الأعمال والشركات في أوروبا والشرق الأوسط على أتمتة العمليات، ضبط المحاسبة والمخازن، وامتلاك هوية رقمية سيادية متكاملة.\n\nتعرف على خدماتنا وحلولنا: https://sr-coresync.com\n#SRCoreSync #Solutions #ERP`,
+                    en: `Welcome to the official Facebook page of S&R CoreSync For Intelligent Solutions.\n\nEmpowering enterprises across Europe and the Middle East with sovereign cloud ERP and cutting-edge digital systems.\n\nVisit us: https://sr-coresync.com\n#SRCoreSync #CloudArchitecture`,
+                    nl: `Welkom op de officiële Facebookpagina van S&R CoreSync For Intelligent Solutions.\n\nOptimaliseer uw bedrijfsprocessen met onze geavanceerde ERP- en cloudoplossingen.\n\nBezoek: https://sr-coresync.com\n#SRCoreSync`
+                }
+            },
+            {
+                id: "snapchat",
+                category: "visual",
+                platform: "Snapchat",
+                handle: "@SRCoreSync",
+                color: "#fffc00",
+                title: "كبسولة الأعمال السريعة: هل شركتك جاهزة لمتطلبات 2026؟",
+                assetTitle: "بانر سناب شات فائق الدقة 8K",
+                assetImg: "./assets/social-8k-branding/snapchat-8k/snapchat-header-banner-8k.webp",
+                assetFile: "./assets/social-8k-branding/snapchat-8k/snapchat-header-banner-8k.png",
+                shareUrl: "https://snapchat.com/add/SRCoreSync",
+                texts: {
+                    ar: `كبسولة الأعمال السريعة من S&R CoreSync ⚡\n\nتخلص من العمل اليدوي والأخطاء المحاسبية، واجعل نظامك يعمل لأجلك 24/7.\n\nأضف حسابنا الرسمي على سناب شات: @SRCoreSync واستمتع بلقطات يومية من عالم ريادة الأعمال التقنية!`,
+                    en: `Quick Enterprise Spotlight with S&R CoreSync ⚡\n\nEliminate manual errors and run your cloud business 24/7.\n\nAdd us on Snapchat: @SRCoreSync for exclusive behind-the-scenes tech insights!`,
+                    nl: `Zakelijke innovatie in seconden met S&R CoreSync ⚡\n\nAutomatiseer uw onderneming en bespaar wekelijks tientallen uren.\n\nVoeg ons toe op Snapchat: @SRCoreSync!`
+                }
+            }
+        ];
+
+        let activeFilter = 'all';
+        let cardLangState = {};
+
+        function renderCards() {
+            const grid = document.getElementById('campaignCardsGrid');
+            grid.innerHTML = '';
+
+            const filtered = campaignData.filter(item => {
+                if (activeFilter === 'all') return true;
+                return item.category === activeFilter;
+            });
+
+            filtered.forEach(item => {
+                const currentLang = cardLangState[item.id] || 'ar';
+                const postText = item.texts[currentLang];
+
+                const card = document.createElement('div');
+                card.className = 'campaign-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-platform-tag">
+                            <span style="color:${item.color}; font-size:1.2rem;">●</span>
+                            <span>${item.platform}</span>
+                        </div>
+                        <span class="card-handle-badge">${item.handle}</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${item.title}</h3>
+
+                        <div class="lang-tabs">
+                            <button type="button" class="lang-tab-btn ${currentLang === 'ar' ? 'active' : ''}" onclick="switchCardLang('${item.id}', 'ar')">العربية</button>
+                            <button type="button" class="lang-tab-btn ${currentLang === 'en' ? 'active' : ''}" onclick="switchCardLang('${item.id}', 'en')">English</button>
+                            <button type="button" class="lang-tab-btn ${currentLang === 'nl' ? 'active' : ''}" onclick="switchCardLang('${item.id}', 'nl')">Nederlands</button>
+                        </div>
+
+                        <div class="post-text-box" id="postText_${item.id}">${postText}</div>
+
+                        <div class="card-asset-preview">
+                            <img src="${item.assetImg}" alt="${item.assetTitle}" class="card-asset-img" onerror="this.src='./assets/sr-core-emblem-official.png'" />
+                            <div class="card-asset-meta">
+                                <strong>الأصل المرفق: ${item.assetTitle}</strong>
+                                <span>دقة 8K فائقة • Master Asset</span>
+                            </div>
+                        </div>
+
+                        <div class="card-actions">
+                            <button type="button" class="btn-post-action" onclick="copyPostText('${item.id}')">
+                                <span>📋 نسخ النص</span>
+                            </button>
+                            <a href="${item.assetFile}" download class="btn-post-action">
+                                <span>⬇️ تحميل الأصل 8K</span>
+                            </a>
+                            <a href="${item.shareUrl}" target="_blank" rel="noopener noreferrer" class="btn-post-action btn-post-share">
+                                <span>🚀 نشر فوري</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.switchCardLang = function(id, lang) {
+            cardLangState[id] = lang;
+            renderCards();
+        };
+
+        window.copyPostText = function(id) {
+            const box = document.getElementById(`postText_${id}`);
+            if (box) {
+                navigator.clipboard.writeText(box.innerText).then(() => {
+                    showToast('✓ تم نسخ نص المنشور بنجاح إلى الحافظة!');
+                });
+            }
+        };
+
+        function showToast(msg) {
+            const toast = document.getElementById('hubToast');
+            if (toast) {
+                toast.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2600);
+            }
+        }
+
+        window.exportFullCampaignSchedule = function() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(campaignData, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "SRCoreSync-Omnichannel-Campaign-Schedule-2026.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+            showToast('✓ تم تصدير جدول الحملات الكامل كملف JSON بنجاح!');
+        };
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.getAttribute('data-filter');
+                renderCards();
+            });
+        });
+
+        renderCards();
+    </script>
+</body>
+</html>
