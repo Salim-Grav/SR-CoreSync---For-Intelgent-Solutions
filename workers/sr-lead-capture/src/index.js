@@ -431,6 +431,7 @@ function smtpChannel(socket) {
 }
 
 async function sendViaPurelymail(env, from, to, raw) {
+    const recipients = Array.isArray(to) ? to : [to];
     const steps = [];
     let smtp = null;
     try {
@@ -449,7 +450,9 @@ async function sendViaPurelymail(env, from, to, raw) {
         await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
         steps.push('auth');
         await smtp.command('MAIL FROM:<' + from + '>', 250);
-        await smtp.command('RCPT TO:<' + to + '>', 250);
+        for (const rcpt of recipients) {
+            await smtp.command('RCPT TO:<' + rcpt + '>', 250);
+        }
         await smtp.command('DATA', 354);
         // dot-stuffing: a line starting with '.' would end the message early
         await smtp.write(raw.replace(/\r\n\./g, '\r\n..') + '\r\n.');
@@ -543,12 +546,31 @@ async function resolveMailDns(domain) {
 
 async function deliverEmail(env, to, subject, html, text, attachment) {
     if (!env) return { ok: false, reason: 'no-env' };
+    const recipients = (Array.isArray(to) ? to : [to])
+        .map(function (value) { return String(value || '').trim(); })
+        .filter(Boolean);
+    if (!recipients.length) return { ok: false, reason: 'no-recipient' };
+    // Only the SMTP path can address several mailboxes in one message. The
+    // legacy providers are single-recipient, so fan out rather than drop a copy.
+    if (recipients.length > 1 && !smtpConfigured(env)) {
+        const results = [];
+        for (const one of recipients) {
+            results.push(await deliverEmail(env, one, subject, html, text, attachment));
+        }
+        return {
+            ok: results.every(function (r) { return r && r.ok; }),
+            provider: (results[0] || {}).provider || null,
+            recipients: recipients,
+            reason: results.map(function (r) { return (r && r.reason) || 'ok'; }).join(',')
+        };
+    }
     const sender = env.MAIL_FROM || 'leads@sr-coresync.com';
     const attachmentName = attachment && attachment.filename ? attachment.filename : '';
     const attachmentB64 = attachment && attachment.base64 ? attachment.base64 : '';
+    const toHeader = recipients.join(', ');
 
     if (env.SEND_EMAIL && typeof env.SEND_EMAIL.send === 'function') {
-        const message = { to: to, from: sender, subject: subject, html: html, text: text };
+        const message = { to: toHeader, from: sender, subject: subject, html: html, text: text };
         if (attachmentB64) {
             message.attachments = [{ filename: attachmentName, content: attachmentB64, type: 'application/pdf', disposition: 'attachment' }];
         }
@@ -563,7 +585,7 @@ async function deliverEmail(env, to, subject, html, text, attachment) {
         const raw = buildMime({
             from: from,
             fromName: env.MAIL_FROM_NAME || 'S&R CoreSync Solutions',
-            to: to,
+            to: toHeader,
             subject: subject,
             html: html,
             text: text,
@@ -571,7 +593,7 @@ async function deliverEmail(env, to, subject, html, text, attachment) {
             attachmentName: attachmentName,
             attachmentB64: attachmentB64
         });
-        return await sendViaPurelymail(env, from, to, raw);
+        return await sendViaPurelymail(env, from, recipients, raw);
     }
 
     if (env.RESEND_API_KEY) {
@@ -703,8 +725,64 @@ async function sendTelegram(lead, env) {
     return sendTelegramText(lines.join('\n'), env);
 }
 
+// ---------------------------------------------------------------------------
+// Who gets told about an enquiry
+// ---------------------------------------------------------------------------
+// info@ always receives every enquiry: a lead must never depend on a keyword
+// guess. Department mailboxes are added on top, matched on whole words in the
+// enquiry itself, and the map is overridable from wrangler.toml (LEAD_ROUTES)
+// so the owner can change it without touching code.
+const DEFAULT_ROUTES = {
+    billing: 'billing@sr-coresync.com',
+    support: 'support@sr-coresync.com'
+};
+
+const ROUTE_KEYWORDS = {
+    billing: ['invoice', 'factuur', 'facture', 'fattura', 'faktura', 'rechnung', 'payment', 'betaling',
+        'quote', 'quotation', 'offerte', 'pricing', 'price', 'prijs', 'tarief', 'vat', 'btw',
+        'contract', 'license', 'licence', 'subscription', 'abonnement'],
+    support: ['support', 'problem', 'error', 'bug', 'outage', 'incident', 'maintenance', 'fix', 'help',
+        'storing', 'hilfe', 'aide', 'aiuto', 'pomoc', 'destek', 'migration', 'migratie']
+};
+
+function routeTable(env) {
+    const table = Object.assign({}, DEFAULT_ROUTES);
+    String((env && env.LEAD_ROUTES) || '').split(';').forEach(function (entry) {
+        const parts = entry.split('=');
+        if (parts.length === 2 && parts[0].trim()) {
+            // 'billing=' with an empty value switches that department off.
+            table[parts[0].trim().toLowerCase()] = parts[1].trim().toLowerCase() || null;
+        }
+    });
+    return table;
+}
+
+function departmentsFor(lead, env) {
+    const haystack = [lead.package, lead.packageLabel, lead.sessionLabel, lead.channel, lead.notes, lead.sourceUrl]
+        .filter(Boolean).join(' ').toLowerCase();
+    if (!haystack) return [];
+    const table = routeTable(env);
+    return Object.keys(ROUTE_KEYWORDS).filter(function (name) {
+        if (!table[name]) return false;
+        return ROUTE_KEYWORDS[name].some(function (word) {
+            // Word boundaries, otherwise 'vat' fires inside 'private'.
+            return new RegExp('(^|[^a-z0-9])' + word + '([^a-z0-9]|$)').test(haystack);
+        });
+    }).map(function (name) {
+        return { department: name, email: table[name] };
+    });
+}
+
+function leadRecipients(lead, env) {
+    const primary = (env && env.NOTIFY_EMAIL) || '';
+    const hits = departmentsFor(lead, env);
+    const list = [primary].filter(Boolean).concat(hits.map(function (hit) { return hit.email; }));
+    return { recipients: Array.from(new Set(list)), departments: hits.map(function (hit) { return hit.department; }) };
+}
+
 async function notifyByEmail(lead, env, ctx) {
     if (!env || !env.NOTIFY_EMAIL) return { sent: false, reason: 'no-recipient' };
+    const routing = leadRecipients(lead, env);
 
     const lines = [
         'New consultation lead \u2014 ' + (lead.leadId || ''),
@@ -719,11 +797,12 @@ async function notifyByEmail(lead, env, ctx) {
         'Source  : ' + (lead.sourceUrl || '-')
     ];
     if (lead.notes) lines.push('Notes   : ' + String(lead.notes).slice(0, 400));
+    if (routing.departments.length) lines.push('Route   : ' + routing.departments.join(', '));
 
     // One delivery path, not four: deliverEmail already knows every provider.
     const work = deliverEmail(
         env,
-        env.NOTIFY_EMAIL,
+        routing.recipients,
         'New Consultation Lead ' + (lead.leadId || ''),
         buildNotificationHtml(lead),
         lines.join('\n')
@@ -1189,6 +1268,7 @@ export default {
                 mailFrom: (env && (env.PURELYMAIL_USER || env.MAIL_FROM)) || null,
                 // Presence only; /mail/check?deep=1 is what proves the password.
                 purelymail: smtpConfigured(env) ? 'on' : 'off',
+                leadRoutes: Object.keys(routeTable(env)),
                 d1: !!(env && env.DB),
                 turnstile: (env && env.TURNSTILE_SECRET)
                     ? (String(env.TURNSTILE_ENFORCE || '') === '1' ? 'enforcing' : 'soft') : 'off',

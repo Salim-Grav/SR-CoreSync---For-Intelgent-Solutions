@@ -104,6 +104,21 @@ Lead تجريبي          -> "New Consultation Lead LEAD-SR-20261025-DUE4" وص
 | `/mail/selftest` | يرسل رسالة فعلية إلى `NOTIFY_EMAIL` — محدود مرة/10 دقائق |
 | `/mail/dns` | يقرأ MX/SPF/DKIM/DMARC عبر DoH ويعيد حكمًا واحدًا |
 
+### توجيه الإشعارات حسب نوع الطلب (25 أكتوبر)
+`info@` تستقبل **كل** استفسار دائمًا — لا يُترك مصير استفسار لتخمين كلمة.
+وتُضاف صندوق القسم فوقها عند وجود كلمة مفتاحية في نص الطلب نفسه:
+
+| القسم | أمثلة الكلمات | الصندوق |
+|---|---|---|
+| الفواتير | invoice · factuur · quote · pricing · vat · btw · license | `billing@` |
+| الدعم | support · error · bug · outage · migration · help | `support@` |
+
+التحكم من `wrangler.toml` بلا كود: `LEAD_ROUTES = "billing=finance@…;support="` (فراغ = إيقاف القسم).
+مطابقة الكلمات بحدود الكلمة، فلا تُفعّل `vat` داخل `private`.
+
+**دليل حيّ:** استفسار بكلمات فواتير وصل إلى `info@` و`billing@` معًا، موقّعًا بـ DKIM
+(selector=purelymail1، auth=pass).
+
 ### أخطاء واجهناها وأصلحناها
 1. **`WritableStream is currently locked`** — `startTls()` يجب أن يُسبق بتحرير قفل reader/writer القديمين.
 2. **قيمة السرّ كانت نص العنصر النائب** (`Enter a secret value:`) — اكتُشفت بفكّ base64 من رسالة 535.
@@ -111,7 +126,8 @@ Lead تجريبي          -> "New Consultation Lead LEAD-SR-20261025-DUE4" وص
 
 ### مكان بيانات الاعتماد
 - السرّ في Cloudflare: `PURELYMAIL_PASS` (نوع Secret).
-- محليًا للفحص: `.secrets/purelymail-pass.txt` (خارج Git) — يقرأه `scripts/check_mailbox.py`.
+- لا تُحفظ كلمة المرور على القرص: `scripts/check_mailbox.py` يقرأها من `PURELYMAIL_PASS`
+  أو يطلبها تفاعليًا (getpass). حُذف ملف `.secrets/purelymail-pass.txt` في 25 أكتوبر.
 - ⚠️ كلمة المرور ظهرت في محادثة 25 أكتوبر ⇒ يُنصح بتدويرها في Purelymail ثم `wrangler secret put PURELYMAIL_PASS` بالقيمة الجديدة.
 
 ## صفحة الحالة

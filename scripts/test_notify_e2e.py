@@ -75,6 +75,8 @@ def main():
     ap.add_argument('--cleanup', action='store_true', help='delete the test row when finished')
     ap.add_argument('--cleanup-only', action='store_true', help='only delete test rows')
     ap.add_argument('--wait', type=int, default=6, help='seconds to wait before reading D1')
+    ap.add_argument('--notes', default='Automated end-to-end test of the notification path. Not a real enquiry.',
+                    help='enquiry text; keyword routing reads this')
     args = ap.parse_args()
 
     if args.cleanup_only:
@@ -94,7 +96,7 @@ def main():
         'package': 'self-test',
         'language': 'ar',
         'sourceUrl': 'https://sr-coresync.com/status.html',
-        'notes': 'Automated end-to-end test of the notification path. Not a real enquiry.',
+        'notes': args.notes,
         'website': ''
     }
 

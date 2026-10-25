@@ -38,6 +38,9 @@ def read_password(explicit):
     if os.path.isfile(PASS_FILE):
         with open(PASS_FILE, encoding='utf-8') as fh:
             return fh.read().strip()
+    if sys.stdin is not None and sys.stdin.isatty():
+        import getpass
+        return getpass.getpass('Mailbox password: ').strip()
     return ''
 
 
@@ -72,7 +75,7 @@ def main():
 
     password = read_password(args.password)
     if not password:
-        print('No password. Set PURELYMAIL_PASS or write .secrets/purelymail-pass.txt')
+        print('No password. Set PURELYMAIL_PASS, write .secrets/purelymail-pass.txt, or run it in a terminal to be prompted.')
         return 2
 
     deadline = time.time() + max(args.wait, 0)
