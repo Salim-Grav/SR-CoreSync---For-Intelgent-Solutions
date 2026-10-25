@@ -766,6 +766,145 @@ main#wrapper:focus{outline:none}
     border-top: 1px solid rgba(197, 168, 128, 0.22) !important;
 }
 
+/* ── AI Executive Voice Audio Synthesis Player ── */
+.sr-blueprint-audio-player {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    padding: 16px 20px !important;
+    margin: 18px 0 20px !important;
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.12) 0%, rgba(8, 14, 10, 0.95) 100%) !important;
+    border: 1px solid rgba(197, 168, 128, 0.45) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(197, 168, 128, 0.15) !important;
+    transition: all 0.3s ease !important;
+}
+
+.sr-blueprint-audio-player.is-playing {
+    border-color: #f3dfba !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(197, 168, 128, 0.45) !important;
+}
+
+.sr-blueprint-audio-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.sr-blueprint-audio-avatar {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    border: 2px solid #c5a880 !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+    background: #020705 !important;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.3) !important;
+}
+
+.sr-blueprint-audio-img {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+.sr-blueprint-audio-status-dot {
+    position: absolute !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    background: #10b981 !important;
+    border: 2px solid #020705 !important;
+    transition: all 0.25s ease !important;
+}
+
+.sr-blueprint-audio-player.is-playing .sr-blueprint-audio-status-dot {
+    background: #f59e0b !important;
+    box-shadow: 0 0 10px #f59e0b !important;
+    animation: voiceMicPulse 1.2s infinite ease-in-out !important;
+}
+
+.sr-blueprint-audio-badge {
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    color: #c5a880 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    margin-bottom: 2px !important;
+}
+
+.sr-blueprint-audio-title {
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+.sr-blueprint-audio-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+}
+
+.sr-blueprint-audio-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 9px 18px !important;
+    background: linear-gradient(135deg, #c5a880 0%, #8c7350 100%) !important;
+    border: 1px solid #f3dfba !important;
+    border-radius: 999px !important;
+    color: #020705 !important;
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.35) !important;
+}
+
+.sr-blueprint-audio-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(197, 168, 128, 0.6) !important;
+}
+
+.sr-blueprint-audio-waves {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    height: 24px !important;
+}
+
+.sr-audio-bar {
+    width: 3px !important;
+    height: 6px !important;
+    background: rgba(197, 168, 128, 0.4) !important;
+    border-radius: 2px !important;
+    transition: height 0.2s ease !important;
+}
+
+.sr-blueprint-audio-player.is-playing .sr-audio-bar {
+    background: #f3dfba !important;
+    animation: audioWaveBounce 0.8s infinite ease-in-out alternate !important;
+}
+
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(1) { animation-delay: 0.05s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(2) { animation-delay: 0.2s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(3) { animation-delay: 0.35s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(4) { animation-delay: 0.15s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(5) { animation-delay: 0.3s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(6) { animation-delay: 0.45s !important; }
+.sr-blueprint-audio-player.is-playing .sr-audio-bar:nth-child(7) { animation-delay: 0.25s !important; }
+
+@keyframes audioWaveBounce {
+    0% { height: 4px; }
+    100% { height: 22px; background: #c5a880; }
+}
+
 
 /* ==========================================================================
    TOP HEADER & HERO VOICE PLANNER CTA BUTTONS (MILESTONE 36 EXTENSION)
