@@ -6,6 +6,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def get_floating_follow(is_rtl=True):
     lbl_follow = "تابع S&R CoreSync For Intelligent Solutions على وسائل التواصل" if is_rtl else "Follow S&R CoreSync For Intelligent Solutions on social media"
+    lbl_mail = "البريد الإلكتروني الرسمي" if is_rtl else "Official Corporate Email"
     lbl_chat = "المساعد الذكي والمحادثة المباشرة" if is_rtl else "AI Concierge & Live Chat"
     title_chat = "المساعد الذكي (AI Concierge) | المحادثة الفورية" if is_rtl else "AI Concierge | Live Chat"
     
@@ -16,9 +17,6 @@ def get_floating_follow(is_rtl=True):
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="floating-follow__link floating-follow__link--linkedin" aria-label="LinkedIn" title="LinkedIn">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>
-            </a>
-            <a href="mailto:info@sr-coresync.com" class="floating-follow__link floating-follow__link--mail" aria-label="Email" title="info@sr-coresync.com">
-                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             </a>
             <a href="https://facebook.com/SRCoreSync" target="_blank" rel="noopener noreferrer" class="floating-follow__link floating-follow__link--facebook" aria-label="Facebook" title="Facebook">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -42,6 +40,9 @@ def get_floating_follow(is_rtl=True):
         <span class="floating-follow__line" aria-hidden="true"></span>
         <span class="floating-follow__label">S&amp;R CORESYNC</span>
         <span class="floating-follow__line" aria-hidden="true"></span>
+        <a href="mailto:info@sr-coresync.com" class="floating-follow__link floating-follow__link--mail floating-follow__mail-bottom" aria-label="{lbl_mail}" title="info@sr-coresync.com">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
         <button type="button" class="floating-follow__link floating-follow__link--chat floating-follow__chat-bottom" id="floatingFollowChatBtn" aria-label="{lbl_chat}" title="{title_chat}" onclick="window.toggleAiChat && window.toggleAiChat()">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a9 9 0 0 1 9 9c0 3.1-1.6 5.9-4 7.5V21a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-2.5A9 9 0 0 1 3 11a9 9 0 0 1 9-9z"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>
             <span class="floating-follow__live-dot" aria-hidden="true"></span>
@@ -65,41 +66,6 @@ def update_file(filepath):
     # 1. Replace floating-follow
     if FLOATING_FOLLOW_REGEX.search(content):
         content = FLOATING_FOLLOW_REGEX.sub(get_floating_follow(is_rtl=is_ar), content)
-
-    # 2. Update Hero 3D Emblem to be completely unmasked
-    # Target badges inside hero-emblem-card-3d
-    btn_inspect_txt = "فحص الشعار بدقة 4K Ultra-DPI" if is_ar else "Inspect 4K Ultra-DPI Seal"
-    btn_inspect_title = "فحص الشعار بدقة 4K فائقة" if is_ar else "Inspect Luxury 4K Emblem"
-    btn_cloud_txt = "Enterprise Cloud &amp; AI Native"
-
-    # Regex targeting from <div class="hero-emblem-badge hero-emblem-badge--top"> until closing of card
-    # In index.html:
-    # <div class="hero-emblem-badge hero-emblem-badge--top">...</div>
-    # ...
-    # </div>\s*</div>\s*</div>
-    BADGES_BLOCK_REGEX = re.compile(
-        r'(<div class="hero-emblem-frame">.*?</div>)\s*(?:<!--.*?-->\s*)?<div class="hero-emblem-badge hero-emblem-badge--top">.*?</div>\s*</div>\s*</div>\s*</div>',
-        re.DOTALL
-    )
-
-    if BADGES_BLOCK_REGEX.search(content) and 'hero-emblem-actions-bar' not in content:
-        repl_str = (
-            r'\1\n'
-            '                                    </div>\n'
-            '                                    <div class="hero-emblem-actions-bar">\n'
-            f'                                        <button type="button" class="btn-emblem-pill btn-emblem-inspect" data-sr-call="openLogoLightbox" data-sr-event="1" title="{btn_inspect_title}">\n'
-            '                                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>\n'
-            f'                                            <span>{btn_inspect_txt}</span>\n'
-            '                                        </button>\n'
-            '                                        <div class="btn-emblem-pill btn-emblem-cloud">\n'
-            '                                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>\n'
-            f'                                            <span>{btn_cloud_txt}</span>\n'
-            '                                        </div>\n'
-            '                                    </div>\n'
-            '                                </div>\n'
-            '                            </div>'
-        )
-        content = BADGES_BLOCK_REGEX.sub(repl_str, content)
 
     if content != orig:
         with open(filepath, 'w', encoding='utf-8', newline='') as f:
