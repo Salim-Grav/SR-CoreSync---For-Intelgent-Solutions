@@ -4519,7 +4519,7 @@ main#wrapper:focus{outline:none}
             }
 
             // CoreSync System Controller
-            document.querySelectorTodos('video').forEach(v => {
+            document.querySelectorAll('video').forEach(v => {
                 v.setAttribute('playsinline', '');
                 v.setAttribute('webkit-playsinline', '');
             });
@@ -4937,13 +4937,13 @@ main#wrapper:focus{outline:none}
 
         function applyKpiLabels(p) {
             const custom = p && p.kpiLabels;
-            const strip = document.querySelectorTodos('.work-kpis-strip .work-kpi-lbl');
+            const strip = document.querySelectorAll('.work-kpis-strip .work-kpi-lbl');
             const stripKeys = ['speed', 'conv', 'sales'];
             strip.forEach((el, i) => {
                 const k = stripKeys[i];
                 el.textContent = (custom && custom[k]) || DEFAULT_KPI_LABELS.strip[k];
             });
-            const modal = document.querySelectorTodos('.project-modal-kpis .project-kpi-lbl');
+            const modal = document.querySelectorAll('.project-modal-kpis .project-kpi-lbl');
             const modalKeys = ['conv', 'speed', 'sales'];
             modal.forEach((el, i) => {
                 const k = modalKeys[i];
@@ -4960,7 +4960,7 @@ main#wrapper:focus{outline:none}
             currentWorkProjectIdx = 0;
 
             // CoreSync System Controller
-            document.querySelectorTodos('.work-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.work-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -5308,7 +5308,7 @@ main#wrapper:focus{outline:none}
 
         // CoreSync System Controller
         function switchPricingTab(category, btn) {
-            document.querySelectorTodos('.pricing-tab_btn .tf-btn-tab').forEach(b => {
+            document.querySelectorAll('.pricing-tab_btn .tf-btn-tab').forEach(b => {
                 b.classList.remove('active');
                 b.setAttribute('aria-selected', 'false');
             });
@@ -5360,8 +5360,8 @@ main#wrapper:focus{outline:none}
             const isVisible = body.classList.contains('is-open');
 
             // CoreSync System Controller
-            document.querySelectorTodos('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
-            document.querySelectorTodos('.accordion-action').forEach(a => a.classList.add('collapsed'));
+            document.querySelectorAll('.accordion-collapse-body').forEach(b => b.classList.remove('is-open'));
+            document.querySelectorAll('.accordion-action').forEach(a => a.classList.add('collapsed'));
 
             if (!isVisible) {
                 body.classList.add('is-open');
@@ -6129,7 +6129,7 @@ main#wrapper:focus{outline:none}
             if (stage) {
                 stage.setAttribute('data-theme', theme);
             }
-            document.querySelectorTodos('.sr-theme-pill').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sr-theme-pill').forEach(p => p.classList.remove('active'));
             if (btn) btn.classList.add('active');
             LuxuryAudio.play('switch');
         }
@@ -6167,7 +6167,7 @@ main#wrapper:focus{outline:none}
         document.addEventListener('DOMContentLoaded', () => {
             updateROICalculator();
 
-            document.querySelectorTodos('.brand-logo-preview-trigger').forEach(el => {
+            document.querySelectorAll('.brand-logo-preview-trigger').forEach(el => {
                 el.addEventListener('click', (e) => {
                     openLogoLightbox(e);
                 });
@@ -6794,14 +6794,14 @@ main#wrapper:focus{outline:none}
         }
 
         // CoreSync System Controller
-        document.querySelectorTodos('video').forEach(v => {
+        document.querySelectorAll('video').forEach(v => {
             v.setAttribute('playsinline', '');
             v.playsInline = true;
         });
 
         // CoreSync System Controller
         document.addEventListener('click', (e) => {
-            document.querySelectorTodos('.header-language').forEach(el => {
+            document.querySelectorAll('.header-language').forEach(el => {
                 if (el.hasAttribute('open') && !el.contains(e.target)) {
                     el.removeAttribute('open');
                 }
@@ -6820,14 +6820,14 @@ main#wrapper:focus{outline:none}
             });
         }, { threshold: 0.15 });
 
-        document.querySelectorTodos('video').forEach(vid => {
+        document.querySelectorAll('video').forEach(vid => {
             vid.setAttribute('playsinline', '');
             vid.playsInline = true;
             videoObserver.observe(vid);
         });
 
         // 2. Silky smooth paragraph & section navigation with sticky header offset
-        document.querySelectorTodos('a[href^="#"]').forEach(link => {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', function(e) {
                 const hash = this.getAttribute('href');
                 if (!hash || hash === '#' || hash === '#!' || hash.startsWith('#javascript')) return;
@@ -7433,7 +7433,7 @@ main#wrapper:focus{outline:none}
             let isPlaying = true;
 
             window.updateSlideUI = function() {
-                const slides = document.querySelectorTodos('#slidesTrack .showcase-slide-item');
+                const slides = document.querySelectorAll('#slidesTrack .showcase-slide-item');
                 slides.forEach((slide, idx) => {
                     if (idx === currentSlideIndex) {
                         slide.classList.add('active');
@@ -8074,7 +8074,7 @@ let currentFoundersTarget = 'salim';
         const trigger = document.getElementById('sovereignLangTrigger');
         const menu = document.getElementById('sovereignLangMenu');
         const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorTodos('.sovereign-lang-item');
+        const items = dropdown.querySelectorAll('.sovereign-lang-item');
         
         if (!trigger || !menu) return;
         
@@ -8159,7 +8159,7 @@ let currentFoundersTarget = 'salim';
             const slider = document.getElementById('roiCompanySize');
             if (!slider) return;
             slider.value = size;
-            document.querySelectorTodos('.roi-preset-btn').forEach(btn => {
+            document.querySelectorAll('.roi-preset-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent.includes(`(${size})`));
             });
             updateROICalculator();
@@ -8190,7 +8190,7 @@ let currentFoundersTarget = 'salim';
             const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || { symbol: '€', rate: 1, name: 'Euro' };
 
             // مزامنة حالة أزرار العملة
-            document.querySelectorTodos('.roi-currency-pill').forEach(btn => {
+            document.querySelectorAll('.roi-currency-pill').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.currency === curCode);
             });
 
@@ -8206,7 +8206,7 @@ let currentFoundersTarget = 'salim';
             const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
 
             // مزامنة حالة أزرار الخيارات السريعة
-            document.querySelectorTodos('.roi-preset-btn').forEach(btn => {
+            document.querySelectorAll('.roi-preset-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent.includes(`(${teamSize})`));
             });
 
@@ -8408,7 +8408,7 @@ if (typeof window.openPublishSoftwareModal !== 'function') {
 <script src="../js/sr-events.js" defer></script>
 <!-- SRX:BEGIN:srx_behavior -->
 <script>
-try{(function(){var acts=document.querySelectorTodos('.accordion-action[data-sr-call="toggleFaq"]');for(var i=0;i<acts.length;i++){var a=acts[i];if(a.hasAttribute('data-srx-kb'))continue;a.setAttribute('data-srx-kb','1');a.setAttribute('tabindex','0');a.setAttribute('role','button');var sync=function(el){return function(){el.setAttribute('aria-expanded',el.classList.contains('collapsed')?'false':'true');};}(a);sync();a.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();this.click();}});a.addEventListener('click',function(){setTimeout(sync,0);});if(window.MutationObserver){new MutationObserver(sync).observe(a,{attributes:true,attributeFilter:['class']});}}})()}catch(e){}
+try{(function(){var acts=document.querySelectorAll('.accordion-action[data-sr-call="toggleFaq"]');for(var i=0;i<acts.length;i++){var a=acts[i];if(a.hasAttribute('data-srx-kb'))continue;a.setAttribute('data-srx-kb','1');a.setAttribute('tabindex','0');a.setAttribute('role','button');var sync=function(el){return function(){el.setAttribute('aria-expanded',el.classList.contains('collapsed')?'false':'true');};}(a);sync();a.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();this.click();}});a.addEventListener('click',function(){setTimeout(sync,0);});if(window.MutationObserver){new MutationObserver(sync).observe(a,{attributes:true,attributeFilter:['class']});}}})()}catch(e){}
 try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAttribute('data-srx-bound')){sl.setAttribute('data-srx-bound','1');sl.addEventListener('click',function(e){var t=document.getElementById('wrapper');if(t){e.preventDefault();t.focus({preventScroll:true});t.scrollIntoView({behavior:'smooth',block:'start'});if(history.replaceState){history.replaceState(null,'','#wrapper');}}});}})()}catch(e){}
 try{(function(){window.addEventListener('scroll',function(){var winScroll=document.body.scrollTop||document.documentElement.scrollTop;var height=document.documentElement.scrollHeight-document.documentElement.clientHeight;var scrolled=(winScroll/height)*100;var pb=document.getElementById('scroll-progress');if(pb)pb.style.width=scrolled+'%';});})()}catch(e){}
 </script>
