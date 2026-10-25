@@ -726,8 +726,45 @@ html[dir="rtl"] .hotline-popover-card {
 }
 @media (max-width: 640px) {
     .apple-macos-dock-wrapper {
-        bottom: 10px;
-        transform: translateX(-50%) scale(0.9);
+        bottom: 12px;
+        width: calc(100% - 20px);
+        max-width: 430px;
+        display: flex;
+        justify-content: center;
+        transform: translateX(-50%);
+    }
+    .apple-macos-dock {
+        gap: 5px;
+        padding: 5px 10px;
+        max-width: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(197, 168, 128, 0.3);
+    }
+    .apple-dock-item {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+    }
+    .apple-dock-flag {
+        width: 24px;
+        height: 16px;
+    }
+    .apple-dock-item:hover {
+        transform: translateY(-4px) scale(1.18);
     }
 }
+@media (max-width: 380px) {
+    .apple-macos-dock {
+        gap: 3px;
+        padding: 4px 8px;
+    }
+    .apple-dock-item {
+        width: 30px;
+        height: 30px;
+    }
+    .apple-dock-flag {
+        width: 22px;
+        height: 15px;
+    }
+}
+
 
