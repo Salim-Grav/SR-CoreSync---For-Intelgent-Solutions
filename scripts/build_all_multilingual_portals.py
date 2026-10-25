@@ -770,44 +770,25 @@ def replace_any_switcher(html_content, new_dropdown_html, page_type="demo"):
     """
     Deterministically replaces any existing switcher in the file.
     """
-    if page_type == "demo":
-        # Check for sovereign-lang-dropdown first
-        marker = 'id="sovereignLangDropdown"'
-        if marker in html_content:
-            start = html_content.find('<!-- Sovereign Global Multilingual Hub')
-            if start == -1:
-                start = html_content.rfind('<div class="sovereign-lang-dropdown"', 0, html_content.find(marker))
-            end = html_content.find('</div>\n</div>\n', start)
-            if end != -1:
-                end += len('</div>\n</div>\n')
-                return html_content[:start] + new_dropdown_html + '\n' + html_content[end:]
-        
-        # Check for old portal-lang-switcher
-        marker_old = '<div class="portal-lang-switcher"'
-        if marker_old in html_content:
-            start = html_content.find(marker_old)
-            start_comment = html_content.rfind('<!--', 0, start)
-            if start_comment != -1 and (start - start_comment) < 100:
-                start = start_comment
-            end = html_content.find('</div>', start) + len('</div>')
-            return html_content[:start] + new_dropdown_html + '\n' + html_content[end:]
-            
-    else: # index.html
-        marker_details = '<details class="language-switcher'
-        if marker_details in html_content:
-            start = html_content.find(marker_details)
-            end = html_content.find('</details>', start) + len('</details>')
-            return html_content[:start] + new_dropdown_html + '\n' + html_content[end:]
-            
-        marker = 'id="sovereignLangDropdown"'
-        if marker in html_content:
-            start = html_content.find('<!-- Sovereign Global Multilingual Hub')
-            if start == -1:
-                start = html_content.rfind('<div class="sovereign-lang-dropdown"', 0, html_content.find(marker))
-            end = html_content.find('</div>\n</div>\n', start)
-            if end != -1:
-                end += len('</div>\n</div>\n')
-                return html_content[:start] + new_dropdown_html + '\n' + html_content[end:]
+    # 1. Match sovereign-lang-hub-wrap
+    pattern_hub = r'<!-- Sovereign Global Multilingual Hub[\s\S]*?</div>\s*</div>\s*</div>'
+    if re.search(pattern_hub, html_content):
+        return re.sub(pattern_hub, new_dropdown_html, html_content, count=1)
+    
+    # 2. Match sovereign-lang-dropdown
+    pattern_dropdown = r'<!-- Sovereign Global Multilingual Hub[\s\S]*?</div>\s*</div>'
+    if re.search(pattern_dropdown, html_content):
+        return re.sub(pattern_dropdown, new_dropdown_html, html_content, count=1)
+
+    # 3. Match old portal-lang-switcher
+    pattern_old = r'<div class="portal-lang-switcher"[\s\S]*?</div>'
+    if re.search(pattern_old, html_content):
+        return re.sub(pattern_old, new_dropdown_html, html_content, count=1)
+
+    # 4. Match old details language-switcher
+    pattern_details = r'<details class="language-switcher[\s\S]*?</details>'
+    if re.search(pattern_details, html_content):
+        return re.sub(pattern_details, new_dropdown_html, html_content, count=1)
 
     return html_content
 
