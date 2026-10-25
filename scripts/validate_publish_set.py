@@ -107,6 +107,10 @@ def main():
                 resolved = (base + '/' + target) if base else target
             resolved = os.path.normpath(resolved).replace('\\', '/')
             checked_refs += 1
+            if resolved == '.' and 'index.html' in publish_set_files:
+                continue
+            if resolved in publish_dirs and (resolved + '/index.html') in publish_set_files:
+                continue
             if resolved not in publish_set_files:
                 missing_refs.setdefault(resolved, []).append(rel)
 
