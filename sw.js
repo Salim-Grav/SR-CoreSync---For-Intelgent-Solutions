@@ -29,6 +29,7 @@ const CRITICAL_ASSETS = [
 // so only the explicit file is listed.
 const SECONDARY_ASSETS = [
   './card.html',
+  './social-8k-studio.html',
   './en/index.html',
   './nl/index.html',
   './corporate-profile.html',
