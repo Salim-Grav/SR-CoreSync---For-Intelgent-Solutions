@@ -124,11 +124,16 @@
   - **2. إدراج الرابط المباشر في شريط إجراءات المخطط التنفيذي (`.sr-blueprint-actions`):** إضافة زر `💼 صفحة LinkedIn` الموجه إلى `https://www.linkedin.com/company/srcoresync/` بكامل سمات الأمان `target="_blank" rel="noopener noreferrer"`.
   - **3. شارة لينكد إن التوثيقية في بطاقة الرد الصوتي التنفيذي (`.sr-blueprint-audio-player`):** ربط حساب الشركة الرسمي بجانب شارة المهندس محمد سليم عزيزة لتمكين المستمعين للخطة الصوتية من التحقق الفوري من التوثيق المؤسسي.
 
+- [x] **المهمة 40 (منجزة 100% - تطهير وحل تنبيهات إمكانية الوصول ARIA & Form Labels عبر 29 بوابة لغوية وملف):**
+  - **1. حل مشكلة تسميات حقول النطاق (Form elements must have labels):** إضافة سمات `title` و `aria-label` لحقلي شرائح حساب التكاليف وفريق العمل (`#roiCostRange` و `#roiTeamRange`) عبر 29 ملفاً شملت كافة بوابات اللغات الأوروبية والكردية والبانر التصديري.
+  - **2. معالجة وتصحيح أدوار ARIA في تبويبات العرض التجريبي (Certain ARIA roles must contain particular children):** تزويد أزرار التبويبات المندرجة داخل `role="tablist"` بسمات `role="tab"` و `aria-selected="true/false"` (`#demoTabBtnErp`, `#demoTabBtnCloud`, `#demoTabBtnGov`) عبر كافة البوابات الـ 28 لحل أي تعارضات معيارية 100%.
+  - **3. أتمتة الفحص والتصحيح الشامل (`scripts/fix_portals_a11y_problems.py`):** تطوير سكربت بايثون تنفيذي وتطبيقه لضمان خلو كامل المشروع من أي تنبيهات أو أخطاء برمجية في بيئة الـ IDE.
+
 ---
 
 ## 🚀 خطة المهام القادمة (Upcoming Roadmap)
 
-- [ ] **المهمة 40 (الموصى بها): خط أنابيب النشر المؤتمت والحاويات السحابية (Enterprise CI/CD & Docker Sovereign Cloud Stack):**
+- [ ] **المهمة 41 (الموصى بها): خط أنابيب النشر المؤتمت والحاويات السحابية (Enterprise CI/CD & Docker Sovereign Cloud Stack):**
   - إنشاء ملفات Dockerfile و docker-compose معزولة لمحرك CoreSync ERP وبوابات المطورين.
   - أتمتة اختبارات الـ SDK وفحص التوافق عبر GitHub Actions مع كل Release.
   - تفعيل وكيل محادثة صوتية مباشر بتقنية WebRTC لخدمة عملاء الشركات والمؤسسات الأوروبية على مدار الساعة.
