@@ -6306,24 +6306,24 @@ main#wrapper:focus{outline:none}
                 <!-- شريط التكلفة الشهرية -->
                 <div class="sr-roi-slider-row">
                     <div class="sr-roi-slider-header">
-                        <span class="text-white">التكاليف التشغيلية والإدارية والمحاسبية الحالية (شهرياً):</span>
+                        <label for="roiCostRange" class="text-white">التكاليف التشغيلية والإدارية والمحاسبية الحالية (شهرياً):</label>
                         <span class="sr-roi-val-badge" id="roiCostDisplay">€ 6,500</span>
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
-                        <input type="range" class="sr-roi-range" id="roiCostRange" title="Monthly Operational Cost" aria-label="Monthly Operational Cost" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiCostRange" placeholder="6500" title="Monthly Operational Cost" aria-label="Monthly Operational Cost" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
                 <!-- شريط عدد الموظفين -->
                 <div class="sr-roi-slider-row">
                     <div class="sr-roi-slider-header">
-                        <span class="text-white">حجم فريق العمل الإداري والمالي (عدد الموظفين):</span>
+                        <label for="roiTeamRange" class="text-white">حجم فريق العمل الإداري والمالي (عدد الموظفين):</label>
                         <span class="sr-roi-val-badge" id="roiTeamDisplay">12 موظف</span>
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 موظف</div>
-                        <input type="range" class="sr-roi-range" id="roiTeamRange" title="Team Size" aria-label="Team Size" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" placeholder="12" title="Team Size" aria-label="Team Size" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -6528,7 +6528,7 @@ main#wrapper:focus{outline:none}
             </div>
 
             <!-- تبويبات العرض التجريبي -->
-            <div class="sr-demo-tab-list" role="tablist">
+            <div class="sr-demo-tab-list" role="tablist" aria-label="Demo Tabs">
                 <button type="button" class="sr-demo-tab-btn active" role="tab" aria-selected="true" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 منظومة ERP والمحاسبة الذكية (CFO Hub)
                 </button>
