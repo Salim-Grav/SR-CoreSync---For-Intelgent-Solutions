@@ -344,10 +344,21 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 39:
-1. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة فئة التنسيق `.sr-btn-linkedin`، ودمج زر LinkedIn في شريط إجراءات المخطط التنفيذي، وشارة التوثيق في بطاقة الصوت الذكي.
-2. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 39 بنسبة 100%.
-3. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق المعماري وتأكيد التكامل.
+### 8. المهمة 40: تطهير وحل تنبيهات إمكانية الوصول ومعايير ARIA عبر 29 بوابة لغوية وملف:
+- **تسميات الحقول (Form Labels):**
+  - تزويد كافة حقول منزلقات التكاليف الشهرية وحجم فريق العمل (`roiCostRange`, `roiTeamRange`) بسمات `title` و `aria-label` الصريحة عبر كافة اللغات الأوروبية والكردية.
+- **أدوار ARIA الهيكلية (Valid Tablist Children):**
+  - معالجة قائمة التبويبات `role="tablist"` بمنح كافة الأزرار التابعة لها الأدوار القياسية `role="tab"` وحالة التحديد `aria-selected="true/false"` (`#demoTabBtnErp`, `#demoTabBtnCloud`, `#demoTabBtnGov`).
+- **نتائج الفحص:**
+  - تم تطهير كافة التنبيهات والأخطاء (0 Errors, 0 Warnings) في تقرير الـ IDE.
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 40:
+1. **[scripts/fix_portals_a11y_problems.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/fix_portals_a11y_problems.py):** سكربت بايثون المؤتمت للفحص والتصحيح.
+2. **28 بوابة لغوية فرعية وملف البانر:** (`en/`, `nl/`, `de/`, `fr/`, `es/`, `it/`, `tr/`, `sv/`, `sl/`, `sk/`, `ro/`, `pt/`, `pl/`, `no/`, `mt/`, `lv/`, `lt/`, `ku/`, `hu/`, `hr/`, `ga/`, `et/`, `el/`, `fi/`, `da/`, `cs/`, `bg/`, `ckb/`, `export-banner-founders-erp.html`).
+3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 40 بنسبة 100%.
+4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق المعماري وتأكيد خلو الأخطاء.
 
 </div>
 
