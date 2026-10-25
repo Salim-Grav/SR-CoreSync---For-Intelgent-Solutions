@@ -2821,10 +2821,10 @@
 
         function generateNewInvoice() {
             const client = document.getElementById('invClient').value || 'Rotterdam Tech BV';
-            const netBeløp = parseFloat(document.getElementById('invBeløp').value) || 10000;
+            const netAmount = parseFloat(document.getElementById('invBeløp').value) || 10000;
             const taxPct = parseFloat(document.getElementById('invTaxRegime').value) || 0;
-            const vatBeløp = Math.round(netBeløp * (taxPct / 100));
-            const total = netBeløp + vatBeløp;
+            const vatAmount = Math.round(netAmount * (taxPct / 100));
+            const total = netAmount + vatAmount;
             const invNum = 'INV-2026-0' + Math.floor(83 + Math.random() * 20);
             const dateStr = '2026-10-06';
             const taxLabel = taxPct > 0 ? `${taxPct}% BTW` : 'Reverse Charge 0%';
@@ -2837,13 +2837,13 @@
             tr.innerHTML = `
                 <td class="font-num">${invNum}</td>
                 <td>${client}</td>
-                <td class="font-num">€ ${netBeløp.toLocaleString()}</td>
-                <td class="font-num">€ ${vatBeløp.toLocaleString()} (${taxLabel})</td>
+                <td class="font-num">€ ${netAmount.toLocaleString()}</td>
+                <td class="font-num">€ ${vatAmount.toLocaleString()} (${taxLabel})</td>
                 <td class="font-num tx-amount-highlight">€ ${total.toLocaleString()}</td>
                 <td><span class="status-badge status-processing" id="status-badge-${invNum}">New - Due</span></td>
                 <td>
                     <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-${invNum}" onclick="openIdealSimulatorModal('${invNum}', '${client}', ${total})">Pay via iDEAL</button>
-                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netBeløp}, ${vatBeløp}, ${total}, 'Utestående', '${dateStr}', '${taxLabel}')">Vis Faktura</button>
+                    <button type="button" class="table-action-btn" onclick="previewInvoiceModal('${invNum}', '${client}', ${netAmount}, ${vatAmount}, ${total}, 'Utestående', '${dateStr}', '${taxLabel}')">Vis Faktura</button>
                 </td>
             `;
 
@@ -2856,7 +2856,7 @@
 
             updateInvoiceCounters();
             closeInvoiceGeneratorModal();
-            previewInvoiceModal(invNum, client, netBeløp, vatBeløp, total, 'Utestående', dateStr, taxLabel);
+            previewInvoiceModal(invNum, client, netAmount, vatAmount, total, 'Utestående', dateStr, taxLabel);
         }
 
         function previewInvoiceModal(num, client, net, vat, total, status, date, taxType, customIssuerName = null) {
@@ -3583,7 +3583,7 @@
         function openExecutivePdfModal() {
             updateGlobalFinancials();
             const dateEl = document.getElementById('pdfDatoDisplay');
-            if (dateEl) dateEl.innerText = new Dato().toISOString().split('T')[0];
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
             const modal = document.getElementById('executivePdfModal');
             if (modal) modal.classList.add('active');
         }
@@ -3666,7 +3666,7 @@ Direct Founders Contact: info@coresync.cloud
             const desc = document.getElementById('pubDesc').value;
 
             // Enterprise CoreSync Engine Logic
-            const id = 'custom_' + Dato.now();
+            const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
                 icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
