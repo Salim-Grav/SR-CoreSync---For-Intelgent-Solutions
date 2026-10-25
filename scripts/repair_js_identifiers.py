@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Translated JavaScript identifier repair
+S&R CoreSync For Intelligent Solutions - Translated JavaScript identifier repair
 ===============================================================================
 The multilingual generation pass translated JavaScript identifiers along with
 the visible copy. Examples:

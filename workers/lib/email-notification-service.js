@@ -11,7 +11,7 @@
  * ---------------------------------------------------------------------------
  */
 /**
- * S&R CoreSync Solutions - Enterprise Email & Invoice Dispatcher
+ * S&R CoreSync For Intelligent Solutions - Enterprise Email & Invoice Dispatcher
  * Multi-Provider Architecture: Native Hostinger SMTP (TLS/SSL 465) & SendGrid API
  * Automatically sends branded HTML receipt, official BTW invoice details,
  * and cryptographic license activation keys upon verified payment.
@@ -32,7 +32,7 @@ class EmailNotificationService {
     this.sendgridApiKey = process.env.SENDGRID_API_KEY || options.sendgridApiKey;
     this.postmarkToken = process.env.POSTMARK_SERVER_TOKEN || options.postmarkToken;
     this.fromEmail = process.env.EMAIL_FROM || options.fromEmail || 'billing@sr-coresync.com';
-    this.fromName = process.env.EMAIL_FROM_NAME || options.fromName || 'S&R CoreSync Solutions B.V.';
+    this.fromName = process.env.EMAIL_FROM_NAME || options.fromName || 'S&R CoreSync For Intelligent Solutions';
     this.adminEmail = process.env.EMAIL_ADMIN || options.adminEmail || 'salim@sr-coresync.com';
     this.supportEmail = process.env.EMAIL_SUPPORT || options.supportEmail || 'info@sr-coresync.com';
   }
@@ -117,7 +117,7 @@ class EmailNotificationService {
 <html lang="nl">
 <head>
   <meta charset="utf-8">
-  <title>Officiële Licentie &amp; BTW Factuur - S&amp;R CoreSync Solutions</title>
+  <title>Officiële Licentie &amp; BTW Factuur - S&amp;R CoreSync For Intelligent Solutions</title>
   <style>
     body { margin:0; padding:0; background:#010907; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#ffffff; }
     .email-wrapper { max-width:640px; margin:20px auto; background:#071410; border:1px solid rgba(197,168,128,0.25); border-radius:12px; overflow:hidden; }
@@ -138,13 +138,13 @@ class EmailNotificationService {
 <body>
   <div class="email-wrapper">
     <div class="header">
-      <div style="font-size:28px;">🛡️ S&amp;R CoreSync Solutions</div>
+      <div style="font-size:28px;">🛡️ S&amp;R CoreSync For Intelligent Solutions</div>
       <h1 class="title">Bevestiging van Licentie &amp; Factuur</h1>
       <p class="subtitle">Amsterdam HQ, Nederland • KvK 84920183 • BTW NL863412987B01</p>
     </div>
     <div class="content">
       <p>Geachte <strong>${customerName}</strong>,</p>
-      <p>Hartelijk dank voor uw aankoop bij <strong>S&amp;R CoreSync Solutions</strong>. Uw betaling is geverifieerd via het beveiligde Europese banknetwerk. Hieronder vindt u uw officiële licentiesleutel en factuurgegevens:</p>
+      <p>Hartelijk dank voor uw aankoop bij <strong>S&amp;R CoreSync For Intelligent Solutions</strong>. Uw betaling is geverifieerd via het beveiligde Europese banknetwerk. Hieronder vindt u uw officiële licentiesleutel en factuurgegevens:</p>
       
       <div class="license-card">
         <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-bottom:8px;">OFFICIËLE DIGITALE LICENTIESLEUTEL</div>
@@ -191,7 +191,7 @@ class EmailNotificationService {
     </div>
 
     <div class="footer">
-      S&amp;R CoreSync Solutions B.V. • Keizersgracht, 1016 Amsterdam, Nederland<br>
+      S&amp;R CoreSync For Intelligent Solutions • Keizersgracht, 1016 Amsterdam, Nederland<br>
       Voor technische ondersteuning: <a href="mailto:info@sr-coresync.com" style="color:#c5a880;">info@sr-coresync.com</a> of WhatsApp: +31 6 1811 1116.<br>
       Dit document geldt als officieel digitaal betalingsbewijs conform de Nederlandse belastingwetgeving.
     </div>
@@ -338,7 +338,7 @@ class EmailNotificationService {
    * High-level unified dispatcher for official Arabic/Multi-lingual Invoice & Quote
    */
   async sendOfficialInvoiceQuote({ to, clientName, quoteNumber, issueDate, validityDays, totalFormatted }) {
-    const subject = `فاتورة / عرض سعر رسمي معتمد #${quoteNumber || 'SR-2026-Q892'} • S&R CoreSync Solutions`;
+    const subject = `فاتورة / عرض سعر رسمي معتمد #${quoteNumber || 'SR-2026-Q892'} • S&R CoreSync For Intelligent Solutions`;
     const html = this.compileInvoiceQuoteTemplate({ clientName, quoteNumber, issueDate, validityDays, totalFormatted });
 
     console.log(`[Email Service] Dispatching certified Invoice/Quote to ${to} (${subject})...`);
@@ -353,7 +353,7 @@ class EmailNotificationService {
    * High-level unified dispatcher for Welcome & Onboarding Email
    */
   async sendOfficialWelcomeEmail({ to, customerName }) {
-    const subject = `أهلاً بكم في منظومة S&R CoreSync Solutions | مرحباً بكم`;
+    const subject = `أهلاً بكم في منظومة S&R CoreSync For Intelligent Solutions | مرحباً بكم`;
     const html = this.compileWelcomeEmailTemplate({ customerName });
 
     console.log(`[Email Service] Dispatching Official Welcome Email to ${to}...`);
@@ -368,7 +368,7 @@ class EmailNotificationService {
    * High-level unified dispatcher for Dutch BTW License invoice
    */
   async sendLicenseInvoice({ to, customerName, invoiceNumber, licenseKey, productTitle, amount, plan, downloadUrl }) {
-    const subject = `Factuur & Licentie ${invoiceNumber} - ${productTitle} | S&R CoreSync Solutions`;
+    const subject = `Factuur & Licentie ${invoiceNumber} - ${productTitle} | S&R CoreSync For Intelligent Solutions`;
     const html = this.generateInvoiceHtml({ customerName, invoiceNumber, licenseKey, productTitle, amount, plan, downloadUrl });
 
     console.log(`[Email Service] Dispatching official BTW invoice to ${to} for order ${invoiceNumber} via ${this.provider}...`);

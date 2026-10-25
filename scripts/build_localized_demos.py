@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - Multilingual Demo Generator
+S&R CoreSync For Intelligent Solutions - Multilingual Demo Generator
 Generates full, culturally-accurate, production-ready EN and NL localized versions of demo.html
 and injects the language switcher into AR demo.html.
 """
@@ -104,9 +104,9 @@ TRANSLATIONS = {
         'en': 'Emblem Studio',
         'nl': 'Embleem Studio'
     },
-    'العودة للصفحة الرئيسية - S&R CoreSync Solutions': {
-        'en': 'Return to Homepage - S&R CoreSync Solutions',
-        'nl': 'Terug naar Homepage - S&R CoreSync Solutions'
+    'العودة للصفحة الرئيسية - S&R CoreSync For Intelligent Solutions': {
+        'en': 'Return to Homepage - S&R CoreSync For Intelligent Solutions',
+        'nl': 'Terug naar Homepage - S&R CoreSync For Intelligent Solutions'
     },
     'العودة للموقع': {
         'en': 'Return to Website',

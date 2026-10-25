@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - JavaScript identifier corruption scanner
+S&R CoreSync For Intelligent Solutions - JavaScript identifier corruption scanner
 ===============================================================================
 The multilingual generation pass translates page copy. When it touches an
 inline <script> block it can translate JavaScript *built-ins* as well, e.g.

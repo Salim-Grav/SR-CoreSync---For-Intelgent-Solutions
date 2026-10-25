@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Publish Set Validator
+S&R CoreSync For Intelligent Solutions - Publish Set Validator
 ===============================================================================
 Verifies, locally, that the GitHub Pages artifact is safe to publish.
 

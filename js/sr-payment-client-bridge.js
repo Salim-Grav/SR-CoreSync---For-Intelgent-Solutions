@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Client Gateway Bridge
+ * S&R CoreSync For Intelligent Solutions - Client Gateway Bridge
  * Connects frontend checkout UI with Mollie / Stripe live payment services.
  */
 

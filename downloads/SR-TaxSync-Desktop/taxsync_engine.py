@@ -22,7 +22,7 @@ class TaxSyncEngine:
     def generate_xml(self, client_name, fiscal_id, calc_result):
         root = ET.Element("BelastingdienstAangifte")
         header = ET.SubElement(root, "Header")
-        ET.SubElement(header, "Vendor").text = "S&R CoreSync Solutions"
+        ET.SubElement(header, "Vendor").text = "S&R CoreSync For Intelligent Solutions"
         ET.SubElement(header, "License").text = self.license_key
 
         declarant = ET.SubElement(root, "Declarant")

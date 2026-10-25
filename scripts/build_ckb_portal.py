@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - Sorani Kurdish (ckb) Portal Generator
+S&R CoreSync For Intelligent Solutions - Sorani Kurdish (ckb) Portal Generator
 Generates full RTL Kurdish Sorani portal based on Arabic RTL master.
 """
 

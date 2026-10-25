@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — European Trust Ribbon & Compliance Verification Engine
+ * S&R CoreSync For Intelligent Solutions — European Trust Ribbon & Compliance Verification Engine
  * Multilingual interactive modal verification (AR, EN, NL, DE).
  */
 

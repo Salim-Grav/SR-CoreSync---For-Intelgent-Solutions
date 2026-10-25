@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Brand Assets Generator
+ * S&R CoreSync For Intelligent Solutions - Brand Assets Generator
  * Creates authentic vector SVG, EPS, 4K PNG mockups, and PDF guidelines
  * for all portfolio brand identity projects, packaged into downloadable ZIPs.
  */
@@ -170,7 +170,7 @@ const brands = {
         accentColor: '#38bdf8',
         darkColor: '#010907',
         year: '2026',
-        client: 'S&R CoreSync Solutions Amsterdam',
+        client: 'S&R CoreSync For Intelligent Solutions Amsterdam',
         svgEmblem: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200" width="100%" height="100%">
             <defs>
@@ -228,13 +228,13 @@ for (const [key, b] of Object.entries(brands)) {
 
     // 4. EPS vector file header
     const epsContent = `%!PS-Adobe-3.0 EPSF-3.0
-%%Creator: S&R CoreSync Solutions Vector Engine
+%%Creator: S&R CoreSync For Intelligent Solutions Vector Engine
 %%Title: ${b.name} Official Brand Asset
 %%BoundingBox: 0 0 500 200
 %%DocumentData: Clean7Bit
 %%LanguageLevel: 2
 %%EndComments
-% S&R CoreSync Solutions Official Brand Pack
+% S&R CoreSync For Intelligent Solutions Official Brand Pack
 % Client: ${b.client} (${b.year})
 gsave
 /Helvetica findfont 24 scalefont setfont
@@ -246,7 +246,7 @@ showpage
 
     // 5. Brand Identity Guidelines & Palette Specification Sheet
     const specSheet = `=============================================================================
-  S&R CORESYNC SOLUTIONS • OFFICIAL BRAND IDENTITY GUIDELINES
+  S&R CORESYNC FOR INTELLIGENT SOLUTIONS • OFFICIAL BRAND IDENTITY GUIDELINES
   ${b.name} MASTER ASSET SPECIFICATIONS
 =============================================================================
 
@@ -275,7 +275,7 @@ OFFICIAL FILE FORMATS INCLUDED:
   • PDF-Guidelines/ : This Design Specification Sheet
 
 LEGAL & COPYRIGHT:
-  © ${b.year} ${b.client}. Designed & Engineered by S&R CoreSync Solutions.
+  © ${b.year} ${b.client}. Designed & Engineered by S&R CoreSync For Intelligent Solutions.
   All Rights Reserved. Official Digital Release.
 =============================================================================`;
     fs.writeFileSync(path.join(pdfDir, `${b.id}-brand-guidelines.txt`), specSheet, 'utf8');

@@ -33,7 +33,7 @@ const CONTENT = {
                 { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Information Security ✓', title: 'Security & Risk Governance', desc: 'Rigorous alignment with ISO/IEC 27001 standards and SOC 2 Type II controls for enterprise risk governance.' },
                 { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Sovereign Encryption ✓', title: 'Cryptographic Zero-Knowledge', desc: 'Dedicated single-tenant databases with client-controlled keys (BYOK), eliminating third-party backdoors.' }
             ],
-            footerLegal: 'S&R CoreSync Solutions B.V. operates strictly under Dutch and European Union jurisdictions.',
+            footerLegal: 'S&R CoreSync For Intelligent Solutions operates strictly under Dutch and European Union jurisdictions.',
             certBtn: 'Request Enterprise Compliance Dossier (PDF) →'
         },
         matrix: {
@@ -119,7 +119,7 @@ const CONTENT = {
                 { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Informatiebeveiliging ✓', title: 'Beveiliging & Risicobeheer', desc: 'Strikte conformiteit met ISO/IEC 27001-normen en SOC 2 Type II-principes voor integraal risicobeheer.' },
                 { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Soevereine Versleuteling ✓', title: 'Cryptografische Zero-Knowledge', desc: 'Toegewijde databases met door de klant beheerde sleutels (BYOK), zonder achterdeuren voor derden.' }
             ],
-            footerLegal: 'S&R CoreSync Solutions B.V. opereert strikt onder Nederlands en Europees recht.',
+            footerLegal: 'S&R CoreSync For Intelligent Solutions opereert strikt onder Nederlands en Europees recht.',
             certBtn: 'Vraag Zakelijk Compliance-Dossier Aan (PDF) →'
         },
         matrix: {
@@ -205,7 +205,7 @@ const CONTENT = {
                 { id: 'iso', code: 'ISO 27001 / SOC 2', status: 'Informationssicherheit ✓', title: 'Sicherheit & Risikomanagement', desc: 'Konsequente Ausrichtung an ISO/IEC 27001-Vorgaben und SOC 2 Type II-Richtlinien für unternehmensweites Risikomanagement.' },
                 { id: 'zeroknowledge', code: 'Zero-Knowledge', status: 'Souveräne Verschlüsselung ✓', title: 'Kryptographische Zero-Knowledge', desc: 'Dedizierte Datenbanken mit kundenkontrollierten Schlüsseln (BYOK), ohne jegliche Hintertüren für Dritte.' }
             ],
-            footerLegal: 'S&R CoreSync Solutions B.V. unterliegt vollumfänglich niederländischem und EU-Recht.',
+            footerLegal: 'S&R CoreSync For Intelligent Solutions unterliegt vollumfänglich niederländischem und EU-Recht.',
             certBtn: 'Unternehmens-Compliance-Dossier Anfordern (PDF) →'
         },
         matrix: {

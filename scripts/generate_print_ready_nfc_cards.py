@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Ultra High-Resolution Print-Ready NFC Smart Cards Generator
+S&R CoreSync For Intelligent Solutions - Ultra High-Resolution Print-Ready NFC Smart Cards Generator
 Outputs 300 DPI CMYK-Safe CR80 standard physical card layouts (2048 x 1280 px)
 for Eng. Mohammad Salim Aziza & Mr. Mohammad Raed Kaaka.
 """
@@ -61,7 +61,7 @@ def create_front_card(founder_id, name, ar_name, title, ar_title, phone, email, 
             card.paste(emb, (70, 65), mask)
             draw.ellipse([68, 63, 70 + emb_sz + 2, 65 + emb_sz + 2], outline=GOLD_BRIGHT, width=3)
             
-    draw.text((235, 80), "S&R CORESYNC SOLUTIONS", fill=TEXT_WHITE, font=f_sub)
+    draw.text((235, 80), "S&R CORESYNC FOR INTELLIGENT SOLUTIONS", fill=TEXT_WHITE, font=f_sub)
     draw.text((235, 130), "ENTERPRISE CLOUD • SOVEREIGN AI • FINANCIAL ERP ARCHITECTURE", fill=GOLD_MAIN, font=f_micro)
     draw.text((235, 160), "AMSTERDAM, NETHERLANDS • KEIZERSGRACHT 482", fill=TEXT_MUTED, font=f_micro)
 
@@ -176,7 +176,7 @@ def create_back_card(founder_id, name, out_file):
 
     # Bottom Corporate Branding
     draw.line([80, h - 130, w - 80, h - 130], fill=GOLD_DARK, width=1)
-    draw.text((90, h - 95), "S&R CORESYNC SOLUTIONS B.V. • AMSTERDAM • DUBAI • FRANKFURT", fill=GOLD_MAIN, font=f_small)
+    draw.text((90, h - 95), "S&R CORESYNC FOR INTELLIGENT SOLUTIONS • AMSTERDAM • DUBAI • FRANKFURT", fill=GOLD_MAIN, font=f_small)
     draw.text((w - 480, h - 95), "OFFICIAL PHYSICAL NFC CARD • 2026", fill=TEXT_MUTED, font=f_small)
 
     out_path = os.path.join(ASSETS_DIR, out_file)

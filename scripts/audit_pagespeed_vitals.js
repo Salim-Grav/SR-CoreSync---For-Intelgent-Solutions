@@ -43,7 +43,7 @@ function startServer(port) {
 
 async function auditVitals() {
     console.log('============================================================');
-    console.log('⚡ S&R CoreSync Solutions - Core Web Vitals & PageSpeed Auditor');
+    console.log('⚡ S&R CoreSync For Intelligent Solutions - Core Web Vitals & PageSpeed Auditor');
     console.log('============================================================\n');
 
     const srvPort = 9590;

@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Enterprise Production Optimizer
+ * S&R CoreSync For Intelligent Solutions - Enterprise Production Optimizer
  * Automates CSS & JS asset minification, calculates compression ratios,
  * and generates deployment-ready bundles.
  */
@@ -108,7 +108,7 @@ function processAsset(inputPath, outputPath, type) {
 }
 
 console.log('------------------------------------------------------------');
-console.log('🚀 S&R CoreSync Solutions - Building Production Assets...');
+console.log('🚀 S&R CoreSync For Intelligent Solutions - Building Production Assets...');
 console.log('------------------------------------------------------------');
 
 const results = [];

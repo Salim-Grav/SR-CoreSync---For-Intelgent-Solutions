@@ -1,6 +1,6 @@
 """
 Generate Branded Luxury QR Codes with Embedded HD Gold Emblem in Center
-for S&R CoreSync Solutions.
+for S&R CoreSync For Intelligent Solutions.
 """
 
 import os
@@ -69,5 +69,5 @@ def generate_branded_qr(data_url, out_filename, title, subtitle):
 if __name__ == "__main__":
     generate_branded_qr("https://sr-coresync.com/card.html?id=salim", "qr-founder-salim.png", "م. محمد سليم عزيزة", "CTO & Cloud Architect")
     generate_branded_qr("https://sr-coresync.com/card.html?id=raed", "qr-founder-raed.png", "أ. محمد رائد كعكة", "CFO & ERP Architect")
-    generate_branded_qr("https://sr-coresync.com/", "qr-company-emblem.png", "S&R CoreSync Solutions", "Enterprise Systems")
+    generate_branded_qr("https://sr-coresync.com/", "qr-company-emblem.png", "S&R CoreSync For Intelligent Solutions", "Enterprise Systems")
     print("All Branded QR codes successfully generated!")

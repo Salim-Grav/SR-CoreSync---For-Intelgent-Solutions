@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Comprehensive Site Quality & Accessibility Auditor
+ * S&R CoreSync For Intelligent Solutions - Comprehensive Site Quality & Accessibility Auditor
  * Audits index.html (AR), en/index.html (EN), nl/index.html (NL) for SEO & WCAG standards
  */
 
@@ -138,7 +138,7 @@ function auditPage(pageConfig) {
 }
 
 console.log('============================================================');
-console.log('🔍 S&R CoreSync Solutions - Comprehensive Audit');
+console.log('🔍 S&R CoreSync For Intelligent Solutions - Comprehensive Audit');
 console.log('============================================================\n');
 
 PAGES.forEach(p => {

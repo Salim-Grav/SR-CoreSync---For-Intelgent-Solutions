@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — Sovereign Floating Quick-Dock Engine
+ * S&R CoreSync For Intelligent Solutions — Sovereign Floating Quick-Dock Engine
  * Ultra-responsive macOS-style floating dock for seamless cross-navigation.
  */
 

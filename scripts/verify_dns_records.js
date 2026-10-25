@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — live DNS / e-mail authentication checker
+ * S&R CoreSync For Intelligent Solutions — live DNS / e-mail authentication checker
  * -----------------------------------------------------------------
  * The previous version of this script read `config/dns-records.json` and
  * validated the JSON against itself, which is how a completely unconfigured

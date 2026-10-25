@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - 100% Comprehensive Multilingual Demo Portal Generator (v2)
+S&R CoreSync For Intelligent Solutions - 100% Comprehensive Multilingual Demo Portal Generator (v2)
 Translates EVERY single Arabic string in demo.html to high-end corporate English and Dutch.
 Establishes full language isolation and LTR ergonomics with ZERO leftover Arabic text.
 """
@@ -67,9 +67,9 @@ DICT = {
         "Emblem Studio",
         "Embleem Studio"
     ),
-    "العودة للصفحة الرئيسية - S&R CoreSync Solutions": (
-        "Return to Homepage - S&R CoreSync Solutions",
-        "Terug naar Homepage - S&R CoreSync Solutions"
+    "العودة للصفحة الرئيسية - S&R CoreSync For Intelligent Solutions": (
+        "Return to Homepage - S&R CoreSync For Intelligent Solutions",
+        "Terug naar Homepage - S&R CoreSync For Intelligent Solutions"
     ),
     "العودة للموقع": (
         "Return to Website",
@@ -999,9 +999,9 @@ DICT = {
         "Looking to engineer and distribute your proprietary software on our platform?",
         "Wilt u uw eigen commerciële software ontwikkelen en distribueren via ons platform?"
     ),
-    "توفر شركة S&R CoreSync Solutions بنية متكاملة للمطورين لتوزيع البرمجيات مع نظام التراخيص الرقمية المشفرة وبوابات الدفع الهولندية والأوروبية والخليجية.": (
-        "S&R CoreSync Solutions offers an enterprise distribution rail featuring encrypted license keys, multi-currency payment gateways, and automated revenue share.",
-        "S&R CoreSync Solutions biedt een complete distributie-infrastructuur met versleutelde licenties, Europese en GCC betaalkoppelingen en geautomatiseerde facturatie."
+    "توفر شركة S&R CoreSync For Intelligent Solutions بنية متكاملة للمطورين لتوزيع البرمجيات مع نظام التراخيص الرقمية المشفرة وبوابات الدفع الهولندية والأوروبية والخليجية.": (
+        "S&R CoreSync For Intelligent Solutions offers an enterprise distribution rail featuring encrypted license keys, multi-currency payment gateways, and automated revenue share.",
+        "S&R CoreSync For Intelligent Solutions biedt een complete distributie-infrastructuur met versleutelde licenties, Europese en GCC betaalkoppelingen en geautomatiseerde facturatie."
     ),
     "إضافة برنامج جديد الآن": (
         "Publish Enterprise Software Now",
@@ -1241,9 +1241,9 @@ DICT = {
         "Preview Official Branded Invoice with Your Enterprise Emblem",
         "Officiële Factuur met Uw Bedrijfsidentiteit Bekijken"
     ),
-    "يمكن لشركة S&R CoreSync Solutions تخصيص نظام الـ ERP ونظام الفوترة والمحاسبة الذكية بالكامل تحت علامتك التجارية (White-Label Deployment) على نطاقك الخاص (yourcompany.com) مع خوادم معزولة بالكامل.": (
-        "S&R CoreSync Solutions delivers turnkey white-label enterprise deployments on your custom domain (e.g. portal.yourcompany.com) with dedicated sovereign database clusters and complete brand isolation.",
-        "S&R CoreSync Solutions levert kant-en-klare white-label implementaties op uw eigen domein (bijv. portaal.uwbedrijf.nl) met dedicated soevereine databases en volledige merkisolatie."
+    "يمكن لشركة S&R CoreSync For Intelligent Solutions تخصيص نظام الـ ERP ونظام الفوترة والمحاسبة الذكية بالكامل تحت علامتك التجارية (White-Label Deployment) على نطاقك الخاص (yourcompany.com) مع خوادم معزولة بالكامل.": (
+        "S&R CoreSync For Intelligent Solutions delivers turnkey white-label enterprise deployments on your custom domain (e.g. portal.yourcompany.com) with dedicated sovereign database clusters and complete brand isolation.",
+        "S&R CoreSync For Intelligent Solutions levert kant-en-klare white-label implementaties op uw eigen domein (bijv. portaal.uwbedrijf.nl) met dedicated soevereine databases en volledige merkisolatie."
     ),
     "جاهز لإطلاق نسختك الخاصة من النظام؟": (
         "Ready to deploy your sovereign enterprise ERP instance?",
@@ -1689,9 +1689,9 @@ DICT = {
         "Certified accounting bridge to Dutch Tax Administration (Digipoort SBR)",
         "Gecertificeerde boekhoudkoppeling met de Belastingdienst (Digipoort SBR)"
     ),
-    "حوكمة استشارية مباشرة بإشراف مؤسسي S&R CoreSync Solutions": (
-        "Executive governance guided directly by the founders of S&R CoreSync Solutions",
-        "Directe executive begeleiding onder toezicht van de oprichters van S&R CoreSync Solutions"
+    "حوكمة استشارية مباشرة بإشراف مؤسسي S&R CoreSync For Intelligent Solutions": (
+        "Executive governance guided directly by the founders of S&R CoreSync For Intelligent Solutions",
+        "Directe executive begeleiding onder toezicht van de oprichters van S&R CoreSync For Intelligent Solutions"
     ),
     "ينعكس الاسم المخصص تلقائياً على الوثيقة المطبوعة": (
         "Customized name reflects automatically across exported documents",
@@ -1702,7 +1702,7 @@ DICT = {
         "Op Maat Gemaakt Zakelijk Consultdossier"
     ),
     "🌟 نظرة عامة على حلول S&R CoreSync": (
-        "🌟 Overview of S&R CoreSync Solutions",
+        "🌟 Overview of S&R CoreSync For Intelligent Solutions",
         "🌟 Overzicht van S&R CoreSync Oplossingen"
     ),
     "منظومة سحابية أوروبية موحدة تجمع بين معايير هندسة البرمجيات الهولندية (Compliant with Dutch Tax Administration AWR & EU GDPR) وسرعة البنية التحتية التوزيعية، متوافقة كلياً مع الفوترة الإلكترونية EN 16931 والربط المصرفي المباشر.": (

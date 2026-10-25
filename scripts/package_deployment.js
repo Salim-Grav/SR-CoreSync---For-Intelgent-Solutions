@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Enterprise Production Packager
+ * S&R CoreSync For Intelligent Solutions - Enterprise Production Packager
  * Compiles minified bundles, filters production assets, and generates
  * a clean deployment ZIP package ready for live Hostinger cPanel deployment.
  */
@@ -10,7 +10,7 @@ const crypto = require('crypto');
 const { execSync } = require('child_process');
 
 console.log('============================================================');
-console.log('📦 S&R CoreSync Solutions - Generating Deployment Package...');
+console.log('📦 S&R CoreSync For Intelligent Solutions - Generating Deployment Package...');
 console.log(' Enterprise Cloud & Financial ERP Systems • Amsterdam HQ');
 console.log('============================================================');
 
@@ -144,7 +144,7 @@ const sha256Hex = hashSum.digest('hex');
 console.log('📝 Step 4/4: Generating Hostinger cPanel Deployment Guide & Verification Report...');
 
 const reportData = {
-  projectName: 'S&R CoreSync Solutions',
+  projectName: 'S&R CoreSync For Intelligent Solutions',
   version: '2.0.0-PROD',
   timestamp: new Date().toISOString(),
   timestampArabic: 'الثلاثاء، 20 أكتوبر 2026 - الساعة 06:25 صباحاً',
@@ -179,7 +179,7 @@ const reportJsonPath = path.join(distDir, 'PRODUCTION_VERIFICATION_REPORT.json')
 fs.writeFileSync(reportJsonPath, JSON.stringify(reportData, null, 2), 'utf8');
 
 const guideMarkdown = `# دليل نشر الإنتاج المعتمد — خوادم Hostinger cPanel
-### مشروع: S&R CoreSync Solutions B.V. (Enterprise Edition v2.0)
+### مشروع: S&R CoreSync For Intelligent Solutions (Enterprise Edition v2.0)
 **تاريخ وموعد الاعتماد:** ${reportData.timestampArabic}
 
 ---

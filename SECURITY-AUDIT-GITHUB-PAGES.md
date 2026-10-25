@@ -1,6 +1,6 @@
 # 🔐 تقرير تدقيق أمني — GitHub Pages
 
-**S&R CoreSync Solutions**
+**S&R CoreSync For Intelligent Solutions**
 **التاريخ:** الخميس، 22 أكتوبر 2026 — الساعة 12:43 فجراً
 **النطاق:** `https://sr-coresync.com` + المستودع `Salim-Grav/SR-CoreSync---For-Intelgent-Solutions`
 

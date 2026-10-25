@@ -93,7 +93,7 @@ window.submitContactForm = async function (event) {
     if (btn) { btn.disabled = false; if (btn.tagName === 'BUTTON') btn.innerHTML = label; else btn.value = label; }
 
     if (sent) {
-        alert('\\u0634\\u0643\\u0631\\u0627\\u064b \\u0644\\u062a\\u0648\\u0627\\u0635\\u0644\\u0643 \\u0645\\u0639 S&R CoreSync Solutions! \\u062a\\u0645 \\u0627\\u0633\\u062a\\u0644\\u0627\\u0645 \\u0637\\u0644\\u0628\\u0643 \\u0648\\u0633\\u064a\\u062a\\u0648\\u0627\\u0635\\u0644 \\u0645\\u0639\\u0643 \\u0627\\u0644\\u0634\\u0631\\u064a\\u0643\\u0627\\u0646 \\u0627\\u0644\\u0645\\u0624\\u0633\\u0633\\u0627\\u0646 \\u0642\\u0631\\u064a\\u0628\\u0627\\u064b.');
+        alert('\\u0634\\u0643\\u0631\\u0627\\u064b \\u0644\\u062a\\u0648\\u0627\\u0635\\u0644\\u0643 \\u0645\\u0639 S&R CoreSync For Intelligent Solutions! \\u062a\\u0645 \\u0627\\u0633\\u062a\\u0644\\u0627\\u0645 \\u0637\\u0644\\u0628\\u0643 \\u0648\\u0633\\u064a\\u062a\\u0648\\u0627\\u0635\\u0644 \\u0645\\u0639\\u0643 \\u0627\\u0644\\u0634\\u0631\\u064a\\u0643\\u0627\\u0646 \\u0627\\u0644\\u0645\\u0624\\u0633\\u0633\\u0627\\u0646 \\u0642\\u0631\\u064a\\u0628\\u0627\\u064b.');
         form.reset();
     } else {
         var line = [

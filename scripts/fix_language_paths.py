@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Precise localized path repair
+S&R CoreSync For Intelligent Solutions - Precise localized path repair
 ================================================================
 Resolves every "./..." reference inside a localized page (<lang>/*.html)
 against the repository root. When the target does not exist inside the

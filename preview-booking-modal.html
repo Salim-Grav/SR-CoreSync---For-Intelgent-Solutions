@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl" data-page-language="ar">
 <head>
     <meta charset="utf-8">
-    <title>معاينة نافذة حجز الاستشارات التنفيذية وربط الأتمتة (Webhook Lead Dispatcher) | S&R CoreSync Solutions</title>
+    <title>معاينة نافذة حجز الاستشارات التنفيذية وربط الأتمتة (Webhook Lead Dispatcher) | S&R CoreSync For Intelligent Solutions</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="معاينة حية ومباشرة لنافذة حجز الاستشارات التنفيذية VIP المربوطة بنظام الأتمتة الخارجي Webhook Lead Dispatcher لـ Google Sheets و Make.com و n8n.">
     <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
@@ -388,7 +388,7 @@
             // Smart phone destination
             const targetPhone = (advisor === 'raed') ? '31687710290' : '31618111116';
             const advisorName = (advisor === 'raed') ? 'أ. رائد كعكة (المحاسبة والضرائب)' : 'م. سليم عزيزة (الأنظمة والسحابة)';
-            const waMsg = `*طلب استشارة تنفيذية VIP - S&R CoreSync Solutions*\n` +
+            const waMsg = `*طلب استشارة تنفيذية VIP - S&R CoreSync For Intelligent Solutions*\n` +
                           `رقم الطلب: ${result.leadId}\n` +
                           `المستشار: ${advisorName}\n` +
                           `العميل: ${leadData.clientName} (${leadData.companyName})\n` +
@@ -424,7 +424,7 @@
             const advisorName = (advisor === 'raed') ? 'أ. رائد كعكة (المحاسبة والضرائب)' : (advisor === 'salim' ? 'م. سليم عزيزة (الأنظمة والسحابة)' : 'كلا الشريكين');
             const subject = encodeURIComponent(`طلب استشارة VIP [${result.leadId}] - ${leadData.clientName} (${advisorName})`);
             const body = encodeURIComponent(
-                `السادة إدارة S&R CoreSync Solutions المحترمين،\n\n` +
+                `السادة إدارة S&R CoreSync For Intelligent Solutions المحترمين،\n\n` +
                 `طلب استشارة تنفيذية برقم: ${result.leadId}\n` +
                 `المستشار المطلوب: ${advisorName}\n` +
                 `الاسم: ${leadData.clientName}\n` +

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - 4 High-Conversion Enterprise Features Injector
+S&R CoreSync For Intelligent Solutions - 4 High-Conversion Enterprise Features Injector
 Injects:
 1. VIP Branded Client Proposal Engine Banner (with instant company name input)
 2. Interactive Smart ROI & Cost Savings Calculator Tab (3 sliders + live gold counters)

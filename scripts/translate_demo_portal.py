@@ -33,7 +33,7 @@ DICT_EN = {
     'title="استوديو ومحرر الشعار"': 'title="Emblem & Brand Studio"',
     'استوديو الشعار': 'Emblem Studio',
     'العودة للموقع': 'Return to Website',
-    'العودة للصفحة الرئيسية - S&R CoreSync Solutions': 'Return to Homepage - S&R CoreSync Solutions',
+    'العودة للصفحة الرئيسية - S&R CoreSync For Intelligent Solutions': 'Return to Homepage - S&R CoreSync For Intelligent Solutions',
     'النظام السحابي متصل (EU Node)': 'Cloud System Online (EU Node)',
     'بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون': 'Start interactive step-by-step guided tour of platform features',
     '🚀 ابدأ الجولة': '🚀 Start Tour',
@@ -327,7 +327,7 @@ DICT_EN = {
     'المؤسس والمدير التقني التنفيذي (CTO)': 'Founder & Chief Technology Officer (CTO)',
     'المؤسس والمدير المالي التنفيذي (CFO)': 'Founder & Chief Financial Officer (CFO)',
     'مقر القيادة: أمستردام، مملكة هولندا | التسليم المؤسسي: أوروبا والشرق الأوسط': 'Headquarters: Amsterdam, The Netherlands | Global Enterprise Delivery',
-    'جميع الحقوق محفوظة لمنصة S&R CoreSync Solutions B.V. © 2026': 'All Rights Reserved. S&R CoreSync Solutions B.V. © 2026'
+    'جميع الحقوق محفوظة لمنصة S&R CoreSync For Intelligent Solutions © 2026': 'All Rights Reserved. S&R CoreSync For Intelligent Solutions © 2026'
 }
 
 # Clone for Dutch with Dutch-specific vocabulary
@@ -337,7 +337,7 @@ DICT_NL.update({
     'title="استوديو ومحرر الشعار"': 'title="Merk- & Embleem Studio"',
     'استوديو الشعار': 'Embleem Studio',
     'العودة للموقع': 'Terug naar Website',
-    'العودة للصفحة الرئيسية - S&R CoreSync Solutions': 'Terug naar Homepage - S&R CoreSync Solutions',
+    'العودة للصفحة الرئيسية - S&R CoreSync For Intelligent Solutions': 'Terug naar Homepage - S&R CoreSync For Intelligent Solutions',
     'النظام السحابي متصل (EU Node)': 'Cloud Systeem Online (EU Node)',
     'بدء جولة إرشادية خطواتية توضح مزايا المنصة للزبون': 'Start interactieve stapsgewijze rondleiding langs platformfuncties',
     '🚀 ابدأ الجولة': '🚀 Start Rondleiding',
@@ -631,7 +631,7 @@ DICT_NL.update({
     'المؤسس والمدير التقني التنفيذي (CTO)': 'Oprichter & Chief Technology Officer (CTO)',
     'المؤسس والمدير المالي التنفيذي (CFO)': 'Oprichter & Chief Financial Officer (CFO)',
     'مقر القيادة: أمستردام، مملكة هولندا | التسليم المؤسسي: أوروبا والشرق الأوسط': 'Hoofdkantoor: Amsterdam, Nederland | Wereldwijde Zakelijke Levering',
-    'جميع الحقوق محفوظة لمنصة S&R CoreSync Solutions B.V. © 2026': 'Alle rechten voorbehouden. S&R CoreSync Solutions B.V. © 2026'
+    'جميع الحقوق محفوظة لمنصة S&R CoreSync For Intelligent Solutions © 2026': 'Alle rechten voorbehouden. S&R CoreSync For Intelligent Solutions © 2026'
 })
 
 def apply_translation(html, mapping, lang):

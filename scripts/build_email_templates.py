@@ -37,14 +37,14 @@ TEMPLATES = [
         'name': 'welcome-email',
         'html': 'templates/welcome-email.html',
         'css': 'css/welcome-email.css',
-        'preheader': 'مرحباً بكم في S&R CoreSync Solutions — أنظمة ERP سحابية وأتمتة ذكية واستشارات مالية في هولندا وأوروبا.',
+        'preheader': 'مرحباً بكم في S&R CoreSync For Intelligent Solutions — أنظمة ERP سحابية وأتمتة ذكية واستشارات مالية في هولندا وأوروبا.',
         'bg': [('outer-table', '#080a0f'), ('wrapper-table', '#0f131a')],
     },
     {
         'name': 'invoice-quote',
         'html': 'templates/invoice-quote-email.html',
         'css': 'css/invoice-quote-email.css',
-        'preheader': 'فاتورة / عرض سعر رسمي من S&R CoreSync Solutions — التفاصيل والمبالغ وضريبة BTW 21%.',
+        'preheader': 'فاتورة / عرض سعر رسمي من S&R CoreSync For Intelligent Solutions — التفاصيل والمبالغ وضريبة BTW 21%.',
         'bg': [('outer-table', '#080a0f'), ('wrapper-table', '#0f131a')],
     },
 ]

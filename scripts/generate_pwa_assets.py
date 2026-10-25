@@ -59,7 +59,7 @@ def update_manifest():
     manifest_path = os.path.join(ROOT, 'manifest.json')
     
     manifest_data = {
-        "name": "S&R CoreSync Solutions",
+        "name": "S&R CoreSync For Intelligent Solutions",
         "short_name": "CoreSync",
         "id": "/",
         "description": "برمجيات سحابية متقدمة، حلول ERP، واستشارات مالية ذكية",

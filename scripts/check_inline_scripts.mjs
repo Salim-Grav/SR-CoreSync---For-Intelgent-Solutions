@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - inline script syntax checker
+ * S&R CoreSync For Intelligent Solutions - inline script syntax checker
  * Extracts every inline <script> block from the published HTML pages and
  * parses it with the JavaScript engine, so a corrupted translation cannot
  * reach production unnoticed.

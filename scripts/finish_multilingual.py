@@ -113,14 +113,14 @@ old_nl_salim = """                <!-- 2. Single View: Ing. Mohammad Salim Aziza
 new_nl_emblem = """                <!-- Individuele Weergave: Officieel Bedrijfsembleem -->
                 <div id="viewEmblem" class="showcase-single-view showcase-is-hidden">
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync Solutions • Officieel Directie Embleem')">
-                            <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Solutions Officieel Luxe Embleem" class="showcase-img" loading="lazy">
+                        <div class="showcase-img-wrap" onclick="openFoundersLightbox('../assets/sr-emblem-gold-luxury.jpg', 'S&amp;R CoreSync For Intelligent Solutions • Officieel Directie Embleem')">
+                            <img src="../assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Officieel Luxe Embleem" class="showcase-img" loading="lazy">
                         </div>
                         <div class="showcase-banner-footer">
                             <div class="showcase-footer-meta">
                                 <div class="showcase-footer-avatar" style="background: linear-gradient(135deg, #c5a880, #f3dfba); color: #050706; font-weight: 900;">👑</div>
                                 <div>
-                                    <div class="showcase-footer-title">S&amp;R CoreSync Solutions • Officieel Directie Embleem</div>
+                                    <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • Officieel Directie Embleem</div>
                                     <div class="showcase-footer-role">For Intelligent Solutions • Cloud Architectuur, Enterprise AI &amp; ERP Integratie</div>
                                     <div class="showcase-credentials-badges">
                                         <span class="cred-badge"><i class="badge-dot"></i> Officieel Bedrijfsembleem</span>

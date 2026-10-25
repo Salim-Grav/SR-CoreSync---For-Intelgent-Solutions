@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Sovereign Lead Dispatcher (Client Runtime)
+ * S&R CoreSync For Intelligent Solutions - Sovereign Lead Dispatcher (Client Runtime)
  * -----------------------------------------------------------------------------
  * Dispatches consultation / VIP booking leads to the Cloudflare Worker API.
  *

@@ -1,13 +1,13 @@
 """
 Generate 4K High-Res Banners and Luxury Golden QR Codes + vCards
-for S&R CoreSync Solutions.
+for S&R CoreSync For Intelligent Solutions.
 """
 
 import os
 import qrcode
 from PIL import Image, ImageEnhance, ImageFilter, ImageDraw
 
-PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
+PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project"
 ASSETS_DIR = os.path.join(PROJECT_DIR, "assets")
 
 def generate_4k_banners():
@@ -50,13 +50,13 @@ def generate_vcards():
 VERSION:3.0
 N:عزيزة;محمد سليم;م.;;
 FN:م. محمد سليم عزيزة (Mohammad Salim Aziza)
-ORG:S&R CoreSync Solutions
+ORG:S&R CoreSync For Intelligent Solutions
 TITLE:Chief Technology Officer & Principal Cloud & AI Architect
 EMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com
 TEL;TYPE=CELL,WORK:+31618111116
 ADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;;1016 GD;Netherlands
 URL:https://sr-coresync.com
-NOTE:S&R CoreSync Solutions - Enterprise Cloud Architecture, AI Automation & Digital Systems
+NOTE:S&R CoreSync For Intelligent Solutions - Enterprise Cloud Architecture, AI Automation & Digital Systems
 REV:2026-10-18T10:00:00Z
 END:VCARD"""
 
@@ -64,21 +64,21 @@ END:VCARD"""
 VERSION:3.0
 N:كعكة;محمد رائد;أ.;;
 FN:أ. محمد رائد كعكة (Mohammad Raed Kaaka)
-ORG:S&R CoreSync Solutions
+ORG:S&R CoreSync For Intelligent Solutions
 TITLE:Chief Financial Officer & Senior Financial ERP Consultant
 EMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com
 TEL;TYPE=CELL,WORK:+31618111116
 ADR;TYPE=WORK:;;Keizersgracht 482;Amsterdam;;1016 GD;Netherlands
 URL:https://sr-coresync.com
-NOTE:S&R CoreSync Solutions - Advanced ERP Systems, Financial Consulting & Enterprise Automation
+NOTE:S&R CoreSync For Intelligent Solutions - Advanced ERP Systems, Financial Consulting & Enterprise Automation
 REV:2026-10-18T10:00:00Z
 END:VCARD"""
 
     vcard_company = """BEGIN:VCARD
 VERSION:3.0
 N:Solutions;S&R CoreSync;;;
-FN:S&R CoreSync Solutions
-ORG:S&R CoreSync Solutions
+FN:S&R CoreSync For Intelligent Solutions
+ORG:S&R CoreSync For Intelligent Solutions
 TITLE:Enterprise Cloud & Financial ERP Systems
 EMAIL;TYPE=INTERNET,WORK:info@sr-coresync.com
 TEL;TYPE=WORK:+31618111116
@@ -159,5 +159,5 @@ if __name__ == "__main__":
     v_salim, v_raed, v_company = generate_vcards()
     create_luxury_qr(v_salim, "qr-founder-salim.png", "م. محمد سليم عزيزة")
     create_luxury_qr(v_raed, "qr-founder-raed.png", "أ. محمد رائد كعكة")
-    create_luxury_qr(v_company, "qr-company-emblem.png", "S&R CoreSync Solutions")
+    create_luxury_qr(v_company, "qr-company-emblem.png", "S&R CoreSync For Intelligent Solutions")
     print("All 4K banners and QR codes generated!")

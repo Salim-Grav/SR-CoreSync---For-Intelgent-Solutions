@@ -31,7 +31,7 @@ navbar_work = """    <!-- شريط الملاحة والرجوع الفاخر ا
             </a>
             <div class="sr-preview-navbar__brand">
                 <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R CoreSync" width="28" height="28">
-                <span class="sr-brand-name">S&R CoreSync™ Solutions</span>
+                <span class="sr-brand-name">S&R CoreSync For Intelligent Solutions</span>
                 <span class="sr-preview-chip">معرض الأعمال والمنصات السيادية</span>
             </div>
             <a href="./index.html" class="sr-btn-home-link" title="العودة للبوابة الرئيسية">
@@ -83,7 +83,7 @@ navbar_soft = """    <!-- شريط الملاحة والرجوع الفاخر ا
             </a>
             <div class="sr-preview-navbar__brand">
                 <img src="./assets/sr-core-emblem.svg?v=sovereign2026" alt="S&R CoreSync" width="28" height="28">
-                <span class="sr-brand-name">S&R CoreSync™ Solutions</span>
+                <span class="sr-brand-name">S&R CoreSync For Intelligent Solutions</span>
                 <span class="sr-preview-chip">سوق البرمجيات والمنصات الجاهزة</span>
             </div>
             <a href="./preview-work.html#platforms" class="sr-btn-home-link" title="معاينة قسم المنصات والأعمال">

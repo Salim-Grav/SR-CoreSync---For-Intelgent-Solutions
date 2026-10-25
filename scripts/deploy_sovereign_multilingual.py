@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - Sovereign Global Multilingual Infrastructure
+S&R CoreSync For Intelligent Solutions - Sovereign Global Multilingual Infrastructure
 Generates and maintains 28 Languages:
 - All 24 European Union Official Languages
 - Norwegian (Scandinavia / EEA)

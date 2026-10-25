@@ -87,11 +87,11 @@ check('To header carries both', multi.includes('To: info@sr-coresync.com, billin
 
 const html = '<p>مرحبا بالعالم — S&R CoreSync</p>';
 const raw = buildMime({
-    from: 'info@sr-coresync.com', fromName: 'S&R CoreSync Solutions',
+    from: 'info@sr-coresync.com', fromName: 'S&R CoreSync For Intelligent Solutions',
     to: 'owner@example.com', subject: 'استفسار جديد — LEAD-SR-1',
     html, text: 'مرحبا\nsecond line', replyTo: 'info@sr-coresync.com'
 });
-check('From has a display name', raw.includes('From: S&R CoreSync Solutions <info@sr-coresync.com>'));
+check('From has a display name', raw.includes('From: S&R CoreSync For Intelligent Solutions <info@sr-coresync.com>'));
 check('subject is RFC 2047 encoded', /^Subject: =\?UTF-8\?B\?/m.test(raw));
 check('Message-ID uses the sending domain', /Message-ID: <[^>]+@sr-coresync\.com>/.test(raw));
 check('multipart/alternative declared', raw.includes('Content-Type: multipart/alternative; boundary="alt-'));

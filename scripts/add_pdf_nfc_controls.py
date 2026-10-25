@@ -5,7 +5,7 @@ across index.html, preview-founders-showcase.html, en/index.html, and nl/index.h
 
 import os
 
-PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
+PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project"
 
 def add_to_ar():
     path = os.path.join(PROJECT_DIR, "index.html")

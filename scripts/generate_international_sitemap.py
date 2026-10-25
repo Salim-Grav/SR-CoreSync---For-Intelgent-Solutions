@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - International XML Sitemap Generator
+S&R CoreSync For Intelligent Solutions - International XML Sitemap Generator
 Generates an exhaustive, search-engine-ready sitemap with all 28 multilingual portals
 and hreflang alternate links conforming to Google & Bing international SEO standards.
 """

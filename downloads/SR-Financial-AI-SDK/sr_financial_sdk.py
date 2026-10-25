@@ -1,5 +1,5 @@
 # S&R Financial AI SDK v1.2 (Python)
-# (c) 2026 S&R CoreSync Solutions B.V.
+# (c) 2026 S&R CoreSync For Intelligent Solutions
 
 class CoreSyncFinancialSDK:
     def __init__(self, api_key="DEMO_API_KEY_2026"):

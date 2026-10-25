@@ -1,6 +1,6 @@
 /**
  * =========================================================================
- * S&R CoreSync Solutions - Google Sheets Automated Lead Receiver (Apps Script)
+ * S&R CoreSync For Intelligent Solutions - Google Sheets Automated Lead Receiver (Apps Script)
  * =========================================================================
  * 
  * Instructions for Setup in 60 Seconds:

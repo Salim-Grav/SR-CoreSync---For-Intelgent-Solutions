@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Publish Set Builder
+S&R CoreSync For Intelligent Solutions - Publish Set Builder
 ===============================================================================
 Builds the `_site/` directory that is uploaded to GitHub Pages.
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - 0ms Sovereign System Language Auto-Detector
+S&R CoreSync For Intelligent Solutions - 0ms Sovereign System Language Auto-Detector
 Detects visitor device/browser locale and instantly routes them to their native language portal.
 - Arabic device (ar) -> stays on root index.html (Arabic Master)
 - English device (en) -> routes to en/index.html

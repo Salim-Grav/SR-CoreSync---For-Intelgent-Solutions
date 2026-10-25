@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - live browser console audit
+ * S&R CoreSync For Intelligent Solutions - live browser console audit
  * -----------------------------------------------------------------------------
  * Loads every published page in headless Microsoft Edge via the DevTools
  * Protocol and reports uncaught exceptions, failed network requests and

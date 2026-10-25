@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - Quick Performance & Publish-Hygiene Package
+S&R CoreSync For Intelligent Solutions - Quick Performance & Publish-Hygiene Package
 ====================================================================
 Applies the 2026-10 quick-win package to every published HTML page:
 

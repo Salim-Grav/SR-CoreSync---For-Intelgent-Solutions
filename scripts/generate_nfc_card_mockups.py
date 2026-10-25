@@ -50,7 +50,7 @@ def create_card_mockup(name, title, qr_file, out_file, founder_id="salim"):
     # Founder Info
     draw.text((60, 230), name.upper(), fill=(255, 255, 255, 255), font=font_large)
     draw.text((60, 280), title.upper(), fill=(243, 223, 186, 255), font=font_med)
-    draw.text((60, 315), "S&R CORESYNC SOLUTIONS B.V. • AMSTERDAM, NETHERLANDS", fill=(176, 191, 184, 255), font=font_small)
+    draw.text((60, 315), "S&R CORESYNC FOR INTELLIGENT SOLUTIONS • AMSTERDAM, NETHERLANDS", fill=(176, 191, 184, 255), font=font_small)
     
     draw.line([60, 360, w - 380, 360], fill=(197, 168, 128, 120), width=1)
     

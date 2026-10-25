@@ -1,5 +1,5 @@
 S&R TaxSync Desktop v2.4 Pro
-Official Desktop Software by S&R CoreSync Solutions B.V.
+Official Desktop Software by S&R CoreSync For Intelligent Solutions
 ========================================================
 
 تعليمات التشغيل:
@@ -16,5 +16,5 @@ Official Desktop Software by S&R CoreSync Solutions B.V.
 TRIAL-SRTX-2026-X892-PRO
 
 للدعم الفني وتراخيص الشركات:
-S&R CoreSync Solutions B.V. - Amsterdam HQ
+S&R CoreSync For Intelligent Solutions - Amsterdam HQ
 info@sr-coresync.com

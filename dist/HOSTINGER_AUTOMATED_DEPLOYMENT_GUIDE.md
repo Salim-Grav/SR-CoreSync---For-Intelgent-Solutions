@@ -1,5 +1,5 @@
 # دليل النشر التلقائي المباشر لخوادم Hostinger (SSH / SFTP)
-### منظومة: S&R CoreSync Solutions — Enterprise Edition v2.0
+### منظومة: S&R CoreSync For Intelligent Solutions — Enterprise Edition v2.0
 **الوقت والتاريخ:** الأربعاء، 14 أكتوبر 2026 - توقيت أمستردام
 
 ---

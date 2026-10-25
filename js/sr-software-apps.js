@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * S&R CORESYNC SOLUTIONS - CLOUD WEB APPS & PWA RUNTIME ENGINE
+ * S&R CORESYNC FOR INTELLIGENT SOLUTIONS - CLOUD WEB APPS & PWA RUNTIME ENGINE
  * Software Architect: Eng. Salim Aziza | Executive: M. Raed Kaakeh
  * All 6 Applications: In-Browser Execution, Offline Support & PWA
  * ==========================================================================
@@ -532,7 +532,7 @@
 <!-- S&R CoreSync TaxSync Desktop v2.4 Pro Generated XML Declaration -->
 <BelastingdienstAangifte xmlns="http://xml.coresync.eu/tax/2026/btw">
     <Header>
-        <Vendor>S&amp;R CoreSync Solutions B.V.</Vendor>
+        <Vendor>S&amp;R CoreSync For Intelligent Solutions</Vendor>
         <Product>TaxSync Desktop / Web v2.4 Pro</Product>
         <Timestamp>${new Date().toISOString()}</Timestamp>
         <ComplianceStandard>Dutch Tax Administration AWR Article 52</ComplianceStandard>
@@ -597,7 +597,7 @@
             <body>
                 <div class="header">
                     <div>
-                        <div class="vendor-logo">S&R CORESYNC SOLUTIONS B.V.</div>
+                        <div class="vendor-logo">S&R CORESYNC FOR INTELLIGENT SOLUTIONS</div>
                         <div>Keizersgracht 482, 1016 GD Amsterdam, Netherlands</div>
                         <div>BTW ID: NL862145890B01 • KvK: 84920153</div>
                     </div>
@@ -2822,7 +2822,7 @@ var response = await client.PostAsync("https://api.sr-coresync.com/tax", content
             const isAcct = (category === 'accounting');
             const targetPhone = isAcct ? '31687710290' : '31618111116';
             const advisorName = isAcct ? 'أ. محمد رائد كعكة (CFO - المحاسبة والضرائب)' : 'م. محمد سليم عزيزة (CTO - الأنظمة والبرمجيات)';
-            const msg = `*طلب استشارة تنفيذية خاصة - S&R CoreSync Solutions*\n` +
+            const msg = `*طلب استشارة تنفيذية خاصة - S&R CoreSync For Intelligent Solutions*\n` +
                         `━━━━━━━━━━━━━━━━━━━━\n` +
                         `👔 *المستشار المطلوب:* ${advisorName}\n` +
                         `🎯 *البرنامج المستهدف:* ${softwareName || (isAcct ? 'الأنظمة المحاسبية' : 'الأنظمة السحابية')}\n` +
@@ -2842,7 +2842,7 @@ var response = await client.PostAsync("https://api.sr-coresync.com/tax", content
         window.sendDirectInfoEmail = function(softwareName = '') {
             const subject = encodeURIComponent(`استفسار رسمي حول [${softwareName || 'برمجيات وأنظمة S&R CoreSync'}]`);
             const body = encodeURIComponent(
-                `السادة إدارة S&R CoreSync Solutions المحترمين،\n\n` +
+                `السادة إدارة S&R CoreSync For Intelligent Solutions المحترمين،\n\n` +
                 `أود الاستفسار والتواصل بخصوص: ${softwareName || 'برمجيات المنصة'}.\n\n` +
                 `الاسم الكامل:\nالشركة:\nرقم الواتساب / الهاتف:\nتفاصيل الاستفسار المطلوب:\n\nمع فائق الاحترام والتقدير.`
             );

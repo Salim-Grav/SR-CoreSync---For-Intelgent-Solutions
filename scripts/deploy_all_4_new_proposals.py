@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - 4 New Proposals Deployer Across All 29 Portals
+S&R CoreSync For Intelligent Solutions - 4 New Proposals Deployer Across All 29 Portals
 Proposals:
 1. Executive ROI Evaluation Certificate Modal (PDF print/export ready)
 2. VIP Founders Strategic Advisory Booking Modal (in Hotline and ROI tab)
@@ -48,7 +48,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 Book Strategic Advisory Session with Founders',
         'hotline_book_btn': '📅 Book Strategic Session (30 Min)',
         'cert_title': 'EXECUTIVE ROI EVALUATION CERTIFICATE',
-        'cert_sub': 'S&R CORESYNC SOLUTIONS B.V. — AMSTERDAM, NETHERLANDS',
+        'cert_sub': 'S&R CORESYNC FOR INTELLIGENT SOLUTIONS — AMSTERDAM, NETHERLANDS',
         'cert_recip_lbl': 'Official Attribution & Accreditation',
         'cert_recip_default': 'Enterprise Partner Group',
         'cert_m1': 'Direct Annual Financial Savings',
@@ -106,7 +106,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 حجز جلسة استراتيجية مع المؤسسين',
         'hotline_book_btn': '📅 حجز جلسة استراتيجية (30 دقيقة)',
         'cert_title': 'شهادة التقييم التنفيذي للعائد على الاستثمار',
-        'cert_sub': 'شركة S&R CORESYNC SOLUTIONS B.V. — أمستردام، هولندا',
+        'cert_sub': 'شركة S&R CORESYNC FOR INTELLIGENT SOLUTIONS — أمستردام، هولندا',
         'cert_recip_lbl': 'الاعتماد والتخصيص الرسمي',
         'cert_recip_default': 'المجموعة الشريكة المؤسسية',
         'cert_m1': 'التوفير المالي السنوي المباشر',
@@ -164,7 +164,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 Plan Strategische Sessie met Oprichters',
         'hotline_book_btn': '📅 Plan Strategische Sessie (30 Min)',
         'cert_title': 'UITVOEREND ROI RENDEMENTSCERTIFICAAT',
-        'cert_sub': 'S&R CORESYNC SOLUTIONS B.V. — AMSTERDAM, NEDERLAND',
+        'cert_sub': 'S&R CORESYNC FOR INTELLIGENT SOLUTIONS — AMSTERDAM, NEDERLAND',
         'cert_recip_lbl': 'Officiële Toewijzing & Accreditatie',
         'cert_recip_default': 'Zakelijke Partnergroep',
         'cert_m1': 'Directe Jaarlijkse Financiële Besparingen',
@@ -222,7 +222,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 Strategische Beratungssitzung mit Gründern Buchen',
         'hotline_book_btn': '📅 Strategische Sitzung Buchen (30 Min)',
         'cert_title': 'EXEKLUSIVES ROI-RENTABILITÄTSZERTIFIKAT',
-        'cert_sub': 'S&R CORESYNC SOLUTIONS B.V. — AMSTERDAM, NIEDERLANDE',
+        'cert_sub': 'S&R CORESYNC FOR INTELLIGENT SOLUTIONS — AMSTERDAM, NIEDERLANDE',
         'cert_recip_lbl': 'Offizielle Vergabe & Akkreditierung',
         'cert_recip_default': 'Unternehmens-Partnergruppe',
         'cert_m1': 'Direkte Jährliche Finanzielle Einsparungen',
@@ -280,7 +280,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 Rûniştina Stratejîk bi Damezrîneran re Tomar Bike',
         'hotline_book_btn': '📅 Rûniştina Stratejîk Tomar Bike (30 Xul)',
         'cert_title': 'BAWERNAMEYA RÊVEBERIYÊ YA NIRXANDINA ROI',
-        'cert_sub': 'S&R CORESYNC SOLUTIONS B.V. — AMSTERDAM, HOLENDA',
+        'cert_sub': 'S&R CORESYNC FOR INTELLIGENT SOLUTIONS — AMSTERDAM, HOLENDA',
         'cert_recip_lbl': 'Dayîna Fermî & Qebûlkirin',
         'cert_recip_default': 'Koma Hevpar a Karsaziyê',
         'cert_m1': 'Teserûfa Aborî ya Salane ya Yekser',
@@ -338,7 +338,7 @@ PROP_DATA = {
         'roi_book_btn': '📅 دانانی دانیشتنی ستراتیژی لەگەڵ دامەزرێنەران',
         'hotline_book_btn': '📅 دانانی دانیشتنی ستراتیژی (٣٠ خولەک)',
         'cert_title': 'بڕوانامەی جێبەجێکاری هەڵسەنگاندنی ROI',
-        'cert_sub': 'کۆمپانیای S&R CORESYNC SOLUTIONS B.V. — ئەمستەردام، هۆڵەندا',
+        'cert_sub': 'کۆمپانیای S&R CORESYNC FOR INTELLIGENT SOLUTIONS — ئەمستەردام، هۆڵەندا',
         'cert_recip_lbl': 'پێدانی فەرمی و متمانەپێکراو',
         'cert_recip_default': 'گرووپی هاوبەشی دامەزراوەیی',
         'cert_m1': 'پاشەکەوتی دارایی ساڵانەی ڕاستەوخۆ',

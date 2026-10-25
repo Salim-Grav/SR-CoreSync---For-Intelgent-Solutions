@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — Enterprise Tier Matrix & Institutional Calculator
+ * S&R CoreSync For Intelligent Solutions — Enterprise Tier Matrix & Institutional Calculator
  * Multilingual dynamic billing cycle toggle, multi-entity discount, and quote generator (AR, EN, NL, DE).
  */
 

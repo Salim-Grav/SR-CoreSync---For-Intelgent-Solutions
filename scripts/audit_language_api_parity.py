@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Cross-language DOM API parity auditor
+S&R CoreSync For Intelligent Solutions - Cross-language DOM API parity auditor
 ===============================================================================
 The multilingual generation pass translates page copy and, occasionally,
 translates JavaScript API names too:

@@ -1,6 +1,6 @@
 /**
  * S&R Financial AI SDK v1.2
- * (c) 2026 S&R CoreSync Solutions B.V.
+ * (c) 2026 S&R CoreSync For Intelligent Solutions
  * Chief Architects: Eng. Salim Azizah & Mr. Raed Kaakeh
  */
 

@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — delegated event runtime
+ * S&R CoreSync For Intelligent Solutions — delegated event runtime
  * ==============================================
  * Replaces inline `onclick="fn()"` attributes, which force a Content-Security-
  * Policy that allows `'unsafe-inline'` for scripts and therefore blocks any

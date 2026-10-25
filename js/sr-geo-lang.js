@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — Sovereign Geo-Language Detection Engine
+ * S&R CoreSync For Intelligent Solutions — Sovereign Geo-Language Detection Engine
  * Intelligent, non-intrusive browser language detection with polite visual notification.
  *
  * Strategy:

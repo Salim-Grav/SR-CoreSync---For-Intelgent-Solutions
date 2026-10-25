@@ -1,6 +1,6 @@
 # ☁️ Cloudflare Worker — التقاط العملاء (Lead Capture)
 
-> **S&R CoreSync Solutions — Sovereign Lead Capture**
+> **S&R CoreSync For Intelligent Solutions — Sovereign Lead Capture**
 > بديل بوابة `/api/lead-capture.php` التي لم تكن قابلة للتنفيذ على GitHub Pages.
 
 ---

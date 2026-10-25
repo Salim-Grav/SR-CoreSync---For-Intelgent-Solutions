@@ -1,4 +1,4 @@
-// S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
+// S&R CoreSync For Intelligent Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
 // Version: coresync-prerender-v14-srx
 const CACHE_NAME = 'coresync-prerender-v14-srx';
 

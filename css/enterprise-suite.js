@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Enterprise Suite Engine v2.0
+ * S&R CoreSync For Intelligent Solutions - Enterprise Suite Engine v2.0
  * Fully Unified Multi-Language Enterprise Architecture (AR / EN / NL)
  * 1. Instant Official PDF Quotation Generator (Multi-Language)
  * 2. Client Visual Feedback Hub (Auto-Flipping RTL/LTR & Multi-Language)
@@ -711,7 +711,7 @@
                 <div class="es-quote-paper" id="esQuotePrintableArea">
                     <div class="es-quote-header">
                         <div class="es-quote-brand">
-                            <h2>S&R CORESYNC SOLUTIONS</h2>
+                            <h2>S&R CORESYNC FOR INTELLIGENT SOLUTIONS</h2>
                             <p>Enterprise Cloud Architecture & Intelligent AI Systems</p>
                             <p style="font-size: 0.78rem; color: #a0aec0; margin-top: 2px;">Amsterdam HQ, The Netherlands | Global Enterprise Delivery</p>
                         </div>
@@ -3189,9 +3189,9 @@
     window.downloadCapabilityDeck = function() {
         const lang = detectLang();
         const titleMap = {
-            ar: 'ملف القدرات التنفيذي ولوحة الـ KPIs – S&R CoreSync Solutions',
-            en: 'Executive Capability Deck & Visual KPIs – S&R CoreSync Solutions',
-            nl: 'Executive Capability Deck & KPI Dashboard – S&R CoreSync Solutions'
+            ar: 'ملف القدرات التنفيذي ولوحة الـ KPIs – S&R CoreSync For Intelligent Solutions',
+            en: 'Executive Capability Deck & Visual KPIs – S&R CoreSync For Intelligent Solutions',
+            nl: 'Executive Capability Deck & KPI Dashboard – S&R CoreSync For Intelligent Solutions'
         };
 
         const deck = `<!DOCTYPE html>
@@ -3351,7 +3351,7 @@
       <div class="deck-contact-item">🌐<br>coresync.solutions<br>info@coresync.solutions</div>
     </div>
     <p style="text-align:center;margin-top:14px;font-size:0.7rem;color:rgba(255,255,255,0.35);">
-      This document is confidential and proprietary to S&R CoreSync Solutions B.V. Generated on ${new Date().toLocaleDateString('ar', { dateStyle: 'full' })}.
+      This document is confidential and proprietary to S&R CoreSync For Intelligent Solutions Generated on ${new Date().toLocaleDateString('ar', { dateStyle: 'full' })}.
     </p>
   </div>
 </div>
@@ -3734,7 +3734,7 @@
             <html lang="ar" dir="rtl">
             <head>
                 <meta charset="UTF-8">
-                <title>وثيقة مقارنة الباقات الرسمية - S&R CoreSync Solutions</title>
+                <title>وثيقة مقارنة الباقات الرسمية - S&R CoreSync For Intelligent Solutions</title>
                 <style>
                     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 35px; color: #111; line-height: 1.6; }
                     .header { border-bottom: 2px solid #c5a880; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
@@ -3755,7 +3755,7 @@
             <body>
                 <div class="header">
                     <div>
-                        <div class="logo">S&R CoreSync Solutions B.V.</div>
+                        <div class="logo">S&R CoreSync For Intelligent Solutions</div>
                         <div style="font-size:12px; color:#555;">The Netherlands • Enterprise Cloud & Financial AI</div>
                     </div>
                     <div class="meta">
@@ -3805,7 +3805,7 @@
                 ` : ''}
 
                 <div class="footer">
-                    <div>S&R CoreSync Solutions — www.coresync.nl • info@coresync.nl • +31 6 87764998</div>
+                    <div>S&R CoreSync For Intelligent Solutions — www.coresync.nl • info@coresync.nl • +31 6 87764998</div>
                     <div>اعتماد رسمي معفى من التوقيع اليدوي</div>
                 </div>
 
@@ -4087,7 +4087,7 @@
         const paybackEl = document.getElementById('roiPdfPaybackVal');
         const payback = paybackEl ? paybackEl.textContent.trim() : '';
 
-        const msg = `*تقرير دراسة الجدوى الاستثمارية والوفر السنوي - S&R CoreSync Solutions*\n` +
+        const msg = `*تقرير دراسة الجدوى الاستثمارية والوفر السنوي - S&R CoreSync For Intelligent Solutions*\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
                     `🏢 *الشركة:* ${clientName}\n` +
                     `👥 *حجم الفريق:* ${team}\n` +
@@ -4095,7 +4095,7 @@
                     `⏱️ *الساعات المستردة سنوياً:* ${hours}\n` +
                     `📈 *فترة استرداد رأس المال:* ${payback}\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `_تم استخراج التقرير عبر Smart ROI Engine المعتمد لشركة S&R CoreSync Solutions_`;
+                    `_تم استخراج التقرير عبر Smart ROI Engine المعتمد لشركة S&R CoreSync For Intelligent Solutions_`;
 
         const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
@@ -4483,7 +4483,7 @@
         const dateStr = new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
 
         const certContent = `================================================================================
-   S&R CORESYNC SOLUTIONS - OFFICIAL SOFTWARE LICENSE CERTIFICATE
+   S&R CORESYNC FOR INTELLIGENT SOLUTIONS - OFFICIAL SOFTWARE LICENSE CERTIFICATE
    Amsterdam HQ • The Netherlands • Chamber of Commerce (KvK) Registered
 ================================================================================
 
@@ -4743,7 +4743,7 @@ Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
 
         const certContent = [
             '========================================================================',
-            ' S&R CoreSync Solutions — Official Software License Certificate (.key)',
+            ' S&R CoreSync For Intelligent Solutions — Official Software License Certificate (.key)',
             ' Amsterdam HQ, Keizersgracht, The Netherlands • BTW NL863412987B01',
             '========================================================================',
             '',

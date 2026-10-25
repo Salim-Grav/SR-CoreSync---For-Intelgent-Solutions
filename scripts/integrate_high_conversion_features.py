@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - High-Conversion Enterprise Features Integrator
+S&R CoreSync For Intelligent Solutions - High-Conversion Enterprise Features Integrator
 Implements 4 Top-Tier Client Acquisition Features:
 1. Instant Branded Client Proposal & Executive PDF Brief Generator (with company name input)
 2. Interactive Smart ROI & Cost Savings Calculator Tab & Simulation

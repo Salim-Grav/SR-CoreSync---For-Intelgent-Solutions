@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — Live trust feed
+ * S&R CoreSync For Intelligent Solutions — Live trust feed
  * =======================================
  * Replaces the previous `sr-live-feed.js`, which displayed invented
  * customer activity ("a client in Rotterdam downloaded the kit", "7 minutes

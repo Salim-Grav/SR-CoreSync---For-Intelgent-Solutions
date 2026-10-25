@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Lead endpoint migration
+S&R CoreSync For Intelligent Solutions - Lead endpoint migration
 Moves the client dispatcher from api/ to js/ and repoints the lead capture
 fetch from the dead PHP gateway to the Cloudflare Worker.
 """

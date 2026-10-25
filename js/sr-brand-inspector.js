@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - 4K Ultra-HD Image Zoom, Pan & Brand Kit Controller
+ * S&R CoreSync For Intelligent Solutions - 4K Ultra-HD Image Zoom, Pan & Brand Kit Controller
  * Provides interactive vector & logo inspection with smooth hardware-accelerated pan/zoom
  * and authentic Brand Asset ZIP bundle downloads across all languages (AR, EN, NL).
  */

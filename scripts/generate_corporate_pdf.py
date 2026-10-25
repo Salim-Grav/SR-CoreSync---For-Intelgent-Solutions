@@ -1,5 +1,5 @@
 """
-Generate Official Corporate Profile PDF for S&R CoreSync Solutions
+Generate Official Corporate Profile PDF for S&R CoreSync For Intelligent Solutions
 Using ReportLab with Luxury Gold & Obsidian Styling.
 """
 
@@ -12,7 +12,7 @@ from reportlab.platypus import (
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfgen import canvas
 
-PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync Solutions\Project"
+PROJECT_DIR = r"i:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project"
 ASSETS_DIR = os.path.join(PROJECT_DIR, "assets")
 OUTPUT_PDF = os.path.join(ASSETS_DIR, "SR-CoreSync-Corporate-Profile-2026.pdf")
 
@@ -62,7 +62,7 @@ class NumberedCanvas(canvas.Canvas):
         # Footer
         self.setFillColor(TEXT_MUTED)
         self.setFont("Helvetica", 7.5)
-        self.drawString(28, 24, "S&R CoreSync Solutions B.V.  |  Keizersgracht 482, 1016 GD Amsterdam, Netherlands")
+        self.drawString(28, 24, "S&R CoreSync For Intelligent Solutions  |  Keizersgracht 482, 1016 GD Amsterdam, Netherlands")
         self.drawRightString(A4[0] - 28, 24, f"sr-coresync.com  |  Page {self._pageNumber} of {page_count}")
         
         # Top Header (except on cover page 1)
@@ -71,7 +71,7 @@ class NumberedCanvas(canvas.Canvas):
             self.line(28, A4[1] - 35, A4[0] - 28, A4[1] - 35)
             self.setFillColor(GOLD)
             self.setFont("Helvetica-Bold", 8)
-            self.drawString(28, A4[1] - 30, "S&R CORESYNC SOLUTIONS")
+            self.drawString(28, A4[1] - 30, "S&R CORESYNC FOR INTELLIGENT SOLUTIONS")
             self.setFillColor(TEXT_MUTED)
             self.setFont("Helvetica", 7.5)
             self.drawRightString(A4[0] - 28, A4[1] - 30, "ENTERPRISE CLOUD, AI & FINANCIAL ERP SYSTEMS")
@@ -179,7 +179,7 @@ def build_pdf():
     story.append(Spacer(1, 15))
     story.append(Paragraph("<font color='#c5a880' size='9'><b>OFFICIAL CORPORATE PORTFOLIO • 2026 EDITION</b></font>", tagline_style))
     story.append(Spacer(1, 5))
-    story.append(Paragraph("S&R CORESYNC SOLUTIONS", title_style))
+    story.append(Paragraph("S&R CORESYNC FOR INTELLIGENT SOLUTIONS", title_style))
     story.append(Paragraph("For Intelligent Solutions — Enterprise Cloud, AI Automation & Financial ERP Systems", gold_title_style))
     story.append(Paragraph("Amsterdam Headquarters, Keizersgracht 482, Netherlands  |  High-End Enterprise Architecture", tagline_style))
     
@@ -373,7 +373,7 @@ def build_pdf():
     legal_text = [
         Paragraph("<b>OFFICIAL CORPORATE HEADQUARTERS & GOVERNANCE</b>", card_title),
         Spacer(1, 6),
-        Paragraph("<b>Company:</b> S&R CoreSync Solutions B.V.  |  <b>Jurisdiction:</b> Kingdom of the Netherlands 🇳🇱", body_style),
+        Paragraph("<b>Company:</b> S&R CoreSync For Intelligent Solutions  |  <b>Jurisdiction:</b> Kingdom of the Netherlands 🇳🇱", body_style),
         Paragraph("<b>Address:</b> Keizersgracht 482, 1016 GD Amsterdam, Netherlands", body_style),
         Paragraph("<b>Official Contact:</b> +31 6 18111116  |  <b>Official Inquiries:</b> info@sr-coresync.com", body_style),
         Paragraph("<b>Digital Hub:</b> https://sr-coresync.com  |  <b>NFC Card Link:</b> https://sr-coresync.com/card.html", body_style)

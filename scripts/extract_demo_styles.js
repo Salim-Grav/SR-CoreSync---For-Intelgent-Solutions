@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Zero Warnings Refactoring Engine
+ * S&R CoreSync For Intelligent Solutions - Zero Warnings Refactoring Engine
  * Extracts all inline styles from demo.html into css/demo-portal.css
  */
 const fs = require('fs');

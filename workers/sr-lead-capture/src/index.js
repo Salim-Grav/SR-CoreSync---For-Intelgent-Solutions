@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Sovereign Lead Capture Worker
+ * S&R CoreSync For Intelligent Solutions - Sovereign Lead Capture Worker
  * -----------------------------------------------------------------------------
  * Cloudflare Worker that replaces the former `/api/lead-capture.php` endpoint.
  *
@@ -279,7 +279,7 @@ function buildNotificationHtml(lead) {
         '<title>New Consultation Lead</title></head>' +
         '<body style="font-family:Segoe UI,Arial,sans-serif;background:#f6f1e6;padding:24px;">' +
         '<div style="max-width:680px;margin:auto;background:#fff;border:1px solid #d9c9a3;border-radius:12px;overflow:hidden;">' +
-        '<div style="background:#010907;color:#c5a880;padding:18px 24px;font-size:18px;">S&amp;R CoreSync Solutions — New Consultation Lead</div>' +
+        '<div style="background:#010907;color:#c5a880;padding:18px 24px;font-size:18px;">S&amp;R CoreSync For Intelligent Solutions — New Consultation Lead</div>' +
         '<div style="padding:20px 24px;"><p style="color:#0b1a14;">Lead ID: <strong>' + escapeHtml(lead.leadId) + '</strong></p>' +
         '<table style="border-collapse:collapse;width:100%;font-size:14px;">' + rows + '</table></div></div></body></html>';
 }
@@ -611,7 +611,7 @@ async function deliverEmail(env, to, subject, html, text, attachment) {
         const from = env.PURELYMAIL_USER;
         const raw = buildMime({
             from: from,
-            fromName: env.MAIL_FROM_NAME || 'S&R CoreSync Solutions',
+            fromName: env.MAIL_FROM_NAME || 'S&R CoreSync For Intelligent Solutions',
             to: toHeader,
             subject: subject,
             html: html,
@@ -703,7 +703,7 @@ function buildContractHtml(text) {
         '<title>S&R CoreSync — Contract</title></head>' +
         '<body style="margin:0;padding:24px;background:#f6f1e6;">' +
         '<div style="max-width:720px;margin:auto;background:#fff;border:1px solid #d9c9a3;border-radius:12px;overflow:hidden;">' +
-        '<div style="background:#010907;color:#c5a880;padding:18px 24px;font-size:18px;">S&amp;R CoreSync Solutions &amp; Engineering</div>' +
+        '<div style="background:#010907;color:#c5a880;padding:18px 24px;font-size:18px;">S&amp;R CoreSync For Intelligent Solutions</div>' +
         '<div style="padding:24px;font-family:Segoe UI,Arial,sans-serif;font-size:14px;line-height:1.9;color:#0b1a14;">' +
         safe + '</div></div></body></html>';
 }
@@ -1532,7 +1532,7 @@ export default {
                 env,
                 env.NOTIFY_EMAIL,
                 'S&R CoreSync — SMTP self-test ' + stamp.slice(0, 16).replace('T', ' '),
-                '<p dir="rtl">هذه رسالة اختبار من منصة S&amp;R CoreSync Solutions.</p>'
+                '<p dir="rtl">هذه رسالة اختبار من منصة S&amp;R CoreSync For Intelligent Solutions.</p>'
                 + '<p>Sent at <strong>' + stamp + '</strong> from <strong>' + env.PURELYMAIL_USER + '</strong>.</p>'
                 + '<p>If SPF, DKIM and DMARC show PASS in the headers, the mail path is healthy.</p>',
                 'S&R CoreSync SMTP self-test\nSent: ' + stamp + '\nFrom: ' + env.PURELYMAIL_USER

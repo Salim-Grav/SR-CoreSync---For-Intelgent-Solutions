@@ -33,7 +33,7 @@ STUB = """<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>تم نقل الصفحة | S&amp;R CoreSync Solutions</title>
+<title>تم نقل الصفحة | S&amp;R CoreSync For Intelligent Solutions</title>
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://sr-coresync.com/{new}">
 <meta http-equiv="refresh" content="0; url=./{new}">

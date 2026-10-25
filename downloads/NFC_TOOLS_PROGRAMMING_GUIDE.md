@@ -1,4 +1,4 @@
-# دليل برمجة بطاقات NFC الذكية المعتمدة (S&R CoreSync Solutions)
+# دليل برمجة بطاقات NFC الذكية المعتمدة (S&R CoreSync For Intelligent Solutions)
 **NFC Smart Cards Programming Guide • Amsterdam HQ**
 
 ---

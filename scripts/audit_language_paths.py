@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Language folder relative path auditor
+S&R CoreSync For Intelligent Solutions - Language folder relative path auditor
 ================================================================
 Every localized page lives in <lang>/index.html but all shared assets
 (css/, js/, assets/, downloads/, manifest.json) live at the repository root.

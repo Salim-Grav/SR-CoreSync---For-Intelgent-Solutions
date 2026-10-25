@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - 28-Language Sovereign Multilingual Factory (v2)
+S&R CoreSync For Intelligent Solutions - 28-Language Sovereign Multilingual Factory (v2)
 Builds production-grade localized demo portals and landing pages for:
 - 24 EU Official Languages
 - Norwegian (EEA / Scandinavia)
@@ -203,8 +203,8 @@ COMMON_KPI_REPLACEMENTS = {
 # Dictionaries for high-fidelity localization
 LANG_DATA = {
     "de": {
-        "title": "S&R CoreSync Solutions | Enterprise-Software, Cloud-ERP & KI-Architektur",
-        "desc": "S&R CoreSync Solutions - Führende Cloud-ERP-Architektur, Finanzautomatisierung und KI-Systeme in Amsterdam, Deutschland und ganz Europa.",
+        "title": "S&R CoreSync For Intelligent Solutions | Enterprise-Software, Cloud-ERP & KI-Architektur",
+        "desc": "S&R CoreSync For Intelligent Solutions - Führende Cloud-ERP-Architektur, Finanzautomatisierung und KI-Systeme in Amsterdam, Deutschland und ganz Europa.",
         "vat_label": "MwSt (19%)",
         "tax_authority": "DATEV / Bundeszentralamt für Steuern",
         "replacements": {
@@ -270,8 +270,8 @@ LANG_DATA = {
         }
     },
     "fr": {
-        "title": "S&R CoreSync Solutions | Logiciels d'entreprise, Cloud ERP & Architecture IA",
-        "desc": "S&R CoreSync Solutions - Architecture Cloud ERP de pointe, automatisation financière et systèmes d'intelligence artificielle à Amsterdam et en Europe.",
+        "title": "S&R CoreSync For Intelligent Solutions | Logiciels d'entreprise, Cloud ERP & Architecture IA",
+        "desc": "S&R CoreSync For Intelligent Solutions - Architecture Cloud ERP de pointe, automatisation financière et systèmes d'intelligence artificielle à Amsterdam et en Europe.",
         "vat_label": "TVA (20%)",
         "tax_authority": "Chorus Pro / Factur-X / DGFiP",
         "replacements": {
@@ -337,8 +337,8 @@ LANG_DATA = {
         }
     },
     "tr": {
-        "title": "S&R CoreSync Solutions | Kurumsal Yazılım, Bulut ERP & Yapay Zeka Mimarisi",
-        "desc": "S&R CoreSync Solutions - Amsterdam merkezli kurumsal bulut yazılımları, e-Fatura entegrasyonu, finansal yapay zeka ve ERP mimarisi.",
+        "title": "S&R CoreSync For Intelligent Solutions | Kurumsal Yazılım, Bulut ERP & Yapay Zeka Mimarisi",
+        "desc": "S&R CoreSync For Intelligent Solutions - Amsterdam merkezli kurumsal bulut yazılımları, e-Fatura entegrasyonu, finansal yapay zeka ve ERP mimarisi.",
         "vat_label": "KDV (%20)",
         "tax_authority": "GİB e-Fatura / Gelir İdaresi Başkanlığı",
         "replacements": {
@@ -404,8 +404,8 @@ LANG_DATA = {
         }
     },
     "sv": {
-        "title": "S&R CoreSync Solutions | Företagsmjukvara, Moln-ERP & AI-Arkitektur",
-        "desc": "S&R CoreSync Solutions - Ledande moln-ERP-arkitektur, automatiserad fakturering och finansiell AI i Amsterdam och Norden.",
+        "title": "S&R CoreSync For Intelligent Solutions | Företagsmjukvara, Moln-ERP & AI-Arkitektur",
+        "desc": "S&R CoreSync For Intelligent Solutions - Ledande moln-ERP-arkitektur, automatiserad fakturering och finansiell AI i Amsterdam och Norden.",
         "vat_label": "MOMS (25%)",
         "tax_authority": "Skatteverket / PEPPOL E-faktura",
         "replacements": {
@@ -471,8 +471,8 @@ LANG_DATA = {
         }
     },
     "no": {
-        "title": "S&R CoreSync Solutions | Bedriftsprogramvare, Sky-ERP & AI-Arkitektur",
-        "desc": "S&R CoreSync Solutions - Ledende sky-ERP, automatisert e-fakturering og finansiell AI-arkitektur for bedrifter i Norge og Europa.",
+        "title": "S&R CoreSync For Intelligent Solutions | Bedriftsprogramvare, Sky-ERP & AI-Arkitektur",
+        "desc": "S&R CoreSync For Intelligent Solutions - Ledende sky-ERP, automatisert e-fakturering og finansiell AI-arkitektur for bedrifter i Norge og Europa.",
         "vat_label": "MVA (25%)",
         "tax_authority": "Skatteetaten / EHF E-faktura",
         "replacements": {
@@ -538,8 +538,8 @@ LANG_DATA = {
         }
     },
     "es": {
-        "title": "S&R CoreSync Solutions | Software Empresarial, Cloud ERP & Arquitectura IA",
-        "desc": "S&R CoreSync Solutions - Innovación en ERP en la nube, facturación electrónica integrada y automatización de procesos financieros con IA en España y Europa.",
+        "title": "S&R CoreSync For Intelligent Solutions | Software Empresarial, Cloud ERP & Arquitectura IA",
+        "desc": "S&R CoreSync For Intelligent Solutions - Innovación en ERP en la nube, facturación electrónica integrada y automatización de procesos financieros con IA en España y Europa.",
         "vat_label": "IVA (21%)",
         "tax_authority": "Agencia Tributaria / FacturaE / SII",
         "replacements": {
@@ -605,8 +605,8 @@ LANG_DATA = {
         }
     },
     "it": {
-        "title": "S&R CoreSync Solutions | Software Aziendale, Cloud ERP & Architettura IA",
-        "desc": "S&R CoreSync Solutions - Architettura Cloud ERP all'avanguardia, fatturazione elettronica conforme SDI e automazione finanziaria IA in Italia e in Europa.",
+        "title": "S&R CoreSync For Intelligent Solutions | Software Aziendale, Cloud ERP & Architettura IA",
+        "desc": "S&R CoreSync For Intelligent Solutions - Architettura Cloud ERP all'avanguardia, fatturazione elettronica conforme SDI e automazione finanziaria IA in Italia e in Europa.",
         "vat_label": "IVA (22%)",
         "tax_authority": "Agenzia delle Entrate / Sistema di Interscambio SDI",
         "replacements": {
@@ -672,8 +672,8 @@ LANG_DATA = {
         }
     },
     "ku": {
-        "title": "S&R CoreSync Solutions | Nexşesaziya Nermalava Pargîdaniyan, Cloud ERP & AI",
-        "desc": "S&R CoreSync Solutions - Pergalên pêşketî yên Cloud ERP, otomatîkkirina fatûreyan û çareseriyên AI ji bo pargîdaniyên Kurdistan û Ewropayê.",
+        "title": "S&R CoreSync For Intelligent Solutions | Nexşesaziya Nermalava Pargîdaniyan, Cloud ERP & AI",
+        "desc": "S&R CoreSync For Intelligent Solutions - Pergalên pêşketî yên Cloud ERP, otomatîkkirina fatûreyan û çareseriyên AI ji bo pargîdaniyên Kurdistan û Ewropayê.",
         "vat_label": "Bac (5%)",
         "tax_authority": "Wezareta Darayî ya Herêmê / ERP Tax Engine",
         "replacements": {
@@ -901,7 +901,7 @@ for code, native_name, en_name, flag, vat in EU_REMAINING:
 
     c = master_en_demo
     c = re.sub(r'<html lang="[^"]*" dir="[^"]*"', f'<html lang="{code}" dir="ltr"', c)
-    c = re.sub(r'<title>[^<]*</title>', f'<title>S&R CoreSync Solutions | Enterprise Cloud ERP ({native_name})</title>', c)
+    c = re.sub(r'<title>[^<]*</title>', f'<title>S&R CoreSync For Intelligent Solutions | Enterprise Cloud ERP ({native_name})</title>', c)
     c = re.sub(r'content="en_US"', f'content="{code}_{code.upper()}"', c)
     dropdown_html = build_dropdown_html(code, page_type="demo", is_subfolder=True)
     c = replace_any_switcher(c, dropdown_html, page_type="demo")
@@ -912,7 +912,7 @@ for code, native_name, en_name, flag, vat in EU_REMAINING:
 
     idx_c = master_en_index
     idx_c = re.sub(r'<html lang="[^"]*" dir="[^"]*"', f'<html lang="{code}" dir="ltr"', idx_c)
-    idx_c = re.sub(r'<title>[^<]*</title>', f'<title>S&R CoreSync Solutions | Enterprise Cloud ERP & AI ({native_name})</title>', idx_c)
+    idx_c = re.sub(r'<title>[^<]*</title>', f'<title>S&R CoreSync For Intelligent Solutions | Enterprise Cloud ERP & AI ({native_name})</title>', idx_c)
     idx_dropdown = build_dropdown_html(code, page_type="index", is_subfolder=True)
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
     idx_c = inject_or_replace_apple_dock(idx_c, code, page_type="index", is_subfolder=True)

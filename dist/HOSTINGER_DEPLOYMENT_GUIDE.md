@@ -1,5 +1,5 @@
 # دليل نشر الإنتاج المعتمد — خوادم Hostinger cPanel
-### مشروع: S&R CoreSync Solutions B.V. (Enterprise Edition v2.0)
+### مشروع: S&R CoreSync For Intelligent Solutions (Enterprise Edition v2.0)
 **تاريخ وموعد الاعتماد:** الثلاثاء، 20 أكتوبر 2026 - الساعة 06:25 صباحاً
 
 ---

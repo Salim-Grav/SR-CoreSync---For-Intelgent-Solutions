@@ -1,5 +1,5 @@
 """
-S&R CoreSync Solutions - Publish Set Rules
+S&R CoreSync For Intelligent Solutions - Publish Set Rules
 ===============================================================================
 Single source of truth for "what gets published to GitHub Pages".
 

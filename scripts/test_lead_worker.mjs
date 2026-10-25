@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions - Cloudflare Worker test harness
+ * S&R CoreSync For Intelligent Solutions - Cloudflare Worker test harness
  * Runs the worker handler against mock Request/Response objects without
  * requiring wrangler or a network connection.
  *

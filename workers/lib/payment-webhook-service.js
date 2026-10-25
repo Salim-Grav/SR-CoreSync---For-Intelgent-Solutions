@@ -11,7 +11,7 @@
  * ---------------------------------------------------------------------------
  */
 /**
- * S&R CoreSync Solutions - Enterprise Payment & Webhook Integration Service
+ * S&R CoreSync For Intelligent Solutions - Enterprise Payment & Webhook Integration Service
  * Multi-Gateway Architecture: Mollie (iDEAL, SEPA, Bancontact) & Stripe (Cards, Apple Pay)
  * Automatic Cryptographic License Key Provisioning & BTW Invoice Delivery.
  */

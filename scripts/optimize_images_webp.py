@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-S&R CoreSync Solutions - Raster asset optimiser (WebP)
+S&R CoreSync For Intelligent Solutions - Raster asset optimiser (WebP)
 ======================================================
 The service / work / founder imagery is stored as multi-hundred-KB JPEGs and
 referenced with a plain `<img src="...jpg">`. This script produces a WebP

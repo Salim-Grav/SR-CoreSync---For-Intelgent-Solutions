@@ -1,5 +1,5 @@
 /**
- * S&R CoreSync Solutions — Sovereign AI Readiness Engine (shared AR / EN / NL / DE)
+ * S&R CoreSync For Intelligent Solutions — Sovereign AI Readiness Engine (shared AR / EN / NL / DE)
  * Renders the 5-axis assessment, live radar, diagnosis, WhatsApp report,
  * and a smart deep-link to the White-Label License Calculator and SLA Generator.
  */
@@ -26,7 +26,7 @@
                 sectorQ: 'ما القطاع الذي تعمل فيه مؤسستك؟',
                 sectorDesc: 'لا يؤثر على النقاط، لكنه يحدد المنصة الأنسب في عرض السعر المقترح.',
                 recommend: (p, t) => `🎯 التوصية: منصة <strong>${p}</strong> بباقة <strong>${t}</strong> — بناءً على نتيجتك وقطاعك.`,
-                waIntro: 'مرحباً S&R CoreSync Solutions،\n\nأكملت تقييم الجاهزية الرقمية:\n\n',
+                waIntro: 'مرحباً S&R CoreSync For Intelligent Solutions،\n\nأكملت تقييم الجاهزية الرقمية:\n\n',
                 waTotal: '📊 النقطة الإجمالية', waLevel: '🏷️ المستوى', waSector: '🏢 القطاع',
                 waOutro: 'أودّ الاطلاع على خارطة طريق مخصصة لمؤسستي.'
             },
@@ -84,7 +84,7 @@
                 sectorQ: 'Which sector does your organisation operate in?',
                 sectorDesc: 'Does not affect your score, but determines the best-fit platform in your suggested quote.',
                 recommend: (p, t) => `🎯 Recommendation: <strong>${p}</strong> on the <strong>${t}</strong> tier — based on your score and sector.`,
-                waIntro: 'Hello S&R CoreSync Solutions,\n\nI completed the Digital Readiness assessment:\n\n',
+                waIntro: 'Hello S&R CoreSync For Intelligent Solutions,\n\nI completed the Digital Readiness assessment:\n\n',
                 waTotal: '📊 Overall score', waLevel: '🏷️ Level', waSector: '🏢 Sector',
                 waOutro: 'I would like to receive a tailored roadmap for my organisation.'
             },
@@ -142,7 +142,7 @@
                 sectorQ: 'In welke sector is uw organisatie actief?',
                 sectorDesc: 'Telt niet mee in de score, maar bepaalt het best passende platform in uw voorgestelde offerte.',
                 recommend: (p, t) => `🎯 Advies: <strong>${p}</strong> met het <strong>${t}</strong>-pakket — op basis van uw score en sector.`,
-                waIntro: 'Hallo S&R CoreSync Solutions,\n\nIk heb de Digitale Gereedheidsscan voltooid:\n\n',
+                waIntro: 'Hallo S&R CoreSync For Intelligent Solutions,\n\nIk heb de Digitale Gereedheidsscan voltooid:\n\n',
                 waTotal: '📊 Totaalscore', waLevel: '🏷️ Niveau', waSector: '🏢 Sector',
                 waOutro: 'Graag ontvang ik een roadmap op maat voor mijn organisatie.'
             },
@@ -200,7 +200,7 @@
                 sectorQ: 'In welcher Branche ist Ihre Organisation tätig?',
                 sectorDesc: 'Fließt nicht in die Punktzahl ein, bestimmt aber die passende Plattform im Angebotsvorschlag.',
                 recommend: (p, t) => `🎯 Empfehlung: <strong>${p}</strong> im <strong>${t}</strong>-Paket — basierend auf Ergebnis und Branche.`,
-                waIntro: 'Hallo S&R CoreSync Solutions,\n\nich habe den Digital-Readiness-Check abgeschlossen:\n\n',
+                waIntro: 'Hallo S&R CoreSync For Intelligent Solutions,\n\nich habe den Digital-Readiness-Check abgeschlossen:\n\n',
                 waTotal: '📊 Gesamtpunktzahl', waLevel: '🏷️ Stufe', waSector: '🏢 Branche',
                 waOutro: 'Ich wünsche mir eine maßgeschneiderte Roadmap für meine Organisation.'
             },

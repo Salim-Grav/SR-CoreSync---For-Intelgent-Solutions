@@ -133,7 +133,7 @@ def main():
 
     text = to_text(doc)
     subject = payload.get('subject') or ('فاتورة / عرض سعر رسمي معتمد • %s' % payload.get('quote_id', ''))
-    sender = payload.get('from') or 'S&R CoreSync Solutions <billing@sr-coresync.com>'
+    sender = payload.get('from') or 'S&R CoreSync For Intelligent Solutions <billing@sr-coresync.com>'
     recipient = payload.get('to') or 'klant@example.com'
 
     base = os.path.join(OUT, '%s-rendered' % name)
