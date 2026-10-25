@@ -433,22 +433,12 @@ function smtpChannel(socket) {
 async function sendViaPurelymail(env, from, to, raw) {
     const recipients = Array.isArray(to) ? to : [to];
     const steps = [];
-    let smtp = null;
+    const opened = await openAuthedSmtp(env, steps);
+    if (!opened.ok) {
+        return { ok: false, provider: 'purelymail-smtp', reason: opened.reason, steps: steps };
+    }
+    const smtp = opened.smtp;
     try {
-        smtp = smtpChannel(connect(
-            { hostname: SMTP_HOST, port: SMTP_PORT },
-            { secureTransport: 'starttls' }));
-        await smtp.command(null, 220);
-        steps.push('connected');
-        await smtp.command('EHLO sr-coresync.com', 250);
-        await smtp.command('STARTTLS', 220);
-        smtp.upgrade();
-        await smtp.command('EHLO sr-coresync.com', 250);
-        steps.push('tls');
-        await smtp.command('AUTH LOGIN', 334);
-        await smtp.command(b64(env.PURELYMAIL_USER), 334, 'AUTH username');
-        await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
-        steps.push('auth');
         await smtp.command('MAIL FROM:<' + from + '>', 250);
         for (const rcpt of recipients) {
             await smtp.command('RCPT TO:<' + rcpt + '>', 250);
@@ -467,32 +457,63 @@ async function sendViaPurelymail(env, from, to, raw) {
     }
 }
 
+// Open a session and authenticate. Shared by the send path and the probe, and
+// retried once on the transient failures Purelymail actually returns: a 421 at
+// greeting, or a socket that dies on the way in. Those are worth one more try;
+// a 535 must never be retried, because repeating a wrong password looks like an
+// attack and gets the mailbox locked.
+async function openAuthedSmtp(env, steps) {
+    let lastError = null;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+        let smtp = null;
+        try {
+            smtp = smtpChannel(connect(
+                { hostname: SMTP_HOST, port: SMTP_PORT },
+                { secureTransport: 'starttls' }));
+            await smtp.command(null, 220);
+            if (!steps.includes('connected')) steps.push('connected');
+            await smtp.command('EHLO sr-coresync.com', 250);
+            await smtp.command('STARTTLS', 220);
+            smtp.upgrade();
+            await smtp.command('EHLO sr-coresync.com', 250);
+            if (!steps.includes('tls')) steps.push('tls');
+            await smtp.command('AUTH LOGIN', 334);
+            await smtp.command(b64(env.PURELYMAIL_USER), 334, 'AUTH username');
+            await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
+            if (!steps.includes('auth')) steps.push('auth');
+            return { ok: true, smtp: smtp };
+        } catch (err) {
+            if (smtp) smtp.close();
+            lastError = err;
+            const message = String((err && err.message) || err);
+            const transient = message.indexOf('421') !== -1
+                || message.indexOf('connection closed') !== -1
+                || message.indexOf('Network connection lost') !== -1;
+            if (!transient || attempt === 2) {
+                return { ok: false, reason: message };
+            }
+            // Short pause: long enough for an overloaded greeting to clear, short
+            // enough to stay inside the request budget.
+            await new Promise(function (resolve) { setTimeout(resolve, 1200); });
+        }
+    }
+    return { ok: false, reason: String((lastError && lastError.message) || lastError) };
+}
+
 // Authenticate only: proves the mailbox password works without sending anything.
 async function probeSmtp(env) {
     const steps = [];
-    let smtp = null;
-    try {
-        smtp = smtpChannel(connect(
-            { hostname: SMTP_HOST, port: SMTP_PORT },
-            { secureTransport: 'starttls' }));
-        await smtp.command(null, 220);
-        steps.push('connected');
-        await smtp.command('EHLO sr-coresync.com', 250);
-        await smtp.command('STARTTLS', 220);
-        smtp.upgrade();
-        await smtp.command('EHLO sr-coresync.com', 250);
-        steps.push('tls');
-        await smtp.command('AUTH LOGIN', 334);
-        await smtp.command(b64(env.PURELYMAIL_USER), 334, 'AUTH username');
-        await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
-        steps.push('auth');
-        await smtp.command('QUIT', null).catch(function () { return null; });
-        return { ok: true, verified: true, steps: steps };
-    } catch (err) {
-        return { ok: false, verified: false, reason: String((err && err.message) || err), steps: steps };
-    } finally {
-        if (smtp) smtp.close();
+    const opened = await openAuthedSmtp(env, steps);
+    if (!opened.ok) {
+        return { ok: false, verified: false, reason: opened.reason, steps: steps };
     }
+    const smtp = opened.smtp;
+    try {
+        await smtp.command('QUIT', null).catch(function () { return null; });
+    } finally {
+        smtp.close();
+    }
+    return { ok: true, verified: true, steps: steps };
 }
 
 // DNS over HTTPS, so the status page can show the mail records without
@@ -1456,7 +1477,12 @@ export default {
             const last = env.LEADS ? await env.LEADS.get(key) : null;
             const now = Date.now();
             if (last && (now - Number(last)) < 5 * 60 * 1000) {
-                return jsonResponse(Object.assign(body, { ok: true, verified: false, reason: 'throttled' }), 200, headers);
+                return jsonResponse(Object.assign(body, {
+                    ok: true,
+                    verified: false,
+                    reason: 'throttled',
+                    retryInSeconds: Math.ceil((5 * 60 * 1000 - (now - Number(last))) / 1000)
+                }), 200, headers);
             }
             const probe = await probeSmtp(env);
             if (probe.ok && env.LEADS) {

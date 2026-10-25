@@ -123,6 +123,12 @@ Lead تجريبي          -> "New Consultation Lead LEAD-SR-20261025-DUE4" وص
 1. **`WritableStream is currently locked`** — `startTls()` يجب أن يُسبق بتحرير قفل reader/writer القديمين.
 2. **قيمة السرّ كانت نص العنصر النائب** (`Enter a secret value:`) — اكتُشفت بفكّ base64 من رسالة 535.
 3. **تسريب السرّ في رسالة الخطأ** — كان `AUTH` يعيد الأمر كما هو (كلمة المرور بصيغة base64). الآن يظهر `AUTH password rejected` فقط.
+4. **`421 Service not available` عند الترحيب** — عابر من خادم Purelymail (إنترنت مشترك لـ Cloudflare).
+   أُضيفت إعادة محاولة واحدة بعد 1.2 ثانية للأعطال العابرة فقط — **لا** على `535`
+   لأن تكرار كلمة مرور خاطئة يُشبه هجومًا وقد يُقفل الصندوق.
+5. **لا يوجد مسار API لتغيير كلمة المرور** — فُحصت 8 نقاط: `updateUser`/`setUserPassword`/`changePassword`…
+   كلها 404. الموجود فقط `createAppPassword` و`modifyUser` (ويحتاجان API token).
+   لذلك التغيير يدوي في اللوحة، يليه `python scripts/set_mail_password.py` (إدخال مخفي + تحقق تلقائي).
 
 ### مكان بيانات الاعتماد
 - السرّ في Cloudflare: `PURELYMAIL_PASS` (نوع Secret).
