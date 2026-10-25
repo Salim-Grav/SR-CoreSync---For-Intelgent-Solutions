@@ -1138,6 +1138,7 @@ main#wrapper:focus{outline:none}
     cursor: pointer !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(197, 168, 128, 0.2) !important;
     transition: all 0.25s ease !important;
+    -webkit-backdrop-filter: blur(10px) !important;
     backdrop-filter: blur(10px) !important;
 }
 
@@ -7202,7 +7203,7 @@ main#wrapper:focus{outline:none}
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
-                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" title="التكاليف التشغيلية والإدارية والمحاسبية الحالية (شهرياً)" aria-label="التكاليف التشغيلية والإدارية والمحاسبية الحالية (شهرياً)" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -7214,7 +7215,7 @@ main#wrapper:focus{outline:none}
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 موظف</div>
-                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" title="حجم فريق العمل الإداري والمالي" aria-label="حجم فريق العمل الإداري والمالي" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -7420,13 +7421,13 @@ main#wrapper:focus{outline:none}
 
             <!-- تبويبات العرض التجريبي -->
             <div class="sr-demo-tab-list" role="tablist">
-                <button type="button" class="sr-demo-tab-btn active" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
+                <button type="button" class="sr-demo-tab-btn active" role="tab" aria-selected="true" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 منظومة ERP والمحاسبة الذكية (CFO Hub)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
+                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
                     ⚡ المحرك السحابي وأتمتة الذكاء الاصطناعي (CTO Core)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
+                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
                     🛡️ الامتثال والأمان والربط الضريبي
                 </button>
             </div>
@@ -10572,7 +10573,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                     <input type="text" id="checkoutClientVat" class="sr-checkout-input" placeholder="الرقم الضريبي EU VAT / BTW (اختياري)" />
-                    <select id="checkoutBankSelect" class="sr-checkout-input" style="color:#ffffff;">
+                    <select id="checkoutBankSelect" class="sr-checkout-input" title="اختر البنك الهولندي للدفع عبر iDEAL" aria-label="اختر البنك الهولندي للدفع عبر iDEAL" style="color:#ffffff;">
                         <option value="ing" style="background:#020705;">ING Bank</option>
                         <option value="abn" style="background:#020705;">ABN AMRO</option>
                         <option value="rabobank" style="background:#020705;">Rabobank</option>
@@ -10584,7 +10585,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                 <div id="checkoutStatusMsg" style="display:none; padding:12px; border-radius:8px; margin-bottom:12px; font-size:13px; text-align:center;"></div>
 
                 <div style="display:flex; gap:10px; margin-top:14px;">
-                    <button type="submit" id="checkoutSubmitBtn" class="sr-voice-btn-primary" style="flex:1; justify-content:center;">
+                    <button type="submit" id="srLiveCheckoutSubmitBtn" class="sr-voice-btn-primary" style="flex:1; justify-content:center;">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                         <span id="checkoutSubmitBtnLabel">تأكيد الدفع والتسوية الفورية 🔒</span>
                     </button>
@@ -11044,7 +11045,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
 
         function processLiveCheckout(e) {
             e.preventDefault();
-            const btn = document.getElementById('checkoutSubmitBtn');
+            const btn = document.getElementById('srLiveCheckoutSubmitBtn');
             const label = document.getElementById('checkoutSubmitBtnLabel');
             const statusMsg = document.getElementById('checkoutStatusMsg');
             const clientName = document.getElementById('checkoutClientName').value;

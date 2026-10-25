@@ -76,6 +76,14 @@
 
 ---
 
+- [x] **معالجة وتصحيح تنبيهات الشيفرة والجودة البرمجية بنسبة 100% (Code Quality & Accessibility Optimization):**
+  - **1. توافق Safari & iOS:** إضافة سوابق `-webkit-backdrop-filter` و `-webkit-user-select` وترتيبها قبل الخصائص القياسية في `index.html` و `social-8k-studio.html` و `social-campaign-hub.html` و `sr-footer.css`.
+  - **2. إمكانية الوصول وتسميات الحقول (Accessibility & Form Labels):** إضافة سمات `title` و `aria-label` لكافة حقول الاختيار ونطاقات الـ ROI في `index.html`.
+  - **3. تصحيح معايير ARIA:** إضافة `role="tab"` و `aria-selected` للأزرار التفاعلية داخل تبويبات العرض التجريبي ذات `role="tablist"`.
+  - **4. إلغاء تكرار المعرفات النشطة (Unique Active IDs):** ضبط وتخصيص معرف زر الدفع السحابي ليصبح `srLiveCheckoutSubmitBtn` بدلاً من تكرار `checkoutSubmitBtn`.
+
+---
+
 ## 🚀 خطة المهام القادمة (Upcoming Roadmap)
 
 - [ ] **المهمة 37 (الخطوة التالية الموصى بها):** إطلاق واجهة الـ API العامة للمنظومة (Public Developer API Gateway & Docs) وتوفير مفاتيح SDK للمطورين وشركاء الأعمال لدمج CoreSync ERP في تطبيقاتهم الخاصة.
