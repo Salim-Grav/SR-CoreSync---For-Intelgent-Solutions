@@ -538,6 +538,173 @@
         .guide-col ul {
             padding-right: 20px;
         }
+
+        /* ── Official Channel Registry Grid ── */
+        .channel-registry-section {
+            max-width: 1600px;
+            margin: 0 auto 40px;
+            padding: 28px;
+            background: linear-gradient(135deg, rgba(8, 24, 18, 0.9), rgba(4, 14, 10, 0.9));
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        .channel-registry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+        }
+
+        .channel-registry-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .channel-registry-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            border-radius: 999px;
+            color: #f3dfba;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .channel-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .channel-card-item {
+            background: rgba(2, 7, 5, 0.7);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .channel-card-item:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 18px rgba(197, 168, 128, 0.15);
+        }
+
+        .channel-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .channel-card-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .channel-card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        .channel-card-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .channel-card-handle {
+            font-size: 0.82rem;
+            color: var(--gold-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .channel-card-status {
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 999px;
+            color: #6ee7b7;
+            font-weight: 700;
+        }
+
+        .channel-card-meta {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.45;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .channel-card-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .channel-btn-visit {
+            flex: 1;
+            padding: 8px 14px;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .channel-btn-visit:hover {
+            box-shadow: 0 4px 15px var(--gold-glow);
+            transform: scale(1.02);
+        }
+
+        .channel-btn-copy {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .channel-btn-copy:hover {
+            background: rgba(197, 168, 128, 0.15);
+            color: #ffffff;
+            border-color: var(--gold-primary);
+        }
     </style>
 </head>
 <body>
