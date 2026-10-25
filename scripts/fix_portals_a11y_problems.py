@@ -1,16 +1,11 @@
 import os
-import glob
 import re
 
-print("Starting accessibility fix across all HTML files...")
+print("Starting comprehensive accessibility upgrade across all HTML files...")
 
 fixed_files = 0
-fixed_cost = 0
-fixed_team = 0
-fixed_tabs = 0
 
 for root, dirs, files in os.walk('.'):
-    # Skip non-project or cache directories if any
     if any(skip in root for skip in ['.git', '.gemini', 'node_modules', '_site']):
         continue
     for file in files:
@@ -22,57 +17,73 @@ for root, dirs, files in os.walk('.'):
                 content = f.read()
             
             orig = content
-            
-            # 1. Fix demoTabBtnErp
-            if 'id="demoTabBtnErp"' in content and 'role="tab"' not in content[content.find('id="demoTabBtnErp"')-60:content.find('id="demoTabBtnErp"')+60]:
+
+            # 1. Add aria-label to role="tablist" if missing
+            content = re.sub(
+                r'<div class="sr-demo-tab-list" role="tablist"(?! aria-label)>',
+                r'<div class="sr-demo-tab-list" role="tablist" aria-label="Demo Tabs">',
+                content
+            )
+
+            # 2. Ensure buttons in tablist have role="tab" and aria-selected
+            if 'id="demoTabBtnErp"' in content:
                 content = re.sub(
-                    r'(class="sr-demo-tab-btn\s+active")(\s+id="demoTabBtnErp")',
+                    r'(class="sr-demo-tab-btn\s+active")(?!.*role="tab")(\s+id="demoTabBtnErp")',
                     r'\1 role="tab" aria-selected="true"\2',
                     content
                 )
-                fixed_tabs += 1
-
-            # 2. Fix demoTabBtnCloud
-            if 'id="demoTabBtnCloud"' in content and 'role="tab"' not in content[content.find('id="demoTabBtnCloud"')-60:content.find('id="demoTabBtnCloud"')+60]:
+            if 'id="demoTabBtnCloud"' in content:
                 content = re.sub(
-                    r'(class="sr-demo-tab-btn")(\s+id="demoTabBtnCloud")',
+                    r'(class="sr-demo-tab-btn")(?!.*role="tab")(\s+id="demoTabBtnCloud")',
+                    r'\1 role="tab" aria-selected="false"\2',
+                    content
+                )
+            if 'id="demoTabBtnGov"' in content:
+                content = re.sub(
+                    r'(class="sr-demo-tab-btn")(?!.*role="tab")(\s+id="demoTabBtnGov")',
                     r'\1 role="tab" aria-selected="false"\2',
                     content
                 )
 
-            # 3. Fix demoTabBtnGov
-            if 'id="demoTabBtnGov"' in content and 'role="tab"' not in content[content.find('id="demoTabBtnGov"')-60:content.find('id="demoTabBtnGov"')+60]:
-                content = re.sub(
-                    r'(class="sr-demo-tab-btn")(\s+id="demoTabBtnGov")',
-                    r'\1 role="tab" aria-selected="false"\2',
-                    content
-                )
+            # 3. Add explicit <label for="roiCostRange"> to the slider header
+            content = re.sub(
+                r'<span class="text-white">([^<]*?)</span>(\s*<span class="sr-roi-val-badge" id="roiCostDisplay")',
+                r'<label for="roiCostRange" class="text-white">\1</label>\2',
+                content
+            )
 
-            # 4. Fix roiCostRange missing title/aria-label
-            # Match input where id="roiCostRange" without title=
-            def fix_cost_range(match):
+            # 4. Add explicit <label for="roiTeamRange"> to the team slider header
+            content = re.sub(
+                r'<span class="text-white">([^<]*?)</span>(\s*<span class="sr-roi-val-badge" id="roiTeamDisplay")',
+                r'<label for="roiTeamRange" class="text-white">\1</label>\2',
+                content
+            )
+
+            # 5. Ensure roiCostRange has title, aria-label, and placeholder
+            def enhance_cost_range(match):
                 tag = match.group(0)
-                if 'title=' not in tag and 'aria-label=' not in tag:
-                    # insert title and aria-label before data-sr-call or at the end
-                    return tag.replace('id="roiCostRange"', 'id="roiCostRange" title="Monthly Operational Cost" aria-label="Monthly Operational Cost"')
+                if 'placeholder=' not in tag:
+                    tag = tag.replace('id="roiCostRange"', 'id="roiCostRange" placeholder="6500"')
+                if 'title=' not in tag:
+                    tag = tag.replace('id="roiCostRange"', 'id="roiCostRange" title="Monthly Operational Cost"')
+                if 'aria-label=' not in tag:
+                    tag = tag.replace('id="roiCostRange"', 'id="roiCostRange" aria-label="Monthly Operational Cost"')
                 return tag
 
-            new_content = re.sub(r'<input[^>]*id="roiCostRange"[^>]*>', fix_cost_range, content)
-            if new_content != content:
-                content = new_content
-                fixed_cost += 1
+            content = re.sub(r'<input[^>]*id="roiCostRange"[^>]*>', enhance_cost_range, content)
 
-            # 5. Fix roiTeamRange missing title/aria-label
-            def fix_team_range(match):
+            # 6. Ensure roiTeamRange has title, aria-label, and placeholder
+            def enhance_team_range(match):
                 tag = match.group(0)
-                if 'title=' not in tag and 'aria-label=' not in tag:
-                    return tag.replace('id="roiTeamRange"', 'id="roiTeamRange" title="Team Size" aria-label="Team Size"')
+                if 'placeholder=' not in tag:
+                    tag = tag.replace('id="roiTeamRange"', 'id="roiTeamRange" placeholder="12"')
+                if 'title=' not in tag:
+                    tag = tag.replace('id="roiTeamRange"', 'id="roiTeamRange" title="Team Size"')
+                if 'aria-label=' not in tag:
+                    tag = tag.replace('id="roiTeamRange"', 'id="roiTeamRange" aria-label="Team Size"')
                 return tag
 
-            new_content = re.sub(r'<input[^>]*id="roiTeamRange"[^>]*>', fix_team_range, content)
-            if new_content != content:
-                content = new_content
-                fixed_team += 1
+            content = re.sub(r'<input[^>]*id="roiTeamRange"[^>]*>', enhance_team_range, content)
 
             if content != orig:
                 with open(path, 'w', encoding='utf-8') as f:
@@ -81,6 +92,6 @@ for root, dirs, files in os.walk('.'):
                 print(f"Updated: {path}")
 
         except Exception as e:
-            print(f"Error processing {path}: {e}")
+            print(f"Error {path}: {e}")
 
-print(f"Done! Updated {fixed_files} files (Fixed tabs in {fixed_tabs}, cost sliders in {fixed_cost}, team sliders in {fixed_team}).")
+print(f"Done! Comprehensively updated {fixed_files} files.")
