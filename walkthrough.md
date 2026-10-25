@@ -172,6 +172,8 @@
    - إضافة سمات `title` و `aria-label` لكافة حقول الاختيار ونطاقات الـ ROI (`#roiCostRange`, `#roiTeamRange`, `#checkoutBankSelect`).
 3. **تكامل أدوار الـ ARIA:**
    - ضبط أزرار التبويبات التفاعلية داخل الحاوية `role="tablist"` بإضافة `role="tab"` و `aria-selected` لمنع أي تعارض بنيوي.
+4. **حسم تكرار المعرفات النشطة (Unique DOM IDs):**
+   - تخصيص معرف زر الدفع السحابي ليصبح `srLiveCheckoutSubmitBtn` لمنع التعارض مع `checkoutSubmitBtn`.
 5. **إضافة خاصية `background-clip: text` القياسية للمطابقة التامة:**
    - تصحيح النصوص المتدرجة في `css/sr-footer.css` و `social-8k-studio.html` و `social-campaign-hub.html` بدمج الخاصية القياسية إلى جانب سابقة الويب كيت.
 6. **إلغاء كافة الأنماط المضمنة المباشرة (Zero Inline Styles):**
