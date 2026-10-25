@@ -430,6 +430,18 @@
                 return window.testimonialSwiper;
             };
         }
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var directCase = urlParams.get('case') || urlParams.get('casestudy');
+        if (!directCase && window.location.hash) {
+            var hashMatch = window.location.hash.match(/#case-([a-z0-9_-]+)/i);
+            if (hashMatch) directCase = hashMatch[1];
+        }
+        if (directCase && CASE_STUDIES[directCase]) {
+            setTimeout(function() {
+                openModal(CASE_STUDIES[directCase]);
+            }, 400);
+        }
     }
 
     if (document.readyState === 'loading') {
