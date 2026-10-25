@@ -198,7 +198,7 @@ def deploy():
             if close_a != -1:
                 insert_pos = close_a + 4
                 html = html[:insert_pos] + header_btn_code + html[insert_pos:]
-                print("✓ Injected Header Voice AI button next to #headerLiveDemoPill.")
+                print("[OK] Injected Header Voice AI button next to #headerLiveDemoPill.")
 
     # 3. Add Hero Action Button next to hero-btn-demo
     hero_btn_code = """
