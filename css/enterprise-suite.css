@@ -8621,3 +8621,329 @@ html:not([dir="rtl"]) .testimonial-v01 {
     box-shadow: none !important;
     vertical-align: middle !important;
 }
+
+
+/* ==========================================================================
+   S&R CORESYNC - INTERACTIVE CASE STUDIES & ROI SUCCESS STORY MODAL (Milestone 35)
+   ========================================================================== */
+
+/* Trigger Badge on Testimonial Cards */
+.testimonial-v01 {
+    cursor: pointer !important;
+}
+
+.tes-case-trigger {
+    margin-top: 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 8px 16px !important;
+    background: rgba(197, 168, 128, 0.12) !important;
+    border: 1px solid rgba(197, 168, 128, 0.35) !important;
+    border-radius: 999px !important;
+    color: #f3dfba !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+}
+
+.testimonial-v01:hover .tes-case-trigger {
+    background: rgba(197, 168, 128, 0.25) !important;
+    border-color: #c5a880 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(197, 168, 128, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.tes-case-trigger svg {
+    transition: transform 0.3s ease !important;
+}
+
+.testimonial-v01:hover .tes-case-trigger svg {
+    transform: translate(-3px, -3px) !important;
+}
+
+[dir="ltr"] .testimonial-v01:hover .tes-case-trigger svg {
+    transform: translate(3px, -3px) !important;
+}
+
+/* Case Study Modal Overlay */
+.sr-casestudy-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    background: rgba(2, 7, 5, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: clamp(16px, 3vw, 32px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.35s ease, visibility 0.35s ease !important;
+}
+
+.sr-casestudy-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Modal Window Container */
+.sr-casestudy-card {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 860px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    background: radial-gradient(circle at 50% 0%, rgba(24, 34, 28, 0.98) 0%, rgba(6, 11, 9, 0.99) 100%) !important;
+    border: 1.5px solid rgba(197, 168, 128, 0.45) !important;
+    border-radius: 26px !important;
+    padding: clamp(24px, 4vw, 42px) !important;
+    box-shadow: 0 35px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(197, 168, 128, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    transform: scale(0.92) translateY(20px) !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-sizing: border-box !important;
+    color: #e5e5e0 !important;
+}
+
+.sr-casestudy-overlay.active .sr-casestudy-card {
+    transform: scale(1) translateY(0) !important;
+}
+
+/* RTL / LTR text direction inside modal */
+[dir="rtl"] .sr-casestudy-card,
+html[lang="ar"] .sr-casestudy-card,
+html[lang="ckb"] .sr-casestudy-card,
+html[lang="ku"] .sr-casestudy-card {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+html[dir="ltr"] .sr-casestudy-card,
+html:not([dir="rtl"]) .sr-casestudy-card {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* Close Button */
+.sr-casestudy-close {
+    position: absolute !important;
+    top: 22px !important;
+    left: 22px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(197, 168, 128, 0.3) !important;
+    color: #f3dfba !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+    z-index: 10 !important;
+}
+
+[dir="ltr"] .sr-casestudy-close {
+    left: auto !important;
+    right: 22px !important;
+}
+
+.sr-casestudy-close:hover {
+    background: rgba(197, 168, 128, 0.3) !important;
+    border-color: #f3dfba !important;
+    color: #ffffff !important;
+    transform: rotate(90deg) scale(1.1) !important;
+}
+
+/* Header Section */
+.sr-casestudy-header {
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2) !important;
+    padding-bottom: 24px !important;
+    margin-bottom: 24px !important;
+}
+
+.sr-casestudy-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    background: rgba(197, 168, 128, 0.15) !important;
+    border: 1px solid rgba(197, 168, 128, 0.4) !important;
+    color: #f3dfba !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 14px !important;
+}
+
+.sr-casestudy-client {
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+}
+
+.sr-casestudy-client-name {
+    font-size: clamp(20px, 2.5vw, 26px) !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.sr-casestudy-client-company {
+    font-size: 15px !important;
+    color: #c5a880 !important;
+    margin: 4px 0 0 0 !important;
+    font-weight: 500 !important;
+}
+
+.sr-casestudy-title {
+    font-size: clamp(17px, 2vw, 21px) !important;
+    font-weight: 700 !important;
+    color: #f3dfba !important;
+    margin: 18px 0 0 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Key Metrics Grid */
+.sr-casestudy-metrics {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+    gap: 14px !important;
+    margin: 24px 0 !important;
+}
+
+.sr-metric-box {
+    background: rgba(12, 20, 16, 0.85) !important;
+    border: 1px solid rgba(197, 168, 128, 0.3) !important;
+    border-radius: 16px !important;
+    padding: 16px 18px !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.sr-metric-box:hover {
+    border-color: #f3dfba !important;
+    box-shadow: 0 0 20px rgba(197, 168, 128, 0.25) !important;
+    transform: translateY(-3px) !important;
+}
+
+.sr-metric-value {
+    font-size: clamp(24px, 3vw, 32px) !important;
+    font-weight: 900 !important;
+    color: #f3dfba !important;
+    line-height: 1.1 !important;
+    margin-bottom: 6px !important;
+    text-shadow: 0 0 15px rgba(197, 168, 128, 0.4) !important;
+    font-family: monospace, sans-serif !important;
+}
+
+.sr-metric-label {
+    font-size: 13px !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+}
+
+.sr-metric-note {
+    font-size: 11px !important;
+    color: #9ca3af !important;
+}
+
+/* Sections: Challenge & Solution */
+.sr-casestudy-section {
+    margin: 20px 0 !important;
+}
+
+.sr-casestudy-sec-title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #f3dfba !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.sr-casestudy-sec-desc {
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+    color: #d1d5db !important;
+    margin: 0 !important;
+}
+
+/* Tech Stack Pills */
+.sr-casestudy-stack {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin: 18px 0 !important;
+}
+
+.sr-stack-pill {
+    padding: 5px 12px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 999px !important;
+    font-size: 12px !important;
+    color: #9ca3af !important;
+    font-weight: 500 !important;
+}
+
+/* Modal Actions Footer */
+.sr-casestudy-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+    border-top: 1px solid rgba(197, 168, 128, 0.2) !important;
+    padding-top: 22px !important;
+    margin-top: 24px !important;
+}
+
+.sr-casestudy-roi-badge {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    padding: 8px 16px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.sr-casestudy-cta-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: linear-gradient(135deg, #c5a880 0%, #e2b17a 100%) !important;
+    color: #060b09 !important;
+    padding: 10px 22px !important;
+    border-radius: 999px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4) !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+.sr-casestudy-cta-btn:hover {
+    transform: translateY(-2px) scale(1.03) !important;
+    box-shadow: 0 6px 25px rgba(197, 168, 128, 0.6) !important;
+    color: #000000 !important;
+}
