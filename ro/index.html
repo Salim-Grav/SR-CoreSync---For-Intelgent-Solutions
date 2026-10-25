@@ -4992,7 +4992,7 @@ main#wrapper:focus{outline:none}
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
-                        <input type="range" class="sr-roi-range" id="roiCostRange" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiCostRange" title="Monthly Operational Cost" aria-label="Monthly Operational Cost" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -5004,7 +5004,7 @@ main#wrapper:focus{outline:none}
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 employees</div>
-                        <input type="range" class="sr-roi-range" id="roiTeamRange" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" title="Team Size" aria-label="Team Size" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -5210,13 +5210,13 @@ main#wrapper:focus{outline:none}
 
             <!-- Demo Tabs -->
             <div class="sr-demo-tab-list" role="tablist">
-                <button type="button" class="sr-demo-tab-btn active" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
+                <button type="button" class="sr-demo-tab-btn active" role="tab" aria-selected="true" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 Financial ERP (CFO Hub)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
+                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
                     ⚡ Cloud &amp; AI Core (CTO)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
+                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
                     🛡️ Compliance &amp; Security
                 </button>
             </div>
