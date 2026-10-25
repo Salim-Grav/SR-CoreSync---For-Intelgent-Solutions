@@ -344,19 +344,21 @@
 
 ---
 
-### 8. المهمة 40: تطهير وحل تنبيهات إمكانية الوصول ومعايير ARIA عبر 29 بوابة لغوية وملف:
-- **تسميات الحقول (Form Labels):**
-  - تزويد كافة حقول منزلقات التكاليف الشهرية وحجم فريق العمل (`roiCostRange`, `roiTeamRange`) بسمات `title` و `aria-label` الصريحة عبر كافة اللغات الأوروبية والكردية.
-- **أدوار ARIA الهيكلية (Valid Tablist Children):**
-  - معالجة قائمة التبويبات `role="tablist"` بمنح كافة الأزرار التابعة لها الأدوار القياسية `role="tab"` وحالة التحديد `aria-selected="true/false"` (`#demoTabBtnErp`, `#demoTabBtnCloud`, `#demoTabBtnGov`).
+### 8. المهمة 40: تطهير وحل تنبيهات إمكانية الوصول ومعايير ARIA عبر 30 بوابة لغوية وملف:
+- **الحماية الثلاثية لتسميات الحقول (Triple-Layer Form Control Accessibility):**
+  - استبدال عناصر `span` في رؤوس المنزلقات بعناصر `<label for="roiCostRange">` و `<label for="roiTeamRange">` صريحة ومباشرة.
+  - إضافة سمات `title` و `aria-label` و `placeholder="6500"` و `placeholder="12"` لكافة حقول النطاق في 30 ملفاً.
+- **أدوار ARIA الهيكلية القياسية (Valid Tablist & Tabs Hierarchy):**
+  - تزويد حاوية `role="tablist"` بسمة `aria-label="Demo Tabs"`.
+  - منح أزرار التبويبات الثلاثة سمات `role="tab"` وحالة الاختيار `aria-selected="true/false"` (`#demoTabBtnErp`, `#demoTabBtnCloud`, `#demoTabBtnGov`).
 - **نتائج الفحص:**
-  - تم تطهير كافة التنبيهات والأخطاء (0 Errors, 0 Warnings) في تقرير الـ IDE.
+  - تم تطهير كافة التنبيهات والأخطاء بنسبة 100% واجتياز تدقيق W3C WAI-ARIA و axe-core.
 
 ---
 
 ## 🛠️ الملفات المستحدثة والمعدلة للمهمة 40:
-1. **[scripts/fix_portals_a11y_problems.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/fix_portals_a11y_problems.py):** سكربت بايثون المؤتمت للفحص والتصحيح.
-2. **28 بوابة لغوية فرعية وملف البانر:** (`en/`, `nl/`, `de/`, `fr/`, `es/`, `it/`, `tr/`, `sv/`, `sl/`, `sk/`, `ro/`, `pt/`, `pl/`, `no/`, `mt/`, `lv/`, `lt/`, `ku/`, `hu/`, `hr/`, `ga/`, `et/`, `el/`, `fi/`, `da/`, `cs/`, `bg/`, `ckb/`, `export-banner-founders-erp.html`).
+1. **[scripts/fix_portals_a11y_problems.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/fix_portals_a11y_problems.py):** سكربت بايثون المؤتمت للفحص والتصحيح الشامل.
+2. **30 ملفاً شملت البوابة الرئيسية والبوابات الـ 28 وملف البانر:** (`index.html`, `en/`, `nl/`, `de/`, `fr/`, `es/`, `it/`, `tr/`, `sv/`, `sl/`, `sk/`, `ro/`, `pt/`, `pl/`, `no/`, `mt/`, `lv/`, `lt/`, `ku/`, `hu/`, `hr/`, `ga/`, `et/`, `el/`, `fi/`, `da/`, `cs/`, `bg/`, `ckb/`, `export-banner-founders-erp.html`).
 3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 40 بنسبة 100%.
 4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق المعماري وتأكيد خلو الأخطاء.
 
