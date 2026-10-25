@@ -54,7 +54,7 @@ async function main() {
         await sleep(1500);
         const snapMic = await send('Page.captureScreenshot', { format: 'png' });
         writeFileSync('live_voice_planner_mic_listening.png', Buffer.from(snapMic.data, 'base64'));
-        writeFileSync('C:\\Users\\msali\\.gemini\antigravity-ide\\brain\\c2846371-b1e6-4b8f-9fee-01dda36014e9\\live_voice_planner_mic_listening.png', Buffer.from(snapMic.data, 'base64'));
+        writeFileSync('C:\\\\Users\\\\msali\\\\.gemini\\\\antigravity-ide\\\\brain\\\\c2846371-b1e6-4b8f-9fee-01dda36014e9\\\\live_voice_planner_mic_listening.png', Buffer.from(snapMic.data, 'base64'));
         console.log('Successfully captured mic listening stage');
 
         ws.close();
