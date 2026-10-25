@@ -180,9 +180,15 @@
    - نقل وتوحيد جميع تنسيقات نافذة الدفع والتسوية `#srCheckoutModal` في `index.html` إلى فئات CSS متخصصة داخل وسم `<style>`.
    - استبدال الأنماط المضمنة لبطاقات القنوات الـ 9 في `social-8k-studio.html` بفئات مخصصة للأيقونات (`.icon-linkedin`, `.icon-facebook`, إلخ).
    - إدراج الفئة `.verified-handle-banner` في `social-campaign-hub.html` لإلغاء أي أنماط عشوائية.
+7. **توافق أشرطة التمرير عبر كافة المتصفحات (Cross-Browser Scrollbar Support):**
+   - إضافة محددات `::-webkit-scrollbar` وتغليف `scrollbar-width` داخل استعلام `@supports (scrollbar-width: thin)` في `social-8k-studio.html` لتوفير تجربة تمرير انسيابية وفاخرة لمتصفحات Chrome و Safari و Samsung Internet.
 
-### 📸 لقطة حية ومباشرة من شاشة المتصفح بعد تنظيف التنبيهات بالكامل:
+### 📸 لقطات حية ومباشرة من شاشة المتصفح بعد تنظيف التنبيهات بالكامل:
+1. **معاينة قسم الهيرو بعد التوافق التام والتنظيف البرمجي:**
 ![شاشة المنصة بعد تصحيح تنبيهات الشيفرة والجودة البرمجية بنسبة 100%](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/hero_section_verified_1792960638683.png)
+
+2. **معاينة شريط الفلاتر وسجل شبكة القنوات في استوديو 8K:**
+![سجل شبكة القنوات وشريط التمرير الانسيابي في استوديو 8K](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/social_8k_studio_channels_registry_1792960781771.png)
 
 </div>
 
