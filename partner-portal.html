@@ -476,11 +476,11 @@
         </div>
         <div class="stat-card">
             <div class="stat-title">الشركات والعملاء النشطين (Active Tenants)</div>
-            <div class="stat-value">14 <span style="font-size:1rem; color:var(--text-muted); font-weight:normal;">مؤسسة هولندية</span></div>
+            <div class="stat-value">14 <span class="stat-unit-muted">مؤسسة هولندية</span></div>
         </div>
         <div class="stat-card">
             <div class="stat-title">إقرارات BTW الجاهزة للتقديم (Belastingdienst)</div>
-            <div class="stat-value stat-accent">100% <span style="font-size:1rem; color:#34d399; font-weight:normal;">مطابقة تامة</span></div>
+            <div class="stat-value stat-accent">100% <span class="stat-unit-emerald">مطابقة تامة</span></div>
         </div>
     </div>
 
@@ -492,7 +492,7 @@
             <div class="card-header-row">
                 <div>
                     <h2 class="card-heading">1. استوديو تخصيص الهوية المستقلة (White-Label Studio)</h2>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">حدد هوية مكتبك المحاسبي لتظهر واجهات الـ ERP السحابي لعملائك باسمك وشعارك ونطاقك الخاص.</p>
+                    <p class="card-subtext">حدد هوية مكتبك المحاسبي لتظهر واجهات الـ ERP السحابي لعملائك باسمك وشعارك ونطاقك الخاص.</p>
                 </div>
             </div>
 
@@ -503,7 +503,7 @@
 
             <div class="wl-form-group">
                 <label for="partnerDomainInput" class="wl-label">النطاق المخصص أو الرابط الفرعي (Custom CNAME / Subdomain):</label>
-                <input type="text" id="partnerDomainInput" class="wl-input" value="portal.vandijk-accountants.nl" title="النطاق المخصص" style="direction:ltr; text-align:left;" oninput="updateLiveWlPreview()" />
+                <input type="text" id="partnerDomainInput" class="wl-input input-ltr" value="portal.vandijk-accountants.nl" title="النطاق المخصص" oninput="updateLiveWlPreview()" />
             </div>
 
             <div class="wl-form-group">
@@ -520,13 +520,13 @@
             <div class="wl-live-preview">
                 <div class="preview-top-bar">
                     <span class="preview-domain-pill" id="previewDomainText">portal.vandijk-accountants.nl</span>
-                    <span style="font-size:0.75rem; color:#4ade80; font-weight:700;">● بيئة الشريك المباشرة 2026</span>
+                    <span class="preview-env-badge">● بيئة الشريك المباشرة 2026</span>
                 </div>
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <div style="width:36px; height:36px; border-radius:8px; background:rgba(197,168,128,0.2); display:flex; align-items:center; justify-content:center; font-size:1.2rem;" id="previewLogoBox">🏛️</div>
+                <div class="preview-tenant-row">
+                    <div class="preview-logo-box" id="previewLogoBox">🏛️</div>
                     <div>
                         <div class="preview-tenant-name" id="previewTenantName">Van Dijk &amp; Partners Accountants B.V.</div>
-                        <div style="font-size:0.75rem; color:var(--text-muted);">مدعوم ومؤمن هندسياً بواسطة S&amp;R CoreSync Sovereign Infrastructure</div>
+                        <div class="preview-powered-by">مدعوم ومؤمن هندسياً بواسطة S&amp;R CoreSync Sovereign Infrastructure</div>
                     </div>
                 </div>
             </div>
@@ -537,13 +537,13 @@
             <div class="card-header-row">
                 <div>
                     <h2 class="card-heading">2. نظام إشعارات WhatsApp Business المالي للمحاسبين</h2>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">إرسال فوري وتلقائي لإشعارات السداد والتسوية البنكية iDEAL إلى مدراء الحسابات عبر واتساب الرسمي.</p>
+                    <p class="card-subtext">إرسال فوري وتلقائي لإشعارات السداد والتسوية البنكية iDEAL إلى مدراء الحسابات عبر واتساب الرسمي.</p>
                 </div>
             </div>
 
             <div class="wl-form-group">
                 <label for="waPhoneInput" class="wl-label">رقم هاتف مدير الحسابات المعتمد (مع الرمز الدولي):</label>
-                <input type="text" id="waPhoneInput" class="wl-input" value="+31636279435" title="رقم واتساب المحاسب" style="direction:ltr; text-align:left;" />
+                <input type="text" id="waPhoneInput" class="wl-input input-ltr" value="+31636279435" title="رقم واتساب المحاسب" />
             </div>
 
             <div class="wl-form-group">
@@ -555,12 +555,12 @@
                 </select>
             </div>
 
-            <div class="wl-live-preview" style="background:rgba(2, 8, 5, 0.9);">
-                <div style="font-size:0.8rem; color:#4ade80; font-weight:700; margin-bottom:6px;">📱 معاينة رسالة WhatsApp Business الرسمية:</div>
-                <div id="waPreviewText" style="font-size:0.85rem; color:#e2e8f0; line-height:1.6; white-space:pre-wrap; direction:rtl;"></div>
+            <div class="wl-live-preview wl-preview-box-dark">
+                <div class="wa-preview-header">📱 معاينة رسالة WhatsApp Business الرسمية:</div>
+                <div id="waPreviewText" class="wa-preview-body"></div>
             </div>
 
-            <button type="button" class="nav-btn nav-btn-primary" style="justify-content:center; padding:12px;" onclick="dispatchWhatsAppNotification()">
+            <button type="button" class="nav-btn nav-btn-primary btn-dispatch-wa" onclick="dispatchWhatsAppNotification()">
                 <span>📱 إرسال الإشعار لمدير الحسابات عبر WhatsApp API</span>
             </button>
         </section>
@@ -570,10 +570,10 @@
             <div class="card-header-row">
                 <div>
                     <h2 class="card-heading">3. إدارة المؤسسات والعملاء المربوطين (Active Dutch Client Tenants)</h2>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">استعراض الشركات المستفيدة وموقف الإقرارات الضريبية لـ Belastingdienst وإجمالي الاشتراكات.</p>
+                    <p class="card-subtext">استعراض الشركات المستفيدة وموقف الإقرارات الضريبية لـ Belastingdienst وإجمالي الاشتراكات.</p>
                 </div>
                 <div>
-                    <span style="font-size:0.85rem; color:var(--text-muted);">حالة الربط المالي: <strong style="color:#34d399;">PSD2 Open Banking Live</strong></span>
+                    <span class="status-link-meta">حالة الربط المالي: <strong class="status-live-strong">PSD2 Open Banking Live</strong></span>
                 </div>
             </div>
 
@@ -592,10 +592,10 @@
                 <tbody>
                     <tr>
                         <td><strong>Rotterdam Port Logistics B.V.</strong></td>
-                        <td style="font-family:var(--font-code);">KVK 84219871</td>
+                        <td class="tenant-kvk-col">KVK 84219871</td>
                         <td>ING Bank (NL)</td>
-                        <td style="font-family:var(--font-code); font-weight:700;">€1,250.00</td>
-                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€312.50</td>
+                        <td class="tenant-fee-col">€1,250.00</td>
+                        <td class="tenant-rev-col">€312.50</td>
                         <td><span class="status-badge status-active">مطابق ومسدد ✓</span></td>
                         <td>
                             <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Rotterdam Port Logistics B.V.', '€1,250.00')">واتساب 📱</button>
@@ -603,10 +603,10 @@
                     </tr>
                     <tr>
                         <td><strong>De Vries BioTech Solutions</strong></td>
-                        <td style="font-family:var(--font-code);">KVK 79142388</td>
+                        <td class="tenant-kvk-col">KVK 79142388</td>
                         <td>ABN AMRO</td>
-                        <td style="font-family:var(--font-code); font-weight:700;">€890.00</td>
-                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€222.50</td>
+                        <td class="tenant-fee-col">€890.00</td>
+                        <td class="tenant-rev-col">€222.50</td>
                         <td><span class="status-badge status-sync">مزامنة دفتر الأستاذ ✓</span></td>
                         <td>
                             <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('De Vries BioTech Solutions', '€890.00')">واتساب 📱</button>
@@ -614,10 +614,10 @@
                     </tr>
                     <tr>
                         <td><strong>Nordic Cloud Media Group</strong></td>
-                        <td style="font-family:var(--font-code);">KVK 91028472</td>
+                        <td class="tenant-kvk-col">KVK 91028472</td>
                         <td>Rabobank</td>
-                        <td style="font-family:var(--font-code); font-weight:700;">€1,450.00</td>
-                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€362.50</td>
+                        <td class="tenant-fee-col">€1,450.00</td>
+                        <td class="tenant-rev-col">€362.50</td>
                         <td><span class="status-badge status-active">جاهز لإقرار BTW Q3 ✓</span></td>
                         <td>
                             <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Nordic Cloud Media Group', '€1,450.00')">واتساب 📱</button>
@@ -625,10 +625,10 @@
                     </tr>
                     <tr>
                         <td><strong>Utrecht Clean Energy V.O.F.</strong></td>
-                        <td style="font-family:var(--font-code);">KVK 68420199</td>
+                        <td class="tenant-kvk-col">KVK 68420199</td>
                         <td>bunq Business</td>
-                        <td style="font-family:var(--font-code); font-weight:700;">€650.00</td>
-                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€162.50</td>
+                        <td class="tenant-fee-col">€650.00</td>
+                        <td class="tenant-rev-col">€162.50</td>
                         <td><span class="status-badge status-pending">قيد مراجعة الضرائب ⏳</span></td>
                         <td>
                             <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Utrecht Clean Energy V.O.F.', '€650.00')">واتساب 📱</button>
