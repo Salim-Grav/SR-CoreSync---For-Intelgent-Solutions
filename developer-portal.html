@@ -1290,25 +1290,25 @@ console.log('WhatsApp Status:', notify.message);</pre>
                 // Update General Ledger table
                 tableBody.innerHTML = `
                     <tr>
-                        <td style="font-family:var(--font-code); font-weight:700; color:#38bdf8;">1000 (ING Zakelijk)</td>
+                        <td class="ledger-acc-bank">1000 (ING Zakelijk)</td>
                         <td>إيداع فوري من سداد iDEAL للعميل</td>
                         <td class="ledger-debit">€${amount.toFixed(2)}</td>
                         <td>-</td>
                     </tr>
                     <tr>
-                        <td style="font-family:var(--font-code); font-weight:700; color:#f59e0b;">8000 (Omzet Diensten)</td>
+                        <td class="ledger-acc-rev">8000 (Omzet Diensten)</td>
                         <td>إيرادات مبيعات الباقة السيادية</td>
                         <td>-</td>
                         <td class="ledger-credit">€${netAmount.toFixed(2)}</td>
                     </tr>
                     <tr>
-                        <td style="font-family:var(--font-code); font-weight:700; color:#f59e0b;">1500 (Te Betalen BTW 21%)</td>
+                        <td class="ledger-acc-vat">1500 (Te Betalen BTW 21%)</td>
                         <td>ضريبة القيمة المضافة المستحقة لهولندا</td>
                         <td>-</td>
                         <td class="ledger-credit">€${btwAmount.toFixed(2)}</td>
                     </tr>
-                    <tr style="background:rgba(16, 185, 129, 0.1); font-weight:800;">
-                        <td colspan="2" style="color:#ffffff;">المجموع المتوازن (Total Balance)</td>
+                    <tr class="ledger-total-row">
+                        <td colspan="2" class="ledger-total-label">المجموع المتوازن (Total Balance)</td>
                         <td class="ledger-debit">€${amount.toFixed(2)}</td>
                         <td class="ledger-credit">€${amount.toFixed(2)}</td>
                     </tr>
