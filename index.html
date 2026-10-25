@@ -10408,6 +10408,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
             const modal = document.getElementById('aiVoicePlannerModal');
             if (modal && modal.classList.contains('active')) {
                 stopVoiceRecording();
+                stopBlueprintAudioSynthesis();
                 modal.classList.remove('active');
                 document.body.style.overflow = '';
                 if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('close');
@@ -10493,6 +10494,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
 
         function resetVoicePlanner() {
             stopVoiceRecording();
+            stopBlueprintAudioSynthesis();
             const transcriptBox = document.getElementById('voicePlannerTranscript');
             const resultBox = document.getElementById('voicePlannerResult');
             const status = document.getElementById('voicePlannerStatus');
@@ -10505,6 +10507,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
         }
 
         function generateAiProjectBlueprint() {
+            stopBlueprintAudioSynthesis();
             const transcriptBox = document.getElementById('voicePlannerTranscript');
             const resultBox = document.getElementById('voicePlannerResult');
             const status = document.getElementById('voicePlannerStatus');
@@ -10549,6 +10552,10 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     roiValue = 'مضاعفة ثقة المستثمرين والعملاء بمعدل 5.4x وتسليم كامل خلال 48 إلى 72 ساعة';
                 }
 
+                const encodedProject = encodeURIComponent(projectName);
+                const encodedSysRec = encodeURIComponent(sysRec);
+                const encodedRoi = encodeURIComponent(roiValue);
+
                 const html = `
                     <div class="sr-blueprint-card">
                         <div class="sr-blueprint-header">
@@ -10558,6 +10565,38 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                             </span>
                             <h4 class="sr-blueprint-title">${projectName}</h4>
                             <p class="text-white-64 font-size-14 mb-0">المجال: <strong class="text-white">${industry}</strong> • تم التحليل والصياغة بناءً على فكرتك المنطوقة.</p>
+                        </div>
+
+                        <!-- 🎙️ مشغل الرد الصوتي التنفيذي الذكي (AI Executive Audio Synthesis) -->
+                        <div class="sr-blueprint-audio-player" id="blueprintAudioPlayer"
+                             data-project-name="${encodedProject}"
+                             data-sys-rec="${encodedSysRec}"
+                             data-roi-value="${encodedRoi}">
+                            <div class="sr-blueprint-audio-info">
+                                <div class="sr-blueprint-audio-avatar">
+                                    <img src="./assets/founder-salim.png" alt="Eng. Mohammad Salim Aziza" class="sr-blueprint-audio-img" />
+                                    <span class="sr-blueprint-audio-status-dot" id="audioSpeakingDot"></span>
+                                </div>
+                                <div class="sr-blueprint-audio-texts">
+                                    <span class="sr-blueprint-audio-badge">🎙️ صوت المهندس سليم الرقمي • AI Executive Audio</span>
+                                    <div class="sr-blueprint-audio-title">الاستماع للملخص التنفيذي للخطة المخصصة</div>
+                                </div>
+                            </div>
+                            <div class="sr-blueprint-audio-controls">
+                                <button type="button" class="sr-blueprint-audio-btn" id="blueprintPlayVoiceBtn" onclick="toggleBlueprintAudioSynthesis()">
+                                    <span id="blueprintPlayVoiceIcon">▶️</span>
+                                    <span id="blueprintPlayVoiceLabel">استمع للخطة الآن</span>
+                                </button>
+                                <div class="sr-blueprint-audio-waves" id="blueprintAudioWaves">
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                    <span class="sr-audio-bar"></span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="sr-blueprint-grid">
@@ -10625,9 +10664,92 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
 
-                if (status) status.innerHTML = '✨ تم بناء وتوليد خطة عملك بنجاح تام! يمكنك تحميلها كـ PDF أو حجز التنفيذ فوراً.';
+                if (status) status.innerHTML = '✨ تم بناء وتوليد خطة عملك بنجاح تام! يمكنك الاستماع للملخص الصوتي أو تحميلها كـ PDF.';
                 if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('success');
             }, 700);
+        }
+
+        // =======================================================================
+        // محرك توليف الصوت التنفيذي الذكي (AI Executive Audio Synthesis Engine)
+        // =======================================================================
+        let isBlueprintSpeaking = false;
+        let currentSpeechUtterance = null;
+
+        function stopBlueprintAudioSynthesis() {
+            if (window.speechSynthesis) {
+                try {
+                    window.speechSynthesis.cancel();
+                } catch (e) {
+                    console.warn(e);
+                }
+            }
+            isBlueprintSpeaking = false;
+            currentSpeechUtterance = null;
+
+            const player = document.getElementById('blueprintAudioPlayer');
+            const icon = document.getElementById('blueprintPlayVoiceIcon');
+            const label = document.getElementById('blueprintPlayVoiceLabel');
+
+            if (player) player.classList.remove('is-playing');
+            if (icon) icon.innerHTML = '▶️';
+            if (label) label.textContent = 'استمع للخطة الآن';
+        }
+
+        function toggleBlueprintAudioSynthesis() {
+            if (isBlueprintSpeaking) {
+                stopBlueprintAudioSynthesis();
+                return;
+            }
+
+            if (!('speechSynthesis' in window)) {
+                alert('عذراً، المتصفح الحالي لا يدعم التوليف الصوتي المباشر (Speech Synthesis). يمكنك قراءة الخطة أو تنزيلها بصيغة PDF.');
+                return;
+            }
+
+            stopBlueprintAudioSynthesis();
+
+            const player = document.getElementById('blueprintAudioPlayer');
+            const projectName = player ? decodeURIComponent(player.getAttribute('data-project-name') || '') : 'مشروعك الذكي';
+            const sysRec = player ? decodeURIComponent(player.getAttribute('data-sys-rec') || '') : 'البنية السحابية الموصى بها';
+            const roiValue = player ? decodeURIComponent(player.getAttribute('data-roi-value') || '') : 'عائد استثماري نوعي';
+
+            const textToSpeak = `أهلاً بك، معك المهندس محمد سليم عزيزة، كبير مهندسي السحابة والذكاء الاصطناعي في إس آند آر كور سينك. قمت بتحليل فكرتك وهندسة خطة العمل التنفيذية التالية: ${projectName}. تشمل البنية البرمجية الموصى بها: ${sysRec}. ونتوقع عائداً استثمارياً نوعياً: ${roiValue}. سننفذ المشروع عبر ثلاث مراحل تبدأ بحزمة الهوية والسوشيال ميديا بدقة ثمانية كي وصولاً للإطلاق السحابي الشامل. يمكنك تحميل الخطة كملف بي دي إف أو حجز جلسة تنفيذ فورية معنا.`;
+
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            currentSpeechUtterance = utterance;
+
+            utterance.lang = 'ar-SA';
+            utterance.rate = 0.95; // calm, authoritative executive pace
+            utterance.pitch = 0.94; // deep, executive tone
+
+            // Pick an Arabic voice if available
+            const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+            const arVoice = voices.find(v => (v.lang && v.lang.toLowerCase().startsWith('ar')) || (v.name && (v.name.includes('Arabic') || v.name.includes('Maged') || v.name.includes('Tarik') || v.name.includes('Laila') || v.name.includes('Naayf'))));
+            if (arVoice) {
+                utterance.voice = arVoice;
+            }
+
+            const icon = document.getElementById('blueprintPlayVoiceIcon');
+            const label = document.getElementById('blueprintPlayVoiceLabel');
+
+            utterance.onstart = function() {
+                isBlueprintSpeaking = true;
+                if (player) player.classList.add('is-playing');
+                if (icon) icon.innerHTML = '⏸️';
+                if (label) label.textContent = 'إيقاف الملخص الصوتي';
+                if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('hover');
+            };
+
+            utterance.onend = function() {
+                stopBlueprintAudioSynthesis();
+            };
+
+            utterance.onerror = function(e) {
+                console.warn('Speech synthesis error:', e);
+                stopBlueprintAudioSynthesis();
+            };
+
+            window.speechSynthesis.speak(utterance);
         }
 
         function exportBlueprintPdf(title) {
@@ -10635,6 +10757,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
         }
 
         function bookBlueprintConsultation(title) {
+            stopBlueprintAudioSynthesis();
             closeAiVoicePlannerModal();
             setTimeout(() => {
                 if (typeof openExecutiveBookingModal === 'function') {
