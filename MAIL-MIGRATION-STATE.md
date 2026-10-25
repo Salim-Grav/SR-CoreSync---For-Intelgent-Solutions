@@ -112,12 +112,15 @@ Lead تجريبي          -> "New Consultation Lead LEAD-SR-20261025-DUE4" وص
 |---|---|---|
 | الفواتير | invoice · factuur · quote · pricing · vat · btw · license | `billing@` |
 | الدعم | support · error · bug · outage · migration · help | `support@` |
+| المشاريع الكبيرة | enterprise · corporate · holding · rfp · tender · aanbesteding · partnership · reseller · white-label · government · due diligence | `raed@` + `salim@` معًا |
 
 التحكم من `wrangler.toml` بلا كود: `LEAD_ROUTES = "billing=finance@…;support="` (فراغ = إيقاف القسم).
 مطابقة الكلمات بحدود الكلمة، فلا تُفعّل `vat` داخل `private`.
 
 **دليل حيّ:** استفسار بكلمات فواتير وصل إلى `info@` و`billing@` معًا، موقّعًا بـ DKIM
-(selector=purelymail1، auth=pass).
+(selector=purelymail1، auth=pass). واستفسار بصياغة مشروع كبير (corporate · RFP · partnership)
+وصل إلى `info@` و`raed@` و`salim@` — تم التحقق من الصناديق الثلاثة عبر IMAP.
+قسم واحد قد يحمل عدة عناوين بفاصلة، والفراغ يوقفه: `executive=`.
 
 ### أخطاء واجهناها وأصلحناها
 1. **`WritableStream is currently locked`** — `startTls()` يجب أن يُسبق بتحرير قفل reader/writer القديمين.

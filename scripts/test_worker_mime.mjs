@@ -58,6 +58,26 @@ check('LEAD_ROUTES can disable a department',
 check('empty enquiry still reaches the owner',
     leadRecipients({}, env).recipients.length === 1);
 
+console.log('executive routing');
+const big = leadRecipients({ notes: 'Our corporate group is running an RFP for ERP.' }, env);
+check('enterprise wording adds both founders',
+    big.recipients.includes('raed@sr-coresync.com') && big.recipients.includes('salim@sr-coresync.com'),
+    big.recipients.join(','));
+check('executive route named once', big.departments.filter((d) => d === 'executive').length === 1);
+check('founders keep the owner informed too', big.recipients[0] === 'info@sr-coresync.com');
+check('a tender also reaches billing? no', !big.departments.includes('billing'));
+check('white-label triggers executives',
+    leadRecipients({ notes: 'we want to resell your platform white-label' }, env)
+        .departments.includes('executive'));
+check('a plain demo request does not page founders',
+    !leadRecipients({ notes: 'please show me a demo' }, env).departments.includes('executive'));
+check('executive route can be switched off',
+    !leadRecipients({ notes: 'corporate RFP' }, { ...env, LEAD_ROUTES: 'executive=' })
+        .departments.includes('executive'));
+check('a comma list overrides both founders',
+    leadRecipients({ notes: 'corporate RFP' }, { ...env, LEAD_ROUTES: 'executive=a@x.com,b@x.com' })
+        .recipients.filter((r) => r.endsWith('@x.com')).length === 2);
+
 console.log('multipart addressing');
 const multi = buildMime({
     from: 'info@sr-coresync.com', to: 'info@sr-coresync.com, billing@sr-coresync.com',

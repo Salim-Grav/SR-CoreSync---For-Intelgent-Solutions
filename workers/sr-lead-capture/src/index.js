@@ -755,7 +755,9 @@ async function sendTelegram(lead, env) {
 // so the owner can change it without touching code.
 const DEFAULT_ROUTES = {
     billing: 'billing@sr-coresync.com',
-    support: 'support@sr-coresync.com'
+    support: 'support@sr-coresync.com',
+    // Big-project signals go to the two founders, not to a shared inbox.
+    executive: 'raed@sr-coresync.com,salim@sr-coresync.com'
 };
 
 const ROUTE_KEYWORDS = {
@@ -763,7 +765,10 @@ const ROUTE_KEYWORDS = {
         'quote', 'quotation', 'offerte', 'pricing', 'price', 'prijs', 'tarief', 'vat', 'btw',
         'contract', 'license', 'licence', 'subscription', 'abonnement'],
     support: ['support', 'problem', 'error', 'bug', 'outage', 'incident', 'maintenance', 'fix', 'help',
-        'storing', 'hilfe', 'aide', 'aiuto', 'pomoc', 'destek', 'migration', 'migratie']
+        'storing', 'hilfe', 'aide', 'aiuto', 'pomoc', 'destek', 'migration', 'migratie'],
+    executive: ['enterprise', 'corporate', 'holding', 'group-wide', 'rfp', 'tender', 'aanbesteding',
+        'partnership', 'partner', 'reseller', 'white-label', 'whitelabel', 'government', 'overheid',
+        'gemeente', 'ministry', 'ministerie', 'acquisition', 'due diligence', 'multinational']
 };
 
 function routeTable(env) {
@@ -790,14 +795,22 @@ function departmentsFor(lead, env) {
             return new RegExp('(^|[^a-z0-9])' + word + '([^a-z0-9]|$)').test(haystack);
         });
     }).map(function (name) {
-        return { department: name, email: table[name] };
+        // A department may hold several mailboxes; a comma list keeps that
+        // expressible without inventing a second config format.
+        return {
+            department: name,
+            emails: String(table[name]).split(',').map(function (address) {
+                return address.trim().toLowerCase();
+            }).filter(Boolean)
+        };
     });
 }
 
 function leadRecipients(lead, env) {
     const primary = (env && env.NOTIFY_EMAIL) || '';
     const hits = departmentsFor(lead, env);
-    const list = [primary].filter(Boolean).concat(hits.map(function (hit) { return hit.email; }));
+    const list = [primary].filter(Boolean);
+    hits.forEach(function (hit) { list.push.apply(list, hit.emails); });
     return { recipients: Array.from(new Set(list)), departments: hits.map(function (hit) { return hit.department; }) };
 }
 
