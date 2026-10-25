@@ -4,86 +4,94 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
+    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device & Media App Routing) -->
     <script id="srLangAutoDetect">
     (function() {
         try {
+            if (/bot|crawl|spider|slurp|google|bing|yandex/i.test(navigator.userAgent)) return;
             var urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('noredirect') === '1') return;
             var qLang = urlParams.get('lang');
             var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
-            var currentLang = (document.documentElement.getAttribute('lang') || 'ar').toLowerCase().split('-')[0];
             
-            // 1. Explicit query param ?lang=xx (immediate priority)
+            var currentLang = (document.documentElement.getAttribute('lang') || 'ar').toLowerCase().split('-')[0];
+            var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
+            var targetFile = isDemo ? 'demo.html' : 'index.html';
+            var isSubfolder = !!window.location.pathname.match(/\/[a-z]{2,3}\//);
+            var prefix = isSubfolder ? '../' : './';
+            
+            // 1. Explicit query parameter ?lang=xx (immediate manual priority)
             if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
                 var chosen = qLang.toLowerCase();
-                try { localStorage.setItem('sr_lang_pref', chosen); } catch(e){}
+                try {
+                    sessionStorage.setItem('sr_user_lang_locked', chosen);
+                    localStorage.setItem('sr_lang_pref', chosen);
+                } catch(e){}
                 if (chosen !== currentLang) {
-                    var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
-                    var targetFile = isDemo ? 'demo.html' : 'index.html';
                     var targetPath = (chosen === 'ar') ? targetFile : (chosen + '/' + targetFile);
-                    var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
-                    var prefix = isSubfolder ? '../' : './';
                     window.location.replace(prefix + targetPath + window.location.hash);
                 }
                 return;
             }
 
-            // 2. User manual override from localStorage
-            var savedPref = null;
-            try { savedPref = localStorage.getItem('sr_lang_pref'); } catch(e){}
+            // 2. Active Session Manual Lock: User explicitly switched language during this visit
+            var sessionLock = null;
+            try { sessionLock = sessionStorage.getItem('sr_user_lang_locked'); } catch(e){}
+            if (sessionLock && supported.indexOf(sessionLock) !== -1) {
+                if (sessionLock !== currentLang) {
+                    var targetPath = (sessionLock === 'ar') ? targetFile : (sessionLock + '/' + targetFile);
+                    window.location.replace(prefix + targetPath + window.location.hash);
+                }
+                return;
+            }
 
+            // 3. Automatic Device, Mobile & Browser Language Detection (Media apps, WhatsApp, in-app webviews)
+            var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || navigator.browserLanguage || ''];
             var targetLang = null;
-            if (savedPref && supported.indexOf(savedPref) !== -1) {
-                targetLang = savedPref;
-            } else {
-                // 3. First-time visit: Check visitor device / OS / browser system languages
-                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-                var hasArabic = false;
-                for (var i = 0; i < browserLangs.length; i++) {
-                    var raw = (browserLangs[i] || '').toLowerCase().trim();
-                    var primary = raw.split('-')[0];
-                    if (primary === 'ar' || raw.indexOf('ar') !== -1) {
-                        hasArabic = true;
+
+            // Check if device/browser prefers Arabic anywhere in its language profile
+            for (var i = 0; i < browserLangs.length; i++) {
+                var raw = (browserLangs[i] || '').toLowerCase().trim();
+                var primary = raw.split('-')[0];
+                if (primary === 'ar' || raw.indexOf('ar') !== -1) {
+                    targetLang = 'ar';
+                    break;
+                }
+            }
+
+            // If not Arabic, inspect browser languages for Kurdish or matching European / Regional language
+            if (!targetLang) {
+                for (var j = 0; j < browserLangs.length; j++) {
+                    var rawJ = (browserLangs[j] || '').toLowerCase().trim();
+                    var primaryJ = rawJ.split('-')[0];
+                    if (rawJ.indexOf('ckb') !== -1 || rawJ.indexOf('sorani') !== -1) {
+                        targetLang = 'ckb';
+                        break;
+                    }
+                    if (rawJ.indexOf('ku') !== -1 || rawJ.indexOf('kurmanji') !== -1) {
+                        targetLang = 'ku';
+                        break;
+                    }
+                    if (supported.indexOf(primaryJ) !== -1) {
+                        targetLang = primaryJ;
                         break;
                     }
                 }
-                
-                // If visitor's device has Arabic anywhere in its language preferences, stay on Arabic Master!
-                if (hasArabic) {
-                    targetLang = 'ar';
-                } else {
-                    // Non-Arabic device: find first supported language
-                    for (var j = 0; j < browserLangs.length; j++) {
-                        var rawJ = (browserLangs[j] || '').toLowerCase().trim();
-                        var primaryJ = rawJ.split('-')[0];
-                        if (rawJ.indexOf('ckb') !== -1 || rawJ.indexOf('ku-iq') !== -1 || rawJ.indexOf('sorani') !== -1) {
-                            targetLang = 'ckb';
-                            break;
-                        }
-                        if (supported.indexOf(primaryJ) !== -1) {
-                            targetLang = primaryJ;
-                            break;
-                        }
-                    }
-                    if (!targetLang) {
-                        targetLang = 'en'; // Global fallback for foreign devices
-                    }
-                }
-                try { localStorage.setItem('sr_lang_pref', targetLang); } catch(e){}
             }
 
-            // 4. Route only if targetLang is different from current page
-            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
-                var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
-                var targetFile = isDemo ? 'demo.html' : 'index.html';
-                var targetPath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
-                var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
-                var prefix = isSubfolder ? '../' : './';
-                var destUrl = prefix + targetPath + window.location.search + window.location.hash;
-                window.location.replace(destUrl);
+            // Global fallback for international visitors
+            if (!targetLang) {
+                targetLang = 'en';
             }
-        } catch(e) {}
+
+            // Route instantly if detected language differs from current page
+            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
+                var routePath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
+                window.location.replace(prefix + routePath + window.location.search + window.location.hash);
+            }
+        } catch(e) {
+            // Fail-safe: stay on current page gracefully
+        }
     })();
     </script>
 
@@ -7716,38 +7724,45 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
 
 
 
+
+<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+
+
+
+
+
 <!-- Apple macOS Sovereign Language & Flags Dock -->
 <aside class="apple-macos-dock-wrapper" id="appleMacosDockWrapper" aria-label="Sovereign Language Quick Dock">
     <div class="apple-macos-dock" id="appleMacosDock">
-        <a href="../de/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
+        <a href="../de/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
             <img src="../assets/flags/de.png" alt="DE" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../fr/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
+        <a href="../fr/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
             <img src="../assets/flags/fr.png" alt="FR" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../nl/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
+        <a href="../nl/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
             <img src="../assets/flags/nl.png" alt="NL" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../en/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
+        <a href="../en/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
             <img src="../assets/flags/gb.png" alt="EN" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../es/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
+        <a href="../es/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
             <img src="../assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
+        <a href="../index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
             <img src="../assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../tr/index.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
+        <a href="../tr/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
             <img src="../assets/flags/tr.png" alt="TR" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../no/index.html" class="apple-dock-item active" onclick="try{localStorage.setItem('sr_lang_pref','no');}catch(e){}" data-tooltip="Norsk (Norwegian)" aria-label="Norsk (Norwegian)">
+        <a href="../no/index.html" class="apple-dock-item active" onclick="try{sessionStorage.setItem('sr_user_lang_locked','no');localStorage.setItem('sr_lang_pref','no');}catch(e){}" data-tooltip="Norsk (Norwegian)" aria-label="Norsk (Norwegian)">
             <img src="../assets/flags/no.png" alt="NO" class="apple-dock-flag" width="28" height="19">
             <span class="apple-dock-dot"></span>
         </a>
@@ -7756,7 +7771,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1-4-10z"></path>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
             <span class="apple-dock-badge">28</span>
         </button>
@@ -7783,7 +7798,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
         </div>
         <div class="apple-launchpad-body">
             <div class="apple-launchpad-grid" id="appleLaunchpadGrid">
-                <a href="../de/index.html" class="apple-launchpad-card" data-code="de" data-name="deutsch german" onclick="try{localStorage.setItem('sr_lang_pref','de');}catch(e){}">
+                <a href="../de/index.html" class="apple-launchpad-card" data-code="de" data-name="deutsch german" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/de.png" alt="DE" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7793,7 +7808,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">MwSt 19%</span>
                 </a>
-                <a href="../fr/index.html" class="apple-launchpad-card" data-code="fr" data-name="français french" onclick="try{localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
+                <a href="../fr/index.html" class="apple-launchpad-card" data-code="fr" data-name="français french" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/fr.png" alt="FR" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7803,7 +7818,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">TVA 20%</span>
                 </a>
-                <a href="../nl/index.html" class="apple-launchpad-card" data-code="nl" data-name="nederlands dutch" onclick="try{localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
+                <a href="../nl/index.html" class="apple-launchpad-card" data-code="nl" data-name="nederlands dutch" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/nl.png" alt="NL" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7813,7 +7828,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">BTW 21%</span>
                 </a>
-                <a href="../en/index.html" class="apple-launchpad-card" data-code="en" data-name="english english" onclick="try{localStorage.setItem('sr_lang_pref','en');}catch(e){}">
+                <a href="../en/index.html" class="apple-launchpad-card" data-code="en" data-name="english english" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/gb.png" alt="EN" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7823,7 +7838,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">VAT 20%</span>
                 </a>
-                <a href="../es/index.html" class="apple-launchpad-card" data-code="es" data-name="español spanish" onclick="try{localStorage.setItem('sr_lang_pref','es');}catch(e){}">
+                <a href="../es/index.html" class="apple-launchpad-card" data-code="es" data-name="español spanish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/es.png" alt="ES" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7833,7 +7848,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">IVA 21%</span>
                 </a>
-                <a href="../it/index.html" class="apple-launchpad-card" data-code="it" data-name="italiano italian" onclick="try{localStorage.setItem('sr_lang_pref','it');}catch(e){}">
+                <a href="../it/index.html" class="apple-launchpad-card" data-code="it" data-name="italiano italian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','it');localStorage.setItem('sr_lang_pref','it');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/it.png" alt="IT" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7843,7 +7858,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">IVA 22%</span>
                 </a>
-                <a href="../sv/index.html" class="apple-launchpad-card" data-code="sv" data-name="svenska swedish" onclick="try{localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
+                <a href="../sv/index.html" class="apple-launchpad-card" data-code="sv" data-name="svenska swedish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sv');localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/se.png" alt="SV" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7853,7 +7868,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">MOMS 25%</span>
                 </a>
-                <a href="../no/index.html" class="apple-launchpad-card active" data-code="no" data-name="norsk norwegian" onclick="try{localStorage.setItem('sr_lang_pref','no');}catch(e){}">
+                <a href="../no/index.html" class="apple-launchpad-card active" data-code="no" data-name="norsk norwegian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','no');localStorage.setItem('sr_lang_pref','no');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/no.png" alt="NO" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7863,7 +7878,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">MVA 25%</span>
                 </a>
-                <a href="../da/index.html" class="apple-launchpad-card" data-code="da" data-name="dansk danish" onclick="try{localStorage.setItem('sr_lang_pref','da');}catch(e){}">
+                <a href="../da/index.html" class="apple-launchpad-card" data-code="da" data-name="dansk danish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','da');localStorage.setItem('sr_lang_pref','da');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/dk.png" alt="DA" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7873,7 +7888,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">MOMS 25%</span>
                 </a>
-                <a href="../fi/index.html" class="apple-launchpad-card" data-code="fi" data-name="suomi finnish" onclick="try{localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
+                <a href="../fi/index.html" class="apple-launchpad-card" data-code="fi" data-name="suomi finnish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fi');localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/fi.png" alt="FI" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7883,7 +7898,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">ALV 25.5%</span>
                 </a>
-                <a href="../pl/index.html" class="apple-launchpad-card" data-code="pl" data-name="polski polish" onclick="try{localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
+                <a href="../pl/index.html" class="apple-launchpad-card" data-code="pl" data-name="polski polish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pl');localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/pl.png" alt="PL" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7893,7 +7908,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">VAT 23%</span>
                 </a>
-                <a href="../pt/index.html" class="apple-launchpad-card" data-code="pt" data-name="português portuguese" onclick="try{localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
+                <a href="../pt/index.html" class="apple-launchpad-card" data-code="pt" data-name="português portuguese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pt');localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/pt.png" alt="PT" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7903,7 +7918,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">IVA 23%</span>
                 </a>
-                <a href="../el/index.html" class="apple-launchpad-card" data-code="el" data-name="ελληνικά greek" onclick="try{localStorage.setItem('sr_lang_pref','el');}catch(e){}">
+                <a href="../el/index.html" class="apple-launchpad-card" data-code="el" data-name="ελληνικά greek" onclick="try{sessionStorage.setItem('sr_user_lang_locked','el');localStorage.setItem('sr_lang_pref','el');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/gr.png" alt="EL" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7913,7 +7928,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">ΦΠΑ 24%</span>
                 </a>
-                <a href="../cs/index.html" class="apple-launchpad-card" data-code="cs" data-name="čeština czech" onclick="try{localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
+                <a href="../cs/index.html" class="apple-launchpad-card" data-code="cs" data-name="čeština czech" onclick="try{sessionStorage.setItem('sr_user_lang_locked','cs');localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/cz.png" alt="CS" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7923,7 +7938,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">DPH 21%</span>
                 </a>
-                <a href="../ro/index.html" class="apple-launchpad-card" data-code="ro" data-name="română romanian" onclick="try{localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
+                <a href="../ro/index.html" class="apple-launchpad-card" data-code="ro" data-name="română romanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ro');localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/ro.png" alt="RO" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7933,7 +7948,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">TVA 19%</span>
                 </a>
-                <a href="../hu/index.html" class="apple-launchpad-card" data-code="hu" data-name="magyar hungarian" onclick="try{localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
+                <a href="../hu/index.html" class="apple-launchpad-card" data-code="hu" data-name="magyar hungarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hu');localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/hu.png" alt="HU" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7943,7 +7958,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">ÁFA 27%</span>
                 </a>
-                <a href="../bg/index.html" class="apple-launchpad-card" data-code="bg" data-name="български bulgarian" onclick="try{localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
+                <a href="../bg/index.html" class="apple-launchpad-card" data-code="bg" data-name="български bulgarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','bg');localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/bg.png" alt="BG" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7953,7 +7968,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">ДДС 20%</span>
                 </a>
-                <a href="../sk/index.html" class="apple-launchpad-card" data-code="sk" data-name="slovenčina slovak" onclick="try{localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
+                <a href="../sk/index.html" class="apple-launchpad-card" data-code="sk" data-name="slovenčina slovak" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sk');localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/sk.png" alt="SK" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7963,7 +7978,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">DPH 20%</span>
                 </a>
-                <a href="../hr/index.html" class="apple-launchpad-card" data-code="hr" data-name="hrvatski croatian" onclick="try{localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
+                <a href="../hr/index.html" class="apple-launchpad-card" data-code="hr" data-name="hrvatski croatian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hr');localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/hr.png" alt="HR" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7973,7 +7988,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">PDV 25%</span>
                 </a>
-                <a href="../lt/index.html" class="apple-launchpad-card" data-code="lt" data-name="lietuvių lithuanian" onclick="try{localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
+                <a href="../lt/index.html" class="apple-launchpad-card" data-code="lt" data-name="lietuvių lithuanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lt');localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/lt.png" alt="LT" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7983,7 +7998,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">PVM 21%</span>
                 </a>
-                <a href="../sl/index.html" class="apple-launchpad-card" data-code="sl" data-name="slovenščina slovenian" onclick="try{localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
+                <a href="../sl/index.html" class="apple-launchpad-card" data-code="sl" data-name="slovenščina slovenian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sl');localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/si.png" alt="SL" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -7993,7 +8008,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">DDV 22%</span>
                 </a>
-                <a href="../lv/index.html" class="apple-launchpad-card" data-code="lv" data-name="latviešu latvian" onclick="try{localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
+                <a href="../lv/index.html" class="apple-launchpad-card" data-code="lv" data-name="latviešu latvian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lv');localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/lv.png" alt="LV" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8003,7 +8018,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">PVN 21%</span>
                 </a>
-                <a href="../et/index.html" class="apple-launchpad-card" data-code="et" data-name="eesti estonian" onclick="try{localStorage.setItem('sr_lang_pref','et');}catch(e){}">
+                <a href="../et/index.html" class="apple-launchpad-card" data-code="et" data-name="eesti estonian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','et');localStorage.setItem('sr_lang_pref','et');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/ee.png" alt="ET" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8013,7 +8028,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">KM 22%</span>
                 </a>
-                <a href="../ga/index.html" class="apple-launchpad-card" data-code="ga" data-name="gaeilge irish" onclick="try{localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
+                <a href="../ga/index.html" class="apple-launchpad-card" data-code="ga" data-name="gaeilge irish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ga');localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/ie.png" alt="GA" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8023,7 +8038,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">CBL 23%</span>
                 </a>
-                <a href="../mt/index.html" class="apple-launchpad-card" data-code="mt" data-name="malti maltese" onclick="try{localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
+                <a href="../mt/index.html" class="apple-launchpad-card" data-code="mt" data-name="malti maltese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','mt');localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/mt.png" alt="MT" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8033,7 +8048,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">VAT 18%</span>
                 </a>
-                <a href="../index.html" class="apple-launchpad-card" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
+                <a href="../index.html" class="apple-launchpad-card" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/sa.png" alt="AR" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8043,7 +8058,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">VAT 15%</span>
                 </a>
-                <a href="../tr/index.html" class="apple-launchpad-card" data-code="tr" data-name="türkçe turkish" onclick="try{localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
+                <a href="../tr/index.html" class="apple-launchpad-card" data-code="tr" data-name="türkçe turkish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/tr.png" alt="TR" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8053,7 +8068,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">KDV 20%</span>
                 </a>
-                <a href="../ku/index.html" class="apple-launchpad-card" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
+                <a href="../ku/index.html" class="apple-launchpad-card" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ku');localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/iq.png" alt="KU" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
@@ -8063,7 +8078,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">Tax 5%</span>
                 </a>
-                <a href="../ckb/index.html" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
+                <a href="../ckb/index.html" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/iq.png" alt="CKB" class="apple-launchpad-flag" width="28" height="19">
                         <div class="apple-launchpad-text">
