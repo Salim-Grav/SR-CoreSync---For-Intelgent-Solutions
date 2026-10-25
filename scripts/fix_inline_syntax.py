@@ -44,6 +44,34 @@ def fix_query_selectors():
                 print(f'Fixed querySelector in {p}')
     print(f'Total files updated for querySelector: {fixed_count}')
 
+def fix_current_pending():
+    # Matches: const current... = 35000 + total; ... pendingEl.innerText = `€ ${current...toLocaleString()}`;
+    # or any declaration of const current<something> = 35000 + total;
+    pattern_decl = re.compile(r'const\s+current[^\=]+\s*=\s*35000\s*\+\s*total;')
+    pattern_use = re.compile(r'pendingEl\.innerText\s*=\s*`€\s*\$\{current[^\.]*\.toLocaleString\(\)\}`;')
+    
+    fixed = 0
+    for root_dir, dirs, files in os.walk('.'):
+        if any(ex in root_dir for ex in ('.git', '_site', 'node_modules')):
+            continue
+        for file in files:
+            if not file.endswith('demo.html'):
+                continue
+            p = os.path.join(root_dir, file)
+            with open(p, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+            
+            new_content = pattern_decl.sub('const currentPending = 35000 + total;', content)
+            new_content = pattern_use.sub('pendingEl.innerText = `€ ${currentPending.toLocaleString()}`;', new_content)
+            
+            if new_content != content:
+                with open(p, 'w', encoding='utf-8') as f:
+                    f.write(new_content)
+                fixed += 1
+                print(f'Fixed currentPending in {p}')
+    print(f'Total demo.html files fixed for currentPending: {fixed}')
+
 if __name__ == '__main__':
     fix_demo_excel()
     fix_query_selectors()
+    fix_current_pending()
