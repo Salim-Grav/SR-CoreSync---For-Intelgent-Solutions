@@ -10598,7 +10598,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
             </div>
 
             <!-- Blueprint Generated Result -->
-            <div id="voicePlannerResult" style="display: none;"></div>
+            <div id="voicePlannerResult" class="sr-voice-planner-result"></div>
         </div>
     </div>
 
@@ -10622,59 +10622,69 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
 
             <!-- Order Summary Box -->
             <div class="sr-checkout-card-preview">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                    <span style="color:#c5a880; font-size:12px; font-weight:700;">الباقة المختارة:</span>
-                    <span class="meta-tag tag-res" style="font-size:11px;">رسمية معتمدة 2026</span>
+                <div class="sr-checkout-preview-header">
+                    <span class="sr-checkout-pkg-label">الباقة المختارة:</span>
+                    <span class="meta-tag tag-res sr-checkout-pkg-tag">رسمية معتمدة 2026</span>
                 </div>
-                <div id="checkoutItemTitle" style="color:#ffffff; font-size:15px; font-weight:800; margin-bottom:8px;">باقة التأسيس السيادي للسوشيال ميديا وهوية الـ 8K الملكية</div>
-                <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid rgba(197,168,128,0.2); padding-top:8px;">
-                    <span style="color:#94a3b8; font-size:13px;">المبلغ الإجمالي (صافي الفاتورة):</span>
-                    <span style="color:#f3dfba; font-size:20px; font-weight:900;" id="checkoutAmountDisplay">€890.00 <span style="font-size:12px; font-weight:normal; color:#94a3b8;">(BTW 0% - B2B Reverse Charge)</span></span>
+                <div id="checkoutItemTitle" class="sr-checkout-item-title">باقة التأسيس السيادي للسوشيال ميديا وهوية الـ 8K الملكية</div>
+                <div class="sr-checkout-total-row">
+                    <span class="sr-checkout-total-label">المبلغ الإجمالي (صافي الفاتورة):</span>
+                    <span class="sr-checkout-amount-val" id="checkoutAmountDisplay">€890.00 <span class="sr-checkout-amount-vat">(BTW 0% - B2B Reverse Charge)</span></span>
                 </div>
             </div>
 
             <!-- Payment Methods Tabs -->
-            <div style="font-size:12px; font-weight:700; color:#c5a880; margin-bottom:6px;">اختر وسيلة الدفع المفضلة:</div>
+            <div class="sr-checkout-methods-heading">اختر وسيلة الدفع المفضلة:</div>
             <div class="sr-checkout-methods">
                 <button type="button" class="sr-checkout-method-btn active" onclick="selectPaymentMethod(this, 'ideal')">
-                    <span style="font-size:16px;">🏦</span>
+                    <span class="sr-checkout-method-icon">🏦</span>
                     <span>iDEAL (هولندا)</span>
                 </button>
                 <button type="button" class="sr-checkout-method-btn" onclick="selectPaymentMethod(this, 'card')">
-                    <span style="font-size:16px;">💳</span>
+                    <span class="sr-checkout-method-icon">💳</span>
                     <span>بطاقة ائتمان / Stripe</span>
                 </button>
                 <button type="button" class="sr-checkout-method-btn" onclick="selectPaymentMethod(this, 'bancontact')">
-                    <span style="font-size:16px;">🇧🇪</span>
+                    <span class="sr-checkout-method-icon">🇧🇪</span>
                     <span>Bancontact</span>
                 </button>
                 <button type="button" class="sr-checkout-method-btn" onclick="selectPaymentMethod(this, 'wire')">
-                    <span style="font-size:16px;">📄</span>
+                    <span class="sr-checkout-method-icon">📄</span>
                     <span>فاتورة BTW رسمية</span>
                 </button>
             </div>
 
             <!-- Customer Details Form -->
             <form id="srCheckoutForm" onsubmit="processLiveCheckout(event)">
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <div class="sr-checkout-form-grid">
                     <input type="text" id="checkoutClientName" class="sr-checkout-input" placeholder="اسم الشركة أو العميل *" required />
                     <input type="email" id="checkoutClientEmail" class="sr-checkout-input" placeholder="البريد الإلكتروني للفاتورة *" required />
                 </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <div class="sr-checkout-form-grid">
                     <input type="text" id="checkoutClientVat" class="sr-checkout-input" placeholder="الرقم الضريبي EU VAT / BTW (اختياري)" />
-                    <select id="checkoutBankSelect" class="sr-checkout-input" title="اختر البنك الهولندي للدفع عبر iDEAL" aria-label="اختر البنك الهولندي للدفع عبر iDEAL" style="color:#ffffff;">
-                        <option value="ing" style="background:#020705;">ING Bank</option>
-                        <option value="abn" style="background:#020705;">ABN AMRO</option>
-                        <option value="rabobank" style="background:#020705;">Rabobank</option>
-                        <option value="revolut" style="background:#020705;">Revolut</option>
-                        <option value="asn" style="background:#020705;">ASN Bank</option>
+                    <select id="checkoutBankSelect" class="sr-checkout-input" title="اختر البنك الهولندي للدفع عبر iDEAL" aria-label="اختر البنك الهولندي للدفع عبر iDEAL">
+                        <option value="ing" class="sr-checkout-bank-opt">ING Bank</option>
+                        <option value="abn" class="sr-checkout-bank-opt">ABN AMRO</option>
+                        <option value="rabobank" class="sr-checkout-bank-opt">Rabobank</option>
+                        <option value="revolut" class="sr-checkout-bank-opt">Revolut</option>
+                        <option value="asn" class="sr-checkout-bank-opt">ASN Bank</option>
                     </select>
                 </div>
 
-                <div id="checkoutStatusMsg" style="display:none; padding:12px; border-radius:8px; margin-bottom:12px; font-size:13px; text-align:center;"></div>
+                <div id="checkoutStatusMsg" class="sr-checkout-status-msg"></div>
 
-                <div style="display:flex; gap:10px; margin-top:14px;">
-                    <button type="submit" id="srLiveCheckoutSubmitBtn" class="sr-voice-btn-primary" style="flex:1; justify-content:center;">
+                <div class="sr-checkout-btn-row">
+                    <button type="submit" id="srLiveCheckoutSubmitBtn" class="sr-voice-btn-primary sr-checkout-submit-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <span id="checkoutSubmitBtnLabel">تأكيد الدفع والتسوية الفورية 🔒</span>
+                    </button>
+                    <button type="button" class="sr-voice-btn-glass" onclick="closeExecutiveCheckoutModal()">
+                        <span>إلغاء</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                         <span id="checkoutSubmitBtnLabel">تأكيد الدفع والتسوية الفورية 🔒</span>
                     </button>
