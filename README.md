@@ -1,115 +1,130 @@
-# S&R CoreSync Solutions
+<div dir="rtl" align="right">
 
-> **Advanced Enterprise Software, Smart ERP & Intelligent AI Systems**
->
-> Headquartered in the Netherlands & serving enterprises across Europe & the Middle East.
+# 🌟 إس آند آر كور سينك للحلول الذكية (S&R CoreSync Solutions)
 
----
-
-## 🌟 Overview
-
-**S&R CoreSync Solutions** is a next-generation corporate platform uniting European engineering standards with high-velocity agile architecture. The platform delivers enterprise cloud systems, tailored ERP solutions, automated financial compliance, and bespoke AI applications.
+> **برمجيات مؤسسية متقدمة، حلول ERP ذكية، وأنظمة ذكاء اصطناعي سيادية**  
+> **المقر الرئيسي:** أمستردام، مملكة هولندا 🇳🇱 — **نطاق الخدمة:** المؤسسات الكبرى والشركات عبر أوروبا والشرق الأوسط.
 
 ---
 
-## ☁️ Hosting Model
+## 📌 نبذة عامة عن المنصة (Overview)
 
-| Layer | Technology | Notes |
-|---|---|---|
-| **Web** | GitHub Pages | `sr-coresync.com` → `185.199.108-111.153` (A records). Static only. |
-| **API** | Cloudflare Worker (`sr-lead-capture`) | Lead capture, webhooks, KV ledger. Source: [`workers/sr-lead-capture/`](./workers/sr-lead-capture/) |
-| **Mail** | Hostinger MX + SendGrid | SPF / DKIM / DMARC / BIMI configured in `workers/config/dns-records.json` |
-
-> **Important:** GitHub Pages does **not** execute PHP or Node and does **not** honour `.htaccess`.
-> Security headers live in [`_headers`](./_headers) (the GitHub Pages native mechanism), and the
-> publish workflow uploads a curated subset of the repository. Run
-> `python scripts/validate_publish_set.py` to verify what would be published.
+تُعد **S&R CoreSync Solutions** منصة مؤسسية سحابية من الجيل القادم، تجمع بين أرقى المعايير الهندسية الأوروبية في الأمان والموثوقية، وبين السرعة الفائقة للبنى البرمجية المرنة (Agile Architecture). تُقدم المنصة أنظمة سحابية متكاملة للمؤسسات، وحلول تخطيط الموارد (ERP) المخصصة، والأتمتة المالية للامتثال الضريبي الأوروبي، وتطبيقات الذكاء الاصطناعي المؤسسي الموجه.
 
 ---
 
-## 🌐 Multilingual Architecture (29 Languages)
+## ☁️ نموذج الاستضافة والبنية التحتية السحابية (Hosting Model)
 
-| Language | Location | Layout |
-|---|---|---|
-| 🇸🇦 **العربية** | [`index.html`](./index.html) | RTL, Alexandria + Plus Jakarta Sans |
-| 🇬🇧 **English** | [`en/index.html`](./en/index.html) | LTR, European enterprise terminology |
-| 🇳🇱 **Dutch** | [`nl/index.html`](./nl/index.html) | LTR, Dutch fiscal & EU GDPR terminology |
-| 🇩🇪 **Deutsch** | [`de/index.html`](./de/index.html) | LTR |
-| 🏳️ **Kurdish (Sorani)** | [`ckb/index.html`](./ckb/index.html) | RTL |
-| 🇹🇷 **Türkçe** | [`tr/index.html`](./tr/index.html) | LTR |
+| الطبقة التقنية | التقنية المعتمدة | التفاصيل وملاحظات التشغيل |
+|:---|:---|:---|
+| **واجهة الويب (Web)** | **GitHub Pages** (عالي التوافر) | النطاق الرسمي `sr-coresync.com` مربوط بسجلات A الأربعة المعتمدة (`185.199.108-111.153`). استضافة أصول ومواقع ثابتة فائقة السرعة والأمان. |
+| **واجهات البرمجة (API)** | **Cloudflare Workers** (`sr-lead-capture`) | معالجة فورية لاستمارات التواصل، خطافات الويب (Webhooks)، دفتر الأستاذ السحابي (KV Ledger). المصدر: [`workers/sr-lead-capture/`](./workers/sr-lead-capture/) |
+| **منظومة البريد (Mail)** | **سجلات البريد الرسمية السحابية** | تكامل بروتوكولات الأمان العالمية للبريد المؤسسي (SPF / DKIM / DMARC / BIMI) لضمان وصول الرسائل بنسبة 100% ومنع الاحتيال. |
 
-Plus 23 further EU languages: `bg, cs, da, el, es, et, fi, fr, ga, hr, hu, it, ku, lt, lv, mt, no, pl, pt, ro, sk, sl, sv`.
-
-Every language folder ships a complete, standalone `index.html` + `demo.html` — there is no
-runtime templating. Generation lives in `scripts/build_all_multilingual_portals.py`.
+> **⚠️ تنبيه هندسي هام:** استضافة GitHub Pages لا تشغل لغات الخوادم التقليدية مثل PHP أو Node في الواجهة، ولا تدعم ملفات `.htaccess`. كافة ترويسات الأمان الصارمة (Security Headers) يتم تكوينها عبر ملف [`_headers`](./_headers)، ويتم تدقيق وفحص حزمة النشر تلقائياً قبل رفعها عبر السكربت:
+> `python scripts/validate_publish_set.py`
 
 ---
 
-## 👥 Executive Leadership
+## 🌐 المعمارية الدولية متعددة اللغات (29 لغة معتمدة)
 
-- **Eng. Mohammad Salim Aziza** — Co-Founder & CTO // Lead Cloud Systems Architect
-- **Mr. Mohammad Raed Kaakeh** — Co-Founder & CFO // Financial ERP Architect
+تم بناء الموقع بنظام بوابات برمجية مستقلة لكل لغة (Standalone Static Portals) دون الحاجة لقوالب وقت التشغيل، مما يمنح سرعة تصفح لحظية (0ms Latency):
 
----
+| اللغة | مسار البوابة | الواجهة ونظام الكتابة |
+|:---|:---|:---|
+| 🇸🇦 **العربية (اللغة المركزية)** | [`index.html`](./index.html) | اتجاه كامل من اليمين لليسار (RTL)، خطوط Alexandria الملكية |
+| 🇬🇧 **الإنجليزية (English)** | [`en/index.html`](./en/index.html) | اتجاه من اليسار لليمين (LTR)، مصطلحات التجارة والمؤسسات الدولية |
+| 🇳🇱 **الهولندية (Nederlands)** | [`nl/index.html`](./nl/index.html) | متوافقة مع الأنظمة المالية الهولندية والامتثال للائحة GDPR الأوروبية |
+| 🇩🇪 **الألمانية (Deutsch)** | [`de/index.html`](./de/index.html) | معايير الصناعة والتوافق الضريبي الألماني (MwSt) |
+| 🏳️ **الكردية السورانية (Kurdî - Soranî)** | [`ckb/index.html`](./ckb/index.html) | اتجاه من اليمين لليسار (RTL) |
+| 🏳️ **الكردية البادينية (Kurdî - Kurmancî)** | [`ku/index.html`](./ku/index.html) | اتجاه قياسي كامل وتوافق تام |
+| 🇹🇷 **التركية (Türkçe)** | [`tr/index.html`](./tr/index.html) | اتجاه LTR ومصطلحات قطاع الأعمال التركي |
 
-## 🚀 Key Modules & Capabilities
+**بالإضافة إلى 22 لغة رسمية أخرى لدول الاتحاد الأوروبي:**  
+`bg, cs, da, el, es, et, fi, fr, ga, hr, hu, it, lt, lv, mt, no, pl, pt, ro, sk, sl, sv`
 
-1. **Cloud ERP & Enterprise Systems** — Distributed data architectures, inventory management, multi-branch supply chains.
-2. **AI & Smart Automation** — RAG architecture, intelligent document extraction, automated conversational agents.
-3. **Financial Accounting Tech** — Multi-currency general ledgers, Dutch VAT & EU tax compliance, direct banking APIs.
-4. **Cinematic Web Experience** — Founder cinematic backgrounds, glowing golden neon signatures, GSAP/Swiper motion.
-5. **Cloud Web Apps (PWA)** — 9 in-browser applications: TaxSync, FlowScan AI, CloudPOS, SecureVault, Financial AI SDK, CivicSync, HealthBridge, OmniBakery, Cloud Terminal Agent.
-6. **Enterprise Suite** — Official PDF Quotation, client notes centre, GDPR bar, meeting scheduler, readiness assessment, ROI studio, licensing admin.
-
-### Engine modules (`js/`)
-
-| File | Role |
-|---|---|
-| `sr-software-apps.js` | Cloud web app & PWA runtime engine (9 applications) |
-| `enterprise-suite.min.js` | Enterprise Suite v2.0 (~110 exported functions) |
-| `sr-readiness.js` | AI Readiness & Digital Maturity scoring (5 axes, radar chart) |
-| `sr-trust-ribbon.js` | European trust ribbon & compliance verification modal |
-| `sr-tier-matrix.js` | Enterprise tier matrix & institutional calculator |
-| `sr-quick-dock.js` | Sovereign floating macOS-style quick dock |
-| `sr-geo-lang.js` | Browser-language detection with polite banner |
-| `sr-lead-dispatcher.js` | Lead capture client (targets the Cloudflare Worker) |
-| `sr-brand-inspector.js` | 4K logo inspector + Brand Kit ZIP export |
-| `sr-live-feed.js` | Live trust feed — real, aggregated worker data only (never fabricated) |
-| `sr-mockup-3d.min.js` | Zero-dependency WebGL 3D mockup viewer |
-| `chart.umd.min.js` · `jszip.min.js` | Vendored third-party libraries |
+- **نظام التبديل اللغوي العائم:** شريط دوك آبل السفلي العائم (Apple macOS Language Dock) مع نقطة نشطة متوهجة ونافذة Launchpad المركزية لاستعراض كافة الـ 28 دولة ببحث لحظي.
+- **الكشف التلقائي الذكي (Auto Detection):** كشف لحظي استباقي للغة الجهاز وتطبيقات التواصل (واتساب، إنستغرام، تليغرام) مع تثبيت فوري للغة العربية للأجهزة العربية.
 
 ---
 
-## 💻 Tech Stack
+## 👥 القيادة التنفيذية والمؤسسون (Executive Leadership)
 
-- **HTML5 & CSS3** — Vanilla CSS design system, responsive flex/grid layouts.
-- **JavaScript ES6+** — IIFE + UMD modules, GSAP 3, ScrollTrigger, Swiper 11, Odometer.js.
-- **Backend** — PHP 8 (legacy reference), Node.js CommonJS modules, Cloudflare Workers (ES modules).
-- **PWA** — `manifest.json` + `sw.js` (stale-while-revalidate service worker).
-- **SVG & Motion Design** — Pure vector SVG with embedded typography and multi-stage Gaussian bloom filters.
+- **المهندس محمد سليم عزيزة (Eng. Mohammad Salim Aziza)**  
+  *الشريك المؤسس ورئيس قطاع التكنولوجيا (Co-Founder & CTO) // كبير مهندسي الأنظمة السحابية والذكاء الاصطناعي*
+- **الأستاذ محمد رائد كعكة (Mr. Mohammad Raed Kaakeh)**  
+  *الشريك المؤسس والمدير المالي التنفيذي (Co-Founder & CFO) // مهندس معماريات الـ ERP والامتثال المالي*
 
 ---
 
-## 🛡️ Security Posture
+## 🚀 القدرات والأنظمة البرمجية المدمجة (Key Modules & Capabilities)
 
-| Control | Implementation |
-|---|---|
-| Response headers | `_headers` (HSTS, CSP, COOP, CORP, Permissions-Policy, Referrer-Policy) |
-| Publish isolation | `deploy-pages.yml` uploads a curated `_site/`; server-side material is excluded and guarded |
-| Lead capture | Cloudflare Worker — input sanitisation, honeypot, rate limiting, KV ledger |
-| Secrets | Never committed. Worker secrets via `wrangler secret put`. |
-| Asset path integrity | `scripts/audit_language_paths.py` + `scripts/validate_publish_set.py` |
+1. **أنظمة الـ ERP السحابية والمؤسسية:** بنية بيانات موزعة، إدارة سلاسل الإمداد والمستودعات المتعددة، ونقاط البيع السحابية.
+2. **الذكاء الاصطناعي والأتمتة الذكية:** معمارية التوليد المعزز بالاسترجاع (RAG)، الاستخراج الآلي للوثائق، والمساعد المالي الذكي.
+3. **التكنولوجيا المالية والمحاسبية:** دفاتر الأستاذ متعددة العملات (اليورو، الدولار، الريال)، وحساب الضرائب الآلي (Dutch VAT / BTW).
+4. **التجربة البصرية السينمائية الفاخرة:** خلفيات سينمائية للمؤسسين، مؤثرات النيون والزجاج المعتم (Glassmorphism)، وحركات ناعمة عبر GSAP.
+5. **تطبيقات الويب السحابية المستقلة (9 تطبيقات PWA):**
+   - **TaxSync:** حاسبة ومحاكي الضرائب والامتثال الأوروبي.
+   - **FlowScan AI:** التعرف الذكي ومسح الفواتير بالذكاء الاصطناعي.
+   - **CloudPOS:** نظام إدارة المبيعات ونقاط البيع السحابية.
+   - **SecureVault:** خزينة التشفير وإدارة الأصول الرقمية.
+   - **Financial AI SDK:** حزمة تحليلات التدفق النقدي والتنبؤ المالي.
+   - **CivicSync & HealthBridge:** حلول البنى التحتية للمؤسسات والقطاع الصحي.
+   - **OmniBakery & Cloud Terminal Agent:** أدوات إدارة المخابز والطرفية السحابية الذكية.
+6. **باقة المؤسسات التنفيذية (Enterprise Suite v2.0):** مولد عروض الأسعار الرسمية الفورية المعتمدة (Branded Proposal PDF)، مركز ملاحظات العملاء، شريط الخصوصية الأوروبي (GDPR)، وجدولة الاستشارات التنفيذية.
 
-Run the full local quality gate:
+---
 
+### 📦 حزمة محركات الجافاسكربت الأساسية (`js/`)
+
+| الملف | الدور الوظيفي |
+|:---|:---|
+| `sr-software-apps.js` | محرك تشغيل وإدارة تطبيقات الويب السحابية الـ 9 |
+| `enterprise-suite.min.js` | محرك باقة المؤسسات التنفيذية (تصدير العقود وتوليد الـ PDF) |
+| `sr-readiness.js` | محاكي قياس الجاهزية الرقمية والنضج التقني (رادار خماسي المحاور) |
+| `sr-trust-ribbon.js` | شريط الثقة الأوروبي والتحقق من التراخيص والامتثال |
+| `sr-tier-matrix.js` | مصفوفة باقات الاشتراكات المؤسسية وحاسبة التوفير والعائد (ROI) |
+| `sr-quick-dock.js` | شريط دوك آبل العائم المركزي للتنقل السريع بين اللغات |
+| `sr-lead-dispatcher.js` | عميل توجيه وتأمين إرسال طلبات العملاء إلى Cloudflare Worker |
+| `sr-brand-inspector.js` | أداة فحص الشعار الملكي بدقة 4K وتوليد حزمة الهوية الرقمية ZIP |
+| `sr-mockup-3d.min.js` | عارض البطاقات الذكية ثلاثي الأبعاد عبر WebGL بدون أي مكتبات خارجية |
+| `chart.umd.min.js` | مكتبة الرسوم البيانية التفاعلية للوحة التدفق المالي |
+
+---
+
+## 💻 المكدس التقني الأساسي (Tech Stack)
+
+- **الهيكلية والتصميم:** HTML5 دلالي حديث، نظام تصميم فائق الدقة بـ Vanilla CSS3 المعزز بتأثيرات الزجاج والنيون.
+- **التفاعل والبرمجة:** Vanilla JavaScript ES6+ عبر كتل معيارية موحدة (IIFE + UMD) مع مكتبات GSAP 3 و Swiper 11.
+- **الخوادم وواجهات البيانات:** Cloudflare Workers (ES Modules) مع قواعد بيانات حافة سريعة (KV Ledger).
+- **تطبيقات الجوال (PWA):** ملف البيان `manifest.json` وعامل الخدمة `sw.js` للتشغيل والتثبيت السريع دون اتصال.
+- **التصميم المتجهي:** رسومات SVG متجهة عالية النقاء مع معالجة إضاءة سينمائية متعددة الطبقات.
+
+---
+
+## 🛡️ معايير الأمان والامتثال الصارم (Security Posture)
+
+| معيار الأمان | آلية التطبيق والتنفيذ |
+|:---|:---|
+| **ترويسات الاستجابة** | تطبيق صارم عبر `_headers` لسياسات (HSTS, CSP Hashes, COOP, CORP, Permissions-Policy) لمنع أي هجمات XSS أو حقن للبيانات. |
+| **عزل حزمة النشر** | سير عمل GitHub Pages ينشر حصرياً مجلد `_site/` بعد تطهيره من كافة ملفات السيرفرات والأدوات الداخلية. |
+| **حماية استمارات التواصل** | مصادقة مدخلات البيانات، مصائد البوتات (Honeypot)، وتحديد معدل الطلبات (Rate Limiting). |
+| **حماية المفاتيح والأسرار** | حظر رفع أي مفاتيح برمجية للمستودع العام، وإدارتها حصرياً عبر `wrangler secret put`. |
+| **فحص الجودة المحلي (QA Gate)** | تدقيق كافة الروابط، بصمات الأمان، والمسارات قبل النشر عبر السكربتات المخصصة. |
+
+لتشغيل فحص الجودة الشامل محلياً:
 ```bash
 node scripts/validate.js
 python scripts/audit_language_paths.py
 python scripts/validate_publish_set.py
+python scripts/build_csp.py --check
 ```
 
 ---
 
-## 📜 License
+## 📜 الترخيص والحقوق الملكية (License)
 
-All rights reserved © 2026 S&R CoreSync Solutions.
+جميع الحقوق محفوظة ومسجلة © 2026 **إس آند آر كور سينك للحلول الذكية (S&R CoreSync Solutions)**.  
+*مملكة هولندا — الاتحاد الأوروبي.*
+
+</div>
