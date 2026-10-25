@@ -1,0 +1,44 @@
+/* ==========================================================================
+   S&R CoreSync - Quick Translate & Language Dock Styles
+   ========================================================================== */
+
+:root {
+    --sr-translate-dock-bg: rgba(15, 23, 42, 0.88);
+    --sr-translate-dock-border: rgba(197, 168, 128, 0.35);
+    --sr-translate-dock-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+.sr-quick-translate-container {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+}
+
+.sr-quick-translate-dock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--sr-translate-dock-bg);
+    border: 1px solid var(--sr-translate-dock-border);
+    border-radius: 999px;
+    box-shadow: var(--sr-translate-dock-shadow);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+}
+
+.sr-quick-translate-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.sr-quick-translate-item:hover {
+    transform: scale(1.15);
+}

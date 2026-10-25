@@ -1,0 +1,20 @@
+import glob
+
+count = 0
+for path in glob.glob('**/*.html', recursive=True):
+    if '_site' in path:
+        continue
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        orig = content
+        content = content.replace('id="sovereignLangMenu" role="menu"', 'id="sovereignLangMenu" role="dialog" aria-label="Select Language"')
+        content = content.replace('id="sovereignLangTrigger" aria-expanded="false" aria-haspopup="true"', 'id="sovereignLangTrigger" aria-expanded="false" aria-haspopup="dialog" aria-label="Select Language"')
+        if content != orig:
+            with open(path, 'w', encoding='utf-8') as f:
+                f.write(content)
+            count += 1
+    except Exception as e:
+        print(f"Error {path}: {e}")
+
+print(f"Successfully fixed ARIA role in {count} HTML files.")
