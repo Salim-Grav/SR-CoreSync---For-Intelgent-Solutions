@@ -64,111 +64,14 @@ FLAG_IMG_MAP = {
 
 def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False):
     """
-    Builds the Sovereign Language Dropdown HTML with High-DPI Flags and Quick-Switch Pill.
-    page_type: 'demo' or 'index'
-    is_subfolder: True if the file is in e.g. /en/, /nl/, /de/
+    Header is kept 100% pristine and executive. Language switching is exclusively handled by Apple macOS Dock & Launchpad.
     """
-    # Find current language
-    curr = next((l for l in LANGUAGES if l["code"] == current_lang_code), LANGUAGES[0])
-    
-    # Path prefix
-    prefix = "../" if is_subfolder else "./"
-    
-    # Target filename
-    target_file = f"{page_type}.html"
-    curr_flag = FLAG_IMG_MAP.get(curr["code"], "sa.png")
-    
-    html = []
-    html.append(f'<!-- Sovereign Global Multilingual Hub (28 Languages: EU Official + EEA + Regional) -->')
-    html.append(f'<div class="sovereign-lang-dropdown" id="sovereignLangDropdown">')
-    html.append(f'    <button type="button" class="sovereign-lang-trigger" id="sovereignLangTrigger" aria-expanded="false" aria-label="اختر اللغة / Select Language" title="اختر اللغة / Select Language">')
-    html.append(f'        <span class="sovereign-lang-flag"><img src="{prefix}assets/flags/{curr_flag}" alt="{curr["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
-    html.append(f'        <span class="sovereign-lang-current-label">{curr["code"].upper()}</span>')
-    html.append(f'        <svg class="sovereign-lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>')
-    html.append(f'    </button>')
-    html.append(f'    <div class="sovereign-lang-menu" id="sovereignLangMenu" aria-label="Select Language">')
-    html.append(f'        <div class="sovereign-lang-search-box">')
-    html.append(f'            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>')
-    search_placeholder = "ابحث عن لغة... / Search language" if current_lang_code == "ar" else "Search language / Wählen Sie Sprache..."
-    html.append(f'            <input type="text" class="sovereign-lang-search-input" id="sovereignLangSearch" placeholder="{search_placeholder}" autocomplete="off">')
-    html.append(f'        </div>')
-    html.append(f'        <div class="sovereign-lang-scroll-area">')
-    
-    # Group: EU & Nordic
-    eu_langs = [l for l in LANGUAGES if l["group"] == "eu"]
-    html.append(f'            <div class="sovereign-lang-category">')
-    eu_title = "الاتحاد الأوروبي والإسكندنافية (EU & Nordic)" if current_lang_code == "ar" else "European Union & Nordic"
-    html.append(f'                <div class="sovereign-lang-category-title">')
-    html.append(f'                    <span>{eu_title}</span>')
-    html.append(f'                    <span class="badge-count">{len(eu_langs)}</span>')
-    html.append(f'                </div>')
-    for l in eu_langs:
-        is_active = (l["code"] == current_lang_code)
-        active_cls = " active" if is_active else ""
-        item_flag = FLAG_IMG_MAP.get(l["code"], "sa.png")
-        
-        if l["code"] == "ar":
-            href = f"{prefix}{target_file}"
-        else:
-            if is_subfolder:
-                href = f"../{l['code']}/{target_file}"
-            else:
-                href = f"./{l['code']}/{target_file}"
-                
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
-        html.append(f'                    <div class="sovereign-lang-item-left">')
-        html.append(f'                        <span class="sovereign-lang-item-flag"><img src="{prefix}assets/flags/{item_flag}" alt="{l["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
-        html.append(f'                        <div class="sovereign-lang-item-names">')
-        html.append(f'                            <span class="sovereign-lang-native">{l["name_native"]}</span>')
-        html.append(f'                            <span class="sovereign-lang-english">{l["name_en"]}</span>')
-        html.append(f'                        </div>')
-        html.append(f'                    </div>')
-        html.append(f'                    <span class="sovereign-lang-code">{l["vat"]}</span>')
-        html.append(f'                </a>')
-    html.append(f'            </div>')
-    
-    # Group: Regional & Middle East
-    reg_langs = [l for l in LANGUAGES if l["group"] == "regional"]
-    html.append(f'            <div class="sovereign-lang-category">')
-    reg_title = "الشرق الأوسط والإقليمية (Regional & Middle East)" if current_lang_code == "ar" else "Middle East & Regional"
-    html.append(f'                <div class="sovereign-lang-category-title">')
-    html.append(f'                    <span>{reg_title}</span>')
-    html.append(f'                    <span class="badge-count">{len(reg_langs)}</span>')
-    html.append(f'                </div>')
-    for l in reg_langs:
-        is_active = (l["code"] == current_lang_code)
-        active_cls = " active" if is_active else ""
-        item_flag = FLAG_IMG_MAP.get(l["code"], "sa.png")
-        
-        if l["code"] == "ar":
-            href = f"{prefix}{target_file}"
-        else:
-            if is_subfolder:
-                href = f"../{l['code']}/{target_file}"
-            else:
-                href = f"./{l['code']}/{target_file}"
-                
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
-        html.append(f'                    <div class="sovereign-lang-item-left">')
-        html.append(f'                        <span class="sovereign-lang-item-flag"><img src="{prefix}assets/flags/{item_flag}" alt="{l["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
-        html.append(f'                        <div class="sovereign-lang-item-names">')
-        html.append(f'                            <span class="sovereign-lang-native">{l["name_native"]}</span>')
-        html.append(f'                            <span class="sovereign-lang-english">{l["name_en"]}</span>')
-        html.append(f'                        </div>')
-        html.append(f'                    </div>')
-        html.append(f'                    <span class="sovereign-lang-code">{l["vat"]}</span>')
-        html.append(f'                </a>')
-    html.append(f'            </div>')
-    
-    html.append(f'        </div>')
-    html.append(f'    </div>')
-    html.append(f'</div>')
-    
-    return "\n".join(html)
+    return ""
 
 def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=False):
     """
-    Builds the Apple macOS floating dock for languages and country flags.
+    Builds the Apple macOS floating dock for languages and country flags,
+    along with the Apple macOS Launchpad Modal (Full 28 Languages Grid).
     """
     prefix = "../" if is_subfolder else "./"
     target_file = f"{page_type}.html"
@@ -176,13 +79,13 @@ def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=Fals
     primary_codes = ["ar", "en", "nl", "de", "fr", "es", "tr"]
     dock_langs = [l for l in LANGUAGES if l["code"] in primary_codes]
     
-    # If the current language is not in primary_codes, include it as well
     if current_lang_code not in primary_codes:
         curr_obj = next((l for l in LANGUAGES if l["code"] == current_lang_code), None)
         if curr_obj:
             dock_langs.append(curr_obj)
             
     html = []
+    # 1. Floating Apple macOS Dock
     html.append('<!-- Apple macOS Sovereign Language & Flags Dock -->')
     html.append('<aside class="apple-macos-dock-wrapper" id="appleMacosDockWrapper" aria-label="Sovereign Language Quick Dock">')
     html.append('    <div class="apple-macos-dock" id="appleMacosDock">')
@@ -218,115 +121,128 @@ def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=Fals
     html.append('    </div>')
     html.append('</aside>')
     
+    # 2. Apple macOS Launchpad Modal (Full 28 Languages Grid)
+    html.append('<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->')
+    html.append('<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">')
+    html.append('    <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>')
+    html.append('    <div class="apple-launchpad-window">')
+    html.append('        <div class="apple-launchpad-header">')
+    html.append('            <div class="apple-launchpad-title-wrap">')
+    html.append('                <div class="apple-launchpad-dots">')
+    html.append('                    <span class="apple-dot apple-dot-red" onclick="toggleAppleDockLaunchpad(event)" title="إغلاق / Close"></span>')
+    html.append('                    <span class="apple-dot apple-dot-yellow"></span>')
+    html.append('                    <span class="apple-dot apple-dot-green"></span>')
+    html.append('                </div>')
+    lp_title = "🌐 اللغات السيادية المعتمدة (28 دولة ونظاماً ضريبياً)" if current_lang_code == "ar" else "🌐 Sovereign Global Languages (28 Supported Nations & VAT Regimes)"
+    html.append(f'                <h3 class="apple-launchpad-title">{lp_title}</h3>')
+    html.append('            </div>')
+    html.append('            <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>')
+    html.append('        </div>')
+    html.append('        <div class="apple-launchpad-search-wrap">')
+    html.append('            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>')
+    lp_search_ph = "ابحث عن دولة، لغة، أو نسبة الضريبة... / Search language, country, VAT..." if current_lang_code == "ar" else "Search country, language, or VAT rate..."
+    html.append(f'            <input type="text" id="appleLaunchpadSearchInput" class="apple-launchpad-search-input" placeholder="{lp_search_ph}" autocomplete="off">')
+    html.append('        </div>')
+    html.append('        <div class="apple-launchpad-body">')
+    html.append('            <div class="apple-launchpad-grid" id="appleLaunchpadGrid">')
+    
+    for l in LANGUAGES:
+        is_active = (l["code"] == current_lang_code)
+        active_cls = " active" if is_active else ""
+        flag_file = FLAG_IMG_MAP.get(l["code"], "sa.png")
+        
+        if l["code"] == "ar":
+            href = f"{prefix}{target_file}"
+        else:
+            if is_subfolder:
+                href = f"../{l['code']}/{target_file}"
+            else:
+                href = f"./{l['code']}/{target_file}"
+                
+        html.append(f'                <a href="{href}" class="apple-launchpad-card{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
+        html.append(f'                    <div class="apple-launchpad-card-left">')
+        html.append(f'                        <img src="{prefix}assets/flags/{flag_file}" alt="{l["code"].upper()}" class="apple-launchpad-flag" width="28" height="19">')
+        html.append(f'                        <div class="apple-launchpad-text">')
+        html.append(f'                            <span class="apple-launchpad-native">{l["name_native"]}</span>')
+        html.append(f'                            <span class="apple-launchpad-sub">{l["name_en"]}</span>')
+        html.append(f'                        </div>')
+        html.append(f'                    </div>')
+        html.append(f'                    <span class="apple-launchpad-vat">{l["vat"]}</span>')
+        html.append(f'                </a>')
+        
+    html.append('            </div>')
+    html.append('        </div>')
+    html.append('    </div>')
+    html.append('</div>')
+    
     return "\n".join(html)
 
 def build_dropdown_js():
     """
-    JavaScript to power all sovereign language dropdowns with search, keyboard navigation, and outside-click.
+    Apple macOS Launchpad Modal Controller (Search, Escape, Outside Click, No Page Scroll).
     """
     return """
+<!-- Sovereign Global Multilingual Hub Controller (Apple macOS Launchpad Edition) -->
 <script>
-// Sovereign Global Multilingual Hub Controller
 (function() {
-    function initSovereignLangDropdown() {
-        const dropdown = document.getElementById('sovereignLangDropdown');
-        if (!dropdown) return;
+    function initAppleLaunchpad() {
+        const overlay = document.getElementById('appleMacosLaunchpadOverlay');
+        const searchInput = document.getElementById('appleLaunchpadSearchInput');
+        const grid = document.getElementById('appleLaunchpadGrid');
+        if (!overlay) return;
         
-        const trigger = document.getElementById('sovereignLangTrigger');
-        const menu = document.getElementById('sovereignLangMenu');
-        const searchInput = document.getElementById('sovereignLangSearch');
-        const items = dropdown.querySelectorAll('.sovereign-lang-item');
-        
-        if (!trigger || !menu) return;
-        
-        function toggleDropdown(e) {
-            e.stopPropagation();
-            const isOpen = dropdown.classList.contains('open');
+        window.toggleAppleDockLaunchpad = function(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const isOpen = overlay.classList.contains('active');
             if (isOpen) {
-                closeDropdown();
-            } else {
-                dropdown.classList.add('open');
-                trigger.setAttribute('aria-expanded', 'true');
+                overlay.classList.remove('active');
                 if (searchInput) {
-                    setTimeout(() => searchInput.focus(), 50);
+                    searchInput.value = '';
+                    filterCards('');
+                }
+            } else {
+                overlay.classList.add('active');
+                if (searchInput) {
+                    setTimeout(() => searchInput.focus(), 80);
                 }
             }
-        }
+        };
         
-        function closeDropdown() {
-            dropdown.classList.remove('open');
-            trigger.setAttribute('aria-expanded', 'false');
-            if (searchInput) {
-                searchInput.value = '';
-                filterItems('');
-            }
-        }
-        
-        function filterItems(query) {
+        function filterCards(query) {
+            if (!grid) return;
             const q = query.toLowerCase().trim();
-            items.forEach(item => {
-                const name = item.getAttribute('data-name') || '';
-                const code = item.getAttribute('data-code') || '';
-                if (!q || name.includes(q) || code.includes(q)) {
-                    item.classList.remove('hidden');
+            const cards = grid.querySelectorAll('.apple-launchpad-card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name') || '';
+                const code = card.getAttribute('data-code') || '';
+                const vat = (card.querySelector('.apple-launchpad-vat') || {}).textContent || '';
+                if (!q || name.includes(q) || code.includes(q) || vat.toLowerCase().includes(q)) {
+                    card.classList.remove('hidden');
                 } else {
-                    item.classList.add('hidden');
+                    card.classList.add('hidden');
                 }
             });
         }
-        
-        trigger.addEventListener('click', toggleDropdown);
-
-        items.forEach(item => {
-            item.addEventListener('click', function() {
-                const code = this.getAttribute('data-code');
-                if (code) {
-                    localStorage.setItem('sr_lang_pref', code);
-                }
-            });
-        });
-
         
         if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                filterItems(e.target.value);
-            });
+            searchInput.addEventListener('input', (e) => filterCards(e.target.value));
             searchInput.addEventListener('click', (e) => e.stopPropagation());
         }
         
-        document.addEventListener('click', (e) => {
-            if (!dropdown.contains(e.target)) {
-                closeDropdown();
-            }
-        });
-        
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && dropdown.classList.contains('open')) {
-                closeDropdown();
-                trigger.focus();
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                window.toggleAppleDockLaunchpad();
             }
         });
     }
     
-    window.toggleAppleDockLaunchpad = function(e) {
-        if (e) e.stopPropagation();
-        const dropdown = document.getElementById('sovereignLangDropdown');
-        const trigger = document.getElementById('sovereignLangTrigger');
-        if (dropdown && trigger) {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => {
-                dropdown.classList.add('open');
-                trigger.setAttribute('aria-expanded', 'true');
-                const searchInput = document.getElementById('sovereignLangSearch');
-                if (searchInput) searchInput.focus();
-            }, 250);
-        }
-    };
-    
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSovereignLangDropdown);
+        document.addEventListener('DOMContentLoaded', initAppleLaunchpad);
     } else {
-        initSovereignLangDropdown();
+        initAppleLaunchpad();
     }
 })();
 </script>

@@ -768,3 +768,240 @@ html[dir="rtl"] .hotline-popover-card {
 }
 
 
+
+
+/* ==========================================================================
+   Apple macOS Launchpad Modal (Full 28 Sovereign Languages Grid)
+   ========================================================================== */
+.apple-launchpad-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-launchpad-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+.apple-launchpad-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 8, 12, 0.78);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
+}
+.apple-launchpad-window {
+    position: relative;
+    width: 100%;
+    max-width: 840px;
+    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, rgba(14, 22, 18, 0.96), rgba(8, 12, 10, 0.98));
+    border: 1px solid rgba(197, 168, 128, 0.45);
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+}
+.apple-launchpad-overlay.active .apple-launchpad-window {
+    transform: scale(1) translateY(0);
+}
+.apple-launchpad-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+    background: rgba(255, 255, 255, 0.02);
+}
+.apple-launchpad-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.apple-launchpad-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.apple-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.apple-dot-red {
+    background: #ff5f56;
+    border: 1px solid #e0443e;
+    cursor: pointer;
+}
+.apple-dot-red:hover {
+    filter: brightness(1.2);
+}
+.apple-dot-yellow {
+    background: #ffbd2e;
+    border: 1px solid #dea123;
+}
+.apple-dot-green {
+    background: #27c93f;
+    border: 1px solid #1aab29;
+}
+.apple-launchpad-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f3dfba;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+.apple-launchpad-close-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    color: #e5e7eb;
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+.apple-launchpad-close-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #ff5f56;
+    transform: rotate(90deg);
+}
+.apple-launchpad-search-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+    color: #9ca3af;
+}
+.apple-launchpad-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-family: inherit;
+}
+.apple-launchpad-search-input::placeholder {
+    color: #6b7280;
+}
+.apple-launchpad-body {
+    padding: 16px 20px;
+    overflow-y: auto;
+    max-height: calc(86vh - 125px);
+}
+.apple-launchpad-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.apple-launchpad-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 168, 128, 0.18);
+    border-radius: 12px;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.apple-launchpad-card:hover {
+    background: rgba(197, 168, 128, 0.12);
+    border-color: rgba(243, 223, 186, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+.apple-launchpad-card.active {
+    background: rgba(197, 168, 128, 0.2);
+    border-color: #f3dfba;
+    box-shadow: 0 0 16px rgba(197, 168, 128, 0.35);
+}
+.apple-launchpad-card-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+.apple-launchpad-flag {
+    width: 28px;
+    height: 19px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.2);
+    flex-shrink: 0;
+}
+.apple-launchpad-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.apple-launchpad-native {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #f9fafb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.apple-launchpad-sub {
+    font-size: 0.68rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.apple-launchpad-vat {
+    font-size: 0.64rem;
+    font-weight: 800;
+    color: #f3dfba;
+    background: rgba(197, 168, 128, 0.15);
+    border: 1px solid rgba(197, 168, 128, 0.3);
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.apple-launchpad-card.hidden {
+    display: none !important;
+}
+@media (max-width: 768px) {
+    .apple-launchpad-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    .apple-launchpad-window {
+        max-height: 92vh;
+    }
+}
+@media (max-width: 420px) {
+    .apple-launchpad-grid {
+        grid-template-columns: 1fr;
+    }
+    .apple-launchpad-window {
+        border-radius: 14px;
+    }
+}
