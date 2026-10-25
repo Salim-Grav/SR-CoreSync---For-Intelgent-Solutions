@@ -27,7 +27,7 @@ DEMO_EN_PATH = os.path.join(BASE_DIR, 'en', 'demo.html')
 INDEX_AR_PATH = os.path.join(BASE_DIR, 'index.html')
 INDEX_EN_PATH = os.path.join(BASE_DIR, 'en', 'index.html')
 
-from deploy_sovereign_multilingual import LANGUAGES, build_dropdown_html, build_dropdown_js
+from deploy_sovereign_multilingual import LANGUAGES, build_dropdown_html, build_dropdown_js, build_apple_dock_html
 
 COMMON_KPI_REPLACEMENTS = {
     "de": {
@@ -770,13 +770,13 @@ def replace_any_switcher(html_content, new_dropdown_html, page_type="demo"):
     """
     Deterministically replaces any existing switcher in the file.
     """
-    # 1. Match sovereign-lang-hub-wrap
-    pattern_hub = r'<!-- Sovereign Global Multilingual Hub[\s\S]*?</div>\s*</div>\s*</div>'
+    # 1. Match sovereign-lang-hub-wrap (with or without quick-pill)
+    pattern_hub = r'(?:<!-- Sovereign Global Multilingual Hub[^\n]*\n\s*)?<div class="sovereign-lang-hub-wrap"[\s\S]*?</div>\s*</div>\s*</div>'
     if re.search(pattern_hub, html_content):
         return re.sub(pattern_hub, new_dropdown_html, html_content, count=1)
     
     # 2. Match sovereign-lang-dropdown
-    pattern_dropdown = r'<!-- Sovereign Global Multilingual Hub[\s\S]*?</div>\s*</div>'
+    pattern_dropdown = r'(?:<!-- Sovereign Global Multilingual Hub[^\n]*\n\s*)?<div class="sovereign-lang-dropdown"[\s\S]*?</div>\s*</div>'
     if re.search(pattern_dropdown, html_content):
         return re.sub(pattern_dropdown, new_dropdown_html, html_content, count=1)
 
@@ -792,12 +792,24 @@ def replace_any_switcher(html_content, new_dropdown_html, page_type="demo"):
 
     return html_content
 
+def inject_or_replace_apple_dock(html_content, code, page_type="demo", is_subfolder=False):
+    """
+    Injects or updates the Apple macOS Language & Flags Dock before </body>.
+    """
+    dock_html = build_apple_dock_html(code, page_type=page_type, is_subfolder=is_subfolder)
+    pattern_dock = r'<!-- Apple macOS Sovereign Language & Flags Dock -->[\s\S]*?</aside>'
+    if re.search(pattern_dock, html_content):
+        return re.sub(pattern_dock, dock_html, html_content, count=1)
+    else:
+        return html_content.replace('</body>', dock_html + '\n</body>', 1)
+
 def update_file(file_path, current_lang_code, page_type="demo", is_subfolder=False):
     with open(file_path, 'r', encoding='utf-8') as f:
         c = f.read()
 
     new_dropdown = build_dropdown_html(current_lang_code, page_type=page_type, is_subfolder=is_subfolder)
     c = replace_any_switcher(c, new_dropdown, page_type=page_type)
+    c = inject_or_replace_apple_dock(c, current_lang_code, page_type=page_type, is_subfolder=is_subfolder)
 
     if 'Sovereign Global Multilingual Hub Controller' not in c:
         c = c.replace('</body>', build_dropdown_js() + '\n</body>', 1)
@@ -842,9 +854,10 @@ for code, data in LANG_DATA.items():
     for en_txt, loc_txt in data["replacements"].items():
         c = c.replace(en_txt, loc_txt)
 
-    # Replace language dropdown with the code-specific dropdown
+    # Replace language dropdown and Apple dock
     dropdown_html = build_dropdown_html(code, page_type="demo", is_subfolder=True)
     c = replace_any_switcher(c, dropdown_html, page_type="demo")
+    c = inject_or_replace_apple_dock(c, code, page_type="demo", is_subfolder=True)
 
     with open(target_demo, 'w', encoding='utf-8') as f:
         f.write(c)
@@ -862,6 +875,7 @@ for code, data in LANG_DATA.items():
 
     idx_dropdown = build_dropdown_html(code, page_type="index", is_subfolder=True)
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
+    idx_c = inject_or_replace_apple_dock(idx_c, code, page_type="index", is_subfolder=True)
 
     with open(target_index, 'w', encoding='utf-8') as f:
         f.write(idx_c)
@@ -881,6 +895,7 @@ for code, native_name, en_name, flag, vat in EU_REMAINING:
     c = re.sub(r'content="en_US"', f'content="{code}_{code.upper()}"', c)
     dropdown_html = build_dropdown_html(code, page_type="demo", is_subfolder=True)
     c = replace_any_switcher(c, dropdown_html, page_type="demo")
+    c = inject_or_replace_apple_dock(c, code, page_type="demo", is_subfolder=True)
 
     with open(target_demo, 'w', encoding='utf-8') as f:
         f.write(c)
@@ -890,6 +905,7 @@ for code, native_name, en_name, flag, vat in EU_REMAINING:
     idx_c = re.sub(r'<title>[^<]*</title>', f'<title>S&R CoreSync Solutions | Enterprise Cloud ERP & AI ({native_name})</title>', idx_c)
     idx_dropdown = build_dropdown_html(code, page_type="index", is_subfolder=True)
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
+    idx_c = inject_or_replace_apple_dock(idx_c, code, page_type="index", is_subfolder=True)
 
     with open(target_index, 'w', encoding='utf-8') as f:
         f.write(idx_c)
