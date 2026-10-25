@@ -214,7 +214,7 @@ def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=Fals
     html.append('                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>')
     html.append('            </svg>')
     html.append('            <span class="apple-dock-badge">28</span>')
-    html.append('            <span class="apple-dock-dot" style="opacity:0;"></span>')
+    html.append('            <span class="apple-dock-dot"></span>')
     html.append('        </button>')
     html.append('    </div>')
     html.append('</aside>')
