@@ -53,9 +53,18 @@ LANGUAGES = [
     {"code": "ckb", "name_native": "کوردی (سۆرانی)", "name_en": "Kurdish (Sorani)", "flag": "☀️", "group": "regional", "dir": "rtl", "vat": "باج ٥٪"},
 ]
 
+FLAG_IMG_MAP = {
+    "ar": "sa.png", "en": "gb.png", "nl": "nl.png", "de": "de.png", "fr": "fr.png",
+    "es": "es.png", "it": "it.png", "tr": "tr.png", "sv": "se.png", "no": "no.png",
+    "da": "dk.png", "fi": "fi.png", "pl": "pl.png", "pt": "pt.png", "el": "gr.png",
+    "cs": "cz.png", "ro": "ro.png", "hu": "hu.png", "bg": "bg.png", "sk": "sk.png",
+    "hr": "hr.png", "lt": "lt.png", "sl": "si.png", "lv": "lv.png", "et": "ee.png",
+    "ga": "ie.png", "mt": "mt.png", "ku": "iq.png", "ckb": "iq.png"
+}
+
 def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False):
     """
-    Builds the Sovereign Language Dropdown HTML.
+    Builds the Sovereign Language Dropdown HTML with High-DPI Flags and Quick-Switch Pill.
     page_type: 'demo' or 'index'
     is_subfolder: True if the file is in e.g. /en/, /nl/, /de/
     """
@@ -67,34 +76,46 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
     
     # Target filename
     target_file = f"{page_type}.html"
+    curr_flag = FLAG_IMG_MAP.get(curr["code"], "sa.png")
     
+    # Quick Switch Pill (Direct 1-Click Toggle between Arabic & English)
+    if current_lang_code == "ar":
+        quick_target = f"{prefix}en/{target_file}"
+        quick_pill = f'<a href="{quick_target}" class="sovereign-quick-pill" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'en\');}}catch(e){{}}" title="Switch to English"><img src="{prefix}assets/flags/gb.png" class="sovereign-flag-img" width="20" height="14" alt="EN"> <span>English</span></a>'
+    else:
+        quick_target = f"{prefix}{target_file}" if is_subfolder else f"./{target_file}"
+        quick_pill = f'<a href="{quick_target}" class="sovereign-quick-pill" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'ar\');}}catch(e){{}}" title="التحويل للعربية"><img src="{prefix}assets/flags/sa.png" class="sovereign-flag-img" width="20" height="14" alt="AR"> <span>العربية</span></a>'
+
     html = []
     html.append(f'<!-- Sovereign Global Multilingual Hub (28 Languages: EU Official + EEA + Regional) -->')
-    html.append(f'<div class="sovereign-lang-dropdown" id="sovereignLangDropdown">')
-    html.append(f'    <button type="button" class="sovereign-lang-trigger" id="sovereignLangTrigger" aria-expanded="false" aria-haspopup="true" title="اختر اللغة / Select Language">')
-    html.append(f'        <span class="sovereign-lang-flag">{curr["flag"]}</span>')
-    html.append(f'        <span class="sovereign-lang-current-label">{curr["code"].upper()}</span>')
-    html.append(f'        <svg class="sovereign-lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>')
-    html.append(f'    </button>')
-    html.append(f'    <div class="sovereign-lang-menu" id="sovereignLangMenu" role="menu">')
-    html.append(f'        <div class="sovereign-lang-search-box">')
-    html.append(f'            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>')
+    html.append(f'<div class="sovereign-lang-hub-wrap">')
+    html.append(f'    {quick_pill}')
+    html.append(f'    <div class="sovereign-lang-dropdown" id="sovereignLangDropdown">')
+    html.append(f'        <button type="button" class="sovereign-lang-trigger" id="sovereignLangTrigger" aria-expanded="false" aria-haspopup="true" title="اختر اللغة / Select Language">')
+    html.append(f'            <span class="sovereign-lang-flag"><img src="{prefix}assets/flags/{curr_flag}" alt="{curr["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
+    html.append(f'            <span class="sovereign-lang-current-label">{curr["code"].upper()}</span>')
+    html.append(f'            <svg class="sovereign-lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>')
+    html.append(f'        </button>')
+    html.append(f'        <div class="sovereign-lang-menu" id="sovereignLangMenu" role="menu">')
+    html.append(f'            <div class="sovereign-lang-search-box">')
+    html.append(f'                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>')
     search_placeholder = "ابحث عن لغة... / Search language" if current_lang_code == "ar" else "Search language / Wählen Sie Sprache..."
-    html.append(f'            <input type="text" class="sovereign-lang-search-input" id="sovereignLangSearch" placeholder="{search_placeholder}" autocomplete="off">')
-    html.append(f'        </div>')
-    html.append(f'        <div class="sovereign-lang-scroll-area">')
+    html.append(f'                <input type="text" class="sovereign-lang-search-input" id="sovereignLangSearch" placeholder="{search_placeholder}" autocomplete="off">')
+    html.append(f'            </div>')
+    html.append(f'            <div class="sovereign-lang-scroll-area">')
     
     # Group: EU & Nordic
     eu_langs = [l for l in LANGUAGES if l["group"] == "eu"]
-    html.append(f'            <div class="sovereign-lang-category">')
+    html.append(f'                <div class="sovereign-lang-category">')
     eu_title = "الاتحاد الأوروبي والإسكندنافية (EU & Nordic)" if current_lang_code == "ar" else "European Union & Nordic"
-    html.append(f'                <div class="sovereign-lang-category-title">')
-    html.append(f'                    <span>{eu_title}</span>')
-    html.append(f'                    <span class="badge-count">{len(eu_langs)}</span>')
-    html.append(f'                </div>')
+    html.append(f'                    <div class="sovereign-lang-category-title">')
+    html.append(f'                        <span>{eu_title}</span>')
+    html.append(f'                        <span class="badge-count">{len(eu_langs)}</span>')
+    html.append(f'                    </div>')
     for l in eu_langs:
         is_active = (l["code"] == current_lang_code)
         active_cls = " active" if is_active else ""
+        item_flag = FLAG_IMG_MAP.get(l["code"], "sa.png")
         
         if l["code"] == "ar":
             href = f"{prefix}{target_file}"
@@ -104,29 +125,30 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
             else:
                 href = f"./{l['code']}/{target_file}"
                 
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
-        html.append(f'                    <div class="sovereign-lang-item-left">')
-        html.append(f'                        <span class="sovereign-lang-item-flag">{l["flag"]}</span>')
-        html.append(f'                        <div class="sovereign-lang-item-names">')
-        html.append(f'                            <span class="sovereign-lang-native">{l["name_native"]}</span>')
-        html.append(f'                            <span class="sovereign-lang-english">{l["name_en"]}</span>')
+        html.append(f'                    <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
+        html.append(f'                        <div class="sovereign-lang-item-left">')
+        html.append(f'                            <span class="sovereign-lang-item-flag"><img src="{prefix}assets/flags/{item_flag}" alt="{l["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
+        html.append(f'                            <div class="sovereign-lang-item-names">')
+        html.append(f'                                <span class="sovereign-lang-native">{l["name_native"]}</span>')
+        html.append(f'                                <span class="sovereign-lang-english">{l["name_en"]}</span>')
+        html.append(f'                            </div>')
         html.append(f'                        </div>')
-        html.append(f'                    </div>')
-        html.append(f'                    <span class="sovereign-lang-code">{l["vat"]}</span>')
-        html.append(f'                </a>')
-    html.append(f'            </div>')
+        html.append(f'                        <span class="sovereign-lang-code">{l["vat"]}</span>')
+        html.append(f'                    </a>')
+    html.append(f'                </div>')
     
     # Group: Regional & Middle East
     reg_langs = [l for l in LANGUAGES if l["group"] == "regional"]
-    html.append(f'            <div class="sovereign-lang-category">')
+    html.append(f'                <div class="sovereign-lang-category">')
     reg_title = "الشرق الأوسط والإقليمية (Regional & Middle East)" if current_lang_code == "ar" else "Middle East & Regional"
-    html.append(f'                <div class="sovereign-lang-category-title">')
-    html.append(f'                    <span>{reg_title}</span>')
-    html.append(f'                    <span class="badge-count">{len(reg_langs)}</span>')
-    html.append(f'                </div>')
+    html.append(f'                    <div class="sovereign-lang-category-title">')
+    html.append(f'                        <span>{reg_title}</span>')
+    html.append(f'                        <span class="badge-count">{len(reg_langs)}</span>')
+    html.append(f'                    </div>')
     for l in reg_langs:
         is_active = (l["code"] == current_lang_code)
         active_cls = " active" if is_active else ""
+        item_flag = FLAG_IMG_MAP.get(l["code"], "sa.png")
         
         if l["code"] == "ar":
             href = f"{prefix}{target_file}"
@@ -136,18 +158,19 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
             else:
                 href = f"./{l['code']}/{target_file}"
                 
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
-        html.append(f'                    <div class="sovereign-lang-item-left">')
-        html.append(f'                        <span class="sovereign-lang-item-flag">{l["flag"]}</span>')
-        html.append(f'                        <div class="sovereign-lang-item-names">')
-        html.append(f'                            <span class="sovereign-lang-native">{l["name_native"]}</span>')
-        html.append(f'                            <span class="sovereign-lang-english">{l["name_en"]}</span>')
+        html.append(f'                    <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
+        html.append(f'                        <div class="sovereign-lang-item-left">')
+        html.append(f'                            <span class="sovereign-lang-item-flag"><img src="{prefix}assets/flags/{item_flag}" alt="{l["code"].upper()}" class="sovereign-flag-img" width="20" height="14"></span>')
+        html.append(f'                            <div class="sovereign-lang-item-names">')
+        html.append(f'                                <span class="sovereign-lang-native">{l["name_native"]}</span>')
+        html.append(f'                                <span class="sovereign-lang-english">{l["name_en"]}</span>')
+        html.append(f'                            </div>')
         html.append(f'                        </div>')
-        html.append(f'                    </div>')
-        html.append(f'                    <span class="sovereign-lang-code">{l["vat"]}</span>')
-        html.append(f'                </a>')
-    html.append(f'            </div>')
+        html.append(f'                        <span class="sovereign-lang-code">{l["vat"]}</span>')
+        html.append(f'                    </a>')
+    html.append(f'                </div>')
     
+    html.append(f'            </div>')
     html.append(f'        </div>')
     html.append(f'    </div>')
     html.append(f'</div>')
