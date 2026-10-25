@@ -835,6 +835,16 @@ with open(DEMO_EN_PATH, 'r', encoding='utf-8') as f:
 with open(INDEX_EN_PATH, 'r', encoding='utf-8') as f:
     master_en_index = f.read()
 
+def safe_replace_text(content, en_txt, loc_txt):
+    if en_txt in ("Pending", "Paid", "All"):
+        content = content.replace(f"'{en_txt}'", f"'{loc_txt}'")
+        content = content.replace(f'"{en_txt}"', f'"{loc_txt}"')
+        content = content.replace(f">{en_txt}<", f">{loc_txt}<")
+        content = content.replace(f">{en_txt} ", f">{loc_txt} ")
+        content = content.replace(f" {en_txt}<", f" {loc_txt}<")
+        return content
+    return content.replace(en_txt, loc_txt)
+
 # 2. Build High-Fidelity Localized Portals
 print("\n=== 2. Building High-Fidelity Localized Portals (DE, FR, TR, SV, NO, ES, IT, KU) ===")
 for code, data in LANG_DATA.items():
@@ -852,7 +862,7 @@ for code, data in LANG_DATA.items():
 
     # Replacements
     for en_txt, loc_txt in data["replacements"].items():
-        c = c.replace(en_txt, loc_txt)
+        c = safe_replace_text(c, en_txt, loc_txt)
 
     # Replace language dropdown and Apple dock
     dropdown_html = build_dropdown_html(code, page_type="demo", is_subfolder=True)
@@ -871,7 +881,7 @@ for code, data in LANG_DATA.items():
     idx_c = re.sub(r'content="https://sr-coresync\.com/en/"', f'content="https://sr-coresync.com/{code}/"', idx_c)
 
     for en_txt, loc_txt in data["replacements"].items():
-        idx_c = idx_c.replace(en_txt, loc_txt)
+        idx_c = safe_replace_text(idx_c, en_txt, loc_txt)
 
     idx_dropdown = build_dropdown_html(code, page_type="index", is_subfolder=True)
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
