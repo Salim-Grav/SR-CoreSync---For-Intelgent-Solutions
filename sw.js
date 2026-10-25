@@ -10,6 +10,10 @@ const CACHE_NAME = 'coresync-prerender-v14-srx';
 const CRITICAL_ASSETS = [
   './index.html',
   './manifest.json',
+  './assets/icon-192.png',
+  './assets/icon-512.png',
+  './assets/icon-maskable-192.png',
+  './assets/icon-maskable-512.png',
   './assets/sr-core-emblem.svg?v=sovereign2026',
   './assets/sr-core-emblem-official.webp',
   './assets/logo-neon-icon.svg',

@@ -3307,3 +3307,13 @@ var response = await client.PostAsync("https://api.sr-coresync.com/tax", content
 
 })();
 
+
+
+// S&R CoreSync PWA Service Worker Automatic Loader
+if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        var isSub = !!window.location.pathname.match(/\/[a-z]{2,3}\//);
+        var swPath = isSub ? '../sw.js' : './sw.js';
+        navigator.serviceWorker.register(swPath).catch(function() {});
+    });
+}
