@@ -3583,7 +3583,7 @@
         function openExecutivePdfModal() {
             updateGlobalFinancials();
             const dateEl = document.getElementById('pdfFechaDisplay');
-            if (dateEl) dateEl.innerText = new Fecha().toISOString().split('T')[0];
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
             const modal = document.getElementById('executivePdfModal');
             if (modal) modal.classList.add('active');
         }
@@ -3666,7 +3666,7 @@ Direct Founders Contact: info@coresync.cloud
             const desc = document.getElementById('pubDesc').value;
 
             // Enterprise CoreSync Engine Logic
-            const id = 'custom_' + Fecha.now();
+            const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
                 icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',

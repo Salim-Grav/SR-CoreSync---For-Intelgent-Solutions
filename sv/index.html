@@ -7288,7 +7288,7 @@ main#wrapper:focus{outline:none}
             } else {
                 try {
                     const leads = JSON.parse(localStorage.getItem('sr_leads_vault') || '[]');
-                    leads.unshift(Object.assign({ timestamp: new Datum().toISOString(), leadId: 'LEAD-SR-' + Datum.now() }, leadPayload));
+                    leads.unshift(Object.assign({ timestamp: new Date().toISOString(), leadId: 'LEAD-SR-' + Date.now() }, leadPayload));
                     localStorage.setItem('sr_leads_vault', JSON.stringify(leads.slice(0, 100)));
                     const leadEndpoint = (typeof window !== 'undefined' && window.SR_LEAD_ENDPOINT) || 'https://api.sr-coresync.com/lead';
                     fetch(leadEndpoint, {
@@ -7496,8 +7496,8 @@ main#wrapper:focus{outline:none}
             if (savingsValEl) savingsValEl.textContent = `€ ${annualSavings.toLocaleString()}`;
 
             if (dateEl) {
-                const now = new Datum();
-                dateEl.textContent = now.toLocaleDatumString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+                const now = new Date();
+                dateEl.textContent = now.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
             }
             if (refEl) {
                 refEl.textContent = 'REF-CS-ROI-2026-' + Math.floor(1000 + Math.random() * 9000);

@@ -3080,7 +3080,7 @@
             }, 3500);
         }
 
-        function updateStorageRewşBadge() {
+        function updateStorageStatusBadge() {
             const badge = document.getElementById('storageBadge');
             if (!badge) return;
             const hasCustomBrand = localStorage.getItem('sr_custom_brand_name');
@@ -3118,7 +3118,7 @@
             if (saveToStorage) {
                 try {
                     localStorage.setItem('sr_custom_theme', themeName);
-                    updateStorageRewşBadge();
+                    updateStorageStatusBadge();
                     showPortalToast(`Applied and saved [${themeName.toUpperCase()}] theme in browser!`);
                 } catch(e) {}
             }
@@ -3174,7 +3174,7 @@
                 } catch(e) {}
             }
 
-            updateStorageRewşBadge();
+            updateStorageStatusBadge();
 
             if (!isSilent) {
                 showPortalToast(`✨ Brand identity for [${name}] successfully saved and applied!`);
@@ -3202,7 +3202,7 @@
             document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
             document.querySelector('.portal-brand-emblem').src = '../assets/sr-core-emblem-official.png';
 
-            updateStorageRewşBadge();
+            updateStorageStatusBadge();
             showPortalToast('Restored original S&R CoreSync identity and cleared custom configuration.');
         }
 
@@ -3223,7 +3223,7 @@
                     if (input) input.value = savedName;
                     applyClientBrand(savedName, savedIcon, false, true);
                 }
-                updateStorageRewşBadge();
+                updateStorageStatusBadge();
             } catch(e) {
                 console.warn('LocalStorage error:', e);
             }
@@ -3583,7 +3583,7 @@
         function openExecutivePdfModal() {
             updateGlobalFinancials();
             const dateEl = document.getElementById('pdfDîrokDisplay');
-            if (dateEl) dateEl.innerText = new Dîrok().toISOString().split('T')[0];
+            if (dateEl) dateEl.innerText = new Date().toISOString().split('T')[0];
             const modal = document.getElementById('executivePdfModal');
             if (modal) modal.classList.add('active');
         }
@@ -3666,7 +3666,7 @@ Direct Founders Contact: info@coresync.cloud
             const desc = document.getElementById('pubDesc').value;
 
             // Enterprise CoreSync Engine Logic
-            const id = 'custom_' + Dîrok.now();
+            const id = 'custom_' + Date.now();
             softwareCatalog[id] = {
                 title: title,
                 icon: cat === 'mobile' ? '📱' : cat === 'sdk' ? '🧩' : cat === 'pos' ? '⚡' : '💻',
