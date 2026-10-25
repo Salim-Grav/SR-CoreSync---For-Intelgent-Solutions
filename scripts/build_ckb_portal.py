@@ -15,7 +15,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DEMO_AR_PATH = os.path.join(BASE_DIR, 'demo.html')
 INDEX_AR_PATH = os.path.join(BASE_DIR, 'index.html')
 
-from deploy_sovereign_multilingual import build_dropdown_html, build_dropdown_js
+from deploy_sovereign_multilingual import build_dropdown_html, build_dropdown_js, build_apple_dock_html
 
 CKB_DIR = os.path.join(BASE_DIR, 'ckb')
 os.makedirs(CKB_DIR, exist_ok=True)
