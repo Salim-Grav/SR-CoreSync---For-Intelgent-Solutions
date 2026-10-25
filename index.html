@@ -950,6 +950,28 @@ main#wrapper:focus{outline:none}
     color: #ffffff !important;
 }
 
+.sr-btn-linkedin {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 10px 18px !important;
+    background: linear-gradient(135deg, #0077b5 0%, #0A66C2 100%) !important;
+    border: 1px solid #60a5fa !important;
+    border-radius: 999px !important;
+    color: #ffffff !important;
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 4px 15px rgba(10, 102, 194, 0.35) !important;
+}
+.sr-btn-linkedin:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 22px rgba(10, 102, 194, 0.6) !important;
+    color: #ffffff !important;
+}
+
 .sr-btn-checkout {
     display: inline-flex !important;
     align-items: center !important;
@@ -10976,7 +10998,13 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                                     <span class="sr-blueprint-audio-status-dot" id="audioSpeakingDot"></span>
                                 </div>
                                 <div class="sr-blueprint-audio-texts">
-                                    <span class="sr-blueprint-audio-badge">🎙️ صوت المهندس سليم الرقمي • AI Executive Audio</span>
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                        <span class="sr-blueprint-audio-badge">🎙️ صوت المهندس سليم الرقمي • AI Executive Audio</span>
+                                        <a href="https://www.linkedin.com/company/srcoresync/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(10, 102, 194, 0.25); border: 1px solid rgba(96, 165, 250, 0.45); border-radius: 999px; color: #93c5fd; font-size: 11px; font-weight: 700; text-decoration: none; transition: all 0.2s ease;">
+                                            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>
+                                            <span>LinkedIn</span>
+                                        </a>
+                                    </div>
                                     <div class="sr-blueprint-audio-title">الاستماع للملخص التنفيذي للخطة المخصصة</div>
                                 </div>
                             </div>
@@ -11055,6 +11083,10 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                             <button type="button" class="sr-btn-telegram" onclick="dispatchBlueprintToTelegram()">
                                 <span>✈️ إرسال لتيليجرام</span>
                             </button>
+                            <a href="https://www.linkedin.com/company/srcoresync/" target="_blank" rel="noopener noreferrer" class="sr-btn-linkedin">
+                                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>
+                                <span>💼 صفحة LinkedIn</span>
+                            </a>
                             <button type="button" class="sr-btn-checkout" onclick="openExecutiveCheckoutModal('${projectName.replace(/'/g, "\'")}', 890)">
                                 <span>💳 اعتماد ودفع فوري (€890)</span>
                             </button>
