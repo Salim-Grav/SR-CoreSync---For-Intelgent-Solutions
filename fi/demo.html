@@ -10,41 +10,68 @@
             if (urlParams.get('noredirect') === '1') return;
             var qLang = urlParams.get('lang');
             var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
+            var currentLang = (document.documentElement.getAttribute('lang') || 'ar').toLowerCase().split('-')[0];
             
-            // 1. User manual override from localStorage
-            var savedPref = localStorage.getItem('sr_lang_pref');
-            var targetLang = savedPref;
-            
-            // 2. Query param ?lang=xx
+            // 1. Explicit query param ?lang=xx (immediate priority)
             if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
-                targetLang = qLang.toLowerCase();
-                localStorage.setItem('sr_lang_pref', targetLang);
+                var chosen = qLang.toLowerCase();
+                try { localStorage.setItem('sr_lang_pref', chosen); } catch(e){}
+                if (chosen !== currentLang) {
+                    var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
+                    var targetFile = isDemo ? 'demo.html' : 'index.html';
+                    var targetPath = (chosen === 'ar') ? targetFile : (chosen + '/' + targetFile);
+                    var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
+                    var prefix = isSubfolder ? '../' : './';
+                    window.location.replace(prefix + targetPath + window.location.hash);
+                }
+                return;
             }
-            
-            // 3. Auto-detect from visitor device / OS / browser system language
-            if (!targetLang) {
+
+            // 2. User manual override from localStorage
+            var savedPref = null;
+            try { savedPref = localStorage.getItem('sr_lang_pref'); } catch(e){}
+
+            var targetLang = null;
+            if (savedPref && supported.indexOf(savedPref) !== -1) {
+                targetLang = savedPref;
+            } else {
+                // 3. First-time visit: Check visitor device / OS / browser system languages
                 var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+                var hasArabic = false;
                 for (var i = 0; i < browserLangs.length; i++) {
                     var raw = (browserLangs[i] || '').toLowerCase().trim();
                     var primary = raw.split('-')[0];
-                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
-                        targetLang = 'ckb';
-                        break;
-                    }
-                    if (supported.indexOf(primary) !== -1) {
-                        targetLang = primary;
+                    if (primary === 'ar' || raw.indexOf('ar') !== -1) {
+                        hasArabic = true;
                         break;
                     }
                 }
-                // If device is not Arabic and no specific language matched, fallback to English
-                if (!targetLang && browserLangs.length > 0) {
-                    var first = (browserLangs[0] || '').toLowerCase();
-                    targetLang = (first.indexOf('ar') !== -1) ? 'ar' : 'en';
+                
+                // If visitor's device has Arabic anywhere in its language preferences, stay on Arabic Master!
+                if (hasArabic) {
+                    targetLang = 'ar';
+                } else {
+                    // Non-Arabic device: find first supported language
+                    for (var j = 0; j < browserLangs.length; j++) {
+                        var rawJ = (browserLangs[j] || '').toLowerCase().trim();
+                        var primaryJ = rawJ.split('-')[0];
+                        if (rawJ.indexOf('ckb') !== -1 || rawJ.indexOf('ku-iq') !== -1 || rawJ.indexOf('sorani') !== -1) {
+                            targetLang = 'ckb';
+                            break;
+                        }
+                        if (supported.indexOf(primaryJ) !== -1) {
+                            targetLang = primaryJ;
+                            break;
+                        }
+                    }
+                    if (!targetLang) {
+                        targetLang = 'en'; // Global fallback for foreign devices
+                    }
                 }
+                try { localStorage.setItem('sr_lang_pref', targetLang); } catch(e){}
             }
-            
-            // 4. Compare with current page language and route immediately
-            var currentLang = document.documentElement.getAttribute('lang') || 'ar';
+
+            // 4. Route only if targetLang is different from current page
             if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
                 var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
                 var targetFile = isDemo ? 'demo.html' : 'index.html';
@@ -58,6 +85,7 @@
     })();
     </script>
 
+    
 
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

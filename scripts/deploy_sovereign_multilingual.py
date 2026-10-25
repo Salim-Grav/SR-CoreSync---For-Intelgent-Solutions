@@ -104,7 +104,7 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
             else:
                 href = f"./{l['code']}/{target_file}"
                 
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}">')
+        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
         html.append(f'                    <div class="sovereign-lang-item-left">')
         html.append(f'                        <span class="sovereign-lang-item-flag">{l["flag"]}</span>')
         html.append(f'                        <div class="sovereign-lang-item-names">')
@@ -136,7 +136,7 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
             else:
                 href = f"./{l['code']}/{target_file}"
                 
-        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}">')
+        html.append(f'                <a href="{href}" class="sovereign-lang-item{active_cls}" data-code="{l["code"]}" data-name="{l["name_native"].lower()} {l["name_en"].lower()}" onclick="try{{localStorage.setItem(\'sr_lang_pref\',\'{l["code"]}\');}}catch(e){{}}">')
         html.append(f'                    <div class="sovereign-lang-item-left">')
         html.append(f'                        <span class="sovereign-lang-item-flag">{l["flag"]}</span>')
         html.append(f'                        <div class="sovereign-lang-item-names">')
