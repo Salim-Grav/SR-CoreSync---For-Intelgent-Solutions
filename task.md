@@ -81,6 +81,7 @@
   - **2. إمكانية الوصول وتسميات الحقول (Accessibility & Form Labels):** إضافة سمات `title` و `aria-label` لكافة حقول الاختيار ونطاقات الـ ROI في `index.html`.
   - **3. تصحيح معايير ARIA:** إضافة `role="tab"` و `aria-selected` للأزرار التفاعلية داخل تبويبات العرض التجريبي ذات `role="tablist"`.
   - **4. إلغاء تكرار المعرفات النشطة (Unique Active IDs):** ضبط وتخصيص معرف زر الدفع السحابي ليصبح `srLiveCheckoutSubmitBtn` بدلاً من تكرار `checkoutSubmitBtn`.
+  - **5. معالجة وتوافق أشرطة التمرير (Cross-Browser Scrollbar Compatibility):** تغليف `scrollbar-width` داخل `@supports (scrollbar-width: thin)` وتوفير محددات `::-webkit-scrollbar` المتوافقة مع متصفحات Chrome و Safari و Samsung Internet في `social-8k-studio.html`.
 
 ---
 

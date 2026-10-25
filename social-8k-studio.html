@@ -190,8 +190,26 @@
             margin: 0 auto 35px;
             padding: 0 24px;
             overflow-x: auto;
-            scrollbar-width: thin;
-            scrollbar-color: var(--gold-primary) transparent;
+        }
+
+        .filter-scroll-wrapper::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .filter-scroll-wrapper::-webkit-scrollbar-track {
+            background: rgba(2, 8, 6, 0.5);
+        }
+
+        .filter-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(197, 168, 128, 0.4);
+            border-radius: 4px;
+        }
+
+        @supports (scrollbar-width: thin) {
+            .filter-scroll-wrapper {
+                scrollbar-width: thin;
+                scrollbar-color: var(--gold-primary) transparent;
+            }
         }
 
         .filter-bar {
