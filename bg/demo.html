@@ -6,7 +6,7 @@
     <script id="srLangAutoDetect">
     (function() {
         try {
-            if (/bot|crawl|spider|slurp|google|bing|yandex/i.test(navigator.userAgent)) return;
+            if (/bot|crawl|spider|slurp|google|bing|yandex|lighthouse|headless/i.test(navigator.userAgent)) return;
             var urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('noredirect') === '1') return;
             var qLang = urlParams.get('lang');
@@ -3901,35 +3901,35 @@ document.addEventListener('DOMContentLoaded', function() {
 <aside class="apple-macos-dock-wrapper" id="appleMacosDockWrapper" aria-label="Sovereign Language Quick Dock">
     <div class="apple-macos-dock" id="appleMacosDock">
         <a href="../de/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
-            <img src="../assets/flags/de.png" alt="DE" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/de.png" alt="DE" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../fr/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
-            <img src="../assets/flags/fr.png" alt="FR" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/fr.png" alt="FR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../nl/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
-            <img src="../assets/flags/nl.png" alt="NL" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/nl.png" alt="NL" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../en/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
-            <img src="../assets/flags/gb.png" alt="EN" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/gb.png" alt="EN" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../es/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
-            <img src="../assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
-            <img src="../assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../tr/demo.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
-            <img src="../assets/flags/tr.png" alt="TR" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/tr.png" alt="TR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <a href="../bg/demo.html" class="apple-dock-item active" onclick="try{sessionStorage.setItem('sr_user_lang_locked','bg');localStorage.setItem('sr_lang_pref','bg');}catch(e){}" data-tooltip="Български (Bulgarian)" aria-label="Български (Bulgarian)">
-            <img src="../assets/flags/bg.png" alt="BG" class="apple-dock-flag" width="28" height="19">
+            <img src="../assets/flags/bg.png" alt="BG" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
         <div class="apple-dock-separator"></div>
@@ -3966,7 +3966,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="apple-launchpad-grid" id="appleLaunchpadGrid">
                 <a href="../de/demo.html" class="apple-launchpad-card" data-code="de" data-name="deutsch german" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/de.png" alt="DE" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/de.png" alt="DE" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Deutsch</span>
                             <span class="apple-launchpad-sub">German</span>
@@ -3976,7 +3976,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../fr/demo.html" class="apple-launchpad-card" data-code="fr" data-name="français french" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/fr.png" alt="FR" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/fr.png" alt="FR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Français</span>
                             <span class="apple-launchpad-sub">French</span>
@@ -3986,7 +3986,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../nl/demo.html" class="apple-launchpad-card" data-code="nl" data-name="nederlands dutch" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/nl.png" alt="NL" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/nl.png" alt="NL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Nederlands</span>
                             <span class="apple-launchpad-sub">Dutch</span>
@@ -3996,7 +3996,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../en/demo.html" class="apple-launchpad-card" data-code="en" data-name="english english" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/gb.png" alt="EN" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/gb.png" alt="EN" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">English</span>
                             <span class="apple-launchpad-sub">English</span>
@@ -4006,7 +4006,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../es/demo.html" class="apple-launchpad-card" data-code="es" data-name="español spanish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/es.png" alt="ES" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/es.png" alt="ES" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Español</span>
                             <span class="apple-launchpad-sub">Spanish</span>
@@ -4016,7 +4016,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../it/demo.html" class="apple-launchpad-card" data-code="it" data-name="italiano italian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','it');localStorage.setItem('sr_lang_pref','it');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/it.png" alt="IT" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/it.png" alt="IT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Italiano</span>
                             <span class="apple-launchpad-sub">Italian</span>
@@ -4026,7 +4026,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../sv/demo.html" class="apple-launchpad-card" data-code="sv" data-name="svenska swedish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sv');localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/se.png" alt="SV" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/se.png" alt="SV" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Svenska</span>
                             <span class="apple-launchpad-sub">Swedish</span>
@@ -4036,7 +4036,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../no/demo.html" class="apple-launchpad-card" data-code="no" data-name="norsk norwegian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','no');localStorage.setItem('sr_lang_pref','no');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/no.png" alt="NO" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/no.png" alt="NO" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Norsk</span>
                             <span class="apple-launchpad-sub">Norwegian</span>
@@ -4046,7 +4046,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../da/demo.html" class="apple-launchpad-card" data-code="da" data-name="dansk danish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','da');localStorage.setItem('sr_lang_pref','da');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/dk.png" alt="DA" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/dk.png" alt="DA" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Dansk</span>
                             <span class="apple-launchpad-sub">Danish</span>
@@ -4056,7 +4056,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../fi/demo.html" class="apple-launchpad-card" data-code="fi" data-name="suomi finnish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fi');localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/fi.png" alt="FI" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/fi.png" alt="FI" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Suomi</span>
                             <span class="apple-launchpad-sub">Finnish</span>
@@ -4066,7 +4066,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../pl/demo.html" class="apple-launchpad-card" data-code="pl" data-name="polski polish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pl');localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/pl.png" alt="PL" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/pl.png" alt="PL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Polski</span>
                             <span class="apple-launchpad-sub">Polish</span>
@@ -4076,7 +4076,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../pt/demo.html" class="apple-launchpad-card" data-code="pt" data-name="português portuguese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pt');localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/pt.png" alt="PT" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/pt.png" alt="PT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Português</span>
                             <span class="apple-launchpad-sub">Portuguese</span>
@@ -4086,7 +4086,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../el/demo.html" class="apple-launchpad-card" data-code="el" data-name="ελληνικά greek" onclick="try{sessionStorage.setItem('sr_user_lang_locked','el');localStorage.setItem('sr_lang_pref','el');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/gr.png" alt="EL" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/gr.png" alt="EL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Ελληνικά</span>
                             <span class="apple-launchpad-sub">Greek</span>
@@ -4096,7 +4096,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../cs/demo.html" class="apple-launchpad-card" data-code="cs" data-name="čeština czech" onclick="try{sessionStorage.setItem('sr_user_lang_locked','cs');localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/cz.png" alt="CS" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/cz.png" alt="CS" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Čeština</span>
                             <span class="apple-launchpad-sub">Czech</span>
@@ -4106,7 +4106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../ro/demo.html" class="apple-launchpad-card" data-code="ro" data-name="română romanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ro');localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/ro.png" alt="RO" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/ro.png" alt="RO" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Română</span>
                             <span class="apple-launchpad-sub">Romanian</span>
@@ -4116,7 +4116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../hu/demo.html" class="apple-launchpad-card" data-code="hu" data-name="magyar hungarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hu');localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/hu.png" alt="HU" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/hu.png" alt="HU" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Magyar</span>
                             <span class="apple-launchpad-sub">Hungarian</span>
@@ -4126,7 +4126,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../bg/demo.html" class="apple-launchpad-card active" data-code="bg" data-name="български bulgarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','bg');localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/bg.png" alt="BG" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/bg.png" alt="BG" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Български</span>
                             <span class="apple-launchpad-sub">Bulgarian</span>
@@ -4136,7 +4136,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../sk/demo.html" class="apple-launchpad-card" data-code="sk" data-name="slovenčina slovak" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sk');localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/sk.png" alt="SK" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/sk.png" alt="SK" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Slovenčina</span>
                             <span class="apple-launchpad-sub">Slovak</span>
@@ -4146,7 +4146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../hr/demo.html" class="apple-launchpad-card" data-code="hr" data-name="hrvatski croatian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hr');localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/hr.png" alt="HR" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/hr.png" alt="HR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Hrvatski</span>
                             <span class="apple-launchpad-sub">Croatian</span>
@@ -4156,7 +4156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../lt/demo.html" class="apple-launchpad-card" data-code="lt" data-name="lietuvių lithuanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lt');localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/lt.png" alt="LT" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/lt.png" alt="LT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Lietuvių</span>
                             <span class="apple-launchpad-sub">Lithuanian</span>
@@ -4166,7 +4166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../sl/demo.html" class="apple-launchpad-card" data-code="sl" data-name="slovenščina slovenian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sl');localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/si.png" alt="SL" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/si.png" alt="SL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Slovenščina</span>
                             <span class="apple-launchpad-sub">Slovenian</span>
@@ -4176,7 +4176,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../lv/demo.html" class="apple-launchpad-card" data-code="lv" data-name="latviešu latvian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lv');localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/lv.png" alt="LV" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/lv.png" alt="LV" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Latviešu</span>
                             <span class="apple-launchpad-sub">Latvian</span>
@@ -4186,7 +4186,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../et/demo.html" class="apple-launchpad-card" data-code="et" data-name="eesti estonian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','et');localStorage.setItem('sr_lang_pref','et');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/ee.png" alt="ET" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/ee.png" alt="ET" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Eesti</span>
                             <span class="apple-launchpad-sub">Estonian</span>
@@ -4196,7 +4196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../ga/demo.html" class="apple-launchpad-card" data-code="ga" data-name="gaeilge irish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ga');localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/ie.png" alt="GA" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/ie.png" alt="GA" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Gaeilge</span>
                             <span class="apple-launchpad-sub">Irish</span>
@@ -4206,7 +4206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../mt/demo.html" class="apple-launchpad-card" data-code="mt" data-name="malti maltese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','mt');localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/mt.png" alt="MT" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/mt.png" alt="MT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Malti</span>
                             <span class="apple-launchpad-sub">Maltese</span>
@@ -4216,7 +4216,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../demo.html" class="apple-launchpad-card" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/sa.png" alt="AR" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/sa.png" alt="AR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">العربية</span>
                             <span class="apple-launchpad-sub">Arabic (HQ Master)</span>
@@ -4226,7 +4226,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../tr/demo.html" class="apple-launchpad-card" data-code="tr" data-name="türkçe turkish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/tr.png" alt="TR" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/tr.png" alt="TR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Türkçe</span>
                             <span class="apple-launchpad-sub">Turkish</span>
@@ -4236,7 +4236,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../ku/demo.html" class="apple-launchpad-card" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ku');localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/iq.png" alt="KU" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/iq.png" alt="KU" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">Kurdî (Kurmancî)</span>
                             <span class="apple-launchpad-sub">Kurdish (Kurmanji)</span>
@@ -4246,7 +4246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </a>
                 <a href="../ckb/demo.html" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
                     <div class="apple-launchpad-card-left">
-                        <img src="../assets/flags/iq.png" alt="CKB" class="apple-launchpad-flag" width="28" height="19">
+                        <img src="../assets/flags/iq.png" alt="CKB" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
                             <span class="apple-launchpad-native">کوردی (سۆرانی)</span>
                             <span class="apple-launchpad-sub">Kurdish (Sorani)</span>
