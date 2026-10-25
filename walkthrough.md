@@ -44,7 +44,9 @@
     - `founder-banner-salim-4k.webp` بدقة `3840×2160` UHD.
     - `founder-banner-raed.webp` & `founder-banner-raed.jpg` بدقة `2560×1440`.
     - `founder-banner-raed-4k.webp` بدقة `3840×2160` UHD.
-    - تحسين ورفع تباين وحدة صور الكراسي (`hero-founder-salim-chair.webp` و `hero-founder-raed-chair.webp`).
+    - **مطابقة صور الكراسي القيادية في مسرح الإدارة مع البنرات الرسمية 4K:**
+      - اقتطاع ومعالجة صور الكراسي لكلا المؤسسين مباشرة من أصول البنرات الخام 4K (`founder-banner-salim-4k.jpg` و `founder-banner-raed-4k.jpg`) بمحاذاة مركزية وإلغاء أي تشويش، لتتطابق بنسبة 100% مع نفس ملامح الوجه واستوديو الحلقات الذهبية الملكية والبدلة السوداء الرسمية.
+      - حفظ وتحديث الأصول عالية الكثافة (`hero-founder-salim-chair.webp`، `hero-founder-salim-chair.jpg`، `hero-founder-raed-chair.webp`، `hero-founder-raed-chair.jpg`) بأبعاد `1460×1772` وبنسبة وضوح فائقة تملأ إطار المسرح القيادي دون أي تغطية للوجه.
 - **تحديث 58 بوابة لغوية:**
   - استبدال كود العرض ليحتوي على وسوم متجاوبة تدعم شاشات 2K و 4K (`srcset="...-4k.webp 3840w, ...webp 2560w"`).
   - ربط زر التكبير السريع (Lightbox) مباشرة بملف الـ 4K فائق الجودة.
