@@ -319,6 +319,23 @@
 
 ---
 
+### 5. توحيد واعتماد رابط لينكد إن الرسمي القياسي (Canonical Official LinkedIn URL Unification):
+- **الرابط المعتمد الجديد:** `https://www.linkedin.com/company/srcoresync/` (مع السابقة `www.` والحروف الصغيرة والشرطة المائلة الختامية).
+- **المواقع المحدثة:**
+  - `index.html`: شريط المتابعة الجانبي العائم (`floating-follow`)، شريط الفوتر المؤسسي (`.sr-footer-social-strip`)، ومصفوفة Schema.org `sameAs`.
+  - `social-8k-studio.html`: رابط زيارة القناة وزر نسخ الرابط بضغطة واحدة.
+  - `SOCIAL-MEDIA-SUITE.md` & `scripts/social_campaign_dispatcher.py`.
+  - كافة البوابات اللغوية الـ 28 المترجمة (`en/`, `nl/`, `de/`, إلخ).
+
+---
+
+### 6. لقطات حية للتحقق من اعتماد رابط لينكد إن الجديد:
+![معاينة شريط المتابعة العائم ورابط لينكد إن](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/top_page_floating_bar_1792967157664.png)
+
+![معاينة شريط الفوتر وشبكة التواصل المؤسسية](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/footer_social_strip_final_1792967209544.png)
+
+---
+
 ## 🛠️ الملفات المستحدثة والمعدلة للمهمة 38:
 1. **[sdk/python/coresync/client.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/coresync/client.py):** نواة حزمة الـ Python SDK الرسمية.
 2. **[sdk/python/setup.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/setup.py):** ملف إعداد وتثبيت حزمة بايثون.
@@ -326,9 +343,11 @@
 4. **[sdk/nodejs/package.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/package.json):** إعدادات حزمة npm `@coresync/sdk`.
 5. **[partner-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/partner-portal.html):** بوابة شركاء الحلول والوكلاء البيضاء المتكاملة.
 6. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** إضافة قسم حزم الـ SDK وروابط التنقل وتطهير التنسيقات.
-7. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة رابط بوابة الوكلاء في الهيدر والقائمة المتنقلة.
-8. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 38 بنسبة 100%.
-9. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق واللقطات الحية الكاملة.
+7. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة رابط بوابة الوكلاء، وتحديث رابط لينكد إن الرسمي القياسي.
+8. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** تحديث رابط لينكد إن وزر النسخ.
+9. **البوابات اللغوية الـ 28:** تحديث الرابط في كافة ملفات `index.html` الفرعية.
+10. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 38 بنسبة 100%.
+11. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق واللقطات الحية الكاملة.
 
 </div>
 

@@ -111,6 +111,14 @@
   - **5. تطهير الشيفرات من التنسيقات المضمنة بنسبة 100% (Zero Inline Styles Clean Code):**
     - تحويل كافة التنسيقات المضمنة في `developer-portal.html` و `partner-portal.html` إلى فئات CSS مخصصة ونظامية داخل كتل `<style>` واجتياز فحص الـ IDE بنسبة 100% دون أي تنبيهات أو أخطاء.
 
+  - **6. توحيد واعتماد رابط لينكد إن الرسمي القياسي (Canonical Official LinkedIn URL Unification):**
+    - اعتماد الرابط المعياري الموحد `https://www.linkedin.com/company/srcoresync/` وفق بروتوكول W3C & Schema.org.
+    - تحديث شريط المتابعة الجانبي العائم (`floating-follow`) وشريط الفوتر المؤسسي (`.sr-footer-social-strip`) في `index.html`.
+    - تحديث استوديو الهوية البصرية والقنوات الـ 9 في `social-8k-studio.html` (أزرار الزيارة والنسخ التلقائي).
+    - تحديث مصفوفة Schema.org `sameAs` لتعزيز المعرفة المؤسسية لدى محركات البحث العالمية.
+    - تحديث كافة البوابات اللغوية الـ 28 المتفرعة (`en/`, `nl/`, `de/`, `fr/`, `es/`, `it/`, `tr/`, `sv/`, `sl/`, `sk/`, `ro/`, `pt/`, `pl/`, `no/`, `mt/`, `lv/`, `lt/`, `ku/`, `hu/`, `hr/`, `ga/`, `et/`, `el/`, `fi/`, `da/`, `cs/`, `bg/`, `ckb/`).
+    - تحديث الدليل التشغيلي الشامل `SOCIAL-MEDIA-SUITE.md` وسكربت الأتمتة `scripts/social_campaign_dispatcher.py`.
+
 ---
 
 ## 🚀 خطة المهام القادمة (Upcoming Roadmap)
