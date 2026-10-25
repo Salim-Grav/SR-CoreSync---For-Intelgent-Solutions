@@ -2,91 +2,6 @@
 <html lang="ckb" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
-    <script id="srLangAutoDetect">
-    (function() {
-        try {
-            var urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('noredirect') === '1') return;
-            var qLang = urlParams.get('lang');
-            var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
-            var currentLang = (document.documentElement.getAttribute('lang') || 'ar').toLowerCase().split('-')[0];
-            
-            // 1. Explicit query param ?lang=xx (immediate priority)
-            if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
-                var chosen = qLang.toLowerCase();
-                try { localStorage.setItem('sr_lang_pref', chosen); } catch(e){}
-                if (chosen !== currentLang) {
-                    var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
-                    var targetFile = isDemo ? 'demo.html' : 'index.html';
-                    var targetPath = (chosen === 'ar') ? targetFile : (chosen + '/' + targetFile);
-                    var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
-                    var prefix = isSubfolder ? '../' : './';
-                    window.location.replace(prefix + targetPath + window.location.hash);
-                }
-                return;
-            }
-
-            // 2. User manual override from localStorage
-            var savedPref = null;
-            try { savedPref = localStorage.getItem('sr_lang_pref'); } catch(e){}
-
-            var targetLang = null;
-            if (savedPref && supported.indexOf(savedPref) !== -1) {
-                targetLang = savedPref;
-            } else {
-                // 3. First-time visit: Check visitor device / OS / browser system languages
-                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-                var hasArabic = false;
-                for (var i = 0; i < browserLangs.length; i++) {
-                    var raw = (browserLangs[i] || '').toLowerCase().trim();
-                    var primary = raw.split('-')[0];
-                    if (primary === 'ar' || raw.indexOf('ar') !== -1) {
-                        hasArabic = true;
-                        break;
-                    }
-                }
-                
-                // If visitor's device has Arabic anywhere in its language preferences, stay on Arabic Master!
-                if (hasArabic) {
-                    targetLang = 'ar';
-                } else {
-                    // Non-Arabic device: find first supported language
-                    for (var j = 0; j < browserLangs.length; j++) {
-                        var rawJ = (browserLangs[j] || '').toLowerCase().trim();
-                        var primaryJ = rawJ.split('-')[0];
-                        if (rawJ.indexOf('ckb') !== -1 || rawJ.indexOf('ku-iq') !== -1 || rawJ.indexOf('sorani') !== -1) {
-                            targetLang = 'ckb';
-                            break;
-                        }
-                        if (supported.indexOf(primaryJ) !== -1) {
-                            targetLang = primaryJ;
-                            break;
-                        }
-                    }
-                    if (!targetLang) {
-                        targetLang = 'en'; // Global fallback for foreign devices
-                    }
-                }
-                try { localStorage.setItem('sr_lang_pref', targetLang); } catch(e){}
-            }
-
-            // 4. Route only if targetLang is different from current page
-            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
-                var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
-                var targetFile = isDemo ? 'demo.html' : 'index.html';
-                var targetPath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
-                var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
-                var prefix = isSubfolder ? '../' : './';
-                var destUrl = prefix + targetPath + window.location.search + window.location.hash;
-                window.location.replace(destUrl);
-            }
-        } catch(e) {}
-    })();
-    </script>
-
-    
-    
 
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,14 +20,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- مكتبة الرسوم البيانية Chart.js مع دعم التشغيل دون اتصال (Offline-First) -->
-    <script src="../js/chart.umd.min.js"></script>
+    <script src="./js/chart.umd.min.js"></script>
     <script>if (typeof Chart === 'undefined') { document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\/script>'); }</script>
 
     <link rel="stylesheet" href="../css/demo-portal.css?v=sovereign2026_fixed">
+    <link rel="stylesheet" href="../css/sr-software-apps.css?v=20261020_center">
     <!-- S&R CoreSync Zero-Warnings Validated Build -->
-
-    
-
+    <style>
+        .nav-link-verify { text-decoration: none; color: inherit; }
+        .table-action-verify { text-decoration: none; border-color: #10b981; color: #34d399; }
+        .table-action-verify-flex { text-decoration: none; border-color: #10b981; color: #34d399; display: inline-flex; align-items: center; gap: 4px; }
+        .tracker-readiness-highlight { font-size: 1.05rem; }
+        .tracker-val-sprint { color: #34d399; }
+        .tracker-val-deposit { color: #c5a880; }
+        .tracker-val-compliance { color: #38bdf8; }
+        .sovereign-lang-menu { display: none !important; }
+        .sovereign-lang-dropdown.open .sovereign-lang-menu { display: flex !important; }
+    </style>
 </head>
 <body>
 
@@ -153,11 +77,11 @@
             <!-- Sovereign Global Multilingual Hub (28 Languages: EU Official + EEA + Regional) -->
 <div class="sovereign-lang-dropdown" id="sovereignLangDropdown">
     <button type="button" class="sovereign-lang-trigger" id="sovereignLangTrigger" aria-expanded="false" aria-haspopup="true" title="اختر اللغة / Select Language">
-        <span class="sovereign-lang-flag">☀️</span>
+        <span class="sovereign-lang-flag"><img src="../assets/flags/iq.png" alt="CKB" class="sovereign-flag-img" width="20" height="14"></span>
         <span class="sovereign-lang-current-label">CKB</span>
         <svg class="sovereign-lang-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
     </button>
-    <div class="sovereign-lang-menu" id="sovereignLangMenu">
+    <div class="sovereign-lang-menu" id="sovereignLangMenu" role="menu">
         <div class="sovereign-lang-search-box">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input type="text" class="sovereign-lang-search-input" id="sovereignLangSearch" placeholder="Search language / Wählen Sie Sprache..." autocomplete="off">
@@ -168,9 +92,9 @@
                     <span>European Union & Nordic</span>
                     <span class="badge-count">25</span>
                 </div>
-                <a href="../de/demo.html" class="sovereign-lang-item" data-code="de" data-name="deutsch german">
+                <a href="../de/demo.html" class="sovereign-lang-item" data-code="de" data-name="deutsch german" onclick="try{localStorage.setItem('sr_lang_pref','de');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇩🇪</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/de.png" alt="DE" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Deutsch</span>
                             <span class="sovereign-lang-english">German</span>
@@ -178,9 +102,9 @@
                     </div>
                     <span class="sovereign-lang-code">MwSt 19%</span>
                 </a>
-                <a href="../fr/demo.html" class="sovereign-lang-item" data-code="fr" data-name="français french">
+                <a href="../fr/demo.html" class="sovereign-lang-item" data-code="fr" data-name="français french" onclick="try{localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇫🇷</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/fr.png" alt="FR" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Français</span>
                             <span class="sovereign-lang-english">French</span>
@@ -188,9 +112,9 @@
                     </div>
                     <span class="sovereign-lang-code">TVA 20%</span>
                 </a>
-                <a href="../nl/demo.html" class="sovereign-lang-item" data-code="nl" data-name="nederlands dutch">
+                <a href="../nl/demo.html" class="sovereign-lang-item" data-code="nl" data-name="nederlands dutch" onclick="try{localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇳🇱</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/nl.png" alt="NL" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Nederlands</span>
                             <span class="sovereign-lang-english">Dutch</span>
@@ -198,9 +122,9 @@
                     </div>
                     <span class="sovereign-lang-code">BTW 21%</span>
                 </a>
-                <a href="../en/demo.html" class="sovereign-lang-item" data-code="en" data-name="english english">
+                <a href="../en/demo.html" class="sovereign-lang-item" data-code="en" data-name="english english" onclick="try{localStorage.setItem('sr_lang_pref','en');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇬🇧</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/gb.png" alt="EN" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">English</span>
                             <span class="sovereign-lang-english">English</span>
@@ -208,9 +132,9 @@
                     </div>
                     <span class="sovereign-lang-code">VAT 20%</span>
                 </a>
-                <a href="../es/demo.html" class="sovereign-lang-item" data-code="es" data-name="español spanish">
+                <a href="../es/demo.html" class="sovereign-lang-item" data-code="es" data-name="español spanish" onclick="try{localStorage.setItem('sr_lang_pref','es');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇪🇸</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/es.png" alt="ES" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Español</span>
                             <span class="sovereign-lang-english">Spanish</span>
@@ -218,9 +142,9 @@
                     </div>
                     <span class="sovereign-lang-code">IVA 21%</span>
                 </a>
-                <a href="../it/demo.html" class="sovereign-lang-item" data-code="it" data-name="italiano italian">
+                <a href="../it/demo.html" class="sovereign-lang-item" data-code="it" data-name="italiano italian" onclick="try{localStorage.setItem('sr_lang_pref','it');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇮🇹</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/it.png" alt="IT" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Italiano</span>
                             <span class="sovereign-lang-english">Italian</span>
@@ -228,9 +152,9 @@
                     </div>
                     <span class="sovereign-lang-code">IVA 22%</span>
                 </a>
-                <a href="../sv/demo.html" class="sovereign-lang-item" data-code="sv" data-name="svenska swedish">
+                <a href="../sv/demo.html" class="sovereign-lang-item" data-code="sv" data-name="svenska swedish" onclick="try{localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇸🇪</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/se.png" alt="SV" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Svenska</span>
                             <span class="sovereign-lang-english">Swedish</span>
@@ -238,9 +162,9 @@
                     </div>
                     <span class="sovereign-lang-code">MOMS 25%</span>
                 </a>
-                <a href="../no/demo.html" class="sovereign-lang-item" data-code="no" data-name="norsk norwegian">
+                <a href="../no/demo.html" class="sovereign-lang-item" data-code="no" data-name="norsk norwegian" onclick="try{localStorage.setItem('sr_lang_pref','no');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇳🇴</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/no.png" alt="NO" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Norsk</span>
                             <span class="sovereign-lang-english">Norwegian</span>
@@ -248,9 +172,9 @@
                     </div>
                     <span class="sovereign-lang-code">MVA 25%</span>
                 </a>
-                <a href="../da/demo.html" class="sovereign-lang-item" data-code="da" data-name="dansk danish">
+                <a href="../da/demo.html" class="sovereign-lang-item" data-code="da" data-name="dansk danish" onclick="try{localStorage.setItem('sr_lang_pref','da');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇩🇰</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/dk.png" alt="DA" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Dansk</span>
                             <span class="sovereign-lang-english">Danish</span>
@@ -258,9 +182,9 @@
                     </div>
                     <span class="sovereign-lang-code">MOMS 25%</span>
                 </a>
-                <a href="../fi/demo.html" class="sovereign-lang-item" data-code="fi" data-name="suomi finnish">
+                <a href="../fi/demo.html" class="sovereign-lang-item" data-code="fi" data-name="suomi finnish" onclick="try{localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇫🇮</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/fi.png" alt="FI" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Suomi</span>
                             <span class="sovereign-lang-english">Finnish</span>
@@ -268,9 +192,9 @@
                     </div>
                     <span class="sovereign-lang-code">ALV 25.5%</span>
                 </a>
-                <a href="../pl/demo.html" class="sovereign-lang-item" data-code="pl" data-name="polski polish">
+                <a href="../pl/demo.html" class="sovereign-lang-item" data-code="pl" data-name="polski polish" onclick="try{localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇵🇱</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/pl.png" alt="PL" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Polski</span>
                             <span class="sovereign-lang-english">Polish</span>
@@ -278,9 +202,9 @@
                     </div>
                     <span class="sovereign-lang-code">VAT 23%</span>
                 </a>
-                <a href="../pt/demo.html" class="sovereign-lang-item" data-code="pt" data-name="português portuguese">
+                <a href="../pt/demo.html" class="sovereign-lang-item" data-code="pt" data-name="português portuguese" onclick="try{localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇵🇹</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/pt.png" alt="PT" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Português</span>
                             <span class="sovereign-lang-english">Portuguese</span>
@@ -288,9 +212,9 @@
                     </div>
                     <span class="sovereign-lang-code">IVA 23%</span>
                 </a>
-                <a href="../el/demo.html" class="sovereign-lang-item" data-code="el" data-name="ελληνικά greek">
+                <a href="../el/demo.html" class="sovereign-lang-item" data-code="el" data-name="ελληνικά greek" onclick="try{localStorage.setItem('sr_lang_pref','el');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇬🇷</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/gr.png" alt="EL" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Ελληνικά</span>
                             <span class="sovereign-lang-english">Greek</span>
@@ -298,9 +222,9 @@
                     </div>
                     <span class="sovereign-lang-code">ΦΠΑ 24%</span>
                 </a>
-                <a href="../cs/demo.html" class="sovereign-lang-item" data-code="cs" data-name="čeština czech">
+                <a href="../cs/demo.html" class="sovereign-lang-item" data-code="cs" data-name="čeština czech" onclick="try{localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇨🇿</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/cz.png" alt="CS" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Čeština</span>
                             <span class="sovereign-lang-english">Czech</span>
@@ -308,9 +232,9 @@
                     </div>
                     <span class="sovereign-lang-code">DPH 21%</span>
                 </a>
-                <a href="../ro/demo.html" class="sovereign-lang-item" data-code="ro" data-name="română romanian">
+                <a href="../ro/demo.html" class="sovereign-lang-item" data-code="ro" data-name="română romanian" onclick="try{localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇷🇴</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/ro.png" alt="RO" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Română</span>
                             <span class="sovereign-lang-english">Romanian</span>
@@ -318,9 +242,9 @@
                     </div>
                     <span class="sovereign-lang-code">TVA 19%</span>
                 </a>
-                <a href="../hu/demo.html" class="sovereign-lang-item" data-code="hu" data-name="magyar hungarian">
+                <a href="../hu/demo.html" class="sovereign-lang-item" data-code="hu" data-name="magyar hungarian" onclick="try{localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇭🇺</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/hu.png" alt="HU" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Magyar</span>
                             <span class="sovereign-lang-english">Hungarian</span>
@@ -328,9 +252,9 @@
                     </div>
                     <span class="sovereign-lang-code">ÁFA 27%</span>
                 </a>
-                <a href="../bg/demo.html" class="sovereign-lang-item" data-code="bg" data-name="български bulgarian">
+                <a href="../bg/demo.html" class="sovereign-lang-item" data-code="bg" data-name="български bulgarian" onclick="try{localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇧🇬</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/bg.png" alt="BG" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Български</span>
                             <span class="sovereign-lang-english">Bulgarian</span>
@@ -338,9 +262,9 @@
                     </div>
                     <span class="sovereign-lang-code">ДДС 20%</span>
                 </a>
-                <a href="../sk/demo.html" class="sovereign-lang-item" data-code="sk" data-name="slovenčina slovak">
+                <a href="../sk/demo.html" class="sovereign-lang-item" data-code="sk" data-name="slovenčina slovak" onclick="try{localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇸🇰</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/sk.png" alt="SK" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Slovenčina</span>
                             <span class="sovereign-lang-english">Slovak</span>
@@ -348,9 +272,9 @@
                     </div>
                     <span class="sovereign-lang-code">DPH 20%</span>
                 </a>
-                <a href="../hr/demo.html" class="sovereign-lang-item" data-code="hr" data-name="hrvatski croatian">
+                <a href="../hr/demo.html" class="sovereign-lang-item" data-code="hr" data-name="hrvatski croatian" onclick="try{localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇭🇷</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/hr.png" alt="HR" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Hrvatski</span>
                             <span class="sovereign-lang-english">Croatian</span>
@@ -358,9 +282,9 @@
                     </div>
                     <span class="sovereign-lang-code">PDV 25%</span>
                 </a>
-                <a href="../lt/demo.html" class="sovereign-lang-item" data-code="lt" data-name="lietuvių lithuanian">
+                <a href="../lt/demo.html" class="sovereign-lang-item" data-code="lt" data-name="lietuvių lithuanian" onclick="try{localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇱🇹</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/lt.png" alt="LT" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Lietuvių</span>
                             <span class="sovereign-lang-english">Lithuanian</span>
@@ -368,9 +292,9 @@
                     </div>
                     <span class="sovereign-lang-code">PVM 21%</span>
                 </a>
-                <a href="../sl/demo.html" class="sovereign-lang-item" data-code="sl" data-name="slovenščina slovenian">
+                <a href="../sl/demo.html" class="sovereign-lang-item" data-code="sl" data-name="slovenščina slovenian" onclick="try{localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇸🇮</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/si.png" alt="SL" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Slovenščina</span>
                             <span class="sovereign-lang-english">Slovenian</span>
@@ -378,9 +302,9 @@
                     </div>
                     <span class="sovereign-lang-code">DDV 22%</span>
                 </a>
-                <a href="../lv/demo.html" class="sovereign-lang-item" data-code="lv" data-name="latviešu latvian">
+                <a href="../lv/demo.html" class="sovereign-lang-item" data-code="lv" data-name="latviešu latvian" onclick="try{localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇱🇻</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/lv.png" alt="LV" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Latviešu</span>
                             <span class="sovereign-lang-english">Latvian</span>
@@ -388,9 +312,9 @@
                     </div>
                     <span class="sovereign-lang-code">PVN 21%</span>
                 </a>
-                <a href="../et/demo.html" class="sovereign-lang-item" data-code="et" data-name="eesti estonian">
+                <a href="../et/demo.html" class="sovereign-lang-item" data-code="et" data-name="eesti estonian" onclick="try{localStorage.setItem('sr_lang_pref','et');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇪🇪</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/ee.png" alt="ET" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Eesti</span>
                             <span class="sovereign-lang-english">Estonian</span>
@@ -398,9 +322,9 @@
                     </div>
                     <span class="sovereign-lang-code">KM 22%</span>
                 </a>
-                <a href="../ga/demo.html" class="sovereign-lang-item" data-code="ga" data-name="gaeilge irish">
+                <a href="../ga/demo.html" class="sovereign-lang-item" data-code="ga" data-name="gaeilge irish" onclick="try{localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇮🇪</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/ie.png" alt="GA" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Gaeilge</span>
                             <span class="sovereign-lang-english">Irish</span>
@@ -408,9 +332,9 @@
                     </div>
                     <span class="sovereign-lang-code">CBL 23%</span>
                 </a>
-                <a href="../mt/demo.html" class="sovereign-lang-item" data-code="mt" data-name="malti maltese">
+                <a href="../mt/demo.html" class="sovereign-lang-item" data-code="mt" data-name="malti maltese" onclick="try{localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇲🇹</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/mt.png" alt="MT" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Malti</span>
                             <span class="sovereign-lang-english">Maltese</span>
@@ -424,9 +348,9 @@
                     <span>Middle East & Regional</span>
                     <span class="badge-count">4</span>
                 </div>
-                <a href="../demo.html" class="sovereign-lang-item" data-code="ar" data-name="العربية arabic (hq master)">
+                <a href="../demo.html" class="sovereign-lang-item" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇸🇦</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/sa.png" alt="AR" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">العربية</span>
                             <span class="sovereign-lang-english">Arabic (HQ Master)</span>
@@ -434,9 +358,9 @@
                     </div>
                     <span class="sovereign-lang-code">VAT 15%</span>
                 </a>
-                <a href="../tr/demo.html" class="sovereign-lang-item" data-code="tr" data-name="türkçe turkish">
+                <a href="../tr/demo.html" class="sovereign-lang-item" data-code="tr" data-name="türkçe turkish" onclick="try{localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">🇹🇷</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/tr.png" alt="TR" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Türkçe</span>
                             <span class="sovereign-lang-english">Turkish</span>
@@ -444,9 +368,9 @@
                     </div>
                     <span class="sovereign-lang-code">KDV 20%</span>
                 </a>
-                <a href="../ku/demo.html" class="sovereign-lang-item" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)">
+                <a href="../ku/demo.html" class="sovereign-lang-item" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">☀️</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/iq.png" alt="KU" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">Kurdî (Kurmancî)</span>
                             <span class="sovereign-lang-english">Kurdish (Kurmanji)</span>
@@ -454,9 +378,9 @@
                     </div>
                     <span class="sovereign-lang-code">Tax 5%</span>
                 </a>
-                <a href="../ckb/demo.html" class="sovereign-lang-item active" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)">
+                <a href="../ckb/demo.html" class="sovereign-lang-item active" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
                     <div class="sovereign-lang-item-left">
-                        <span class="sovereign-lang-item-flag">☀️</span>
+                        <span class="sovereign-lang-item-flag"><img src="../assets/flags/iq.png" alt="CKB" class="sovereign-flag-img" width="20" height="14"></span>
                         <div class="sovereign-lang-item-names">
                             <span class="sovereign-lang-native">کوردی (سۆرانی)</span>
                             <span class="sovereign-lang-english">Kurdish (Sorani)</span>
@@ -467,6 +391,9 @@
             </div>
         </div>
     </div>
+</div>
+    </div>
+</div>
 </div>
 
             <a href="../logo-studio.html" class="btn-return-main" title="استوديو ومحرر الشعار">
@@ -515,8 +442,18 @@
 
             <div class="nav-item" id="tourNav-roi" data-sr-call="switchPortalTab" data-sr-args='["roi"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v12M15 9.5H9.5a2.5 2.5 0 0 0 0 5h5a2.5 2.5 0 0 1 0 5H9"></path></svg>
-                <span>ژمێرەری زیرەکی ROI و پاشەکەوت</span>
+                <span>حاسبة التوفير والعائد (ROI)</span>
             </div>
+
+            <div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span>مراحل المشروع (Sprint Tracker)</span>
+            </div>
+
+            <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="nav-item nav-link-verify">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>التحقق من الوثائق (Verify)</span>
+            </a>
 
 
             <div class="sidebar-spacer"></div>
@@ -582,18 +519,18 @@
                         <p>سیستەمی هاوشێوەکاری ڕاستەوخۆ بۆ جوڵەی هەژمارەکان، داهات و خەرجییە هەورەییە ئۆتۆماتیکەکان</p>
                     </div>
 
-            <!-- Feature 1: VIP Branded Proposal Engine -->
-            <div class="vip-proposal-banner" dir="rtl">
+            <!-- Feature 1: مولّد عروض الأسعار اللحظي باسم شركة العميل -->
+            <div class="vip-proposal-banner">
                 <div class="vip-banner-content">
-                    <div class="vip-badge">✨ بزوێنەری پێشنیاری فەرمی و تایبەت بە کۆمپانیا</div>
-                    <h4 class="vip-title">بەرهەمهێنانی پوختەی پێشنیاری فەرمی بۆ کۆمپانیاکەت</h4>
-                    <p class="vip-desc">ناوی کۆمپانیاکەت بنووسە بۆ دابەزاندنی دەستبەجێی فایلی فەرمی PDF بە مۆدیوولە باوەڕپێکراوەکان و ڕێژەی باجەوە.</p>
+                    <div class="vip-badge">✨ محرك عروض الأسعار التنفيذية المخصصة</div>
+                    <h4 class="vip-title">توليد عرض رسمي فوري باسم شركتك (Branded Proposal Dossier)</h4>
+                    <p class="vip-desc">أدخل اسم شركتك وسيتم توليد ملف PDF تنفيذي فوري متكامل معتمد يحمل اسم منشأتك والتسعير والضريبة المحلية.</p>
                 </div>
                 <div class="vip-banner-actions">
-                    <input type="text" id="quickClientNameInput" class="vip-input" placeholder="ناوی کۆمپانیاکەت لێرە بنووسە..." oninput="updatePdfClientName(this.value)" />
+                    <input type="text" id="quickClientNameInput" class="vip-input" placeholder="أدخل اسم شركتك هنا..." oninput="updatePdfClientName(this.value)" />
                     <button type="button" class="vip-btn-gold" data-sr-call="openExecutivePdfModal">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                        <span>دەرکردنی پوختەی فەرمی (PDF)</span>
+                        <span>تصدير عرض السعر (PDF)</span>
                     </button>
                 </div>
             </div>
@@ -846,6 +783,36 @@
                                 </tr>
                             </thead>
                             <tbody id="invoicesTableBody">
+                                <tr data-status="pending" id="inv-row-of-1021" class="inv-row-featured">
+                                    <td class="font-num"><strong class="text-gold">OF-2026-1021-T1</strong></td>
+                                    <td><strong>السيد مضر أبو فاشة (منصة NL بالعربي — العقد البرمجي)</strong></td>
+                                    <td class="font-num">€ 6,300</td>
+                                    <td class="font-num">€ 1,323 (21% BTW)</td>
+                                    <td class="font-num tx-amount-highlight text-gold-num">€ 7,623</td>
+                                    <td><span class="status-badge status-processing" id="status-badge-inv-1021">الدفعة 1 (30%) - تستحق لبدء التأسيس</span></td>
+                                    <td>
+                                        <div class="d-flex gap-1 flex-wrap">
+                                            <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026Modal">💻 عرض وتوقيع العقد التقني</button>
+                                            <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
+                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1021" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1021-T1", "السيد مضر أبو فاشة (NL بالعربي)", 7623]'>سداد iDEAL</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr data-status="pending" id="inv-row-of-1022" class="inv-row-featured">
+                                    <td class="font-num"><strong class="text-gold">OF-2026-1022-FIN</strong></td>
+                                    <td><strong>السيد مضر أبو فاشة (NL بالعربي — العقد المالي والضريبي)</strong></td>
+                                    <td class="font-num">€ 3,900</td>
+                                    <td class="font-num">€ 819 (21% BTW)</td>
+                                    <td class="font-num tx-amount-highlight text-gold-num">€ 4,719 <small class="d-block text-sage-caption font-normal">(خصم 50% = 325 €/شهر)</small></td>
+                                    <td><span class="status-badge status-processing" id="status-badge-inv-1022">حزمة المحاسبة السنوية + استرداد 4,410 € ضريبة</span></td>
+                                    <td>
+                                        <div class="d-flex gap-1 flex-wrap">
+                                            <button type="button" class="table-action-btn btn-gold-action" data-sr-call="openContractOf2026FinModal">📊 عرض وتوقيع العقد المالي</button>
+                                            <a href="verify.html?doc=OF-2026-1022-FIN" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify">🛡️ التحقق الرقمي</a>
+                                            <button type="button" class="table-action-btn pay-action-btn" id="btn-pay-inv-1022" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1022-FIN", "السيد مضر أبو فاشة (NL بالعربي - العقد المالي)", 4719]'>سداد iDEAL</button>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <tr data-status="paid" id="inv-row-1">
                                     <td class="font-num">INV-2026-081</td>
                                     <td>Amsterdam Tech Hub (NL)</td>
@@ -961,43 +928,43 @@
                 <div class="sovereign-shield-card" dir="rtl">
                     <div class="shield-header-row">
                         <div>
-                            <h3 class="mb-1" style="color: #c5a880;">🛡️ قەڵغانی پابەندبوونی سەروەری ئەوروپی (NIS2 و GDPR)</h3>
-                            <p class="text-caption mb-0" style="color: #9abdb0;">دەستەبەری یاسایی و ئەندازیاری بۆ پاراستنی داتای گرنگ بەپێی ڕێساکانی یەکێتی ئەوروپا</p>
+                            <h3 class="mb-1 text-gold">🛡️ درع الامتثال والسيادة الأوروبية (NIS2 & RGPD)</h3>
+                            <p class="text-caption mb-0 text-sage-caption">ضمانات قانونية ومعمارية لحماية البيانات المؤسسية الحساسة وفق أعلى المعايير الأوروبية</p>
                         </div>
                         <div class="shield-live-status font-num">
-                            <span>●</span> ١٠٠٪ سەروەر — نۆدی ئەمستەردام (NL Central)
+                            <span>●</span> 100% سيادي — مركز بيانات أمستردام (NL Central)
                         </div>
                     </div>
 
                     <div class="shield-pillars-grid">
                         <div class="shield-pillar-box">
                             <div class="shield-pillar-icon">🔒</div>
-                            <div class="shield-pillar-title">GDPR ماددەی ٢٨ و ٣٢</div>
-                            <div class="shield-pillar-desc">شفرەکردنی تەواوەتی AES-256-GCM و جیاکردنەوەی تەواوی داتا بەبێ گواستنەوە بۆ دەرەوەی ئەوروپا.</div>
+                            <div class="shield-pillar-title">اللائحة العامة RGPD (المادتان 28 و 32)</div>
+                            <div class="shield-pillar-desc">تشفير AES-256-GCM شامل، وفصل تام لبيانات المستأجرين مع حظر قاطع لأي نقل خارج الاتحاد الأوروبي.</div>
                         </div>
                         <div class="shield-pillar-box">
                             <div class="shield-pillar-icon">🏛️</div>
-                            <div class="shield-pillar-title">ڕێنمایی NIS2 (٢٠٢٦)</div>
-                            <div class="shield-pillar-desc">خۆڕاگری ژێرخانی سەرەکی، چاودێری پێشوەختەی AI و گرەنتی کارکردنی ٩٩.٩٩٪.</div>
+                            <div class="shield-pillar-title">توجيه الأمن السيبراني NIS2 (2026)</div>
+                            <div class="shield-pillar-desc">مرونة متقدمة للبنية التحتية الحيوية، ورصد استباقي بالذكاء الاصطناعي مع ضمان تشغيلي 99.99%.</div>
                         </div>
                         <div class="shield-pillar-box">
                             <div class="shield-pillar-icon">💶</div>
-                            <div class="shield-pillar-title">ڕێسای DORA</div>
-                            <div class="shield-pillar-desc">پابەندبوونی تەواو بە خۆڕاگری ئۆپەراسیۆنی دیجیتاڵی بۆ دامەزراوە دارایی و بانکییەکان.</div>
+                            <div class="shield-pillar-title">تنظيم الصمود التشغيلي DORA</div>
+                            <div class="shield-pillar-desc">امتثال كامل للمتانة الرقمية والتدقيق المالي الفوري للمصارف والشركات المالية الكبرى.</div>
                         </div>
                         <div class="shield-pillar-box">
                             <div class="shield-pillar-icon">🇳🇱</div>
-                            <div class="shield-pillar-title">١٠٠٪ جێگیربوون لە هۆڵەندا</div>
-                            <div class="shield-pillar-desc">سەنتەرەکانی داتای Equinix AM4 لە ئەمستەردام لەژێر دەسەڵاتی دادوەری هۆڵەندا و ئەوروپادا.</div>
+                            <div class="shield-pillar-title">توطين 100% بهولندا / الاتحاد الأوروبي</div>
+                            <div class="shield-pillar-desc">مراكز Equinix AM4 بأمستردام الخاضعة حصرياً للولاية القضائية والتشريعات الهولندية.</div>
                         </div>
                     </div>
 
                     <div class="shield-audit-bar-wrap">
-                        <div style="font-size: 0.82rem; color: #e2f1ec;" id="auditStatusText">
-                            🟢 <strong>دۆخی پشکنین: ١٠٠٪ پەسەندکراو</strong> — هیچ کێشەیەکی پابەندبوون لە تۆڕەکەدا نەدۆزراوەتەوە.
+                        <div class="audit-status-lbl" id="auditStatusText">
+                            🟢 <strong>حالة التدقيق: معتمد 100%</strong> — لم يتم رصد أي ثغرات امتثال أو أمان على الشبكة.
                         </div>
                         <button type="button" class="btn-run-audit" id="btnRunAudit" data-sr-call="runComplianceAuditScanner">
-                            🛡️ دەستپێکردنەوەی پشکنینی پابەندبوون
+                            🛡️ إعادة تشغيل فحص الامتثال
                         </button>
                     </div>
                 </div>
@@ -1006,13 +973,13 @@
                 <div class="migration-estimator-card" dir="rtl">
                     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
                         <div>
-                            <h3 class="mb-1" style="color: #c5a880;">🔄 خەمڵێنەری کۆچی هەوری بێ وەستان (Zero-Downtime)</h3>
-                            <p class="text-caption mb-0" style="color: #9abdb0;">ماوە و کەمکردنەوەی تێچووی گواستنەوە بۆ سەر هەوری S&R CoreSync بخەمڵێنە لە ڕێگەی هاوکاتکردنی ڕاستەوخۆ</p>
+                            <h3 class="mb-1 text-gold">🔄 محاكي الترحيل السحابي بدون انقطاع (Zero-Downtime)</h3>
+                            <p class="text-caption mb-0 text-sage-caption">احسب مدة وتكلفة الانتقال من نظامك الحالي إلى سحابة S&R CoreSync عبر المزامنة المتوازية الفورية</p>
                         </div>
-                        <span class="badge-count" style="background: rgba(197, 168, 128, 0.2); color: #c5a880; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;">هاوکاتکردنی ڕاستەوخۆ</span>
+                        <span class="badge-count badge-gold-subtle">مزامنة متوازية نشطة</span>
                     </div>
 
-                    <div style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 8px;">١. سیستەمی کۆنی خۆت هەڵبژێرە:</div>
+                    <div class="mig-sys-lbl">1. اختر نظامك الحالي:</div>
                     <div class="migration-systems-row">
                         <button type="button" class="migration-sys-btn active" data-sr-call="selectMigrationSystem" data-sr-args='["SAP"]' data-sr-this="1">SAP ECC / S4HANA</button>
                         <button type="button" class="migration-sys-btn" data-sr-call="selectMigrationSystem" data-sr-args='["Oracle"]' data-sr-this="1">Oracle NetSuite</button>
@@ -1021,29 +988,29 @@
                     </div>
 
                     <div class="roi-slider-header mt-3 mb-1">
-                        <span style="font-size: 0.82rem; color: #e2f1ec;">٢. قەبارەی بنکەدراوە (گێگابایت)</span>
-                        <span class="roi-val-display font-num" id="dispMigVolume">250 گێگابایت</span>
+                        <span class="roi-slider-lbl">2. حجم قاعدة البيانات (جيجابايت)</span>
+                        <span class="roi-val-display font-num" id="dispMigVolume">250 جيجابايت</span>
                     </div>
                     <input type="range" min="20" max="1500" value="250" step="10" class="roi-range-input" id="slideMigVolume" title="Database Volume in GB" aria-label="Database Volume in GB" data-sr-call="calcMigrationEstimator" data-sr-on="input" />
 
                     <div class="migration-metrics-grid">
                         <div class="migration-metric-box">
                             <div class="migration-metric-val font-num" id="migValTime">42 h (Zero-Downtime)</div>
-                            <div class="migration-metric-lbl">ماوەی گواستنەوە لە پاشبنەمادا</div>
+                            <div class="migration-metric-lbl">مدة التحويل المتوازي في الخلفية</div>
                         </div>
                         <div class="migration-metric-box">
                             <div class="migration-metric-val font-num" id="migValIntegrity">99.98%</div>
-                            <div class="migration-metric-lbl">دروستی نەخشەی ئۆتۆماتیکی</div>
+                            <div class="migration-metric-lbl">دقة المطابقة الآلية للمخطط</div>
                         </div>
                         <div class="migration-metric-box">
                             <div class="migration-metric-val font-num" id="migValSavings">-44%</div>
-                            <div class="migration-metric-lbl">داشکاندنی ساڵانەی تێچووی هەور</div>
+                            <div class="migration-metric-lbl">التوفير السنوي في تكاليف السحابة</div>
                         </div>
                     </div>
 
                     <div class="text-center mt-3">
                         <button type="button" class="btn-cert-print" data-sr-call="openStrategicBookingModal">
-                            📑 داواکردنی پلانی کۆچی تایبەت (Blueprint)
+                            📑 طلب خطة الترحيل المخصصة (Blueprint)
                         </button>
                     </div>
                 </div>
@@ -1150,32 +1117,77 @@
 
             <!-- 7. سوق البرمجيات الحصرية وحلول التطبيقات (Software Hub & App Store) -->
             <section class="tab-section" id="tab-software">
-                <div class="section-header">
-                    <div class="section-title-wrap">
-                        <h2>سوق البرمجيات والحلول الحصرية (S&R Software Hub & Store)</h2>
-                        <p>تطبيقات سطح المكتب للكمبيوتر، تطبيقات الهاتف، وأدوات الربط المطورة حصرياً بعوائد وتراخيص رقمية</p>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <button type="button" class="action-cta-btn" data-sr-call="openPublishSoftwareModal">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                            نشر برنامج جديد (Publish)
-                        </button>
+                <!-- البنر الرئيسي الفخم والمتوسط هندسياً (Sovereign Centered Software Hub Banner) -->
+                <div class="sr-market-hero-banner">
+                    <div class="sr-market-hero-backdrop"></div>
+                    <div class="sr-market-hero-content">
+                        <div class="sr-market-tag-badge">
+                            <span class="sr-pulse-dot"></span>
+                            <span>S&R SOVEREIGN SOFTWARE ECOSYSTEM • AMSTERDAM AMS-IX</span>
+                        </div>
+                        <h2 class="sr-market-hero-title">
+                            سوق البرمجيات الحصرية ومختبر حلول التطبيقات
+                        </h2>
+                        <p class="sr-market-hero-subtitle">
+                            منظومة برمجيات أوروبية متكاملة ومستقلة (Offline-First &amp; Cloud)، مطورة حصرياً بأعلى معايير الأمان والتشفير، متوافقة 100% مع الضرائب الهولندية والاتحاد الأوروبي مع تراخيص رقمية مشفرة وتثبيت فوري.
+                        </p>
+                        
+                        <!-- أشرطة الضمانات والمعايير في منتصف البنر -->
+                        <div class="sr-market-guarantees">
+                            <div class="sr-guarantee-pill">
+                                <span>🇳🇱</span>
+                                <span>سيرفرات أمستردام AMS-IX</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>🛡️</span>
+                                <span>تشفير عسكري AES-256 GCM</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>📑</span>
+                                <span>معايير Belastingdienst &amp; GDPR</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>📷</span>
+                                <span>دعم كاميرات الموبايل واللابتوب والباركود</span>
+                            </div>
+                            <div class="sr-guarantee-pill">
+                                <span>⚡</span>
+                                <span>تشغيل أوفلاين وسحابي</span>
+                            </div>
+                        </div>
+
+                        <!-- أزرار الإجراءات الرئيسية في منتصف البنر -->
+                        <div class="sr-market-hero-actions">
+                            <button type="button" class="sr-hero-btn sr-hero-btn-primary" data-sr-call="openSoftwareDocsModal" data-sr-args='["cloudpos", "ar"]'>
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>📖 دليل الاستخدام والتشغيل الشامل (6 لغات)</span>
+                            </button>
+                            <button type="button" class="sr-hero-btn sr-hero-btn-secondary" data-sr-call="openPublishSoftwareModal">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                <span>🚀 نشر وتوزيع برنامج جديد (Publish)</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- شريط فلترة التصنيفات -->
-                <div class="glass-box mb-4 p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <!-- شريط البحث والفلترة الذكي التفاعلي -->
+                <div class="sr-market-toolbar">
+                    <div class="sr-market-search-box">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="srSoftwareSearchInput" placeholder="ابحث في البرمجيات (مثال: ضريبة, كاميرا, POS, OCR, تشفير, SDK)..." oninput="filterSoftwareBySearch(this.value)" aria-label="بحث في البرمجيات" />
+                        <button type="button" class="sr-search-clear-btn" id="srSearchClearBtn" data-sr-call="clearSoftwareSearch" title="مسح البحث">✕</button>
+                    </div>
+
                     <div class="filter-pill-group">
-                        <button type="button" class="filter-btn active" data-sr-call="filterSoftwareCategory" data-sr-args='["all"]' data-sr-this="last">هەموو (5)</button>
-                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["desktop"]' data-sr-this="last">برامج الكمبيوتر PC/Mac (2)</button>
-                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["mobile"]' data-sr-this="last">تطبيقات الموبايل (1)</button>
-                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["pos"]' data-sr-this="last">نقاط البيع POS (1)</button>
-                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["sdk"]' data-sr-this="last">أدوات المطورين SDK (1)</button>
+                        <button type="button" class="filter-btn active" data-sr-call="filterSoftwareCategory" data-sr-args='["all"]' data-sr-this="last">🗂️ هەموو (6)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["desktop"]' data-sr-this="last">💻 برامج الكمبيوتر PC/Mac (2)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["mobile"]' data-sr-this="last">📱 تطبيقات الموبايل (1)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["pos"]' data-sr-this="last">⚡ نقاط البيع والكاشير POS (1)</button>
+                        <button type="button" class="filter-btn" data-sr-call="filterSoftwareCategory" data-sr-args='["sdk"]' data-sr-this="last">🧩 أدوات المطورين SDK (2)</button>
                     </div>
-                    <span class="text-caption text-white-64">تراخيص رقمية فورية وتنزيل مباشر</span>
                 </div>
 
-                <!-- شبكة كروت البرمجيات -->
+                <!-- شبكة كروت البرمجيات المنظمة -->
                 <div class="software-grid" id="softwareGridContainer">
                     
                     <!-- 1. برنامج S&R TaxSync Desktop -->
@@ -1247,8 +1259,9 @@
                                 <span class="software-price-unit">ترخيص سنوي / جهاز</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openDesktopSimulatorModal" data-sr-args='["taxsync"]' title="محاكاة حية فورية داخل المتصفح">محاكي حي ⚡</button>
-                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["taxsync", "trial"]'>تجربة 14 يوماً</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["taxsync"]' title="تشغيل فوري داخل المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["taxsync", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-TaxSync-Web-App.html" download="SR-TaxSync-Web-App.html" class="btn-software-trial" title="تحميل کۆپیکردنة أوفلاين كاملة">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["taxsync"]'>شراء الترخيص</button>
                             </div>
                         </div>
@@ -1291,7 +1304,9 @@
                                 <span class="software-price-unit">شهرياً / مستخدم</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["flowscan", "trial"]'>تجربة مجانية</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["flowscan", "mobile"]' title="تشغيل فوري على شاشة الهاتف بالمتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["flowscan", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-FlowScan-Mobile-App.html" download="SR-FlowScan-Mobile-App.html" class="btn-software-trial" title="تحميل تطبيق الموبايل أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["flowscan"]'>اشتراك</button>
                             </div>
                         </div>
@@ -1319,11 +1334,11 @@
                                 </li>
                                 <li class="software-feature-item">
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    مزامنة مبيعات أوفلاين عند انقطاع الإنترنت
+                                    مسح باركود مباشر بكاميرا الموبايل واللابتوب أو السكانر
                                 </li>
                                 <li class="software-feature-item">
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    حماية وأمان معزول للأرصدة النقدية
+                                    مزامنة مبيعات أوفلاين عند انقطاع الإنترنت
                                 </li>
                             </ul>
                         </div>
@@ -1333,7 +1348,9 @@
                                 <span class="software-price-unit">شهرياً / نقطة بيع</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["cloudpos", "trial"]'>تجربة الربط</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["cloudpos"]' title="تشغيل شاشة الكاشير ونقاط البيع">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["cloudpos", "ar"]' title="دليل الاستخدام ومسح الباركود بالكاميرا">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudPOS-Terminal.html" class="btn-software-trial" title="تحميل شاشة الكاشير أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["cloudpos"]'>تفعيل</button>
                             </div>
                         </div>
@@ -1375,7 +1392,9 @@
                                 <span class="software-price-unit">شهرياً (1TB Encrypted)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["vault", "trial"]'>تجربة مجانية</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["vault"]' title="تشغيل أداة التشفير في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["vault", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-SecureVault-App.html" download="SR-SecureVault-App.html" class="btn-software-trial" title="تحميل أداة التشفير أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["vault"]'>اشتراك</button>
                             </div>
                         </div>
@@ -1419,8 +1438,56 @@
                                 <span class="software-price-unit">شهرياً (50k Calls)</span>
                             </div>
                             <div class="software-btn-group">
-                                <button type="button" class="btn-software-trial" data-sr-call="openSoftwareModal" data-sr-args='["sdk", "trial"]'>تحميل الـ SDK</button>
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["sdk"]' title="تشغيل وحدة الـ API في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["sdk", "ar"]' title="دليل الاستخدام والـ API">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-Financial-AI-SDK.html" download="SR-Financial-AI-SDK.html" class="btn-software-trial" title="تحميل حزمة الـ SDK أوفلاين">أوفلاين 📥</a>
                                 <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["sdk"]'>طلب الترخيص</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. وكيل S&R Cloud Terminal Agent -->
+                    <div class="software-card" data-category="sdk">
+                        <span class="software-card-badge">مراقبة سحابية وميكروسيرفس</span>
+                        <div>
+                            <div class="software-card-top">
+                                <div class="software-icon-wrap">⚙️</div>
+                                <div>
+                                    <div class="software-info-title">S&R Cloud Terminal Agent</div>
+                                    <div class="software-info-version">
+                                        <span>v1.0 DevOps</span>
+                                        <span class="platform-pill">Docker</span>
+                                        <span class="platform-pill">Kubernetes</span>
+                                        <span class="platform-pill">Linux</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="software-desc">وكيل سحابي خفيف لمراقبة البنية التحتية والخوادم، يتتبع استهلاك المعالج والذاكرة وحالة نبضات الخدمات سحابياً مع إدارة وإعادة تشغيل فورية.</p>
+                            <ul class="software-features-list">
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    مراقبة حية بنبضات الـ Heartbeat لميكروسيرفس المنظومة
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    تنبيهات فورية عند تجاوز حدود استهلاك المعالج والذاكرة
+                                </li>
+                                <li class="software-feature-item">
+                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    إعادة تشغيل ذاتية للخدمات في خوادم أمستردام AMS-IX
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="software-card-bottom">
+                            <div class="software-price-wrap">
+                                <span class="software-price-amount">€ 39</span>
+                                <span class="software-price-unit">شهرياً / Cluster</span>
+                            </div>
+                            <div class="software-btn-group">
+                                <button type="button" class="btn-software-sandbox ds-u19" data-sr-call="openSoftwareLiveApp" data-sr-args='["terminal"]' title="تشغيل وكيل المراقبة في المتصفح">⚡ تشغيل فوري</button>
+                                <button type="button" class="btn-software-guide" data-sr-call="openSoftwareDocsModal" data-sr-args='["terminal", "ar"]' title="دليل الاستخدام والشرح">📖 دليل الاستخدام</button>
+                                <a href="downloads/SR-CloudPOS-Terminal.html" download="SR-CloudTerminal-Agent.html" class="btn-software-trial" title="تحميل وكيل المراقبة">أوفلاين 📥</a>
+                                <button type="button" class="btn-software-buy" data-sr-call="openSoftwareCheckoutModal" data-sr-args='["terminal"]'>اشتراك</button>
                             </div>
                         </div>
                     </div>
@@ -1444,12 +1511,12 @@
             </section>
 
         
-        <!-- Feature 2: Smart ROI & Cost Reduction Tab -->
-        <section class="tab-section" id="tab-roi" dir="rtl">
+        <!-- Feature 2: قسم حاسبة العائد على الاستثمار التفاعلية ROI -->
+        <section class="tab-section" id="tab-roi">
             <div class="section-header">
                 <div>
-                    <h3 class="section-title">ژمێرەری کارلێککاری پاشەکەوتی دارایی و گەڕانەوەی وەبەرهێنان (ROI)</h3>
-                    <p class="section-desc">هاوشێوەکردنێکی وردی قەبارەی پاشەکەوتی دارایی ساڵانە و کاتژمێرەکانی کارکردن لە کاتی گواستنەوە بۆ S&R CoreSync Cloud ERP.</p>
+                    <h3 class="section-title">حاسبة التوفير والعائد على الاستثمار الذكية (Interactive ROI Engine)</h3>
+                    <p class="section-desc">محاكاة دقيقة لحجم التوفير المالي وساعات العمل التي ستحققها شركتك سنوياً عند التحول لبنية S&R CoreSync السحابية.</p>
                 </div>
             </div>
 
@@ -1457,24 +1524,24 @@
                 <div class="roi-sliders-grid">
                     <div class="roi-slider-box">
                         <div class="roi-slider-header">
-                            <span>👥 قەبارەی تیم / کارمەندان</span>
-                            <span class="roi-val-display font-num" id="dispRoiTeam">20 کارمەند</span>
+                            <span>👥 حجم الفريق / الموظفين</span>
+                            <span class="roi-val-display" id="dispRoiTeam">20 موظف</span>
                         </div>
                         <input type="range" min="3" max="250" value="20" class="roi-range-input" id="slideRoiTeam" title="Team Size / Employees" aria-label="Team Size / Employees" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
                         <div class="roi-slider-header">
-                            <span>⏱️ کاتژمێری ئەرکە دەستییەکان / هەفتانە</span>
-                            <span class="roi-val-display font-num" id="dispRoiHours">18 کاتژمێر/هەفتە</span>
+                            <span>⏱️ ساعات المعاملات اليدوية / أسبوعياً</span>
+                            <span class="roi-val-display" id="dispRoiHours">18 ساعة/أسبوع</span>
                         </div>
                         <input type="range" min="5" max="60" value="18" class="roi-range-input" id="slideRoiHours" title="Manual Hours per Week" aria-label="Manual Hours per Week" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
 
                     <div class="roi-slider-box">
                         <div class="roi-slider-header">
-                            <span>💶 تێکڕای تێچووی کاتژمێر بۆ ستاف (€)</span>
-                            <span class="roi-val-display font-num" id="dispRoiCost">€ 45 / کاتژمێر</span>
+                            <span>💶 متوسط تكلفة الساعة للكوادر (€)</span>
+                            <span class="roi-val-display" id="dispRoiCost">€ 45 / ساعة</span>
                         </div>
                         <input type="range" min="15" max="150" value="45" step="5" class="roi-range-input" id="slideRoiCost" title="Average Hourly Cost" aria-label="Average Hourly Cost" data-sr-call="calcPortalRoi" data-sr-on="input" />
                     </div>
@@ -1483,27 +1550,253 @@
                 <div class="roi-results-row">
                     <div class="roi-metric-result">
                         <div class="roi-metric-num text-gold font-num" id="resRoiSavings">€ 31,590</div>
-                        <div class="roi-metric-lbl">پاشەکەوتی ڕاستەوخۆی دارایی ساڵانە</div>
+                        <div class="roi-metric-lbl">التوفير المالي المباشر سنوياً</div>
                     </div>
                     <div class="roi-metric-result">
-                        <div class="roi-metric-num text-white font-num" id="resRoiHours">702 کاتژمێر</div>
-                        <div class="roi-metric-lbl">کاتژمێرەکانی پاشەکەوتکراوی کار بە هۆی ئۆتۆمەیشن</div>
+                        <div class="roi-metric-num text-white font-num" id="resRoiHours">702 ساعة</div>
+                        <div class="roi-metric-lbl">ساعات عمل موفرة سنوياً من الأتمتة</div>
                     </div>
                     <div class="roi-metric-result">
                         <div class="roi-metric-num text-gold font-num" id="resRoiYield">780% Net</div>
-                        <div class="roi-metric-lbl">گەڕانەوەی خەمڵێنراوی خاوێنی وەبەرهێنان (Net ROI)</div>
+                        <div class="roi-metric-lbl">العائد الصافي على الاستثمار (Estimated ROI)</div>
                     </div>
                 </div>
 
                                 <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mt-4">
                     <button type="button" class="btn-sync-consultation" data-sr-call="openStrategicBookingModal">
-                        <span>📅 دانانی دانیشتنی ستراتیژی لەگەڵ دامەزرێنەران</span>
+                        <span>📅 حجز جلسة استراتيجية مع المؤسسين</span>
                     </button>
                     <button type="button" class="btn-cert-print" data-sr-call="openRoiCertModal">
-                        <span>📄 داگرتنی بڕوانامەی جێبەجێکاری ROI (PDF)</span>
+                        <span>📄 تحميل الشهادة التنفيذية للجدوى (ROI PDF)</span>
                     </button>
                 </div>
             </div>
+        </section>
+
+        <!-- 8. شاشة تتبع مراحل المشروع والسبرنتات (Project Milestone & Sprint Tracker) -->
+        <section class="tab-section" id="tab-tracker">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2>لوحة المتابعة الحية لمراحل المشروع (Live Milestone & Sprint Tracker)</h2>
+                    <p>المتابعة الهندسية اللحظية للمراحل الـ 5 المعتمدة في العقد التجاري الرسمي (OF-2026-1021)</p>
+                </div>
+            </div>
+
+            <div class="tracker-header-box">
+                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                    <div>
+                        <div class="tracker-project-title">منظومة منصة NL بالعربي في هولندا (NL bil Arabi Platform)</div>
+                        <div class="tracker-project-sub">
+                            المرجع التعاقدي: <strong class="text-gold font-num">OF-2026-1021</strong> • العميل المالك: <strong>السيد مضر أبو فاشة</strong> • المقر: هولندا
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026Modal">
+                            💻 العقد التقني (€ 21k)
+                        </button>
+                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026FinModal">
+                            📊 العقد المالي (استرداد 4,410 €)
+                        </button>
+                        <a href="verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify-flex">
+                            🛡️ فحص التوثيق المشفر
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+                    <span>مؤشر الجاهزية الإجمالية للمشروع (Overall Architecture & Development Readiness):</span>
+                    <strong class="text-gold font-num tracker-readiness-highlight">78% مكتمل</strong>
+                </div>
+                <div class="tracker-progress-bar-wrap">
+                    <div class="tracker-progress-bar-fill"></div>
+                </div>
+
+                <div class="tracker-top-stats">
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">إجمالي المراحل المعتمدة</div>
+                        <div class="tracker-stat-val">5 مراحل برمجية</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">المرحلة النشطة الحالية</div>
+                        <div class="tracker-stat-val tracker-val-sprint">المرحلة 1 &amp; 2 (Sprint 1)</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">الدفعة المستحقة لبدء التأسيس</div>
+                        <div class="tracker-stat-val tracker-val-deposit">€ 7,623 (30%)</div>
+                    </div>
+                    <div class="tracker-stat-box">
+                        <div class="tracker-stat-lbl">الامتثال الأوروبي والضريبي</div>
+                        <div class="tracker-stat-val tracker-val-compliance">GDPR &amp; BTW 100%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شبكة بطاقات المراحل الـ 5 -->
+            <div class="tracker-stages-grid">
+                
+                <!-- المرحلة 1 -->
+                <div class="tracker-stage-card in-progress">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge active">سبرنت حالي · 85% مكتمل</span>
+                            <span class="font-num text-caption text-white-64">Sprint 1</span>
+                        </div>
+                        <div class="tracker-stage-name">1. المنصة الأساسية والاشتراكات (Core Web &amp; Subscriptions)</div>
+                        <div class="tracker-stage-desc">
+                            بنية تحتية سحابية هجينة معزولة، دعم كامل للغات الثلاث (عربي RTL، هولندي، إنجليزي)، باقات 2€ و 5€، بوابة دفع iDEAL لتفادي عمولة المتاجر.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">المعمارية السحابية وقواعد البيانات المعزولة</li>
+                            <li class="done-item">نظام باقات المشتركين والتسجيل الآمن OTP</li>
+                            <li class="done-item">بوابة iDEAL والتحويل البنكي الأوروبي SEPA</li>
+                            <li class="pending-item">اللمسات النهائية لحسابات الأطفال والرقابة الأبوية</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 4,800.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 2 -->
+                <div class="tracker-stage-card in-progress">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge active">قيد التطوير والتكامل</span>
+                            <span class="font-num text-caption text-white-64">Sprint 2</span>
+                        </div>
+                        <div class="tracker-stage-name">2. محرك القسائم الذكية وبوابة المتاجر (Vouchers &amp; WhatsApp)</div>
+                        <div class="tracker-stage-desc">
+                            توليد قسائم QR مشفرة لمشتركي باقة 5€، ربط آلي مع WhatsApp Business API، وبوابة مسح خفيفة للمتاجر تعمل عبر المتصفح بدون تطبيقات.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">خوارزمية توليد وتشفير أكواد الـ QR الشهرية</li>
+                            <li class="done-item">واجهة مسح القسائم للمتاجر عبر كاميرا الهاتف</li>
+                            <li class="pending-item">تكامل WhatsApp Business لإرسال القسائم فورياً</li>
+                            <li class="pending-item">نظام إصدار تقارير تسوية المتاجر الضريبية PDF</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 4,200.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 3 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">مجدولة للسبرنت القادم</span>
+                            <span class="font-num text-caption text-white-64">Sprint 3</span>
+                        </div>
+                        <div class="tracker-stage-name">3. استوديو البث الحي والترجمة بالذكاء الاصطناعي (Live &amp; AI)</div>
+                        <div class="tracker-stage-desc">
+                            استوديو سحابي لدمج عدة كاميرات وهواتف، مشغل تفاعلي يدعم 3 مسارات صوتية، محرك الترجمة الفورية بالذكاء الاصطناعي، وطابور موافقة مقاطع الجمهور.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">تصميم مواصفات بروتوكول البث فائق السرعة (HLS/WebRTC)</li>
+                            <li class="pending-item">برمجة استوديو البث التلفزيوني السحابي المدمج</li>
+                            <li class="pending-item">تكامل الذكاء الاصطناعي للترجمة التلقائية متعددة اللغات</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 5,200.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 4 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">مرحلة الإدارة والرعايات</span>
+                            <span class="font-num text-caption text-white-64">Sprint 4</span>
+                        </div>
+                        <div class="tracker-stage-name">4. لوحة الإدارة المركزية وبوابة المعلنين (Admin &amp; Ads)</div>
+                        <div class="tracker-stage-desc">
+                            إدارة برامج المنصة وصلاحيات فرق العمل وسجل التدقيق، التصويت الحصري لباقة 5€، وبوابة المعلنين لحجز المساحات والربط المالي الآلي.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">بنية التحقق وصلاحيات الفرق وسجلات التدقيق</li>
+                            <li class="pending-item">بوابة المعلنين والربط المحاسبي التلقائي للفواتير</li>
+                            <li class="pending-item">تطبيق الامتثال الأوروبي الصارم للخصوصية GDPR/AVG</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 3,300.00</span>
+                    </div>
+                </div>
+
+                <!-- المرحلة 5 -->
+                <div class="tracker-stage-card">
+                    <div>
+                        <div class="tracker-stage-header">
+                            <span class="tracker-stage-badge upcoming">المرحلة الإنتاجية النهائية</span>
+                            <span class="font-num text-caption text-white-64">Sprint 5</span>
+                        </div>
+                        <div class="tracker-stage-name">5. تطبيقات الهواتف الذكية (Mobile Apps - iOS &amp; Android)</div>
+                        <div class="tracker-stage-desc">
+                            تطبيق موحد بنظام Reader App لتفادي عمولة الـ 30% لمتجري آبل وجوجل، إشعارات فورية ذكية، ووصول كامل للبث والأرشيف.
+                        </div>
+                        <ul class="tracker-items-list">
+                            <li class="done-item">معمارية التوافق والامتثال لقوانين App Store و Play Store</li>
+                            <li class="pending-item">تطوير حزمة التطبيقات الأصلية وتجهيز ملفات النشر</li>
+                            <li class="pending-item">الإطلاق التجريبي واختبارات الاستقرار لمدة 14 يوماً</li>
+                        </ul>
+                    </div>
+                    <div class="tracker-stage-footer">
+                        <span>المخصص المالي:</span>
+                        <span class="tracker-stage-fee">€ 3,500.00</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- أداة حاسبة سعة السيرفرات والبث المباشر (Cloud Infrastructure Sizing Calculator) -->
+            <div class="tracker-sizing-card">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div>
+                        <h4 class="text-white fw-bold mb-1">☁️ حاسبة سعة الخوادم السحابية واستهلاك البث التقديري (Cloud Sizing &amp; Bandwidth)</h4>
+                        <p class="text-caption text-white-64 mb-0">قدر السيرفرات السحابية والباندويث الشهري الموصى به لمنصة NL بالعربي حسب حجم المشتركين وساعات البث الحي</p>
+                    </div>
+                    <span class="badge-status-sepa font-num">Hetzner / AWS EU (Frankfurt)</span>
+                </div>
+
+                <div class="tracker-sizing-grid">
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>👥 عدد المشتركين النشطين المتوقع</span>
+                            <span class="roi-val-display font-num" id="dispSubscribersCount">5,000 مشترك</span>
+                        </div>
+                        <input type="range" min="500" max="50000" step="500" value="5000" class="roi-range-input" id="slideSubscribersCount" title="Subscribers Count" aria-label="Subscribers Count" data-sr-call="calcCloudSizing" data-sr-on="input" />
+                    </div>
+
+                    <div class="roi-slider-box">
+                        <div class="roi-slider-header">
+                            <span>🎥 ساعات البث المباشر أسبوعياً</span>
+                            <span class="roi-val-display font-num" id="dispStreamHours">10 ساعات/أسبوع</span>
+                        </div>
+                        <input type="range" min="2" max="50" step="2" value="10" class="roi-range-input" id="slideStreamHours" title="Streaming Hours" aria-label="Streaming Hours" data-sr-call="calcCloudSizing" data-sr-on="input" />
+                    </div>
+                </div>
+
+                <div class="roi-results-row mt-3">
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-cyan font-num" id="resCloudServerSpec">Cloud Dedicated (8 vCPU / 32 GB)</div>
+                        <div class="roi-metric-lbl">مواصفات السيرفر السحابي الموصى به</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-white font-num" id="resCloudBandwidth">4.2 TB / شهر</div>
+                        <div class="roi-metric-lbl">استهلاك الباندويث المقدر شهرياً</div>
+                    </div>
+                    <div class="roi-metric-result">
+                        <div class="roi-metric-num text-gold font-num" id="resCloudCost">€ 85 / شهر</div>
+                        <div class="roi-metric-lbl">التكلفة السحابية الصافية التقديرية (وفر 48%)</div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         </main>
@@ -1600,7 +1893,11 @@
 
             <label class="text-caption text-white-64 d-block mb-1">اختر البنك الهولندي (Dutch Banking Partner):</label>
             <div class="bank-select-grid">
-                <div class="bank-option selected" data-sr-call="selectBank" data-sr-this="1">
+                <div class="bank-option wise-active selected" data-sr-call="selectBank" data-sr-this="1">
+                    <div class="bank-badge font-num bank-color-wise">WISE</div>
+                    <div class="bank-name">Wise Europe SA (المعتمد)</div>
+                </div>
+                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-ing">ING</div>
                     <div class="bank-name">ING Bank</div>
                 </div>
@@ -1611,10 +1908,6 @@
                 <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
                     <div class="bank-badge font-num bank-color-rabo">RABO</div>
                     <div class="bank-name">Rabobank</div>
-                </div>
-                <div class="bank-option" data-sr-call="selectBank" data-sr-this="1">
-                    <div class="bank-badge font-num bank-color-bunq">BNQ</div>
-                    <div class="bank-name">Bunq Digital</div>
                 </div>
             </div>
 
@@ -1647,7 +1940,8 @@
                     <div>
                         <h4 class="fw-bold text-white mb-1" id="invIssuerName">S&R CoreSync Solutions B.V.</h4>
                         <div class="text-caption text-white-64" id="invIssuerSub">KVK: 84920194 | VAT ID: NL849201942B01</div>
-                        <div class="text-caption text-white-64" id="invIssuerAddress">Keizersgracht 482, 1016 EG Amsterdam, Netherlands</div>
+                        <div class="text-caption text-white-64" id="invIssuerAddress">Meester Beerninkplantsoen 208, 2286MP Rijswijk, Netherlands</div>
+                        <div class="text-caption text-white-64 font-num mt-1" id="invIssuerBank">Bank: Wise Europe SA · IBAN: BE45 •••• •••• 2989 · BIC: TRWIBEB1XXX · Account: S&amp;R CoreSync Treasury</div>
                     </div>
                     <div class="inv-qr-block" title="EPC-QR / ZATCA Cryptographic Stamp">
                         <svg viewBox="0 0 100 100" fill="#010907">
@@ -2324,7 +2618,7 @@
             }
             document.querySelector('.sidebar-user-card .user-name').innerText = 'جلسة معاينة تفاعلية';
             document.querySelector('.sidebar-user-card .user-avatar').innerText = 'SR';
-            document.querySelector('.portal-brand-emblem').src = '../assets/sr-core-emblem-official.png';
+            document.querySelector('.portal-brand-emblem').src = './assets/sr-core-emblem-official.png';
 
             updateStorageStatusBadge();
             showPortalToast('تمت استعادة هوية S&R CoreSync الأصلية ومسح التخصيص المحفوظ.');
@@ -2402,6 +2696,15 @@
                 desc: 'مكتبة برمجية للمطورين والشركات البرمجية لدمج خوارزميات الذكاء الاصطناعي المالي والفوترة والامتثال المحاسبي في تطبيقاتهم الخاصة بسهولة عبر REST APIs.',
                 category: 'sdk',
                 os: 'Python / Node.js / C#'
+            },
+            terminal: {
+                title: 'S&R Cloud Terminal Agent',
+                icon: '⚙️',
+                version: 'v1.0 DevOps Agent',
+                price: 39,
+                desc: 'وكيل سحابي خفيف لمراقبة البنية التحتية والخوادم، يتتبع استهلاك المعالج والذاكرة وحالة نبضات الخدمات سحابياً.',
+                category: 'sdk',
+                os: 'Docker / Kubernetes / Linux'
             }
         };
 
@@ -2731,39 +3034,24 @@
 
         function triggerSoftwareDownload() {
             if (!currentActiveSoftware) return;
-            const title = currentActiveSoftware.title;
-            const key = document.getElementById('modalSwKey').innerText;
-
-            // توليد ملف حزمة التثبيت التجريبية
-            const fileContent = `-----------------------------------------------------
-${title.toUpperCase()} — OFFICIAL SOFTWARE PACKAGE
------------------------------------------------------
-Publisher: S&R CoreSync Solutions B.V. (Amsterdam, Netherlands)
-License Key: ${key}
-Issued: 2026-10-06
-Status: Verified Digital Signature (SHA-256)
-
-INSTALLATION INSTRUCTIONS:
-1. Run the installer matching your OS (Windows .msi or macOS .dmg).
-2. Enter the License Key provided above when prompted during first launch.
-3. For enterprise cloud sync, configure your CoreSync Tenant API URL.
-
-Support & Documentation: https://coresync.cloud/docs
-Direct Founders Contact: info@coresync.cloud
------------------------------------------------------
-(c) 2026 S&R CoreSync Solutions B.V. All rights reserved.
-`;
-            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
+            const id = currentActiveSoftware.id || 'taxsync';
+            const title = currentActiveSoftware.title || 'S&R Software';
+            const appFiles = {
+                taxsync: 'downloads/SR-TaxSync-Web-App.html',
+                flowscan: 'downloads/SR-FlowScan-Mobile-App.html',
+                cloudpos: 'downloads/SR-CloudPOS-Terminal.html',
+                vault: 'downloads/SR-SecureVault-App.html',
+                sdk: 'downloads/SR-Financial-AI-SDK.html'
+            };
+            const downloadUrl = appFiles[id] || 'downloads/SR-TaxSync-Web-App.html';
             const a = document.createElement('a');
-            a.href = url;
-            a.download = `${title.replace(/\s+/g, '_')}_QuickStart_Package.txt`;
+            a.href = downloadUrl;
+            a.download = downloadUrl.split('/').pop();
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            URL.revokeObjectURL(url);
 
-            showPortalToast(`⚡ بدأ تنزيل حزمة التثبيت لـ [${title}] بنجاح!`);
+            showPortalToast(`📥 بدأ تنزيل تطبيق [${title}] المستقل أوفلاين بنجاح!`);
         }
 
         function triggerSoftwareCheckout() {
@@ -3202,9 +3490,12 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 
             <div class="modal-form-actions">
                 <button type="button" class="btn-return-main" data-sr-call="closeSoftwareModal">داخستن</button>
+                <button type="button" class="btn-secondary-glow" onclick="closeSoftwareModal(); openSoftwareLiveApp(currentActiveSoftware ? currentActiveSoftware.id || 'taxsync' : 'taxsync');">
+                    ⚡ تشغيل فوري في المتصفح
+                </button>
                 <button type="button" class="btn-secondary-glow" id="modalBtnDownload" data-sr-call="triggerSoftwareDownload">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    تنزيل حزمة التثبيت المباشرة (Installer .zip)
+                    تنزيل أوفلاين (Single HTML App)
                 </button>
                 <button type="button" class="action-cta-btn" id="modalBtnBuy" data-sr-call="triggerSoftwareCheckout">
                     شراء الترخيص وإصدار فاتورة
@@ -3493,6 +3784,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
             <div id="gwInput-ideal" class="payment-input-group">
                 <label for="idealBankSelect" class="text-caption text-white-64 mb-1 d-block">اختر البنك الهولندي (Kies uw bank):</label>
                 <select id="idealBankSelect" class="form-select-dark">
+                    <option value="wise" selected>Wise Europe SA (Account: MOHAMMAD SALIM AZIZA)</option>
                     <option value="ing">ING Bank</option>
                     <option value="rabobank">Rabobank</option>
                     <option value="abnamro">ABN AMRO</option>
@@ -3502,32 +3794,32 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <option value="asn">ASN Bank</option>
                 </select>
                 <div class="text-caption text-white-64 mt-2 ds-u40">
-                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect.
+                    🔒 سيتم تحويلك بشكل آمن عبر بروتوكول التشفير المباشر Mollie Connect & Wise Direct.
                 </div>
             </div>
 
             <!-- 2. Stripe Card fields -->
             <div id="gwInput-card" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية:</label>
-                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="4242 •••• •••• 4242" title="رقم البطاقة الائتمانية" placeholder="رقم البطاقة الائتمانية" aria-label="رقم البطاقة الائتمانية">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkCardNumber">رقم البطاقة الائتمانية / بطاقة الخصم:</label>
+                <input type="text" id="chkCardNumber" class="ai-chat-input mb-2 ds-u59" value="" title="رقم البطاقة الائتمانية" placeholder="•••• •••• •••• ••••" aria-label="رقم البطاقة الائتمانية">
                 <div class="row g-2">
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardExpiry">تاريخ الانتهاء:</label>
-                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="12/28" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
+                        <input type="text" id="chkCardExpiry" class="ai-chat-input ds-u59" value="" title="تاريخ انتهاء البطاقة MM/YY" placeholder="MM/YY" aria-label="تاريخ انتهاء البطاقة">
                     </div>
                     <div class="col-6">
                         <label class="text-caption text-white-64 mb-1 d-block" for="chkCardCvc">رمز الأمان CVC:</label>
-                        <input type="text" id="chkCardCvc" class="ai-chat-input ds-u59" value="888" title="رمز الأمان CVC" placeholder="CVC" aria-label="رمز الأمان CVC">
+                        <input type="password" id="chkCardCvc" class="ai-chat-input ds-u59" value="" title="رمز الأمان CVC" placeholder="•••" maxlength="4" aria-label="رمز الأمان CVC">
                     </div>
                 </div>
             </div>
 
             <!-- 3. SEPA Direct Debit -->
             <div id="gwInput-sepa" class="payment-input-group ds-u52">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان للشركة (Business IBAN):</label>
-                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="NL91 ABNA 0417 1641 00" title="رقم الآيبان للشركة (IBAN)" placeholder="IBAN" aria-label="رقم الآيبان للشركة">
-                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم الحساب التجاري (Bedrijfsnaam):</label>
-                <input type="text" id="chkSepaName" class="ai-chat-input" value="S&R B2B Enterprise Client" title="اسم الحساب التجاري" placeholder="اسم الشركة" aria-label="اسم الحساب التجاري">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaIban">رقم الآيبان الخاص بالمشترك (Uw IBAN):</label>
+                <input type="text" id="chkSepaIban" class="ai-chat-input mb-2 ds-u59" value="" title="رقم الآيبان للمشترك" placeholder="NL•• BANK •••• •••• ••" aria-label="رقم الآيبان للمشترك">
+                <label class="text-caption text-white-64 mb-1 d-block" for="chkSepaName">اسم صاحب الحساب (Naam Rekeninghouder):</label>
+                <input type="text" id="chkSepaName" class="ai-chat-input" value="" title="اسم صاحب الحساب" placeholder="اسم المشترك أو شركته" aria-label="اسم صاحب الحساب">
             </div>
 
             <!-- حالة النجاح بعد الدفع (Success State) -->
@@ -3789,6 +4081,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                 closeDropdown();
             } else {
                 dropdown.classList.add('open');
+                menu.style.display = 'flex';
                 trigger.setAttribute('aria-expanded', 'true');
                 if (searchInput) {
                     setTimeout(() => searchInput.focus(), 50);
@@ -3798,6 +4091,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
         
         function closeDropdown() {
             dropdown.classList.remove('open');
+            menu.style.display = 'none';
             trigger.setAttribute('aria-expanded', 'false');
             if (searchInput) {
                 searchInput.value = '';
@@ -3850,11 +4144,11 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
 </script>
 
 
-    <!-- Feature 3: Sovereign VIP Founders Hotline Widget -->
+    <!-- Feature 3: Sovereign VIP Founders Hotline Widget (Pre-filled Localized Contact) -->
     <div class="sovereign-hotline-widget" id="sovereignHotlineWidget">
         <div class="hotline-popover-card" id="hotlinePopoverCard">
             <div class="hotline-header-row">
-                <span class="hotline-header-title">هێڵی ڕاستەوخۆی بەڕێوەبەرایەتی</span>
+                <span class="hotline-header-title">Direct Executive Hotline</span>
                 <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="toggleHotlineWidget" data-sr-event="1" aria-label="Close">✕</button>
             </div>
             
@@ -3863,124 +4157,9 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div class="hotline-avatar">SA</div>
                     <div class="hotline-names">
                         <span class="hotline-name">Eng. Mohammad Salim Aziza</span>
-                        <span class="hotline-role">CTO & ئەندازیاری باڵای نەرمەکاڵا</span>
+                        <span class="hotline-role">CTO & Software Architect</span>
                     </div>
                 </div>
-
-    <!-- Proposal 1 Modal: Executive ROI Certificate -->
-    <div class="modal-overlay" id="roiCertModal" data-sr-backdrop-call="closeRoiCertModal" dir="rtl">
-        <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
-            <div class="d-flex justify-content-end mb-2">
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
-            </div>
-            <div class="roi-cert-header">
-                <img src="../assets/sr-core-emblem.svg" class="roi-cert-emblem" alt="S&R CoreSync Official Emblem" onerror="this.src='../assets/sr-core-emblem-official.png'">
-                <div class="roi-cert-title" id="roiCertTitle">بڕوانامەی جێبەجێکاری هەڵسەنگاندنی ROI</div>
-                <div class="roi-cert-subtitle">کۆمپانیای S&R CORESYNC SOLUTIONS B.V. — ئەمستەردام، هۆڵەندا</div>
-            </div>
-
-            <div class="roi-cert-recipient">
-                <div class="roi-cert-recipient-lbl">پێدانی فەرمی و متمانەپێکراو</div>
-                <div class="roi-cert-recipient-name" id="certClientNameDisplay">گرووپی هاوبەشی دامەزراوەیی</div>
-            </div>
-
-            <div class="roi-cert-grid">
-                <div class="roi-cert-box">
-                    <div class="roi-cert-box-num font-num" id="certRoiSavingsVal">€ 31,590</div>
-                    <div class="roi-cert-box-lbl">پاشەکەوتی دارایی ساڵانەی ڕاستەوخۆ</div>
-                </div>
-                <div class="roi-cert-box">
-                    <div class="roi-cert-box-num font-num" id="certRoiHoursVal">702 h</div>
-                    <div class="roi-cert-box-lbl">کاتژمێرە بەرهەمدارە گەڕاوەکان / ساڵ</div>
-                </div>
-                <div class="roi-cert-box">
-                    <div class="roi-cert-box-num font-num" id="certRoiYieldVal">780% Net</div>
-                    <div class="roi-cert-box-lbl">داهاتی خەمڵێنراوی پوخت (ROI)</div>
-                </div>
-            </div>
-
-            <div class="roi-cert-signatures">
-                <div class="roi-cert-sign-col">
-                    <div class="roi-cert-sign-line">Mohammad Salim Aziza</div>
-                    <div class="roi-cert-sign-name">Eng. Mohammad Salim Aziza</div>
-                    <div class="roi-cert-sign-role">بەڕێوەبەری تەکنیکی و ئەندازیاری پرۆگرام</div>
-                </div>
-                <div class="roi-cert-seal-badge font-num">
-                    <span>مۆری فەرمی</span>
-                    <strong style="font-size: 0.55rem; color: #fff;">AMSTERDAM</strong>
-                    <span style="font-size: 0.5rem;">2026/EU</span>
-                </div>
-                <div class="roi-cert-sign-col">
-                    <div class="roi-cert-sign-line">Mohammad Raed Kaaka</div>
-                    <div class="roi-cert-sign-name">Mr. Mohammad Raed Kaaka</div>
-                    <div class="roi-cert-sign-role">بەڕێوەبەری گشتی و ئۆپەراسیۆنەکان</div>
-                </div>
-            </div>
-
-            <div class="roi-cert-actions">
-                <button type="button" class="btn-cert-print" data-sr-call="print" data-sr-ctx="window">
-                    🖨️ چاپکردن / پاشەکەوتکردن وەک PDF
-                </button>
-                <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
-                    داخستن
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Proposal 2 Modal: Strategic Meeting Booking -->
-    <div class="modal-overlay" id="strategicBookingModal" data-sr-backdrop-call="closeStrategicBookingModal" dir="rtl">
-        <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="section-title mb-0" id="bookingModalTitle">📅 دانانی دانیشتنی ستراتیژی لەگەڵ دامەزرێنەران</h3>
-                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeStrategicBookingModal" aria-label="Close">✕</button>
-            </div>
-            <p class="section-desc mb-3">ڕاوێژی جێبەجێکاری نهێنی ٣٠ خولەکی لەسەر تەلارسازی Cloud ERP و زیرەکی دەستکرد.</p>
-
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">١. تەوەرەی ستراتیژی</label>
-                <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" data-sr-call="selectBookingTopic" data-sr-args='["☁️ تەلارسازی Cloud ERP"]' data-sr-this="1">☁️ تەلارسازی Cloud ERP</button>
-                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🛡️ سەروەری و پابەندبوونی NIS2"]' data-sr-this="1">🛡️ سەروەری و پابەندبوونی NIS2</button>
-                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🤖 ئۆتۆماتیکردنی AI و دارایی"]' data-sr-this="1">🤖 ئۆتۆماتیکردنی AI و دارایی</button>
-                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🔄 کۆچی بێ وەستان (Zero-Downtime)"]' data-sr-this="1">🔄 کۆچی بێ وەستان (Zero-Downtime)</button>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">٢. میوانداری جێبەجێکاری داواکراو</label>
-                <div class="booking-pills-row">
-                    <button type="button" class="booking-pill active" data-sr-call="selectBookingHost" data-sr-args='["ئەندازیار Mohammad Salim Aziza (CTO)"]' data-sr-this="1">ئەندازیار Mohammad Salim Aziza (CTO)</button>
-                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["بەڕێز Mohammad Raed Kaaka (CEO)"]' data-sr-this="1">بەڕێز Mohammad Raed Kaaka (CEO)</button>
-                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["هەردوو دامەزرێنەر (دانیشتنی هاوبەش)"]' data-sr-this="1">هەردوو دامەزرێنەر (دانیشتنی هاوبەش)</button>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 0.8rem; color: #a4c2b5; margin-bottom: 6px; display: block;">٣. کاتی خوازراو (CET / کاتی ئەمستەردام)</label>
-                <div class="booking-slots-grid">
-                    <button type="button" class="booking-slot-btn active" data-sr-call="selectBookingSlot" data-sr-args='["09:30 CET"]' data-sr-this="1">09:30 CET</button>
-                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["11:00 CET"]' data-sr-this="1">11:00 CET</button>
-                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["14:00 CET"]' data-sr-this="1">14:00 CET</button>
-                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["16:30 CET"]' data-sr-this="1">16:30 CET</button>
-                </div>
-            </div>
-
-            <div class="booking-confirm-box" id="bookingConfirmBox">
-                <div style="font-weight: 700; color: #34d399; margin-bottom: 6px;">✓ دانیشتنەکە بە سەرکەوتوویی تۆمارکرا</div>
-                <div style="font-size: 0.82rem; color: #e2f1ec;" id="bookingSummaryText">09:30 CET</div>
-            </div>
-
-            <div class="d-flex justify-content-center gap-3">
-                <button type="button" class="btn-cert-print" data-sr-call="confirmBookingAndOpenWa">
-                    🚀 پشتڕاستکردنەوە و دەستپێکردن بە WhatsApp
-                </button>
-                <button type="button" class="btn-cert-close" data-sr-call="closeStrategicBookingModal">
-                    هەڵوەشاندنەوە
-                </button>
-            </div>
-        </div>
-    </div>
                 <div class="hotline-actions">
                     <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaSalim">
                         <span>WhatsApp</span>
@@ -3996,7 +4175,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     <div class="hotline-avatar">RK</div>
                     <div class="hotline-names">
                         <span class="hotline-name">Mr. Mohammad Raed Kaaka</span>
-                        <span class="hotline-role">بەڕێوەبەری جێبەجێکار & ئۆپەراسیۆن</span>
+                        <span class="hotline-role">Managing Director & Operations</span>
                     </div>
                 </div>
                 <div class="hotline-actions">
@@ -4007,21 +4186,533 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                         <span>+31 6 8771 0290</span>
                     </a>
                 </div>
-                <div class="hotline-booking-action" style="margin-top: 14px; text-align: center;">
-                    <button type="button" class="btn-cert-print" style="width: 100%; font-size: 0.8rem; padding: 8px 12px;" data-sr-call="openStrategicBookingModal">
-                        📅 دانانی دانیشتنی ستراتیژی (٣٠ خولەک)
+                <div class="hotline-booking-action mt-3 text-center">
+                    <button type="button" class="btn-cert-print btn-booking-full" data-sr-call="openStrategicBookingModal">
+                        📅 حجز جلسة استراتيجية (30 دقيقة)
                     </button>
                 </div>
             </div>
         </div>
         <button type="button" class="hotline-trigger-pill" id="hotlineTriggerBtn" data-sr-call="toggleHotlineWidget" data-sr-event="1">
             <span class="hotline-pulse-dot"></span>
-            <span id="hotlineTriggerText">💬 پەیوەندی بە دامەزرێنەران</span>
+            <span id="hotlineTriggerText">💬 Contact Founders</span>
         </button>
+    </div>
+
+    <!-- Proposal 1 Modal: Executive ROI Certificate -->
+    <div class="modal-overlay" id="roiCertModal" data-sr-backdrop-call="closeRoiCertModal" dir="rtl">
+        <div class="roi-cert-modal" role="dialog" aria-modal="true" aria-labelledby="roiCertTitle">
+            <div class="d-flex justify-content-end mb-2">
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeRoiCertModal" aria-label="Close">✕</button>
+            </div>
+            <div class="roi-cert-header">
+                <img src="../assets/sr-core-emblem.svg" class="roi-cert-emblem" alt="S&R CoreSync Official Emblem" onerror="this.src='./assets/sr-core-emblem-official.png'">
+                <div class="roi-cert-title" id="roiCertTitle">شهادة التقييم التنفيذي للعائد على الاستثمار</div>
+                <div class="roi-cert-subtitle">شركة S&R CORESYNC SOLUTIONS B.V. — أمستردام، هولندا</div>
+            </div>
+
+            <div class="roi-cert-recipient">
+                <div class="roi-cert-recipient-lbl">الاعتماد والتخصيص الرسمي</div>
+                <div class="roi-cert-recipient-name" id="certClientNameDisplay">المجموعة الشريكة المؤسسية</div>
+            </div>
+
+            <div class="roi-cert-grid">
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiSavingsVal">€ 31,590</div>
+                    <div class="roi-cert-box-lbl">التوفير المالي السنوي المباشر</div>
+                </div>
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiHoursVal">702 h</div>
+                    <div class="roi-cert-box-lbl">ساعات الإنتاجية المسترجعة سنوياً</div>
+                </div>
+                <div class="roi-cert-box">
+                    <div class="roi-cert-box-num font-num" id="certRoiYieldVal">780% Net</div>
+                    <div class="roi-cert-box-lbl">العائد الصافي التقديري على الاستثمار</div>
+                </div>
+            </div>
+
+            <div class="roi-cert-signatures">
+                <div class="roi-cert-sign-col">
+                    <div class="roi-cert-sign-line">Mohammad Salim Aziza</div>
+                    <div class="roi-cert-sign-name">Eng. Mohammad Salim Aziza</div>
+                    <div class="roi-cert-sign-role">المدير التقني ومهندس البرمجيات</div>
+                </div>
+                <div class="roi-cert-seal-badge font-num">
+                    <span>الختم الرسمي</span>
+                    <strong class="seal-amsterdam">AMSTERDAM</strong>
+                    <span class="seal-year">2026/EU</span>
+                </div>
+                <div class="roi-cert-sign-col">
+                    <div class="roi-cert-sign-line">Mohammad Raed Kaaka</div>
+                    <div class="roi-cert-sign-name">Mr. Mohammad Raed Kaaka</div>
+                    <div class="roi-cert-sign-role">المدير العام وإدارة العمليات</div>
+                </div>
+            </div>
+
+            <div class="roi-cert-actions">
+                <button type="button" class="btn-cert-print" data-sr-call="print" data-sr-ctx="window">
+                    🖨️ طباعة / حفظ كملف PDF
+                </button>
+                <button type="button" class="btn-cert-close" data-sr-call="closeRoiCertModal">
+                    داخستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proposal 2 Modal: Strategic Meeting Booking -->
+    <div class="modal-overlay" id="strategicBookingModal" data-sr-backdrop-call="closeStrategicBookingModal" dir="rtl">
+        <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="section-title mb-0" id="bookingModalTitle">📅 حجز جلسة استشارية استراتيجية مع المؤسسين</h3>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeStrategicBookingModal" aria-label="Close">✕</button>
+            </div>
+            <p class="section-desc mb-3">استشارة تنفيذية سرية لمدة 30 دقيقة مع إدارة S&R CoreSync حول معمارية السحابة وخارطة طريق الذكاء الاصطناعي.</p>
+
+            <div class="mb-3">
+                <label class="form-label text-mint-label">1. المحور الاستراتيجي للجلسة</label>
+                <div class="booking-pills-row">
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingTopic" data-sr-args='["☁️ معمارية Cloud ERP السحابية"]' data-sr-this="1">☁️ معمارية Cloud ERP السحابية</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🛡️ السيادة الرقمية وتوافق NIS2"]' data-sr-this="1">🛡️ السيادة الرقمية وتوافق NIS2</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🤖 أتمتة الذكاء الاصطناعي والمالية"]' data-sr-this="1">🤖 أتمتة الذكاء الاصطناعي والمالية</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingTopic" data-sr-args='["🔄 الترحيل بدون توقف (Zero-Downtime)"]' data-sr-this="1">🔄 الترحيل بدون توقف (Zero-Downtime)</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label text-mint-label">2. المضيف التنفيذي المطلوب</label>
+                <div class="booking-pills-row">
+                    <button type="button" class="booking-pill active" data-sr-call="selectBookingHost" data-sr-args='["م. محمد سليم عزيزة (CTO)"]' data-sr-this="1">م. محمد سليم عزيزة (CTO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["أ. محمد رائد كعكة (CEO)"]' data-sr-this="1">أ. محمد رائد كعكة (CEO)</button>
+                    <button type="button" class="booking-pill" data-sr-call="selectBookingHost" data-sr-args='["كلا المؤسسين (جلسة مشتركة)"]' data-sr-this="1">كلا المؤسسين (جلسة مشتركة)</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label text-mint-label">3. الموعد المفضل (بتوقيت أمستردام CET)</label>
+                <div class="booking-slots-grid">
+                    <button type="button" class="booking-slot-btn active" data-sr-call="selectBookingSlot" data-sr-args='["09:30 CET"]' data-sr-this="1">09:30 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["11:00 CET"]' data-sr-this="1">11:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["14:00 CET"]' data-sr-this="1">14:00 CET</button>
+                    <button type="button" class="booking-slot-btn" data-sr-call="selectBookingSlot" data-sr-args='["16:30 CET"]' data-sr-this="1">16:30 CET</button>
+                </div>
+            </div>
+
+            <div class="booking-confirm-box" id="bookingConfirmBox">
+                <div class="booking-confirm-title">✓ تم حجز الجلسة بنجاح مبدئياً</div>
+                <div class="booking-confirm-summary" id="bookingSummaryText">09:30 CET</div>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3">
+                <button type="button" class="btn-cert-print" data-sr-call="confirmBookingAndOpenWa">
+                    🚀 تأكيد وفتح الجلسة عبر واتساب
+                </button>
+                <button type="button" class="btn-cert-close" data-sr-call="closeStrategicBookingModal">
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- نافذة العقد والاتفاقية التجارية الرسمية OF-2026-1021 -->
+    <div class="modal-overlay" id="contractOf2026Modal" data-sr-backdrop-call="closeContractOf2026Modal" dir="rtl">
+        <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractModalHeaderTitle">
+            <!-- ألسنة التبديل بين العقدين المالي والتقني -->
+            <div class="contract-tabs-nav">
+                <button type="button" class="contract-tab-btn active" data-sr-call="switchContractModal" data-sr-args='["tech"]'>💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn" data-sr-call="switchContractModal" data-sr-args='["fin"]'>📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../assets/sr-core-emblem-official.webp" width="48" height="48" alt="S&R CoreSync" />
+                    <div>
+                        <span class="contract-tag-gold">COMMERCIAL QUOTATION / OFFERTE</span>
+                        <h4 class="mb-0 fw-bold text-white" id="contractModalHeaderTitle">عرض سعر تجاري رسمي — منصة NL بالعربي</h4>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeContractOf2026Modal" aria-label="Close">✕</button>
+            </div>
+
+            <div class="contract-header-banner">
+                <div>
+                    <span class="contract-desc-mint">تطوير المنصة الرقمية المتكاملة لمنظومة NL بالعربي في هولندا</span>
+                    <div class="contract-sub-mint">يشمل البث الرقمي، نظام الاشتراكات عبر الويب، ومحرك القسائم الذكية QR وتطبيقات الهواتف.</div>
+                </div>
+                <div class="contract-ref-badge font-num">
+                    <div>مرجع: <strong class="text-gold">OF-2026-1021</strong></div>
+                    <div>مێژوو: <strong>20 أكتوبر 2026</strong></div>
+                    <div>الحالة: <strong class="text-emerald-status">Definitief / ملزم</strong> (صلاحية 30 يوماً)</div>
+                </div>
+            </div>
+
+            <!-- شبكة أطراف العقد -->
+            <div class="contract-parties-grid">
+                <div class="contract-party-box">
+                    <h5>الجهة المنفذة (Dienstverlener):</h5>
+                    <strong class="contract-party-head">S&R CoreSync Solutions & Engineering</strong>
+                    <div class="contract-party-line-mt">المسؤول التقني: م. محمد سليم عزيزة</div>
+                    <div class="contract-party-line">البريد: info@sr-coresync.nl</div>
+                    <div class="contract-party-line">المقر: لاهاي / رايسفايك، هولندا</div>
+                </div>
+                <div class="contract-party-box">
+                    <h5>الجهة المالكة والعميل (Opdrachtgever):</h5>
+                    <strong class="contract-party-head">السيد مضر أبو فاشة</strong>
+                    <div class="contract-party-line-mt">المشروع: منصة NL بالعربي (NL bil Arabi)</div>
+                    <div class="contract-party-line">المرجع: وثيقة المتطلبات الفنية (Platform Requirements)</div>
+                    <div class="contract-party-line">الموقع: هولندا</div>
+                </div>
+            </div>
+
+            <!-- جدول مراحل التطوير والتسليمات الـ 5 -->
+            <div class="mb-3">
+                <h5 class="contract-sec-h">1. مراحل التطوير البرمجي والتسليمات (Deliverables & Ontwikkelingsfasen):</h5>
+                
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">المرحلة 1: المنصة الأساسية والاشتراكات (Core Web & Subscriptions)</span>
+                        <div class="contract-stage-d">بنية تحتية سحابية متعددة اللغات (عربي RTL، هولندي، إنجليزي)، مصادقة آمنة OTP وتكامل Google وApple، باقات المشتركين (Basic 2€ / Plus 5€)، بوابة دفع iDEAL لتفادي عمولات المتاجر، الرقابة الأبوية وملفات الأطفال.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 4,800</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">المرحلة 2: محرك القسائم وبوابة المتاجر (Voucher Engine & WhatsApp)</span>
+                        <div class="contract-stage-d">توليد قسائم رقمية شهرية ذكية برمز QR مشفر لمشتركي باقة 5€، ربط آلي مع WhatsApp Business API، بوابة مسح خفيفة للمتاجر تعمل عبر متصفح الهاتف بدون تطبيقات، وتخصيص صلاحيات موظفين برمز PIN، وفواتير تسوية شهرية PDF لخصمها ضريبياً.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 4,200</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">المرحلة 3: البث المباشر والترجمة بالذكاء الاصطناعي (Live Stream & AI Audio)</span>
+                        <div class="contract-stage-d">استوديو بث سحابي يدمج عدة مدخلات وهواتف في بث موحد ومتزامن، أرشفة وتسجيل تلقائي فوري للحلقات، مشغل وسائط تفاعلي يدعم 3 مسارات صوتية (عربي/هولندي/إنجليزي)، محركات الترجمة الفورية بالـ AI، ونظام رفع مقاطع الجمهور وطابور الموافقة.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 5,200</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">المرحلة 4: لوحة التحكم المركزية وبوابة المعلنين (Super-Admin & Ads Portal)</span>
+                        <div class="contract-stage-d">إدارة برامج المنصة وصلاحيات فرق الإعداد وسجل تدقيق العمليات (Audit Log)، إدارة التصويت الحصري لمشتركي باقة 5€، بوابة المعلنين لحجز مساحات إعلانية بأسعار محددة والربط المالي التلقائي، وتطبيق كامل لمعايير GDPR/AVG الأوروبية.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 3,300</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">المرحلة 5: تطبيقات الهواتف الذكية (Mobile Apps - iOS & Android)</span>
+                        <div class="contract-stage-d">تطبيق هجين موحد بنظام العرض السلس (Reader App Model) لمتجري أبل وجوجل، حماية الإيرادات وتفادي عمولة الـ 30% للمتاجر بحصر الدفع عبر الويب، ووصول كامل للمحتوى والأرشيف والبث المباشر والتنبيهات الفورية (Push Notifications).</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 3,500</div>
+                </div>
+            </div>
+
+            <!-- بطاقة التكلفة الإجمالية والضريبة -->
+            <div class="contract-totals-card">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-base">إجمالي أعمال التأسيس البرمجي (5 مراحل):</span>
+                    <strong class="font-num contract-tot-base-num">€ 21,000.00</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-vat">ضريبة القيمة المضافة بهولندا (BTW 21%):</span>
+                    <span class="font-num contract-tot-vat-num">€ 4,410.00</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2 contract-grand-row">
+                    <span class="contract-grand-title">الإجمالي النهائي الشامل للضريبة (Incl. BTW):</span>
+                    <strong class="font-num contract-grand-num">€ 25,410.00</strong>
+                </div>
+                <div class="contract-vat-note">* يُخصم كامل مبلغ ضريبة الـ BTW للشركات المسجلة في الـ Belastingdienst كمدخلات ضريبية معتمدة.</div>
+            </div>
+
+            <!-- بطاقة جدولة الدفعات (30% - 30% - 30% - 10%) -->
+            <h5 class="contract-sec-h">2. آلية الدفعات والضمان (Betalingsvoorwaarden):</h5>
+            <div class="contract-installments-grid">
+                <div class="contract-inst-card active">
+                    <div class="contract-i-h-active">الدفعة 1 (30% مقدمة)</div>
+                    <div class="font-num contract-i-val">€ 6,300</div>
+                    <div class="contract-i-txt">+ BTW = € 7,623<br>تستحق عند التوقيع لبدء التأسيس</div>
+                </div>
+                <div class="contract-inst-card">
+                    <div class="contract-i-h">الدفعة 2 (30% مرحلية)</div>
+                    <div class="font-num contract-i-val">€ 6,300</div>
+                    <div class="contract-i-txt">+ BTW<br>بعد المنصة الأساسية ومحرك القسائم</div>
+                </div>
+                <div class="contract-inst-card">
+                    <div class="contract-i-h">الدفعة 3 (30% مرحلية)</div>
+                    <div class="font-num contract-i-val">€ 6,300</div>
+                    <div class="contract-i-txt">+ BTW<br>بعد استوديو البث وبوابة المعلنين</div>
+                </div>
+                <div class="contract-inst-card">
+                    <div class="contract-i-h">الدفعة 4 (10% نهائية)</div>
+                    <div class="font-num contract-i-val">€ 2,100</div>
+                    <div class="contract-i-txt">+ BTW<br>بعد إطلاق التطبيقات واستقرارها 14 يوماً</div>
+                </div>
+            </div>
+
+            <!-- التوقيع والاعتماد الرسمي -->
+            <div class="contract-signatures-box">
+                <div class="contract-sign-col">
+                    <div class="contract-stamp-signed">✓ معتمد وموقع رسمياً</div>
+                    <div class="contract-s-org">عن الجهة المنفذة: S&R CoreSync</div>
+                    <div class="contract-s-salim">Mohammad Salim Aziza</div>
+                    <div class="contract-s-role">م. محمد سليم عزيزة — المدير التقني للشؤون الهندسية</div>
+                    <div class="contract-s-date">تاريخ التوقيع: 20 أكتوبر 2026</div>
+                </div>
+
+                <div class="contract-sign-col" id="clientSignArea">
+                    <div id="clientUnsignedBox">
+                        <div class="contract-c-org">عن العميل والجهة المالكة: NL بالعربي</div>
+                        <div class="contract-c-desc">السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)</div>
+                        <button type="button" class="btn-sign-contract" data-sr-call="signContractDigitally">
+                            ✍️ اعتماد وتوقيع العقد رقمياً (Digitale Handtekening)
+                        </button>
+                    </div>
+                    <div id="clientSignedBox" class="d-none">
+                        <div class="contract-stamp-signed contract-c-signed-stamp">✓ تم الاعتماد والتوقيع الرقمي بنجاح</div>
+                        <div class="contract-s-mudar">Mudar Abu Fasheh</div>
+                        <div class="contract-c-name">السيد مضر أبو فاشة</div>
+                        <div class="contract-c-stamp-date">تم التوثيق الرقمي: 2026-10-20 • ساري المفعول قانونياً</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراءات والمشاركة المباشرة مع السيد مضر -->
+            <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-2">
+                <button type="button" class="btn-share-wa" data-sr-call="shareContractViaWhatsApp">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
+                    <span>إرسال العقد عبر WhatsApp</span>
+                </button>
+                <button type="button" class="btn-share-email" data-sr-call="shareContractViaEmail">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>إرسال العقد عبر البريد (Email)</span>
+                </button>
+                <button type="button" class="btn-share-word" data-sr-call="exportTechnicalContractWord">
+                    <span>📄 تصدير Word (.doc)</span>
+                </button>
+                <button type="button" class="btn-share-excel" data-sr-call="exportTechnicalContractExcel">
+                    <span>📊 تصدير Excel (.xls)</span>
+                </button>
+                <button type="button" class="btn-cert-print" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1021-T1", "السيد مضر أبو فاشة (NL بالعربي)", 7623]'>
+                    💳 سداد الدفعة الأولى (30%) عبر iDEAL
+                </button>
+                <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractPdf">
+                    🖨️ چاپکردن / پاشەکەوتکردن وەک PDF رسمي
+                </button>
+                <button type="button" class="btn-cert-close" data-sr-call="closeContractOf2026Modal">
+                    داخستن
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة العقد والاتفاقية المالية والضريبية الرسمية OF-2026-1022-FIN -->
+    <div class="modal-overlay" id="contractOf2026FinModal" data-sr-backdrop-call="closeContractOf2026FinModal" dir="rtl">
+        <div class="contract-modal-card" role="dialog" aria-modal="true" aria-labelledby="contractFinModalHeaderTitle">
+            
+            <!-- ألسنة التبديل بين العقدين المالي والتقني -->
+            <div class="contract-tabs-nav">
+                <button type="button" class="contract-tab-btn" data-sr-call="switchContractModal" data-sr-args='["tech"]'>💻 1. العقد التقني والبرمجي (OF-2026-1021)</button>
+                <button type="button" class="contract-tab-btn active" data-sr-call="switchContractModal" data-sr-args='["fin"]'>📊 2. العقد المالي والضريبي (OF-2026-1022-FIN)</button>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="../assets/sr-core-emblem-official.webp" width="48" height="48" alt="S&R CoreSync" />
+                    <div>
+                        <span class="contract-tag-gold">FINANCIAL & TAX ADVISORY · BTW TERUGGAVE</span>
+                        <h4 class="mb-0 fw-bold text-white" id="contractFinModalHeaderTitle">العقد المالي والضريبي الرسمي — منصة NL بالعربي</h4>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-close-sm font-num hotline-close-btn" data-sr-call="closeContractOf2026FinModal" aria-label="Close">✕</button>
+            </div>
+
+            <div class="contract-header-banner">
+                <div>
+                    <span class="contract-desc-mint">حزمة الإدارة المحاسبية، الإقرارات الضريبية، واسترداد الـ BTW بهولندا</span>
+                    <div class="contract-sub-mint">تشمل إقرارات الضرائب الـ 4، الميزانية الختامية KvK، تسويات اشتراكات iDEAL، وفواتير المتاجر الضريبية.</div>
+                </div>
+                <div class="contract-ref-badge font-num">
+                    <div>مرجع: <strong class="text-gold">OF-2026-1022-FIN</strong></div>
+                    <div>مێژوو: <strong>20 أكتوبر 2026</strong></div>
+                    <div>الحالة: <strong class="text-emerald-status">Definitief / ملزم</strong> (خصم 50% شريك)</div>
+                </div>
+            </div>
+
+            <!-- بطاقة المفاجأة الاستراتيجية: استرداد ضريبة القيمة المضافة -->
+            <div class="fin-recovery-banner">
+                <div>
+                    <div class="fin-recovery-title">💎 المفاجأة الاستراتيجية: استرداد كامل ضريبة العقد التقني كاش لحسابك</div>
+                    <div class="fin-recovery-desc">نقوم بإعداد وتقديم ملف الاسترداد الضريبي الفوري لضريبة العقد البرمجي OF-2026-1021 لدى مصلحة الضرائب الهولندية (Belastingdienst)، مما يغطي كامل تكلفة الحزمة المحاسبية ويوفر لك فائضاً نقدياً مباشراً!</div>
+                </div>
+                <div class="fin-recovery-val">
+                    <div class="fin-recovery-val-num">€ 4,410.00</div>
+                    <div class="fin-recovery-val-lbl">مبلغ مسترد في حسابك (BTW Teruggave)</div>
+                </div>
+            </div>
+
+            <!-- شبكة أطراف العقد المالي -->
+            <div class="contract-parties-grid">
+                <div class="contract-party-box">
+                    <h5>الجهة الاستشارية والمنفذة (Dienstverlener):</h5>
+                    <strong class="contract-party-head">S&R CoreSync Solutions & Engineering</strong>
+                    <div class="contract-party-line-mt">المسؤول المالي: أ. محمد رائد كعكة (المدير العام والمالي)</div>
+                    <div class="contract-party-line">المسؤول التقني: م. محمد سليم عزيزة (المدير التقني)</div>
+                    <div class="contract-party-line">المقر: لاهاي / رايسفايك، هولندا</div>
+                </div>
+                <div class="contract-party-box">
+                    <h5>الجهة المالكة والعميل (Opdrachtgever):</h5>
+                    <strong class="contract-party-head">السيد مضر أبو فاشة</strong>
+                    <div class="contract-party-line-mt">المشروع: منصة NL بالعربي (NL bil Arabi)</div>
+                    <div class="contract-party-line">الكيان التجاري: مسجل في هولندا (KvK / Belastingdienst)</div>
+                    <div class="contract-party-line">الموقع: هولندا</div>
+                </div>
+            </div>
+
+            <!-- جدول التسليمات المالية والمحاسبية الـ 4 -->
+            <div class="mb-3">
+                <h5 class="contract-sec-h">1. محاور الخدمة المحاسبية والضريبية المعتمدة (Financiële Deliverables):</h5>
+                
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">1. استرداد ضريبة القيمة المضافة (BTW-Teruggave Belastingdienst)</span>
+                        <div class="contract-stage-d">إعداد ملف الإقرار الضريبي الخاص بتأسيس المنظومة البرمجية والمصاريف التشغيلية، وتقديمه لمصلحة الضرائب لاسترداد مبلغ € 4,410.00 كمدخلات ضريبية معتمدة ومودعة في الحساب البنكي للشركة.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">€ 4,410 كاش مسترد</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">2. أتمتة حسابات الاشتراكات (Abonnementen & iDEAL Boekhouding)</span>
+                        <div class="contract-stage-d">ربط آلي سحابي مع CoreSync ERP لمعالجة آلاف الدفعات الصغيرة عبر iDEAL (باقات 2€ و 5€)، تقييد العمليات تلقائياً وتفادي أخطاء التدقيق، وإصدار فواتير رقمية آلية لكل مشترك مطابقة للاتحاد الأوروبي.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">3. تسويات فواتير المتاجر والقسائم (Winkel Facturatie & Vouchers)</span>
+                        <div class="contract-stage-d">إصدار تقارير تسوية شهرية معتمدة PDF للمتاجر الشريكة التي تقبل قسائم باقة 5€ لتمكينها من خصم القيمة كأعباء تسويق ضريبية، واحتساب عمولات منصة NL بالعربي وتوثيقها رسمياً.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+
+                <div class="contract-stage-row">
+                    <div>
+                        <span class="contract-stage-badge">4. الإقرارات الربعية والميزانية السنوية (Kwartaalaangiften & Jaarrekening)</span>
+                        <div class="contract-stage-d">إعداد وتقديم الـ 4 إقرارات الربع سنوية لضريبة القيمة المضافة (BTW Kwartaalaangiften)، وإعداد الميزانية الختامية السنوية وتقارير الأرباح والخسائر الرسمية لتقديمها لغرفة التجارة KvK والضرائب.</div>
+                    </div>
+                    <div class="font-num contract-stage-pr">مشمول بالكامل</div>
+                </div>
+            </div>
+
+            <!-- خيارات الأسعار التنافسية المخفضة بهولندا -->
+            <h5 class="contract-sec-h">2. خطط الرسوم التنافسية المخفضة بهولندا (Concurrerende Tarieven):</h5>
+            <div class="fin-opts-grid">
+                <!-- الخيار السنوي الموصى به -->
+                <div class="fin-opt-card active">
+                    <span class="fin-opt-badge">الخيار الأوفر (خصم 50% شريك استراتيجي)</span>
+                    <div class="fin-opt-title">الحزمة السنوية الشاملة (Jaarabonnement)</div>
+                    <div class="fin-opt-price-box">
+                        <span class="fin-opt-price">€ 3,900.00</span>
+                        <span class="fin-opt-old">€ 7,800</span>
+                        <span class="fin-opt-period">/ سنوياً (+ 21% BTW)</span>
+                    </div>
+                    <div class="fin-opt-benefit">
+                        <strong>يعادل فقط € 325 شهرياً</strong> — يشمل كامل الإقرارات الـ 4 والميزانية السنوية Jaarrekening، واسترداد الضريبة الفوري. بفضل استرداد الضريبة (€ 4,410)، تكون الحزمة مجانية بالكامل للسنة الأولى مع فائض نقدي في حسابك!
+                    </div>
+                </div>
+
+                <!-- الخيار الشهري المرن -->
+                <div class="fin-opt-card">
+                    <div class="fin-opt-title">الاشتراك الشهري المرن (Maandelijks Opzegbaar)</div>
+                    <div class="fin-opt-price-box">
+                        <span class="fin-opt-price">€ 380.00</span>
+                        <span class="fin-opt-old">€ 650</span>
+                        <span class="fin-opt-period">/ شهرياً (+ 21% BTW)</span>
+                    </div>
+                    <div class="fin-opt-benefit">
+                        تخفيض 41% عن سعر السوق الهولندي. مرونة تامة في السداد شهراً بشهر مع تغطية شاملة لجميع معاملات الاشتراكات وفواتير المتاجر والإقرارات الربعية دون التزامات سنوية طويلة.
+                    </div>
+                </div>
+            </div>
+
+            <!-- بطاقة التكلفة الإجمالية للحزمة السنوية -->
+            <div class="contract-totals-card">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-base">تكلفة الحزمة المحاسبية والضريبية السنوية (بعد خصم 50%):</span>
+                    <strong class="font-num contract-tot-base-num">€ 3,900.00</strong>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="contract-tot-vat">ضريبة القيمة المضافة بهولندا (BTW 21%):</span>
+                    <span class="font-num contract-tot-vat-num">€ 819.00</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2 contract-grand-row">
+                    <span class="contract-grand-title">الإجمالي السنوي النهائي الشامل للضريبة (Incl. BTW):</span>
+                    <strong class="font-num contract-grand-num">€ 4,719.00</strong>
+                </div>
+                <div class="contract-vat-note">* بعد خصم استرداد ضريبة العقد التقني (€ 4,410.00)، تصبح التكلفة الفعلية الصافية السنوية على مشروعك فقط <strong>€ 309.00 للسنة بأكملها!</strong></div>
+            </div>
+
+            <!-- التوقيع والاعتماد الرسمي المالي -->
+            <div class="contract-signatures-box">
+                <div class="contract-sign-col">
+                    <div class="contract-stamp-signed">✓ معتمد وموقع رسمياً</div>
+                    <div class="contract-s-org">عن الإدارة المالية: S&R CoreSync</div>
+                    <div class="contract-s-raed">Mohammad Raed Kaaka</div>
+                    <div class="contract-s-role">أ. محمد رائد كعكة — المدير العام والشؤون المالية والضريبية</div>
+                    <div class="contract-s-date">تاريخ التوقيع: 20 أكتوبر 2026</div>
+                </div>
+
+                <div class="contract-sign-col" id="clientFinSignArea">
+                    <div id="clientFinUnsignedBox">
+                        <div class="contract-c-org">عن العميل والجهة المالكة: NL بالعربي</div>
+                        <div class="contract-c-desc">السيد مضر أبو فاشة (المفوض بالتوقيع والمالك التجاري)</div>
+                        <button type="button" class="btn-sign-contract" data-sr-call="signContractFinDigitally">
+                            ✍️ اعتماد وتوقيع العقد المالي رقمياً (Digitale Handtekening)
+                        </button>
+                    </div>
+                    <div id="clientFinSignedBox" class="d-none">
+                        <div class="contract-stamp-signed contract-c-signed-stamp">✓ تم الاعتماد والتوقيع الرقمي بنجاح</div>
+                        <div class="contract-s-mudar">Mudar Abu Fasheh</div>
+                        <div class="contract-c-name">السيد مضر أبو فاشة</div>
+                        <div class="contract-c-stamp-date">تم التوثيق الرقمي: 2026-10-20 • ساري المفعول قانونياً</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراءات والمشاركة المباشرة -->
+            <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 pt-2">
+                <button type="button" class="btn-share-wa" data-sr-call="shareContractFinViaWhatsApp">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/></svg>
+                    <span>إرسال العقد المالي عبر WhatsApp</span>
+                </button>
+                <button type="button" class="btn-share-email" data-sr-call="shareContractFinViaEmail">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>إرسال العقد المالي عبر البريد (Email)</span>
+                </button>
+                <button type="button" class="btn-share-word" data-sr-call="exportFinancialContractWord">
+                    <span>📄 تصدير Word (.doc)</span>
+                </button>
+                <button type="button" class="btn-share-excel" data-sr-call="exportFinancialContractExcel">
+                    <span>📊 تصدير Excel (.xls)</span>
+                </button>
+                <button type="button" class="btn-cert-print" data-sr-call="openIdealSimulatorModal" data-sr-args='["OF-2026-1022-FIN", "السيد مضر أبو فاشة (NL بالعربي - العقد المالي)", 4719]'>
+                    💳 سداد الحزمة السنوية (€ 4,719) عبر iDEAL
+                </button>
+                <button type="button" class="btn-cert-print" data-sr-call="printOfficialContractFinPdf">
+                    🖨️ چاپکردن / پاشەکەوتکردن وەک PDF رسمي
+                </button>
+                <button type="button" class="btn-cert-close" data-sr-call="closeContractOf2026FinModal">
+                    داخستن
+                </button>
+            </div>
+        </div>
     </div>
 
 
 <script id="sovereignFeaturesLogic">
+// Feature 2: Live ROI Calculator Logic
 function calcPortalRoi() {
     const teamEl = document.getElementById('slideRoiTeam');
     const hoursEl = document.getElementById('slideRoiHours');
@@ -4032,15 +4723,18 @@ function calcPortalRoi() {
     const hours = parseInt(hoursEl.value) || 18;
     const cost = parseInt(costEl.value) || 45;
 
+    // Display updates
     const dispTeam = document.getElementById('dispRoiTeam');
-    if (dispTeam) dispTeam.innerText = team + ' ' + 'کارمەند';
+    if (dispTeam) dispTeam.innerText = team + ' ' + (document.documentElement.lang === 'ar' ? 'موظف' : 'staff');
 
     const dispHours = document.getElementById('dispRoiHours');
-    if (dispHours) dispHours.innerText = hours + ' ' + 'کاتژمێر/هەفتە';
+    if (dispHours) dispHours.innerText = hours + ' ' + (document.documentElement.lang === 'ar' ? 'ساعة/أسبوع' : 'hrs/wk');
 
     const dispCost = document.getElementById('dispRoiCost');
-    if (dispCost) dispCost.innerText = '€ ' + cost + ' / کاتژمێر';
+    if (dispCost) dispCost.innerText = '€ ' + cost + ' / ' + (document.documentElement.lang === 'ar' ? 'ساعة' : 'hr');
 
+    // Formulas:
+    // CoreSync automates ~75% of manual operational hours
     const hoursSavedYear = Math.round(hours * 52 * 0.75);
     const savingsYear = Math.round(hoursSavedYear * cost);
     const roiPercent = Math.min(1450, Math.max(340, Math.round((savingsYear / 4200) * 100)));
@@ -4049,12 +4743,13 @@ function calcPortalRoi() {
     if (resSavings) resSavings.innerText = '€ ' + savingsYear.toLocaleString();
 
     const resHours = document.getElementById('resRoiHours');
-    if (resHours) resHours.innerText = hoursSavedYear.toLocaleString() + ' ' + 'کاتژمێر';
+    if (resHours) resHours.innerText = hoursSavedYear.toLocaleString() + ' ' + (document.documentElement.lang === 'ar' ? 'ساعة' : 'hours');
 
     const resYield = document.getElementById('resRoiYield');
     if (resYield) resYield.innerText = roiPercent + '% Net';
 }
 
+// Feature 3: Toggle Hotline Widget & Localize WhatsApp Messages
 function toggleHotlineWidget(e) {
     if (e) e.stopPropagation();
     const widget = document.getElementById('sovereignHotlineWidget');
@@ -4069,10 +4764,11 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Configure localized WhatsApp message on load
 
 function openRoiCertModal() {
     const clientNameInput = document.getElementById('quickClientNameInput');
-    const name = clientNameInput && clientNameInput.value ? clientNameInput.value.trim() : 'گرووپی هاوبەشی دامەزراوەیی';
+    const name = clientNameInput && clientNameInput.value ? clientNameInput.value.trim() : 'المجموعة الشريكة المؤسسية';
     const dispEl = document.getElementById('certClientNameDisplay');
     if (dispEl) dispEl.innerText = name;
 
@@ -4097,8 +4793,8 @@ function closeRoiCertModal() {
     if (modal) modal.classList.remove('active');
 }
 
-let selectedBookingTopic = '☁️ تەلارسازی Cloud ERP';
-let selectedBookingHost = 'ئەندازیار Mohammad Salim Aziza (CTO)';
+let selectedBookingTopic = '☁️ معمارية Cloud ERP السحابية';
+let selectedBookingHost = 'م. محمد سليم عزيزة (CTO)';
 let selectedBookingSlot = '09:30 CET';
 
 function openStrategicBookingModal() {
@@ -4139,7 +4835,7 @@ function confirmBookingAndOpenWa() {
     if (summary) summary.innerText = `${selectedBookingTopic} | ${selectedBookingHost} | ${selectedBookingSlot}`;
 
     const phone = selectedBookingHost.includes('Raed') ? '31687710290' : '31618111116';
-    const text = encodeURIComponent(`سڵاو، دەمەوێت کاتی دانیشتنی ڕاوێژکاری ستراتیژی لەگەڵ S&R CoreSync پشتڕاست بکەمەوە:\n- ${selectedBookingTopic}\n- ${selectedBookingHost}\n- ${selectedBookingSlot}`);
+    const text = encodeURIComponent(`مرحباً، أود تأكيد موعد جلسة استشارية استراتيجية مع S&R CoreSync:\n- ${selectedBookingTopic}\n- ${selectedBookingHost}\n- ${selectedBookingSlot}`);
     setTimeout(() => {
         window.open(`https://wa.me/${phone}?text=${text}`, '_blank', 'noopener,noreferrer');
     }, 600);
@@ -4150,11 +4846,11 @@ function runComplianceAuditScanner() {
     const status = document.getElementById('auditStatusText');
     if (!btn || !status) return;
     btn.disabled = true;
-    btn.innerText = '⏳ پشکنینی پابەندبوون لە کاردایە...';
+    btn.innerText = '⏳ جاري فحص الامتثال والسيادة...';
     setTimeout(() => {
         btn.disabled = false;
-        btn.innerText = '✓ پشکنین ١٠٠٪ سەرکەوتوو بوو';
-        status.innerHTML = '🟢 <strong>دۆخی پشکنین: ١٠٠٪ پەسەندکراو</strong> — هیچ کێشەیەکی پابەندبوون لە تۆڕەکەدا نەدۆزراوەتەوە.';
+        btn.innerText = '✓ تم التحقق بنسبة 100%';
+        status.innerHTML = '🟢 <strong>حالة التدقيق: معتمد 100%</strong> — لم يتم رصد أي ثغرات امتثال أو أمان على الشبكة.';
     }, 800);
 }
 
@@ -4169,7 +4865,7 @@ function calcMigrationEstimator() {
     const range = document.getElementById('slideMigVolume');
     const vol = range ? parseInt(range.value, 10) : 250;
     const disp = document.getElementById('dispMigVolume');
-    if (disp) disp.innerText = `${vol} گێگابایت`;
+    if (disp) disp.innerText = `${vol} جيجابايت`;
 
     const activeSysBtn = document.querySelector('.migration-systems-row .migration-sys-btn.active');
     const sys = activeSysBtn ? activeSysBtn.innerText : 'SAP';
@@ -4187,18 +4883,503 @@ function calcMigrationEstimator() {
     if (valSavings) valSavings.innerText = `-${savings}%`;
 }
 
+// -------------------------------------------------------------
+// Official Contracts Logic (NL bil Arabi - Mudar Abu Fasheh)
+// Technical: OF-2026-1021 | Financial: OF-2026-1022-FIN
+// -------------------------------------------------------------
+function switchContractModal(type) {
+    if (type === 'fin') {
+        closeContractOf2026Modal();
+        openContractOf2026FinModal();
+    } else {
+        closeContractOf2026FinModal();
+        openContractOf2026Modal();
+    }
+}
+
+function openContractOf2026Modal() {
+    const modal = document.getElementById('contractOf2026Modal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeContractOf2026Modal() {
+    const modal = document.getElementById('contractOf2026Modal');
+    if (modal) modal.classList.remove('active');
+}
+
+let isContractOf2026Signed = false;
+
+function signContractDigitally() {
+    isContractOf2026Signed = true;
+    const unsignedBox = document.getElementById('clientUnsignedBox');
+    const signedBox = document.getElementById('clientSignedBox');
+    if (unsignedBox) unsignedBox.classList.add('d-none');
+    if (signedBox) signedBox.classList.remove('d-none');
+
+    const statusBadge = document.getElementById('status-badge-inv-1021');
+    if (statusBadge) {
+        statusBadge.className = 'status-badge status-completed';
+        statusBadge.innerText = 'تم التوقيع والاعتماد رقمياً ✓';
+    }
+
+    showPortalToast('✓ تم اعتماد وتوقيع العقد التقني رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
+}
+
+function getOfficialShareUrl(contractRef) {
+    return `https://sr-coresync.com/demo.html?client=mudar&contract=${contractRef}#invoices`;
+}
+
+function getOfficialPdfUrl(contractRef) {
+    if (contractRef === 'OF-2026-1022-FIN') {
+        return `https://sr-coresync.com/contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN`;
+    }
+    return `https://sr-coresync.com/contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021`;
+}
+
+const CLIENT_MUDAR_EMAIL = 'mudar@nlbilarabi.nl';
+const CLIENT_MUDAR_PHONE = '31631069433'; // +31 6 31069433 (السيد مضر أبو فاشة)
+
+function shareContractViaWhatsApp() {
+    const portalUrl = getOfficialShareUrl('OF-2026-1021');
+    const contractPdfUrl = getOfficialPdfUrl('OF-2026-1021');
+    const rawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العقد التجاري الرسمي المعتمد لتطوير منصة NL بالعربي (مرجع: OF-2026-1021) بقيمة 21,000 € عبر بوابة S&R CoreSync Solutions في هولندا.\n\n📄 رابط معاينة العقد الرسمي (کۆپیکردنة A4 موثقة):\n${contractPdfUrl}\n\n✍️ رابط التوقيع الرقمي وسداد الدفعة الأولى عبر iDEAL:\n${portalUrl}\n\nمع أطيب التحيات،\nم. محمد سليم عزيزة - S&R CoreSync Solutions`;
+    const text = encodeURIComponent(rawMsg);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(rawMsg).catch(() => {});
+    }
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = `whatsapp://send?phone=${CLIENT_MUDAR_PHONE}&text=${text}`;
+        setTimeout(() => {
+            window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${text}`, '_blank');
+        }, 600);
+    } else {
+        const waWebUrl = `https://web.whatsapp.com/send?phone=${CLIENT_MUDAR_PHONE}&text=${text}`;
+        const win = window.open(waWebUrl, '_blank');
+        if (!win || win.closed) {
+            window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${text}`, '_blank');
+        }
+    }
+    showPortalToast('✓ جاري فتح واتساب مع السيد مضر (+31631069433) وتم کۆپیکردن نص الرسالة والرابط للحافظة!');
+}
+
+const SR_CONTRACT_ENDPOINT = 'https://sr-lead-capture.sr-coresync.workers.dev/contract';
+
+function extractContractBodyText(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return '';
+    const card = modal.querySelector('.contract-modal-card') || modal;
+    const clone = card.cloneNode(true);
+    clone.querySelectorAll('button, .contract-tabs-nav, script, style').forEach(function (node) {
+        if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    return (clone.innerText || clone.textContent || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+}
+
+async function deliverContractEmail(ref, modalId, heading, subjectLine) {
+    const bodyText = extractContractBodyText(modalId);
+    if (bodyText.length < 40) {
+        showPortalToast('⚠️ تعذّر قراءة نص العقد. افتح تبويب العقد ثم أعد المحاولة.');
+        return;
+    }
+
+    const fullText = heading + '\n' + '='.repeat(52) + '\n\n' + bodyText +
+        '\n\n— — —\nS&R CoreSync Solutions & Engineering\nDen Haag / Rijswijk, The Netherlands\ninfo@sr-coresync.nl';
+    const subject = subjectLine + ' (' + ref + ')';
+    showPortalToast('⏳ جاري إرسال نص العقد كاملاً إلى ' + CLIENT_MUDAR_EMAIL + ' …');
+
+    let sent = false;
+    try {
+        const controller = new AbortController();
+        const timer = setTimeout(function () { controller.abort(); }, 15000);
+        const res = await fetch(SR_CONTRACT_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ to: CLIENT_MUDAR_EMAIL, subject: subject, text: fullText, contractRef: ref, attach: true }),
+            signal: controller.signal
+        });
+        clearTimeout(timer);
+        const data = await res.json().catch(function () { return {}; });
+        sent = res.ok && data.status === 'success';
+        if (!sent) console.warn('Contract email rejected:', res.status, data.reason || data.message);
+    } catch (err) {
+        console.warn('Contract email failed:', err && err.message);
+    }
+
+    if (sent) {
+        showPortalToast('✅ تم إرسال نص العقد كاملاً + ملف PDF إلى ' + CLIENT_MUDAR_EMAIL + ' بنجاح.');
+        return;
+    }
+
+    try {
+        if (navigator.clipboard) await navigator.clipboard.writeText(fullText);
+    } catch (e) { /* ignore */ }
+
+    const shortBody = 'نص العقد الكامل منسوخ في الحافظة — اضغط Ctrl+V داخل هذا البريد للصقه كاملاً.\n\n' +
+        'معاينة العقد: ' + getOfficialPdfUrl(ref) + '\n' +
+        'بوابة التوقيع: ' + getOfficialShareUrl(ref);
+    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(CLIENT_MUDAR_EMAIL) +
+        '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(shortBody);
+    window.open(gmailUrl, '_blank');
+    showPortalToast('📋 نُسخ نص العقد كاملاً. في نافذة Gmail اضغط Ctrl+V ثم أرسل.');
+}
+
+function shareContractViaEmail() {
+    deliverContractEmail('OF-2026-1021', 'contractOf2026Modal',
+        'وثيقة العقد التجاري الرسمي المعتمد — منصة NL بالعربي',
+        'وثيقة العقد التجاري الرسمي المعتمد');
+}
+
+function printOfficialContractPdf() {
+    const signedParam = isContractOf2026Signed ? 'true' : 'false';
+    const printUrl = `contract-of2026-pdf.html?client=mudar&contract=OF-2026-1021&signed=${signedParam}&print=true`;
+    window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
+}
+
+function exportTechnicalContractWord() {
+    const html = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+    <head><meta charset='utf-8'><title>العقد التجاري الرسمي OF-2026-1021</title>
+    <style>body{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;font-size:11pt;line-height:1.5;color:#1e293b;}table{border-collapse:collapse;width:100%;margin:15px 0;}th,td{border:1px solid #cbd5e1;padding:8px 10px;font-size:10pt;}th{background:#f1f5f9;font-weight:bold;text-align:right;}.price{direction:ltr;text-align:left;font-weight:bold;}.banner{background:#0f172a;color:#fbf5b7;padding:10px;font-weight:bold;font-size:13pt;}.total{background:#f8fafc;border:2px solid #b38728;padding:12px;margin:15px 0;}</style>
+    </head><body>
+    <h2>S&R CoreSync Solutions & Engineering (The Netherlands)</h2>
+    <div class='banner'>OFFICIËLE OFFERTE & OVEREENKOMST · عقد تجاري رسمي معتمد (OF-2026-1021)</div>
+    <p><strong>الطرف الأول:</strong> S&R CoreSync Solutions — المفوض: م. محمد سليم عزيزة</p>
+    <p><strong>الطرف الثاني:</strong> السيد مضر أبو فاشة — مشروع: منصة NL بالعربي في هولندا</p>
+    <h3>مراحل التطوير البرمجي الـ 5:</h3>
+    <table>
+    <tr><th>المرحلة</th><th>التسليمات الفنية</th><th>القيمة (EUR)</th></tr>
+    <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية تحتية سحابية، باقات 2€ و 5€، بوابة iDEAL</td><td class='price'>€ 4,800.00</td></tr>
+    <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم QR، ربط WhatsApp، بوابة مسح للمتاجر</td><td class='price'>€ 4,200.00</td></tr>
+    <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، 3 مسارات صوتية، ترجمة فورية AI</td><td class='price'>€ 5,200.00</td></tr>
+    <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات، معايير GDPR</td><td class='price'>€ 3,300.00</td></tr>
+    <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بنظام Reader App لتفادي عمولة الـ 30%</td><td class='price'>€ 3,500.00</td></tr>
+    </table>
+    <div class='total'>
+    <p>صافي التأسيس البرمجي: <strong>€ 21,000.00</strong> | ضريبة BTW 21%: <strong>€ 4,410.00</strong></p>
+    <p style='font-size:13pt;color:#059669;'>الإجمالي التعاقدي الشامل للضريبة: <strong>€ 25,410.00</strong></p>
+    <p><small>* تسترد كامل الضريبة (4,410 €) كاش من Belastingdienst.</small></p>
+    </div>
+    <p><strong>الاعتماد والتوقيع:</strong> معتمد وموقع رسمياً من م. محمد سليم عزيزة والسيد مضر أبو فاشة.</p>
+    <!-- Apple macOS Sovereign Language & Flags Dock -->
+<aside class="apple-macos-dock-wrapper" id="appleMacosDockWrapper" aria-label="Sovereign Language Quick Dock">
+    <div class="apple-macos-dock" id="appleMacosDock">
+        <a href="./de/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
+            <img src="../assets/flags/de.png" alt="DE" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./fr/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
+            <img src="../assets/flags/fr.png" alt="FR" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./nl/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
+            <img src="../assets/flags/nl.png" alt="NL" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./en/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
+            <img src="../assets/flags/gb.png" alt="EN" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./es/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
+            <img src="../assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./demo.html" class="apple-dock-item active" onclick="try{localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
+            <img src="../assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <a href="./tr/demo.html" class="apple-dock-item" onclick="try{localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
+            <img src="../assets/flags/tr.png" alt="TR" class="apple-dock-flag" width="28" height="19">
+            <span class="apple-dock-dot"></span>
+        </a>
+        <div class="apple-dock-separator"></div>
+        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="جميع اللغات الـ 28 (Launchpad)" aria-label="Open Full 28 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="apple-dock-badge">28</span>
+            <span class="apple-dock-dot" style="opacity:0;"></span>
+        </button>
+    </div>
+</aside>
+</body></html>`;
+    const blob = new Blob(['\\ufeff', html], { type: 'application/msword;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-Contract-OF-2026-1021-Mudar.doc';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير مستند Word (.doc) بنجاح!');
+}
+
+function exportTechnicalContractExcel() {
+    const rows = `
+    <tr><th colspan="3" style="background:#0a2540;color:#fbf5b7;font-size:13pt;padding:10px;">S&R CoreSync Solutions — جدول التكاليف البرمجية (OF-2026-1021)</th></tr>
+    <tr><th colspan="3" style="background:#f1f5f9;">العميل: السيد مضر أبو فاشة (NL بالعربي) — مێژوو: 2026-10-20</th></tr>
+    <tr><th style="background:#1e293b;color:#fff;">المرحلة البرمجية</th><th style="background:#1e293b;color:#fff;">التسليمات الفنية</th><th style="background:#1e293b;color:#fff;">القيمة باليورو (EUR)</th></tr>
+    <tr><td>المرحلة 1: المنصة والاشتراكات</td><td>بنية سحابية، باقات 2€ و 5€، دفع iDEAL</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4800.00</td></tr>
+    <tr><td>المرحلة 2: محرك القسائم والمتاجر</td><td>قسائم QR، ربط WhatsApp، بوابة مسح للمتاجر</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4200.00</td></tr>
+    <tr><td>المرحلة 3: البث الحي والترجمة AI</td><td>استوديو سحابي، ترجمة AI فورية 3 لغات</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">5200.00</td></tr>
+    <tr><td>المرحلة 4: لوحة الإدارة والإعلانات</td><td>Super-Admin كامل، محرك رعايات، GDPR</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3300.00</td></tr>
+    <tr><td>المرحلة 5: تطبيقات الهواتف</td><td>iOS و Android بدون عمولة 30% للمتاجر</td><td style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3500.00</td></tr>
+    <tr><th colspan="2" style="text-align:right;">صافي أعمال التأسيس البرمجي:</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">21000.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4410.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;">الإجمالي الشامل للضريبة (Incl. BTW):</th><th style="text-align:left;background:#059669;color:#fff;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">25410.00</th></tr>
+    `;
+    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8">
+    <style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
+    const blob = new Blob(['\\ufeff', excel], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialSchedule-OF-2026-1021.xls';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير جدول Excel (.xls) بنجاح!');
+}
+
+function exportFinancialContractWord() {
+    const html = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+    <head><meta charset='utf-8'><title>العقد المالي والضريبي الرسمي OF-2026-1022-FIN</title>
+    <style>body{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;font-size:11pt;line-height:1.5;color:#1e293b;}table{border-collapse:collapse;width:100%;margin:15px 0;}th,td{border:1px solid #cbd5e1;padding:8px 10px;font-size:10pt;}th{background:#f1f5f9;font-weight:bold;text-align:right;}.price{direction:ltr;text-align:left;font-weight:bold;color:#059669;}.tax{background:#fffbeb;border:2px solid #f59e0b;padding:12px;margin:15px 0;}.total{background:#f8fafc;border:2px solid #059669;padding:12px;margin:15px 0;}</style>
+    </head><body>
+    <h2>S&R CoreSync Solutions & Engineering (The Netherlands)</h2>
+    <div style='background:#0f172a;color:#fbf5b7;padding:10px;font-weight:bold;font-size:13pt;'>OFFICIËLE OFFERTE · عقد الإدارة المحاسبية والضريبية الرسمي (OF-2026-1022-FIN)</div>
+    <div class='tax'>
+    <h3 style='color:#b45309;margin-top:0;'>💎 استرداد كامل ضريبة العقد البرمجي: 4,410.00 € كاش في حسابكم</h3>
+    <p>ملف الاسترداد الضريبي لدى مصلحة الضرائب الهولندية Belastingdienst يغطي كامل تكلفة المحاسبة السنوية ويوفر فائضاً نقدياً مباشراً!</p>
+    </div>
+    <p><strong>الجهة الاستشارية:</strong> S&R CoreSync Solutions — المفوض المالي: أ. محمد رائد كعكة</p>
+    <p><strong>الجهة المالكة والعميل:</strong> السيد مضر أبو فاشة — مشروع: منصة NL بالعربي في هولندا</p>
+    <h3>الخدمات المالية والمحاسبية المعتمدة:</h3>
+    <table>
+    <tr><th>محور الخدمة</th><th>التفاصيل الفنية بهولندا</th><th>القيمة المستردة</th></tr>
+    <tr><td>1. استرداد ضريبة BTW</td><td>تقديم ملف الإقرار لدى Belastingdienst لاسترداد 4,410 € كاش</td><td class='price'>€ 4,410.00 مسترد</td></tr>
+    <tr><td>2. أتمتة حسابات الاشتراكات</td><td>ربط سحابي عبر CoreSync ERP لدفعات iDEAL لباقات 2€ و 5€</td><td class='price'>مشمول بالكامل</td></tr>
+    <tr><td>3. تسويات فواتير المتاجر</td><td>تقارير تسوية شهرية PDF لتمكين المتاجر من خصم القسائم ضريبياً</td><td class='price'>مشمول بالكامل</td></tr>
+    <tr><td>4. الإقرارات والميزانية السنوية</td><td>تقديم الإقرارات الـ 4 والميزانية الختامية لدى KvK والضرائب</td><td class='price'>مشمول بالكامل</td></tr>
+    </table>
+    <div class='total'>
+    <p>تكلفة الحزمة السنوية (بعد خصم 50% شريك استراتيجي): <strong>€ 3,900.00 / سنة</strong> (325 € شهرياً)</p>
+    <p>ضريبة BTW 21%: <strong>€ 819.00</strong> | الإجمالي الشامل: <strong>€ 4,719.00</strong></p>
+    <p><strong style='color:#b45309;'>* التكلفة الفعلية الصافية: بعد خصم استرداد الضريبة (4,410 €)، لا يدفع مشروعكم سوى 309 € فقط للسنة بأكملها!</strong></p>
+    </div>
+    <p><strong>الاعتماد والتوقيع:</strong> معتمد وموقع رسمياً من أ. محمد رائد كعكة والسيد مضر أبو فاشة.</p>
+    </body></html>`;
+    const blob = new Blob(['\\ufeff', html], { type: 'application/msword;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialContract-OF-2026-1022-FIN.doc';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير عقد Word (.doc) المالي بنجاح!');
+}
+
+function exportFinancialContractExcel() {
+    const rows = `
+    <tr><th colspan="3" style="background:#0a2540;color:#fbf5b7;font-size:13pt;padding:10px;">S&R CoreSync Solutions — العرض المالي والضريبي الرسمي (OF-2026-1022-FIN)</th></tr>
+    <tr><th colspan="3" style="background:#f1f5f9;">العميل: السيد مضر أبو فاشة (NL بالعربي) — مێژوو: 2026-10-20</th></tr>
+    <tr><th style="background:#1e293b;color:#fff;">محور الخدمة المالية والمحاسبية</th><th style="background:#1e293b;color:#fff;">المعايير المعتمدة بهولندا</th><th style="background:#1e293b;color:#fff;">القيمة باليورو (EUR)</th></tr>
+    <tr><td>1. استرداد ضريبة القيمة المضافة (BTW Teruggave)</td><td>استرداد فوري كاش من Belastingdienst لضريبة العقد التقني</td><td style="text-align:left;color:#059669;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4410.00</td></tr>
+    <tr><td>2. أتمتة حسابات الاشتراكات الرقمية</td><td>معالجة سحابية لآلاف عمليات iDEAL شهرياً</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><td>3. تسويات فواتير المتاجر والقسائم QR</td><td>تقارير تسوية شهرية PDF لخصمها ضريبياً للمتاجر</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><td>4. إقرارات BTW الـ 4 والميزانية السنوية</td><td>تقديم رسمي لغرفة التجارة KvK ومصلحة الضرائب</td><td style="text-align:left;">مشمول بالكامل</td></tr>
+    <tr><th colspan="2" style="text-align:right;">تكلفة الحزمة السنوية المخفضة (خصم 50%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">3900.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">819.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;">الإجمالي السنوي النهائي الشامل للضريبة:</th><th style="text-align:left;background:#059669;color:#fff;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4719.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#fef3c7;color:#92400e;">استرداد ضريبة العقد التقني الكاش المودع بحسابكم:</th><th style="text-align:left;background:#fef3c7;color:#047857;font-weight:bold;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">-4410.00</th></tr>
+    <tr><th colspan="2" style="text-align:right;background:#ecfdf5;color:#065f46;font-size:11pt;">التكلفة الفعلية الصافية السنوية على المشروع:</th><th style="text-align:left;background:#ecfdf5;color:#065f46;font-size:11pt;font-weight:bold;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">309.00</th></tr>
+    `;
+    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
+    const blob = new Blob(['\\ufeff', excel], { type: 'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'SR-CoreSync-FinancialSchedule-OF-2026-1022-FIN.xls';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showPortalToast('✓ تم تصدير جدول Excel (.xls) المالي بنجاح!');
+}
+
+// -------------------------------------------------------------
+// Official Financial Contract OF-2026-1022-FIN Logic
+// -------------------------------------------------------------
+function openContractOf2026FinModal() {
+    const modal = document.getElementById('contractOf2026FinModal');
+    if (modal) modal.classList.add('active');
+}
+
+function closeContractOf2026FinModal() {
+    const modal = document.getElementById('contractOf2026FinModal');
+    if (modal) modal.classList.remove('active');
+}
+
+let isContractOf2026FinSigned = false;
+
+function signContractFinDigitally() {
+    isContractOf2026FinSigned = true;
+    const unsignedBox = document.getElementById('clientFinUnsignedBox');
+    const signedBox = document.getElementById('clientFinSignedBox');
+    if (unsignedBox) unsignedBox.classList.add('d-none');
+    if (signedBox) signedBox.classList.remove('d-none');
+
+    const statusBadge = document.getElementById('status-badge-inv-1022');
+    if (statusBadge) {
+        statusBadge.className = 'status-badge status-completed';
+        statusBadge.innerText = 'تم التوقيع والاعتماد رقمياً ✓';
+    }
+
+    showPortalToast('✓ تم اعتماد وتوقيع العقد المالي والضريبي رقمياً بنجاح من قبل السيد مضر أبو فاشة!');
+}
+
+function shareContractFinViaWhatsApp() {
+    const portalUrl = getOfficialShareUrl('OF-2026-1022-FIN');
+    const contractPdfUrl = getOfficialPdfUrl('OF-2026-1022-FIN');
+    const rawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد كامل ضريبة الـ BTW (4,410 €) كاش من Belastingdienst بتخفيض شريك استثنائي 50%.\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nمع أطيب التحيات،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية\nS&R CoreSync Solutions & Engineering\n+31 6 8771 0290`;
+    const text = encodeURIComponent(rawMsg);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(rawMsg).catch(() => {});
+    }
+
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+        window.location.href = `whatsapp://send?phone=${CLIENT_MUDAR_PHONE}&text=${text}`;
+        setTimeout(() => {
+            window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${text}`, '_blank');
+        }, 600);
+    } else {
+        const waWebUrl = `https://web.whatsapp.com/send?phone=${CLIENT_MUDAR_PHONE}&text=${text}`;
+        const win = window.open(waWebUrl, '_blank');
+        if (!win || win.closed) {
+            window.open(`https://wa.me/${CLIENT_MUDAR_PHONE}?text=${text}`, '_blank');
+        }
+    }
+    showPortalToast('✓ جاري فتح واتساب مع السيد مضر (+31631069433) وتم کۆپیکردن نص الرسالة والرابط للحافظة!');
+}
+
+function shareContractFinViaEmail() {
+    deliverContractEmail('OF-2026-1022-FIN', 'contractOf2026FinModal',
+        'وثيقة العقد المالي والضريبي الرسمي — منصة NL بالعربي',
+        'وثيقة العقد المالي والضريبي الرسمي');
+}
+
+function printOfficialContractFinPdf() {
+    const signedParam = isContractOf2026FinSigned ? 'true' : 'false';
+    const printUrl = `contract-of2026-fin-pdf.html?client=mudar&contract=OF-2026-1022-FIN&signed=${signedParam}&print=true`;
+    window.open(printUrl, '_blank', 'width=1000,height=900,menubar=yes,toolbar=yes');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    const lang = document.documentElement.lang || 'ar';
+    const greetings = {
+        'de': 'Guten Tag Eng. Salim, ich interessiere mich für das S&R CoreSync ERP-System für mein Unternehmen...',
+        'fr': 'Bonjour Ing. Salim, je souhaite obtenir des informations sur S&R CoreSync ERP pour mon entreprise...',
+        'tr': 'Merhaba Salim Bey, şirketim için S&R CoreSync ERP sistemi hakkında bilgi almak istiyorum...',
+        'sv': 'Hej Salim, jag är intresserad av S&R CoreSync ERP-systemet för mitt företag...',
+        'no': 'Hei Salim, jeg er interessert i S&R CoreSync ERP-systemet for min bedrift...',
+        'ku': 'Silav Salim Beg, ez dixwazim li ser pergala S&R CoreSync ERP agahdarî bistînim ji bo karsaziya xwe...',
+        'ckb': 'سڵاو ئەندازیار سەلیم، ئارەزووی وەرگرتنی زانیاریم هەیە سەبارەت بە سیستەمی S&R CoreSync ERP بۆ کۆمپانیاکەمان...',
+        'nl': 'Hallo Eng. Salim, ik heb interesse in het S&R CoreSync ERP-systeem voor mijn onderneming...',
+        'ar': 'مرحباً م. سليم، أود مناقشة اعتماد بنية S&R CoreSync ERP وحجز استشارة تنفيذية لشركتنا...',
+        'en': 'Hello Eng. Salim, I would like to consult on deploying S&R CoreSync ERP for my enterprise...'
+    };
+
+    const msg = greetings[lang] || greetings['en'];
     const waSalim = document.getElementById('btnHotlineWaSalim');
-    if (waSalim) waSalim.href = 'https://wa.me/31618111116?text=' + encodeURIComponent('سڵاو ئەندازیار سەلیم، ئارەزووی وەرگرتنی زانیاریم هەیە سەبارەت بە سیستەمی S&R CoreSync ERP بۆ کۆمپانیاکەمان...');
+    if (waSalim) waSalim.href = 'https://wa.me/31618111116?text=' + encodeURIComponent(msg);
 
     const waRaed = document.getElementById('btnHotlineWaRaed');
-    if (waRaed) waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent('سڵاو ئەندازیار سەلیم، ئارەزووی وەرگرتنی زانیاریم هەیە سەبارەت بە سیستەمی S&R CoreSync ERP بۆ کۆمپانیاکەمان...');
+    if (waRaed) {
+        const msgRaed = msg.replace('Salim', 'Raed').replace('سليم', 'رائد');
+        waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent(msgRaed);
+    }
+
+    const triggerText = document.getElementById('hotlineTriggerText');
+    if (triggerText) {
+        if (lang === 'ar') triggerText.innerText = '💬 تواصل مع المؤسسين';
+        else if (lang === 'ckb') triggerText.innerText = '💬 پەیوەندی بە دامەزرێنەران';
+        else if (lang === 'de') triggerText.innerText = '💬 Gründer-Hotline';
+        else if (lang === 'fr') triggerText.innerText = '💬 Ligne Directe Fondateurs';
+        else if (lang === 'tr') triggerText.innerText = '💬 Kurucu Hattı';
+        else if (lang === 'nl') triggerText.innerText = '💬 Contact Oprichters';
+        else triggerText.innerText = '💬 Founder Hotline';
+    }
 
     calcPortalRoi();
     calcMigrationEstimator();
-});
-</script>
+    calcCloudSizing();
 
-<script src="../js/sr-events.js" defer></script>
+    // Check URL parameters for contract activation
+    const urlParams = new URLSearchParams(window.location.search);
+    const contractParam = urlParams.get('contract');
+    if (contractParam === 'OF-2026-1022-FIN') {
+        const clientInput = document.getElementById('quickClientNameInput');
+        if (clientInput) clientInput.value = 'منصة NL بالعربي (السيد مضر أبو فاشة - العقد المالي)';
+        if (typeof switchPortalTab === 'function') switchPortalTab('invoices');
+        setTimeout(openContractOf2026FinModal, 400);
+    } else if (contractParam === 'OF-2026-1021' || urlParams.get('client') === 'mudar' || urlParams.get('client') === 'NL_bil_Arabi') {
+        const clientInput = document.getElementById('quickClientNameInput');
+        if (clientInput) clientInput.value = 'منصة NL بالعربي (السيد مضر أبو فاشة)';
+        if (typeof switchPortalTab === 'function') switchPortalTab('invoices');
+        setTimeout(openContractOf2026Modal, 400);
+    }
+});
+
+function calcCloudSizing() {
+    const subRange = document.getElementById('slideSubscribersCount');
+    const hrRange = document.getElementById('slideStreamHours');
+    if (!subRange || !hrRange) return;
+
+    const subs = parseInt(subRange.value, 10) || 5000;
+    const hours = parseInt(hrRange.value, 10) || 10;
+
+    const dispSubs = document.getElementById('dispSubscribersCount');
+    if (dispSubs) dispSubs.innerText = subs.toLocaleString() + ' مشترك';
+
+    const dispHours = document.getElementById('dispStreamHours');
+    if (dispHours) dispHours.innerText = hours + ' ساعات/أسبوع';
+
+    let vCpu = subs > 20000 ? 16 : subs > 8000 ? 8 : 4;
+    let ram = subs > 20000 ? 64 : subs > 8000 ? 32 : 16;
+    let serverSpec = `Cloud Dedicated (${vCpu} vCPU / ${ram} GB)`;
+
+    let bwTb = ((subs * 0.25 * hours * 4 * 0.45) / 1000).toFixed(1);
+    if (parseFloat(bwTb) < 1.0) bwTb = '1.2';
+
+    let cost = Math.round(vCpu * 8 + ram * 1.2 + parseFloat(bwTb) * 4);
+
+    const specEl = document.getElementById('resCloudServerSpec');
+    if (specEl) specEl.innerText = serverSpec;
+
+    const bwEl = document.getElementById('resCloudBandwidth');
+    if (bwEl) bwEl.innerText = `${bwTb} TB / شهر`;
+
+    const costEl = document.getElementById('resCloudCost');
+    if (costEl) costEl.innerText = `€ ${cost} / شهر`;
+}
+</script>
+<script src="./js/sr-software-apps.js"></script>
+
+<script src="./js/sr-events.js" defer></script>
 </body>
 </html>
