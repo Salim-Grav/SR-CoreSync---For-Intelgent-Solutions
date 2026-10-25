@@ -13,7 +13,7 @@
 
 | المنصة | المعرف الموحد | الرابط الرسمي المباشر | الأصول البصرية بدقة 8K المعتمدة |
 | :--- | :--- | :--- | :--- |
-| **LinkedIn** | `@SRCoreSync` | `https://linkedin.com/company/SRCoreSync` | غلاف الشركة (6336×1584)، بطاقة البوست (7680×4320)، غلاف الكاروسيل (4320×5400) |
+| **LinkedIn** | `@SRCoreSync` | `https://www.linkedin.com/company/srcoresync/` | غلاف الشركة (6336×1584)، بطاقة البوست (7680×4320)، غلاف الكاروسيل (4320×5400) |
 | **Meta / Facebook** | `@SRCoreSync` | `https://facebook.com/SRCoreSync` | غلاف الصفحة 8K، بطاقة المنشورات، أفاتار رسمي (3840×3840) |
 | **Instagram** | `@SRCoreSync` | `https://instagram.com/SRCoreSync` | بوست مربع (4320×4320)، بوست طولي (4320×5400)، إطار ستوري (4320×7680)، 5 أغلفة هايلايتس |
 | **X (Twitter)** | `@SRCoreSync` | `https://x.com/SRCoreSync` | هيدر بانورامي 3:1 (7680×2560)، أفاتار دائري مع مراعاة منطقة الأمان |

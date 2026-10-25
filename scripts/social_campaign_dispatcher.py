@@ -15,7 +15,7 @@ CAMPAIGN_REGISTRY = [
         "channel": "LinkedIn",
         "handle": "@SRCoreSync",
         "category": "b2b",
-        "url": "https://linkedin.com/company/SRCoreSync",
+        "url": "https://www.linkedin.com/company/srcoresync/",
         "asset": "assets/social-8k-branding/linkedin-8k/linkedin-company-cover-8k.png",
         "status": "READY_FOR_PUBLISH",
         "scheduled_week": 1
