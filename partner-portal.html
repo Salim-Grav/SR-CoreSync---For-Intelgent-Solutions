@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة شركاء الحلول والوكلاء البيضاء | S&R CoreSync White-Label Partner Portal</title>
+    <meta name="description" content="البوابة الرسمية لشركاء الحلول والوكلاء ومكاتب المحاسبة الأوروبية - إعادة بيع منظومة CoreSync ERP السحابية بهويتكم الخاصة وشعاراتكم المستقلة مع نظام RevShare 25% وإدارة العملاء.">
+    <link rel="icon" type="image/png" href="./assets/favicon-96.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020705;
+            --bg-card: rgba(8, 20, 15, 0.82);
+            --bg-elevated: rgba(14, 28, 22, 0.9);
+            --gold-primary: #c5a880;
+            --gold-bright: #f3dfba;
+            --gold-glow: rgba(197, 168, 128, 0.4);
+            --emerald-accent: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.35);
+            --border-gold: rgba(197, 168, 128, 0.28);
+            --border-hover: rgba(243, 223, 186, 0.65);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-code: 'Fira Code', monospace;
+            --font-main: 'Cairo', 'Outfit', sans-serif;
+            --glass-blur: blur(14px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(197, 168, 128, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.07) 0%, transparent 50%),
+                linear-gradient(rgba(2, 7, 5, 0.94), rgba(2, 7, 5, 0.98)),
+                url('./assets/grid.png');
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .partner-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 7, 5, 0.92);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 14px 28px;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .partner-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .partner-emblem {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+        }
+
+        .brand-title {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(14, 28, 22, 0.7);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--gold-bright);
+            background: rgba(197, 168, 128, 0.15);
+            box-shadow: 0 0 14px var(--gold-glow);
+            color: #ffffff;
+        }
+
+        .nav-btn-primary {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705 !important;
+            border: none;
+        }
+
+        /* Hero */
+        .partner-hero {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 45px 24px 30px;
+            text-align: center;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 999px;
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-size: 2.3rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--gold-bright) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 920px;
+            margin: 0 auto 30px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Stats Strip */
+        .partner-stats-grid {
+            max-width: 1600px;
+            margin: 0 auto 35px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 14px;
+            padding: 20px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            font-family: var(--font-code);
+        }
+
+        .stat-accent {
+            color: var(--gold-bright);
+        }
+
+        .stat-emerald {
+            color: #34d399;
+        }
+
+        /* Dashboard Container */
+        .partner-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        /* White Label Studio Card */
+        .wl-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            padding: 28px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            padding-bottom: 14px;
+        }
+
+        .card-heading {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .wl-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .wl-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+        }
+
+        .wl-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(4, 12, 9, 0.9);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .wl-input:focus {
+            border-color: var(--gold-bright);
+        }
+
+        /* Live White-Label Preview Box */
+        .wl-live-preview {
+            background: linear-gradient(135deg, rgba(3, 10, 7, 0.95), rgba(6, 18, 14, 0.95));
+            border: 2px dashed rgba(197, 168, 128, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .preview-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .preview-domain-pill {
+            background: rgba(2, 7, 5, 0.8);
+            border: 1px solid var(--border-gold);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: var(--font-code);
+            font-size: 0.78rem;
+            color: #38bdf8;
+            direction: ltr;
+        }
+
+        .preview-tenant-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+        }
+
+        /* Tenants Table */
+        .tenants-full-card {
+            grid-column: 1 / -1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            padding: 28px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .tenants-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 16px;
+        }
+
+        .tenants-table th, .tenants-table td {
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+        }
+
+        .tenants-table th {
+            color: var(--gold-bright);
+            font-weight: 800;
+            background: rgba(4, 14, 10, 0.5);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status-active { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .status-sync { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+        .status-pending { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+        .btn-action-sm {
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action-sm:hover {
+            background: var(--gold-bright);
+            color: #020705;
+        }
+
+        .btn-whatsapp-sm {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid rgba(37, 211, 102, 0.4);
+            color: #4ade80;
+        }
+
+        .btn-whatsapp-sm:hover {
+            background: #25d366;
+            color: #ffffff;
+        }
+
+        @media (max-width: 1024px) {
+            .partner-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .partner-container {
+                grid-template-columns: 1fr;
+            }
+            .tenants-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="partner-header">
+        <div class="header-inner">
+            <a href="index.html" class="partner-brand" title="العودة للرئيسية">
+                <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="partner-emblem">
+                <div>
+                    <div class="brand-title">S&amp;R CORESYNC PARTNERS</div>
+                    <div class="brand-sub">Multi-Tenant White-Label Hub • RevShare 25%</div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="index.html" class="nav-btn">
+                    <span>الرئيسية ↩️</span>
+                </a>
+                <a href="developer-portal.html" class="nav-btn">
+                    <span>بوابة المطورين API ⚡</span>
+                </a>
+                <a href="social-campaign-hub.html" class="nav-btn">
+                    <span>منصة الحملات 🚀</span>
+                </a>
+                <button type="button" class="nav-btn nav-btn-primary" onclick="openOnboardModal()">
+                    <span>إضافة عميل محاسبي جديد ➕</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="partner-hero">
+        <div class="hero-pill">
+            <span>💼 برنامج الوكلاء وشركاء الحلول السحابية • Netherlands &amp; EU Multi-Tenant Edition</span>
+        </div>
+        <h1 class="hero-title">بوابة شركاء الحلول والوكلاء بهويتكم البيضاء</h1>
+        <p class="hero-desc">
+            مخصصة لمكاتب المحاسبة، الشركات الاستشارية، ومطوري الحلول في هولندا وأوروبا. أعد بيع CoreSync ERP السحابي بهوية وشعار ونطاق مؤسستك المستقل، مع استحقاق عمولة دورية 25% من إيرادات الاشتراكات الشهرية.
+        </p>
+    </section>
+
+    <!-- Stats Performance Grid -->
+    <div class="partner-stats-grid">
+        <div class="stat-card">
+            <div class="stat-title">إجمالي الاشتراكات الشهرية المدارة (MRR)</div>
+            <div class="stat-value">€4,240<span class="stat-accent">.00</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">أرباح الشريك الشهرية الصافية (25% RevShare)</div>
+            <div class="stat-value stat-emerald">€1,060<span class="stat-accent">.00</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">الشركات والعملاء النشطين (Active Tenants)</div>
+            <div class="stat-value">14 <span style="font-size:1rem; color:var(--text-muted); font-weight:normal;">مؤسسة هولندية</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">إقرارات BTW الجاهزة للتقديم (Belastingdienst)</div>
+            <div class="stat-value stat-accent">100% <span style="font-size:1rem; color:#34d399; font-weight:normal;">مطابقة تامة</span></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="partner-container">
+
+        <!-- 1. White-Label Branding Studio -->
+        <section class="wl-card">
+            <div class="card-header-row">
+                <div>
+                    <h2 class="card-heading">1. استوديو تخصيص الهوية المستقلة (White-Label Studio)</h2>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">حدد هوية مكتبك المحاسبي لتظهر واجهات الـ ERP السحابي لعملائك باسمك وشعارك ونطاقك الخاص.</p>
+                </div>
+            </div>
+
+            <div class="wl-form-group">
+                <label for="partnerNameInput" class="wl-label">اسم مؤسسة الشريك / المكتب المحاسبي:</label>
+                <input type="text" id="partnerNameInput" class="wl-input" value="Van Dijk &amp; Partners Accountants B.V." title="اسم مكتب المحاسبة" oninput="updateLiveWlPreview()" />
+            </div>
+
+            <div class="wl-form-group">
+                <label for="partnerDomainInput" class="wl-label">النطاق المخصص أو الرابط الفرعي (Custom CNAME / Subdomain):</label>
+                <input type="text" id="partnerDomainInput" class="wl-input" value="portal.vandijk-accountants.nl" title="النطاق المخصص" style="direction:ltr; text-align:left;" oninput="updateLiveWlPreview()" />
+            </div>
+
+            <div class="wl-form-group">
+                <label for="partnerColorSelect" class="wl-label">اللون الرئيسي المميز للعلامة التجارية (Brand Accent):</label>
+                <select id="partnerColorSelect" class="wl-input" title="اختر لون الهوية" onchange="updateLiveWlPreview()">
+                    <option value="#f3dfba">الذهب الملكي (Royal Gold) • المعيار الافتراضي</option>
+                    <option value="#10b981">الزمرد السحابي (Emerald Green)</option>
+                    <option value="#38bdf8">الياقوت الأزرق (Sapphire Blue)</option>
+                    <option value="#a855f7">البنفسجي الإمبراطوري (Amethyst)</option>
+                </select>
+            </div>
+
+            <!-- Live Preview -->
+            <div class="wl-live-preview">
+                <div class="preview-top-bar">
+                    <span class="preview-domain-pill" id="previewDomainText">portal.vandijk-accountants.nl</span>
+                    <span style="font-size:0.75rem; color:#4ade80; font-weight:700;">● بيئة الشريك المباشرة 2026</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <div style="width:36px; height:36px; border-radius:8px; background:rgba(197,168,128,0.2); display:flex; align-items:center; justify-content:center; font-size:1.2rem;" id="previewLogoBox">🏛️</div>
+                    <div>
+                        <div class="preview-tenant-name" id="previewTenantName">Van Dijk &amp; Partners Accountants B.V.</div>
+                        <div style="font-size:0.75rem; color:var(--text-muted);">مدعوم ومؤمن هندسياً بواسطة S&amp;R CoreSync Sovereign Infrastructure</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. WhatsApp Instant Financial Dispatcher -->
+        <section class="wl-card">
+            <div class="card-header-row">
+                <div>
+                    <h2 class="card-heading">2. نظام إشعارات WhatsApp Business المالي للمحاسبين</h2>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">إرسال فوري وتلقائي لإشعارات السداد والتسوية البنكية iDEAL إلى مدراء الحسابات عبر واتساب الرسمي.</p>
+                </div>
+            </div>
+
+            <div class="wl-form-group">
+                <label for="waPhoneInput" class="wl-label">رقم هاتف مدير الحسابات المعتمد (مع الرمز الدولي):</label>
+                <input type="text" id="waPhoneInput" class="wl-input" value="+31636279435" title="رقم واتساب المحاسب" style="direction:ltr; text-align:left;" />
+            </div>
+
+            <div class="wl-form-group">
+                <label for="waInvoiceSelect" class="wl-label">المعاملة البنكية المسددة (iDEAL Settlement):</label>
+                <select id="waInvoiceSelect" class="wl-input" title="المعاملة البنكية" onchange="updateWaPreview()">
+                    <option value="INV-2026-SR-9182|Rotterdam Port Logistics B.V.|1250.00">INV-2026-SR-9182 • Rotterdam Port Logistics (€1,250.00)</option>
+                    <option value="INV-2026-SR-8491|De Vries BioTech Solutions|890.00">INV-2026-SR-8491 • De Vries BioTech Solutions (€890.00)</option>
+                    <option value="INV-2026-SR-7120|Nordic Cloud Media Group|1450.00">INV-2026-SR-7120 • Nordic Cloud Media Group (€1,450.00)</option>
+                </select>
+            </div>
+
+            <div class="wl-live-preview" style="background:rgba(2, 8, 5, 0.9);">
+                <div style="font-size:0.8rem; color:#4ade80; font-weight:700; margin-bottom:6px;">📱 معاينة رسالة WhatsApp Business الرسمية:</div>
+                <div id="waPreviewText" style="font-size:0.85rem; color:#e2e8f0; line-height:1.6; white-space:pre-wrap; direction:rtl;"></div>
+            </div>
+
+            <button type="button" class="nav-btn nav-btn-primary" style="justify-content:center; padding:12px;" onclick="dispatchWhatsAppNotification()">
+                <span>📱 إرسال الإشعار لمدير الحسابات عبر WhatsApp API</span>
+            </button>
+        </section>
+
+        <!-- 3. Connected Tenants Management Table -->
+        <section class="tenants-full-card">
+            <div class="card-header-row">
+                <div>
+                    <h2 class="card-heading">3. إدارة المؤسسات والعملاء المربوطين (Active Dutch Client Tenants)</h2>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">استعراض الشركات المستفيدة وموقف الإقرارات الضريبية لـ Belastingdienst وإجمالي الاشتراكات.</p>
+                </div>
+                <div>
+                    <span style="font-size:0.85rem; color:var(--text-muted);">حالة الربط المالي: <strong style="color:#34d399;">PSD2 Open Banking Live</strong></span>
+                </div>
+            </div>
+
+            <table class="tenants-table">
+                <thead>
+                    <tr>
+                        <th>اسم الشركة / العميل</th>
+                        <th>السجل التجاري (KVK)</th>
+                        <th>البنك الهولندي المرتبط</th>
+                        <th>الاشتراك الشهري</th>
+                        <th>عمولة الشريك (25%)</th>
+                        <th>حالة المطابقة والـ BTW</th>
+                        <th>الإجراءات الفورية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Rotterdam Port Logistics B.V.</strong></td>
+                        <td style="font-family:var(--font-code);">KVK 84219871</td>
+                        <td>ING Bank (NL)</td>
+                        <td style="font-family:var(--font-code); font-weight:700;">€1,250.00</td>
+                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€312.50</td>
+                        <td><span class="status-badge status-active">مطابق ومسدد ✓</span></td>
+                        <td>
+                            <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Rotterdam Port Logistics B.V.', '€1,250.00')">واتساب 📱</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>De Vries BioTech Solutions</strong></td>
+                        <td style="font-family:var(--font-code);">KVK 79142388</td>
+                        <td>ABN AMRO</td>
+                        <td style="font-family:var(--font-code); font-weight:700;">€890.00</td>
+                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€222.50</td>
+                        <td><span class="status-badge status-sync">مزامنة دفتر الأستاذ ✓</span></td>
+                        <td>
+                            <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('De Vries BioTech Solutions', '€890.00')">واتساب 📱</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nordic Cloud Media Group</strong></td>
+                        <td style="font-family:var(--font-code);">KVK 91028472</td>
+                        <td>Rabobank</td>
+                        <td style="font-family:var(--font-code); font-weight:700;">€1,450.00</td>
+                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€362.50</td>
+                        <td><span class="status-badge status-active">جاهز لإقرار BTW Q3 ✓</span></td>
+                        <td>
+                            <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Nordic Cloud Media Group', '€1,450.00')">واتساب 📱</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Utrecht Clean Energy V.O.F.</strong></td>
+                        <td style="font-family:var(--font-code);">KVK 68420199</td>
+                        <td>bunq Business</td>
+                        <td style="font-family:var(--font-code); font-weight:700;">€650.00</td>
+                        <td style="font-family:var(--font-code); color:#34d399; font-weight:800;">€162.50</td>
+                        <td><span class="status-badge status-pending">قيد مراجعة الضرائب ⏳</span></td>
+                        <td>
+                            <button type="button" class="btn-action-sm btn-whatsapp-sm" onclick="sendDirectTenantAlert('Utrecht Clean Energy V.O.F.', '€650.00')">واتساب 📱</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <script>
+        function updateLiveWlPreview() {
+            const name = document.getElementById('partnerNameInput').value || 'Van Dijk & Partners Accountants B.V.';
+            const domain = document.getElementById('partnerDomainInput').value || 'portal.vandijk-accountants.nl';
+            const color = document.getElementById('partnerColorSelect').value;
+
+            const previewName = document.getElementById('previewTenantName');
+            const previewDomain = document.getElementById('previewDomainText');
+            const previewBox = document.getElementById('previewLogoBox');
+
+            if (previewName) {
+                previewName.textContent = name;
+                previewName.style.color = color;
+            }
+            if (previewDomain) {
+                previewDomain.textContent = domain;
+            }
+            if (previewBox) {
+                previewBox.style.borderColor = color;
+            }
+        }
+
+        function updateWaPreview() {
+            const rawVal = document.getElementById('waInvoiceSelect').value;
+            const [invId, client, amount] = rawVal.split('|');
+            const preview = document.getElementById('waPreviewText');
+
+            if (preview) {
+                preview.textContent = 
+`🔔 *إشعار تسوية مالية معتمد • S&R CoreSync ERP*
+━━━━━━━━━━━━━━━━━━
+🏢 *العميل المؤسسي:* ${client}
+📄 *رقم الفاتورة:* ${invId}
+💶 *المبلغ المسدد:* €${amount} (شامل ضريبة BTW 21%)
+🏦 *طريقة السداد:* تحويل بنكي فوري iDEAL (PSD2 Settled)
+⚖️ *دفتر الأستاذ العام:* تم ترحيل القيود وتحديث الحسابات آلياً بنجاح 100%.
+━━━━━━━━━━━━━━━━━━
+🔗 *رابط الفاتورة والتدقيق:* https://sr-coresync.com/api/v1/invoices/${invId}.pdf`;
+            }
+        }
+
+        function dispatchWhatsAppNotification() {
+            const rawVal = document.getElementById('waInvoiceSelect').value;
+            const [invId, client, amount] = rawVal.split('|');
+            const phone = document.getElementById('waPhoneInput').value || '+31636279435';
+
+            const msg = 
+`🔔 *إشعار تسوية مالية معتمد • S&R CoreSync ERP*
+━━━━━━━━━━━━━━━━━━
+🏢 *العميل المؤسسي:* ${client}
+📄 *رقم الفاتورة:* ${invId}
+💶 *المبلغ المسدد:* €${amount} (شامل ضريبة BTW 21%)
+🏦 *طريقة السداد:* تحويل بنكي فوري iDEAL (PSD2 Settled)
+⚖️ *دفتر الأستاذ العام:* تم ترحيل القيود وتحديث الحسابات آلياً بنجاح 100%.
+━━━━━━━━━━━━━━━━━━
+🔗 *رابط الفاتورة والتدقيق:* https://sr-coresync.com/api/v1/invoices/${invId}.pdf`;
+
+            const cleanPhone = phone.replace(/[^0-9]/g, '');
+            const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        function sendDirectTenantAlert(tenantName, amount) {
+            const phone = '31636279435';
+            const msg = `🔔 *إشعار متابعة حساب العميل:* ${tenantName}\n💶 *المبلغ:* ${amount}\nتم تأكيد مطابقة الحسابات والـ BTW في منظومة S&R CoreSync.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function openOnboardModal() {
+            const name = prompt('🏢 أدخل اسم العميل المحاسبي أو المؤسسة الجديدة:');
+            if (name) {
+                alert(`✓ تم تسجيل الشركة [${name}] بنجاح في بيئة الشريك، وتم تجهيز دفتر الأستاذ وحسابات الـ BTW تلقائياً.`);
+            }
+        }
+
+        // Initialize preview on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLiveWlPreview();
+            updateWaPreview();
+        });
+    </script>
+</body>
+</html>
