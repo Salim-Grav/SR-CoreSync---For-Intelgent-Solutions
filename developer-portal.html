@@ -1304,6 +1304,43 @@ console.log('WhatsApp Status:', notify.message);</pre>
             const key = 'sr_live_2026_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
             prompt('🔑 تم توليد مفتاح API تجريبي معتمد لمنظومة S&R CoreSync:\nاحفظه لاستخدامه في استدعاءاتك البرمجية:', key);
         }
+
+        // =======================================================================
+        // إدارة تبويبات ونسخ حزم الـ SDK (Official SDKs)
+        // =======================================================================
+        function switchSdkTab(lang) {
+            document.querySelectorAll('.sdk-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.sdk-content-panel').forEach(panel => panel.classList.remove('active'));
+            
+            if (lang === 'python') {
+                const pyBtn = document.getElementById('tabBtnPython');
+                const pyPanel = document.getElementById('panelPython');
+                if (pyBtn) pyBtn.classList.add('active');
+                if (pyPanel) pyPanel.classList.add('active');
+            } else {
+                const nodeBtn = document.getElementById('tabBtnNode');
+                const nodePanel = document.getElementById('panelNode');
+                if (nodeBtn) nodeBtn.classList.add('active');
+                if (nodePanel) nodePanel.classList.add('active');
+            }
+        }
+
+        function copySdkCmd(id, btn) {
+            const elem = document.getElementById(id);
+            if (!elem) return;
+            const text = elem.textContent.trim();
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = btn.textContent;
+                    btn.textContent = 'تم النسخ ✓';
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 1800);
+                });
+            } else {
+                prompt('انسخ أمر التثبيت يدوياً:', text);
+            }
+        }
     </script>
 </body>
 </html>
