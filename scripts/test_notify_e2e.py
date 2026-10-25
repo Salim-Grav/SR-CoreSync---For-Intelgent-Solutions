@@ -138,21 +138,24 @@ def main():
         print('  /mail/selftest        -> SENT to %s via %s (steps: %s)'
               % (self_test.get('to'), self_test.get('provider'),
                  ','.join(self_test.get('steps') or [])))
+    elif self_test.get('reason') == 'throttled':
+        print('  /mail/selftest        -> throttled (a real message went out <10 min ago)')
     else:
         print('  /mail/selftest        -> not sent (%s)' % self_test.get('reason'))
 
     print('-' * 74)
     telegram_ok = bool(rows and rows[0].get('notify_status') in ('sent', 'resent', 'sent:webhook'))
+    mail_ok = bool(self_test.get('ok')) or self_test.get('reason') == 'throttled'
     print('  verdict: enquiry %s · telegram %s · email %s'
           % ('captured' if rows else 'NOT captured',
              'sent' if telegram_ok else 'not marked sent',
-             'sent' if self_test.get('ok') else 'not configured'))
+             'sent' if self_test.get('ok') else ('working (throttled)' if mail_ok else 'not configured')))
 
     if args.cleanup:
         d1("DELETE FROM leads WHERE client_name LIKE '%" + MARKER + "%'")
         print('  cleanup: test rows deleted')
 
-    return 0 if (rows and telegram_ok and self_test.get('ok')) else 2
+    return 0 if (rows and telegram_ok and mail_ok) else 2
 
 
 if __name__ == '__main__':

@@ -83,18 +83,36 @@ purelymail1._domainkey.sr-coresync.com → key1.dkimroot.purelymail.com.
 | POP3 | `pop3.purelymail.com` | 995 (SSL) |
 | Webmail | `https://inbox.purelymail.com` — **ليس** `purelymail.com/webmail` (يعطي 404) | — |
 
-## إشعارات بريدية من المنصة (بعد الترحيل)
-الـ Worker صار يرسل بنفسه عبر `smtp.purelymail.com:587` بـ STARTTLS (Cloudflare يحجب 25 فقط).
+## إشعارات بريدية من المنصة — تعمل ✅ (25 أكتوبر 05:30)
+الـ Worker يرسل بنفسه عبر `smtp.purelymail.com:587` بـ STARTTLS (Cloudflare يحجب 25 فقط).
+
+**دليل التشغيل الكامل:**
+```
+/mail/check?deep=1  -> verified=true · steps=connected,tls,auth
+/mail/selftest      -> ok=true · steps=connected,tls,auth,sent
+Inbox info@         -> "SMTP self-test 2026-10-25 05:29"
+                       DKIM signed — selector=purelymail1 domain=sr-coresync.com
+                       Authentication-Results: purelymail.com; auth=pass
+Lead تجريبي          -> "New Consultation Lead LEAD-SR-20261025-DUE4" وصل بالتوقيع نفسه
+```
 
 | المسار | ما يفعله |
 |---|---|
-| `/health` | يعرض `emailChannel` و`purelymail: on\|off` (وجود الأسرار فقط) |
+| `/health` | `emailChannel` و`purelymail: on\|off` (وجود الأسرار فقط) |
 | `/mail/check` | هل الأسرار موجودة |
 | `/mail/check?deep=1` | مصادقة SMTP حقيقية بلا إرسال — محدود مرة/5 دقائق |
+| `/mail/selftest` | يرسل رسالة فعلية إلى `NOTIFY_EMAIL` — محدود مرة/10 دقائق |
 | `/mail/dns` | يقرأ MX/SPF/DKIM/DMARC عبر DoH ويعيد حكمًا واحدًا |
 
-المطلوب سرّ واحد فقط: `PURELYMAIL_PASS` — أما `PURELYMAIL_USER` و`NOTIFY_EMAIL` فصارا في `wrangler.toml` (ليسا سرّين).
-التفاصيل في `DEPLOY-WORKER.md`. حتى تُضاف: `emailChannel: none` والإشعارات تبقى على Telegram فقط.
+### أخطاء واجهناها وأصلحناها
+1. **`WritableStream is currently locked`** — `startTls()` يجب أن يُسبق بتحرير قفل reader/writer القديمين.
+2. **قيمة السرّ كانت نص العنصر النائب** (`Enter a secret value:`) — اكتُشفت بفكّ base64 من رسالة 535.
+3. **تسريب السرّ في رسالة الخطأ** — كان `AUTH` يعيد الأمر كما هو (كلمة المرور بصيغة base64). الآن يظهر `AUTH password rejected` فقط.
+
+### مكان بيانات الاعتماد
+- السرّ في Cloudflare: `PURELYMAIL_PASS` (نوع Secret).
+- محليًا للفحص: `.secrets/purelymail-pass.txt` (خارج Git) — يقرأه `scripts/check_mailbox.py`.
+- ⚠️ كلمة المرور ظهرت في محادثة 25 أكتوبر ⇒ يُنصح بتدويرها في Purelymail ثم `wrangler secret put PURELYMAIL_PASS` بالقيمة الجديدة.
 
 ## صفحة الحالة
 `status.html` تقرأ الحالة من الخدمة نفسها: `/health` · `/mail/dns` · `/mail/check?deep=1`،

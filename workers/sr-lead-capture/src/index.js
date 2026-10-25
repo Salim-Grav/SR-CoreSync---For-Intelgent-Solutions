@@ -397,18 +397,25 @@ function smtpChannel(socket) {
         await writer.write(encoder.encode(line + '\r\n'));
     }
 
-    async function command(line, expect) {
+    async function command(line, expect, label) {
         if (line !== null) await write(line);
         const reply = await readReply();
         if (expect && reply.code !== expect) {
-            const label = line === null ? 'greeting' : line.split(' ')[0].split('<')[0];
-            throw new Error('SMTP ' + label + ' rejected: ' + reply.code + ' ' + String(reply.text).slice(0, 120));
+            // Never echo the command itself: AUTH arguments carry the mailbox
+            // password in base64, and this string reaches HTTP callers and logs.
+            const shown = label || (line === null ? 'greeting' : line.split(' ')[0].split('<')[0]);
+            throw new Error('SMTP ' + shown + ' rejected: ' + reply.code + ' ' + String(reply.text).slice(0, 120));
         }
         return reply;
     }
 
     function upgrade() {
-        // STARTTLS returns a new socket; the old streams are dead from here on.
+        // STARTTLS returns a new socket. The old streams are dead, but their
+        // reader/writer still hold the lock on the shared underlying stream, so
+        // they must be released first — otherwise getWriter() above throws
+        // "This WritableStream is currently locked to a writer".
+        try { writer.releaseLock(); } catch (err) { /* already gone */ }
+        try { reader.releaseLock(); } catch (err) { /* already gone */ }
         active = socket.startTls();
         writer = active.writable.getWriter();
         reader = active.readable.getReader();
@@ -438,8 +445,8 @@ async function sendViaPurelymail(env, from, to, raw) {
         await smtp.command('EHLO sr-coresync.com', 250);
         steps.push('tls');
         await smtp.command('AUTH LOGIN', 334);
-        await smtp.command(b64(env.PURELYMAIL_USER), 334);
-        await smtp.command(b64(env.PURELYMAIL_PASS), 235);
+        await smtp.command(b64(env.PURELYMAIL_USER), 334, 'AUTH username');
+        await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
         steps.push('auth');
         await smtp.command('MAIL FROM:<' + from + '>', 250);
         await smtp.command('RCPT TO:<' + to + '>', 250);
@@ -473,8 +480,8 @@ async function probeSmtp(env) {
         await smtp.command('EHLO sr-coresync.com', 250);
         steps.push('tls');
         await smtp.command('AUTH LOGIN', 334);
-        await smtp.command(b64(env.PURELYMAIL_USER), 334);
-        await smtp.command(b64(env.PURELYMAIL_PASS), 235);
+        await smtp.command(b64(env.PURELYMAIL_USER), 334, 'AUTH username');
+        await smtp.command(b64(env.PURELYMAIL_PASS), 235, 'AUTH password');
         steps.push('auth');
         await smtp.command('QUIT', null).catch(function () { return null; });
         return { ok: true, verified: true, steps: steps };
