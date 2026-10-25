@@ -215,7 +215,7 @@ def deploy():
             if close_a != -1:
                 insert_pos = close_a + 4
                 html = html[:insert_pos] + hero_btn_code + html[insert_pos:]
-                print("✓ Injected Hero Action Voice AI button next to hero-btn-demo.")
+                print("[OK] Injected Hero Action Voice AI button next to hero-btn-demo.")
 
     # 4. Add Floating Under-Emblem Voice Badge under hero-emblem-card-3d
     emblem_badge_code = """
@@ -245,7 +245,7 @@ def deploy():
                 if third_div != -1:
                     insert_pos = third_div + 6
                     html = html[:insert_pos] + emblem_badge_code + html[insert_pos:]
-                    print("✓ Injected Floating Under-Emblem Voice Badge.")
+                    print("[OK] Injected Floating Under-Emblem Voice Badge.")
 
     with open(INDEX_PATH, 'w', encoding='utf-8') as f:
         f.write(html)
