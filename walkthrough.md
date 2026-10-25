@@ -172,11 +172,15 @@
    - إضافة سمات `title` و `aria-label` لكافة حقول الاختيار ونطاقات الـ ROI (`#roiCostRange`, `#roiTeamRange`, `#checkoutBankSelect`).
 3. **تكامل أدوار الـ ARIA:**
    - ضبط أزرار التبويبات التفاعلية داخل الحاوية `role="tablist"` بإضافة `role="tab"` و `aria-selected` لمنع أي تعارض بنيوي.
-4. **حسم تكرار المعرفات النشطة (Unique DOM IDs):**
-   - إعادة تسمية معرف زر الدفع السحابي إلى `srLiveCheckoutSubmitBtn` لمنع التعارض مع زر شراء الرخص القديم `checkoutSubmitBtn`.
+5. **إضافة خاصية `background-clip: text` القياسية للمطابقة التامة:**
+   - تصحيح النصوص المتدرجة في `css/sr-footer.css` و `social-8k-studio.html` و `social-campaign-hub.html` بدمج الخاصية القياسية إلى جانب سابقة الويب كيت.
+6. **إلغاء كافة الأنماط المضمنة المباشرة (Zero Inline Styles):**
+   - نقل وتوحيد جميع تنسيقات نافذة الدفع والتسوية `#srCheckoutModal` في `index.html` إلى فئات CSS متخصصة داخل وسم `<style>`.
+   - استبدال الأنماط المضمنة لبطاقات القنوات الـ 9 في `social-8k-studio.html` بفئات مخصصة للأيقونات (`.icon-linkedin`, `.icon-facebook`, إلخ).
+   - إدراج الفئة `.verified-handle-banner` في `social-campaign-hub.html` لإلغاء أي أنماط عشوائية.
 
-### 📸 لقطة حية من شاشة المتصفح بعد المعالجة الشاملة:
-![شاشة المنصة بعد تصحيح تنبيهات الشيفرة والجودة البرمجية](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/.tempmediaStorage/media_1792960191581.png)
+### 📸 لقطة حية ومباشرة من شاشة المتصفح بعد تنظيف التنبيهات بالكامل:
+![شاشة المنصة بعد تصحيح تنبيهات الشيفرة والجودة البرمجية بنسبة 100%](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/hero_section_verified_1792960638683.png)
 
 </div>
 
