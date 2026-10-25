@@ -14,6 +14,7 @@ import argparse
 import json
 import os
 import sys
+import time
 import urllib.request
 
 if hasattr(sys.stdout, 'reconfigure'):
@@ -48,24 +49,37 @@ CHECKS = [
 ]
 
 
+def normalize(value):
+    """DNS answers differ by a trailing dot and spacing; compare the meaning."""
+    return ' '.join(str(value).strip().rstrip('.').split())
+
+
 def dns_per_resolver(name, rtype):
     """One set of answers per resolver, so caches can be told apart from truth."""
     per_resolver = []
     for template, extra in RESOLVERS:
-        try:
-            headers = dict(UA)
-            headers.update(extra)
-            req = urllib.request.Request(template % (name, rtype), headers=headers)
-            with urllib.request.urlopen(req, timeout=20) as res:
-                payload = json.loads(res.read().decode('utf-8'))
-        except Exception:
-            continue
-        values = set()
-        for answer in payload.get('Answer', []) or []:
-            data = answer.get('data', '').strip('"')
-            if data:
-                values.add(data)
-        per_resolver.append(values)
+        values = None
+        for attempt in (1, 2):
+            try:
+                headers = dict(UA)
+                headers.update(extra)
+                req = urllib.request.Request(template % (name, rtype), headers=headers)
+                with urllib.request.urlopen(req, timeout=20) as res:
+                    payload = json.loads(res.read().decode('utf-8'))
+                values = set()
+                for answer in payload.get('Answer', []) or []:
+                    data = normalize(answer.get('data', ''))
+                    if data:
+                        values.add(data)
+                break
+            except Exception:
+                # A rate-limited or flaky resolver must not make a record look
+                # absent, which would then be written into the baseline.
+                values = None
+                if attempt == 1:
+                    time.sleep(1.5)
+        if values is not None:
+            per_resolver.append(values)
     return per_resolver
 
 
@@ -83,13 +97,24 @@ def dns_consensus(name, rtype):
     --save uses this. A resolver still holding yesterday's MX or the retired
     SPF would otherwise be written into the baseline, and the very next run
     would then report the *correct* state as drift.
+
+    When the resolvers disagree only because one of them is still negative-
+    caching a record that was added seconds ago, an empty intersection would
+    mean the record is never guarded at all — so in that case fall back to the
+    union and say so.
     """
     per_resolver = dns_per_resolver(name, rtype)
     if not per_resolver:
         return []
+    union = set()
+    for values in per_resolver:
+        union |= values
     common = set(per_resolver[0])
     for values in per_resolver[1:]:
         common &= values
+    if not common and union:
+        print('  (using union for %s %s: resolvers disagree, likely a fresh cache)' % (rtype, name))
+        return sorted(union)
     return sorted(common)
 
 

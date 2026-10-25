@@ -76,7 +76,14 @@ FORBIDDEN_PUBLISHED = [
 # ---------------------------------------------------------------------------
 # Files that must always be present in the published artifact.
 # ---------------------------------------------------------------------------
-REQUIRED_PUBLISHED = ['_headers', '.nojekyll']
+REQUIRED_PUBLISHED = [
+    '_headers',
+    '.nojekyll',
+    # Mail clients fetch this to configure themselves. If it stops being
+    # published, the only remaining discovery path is the CNAME that fails its
+    # certificate check, so failing the build is the correct response.
+    '.well-known/autoconfig/mail/config-v1.1.xml',
+]
 
 
 def is_excluded(rel_path):
