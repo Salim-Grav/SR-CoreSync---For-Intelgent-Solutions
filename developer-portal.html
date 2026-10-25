@@ -998,7 +998,7 @@ console.log('WhatsApp Status:', notify.message);</pre>
                 <div class="endpoint-card-header">
                     <div>
                         <div class="endpoint-summary">1. توليد الفاتورة الضريبية الرسمية وحساب الـ BTW</div>
-                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">توليد فاتورة رقمية معتمدة وفق اشتراطات مصلحة الضرائب الهولندية مع معالجة الاحتساب العكسي B2B.</div>
+                        <div class="endpoint-subtext">توليد فاتورة رقمية معتمدة وفق اشتراطات مصلحة الضرائب الهولندية مع معالجة الاحتساب العكسي B2B.</div>
                     </div>
                     <div class="endpoint-url-wrap">
                         <span class="http-badge badge-post">POST</span>
@@ -1041,7 +1041,7 @@ console.log('WhatsApp Status:', notify.message);</pre>
                 <div class="sim-header">
                     <div>
                         <div class="endpoint-summary">2. محاكي الـ Webhooks لتسوية بنوك هولندا PSD2 (Open Banking)</div>
-                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">محاكاة استلام إشعار السداد البنكي المباشر وتحديث دفتر الأستاذ العام آلياً فوراً.</div>
+                        <div class="endpoint-subtext">محاكاة استلام إشعار السداد البنكي المباشر وتحديث دفتر الأستاذ العام آلياً فوراً.</div>
                     </div>
                     <div class="endpoint-url-wrap">
                         <span class="http-badge badge-webhook">WEBHOOK</span>
@@ -1049,9 +1049,9 @@ console.log('WhatsApp Status:', notify.message);</pre>
                     </div>
                 </div>
 
-                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
-                    <label for="simBankSelect" style="font-size:0.85rem; color:var(--gold-bright); font-weight:700;">البنك الهولندي المسدد:</label>
-                    <select id="simBankSelect" class="sr-checkout-input" title="اختر البنك الهولندي" style="width:auto; padding:6px 12px; background:#020705; border:1px solid var(--border-gold); color:#ffffff; border-radius:6px;">
+                <div class="sim-controls-row">
+                    <label for="simBankSelect" class="sim-ctrl-label">البنك الهولندي المسدد:</label>
+                    <select id="simBankSelect" class="sr-checkout-input sim-select" title="اختر البنك الهولندي">
                         <option value="ING_BANK">ING Bank (NL)</option>
                         <option value="ABN_AMRO">ABN AMRO</option>
                         <option value="RABOBANK">Rabobank</option>
@@ -1059,8 +1059,8 @@ console.log('WhatsApp Status:', notify.message);</pre>
                         <option value="REVOLUT">Revolut EU</option>
                     </select>
 
-                    <label for="simAmount" style="font-size:0.85rem; color:var(--gold-bright); font-weight:700;">المبلغ المسدد:</label>
-                    <input type="number" id="simAmount" value="890.00" title="المبلغ المسدد" style="width:110px; padding:6px 10px; background:#020705; border:1px solid var(--border-gold); color:#ffffff; border-radius:6px; direction:ltr;" />
+                    <label for="simAmount" class="sim-ctrl-label">المبلغ المسدد:</label>
+                    <input type="number" id="simAmount" value="890.00" title="المبلغ المسدد" class="sim-input" />
 
                     <button type="button" class="btn-send-req" onclick="simulatePsd2Webhook()">
                         <span>⚡ إرسال إشعار Webhook وتوليد القيد المحاسبي</span>
@@ -1079,7 +1079,7 @@ console.log('WhatsApp Status:', notify.message);</pre>
                     <div class="sim-ledger-box">
                         <div class="panel-header">
                             <span>القيود المحاسبية التلقائية (General Ledger Entry)</span>
-                            <span style="color:#34d399;">متوازن 100% ✓</span>
+                            <span class="sim-balanced-badge">متوازن 100% ✓</span>
                         </div>
                         <table class="ledger-table" id="ledgerTable">
                             <thead>
@@ -1092,7 +1092,7 @@ console.log('WhatsApp Status:', notify.message);</pre>
                             </thead>
                             <tbody id="ledgerTableBody">
                                 <tr>
-                                    <td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">
+                                    <td colspan="4" class="ledger-empty-cell">
                                         اضغط على "إرسال إشعار Webhook" لاستعراض القيود المعتمدة تلقائياً.
                                     </td>
                                 </tr>
