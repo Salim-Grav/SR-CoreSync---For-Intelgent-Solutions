@@ -23,7 +23,12 @@
  *          npx wrangler secret put PURELYMAIL_PASS   (send through our own mailbox)
  */
 
-import { connect } from 'cloudflare:sockets';
+// NOTE: `connect` from 'cloudflare:sockets' is imported lazily inside
+// openAuthedSmtp() below. A static top-level import crashes any plain-Node
+// consumer (e.g. scripts/test_lead_worker.mjs in CI) with
+// ERR_UNSUPPORTED_ESM_URL_SCHEME, because the cloudflare: scheme only exists
+// inside the Workers runtime. Dynamic import resolves fine at runtime on
+// Cloudflare, so behaviour in production is unchanged.
 
 // ---------------------------------------------------------------------------
 // Configuration
@@ -463,6 +468,7 @@ async function sendViaPurelymail(env, from, to, raw) {
 // a 535 must never be retried, because repeating a wrong password looks like an
 // attack and gets the mailbox locked.
 async function openAuthedSmtp(env, steps) {
+    const { connect } = await import('cloudflare:sockets');
     let lastError = null;
     for (let attempt = 1; attempt <= 2; attempt++) {
         let smtp = null;
