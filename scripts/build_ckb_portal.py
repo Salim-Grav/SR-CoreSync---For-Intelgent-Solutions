@@ -98,28 +98,53 @@ c_demo = re.sub(r'<html lang="[^"]*" dir="[^"]*"', '<html lang="ckb" dir="rtl"',
 for ar_txt, ckb_txt in CKB_REPLACEMENTS.items():
     c_demo = c_demo.replace(ar_txt, ckb_txt)
 
+def fix_subfolder_links(html, page_type="index"):
+    root_pages = [
+        "status.html", "verify.html", "whitelabel-calculator.html", "contract-of2026-pdf.html",
+        "card.html", "3d-mockup.html", "software.html", "estimator.html", "logo-studio.html",
+        "manifest.json"
+    ]
+    for p in root_pages:
+        html = html.replace(f'href="./{p}"', f'href="../{p}"')
+        html = html.replace(f'href="{p}"', f'href="../{p}"')
+    
+    for folder in ["assets", "css", "js", "downloads"]:
+        html = html.replace(f'href="./{folder}/', f'href="../{folder}/')
+        html = html.replace(f'href="{folder}/', f'href="../{folder}/')
+        html = html.replace(f'src="./{folder}/', f'src="../{folder}/')
+        html = html.replace(f'src="{folder}/', f'src="../{folder}/')
+    
+    langs = ["de", "fr", "en", "nl", "es", "it", "sv", "no", "tr", "ku", "da", "fi", "cs", "el", "ro", "hu", "bg", "sk", "hr", "lt", "sl", "lv", "et", "ga", "mt", "pl", "pt"]
+    for l in langs:
+        html = html.replace(f'href="./{l}/', f'href="../{l}/')
+        html = html.replace(f'href="{l}/', f'href="../{l}/')
+        
+    return html
+
+def inject_apple_dock(html, code="ckb", page_type="index"):
+    dock_html = build_apple_dock_html(code, page_type=page_type, is_subfolder=True)
+    pattern_dock = r'<!-- Apple macOS Sovereign Language & Flags Dock -->[\s\S]*?</aside>'
+    if re.search(pattern_dock, html):
+        return re.sub(pattern_dock, dock_html, html, count=1)
+    return html.replace('</body>', dock_html + '\n</body>', 1)
+
 # Relative links update for ckb subfolder
-c_demo = c_demo.replace('href="./css/', 'href="../css/')
-c_demo = c_demo.replace('href="css/', 'href="../css/')
-c_demo = c_demo.replace('src="./assets/', 'src="../assets/')
-c_demo = c_demo.replace('src="assets/', 'src="../assets/')
-c_demo = c_demo.replace('href="./assets/', 'href="../assets/')
-c_demo = c_demo.replace('href="assets/', 'href="../assets/')
-c_demo = c_demo.replace('href="demo.html"', 'href="../demo.html"')
-c_demo = c_demo.replace('href="index.html"', 'href="index.html"')
-c_demo = c_demo.replace('href="logo-studio.html"', 'href="../logo-studio.html"')
+c_demo = fix_subfolder_links(c_demo, page_type="demo")
 
 # Inject dropdown for ckb
 ckb_dropdown_demo = build_dropdown_html("ckb", page_type="demo", is_subfolder=True)
 
 # Replace existing dropdown in demo
-start = c_demo.find('id="sovereignLangDropdown"')
-if start != -1:
-    s_idx = c_demo.find('<!-- Sovereign Global Multilingual Hub')
-    if s_idx == -1:
-        s_idx = c_demo.rfind('<div class="sovereign-lang-dropdown"', 0, start)
-    e_idx = c_demo.find('</div>\n</div>\n', start) + len('</div>\n</div>\n')
-    c_demo = c_demo[:s_idx] + ckb_dropdown_demo + '\n' + c_demo[e_idx:]
+pattern_hub = r'(?:<!-- Sovereign Global Multilingual Hub[^\n]*\n\s*)?<div class="sovereign-lang-hub-wrap"[\s\S]*?</div>\s*</div>\s*</div>'
+pattern_drop = r'(?:<!-- Sovereign Global Multilingual Hub[^\n]*\n\s*)?<div class="sovereign-lang-dropdown"[\s\S]*?</div>\s*</div>'
+if re.search(pattern_hub, c_demo):
+    c_demo = re.sub(pattern_hub, ckb_dropdown_demo, c_demo, count=1)
+elif re.search(pattern_drop, c_demo):
+    c_demo = re.sub(pattern_drop, ckb_dropdown_demo, c_demo, count=1)
+
+c_demo = inject_apple_dock(c_demo, code="ckb", page_type="demo")
+if 'Sovereign Global Multilingual Hub Controller' not in c_demo:
+    c_demo = c_demo.replace('</body>', build_dropdown_js() + '\n</body>', 1)
 
 with open(CKB_DEMO_PATH, 'w', encoding='utf-8') as f:
     f.write(c_demo)
@@ -132,24 +157,17 @@ c_index = re.sub(r'<html lang="[^"]*" dir="[^"]*"', '<html lang="ckb" dir="rtl"'
 for ar_txt, ckb_txt in CKB_REPLACEMENTS.items():
     c_index = c_index.replace(ar_txt, ckb_txt)
 
-# Relative links update for ckb subfolder
-c_index = c_index.replace('href="./css/', 'href="../css/')
-c_index = c_index.replace('href="css/', 'href="../css/')
-c_index = c_index.replace('src="./assets/', 'src="../assets/')
-c_index = c_index.replace('src="assets/', 'src="../assets/')
-c_index = c_index.replace('href="./assets/', 'href="../assets/')
-c_index = c_index.replace('href="assets/', 'href="../assets/')
-c_index = c_index.replace('href="demo.html"', 'href="demo.html"')
-c_index = c_index.replace('href="./demo.html"', 'href="demo.html"')
-
+c_index = fix_subfolder_links(c_index, page_type="index")
 ckb_dropdown_index = build_dropdown_html("ckb", page_type="index", is_subfolder=True)
-start = c_index.find('id="sovereignLangDropdown"')
-if start != -1:
-    s_idx = c_index.find('<!-- Sovereign Global Multilingual Hub')
-    if s_idx == -1:
-        s_idx = c_index.rfind('<div class="sovereign-lang-dropdown"', 0, start)
-    e_idx = c_index.find('</div>\n</div>\n', start) + len('</div>\n</div>\n')
-    c_index = c_index[:s_idx] + ckb_dropdown_index + '\n' + c_index[e_idx:]
+
+if re.search(pattern_hub, c_index):
+    c_index = re.sub(pattern_hub, ckb_dropdown_index, c_index, count=1)
+elif re.search(pattern_drop, c_index):
+    c_index = re.sub(pattern_drop, ckb_dropdown_index, c_index, count=1)
+
+c_index = inject_apple_dock(c_index, code="ckb", page_type="index")
+if 'Sovereign Global Multilingual Hub Controller' not in c_index:
+    c_index = c_index.replace('</body>', build_dropdown_js() + '\n</body>', 1)
 
 with open(CKB_INDEX_PATH, 'w', encoding='utf-8') as f:
     f.write(c_index)
