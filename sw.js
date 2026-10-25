@@ -1,6 +1,6 @@
 // S&R CoreSync Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v12-live-feed
-const CACHE_NAME = 'coresync-prerender-v13-status-bypass';
+// Version: coresync-prerender-v14-srx
+const CACHE_NAME = 'coresync-prerender-v14-srx';
 
 // 1. Critical assets: everything the first screen needs to paint.
 // Anything that is only reachable after a scroll (founder banners, portraits,
