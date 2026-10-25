@@ -878,6 +878,101 @@
                         </div>
                     </div>
                 </div>
+            <!-- SDK Quickstart Section -->
+            <section id="sdkQuickstart" class="endpoint-card">
+                <div class="endpoint-card-header">
+                    <div>
+                        <div class="endpoint-summary">حزم الـ SDK الرسمية (Official Python &amp; Node.js SDKs)</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">مكتبات برمجية خفيفة وقوية لتكامل مباشر مع محرك CoreSync ERP وإشعارات WhatsApp المحاسبية في 3 أسطر فقط.</div>
+                    </div>
+                    <div class="endpoint-url-wrap">
+                        <span class="http-badge badge-get">v2.4.0</span>
+                        <span>Enterprise Production Release 2026</span>
+                    </div>
+                </div>
+
+                <div class="sdk-tabs">
+                    <button type="button" class="sdk-tab-btn active" id="tabBtnPython" onclick="switchSdkTab('python')">
+                        <span>🐍 Python SDK</span>
+                        <span style="font-size:0.75rem; opacity:0.8;">(coresync-python)</span>
+                    </button>
+                    <button type="button" class="sdk-tab-btn" id="tabBtnNode" onclick="switchSdkTab('node')">
+                        <span>🟢 Node.js SDK</span>
+                        <span style="font-size:0.75rem; opacity:0.8;">(@coresync/sdk)</span>
+                    </button>
+                </div>
+
+                <!-- Python Panel -->
+                <div class="sdk-content-panel active" id="panelPython">
+                    <div class="sdk-install-box">
+                        <span class="sdk-install-cmd" id="pythonInstallCmd">pip install coresync-python</span>
+                        <button type="button" class="sdk-copy-btn" onclick="copySdkCmd('pythonInstallCmd', this)">نسخ الأمر 📋</button>
+                    </div>
+                    <div class="code-box">
+                        <div class="code-box-header">
+                            <span>main.py • تكامل فوري وسلس</span>
+                            <span>Python 3.9+</span>
+                        </div>
+                        <pre class="code-pre">from coresync import CoreSyncClient
+
+# 1. تهيئة عميل المنظومة بمفتاح الـ API
+client = CoreSyncClient(api_key="sr_live_2026_eu_prod_key")
+
+# 2. إنشاء فاتورة سحابية متوافقة مع مصلحة الضرائب الهولندية (BTW 21%)
+invoice = client.generate_invoice(
+    client_name="Amsterdam Tech Solutions B.V.",
+    client_vat="NL862145892B01",
+    amount_net=1500.0,
+    btw_rate=0.21
+)
+print("تم إصدار الفاتورة:", invoice["data"]["invoice_id"])
+
+# 3. إرسال إشعار WhatsApp Business فوري لمدير الحسابات
+notify = client.trigger_whatsapp_notification(
+    manager_phone="+31612345678",
+    invoice_id=invoice["data"]["invoice_id"],
+    amount=1815.0,
+    ledger_ref=invoice["data"]["ledger_reference"]
+)
+print("حالة إشعار الواتساب:", notify["message"])</pre>
+                    </div>
+                </div>
+
+                <!-- Node.js Panel -->
+                <div class="sdk-content-panel" id="panelNode">
+                    <div class="sdk-install-box">
+                        <span class="sdk-install-cmd" id="nodeInstallCmd">npm install @coresync/sdk</span>
+                        <button type="button" class="sdk-copy-btn" onclick="copySdkCmd('nodeInstallCmd', this)">نسخ الأمر 📋</button>
+                    </div>
+                    <div class="code-box">
+                        <div class="code-box-header">
+                            <span>index.js • تكامل فوري مع Express أو Next.js</span>
+                            <span>Node 18+ ESM / CJS</span>
+                        </div>
+                        <pre class="code-pre">import { CoreSyncClient } from '@coresync/sdk';
+
+// 1. تهيئة العميل
+const client = new CoreSyncClient({ apiKey: 'sr_live_2026_eu_prod_key' });
+
+// 2. إصدار فاتورة متوافقة مع Belastingdienst
+const invoice = await client.generateInvoice({
+  clientName: 'Rotterdam Port Logistics B.V.',
+  clientVat: 'NL854721963B01',
+  amountNet: 2400.0,
+  btwRate: 0.21
+});
+console.log('Invoice Created:', invoice.data.invoice_id);
+
+// 3. إشعار WhatsApp فوري لتأكيد التسوية البنكية
+const notify = await client.triggerWhatsAppNotification({
+  managerPhone: '+31687654321',
+  invoiceId: invoice.data.invoice_id,
+  amount: 2904.0,
+  ledgerRef: invoice.data.ledger_reference
+});
+console.log('WhatsApp Status:', notify.message);</pre>
+                    </div>
+                </div>
             </section>
 
             <!-- 2. Endpoint 1: Invoicing & BTW Calculation -->
