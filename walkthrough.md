@@ -244,7 +244,80 @@
 1. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** بوابة المطورين التفاعلية، كونسول OpenAPI، محاكي PSD2 Webhook، والأفاتار الصوتي الذكي 3D.
 2. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة أزرار بوابة المطورين في الهيدر والهيرو وشارة الأفاتار تحت الشعار.
 3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق وإغلاق المهمة 37 كمنجزة بنسبة 100%.
-4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** الدليل التنفيذي الشامل باللقطات الحية والشروحات البرمجية.
+---
+
+# 🚀 توثيق إنجاز المهمة 38 (Milestone 38 - Walkthrough)
+**تاريخ الإنجاز:** الأحد، 25 أكتوبر 2026 — الساعة 10:02 مساءً  
+**نسبة الإنجاز:** 100% مكتملة ومختبرة بالكامل
+
+---
+
+## 🌟 المحاور التنفيذية المنجزة في المهمة 38:
+
+### 1. إطلاق حزم الـ SDK الرسمية (Official Python & Node.js SDK Packages):
+- **حزمة Python SDK (`coresync-python` v2.4.0):**
+  - المسار: [sdk/python/coresync/client.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/coresync/client.py)
+  - التثبيت عبر: `pip install coresync-python`
+  - الوظائف: فئة `CoreSyncClient` تدعم الفوترة والـ BTW الهولندية (`generate_invoice()`)، إشعارات الواتساب المالية (`trigger_whatsapp_notification()`)، واستعلامات دفتر الأستاذ العام (`get_ledger_entries()`).
+  - ملف الإعداد والتوزيع: [setup.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/setup.py) و [README.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/README.md).
+- **حزمة Node.js SDK (`@coresync/sdk` v2.4.0):**
+  - المسار: [sdk/nodejs/index.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/index.js)
+  - التثبيت عبر: `npm install @coresync/sdk`
+  - التوافقية: معيار Node 18+، دعم كامل لـ ESM (`import`) و CommonJS (`require`).
+  - ملف الحزمة: [package.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/package.json) و [README.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/README.md).
+- **قسم الـ SDK السريع في بوابة المطورين ([developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html)):**
+  - تبويبات تفاعلية سريعة تتيح للمطورين التبديل بنقرة واحدة بين Python و Node.js، مع أزرار نسخ فورية بنظام `navigator.clipboard`.
+
+### 2. بوابة شركاء الحلول والوكلاء البيضاء ([partner-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/partner-portal.html)):
+- **استوديو التخصيص والهوية المستقلة (White-Label Studio):**
+  - تخصيص اسم المؤسسة المحاسبية (مثل: `Van Dijk & Partners Accountants B.V.`).
+  - إعداد النطاق المخصص CNAME أو الرابط الفرعي (`portal.vandijk-accountants.nl`).
+  - اختيار لوحة الألوان الخاصة بالعلامة التجارية مع معاينة حية فورية ومباشرة.
+- **مؤشرات أداء الشريك والـ RevShare:**
+  - اشتراكات شهرية مدارة: **€4,240.00 MRR**.
+  - أرباح صافية شهرية للوكيل (25% RevShare): **€1,060.00**.
+  - عدد المستأجرين النشطين: **14 مؤسسة هولندية وأوروبية**.
+  - الامتثال الضريبي مع Belastingdienst: **100% مطابقة تامة**.
+- **إدارة المستأجرين الهولنديين النشطين (Active Dutch Tenants):**
+  - استعراض الشركات المشتركة: *Rotterdam Port Logistics B.V.*, *De Vries BioTech Solutions*, *Nordic Cloud Infrastructure*, *Utrecht Clean Energy B.V.*
+  - أرقام السجل الضريبي KVK و BTW، الاشتراكات الفردية، وروابط الدخول المباشر.
+  - نافذة تسجيل وانضمام عميل محاسبي جديد بنقرة زر واحدة.
+
+### 3. أتمتة إشعارات WhatsApp Business API للمعاملات المالية والتسويات:
+- **نظام الإشعارات المحاسبية اللحظي:**
+  - إرسال تفاصيل الفاتورة، قيمة السداد، ونسب الـ BTW 21% المستحقة لمدير الحسابات على واتساب فور اكتمال تسوية الـ Webhook البنكية عبر iDEAL.
+  - زر تفاعلي ينشئ رابط WhatsApp الرسمي فوريًا ويفتحه مباشرة مع الرسالة المنسقة.
+
+### 4. التكامل والربط عبر الموقع الرئيسي ([index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html)):
+- إضافة زر كبسولي فاخر في شريط الهيدر العلوي: `بوابة الوكلاء 💼`.
+- إضافة الرابط في القائمة المتنقلة للجوال (Mobile Drawer Menu).
+- إضافة رابط مباشر بين بوابة المطورين وبوابة الشركاء في كلا الاتجاهين.
+
+---
+
+## 📸 لقطات حية ومباشرة من شاشة المتصفح للمهمة 38 (Live Visual Snapshots):
+
+### 1. استوديو الهوية المستقلة ومؤشرات أداء الشريك في بوابة الوكلاء (White-Label Portal):
+![بوابة الشركاء والوكلاء البيضاء ومؤشرات الـ RevShare](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/partner_portal_top_1792962061039.png)
+
+### 2. محاكي إشعارات WhatsApp Business API وجدول المستأجرين والعملاء الهولنديين:
+![إشعارات WhatsApp Business المالية وإدارة العملاء الهولنديين](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/partner_portal_whatsapp_tenants_1792962067586.png)
+
+### 3. تبويبات حزم الـ SDK الرسمية في بوابة المطورين (Python & Node.js SDK Tabs):
+![حزم الـ SDK الرسمية في بوابة المطورين](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/developer_portal_sdk_tabs_1792962085828.png)
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 38:
+1. **[sdk/python/coresync/client.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/coresync/client.py):** نواة حزمة الـ Python SDK الرسمية.
+2. **[sdk/python/setup.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/python/setup.py):** ملف إعداد وتثبيت حزمة بايثون.
+3. **[sdk/nodejs/index.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/index.js):** نواة حزمة الـ Node.js SDK الرسمية.
+4. **[sdk/nodejs/package.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/package.json):** إعدادات حزمة npm `@coresync/sdk`.
+5. **[partner-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/partner-portal.html):** بوابة شركاء الحلول والوكلاء البيضاء المتكاملة.
+6. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** إضافة قسم حزم الـ SDK وروابط التنقل.
+7. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة رابط بوابة الوكلاء في الهيدر والقائمة المتنقلة.
+8. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 38 بنسبة 100%.
+9. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق واللقطات الحية الكاملة.
 
 </div>
 
