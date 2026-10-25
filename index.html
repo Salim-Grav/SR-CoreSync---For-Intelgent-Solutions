@@ -1276,6 +1276,67 @@ main#wrapper:focus{outline:none}
 .sr-checkout-btn-row { display: flex; gap: 10px; margin-top: 14px; }
 .sr-checkout-submit-btn { flex: 1; justify-content: center; }
 
+/* Developer Portal & 3D AI Digital Avatar Launchers */
+.btn-developer-api-header {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid rgba(16, 185, 129, 0.45) !important;
+    color: #34d399 !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    padding: 7px 14px !important;
+    border-radius: 20px !important;
+    font-size: 0.82rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.25s ease !important;
+}
+.btn-developer-api-header:hover {
+    background: rgba(16, 185, 129, 0.3) !important;
+    border-color: #34d399 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.4) !important;
+}
+.hero-btn-dev-portal {
+    background: rgba(14, 28, 22, 0.85) !important;
+    border: 1px solid rgba(197, 168, 128, 0.45) !important;
+    color: #f3dfba !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+.hero-btn-dev-portal:hover {
+    background: rgba(197, 168, 128, 0.2) !important;
+    border-color: #f3dfba !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 16px rgba(197, 168, 128, 0.35) !important;
+}
+.hero-emblem-avatar-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 18px !important;
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid rgba(16, 185, 129, 0.45) !important;
+    border-radius: 999px !important;
+    color: #34d399 !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(16, 185, 129, 0.2) !important;
+    transition: all 0.25s ease !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    margin-right: 8px !important;
+}
+.hero-emblem-avatar-badge:hover {
+    background: rgba(16, 185, 129, 0.25) !important;
+    border-color: #34d399 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(16, 185, 129, 0.5) !important;
+}
+
 </style>
 </head>
 
@@ -1390,6 +1451,10 @@ main#wrapper:focus{outline:none}
 
                             <!-- 3. أدوات الاتصال السريع وتغيير اللغة وقائمة الهاتف (مرتبة LTR بأناقة مطلقة) -->
                             <div class="header-col-actions">
+                                <a href="developer-portal.html" class="tf-btn btn-developer-api-header" title="بوابة المطورين والـ API المفتوحة و 3D AI Avatar">
+                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                                    <span>بوابة المطورين API ⚡</span>
+                                </a>
                                 <a href="demo.html" class="tf-btn btn-live-sandbox-header" id="headerLiveDemoPill" title="تجربة لوحة تحكم ERP السحابية الحية">
                                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                                     <span>تجربة ERP السحابي ⚡</span>
@@ -1445,6 +1510,10 @@ main#wrapper:focus{outline:none}
                                     <div class="hero-reference__actions d-flex flex-wrap gap-3">
                                         <a href="demo.html" class="tf-btn hero-reference__action hero-btn-demo hero-btn-primary-highlight" title="تجربة المنصة السحابية الحية فوراً">
                                             <span>⚡ تجربة الـ ERP السحابي الحي (Live Demo)</span>
+                                        </a>
+                                        <a href="developer-portal.html" class="tf-btn hero-reference__action hero-btn-dev-portal" title="بوابة المطورين والـ API المفتوحة و 3D AI Avatar">
+                                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                                            <span>بوابة المطورين و 3D AI Avatar ⚡</span>
                                         </a>
                                         <button type="button" class="tf-btn hero-reference__action hero-btn-voice-ai" id="heroVoiceAiBtn" onclick="openAiVoicePlannerModal()" data-sr-call="openAiVoicePlannerModal" title="خطط لمشروعك بالصوت فوراً عبر الذكاء الاصطناعي">
                                             <span class="hero-voice-icon-pulse">🎙️</span>
@@ -1509,6 +1578,11 @@ main#wrapper:focus{outline:none}
                                             <span>تحدث بفكرة مشروعك | مهندس الـ AI بانتظارك</span>
                                             <span class="emblem-voice-arrow">←</span>
                                         </button>
+                                        <a href="developer-portal.html#avatarSection" class="hero-emblem-avatar-badge" title="تحدث مع النسخة الرقمية الذكية ثلاثية الأبعاد للمهندس سليم عزيزة">
+                                            <span>✨</span>
+                                            <span>المهندس سليم الرقمي • 3D AI Avatar</span>
+                                            <span>↗</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
