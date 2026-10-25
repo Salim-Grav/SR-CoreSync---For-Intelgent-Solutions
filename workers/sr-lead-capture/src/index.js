@@ -760,6 +760,7 @@ async function sendTelegram(lead, env) {
 // enquiry itself, and the map is overridable from wrangler.toml (LEAD_ROUTES)
 // so the owner can change it without touching code.
 const DEFAULT_ROUTES = {
+    sales: 'sales@sr-coresync.com',
     billing: 'billing@sr-coresync.com',
     support: 'support@sr-coresync.com',
     // Big-project signals go to the two founders, not to a shared inbox.
@@ -767,9 +768,10 @@ const DEFAULT_ROUTES = {
 };
 
 const ROUTE_KEYWORDS = {
+    sales: ['sales', 'buy', 'order', 'purchase', 'koop', 'achat', 'kauf', 'acquisto', 'zakup', 'deal',
+        'quote', 'quotation', 'offerte', 'pricing', 'price', 'prijs', 'tarief', 'proposal', 'dossier'],
     billing: ['invoice', 'factuur', 'facture', 'fattura', 'faktura', 'rechnung', 'payment', 'betaling',
-        'quote', 'quotation', 'offerte', 'pricing', 'price', 'prijs', 'tarief', 'vat', 'btw',
-        'contract', 'license', 'licence', 'subscription', 'abonnement'],
+        'vat', 'btw', 'contract', 'license', 'licence', 'subscription', 'abonnement'],
     support: ['support', 'problem', 'error', 'bug', 'outage', 'incident', 'maintenance', 'fix', 'help',
         'storing', 'hilfe', 'aide', 'aiuto', 'pomoc', 'destek', 'migration', 'migratie'],
     executive: ['enterprise', 'corporate', 'holding', 'group-wide', 'rfp', 'tender', 'aanbesteding',
