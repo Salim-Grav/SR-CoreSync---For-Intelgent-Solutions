@@ -638,6 +638,81 @@
         .ledger-debit { color: #34d399; font-family: var(--font-code); font-weight: 700; }
         .ledger-credit { color: #f59e0b; font-family: var(--font-code); font-weight: 700; }
 
+        /* SDK Quickstart Section */
+        .sdk-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .sdk-tab-btn {
+            background: rgba(14, 28, 22, 0.7);
+            border: 1px solid var(--border-gold);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sdk-tab-btn.active {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        .sdk-content-panel {
+            display: none;
+        }
+
+        .sdk-content-panel.active {
+            display: block;
+        }
+
+        .sdk-install-box {
+            background: #020604;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 10px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-family: var(--font-code);
+            direction: ltr;
+        }
+
+        .sdk-install-cmd {
+            color: var(--gold-bright);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .sdk-copy-btn {
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+        }
+
+        .sdk-copy-btn:hover {
+            background: var(--gold-bright);
+            color: #020705;
+        }
+
         @media (max-width: 1024px) {
             .dev-container {
                 grid-template-columns: 1fr;
