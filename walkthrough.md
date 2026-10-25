@@ -306,6 +306,17 @@
 ### 3. تبويبات حزم الـ SDK الرسمية في بوابة المطورين (Python & Node.js SDK Tabs):
 ![حزم الـ SDK الرسمية في بوابة المطورين](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/developer_portal_sdk_tabs_1792962085828.png)
 
+### 4. التحقق والتطهير التام من التنسيقات المضمنة (Zero Inline Styles Clean UI):
+- استبدال كافة التنسيقات المضمنة `style="..."` في `developer-portal.html` و `partner-portal.html` بفئات CSS قياسية ونظيفة.
+- التحقق عبر فحص الـ IDE وخلو الملفات من أي تنبيهات أو أخطاء.
+
+---
+
+### 4. لقطات الفحص والتحقق بعد إزالة التنسيقات المضمنة:
+![بوابة الوكلاء بعد التطهير الكامل للشيفرة](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/partner_portal_clean_1792962491564.png)
+
+![بوابة المطورين ودفتر الأستاذ بعد التطهير الكامل للشيفرة](C:/Users/msali/.gemini/antigravity-ide/brain/a135bd96-a130-4fce-bd03-e8737183b85b/developer_portal_clean_1792962512911.png)
+
 ---
 
 ## 🛠️ الملفات المستحدثة والمعدلة للمهمة 38:
@@ -314,7 +325,7 @@
 3. **[sdk/nodejs/index.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/index.js):** نواة حزمة الـ Node.js SDK الرسمية.
 4. **[sdk/nodejs/package.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sdk/nodejs/package.json):** إعدادات حزمة npm `@coresync/sdk`.
 5. **[partner-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/partner-portal.html):** بوابة شركاء الحلول والوكلاء البيضاء المتكاملة.
-6. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** إضافة قسم حزم الـ SDK وروابط التنقل.
+6. **[developer-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/developer-portal.html):** إضافة قسم حزم الـ SDK وروابط التنقل وتطهير التنسيقات.
 7. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إضافة رابط بوابة الوكلاء في الهيدر والقائمة المتنقلة.
 8. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 38 بنسبة 100%.
 9. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق واللقطات الحية الكاملة.
