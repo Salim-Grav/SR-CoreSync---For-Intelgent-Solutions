@@ -4,8 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
+    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
     <script id="srLangAutoDetect">
     (function() {
         try {
@@ -24,7 +23,7 @@
                 localStorage.setItem('sr_lang_pref', targetLang);
             }
             
-            // 3. Auto-detect from device / OS / browser
+            // 3. Auto-detect from visitor device / OS / browser system language
             if (!targetLang) {
                 var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
                 for (var i = 0; i < browserLangs.length; i++) {
@@ -39,9 +38,14 @@
                         break;
                     }
                 }
+                // If device is not Arabic and no specific language matched, fallback to English
+                if (!targetLang && browserLangs.length > 0) {
+                    var first = (browserLangs[0] || '').toLowerCase();
+                    targetLang = (first.indexOf('ar') !== -1) ? 'ar' : 'en';
+                }
             }
             
-            // 4. Compare with current page language
+            // 4. Compare with current page language and route immediately
             var currentLang = document.documentElement.getAttribute('lang') || 'ar';
             if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
                 var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
@@ -56,6 +60,8 @@
     })();
     </script>
 
+
+    
     <title>S&R CoreSync Solutions | Enterprise Cloud ERP & AI (Български)</title>
     <meta name="author" content="S&R CoreSync Solutions">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

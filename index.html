@@ -4,8 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
+    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
     <script id="srLangAutoDetect">
     (function() {
         try {
@@ -24,11 +23,29 @@
                 localStorage.setItem('sr_lang_pref', targetLang);
             }
             
-            // 3. User explicit preferences (saved in localStorage or via ?lang=) route immediately.
-            // First-time visitor discovery is politely handled by Sovereign Geo-Language Detection (sr-geo-lang.js)
-            // to provide a smooth, dignified experience without forced page jumps.
+            // 3. Auto-detect from visitor device / OS / browser system language
+            if (!targetLang) {
+                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+                for (var i = 0; i < browserLangs.length; i++) {
+                    var raw = (browserLangs[i] || '').toLowerCase().trim();
+                    var primary = raw.split('-')[0];
+                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
+                        targetLang = 'ckb';
+                        break;
+                    }
+                    if (supported.indexOf(primary) !== -1) {
+                        targetLang = primary;
+                        break;
+                    }
+                }
+                // If device is not Arabic and no specific language matched, fallback to English
+                if (!targetLang && browserLangs.length > 0) {
+                    var first = (browserLangs[0] || '').toLowerCase();
+                    targetLang = (first.indexOf('ar') !== -1) ? 'ar' : 'en';
+                }
+            }
             
-            // 4. Compare with current page language
+            // 4. Compare with current page language and route immediately
             var currentLang = document.documentElement.getAttribute('lang') || 'ar';
             if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
                 var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
@@ -43,6 +60,8 @@
     })();
     </script>
 
+
+    
     <title>S&R CoreSync Solutions | برمجيات متقدمة، حلول ERP واستشارات مالية ذكية</title>
     <meta name="author" content="S&R CoreSync Solutions">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

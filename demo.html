@@ -3,57 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
-    <script id="srLangAutoDetect">
-    (function() {
-        try {
-            var urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('noredirect') === '1') return;
-            var qLang = urlParams.get('lang');
-            var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
-            
-            // 1. User manual override from localStorage
-            var savedPref = localStorage.getItem('sr_lang_pref');
-            var targetLang = savedPref;
-            
-            // 2. Query param ?lang=xx
-            if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
-                targetLang = qLang.toLowerCase();
-                localStorage.setItem('sr_lang_pref', targetLang);
-            }
-            
-            // 3. Auto-detect from device / OS / browser
-            if (!targetLang) {
-                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
-                for (var i = 0; i < browserLangs.length; i++) {
-                    var raw = (browserLangs[i] || '').toLowerCase().trim();
-                    var primary = raw.split('-')[0];
-                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
-                        targetLang = 'ckb';
-                        break;
-                    }
-                    if (supported.indexOf(primary) !== -1) {
-                        targetLang = primary;
-                        break;
-                    }
-                }
-            }
-            
-            // 4. Compare with current page language
-            var currentLang = document.documentElement.getAttribute('lang') || 'ar';
-            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
-                var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
-                var targetFile = isDemo ? 'demo.html' : 'index.html';
-                var targetPath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
-                var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
-                var prefix = isSubfolder ? '../' : './';
-                var destUrl = prefix + targetPath + window.location.search + window.location.hash;
-                window.location.replace(destUrl);
-            }
-        } catch(e) {}
-    })();
-    </script>
-
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -5141,7 +5091,63 @@ function exportTechnicalContractExcel() {
     <tr><th colspan="2" style="text-align:right;">ضريبة القيمة المضافة بهولندا (BTW 21%):</th><th style="text-align:left;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">4410.00</th></tr>
     <tr><th colspan="2" style="text-align:right;background:#059669;color:#fff;">الإجمالي الشامل للضريبة (Incl. BTW):</th><th style="text-align:left;background:#059669;color:#fff;mso-number-format:'\\\\€\\\\#,##0\\\\.00'">25410.00</th></tr>
     `;
-    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
+    const excel = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8">
+    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
+    <script id="srLangAutoDetect">
+    (function() {
+        try {
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('noredirect') === '1') return;
+            var qLang = urlParams.get('lang');
+            var supported = ["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"];
+            
+            // 1. User manual override from localStorage
+            var savedPref = localStorage.getItem('sr_lang_pref');
+            var targetLang = savedPref;
+            
+            // 2. Query param ?lang=xx
+            if (qLang && supported.indexOf(qLang.toLowerCase()) !== -1) {
+                targetLang = qLang.toLowerCase();
+                localStorage.setItem('sr_lang_pref', targetLang);
+            }
+            
+            // 3. Auto-detect from visitor device / OS / browser system language
+            if (!targetLang) {
+                var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+                for (var i = 0; i < browserLangs.length; i++) {
+                    var raw = (browserLangs[i] || '').toLowerCase().trim();
+                    var primary = raw.split('-')[0];
+                    if (raw.indexOf('ckb') !== -1 || raw.indexOf('ku-iq') !== -1 || raw.indexOf('sorani') !== -1) {
+                        targetLang = 'ckb';
+                        break;
+                    }
+                    if (supported.indexOf(primary) !== -1) {
+                        targetLang = primary;
+                        break;
+                    }
+                }
+                // If device is not Arabic and no specific language matched, fallback to English
+                if (!targetLang && browserLangs.length > 0) {
+                    var first = (browserLangs[0] || '').toLowerCase();
+                    targetLang = (first.indexOf('ar') !== -1) ? 'ar' : 'en';
+                }
+            }
+            
+            // 4. Compare with current page language and route immediately
+            var currentLang = document.documentElement.getAttribute('lang') || 'ar';
+            if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
+                var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
+                var targetFile = isDemo ? 'demo.html' : 'index.html';
+                var targetPath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
+                var isSubfolder = window.location.pathname.match(/\/[a-z]{2,3}\//);
+                var prefix = isSubfolder ? '../' : './';
+                var destUrl = prefix + targetPath + window.location.search + window.location.hash;
+                window.location.replace(destUrl);
+            }
+        } catch(e) {}
+    })();
+    </script>
+<style>body{font-family:Segoe UI,Arial;direction:rtl;}table{border-collapse:collapse;}th,td{border:1px solid #cbd5e1;padding:6px 10px;font-size:10pt;}</style></head><body><table>${rows}</table></body></html>`;
     const blob = new Blob(['\\ufeff', excel], { type: 'application/vnd.ms-excel;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

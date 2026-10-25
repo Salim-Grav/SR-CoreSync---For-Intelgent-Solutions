@@ -2,7 +2,10 @@
 """
 S&R CoreSync Solutions - 0ms Sovereign System Language Auto-Detector
 Detects visitor device/browser locale and instantly routes them to their native language portal.
-Respects user manual selection via localStorage ('sr_lang_pref').
+- Arabic device (ar) -> stays on root index.html (Arabic Master)
+- English device (en) -> routes to en/index.html
+- Dutch (nl), German (de), French (fr), Spanish (es), etc. -> routes to their respective native portal
+- Respects user manual selection via localStorage ('sr_lang_pref').
 """
 
 import os
@@ -14,8 +17,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-AUTO_DETECT_SCRIPT = """
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Routing) -->
+AUTO_DETECT_SCRIPT = """    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device Routing) -->
     <script id="srLangAutoDetect">
     (function() {
         try {
@@ -34,7 +36,7 @@ AUTO_DETECT_SCRIPT = """
                 localStorage.setItem('sr_lang_pref', targetLang);
             }
             
-            // 3. Auto-detect from device / OS / browser
+            // 3. Auto-detect from visitor device / OS / browser system language
             if (!targetLang) {
                 var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
                 for (var i = 0; i < browserLangs.length; i++) {
@@ -49,9 +51,14 @@ AUTO_DETECT_SCRIPT = """
                         break;
                     }
                 }
+                // If device is not Arabic and no specific language matched, fallback to English
+                if (!targetLang && browserLangs.length > 0) {
+                    var first = (browserLangs[0] || '').toLowerCase();
+                    targetLang = (first.indexOf('ar') !== -1) ? 'ar' : 'en';
+                }
             }
             
-            // 4. Compare with current page language
+            // 4. Compare with current page language and route immediately
             var currentLang = document.documentElement.getAttribute('lang') || 'ar';
             if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
                 var isDemo = window.location.pathname.indexOf('demo.html') !== -1;
@@ -67,31 +74,6 @@ AUTO_DETECT_SCRIPT = """
     </script>
 """
 
-# Update deploy_sovereign_multilingual.py with click event to store preference
-DEPLOY_PATH = os.path.join(BASE_DIR, 'scripts', 'deploy_sovereign_multilingual.py')
-with open(DEPLOY_PATH, 'r', encoding='utf-8') as f:
-    deploy_content = f.read()
-
-click_listener = """
-        items.forEach(item => {
-            item.addEventListener('click', function() {
-                const code = this.getAttribute('data-code');
-                if (code) {
-                    localStorage.setItem('sr_lang_pref', code);
-                }
-            });
-        });
-"""
-
-if "localStorage.setItem('sr_lang_pref'" not in deploy_content:
-    deploy_content = deploy_content.replace(
-        "trigger.addEventListener('click', toggleDropdown);",
-        "trigger.addEventListener('click', toggleDropdown);\n" + click_listener
-    )
-    with open(DEPLOY_PATH, 'w', encoding='utf-8') as f:
-        f.write(deploy_content)
-    print("Updated deploy_sovereign_multilingual.py with localStorage saving on click!")
-
 # Function to inject auto-detector into any HTML file
 def inject_detector(file_path):
     if not os.path.exists(file_path):
@@ -99,13 +81,16 @@ def inject_detector(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         c = f.read()
     
-    # Remove older versions if present
-    c = re.sub(r'<!-- Sovereign Intelligent System Language Auto-Detector[\s\S]*?<\/script>', '', c)
-    c = re.sub(r'<!-- Language Auto-Redirect[\s\S]*?<\/script>', '', c)
+    # Remove older detector versions if present
+    c = re.sub(r'<!-- Sovereign Intelligent System Language Auto-Detector[\s\S]*?<\/script>\n?', '', c)
+    c = re.sub(r'<!-- Language Auto-Redirect[\s\S]*?<\/script>\n?', '', c)
+    c = re.sub(r'<script id="srLangAutoDetect">[\s\S]*?<\/script>\n?', '', c)
     
     # Inject right after <meta charset="utf-8">
     if '<meta charset="utf-8">' in c:
         c = c.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + AUTO_DETECT_SCRIPT, 1)
+    elif '<meta charset="UTF-8">' in c:
+        c = c.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n' + AUTO_DETECT_SCRIPT, 1)
     elif '<head>' in c:
         c = c.replace('<head>', '<head>\n' + AUTO_DETECT_SCRIPT, 1)
         
@@ -126,4 +111,4 @@ for l in LANGUAGES:
     inject_detector(os.path.join(BASE_DIR, code, 'index.html'))
     inject_detector(os.path.join(BASE_DIR, code, 'demo.html'))
 
-print("\nSystem Language Auto-Detection Engine successfully deployed across all 29 language portals!")
+print("\nDevice Language Auto-Detection Engine successfully deployed across all 29 language portals!")
