@@ -6231,7 +6231,7 @@ li, dt, dd, td, th {
         margin-inline: auto !important;
     }
     .hero-reference__grid {
-        gap: 50px !important;
+        gap: clamp(6.5rem, 9.5vw, 12.5rem) !important;
     }
 }
 
@@ -8076,6 +8076,12 @@ html[dir="ltr"] .service-orbit-section .wg-tech-v2 .tech-content {
         padding-left: 0 !important;
         padding-right: clamp(110px, 11vw, 220px) !important;
     }
+    .hero-reference__grid {
+        gap: clamp(4.5rem, 8vw, 11rem) !important;
+    }
+    .hero-reference__copy {
+        max-width: 740px !important;
+    }
     [dir="rtl"] .hero-reference__emblem-col {
         padding-left: clamp(40px, 5vw, 90px) !important;
         padding-right: 0 !important;
@@ -8092,60 +8098,11 @@ html[dir="ltr"] .service-orbit-section .wg-tech-v2 .tech-content {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    max-width: 540px !important;
+    max-width: 560px !important;
+    position: relative !important;
 }
 .hero-emblem-card-3d {
     margin: 0 auto !important;
-}
-.hero-emblem-actions-bar {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-    margin-top: 14px !important;
-    z-index: 10 !important;
-    width: 100%;
-    max-width: 500px !important;
-}
-.btn-emblem-pill {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 6px 14px !important;
-    border-radius: 999px !important;
-    font-size: 0.76rem !important;
-    font-weight: 700 !important;
-    border: 1px solid rgba(197, 168, 128, 0.45) !important;
-    background: rgba(7, 13, 10, 0.88) !important;
-    color: #f3dfba !important;
-    text-decoration: none !important;
-    cursor: pointer !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5) !important;
-}
-.btn-emblem-pill:hover {
-    border-color: rgba(243, 223, 186, 0.85) !important;
-    color: #ffffff !important;
-    background: rgba(197, 168, 128, 0.22) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px rgba(197, 168, 128, 0.3) !important;
-}
-.btn-emblem-inspect {
-    border-color: rgba(243, 223, 186, 0.65) !important;
-}
-.btn-emblem-cloud {
-    background: rgba(6, 182, 212, 0.12) !important;
-    border-color: rgba(56, 189, 248, 0.4) !important;
-    color: #bae6fd !important;
-}
-.btn-emblem-cloud:hover {
-    border-color: rgba(56, 189, 248, 0.9) !important;
-    color: #ffffff !important;
-    background: rgba(6, 182, 212, 0.28) !important;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.4) !important;
 }
 
 /* Floating Follow Omnichannel Sidebar */
