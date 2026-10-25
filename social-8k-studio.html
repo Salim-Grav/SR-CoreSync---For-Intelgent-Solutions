@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو الهوية البصرية وحزمة السوشيال ميديا 8K الفائقة | S&R CoreSync</title>
+    <meta name="description" content="الحزمة البصرية الرسمية المعتمدة لشركة S&R CoreSync For Intelligent Solutions بدقة 8K فائقة لجميع منصات التواصل الاجتماعي ومصممي الفيديو.">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-obsidian: #020705;
+            --bg-surface: #06120e;
+            --bg-card: rgba(8, 24, 18, 0.85);
+            --gold-primary: #c5a880;
+            --gold-bright: #e6cea8;
+            --gold-glow: rgba(197, 168, 128, 0.35);
+            --emerald-accent: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-gold: rgba(197, 168, 128, 0.25);
+            --border-hover: rgba(197, 168, 128, 0.6);
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--text-main);
+            font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 10% 30%, rgba(16, 75, 50, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 90% 70%, rgba(16, 75, 50, 0.12) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Top Bar */
+        .studio-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 7, 5, 0.88);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 14px 24px;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-emblem {
+            width: 44px;
+            height: 44px;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+            transition: transform 0.3s ease;
+        }
+
+        .brand-link:hover .brand-emblem {
+            transform: rotate(5deg) scale(1.08);
+        }
+
+        .brand-title {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--border-gold);
+            background: rgba(197, 168, 128, 0.08);
+            color: var(--gold-bright);
+        }
+
+        .btn-action:hover {
+            background: rgba(197, 168, 128, 0.2);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary), #9a7d52);
+            color: #020705;
+            border-color: var(--gold-bright);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+        }
+
+        /* Hero Section */
+        .studio-hero {
+            max-width: 1600px;
+            margin: 40px auto 20px;
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            margin-bottom: 12px;
+            line-height: 1.25;
+            background: linear-gradient(135deg, #ffffff 40%, var(--gold-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 860px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Filter Tabs */
+        .filter-scroll-wrapper {
+            max-width: 1600px;
+            margin: 0 auto 35px;
+            padding: 0 24px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold-primary) transparent;
+        }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: max-content;
+            padding-bottom: 8px;
+        }
+
+        .filter-btn {
+            background: rgba(6, 18, 14, 0.8);
+            border: 1px solid var(--border-gold);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-bright);
+            background: rgba(197, 168, 128, 0.12);
+        }
+
+        .filter-btn.active {
+            background: var(--gold-primary);
+            color: #020705;
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.4);
+        }
+
+        .badge-count {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        /* Gallery Grid */
+        .gallery-container {
+            max-width: 1600px;
+            margin: 0 auto 80px;
+            padding: 0 24px;
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 28px;
+        }
+
+        @media (max-width: 640px) {
+            .assets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .asset-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .asset-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(197, 168, 128, 0.2);
+        }
+
+        .preview-box {
+            position: relative;
+            background: #020604;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+        }
+
+        .preview-box.ratio-1-1 { aspect-ratio: 1 / 1; max-height: 380px; }
+        .preview-box.ratio-9-16 { aspect-ratio: 9 / 16; max-height: 480px; }
+        .preview-box.ratio-4-1 { aspect-ratio: 4 / 1; }
+        .preview-box.ratio-3-1 { aspect-ratio: 3 / 1; }
+        .preview-box.ratio-4-5 { aspect-ratio: 4 / 5; max-height: 440px; }
+
+        .preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+            background: repeating-conic-gradient(#05110c 0% 25%, #020705 0% 50%) 50% / 20px 20px;
+        }
+
+        .asset-card:hover .preview-box img {
+            transform: scale(1.03);
+        }
+
+        .zoom-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 7, 5, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .preview-box:hover .zoom-overlay {
+            opacity: 1;
+        }
+
+        .zoom-tag {
+            padding: 8px 16px;
+            background: var(--gold-primary);
+            color: #020705;
+            font-weight: 800;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+        }
+
+        .asset-meta {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .meta-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .tag-res {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tag-platform {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-bright);
+            border: 1px solid var(--border-gold);
+        }
+
+        .tag-ratio {
+            background: rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+        }
+
+        .asset-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.35;
+        }
+
+        .asset-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .asset-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(197, 168, 128, 0.15);
+        }
+
+        .btn-download {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-png {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-bright);
+            border: 1px solid var(--border-gold);
+        }
+
+        .btn-download-png:hover {
+            background: var(--gold-primary);
+            color: #020705;
+        }
+
+        .btn-download-webp {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-download-webp:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #cbd5e1;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.94);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 95vw;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+            border: 1px solid var(--border-gold);
+        }
+
+        .lightbox-footer {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .lightbox-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+        }
+
+        .btn-close-lightbox {
+            position: absolute;
+            top: -45px;
+            left: 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-close-lightbox:hover {
+            background: var(--gold-primary);
+            color: #020705;
+        }
+
+        /* Safe zone explanation box */
+        .studio-guide-box {
+            max-width: 1600px;
+            margin: 0 auto 60px;
+            padding: 32px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(6, 18, 14, 0.95), rgba(4, 12, 9, 0.95));
+            border: 1px solid var(--border-gold);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .studio-guide-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .guide-col h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .guide-col p, .guide-col li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .guide-col ul {
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="studio-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-link" title="العودة للبوابة الرئيسية">
+                <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="brand-emblem">
+                <div>
+                    <div class="brand-title">S&amp;R CORESYNC</div>
+                    <div class="brand-sub">8K Visual Identity &amp; Social Suite Studio</div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="index.html#showcase" class="btn-action">
+                    <span>عودة للرئيسية ↩️</span>
+                </a>
+                <a href="./assets/social-8k-branding/manifest.json" target="_blank" class="btn-action">
+                    <span>بيانات الـ Manifest (JSON) 📄</span>
+                </a>
+                <a href="./assets/SR-CoreSync-Corporate-Profile-2026.pdf" download class="btn-action btn-primary">
+                    <span>الملف المؤسسي (PDF) 👑</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="studio-hero">
+        <div class="hero-pill">
+            <span>✨ دقة 8K فائقة (7680×4320 &amp; 4320×7680) • معتمدة رسمياً لعام 2026</span>
+        </div>
+        <h1 class="hero-title">استوديو الحزمة البصرية المعتمدة للسوشيال ميديا 8K</h1>
+        <p class="hero-desc">
+            حزمة متكاملة ومصممة بأعلى معايير الدقة والرفاهية لجميع المنصات العالمية (LinkedIn, X, YouTube, Meta, Instagram, TikTok, Snapchat, Telegram, WhatsApp Business) مع طبقات Master شفافة ومناطق أمان معتمدة لفيديوهات الشورتس والريلز.
+        </p>
+    </section>
+
+    <!-- Filter Tabs -->
+    <div class="filter-scroll-wrapper">
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-filter="all">
+                <span>🌟 الكل (جميع الأصول)</span>
+                <span class="badge-count" id="countAll">23</span>
+            </button>
+            <button class="filter-btn" data-filter="Universal">
+                <span>👑 الأفاتار والشعارات العامة</span>
+                <span class="badge-count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="LinkedIn">
+                <span>💼 لينكد إن (LinkedIn)</span>
+                <span class="badge-count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="X">
+                <span>🐦 إكس (X / Twitter)</span>
+                <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="YouTube">
+                <span>📺 يوتيوب (YouTube)</span>
+                <span class="badge-count">2</span>
+            </button>
+            <button class="filter-btn" data-filter="Instagram">
+                <span>📸 إنستغرام (Instagram)</span>
+                <span class="badge-count">3</span>
+            </button>
+            <button class="filter-btn" data-filter="Highlights">
+                <span>🔘 هايلايتس القصص</span>
+                <span class="badge-count">5</span>
+            </button>
+            <button class="filter-btn" data-filter="TikTok">
+                <span>🎵 تيك توك (TikTok)</span>
+                <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="Snapchat">
+                <span>👻 سناب شات (Snapchat)</span>
+                <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="Telegram">
+                <span>✈️ تيليجرام (Telegram)</span>
+                <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="WhatsApp">
+                <span>💬 واتساب للأعمال (WhatsApp)</span>
+                <span class="badge-count">1</span>
+            </button>
+            <button class="filter-btn" data-filter="Shorts">
+                <span>🎬 طبقات الفيديو والشورتس 9:16</span>
+                <span class="badge-count">2</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <main class="gallery-container">
+        <div class="assets-grid" id="assetsGrid">
+            <!-- Will be populated by JS from manifest.json -->
+        </div>
+    </main>
+
+    <!-- Safe-Zones & Guide Section -->
+    <section class="studio-guide-box">
+        <div class="guide-col">
+            <h3>📏 هندسة المقاسات ومناطق الأمان (Safe Zones)</h3>
+            <p>تم تصميم كافة الأصول وفقاً لمعايير الدقة الفائقة 8K مع مراعاة مناطق واجهات المستخدم (UI Elements):</p>
+            <ul>
+                <li><strong>شورتس وريلز (9:16):</strong> مسافة 650 بكسل علوية للأشرطة والبحث، ومسافة 1200 بكسل سفلية للوصف، وزاوية يمنى مخصصة لأزرار الإعجاب والتعليق.</li>
+                <li><strong>بانرات يوتيوب ولينكد إن:</strong> منطقة الوسط متوافقة مع شاشات الهواتف دون اقتطاع للنصوص أو الشعار الرئيسي.</li>
+                <li><strong>أفاتار 1:1:</strong> هوامش أمان دائرية بنسبة 100% تناسب القصاص الدائري في المنصات كافة.</li>
+            </ul>
+        </div>
+        <div class="guide-col">
+            <h3>💎 تعليمات الحفظ والرفع بدون فقدان الجودة</h3>
+            <p>لضمان بقاء الصور فائقة النقاء عند رفعها على منصات التواصل:</p>
+            <ul>
+                <li>استخدم ملفات <strong>Master PNG</strong> لأعلى نقاء ووضوح مع شفافية كاملة للطبقات.</li>
+                <li>استخدم ملفات <strong>WebP</strong> عند الاستخدام على المواقع الإلكترونية للسرعة الفائقة مع الاحتفاظ بدقة 8K/4K.</li>
+                <li>تتيح طبقات الشورتس الشفافة دمجها مباشرة في برامج المونتاج (Premiere, DaVinci, Final Cut, CapCut) كـ Overlay فوري.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <button type="button" class="btn-close-lightbox" id="btnCloseLightbox" aria-label="إغلاق">&times;</button>
+            <img id="lightboxImg" src="" alt="8K Asset Fullscreen Preview">
+            <div class="lightbox-footer">
+                <span class="lightbox-title" id="lightboxTitle">Asset Title</span>
+                <a id="lightboxDlPng" href="#" download class="btn-action btn-primary">تحميل Master PNG ⬇️</a>
+                <a id="lightboxDlWebp" href="#" download class="btn-action">تحميل WebP 🚀</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load Manifest and Populate Grid
+        let currentFilter = 'all';
+        let allAssets = [];
+
+        async function initStudio() {
+            try {
+                const res = await fetch('./assets/social-8k-branding/manifest.json');
+                const data = await res.json();
+                allAssets = data.assets || [];
+                renderGrid();
+            } catch (err) {
+                console.error('Failed to load manifest.json', err);
+            }
+        }
+
+        function getRatioClass(ratio) {
+            if (ratio === '1:1') return 'ratio-1-1';
+            if (ratio === '9:16') return 'ratio-9-16';
+            if (ratio === '4:1') return 'ratio-4-1';
+            if (ratio === '3:1') return 'ratio-3-1';
+            if (ratio === '4:5') return 'ratio-4-5';
+            return 'ratio-16-9';
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('assetsGrid');
+            grid.innerHTML = '';
+
+            const filtered = allAssets.filter(item => {
+                if (currentFilter === 'all') return true;
+                if (currentFilter === 'Universal' && item.platform.includes('Universal')) return true;
+                if (currentFilter === 'LinkedIn' && item.platform.includes('LinkedIn')) return true;
+                if (currentFilter === 'X' && (item.platform.includes('X') || item.platform.includes('Twitter'))) return true;
+                if (currentFilter === 'YouTube' && item.platform.includes('YouTube')) return true;
+                if (currentFilter === 'Instagram' && item.platform.includes('Instagram')) return true;
+                if (currentFilter === 'Highlights' && item.id.includes('highlight')) return true;
+                if (currentFilter === 'TikTok' && item.platform.includes('TikTok')) return true;
+                if (currentFilter === 'Snapchat' && item.platform.includes('Snapchat')) return true;
+                if (currentFilter === 'Telegram' && item.platform.includes('Telegram')) return true;
+                if (currentFilter === 'WhatsApp' && item.platform.includes('WhatsApp')) return true;
+                if (currentFilter === 'Shorts' && (item.id.includes('video-short') || item.aspect_ratio === '9:16')) return true;
+                return false;
+            });
+
+            filtered.forEach(asset => {
+                const card = document.createElement('div');
+                card.className = 'asset-card';
+
+                const ratioClass = getRatioClass(asset.aspect_ratio);
+                const webpFile = asset.file.replace('.png', '.webp');
+
+                card.innerHTML = `
+                    <div class="preview-box ${ratioClass}" onclick="openLightbox('${asset.file}', '${asset.title}')">
+                        <img src="./${webpFile}" alt="${asset.title}" loading="lazy" onerror="this.src='./${asset.file}'">
+                        <div class="zoom-overlay">
+                            <span class="zoom-tag">🔍 استعراض بدقة 8K</span>
+                        </div>
+                    </div>
+                    <div class="asset-meta">
+                        <div class="meta-badges">
+                            <span class="meta-tag tag-res">${asset.resolution}</span>
+                            <span class="meta-tag tag-ratio">${asset.aspect_ratio}</span>
+                            <span class="meta-tag tag-platform">${asset.platform}</span>
+                        </div>
+                        <h2 class="asset-title">${asset.title}</h2>
+                        <p class="asset-desc">${asset.description}</p>
+                        <div class="asset-actions">
+                            <a href="./${asset.file}" download class="btn-download btn-download-png" title="تحميل ملف الـ PNG بدقة 8K كاملة">
+                                <span>Master PNG 👑</span>
+                            </a>
+                            <a href="./${webpFile}" download class="btn-download btn-download-webp" title="تحميل نسخة WebP مضغوطة">
+                                <span>WebP عالي الدقة ⚡</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-filter');
+                renderGrid();
+            });
+        });
+
+        // Lightbox
+        const modal = document.getElementById('lightboxModal');
+        const lbImg = document.getElementById('lightboxImg');
+        const lbTitle = document.getElementById('lightboxTitle');
+        const lbDlPng = document.getElementById('lightboxDlPng');
+        const lbDlWebp = document.getElementById('lightboxDlWebp');
+        const btnClose = document.getElementById('btnCloseLightbox');
+
+        window.openLightbox = function(pngPath, title) {
+            lbImg.src = './' + pngPath;
+            lbTitle.textContent = title;
+            lbDlPng.href = './' + pngPath;
+            lbDlWebp.href = './' + pngPath.replace('.png', '.webp');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        function closeLightbox() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        btnClose.addEventListener('click', closeLightbox);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeLightbox();
+        });
+
+        initStudio();
+    </script>
+</body>
+</html>
