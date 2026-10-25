@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة المطورين وواجهة الـ API العامة | S&R CoreSync Developer Gateway 2026</title>
+    <meta name="description" content="بوابة المطورين الرسمية لمنظومة S&R CoreSync - توثيق تفاعلي Swagger/OpenAPI، ربط أنظمة ERP والحسابات السحابية، أتمتة الـ Webhooks لخدمات Open Banking PSD2، ونموذج الذكاء الاصطناعي التفاعلي.">
+    <link rel="icon" type="image/png" href="./assets/favicon-96.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020705;
+            --bg-card: rgba(8, 20, 15, 0.78);
+            --bg-elevated: rgba(14, 28, 22, 0.88);
+            --gold-primary: #c5a880;
+            --gold-bright: #f3dfba;
+            --gold-glow: rgba(197, 168, 128, 0.4);
+            --emerald-accent: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.35);
+            --border-gold: rgba(197, 168, 128, 0.28);
+            --border-hover: rgba(243, 223, 186, 0.65);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-code: 'Fira Code', monospace;
+            --font-main: 'Cairo', 'Outfit', sans-serif;
+            --glass-blur: blur(14px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(197, 168, 128, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                linear-gradient(rgba(2, 7, 5, 0.94), rgba(2, 7, 5, 0.98)),
+                url('./assets/grid.png');
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        .dev-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 7, 5, 0.92);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 14px 28px;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .dev-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dev-emblem {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+        }
+
+        .brand-title {
+            font-family: 'Outfit', 'Cairo', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(14, 28, 22, 0.7);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--gold-bright);
+            background: rgba(197, 168, 128, 0.15);
+            box-shadow: 0 0 14px var(--gold-glow);
+            color: #ffffff;
+        }
+
+        .nav-btn-primary {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705 !important;
+            border: none;
+        }
+
+        /* Hero Section */
+        .dev-hero {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 45px 24px 30px;
+            text-align: center;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 18px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 999px;
+            color: #34d399;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--gold-bright) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 920px;
+            margin: 0 auto 30px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Grid Layout */
+        .dev-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 28px;
+        }
+
+        /* Sidebar Navigation */
+        .dev-sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .sidebar-section-title {
+            font-size: 0.82rem;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .endpoint-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 24px;
+        }
+
+        .endpoint-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .endpoint-nav-item:hover,
+        .endpoint-nav-item.active {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--border-gold);
+            color: #ffffff;
+        }
+
+        .http-badge {
+            font-family: var(--font-code);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-post { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+        .badge-get { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+        .badge-webhook { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+
+        /* Main Content Area */
+        .dev-main {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* 3D AI Digital Avatar Card */
+        .ai-avatar-card {
+            background: linear-gradient(135deg, rgba(8, 24, 18, 0.95), rgba(4, 14, 10, 0.92));
+            border: 1px solid var(--gold-primary);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(197, 168, 128, 0.2);
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 28px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .ai-avatar-visual {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-hologram-ring {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            position: relative;
+            padding: 6px;
+            background: conic-gradient(from 0deg, var(--gold-bright), #10b981, var(--gold-primary), var(--gold-bright));
+            animation: rotateHolo 8s linear infinite;
+            box-shadow: 0 0 25px rgba(197, 168, 128, 0.4);
+        }
+
+        @keyframes rotateHolo {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-portrait-wrap {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #020705;
+            position: relative;
+        }
+
+        .avatar-portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transform: scale(1.05);
+            transition: transform 0.4s ease;
+        }
+
+        .avatar-live-indicator {
+            position: absolute;
+            bottom: 4px;
+            right: 25px;
+            background: rgba(2, 7, 5, 0.9);
+            border: 1px solid var(--gold-primary);
+            border-radius: 999px;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .avatar-pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .ai-avatar-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .avatar-tag {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            letter-spacing: 0.5px;
+        }
+
+        .avatar-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .avatar-speech-box {
+            background: rgba(2, 8, 5, 0.65);
+            border: 1px solid rgba(197, 168, 128, 0.22);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .avatar-speech-waves {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 24px;
+            margin-top: 10px;
+        }
+
+        .avatar-speech-wave-bar {
+            width: 3px;
+            height: 6px;
+            background: var(--gold-primary);
+            border-radius: 3px;
+            transition: height 0.15s ease;
+        }
+
+        .is-speaking .avatar-speech-wave-bar:nth-child(1) { animation: waveAnim 0.7s infinite alternate 0.1s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(2) { animation: waveAnim 0.7s infinite alternate 0.2s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(3) { animation: waveAnim 0.7s infinite alternate 0.3s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(4) { animation: waveAnim 0.7s infinite alternate 0.15s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(5) { animation: waveAnim 0.7s infinite alternate 0.35s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(6) { animation: waveAnim 0.7s infinite alternate 0.25s; }
+        .is-speaking .avatar-speech-wave-bar:nth-child(7) { animation: waveAnim 0.7s infinite alternate 0.05s; }
+
+        @keyframes waveAnim {
+            0% { height: 6px; background: var(--gold-primary); }
+            100% { height: 22px; background: #34d399; }
+        }
+
+        .avatar-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .avatar-btn {
+            background: linear-gradient(135deg, var(--gold-bright), var(--gold-primary));
+            color: #020705;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .avatar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 16px var(--gold-glow);
+        }
+
+        .avatar-lang-switch {
+            display: flex;
+            gap: 6px;
+            background: rgba(2, 7, 5, 0.7);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: rgba(197, 168, 128, 0.2);
+            color: var(--gold-bright);
+        }
+
+        /* Endpoint Interactive Cards */
+        .endpoint-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            padding: 24px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .endpoint-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            padding-bottom: 16px;
+        }
+
+        .endpoint-url-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-code);
+            font-size: 0.95rem;
+            color: #ffffff;
+            direction: ltr;
+        }
+
+        .endpoint-summary {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        /* Interactive Live Console */
+        .api-console-box {
+            background: rgba(3, 10, 7, 0.95);
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background-color: var(--border-gold);
+        }
+
+        .console-panel {
+            background: #030a07;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+        }
+
+        .code-textarea {
+            width: 100%;
+            height: 220px;
+            background: rgba(6, 14, 10, 0.8);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 8px;
+            color: #e2e8f0;
+            font-family: var(--font-code);
+            font-size: 0.82rem;
+            padding: 12px;
+            resize: none;
+            direction: ltr;
+            text-align: left;
+            outline: none;
+        }
+
+        .console-output {
+            width: 100%;
+            height: 220px;
+            background: rgba(2, 6, 4, 0.9);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 8px;
+            color: #34d399;
+            font-family: var(--font-code);
+            font-size: 0.82rem;
+            padding: 12px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .btn-send-req {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-send-req:hover {
+            box-shadow: 0 0 16px var(--emerald-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Webhook Simulator Section */
+        .webhook-simulator-section {
+            background: linear-gradient(135deg, rgba(8, 20, 16, 0.95), rgba(4, 12, 9, 0.95));
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            padding: 28px;
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+        }
+
+        .sim-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .sim-ledger-box {
+            background: rgba(2, 8, 5, 0.85);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .ledger-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 12px;
+        }
+
+        .ledger-table th, .ledger-table td {
+            padding: 8px 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+        }
+
+        .ledger-table th {
+            color: var(--gold-bright);
+            font-weight: 700;
+        }
+
+        .ledger-debit { color: #34d399; font-family: var(--font-code); font-weight: 700; }
+        .ledger-credit { color: #f59e0b; font-family: var(--font-code); font-weight: 700; }
+
+        @media (max-width: 1024px) {
+            .dev-container {
+                grid-template-columns: 1fr;
+            }
+            .dev-sidebar {
+                position: static;
+            }
+            .ai-avatar-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .avatar-controls {
+                justify-content: center;
+            }
+            .api-console-box, .sim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="dev-header">
+        <div class="header-inner">
+            <a href="index.html" class="dev-brand" title="العودة للرئيسية">
+                <img src="./assets/sr-core-emblem-official.png" alt="S&R Emblem" class="dev-emblem">
+                <div>
+                    <div class="brand-title">S&amp;R CORESYNC DEVELOPERS</div>
+                    <div class="brand-sub">Open API Gateway • OpenAPI 3.1 &amp; PSD2 Hub</div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="index.html" class="nav-btn">
+                    <span>الرئيسية ↩️</span>
+                </a>
+                <a href="social-campaign-hub.html" class="nav-btn">
+                    <span>منصة الحملات 🚀</span>
+                </a>
+                <a href="social-8k-studio.html" class="nav-btn">
+                    <span>استوديو 8K 🎨</span>
+                </a>
+                <button type="button" class="nav-btn nav-btn-primary" onclick="generateApiKey()">
+                    <span>مفتاح API تجريبي 🔑</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="dev-hero">
+        <div class="hero-pill">
+            <span>⚡ OpenAPI 3.1 Specification • Dutch PSD2 Open Banking Protocol 2026</span>
+        </div>
+        <h1 class="hero-title">بوابة المطورين والربط البرمجي السحابي المفتوح</h1>
+        <p class="hero-desc">
+            وثائق تشغيلية وتفاعلية للمؤسسات والمطورين لدمج منظومة CoreSync ERP السحابية، أتمتة تحصيل ومعالجة مدفوعات iDEAL عبر بنوك هولندا بنظام الـ Webhooks، والتوليد الفوري لخطط العمل بالذكاء الاصطناعي.
+        </p>
+    </section>
+
+    <!-- Developer Console Container -->
+    <div class="dev-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="dev-sidebar">
+            <div class="sidebar-section-title">محاور المنظومة السحابية</div>
+            <ul class="endpoint-nav-list">
+                <li>
+                    <a href="#avatarSection" class="endpoint-nav-item active">
+                        <span class="http-badge badge-get">AI</span>
+                        <span>مساعد سليم الذكي 3D</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#invoicesEndpoint" class="endpoint-nav-item">
+                        <span class="http-badge badge-post">POST</span>
+                        <span>توليد الفواتير والـ BTW</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#webhooksEndpoint" class="endpoint-nav-item">
+                        <span class="http-badge badge-webhook">HOOK</span>
+                        <span>تسوية بنوك PSD2 iDEAL</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#ledgerEndpoint" class="endpoint-nav-item">
+                        <span class="http-badge badge-get">GET</span>
+                        <span>دفتر الأستاذ العام Ledger</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#voiceEndpoint" class="endpoint-nav-item">
+                        <span class="http-badge badge-post">POST</span>
+                        <span>تخطيط المشاريع الصوتي AI</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-section-title">بيئة الاعتماد والتشفير</div>
+            <div style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                <p>🔒 <strong>الأمان:</strong> Bearer Token Auth</p>
+                <p>⚡ <strong>الاستجابة:</strong> < 35ms (Amsterdam EU-West)</p>
+                <p>📄 <strong>المطابقة:</strong> Belastingdienst BTW 21%</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dev-main">
+
+            <!-- 1. 3D AI Digital Human Avatar for Eng. Salim Aziza -->
+            <section id="avatarSection" class="ai-avatar-card">
+                <div class="ai-avatar-visual">
+                    <div class="avatar-hologram-ring" id="avatarHoloRing">
+                        <div class="avatar-portrait-wrap">
+                            <img src="./assets/founder-salim.png" alt="المهندس محمد سليم عزيزة" class="avatar-portrait" id="avatarImg">
+                        </div>
+                    </div>
+                    <div class="avatar-live-indicator">
+                        <div class="avatar-pulse-dot"></div>
+                        <span id="avatarStatusLabel">متصل وحي • 3D Avatar</span>
+                    </div>
+                </div>
+
+                <div class="ai-avatar-details">
+                    <div class="avatar-tag">✨ S&amp;R CORESYNC EXECUTIVE DIGITAL HUMAN</div>
+                    <h2 class="avatar-name">المهندس محمد سليم عزيزة • النسخة الرقمية الذكية</h2>
+                    
+                    <div class="avatar-speech-box" id="avatarSpeechBox">
+                        <p id="avatarSpeechText">
+                            "أهلاً بكم في S&R CoreSync. بصفتي الشريك المؤسس، يسعدني الترحيب بكم في منصة المطورين المفتوحة. لقد قمنا بهندسة محرك ERP السحابي وحزمة الـ API لتمكين شركائنا من الربط المصرفي الأوروبي الفوري، وإدارة الفواتير والضرائب بأمان مصرفي متكامل. يسعدنا دعمكم للوصول إلى أعلى مستويات الأتمتة والنمو."
+                        </p>
+                        <div class="avatar-speech-waves" id="avatarWaves">
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                            <div class="avatar-speech-wave-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="avatar-controls">
+                        <button type="button" class="avatar-btn" id="avatarPlayBtn" onclick="toggleAvatarSpeech()">
+                            <span id="avatarPlayIcon">▶️</span>
+                            <span id="avatarPlayText">استمع لترحيب المهندس سليم الرقمي</span>
+                        </button>
+                        
+                        <div class="avatar-lang-switch">
+                            <button type="button" class="lang-btn active" onclick="switchAvatarLang('ar')">العربية</button>
+                            <button type="button" class="lang-btn" onclick="switchAvatarLang('en')">English</button>
+                            <button type="button" class="lang-btn" onclick="switchAvatarLang('nl')">Nederlands</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Endpoint 1: Invoicing & BTW Calculation -->
+            <section id="invoicesEndpoint" class="endpoint-card">
+                <div class="endpoint-card-header">
+                    <div>
+                        <div class="endpoint-summary">1. توليد الفاتورة الضريبية الرسمية وحساب الـ BTW</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">توليد فاتورة رقمية معتمدة وفق اشتراطات مصلحة الضرائب الهولندية مع معالجة الاحتساب العكسي B2B.</div>
+                    </div>
+                    <div class="endpoint-url-wrap">
+                        <span class="http-badge badge-post">POST</span>
+                        <span>https://api.sr-coresync.com/v1/erp/invoices/generate</span>
+                    </div>
+                </div>
+
+                <div class="api-console-box">
+                    <div class="console-panel">
+                        <div class="panel-header">
+                            <span>جسم الطلب (Request Payload)</span>
+                            <span>JSON</span>
+                        </div>
+                        <textarea class="code-textarea" id="invoiceReqPayload" title="طلب إنشاء فاتورة" aria-label="طلب إنشاء فاتورة">{
+  "client_name": "Amsterdam Tech Logistics B.V.",
+  "client_vat": "NL864219876B01",
+  "client_email": "finance@amsterdam-tech.nl",
+  "package_code": "SOCIAL_8K_SUITE",
+  "amount_net": 735.54,
+  "btw_rate": 0.21,
+  "currency": "EUR"
+}</textarea>
+                        <button type="button" class="btn-send-req" onclick="testInvoiceApi()">
+                            <span>⚡ تجربة الإرسال الحي (Send Request)</span>
+                        </button>
+                    </div>
+
+                    <div class="console-panel">
+                        <div class="panel-header">
+                            <span>استجابة السحابة (Response: 200 OK)</span>
+                            <span id="invoiceLatency">22ms</span>
+                        </div>
+                        <div class="console-output" id="invoiceResOutput">// اضغط على "تجربة الإرسال الحي" لاختبار محرك الفوترة...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Endpoint 2 & PSD2 Webhook Simulator -->
+            <section id="webhooksEndpoint" class="webhook-simulator-section">
+                <div class="sim-header">
+                    <div>
+                        <div class="endpoint-summary">2. محاكي الـ Webhooks لتسوية بنوك هولندا PSD2 (Open Banking)</div>
+                        <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">محاكاة استلام إشعار السداد البنكي المباشر وتحديث دفتر الأستاذ العام آلياً فوراً.</div>
+                    </div>
+                    <div class="endpoint-url-wrap">
+                        <span class="http-badge badge-webhook">WEBHOOK</span>
+                        <span>/v1/banking/webhooks/ideal</span>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px;">
+                    <label for="simBankSelect" style="font-size:0.85rem; color:var(--gold-bright); font-weight:700;">البنك الهولندي المسدد:</label>
+                    <select id="simBankSelect" class="sr-checkout-input" title="اختر البنك الهولندي" style="width:auto; padding:6px 12px; background:#020705; border:1px solid var(--border-gold); color:#ffffff; border-radius:6px;">
+                        <option value="ING_BANK">ING Bank (NL)</option>
+                        <option value="ABN_AMRO">ABN AMRO</option>
+                        <option value="RABOBANK">Rabobank</option>
+                        <option value="BUNQ">bunq</option>
+                        <option value="REVOLUT">Revolut EU</option>
+                    </select>
+
+                    <label for="simAmount" style="font-size:0.85rem; color:var(--gold-bright); font-weight:700;">المبلغ المسدد:</label>
+                    <input type="number" id="simAmount" value="890.00" title="المبلغ المسدد" style="width:110px; padding:6px 10px; background:#020705; border:1px solid var(--border-gold); color:#ffffff; border-radius:6px; direction:ltr;" />
+
+                    <button type="button" class="btn-send-req" onclick="simulatePsd2Webhook()">
+                        <span>⚡ إرسال إشعار Webhook وتوليد القيد المحاسبي</span>
+                    </button>
+                </div>
+
+                <div class="sim-grid">
+                    <div class="sim-ledger-box">
+                        <div class="panel-header">
+                            <span>حمولة الـ Webhook المستلمة (JSON)</span>
+                            <span id="webhookSig">HMAC-SHA256: Verified ✓</span>
+                        </div>
+                        <div class="console-output" id="webhookPayloadOutput">// في انتظار إطلاق المحاكاة...</div>
+                    </div>
+
+                    <div class="sim-ledger-box">
+                        <div class="panel-header">
+                            <span>القيود المحاسبية التلقائية (General Ledger Entry)</span>
+                            <span style="color:#34d399;">متوازن 100% ✓</span>
+                        </div>
+                        <table class="ledger-table" id="ledgerTable">
+                            <thead>
+                                <tr>
+                                    <th>رقم الحساب (Grootboek)</th>
+                                    <th>البيان المحاسبي</th>
+                                    <th>مدين (Debit)</th>
+                                    <th>دائن (Credit)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ledgerTableBody">
+                                <tr>
+                                    <td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">
+                                        اضغط على "إرسال إشعار Webhook" لاستعراض القيود المعتمدة تلقائياً.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // =======================================================================
+        // محرك الأفاتار الصوتي الذكي ثلاثي الأبعاد للمهندس محمد سليم عزيزة
+        // =======================================================================
+        let isAvatarSpeaking = false;
+        let avatarUtterance = null;
+        let currentAvatarLang = 'ar';
+
+        const avatarDialogues = {
+            ar: "أهلاً بكم في S&R CoreSync. بصفتي الشريك المؤسس، يسعدني الترحيب بكم في منصة المطورين المفتوحة. لقد قمنا بهندسة محرك ERP السحابي وحزمة الـ API لتمكين شركائنا من الربط المصرفي الأوروبي الفوري، وإدارة الفواتير والضرائب بأمان مصرفي متكامل. يسعدنا دعمكم للوصول إلى أعلى مستويات الأتمتة والنمو.",
+            en: "Welcome to S&R CoreSync. As Co-Founder, I am delighted to welcome you to our Developer Platform. We engineered our sovereign Cloud ERP and API Suite to empower European businesses with seamless Open Banking PSD2 integration, automated compliant invoicing, and unmatched financial security.",
+            nl: "Welkom bij S&R CoreSync. Als medeoprichter heet ik u van harte welkom op ons ontwikkelaarsplatform. We hebben onze cloud-ERP en API-suite ontworpen om bedrijven te voorzien van realtime PSD2-bankkoppelingen, geautomatiseerde BTW-facturatie en absolute financiële zekerheid."
+        };
+
+        function switchAvatarLang(lang) {
+            currentAvatarLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const speechText = document.getElementById('avatarSpeechText');
+            if (speechText) {
+                speechText.textContent = `"${avatarDialogues[lang]}"`;
+            }
+
+            if (isAvatarSpeaking) {
+                stopAvatarSpeech();
+                startAvatarSpeech();
+            }
+        }
+
+        function toggleAvatarSpeech() {
+            if (isAvatarSpeaking) {
+                stopAvatarSpeech();
+            } else {
+                startAvatarSpeech();
+            }
+        }
+
+        function stopAvatarSpeech() {
+            if (window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+            isAvatarSpeaking = false;
+            avatarUtterance = null;
+
+            const card = document.getElementById('avatarSection');
+            const icon = document.getElementById('avatarPlayIcon');
+            const text = document.getElementById('avatarPlayText');
+            const statusLabel = document.getElementById('avatarStatusLabel');
+
+            if (card) card.classList.remove('is-speaking');
+            if (icon) icon.textContent = '▶️';
+            if (text) text.textContent = 'استمع لترحيب المهندس سليم الرقمي';
+            if (statusLabel) statusLabel.textContent = 'متصل وحي • 3D Avatar';
+        }
+
+        function startAvatarSpeech() {
+            if (!('speechSynthesis' in window)) {
+                alert('المتصفح لا يدعم التوليف الصوتي المباشر.');
+                return;
+            }
+
+            stopAvatarSpeech();
+
+            const textToSpeak = avatarDialogues[currentAvatarLang];
+            avatarUtterance = new SpeechSynthesisUtterance(textToSpeak);
+
+            const langCodes = { ar: 'ar-SA', en: 'en-US', nl: 'nl-NL' };
+            avatarUtterance.lang = langCodes[currentAvatarLang] || 'ar-SA';
+            avatarUtterance.rate = 0.94;
+            avatarUtterance.pitch = 0.95;
+
+            avatarUtterance.onstart = function() {
+                isAvatarSpeaking = true;
+                const card = document.getElementById('avatarSection');
+                const icon = document.getElementById('avatarPlayIcon');
+                const text = document.getElementById('avatarPlayText');
+                const statusLabel = document.getElementById('avatarStatusLabel');
+
+                if (card) card.classList.add('is-speaking');
+                if (icon) icon.textContent = '⏸️';
+                if (text) text.textContent = 'إيقاف الصوت الرقمي';
+                if (statusLabel) statusLabel.textContent = '🎙️ يتحدث الآن...';
+            };
+
+            avatarUtterance.onend = function() {
+                stopAvatarSpeech();
+            };
+
+            avatarUtterance.onerror = function() {
+                stopAvatarSpeech();
+            };
+
+            window.speechSynthesis.speak(avatarUtterance);
+        }
+
+        // =======================================================================
+        // تجربة واجهات الـ API الحي (Invoicing API Tester)
+        // =======================================================================
+        function testInvoiceApi() {
+            const rawPayload = document.getElementById('invoiceReqPayload').value;
+            const outputBox = document.getElementById('invoiceResOutput');
+            const latencyBox = document.getElementById('invoiceLatency');
+
+            outputBox.textContent = '⏳ جاري إرسال الطلب إلى خوادم S&R CoreSync في أمستردام...';
+
+            setTimeout(() => {
+                try {
+                    const parsed = JSON.parse(rawPayload);
+                    const invNumber = 'INV-2026-SR-' + Math.floor(1000 + Math.random() * 9000);
+                    const btwAmount = +(parsed.amount_net * (parsed.btw_rate || 0.21)).toFixed(2);
+                    const totalAmount = +(parsed.amount_net + btwAmount).toFixed(2);
+
+                    const res = {
+                        "status": "success",
+                        "code": 200,
+                        "data": {
+                            "invoice_id": invNumber,
+                            "issue_date": new Date().toISOString(),
+                            "client": {
+                                "name": parsed.client_name,
+                                "vat_number": parsed.client_vat,
+                                "email": parsed.client_email
+                            },
+                            "accounting": {
+                                "currency": parsed.currency || "EUR",
+                                "subtotal_net": parsed.amount_net,
+                                "btw_percentage": "21%",
+                                "btw_amount": btwAmount,
+                                "total_due": totalAmount,
+                                "audit_status": "BELASTINGDIENST_COMPLIANT_V2026"
+                            },
+                            "ledger_reference": "GL-TXN-2026-" + Math.floor(100000 + Math.random() * 900000),
+                            "download_pdf_url": "https://api.sr-coresync.com/v1/invoices/" + invNumber + ".pdf"
+                        }
+                    };
+
+                    outputBox.textContent = JSON.stringify(res, null, 2);
+                    if (latencyBox) latencyBox.textContent = Math.floor(18 + Math.random() * 15) + 'ms';
+                } catch (e) {
+                    outputBox.textContent = '❌ خطأ في تنسيق الـ JSON المرسل: ' + e.message;
+                }
+            }, 450);
+        }
+
+        // =======================================================================
+        // محاكي الـ Webhook المصرفي الهولندي وقيد دفتر الأستاذ العام
+        // =======================================================================
+        function simulatePsd2Webhook() {
+            const bank = document.getElementById('simBankSelect').value;
+            const amount = parseFloat(document.getElementById('simAmount').value) || 890.00;
+            const payloadBox = document.getElementById('webhookPayloadOutput');
+            const tableBody = document.getElementById('ledgerTableBody');
+
+            payloadBox.textContent = '⏳ جاري محاكاة إشعار السداد المصرفي...';
+
+            setTimeout(() => {
+                const eventId = 'evt_' + Math.random().toString(36).substring(2, 12);
+                const paymentId = 'pay_ideal_' + Math.random().toString(36).substring(2, 10);
+                const btwAmount = +(amount - (amount / 1.21)).toFixed(2);
+                const netAmount = +(amount - btwAmount).toFixed(2);
+
+                const webhookEvent = {
+                    "event_id": eventId,
+                    "event_type": "banking.payment.settled",
+                    "created_at": new Date().toISOString(),
+                    "provider": "DUTCH_PSD2_GATEWAY",
+                    "bank_institution": bank,
+                    "payment": {
+                        "id": paymentId,
+                        "method": "iDEAL",
+                        "amount": amount,
+                        "currency": "EUR",
+                        "status": "SETTLED",
+                        "mandate_ref": "NL-SR-MANDATE-2026",
+                        "counterparty_iban": "NL91INGB000" + Math.floor(1000000 + Math.random() * 9000000)
+                    },
+                    "signature": "sha256=" + Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
+                };
+
+                payloadBox.textContent = JSON.stringify(webhookEvent, null, 2);
+
+                // Update General Ledger table
+                tableBody.innerHTML = `
+                    <tr>
+                        <td style="font-family:var(--font-code); font-weight:700; color:#38bdf8;">1000 (ING Zakelijk)</td>
+                        <td>إيداع فوري من سداد iDEAL للعميل</td>
+                        <td class="ledger-debit">€${amount.toFixed(2)}</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family:var(--font-code); font-weight:700; color:#f59e0b;">8000 (Omzet Diensten)</td>
+                        <td>إيرادات مبيعات الباقة السيادية</td>
+                        <td>-</td>
+                        <td class="ledger-credit">€${netAmount.toFixed(2)}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-family:var(--font-code); font-weight:700; color:#f59e0b;">1500 (Te Betalen BTW 21%)</td>
+                        <td>ضريبة القيمة المضافة المستحقة لهولندا</td>
+                        <td>-</td>
+                        <td class="ledger-credit">€${btwAmount.toFixed(2)}</td>
+                    </tr>
+                    <tr style="background:rgba(16, 185, 129, 0.1); font-weight:800;">
+                        <td colspan="2" style="color:#ffffff;">المجموع المتوازن (Total Balance)</td>
+                        <td class="ledger-debit">€${amount.toFixed(2)}</td>
+                        <td class="ledger-credit">€${amount.toFixed(2)}</td>
+                    </tr>
+                `;
+            }, 400);
+        }
+
+        function generateApiKey() {
+            const key = 'sr_live_2026_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            prompt('🔑 تم توليد مفتاح API تجريبي معتمد لمنظومة S&R CoreSync:\nاحفظه لاستخدامه في استدعاءاتك البرمجية:', key);
+        }
+    </script>
+</body>
+</html>
