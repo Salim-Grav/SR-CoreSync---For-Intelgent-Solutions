@@ -4987,24 +4987,24 @@ main#wrapper:focus{outline:none}
                 <!-- Monthly Cost Slider -->
                 <div class="sr-roi-slider-row">
                     <div class="sr-roi-slider-header">
-                        <label for="roiCostRange" class="text-white">Current Operational &amp; Administrative Monthly Cost:</label>
+                        <label for="roiCostRange" id="roiCostLabel" class="text-white">Current Operational &amp; Administrative Monthly Cost:</label>
                         <span class="sr-roi-val-badge" id="roiCostDisplay">€ 6,500</span>
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiCostBubble">€ 6,500</div>
-                        <input type="range" class="sr-roi-range" id="roiCostRange" placeholder="6500" title="Monthly Operational Cost" aria-label="Monthly Operational Cost" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiCostRange" name="roiCostRange" placeholder="6500" title="Monthly Operational Cost" aria-label="Monthly Operational Cost" aria-labelledby="roiCostLabel" min="1000" max="40000" step="500" value="6500" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
                 <!-- Team Size Slider -->
                 <div class="sr-roi-slider-row">
                     <div class="sr-roi-slider-header">
-                        <label for="roiTeamRange" class="text-white">Administrative &amp; Finance Team Size (Employees):</label>
+                        <label for="roiTeamRange" id="roiTeamLabel" class="text-white">Administrative &amp; Finance Team Size (Employees):</label>
                         <span class="sr-roi-val-badge" id="roiTeamDisplay">12 employees</span>
                     </div>
                     <div class="sr-roi-range-wrap">
                         <div class="sr-roi-drag-bubble" id="roiTeamBubble">12 employees</div>
-                        <input type="range" class="sr-roi-range" id="roiTeamRange" placeholder="12" title="Team Size" aria-label="Team Size" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
+                        <input type="range" class="sr-roi-range" id="roiTeamRange" name="roiTeamRange" placeholder="12" title="Team Size" aria-label="Team Size" aria-labelledby="roiTeamLabel" min="2" max="150" step="1" value="12" data-sr-call="updateRoiCalc" data-sr-on="input" />
                     </div>
                 </div>
 
@@ -5209,14 +5209,14 @@ main#wrapper:focus{outline:none}
             </div>
 
             <!-- Demo Tabs -->
-            <div class="sr-demo-tab-list" role="tablist" aria-label="Demo Tabs">
-                <button type="button" class="sr-demo-tab-btn active" role="tab" aria-selected="true" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
+            <div class="sr-demo-tab-list" aria-label="Demo Tabs">
+                <button type="button" class="sr-demo-tab-btn active" id="demoTabBtnErp" data-sr-call="switchDemoModalTab" data-sr-args='["erp"]'>
                     📊 Financial ERP (CFO Hub)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
+                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnCloud" data-sr-call="switchDemoModalTab" data-sr-args='["cloud"]'>
                     ⚡ Cloud &amp; AI Core (CTO)
                 </button>
-                <button type="button" class="sr-demo-tab-btn" role="tab" aria-selected="false" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
+                <button type="button" class="sr-demo-tab-btn" id="demoTabBtnGov" data-sr-call="switchDemoModalTab" data-sr-args='["gov"]'>
                     🛡️ Compliance &amp; Security
                 </button>
             </div>
