@@ -385,12 +385,48 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 41:
-1. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** تحديث كافة أزرار وشارات ومصفوفات Schema الخاصة بلينكد إن.
-2. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** تحديث بطاقة قناة لينكد إن وأزرار النسخ والزيارة.
-3. **28 ملف لغات لـ index.html:** تحديث روابط الشريط العائم عبر كافة البوابات الدولية.
-4. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 41 بنسبة 100%.
-5. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الفني الكامل واللقطات الحية.
+---
+
+### 11. المهمة 42: تصحيح قياسات LinkedIn وتدشين حزمة Meta / Facebook ودليل المقاسات ومناطق الأمان العالمية 2026 (100% Complete)
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 10:48 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+
+#### 1. تصحيح قياسات غلاف لينكد إن للشركات (LinkedIn Company Cover Ratio 5.91:1):
+- **المشكلة السابقة:** تم إنشاء الغلاف سابقاً بنسبة 4:1 (6336×1584 px) وهي مخصصة للملف الشخصي للأفراد، مما تسبب باقتطاع حواف الغلاف عند رفعه على صفحة الشركة المؤسسية.
+- **المعيار المعتمد عالمياً لصفحات الشركات:** **1128 × 191 px** بنسبة عرض إلى ارتفاع **5.91:1**.
+- **الأصل بدقة 8K:** تم إنتاج وتصدير الغلاف بأبعاد **6768 × 1146 px** (مضروب 6x دقيق جداً) بصيغ `.png`, `.webp`, `.jpg` في المجلد `assets/social-8k-branding/linkedin/` مع توفير مساحة أمان مخصصة لعدم حجب الشعار بواسطة صورة بروفايل الشركة.
+
+#### 2. تدشين حزمة Meta / Facebook 8K المتكاملة:
+- إنشاء مجلد الأصول `assets/social-8k-branding/facebook/` وتوليد 3 أصول رئيسية فائقة الدقة:
+  1. **غلاف صفحة فيسبوك 8K (`facebook-page-cover-8k.*`):** أبعاد **6560 × 2496 px** بنسبة **2.63:1** (المعيار الأساسي 820×312 px مع مراعاة منطقة أمان الجوال في المنتصف 640×360 px).
+  2. **منشور فيسبوك أفقي 8K (`facebook-post-landscape-8k.*`):** أبعاد **7680 × 4020 px** بنسبة **1.91:1** (المعيار الأساسي 1200×630 px).
+  3. **منشور فيسبوك مربع 8K (`facebook-post-square-8k.*`):** أبعاد **4320 × 4320 px** بنسبة **1:1** (المعيار الأساسي 1080×1080 px).
+- تحديث ملف `manifest.json` ليرتفع إجمالي الأصول المعتمدة من 23 إلى 26 أصلاً فائق الدقة بدقة 8K.
+
+#### 3. الدليل التفاعلي الشامل لمقاسات السوشيال ميديا ومناطق الأمان لعام 2026 (`#specsCheatSheet`):**
+- تصميم جدول تفاعلي فاخر في `social-8k-studio.html` يضم المنصات الـ 9:
+  - المقاس القياسي العالمي بالبكسل.
+  - النسبة الرياضية (Aspect Ratio).
+  - أبعاد ملف الأصل 8K الحقيقي.
+  - مناطق الأمان وتوجيهات عدم الاقتطاع (Safe Zones Guidelines).
+  - زر نسخ الأبعاد بنقرة واحدة (`copyDimensions`) مع إشعار تفاعلي فوري.
+
+#### 4. لقطات حية ومباشرة من شاشة العرض (Live Visual Snapshots):
+
+![جدول مقاسات السوشيال ميديا ومناطق الأمان العالمية 2026 في استوديو 8K](file:///C:/Users/msali/.gemini/antigravity-ide/brain/85966c0a-c8d5-464f-b0e6-0664f5664ec5/live_social_specs_table_full.png)
+
+![معاينة بطاقة لينكد إن وفيسبوك بعد التحديث وفلتر فيسبوك الجديد](file:///C:/Users/msali/.gemini/antigravity-ide/brain/85966c0a-c8d5-464f-b0e6-0664f5664ec5/live_social_specs_updated.png)
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 42:
+1. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** إضافة جدول المقاسات ومناطق الأمان `#specsCheatSheet`، تبويب فلترة Facebook، دالات نسخ المقاسات، وفئات النسب البصرية 5.91:1 و 2.63:1 و 1.91:1.
+2. **[assets/social-8k-branding/manifest.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/manifest.json):** تسجيل حزمة فيسبوك وتصحيح أبعاد غلاف لينكد إن لـ 6768×1146 px وتحديث إجمالي الأصول إلى 26 أصلاً.
+3. **[SOCIAL-MEDIA-SUITE.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/SOCIAL-MEDIA-SUITE.md):** توثيق المقاسات الدقيقة لـ LinkedIn و Meta/Facebook.
+4. **[social-campaign-hub.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-campaign-hub.html):** تنظيف مسارات معاينة وتحميل أصول الـ 8K.
+5. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 42 بنسبة 100%.
+6. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق الدليل وإدراج اللقطات الحية من شاشة العرض.
 
 </div>
 
