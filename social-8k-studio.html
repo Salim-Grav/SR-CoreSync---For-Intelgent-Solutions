@@ -743,6 +743,145 @@
             color: #ffffff;
             border-color: var(--gold-primary);
         }
+
+        /* -------------------------------------------------------------
+           Global Dimensions & Safe Zones Master Guide Section
+        ------------------------------------------------------------- */
+        .specs-guide-section {
+            max-width: 1400px;
+            margin: 0 auto 35px;
+            padding: 0 24px;
+        }
+
+        .specs-guide-card {
+            background: linear-gradient(135deg, rgba(6, 18, 14, 0.95), rgba(2, 7, 5, 0.98));
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(197, 168, 128, 0.05);
+        }
+
+        .specs-guide-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 14px;
+        }
+
+        .specs-guide-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .specs-guide-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .specs-table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid rgba(197, 168, 128, 0.15);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            color: var(--text-light);
+            text-align: right;
+            min-width: 860px;
+        }
+
+        .specs-table th {
+            background: rgba(197, 168, 128, 0.12);
+            color: var(--gold-bright);
+            padding: 12px 14px;
+            font-weight: 800;
+            border-bottom: 2px solid var(--border-gold);
+            white-space: nowrap;
+        }
+
+        .specs-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .specs-table tr:hover {
+            background: rgba(197, 168, 128, 0.05);
+        }
+
+        .specs-platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .specs-res-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            border-radius: 6px;
+            color: #f3dfba;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 0.86rem;
+            direction: ltr;
+        }
+
+        .specs-ratio-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 6px;
+            color: #6ee7b7;
+            font-family: monospace;
+            font-weight: 700;
+            font-size: 0.82rem;
+            direction: ltr;
+        }
+
+        .specs-note-tip {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: normal;
+            max-width: 320px;
+            line-height: 1.45;
+        }
+
+        .specs-copy-btn {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .specs-copy-btn:hover {
+            background: var(--gold-primary);
+            color: #020705;
+            border-color: var(--gold-bright);
+        }
     </style>
 </head>
 <body>
