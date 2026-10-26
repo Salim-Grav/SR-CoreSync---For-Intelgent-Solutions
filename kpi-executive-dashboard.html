@@ -52,8 +52,8 @@
         /* Header */
         header {
             background: rgba(4, 18, 13, 0.95);
-            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-dim);
             padding: 1rem 2rem;
             position: sticky;
@@ -352,6 +352,126 @@
             font-size: 0.85rem;
             color: #64748b;
         }
+
+        .legend-gold {
+            background: var(--gold-primary);
+        }
+
+        .legend-emerald {
+            background: var(--emerald);
+        }
+
+        .kpi-vector-chart {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .panel-header-spaced-sm {
+            margin-top: 1rem;
+        }
+
+        .panel-header-spaced-lg {
+            margin-top: 1.75rem;
+        }
+
+        .geo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .geo-card {
+            background: #061912;
+            border: 1px solid #1a3c2e;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .geo-lbl {
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+
+        .geo-val {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .geo-val-gold {
+            color: var(--gold-light);
+        }
+
+        .geo-val-cyan {
+            color: var(--cyan);
+        }
+
+        .geo-sub-emerald {
+            color: #34d399;
+            font-size: 0.75rem;
+        }
+
+        .geo-sub-gold {
+            color: #f3dfba;
+            font-size: 0.75rem;
+        }
+
+        .geo-sub-cyan {
+            color: #7dd3fc;
+            font-size: 0.75rem;
+        }
+
+        .funnel-bar-100 { width: 100%; }
+        .funnel-bar-48 { width: 48%; }
+        .funnel-bar-22 { width: 22%; }
+        .funnel-bar-8 { width: 8%; }
+
+        .funnel-count-settled {
+            color: #10b981;
+        }
+
+        .telemetry-box {
+            background: #020805;
+            border: 1px solid #143124;
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .telemetry-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .telemetry-lbl {
+            color: #94a3b8;
+        }
+
+        .telemetry-val-emerald {
+            color: #34d399;
+            font-weight: 700;
+        }
+
+        .telemetry-val-gold {
+            color: var(--gold-light);
+            font-weight: 700;
+        }
+
+        .telemetry-val-cyan {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .footer-disclaimer {
+            margin-top: 0.35rem;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 <body>
@@ -421,16 +541,16 @@
                 <div class="chart-box">
                     <div class="chart-legend">
                         <div class="legend-item">
-                            <span class="legend-color" style="background: var(--gold-primary);"></span>
+                            <span class="legend-color legend-gold"></span>
                             <span>إيرادات الاشتراكات B2B (EUR)</span>
                         </div>
                         <div class="legend-item">
-                            <span class="legend-color" style="background: var(--emerald);"></span>
+                            <span class="legend-color legend-emerald"></span>
                             <span>التسويات اللحظية المحصلة</span>
                         </div>
                     </div>
                     <!-- Vector SVG Chart -->
-                    <svg viewBox="0 0 700 240" style="width: 100%; height: auto; display: block;">
+                    <svg viewBox="0 0 700 240" class="kpi-vector-chart">
                         <!-- Grid lines -->
                         <line x1="30" y1="20" x2="680" y2="20" stroke="#132b20" stroke-dasharray="4"/>
                         <line x1="30" y1="70" x2="680" y2="70" stroke="#132b20" stroke-dasharray="4"/>
@@ -459,28 +579,28 @@
                     </svg>
                 </div>
 
-                <div class="panel-header" style="margin-top: 1rem;">
+                <div class="panel-header panel-header-spaced-sm">
                     <div class="panel-title">
                         <span>🌍</span>
                         <span>توزيع الإيرادات حسب التكتلات الاقتصادية والعملات</span>
                     </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
-                        <div style="color: #94a3b8; font-size: 0.8rem;">منطقة اليورو (EUR)</div>
-                        <div style="font-size: 1.4rem; font-weight: 800; color: #ffffff;">68.4%</div>
-                        <div style="color: #34d399; font-size: 0.75rem;">هولندا، ألمانيا، السويد، فرنسا</div>
+                <div class="geo-grid">
+                    <div class="geo-card">
+                        <div class="geo-lbl">منطقة اليورو (EUR)</div>
+                        <div class="geo-val">68.4%</div>
+                        <div class="geo-sub-emerald">هولندا، ألمانيا، السويد، فرنسا</div>
                     </div>
-                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
-                        <div style="color: #94a3b8; font-size: 0.8rem;">دول مجلس التعاون الخليجي (GCC)</div>
-                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--gold-light);">18.2%</div>
-                        <div style="color: #f3dfba; font-size: 0.75rem;">السعودية (SAR) والإمارات (AED)</div>
+                    <div class="geo-card">
+                        <div class="geo-lbl">دول مجلس التعاون الخليجي (GCC)</div>
+                        <div class="geo-val geo-val-gold">18.2%</div>
+                        <div class="geo-sub-gold">السعودية (SAR) والإمارات (AED)</div>
                     </div>
-                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
-                        <div style="color: #94a3b8; font-size: 0.8rem;">أمريكا الشمالية والأسواق الدولية</div>
-                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--cyan);">13.4%</div>
-                        <div style="color: #7dd3fc; font-size: 0.75rem;">الدولار الأمريكي (USD) وسويسرا</div>
+                    <div class="geo-card">
+                        <div class="geo-lbl">أمريكا الشمالية والأسواق الدولية</div>
+                        <div class="geo-val geo-val-cyan">13.4%</div>
+                        <div class="geo-sub-cyan">الدولار الأمريكي (USD) وسويسرا</div>
                     </div>
                 </div>
             </div>
@@ -496,7 +616,7 @@
 
                 <div class="funnel-list">
                     <div class="funnel-step">
-                        <div class="funnel-bar" style="width: 100%;"></div>
+                        <div class="funnel-bar funnel-bar-100"></div>
                         <div class="funnel-content">
                             <div>
                                 <div class="funnel-name">1. زيارات بوابات اللغات الـ 29 والقنوات الـ 9</div>
@@ -507,7 +627,7 @@
                     </div>
 
                     <div class="funnel-step">
-                        <div class="funnel-bar" style="width: 48%;"></div>
+                        <div class="funnel-bar funnel-bar-48"></div>
                         <div class="funnel-content">
                             <div>
                                 <div class="funnel-name">2. تفاعل الكونسيرج الذكي (AI Concierge Engaged)</div>
@@ -518,7 +638,7 @@
                     </div>
 
                     <div class="funnel-step">
-                        <div class="funnel-bar" style="width: 22%;"></div>
+                        <div class="funnel-bar funnel-bar-22"></div>
                         <div class="funnel-content">
                             <div>
                                 <div class="funnel-name">3. طلبات عروض الأسعار المؤهلة (Qualified B2B Quotes)</div>
@@ -529,36 +649,36 @@
                     </div>
 
                     <div class="funnel-step">
-                        <div class="funnel-bar" style="width: 8%;"></div>
+                        <div class="funnel-bar funnel-bar-8"></div>
                         <div class="funnel-content">
                             <div>
                                 <div class="funnel-name">4. عقود واشتراكات الشركات المسددة بالكامل</div>
                                 <div class="funnel-rate">تسوية لحظية 100% عبر iDEAL / PSD2</div>
                             </div>
-                            <div class="funnel-count" style="color: #10b981;">42 شركة</div>
+                            <div class="funnel-count funnel-count-settled">42 شركة</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-header" style="margin-top: 1.75rem;">
+                <div class="panel-header panel-header-spaced-lg">
                     <div class="panel-title">
                         <span>🤖</span>
                         <span>كفاءة مساعد الذكاء الاصطناعي (AI Concierge Telemetry)</span>
                     </div>
                 </div>
 
-                <div style="background: #020805; border: 1px solid #143124; border-radius: 12px; padding: 1.25rem;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">زمن الاستجابة الأوتوماتيكية الأولية:</span>
-                        <span style="color: #34d399; font-weight: 700;">1.2 ثانية (Real-Time)</span>
+                <div class="telemetry-box">
+                    <div class="telemetry-row">
+                        <span class="telemetry-lbl">زمن الاستجابة الأوتوماتيكية الأولية:</span>
+                        <span class="telemetry-val-emerald">1.2 ثانية (Real-Time)</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">لغات المحادثة المعالجة اليوم:</span>
-                        <span style="color: var(--gold-light); font-weight: 700;">29 لغة سيادية</span>
+                    <div class="telemetry-row">
+                        <span class="telemetry-lbl">لغات المحادثة المعالجة اليوم:</span>
+                        <span class="telemetry-val-gold">29 لغة سيادية</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                        <span style="color: #94a3b8;">رضا العملاء المالي والمؤسسي:</span>
-                        <span style="color: #38bdf8; font-weight: 700;">99.4% CSAT Rating</span>
+                    <div class="telemetry-row">
+                        <span class="telemetry-lbl">رضا العملاء المالي والمؤسسي:</span>
+                        <span class="telemetry-val-cyan">99.4% CSAT Rating</span>
                     </div>
                 </div>
             </div>
@@ -570,7 +690,7 @@
     <!-- Footer -->
     <footer>
         <p>S&R CoreSync For Intelligent Solutions • Keizersgracht 482, 1016 EG Amsterdam, Netherlands • KvK: 96515865 • الهاتف: +31 618111116</p>
-        <p style="margin-top: 0.35rem; font-size: 0.75rem;">جميع مؤشرات الأداء الحيوية مستمدة لحظياً من محرك الـ ERP وعقد التسوية البنكية PSD2 في أمستردام.</p>
+        <p class="footer-disclaimer">جميع مؤشرات الأداء الحيوية مستمدة لحظياً من محرك الـ ERP وعقد التسوية البنكية PSD2 في أمستردام.</p>
     </footer>
 
     <script>
