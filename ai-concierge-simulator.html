@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي المساعد الذكي السيادي | S&R CoreSync AI Concierge Simulator</title>
+    <meta name="description" content="محاكي الرد الآلي الذكي لخدمة عملاء WhatsApp Business و Telegram عبر محرك S&R CoreSync Sovereign AI Concierge متعدد اللغات">
+    <link rel="icon" type="image/png" href="./assets/favicon-96.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020705;
+            --bg-card: rgba(8, 22, 17, 0.85);
+            --bg-card-hover: rgba(14, 34, 26, 0.95);
+            --gold-primary: #c5a880;
+            --gold-bright: #f3dfba;
+            --gold-glow: rgba(197, 168, 128, 0.35);
+            --border-gold: rgba(197, 168, 128, 0.25);
+            --border-hover: rgba(197, 168, 128, 0.7);
+            --wa-green: #128c7e;
+            --wa-green-dark: #075e54;
+            --wa-light: #25d366;
+            --tg-blue: #229ed9;
+            --tg-blue-dark: #176b94;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-blur: blur(14px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                linear-gradient(180deg, #020705 0%, #03120c 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            font-family: 'Cairo', 'Outfit', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Top Executive Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(2, 7, 5, 0.92);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 12px 24px;
+        }
+
+        .header-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .brand-emblem {
+            width: 44px;
+            height: 44px;
+            filter: drop-shadow(0 0 10px var(--gold-glow));
+            border-radius: 50%;
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            color: #34d399;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .btn-link {
+            padding: 7px 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-link:hover {
+            background: rgba(197, 168, 128, 0.25);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+
+        /* Main Container */
+        .main-layout {
+            max-width: 1600px;
+            margin: 24px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 28px;
+        }
+
+        @media (max-width: 1100px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Simulator Left Column (Phone UI) */
+        .simulator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 120px);
+            min-height: 650px;
+        }
+
+        .channel-switcher {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px;
+            gap: 6px;
+        }
+
+        .channel-btn {
+            flex: 1;
+            padding: 9px 12px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .channel-btn.active.wa-tab {
+            background: linear-gradient(135deg, var(--wa-green-dark), #093f38);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(18, 140, 126, 0.4);
+        }
+
+        .channel-btn.active.tg-tab {
+            background: linear-gradient(135deg, var(--tg-blue-dark), #0d4661);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(34, 158, 217, 0.4);
+        }
+
+        /* Chat Header */
+        .chat-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .chat-header.wa-mode {
+            background: #075e54;
+            border-bottom: 1px solid #128c7e;
+        }
+
+        .chat-header.tg-mode {
+            background: #176b94;
+            border-bottom: 1px solid #229ed9;
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-bright);
+            object-fit: cover;
+            background: #020705;
+        }
+
+        .chat-info {
+            flex: 1;
+        }
+
+        .chat-info h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .verified-badge {
+            color: #10b981;
+            font-size: 1rem;
+        }
+
+        .chat-info p {
+            font-size: 0.72rem;
+            color: #d1fae5;
+            font-weight: 600;
+        }
+
+        /* Chat Messages Container */
+        .chat-messages {
+            flex: 1;
+            padding: 18px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background-color: #05100b;
+            background-image: radial-gradient(circle, rgba(197, 168, 128, 0.04) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+
+        .message-bubble {
+            max-width: 86%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+            white-space: pre-line;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-bubble.incoming {
+            align-self: flex-start;
+            background: #18251e;
+            color: #f1f5f9;
+            border-right: 3px solid var(--gold-primary);
+            border-top-right-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .message-bubble.outgoing {
+            align-self: flex-end;
+            background: #064e3b;
+            color: #ecfdf5;
+            border-left: 3px solid #10b981;
+            border-top-left-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .msg-time {
+            display: block;
+            font-size: 0.68rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: left;
+            margin-top: 6px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #18251e;
+            padding: 10px 16px;
+            border-radius: 14px;
+            border-right: 3px solid var(--gold-primary);
+            font-size: 0.78rem;
+            color: var(--gold-bright);
+            gap: 6px;
+            align-items: center;
+        }
+
+        .typing-dots {
+            display: inline-flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            animation: wave 1.2s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+
+        /* Message Action Buttons inside Chat */
+        .bubble-actions {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .action-chip-btn {
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .action-chip-btn:hover {
+            background: rgba(197, 168, 128, 0.35);
+            color: #ffffff;
+        }
+
+        /* Chat Input Bar */
+        .chat-input-bar {
+            padding: 12px 14px;
+            background: rgba(4, 15, 11, 0.95);
+            border-top: 1px solid var(--border-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-input-bar input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 10px 16px;
+            color: #ffffff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border 0.2s ease;
+        }
+
+        .chat-input-bar input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .send-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--gold-primary), #dfc298);
+            color: #020705;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px var(--gold-glow);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px var(--gold-glow);
+        }
+
+        /* Right Column: AI Telemetry & Executive Controls */
+        .telemetry-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .telemetry-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+            padding-bottom: 8px;
+        }
+
+        /* Preset Chips */
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .prompt-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: #cbd5e1;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-align: right;
+        }
+
+        .prompt-chip:hover {
+            background: rgba(197, 168, 128, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-bright);
+            transform: translateY(-2px);
+        }
+
+        .prompt-chip .chip-lang {
+            font-size: 0.72rem;
+            padding: 2px 6px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 4px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        /* Telemetry Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        .metric-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .metric-box .label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-box .val {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            font-family: 'Outfit', 'Cairo', sans-serif;
+        }
+
+        .metric-box.active-intent {
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.08);
+        }
+
+        /* Package Card Preview */
+        .package-preview {
+            margin-top: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .package-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid var(--border-gold);
+        }
+
+        .package-details h4 {
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+        }
+
+        .package-details .price {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #34d399;
+            font-family: 'Outfit', sans-serif;
+            margin: 4px 0;
+        }
+
+        .package-details p {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .package-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            background: rgba(197, 168, 128, 0.2);
+            color: var(--gold-bright);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Founder Escalation Cards */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 650px) {
+            .founders-grid { grid-template-columns: 1fr; }
+        }
+
+        .founder-card {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(197, 168, 128, 0.15);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .founder-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .founder-info h5 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .founder-info p {
+            font-size: 0.7rem;
+            color: var(--gold-primary);
+        }
+
+        .founder-wa {
+            font-size: 0.75rem;
+            color: #34d399;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Raw JSON Webhook Viewer */
+        .json-viewer {
+            background: #010604;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #a7f3d0;
+            overflow-x: auto;
+            max-height: 180px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Voice playback button */
+        .voice-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .voice-btn:hover {
+            background: rgba(197, 168, 128, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="./index.html" class="brand-link">
+                <img src="./assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-emblem">
+                <div class="brand-text">
+                    <h1>S&R CoreSync For Intelligent Solutions</h1>
+                    <p>Sovereign AI Concierge & Webhook Engine 2026</p>
+                </div>
+            </a>
+            <div class="header-actions">
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span>AI Concierge Node: Active (AMS-01)</span>
+                </div>
+                <a href="./social-campaign-hub.html" class="btn-link">
+                    <span>📊 منصة الحملات 8K</span>
+                </a>
+                <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="btn-link">
+                    <span>💬 WhatsApp VIP المباشر</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Simulator Area -->
+    <main class="main-layout">
+        
+        <!-- Simulator Left Box -->
+        <section class="simulator-card" aria-label="Interactive Chat Simulator">
+            <!-- Channel Switcher -->
+            <div class="channel-switcher">
+                <button type="button" class="channel-btn active wa-tab" id="btn-wa-mode" onclick="switchChannel('whatsapp')">
+                    <span>🟢 WhatsApp Business (+31 618111116)</span>
+                </button>
+                <button type="button" class="channel-btn tg-tab" id="btn-tg-mode" onclick="switchChannel('telegram')">
+                    <span>🔵 Telegram Bot (@SRCoreSyncBot)</span>
+                </button>
+            </div>
+
+            <!-- Chat Top Bar -->
+            <div class="chat-header wa-mode" id="chat-header">
+                <img src="./assets/branding/coresync-emblem-8k.png" alt="S&R AI Concierge Avatar" class="chat-avatar" id="chat-avatar">
+                <div class="chat-info">
+                    <h3 id="chat-title">
+                        <span>S&amp;R CoreSync Concierge</span>
+                        <span class="verified-badge" title="Official Verified Corporate Channel">✓</span>
+                    </h3>
+                    <p id="chat-subtitle">حساب أعمال رسمي موثّق • متصل 24/7</p>
+                </div>
+                <button type="button" class="voice-btn" id="voice-toggle" onclick="toggleAudioReading()" title="تشغيل القراءة الصوتية للردود">
+                    <span id="voice-icon">🔊</span>
+                    <span id="voice-text">الصوت الذكي</span>
+                </button>
+            </div>
+
+            <!-- Messages Stream -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- Initial Welcome Message -->
+                <div class="message-bubble incoming">
+مرحباً بكم في S&amp;R CoreSync For Intelligent Solutions! 🌟
+أنا المساعد السيادي الذكي (Enterprise AI Concierge) المتوفر على مدار الساعة 24/7 لخدمتكم.
+
+كيف يمكنني مساعدتك اليوم؟
+1️⃣ استعراض باقات وحلول الـ ERP السحابية
+2️⃣ حلول الذكاء الاصطناعي والأتمتة الذاتية (Autonomous Agents)
+3️⃣ استضافة السحابة السيادية الخاصة للشركات الكبرى
+4️⃣ حجز موعد استشارة استراتيجية مع المؤسسين
+
+🌐 بوابتنا الرسمية: https://sr-coresync.com
+📞 الخط المباشر: +31 6 1811 1116
+                    <div class="bubble-actions">
+                        <a href="https://sr-coresync.com/#pricing" target="_blank" class="action-chip-btn">💼 استعراض باقات الأسعار</a>
+                        <a href="https://sr-coresync.com/#booking" target="_blank" class="action-chip-btn">📅 حجز جلسة استشارية VIP</a>
+                    </div>
+                    <span class="msg-time">10:00 AM • كونسيرج سيادي</span>
+                </div>
+
+                <div class="typing-indicator" id="typing-indicator">
+                    <span>الكونسيرج السيادي يحلل الطلب ويجهز الرد</span>
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <form class="chat-input-bar" id="chat-form" onsubmit="handleUserSubmit(event)">
+                <input type="text" id="user-input" placeholder="اكتب استفسارك هنا (عربي، إنجليزي، هولندي، ألماني)..." autocomplete="off" required>
+                <button type="submit" class="send-btn" title="إرسال الرسالة">➤</button>
+            </form>
+        </section>
+
+        <!-- Right Column: AI Telemetry & Telemetry Dashboard -->
+        <section class="telemetry-column" aria-label="AI Diagnostics and Engine Telemetry">
+            
+            <!-- Quick Interactive Prompts -->
+            <div class="telemetry-card">
+                <h3 class="section-title">
+                    <span>⚡ تجربة استفسارات سريعة بنقرة واحدة (Quick Prompt Chips)</span>
+                </h3>
+                <div class="chips-container">
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('أريد معرفة أسعار باقات الـ ERP والخدمات المحاسبية')">
+                        <span class="chip-lang">AR</span>
+                        <span>أريد معرفة أسعار باقات الـ ERP والخدمات المحاسبية</span>
+                    </button>
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('Tell me about your Autonomous AI Agents and European SLA')">
+                        <span class="chip-lang">EN</span>
+                        <span>Autonomous AI Agents & European SLA</span>
+                    </button>
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('Wat kost het Sovereign Enterprise pakket en hoe zit het met GDPR?')">
+                        <span class="chip-lang">NL</span>
+                        <span>Sovereign Enterprise Pakket & GDPR</span>
+                    </button>
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('أود حجز موعد استشارة استراتيجية مع المؤسس م. محمد سليم عزيزة')">
+                        <span class="chip-lang">AR</span>
+                        <span>حجز موعد استشارة مع المؤسس م. محمد سليم عزيزة</span>
+                    </button>
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('أريد التواصل المباشر مع المدير المالي أ. محمد رائد كعكة بخصوص التراخيص')">
+                        <span class="chip-lang">AR</span>
+                        <span>تواصل مع المدير المالي أ. محمد رائد كعكة</span>
+                    </button>
+                    <button type="button" class="prompt-chip" onclick="sendQuickPrompt('استعراض كتالوج المنتجات والباقات 8K')">
+                        <span class="chip-lang">AR</span>
+                        <span>استعراض كتالوج المنتجات والباقات 8K</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Telemetry Metrics -->
+            <div class="telemetry-card">
+                <h3 class="section-title">
+                    <span>🧠 القياسات الحيوية لتحليل النوايا (AI Intent & Telemetry)</span>
+                </h3>
+                <div class="metrics-grid">
+                    <div class="metric-box active-intent">
+                        <div class="label">النية المكتشفة (Intent)</div>
+                        <div class="val" id="telemetry-intent">GENERAL_GREETING</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="label">اللغة المكتشفة (Language)</div>
+                        <div class="val" id="telemetry-lang">🇸🇦 Arabic (ar)</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="label">زمن الاستجابة (Latency)</div>
+                        <div class="val" id="telemetry-latency">18 ms</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="label">بروتوكول الويب هوك (Channel)</div>
+                        <div class="val" id="telemetry-channel">WhatsApp Cloud API</div>
+                    </div>
+                </div>
+
+                <!-- Matched Package Preview -->
+                <div class="package-preview" id="package-preview-box">
+                    <img src="./assets/social-8k-branding/whatsapp/catalog/whatsapp-catalog-business-pro-8k.png" alt="Matched Package" class="package-img" id="pkg-img">
+                    <div class="package-details">
+                        <span class="package-badge" id="pkg-badge">MOST POPULAR - B2B PRO</span>
+                        <h4 id="pkg-title">Business Pro Suite (ERP + AI)</h4>
+                        <div class="price" id="pkg-price">€2,890 / شهرياً</div>
+                        <p id="pkg-desc">الحل الأكثر طلباً: دمج الـ ERP مع وكلاء الذكاء الاصطناعي المستقلين وتكامل البنوك اللحظي PSD2.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Founders Escalation Section -->
+            <div class="telemetry-card">
+                <h3 class="section-title">
+                    <span>👑 مسار التصعيد التنفيذي للمؤسسين (Executive Founder Routing)</span>
+                </h3>
+                <div class="founders-grid">
+                    <div class="founder-card">
+                        <img src="./assets/social-8k-branding/avatars/founder-salim-portrait-8k.png" alt="Eng. Mohammad Salim Aziza" class="founder-avatar" onerror="this.src='./assets/branding/coresync-emblem-8k.png'">
+                        <div class="founder-info">
+                            <h5>م. محمد سليم عزيزة</h5>
+                            <p>CTO &amp; كبير مهندسي السحابة والذكاء الاصطناعي</p>
+                            <a href="https://wa.me/31631069433" target="_blank" class="founder-wa">💬 +31 6 31069433</a>
+                        </div>
+                    </div>
+                    <div class="founder-card">
+                        <img src="./assets/social-8k-branding/avatars/founder-raed-portrait-8k.png" alt="Mohammad Raed Kaakeh" class="founder-avatar" onerror="this.src='./assets/branding/coresync-emblem-8k.png'">
+                        <div class="founder-info">
+                            <h5>أ. محمد رائد كعكة</h5>
+                            <p>CFO &amp; استشاري نظم ERP والمالية</p>
+                            <a href="https://wa.me/31636279435" target="_blank" class="founder-wa">💬 +31 6 36279435</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Raw Webhook JSON Inspector -->
+            <div class="telemetry-card">
+                <h3 class="section-title">
+                    <span>📡 حمولة الويب هوك اللحظية (Raw Webhook JSON Payload)</span>
+                </h3>
+                <pre class="json-viewer" id="json-inspector">{
+  "status": "ready",
+  "channel": "whatsapp_cloud_api",
+  "endpoint": "/api/whatsapp/webhook",
+  "aiEngine": "S&R Sovereign Concierge v2026.1",
+  "latencyTarget": "< 30ms",
+  "supportedLanguages": ["ar", "en", "nl", "de"]
+}</pre>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Client-Side AI Engine & Controller -->
+    <script>
+        // Catalog Packages matching workers/lib/ai-concierge.js
+        const CATALOG_PACKAGES = {
+            starter: {
+                id: 'SRC-ERP-START-2026',
+                name: { ar: 'باقة Core Starter ERP Suite', en: 'Core Starter ERP Suite', nl: 'Core Starter ERP Suite' },
+                price: '€1,490 / شهرياً',
+                badge: 'ENTERPRISE ERP CORE',
+                img: './assets/social-8k-branding/whatsapp/catalog/whatsapp-catalog-erp-starter-8k.png',
+                description: {
+                    ar: 'نظام إدارة موارد المؤسسات السحابي السيادي مع دفتر الأستاذ التلقائي، والفوترة الضريبية المتوافقة مع BTW والأنظمة الأوروبية، وبوابات الدفع الإلكتروني.',
+                    en: 'Sovereign cloud ERP with automated general ledger, Dutch BTW/EU tax compliant invoicing, and Stripe/iDEAL integration.',
+                    nl: 'Soevereine cloud-ERP met geautomatiseerd grootboek, BTW-conforme facturatie en Stripe/iDEAL integratie.'
+                },
+                link: 'https://sr-coresync.com/#pricing'
+            },
+            pro: {
+                id: 'SRC-AI-PRO-2026',
+                name: { ar: 'باقة Business Pro Suite (ERP + AI)', en: 'Business Pro Suite (ERP + AI)', nl: 'Business Pro Suite (ERP + AI)' },
+                price: '€2,890 / شهرياً',
+                badge: 'MOST POPULAR - B2B PRO',
+                img: './assets/social-8k-branding/whatsapp/catalog/whatsapp-catalog-business-pro-8k.png',
+                description: {
+                    ar: 'الحل الأكثر طلباً: دمج الـ ERP مع وكلاء الذكاء الاصطناعي المستقلين (Autonomous AI Agents)، وتكامل البنوك اللحظي PSD2، وأتمتة خطوط المبيعات بنسبة 99.9% SLA.',
+                    en: 'Our most popular tier: full ERP integrated with Autonomous AI Agents, real-time PSD2 banking, and high-availability 99.9% European SLA.',
+                    nl: 'Onze populairste tier: complete ERP gecombineerd met Autonome AI-agents, realtime PSD2-bankieren en 99.9% SLA.'
+                },
+                link: 'https://sr-coresync.com/#pricing'
+            },
+            enterprise: {
+                id: 'SRC-SOV-ENT-2026',
+                name: { ar: 'باقة Sovereign Enterprise Cloud & AI', en: 'Sovereign Enterprise Cloud & AI', nl: 'Sovereign Enterprise Cloud & AI' },
+                price: '€5,400 / شهرياً',
+                badge: 'MISSION CRITICAL SOVEREIGN',
+                img: './assets/social-8k-branding/whatsapp/catalog/whatsapp-catalog-sovereign-enterprise-8k.png',
+                description: {
+                    ar: 'بنية سحابية سيادية خاصة معزولة في أمستردام، نماذج ذكاء اصطناعي خاصة بالمنشأة (Proprietary LLM) لضمان الخصوصية والامتثال لـ GDPR/ISO مع كونسيرج VIP 24/7.',
+                    en: 'Dedicated sovereign cloud infrastructure in Amsterdam with proprietary on-premise LLMs, GDPR/ISO compliance, and 24/7 VIP concierge.',
+                    nl: 'Toegewijde soevereine cloud in Amsterdam met eigen LLM-modellen, GDPR/ISO-conformiteit en 24/7 VIP concierge.'
+                },
+                link: 'https://sr-coresync.com/#pricing'
+            }
+        };
+
+        const FOUNDERS = {
+            cto: { name: 'م. محمد سليم عزيزة', phone: '+31 6 31069433', wa: 'https://wa.me/31631069433' },
+            cfo: { name: 'أ. محمد رائد كعكة', phone: '+31 6 36279435', wa: 'https://wa.me/31636279435' },
+            companyPhone: '+31 6 1811 1116',
+            companyWa: 'https://wa.me/31618111116'
+        };
+
+        let currentChannel = 'whatsapp';
+        let isAudioEnabled = false;
+
+        function switchChannel(channel) {
+            currentChannel = channel;
+            const waBtn = document.getElementById('btn-wa-mode');
+            const tgBtn = document.getElementById('btn-tg-mode');
+            const chatHeader = document.getElementById('chat-header');
+            const chatTitle = document.getElementById('chat-title');
+            const chatSubtitle = document.getElementById('chat-subtitle');
+            const telChannel = document.getElementById('telemetry-channel');
+
+            if (channel === 'whatsapp') {
+                waBtn.classList.add('active');
+                tgBtn.classList.remove('active');
+                chatHeader.className = 'chat-header wa-mode';
+                chatTitle.innerHTML = '<span>S&amp;R CoreSync Concierge</span><span class="verified-badge">✓</span>';
+                chatSubtitle.textContent = 'حساب أعمال رسمي موثّق • +31 618111116';
+                telChannel.textContent = 'WhatsApp Cloud API';
+            } else {
+                tgBtn.classList.add('active');
+                waBtn.classList.remove('active');
+                chatHeader.className = 'chat-header tg-mode';
+                chatTitle.innerHTML = '<span>S&amp;R CoreSync Bot</span><span class="verified-badge">🤖</span>';
+                chatSubtitle.textContent = 'بوت تيليجرام الرسمي المعتمد • @SRCoreSyncBot';
+                telChannel.textContent = 'Telegram Bot API';
+            }
+            updateInspector({ switchedChannel: channel, timestamp: new Date().toISOString() });
+        }
+
+        function toggleAudioReading() {
+            isAudioEnabled = !isAudioEnabled;
+            const btn = document.getElementById('voice-toggle');
+            const icon = document.getElementById('voice-icon');
+            const text = document.getElementById('voice-text');
+            if (isAudioEnabled) {
+                btn.style.background = 'rgba(16, 185, 129, 0.25)';
+                btn.style.borderColor = '#10b981';
+                icon.textContent = '🔊';
+                text.textContent = 'الصوت مفعل';
+                speakText('تم تفعيل المساعد الصوتي التنفيذي لشركة إس آند آر كور سينك');
+            } else {
+                btn.style.background = 'rgba(255, 255, 255, 0.06)';
+                btn.style.borderColor = 'var(--border-gold)';
+                icon.textContent = '🔇';
+                text.textContent = 'الصوت معطل';
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            }
+        }
+
+        function speakText(text) {
+            if (!isAudioEnabled || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const cleanText = text.replace(/[*#_~`]/g, '').slice(0, 200);
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            const isArabic = /[\u0600-\u06FF]/.test(cleanText);
+            utterance.lang = isArabic ? 'ar-SA' : 'en-US';
+            utterance.rate = 1.0;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function detectLanguage(text) {
+            if (!text) return 'ar';
+            if (/[\u0600-\u06FF]/.test(text)) return 'ar';
+            const lower = text.toLowerCase();
+            const nlKeys = ['hallo', 'wat', 'kost', 'pakket', 'prijs', 'bedrijf', 'graag', 'informatie', 'afspraak', 'soeverein'];
+            const deKeys = ['hallo', 'preis', 'paket', 'unternehmen', 'termin', 'kosten', 'beratung'];
+            if (nlKeys.some(k => lower.includes(k))) return 'nl';
+            if (deKeys.some(k => lower.includes(k))) return 'de';
+            return 'en';
+        }
+
+        function classifyIntent(text) {
+            const raw = String(text || '').toLowerCase();
+            if (raw.includes('سليم') || raw.includes('salim') || raw.includes('رائد') || raw.includes('raed') ||
+                raw.includes('اجتماع') || raw.includes('meeting') || raw.includes('appointment') || raw.includes('afspraak') ||
+                raw.includes('استشارة') || raw.includes('consultation') || raw.includes('مكالمة') || raw.includes('call')) {
+                return 'VIP_MEETING';
+            }
+            if (raw.includes('sovereign') || raw.includes('enterprise') || raw.includes('سيادي') || raw.includes('حكوم') ||
+                raw.includes('مؤسسات كبرى') || raw.includes('خوادم خاصة') || raw.includes('dedicated') || raw.includes('gdpr') ||
+                raw.includes('iso') || raw.includes('5400') || raw.includes('5,400')) {
+                return 'SOVEREIGN_CLOUD';
+            }
+            if (raw.includes('ذكاء') || raw.includes('اصطناعي') || raw.includes('ai') || raw.includes('وكلاء') ||
+                raw.includes('agents') || raw.includes('أتمتة') || raw.includes('automation') || raw.includes('pro') ||
+                raw.includes('2890') || raw.includes('2,890')) {
+                return 'AI_INQUIRY';
+            }
+            if (raw.includes('erp') || raw.includes('محاسب') || raw.includes('accounting') || raw.includes('فواتير') ||
+                raw.includes('invoice') || raw.includes('ضرائب') || raw.includes('btw') || raw.includes('vat') ||
+                raw.includes('starter') || raw.includes('1490') || raw.includes('1,490')) {
+                return 'ERP_INQUIRY';
+            }
+            if (raw.includes('سعر') || raw.includes('أسعار') || raw.includes('price') || raw.includes('cost') ||
+                raw.includes('prijs') || raw.includes('kosten') || raw.includes('كتالوج') || raw.includes('catalog') ||
+                raw.includes('باقات') || raw.includes('packages')) {
+                return 'PRICING_QUOTE';
+            }
+            return 'GENERAL_GREETING';
+        }
+
+        function generateLocalReply(userMessage) {
+            const lang = detectLanguage(userMessage);
+            const intent = classifyIntent(userMessage);
+            let reply = '';
+            let matchedPackage = null;
+            let actions = [];
+
+            if (intent === 'VIP_MEETING') {
+                if (lang === 'ar') {
+                    reply = 'يسعدنا للغاية ترتيب جلسة استشارية تنفيذية مباشرة مع مؤسسي الشركة.\n\n👤 المؤسس التقني والذكاء الاصطناعي:\nم. محمد سليم عزيزة | CTO\n📞 واتساب: +31 6 31069433\n\n👤 الشريك المؤسس للشؤون المالية ونظم الـ ERP:\nأ. محمد رائد كعكة | CFO\n📞 واتساب: +31 6 36279435\n\nيمكنكم حجز الجلسة مباشرة عبر بوابتنا: https://sr-coresync.com/#booking';
+                } else if (lang === 'nl') {
+                    reply = 'Wij plannen graag een exclusief adviesgesprek in met onze oprichters.\n\n👤 CTO & AI Lead: Ir. Mohammad Salim Aziza (+31 6 31069433)\n👤 CFO & ERP Lead: Mohammad Raed Kaakeh (+31 6 36279435)\n\nBoek direct via: https://sr-coresync.com/nl/#booking';
+                } else {
+                    reply = 'We would be honored to arrange an executive consultation with our co-founders.\n\n👤 CTO & Cloud AI Architect: Eng. Mohammad Salim Aziza (+31 6 31069433)\n👤 CFO & ERP Consultant: Mohammad Raed Kaakeh (+31 6 36279435)\n\nBook your slot: https://sr-coresync.com/#booking';
+                }
+                actions = [
+                    { label: '📅 حجز الجلسة عبر الموقع', url: 'https://sr-coresync.com/#booking' },
+                    { label: '💬 محادثة م. سليم عزيزة', url: 'https://wa.me/31631069433' },
+                    { label: '💬 محادثة أ. رائد كعكة', url: 'https://wa.me/31636279435' }
+                ];
+            } else if (intent === 'SOVEREIGN_CLOUD') {
+                matchedPackage = CATALOG_PACKAGES.enterprise;
+                if (lang === 'ar') {
+                    reply = '👑 باقة Sovereign Enterprise Cloud & AI (€5,400 / شهرياً)\n\nالحل السيادي الأقوى للمؤسسات الكبرى والهيئات:\n• بنية سحابية معزولة تماماً في مراكز بيانات أمستردام EU.\n• نماذج ذكاء اصطناعي خاصة بالمنشأة (Proprietary LLMs) دون تدريب خارجي.\n• امتثال كامل وموثق لـ GDPR و ISO 27001.\n• دعم فني وكونسيرج تنفيذي مخصص على مدار 24/7.';
+                } else if (lang === 'nl') {
+                    reply = '👑 Sovereign Enterprise Cloud & AI (€5.400 / mnd)\n\nDe ultieme soevereine oplossing voor grote ondernemingen:\n• Volledig geïsoleerde private cloud in Amsterdam.\n• Eigen LLM-modellen met 100% GDPR & ISO 27001 conformiteit.\n• 24/7 dedicated VIP concierge en noodrespons.';
+                } else {
+                    reply = '👑 Sovereign Enterprise Cloud & AI (€5,400 / mo)\n\nOur flagship sovereign infrastructure for large corporations:\n• Dedicated isolated cloud hosted in Amsterdam data centers.\n• Proprietary private LLMs ensuring zero data leakage.\n• Full compliance with EU GDPR and ISO 27001.\n• 24/7 VIP Concierge & SLA guarantee.';
+                }
+                actions = [
+                    { label: '🛡️ تفاصيل الباقة السيادية', url: 'https://sr-coresync.com/#pricing' },
+                    { label: '📞 طلب استشارة سيادية', url: 'https://wa.me/31618111116' }
+                ];
+            } else if (intent === 'AI_INQUIRY') {
+                matchedPackage = CATALOG_PACKAGES.pro;
+                if (lang === 'ar') {
+                    reply = '🤖 باقة Business Pro Suite (ERP + AI) (€2,890 / شهرياً) [الأكثر طلباً ⭐]\n\n• منظومة وكلاء ذكاء اصطناعي مستقلين (Autonomous AI Agents) لإدارة العمليات.\n• ربط بنكي لحظي PSD2 وأتمتة الفواتير ومطابقة الحسابات بنسبة 100%.\n• دعم متعدد اللغات لـ 29 لغة حية مع اتفاقية خدمة أوروبية 99.9% SLA.';
+                } else if (lang === 'nl') {
+                    reply = '🤖 Business Pro Suite (ERP + AI) (€2.890 / mnd) [Meest Populair ⭐]\n\n• Autonome AI-agents voor workflow-automatisering.\n• Realtime PSD2-bankkoppelingen en automatische BTW-aangifte.\n• 29 talen en 99.9% Europese uptime SLA.';
+                } else {
+                    reply = '🤖 Business Pro Suite (ERP + AI) (€2,890 / mo) [Most Popular ⭐]\n\n• Autonomous AI Agents for automated operations.\n• Real-time PSD2 banking & automatic European tax/VAT compliance.\n• 29 languages and enterprise 99.9% European SLA.';
+                }
+                actions = [
+                    { label: '🚀 ترقية الباقة الآن', url: 'https://sr-coresync.com/#pricing' },
+                    { label: '💬 طلب عرض مخصص', url: 'https://wa.me/31618111116' }
+                ];
+            } else if (intent === 'ERP_INQUIRY') {
+                matchedPackage = CATALOG_PACKAGES.starter;
+                if (lang === 'ar') {
+                    reply = '💼 باقة Core Starter ERP Suite (€1,490 / شهرياً)\n\n• إدارة موارد المؤسسات السحابية المتكاملة (محاسبة، مخزون، فواتير).\n• نظام ضريبي ومالي معتمد متوافق مع لوائح BTW والاتحاد الأوروبي.\n• تكامل مباشر مع بوابات الدفع Stripe و iDEAL.\n• إمكانية الترقية المرنة مع نمو المنشأة.';
+                } else if (lang === 'nl') {
+                    reply = '💼 Core Starter ERP Suite (€1.490 / mnd)\n\n• Complete cloud-ERP voor financieel en operationeel beheer.\n• Volledig conform de Nederlandse Belastingdienst en BTW-regels.\n• Naadloze Stripe & iDEAL integratie.';
+                } else {
+                    reply = '💼 Core Starter ERP Suite (€1,490 / mo)\n\n• Complete cloud ERP managing accounting, inventory, and invoices.\n• European tax/VAT & Dutch BTW compliant ledger.\n• Integrated Stripe & iDEAL payment gateways.';
+                }
+                actions = [
+                    { label: '📋 استعراض باقة Starter', url: 'https://sr-coresync.com/#pricing' },
+                    { label: '💬 بدء الاشتراك عبر واتساب', url: 'https://wa.me/31618111116' }
+                ];
+            } else if (intent === 'PRICING_QUOTE') {
+                matchedPackage = CATALOG_PACKAGES.pro;
+                if (lang === 'ar') {
+                    reply = '📦 قائمة باقات وعروض أسعار S&R CoreSync الرسمية لعام 2026:\n\n1️⃣ Core Starter ERP: €1,490 / شهرياً\n(إدارة الـ ERP والفوترة الضريبية والبنوك)\n\n2️⃣ Business Pro Suite: €2,890 / شهرياً [⭐ الأكثر طلباً]\n(ERP متكامل + وكلاء ذكاء اصطناعي مستقلين + بنوك PSD2)\n\n3️⃣ Sovereign Enterprise: €5,400 / شهرياً\n(سحابة سيادية معزولة في أمستردام + نماذج AI خاصة + دعم VIP)\n\n🔗 جميع الباقات متوفرة في كتالوج واتساب للأعمال الرسمي.';
+                } else if (lang === 'nl') {
+                    reply = '📦 Officiële Prijzen S&R CoreSync 2026:\n\n1️⃣ Core Starter ERP: €1.490 / mnd\n2️⃣ Business Pro Suite (ERP + AI): €2.890 / mnd [⭐ Meest gekozen]\n3️⃣ Sovereign Enterprise Cloud: €5.400 / mnd (Dedicated cloud & AI)\n\n🔗 Bekijk onze officiële WhatsApp Business catalogus.';
+                } else {
+                    reply = '📦 Official S&R CoreSync Pricing 2026:\n\n1️⃣ Core Starter ERP: €1,490 / mo\n2️⃣ Business Pro Suite (ERP + AI): €2,890 / mo [⭐ Most Popular]\n3️⃣ Sovereign Enterprise Cloud: €5,400 / mo (Dedicated cloud & Private LLMs)\n\n🔗 Catalog is live in our WhatsApp Business profile.';
+                }
+                actions = [
+                    { label: '📊 فتح جدول مقارنة الأسعار', url: 'https://sr-coresync.com/#pricing' },
+                    { label: '🛍️ كتالوج واتساب للأعمال', url: 'https://wa.me/c/31618111116' }
+                ];
+            } else {
+                matchedPackage = CATALOG_PACKAGES.starter;
+                if (lang === 'ar') {
+                    reply = 'أهلاً وسهلاً بكم في S&R CoreSync For Intelligent Solutions! 🌟\nأنا المساعد السيادي الذكي، متواجد لخدمتكم 24/7.\n\nيسرني تزويدكم بالأسعار أو تفاصيل الذكاء الاصطناعي، أو حجز موعد مباشر مع الإدارة.\n\n📞 الهاتف الموحد: ' + FOUNDERS.companyPhone;
+                } else if (lang === 'nl') {
+                    reply = 'Welkom bij S&R CoreSync For Intelligent Solutions! 🌟\nIk ben de zakelijke AI Concierge, 24/7 beschikbaar.\n\nHoe kan ik u van dienst zijn?\n📞 Tel: ' + FOUNDERS.companyPhone;
+                } else {
+                    reply = 'Welcome to S&R CoreSync For Intelligent Solutions! 🌟\nI am your Enterprise AI Concierge, available 24/7.\n\nHow may I assist you today?\n📞 WhatsApp VIP: ' + FOUNDERS.companyPhone;
+                }
+                actions = [
+                    { label: '🌐 البوابة الرسمية', url: 'https://sr-coresync.com' },
+                    { label: '💼 باقات الأسعار', url: 'https://sr-coresync.com/#pricing' },
+                    { label: '📅 حجز موعد VIP', url: 'https://sr-coresync.com/#booking' }
+                ];
+            }
+
+            return {
+                ok: true,
+                detectedLanguage: lang,
+                intent: intent,
+                reply: reply,
+                matchedPackage: matchedPackage,
+                actions: actions,
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function updateTelemetryUI(res, latencyMs) {
+            document.getElementById('telemetry-intent').textContent = res.intent;
+            
+            const langMap = {
+                ar: '🇸🇦 Arabic (ar)',
+                en: '🇬🇧 English (en)',
+                nl: '🇳🇱 Dutch (nl)',
+                de: '🇩🇪 German (de)'
+            };
+            document.getElementById('telemetry-lang').textContent = langMap[res.detectedLanguage] || res.detectedLanguage;
+            document.getElementById('telemetry-latency').textContent = latencyMs + ' ms';
+
+            // Matched Package
+            const pkg = res.matchedPackage || CATALOG_PACKAGES.pro;
+            const pkgBox = document.getElementById('package-preview-box');
+            if (pkg) {
+                pkgBox.style.display = 'flex';
+                document.getElementById('pkg-img').src = pkg.img;
+                document.getElementById('pkg-badge').textContent = pkg.badge;
+                document.getElementById('pkg-title').textContent = typeof pkg.name === 'object' ? (pkg.name[res.detectedLanguage] || pkg.name.ar) : pkg.name;
+                document.getElementById('pkg-price').textContent = pkg.price;
+                const desc = typeof pkg.description === 'object' ? (pkg.description[res.detectedLanguage] || pkg.description.ar) : pkg.description;
+                document.getElementById('pkg-desc').textContent = desc;
+            } else {
+                pkgBox.style.display = 'none';
+            }
+        }
+
+        function updateInspector(data) {
+            const el = document.getElementById('json-inspector');
+            el.textContent = JSON.stringify(data, null, 2);
+        }
+
+        function appendMessage(text, isOutgoing, actions) {
+            const chat = document.getElementById('chat-messages');
+            const typing = document.getElementById('typing-indicator');
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble ' + (isOutgoing ? 'outgoing' : 'incoming');
+            bubble.textContent = text;
+
+            if (actions && actions.length > 0) {
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'bubble-actions';
+                actions.forEach(a => {
+                    const btn = document.createElement('a');
+                    btn.className = 'action-chip-btn';
+                    btn.href = a.url;
+                    btn.target = '_blank';
+                    btn.rel = 'noopener noreferrer';
+                    btn.textContent = a.label;
+                    actionsDiv.appendChild(btn);
+                });
+                bubble.appendChild(actionsDiv);
+            }
+
+            const timeSpan = document.createElement('span');
+            timeSpan.className = 'msg-time';
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            timeSpan.textContent = timeStr + (isOutgoing ? ' • أُرسلت' : ' • رد سيادي');
+            bubble.appendChild(timeSpan);
+
+            chat.insertBefore(bubble, typing);
+            chat.scrollTop = chat.scrollHeight;
+
+            if (!isOutgoing) {
+                speakText(text);
+            }
+        }
+
+        async function processMessage(userText) {
+            appendMessage(userText, true);
+            const typing = document.getElementById('typing-indicator');
+            typing.style.display = 'inline-flex';
+            const chat = document.getElementById('chat-messages');
+            chat.scrollTop = chat.scrollHeight;
+
+            const startTime = performance.now();
+            let result;
+
+            // Attempt live worker API first, fallback to embedded engine
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 1800);
+                const resp = await fetch('https://sr-lead-capture.sr-coresync.workers.dev/api/ai-concierge', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userText, channel: currentChannel }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                if (resp.ok) {
+                    result = await resp.json();
+                } else {
+                    throw new Error('Worker status ' + resp.status);
+                }
+            } catch (e) {
+                // Seamless zero-latency fallback to client-side sovereign engine
+                result = generateLocalReply(userText);
+            }
+
+            const endTime = performance.now();
+            const latencyMs = Math.round(endTime - startTime);
+
+            setTimeout(() => {
+                typing.style.display = 'none';
+                appendMessage(result.reply, false, result.actions);
+                updateTelemetryUI(result, latencyMs);
+                updateInspector({
+                    channel: currentChannel,
+                    userQuery: userText,
+                    intentDetected: result.intent,
+                    language: result.detectedLanguage,
+                    latencyMs: latencyMs,
+                    actionsCount: (result.actions || []).length,
+                    responseSummary: result.reply.slice(0, 80) + '...',
+                    matchedSKU: result.matchedPackage ? result.matchedPackage.id : 'NONE',
+                    timestamp: new Date().toISOString()
+                });
+            }, Math.min(300, latencyMs + 100));
+        }
+
+        function handleUserSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('user-input');
+            const val = input.value.trim();
+            if (!val) return;
+            input.value = '';
+            processMessage(val);
+        }
+
+        function sendQuickPrompt(promptText) {
+            processMessage(promptText);
+        }
+    </script>
+</body>
+</html>
