@@ -54,8 +54,8 @@
         /* Top Header */
         header {
             background: rgba(4, 19, 13, 0.95);
-            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-dim);
             padding: 1rem 2rem;
             position: sticky;
@@ -425,6 +425,36 @@
             font-size: 0.85rem;
             color: #64748b;
         }
+
+        .status-pill-replica {
+            border-color: var(--cyan);
+            color: #7dd3fc;
+            background: #072635;
+        }
+
+        .cipher-output-wrap {
+            margin-top: 1rem;
+        }
+
+        .cipher-result-box {
+            min-height: 48px;
+            background: #010604;
+            color: #34d399;
+        }
+
+        .panel-header-spaced {
+            margin-top: 1.5rem;
+        }
+
+        .btn-snapshot-action {
+            padding: 0.35rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .footer-disclaimer {
+            margin-top: 0.35rem;
+            font-size: 0.75rem;
+        }
     </style>
 </head>
 <body>
@@ -444,7 +474,7 @@
                     <span class="status-dot"></span>
                     <span>AMS-01 HSM: Active & Armed</span>
                 </div>
-                <div class="status-pill" style="border-color: var(--cyan); color: #7dd3fc; background: #072635;">
+                <div class="status-pill status-pill-replica">
                     <span>DR Replica: FRA-02 Synced (0.8s)</span>
                 </div>
                 <a href="erp-operations-crm.html" class="btn-link">← لوحة العمليات والفواتير</a>
@@ -576,20 +606,20 @@
                         <button class="btn-primary" id="btnEncrypt">تشفير فوري عبر AMS Enclave</button>
                         <button class="btn-gold" id="btnSimulateDR">محاكاة التعافي من الكوارث (DR Failover)</button>
                     </div>
-                    <div style="margin-top: 1rem;">
+                    <div class="cipher-output-wrap">
                         <label class="form-label">الناتج المشفر تشفير مظروفي (Ciphertext Token):</label>
-                        <div id="txtCipher" class="key-hash mono" style="min-height: 48px; background: #010604; color: #34d399;">
+                        <div id="txtCipher" class="key-hash mono cipher-result-box">
                             enc:v1:aes256gcm:dGhpc19pc19hX3NlY3VyZV9zb3ZlcmVpZ25fZW5jbGF2ZV90b2tlbg==:auth_tag:9812ef45b
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-header" style="margin-top: 1.5rem;">
+                <div class="panel-header panel-header-spaced">
                     <div class="panel-title">
                         <span>🛡️</span>
                         <span>سجل المزامنة والنسخ الاحتياطي اللحظي (Disaster Recovery Feed)</span>
                     </div>
-                    <button class="btn-primary" id="btnTriggerBackup" style="padding: 0.35rem 0.8rem; font-size: 0.8rem;">نسخ فوري (Snapshot Now)</button>
+                    <button class="btn-primary btn-snapshot-action" id="btnTriggerBackup">نسخ فوري (Snapshot Now)</button>
                 </div>
 
                 <div class="backup-terminal mono" id="terminalFeed">
@@ -608,7 +638,7 @@
     <!-- Footer -->
     <footer>
         <p>S&R CoreSync For Intelligent Solutions • Keizersgracht 482, 1016 EG Amsterdam, Netherlands • KvK: 96515865 • الهاتف: +31 618111116</p>
-        <p style="margin-top: 0.35rem; font-size: 0.75rem;">جميع المفاتيح التشفيرية محفوظة داخل عتاد FIPS 140-3 Level 4 مشفر بالكامل في أمستردام وفق المادة 32 من اللائحة العامة لحماية البيانات GDPR.</p>
+        <p class="footer-disclaimer">جميع المفاتيح التشفيرية محفوظة داخل عتاد FIPS 140-3 Level 4 مشفر بالكامل في أمستردام وفق المادة 32 من اللائحة العامة لحماية البيانات GDPR.</p>
     </footer>
 
     <!-- Interactive Script -->
