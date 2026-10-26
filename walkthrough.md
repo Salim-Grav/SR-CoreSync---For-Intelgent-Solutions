@@ -356,12 +356,43 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 40:
-1. **[scripts/fix_portals_a11y_problems.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/fix_portals_a11y_problems.py):** سكربت بايثون المؤتمت للفحص والتصحيح الشامل.
-2. **30 ملفاً شملت البوابة الرئيسية والبوابات الـ 28 وملف البانر:** (`index.html`, `en/`, `nl/`, `de/`, `fr/`, `es/`, `it/`, `tr/`, `sv/`, `sl/`, `sk/`, `ro/`, `pt/`, `pl/`, `no/`, `mt/`, `lv/`, `lt/`, `ku/`, `hu/`, `hr/`, `ga/`, `et/`, `el/`, `fi/`, `da/`, `cs/`, `bg/`, `ckb/`, `export-banner-founders-erp.html`).
-3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 40 بنسبة 100%.
-4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق المعماري وتأكيد خلو الأخطاء.
+### 9. المهمة 41: ربط وتكامل صفحة LinkedIn الرسمية المنشأة حديثاً عبر كافة المنصات والبوابات (100% Complete):
+- **الرابط الفعلي المباشر لصفحة الشركة على LinkedIn:**
+  - `https://www.linkedin.com/company/146883282/` (المستخرج من شاشة لوحة تحكم الإدارة `https://www.linkedin.com/company/146883282/admin/dashboard/`).
+- **نطاق التحديث البرمجي الشامل (35 ملفاً):**
+  1. **الصفحة الرئيسية (`index.html`):**
+     - شريط المتابعة الجانبي العائم (`floating-follow__link--linkedin`).
+     - شريط الفوتر المؤسسي (`.sr-footer-social-strip` / `.sr-social-chip--linkedin`).
+     - شريط إجراءات المخطط التنفيذي للمشاريع (`.sr-btn-linkedin`).
+     - شارة التوثيق المؤسسي في مشغل الصوت التنفيذي الذكي (`.sr-blueprint-audio-player`).
+     - مصفوفة بيانات Schema.org و JSON-LD (`sameAs`).
+  2. **استوديو الهوية البصرية 8K (`social-8k-studio.html`):**
+     - رابط زيارة القناة وزر نسخ الرابط الفوري.
+  3. **بوابات اللغات الـ 28 المترجمة بالكامل:**
+     - تحديث شريط المتابعة العائم في كل من: (`en`, `nl`, `de`, `fr`, `es`, `it`, `tr`, `sv`, `sl`, `sk`, `ro`, `pt`, `pl`, `no`, `mt`, `lv`, `lt`, `ku`, `hu`, `hr`, `ga`, `et`, `el`, `fi`, `da`, `cs`, `bg`, `ckb`).
+  4. **ملفات التوثيق والسكربتات:**
+     - `SOCIAL-MEDIA-SUITE.md`
+     - `scripts/social_campaign_dispatcher.py`
+     - `scripts/update_hero_and_floating_rail.py`
+
+---
+
+### 10. لقطات حية للتحقق من الربط الفعلي من شاشة العرض (Live Visual Snapshots):
+
+![معاينة الواجهة والشريط العائم ورابط لينكد إن](file:///C:/Users/msali/.gemini/antigravity-ide/brain/85966c0a-c8d5-464f-b0e6-0664f5664ec5/live_linkedin_snapshot.png)
+
+![معاينة استوديو الهوية البصرية 8K وبطاقة لينكد إن المحدثة](file:///C:/Users/msali/.gemini/antigravity-ide/brain/85966c0a-c8d5-464f-b0e6-0664f5664ec5/live_social_studio_snapshot.png)
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 41:
+1. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** تحديث كافة أزرار وشارات ومصفوفات Schema الخاصة بلينكد إن.
+2. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** تحديث بطاقة قناة لينكد إن وأزرار النسخ والزيارة.
+3. **28 ملف لغات لـ index.html:** تحديث روابط الشريط العائم عبر كافة البوابات الدولية.
+4. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 41 بنسبة 100%.
+5. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الفني الكامل واللقطات الحية.
 
 </div>
+
 
 
