@@ -56,7 +56,11 @@
    - بورتريه أ. محمد رائد كعكة: `universal/sr-coresync-profile-avatar-raed-8k.png` (3840×3840)
 
 2. **أغلفة وبانرات المنصات (Banners & Covers):**
-   - لينكد إن: `linkedin/linkedin-company-cover-8k.png` (6336×1584)
+   - غلاف صفحة لينكد إن الرسمية: `linkedin/linkedin-company-cover-8k.png` (6768×1146 بنسبة 5.91:1 مطابقة لمعيار 1128×191)
+   - غلاف الحساب الشخصي لينكد إن: `linkedin/linkedin-personal-banner-8k.png` (6336×1584 بنسبة 4:1)
+   - غلاف صفحة فيسبوك الرسمية: `facebook/facebook-page-cover-8k.png` (6560×2496 بنسبة 2.63:1 مع أمان الموبايل)
+   - بوست فيسبوك أفقي: `facebook/facebook-post-landscape-8k.png` (7680×4020 بنسبة 1.91:1)
+   - بوست فيسبوك مربع: `facebook/facebook-post-square-8k.png` (4320×4320 بنسبة 1:1)
    - إكس (تويتر): `x-twitter/x-header-cover-8k.png` (7680×2560)
    - يوتيوب: `youtube/youtube-channel-banner-8k.png` (7680×4320)
    - تيليجرام: `telegram/telegram-post-card-8k.png` (7680×4320)
