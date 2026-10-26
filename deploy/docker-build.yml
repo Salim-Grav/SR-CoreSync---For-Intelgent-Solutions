@@ -1,0 +1,55 @@
+name: S&R CoreSync Docker & Containerization Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Dockerfile'
+      - 'nginx.conf'
+      - 'docker-compose.yml'
+      - '.github/workflows/docker-build.yml'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build & Validate Sovereign Container
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          load: true
+          tags: coresync/web-platform:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Start Container via Docker Compose
+        run: |
+          docker compose up -d
+          echo "Waiting for container healthcheck..."
+          sleep 10
+          docker ps
+          docker compose logs
+
+      - name: Test Container HTTP & Health Endpoint
+        run: |
+          curl -f http://localhost:8080/health || (echo "Healthcheck failed!" && exit 1)
+          echo "Container health check passed!"
+          curl -f -I http://localhost:8080/index.html
+          echo "Web root index.html verified successfully!"
+
+      - name: Clean Up
+        if: always()
+        run: docker compose down

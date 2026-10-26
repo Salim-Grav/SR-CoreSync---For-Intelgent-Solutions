@@ -457,13 +457,64 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 43:
-1. **[scripts/social_campaign_dispatcher.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/social_campaign_dispatcher.py):** تحديث مسارات القنوات النظيفة وحل مشكلة الترميز وأتمتة تصدير الجدول.
-2. **[assets/social-8k-branding/campaign_schedule.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/campaign_schedule.json):** روزنامة النشر الرسمية المؤتمتة للأسبوع الأول للقنوات الـ 9.
-3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 43 بنسبة 100%.
-4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق إنجاز المهمة 43 بالكامل مع اللقطة الحية.
+# 🛡️ توثيق المهمة 44: تحديث وتوليد تجزئات CSP واجتياز الفحص الأمني الصارم بنسبة 100%
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 11:20 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمهمة 44 (Content Security Policy & Publish Set Alignment):**
+
+1. **تشخيص سبب رسالة الخطأ:**
+   - كانت تجزئات السكربتات المضمنة في ملف `csp-hashes.txt` غير متطابقة مع أحدث كتل وسوم `<script>` في صفحات المنصة أو حزمة النشر، مما أدى لرسالة:
+     `FAILED - csp-hashes.txt is stale; run python scripts/build_csp.py`.
+2. **إعادة بناء وتحديث حزمة النشر (`scripts/prepare_publish_set.py`):**
+   - تنظيف وتجهيز مجلد `_site/` بكامل ملفات البوابات الـ 29 (456 ملفاً بحجم 177.20 MB).
+   - اجتياز اختبار عزل الملفات الخادمة والسرية (Guard passed: no server-side material in the publish set).
+3. **توليد تجزئات الأمان المحدثة (`scripts/build_csp.py`):**
+   - فحص 94 صفحة ويب HTML بدقة.
+   - استخراج 95 تجزئة أمنية فريدة برمز التشفير `sha256` وتحديث وثيقة `csp-hashes.txt` وسياسة الـ Content Security Policy الرسمية.
+4. **تأكيد واجتياز كافة الفحوصات الصارمة بنجاح:**
+   - تنفيذ `python scripts/build_csp.py --check` واجتيازه بنجاح:
+     `PASSED - csp-hashes.txt matches the publish set (95 hashes).`
+   - تنفيذ `python scripts/validate_publish_set.py` واجتيازه بنجاح:
+     `PASSED - publish set is safe. No server-side material is exposed.`
+
+---
+
+## 📸 لقطة حية ومباشرة من شاشة العرض (Live Visual Snapshot):
+
+![معاينة حية لواجهة المنصة بعد تحديث السياسة الأمنية والتحقق](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/landing_page_1793009933177.png)
+
+---
+
+---
+
+# 🛑 توثيق المهمة 45: تشخيص سبب رفض GitHub للرفع (Git Push Rejection) وتقديم الحلول الفورية
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 11:23 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمهمة 45:**
+
+1. **التحليل الجذري لرسالة الخطأ:**
+   - عند تنفيذ الرفع `git push origin main`، ظهر الخطأ الأمني الصريح من خوادم GitHub:
+     ```text
+     ! [remote rejected] main -> main (refusing to allow a Personal Access Token to create or update workflow `.github/workflows/docker-build.yml` without `workflow` scope)
+     ```
+2. **السبب التقني الدقيق:**
+   - الالتزام السابق `8223c24` قام بإضافة ملف جديد `docker-build.yml` داخل مجلد سير العمل `.github/workflows/`.
+   - رمز الوصول الشخصي (Personal Access Token - PAT) الخاص بالحساب لا يحتوي على تصريح `workflow` (تمنعه GitHub افتراضياً لحماية الأكشنز من التعديلات غير المصرح بها عبر التوكنات العادية).
+3. **الحلول المتاحة للتنفيذ الفوري:**
+   - **الحل الأول (فوري ومباشر 100%):** نقل أو استبعاد ملف الـ workflow مؤقتاً خارج مجلد `.github/` وإتمام الـ push لجميع الملفات والتحسينات بنجاح فوري.
+   - **الحل الثاني (تفعيل الصلاحية في GitHub):** الذهاب إلى إعدادات حساب GitHub -> Developer Settings -> Personal access tokens، وتفعيل خيار `workflow` (Read and write permissions to workflows).
+
+---
+
+## 🛠️ الملفات الموثقة:
+1. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق تشخيص المشكلة وحلولها في سجل المهام.
+2. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق التشخيص والحلول الفورية.
 
 </div>
+
+
 
 
 

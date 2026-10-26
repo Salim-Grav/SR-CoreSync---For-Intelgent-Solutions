@@ -20,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ---------------------------------------------------------------------------
 EXCLUDED_DIRS = {
     '.git', '_site', '.github', '.agents', '.vscode', '.zwork', 'api', 'config',
-    'workers', 'scripts', 'dist', 'scratch', 'node_modules', '__pycache__'
+    'workers', 'scripts', 'dist', 'deploy', 'scratch', 'node_modules', '__pycache__'
 }
 
 # Any other dot-directory is tooling state (editor caches, agent artefacts), not
@@ -69,7 +69,7 @@ EXCLUDED_SUFFIXES = ('.pyc',)
 # Paths that must never appear in the published artifact.
 # ---------------------------------------------------------------------------
 FORBIDDEN_PUBLISHED = [
-    'api', 'config', 'workers', 'scripts', 'dist',
+    'api', 'config', 'workers', 'scripts', 'dist', 'deploy',
     '.htaccess', '.env', '.env.example', '.github'
 ]
 

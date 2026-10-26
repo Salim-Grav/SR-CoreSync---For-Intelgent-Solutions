@@ -1,0 +1,42 @@
+# ==============================================================================
+# S&R CoreSync For Intelligent Solutions - Docker Compose Sovereign Stack
+# Multi-Environment Deployment (Dev / Staging / Production)
+# ==============================================================================
+
+version: '3.8'
+
+services:
+  coresync-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: coresync/web-platform:2026.1.0
+    container_name: coresync_sovereign_web
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:80"
+    environment:
+      - NODE_ENV=production
+      - PLATFORM_NAME=SR-CoreSync-For-Intelligent-Solutions
+      - DOMAIN=sr-coresync.com
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    networks:
+      - coresync_network
+
+networks:
+  coresync_network:
+    name: coresync_sovereign_net
+    driver: bridge
