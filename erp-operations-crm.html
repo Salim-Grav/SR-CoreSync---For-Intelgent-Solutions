@@ -566,7 +566,85 @@
                 width: 100%;
                 box-shadow: none;
                 border: none;
-            }
+        /* Utility classes for clean DOM */
+        .status-pill-stripe {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+        }
+
+        .live-update-tag {
+            font-size: 0.8rem;
+            color: var(--gold-bright);
+        }
+
+        .tier-name-green {
+            font-weight: 800;
+            color: #34d399;
+        }
+
+        .tier-name-gold {
+            font-weight: 800;
+            color: var(--gold-bright);
+        }
+
+        .tier-name-blue {
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .tier-price-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .ledger-title-wrap {
+            margin-top: 10px;
+        }
+
+        .ledger-heading {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            margin-bottom: 8px;
+        }
+
+        .inv-brand-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .inv-brand-emblem {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+        }
+
+        .inv-num-bold {
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .inv-status-paid {
+            color: #10b981;
+            font-weight: 800;
+        }
+
+        .inv-item-sku {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .sec-actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-action-lg {
+            padding: 10px 16px;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -587,7 +665,7 @@
                     <span class="status-dot"></span>
                     <span>Sovereign Ledger Node: Active (AMS-01)</span>
                 </div>
-                <div class="status-pill" style="border-color: rgba(56, 189, 248, 0.4); color: #38bdf8;">
+                <div class="status-pill status-pill-stripe">
                     <span>PSD2 &amp; Stripe: Connected</span>
                 </div>
                 <a href="./ai-concierge-simulator.html" class="btn-header">
@@ -651,7 +729,7 @@
                     <h2>
                         <span>👥 دليل العملاء والعقود النشطة (CRM Pipeline)</span>
                     </h2>
-                    <span style="font-size: 0.8rem; color: var(--gold-bright);">تحديث لحظي • 6 عملاء كبار</span>
+                    <span class="live-update-tag">تحديث لحظي • 6 عملاء كبار</span>
                 </div>
 
                 <div class="clients-table-wrapper">
@@ -674,8 +752,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: #34d399;">Business Pro Suite</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€2,890 / شهرياً • iDEAL</div>
+                                    <div class="tier-name-green">Business Pro Suite</div>
+                                    <div class="tier-price-sub">€2,890 / شهرياً • iDEAL</div>
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
@@ -692,8 +770,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: var(--gold-bright);">Sovereign Enterprise</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€5,400 / شهرياً • SEPA</div>
+                                    <div class="tier-name-gold">Sovereign Enterprise</div>
+                                    <div class="tier-price-sub">€5,400 / شهرياً • SEPA</div>
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
@@ -710,8 +788,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: #38bdf8;">Core Starter ERP</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€1,490 / شهرياً • Stripe</div>
+                                    <div class="tier-name-blue">Core Starter ERP</div>
+                                    <div class="tier-price-sub">€1,490 / شهرياً • Stripe</div>
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
@@ -728,8 +806,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: var(--gold-bright);">Sovereign Enterprise</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€5,400 / شهرياً • PSD2</div>
+                                    <div class="tier-name-gold">Sovereign Enterprise</div>
+                                    <div class="tier-price-sub">€5,400 / شهرياً • PSD2</div>
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
@@ -746,8 +824,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: #34d399;">Business Pro Suite</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€2,890 / شهرياً • SEPA</div>
+                                    <div class="tier-name-green">Business Pro Suite</div>
+                                    <div class="tier-price-sub">€2,890 / شهرياً • SEPA</div>
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
@@ -764,8 +842,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="font-weight: 800; color: var(--gold-bright);">Sovereign Enterprise</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">€5,400 / شهرياً • Wire</div>
+                                    <div class="tier-name-gold">Sovereign Enterprise</div>
+                                    <div class="tier-price-sub">€5,400 / شهرياً • Wire</div>
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
@@ -777,8 +855,8 @@
                 </div>
 
                 <!-- Ledger Real-time Stream -->
-                <div style="margin-top: 10px;">
-                    <h3 style="font-size: 0.95rem; font-weight: 800; color: var(--gold-bright); margin-bottom: 8px;">
+                <div class="ledger-title-wrap">
+                    <h3 class="ledger-heading">
                         <span>📡 سجل الحركات والمدفوعات اللحظية (PSD2 &amp; Stripe Live Ledger)</span>
                     </h3>
                     <div class="ledger-feed" id="ledger-stream">
@@ -827,8 +905,8 @@
                     <!-- Top Details -->
                     <div class="inv-header">
                         <div class="inv-brand">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-                                <img src="./assets/branding/coresync-emblem-8k.png" alt="S&R Emblem" style="width: 38px; height: 38px; border-radius: 50%;">
+                            <div class="inv-brand-row">
+                                <img src="./assets/branding/coresync-emblem-8k.png" alt="S&R Emblem" class="inv-brand-emblem">
                                 <h3>S&amp;R CoreSync For Intelligent Solutions</h3>
                             </div>
                             <p>Sovereign Cloud ERP &amp; Autonomous AI Architectures</p>
@@ -838,10 +916,10 @@
                         </div>
                         <div class="inv-meta">
                             <div class="inv-badge-title">INVOICE</div>
-                            <p style="font-weight: 800; color: #0f172a;" id="inv-num">INV-SRC-2026-1042</p>
+                            <p class="inv-num-bold" id="inv-num">INV-SRC-2026-1042</p>
                             <p id="inv-date">Date: 26 Oct 2026</p>
                             <p id="inv-due">Due: 09 Nov 2026</p>
-                            <p style="color: #10b981; font-weight: 800;">STATUS: PAID (iDEAL Instant)</p>
+                            <p class="inv-status-paid">STATUS: PAID (iDEAL Instant)</p>
                         </div>
                     </div>
 
@@ -877,7 +955,7 @@
                             <tr>
                                 <td>
                                     <strong>Business Pro Suite (ERP + Autonomous AI)</strong>
-                                    <div style="font-size: 0.75rem; color: #64748b;">SKU: SRC-AI-PRO-2026 • Monthly Sovereign Cloud Subscription &amp; PSD2 Banking Gateway</div>
+                                    <div class="inv-item-sku">SKU: SRC-AI-PRO-2026 • Monthly Sovereign Cloud Subscription &amp; PSD2 Banking Gateway</div>
                                 </td>
                                 <td>1</td>
                                 <td>€2,890.00</td>
@@ -910,11 +988,11 @@
                 </div>
 
                 <!-- Secondary Action Buttons -->
-                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                    <a href="https://wa.me/31618111116?text=مرحباً، أود الاستفسار عن فاتورة الاشتراك المؤسسي" target="_blank" class="btn-action-sm" style="padding: 10px 16px; font-size: 0.85rem;">
+                <div class="sec-actions-row">
+                    <a href="https://wa.me/31618111116?text=مرحباً، أود الاستفسار عن فاتورة الاشتراك المؤسسي" target="_blank" rel="noopener noreferrer" class="btn-action-sm btn-action-lg">
                         <span>💬 إرسال الفاتورة عبر واتساب VIP</span>
                     </a>
-                    <button type="button" class="btn-action-sm" onclick="copyInvoiceSummary()" style="padding: 10px 16px; font-size: 0.85rem;">
+                    <button type="button" class="btn-action-sm btn-action-lg" onclick="copyInvoiceSummary()">
                         <span>📋 نسخ ملخص الفاتورة</span>
                     </button>
                 </div>
