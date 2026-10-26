@@ -532,14 +532,33 @@
 
 ---
 
-## 🛠️ الملفات المعدلة والموثقة:
-1. **[deploy/docker-build.yml](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/deploy/docker-build.yml):** مسار ملف أتمتة حاوية Docker Nginx.
-2. **[scripts/publish_set.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/publish_set.py):** إضافة مجلد `deploy` لقواعد الحماية والاستبعاد.
-3. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** تحديث التجزئات الـ 95 وسياسة الـ CSP.
-4. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 46 بنسبة 100%.
-5. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الكامل لنجاح المزامنة والرفع.
+---
+
+# 🐍 توثيق المهمة 47: حل مشكلة مفسر بايثون وتفعيل مسارات مكتبة PIL نهائياً
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 11:57 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمهمة 47:**
+
+1. **تشخيص سبب الإشعار:**
+   - الإشعار الظاهر `Default interpreter path could not be resolved` يظهر لأن إضافة Python Environments في بيئة التطوير تبحث عن المفسر المسجل صراحة عبر محدد البيئات.
+2. **حل مشكلة فحص الحزم `Cannot find module 'PIL'`:**
+   - كانت مكتبة `Pillow (PIL)` مثبتة في المسار الخاص بالمستخدم:
+     `C:\Users\msali\AppData\Roaming\Python\Python314\site-packages`
+   - قمنا بتحديث إعدادات مساحة العمل [.vscode/settings.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.vscode/settings.json) وتضمين هذا المسار صراحة في `python.analysis.extraPaths` و `python.autoComplete.extraPaths`.
+3. **النتيجة والحل الدائم:**
+   - تم التعرف على جميع حزم بايثون المثبتة محلياً، واختفاء تحذيرات الاستيراد في Pyrefly.
+   - لحسم إشعار المفسر في المحرر نهائياً: يكفي الضغط على `Ctrl + Shift + P` واختيار `Python: Select Interpreter` ثم الضغط على `Python 3.14`.
+
+---
+
+## 🛠️ الملفات المعدلة:
+1. **[.vscode/settings.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.vscode/settings.json):** توجيه محرك التحليل إلى مسار بايثون 3.14 وحزم الـ site-packages الرسمية.
+2. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 47 بنسبة 100%.
+3. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الكامل لحل المشكلة نهائياً.
 
 </div>
+
 
 
 
