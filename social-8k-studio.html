@@ -1439,12 +1439,20 @@
             }
         }
 
+        function copyDimensions(dims) {
+            navigator.clipboard.writeText(dims);
+            alert('📋 تم نسخ القياس المعياري (' + dims + ' px) بنجاح!');
+        }
+
         function getRatioClass(ratio) {
             if (ratio === '1:1') return 'ratio-1-1';
             if (ratio === '9:16') return 'ratio-9-16';
             if (ratio === '4:1') return 'ratio-4-1';
             if (ratio === '3:1') return 'ratio-3-1';
             if (ratio === '4:5') return 'ratio-4-5';
+            if (ratio === '5.91:1') return 'ratio-5-91';
+            if (ratio === '2.63:1') return 'ratio-2-63';
+            if (ratio === '1.91:1') return 'ratio-1-91';
             return 'ratio-16-9';
         }
 
@@ -1456,6 +1464,7 @@
                 if (currentFilter === 'all') return true;
                 if (currentFilter === 'Universal' && item.platform.includes('Universal')) return true;
                 if (currentFilter === 'LinkedIn' && item.platform.includes('LinkedIn')) return true;
+                if (currentFilter === 'Facebook' && (item.platform.includes('Meta') || item.platform.includes('Facebook'))) return true;
                 if (currentFilter === 'X' && (item.platform.includes('X') || item.platform.includes('Twitter'))) return true;
                 if (currentFilter === 'YouTube' && item.platform.includes('YouTube')) return true;
                 if (currentFilter === 'Instagram' && item.platform.includes('Instagram')) return true;
