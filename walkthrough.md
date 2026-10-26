@@ -702,11 +702,33 @@
 
 ---
 
+---
+
+# 📸 توثيق المهمة 52: الإرشاد التشغيلي وتدشين حساب إنستغرام الرسمي (@SRCoreSync)
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 02:14 ظهراً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمهمة 52:**
+
+1. **التحليل البصري لشاشة تسجيل الدخول:**
+   - فحص شاشة المستخدم المرفوعة، وتحديد زر **"إنشاء حساب جديد"** المخصص لحساب الشركة المستقل.
+2. **إعداد البيانات المؤسسية المعتمدة لإنشاء الحساب:**
+   - **البريد الإلكتروني المؤسسي:** `info@sr-coresync.com` (أو هاتف الشركة `+31687764998`).
+   - **الاسم الكامل:** `S&R CoreSync For Intelligent Solutions`
+   - **اسم المستخدم (Username):** `SRCoreSync` (ليكون الرابط المعتمد `instagram.com/SRCoreSync`).
+3. **أصول البروفايل وأول منشور 8K:**
+   - الأفاتار الرسمي 8K المعتمد: [assets/social-8k-branding/universal/sr-coresync-profile-avatar-8k.png](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/universal/sr-coresync-profile-avatar-8k.png).
+   - صورة أول منشور طولي 8K (4:5): [assets/social-8k-branding/instagram/instagram-post-portrait-8k.png](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/instagram/instagram-post-portrait-8k.png).
+   - أغلفة الهايلايتس الـ 5 المعتمدة في `assets/social-8k-branding/story-highlights-8k/`.
+4. **لقطة المعاينة الإرشادية للشاشة:**
+
+![دليل إنشاء حساب إنستغرام لشركة S&R CoreSync](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/live_instagram_setup_guide.png)
+
+---
+
 ## 🛠️ الملفات المعدلة:
-1. **[SOCIAL-MEDIA-SUITE.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/SOCIAL-MEDIA-SUITE.md):** الدليل التشغيلي الشامل لكافة المنصات الـ 9.
-2. **[social-campaign-hub.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-campaign-hub.html):** مركز الحملات التفاعلي للنشر المباشر.
-3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المرحلة 51 بنسبة 100%.
-4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق تفاصيل المرحلة 51 بالكامل.
+1. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المرحلة 52 بنسبة 100%.
+2. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الشامل لخطوات تدشين إنستغرام.
 
 </div>
 
