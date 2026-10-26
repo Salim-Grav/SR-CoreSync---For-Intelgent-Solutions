@@ -3904,11 +3904,11 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                     </div>
                 </div>
                 <div class="hotline-actions">
-                    <a href="https://wa.me/31687710290" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaRaed">
+                    <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="hotline-btn-wa" id="btnHotlineWaRaed">
                         <span>WhatsApp</span>
                     </a>
-                    <a href="tel:+31687710290" class="hotline-btn-call">
-                        <span>+31 6 8771 0290</span>
+                    <a href="tel:+31618111116" class="hotline-btn-call">
+                        <span>+31 6 1811 1116</span>
                     </a>
                 </div>
                 <div class="hotline-booking-action mt-3 text-center">
@@ -4559,7 +4559,7 @@ function confirmBookingAndOpenWa() {
     if (box) box.classList.add('active');
     if (summary) summary.innerText = `${selectedBookingTopic} | ${selectedBookingHost} | ${selectedBookingSlot}`;
 
-    const phone = selectedBookingHost.includes('Raed') ? '31687710290' : '31618111116';
+    const phone = selectedBookingHost.includes('Raed') ? '31618111116' : '31618111116';
     const text = encodeURIComponent(`مرحباً، أود تأكيد موعد جلسة استشارية استراتيجية مع S&R CoreSync:\n- ${selectedBookingTopic}\n- ${selectedBookingHost}\n- ${selectedBookingSlot}`);
     setTimeout(() => {
         window.open(`https://wa.me/${phone}?text=${text}`, '_blank', 'noopener,noreferrer');
@@ -4937,7 +4937,7 @@ function signContractFinDigitally() {
 function shareContractFinViaWhatsApp() {
     const portalUrl = getOfficialShareUrl('OF-2026-1022-FIN');
     const contractPdfUrl = getOfficialPdfUrl('OF-2026-1022-FIN');
-    const rawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد كامل ضريبة الـ BTW (4,410 €) كاش من Belastingdienst بتخفيض شريك استثنائي 50%.\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nمع أطيب التحيات،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية\nS&R CoreSync For Intelligent Solutions\n+31 6 8771 0290`;
+    const rawMsg = `السلام عليكم أستاذ مضر،\nأرفق لك وثيقة العرض المالي والمحاسبي المعتمد (مرجع: OF-2026-1022-FIN) الخاص بإدارة حسابات منصة NL بالعربي واسترداد كامل ضريبة الـ BTW (4,410 €) كاش من Belastingdienst بتخفيض شريك استثنائي 50%.\n\n📄 رابط معاينة العقد المالي والضريبي الرسمي:\n${contractPdfUrl}\n\n✍️ رابط التوقيع والاعتماد الإلكتروني وسداد الحزمة:\n${portalUrl}\n\nمع أطيب التحيات،\nأ. محمد رائد كعكة - المدير العام والشؤون المالية\nS&R CoreSync For Intelligent Solutions\n+31 6 1811 1116`;
     const text = encodeURIComponent(rawMsg);
     
     if (navigator.clipboard) {
@@ -4994,7 +4994,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const waRaed = document.getElementById('btnHotlineWaRaed');
     if (waRaed) {
         const msgRaed = msg.replace('Salim', 'Raed').replace('سليم', 'رائد');
-        waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent(msgRaed);
+        waRaed.href = 'https://wa.me/31618111116?text=' + encodeURIComponent(msgRaed);
     }
 
     const triggerText = document.getElementById('hotlineTriggerText');

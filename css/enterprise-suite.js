@@ -14,7 +14,7 @@
     'use strict';
 
     const WHATSAPP_SALIM = '31618111116';
-    const WHATSAPP_RAED = '31687710290';
+    const WHATSAPP_RAED = '31618111116';
     const WHATSAPP_NUM = WHATSAPP_SALIM;
 
     // Central Multi-Language Page Detector
@@ -2049,9 +2049,9 @@
         },
         contact: {
             keywords: ['contact', 'تواصل', 'whatsapp', 'email', 'phone', 'هاتف', 'بريد', 'reach', 'meeting', 'اجتماع', 'schedule', 'afspraak', 'خبير', 'بشري', 'مهندس', 'سليم', 'رائد'],
-            ar: 'فريق الإدارة التنفيذية متاح لمناقشة مشروعك:\n📱 WhatsApp: +31 6 87764998\n📧 info@coresync.solutions\n🏢 المقر: هولندا (EU) وعمليات الشرق الأوسط',
-            en: 'Our executive leadership is available:\n📱 WhatsApp: +31 6 87764998\n📧 info@coresync.solutions\n🏢 HQ: Netherlands (EU) & Middle East operations',
-            nl: 'Ons managementteam staat voor u klaar:\n📱 WhatsApp: +31 6 87764998\n📧 info@coresync.solutions\n🏢 Hoofdkantoor: Nederland (EU) & Midden-Oosten'
+            ar: 'فريق الإدارة التنفيذية متاح لمناقشة مشروعك:\n📱 WhatsApp: +31 6 1811 1116\n📧 info@coresync.solutions\n🏢 المقر: هولندا (EU) وعمليات الشرق الأوسط',
+            en: 'Our executive leadership is available:\n📱 WhatsApp: +31 6 1811 1116\n📧 info@coresync.solutions\n🏢 HQ: Netherlands (EU) & Middle East operations',
+            nl: 'Ons managementteam staat voor u klaar:\n📱 WhatsApp: +31 6 1811 1116\n📧 info@coresync.solutions\n🏢 Hoofdkantoor: Nederland (EU) & Midden-Oosten'
         },
         default: {
             ar: 'شكراً لتواصلك مع CoreSync AI. يسعدني مساعدتك في كل ما يخص الحلول السحابية وأنظمة ERP والذكاء الاصطناعي. اكتب سؤالك أو اختر أحد الخيارات السريعة.',
@@ -3347,7 +3347,7 @@
     <h2>📍 Headquarters & Direct Inquiries</h2>
     <div class="deck-contact">
       <div class="deck-contact-item">🏢<br>Netherlands HQ (Amsterdam)<br>Middle East Regional Ops</div>
-      <div class="deck-contact-item">📱<br>WhatsApp Direct<br>+31 6 87764998</div>
+      <div class="deck-contact-item">📱<br>WhatsApp Direct<br>+31 6 1811 1116</div>
       <div class="deck-contact-item">🌐<br>coresync.solutions<br>info@coresync.solutions</div>
     </div>
     <p style="text-align:center;margin-top:14px;font-size:0.7rem;color:rgba(255,255,255,0.35);">
@@ -3805,7 +3805,7 @@
                 ` : ''}
 
                 <div class="footer">
-                    <div>S&R CoreSync For Intelligent Solutions — www.coresync.nl • info@coresync.nl • +31 6 87764998</div>
+                    <div>S&R CoreSync For Intelligent Solutions — www.coresync.nl • info@coresync.nl • +31 6 1811 1116</div>
                     <div>اعتماد رسمي معفى من التوقيع اليدوي</div>
                 </div>
 
@@ -4506,7 +4506,7 @@ INSTALLATION & ACTIVATION INSTRUCTIONS:
 4. The software will authenticate locally without requiring internet access.
 
 Official Portal: https://sr-coresync.com/
-Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 8771 0290
+Support & Auditing: info@sr-coresync.com | WhatsApp: +31 6 1811 1116
 ================================================================================`;
 
         const blob = new Blob([certContent], { type: 'text/plain;charset=utf-8' });

@@ -5,7 +5,7 @@
 **🎯 المعرف الموحد لجميع المنصات (Universal Official Handle):** `@SRCoreSync`  
 **🌐 الموقع الإلكتروني الرسمي:** `https://sr-coresync.com`  
 **📧 البريد المؤسسي:** `info@sr-coresync.com`  
-**📞 واتساب الأعمال VIP:** `+31 6 8776 4998`
+**📞 واتساب الأعمال VIP:** `+31 6 1811 1116`
 
 ---
 
@@ -21,7 +21,7 @@
 | **TikTok** | `@SRCoreSync` | `https://tiktok.com/@SRCoreSync` | غلاف فيديو عمودي 9:16 (4320×7680)، طبقة فيديو شفافة Overlay |
 | **Snapchat** | `@SRCoreSync` | `https://snapchat.com/add/SRCoreSync` | إطار ستوري وفلتر رسمي 9:16 (4320×7680) |
 | **Telegram** | `@SRCoreSync` | `https://t.me/SRCoreSync` | بطاقة القناة الإخبارية 16:9 (7680×4320)، أيقونة القناة الرسمية |
-| **WhatsApp Business** | `+31687764998` | `https://wa.me/31687764998` | هيدر كتالوج الخدمات 8K (7680×4320)، صورة الملف المؤسسي الموثق |
+| **WhatsApp Business** | `+31 6 1811 1116` | `https://wa.me/31618111116` | هيدر كتالوج الخدمات 8K (7680×4320)، صورة الملف المؤسسي الموثق |
 
 ---
 

@@ -702,7 +702,7 @@ function confirmBookingAndOpenWa() {{
     if (box) box.classList.add('active');
     if (summary) summary.innerText = `${{selectedBookingTopic}} | ${{selectedBookingHost}} | ${{selectedBookingSlot}}`;
 
-    const phone = selectedBookingHost.includes('Raed') ? '31687710290' : '31618111116';
+    const phone = selectedBookingHost.includes('Raed') ? '31618111116' : '31618111116';
     const text = encodeURIComponent(`{prefix}\\n- ${{selectedBookingTopic}}\\n- ${{selectedBookingHost}}\\n- ${{selectedBookingSlot}}`);
     setTimeout(() => {{
         window.open(`https://wa.me/${{phone}}?text=${{text}}`, '_blank', 'noopener,noreferrer');

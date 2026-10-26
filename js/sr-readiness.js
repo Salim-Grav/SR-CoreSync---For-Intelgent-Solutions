@@ -493,7 +493,7 @@
         const msg = T.ui.waIntro + lines.join('\n') + '\n\n' +
             `${T.ui.waTotal}: ${total}/100\n${T.ui.waLevel}: ${level.title}\n` +
             (sector ? `${T.ui.waSector}: ${sector.label}\n` : '') + '\n' + T.ui.waOutro;
-        $('rd-wa-btn').href = 'https://wa.me/31687764998?text=' + encodeURIComponent(msg);
+        $('rd-wa-btn').href = 'https://wa.me/31618111116?text=' + encodeURIComponent(msg);
     }
 
     // ── RESET ─────────────────────────────────────────────────

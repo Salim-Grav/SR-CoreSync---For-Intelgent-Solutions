@@ -730,7 +730,7 @@ def update_index():
                                     تأسيس وتوثيق 9 منصات تواصل موحدة وتوليد 23 أصلاً فائق الدقة 8K مع قوالب ريلز واستوديو تسليم خاص
                                 </p>
                                 <div class="pricing-card-actions">
-                                    <a href="https://wa.me/31687764998?text=مرحباً%20فريق%20CoreSync،%20أود%20طلب%20باقة%20تأسيس%20قنوات%20السوشيال%20ميديا%20وهوية%20الـ%208K%20(€890)" target="_blank" rel="noopener noreferrer" class="pricing-card-btn-gold">
+                                    <a href="https://wa.me/31618111116?text=مرحباً%20فريق%20CoreSync،%20أود%20طلب%20باقة%20تأسيس%20قنوات%20السوشيال%20ميديا%20وهوية%20الـ%208K%20(€890)" target="_blank" rel="noopener noreferrer" class="pricing-card-btn-gold">
                                         <span>طلب حجز الباقة عبر واتساب 💬</span>
                                     </a>
                                     <button type="button" class="pricing-card-btn-pdf" data-sr-call="openExecutiveBookingModal" data-sr-args='["social_8k"]'>

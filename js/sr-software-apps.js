@@ -2820,7 +2820,7 @@ var response = await client.PostAsync("https://api.sr-coresync.com/tax", content
     if (!window.openExecutiveContactModal) {
         window.openExecutiveContactModal = function(category = 'accounting', softwareName = '') {
             const isAcct = (category === 'accounting');
-            const targetPhone = isAcct ? '31687710290' : '31618111116';
+            const targetPhone = isAcct ? '31618111116' : '31618111116';
             const advisorName = isAcct ? 'أ. محمد رائد كعكة (CFO - المحاسبة والضرائب)' : 'م. محمد سليم عزيزة (CTO - الأنظمة والبرمجيات)';
             const msg = `*طلب استشارة تنفيذية خاصة - S&R CoreSync For Intelligent Solutions*\n` +
                         `━━━━━━━━━━━━━━━━━━━━\n` +

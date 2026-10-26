@@ -218,11 +218,11 @@ HOTLINE_WIDGET_HTML = """
                     </div>
                 </div>
                 <div class="hotline-actions">
-                    <a href="https://wa.me/31687710290" target="_blank" class="hotline-btn-wa" id="btnHotlineWaRaed">
+                    <a href="https://wa.me/31618111116" target="_blank" class="hotline-btn-wa" id="btnHotlineWaRaed">
                         <span>WhatsApp</span>
                     </a>
-                    <a href="tel:+31687710290" class="hotline-btn-call">
-                        <span>+31 6 8771 0290</span>
+                    <a href="tel:+31618111116" class="hotline-btn-call">
+                        <span>+31 6 1811 1116</span>
                     </a>
                 </div>
             </div>
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const waRaed = document.getElementById('btnHotlineWaRaed');
     if (waRaed) {
         const msgRaed = msg.replace('Salim', 'Raed').replace('سليم', 'رائد');
-        waRaed.href = 'https://wa.me/31687710290?text=' + encodeURIComponent(msgRaed);
+        waRaed.href = 'https://wa.me/31618111116?text=' + encodeURIComponent(msgRaed);
     }
 
     const triggerText = document.getElementById('hotlineTriggerText');

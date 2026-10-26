@@ -85,7 +85,7 @@ const matrixHtml = `
                                                 <span class="sr-tier-original-price" id="tier-orig-starter">€1,490</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-starter">تُدفع سنوياً (وفّر 20%)</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-starter" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-starter" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
                                                 <span>حجز الباقة عبر واتساب VIP</span>
                                             </a>
                                         </div>
@@ -106,7 +106,7 @@ const matrixHtml = `
                                                 <span class="sr-tier-original-price" id="tier-orig-pro">€2,890</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-pro">تُدفع سنوياً (وفّر 20%)</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-pro" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--primary">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-pro" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--primary">
                                                 <span>بدء النشر السحابي الفوري ★</span>
                                             </a>
                                         </div>
@@ -126,7 +126,7 @@ const matrixHtml = `
                                                 <span class="sr-tier-original-price" id="tier-orig-enterprise">€5,400</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-enterprise">تُدفع سنوياً (وفّر 20%)</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-enterprise" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-enterprise" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
                                                 <span>استشارة معمارية سيادية 🛡️</span>
                                             </a>
                                         </div>
@@ -327,7 +327,7 @@ const matrixHtml = `
                             </div>
                         </div>
 
-                        <a href="https://wa.me/31687764998?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20S%26R%20CoreSync%D8%8C%20%D9%86%D8%AD%D9%86%20%D9%85%D8%A4%D8%B3%D8%B3%D8%A9%20%D9%83%D8%A8%D8%B1%D9%89%20%D9%88%D9%86%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B9%D9%82%D8%AF%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9%20%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A8%D8%A7%D9%82%D8%A9%20Enterprise%20%D8%B3%D9%8A%D8%A7%D8%AF%D9%8A%D8%A9%20%D9%85%D8%AE%D8%B5%D8%B5%D8%A9." target="_blank" rel="noopener noreferrer" class="sr-tier-custom-quote-btn">
+                        <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20S%26R%20CoreSync%D8%8C%20%D9%86%D8%AD%D9%86%20%D9%85%D8%A4%D8%B3%D8%B3%D8%A9%20%D9%83%D8%A8%D8%B1%D9%89%20%D9%88%D9%86%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B9%D9%82%D8%AF%20%D8%AC%D9%84%D8%B3%D8%A9%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9%20%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A8%D8%A7%D9%82%D8%A9%20Enterprise%20%D8%B3%D9%8A%D8%A7%D8%AF%D9%8A%D8%A9%20%D9%85%D8%AE%D8%B5%D8%B5%D8%A9." target="_blank" rel="noopener noreferrer" class="sr-tier-custom-quote-btn">
                             <span>طلب تسعير مؤسسي خاص (Custom B2B Quotation) ←</span>
                         </a>
                     </div>

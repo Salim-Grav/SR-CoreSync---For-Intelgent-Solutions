@@ -713,7 +713,7 @@
 1. **التحليل البصري لشاشة تسجيل الدخول:**
    - فحص شاشة المستخدم المرفوعة، وتحديد زر **"إنشاء حساب جديد"** المخصص لحساب الشركة المستقل.
 2. **إعداد البيانات المؤسسية المعتمدة لإنشاء الحساب:**
-   - **البريد الإلكتروني المؤسسي:** `info@sr-coresync.com` (أو هاتف الشركة `+31687764998`).
+   - **البريد الإلكتروني المؤسسي:** `info@sr-coresync.com` (أو هاتف الشركة `+31 6 1811 1116`).
    - **الاسم الكامل:** `S&R CoreSync For Intelligent Solutions`
    - **اسم المستخدم (Username):** `SRCoreSync` (ليكون الرابط المعتمد `instagram.com/SRCoreSync`).
 3. **أصول البروفايل وأول منشور 8K:**
@@ -768,7 +768,7 @@
    - **X (Twitter):** المعرف المعتمد `@SRCoreSync` وهيدر القناة 3:1 (7680×2560).
    - **YouTube:** المعرف المعتمد `@SRCoreSync` وبانر القناة 16:9 (7680×4320).
    - **Telegram:** القناة الإخبارية والـ Bot `@SRCoreSync`.
-   - **WhatsApp VIP Business:** رقم التواصل التنفيذي المباشر `+31687764998`.
+   - **WhatsApp VIP Business:** رقم التواصل التنفيذي المباشر `+31 6 1811 1116`.
    - **TikTok:** الحساب الرسمي `@SRCoreSync`.
    - **Snapchat:** المعرف الرسمي الموحد `@SRCoreSync`.
 4. **اللقطة الحية لتتبع نشر القنوات الـ 9:**
@@ -1024,6 +1024,45 @@
 ## 🛠️ الملفات المعدلة:
 1. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المرحلة 63 بنسبة 100%.
 2. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الشامل لتفعيل سناب شات وخطة WhatsApp VIP الختامية.
+
+---
+
+# 🚀 توثيق المرحلة 64: الاستبدال الشامل للرقم المؤسسي واعتماد `+31 618111116` وإتمام شبكة السوشيال ميديا 9 من 9 بنسبة 100%
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 08:00 مساءً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمرحلة 64:**
+
+1. **الاستبدال الشامل للرقم المؤسسي العام المعتمد:**
+   - تم استبدال الرقم المؤقت القديم واعتماد الرقم الجديد الصادر عن الإدارة: **`+31 618111116`**.
+   - صيغة العرض والاتصال الدولي: `+31 6 1811 1116` / `+31 618111116`.
+   - رابط المحادثة المباشرة المعتمد: [https://wa.me/31618111116](https://wa.me/31618111116).
+   - نطاق التطبيق: كافة ملفات ومحركات المنصة، بوابات اللغات الـ 29، قوالب الفواتير، ونوافذ حجز العروض والعقود (167 ملفاً، 1,621 استبدالاً ناجحاً).
+   - حماية أرقام المؤسسين المباشرة: تم الحفاظ الكامل على أرقام الشريكين المؤسسين (م. محمد سليم عزيزة `+31 6 31069433`، أ. محمد رائد كعكة `+31 6 36279435`).
+2. **إعادة بناء والتحقق الأمني من الـ CSP:**
+   - فحص 94 صفحة وتحديث `csp-hashes.txt` (95 تجزئة متطابقة).
+   - اجتياز اختبار `python scripts/build_csp.py --check` بنجاح كامل `PASSED`.
+3. **اكتمال شبكة القنوات التسويقية الـ 9 الرسمية (Omnichannel 9/9 Complete):**
+   - **LinkedIn:** [https://linkedin.com/company/SRCoreSync](https://linkedin.com/company/SRCoreSync) ✓
+   - **Facebook:** [https://facebook.com/SRCoreSync](https://facebook.com/SRCoreSync) ✓
+   - **Instagram:** [https://www.instagram.com/srcoresync/](https://www.instagram.com/srcoresync/) ✓
+   - **X (Twitter):** [https://x.com/SRCoreSync](https://x.com/SRCoreSync) ✓
+   - **YouTube:** [https://www.youtube.com/@SRCoreSync](https://www.youtube.com/@SRCoreSync) ✓
+   - **Telegram:** [https://t.me/SRCoreSync](https://t.me/SRCoreSync) ✓
+   - **TikTok:** [https://www.tiktok.com/@srcoresync](https://www.tiktok.com/@srcoresync) ✓
+   - **Snapchat:** [https://www.snapchat.com/add/SRCoreSync](https://www.snapchat.com/add/SRCoreSync) ✓
+   - **WhatsApp VIP Business:** [https://wa.me/31618111116](https://wa.me/31618111116) (`+31 6 1811 1116`) ✓
+4. **اللقطة الحية لتحديث الرقم المؤسسي واكتمال الشبكة:**
+
+![لوحة اعتماد الرقم الجديد وتحديث شبكة الـ 9 قنوات](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/live_phone_migration_and_whatsapp_snapshot.png)
+
+---
+
+## 🛠️ الملفات المعدلة:
+1. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** حسم وتحديث المرحلة 64 واعتماد الرقم الجديد بنسبة 100%.
+2. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق استبدال الرقم عبر 167 ملفاً واكتمال القنوات الـ 9.
+3. **[SOCIAL-MEDIA-SUITE.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/SOCIAL-MEDIA-SUITE.md):** اعتماد رقم واتساب VIP الرسمي الجديد.
+4. **167 ملفاً برمجياً:** تحديث الروابط ونصوص الاتصال في كامل المنصة.
 
 </div>
 

@@ -102,7 +102,7 @@
                 : (htmlLang === 'en' 
                     ? 'Hello S&R CoreSync, I would like to schedule a VIP consultation.' 
                     : 'مرحباً S&R CoreSync، أود حجز استشارة تنفيذية VIP مباشرة.'));
-        const waUrl = 'https://wa.me/31687764998?text=' + encodeURIComponent(waText);
+        const waUrl = 'https://wa.me/31618111116?text=' + encodeURIComponent(waText);
 
         // Build HTML
         const container = document.createElement('div');

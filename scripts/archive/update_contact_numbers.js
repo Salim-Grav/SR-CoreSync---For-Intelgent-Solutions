@@ -1,7 +1,7 @@
 /**
  * Updates official contact numbers for Salim and Raed across all pages and configs
  * Salim: +31 6 1811 1116 (31618111116)
- * Raed:  +31 6 8771 0290 (31687710290)
+ * Raed:  +31 6 1811 1116 (31618111116)
  */
 
 const fs = require('fs');
@@ -9,8 +9,8 @@ const path = require('path');
 
 const SALIM_RAW = '31618111116';
 const SALIM_FMT = '+31 6 1811 1116';
-const RAED_RAW  = '31687710290';
-const RAED_FMT  = '+31 6 8771 0290';
+const RAED_RAW  = '31618111116';
+const RAED_FMT  = '+31 6 1811 1116';
 
 // Files to update
 const targetFiles = [
@@ -41,12 +41,12 @@ for (const relPath of targetFiles) {
   if (relPath === 'index.html') {
     // Salim contact
     content = content.replace(
-      /contactUrl:\s*'https:\/\/wa\.me\/(?:31687764998|31612345678)\?text='\s*\+\s*encodeURIComponent\('مرحباً م\. سليم/g,
+      /contactUrl:\s*'https:\/\/wa\.me\/(?:31618111116|31612345678)\?text='\s*\+\s*encodeURIComponent\('مرحباً م\. سليم/g,
       `contactUrl: 'https://wa.me/${SALIM_RAW}?text=' + encodeURIComponent('مرحباً م. سليم`
     );
     // Raed contact
     content = content.replace(
-      /contactUrl:\s*'https:\/\/wa\.me\/(?:31687764998|31612345678)\?text='\s*\+\s*encodeURIComponent\('مرحباً أ\. رائد/g,
+      /contactUrl:\s*'https:\/\/wa\.me\/(?:31618111116|31612345678)\?text='\s*\+\s*encodeURIComponent\('مرحباً أ\. رائد/g,
       `contactUrl: 'https://wa.me/${RAED_RAW}?text=' + encodeURIComponent('مرحباً أ. رائد`
     );
   }
@@ -56,10 +56,10 @@ for (const relPath of targetFiles) {
   content = content.replace(/\+31 6 1234 5678/g, SALIM_FMT);
   content = content.replace(/\+31612345678/g, `+${SALIM_RAW}`);
 
-  // 3. Replace old temp number 31687764998 -> Salim (except if specifically Raed)
-  content = content.replace(/31687764998/g, SALIM_RAW);
-  content = content.replace(/\+31 6 87764998/g, SALIM_FMT);
-  content = content.replace(/\+31687764998/g, `+${SALIM_RAW}`);
+  // 3. Replace old temp number 31618111116 -> Salim (except if specifically Raed)
+  content = content.replace(/31618111116/g, SALIM_RAW);
+  content = content.replace(/\+31 6 1811 1116/g, SALIM_FMT);
+  content = content.replace(/\+31 6 1811 1116/g, `+${SALIM_RAW}`);
 
   // 4. Replace old domain email info@coresync-solutions.com -> info@sr-coresync.com
   content = content.replace(/info@coresync-solutions\.com/g, 'info@sr-coresync.com');

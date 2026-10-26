@@ -175,7 +175,7 @@
                 const billingName = isAnnual ? dict.billingAnnualText : dict.billingMonthlyText;
                 const entityText = currentEntities === 1 ? dict.entitySingle : dict.entityMultiple(currentEntities);
                 const rawMsg = dict.waMsg(tierName, billingName, entityText, formatNumber(finalMonthly));
-                ctaBtn.href = `https://wa.me/31687764998?text=${encodeURIComponent(rawMsg)}`;
+                ctaBtn.href = `https://wa.me/31618111116?text=${encodeURIComponent(rawMsg)}`;
             }
         });
     }

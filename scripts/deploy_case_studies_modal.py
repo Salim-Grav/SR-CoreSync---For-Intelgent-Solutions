@@ -485,7 +485,7 @@ JS_NEW_TESTIMONIALS = """/**
             '      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
             '      <span class="modal-roi"></span>',
             '    </div>',
-            '    <a href="https://wa.me/31687764998?text=' + encodeURIComponent('مرحباً، أود استشارة وحل مماثل لدراسات الحالات المعتمدة لدى S&R CoreSync') + '" target="_blank" rel="noopener noreferrer" class="sr-casestudy-cta-btn">',
+            '    <a href="https://wa.me/31618111116?text=' + encodeURIComponent('مرحباً، أود استشارة وحل مماثل لدراسات الحالات المعتمدة لدى S&R CoreSync') + '" target="_blank" rel="noopener noreferrer" class="sr-casestudy-cta-btn">',
             '      <span>طلب استشارة وحل مماثل لشركتك</span>',
             '      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
             '    </a>',

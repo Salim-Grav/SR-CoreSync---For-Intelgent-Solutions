@@ -332,7 +332,7 @@ ${cardsHtml}
                 <div class="sr-trust-legal-footer">
                     <span class="sr-trust-legal-icon">⚖️</span>
                     <span class="sr-trust-legal-text">${data.footerLegal}</span>
-                    <a href="https://wa.me/31687764998?text=Hello%20S%26R%20CoreSync%2C%20we%20would%20like%20to%20request%20the%20official%20Corporate%20Compliance%20Dossier." target="_blank" rel="noopener noreferrer" class="sr-trust-audit-link">
+                    <a href="https://wa.me/31618111116?text=Hello%20S%26R%20CoreSync%2C%20we%20would%20like%20to%20request%20the%20official%20Corporate%20Compliance%20Dossier." target="_blank" rel="noopener noreferrer" class="sr-trust-audit-link">
                         ${data.certBtn}
                     </a>
                 </div>
@@ -435,7 +435,7 @@ function buildTierMatrixHtml(data) {
                                                 <span class="sr-tier-original-price" id="tier-orig-starter">€1,490</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-starter">${data.annualSave}</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-starter" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-starter" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
                                                 <span>${data.ctaStarter}</span>
                                             </a>
                                         </div>
@@ -456,7 +456,7 @@ function buildTierMatrixHtml(data) {
                                                 <span class="sr-tier-original-price" id="tier-orig-pro">€2,890</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-pro">${data.annualSave}</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-pro" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--primary">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-pro" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--primary">
                                                 <span>${data.ctaPro}</span>
                                             </a>
                                         </div>
@@ -476,7 +476,7 @@ function buildTierMatrixHtml(data) {
                                                 <span class="sr-tier-original-price" id="tier-orig-enterprise">€5,400</span>
                                                 <div class="sr-tier-billed-note" id="tier-note-enterprise">${data.annualSave}</div>
                                             </div>
-                                            <a href="https://wa.me/31687764998" id="tier-cta-enterprise" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
+                                            <a href="https://wa.me/31618111116" id="tier-cta-enterprise" target="_blank" rel="noopener noreferrer" class="sr-tier-action-btn sr-tier-action-btn--glass">
                                                 <span>${data.ctaEnterprise}</span>
                                             </a>
                                         </div>
@@ -496,7 +496,7 @@ ${categoriesHtml}
 ${guaranteesHtml}
                         </div>
 
-                        <a href="https://wa.me/31687764998?text=Hello%20S%26R%20CoreSync%2C%20we%20are%20requesting%20a%20custom%20B2B%20Enterprise%20Quotation." target="_blank" rel="noopener noreferrer" class="sr-tier-custom-quote-btn">
+                        <a href="https://wa.me/31618111116?text=Hello%20S%26R%20CoreSync%2C%20we%20are%20requesting%20a%20custom%20B2B%20Enterprise%20Quotation." target="_blank" rel="noopener noreferrer" class="sr-tier-custom-quote-btn">
                             <span>${data.b2bQuoteBtn}</span>
                         </a>
                     </div>
