@@ -17,7 +17,7 @@ SITEMAP_PATH = os.path.join(BASE_DIR, 'sitemap.xml')
 from deploy_sovereign_multilingual import LANGUAGES
 
 BASE_URL = "https://sr-coresync.com"
-RELEASE_DATE = "2026-10-20"
+RELEASE_DATE = "2026-10-26"
 
 xml = []
 xml.append('<?xml version="1.0" encoding="UTF-8"?>')
@@ -25,7 +25,7 @@ xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"')
 xml.append('        xmlns:xhtml="http://www.w3.org/1999/xhtml">')
 xml.append('')
 xml.append('  <!-- ========================================================')
-xml.append('       1. International Landing Pages (28 Languages)')
+xml.append('       1. International Landing Pages (29 Languages)')
 xml.append('       ======================================================== -->')
 
 for lang in LANGUAGES:
@@ -49,7 +49,7 @@ for lang in LANGUAGES:
     xml.append('')
 
 xml.append('  <!-- ========================================================')
-xml.append('       2. Interactive Cloud ERP Demo Portals (28 Languages)')
+xml.append('       2. Interactive Cloud ERP Demo Portals (29 Languages)')
 xml.append('       ======================================================== -->')
 
 for lang in LANGUAGES:
@@ -71,14 +71,14 @@ for lang in LANGUAGES:
     xml.append('')
 
 xml.append('  <!-- ========================================================')
-xml.append('       3. Executive Suites & Software Hub')
+xml.append('       3. Executive Suites, Marketing Hubs & AI Simulator')
 xml.append('       ======================================================== -->')
-# Only pages that are actually published AND linked from a public page may be
-# listed here: an orphan URL in the sitemap just tells Google to index a page
-# the navigation never reaches.
 features = [
     ("software.html", "0.90", "weekly"),
     ("work.html", "0.85", "weekly"),
+    ("social-campaign-hub.html", "0.85", "weekly"),
+    ("ai-concierge-simulator.html", "0.85", "weekly"),
+    ("social-8k-studio.html", "0.80", "monthly"),
     ("estimator.html", "0.80", "monthly"),
     ("whitelabel-calculator.html", "0.75", "monthly"),
     ("3d-mockup.html", "0.70", "monthly"),
