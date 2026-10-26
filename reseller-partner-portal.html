@@ -487,6 +487,22 @@
             color: #ffffff;
         }
 
+        .disp-cyan {
+            color: var(--cyan);
+            font-weight: 800;
+        }
+
+        .disp-gold {
+            color: var(--gold-primary);
+            font-weight: 800;
+        }
+
+        .prov-status-heading {
+            font-weight: 800;
+            color: #38bdf8;
+            margin-bottom: 0.4rem;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--border-dim);
@@ -669,17 +685,17 @@
                 <div class="calc-row">
                     <div class="calc-label-wrap">
                         <span>عدد العملاء المشتركين شهرياً:</span>
-                        <span class="mono" id="clients-count-disp" style="color: var(--cyan); font-weight: 800;">15 عميل</span>
+                        <span class="mono disp-cyan" id="clients-count-disp">15 عميل</span>
                     </div>
-                    <input type="range" class="calc-slider" id="slider-clients" min="1" max="100" value="15">
+                    <input type="range" class="calc-slider" id="slider-clients" min="1" max="100" value="15" title="عدد العملاء المشتركين شهرياً" aria-label="عدد العملاء المشتركين شهرياً">
                 </div>
 
                 <div class="calc-row">
                     <div class="calc-label-wrap">
                         <span>متوسط قيمة باقة العميل الشهرية (€):</span>
-                        <span class="mono" id="avg-spend-disp" style="color: var(--gold-primary); font-weight: 800;">€890 / شهرياً</span>
+                        <span class="mono disp-gold" id="avg-spend-disp">€890 / شهرياً</span>
                     </div>
-                    <input type="range" class="calc-slider" id="slider-spend" min="450" max="2500" step="50" value="890">
+                    <input type="range" class="calc-slider" id="slider-spend" min="450" max="2500" step="50" value="890" title="متوسط إنفاق العميل الشهري باليورو" aria-label="متوسط إنفاق العميل الشهري باليورو">
                 </div>
 
                 <div class="calc-payout-box">
@@ -720,7 +736,7 @@
                 </form>
 
                 <div class="prov-status-box mono" id="prov-status">
-                    <div style="font-weight: 800; color: #38bdf8; margin-bottom: 0.4rem;">
+                    <div class="prov-status-heading">
                         ✓ تم إنشاء البيئة السيادية المستقلة بنجاح في أمستردام
                     </div>
                     <div>Domain: <span id="out-domain">portal.yourcompany.eu</span></div>

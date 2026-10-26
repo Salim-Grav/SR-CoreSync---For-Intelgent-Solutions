@@ -460,6 +460,23 @@
             color: #ffffff;
         }
 
+        .verifier-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .result-verified-header {
+            font-weight: 800;
+            color: #34d399;
+            margin-bottom: 0.4rem;
+        }
+
+        .result-verified-body {
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--border-dim);
@@ -678,7 +695,7 @@
                 </h3>
             </div>
             <div class="verifier-box">
-                <p style="font-size: 0.85rem; color: #94a3b8;">
+                <p class="verifier-desc">
                     أدخل رقم الشهادة أو التجزئة التشفيرية المعتمدة للتحقق من صحتها وتوقيعها الرقمي الصادر عن المفتاح الجذري السيادي لمنصة S&R CoreSync:
                 </p>
                 <div class="verifier-input-row">
@@ -686,10 +703,10 @@
                     <button class="btn-verify" type="button" id="btn-run-verify">التحقق اللحظي الآن</button>
                 </div>
                 <div class="result-verified" id="verify-result">
-                    <div style="font-weight: 800; color: #34d399; margin-bottom: 0.4rem;">
+                    <div class="result-verified-header">
                         ✓ تم التحقق بنجاح — الشهادة صالحة وموثقة تشفيرياً بنسبة 100%
                     </div>
-                    <div class="mono" style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6;">
+                    <div class="mono result-verified-body">
                         Signer: S&R CoreSync Root Sovereign Authority (Amsterdam Node)<br>
                         Timestamp: 2026-10-26T23:14:00Z<br>
                         Signature Digest: 4a9f20e83b194d6c...f12e88a0 (Ed25519 Verified)<br>
