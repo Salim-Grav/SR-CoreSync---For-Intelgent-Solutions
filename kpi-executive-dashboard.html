@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة مؤشرات الأداء الحيوية والتحليلات التنفيذية | S&R CoreSync</title>
+    <meta name="description" content="منصة تقارير مؤشرات الأداء المالي والتشغيلي، مسار التحويل التسويقي عبر القنوات الـ 9، ومعدلات ذكاء الكونسيرج الاصطناعي">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #020705;
+            --bg-card: #061510;
+            --bg-card-hover: #0a1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #8c724e;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.2);
+            --cyan: #38bdf8;
+            --purple: #a855f7;
+            --border-dim: #183327;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(197, 168, 128, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Header */
+        header {
+            background: rgba(4, 18, 13, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .brand-text h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .brand-text p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .header-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #06281b;
+            border: 1px solid var(--emerald);
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald);
+        }
+
+        .btn-link {
+            background: #092017;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-link:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Container */
+        .main-container {
+            max-width: 1720px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* 4 Key Executive Metrics */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--cyan));
+        }
+
+        .kpi-title {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-sub {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        /* Dashboard Grid */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .dash-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 18px;
+            padding: 1.75rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* SVG Bar / Area Chart Container */
+        .chart-box {
+            background: #030c08;
+            border: 1px solid #143124;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        /* Conversion Funnel */
+        .funnel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .funnel-step {
+            background: #081d15;
+            border: 1px solid #1b3d2f;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funnel-bar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(197, 168, 128, 0.08);
+            z-index: 1;
+        }
+
+        .funnel-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .funnel-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .funnel-rate {
+            font-size: 0.82rem;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .funnel-count {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        /* Buttons */
+        .btn-gold {
+            background: #2a200a;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.55rem 1.15rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Footer */
+        footer {
+            background: #04120c;
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="brand-area">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div class="brand-text">
+                    <h1>S&R CoreSync | لوحة مؤشرات الأداء الحيوية التنفيذية (KPI Analytics)</h1>
+                    <p>التحليلات المالية في الزمن الفعلي • مسار تحويل القنوات التسويقية الـ 9 • تفاعلات الكونسيرج الذكي 24/7</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>Live Telemetry: Active</span>
+                </div>
+                <a href="sovereign-kms-backup.html" class="btn-link">← الأمان وإدارة المفاتيح</a>
+                <a href="erp-operations-crm.html" class="btn-link">لوحة العمليات والفواتير</a>
+                <a href="index.html" class="btn-link">الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+        <!-- 4 Executive KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">الإيرادات السنوية المتكررة (ARR)</div>
+                <div class="kpi-value">€1,783,800.00</div>
+                <div class="kpi-sub">نمو متصاعد +34.2% YoY • 42 عقداً مؤسسياً</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">العائد على استقطاب العميل (LTV : CAC)</div>
+                <div class="kpi-value">28.6x Ratio</div>
+                <div class="kpi-sub">قيمة العميل €89.4k مقابل تكلفة €3.12k</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">معدل حل واستجابة الكونسيرج الذكي</div>
+                <div class="kpi-value">94.8% ذاتي</div>
+                <div class="kpi-sub">إغلاق استفسارات وحجوزات بدون تدخل بشري</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">كفاءة التحصيل والتسوية الفورية</div>
+                <div class="kpi-value">98.6% PSD2</div>
+                <div class="kpi-sub">تسوية بنكية فورية خلال 3 ثوانٍ عبر iDEAL</div>
+            </div>
+        </div>
+
+        <!-- 2 Column Workspace -->
+        <div class="dash-grid">
+
+            <!-- Left: Revenue Growth & Channel Heatmap -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>📈</span>
+                        <span>مسار نمو الإيرادات الشهرية والتدفقات النقدية (Past 12 Months)</span>
+                    </div>
+                    <button class="btn-gold" id="btnExportCSV">تصدير تقرير تنفيذي (CSV)</button>
+                </div>
+
+                <div class="chart-box">
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: var(--gold-primary);"></span>
+                            <span>إيرادات الاشتراكات B2B (EUR)</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: var(--emerald);"></span>
+                            <span>التسويات اللحظية المحصلة</span>
+                        </div>
+                    </div>
+                    <!-- Vector SVG Chart -->
+                    <svg viewBox="0 0 700 240" style="width: 100%; height: auto; display: block;">
+                        <!-- Grid lines -->
+                        <line x1="30" y1="20" x2="680" y2="20" stroke="#132b20" stroke-dasharray="4"/>
+                        <line x1="30" y1="70" x2="680" y2="70" stroke="#132b20" stroke-dasharray="4"/>
+                        <line x1="30" y1="120" x2="680" y2="120" stroke="#132b20" stroke-dasharray="4"/>
+                        <line x1="30" y1="170" x2="680" y2="170" stroke="#132b20" stroke-dasharray="4"/>
+                        <line x1="30" y1="210" x2="680" y2="210" stroke="#1c3e2e" stroke-width="2"/>
+                        <!-- Bars -->
+                        <g fill="rgba(197, 168, 128, 0.45)">
+                            <rect x="50" y="140" width="28" height="70" rx="4"/>
+                            <rect x="105" y="130" width="28" height="80" rx="4"/>
+                            <rect x="160" y="125" width="28" height="85" rx="4"/>
+                            <rect x="215" y="110" width="28" height="100" rx="4"/>
+                            <rect x="270" y="100" width="28" height="110" rx="4"/>
+                            <rect x="325" y="90" width="28" height="120" rx="4"/>
+                            <rect x="380" y="80" width="28" height="130" rx="4"/>
+                            <rect x="435" y="65" width="28" height="145" rx="4"/>
+                            <rect x="490" y="55" width="28" height="155" rx="4"/>
+                            <rect x="545" y="45" width="28" height="165" rx="4"/>
+                            <rect x="600" y="30" width="28" height="180" rx="4" fill="var(--gold-primary)"/>
+                        </g>
+                        <!-- Trend Line -->
+                        <polyline fill="none" stroke="#10b981" stroke-width="3" points="
+                            64,135 119,125 174,120 229,105 284,95 339,85 394,75 449,60 504,50 559,40 614,25
+                        "/>
+                        <circle cx="614" cy="25" r="5" fill="#34d399"/>
+                    </svg>
+                </div>
+
+                <div class="panel-header" style="margin-top: 1rem;">
+                    <div class="panel-title">
+                        <span>🌍</span>
+                        <span>توزيع الإيرادات حسب التكتلات الاقتصادية والعملات</span>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
+                        <div style="color: #94a3b8; font-size: 0.8rem;">منطقة اليورو (EUR)</div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: #ffffff;">68.4%</div>
+                        <div style="color: #34d399; font-size: 0.75rem;">هولندا، ألمانيا، السويد، فرنسا</div>
+                    </div>
+                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
+                        <div style="color: #94a3b8; font-size: 0.8rem;">دول مجلس التعاون الخليجي (GCC)</div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--gold-light);">18.2%</div>
+                        <div style="color: #f3dfba; font-size: 0.75rem;">السعودية (SAR) والإمارات (AED)</div>
+                    </div>
+                    <div style="background: #061912; border: 1px solid #1a3c2e; border-radius: 12px; padding: 1rem;">
+                        <div style="color: #94a3b8; font-size: 0.8rem;">أمريكا الشمالية والأسواق الدولية</div>
+                        <div style="font-size: 1.4rem; font-weight: 800; color: var(--cyan);">13.4%</div>
+                        <div style="color: #7dd3fc; font-size: 0.75rem;">الدولار الأمريكي (USD) وسويسرا</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Omnichannel Funnel & AI Concierge -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>🎯</span>
+                        <span>مسار التحويل التسويقي للقنوات الـ 9 (Conversion Funnel)</span>
+                    </div>
+                </div>
+
+                <div class="funnel-list">
+                    <div class="funnel-step">
+                        <div class="funnel-bar" style="width: 100%;"></div>
+                        <div class="funnel-content">
+                            <div>
+                                <div class="funnel-name">1. زيارات بوابات اللغات الـ 29 والقنوات الـ 9</div>
+                                <div class="funnel-rate">LinkedIn, X, YouTube, Instagram, etc.</div>
+                            </div>
+                            <div class="funnel-count">184,520</div>
+                        </div>
+                    </div>
+
+                    <div class="funnel-step">
+                        <div class="funnel-bar" style="width: 48%;"></div>
+                        <div class="funnel-content">
+                            <div>
+                                <div class="funnel-name">2. تفاعل الكونسيرج الذكي (AI Concierge Engaged)</div>
+                                <div class="funnel-rate">WhatsApp Business VIP &amp; Telegram</div>
+                            </div>
+                            <div class="funnel-count">18,940</div>
+                        </div>
+                    </div>
+
+                    <div class="funnel-step">
+                        <div class="funnel-bar" style="width: 22%;"></div>
+                        <div class="funnel-content">
+                            <div>
+                                <div class="funnel-name">3. طلبات عروض الأسعار المؤهلة (Qualified B2B Quotes)</div>
+                                <div class="funnel-rate">معدل تأهيل 84.2% عبر الخوارزميات الذكية</div>
+                            </div>
+                            <div class="funnel-count">3,860</div>
+                        </div>
+                    </div>
+
+                    <div class="funnel-step">
+                        <div class="funnel-bar" style="width: 8%;"></div>
+                        <div class="funnel-content">
+                            <div>
+                                <div class="funnel-name">4. عقود واشتراكات الشركات المسددة بالكامل</div>
+                                <div class="funnel-rate">تسوية لحظية 100% عبر iDEAL / PSD2</div>
+                            </div>
+                            <div class="funnel-count" style="color: #10b981;">42 شركة</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-header" style="margin-top: 1.75rem;">
+                    <div class="panel-title">
+                        <span>🤖</span>
+                        <span>كفاءة مساعد الذكاء الاصطناعي (AI Concierge Telemetry)</span>
+                    </div>
+                </div>
+
+                <div style="background: #020805; border: 1px solid #143124; border-radius: 12px; padding: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.85rem;">
+                        <span style="color: #94a3b8;">زمن الاستجابة الأوتوماتيكية الأولية:</span>
+                        <span style="color: #34d399; font-weight: 700;">1.2 ثانية (Real-Time)</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.85rem;">
+                        <span style="color: #94a3b8;">لغات المحادثة المعالجة اليوم:</span>
+                        <span style="color: var(--gold-light); font-weight: 700;">29 لغة سيادية</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                        <span style="color: #94a3b8;">رضا العملاء المالي والمؤسسي:</span>
+                        <span style="color: #38bdf8; font-weight: 700;">99.4% CSAT Rating</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>S&R CoreSync For Intelligent Solutions • Keizersgracht 482, 1016 EG Amsterdam, Netherlands • KvK: 96515865 • الهاتف: +31 618111116</p>
+        <p style="margin-top: 0.35rem; font-size: 0.75rem;">جميع مؤشرات الأداء الحيوية مستمدة لحظياً من محرك الـ ERP وعقد التسوية البنكية PSD2 في أمستردام.</p>
+    </footer>
+
+    <script>
+        document.getElementById('btnExportCSV').addEventListener('click', () => {
+            const csvContent = "data:text/csv;charset=utf-8," + 
+                "Metric,Value,Period,Status\n" + 
+                "ARR,€1783800.00,Annual,Active\n" + 
+                "LTV:CAC,28.6x,Current,Healthy\n" + 
+                "Enterprise Clients,42,MTD,Reconciled\n" + 
+                "Concierge Resolution,94.8%,Daily,Automated\n";
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "SR_CoreSync_Executive_KPI_Report_2026.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>

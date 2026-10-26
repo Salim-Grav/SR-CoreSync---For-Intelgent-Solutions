@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الأمان وإدارة المفاتيح KMS والنسخ الاحتياطي السيادي | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لإدارة المفاتيح التشفيرية KMS، وحاويات الأمان العتادية HSM، والنسخ الاحتياطي التلقائي والتعافي من الكوارث في أمستردام">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .brand-text h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .header-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #06281b;
+            border: 1px solid var(--emerald);
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .btn-link {
+            background: #092017;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-link:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Container */
+        .main-container {
+            max-width: 1720px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Top 4 KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--emerald));
+        }
+
+        .kpi-title {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-sub {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        /* Main Workspace Grid (Left KMS Keys, Right DR & Envelope) */
+        .ops-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .ops-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 18px;
+            padding: 1.75rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Key Items Table / Cards */
+        .key-card {
+            background: #091f17;
+            border: 1px solid #1a3c2e;
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s;
+        }
+
+        .key-card:hover {
+            border-color: var(--gold-primary);
+            background: #0b261d;
+        }
+
+        .key-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .key-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .key-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            background: #062b1d;
+            color: #34d399;
+            border: 1px solid #10b981;
+        }
+
+        .key-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .key-hash {
+            background: #04100c;
+            border: 1px solid #163628;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            color: #38bdf8;
+            word-break: break-all;
+        }
+
+        /* Interactive Enclave / Encryption Tool */
+        .simulator-box {
+            background: #05120e;
+            border: 1px solid #18382a;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #020805;
+            border: 1px solid #1c4231;
+            color: #ffffff;
+            padding: 0.65rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold-primary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #0e3b28;
+            border: 1px solid var(--emerald);
+            color: #ffffff;
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--emerald);
+            color: #030806;
+        }
+
+        .btn-gold {
+            background: #2a200a;
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.65rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Live Backup Terminal */
+        .backup-terminal {
+            background: #020705;
+            border: 1px solid #132f22;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 0.8rem;
+            color: #a7f3d0;
+            height: 250px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .log-line {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .log-time {
+            color: #64748b;
+        }
+
+        .log-ok {
+            color: #34d399;
+        }
+
+        .log-info {
+            color: #38bdf8;
+        }
+
+        /* Footer */
+        footer {
+            background: #04120c;
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="brand-area">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div class="brand-text">
+                    <h1>S&R CoreSync | منظومة الأمان السيادية وإدارة المفاتيح KMS</h1>
+                    <p>FIPS 140-3 Level 4 Hardware Security Module (HSM) • عقد النسخ الاحتياطي في أمستردام • التعافي من الكوارث</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>AMS-01 HSM: Active & Armed</span>
+                </div>
+                <div class="status-pill" style="border-color: var(--cyan); color: #7dd3fc; background: #072635;">
+                    <span>DR Replica: FRA-02 Synced (0.8s)</span>
+                </div>
+                <a href="erp-operations-crm.html" class="btn-link">← لوحة العمليات والفواتير</a>
+                <a href="index.html" class="btn-link">الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+        <!-- 4 Financial & Security KPI Cards -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">المفاتيح المشفرة النشطة (Active Keys)</div>
+                <div class="kpi-value">128 مفتاحاً</div>
+                <div class="kpi-sub">تشفير مظروفي AES-256-GCM & Ed25519</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">معدل التعافي من الكوارث (RTO / RPO)</div>
+                <div class="kpi-value">RTO &lt; 2.4 دقيقة</div>
+                <div class="kpi-sub">فقدان بيانات صفري RPO &lt; 15 ثانية</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">النسخ الاحتياطية الثابتة (Immutable WORM)</div>
+                <div class="kpi-value">100% محمية</div>
+                <div class="kpi-sub">عقد التخزين المعزولة جغرافياً (AMS &amp; FRA)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">الامتثال السيادي الأوروبي (EU Compliance)</div>
+                <div class="kpi-value">GDPR Art 32 / NIS2</div>
+                <div class="kpi-sub">معايير الدفع المصرفي PSD2 و KvK 96515865</div>
+            </div>
+        </div>
+
+        <!-- Main 2 Column Grid -->
+        <div class="ops-grid">
+
+            <!-- Left: KMS Key Rings & Active Enclaves -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>🔐</span>
+                        <span>مستودع المفاتيح التشفيرية السيادية (Sovereign KMS Keyring)</span>
+                    </div>
+                    <button class="btn-gold" id="btnRotateKeys">تدوير المفاتيح السنوي (Rotate All)</button>
+                </div>
+
+                <!-- Key 1 -->
+                <div class="key-card">
+                    <div class="key-top">
+                        <span class="key-name">sr-master-kek-2026</span>
+                        <span class="key-badge">Master KEK • Active</span>
+                    </div>
+                    <div class="key-meta">
+                        <span>الخوارزمية: RSA-4096 / OAEP</span>
+                        <span>العقدة: AMS-01 Cryptographic Enclave</span>
+                        <span>تاريخ التدوير القادم: 26 أكتوبر 2027</span>
+                    </div>
+                    <div class="key-hash mono">
+                        Fingerprint: SHA256:7e9a8f23b145cd8901ef24a87612dc345098efab4561230987abcdef90124567
+                    </div>
+                </div>
+
+                <!-- Key 2 -->
+                <div class="key-card">
+                    <div class="key-top">
+                        <span class="key-name">sr-psd2-settlement-signer</span>
+                        <span class="key-badge">PSD2 / iDEAL • Active</span>
+                    </div>
+                    <div class="key-meta">
+                        <span>الخوارزمية: Ed25519 / Curve25519</span>
+                        <span>العقدة: High-Throughput Hardware HSM</span>
+                        <span>توقيع المعاملات: اللحظي التلقائي</span>
+                    </div>
+                    <div class="key-hash mono">
+                        Fingerprint: SHA256:4a0913824f15d86210f924151258f9b4c02da317822fe901c56b9c97b814bb89
+                    </div>
+                </div>
+
+                <!-- Key 3 -->
+                <div class="key-card">
+                    <div class="key-top">
+                        <span class="key-name">sr-tenant-envelope-vault</span>
+                        <span class="key-badge">Multi-Tenant • Active</span>
+                    </div>
+                    <div class="key-meta">
+                        <span>الخوارزمية: ChaCha20-Poly1305</span>
+                        <span>العزل: Zero-Knowledge Per-Tenant Enclave</span>
+                        <span>قواعد البيانات: مشفرة بالكامل في حالة السكون</span>
+                    </div>
+                    <div class="key-hash mono">
+                        Fingerprint: SHA256:88941258fa134bb897e9a8f23b145cd8901ef24a87612dc345098efab4561230
+                    </div>
+                </div>
+
+                <!-- Key 4 -->
+                <div class="key-card">
+                    <div class="key-top">
+                        <span class="key-name">sr-ai-concierge-webhook-token</span>
+                        <span class="key-badge">WhatsApp &amp; Telegram • Active</span>
+                    </div>
+                    <div class="key-meta">
+                        <span>الخوارزمية: HMAC-SHA256 &amp; ECDSA P-384</span>
+                        <span>التأمين: استيثاق طلبات السوشيال ومساعد الذكاء الاصطناعي</span>
+                        <span>الصلاحية: دائمة مع تدوير تلقائي</span>
+                    </div>
+                    <div class="key-hash mono">
+                        Fingerprint: SHA256:12ef45a890bc34def890123456789abcdef0123456789abcdef0123456789abc
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Cryptographic Enclave & Disaster Recovery -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span>⚡</span>
+                        <span>محاكي التشفير المظروفي اللحظي (Envelope Enclave)</span>
+                    </div>
+                </div>
+
+                <div class="simulator-box">
+                    <div class="form-group">
+                        <label class="form-label" for="txtPayload">النص أو المعاملة المراد تشفيرها:</label>
+                        <input type="text" id="txtPayload" class="form-input" value="B2B Invoice INV-2026-08492 | Amount: €15,125.00 | Client: Van Dijk Logistics">
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-primary" id="btnEncrypt">تشفير فوري عبر AMS Enclave</button>
+                        <button class="btn-gold" id="btnSimulateDR">محاكاة التعافي من الكوارث (DR Failover)</button>
+                    </div>
+                    <div style="margin-top: 1rem;">
+                        <label class="form-label">الناتج المشفر تشفير مظروفي (Ciphertext Token):</label>
+                        <div id="txtCipher" class="key-hash mono" style="min-height: 48px; background: #010604; color: #34d399;">
+                            enc:v1:aes256gcm:dGhpc19pc19hX3NlY3VyZV9zb3ZlcmVpZ25fZW5jbGF2ZV90b2tlbg==:auth_tag:9812ef45b
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-header" style="margin-top: 1.5rem;">
+                    <div class="panel-title">
+                        <span>🛡️</span>
+                        <span>سجل المزامنة والنسخ الاحتياطي اللحظي (Disaster Recovery Feed)</span>
+                    </div>
+                    <button class="btn-primary" id="btnTriggerBackup" style="padding: 0.35rem 0.8rem; font-size: 0.8rem;">نسخ فوري (Snapshot Now)</button>
+                </div>
+
+                <div class="backup-terminal mono" id="terminalFeed">
+                    <div class="log-line"><span class="log-time">[22:30:02]</span> <span class="log-ok">[OK]</span> AMS-01 HSM: Master keys verified healthy. 0 anomalies detected.</div>
+                    <div class="log-line"><span class="log-time">[22:30:15]</span> <span class="log-info">[SYNC]</span> Snapshot #84920 synchronized to FRA-02 secondary vault.</div>
+                    <div class="log-line"><span class="log-time">[22:30:30]</span> <span class="log-ok">[WORM]</span> Write-Once-Read-Many retention lock applied for 365 days.</div>
+                    <div class="log-line"><span class="log-time">[22:30:45]</span> <span class="log-info">[HEARTBEAT]</span> Cross-region latency AMS &lt;-&gt; FRA: 7.8ms. RPO within target.</div>
+                    <div class="log-line"><span class="log-time">[22:31:00]</span> <span class="log-ok">[ENCLAVE]</span> Zero-knowledge decryption authorization confirmed for KvK 96515865.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>S&R CoreSync For Intelligent Solutions • Keizersgracht 482, 1016 EG Amsterdam, Netherlands • KvK: 96515865 • الهاتف: +31 618111116</p>
+        <p style="margin-top: 0.35rem; font-size: 0.75rem;">جميع المفاتيح التشفيرية محفوظة داخل عتاد FIPS 140-3 Level 4 مشفر بالكامل في أمستردام وفق المادة 32 من اللائحة العامة لحماية البيانات GDPR.</p>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        const btnEncrypt = document.getElementById('btnEncrypt');
+        const btnSimulateDR = document.getElementById('btnSimulateDR');
+        const btnRotateKeys = document.getElementById('btnRotateKeys');
+        const btnTriggerBackup = document.getElementById('btnTriggerBackup');
+        const txtPayload = document.getElementById('txtPayload');
+        const txtCipher = document.getElementById('txtCipher');
+        const terminalFeed = document.getElementById('terminalFeed');
+
+        function appendLog(level, msg) {
+            const now = new Date();
+            const timeStr = `[${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}]`;
+            const div = document.createElement('div');
+            div.className = 'log-line';
+            const cls = level === 'OK' ? 'log-ok' : level === 'INFO' ? 'log-info' : 'log-ok';
+            div.innerHTML = `<span class="log-time">${timeStr}</span> <span class="${cls}">[${level}]</span> ${msg}`;
+            terminalFeed.appendChild(div);
+            terminalFeed.scrollTop = terminalFeed.scrollHeight;
+        }
+
+        btnEncrypt.addEventListener('click', () => {
+            const text = txtPayload.value.trim() || 'Default Payload';
+            const randomNonce = Array.from(crypto.getRandomValues(new Uint8Array(12))).map(b => b.toString(16).padStart(2, '0')).join('');
+            const fakeCipher = btoa(unescape(encodeURIComponent(text))).substring(0, 32);
+            txtCipher.textContent = `enc:v1:aes256gcm:${fakeCipher}...:nonce:${randomNonce}:tag:f8e910`;
+            appendLog('OK', `Payload encrypted with ChaCha20-Poly1305. Nonce: ${randomNonce.substring(0, 8)}...`);
+        });
+
+        btnSimulateDR.addEventListener('click', () => {
+            appendLog('INFO', 'Initiating simulated failover to Frankfurt FRA-02 vault...');
+            setTimeout(() => {
+                appendLog('OK', 'FRA-02 Secondary Enclave assumed primary read-write status. Latency: 4.1ms. RTO: 1.2s.');
+            }, 800);
+            setTimeout(() => {
+                appendLog('OK', 'Primary AMS-01 restored and resynchronized cleanly. Zero data loss.');
+            }, 1800);
+        });
+
+        btnRotateKeys.addEventListener('click', () => {
+            appendLog('INFO', 'Key rotation triggered for master keyring. Generating new cryptographic versions...');
+            setTimeout(() => {
+                appendLog('OK', 'Master KEK and Settlement Signers rotated successfully. New version v2026.2 active.');
+                alert('تم تدوير المفاتيح التشفيرية بنجاح واعتماد الإصدار الجديد دون انقطاع الخدمة!');
+            }, 600);
+        });
+
+        btnTriggerBackup.addEventListener('click', () => {
+            appendLog('INFO', 'Snapshot #84921 triggered manually. Compressing & sealing ledger state...');
+            setTimeout(() => {
+                appendLog('OK', 'Snapshot #84921 sealed with SHA-256 and sent to WORM storage. Verification passed.');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
