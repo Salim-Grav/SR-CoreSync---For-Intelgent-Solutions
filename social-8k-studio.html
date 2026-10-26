@@ -1433,6 +1433,8 @@
                 const res = await fetch('./assets/social-8k-branding/manifest.json');
                 const data = await res.json();
                 allAssets = data.assets || [];
+                const cAll = document.getElementById('countAll');
+                if (cAll) cAll.textContent = allAssets.length;
                 renderGrid();
             } catch (err) {
                 console.error('Failed to load manifest.json', err);
