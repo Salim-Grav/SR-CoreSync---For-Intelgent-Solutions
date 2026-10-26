@@ -1451,10 +1451,49 @@
 2. **[css/inline-core.css](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/inline-core.css):** نقل `perspective: 1200px` لبطاقة الشعار الملكي مباشرة وضبط العرض والتباعد.
 3. **[css/inline-*.css](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/):** تحديث كافة ملفات الـ CSS للغات الـ 28 المترجمة للحفاظ على التناسق العالمي للمنصة.
 4. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** مطابقة 102 تجزئة أمنية SHA-256 واجتياز الفحص الصارم.
-5. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق التوسيط الصفري للشعار الملكي وتحديث نسبة الإنجاز 100%.
-6. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق تشخيص الإزاحة المنظورية والحل الهندسي والشرح الكامل للأفاتار الرقمي.
+
+---
+
+## 🏆 المرحلة 75: إلغاء التكرار في الهيدر العلوي وتثبيت بوابة الوكلاء الحصرية وضمان نقاء الخط العربي الحقيقي 100%
+
+### 1. تشخيص مشكلة التكرار والخط العربي:
+1. **تكرار أزرار الإجراءات (Button Duplication):**
+   - كان قسم الرأس (Header) يحتوي على زر "تجربة ERP السحابي" وزر "بوابة المطورين"، وهما نفس الزرين الرئيسيين الموجودين في صدر الصفحة (Hero Section).
+   - بعد الفحص المعمق، تبين أن زر "تجربة ERP السحابي" كان يُحقن ديناميكياً بواسطة دالة `injectHeaderDemoPill()` داخل ملف [js/enterprise-suite.min.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/enterprise-suite.min.js#L634-L655).
+2. **علاج الحروف العربية المنفصلة والمعكوسة:**
+   - تم التوقف التام عن استخدام أي سكربتات خارجية لمعالجة الصور لتوليد الواجهات، والاعتماد الحصري والصارم على **محرك المتصفح الحي (Native Chromium Engine)** لالتقاط لقطات شاشة حقيقية 100%، مما يضمن ظهور خط Cairo العربي بأعلى درجات الانسيابية والاتصال الطبيعي من اليمين إلى اليسار دون أي حروف مفصولة أو معكوسة.
+
+### 2. القرارات الهندسية المنفذة:
+1. **تنظيف وترقية الهيدر العلوي (Header Refinement):**
+   - إلغاء زر "تجربة ERP السحابي" وزر "بوابة المطورين" من الهيدر العلوي نهائياً.
+   - إيقاف الحقن الديناميكي داخل [js/enterprise-suite.min.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/enterprise-suite.min.js).
+   - الإبقاء حصرياً على زر **"بوابة الوكلاء 💼"** الفاخر في الهيدر كمدخل رسمي لشركاء الحلول والـ White-Label.
+2. **تركيز أزرار التحويل في الهيرو (Hero CTAs):**
+   - الحفاظ على الأزرار الثلاثة الأساسية في صدر الصفحة:
+     1. `⚡ تجربة الـ ERP السحابي الحي (Live Demo)`
+     2. `بوابة المطورين و 3D AI Avatar ⚡`
+     3. `حجز استشارة VIP 👔`
+3. **تحديث الـ Service Worker وإلغاء الكاش:**
+   - ترقية نسخة الـ Service Worker في [sw.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sw.js) إلى `coresync-prerender-v15-srx` وتحديث وسوم الاستدعاء لضمان تحميل التحديثات فوراً.
+4. **فحص الـ CSP ومطابقة التجزئات:**
+   - اجتياز فحص الـ CSP الصارم بنجاح تام: `102 hashes PASSED`.
+
+---
+
+![لقطة شاشة حية وحقيقية من المتصفح توثق خلو الهيدر من أي تكرار وتثبيت بوابة الوكلاء وظهور صدر الصفحة والخط العربي الملكي بأعلى دقة](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/hero_clean_live_verified.png)
+
+---
+
+## 🛠️ الملفات المعدلة والمنشأة في هذه المرحلة:
+1. **[index.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html):** إزالة الأزرار المكررة من `header-col-actions` وإضافة وسوم كسر الكاش لملفات الجافاسكربت.
+2. **[js/enterprise-suite.min.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/enterprise-suite.min.js):** إيقاف الحقن الديناميكي لزر الديمو في الهيدر لضمان عدم ظهوره إطلاقاً.
+3. **[sw.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sw.js):** ترقية الكاش إلى `v15-srx`.
+4. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** اجتياز فحص السياسات الأمنية ومطابقة 102 تجزئة SHA-256.
+5. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** تحديث كافة بنود المهام وإغلاقها بنسبة 100%.
+6. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق المعالجة الكاملة وإرفاق اللقطة الحقيقية المباشرة.
 
 </div>
+
 
 
 
