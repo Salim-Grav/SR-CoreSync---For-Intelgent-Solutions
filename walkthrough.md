@@ -420,13 +420,48 @@
 
 ---
 
-## 🛠️ الملفات المستحدثة والمعدلة للمهمة 42:
-1. **[social-8k-studio.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-8k-studio.html):** إضافة جدول المقاسات ومناطق الأمان `#specsCheatSheet`، تبويب فلترة Facebook، دالات نسخ المقاسات، وفئات النسب البصرية 5.91:1 و 2.63:1 و 1.91:1.
-2. **[assets/social-8k-branding/manifest.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/manifest.json):** تسجيل حزمة فيسبوك وتصحيح أبعاد غلاف لينكد إن لـ 6768×1146 px وتحديث إجمالي الأصول إلى 26 أصلاً.
-3. **[SOCIAL-MEDIA-SUITE.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/SOCIAL-MEDIA-SUITE.md):** توثيق المقاسات الدقيقة لـ LinkedIn و Meta/Facebook.
-4. **[social-campaign-hub.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/social-campaign-hub.html):** تنظيف مسارات معاينة وتحميل أصول الـ 8K.
-5. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 42 بنسبة 100%.
-6. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق الدليل وإدراج اللقطات الحية من شاشة العرض.
+---
+
+### 12. المهمة 43: تجهيز خطط تنفيذ الخيارات الثلاثة لتدشين السوشيال ميديا 8K وأتمتة روزنامة النشر (100% Complete)
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 10:52 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+
+#### 1. الخيار الأول (رفع غلاف لينكد إن 8K القياسي 6768×1146):
+- مسار الملف الجاهز والمطابق لنسبة 5.91:1:
+  `assets/social-8k-branding/linkedin/linkedin-company-cover-8k.png` (حجم 1.02 ميغابايت) أو `linkedin-company-cover-8k.jpg` (701 كيلوبايت).
+- رابط الدخول المباشر للوحة الإدارة: `https://www.linkedin.com/company/146883282/admin/dashboard/`.
+
+#### 2. الخيار الثاني (تدشين صفحة فيسبوك عبر Meta Business Suite):
+- رابط المنصة: `https://business.facebook.com/` ورابط إنشاء الصفحة `https://www.facebook.com/pages/create/`.
+- الاسم المعتمد: `S&R CoreSync For Intelligent Solutions`، والمعرف الموحد: `@SRCoreSync`.
+- أصول الغلاف والبروفايل:
+  - الغلاف (2.63:1): `assets/social-8k-branding/facebook/facebook-page-cover-8k.png`.
+  - الأفاتار (1:1): `assets/social-8k-branding/universal/sr-coresync-profile-avatar-8k.png`.
+
+#### 3. الخيار الثالث (أتمتة إطلاق وجدولة منشورات الأسبوع الأول):
+- تحديث وتشغيل سكربت `scripts/social_campaign_dispatcher.py` والتحقق من توافر كافة الأصول 9/9 بنجاح.
+- تصدير ملف روزنامة النشر الرسمية `assets/social-8k-branding/campaign_schedule.json`.
+- توزيع منشورات الأسبوع الأول:
+  - الإثنين: LinkedIn (التدشين الرسمي لمنظومة S&R CoreSync).
+  - الثلاثاء: Facebook (إطلاق حلول الأعمال الذكية).
+  - الأربعاء: X / Twitter (مستقبل السحابة وإدارة الأعمال).
+  - الخميس: Instagram (أناقة الهوية البصرية 8K).
+  - الجمعة: YouTube (العرض التعريفي الشامل).
+  - السبت: Telegram (قناة النخبة التقنية).
+  - الأحد: WhatsApp Business (الكتالوج المعتمد للخدمات).
+
+#### 4. لقطة حية ومباشرة من شاشة العرض (Live Visual Snapshot):
+
+![منصة إطلاق وجدولة الحملات التسويقية 8K لـ 9 منصات عالمية](file:///C:/Users/msali/.gemini/antigravity-ide/brain/85966c0a-c8d5-464f-b0e6-0664f5664ec5/live_campaign_hub_snapshot.png)
+
+---
+
+## 🛠️ الملفات المستحدثة والمعدلة للمهمة 43:
+1. **[scripts/social_campaign_dispatcher.py](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/social_campaign_dispatcher.py):** تحديث مسارات القنوات النظيفة وحل مشكلة الترميز وأتمتة تصدير الجدول.
+2. **[assets/social-8k-branding/campaign_schedule.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/campaign_schedule.json):** روزنامة النشر الرسمية المؤتمتة للأسبوع الأول للقنوات الـ 9.
+3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 43 بنسبة 100%.
+4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق إنجاز المهمة 43 بالكامل مع اللقطة الحية.
 
 </div>
 
