@@ -1125,7 +1125,11 @@ main#wrapper:focus{outline:none}
 
 /* Floating Under-Emblem Voice Badge */
 .hero-emblem-voice-badge-wrap {
-    margin-top: 18px !important;
+    margin-top: 36px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
     text-align: center !important;
     position: relative !important;
     z-index: 10 !important;
@@ -1490,10 +1494,6 @@ main#wrapper:focus{outline:none}
                                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                                     <span>تجربة ERP السحابي ⚡</span>
                                 </a>
-                                <button type="button" class="tf-btn btn-header-voice-ai" id="headerVoiceAiBtn" onclick="openAiVoicePlannerModal()" data-sr-call="openAiVoicePlannerModal" title="خطط لمشروعك بالصوت فوراً عبر الذكاء الاصطناعي">
-                                    <span class="voice-header-mic-icon">🎙️</span>
-                                    <span>خطط لمشروعك بالصوت (AI Voice)</span>
-                                </button>
 
                                 <button type="button" class="btn-mobile-menu" data-sr-call="openMobileMenu" aria-label="فتح القائمة الرئيسية">
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -1531,13 +1531,7 @@ main#wrapper:focus{outline:none}
                                 <div class="hero-reference__bottom hero-intro">
                                     <p class="hero-vision-lead"><strong>أنظمة برمجية متكاملة وحلول ذكاء اصطناعي</strong> تبتكرها كوادرنا وفق أرقى المعايير الهندسية السحابية لدعم التحول الرقمي وإدارة الموارد للشركات والمؤسسات الكبرى في أوروبا والشرق الأوسط.</p>
                                     
-                                    <!-- زر التجربة الصوتية المحيطية الفاخرة -->
-                                    <div class="hero-audio-ctrl-row">
-                                        <button type="button" class="hero-sound-toggle-btn" id="heroSoundToggle" data-sr-call="toggleHeroAmbientSound" aria-label="تشغيل / كتم الصوت المحيطي" title="تشغيل تجربة الصوت السينمائي المحيطي">
-                                            <span class="sound-wave-icon" id="heroSoundIcon">🔊</span>
-                                            <span class="sound-label" id="heroSoundLabel">تجربة الصوت المحيطي (اضغط للتشغيل)</span>
-                                        </button>
-                                    </div>
+
                                     <div class="hero-reference__actions d-flex flex-wrap gap-3">
                                         <a href="demo.html" class="tf-btn hero-reference__action hero-btn-demo hero-btn-primary-highlight" title="تجربة المنصة السحابية الحية فوراً">
                                             <span>⚡ تجربة الـ ERP السحابي الحي (Live Demo)</span>
@@ -1546,10 +1540,7 @@ main#wrapper:focus{outline:none}
                                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
                                             <span>بوابة المطورين و 3D AI Avatar ⚡</span>
                                         </a>
-                                        <button type="button" class="tf-btn hero-reference__action hero-btn-voice-ai" id="heroVoiceAiBtn" onclick="openAiVoicePlannerModal()" data-sr-call="openAiVoicePlannerModal" title="خطط لمشروعك بالصوت فوراً عبر الذكاء الاصطناعي">
-                                            <span class="hero-voice-icon-pulse">🎙️</span>
-                                            <span>خطط لمشروعك بالصوت (AI Voice) ⚡</span>
-                                        </button>
+
                                         <button type="button" class="tf-btn hero-reference__action hero-btn-vip" data-sr-call="openExecutiveBookingModal" title="حجز استشارة تنفيذية VIP">
                                             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                             <span>حجز استشارة VIP 👔</span>
@@ -1602,11 +1593,11 @@ main#wrapper:focus{outline:none}
                                             <div class="hero-emblem-glare" aria-hidden="true"></div>
                                         </div>
                                     </div>
-                                    <!-- شارة المساعد الصوتي تحت الشعار الملكي -->
+                                    <!-- شارة خطط لمشروعك بالصوت والمساعد الذكي تحت الشعار الملكي متباعدة بأناقة -->
                                     <div class="hero-emblem-voice-badge-wrap">
-                                        <button type="button" class="hero-emblem-voice-badge" onclick="openAiVoicePlannerModal()" data-sr-call="openAiVoicePlannerModal" title="تحدث بفكرة مشروعك وسيقوم الذكاء الاصطناعي ببناء الخطة فوراً">
+                                        <button type="button" class="hero-emblem-voice-badge" onclick="openAiVoicePlannerModal()" data-sr-call="openAiVoicePlannerModal" title="خطط لمشروعك بالصوت فوراً عبر محرك الذكاء الاصطناعي السيادي">
                                             <span class="emblem-voice-pulse">🎙️</span>
-                                            <span>تحدث بفكرة مشروعك | مهندس الـ AI بانتظارك</span>
+                                            <span>خطط لمشروعك بالصوت (AI Voice) • مهندس الـ AI بانتظارك</span>
                                             <span class="emblem-voice-arrow">←</span>
                                         </button>
                                         <a href="developer-portal.html#avatarSection" class="hero-emblem-avatar-badge" title="تحدث مع النسخة الرقمية الذكية ثلاثية الأبعاد للمهندس سليم عزيزة">
