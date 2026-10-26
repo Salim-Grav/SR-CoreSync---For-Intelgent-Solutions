@@ -125,24 +125,21 @@ def generate_universal_avatars():
 
     # 1.1 Master Emblem Avatar (3840 x 3840)
     w, h = 3840, 3840
-    im = create_luxury_base(w, h, (w // 2, h // 2))
-    draw = ImageDraw.Draw(im)
+    pad = 100
+    ring_dim = w - 2 * pad  # 3640 px
     
-    # Outer gold circular frame
-    pad = 180
-    draw.ellipse([pad, pad, w - pad, h - pad], outline=COLOR_GOLD_PRIMARY, width=16)
-    draw.ellipse([pad + 40, pad + 40, w - pad - 40, h - pad - 40], outline=(197, 168, 128, 60), width=6)
+    im = Image.new("RGBA", (w, h), (1, 5, 4, 255))
     
-    # Center Emblem
-    emblem = load_emblem(2000)
+    # Load official emblem and size it to EXACTLY fill the golden ring
+    emblem = load_emblem(ring_dim)
     if emblem:
-        im.paste(emblem, (w // 2 - 1000, h // 2 - 1050), emblem)
+        im.paste(emblem, (pad, pad), emblem)
         
-    # Text below emblem
-    f_brand = get_font(130, bold=True)
-    f_sub = get_font(72, bold=False)
-    draw_text_centered(draw, (w // 2, h // 2 + 1150), "S&R CORESYNC", f_brand, COLOR_GOLD_BRIGHT)
-    draw_text_centered(draw, (w // 2, h // 2 + 1300), "FOR INTELLIGENT SOLUTIONS • AMSTERDAM", f_sub, COLOR_TEXT_MUTED)
+    # Gold framing ring around the exact perimeter
+    draw = ImageDraw.Draw(im)
+    draw.ellipse([pad - 8, pad - 8, pad + ring_dim + 8, pad + ring_dim + 8], outline=(140, 115, 75, 120), width=4)
+    draw.ellipse([pad - 2, pad - 2, pad + ring_dim + 2, pad + ring_dim + 2], outline=COLOR_GOLD_PRIMARY, width=16)
+    draw.ellipse([pad + 8, pad + 8, pad + ring_dim - 8, pad + ring_dim - 8], outline=COLOR_GOLD_BRIGHT, width=4)
     
     base_name = os.path.join(folder, "sr-coresync-profile-avatar-8k")
     save_multiformat(im, base_name, ("png", "webp", "jpg"))
@@ -153,50 +150,72 @@ def generate_universal_avatars():
         "aspect_ratio": "1:1",
         "platform": "Universal (All 9 Networks)",
         "file": "assets/social-8k-branding/universal/sr-coresync-profile-avatar-8k.png",
-        "description": "Master profile avatar with official gold emblem, concentric rings, and verified status."
+        "description": "Master profile avatar with official gold emblem filling the golden circular perimeter."
     })
 
     # 1.2 Founder Avatars (Salim & Raed)
-    for name, title, role_ar, file_src in [
-        ("salim", "Eng. Mohammad Salim Aziza", "CTO & Principal Cloud/AI Architect", "founder-banner-salim-4k.jpg"),
-        ("raed", "Mohammad Raed Kaakeh", "CFO & Enterprise Systems Director", "founder-banner-raed-4k.jpg")
-    ]:
+    founder_configs = [
+        {
+            "name": "salim",
+            "title": "Eng. Mohammad Salim Aziza",
+            "role": "CTO & Principal Cloud/AI Architect",
+            "file_src": "founder-banner-salim-4k.jpg",
+            "crop_box": (2160, 60, 3560, 1460)
+        },
+        {
+            "name": "raed",
+            "title": "Mohammad Raed Kaakeh",
+            "role": "CFO & Enterprise Systems Director",
+            "file_src": "founder-banner-raed-4k.jpg",
+            "crop_box": (260, 80, 1660, 1480)
+        }
+    ]
+
+    for cfg in founder_configs:
+        name = cfg["name"]
+        title = cfg["title"]
+        role = cfg["role"]
+        file_src = cfg["file_src"]
+        crop_box = cfg["crop_box"]
+
         src_path = os.path.join(ASSETS_DIR, file_src)
         if os.path.exists(src_path):
             with Image.open(src_path) as src_im:
-                # Crop square around founder
-                sw, sh = src_im.size
-                # Founders are centered/slightly right
-                sq_dim = min(sw, sh)
-                crop_x = int(sw * 0.45 - sq_dim * 0.45)
-                crop_y = int(sh * 0.05)
-                founder_sq = src_im.crop((crop_x, crop_y, crop_x + sq_dim, crop_y + sq_dim)).resize((3840, 3840), Image.Resampling.LANCZOS)
+                # High precision portrait crop centered on executive head & upper body
+                founder_crop = src_im.crop(crop_box).resize((ring_dim, ring_dim), Image.Resampling.LANCZOS)
                 
-                # Apply circular mask with royal border
-                mask = Image.new("L", (3840, 3840), 0)
+                # Apply circular mask matching the ring diameter
+                mask = Image.new("L", (ring_dim, ring_dim), 0)
                 mask_draw = ImageDraw.Draw(mask)
-                mask_draw.ellipse([pad + 50, pad + 50, 3840 - pad - 50, 3840 - pad - 50], fill=255)
+                mask_draw.ellipse([0, 0, ring_dim, ring_dim], fill=255)
                 
-                base_f = create_luxury_base(3840, 3840, (1920, 1920))
-                base_f.paste(founder_sq, (0, 0), mask)
+                base_f = Image.new("RGBA", (w, h), (1, 5, 4, 255))
+                base_f.paste(founder_crop, (pad, pad), mask)
                 
-                # Gold rings
+                # Outer luxury gold rings
                 f_draw = ImageDraw.Draw(base_f)
-                f_draw.ellipse([pad + 50, pad + 50, 3840 - pad - 50, 3840 - pad - 50], outline=COLOR_GOLD_PRIMARY, width=20)
-                f_draw.ellipse([pad + 85, pad + 85, 3840 - pad - 85, 3840 - pad - 85], outline=(197, 168, 128, 90), width=6)
+                f_draw.ellipse([pad - 8, pad - 8, pad + ring_dim + 8, pad + ring_dim + 8], outline=(140, 115, 75, 120), width=4)
+                f_draw.ellipse([pad - 2, pad - 2, pad + ring_dim + 2, pad + ring_dim + 2], outline=COLOR_GOLD_PRIMARY, width=16)
+                f_draw.ellipse([pad + 8, pad + 8, pad + ring_dim - 8, pad + ring_dim - 8], outline=COLOR_GOLD_BRIGHT, width=4)
                 
-                # Mini emblem badge at top-right
-                mini_emblem = load_emblem(500)
+                # Mini official emblem seal badge at top-right
+                mini_emblem = load_emblem(480)
                 if mini_emblem:
-                    base_f.paste(mini_emblem, (3840 - pad - 600, pad + 100), mini_emblem)
+                    base_f.paste(mini_emblem, (w - pad - 520, pad + 80), mini_emblem)
                     
-                # Executive lower ribbon
-                ribbon_y = 3840 - pad - 420
-                f_draw.rectangle([pad + 200, ribbon_y, 3840 - pad - 200, ribbon_y + 240], fill=(2, 7, 5, 235), outline=COLOR_GOLD_PRIMARY, width=4)
-                f_name = get_font(96, bold=True)
-                f_role = get_font(56, bold=False)
-                draw_text_centered(f_draw, (1920, ribbon_y + 70), title, f_name, COLOR_GOLD_BRIGHT)
-                draw_text_centered(f_draw, (1920, ribbon_y + 160), role_ar, f_role, COLOR_WHITE)
+                # Executive lower rounded ribbon
+                ribbon_w = 2200
+                ribbon_h = 260
+                rx1 = (w - ribbon_w) // 2
+                ry1 = h - pad - 300
+                rx2 = rx1 + ribbon_w
+                ry2 = ry1 + ribbon_h
+                f_draw.rounded_rectangle([rx1, ry1, rx2, ry2], radius=130, fill=(2, 7, 5, 240), outline=COLOR_GOLD_PRIMARY, width=6)
+                
+                f_name = get_font(90, bold=True)
+                f_role = get_font(52, bold=False)
+                draw_text_centered(f_draw, (w // 2, ry1 + 75), title, f_name, COLOR_GOLD_BRIGHT)
+                draw_text_centered(f_draw, (w // 2, ry1 + 175), role, f_role, COLOR_WHITE)
                 
                 out_p = os.path.join(folder, f"sr-coresync-profile-avatar-{name}-8k")
                 save_multiformat(base_f, out_p, ("png", "webp", "jpg"))
