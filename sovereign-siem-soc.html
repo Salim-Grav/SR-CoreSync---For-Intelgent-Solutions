@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز عمليات الأمن السيادي والتحليل الجنائي SIEM &amp; SOC | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لإدارة أحداث ومعلومات الأمان (SIEM) وغرفة العمليات الأمنية (SOC 24/7) لمراقبة وتحليل التهديدات الجنائية وعزل الاختراقات تلقائياً">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(239, 68, 68, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 90% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .logo-title {
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .logo-subtitle {
+            color: var(--gold-primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-soc-active {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--emerald);
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--emerald);
+        }
+
+        .pulse-soc {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--emerald);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+            width: 100%;
+        }
+
+        .hero-banner {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-accent {
+            color: var(--gold-primary);
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 860px;
+            margin: 0 auto;
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .kpi-label {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            margin-bottom: 0.4rem;
+        }
+
+        .kpi-value {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .kpi-sub {
+            font-size: 0.75rem;
+            color: var(--emerald);
+            margin-top: 0.35rem;
+        }
+
+        /* Two columns: Real-time Log Stream & SOAR Containment */
+        .soc-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .soc-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .log-terminal {
+            background: #020604;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 1rem;
+            height: 360px;
+            overflow-y: auto;
+            font-size: 0.78rem;
+            line-height: 1.8;
+            color: #a7f3d0;
+        }
+
+        .log-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
+            padding-bottom: 0.35rem;
+        }
+
+        .log-time {
+            color: #64748b;
+        }
+
+        .log-sev-info { color: var(--cyan); }
+        .log-sev-warn { color: var(--amber); }
+        .log-sev-crit { color: var(--crimson); font-weight: 700; }
+
+        /* SOAR Action Buttons */
+        .soar-action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .soar-card {
+            background: rgba(3, 8, 6, 0.7);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+        .soar-card:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .soar-card-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .soar-card-desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .btn-soar {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-soar-block {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid var(--crimson);
+        }
+
+        .btn-soar-block:hover {
+            background: var(--crimson);
+            color: #ffffff;
+        }
+
+        .btn-soar-revoke {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fde68a;
+            border: 1px solid var(--amber);
+        }
+
+        .btn-soar-revoke:hover {
+            background: var(--amber);
+            color: #030806;
+        }
+
+        .soar-feedback {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--emerald);
+            color: var(--emerald);
+            font-size: 0.82rem;
+            display: none;
+        }
+
+        footer {
+            background: rgba(4, 19, 13, 0.95);
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-content {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-area">
+            <img src="assets/sr-emblem-gold-luxury.webp" alt="S&R CoreSync" class="logo-img">
+            <div>
+                <div class="logo-title">S&R CoreSync</div>
+                <div class="logo-subtitle">Sovereign SIEM &amp; Incident SOC 24/7</div>
+            </div>
+        </a>
+        <div class="badge-soc-active">
+            <span class="pulse-soc"></span>
+            <span>مركز العمليات الأمنية SOC نشط (أمستردام)</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <h1 class="hero-title">
+                مركز عمليات الأمن السيادي والتحليل الجنائي
+                <br>
+                <span class="hero-accent">SIEM &amp; Automated Incident Response (SOAR)</span>
+            </h1>
+            <p class="hero-desc">
+                مراقبة لحظية لأكثر من 14,000 حدث أمني في الثانية عبر بنية الحوسبة السحابية في أمستردام، مدعومة بمحرك ارتباط MITRE ATT&amp;CK واستجابة تلقائية لعزل التهديدات السيبرانية وتجميد الحسابات المشبوهة في أقل من ثانية واحدة.
+            </p>
+        </section>
+
+        <!-- KPI Metrics -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">معدل تدفق الأحداث (EPS Rate)</div>
+                <div class="kpi-value mono" id="eps-counter">14,280 EPS</div>
+                <div class="kpi-sub">✓ معالجة موزعة لحظية Kafka/ClickHouse</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">زمن الاستجابة التلقائي (Mean Time to Respond)</div>
+                <div class="kpi-value mono">&lt; 850 ms</div>
+                <div class="kpi-sub">✓ تنفيذ سيناريوهات SOAR الفورية</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">تغطية مصفوفة التهديدات</div>
+                <div class="kpi-value">98.4% MITRE</div>
+                <div class="kpi-sub">✓ مطابقة أطر NCSC-NL و ENISA</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">سجلات التحليل الجنائي الثابتة</div>
+                <div class="kpi-value">WORM Compliant</div>
+                <div class="kpi-sub">✓ غير قابلة للتعديل أو المسح 10 سنوات</div>
+            </div>
+        </section>
+
+        <!-- SOC Two Columns Layout -->
+        <div class="soc-layout">
+            <!-- Terminal Panel -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <span class="panel-title"><span>📡</span> تدفق سجلات الأمان الحية (Live SIEM Telemetry Stream)</span>
+                    <span class="mono" style="font-size: 0.75rem; color: var(--emerald);">STATUS: STREAMING</span>
+                </div>
+                <div class="log-terminal mono" id="log-terminal">
+                    <!-- Logs injected dynamically -->
+                </div>
+            </div>
+
+            <!-- SOAR Panel -->
+            <div class="panel-box">
+                <div class="panel-header">
+                    <span class="panel-title"><span>🛡️</span> مسارات الاستجابة التلقائية (SOAR Playbooks)</span>
+                    <span style="font-size: 0.75rem; color: var(--gold-light);">تدخل فوري</span>
+                </div>
+                <div class="soar-action-list">
+                    <div class="soar-card">
+                        <div class="soar-card-title">
+                            <span>عزل فوري للعنوان المشبوه (BGP Blackhole)</span>
+                            <span class="mono" style="color: var(--crimson);">SEV-1</span>
+                        </div>
+                        <p class="soar-card-desc">توجيه حركة المرور الخبيثة من النطاق المهاجم إلى مسار الإسقاط الصامت فوراً على مستوى مزودي الإنترنت في أمستردام.</p>
+                        <button type="button" class="btn-soar btn-soar-block" data-action="عزل BGP Blackhole">تطبيق الحظر والعزل الفوري</button>
+                    </div>
+
+                    <div class="soar-card">
+                        <div class="soar-card-title">
+                            <span>إلغاء جلسات الـ API المشبوهة (Token Revocation)</span>
+                            <span class="mono" style="color: var(--amber);">SEV-2</span>
+                        </div>
+                        <p class="soar-card-desc">إبطال مفاتيح OAuth2 وتوكنات JWT للمستخدم فور رصد تجاوزات في السلوك الطبيعي أو تبدل الدولة الجغرافية المفاجئ.</p>
+                        <button type="button" class="btn-soar btn-soar-revoke" data-action="إلغاء الجلسات المشبوهة">إبطال وتجميد التوكنات</button>
+                    </div>
+
+                    <div class="soar-card">
+                        <div class="soar-card-title">
+                            <span>التقاط لقطة جنائية للذاكرة (Forensic WORM Snapshot)</span>
+                            <span class="mono" style="color: var(--cyan);">FORENSIC</span>
+                        </div>
+                        <p class="soar-card-desc">حفظ صورة فورية مشفرة من ذاكرة الحاوية المتأثرة في وحدة تخزين WORM المعزولة لتقديم الأدلة الجنائية المعتمدة.</p>
+                        <button type="button" class="btn-soar" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid var(--cyan);" data-action="التقاط الذاكرة الجنائية">توليد التقرير الجنائي</button>
+                    </div>
+                </div>
+
+                <div class="soar-feedback mono" id="soar-feedback"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&R CoreSync For Intelligent Solutions. Sovereign Netherlands SOC Node.
+            </div>
+            <div class="footer-links">
+                <a href="digital-timestamping.html" class="footer-link">محرك التوثيق الزمني eIDAS</a>
+                <a href="sovereign-stress-testing.html" class="footer-link">محاكي اختبارات الأحمال</a>
+                <a href="index.html" class="footer-link">الرئيسية</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var terminal = document.getElementById('log-terminal');
+            var feedback = document.getElementById('soar-feedback');
+            var soarBtns = document.querySelectorAll('.btn-soar');
+            
+            var sampleEvents = [
+                { sev: 'info', msg: 'WAF Rule #89201: TLS 1.3 handshake verified from NL-AMS client 185.12.94.10' },
+                { sev: 'info', msg: 'Postgres KMS: Automatic Envelope key rotation executed on ams-db-01' },
+                { sev: 'warn', msg: 'OAuth2 Rate Limit: 120 calls/min detected on /api/v1/invoices from 91.240.118.42' },
+                { sev: 'crit', msg: 'IDS Alert [T1110.001]: Brute-force credentials stuffing thwarted on /auth/v2/sso' },
+                { sev: 'info', msg: 'BGP Anycast: Clean traffic re-routed via AMS-IX node with latency 0.8ms' },
+                { sev: 'warn', msg: 'eIDAS Time-stamp check: Minor clock drift corrected (+0.00002 ms) via VSL' },
+                { sev: 'crit', msg: 'SIEM Core: Anomaly score 89/100 detected on worker container srx-calc-04' }
+            ];
+
+            function appendLog() {
+                if (!terminal) return;
+                var evt = sampleEvents[Math.floor(Math.random() * sampleEvents.length)];
+                var now = new Date().toISOString().substring(11, 19);
+                var div = document.createElement('div');
+                div.className = 'log-item';
+                div.innerHTML = '<span class="log-time">[' + now + ']</span> <span class="log-sev-' + evt.sev + '">[' + evt.sev.toUpperCase() + ']</span> <span>' + evt.msg + '</span>';
+                terminal.prepend(div);
+                if (terminal.childNodes.length > 25) {
+                    terminal.removeChild(terminal.lastChild);
+                }
+            }
+
+            for (var i = 0; i < 7; i++) {
+                appendLog();
+            }
+
+            setInterval(appendLog, 2400);
+
+            soarBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var actionName = this.getAttribute('data-action');
+                    if (feedback) {
+                        feedback.innerHTML = '✓ تم تنفيذ إجراء [' + actionName + '] فورياً عبر SOAR Orchestrator في أمستردام بنجاح (زمن التنفيذ: 32ms).';
+                        feedback.style.display = 'block';
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
