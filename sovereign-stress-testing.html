@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي اختبارات الأحمال والتحمل الأمني السيادي | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لاختبارات الأحمال القصوى ومحاكاة هجمات DDoS والتحقق من صمود البنية التحتية التشفيرية وعزل البيانات في أمستردام">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .brand-text h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .btn-header {
+            padding: 7px 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-header:hover {
+            background: rgba(197, 168, 128, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            max-width: 1720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(7, 21, 16, 0.95), rgba(4, 13, 10, 0.9));
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 10% 50%, rgba(239, 68, 68, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-title-wrap {
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+            padding: 0.25rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-heading {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            z-index: 1;
+        }
+
+        .stat-card {
+            background: rgba(11, 31, 24, 0.7);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            min-width: 160px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .stat-value.red { color: #f87171; }
+        .stat-value.emerald { color: #34d399; }
+        .stat-value.gold { color: #fbbf24; }
+        .stat-value.cyan { color: #38bdf8; }
+
+        /* Grid Layout */
+        .stress-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1200px) {
+            .stress-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.7);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: var(--gold-primary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Controls Form */
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .control-value-display {
+            color: var(--gold-primary);
+            font-weight: 800;
+        }
+
+        .control-select, .control-range {
+            width: 100%;
+            background: #040e0a;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .control-select:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .vector-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .vector-btn {
+            background: #040e0a;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .vector-btn.active {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: #ef4444;
+            color: #ffffff;
+        }
+
+        .vector-desc {
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+
+        .vector-btn.active .vector-desc {
+            color: #fca5a5;
+        }
+
+        .action-btns-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-launch {
+            flex: 2;
+            padding: 0.95rem;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border: none;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+        }
+
+        .btn-launch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .btn-stop {
+            flex: 1;
+            padding: 0.95rem;
+            background: #0f241a;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-stop:hover {
+            background: #183327;
+            color: #ffffff;
+        }
+
+        /* Real-Time Live Graph and Telemetry */
+        .chart-container {
+            background: #020704;
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chart-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .chart-svg-wrap {
+            width: 100%;
+            height: 180px;
+        }
+
+        .live-log-box {
+            background: #020604;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+            height: 220px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .log-entry {
+            font-size: 0.78rem;
+            line-height: 1.4;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .log-time {
+            color: #64748b;
+            flex-shrink: 0;
+        }
+
+        .log-msg-info { color: #38bdf8; }
+        .log-msg-warn { color: #fbbf24; }
+        .log-msg-block { color: #34d399; }
+        .log-msg-alert { color: #f87171; }
+
+        /* Nodes Matrix */
+        .nodes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .nodes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .node-card {
+            background: #040e0a;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .node-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .node-name {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .node-status-chip {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .progress-bar-bg {
+            background: #0f241a;
+            border-radius: 9999px;
+            height: 6px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-fill-emerald {
+            background: var(--emerald);
+            height: 100%;
+            border-radius: 9999px;
+            width: 32%;
+        }
+
+        .progress-fill-cyan {
+            background: var(--cyan);
+            height: 100%;
+            border-radius: 9999px;
+            width: 24%;
+        }
+
+        .progress-fill-gold {
+            background: var(--gold-primary);
+            height: 100%;
+            border-radius: 9999px;
+            width: 41%;
+        }
+
+        .node-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            background: rgba(2, 7, 5, 0.9);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header>
+        <div class="header-content">
+            <div class="brand-area">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div class="brand-text">
+                    <h1>محاكي اختبارات الأحمال والتحمل الأمني السيادي</h1>
+                    <p>S&R CoreSync Sovereign Stress & Penetration Testing Engine — Amsterdam Primary Node</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="badge-status">
+                    <span class="status-dot"></span>
+                    درع الحماية السيادي: نشط (2.4 Tbps BGP Anycast)
+                </span>
+                <a href="index.html" class="btn-header">الرئيسية</a>
+                <a href="erp-operations-crm.html" class="btn-header">العمليات السيادية</a>
+                <a href="sovereign-kms-backup.html" class="btn-header">عقد التشفير KMS</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Hero Summary -->
+        <section class="hero-banner">
+            <div class="hero-title-wrap">
+                <span class="hero-tag">🛡️ FIPS 140-3 LEVEL 4 CERTIFIED SIMULATOR</span>
+                <h2 class="hero-heading">اختبار الصمود الهجومي والضغط المتزامن فائق الكثافة</h2>
+                <p class="hero-desc">
+                    محرك محاكاة هجمات حجب الخدمة الموزعة (DDoS)، وتدفق الاستعلامات المليونية المتزامنة عبر خوادم أمستردام وفرانكفورت. يتم التحقق اللحظي من ثبات زمن الاستجابة (&lt; 1.4ms)، ومنع تسريب الحزم، وعزل استفسارات العملاء في قواعد بيانات سيادية مشفرة بالكامل.
+                </p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-label">معدل الطلبات اللحظي</div>
+                    <div class="stat-value gold mono" id="stat-rps">14,280 /s</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">نسبة الحزم المحجوبة</div>
+                    <div class="stat-value emerald mono" id="stat-mitigated">100.00%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">متوسط زمن الاستجابة</div>
+                    <div class="stat-value cyan mono" id="stat-latency">1.18 ms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">معدل الأخطاء (Error Rate)</div>
+                    <div class="stat-value red mono" id="stat-errors">0.00%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grid Workspace -->
+        <div class="stress-grid">
+            <!-- Left: Attack & Stress Configuration -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">
+                        <span>⚙️</span>
+                        معلمات الاختبار وضبط الهجوم المحاكي
+                    </h3>
+                    <span class="panel-badge">SYNTHETIC LOAD</span>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>متجه الهجوم ونوع الاختبار:</span>
+                    </label>
+                    <div class="vector-selector">
+                        <button class="vector-btn active" type="button" data-vector="l7-flood">
+                            <span>Layer-7 HTTPS Flood</span>
+                            <span class="vector-desc">محاكاة 50,000 استعلام API متزامن</span>
+                        </button>
+                        <button class="vector-btn" type="button" data-vector="tls-exhaust">
+                            <span>TLS Handshake Exhaust</span>
+                            <span class="vector-desc">إجهاد معالجات التشفير HSM</span>
+                        </button>
+                        <button class="vector-btn" type="button" data-vector="sqli-waf">
+                            <span>WAF Malicious Injection</span>
+                            <span class="vector-desc">فحص جدار الحماية ضد ثغرات OWASP</span>
+                        </button>
+                        <button class="vector-btn" type="button" data-vector="distributed-bot">
+                            <span>Botnet Swarm Simulation</span>
+                            <span class="vector-desc">محاكاة 12,000 مصدر جغرافي متزامن</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <span>حجم الطلبات المتزامنة (Concurrency Limit):</span>
+                        <span class="control-value-display mono" id="concurrency-val">25,000 Req/s</span>
+                    </div>
+                    <input type="range" class="control-range" min="1000" max="100000" step="1000" value="25000" id="concurrency-slider">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="target-node-select">
+                        <span>العقدة السيادية المستهدفة بالاختبار:</span>
+                    </label>
+                    <select class="control-select" id="target-node-select">
+                        <option value="all">كافة العقد الموزعة (Anycast Amsterdam + Frankfurt)</option>
+                        <option value="ams-01">العقدة الرئيسية: Amsterdam Datacenter AMS-01</option>
+                        <option value="ams-02">العقدة الاحتياطية: Amsterdam Backup AMS-02</option>
+                        <option value="fra-01">عقدة التعافي من الكوارث: Frankfurt WORM Node FRA-01</option>
+                    </select>
+                </div>
+
+                <div class="action-btns-row">
+                    <button class="btn-launch" id="btn-start-test" type="button">
+                        🚀 إطلاق المحاكاة السيادية المكثفة
+                    </button>
+                    <button class="btn-stop" id="btn-stop-test" type="button">
+                        إيقاف مؤقت
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right: Real-Time Visualization & Node Telemetry -->
+            <section class="panel">
+                <div class="panel-header">
+                    <h3 class="panel-title">
+                        <span>📊</span>
+                        التحليلات الحية والرسوم البيانية للصمود التشغيلي
+                    </h3>
+                    <span class="panel-badge mono" id="badge-load-status">STATUS: DEFENSE ACTIVE</span>
+                </div>
+
+                <!-- Live Vector Sparkline Graph -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <span class="chart-title">تدفق الاستعلامات اللحظية ومعدل الامتصاص (Requests / Sec)</span>
+                        <span class="mono" style="color: var(--emerald); font-size: 0.8rem;">DDoS Buffer: 99.98% Available</span>
+                    </div>
+                    <div class="chart-svg-wrap">
+                        <svg viewBox="0 0 800 180" width="100%" height="100%" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="stressGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#10b981" stop-opacity="0.35"/>
+                                    <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M0,150 Q100,120 200,90 T400,110 T600,60 T800,40 L800,180 L0,180 Z" fill="url(#stressGrad)"/>
+                            <path d="M0,150 Q100,120 200,90 T400,110 T600,60 T800,40" fill="none" stroke="#10b981" stroke-width="2.5"/>
+                            <line x1="0" y1="45" x2="800" y2="45" stroke="#ef4444" stroke-dasharray="4 4" stroke-width="1.2"/>
+                            <text x="790" y="38" fill="#f87171" font-size="10" text-anchor="end" font-family="JetBrains Mono">Peak Cap: 100K RPS</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Node Health Grid -->
+                <div class="nodes-grid">
+                    <div class="node-card">
+                        <div class="node-header">
+                            <span class="node-name">AMS-01 (Amsterdam Primary)</span>
+                            <span class="node-status-chip">99.999%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-fill-emerald"></div>
+                        </div>
+                        <div class="node-meta mono">
+                            <span>CPU: 32%</span>
+                            <span>Latency: 0.8ms</span>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <span class="node-name">AMS-02 (Amsterdam HSM)</span>
+                            <span class="node-status-chip">SECURE</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-fill-cyan"></div>
+                        </div>
+                        <div class="node-meta mono">
+                            <span>HSM OPS: 4.8k/s</span>
+                            <span>Temp: 34°C</span>
+                        </div>
+                    </div>
+
+                    <div class="node-card">
+                        <div class="node-header">
+                            <span class="node-name">FRA-01 (Frankfurt DR)</span>
+                            <span class="node-status-chip">STANDBY</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-fill-gold"></div>
+                        </div>
+                        <div class="node-meta mono">
+                            <span>Sync: &lt;15s</span>
+                            <span>RPO: 0 sec</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Security Log Feed -->
+                <div class="live-log-box mono" id="stress-log-feed">
+                    <div class="log-entry">
+                        <span class="log-time">[23:12:01.042]</span>
+                        <span class="log-msg-info">[INIT] Anycast BGP routing verified across 4 European transit hubs.</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[23:12:02.115]</span>
+                        <span class="log-msg-block">[WAF] Blocked 142 malicious SQLi payload attempts on /api/v1/auth.</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[23:12:03.882]</span>
+                        <span class="log-msg-info">[STRESS] Concurrency dialed to 25,000 Req/s. Cluster CPU remaining below 35%.</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[23:12:05.109]</span>
+                        <span class="log-msg-block">[MITIGATE] 10,000 bot SYN packets scrubbed at Edge Layer without passing to origin.</span>
+                    </div>
+                    <div class="log-entry">
+                        <span class="log-time">[23:12:06.440]</span>
+                        <span class="log-msg-warn">[AUDIT] Zero unencrypted bytes detected in transit. All requests TLS 1.3 enforced.</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&R CoreSync For Intelligent Solutions. All Rights Reserved. Sovereign Netherlands Node.
+            </div>
+            <div class="footer-links">
+                <a href="compliance-audit-center.html" class="footer-link">مركز الامتثال ISO 27001</a>
+                <a href="reseller-partner-portal.html" class="footer-link">بوابة الشركاء والموزعين B2B</a>
+                <a href="kpi-executive-dashboard.html" class="footer-link">مؤشرات الأداء KPI</a>
+                <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="footer-link">الدعم التنفيذي واتساب</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic -->
+    <script>
+        (function() {
+            var slider = document.getElementById('concurrency-slider');
+            var valDisplay = document.getElementById('concurrency-val');
+            var btnStart = document.getElementById('btn-start-test');
+            var btnStop = document.getElementById('btn-stop-test');
+            var logFeed = document.getElementById('stress-log-feed');
+            var statRps = document.getElementById('stat-rps');
+            var vectorBtns = document.querySelectorAll('.vector-btn');
+            var isRunning = true;
+            var timer = null;
+
+            if (slider && valDisplay) {
+                slider.addEventListener('input', function() {
+                    valDisplay.textContent = parseInt(this.value, 10).toLocaleString() + ' Req/s';
+                });
+            }
+
+            vectorBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    vectorBtns.forEach(function(b) { b.classList.remove('active'); });
+                    this.classList.add('active');
+                    addLog('VECTOR', 'Switched attack profile to: ' + this.querySelector('span').textContent, 'log-msg-info');
+                });
+            });
+
+            function addLog(type, msg, cssClass) {
+                if (!logFeed) return;
+                var now = new Date();
+                var timeStr = '[' + now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0') + ']';
+                var div = document.createElement('div');
+                div.className = 'log-entry';
+                div.innerHTML = '<span class="log-time">' + timeStr + '</span><span class="' + (cssClass || 'log-msg-info') + '">[' + type + '] ' + msg + '</span>';
+                logFeed.insertBefore(div, logFeed.firstChild);
+                if (logFeed.children.length > 20) {
+                    logFeed.removeChild(logFeed.lastChild);
+                }
+            }
+
+            if (btnStart) {
+                btnStart.addEventListener('click', function() {
+                    isRunning = true;
+                    addLog('START', 'Sovereign stress testing sequence initiated with 100% capacity.', 'log-msg-block');
+                    if (statRps) statRps.textContent = '28,450 /s';
+                });
+            }
+
+            if (btnStop) {
+                btnStop.addEventListener('click', function() {
+                    isRunning = false;
+                    addLog('HALT', 'Stress test sequence suspended by operator.', 'log-msg-warn');
+                    if (statRps) statRps.textContent = '1,200 /s';
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
