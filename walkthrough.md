@@ -585,14 +585,35 @@
 
 ---
 
-## 🛠️ الملفات المعدلة والمستحدثة:
-1. **[تشغيل_منصة_الحملات_في_Edge.bat](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/%D8%AA%D8%B4%D8%BA%D9%8A%D9%84_%D9%85%D9%86%D8%B5%D8%A9_%D8%A7%D9%84%D8%AD%D9%85%D9%84%D8%A7%D8%AA_%D9%81%D9%8A_Edge.bat):** أداة تشغيل مركز إدارة وجدولة الحملات بنقرة واحدة.
-2. **[منصة_الحملات_في_Edge.url](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/%D9%85%D9%86%D8%B5%D8%A9_%D8%A7%D9%84%D8%AD%D9%85%D9%84%D8%A7%D8%AA_%D9%81%D9%8A_Edge.url):** اختصار إنترنت مباشر لفتح المنصة.
-3. **[assets/social-8k-branding/campaign_schedule.json](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/campaign_schedule.json):** روزنامة النشر الرسمية للأسبوع الأول.
-4. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 48 بنسبة 100%.
-5. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الشامل لعملية التنفيذ التشغيلي واللقطة الحية.
+---
+
+# 🎨 توثيق المهمة 49: اعتماد بنر الشعار الذهبي لبطاقة مشاركة السوشيال ميديا وحل تنبيه معايير فيسبوك
+
+**🕒 تاريخ التوثيق:** الإثنين، 26 أكتوبر 2026 — الساعة 01:10 ظهراً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمهمة 49:**
+
+1. **استبدال صور المؤسسين ببنر الشعار الملكي الذهبي:**
+   - تم إنشاء وتخصيص البنر المعتمد للمشاركة الاجتماعية [assets/og-coresync-official.jpg](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/og-coresync-official.jpg) بالأبعاد القياسية 1.91:1 (1200×628 px) وبحجم فائق السرعة 74 KB، ليحمل الشعار الذهبي الفاخر واسم الشركة.
+   - تم تحديث وسوم `og:image` و `twitter:image` و `og:image:width` و `og:image:height` عبر جميع البوابات الـ 29 بلا استثناء، وبذلك عند مشاركة الرابط مستقبلاً ستظهر صورة الشعار الذهبي الفاخر وليس صور المؤسسين.
+2. **تشخيص وحل رسالة فيسبوك (تعذرت مشاركة محتواك لأن هذا الرابط ينتهك معايير المجتمع):**
+   - **السبب الدقيق:** هذا الحظر شائع وتلقائي من خوارزميات الذكاء الاصطناعي لشركة Meta للدومينات الجديدة تماماً (New Domain Sandbox)، حيث تمنع خوارزميات الحماية نشر الروابط الجديدة حتى يتم تأكيد أمانها وفحصها.
+   - **خطوات فك الحظر الدائم:**
+     1. الضغط مباشرة على رابط **"إخبارنا"** أو **"تقديم ملاحظات"** في النافذة المنبثقة لفيسبوك لإرسال طلب مراجعة تلقائي.
+     2. استخدام أداة [Meta Sharing Debugger](https://developers.facebook.com/tools/debug/) لفحص الرابط `https://sr-coresync.com/` وتحديث كاش الصورة للشعار الجديد.
+   - **الحل البديل الفوري للنشر الآن:**
+     رفع صورة المنشور 8K مباشرة كملف صورة، وكتابة اسم النطاق كنص `sr-coresync.com` داخل البوست.
+
+---
+
+## 🛠️ الملفات المعدلة:
+1. **[assets/og-coresync-official.jpg](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/og-coresync-official.jpg):** البنر الرسمي الجديد لبطاقة المشاركة الاجتماعية (1200×628 px).
+2. **بوابات اللغات الـ 29 (`index.html` و `*/index.html`):** تحديث وسوم الـ Open Graph والـ Twitter Cards.
+3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** توثيق إنجاز المهمة 49 بنسبة 100%.
+4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** التوثيق الكامل لحل مشكلة بنر الشعار ومعايير فيسبوك.
 
 </div>
+
 
 
 
