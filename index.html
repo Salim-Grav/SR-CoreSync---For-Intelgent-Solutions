@@ -10839,6 +10839,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
             document.body.style.overflow = 'hidden';
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('open');
         }
+        window.openAiVoicePlannerModal = openAiVoicePlannerModal;
 
         function closeAiVoicePlannerModal() {
             const modal = document.getElementById('aiVoicePlannerModal');
@@ -10850,6 +10851,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                 if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('close');
             }
         }
+        window.closeAiVoicePlannerModal = closeAiVoicePlannerModal;
 
         function toggleVoiceRecording() {
             if (isVoiceRecording) {
