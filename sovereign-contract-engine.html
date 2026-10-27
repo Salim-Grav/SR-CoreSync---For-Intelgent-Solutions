@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة إدارة العقود الذكية والتوقيع المتزامن متعدد الأطراف | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لإدارة العقود الرقمية المؤسسية والتوقيع الإلكتروني المؤهل المتزامن عبر الاتحاد الأوروبي والشرق الأوسط وآسيا وفق لائحة eIDAS وأنظمة الثقة الرقمية">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .brand-text h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .btn-header {
+            padding: 7px 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-header:hover {
+            background: rgba(197, 168, 128, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Main Workspace */
+        main {
+            flex: 1;
+            max-width: 1720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(7, 21, 16, 0.95), rgba(4, 13, 10, 0.9));
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 10% 50%, rgba(197, 168, 128, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-title-wrap {
+            max-width: 960px;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            color: var(--gold-light);
+            padding: 0.25rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-heading {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .hero-stats-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            z-index: 1;
+        }
+
+        .hero-score-badge {
+            background: rgba(11, 31, 24, 0.85);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 1.25rem 1.75rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .score-val {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold-primary);
+        }
+
+        .score-sub {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 1200px) {
+            .pillars-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.25s ease;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        .pillar-icon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pillar-icon {
+            font-size: 1.5rem;
+        }
+
+        .pillar-status {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .pillar-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .pillar-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.55;
+        }
+
+        /* Two Columns Studio */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1050px) {
+            .studio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .studio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .studio-card-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.7);
+            padding-bottom: 0.75rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #cbd5e1;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            background: #020604;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-select:focus, .form-input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        /* Signatories List */
+        .signatories-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background: rgba(4, 14, 10, 0.6);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .signer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.84rem;
+            padding: 0.5rem 0.6rem;
+            background: rgba(7, 21, 16, 0.8);
+            border-radius: 6px;
+            border: 1px solid rgba(24, 51, 39, 0.6);
+        }
+
+        .signer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .signer-name {
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .signer-role {
+            font-size: 0.74rem;
+            color: #94a3b8;
+        }
+
+        .signer-badge-ready {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+        }
+
+        .btn-sign {
+            padding: 0.85rem 1.75rem;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border: none;
+            border-radius: 8px;
+            color: #030806;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-sign:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+
+        /* Contract Output Voucher */
+        .contract-box {
+            background: #040e0a;
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contract-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-dim);
+            padding-bottom: 0.75rem;
+        }
+
+        .contract-id {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .contract-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+        }
+
+        .contract-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
+        }
+
+        .contract-row-label {
+            color: #94a3b8;
+        }
+
+        .contract-row-val {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .multisig-seal-box {
+            background: #020704;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.76rem;
+            color: var(--cyan);
+            line-height: 1.55;
+            word-break: break-all;
+        }
+
+        /* Table Section */
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .contract-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+
+        .contract-table th {
+            background: #040e0a;
+            color: #94a3b8;
+            padding: 0.85rem 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .contract-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.5);
+            color: #cbd5e1;
+        }
+
+        .contract-table tr:hover td {
+            background: rgba(11, 31, 24, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            background: rgba(2, 7, 5, 0.9);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header>
+        <div class="header-content">
+            <div class="brand-area">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div class="brand-text">
+                    <h1>منصة إدارة العقود الذكية والتوقيع المتزامن متعدد الأطراف</h1>
+                    <p>S&R CoreSync Multi-Party Sovereign Contract Engine &amp; eIDAS / GCC Trust Hub</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="badge-status">
+                    <span class="status-dot"></span>
+                    محرك التوقيع المتزامن: نشط وجاهز 100%
+                </span>
+                <a href="immutable-audit-vault.html" class="btn-header">أرشيف WORM المحصن</a>
+                <a href="compliance-audit-center.html" class="btn-header">مركز الامتثال الدولي</a>
+                <a href="index.html" class="btn-header">الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <div class="hero-title-wrap">
+                <span class="hero-tag">✍️ MULTI-PARTY SYNCHRONOUS SOVEREIGN CONTRACTS</span>
+                <h2 class="hero-heading">إبرام وتوقيع العقود المؤسسية متعددة الأطراف بحجية قضائية دولية</h2>
+                <p class="hero-desc">
+                    محرك تعاقدي فائق الأمان يتيح للشركات متعددة الجنسيات، والجهات الحكومية، والشركاء التجاريين التوقيع اللحظي المتزامن على اتفاقيات الـ SLA، وتراخيص الملكية الفكرية، وعقود التوزيع الدولية عبر خوارزميات التوقيع المتعدد (Ed25519 Multi-Sig) مع ربط أختام الثقة الرقمية في هولندا والاتحاد الأوروبي (eIDAS Art. 25)، والمملكة العربية السعودية (هيئة الاتصالات ونفاذ)، ودولة الإمارات (سلطة خدمات الثقة).
+                </p>
+            </div>
+            <div class="hero-stats-group">
+                <div class="hero-score-badge">
+                    <div class="score-val mono">&lt; 1.2s</div>
+                    <div class="score-sub">زمن إتمام التوقيع المتزامن</div>
+                </div>
+                <div class="hero-score-badge">
+                    <div class="score-val mono">100% Legal</div>
+                    <div class="score-sub">حجية ملزمة أمام المحاكم</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Pillars -->
+        <section class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">⚖️</span>
+                    <span class="pillar-status">eIDAS QES</span>
+                </div>
+                <h3 class="pillar-title">توقيع إلكتروني مؤهل قضائياً</h3>
+                <p class="pillar-desc">
+                    معادل قانونياً للتوقيع الخطي اليدوي أمام جميع محاكم الاتحاد الأوروبي والمملكة المتحدة وفق اللائحة (EU) 910/2014.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🔐</span>
+                    <span class="pillar-status">MULTI-SIG</span>
+                </div>
+                <h3 class="pillar-title">التوقيع التشفيري المتعدد</h3>
+                <p class="pillar-desc">
+                    اعتماد خوارزميات Ed25519 و ECDSA secp256k1 التي تتطلب اكتمال تواقيع كافة المدراء التنفيذيين لتفعيل العقد.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🌍</span>
+                    <span class="pillar-status">GCC &amp; ASIA TRUST</span>
+                </div>
+                <h3 class="pillar-title">التكامل مع منظومات الثقة</h3>
+                <p class="pillar-desc">
+                    مطابقة لنظام المعاملات الإلكترونية السعودي، وإطار خدمات الثقة الإماراتي، وقانون المعاملات الرقمية في سنغافورة.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">📜</span>
+                    <span class="pillar-status">IMMUTABLE TRAIL</span>
+                </div>
+                <h3 class="pillar-title">مسار التدقيق الموثق</h3>
+                <p class="pillar-desc">
+                    تسجيل بصمة رقمية مشفرة لكل طرف تتضمن العنوان الجغرافي، التوقيت الذري UTC، وهوية الشهادة الرقمية المعتمدة.
+                </p>
+            </div>
+        </section>
+
+        <!-- Studio Simulator -->
+        <section class="studio-grid">
+            <!-- Execution Setup -->
+            <div class="studio-card">
+                <h3 class="studio-card-title">
+                    <span>📝</span>
+                    تهيئة جلسة التوقيع المتزامن (Contract Signing Session)
+                </h3>
+
+                <div class="form-group">
+                    <label class="form-label" for="contract-template">نموذج العقد أو الاتفاقية المؤسسية:</label>
+                    <select id="contract-template" class="form-select">
+                        <option value="SLA_ENTERPRISE" selected>اتفاقية مستوى الخدمة والسيادة السحابية (Global Enterprise SLA 99.99%)</option>
+                        <option value="IP_LICENSE">اتفاقية ترخيص الملكية الفكرية والذكاء الاصطناعي (Sovereign AI IP License)</option>
+                        <option value="RESELLER_AGREEMENT">عقد التوزيع والشراكة الحصرية B2B (Regional Master Franchise)</option>
+                        <option value="MURABAHA_ISLAMIC">عقد التوريد والتمويل المتوافق مع الشريعة الإسلامية (AAOIFI Murabaha)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="client-name">اسم المنشأة أو العميل المؤسسي (Enterprise Signatory):</label>
+                    <input type="text" id="client-name" class="form-input" value="شركة الرياض العالمية للحلول التقنية المحدودة">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">أطراف التوقيع المعتمدة في الجلسة (Authorized Signatories):</label>
+                    <div class="signatories-box">
+                        <div class="signer-row">
+                            <div class="signer-info">
+                                <span class="signer-name">م. محمد سليم عزيزة (Mohammad Salim Aziza)</span>
+                                <span class="signer-role">المؤسس والرئيس التنفيذي — المقر السيادي الأوروبي (أمستردام)</span>
+                            </div>
+                            <span class="signer-badge-ready">جاهز للتوقيع</span>
+                        </div>
+                        <div class="signer-row">
+                            <div class="signer-info">
+                                <span class="signer-name">أ. محمد رائد كعكة (Mohammad Raed Kaakeh)</span>
+                                <span class="signer-role">الشريك المؤسس والمدير التنفيذي — مركز الشرق الأوسط والخليج (الرياض/دبي)</span>
+                            </div>
+                            <span class="signer-badge-ready">جاهز للتوقيع</span>
+                        </div>
+                        <div class="signer-row">
+                            <div class="signer-info">
+                                <span class="signer-name" id="display-client-signer">ممثل العميل المؤسسي المفوض</span>
+                                <span class="signer-role">المفوض بالتوقيع والاعتماد الرسمي للجهة المتعاقدة</span>
+                            </div>
+                            <span class="signer-badge-ready">مصرح للمصادقة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-sign" id="btn-execute-multisig">
+                    <span>✍️ تنفيذ جلسة التوقيع المتزامن وإصدار العقد النهائي</span>
+                </button>
+            </div>
+
+            <!-- Execution Result Voucher -->
+            <div class="studio-card">
+                <h3 class="studio-card-title">
+                    <span>🛡️</span>
+                    وثيقة العقد الموثقة تشفيرياً (Cryptographic Multi-Sig Certificate)
+                </h3>
+
+                <div class="contract-box" id="contract-result">
+                    <div class="contract-header">
+                        <div>
+                            <span class="contract-row-label">الرقم المرجعي للعقد:</span>
+                            <div class="contract-id mono" id="c-id">SR-CONTRACT-2026-99410</div>
+                        </div>
+                        <span class="contract-badge" id="c-badge">✓ موقع ومعتمد قضائياً</span>
+                    </div>
+
+                    <div class="contract-row">
+                        <span class="contract-row-label">موضوع الاتفاقية:</span>
+                        <span class="contract-row-val" id="c-template-title">اتفاقية مستوى الخدمة والسيادة السحابية</span>
+                    </div>
+
+                    <div class="contract-row">
+                        <span class="contract-row-label">توقيت الختم الذري المعتمد:</span>
+                        <span class="contract-row-val mono" id="c-timestamp">2026-10-27 02:19:30 UTC</span>
+                    </div>
+
+                    <div class="contract-row">
+                        <span class="contract-row-label">أطراف التوقيع المؤكدة:</span>
+                        <span class="contract-row-val" id="c-signers-count">3 من 3 مدراء تنفيذيين (100% Multi-Sig)</span>
+                    </div>
+
+                    <div class="contract-row">
+                        <span class="contract-row-label">الحجية القانونية والولاية:</span>
+                        <span class="contract-row-val">eIDAS Art. 25 + الأنظمة التجارية في السعودية والإمارات</span>
+                    </div>
+
+                    <div class="multisig-seal-box mono" id="c-multisig-hash">
+                        Signer 1 (Amsterdam Node): ed25519:7c20a84d913bf891104eab9001389f4192b0c399<br>
+                        Signer 2 (Middle East Node): secp256k1:fa8819203914a09127810da77c19902ba4019<br>
+                        Signer 3 (Client Corporate): ed25519:8910e54199cb40129841029ba87612304910e0<br>
+                        Consensus Hash: sha256:d8c4e5b9f123a07c9b8e21f450912cb849102c77138ef902b41
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legal Framework Table -->
+        <section class="panel">
+            <h3 class="studio-card-title">
+                <span>🏛️</span>
+                الأطر القانونية والتشريعية المعترف بها أمام المحاكم الدولية
+            </h3>
+
+            <div class="table-wrap">
+                <table class="contract-table">
+                    <thead>
+                        <tr>
+                            <th>النظام / اللائحة</th>
+                            <th>الولاية القضائية</th>
+                            <th>المستوى التشريعي للتوقيع</th>
+                            <th>الآثار والحجية القضائية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>لائحة eIDAS رقم 910/2014</strong></td>
+                            <td>🇪🇺 الاتحاد الأوروبي والمملكة المتحدة</td>
+                            <td>توقيع إلكتروني مؤهل (QES)</td>
+                            <td>معادل قانوني تام للتوقيع الخطي الورقي أمام جميع المحاكم الأوروبية</td>
+                        </tr>
+                        <tr>
+                            <td><strong>نظام التعاملات الإلكترونية السعودي</strong></td>
+                            <td>🇸🇦 المملكة العربية السعودية</td>
+                            <td>توقيع رقمي معتمد من هيئة الاتصالات والفضاء والتقنية</td>
+                            <td>حجة قطعية في الإثبات وفق نظام الإثبات ونظام المعاملات المدنية</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المرسوم بقانون اتحادي رقم 46 للمعاملات والتجارة</strong></td>
+                            <td>🇦🇪 دولة الإمارات العربية المتحدة</td>
+                            <td>خدمات الثقة الرقمية والتوقيع المعتمد</td>
+                            <td>معترف به أمام محاكم دبي وأبوظبي ومحاكم المناطق المالية (DIFC / ADGM)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>قانون المعاملات الإلكترونية (ETA 2021)</strong></td>
+                            <td>🇸🇬 سنغافورة وآسيا والمحيط الهادئ</td>
+                            <td>توقيع رقمي آمن (Secure Electronic Signature)</td>
+                            <td>حجية تنفيذية كاملة للاتفاقيات وعقود التجارة العابرة للحدود</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&amp;R CoreSync For Intelligent Solutions. All Rights Reserved. Sovereign Contract Engine.
+            </div>
+            <div class="footer-links">
+                <a href="immutable-audit-vault.html" class="footer-link">أرشيف WORM المحصن</a>
+                <a href="compliance-audit-center.html" class="footer-link">مركز الامتثال الدولي</a>
+                <a href="cross-border-settlement.html" class="footer-link">محرك التسويات عبر الحدود</a>
+                <a href="index.html" class="footer-link">الرئيسية</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        (function() {
+            var btn = document.getElementById('btn-execute-multisig');
+            var templateEl = document.getElementById('contract-template');
+            var clientNameEl = document.getElementById('client-name');
+            var displaySignerEl = document.getElementById('display-client-signer');
+
+            var cId = document.getElementById('c-id');
+            var cTitle = document.getElementById('c-template-title');
+            var cTimestamp = document.getElementById('c-timestamp');
+            var cMultisigHash = document.getElementById('c-multisig-hash');
+
+            if (clientNameEl && displaySignerEl) {
+                clientNameEl.addEventListener('input', function() {
+                    displaySignerEl.textContent = 'المفوض عن: ' + (clientNameEl.value.trim() || 'الجهة المتعاقدة');
+                });
+            }
+
+            if (btn && templateEl && clientNameEl) {
+                btn.addEventListener('click', function() {
+                    var title = templateEl.options[templateEl.selectedIndex].text;
+                    var client = clientNameEl.value.trim() || 'الجهة المتعاقدة';
+                    var now = new Date();
+                    var timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+
+                    var randHex1 = Math.random().toString(16).substring(2, 10);
+                    var randHex2 = Math.random().toString(16).substring(2, 10);
+                    var randHex3 = Math.random().toString(16).substring(2, 10);
+
+                    cId.textContent = 'SR-CONTRACT-' + now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+                    cTitle.textContent = title;
+                    cTimestamp.textContent = timeStr;
+
+                    cMultisigHash.innerHTML = 
+                        'Signer 1 [Amsterdam - M. Salim Aziza]: ed25519:' + randHex1 + '7c20a84d913bf891104eab9001389f419<br>' +
+                        'Signer 2 [Riyadh/Dubai - M. Raed Kaakeh]: secp256k1:' + randHex2 + 'fa8819203914a09127810da77c19902ba<br>' +
+                        'Signer 3 [' + client + ']: ed25519:' + randHex3 + '8910e54199cb40129841029ba87612304910e0<br>' +
+                        'Consensus Root Hash: sha256:' + randHex1 + randHex2 + '9b8e21f450912cb849102c77138ef902b41';
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
