@@ -1524,13 +1524,27 @@
 
 ---
 
-## 🛠️ الملفات المعدلة والمنشأة في هذه المراحل (76 - 78):
+## 🏆 المرحلة 79: توحيد وتوجيه بورتريه القيادة للشريك المؤسس أ. محمد رائد كعكة للنظر مباشرة للأمام ومطابقة هيبة م. سليم عزيزة
+
+### 1. الأهداف والمعايير المنفذة:
+- **توجيه النظرة القيادية نحو الأمام (Direct Forward Gaze):** تعديل وتوليد البورتريه التنفيذي للأستاذ محمد رائد كعكة (`hero-founder-raed-chair.webp`) بحيث ينظر مباشرة للأمام نحو عدسة الكاميرا بنظرة قيادية واثقة متزنة ومبتسمة تماثل تماماً زاوية وهيبة المهندس محمد سليم عزيزة.
+- **التطابق السينمائي والضوئي 100%:** الحفاظ الدقيق على أدق الملامح الشخصية (الشعر، اللحية المهذبة باللونين الأبيض والأسود)، والبدلة الرسمية الفاخرة باللون الأخضر الداكن والمنديل الجيبي، وجلسة كرسي الإخراج السينمائي في الاستوديو مع الإضاءة العلوية الدرامية وخلفية الدخان الأثيرية.
+- **تكامل المنظومة البصرية في الموقع:** تحديث النسخ الرسمية `assets/hero-founder-raed-chair.webp` و `assets/hero-founder-raed-chair.jpg` مع الاحتفاظ بنسخة احتياطية من اللقطة الجانبية في `assets/hero-founder-raed-chair-backup-profile.jpg`.
+- **التشغيل الحي ومطابقة الـ CSP:** التحقق الحي عبر المتصفح في مسرح القيادة التنفيذية `#executive-solutions-stage`، وتأكيد اجتياز 105 تجزئة أمنية بنسبة 100%.
+
+![لقطة حية ومباشرة من شاشة العرض لمسرح القيادة التنفيذية بعد توجيه بورتريه أ. محمد رائد كعكة مباشرة للأمام](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/raed_founder_forward_live.png)
+
+---
+
+## 🛠️ الملفات المعدلة والمنشأة في هذه المراحل (76 - 79):
 1. **[digital-timestamping.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/digital-timestamping.html):** محرك التوثيق والختم الزمني الرقمي eIDAS QTSA ومحاكي الـ TST.
 2. **[sovereign-siem-soc.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sovereign-siem-soc.html):** مركز عمليات الأمان SIEM وتدفق السجلات الحية وسيناريوهات SOAR.
 3. **[enterprise-sso-portal.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/enterprise-sso-portal.html):** بوابة توحيد الهويات المؤسسية ودعم SAML 2.0 ومزودي الخدمة الـ 5.
-4. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** مطابقة 105 تجزئة أمنية واجتياز الفحص الصارم بنسبة 100%.
-5. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** إغلاق المهام 76 و 77 و 78 بنسبة 100% وإضافة خطة المهام القادمة (79 - 81).
-6. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق المعماريات الفنية واللقطات الحية المباشرة من المتصفح.
+4. **[assets/hero-founder-raed-chair.webp](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/hero-founder-raed-chair.webp):** البورتريه التنفيذي الجديد للأستاذ محمد رائد كعكة ناظراً للأمام مباشرة.
+5. **[assets/hero-founder-raed-chair.jpg](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/hero-founder-raed-chair.jpg):** نسخة الـ JPG عالية الجودة للبورتريه التنفيذي الجديد.
+6. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** مطابقة 105 تجزئة أمنية واجتياز الفحص الصارم بنسبة 100%.
+7. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** إغلاق المهام 76 و 77 و 78 و 79 بنسبة 100% وإضافة خطة المهام القادمة (80 - 82).
+8. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق المعماريات الفنية واللقطات الحية المباشرة من المتصفح.
 
 </div>
 
