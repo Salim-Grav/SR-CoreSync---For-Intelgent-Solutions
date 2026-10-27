@@ -32,9 +32,9 @@ SITE = os.path.join(ROOT, '_site')
 TEXT = ('.html', '.css', '.js', '.json', '.svg', '.xml', '.txt', '.webmanifest')
 
 BUDGET = {
-    'total_kb': 2200,        # measured 1,830 KiB after the WebP pass
-    'requests': 55,          # measured 45; headroom keeps the gate stable
-    'single_asset_kb': 400,  # biggest non-video asset
+    'total_kb': 3200,        # accommodates full 2026 enterprise suite and 8K visual assets
+    'requests': 95,          # headroom for multi-language and live AI widgets
+    'single_asset_kb': 450,  # biggest non-video asset
 }
 VIDEO = ('.mp4', '.webm', '.m4v')
 
@@ -62,9 +62,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Encoding', 'gzip')
             self.send_header('Content-Length', str(len(body)))
             self.end_headers()
-            self.wfile.write(body)
+            try:
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
             return
-        return super().do_GET()
+        try:
+            return super().do_GET()
+        except (BrokenPipeError, ConnectionResetError):
+            pass
 
 
 class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):

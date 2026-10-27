@@ -269,7 +269,13 @@ const cspAll = [];
         await send('Page.enable');
         if (CSP_MODE) await send('Log.enable');
         await send('Page.navigate', { url });
-        await sleep(2600);
+        for (let i = 0; i < 15; i++) {
+            await sleep(400);
+            try {
+                const r = await send('Runtime.evaluate', { expression: 'document.readyState', returnByValue: true });
+                if (r && r.result && r.result.value === 'complete') break;
+            } catch { }
+        }
 
         // ---------------------------------------------------------------
         // Undefined inline event handlers.
