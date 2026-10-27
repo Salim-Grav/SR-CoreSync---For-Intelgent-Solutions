@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة إدارة واجهات البرمجة السيادية ومحددات السرعة Sovereign API Gateway | S&amp;R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لإدارة واجهات البرمجة (API Gateway) والتحكم الذكي بمعدل الطلبات وتوزيع الأحمال الجغرافي وخوارزميات Token Bucket لمؤسسات الأعمال الكبرى">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 90% 80%, rgba(197, 168, 128, 0.05) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .logo-title {
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .logo-subtitle {
+            color: var(--gold-primary);
+            font-size: 0.75rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .badge-status {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--emerald);
+        }
+
+        main {
+            flex: 1;
+            padding: 2.5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(7, 21, 16, 0.9) 0%, rgba(3, 8, 6, 0.95) 100%);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 320px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.05));
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title span {
+            color: var(--cyan);
+        }
+
+        .hero-desc {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            max-width: 900px;
+            line-height: 1.7;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--cyan);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-val {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: var(--emerald);
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tier-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tier-card.featured {
+            border-color: var(--gold-primary);
+            background: linear-gradient(180deg, rgba(197, 168, 128, 0.08) 0%, rgba(7, 21, 16, 0.95) 100%);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .tier-badge.blue {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+        }
+
+        .tier-badge.gold {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-primary);
+            border: 1px solid var(--gold-primary);
+        }
+
+        .tier-badge.emerald {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+        }
+
+        .tier-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-limit {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+        }
+
+        .tier-features {
+            list-style: none;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .tier-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tier-features li::before {
+            content: "✓";
+            color: var(--emerald);
+            font-weight: bold;
+        }
+
+        .simulator-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            background: #030806;
+            border: 1px solid var(--border-dim);
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .form-select:focus, .form-input:focus {
+            border-color: var(--cyan);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #030806;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        .response-box {
+            background: #020504;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1.25rem;
+            min-height: 280px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .status-pill {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .status-200 {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+        }
+
+        .status-429 {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--crimson);
+            border: 1px solid var(--crimson);
+        }
+
+        .node-cluster-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .node-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .node-info h4 {
+            font-size: 0.95rem;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .node-info p {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .node-ping {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        footer {
+            background: #020504;
+            border-top: 1px solid var(--border-dim);
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-area">
+            <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="logo-img">
+            <div>
+                <div class="logo-title">S&amp;R CoreSync</div>
+                <div class="logo-subtitle">Sovereign Intelligent Solutions</div>
+            </div>
+        </a>
+        <div class="header-actions">
+            <span class="badge-status">
+                <span class="live-dot"></span>
+                عقد Gateway نشطة (Amsterdam AMS-01)
+            </span>
+            <a href="index.html" class="footer-link">العودة للرئيسية ↩</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <h1 class="hero-title">بوابة واجهات البرمجة السيادية <span>Sovereign API Gateway</span></h1>
+            <p class="hero-desc">
+                محرك التوجيه فائق السرعة وإدارة تدفق طلبات الـ API للمؤسسات والشركات الكبرى، مع تحكم سيادي بمحددات السرعة (Rate Limiting)، وتوزيع الأحمال عبر عقد أمستردام وفرانكفورت والرياض، وخوارزميات Token Bucket لحماية منصات الـ ERP المالية من الاختناق وهجمات الحرمان من الخدمة.
+            </p>
+        </section>
+
+        <!-- مقاييس الأداء اللحظية -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">إجمالي الطلبات اليومية (API Requests)</div>
+                <div class="metric-val mono">4,892,110</div>
+                <div class="metric-sub">▲ 14.8% مقارنة بالأسبوع السابق</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">متوسط زمن الاستجابة (Latency)</div>
+                <div class="metric-val mono">1.12 ms</div>
+                <div class="metric-sub">✓ فائق السرعة عبر BGP Anycast</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">نسبة الإرجاع من الذاكرة المؤقتة (Cache Hit)</div>
+                <div class="metric-val mono">94.6%</div>
+                <div class="metric-sub">✓ توفير 82% من استهلاك الخوادم</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">معدل الطلبات المقيدة (HTTP 429 Rate Limited)</div>
+                <div class="metric-val mono">0.04%</div>
+                <div class="metric-sub" style="color: var(--cyan);">✓ استقرار تام لمحددات الأمان</div>
+            </div>
+        </section>
+
+        <!-- باقات وسياسات تحديد السرعة -->
+        <h2 class="section-title">🛡️ سياسات ومحددات تدفق البيانات (Rate Limiting Policies)</h2>
+        <section class="tiers-grid">
+            <div class="tier-card">
+                <span class="tier-badge blue">Standard Partner</span>
+                <h3 class="tier-name">باقة المطورين والشركاء</h3>
+                <div class="tier-limit mono">1,000 req/min</div>
+                <ul class="tier-features">
+                    <li>خوارزمية Token Bucket الأساسية</li>
+                    <li>توقيع HMAC-SHA256 إلزامي</li>
+                    <li>دعم Webhooks لـ 5 نهايات طرفية</li>
+                    <li>نافذة تجميع السجلات: 30 يوماً</li>
+                </ul>
+            </div>
+            <div class="tier-card featured">
+                <span class="tier-badge gold">VIP Enterprise ERP</span>
+                <h3 class="tier-name">باقة المنشآت المتكاملة</h3>
+                <div class="tier-limit mono">10,000 req/min</div>
+                <ul class="tier-features">
+                    <li>خوارزمية Leaky Bucket + Burst مؤقت (2,000 req)</li>
+                    <li>ممر مخصص عبر عقد أمستردام عالية السرعة</li>
+                    <li>تكامل فوري مع أنظمة الفواتير و PSD2</li>
+                    <li>تشفير القنوات عبر TLS 1.3 مع شهادات mTLS</li>
+                </ul>
+            </div>
+            <div class="tier-card">
+                <span class="tier-badge emerald">Sovereign Core Banking</span>
+                <h3 class="tier-name">البنية السيادية الحكومية والمصرفية</h3>
+                <div class="tier-limit mono">Unlimited / Ingress Burst</div>
+                <ul class="tier-features">
+                    <li>قنوات حصرية غير قابلة للاختناق (Zero-Throttling)</li>
+                    <li>عزل عتادي كامل FIPS 140-3 HSM</li>
+                    <li>دعم بروتوكولات eIDAS و ISO 20022 المصرفية</li>
+                    <li>اتصال مباشر بنقاط تبادل الإنترنت AMS-IX</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- محاكي واجهات البرمجة ومحددات السرعة -->
+        <h2 class="section-title">⚡ محاكي بوابة الـ API واختبار استجابة الـ Throttling</h2>
+        <section class="simulator-section">
+            <div class="sim-grid">
+                <div>
+                    <div class="form-group">
+                        <label class="form-label" for="sim-endpoint">نقطة النهاية المستهدفة (API Endpoint):</label>
+                        <select id="sim-endpoint" class="form-select">
+                            <option value="/v1/erp/invoices/generate">POST /v1/erp/invoices/generate (إصدار فاتورة ضريبية)</option>
+                            <option value="/v1/auth/token">POST /v1/auth/token (توليد توكن الدخول OAuth2)</option>
+                            <option value="/v1/vat/validate-eu">GET /v1/vat/validate-eu (التحقق من ضريبة الاتحاد الأوروبي)</option>
+                            <option value="/v1/soar/incident/alert">POST /v1/soar/incident/alert (سجلات الأمان SIEM)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="sim-tier">فئة مفتاح الـ API المستخدم (API Key Tier):</label>
+                        <select id="sim-tier" class="form-select">
+                            <option value="standard">Standard (محدد بـ 100 req/burst)</option>
+                            <option value="enterprise">Enterprise VIP (محدد بـ 1,000 req/burst)</option>
+                            <option value="sovereign">Sovereign Bank (غير مقيد مع Burst غير محدود)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="sim-rate">معدل التدفق المحاكى (Simulated Request Rate):</label>
+                        <select id="sim-rate" class="form-select">
+                            <option value="normal">طبيعي (Normal - 5 requests/sec)</option>
+                            <option value="high">مرتفع (High Spike - 50 requests/sec)</option>
+                            <option value="flood">فيضان هجومي (DDoS Flood - 250 requests/sec)</option>
+                        </select>
+                    </div>
+
+                    <button type="button" class="btn-action" id="btn-run-simulation">
+                        🚀 إرسال طلب تجريبي واختبار بوابة الـ API
+                    </button>
+                </div>
+
+                <div>
+                    <div class="response-box mono" id="sim-output">
+                        <div class="status-header">
+                            <span id="response-status-badge" class="status-pill status-200">HTTP 200 OK</span>
+                            <span style="color: #64748b; font-size: 0.75rem;">Node: ams-01.coresync.eu</span>
+                        </div>
+                        <div id="response-body">
+// انقر على "إرسال طلب تجريبي" لاختبار تدفق الـ API ومحددات السرعة.
+{
+  "status": "READY",
+  "gateway": "S&amp;R Sovereign API Gateway v3.4",
+  "node": "AMS-01 Primary Edge",
+  "token_bucket_available": 1000
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- العقد السحابية ومراكز التوزيع -->
+        <h2 class="section-title">🌐 العقد السحابية ومراكز التوزيع الجغرافي (Edge Cluster Nodes)</h2>
+        <section class="node-cluster-grid">
+            <div class="node-card">
+                <div class="node-info">
+                    <h4>Amsterdam Primary (AMS-01)</h4>
+                    <p>Equinix AM4 • AMS-IX Core</p>
+                </div>
+                <div class="node-ping mono">0.4 ms</div>
+            </div>
+            <div class="node-card">
+                <div class="node-info">
+                    <h4>Frankfurt Hub (FRA-02)</h4>
+                    <p>Interxion FRA1 • DE-CIX</p>
+                </div>
+                <div class="node-ping mono">2.8 ms</div>
+            </div>
+            <div class="node-card">
+                <div class="node-info">
+                    <h4>London Edge (LON-01)</h4>
+                    <p>Telehouse North • LINX</p>
+                </div>
+                <div class="node-ping mono">3.2 ms</div>
+            </div>
+            <div class="node-card">
+                <div class="node-info">
+                    <h4>Riyadh Sovereign GCC (RUH-01)</h4>
+                    <p>STC Data Center • JEDIX</p>
+                </div>
+                <div class="node-ping mono">14.1 ms</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&amp;R CoreSync For Intelligent Solutions. All Rights Reserved.
+            </div>
+            <div class="footer-links">
+                <a href="digital-timestamping.html" class="footer-link">التوثيق الزمني eIDAS</a>
+                <a href="sovereign-siem-soc.html" class="footer-link">مركز الأمن SIEM</a>
+                <a href="enterprise-sso-portal.html" class="footer-link">بوابة SSO</a>
+                <a href="index.html" class="footer-link">الرئيسية</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('btn-run-simulation');
+            var endpointEl = document.getElementById('sim-endpoint');
+            var tierEl = document.getElementById('sim-tier');
+            var rateEl = document.getElementById('sim-rate');
+            var statusBadge = document.getElementById('response-status-badge');
+            var responseBody = document.getElementById('response-body');
+
+            if (btn && endpointEl && tierEl && rateEl && statusBadge && responseBody) {
+                btn.addEventListener('click', function() {
+                    var endpoint = endpointEl.value;
+                    var tier = tierEl.value;
+                    var rate = rateEl.value;
+                    var now = new Date().toISOString();
+
+                    if (rate === 'flood' && tier === 'standard') {
+                        statusBadge.className = 'status-pill status-429';
+                        statusBadge.textContent = 'HTTP 429 TOO MANY REQUESTS';
+                        responseBody.innerHTML = 
+                            'HTTP/2 429 Too Many Requests\n' +
+                            'Date: ' + now + '\n' +
+                            'Server: SR-CoreSync-Gateway/3.4\n' +
+                            'X-RateLimit-Limit: 1000\n' +
+                            'X-RateLimit-Remaining: 0\n' +
+                            'X-RateLimit-Reset: 42\n' +
+                            'Retry-After: 42\n' +
+                            'Content-Type: application/json; charset=utf-8\n\n' +
+                            '{\n' +
+                            '  "error": "rate_limit_exceeded",\n' +
+                            '  "message": "Token bucket empty. High traffic burst throttled to protect Sovereign ERP services.",\n' +
+                            '  "tier": "' + tier + '",\n' +
+                            '  "policy": "leaky_bucket_strict",\n' +
+                            '  "action": "Upgrade to Enterprise VIP or wait for bucket refill."\n' +
+                            '}';
+                    } else {
+                        statusBadge.className = 'status-pill status-200';
+                        statusBadge.textContent = 'HTTP 200 OK';
+                        var remaining = tier === 'sovereign' ? 999999 : (tier === 'enterprise' ? 9840 : 420);
+                        responseBody.innerHTML = 
+                            'HTTP/2 200 OK\n' +
+                            'Date: ' + now + '\n' +
+                            'Server: SR-CoreSync-Gateway/3.4\n' +
+                            'X-RateLimit-Limit: ' + (tier === 'sovereign' ? 'UNLIMITED' : (tier === 'enterprise' ? 10000 : 1000)) + '\n' +
+                            'X-RateLimit-Remaining: ' + remaining + '\n' +
+                            'X-RateLimit-Reset: 60\n' +
+                            'X-Gateway-Latency: 1.08ms\n' +
+                            'X-Signature-HMAC: sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\n' +
+                            'Content-Type: application/json; charset=utf-8\n\n' +
+                            '{\n' +
+                            '  "success": true,\n' +
+                            '  "endpoint": "' + endpoint + '",\n' +
+                            '  "tier": "' + tier + '",\n' +
+                            '  "auth_principal": "sovereign_client_78912",\n' +
+                            '  "edge_node": "ams-01.coresync.eu",\n' +
+                            '  "data": {\n' +
+                            '    "transaction_verified": true,\n' +
+                            '    "timestamp": "' + now + '"\n' +
+                            '  }\n' +
+                            '}';
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

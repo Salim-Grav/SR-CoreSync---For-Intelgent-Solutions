@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك تقارير البصمة الكربونية والحوكمة البيئية ESG Sustainability Reporter | S&amp;R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لقياس البصمة الكربونية واستدامة الحوسبة السحابية وفق معايير الاتحاد الأوروبي CSRD و ESRS E1، وتحقيق صافي انبعاثات صفري بمراكز بيانات أمستردام">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #020704;
+            --bg-card: #06170f;
+            --bg-card-hover: #0b2318;
+            --emerald-primary: #10b981;
+            --emerald-light: #6ee7b7;
+            --emerald-dark: #047857;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --cyan: #38bdf8;
+            --border-dim: #133423;
+            --border-emerald: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(16, 185, 129, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(197, 168, 128, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(3, 15, 9, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--emerald-primary);
+        }
+
+        .logo-title {
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .logo-subtitle {
+            color: var(--emerald-light);
+            font-size: 0.75rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .badge-status {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald-light);
+            border: 1px solid var(--emerald-primary);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald-primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--emerald-primary);
+        }
+
+        main {
+            flex: 1;
+            padding: 2.5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(6, 23, 15, 0.9) 0%, rgba(2, 7, 4, 0.95) 100%);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.08));
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title span {
+            color: var(--emerald-primary);
+        }
+
+        .hero-desc {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            max-width: 920px;
+            line-height: 1.7;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--emerald-primary);
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-val {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: var(--emerald-light);
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calculator-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            background: #020704;
+            border: 1px solid var(--border-dim);
+            color: #ffffff;
+            padding: 0.85rem 1rem;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .form-select:focus, .form-input:focus {
+            border-color: var(--emerald-primary);
+        }
+
+        .btn-calc {
+            background: linear-gradient(135deg, var(--emerald-primary), var(--emerald-dark));
+            color: #ffffff;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: opacity 0.2s;
+        }
+
+        .btn-calc:hover {
+            opacity: 0.9;
+        }
+
+        .results-panel {
+            background: #020704;
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .res-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .res-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .res-val {
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 1.15rem;
+        }
+
+        .res-highlight {
+            color: var(--emerald-light);
+            font-size: 1.35rem;
+        }
+
+        .certificate-preview {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(197, 168, 128, 0.05) 100%);
+            border: 2px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .cert-header {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-stamp {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald-light);
+            border: 1px solid var(--emerald-primary);
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .esg-standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .std-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .std-code {
+            color: var(--cyan);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .std-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .std-desc {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #010402;
+            border-top: 1px solid var(--border-dim);
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-link {
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-area">
+            <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="logo-img">
+            <div>
+                <div class="logo-title">S&amp;R CoreSync</div>
+                <div class="logo-subtitle">Sovereign ESG &amp; Eco-Cloud Hub</div>
+            </div>
+        </a>
+        <div class="header-actions">
+            <span class="badge-status">
+                <span class="live-dot"></span>
+                طاقة متجددة 100% (North Sea Wind)
+            </span>
+            <a href="index.html" class="footer-link">العودة للرئيسية ↩</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <h1 class="hero-title">محرك تقارير البصمة الكربونية والحوكمة البيئية <span>ESG Reporter</span></h1>
+            <p class="hero-desc">
+                المنصة السيادية للشركات والمؤسسات لقياس البصمة الكربونية للحوسبة السحابية وأنظمة الـ ERP، وتوليد تقارير الامتثال البيئي الأوروبية وفق توجيهات الاتحاد الأوروبي CSRD (Corporate Sustainability Reporting Directive) ومعايير الاستدامة ESRS E1، مع كفاءة طاقة استثنائية PUE 1.08 في مراكز بيانات أمستردام.
+            </p>
+        </section>
+
+        <!-- المقاييس البيئية اللحظية -->
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">معامل كفاءة استهلاك الطاقة (PUE)</div>
+                <div class="metric-val mono">1.08</div>
+                <div class="metric-sub">✓ المعيار العالمي المعتاد 1.58 (توفير 46%)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">مزيج الطاقة المتجددة (Renewable Mix)</div>
+                <div class="metric-val mono">100%</div>
+                <div class="metric-sub">✓ طاقة رياح بحرية ومائية في هولندا</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">كثافة الانبعاثات لكل معاملة ERP</div>
+                <div class="metric-val mono">0.0014 gCO2e</div>
+                <div class="metric-sub">✓ الأدنى كربونياً في القارة الأوروبية</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">حالة الحياد الكربوني المعتمدة (Net-Zero)</div>
+                <div class="metric-val mono">100% Verified</div>
+                <div class="metric-sub" style="color: var(--gold-light);">✓ معتمد وفق Gold Standard VCS</div>
+            </div>
+        </section>
+
+        <!-- حاسبة انبعاثات الكربون والتوفير البيئي -->
+        <h2 class="section-title">🌱 حاسبة البصمة الكربونية ومقارنة الوفر البيئي (Scope 1, 2 &amp; 3)</h2>
+        <section class="calculator-box">
+            <div class="calc-grid">
+                <div>
+                    <div class="form-group">
+                        <label class="form-label" for="calc-infra">البيئة التقنية الحالية للشركة (Legacy Environment):</label>
+                        <select id="calc-infra" class="form-select">
+                            <option value="onprem">خوادم محلية تقليدية في مقر الشركة (On-Premise Legacy Server)</option>
+                            <option value="generic_cloud">سحابة تجارية عامة غير مخصصة (Generic Public Cloud)</option>
+                            <option value="hybrid">بنية هجينة قديمة (Legacy Colocation)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="calc-tx">متوسط المعاملات والفواتير المحاسبية الشهرية:</label>
+                        <select id="calc-tx" class="form-select">
+                            <option value="50000">50,000 معاملة / شهر (منشأة متوسطة)</option>
+                            <option value="250000" selected>250,000 معاملة / شهر (مؤسسة تجارية كبرى)</option>
+                            <option value="1000000">1,000,000 معاملة / شهر (مجموعة قابضة عابرة للحدود)</option>
+                            <option value="5000000">5,000,000 معاملة / شهر (مصرف أو منصة تجارة إلكترونية)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="calc-servers">عدد الخوادم وقواعد البيانات المستبدلة:</label>
+                        <input type="number" id="calc-servers" class="form-input mono" value="8" min="1" max="100">
+                    </div>
+
+                    <button type="button" class="btn-calc" id="btn-calculate-esg">
+                        📊 حساب البصمة الكربونية وإصدار التقرير البيئي
+                    </button>
+                </div>
+
+                <div class="results-panel">
+                    <div>
+                        <div class="res-row">
+                            <span class="res-label">الانبعاثات التقديرية الحالية (Legacy Emissions):</span>
+                            <span class="res-val mono" id="res-legacy">14.82 طن CO2e/سنة</span>
+                        </div>
+                        <div class="res-row">
+                            <span class="res-label">انبعاثات سحابة S&amp;R CoreSync الخضراء:</span>
+                            <span class="res-val mono" id="res-coresync" style="color: var(--emerald-light);">0.94 طن CO2e/سنة</span>
+                        </div>
+                        <div class="res-row">
+                            <span class="res-label">صافي خفض الانبعاثات السنوي (Avoided Emissions):</span>
+                            <span class="res-val mono res-highlight" id="res-savings">13.88 طن CO2e</span>
+                        </div>
+                        <div class="res-row">
+                            <span class="res-label">نسبة تقليص البصمة الكربونية الكلية:</span>
+                            <span class="res-val mono" id="res-pct" style="color: var(--cyan);">93.6% خفض كربوني</span>
+                        </div>
+                        <div class="res-row" style="border-bottom: none;">
+                            <span class="res-label">ما يعادل زراعة أشجار سنوية:</span>
+                            <span class="res-val mono" id="res-trees" style="color: var(--gold-light);">661 شجرة</span>
+                        </div>
+                    </div>
+
+                    <div class="certificate-preview" id="cert-box">
+                        <div class="cert-stamp">✓ معتمد رسمياً CSRD ESRS E1</div>
+                        <div class="cert-header">شهادة الامتثال البيئي الأوروبي (Green Cloud Seal)</div>
+                        <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.5rem;">
+                            تؤكد هذه الشهادة الرقمية الصادرة عن S&amp;R CoreSync امتثال البنية التحتية المحاسبية بالكامل لمعايير صافي الانبعاثات الصفري عبر خوادم أمستردام العاملة بطاقة الرياح البحرية 100%.
+                        </p>
+                        <div class="mono" style="font-size: 0.7rem; color: var(--gold-primary);">
+                            Audit Hash: sha256:7f9a21b38e05c9d4b6e821fa5821092c431b9183610931dce9047192a0142
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- أطر ومعايير الامتثال الدولية -->
+        <h2 class="section-title">📜 المعايير واللوائح البيئية الأوروبية المدعومة</h2>
+        <section class="esg-standards-grid">
+            <div class="std-card">
+                <div class="std-code">EU DIRECTIVE 2022/2464</div>
+                <h3 class="std-name">لائحة إفصاح استدامة الشركات (CSRD)</h3>
+                <p class="std-desc">
+                    جاهزية فورية لتقارير الاستدامة الإلزامية للشركات الكبرى والمؤسسات المالية العاملة في الاتحاد الأوروبي، وتوفير سجلات الانبعاثات الناتجة عن تكنولوجيا المعلومات.
+                </p>
+            </div>
+            <div class="std-card">
+                <div class="std-code">EFRAG STANDARD</div>
+                <h3 class="std-name">المعيار الأوروبي للمناخ (ESRS E1)</h3>
+                <p class="std-desc">
+                    تصنيف دقيق ومباشر لجميع الانبعاثات المباشرة (Scope 1) وانبعاثات الطاقة السحابية (Scope 2) وانبعاثات سلاسل التوريد الرقمية (Scope 3).
+                </p>
+            </div>
+            <div class="std-card">
+                <div class="std-code">DUTCH CLIMATE ACT</div>
+                <h3 class="std-name">قانون المناخ الهولندي وأهداف 2030</h3>
+                <p class="std-desc">
+                    الامتثال لأهداف خفض الانبعاثات بنسبة 55% بحلول 2030 بالاعتماد الحصري على مزارع الرياح في بحر الشمال الهولندي (Gemini &amp; Borssele Wind Parks).
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&amp;R CoreSync For Intelligent Solutions. All Rights Reserved.
+            </div>
+            <div class="footer-links">
+                <a href="api-gateway-portal.html" class="footer-link">بوابة الـ API Gateway</a>
+                <a href="digital-timestamping.html" class="footer-link">التوثيق الزمني eIDAS</a>
+                <a href="sovereign-siem-soc.html" class="footer-link">مركز الأمن SIEM</a>
+                <a href="index.html" class="footer-link">الرئيسية</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var btn = document.getElementById('btn-calculate-esg');
+            var infraEl = document.getElementById('calc-infra');
+            var txEl = document.getElementById('calc-tx');
+            var serversEl = document.getElementById('calc-servers');
+            var resLegacy = document.getElementById('res-legacy');
+            var resCoresync = document.getElementById('res-coresync');
+            var resSavings = document.getElementById('res-savings');
+            var resPct = document.getElementById('res-pct');
+            var resTrees = document.getElementById('res-trees');
+            var certBox = document.getElementById('cert-box');
+
+            if (btn && infraEl && txEl && serversEl) {
+                btn.addEventListener('click', function() {
+                    var infra = infraEl.value;
+                    var tx = parseInt(txEl.value, 10) || 250000;
+                    var servers = parseInt(serversEl.value, 10) || 8;
+
+                    var factorLegacy = infra === 'onprem' ? 1.85 : (infra === 'hybrid' ? 1.45 : 1.15);
+                    var legacyTons = (servers * factorLegacy) + ((tx * 12 * 0.000028));
+                    var coresyncTons = legacyTons * 0.064;
+                    var savingsTons = legacyTons - coresyncTons;
+                    var pct = ((savingsTons / legacyTons) * 100).toFixed(1);
+                    var trees = Math.round(savingsTons * 47.6);
+
+                    resLegacy.textContent = legacyTons.toFixed(2) + ' طن CO2e/سنة';
+                    resCoresync.textContent = coresyncTons.toFixed(2) + ' طن CO2e/سنة';
+                    resSavings.textContent = savingsTons.toFixed(2) + ' طن CO2e';
+                    resPct.textContent = pct + '% خفض كربوني';
+                    resTrees.textContent = trees.toLocaleString('en-US') + ' شجرة';
+
+                    if (certBox) certBox.style.display = 'block';
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
