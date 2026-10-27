@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة العقود الذكية الذاتية التنفيذ للمدفوعات المشروطة | S&R CoreSync</title>
+    <meta name="description" content="منظومة الضمان المالي الذكي (Escrow) للإفراج المشروط عن المستحقات المالية للمشاريع والتوريدات فور استيفاء مراحل الإنجاز والمصادقة متعددة الأطراف">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 12% 15%, rgba(197, 168, 128, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.05) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.1);
+            border-color: rgba(197, 168, 128, 0.3);
+        }
+
+        .btn-portal-back {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-portal-back:hover {
+            background: var(--emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 2.5rem 2rem 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--emerald);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            max-width: 1000px;
+            line-height: 1.65;
+        }
+
+        /* Stats Row */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.75rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Workspace */
+        .workspace {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        /* Escrow Vault Details Box */
+        .escrow-vault-card {
+            background: rgba(3, 8, 6, 0.7);
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .escrow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .escrow-contract-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .escrow-status-pill {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .escrow-fund-balance {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(24, 51, 39, 0.8);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+        }
+
+        .fund-balance-val {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold-light);
+        }
+
+        .fund-balance-curr {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Milestones List */
+        .milestones-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .milestone-item {
+            background: rgba(3, 8, 6, 0.5);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .milestone-item.active {
+            border-color: var(--gold-primary);
+            background: rgba(11, 31, 24, 0.6);
+        }
+
+        .milestone-item.completed {
+            border-color: var(--emerald);
+            background: rgba(4, 19, 13, 0.8);
+        }
+
+        .milestone-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .milestone-name {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .milestone-amount-badge {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .milestone-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .milestone-signatures-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 0.75rem;
+        }
+
+        .sig-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .sig-signed {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .sig-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-release-milestone {
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
+            color: #030806;
+            font-weight: 800;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px var(--emerald-glow);
+        }
+
+        .btn-release-milestone:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px var(--emerald-glow);
+        }
+
+        /* Right Panel: Settlement & Clearing Voucher */
+        .escrow-receipt-card {
+            background: #020504;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .receipt-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .receipt-id {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
+        }
+
+        .receipt-label {
+            color: #94a3b8;
+        }
+
+        .receipt-val {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .receipt-val.emerald {
+            color: var(--emerald);
+        }
+
+        .receipt-hash-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 6px;
+            padding: 0.75rem;
+            font-size: 0.72rem;
+            color: var(--cyan);
+            line-height: 1.5;
+            word-break: break-all;
+        }
+
+        .btn-download-voucher {
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.65rem 1rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-voucher:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Smart Escrow Engine</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">لوحة القيادة المركزية 🏛️</a>
+                <a href="sovereign-contract-engine.html" class="nav-link">محرك العقود 📜</a>
+                <a href="cross-border-settlement.html" class="nav-link">التسويات عبر الحدود 💱</a>
+                <a href="immutable-audit-vault.html" class="nav-link">خزينة WORM 🔒</a>
+                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>محرك الضمان المالي الذكي وعقود الإنجاز المشروطة • الدفع الآلي متعدد العملات</span>
+        </div>
+        <h1 class="hero-title">منظومة العقود الذكية لـ <span>المدفوعات المشروطة (Smart Escrow)</span></h1>
+        <p class="hero-subtitle">
+            منظومة أوتوماتيكية تحجز المبالغ المالية للمشاريع وعقود التوريد في حساب ضمان سيادي محصن (Sovereign Escrow)، وتقوم بالإفراج الفوري التلقائي عن الدفعات عبر قنوات المقاصة المصرفية (SEPA Instant, SAMA SARIE, UAEFTS, CBS RTGS) فور إتمام المرحلة واعتماد تواقيع الأطراف تشفيرياً.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>إجمالي أموال الضمان المدارة</span>
+                    <span>🏦</span>
+                </div>
+                <div class="stat-val">€ 14,850,000</div>
+                <div class="stat-sub">حسابات ضمان سيادية محصنة 100%</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>زمن الإفراج والتحويل التلقائي</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val mono">&lt; 2.8 ثانية</div>
+                <div class="stat-sub">SEPA Instant / SARIE / CBS Clearing</div>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>عقود الإنجاز المعتمدة</span>
+                    <span>📜</span>
+                </div>
+                <div class="stat-val">284 مشروعاً</div>
+                <div class="stat-sub">توقيع متعدد الأطراف Multi-Sig</div>
+            </div>
+
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>نسبة النزاعات المالية</span>
+                    <span>🛡️</span>
+                </div>
+                <div class="stat-val mono">0.00%</div>
+                <div class="stat-sub">شروط مبرمجة غير قابلة للتلاعب</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Left: Contract & Milestones -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📋 تفاصيل عقد الضمان وإدارة مراحل الإنجاز</span>
+                </div>
+                <span class="panel-badge mono">ESCROW-SR-2026-904</span>
+            </div>
+
+            <!-- Escrow Overview Box -->
+            <div class="escrow-vault-card">
+                <div class="escrow-header">
+                    <div>
+                        <div class="escrow-contract-title" id="contract-subject">مشروع توريد وتدشين البنية السحابية السيادية لمجموعة التقنية الطبية</div>
+                        <div class="receipt-id mono">Contract Ref: SR-SLA-2026-881 • Currency: EUR &amp; SYP &amp; SAR</div>
+                    </div>
+                    <span class="escrow-status-pill">● الضمان المالي مفعل ونشط</span>
+                </div>
+
+                <div class="escrow-fund-balance">
+                    <div>
+                        <div class="fund-balance-curr">الرصيد المتبقي في الضمان (Remaining Escrow):</div>
+                        <div class="fund-balance-val mono" id="escrow-balance">€ 350,000.00</div>
+                    </div>
+                    <div>
+                        <span class="receipt-label">إجمالي قيمة العقد: </span>
+                        <span class="receipt-val mono">€ 500,000.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestones Interactive List -->
+            <div class="milestones-list">
+                <!-- Milestone 1: Completed -->
+                <div class="milestone-item completed">
+                    <div class="milestone-top">
+                        <div class="milestone-name">
+                            <span>✔ المرحلة الأولى: هندسة البنية السيادية والتركيب المعزول (Air-Gapped Setup)</span>
+                        </div>
+                        <span class="milestone-amount-badge mono">€ 150,000 (30%)</span>
+                    </div>
+                    <p class="milestone-desc">
+                        تركيب الخوادم المحلية، تفعيل التشفير FIPS 140-3، واعتماد قانون المعاملات السوري رقم 4 ونظام ZATCA.
+                    </p>
+                    <div class="milestone-signatures-row">
+                        <span class="sig-badge sig-signed">✔ المقاول: موقع</span>
+                        <span class="sig-badge sig-signed">✔ العميل: موقع ومصادق</span>
+                        <span class="sig-badge sig-signed">✔ الاستشاري السيادي: معتمد</span>
+                        <span class="receipt-label mono">تم التحويل التلقائي: 2026-10-25</span>
+                    </div>
+                </div>
+
+                <!-- Milestone 2: Active Pending Release -->
+                <div class="milestone-item active" id="milestone-2-box">
+                    <div class="milestone-top">
+                        <div class="milestone-name">
+                            <span>⚡ المرحلة الثانية: توطين الـ ERP وربط المقاصة الضريبية والمالية</span>
+                        </div>
+                        <span class="milestone-amount-badge mono">€ 200,000 (40%)</span>
+                    </div>
+                    <p class="milestone-desc">
+                        تكامل واجهات مصرف سورية المركزي (CBS) والتسوية الفورية SARIE و SEPA وربط شهادات الفوترة الإلكترونية.
+                    </p>
+                    <div class="milestone-signatures-row">
+                        <span class="sig-badge sig-signed">✔ المقاول: موقع</span>
+                        <span class="sig-badge sig-signed">✔ العميل: مصادق عليه</span>
+                        <span class="sig-badge sig-signed" id="sig-consultant-status">✔ الاستشاري: مكتمل الاعتماد</span>
+                    </div>
+                    <button type="button" class="btn-release-milestone" id="btn-release-m2">
+                        <span>🚀 الإفراج الفوري عن الدفعة (€ 200,000) وتحويلها للقناة المصرفية</span>
+                    </button>
+                </div>
+
+                <!-- Milestone 3: Pending Future -->
+                <div class="milestone-item" id="milestone-3-box">
+                    <div class="milestone-top">
+                        <div class="milestone-name">
+                            <span>⏳ المرحلة الثالثة: التسليم النهائي والتشغيل الفعلي والانتقال للإنتاج</span>
+                        </div>
+                        <span class="milestone-amount-badge mono">€ 150,000 (30%)</span>
+                    </div>
+                    <p class="milestone-desc">
+                        اختبارات الأداء تحت ضغط 100K طلب، التدريب المؤسسي، وتسليم مفاتيح KMS السيادية المشفرة.
+                    </p>
+                    <div class="milestone-signatures-row">
+                        <span class="sig-badge sig-pending">⏳ في انتظار اكتمال بنود المرحلة</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right: Execution Receipt & Clearing Voucher -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🧾 سند التسوية والإفراج المالي التشفيري</span>
+                </div>
+                <span class="panel-badge mono" id="voucher-ref">VOUCHER-ESC-9081</span>
+            </div>
+
+            <div class="escrow-receipt-card" id="receipt-card">
+                <div class="receipt-header">
+                    <div class="receipt-title">سند الإفراج عن الضمان المالي المعتمد</div>
+                    <div class="receipt-id mono" id="voucher-timestamp">2026-10-27T03:00:15Z</div>
+                </div>
+
+                <div class="receipt-row">
+                    <span class="receipt-label">المرحلة المفرج عنها:</span>
+                    <span class="receipt-val" id="rec-milestone-title">المرحلة الأولى (30% من العقد)</span>
+                </div>
+
+                <div class="receipt-row">
+                    <span class="receipt-label">المبلغ المحول:</span>
+                    <span class="receipt-val emerald mono" id="rec-amount">€ 150,000.00 EUR</span>
+                </div>
+
+                <div class="receipt-row">
+                    <span class="receipt-label">قناة التحويل والمقاصة:</span>
+                    <span class="receipt-val" id="rec-channel">SEPA Instant &amp; CBS RTGS Direct</span>
+                </div>
+
+                <div class="receipt-row">
+                    <span class="receipt-label">المستفيد المصرفي:</span>
+                    <span class="receipt-val" id="rec-beneficiary">Damascus Advanced Tech Solutions</span>
+                </div>
+
+                <div class="receipt-row">
+                    <span class="receipt-label">حالة التسوية المصرفية:</span>
+                    <span class="receipt-val emerald" id="rec-status">✔ تم التحويل والتسوية الفورية بنجاح</span>
+                </div>
+
+                <div class="receipt-hash-box mono" id="rec-hash">
+                    Execution Consensus Hash:<br>
+                    sha256: 8a901948ba1203948bf12e88a09182049182c091823ab9001389fa12bc049182<br>
+                    Signers: [Salim Aziza, Raed Kaakeh, Client Authorized Officer]
+                </div>
+
+                <button type="button" class="btn-download-voucher" id="btn-download-escrow-receipt">
+                    📥 تنزيل سند التحويل المصرفي المعتمد (Cryptographic Settlement Receipt)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="compliance-audit-center.html">مركز الامتثال الدولي</a>
+            <a href="sovereign-contract-engine.html">محرك العقود الذكية</a>
+            <a href="immutable-audit-vault.html">خزينة WORM المحصنة</a>
+            <a href="supply-chain-due-diligence.html">تدقيق سلاسل التوريد</a>
+            <a href="cross-border-settlement.html">التسويات عبر الحدود</a>
+        </div>
+        <div>
+            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        (function() {
+            var btnRelease = document.getElementById('btn-release-m2');
+            var escrowBalance = document.getElementById('escrow-balance');
+            var voucherRef = document.getElementById('voucher-ref');
+            var voucherTimestamp = document.getElementById('voucher-timestamp');
+            var recMilestoneTitle = document.getElementById('rec-milestone-title');
+            var recAmount = document.getElementById('rec-amount');
+            var recHash = document.getElementById('rec-hash');
+            var milestone2Box = document.getElementById('milestone-2-box');
+
+            if (btnRelease) {
+                btnRelease.addEventListener('click', function() {
+                    btnRelease.disabled = true;
+                    btnRelease.innerHTML = '<span>⏳ جاري التحقق من التواقيع والمقاصة الفورية...</span>';
+
+                    setTimeout(function() {
+                        milestone2Box.classList.remove('active');
+                        milestone2Box.classList.add('completed');
+                        btnRelease.style.display = 'none';
+
+                        escrowBalance.textContent = '€ 150,000.00';
+                        var newVoucherId = 'VOUCHER-ESC-' + Math.floor(1000 + Math.random() * 9000);
+                        voucherRef.textContent = newVoucherId;
+                        voucherTimestamp.textContent = new Date().toISOString();
+                        recMilestoneTitle.textContent = 'المرحلة الثانية: توطين الـ ERP والربط المالي (40%)';
+                        recAmount.textContent = '€ 200,000.00 EUR';
+
+                        var randomHash = 'sha256: ' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 10);
+                        recHash.innerHTML = 'Execution Consensus Hash:<br>' + randomHash + '<br>Direct Clearing Settlement: Executed in 1.84s via S&R CoreSync Liquidity Rail.';
+                    }, 800);
+                });
+            }
+
+            var btnDownload = document.getElementById('btn-download-escrow-receipt');
+            if (btnDownload) {
+                btnDownload.addEventListener('click', function() {
+                    var data = {
+                        voucherId: voucherRef.textContent,
+                        timestamp: voucherTimestamp.textContent,
+                        contract: 'SR-SLA-2026-881',
+                        milestone: recMilestoneTitle.textContent,
+                        amountReleased: recAmount.textContent,
+                        channel: 'SEPA Instant & CBS RTGS Direct',
+                        consensusProof: recHash.textContent
+                    };
+
+                    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'escrow_settlement_receipt_' + voucherRef.textContent + '.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
