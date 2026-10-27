@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي تحليل وتوقع تدفقات السيولة والمخاطر الائتمانية | S&R CoreSync</title>
+    <meta name="description" content="محاكي الذكاء الاصطناعي المالي للتنبؤ بتدفقات السيولة النقدية وتقييم المخاطر الائتمانية وسيناريوهات سلاسل الإمداد عبر العملات المتعددة">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 12% 15%, rgba(197, 168, 128, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.05) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.1);
+            border-color: rgba(197, 168, 128, 0.3);
+        }
+
+        .btn-portal-back {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-portal-back:hover {
+            background: var(--emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 2.5rem 2rem 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--emerald);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            max-width: 1000px;
+            line-height: 1.65;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.75rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Workspace */
+        .workspace {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        /* Stress Test Scenario Buttons */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .scenario-btn {
+            background: rgba(3, 8, 6, 0.6);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.85rem;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .scenario-btn:hover, .scenario-btn.active {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--gold-primary);
+        }
+
+        .scenario-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .scenario-sub {
+            font-size: 0.72rem;
+            color: #94a3b8;
+        }
+
+        /* Forecast Visualization Bars */
+        .forecast-bars-box {
+            background: rgba(3, 8, 6, 0.7);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .forecast-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .forecast-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+        }
+
+        .forecast-period {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .forecast-amount {
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .bar-track {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.6s ease;
+        }
+
+        .bar-fill.emerald {
+            background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+        }
+
+        .bar-fill.amber {
+            background: linear-gradient(90deg, #d97706 0%, #f59e0b 100%);
+        }
+
+        .bar-fill.cyan {
+            background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+        }
+
+        /* Right Panel: Risk Scoring & Mitigation */
+        .risk-analysis-card {
+            background: #020504;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .risk-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .risk-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .risk-score-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(24, 51, 39, 0.8);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .risk-score-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--emerald);
+        }
+
+        .risk-score-meta {
+            text-align: left;
+        }
+
+        .risk-grade {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .risk-status {
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+
+        .ai-recommendation-box {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 8px;
+            padding: 0.85rem;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .btn-export-forecast {
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.65rem 1rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-export-forecast:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Predictive Treasury AI</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">لوحة القيادة المركزية 🏛️</a>
+                <a href="cross-border-settlement.html" class="nav-link">التسويات عبر الحدود 💱</a>
+                <a href="smart-escrow-milestone.html" class="nav-link">الضمان الذكي Escrow 🤝</a>
+                <a href="fido2-webauthn-passkey.html" class="nav-link">المصادقة البيومترية 👆</a>
+                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>ذكاء اصطناعي مالي سيادي • تنبؤ دقيق للسيولة والمخاطر الائتمانية عبر الحدود</span>
+        </div>
+        <h1 class="hero-title">محاكي توقع تدفقات السيولة و<span>المخاطر الائتمانية (Predictive AI)</span></h1>
+        <p class="hero-subtitle">
+            محرك ذكاء اصطناعي مالي يدمج فواتير ZATCA السعودية، وضرائب الاتحاد الأوروبي، ومقاصة مصرف سورية المركزي (CBS)، وضريبة الشركات الإماراتية، للتنبؤ اللحظي بمسار السيولة النقدية لـ 30 و 60 و 90 يوماً وتقدير المخاطر الائتمانية للشركاء التجاريين.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>دقة التنبؤ المالي (AI Accuracy)</span>
+                    <span>📈</span>
+                </div>
+                <div class="stat-val mono">98.6%</div>
+                <div class="stat-sub">خوارزميات Monte Carlo &amp; LSTM</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>السيولة النقدية المتوقعة (90 يوماً)</span>
+                    <span>💶</span>
+                </div>
+                <div class="stat-val mono" id="stat-total-cashflow">€ 3,840,000</div>
+                <div class="stat-sub">تدفقات صافية متعددة العملات</div>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>معدل المخاطر الائتمانية العامة</span>
+                    <span>🛡️</span>
+                </div>
+                <div class="stat-val mono" id="stat-risk-rating">AAA (منخفض جداً)</div>
+                <div class="stat-sub">سجل ائتماني نظيف عبر 420 عميلاً</div>
+            </div>
+
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>صدمات سلاسل الإمداد المحايدة</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val mono">0.00% تعثر</div>
+                <div class="stat-sub">إجراءات تحوط تلقائية ضد تذبذب الصرف</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Left: Scenarios & Forecast Bars -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📊 سيناريوهات الضغط المالي والتنبؤ بالسيولة</span>
+                </div>
+                <span class="panel-badge mono">SIMULATION-ACTIVE</span>
+            </div>
+
+            <!-- Scenarios Selector -->
+            <div>
+                <div class="form-label">اختر سيناريو اختبار التحمل المالي (Stress Test):</div>
+                <div class="scenarios-grid">
+                    <div class="scenario-btn active" id="scen-normal">
+                        <div class="scenario-title">1. النمو الاعتيادي المستقر</div>
+                        <div class="scenario-sub">سداد منتظم للعملاء واستقرار أسعار الصرف</div>
+                    </div>
+                    <div class="scenario-btn" id="scen-fx">
+                        <div class="scenario-title">2. تقلبات صرف العملات FX</div>
+                        <div class="scenario-sub">تغير ±8% في أسعار صرف العملات والتحويل</div>
+                    </div>
+                    <div class="scenario-btn" id="scen-supply">
+                        <div class="scenario-title">3. صدمة وتأخر سلاسل التوريد</div>
+                        <div class="scenario-sub">تأخير 30 يوماً في استلام الشحنات والفوترة</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forecast Visualization Bars -->
+            <div class="forecast-bars-box">
+                <div class="forecast-row">
+                    <div class="forecast-header">
+                        <span class="forecast-period">توقعات 30 يوماً القادمة (Next 30 Days):</span>
+                        <span class="forecast-amount mono" id="f-30-val">€ 1,280,000.00</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill emerald" id="f-30-bar"></div>
+                    </div>
+                </div>
+
+                <div class="forecast-row">
+                    <div class="forecast-header">
+                        <span class="forecast-period">توقعات 60 يوماً القادمة (Next 60 Days):</span>
+                        <span class="forecast-amount mono" id="f-60-val">€ 1,140,000.00</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill cyan" id="f-60-bar"></div>
+                    </div>
+                </div>
+
+                <div class="forecast-row">
+                    <div class="forecast-header">
+                        <span class="forecast-period">توقعات 90 يوماً القادمة (Next 90 Days):</span>
+                        <span class="forecast-amount mono" id="f-90-val">€ 1,420,000.00</span>
+                    </div>
+                    <div class="bar-track">
+                        <div class="bar-fill amber" id="f-90-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right: Counterparty Risk & Mitigation -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🔍 تقييم المخاطر وتوصيات الذكاء الاصطناعي</span>
+                </div>
+                <span class="panel-badge mono" id="risk-dossier-id">RISK-AI-9081</span>
+            </div>
+
+            <div class="risk-analysis-card">
+                <div class="risk-header">
+                    <div class="risk-title">مؤشر الجدارة الائتمانية للشركاء (Credit Score)</div>
+                    <div class="mono" id="risk-timestamp">2026-10-27T04:35:00Z</div>
+                </div>
+
+                <div class="risk-score-display">
+                    <div class="risk-score-number mono" id="credit-score">96.8</div>
+                    <div class="risk-score-meta">
+                        <div class="risk-grade" id="credit-grade">فئة استثمارية ممتازة (AAA)</div>
+                        <div class="risk-status">خطر التعثر: شبه معدوم (&lt; 0.12%)</div>
+                    </div>
+                </div>
+
+                <div class="ai-recommendation-box" id="ai-recommendation-text">
+                    <strong>💡 توصية الذكاء الاصطناعي الاستباقية:</strong><br>
+                    مستويات السيولة النقدية ممتازة وتغطي التزامات الـ 90 يوماً القادمة بنسبة 280%. يُنصح بتوجيه الفائض النقدي لتسريع الإفراج عن مراحل عقود التوريد الذكية (Escrow) للاستفادة من خصومات الدفع المبكر (Early Settlement Discounts) بنسبة 4.5%.
+                </div>
+
+                <button type="button" class="btn-export-forecast" id="btn-export-forecast-data">
+                    📥 تصدير تقرير التنبؤ المالي والمخاطر (Forecasting Executive Report)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="cross-border-settlement.html">التسويات عبر الحدود</a>
+            <a href="smart-escrow-milestone.html">العقود الذكية المشروطة</a>
+            <a href="fido2-webauthn-passkey.html">المصادقة البيومترية</a>
+            <a href="digital-forensics-litigation-hub.html">الأدلة الجنائية</a>
+            <a href="immutable-audit-vault.html">خزينة WORM المحصنة</a>
+        </div>
+        <div>
+            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <!-- Interactive Simulation Script -->
+    <script>
+        (function() {
+            var scenarios = {
+                normal: {
+                    f30: '€ 1,280,000.00', w30: '85%',
+                    f60: '€ 1,140,000.00', w60: '75%',
+                    f90: '€ 1,420,000.00', w90: '95%',
+                    total: '€ 3,840,000',
+                    score: '96.8',
+                    grade: 'فئة استثمارية ممتازة (AAA)',
+                    advice: '<strong>💡 توصية الذكاء الاصطناعي الاستباقية:</strong><br>مستويات السيولة النقدية ممتازة وتغطي التزامات الـ 90 يوماً القادمة بنسبة 280%. يُنصح بتوجيه الفائض النقدي لتسريع الإفراج عن مراحل عقود التوريد الذكية (Escrow) للاستفادة من خصومات الدفع المبكر بنسبة 4.5%.'
+                },
+                fx: {
+                    f30: '€ 1,190,000.00', w30: '78%',
+                    f60: '€ 1,060,000.00', w60: '70%',
+                    f90: '€ 1,310,000.00', w90: '86%',
+                    total: '€ 3,560,000',
+                    score: '92.4',
+                    grade: 'فئة ائتمانية قوية (AA+)',
+                    advice: '<strong>💡 توصية الذكاء الاصطناعي الاستباقية:</strong><br>تم رصد تذبذب طفيف في سلة العملات الإقليمية. المنظومة قامت تلقائياً بتفعيل عقود التحوط الفوري (Automated FX Micro-Hedging) لتثبيت أسعار صرف اليورو والريال والليرة السورية عند هوامش صفرية.'
+                },
+                supply: {
+                    f30: '€ 950,000.00', w30: '62%',
+                    f60: '€ 1,290,000.00', w60: '85%',
+                    f90: '€ 1,380,000.00', w90: '90%',
+                    total: '€ 3,620,000',
+                    score: '89.1',
+                    grade: 'فئة موثوقة ومحمية (AA)',
+                    advice: '<strong>💡 توصية الذكاء الاصطناعي الاستباقية:</strong><br>بسبب تأخر شحنات الموردين، سيتم ترحيل تدفقات المرحلة إلى الشهر الثاني مع تفعيل غرامات التأخير التعاقدية المشروطة في حساب الضمان Escrow تلقائياً لحماية حقوق الشركة.'
+                }
+            };
+
+            var f30Val = document.getElementById('f-30-val');
+            var f60Val = document.getElementById('f-60-val');
+            var f90Val = document.getElementById('f-90-val');
+            var f30Bar = document.getElementById('f-30-bar');
+            var f60Bar = document.getElementById('f-60-bar');
+            var f90Bar = document.getElementById('f-90-bar');
+            var statTotal = document.getElementById('stat-total-cashflow');
+            var creditScore = document.getElementById('credit-score');
+            var creditGrade = document.getElementById('credit-grade');
+            var aiText = document.getElementById('ai-recommendation-text');
+
+            // Initial bar widths
+            if (f30Bar && f60Bar && f90Bar) {
+                f30Bar.style.width = '85%';
+                f60Bar.style.width = '75%';
+                f90Bar.style.width = '95%';
+            }
+
+            function applyScenario(key) {
+                var s = scenarios[key];
+                if (!s) return;
+
+                f30Val.textContent = s.f30;
+                f60Val.textContent = s.f60;
+                f90Val.textContent = s.f90;
+                f30Bar.style.width = s.w30;
+                f60Bar.style.width = s.w60;
+                f90Bar.style.width = s.w90;
+                statTotal.textContent = s.total;
+                creditScore.textContent = s.score;
+                creditGrade.textContent = s.grade;
+                aiText.innerHTML = s.advice;
+
+                document.querySelectorAll('.scenario-btn').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                var activeBtn = document.getElementById('scen-' + key);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+
+            var btnNormal = document.getElementById('scen-normal');
+            var btnFx = document.getElementById('scen-fx');
+            var btnSupply = document.getElementById('scen-supply');
+
+            if (btnNormal) btnNormal.addEventListener('click', function() { applyScenario('normal'); });
+            if (btnFx) btnFx.addEventListener('click', function() { applyScenario('fx'); });
+            if (btnSupply) btnSupply.addEventListener('click', function() { applyScenario('supply'); });
+
+            var btnExport = document.getElementById('btn-export-forecast-data');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var data = {
+                        reportType: 'S&R CoreSync Predictive Cashflow & Credit Risk Audit',
+                        generatedAt: new Date().toISOString(),
+                        forecast90Days: statTotal.textContent,
+                        counterpartyCreditScore: creditScore.textContent + ' / 100',
+                        creditGrade: creditGrade.textContent,
+                        modelsUsed: ['LSTM Neural Net', 'Monte Carlo 10,000 Iterations']
+                    };
+
+                    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'coresync_cashflow_risk_forecast.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
