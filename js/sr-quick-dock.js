@@ -17,9 +17,10 @@
     function initQuickDock() {
         if (document.getElementById('srQuickDockContainer')) return;
 
-        // Detect Subfolder (nl, en, de)
-        const path = window.location.pathname.toLowerCase();
-        const isSubdir = /\/(en|nl|de|fr|es|it|ckb|ar)\//.test(path);
+        // Detect Subfolder across all 29 language folders
+        const path = window.location.pathname.toLowerCase().replace(/^\/|\/$/g, '');
+        const pathParts = path.split('/');
+        const isSubdir = pathParts.length > 1 || (pathParts.length === 1 && pathParts[0] !== '' && !pathParts[0].includes('.'));
         const prefix = isSubdir ? '../' : './';
 
         // Detect Language
