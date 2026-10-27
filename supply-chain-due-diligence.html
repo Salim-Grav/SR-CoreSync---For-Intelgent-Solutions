@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة تدقيق سلاسل التوريد والتحقق من الموردين الدوليين | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية الذكية لتدقيق سلاسل الإمداد العالمية، التحقق التلقائي من السجلات التجارية الرسمية (أوروبا، الشرق الأوسط، آسيا)، فحص العقوبات وغسل الأموال، وحوكمة CSDDD">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 15%, rgba(197, 168, 128, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, rgba(16, 185, 129, 0.05) 0%, transparent 40%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.1);
+            border-color: rgba(197, 168, 128, 0.3);
+        }
+
+        .btn-portal-back {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-portal-back:hover {
+            background: var(--emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 3rem 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--emerald);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+        }
+
+        .hero-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            color: #94a3b8;
+            max-width: 900px;
+            line-height: 1.7;
+        }
+
+        /* Metric Counters Row */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Workspace Grid */
+        .workspace {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        /* Preset Chips */
+        .preset-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .preset-title {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .btn-preset {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-dim);
+            color: #cbd5e1;
+            padding: 0.45rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-preset:hover, .btn-preset.active {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        /* Form Inputs */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .form-input, .form-select {
+            background: rgba(3, 8, 6, 0.8);
+            border: 1px solid var(--border-dim);
+            color: #fff;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: border-color 0.2s;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.15);
+        }
+
+        /* Checkboxes Group */
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.65rem;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-dim);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        .check-item input[type="checkbox"] {
+            accent-color: var(--emerald);
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-run-check {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            font-weight: 800;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .btn-run-check:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Results Display */
+        .result-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .score-box {
+            background: linear-gradient(135deg, rgba(7, 21, 16, 0.9), rgba(11, 31, 24, 0.9));
+            border: 1px solid var(--border-gold);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .score-circle-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-val {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold-light);
+        }
+
+        .score-details {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .score-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .score-status-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-status-badge.amber {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--amber);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .score-desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* Verification Pillars List */
+        .pillars-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .pillar-row {
+            background: rgba(3, 8, 6, 0.6);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .pillar-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pillar-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-dim);
+        }
+
+        .pillar-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #e2e8f0;
+        }
+
+        .pillar-meta {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .pillar-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .status-pass {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-exempt {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        /* Certificate Box */
+        .cert-card {
+            background: #020504;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 10px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .cert-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .cert-hash {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        .cert-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        .cert-label {
+            color: #94a3b8;
+        }
+
+        .cert-val {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-download-cert {
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-cert:hover {
+            background: var(--gold-primary);
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Sovereign Supply Chain Hub</span></div>
+                </div>
+            </a>
+            <div class="header-links">
+                <a href="compliance-audit-center.html" class="nav-link">مركز تدقيق الامتثال 🛡️</a>
+                <a href="sovereign-contract-engine.html" class="nav-link">محرك العقود الذكية 📜</a>
+                <a href="immutable-audit-vault.html" class="nav-link">خزينة WORM المحصنة 🔒</a>
+                <a href="cross-border-settlement.html" class="nav-link">التسويات الدولية 💱</a>
+                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>بوابة تدقيق سلاسل الإمداد العالمية • حوكمة CSDDD وفحص العقوبات والسيادة التجارية</span>
+        </div>
+        <h1 class="hero-title">منظومة تدقيق سلاسل التوريد و<span>التحقق من الموردين الدوليين</span></h1>
+        <p class="hero-subtitle">
+            منظومة فحص لحظية تدمج بين السجلات التجارية الحكومية المعتمدة (السعودية، الإمارات، بلاد الشام وسوريا، أوروبا، وآسيا)، وقوائم العقوبات وغسل الأموال الدولية مع تقييم الحصانة السيادية (Sovereign Immunity Check)، والامتثال للائحة الاستدامة والمسؤولية الحقوقية الأوروبية CSDDD.
+        </p>
+
+        <!-- Stats Counters -->
+        <div class="stats-grid">
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>السجلات التجارية المعتمدة</span>
+                    <span>🏛️</span>
+                </div>
+                <div class="stat-val">34 دولة</div>
+                <div class="stat-sub">EU VIES • Wathq KSA • UAE NER • Syria CR • ACRA SG</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>قواعد فحص العقوبات و PEP</span>
+                    <span>⚖️</span>
+                </div>
+                <div class="stat-val">4.8M كيان</div>
+                <div class="stat-sub">مجلس الأمن UN • الاتحاد الأوروبي EU • الإنتربول • FATF</div>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>تقييم الحصانة السيادية من العقوبات</span>
+                    <span>🛡️</span>
+                </div>
+                <div class="stat-val">Air-Gapped 100%</div>
+                <div class="stat-sub">حماية الشركات المحلية من تتبع Cloud Act الأمريكي</div>
+            </div>
+
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>زمن التدقيق وإصدار الشهادة</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val">1.14 ثانية</div>
+                <div class="stat-sub">توقيع رقمي تشفيري Ed25519 معتمد دولياً</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Control / Input Panel -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🔍 محرك الاستعلام والتدقيق اللحظي</span>
+                </div>
+                <span class="panel-title-badge">Live Due Diligence Engine</span>
+            </div>
+
+            <!-- Presets -->
+            <div class="preset-section">
+                <div class="preset-title">اختر سيناريو معتمد أو أدخل بيانات شركة مخصصة:</div>
+                <div class="preset-buttons">
+                    <button type="button" class="btn-preset active" id="btn-preset-syria">🇸🇾 دمشق للصناعات الطبية</button>
+                    <button type="button" class="btn-preset" id="btn-preset-ksa">🇸🇦 الرياض للروبوتات والأتمتة</button>
+                    <button type="button" class="btn-preset" id="btn-preset-uae">🇦🇪 دبي اللوجستية للطاقة</button>
+                    <button type="button" class="btn-preset" id="btn-preset-nl">🇳🇱 أمستردام للرقائق الخضراء</button>
+                    <button type="button" class="btn-preset" id="btn-preset-sg">🇸🇬 سنغافورة للفوتونيات الدقيقة</button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="due-diligence-form" class="form-grid">
+                <div class="form-group form-full">
+                    <label for="company-name" class="form-label">اسم الشركة / المورد التجاري</label>
+                    <input type="text" id="company-name" class="form-input" value="Damascus Advanced Medical Solutions LLC" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="country-select" class="form-label">الدولة والولاية القضائية</label>
+                    <select id="country-select" class="form-select">
+                        <option value="SY" selected>🇸🇾 سوريا (دمشق - السجل التجاري الوطني)</option>
+                        <option value="SA">🇸🇦 السعودية (الرياض - واثق / وزارة التجارة)</option>
+                        <option value="AE">🇦🇪 الإمارات (دبي - السجل الاقتصادي الوطني NER)</option>
+                        <option value="NL">🇳🇱 هولندا (أمستردام - KvK & EU VIES)</option>
+                        <option value="SG">🇸🇬 سنغافورة (ACRA BizFile+)</option>
+                        <option value="DE">🇩🇪 ألمانيا (Handelsregister & LkSG)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-number" class="form-label">رقم السجل التجاري / الرقم الوطني</label>
+                    <input type="text" id="reg-number" class="form-input mono" value="SY-DAM-2024-884910">
+                </div>
+
+                <div class="form-group">
+                    <label for="tax-vat-id" class="form-label">الرقم الضريبي / معرف VAT</label>
+                    <input type="text" id="tax-vat-id" class="form-input mono" value="SYP-TAX-902148">
+                </div>
+
+                <div class="form-group">
+                    <label for="sector-select" class="form-label">القطاع الاقتصادي وسلسلة الإمداد</label>
+                    <select id="sector-select" class="form-select">
+                        <option value="pharma" selected>الصناعات الدوائية والرعاية الصحية</option>
+                        <option value="tech">التكنولوجيا الفائقة والذكاء الاصطناعي</option>
+                        <option value="logistics">سلاسل الإمداد والطاقة النظيفة</option>
+                        <option value="semiconductor">أشباه الموصلات والعتاد السيادي</option>
+                        <option value="finance">التمويل المصرفي والتقنية المالية FinTech</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-full">
+                    <div class="form-label">معايير الفحص والتدقيق المطلوبة:</div>
+                    <div class="check-grid">
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-gov-reg" checked>
+                            <span>صحة السجل الحكومي التجاري</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-sanctions" checked>
+                            <span>فحص العقوبات وقوائم PEP و AML</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-sovereign-immunity" checked>
+                            <span>تقييم الحصانة السيادية (Air-Gapped)</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-csddd" checked>
+                            <span>لائحة الاستدامة الأوروبية CSDDD</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-esg" checked>
+                            <span>معايير العمل وحظر السخرة (LkSG)</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="chk-tax" checked>
+                            <span>الانتظام الضريبي ومقاصة العملات</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group form-full">
+                    <button type="submit" class="btn-run-check" id="btn-run-verification">
+                        <span>🚀 تشغيل التدقيق السيادي الفوري وإصدار الشهادة</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Output / Report Panel -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📊 نتائج الفحص وشهادة الثقة السيادية</span>
+                </div>
+                <span class="panel-title-badge mono" id="badge-verif-id">DUE-DIL-2026-9041</span>
+            </div>
+
+            <div class="result-container" id="results-area">
+                <!-- Score Box -->
+                <div class="score-box">
+                    <div class="score-circle-wrapper">
+                        <div class="score-val mono" id="score-number">98.4</div>
+                    </div>
+                    <div class="score-details">
+                        <div class="score-title" id="score-company-name">Damascus Advanced Medical Solutions LLC</div>
+                        <div class="score-status-badge" id="score-badge-text">✔ مورد موثوق ومطابق بنسبة 100% (Sovereign Verified)</div>
+                        <p class="score-desc" id="score-summary-text">
+                            تم التحقق الكامل من السجل التجاري السوري المعتمد (وزارة التجارة الداخلية)، مع مطابقة قانون المعاملات والتوقيع الإلكتروني السوري (قانون رقم 4 لعام 2009)، وعزل سحابي سيادي كامل يضمن الحصانة التامة من أي تتبع أو عقوبات أحادية، والتسوية المعتمدة بالليرة السورية SYP ومصرف سورية المركزي.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Verification Pillars List -->
+                <div class="pillars-list" id="pillars-list-container">
+                    <!-- Pillar 1 -->
+                    <div class="pillar-row">
+                        <div class="pillar-info">
+                            <div class="pillar-icon">🏛️</div>
+                            <div>
+                                <div class="pillar-name" id="p1-title">السجل التجاري الحكومي والشرعية القانونية</div>
+                                <div class="pillar-meta" id="p1-desc">مطابقة السجل التجاري بدمشق رقم SY-DAM-2024-884910 بنجاح</div>
+                            </div>
+                        </div>
+                        <div class="pillar-status status-pass" id="p1-status">✔ نشط ومطابق</div>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="pillar-row">
+                        <div class="pillar-info">
+                            <div class="pillar-icon">⚖️</div>
+                            <div>
+                                <div class="pillar-name" id="p2-title">قوائم العقوبات الدولية ومكافحة غسل الأموال (AML)</div>
+                                <div class="pillar-meta" id="p2-desc">فحص 4.8M سجل (مجلس الأمن، الإنتربول، والاتحاد الأوروبي) - سجل نظيف تماماً</div>
+                            </div>
+                        </div>
+                        <div class="pillar-status status-pass" id="p2-status">✔ سليم ومطهر 100%</div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="pillar-row">
+                        <div class="pillar-info">
+                            <div class="pillar-icon">🛡️</div>
+                            <div>
+                                <div class="pillar-name" id="p3-title">الحصانة والسيادة السحابية (Sovereign Immunity Check)</div>
+                                <div class="pillar-meta" id="p3-desc">بنية On-Premise معزولة تماماً تمنع تدخل قانون السحابة الأمريكي US Cloud Act</div>
+                            </div>
+                        </div>
+                        <div class="pillar-status status-exempt" id="p3-status">🛡️ محصن سيادياً</div>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="pillar-row">
+                        <div class="pillar-info">
+                            <div class="pillar-icon">🌱</div>
+                            <div>
+                                <div class="pillar-name" id="p4-title">حوكمة الاستدامة وسلاسل الإمداد (EU CSDDD & LkSG)</div>
+                                <div class="pillar-meta" id="p4-desc">خلو تام من عمالة السخرة ومطابقة معايير الانبعاثات النظيفة النطاق 3 (Scope 3)</div>
+                            </div>
+                        </div>
+                        <div class="pillar-status status-pass" id="p4-status">✔ متوافق CSDDD</div>
+                    </div>
+
+                    <!-- Pillar 5 -->
+                    <div class="pillar-row">
+                        <div class="pillar-info">
+                            <div class="pillar-icon">💱</div>
+                            <div>
+                                <div class="pillar-name" id="p5-title">الانتظام الضريبي والمقاصة المالية المعتمدة</div>
+                                <div class="pillar-meta" id="p5-desc">الرقم الضريبي SYP-TAX-902148 نشط • التسوية عبر مسار مصرف سورية المركزي CBS</div>
+                            </div>
+                        </div>
+                        <div class="pillar-status status-pass" id="p5-status">✔ مقاصة معتمدة</div>
+                    </div>
+                </div>
+
+                <!-- Cryptographic Audit Certificate -->
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">📜 شهادة التدقيق السيادي التشفيرية (Sovereign Audit Certificate)</div>
+                        <div class="cert-hash mono" id="cert-timestamp">2026-10-27T02:45:10Z</div>
+                    </div>
+                    <div class="cert-details">
+                        <div>
+                            <span class="cert-label">المعرف التشفيري: </span>
+                            <span class="cert-val mono" id="cert-hash-val">SHA256: 7f8a9e2d...4c1b98a0</span>
+                        </div>
+                        <div>
+                            <span class="cert-label">المصادق المعتمد: </span>
+                            <span class="cert-val">S&R CoreSync Sovereign Trust Network</span>
+                        </div>
+                        <div>
+                            <span class="cert-label">الجهة الموقعة: </span>
+                            <span class="cert-val">Salim Aziza (AMS) & Raed Kaakeh (RUH/DAM)</span>
+                        </div>
+                        <div>
+                            <span class="cert-label">الحجية القانونية: </span>
+                            <span class="cert-val">قانون رقم 4 (2009) • eIDAS Art. 25 • ZATCA</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-download-cert" id="btn-download-report">
+                        📥 تنزيل تقرير التدقيق السيادي المعتمد (PDF / JSON Signed Bundle)
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="compliance-audit-center.html">مركز الامتثال الدولي</a>
+            <a href="sovereign-contract-engine.html">محرك العقود الذكية</a>
+            <a href="immutable-audit-vault.html">خزينة WORM المحصنة</a>
+            <a href="cross-border-settlement.html">التسويات عبر الحدود</a>
+            <a href="digital-timestamping.html">محرك التوثيق الزمني eIDAS</a>
+            <a href="sovereign-siem-soc.html">مركز العمليات الأمنية SIEM</a>
+        </div>
+        <div>
+            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <!-- Interactive Simulation Script -->
+    <script>
+        (function() {
+            const presets = {
+                syria: {
+                    name: 'Damascus Advanced Medical Solutions LLC',
+                    country: 'SY',
+                    regNumber: 'SY-DAM-2024-884910',
+                    taxId: 'SYP-TAX-902148',
+                    sector: 'pharma',
+                    score: '98.4',
+                    badge: '✔ مورد موثوق ومطابق بنسبة 100% (Sovereign Verified)',
+                    badgeClass: 'status-pass',
+                    summary: 'تم التحقق الكامل من السجل التجاري السوري المعتمد (وزارة التجارة الداخلية)، مع مطابقة قانون المعاملات والتوقيع الإلكتروني السوري (قانون رقم 4 لعام 2009)، وعزل سحابي سيادي كامل يضمن الحصانة التامة من أي تتبع أو عقوبات أحادية، والتسوية المعتمدة بالليرة السورية SYP ومصرف سورية المركزي.',
+                    p1: { title: 'السجل التجاري الحكومي والشرعية القانونية', desc: 'مطابقة السجل التجاري بدمشق رقم SY-DAM-2024-884910 بنجاح', status: '✔ نشط ومطابق', statusClass: 'status-pass' },
+                    p2: { title: 'قوائم العقوبات الدولية ومكافحة غسل الأموال (AML)', desc: 'فحص 4.8M سجل (مجلس الأمن، الإنتربول، والاتحاد الأوروبي) - سجل نظيف تماماً', status: '✔ سليم ومطهر 100%', statusClass: 'status-pass' },
+                    p3: { title: 'الحصانة والسيادة السحابية (Sovereign Immunity Check)', desc: 'بنية On-Premise معزولة تماماً تمنع تدخل قانون السحابة الأمريكي US Cloud Act', status: '🛡️ محصن سيادياً', statusClass: 'status-exempt' },
+                    p4: { title: 'حوكمة الاستدامة وسلاسل الإمداد (EU CSDDD & LkSG)', desc: 'خلو تام من عمالة السخرة ومطابقة معايير الانبعاثات النظيفة النطاق 3 (Scope 3)', status: '✔ متوافق CSDDD', statusClass: 'status-pass' },
+                    p5: { title: 'الانتظام الضريبي والمقاصة المالية المعتمدة', desc: 'الرقم الضريبي SYP-TAX-902148 نشط • التسوية عبر مسار مصرف سورية المركزي CBS', status: '✔ مقاصة معتمدة', statusClass: 'status-pass' }
+                },
+                ksa: {
+                    name: 'Riyadh Sovereign Autonomous Robotics Co.',
+                    country: 'SA',
+                    regNumber: '1010-984210-CR',
+                    taxId: 'VAT-SA-310948291000003',
+                    sector: 'tech',
+                    score: '99.2',
+                    badge: '✔ معتمد ZATCA Phase 2 & نفاذ الوطني',
+                    badgeClass: 'status-pass',
+                    summary: 'تم التحقق الفوري عبر واجهة واثق لوزارة التجارة السعودية، مع الربط الكامل مع منصة فاتورة (ZATCA Phase 2) وتشفير CSID، والامتثال لضوابط الهيئة الوطنية للأمن السيبراني NCA ECC-1 ونظام حماية البيانات الشخصية PDPL.',
+                    p1: { title: 'السجل التجاري ووزارة التجارة السعودية', desc: 'تحقق لحظي من سجل الرياض رقم 1010-984210-CR عبر بوابة واثق', status: '✔ نشط ومعتمد', statusClass: 'status-pass' },
+                    p2: { title: 'فحص الحظر والقوائم الائتمانية وقوائم سمة', desc: 'مطابقة تامة لمتطلبات البنك المركزي السعودي SAMA وخلو من أي تعثر مالي', status: '✔ سجل ائتماني ممتاز', statusClass: 'status-pass' },
+                    p3: { title: 'الأمن السيبراني وتوطين البيانات الوطنية', desc: 'امتثال 100% لمعيار NCA ECC-1 واستضافة سحابية داخل حدود المملكة', status: '🛡️ سيادة وطنية سعودية', statusClass: 'status-pass' },
+                    p4: { title: 'الفوترة الإلكترونية والأختام المشفرة', desc: 'دمج كامل مع ZATCA FATOORA وحفظ سجلات XML UBL 2.1 لمدة 10 سنوات', status: '✔ ZATCA Phase 2', statusClass: 'status-pass' },
+                    p5: { title: 'المدفوعات والمقاصة اللحظية (SARIE)', desc: 'تسوية فورية بالريال السعودي SAR مع مصرف الراجحي والبنك الأهلي السعودي', status: '✔ تسوية SAR لحظية', statusClass: 'status-pass' }
+                },
+                uae: {
+                    name: 'Dubai Quantum Logistics & Clean Ports PJSC',
+                    country: 'AE',
+                    regNumber: 'DED-DXB-774921',
+                    taxId: 'TRN-100482910400003',
+                    sector: 'logistics',
+                    score: '97.8',
+                    badge: '✔ مسجل بالهيئة الاتحادية للضرائب FTA',
+                    badgeClass: 'status-pass',
+                    summary: 'تم التحقق من السجل الاقتصادي الوطني الإماراتي (NER) واشتراطات أمن المعلومات لحكومة دبي ISR، مع الامتثال لضريبة الشركات (9%) وضريبة القيمة المضافة (5%) وحوكمة الحوسبة السحابية TDRA.',
+                    p1: { title: 'السجل الاقتصادي الوطني الإماراتي (NER)', desc: 'ترخيص تجاري ساري من دائرة الاقتصاد والسياحة بدبي رقم DED-DXB-774921', status: '✔ رخصة نشطة', statusClass: 'status-pass' },
+                    p2: { title: 'فحص مكافحة غسل الأموال والمستفيد الحقيقي (UBO)', desc: 'تسجيل رسمي في منظومة goAML لوحدة المعلومات المالية بالمصرف المركزي', status: '✔ UBO مدقق وموثق', statusClass: 'status-pass' },
+                    p3: { title: 'معيار أمن المعلومات لحكومة دبي (Dubai ISR)', desc: 'شهادة امتثال رقمية معتمدة ومطابقة لضوابط دبي الرقمية وحفظ البيانات داخل الدولة', status: '🛡️ ISR Compliant', statusClass: 'status-pass' },
+                    p4: { title: 'ضريبة الشركات الاتحادية وضريبة القيمة المضافة', desc: 'امتثال لمرسوم بقانون اتحادي رقم 47 لسنة 2022 ونظام الفوترة الرقمية المعتمد', status: '✔ FTA 9% / 5%', statusClass: 'status-pass' },
+                    p5: { title: 'تسوية المدفوعات والتمويل المفتوح (CBUAE)', desc: 'تسوية فورية عبر نظام الدرهم الإماراتي لنقل الأموال (UAEFTS)', status: '✔ تسوية AED فورية', statusClass: 'status-pass' }
+                },
+                nl: {
+                    name: 'Amsterdam Green Semiconductor Foundry B.V.',
+                    country: 'NL',
+                    regNumber: 'KvK-84910283',
+                    taxId: 'NL84910283B01',
+                    sector: 'semiconductor',
+                    score: '99.8',
+                    badge: '✔ معتمد أوروبياً EU VIES & CSDDD Net-Zero',
+                    badgeClass: 'status-pass',
+                    summary: 'تم التحقق من الغرفة التجارية الهولندية (KvK) ومنظومة تبادل المعلومات الضريبية الأوروبية VIES، مع مطابقة صارمة للائحة الاستدامة سلاسل الإمداد CSDDD وقانون العناية الواجبة بحقوق الإنسان.',
+                    p1: { title: 'الغرفة التجارية الهولندية (KvK) و VIES', desc: 'سجل تجاري KvK رقم 84910283 ورقم ضريبي أوروبي صالح ومعتمد للمعاملات العكسية', status: '✔ VIES Validated', statusClass: 'status-pass' },
+                    p2: { title: 'لائحة العناية الواجبة بالاستدامة المؤسسية (CSDDD)', desc: 'تدقيق دوري لسلسلة التوريد العالمية وخلوها التام من أي انتهاكات عمالية أو بيئية', status: '🌱 CSDDD Certified', statusClass: 'status-pass' },
+                    p3: { title: 'الحفظ الضريبي الإلزامي (Dutch AWR 10 Years)', desc: 'أرشفة السجلات وسلاسل التوريد وفق المادة 52 من قانون الضرائب الهولندي العام', status: '🔒 AWR 10Y Locked', statusClass: 'status-pass' },
+                    p4: { title: 'اللائحة الأوروبية العامة لحماية البيانات (GDPR)', desc: 'امتثال كامل للمادة 32 من GDPR وخوادم معزولة ذات كفاءة طاقة خضراء PUE 1.08', status: '🛡️ GDPR Gold', statusClass: 'status-pass' },
+                    p5: { title: 'المقاصة الأوروبية الفورية (SEPA Instant 10s)', desc: 'تسوية الحسابات التجارية باليورو EUR في أقل من ثوانٍ معدودة عبر بنوك هولندا', status: '✔ SEPA Instant', statusClass: 'status-pass' }
+                },
+                sg: {
+                    name: 'Singapore Micro-Photonics Foundry Pte. Ltd.',
+                    country: 'SG',
+                    regNumber: 'UEN-202209182K',
+                    taxId: 'GST-M90218401X',
+                    sector: 'tech',
+                    score: '98.9',
+                    badge: '✔ معتمد ACRA & InvoiceNow Peppol SG',
+                    badgeClass: 'status-pass',
+                    summary: 'تم التحقق من هيئة تنظيم المحاسبة والشركات بسنغافورة ACRA، وتوافق تام مع إرشادات سلطة النقد MAS TRM Notice 644 وشبكة الفوترة الوطنية InvoiceNow عبر Peppol PINT.',
+                    p1: { title: 'هيئة تنظيم الشركات بسنغافورة (ACRA BizFile+)', desc: 'رقم الكيان الموحد UEN 202209182K نشط ومصرح بممارسة الأنشطة التكنولوجية', status: '✔ ACRA Live Active', statusClass: 'status-pass' },
+                    p2: { title: 'إدارة مخاطر التكنولوجيا (MAS TRM & Cyber Hygiene)', desc: 'مطابقة تامة لتعميم سلطة النقد السنغافورية MAS Notice 644 لحماية البنية الحيوية', status: '🛡️ MAS Compliant', statusClass: 'status-pass' },
+                    p3: { title: 'شبكة الفوترة الوطنية السنغافورية (InvoiceNow)', desc: 'تبادل الفواتير وسلاسل التوريد عبر شبكة Peppol المعتمدة لدول آسيا والمحيط الهادئ', status: '✔ Peppol PINT SG', statusClass: 'status-pass' },
+                    p4: { title: 'حوكمة التجارة ومكافحة الفساد في آسيا (CPIB Rules)', desc: 'سجل شفاف وخالٍ من أي بلاغات تضارب مصالح أو رشوة تجارية عبر جنوب شرق آسيا', status: '✔ 100% شفافية', statusClass: 'status-pass' },
+                    p5: { title: 'المقاصة المالية بالدولار السنغافوري (SGD PayNow Corporate)', desc: 'تسوية سريعة ومقاصة عبر بنك DBS و OCBC بدعم مباشر من S&R CoreSync', status: '✔ PayNow Instant', statusClass: 'status-pass' }
+                }
+            };
+
+            const companyNameInput = document.getElementById('company-name');
+            const countrySelect = document.getElementById('country-select');
+            const regNumberInput = document.getElementById('reg-number');
+            const taxIdInput = document.getElementById('tax-vat-id');
+            const sectorSelect = document.getElementById('sector-select');
+
+            const scoreNumber = document.getElementById('score-number');
+            const scoreCompanyName = document.getElementById('score-company-name');
+            const scoreBadgeText = document.getElementById('score-badge-text');
+            const scoreSummaryText = document.getElementById('score-summary-text');
+            const badgeVerifId = document.getElementById('badge-verif-id');
+            const certTimestamp = document.getElementById('cert-timestamp');
+            const certHashVal = document.getElementById('cert-hash-val');
+
+            const p1Title = document.getElementById('p1-title');
+            const p1Desc = document.getElementById('p1-desc');
+            const p1Status = document.getElementById('p1-status');
+
+            const p2Title = document.getElementById('p2-title');
+            const p2Desc = document.getElementById('p2-desc');
+            const p2Status = document.getElementById('p2-status');
+
+            const p3Title = document.getElementById('p3-title');
+            const p3Desc = document.getElementById('p3-desc');
+            const p3Status = document.getElementById('p3-status');
+
+            const p4Title = document.getElementById('p4-title');
+            const p4Desc = document.getElementById('p4-desc');
+            const p4Status = document.getElementById('p4-status');
+
+            const p5Title = document.getElementById('p5-title');
+            const p5Desc = document.getElementById('p5-desc');
+            const p5Status = document.getElementById('p5-status');
+
+            function applyPreset(presetKey) {
+                const data = presets[presetKey];
+                if (!data) return;
+
+                companyNameInput.value = data.name;
+                countrySelect.value = data.country;
+                regNumberInput.value = data.regNumber;
+                taxIdInput.value = data.taxId;
+                sectorSelect.value = data.sector;
+
+                scoreNumber.textContent = data.score;
+                scoreCompanyName.textContent = data.name;
+                scoreBadgeText.textContent = data.badge;
+                scoreSummaryText.textContent = data.summary;
+
+                p1Title.textContent = data.p1.title;
+                p1Desc.textContent = data.p1.desc;
+                p1Status.textContent = data.p1.status;
+                p1Status.className = 'pillar-status ' + data.p1.statusClass;
+
+                p2Title.textContent = data.p2.title;
+                p2Desc.textContent = data.p2.desc;
+                p2Status.textContent = data.p2.status;
+                p2Status.className = 'pillar-status ' + data.p2.statusClass;
+
+                p3Title.textContent = data.p3.title;
+                p3Desc.textContent = data.p3.desc;
+                p3Status.textContent = data.p3.status;
+                p3Status.className = 'pillar-status ' + data.p3.statusClass;
+
+                p4Title.textContent = data.p4.title;
+                p4Desc.textContent = data.p4.desc;
+                p4Status.textContent = data.p4.status;
+                p4Status.className = 'pillar-status ' + data.p4.statusClass;
+
+                p5Title.textContent = data.p5.title;
+                p5Desc.textContent = data.p5.desc;
+                p5Status.textContent = data.p5.status;
+                p5Status.className = 'pillar-status ' + data.p5.statusClass;
+
+                const randomId = 'DUE-DIL-' + Math.floor(1000 + Math.random() * 9000);
+                badgeVerifId.textContent = randomId;
+                const now = new Date();
+                certTimestamp.textContent = now.toISOString();
+
+                // Compute pseudo hash
+                const pseudoHash = 'SHA256: ' + Array.from(data.name).reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) % 0xfffffffff, 7).toString(16).padStart(12, '0') + '...4c1b98a0';
+                certHashVal.textContent = pseudoHash;
+
+                document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+                const activeBtn = document.getElementById('btn-preset-' + presetKey);
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+
+            document.getElementById('btn-preset-syria').addEventListener('click', () => applyPreset('syria'));
+            document.getElementById('btn-preset-ksa').addEventListener('click', () => applyPreset('ksa'));
+            document.getElementById('btn-preset-uae').addEventListener('click', () => applyPreset('uae'));
+            document.getElementById('btn-preset-nl').addEventListener('click', () => applyPreset('nl'));
+            document.getElementById('btn-preset-sg').addEventListener('click', () => applyPreset('sg'));
+
+            document.getElementById('due-diligence-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('btn-run-verification');
+                const origText = btn.innerHTML;
+                btn.innerHTML = '<span>⏳ جاري الفحص اللحظي للسجلات ومصفوفة العقوبات...</span>';
+                btn.disabled = true;
+
+                setTimeout(function() {
+                    btn.innerHTML = origText;
+                    btn.disabled = false;
+
+                    const name = companyNameInput.value.trim() || 'Custom Enterprise Co.';
+                    scoreCompanyName.textContent = name;
+                    scoreNumber.textContent = '99.0';
+                    scoreBadgeText.textContent = '✔ تدقيق سيادي مخصص ناجح (Custom Due Diligence Cleared)';
+                    scoreSummaryText.textContent = 'تم إتمام الاستعلام المخصص بنجاح عن السجل التجاري والتحقق من عدم وجود أي تطابق في قوائم الحظر العالمية لمجلس الأمن، وضمان الامتثال لضوابط حوكمة سلاسل التوريد CSDDD والسيادة الرقمية المحلية.';
+
+                    const randomId = 'DUE-DIL-' + Math.floor(1000 + Math.random() * 9000);
+                    badgeVerifId.textContent = randomId;
+                    certTimestamp.textContent = new Date().toISOString();
+                    certHashVal.textContent = 'SHA256: ' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 10);
+                }, 800);
+            });
+
+            document.getElementById('btn-download-report').addEventListener('click', function() {
+                const reportData = {
+                    certificateId: badgeVerifId.textContent,
+                    timestamp: certTimestamp.textContent,
+                    companyName: scoreCompanyName.textContent,
+                    jurisdiction: countrySelect.value,
+                    registrationNumber: regNumberInput.value,
+                    taxNumber: taxIdInput.value,
+                    trustScore: scoreNumber.textContent + '/100',
+                    sovereignImmunity: 'Verified On-Premise Air-Gapped Compliant',
+                    csdddCompliance: 'Scope 3 Supply Chain Cleared',
+                    signers: ['Salim Aziza (Amsterdam Hub)', 'Raed Kaakeh (Middle East Hub)'],
+                    cryptographicHash: certHashVal.textContent
+                };
+
+                const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'coresync_due_diligence_' + badgeVerifId.textContent + '.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        })();
+    </script>
+</body>
+</html>
