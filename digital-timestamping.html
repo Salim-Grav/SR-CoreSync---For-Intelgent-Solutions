@@ -394,6 +394,10 @@
         .footer-link:hover {
             color: var(--gold-primary);
         }
+            .badge-rfc { font-size: 0.75rem; color: var(--gold-light); }
+        .btn-verify-emerald { background: linear-gradient(135deg, var(--emerald), #059669); color: #ffffff; }
+        .status-qualified { font-size: 0.75rem; color: var(--emerald); }
+        .reg-status-pill { color: var(--emerald); font-weight: 700; }
     </style>
 </head>
 <body>
@@ -478,7 +482,7 @@
                 <div class="seal-output" id="stamp-result">
                     <div class="seal-header">
                         <span class="seal-title">✓ تم توليد الختم الزمني المؤهل بنجاح (eIDAS QTSA)</span>
-                        <span class="mono" style="font-size: 0.75rem; color: var(--gold-light);">ASN.1 RFC 3161</span>
+                        <span class="mono badge-rfc">ASN.1 RFC 3161</span>
                     </div>
                     <div class="seal-body mono" id="stamp-details"></div>
                 </div>
@@ -492,14 +496,14 @@
                     <label class="form-label" for="verify-hash">تجزئة الختم أو رمز التوكن التشفيري (TST Token):</label>
                     <textarea id="verify-hash" class="form-textarea mono" rows="4" placeholder="أدخل الرمز التشفيري...">0x9e48f1c84b1239aa8e45f918bb0234acfe188204910248abec71a0941829e84b</textarea>
                 </div>
-                <button type="button" class="btn-action" id="btn-verify-stamp" style="background: linear-gradient(135deg, var(--emerald), #059669); color: #ffffff;">
+                <button type="button" class="btn-action btn-verify-emerald" id="btn-verify-stamp">
                     <span>التحقق من قائمة الثقة الأوروبية (Verify Against EUTL)</span>
                 </button>
 
                 <div class="seal-output" id="verify-result">
                     <div class="seal-header">
                         <span class="seal-title">✓ تم التحقق بنجاح — الختم أصلي وصالح قانونياً</span>
-                        <span class="mono" style="font-size: 0.75rem; color: var(--emerald);">STATUS: QUALIFIED</span>
+                        <span class="mono status-qualified">STATUS: QUALIFIED</span>
                     </div>
                     <div class="seal-body mono">
                         Trust Authority: S&R CoreSync Qualified Timestamp Authority (Amsterdam)<br>
@@ -529,25 +533,25 @@
                         <td><strong>EU Regulation No 910/2014 (eIDAS)</strong></td>
                         <td>البرلمان والمجلس الأوروبي</td>
                         <td>المادتان 41 و 42: الآثار القانونية للأختام الزمنية الإلكترونية المؤهلة</td>
-                        <td><span style="color: var(--emerald); font-weight: 700;">✓ معتمد ومطابق</span></td>
+                        <td><span class="reg-status-pill">✓ معتمد ومطابق</span></td>
                     </tr>
                     <tr>
                         <td><strong>RFC 3161 / RFC 5816 TSP</strong></td>
                         <td>IETF (Internet Engineering Task Force)</td>
                         <td>بروتوكول طلب وتوليد الختم الزمني للبيانات بصيغة ASN.1</td>
-                        <td><span style="color: var(--emerald); font-weight: 700;">✓ مفعل في المنظومة</span></td>
+                        <td><span class="reg-status-pill">✓ مفعل في المنظومة</span></td>
                     </tr>
                     <tr>
                         <td><strong>ETSI EN 319 421 / 422</strong></td>
                         <td>ETSI (European Telecommunications Standards)</td>
                         <td>متطلبات الأمان لمقدمي خدمات الثقة للأختام الزمنية الإلكترونية</td>
-                        <td><span style="color: var(--emerald); font-weight: 700;">✓ متوافق كلياً</span></td>
+                        <td><span class="reg-status-pill">✓ متوافق كلياً</span></td>
                     </tr>
                     <tr>
                         <td><strong>Dutch Telecommunications Act</strong></td>
                         <td>Agentschap Telecom (Rijksinspectie Digitale Infrastructuur)</td>
                         <td>الامتثال لمعايير البنية التحتية الرقمية الهولندية في أمستردام</td>
-                        <td><span style="color: var(--emerald); font-weight: 700;">✓ مرخص ومسجل</span></td>
+                        <td><span class="reg-status-pill">✓ مرخص ومسجل</span></td>
                     </tr>
                 </tbody>
             </table>

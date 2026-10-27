@@ -356,6 +356,12 @@
         .footer-link:hover {
             color: var(--gold-primary);
         }
+            .badge-streaming { font-size: 0.75rem; color: var(--emerald); }
+        .badge-immediate { font-size: 0.75rem; color: var(--gold-light); }
+        .sev-1-tag { color: var(--crimson); }
+        .sev-2-tag { color: var(--amber); }
+        .forensic-tag { color: var(--cyan); }
+        .btn-forensic-report { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid var(--cyan); }
     </style>
 </head>
 <body>
@@ -415,7 +421,7 @@
             <div class="panel-box">
                 <div class="panel-header">
                     <span class="panel-title"><span>📡</span> تدفق سجلات الأمان الحية (Live SIEM Telemetry Stream)</span>
-                    <span class="mono" style="font-size: 0.75rem; color: var(--emerald);">STATUS: STREAMING</span>
+                    <span class="mono badge-streaming">STATUS: STREAMING</span>
                 </div>
                 <div class="log-terminal mono" id="log-terminal">
                     <!-- Logs injected dynamically -->
@@ -426,13 +432,13 @@
             <div class="panel-box">
                 <div class="panel-header">
                     <span class="panel-title"><span>🛡️</span> مسارات الاستجابة التلقائية (SOAR Playbooks)</span>
-                    <span style="font-size: 0.75rem; color: var(--gold-light);">تدخل فوري</span>
+                    <span class="badge-immediate">تدخل فوري</span>
                 </div>
                 <div class="soar-action-list">
                     <div class="soar-card">
                         <div class="soar-card-title">
                             <span>عزل فوري للعنوان المشبوه (BGP Blackhole)</span>
-                            <span class="mono" style="color: var(--crimson);">SEV-1</span>
+                            <span class="mono sev-1-tag">SEV-1</span>
                         </div>
                         <p class="soar-card-desc">توجيه حركة المرور الخبيثة من النطاق المهاجم إلى مسار الإسقاط الصامت فوراً على مستوى مزودي الإنترنت في أمستردام.</p>
                         <button type="button" class="btn-soar btn-soar-block" data-action="عزل BGP Blackhole">تطبيق الحظر والعزل الفوري</button>
@@ -441,7 +447,7 @@
                     <div class="soar-card">
                         <div class="soar-card-title">
                             <span>إلغاء جلسات الـ API المشبوهة (Token Revocation)</span>
-                            <span class="mono" style="color: var(--amber);">SEV-2</span>
+                            <span class="mono sev-2-tag">SEV-2</span>
                         </div>
                         <p class="soar-card-desc">إبطال مفاتيح OAuth2 وتوكنات JWT للمستخدم فور رصد تجاوزات في السلوك الطبيعي أو تبدل الدولة الجغرافية المفاجئ.</p>
                         <button type="button" class="btn-soar btn-soar-revoke" data-action="إلغاء الجلسات المشبوهة">إبطال وتجميد التوكنات</button>
@@ -450,10 +456,10 @@
                     <div class="soar-card">
                         <div class="soar-card-title">
                             <span>التقاط لقطة جنائية للذاكرة (Forensic WORM Snapshot)</span>
-                            <span class="mono" style="color: var(--cyan);">FORENSIC</span>
+                            <span class="mono forensic-tag">FORENSIC</span>
                         </div>
                         <p class="soar-card-desc">حفظ صورة فورية مشفرة من ذاكرة الحاوية المتأثرة في وحدة تخزين WORM المعزولة لتقديم الأدلة الجنائية المعتمدة.</p>
-                        <button type="button" class="btn-soar" style="background: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid var(--cyan);" data-action="التقاط الذاكرة الجنائية">توليد التقرير الجنائي</button>
+                        <button type="button" class="btn-soar btn-forensic-report" data-action="التقاط الذاكرة الجنائية">توليد التقرير الجنائي</button>
                     </div>
                 </div>
 

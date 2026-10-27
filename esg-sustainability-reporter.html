@@ -410,6 +410,13 @@
         .footer-link:hover {
             color: #ffffff;
         }
+            .metric-sub-gold { color: var(--gold-light); }
+        .res-coresync-val { color: var(--emerald-light); }
+        .res-pct-val { color: var(--cyan); }
+        .res-row-last { border-bottom: none; }
+        .res-trees-val { color: var(--gold-light); }
+        .cert-desc { font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.5rem; }
+        .cert-hash { font-size: 0.7rem; color: var(--gold-primary); }
     </style>
 </head>
 <body>
@@ -458,7 +465,7 @@
             <div class="metric-card">
                 <div class="metric-label">حالة الحياد الكربوني المعتمدة (Net-Zero)</div>
                 <div class="metric-val mono">100% Verified</div>
-                <div class="metric-sub" style="color: var(--gold-light);">✓ معتمد وفق Gold Standard VCS</div>
+                <div class="metric-sub metric-sub-gold">✓ معتمد وفق Gold Standard VCS</div>
             </div>
         </section>
 
@@ -504,7 +511,7 @@
                         </div>
                         <div class="res-row">
                             <span class="res-label">انبعاثات سحابة S&amp;R CoreSync الخضراء:</span>
-                            <span class="res-val mono" id="res-coresync" style="color: var(--emerald-light);">0.94 طن CO2e/سنة</span>
+                            <span class="res-val mono res-coresync-val" id="res-coresync">0.94 طن CO2e/سنة</span>
                         </div>
                         <div class="res-row">
                             <span class="res-label">صافي خفض الانبعاثات السنوي (Avoided Emissions):</span>
@@ -512,21 +519,21 @@
                         </div>
                         <div class="res-row">
                             <span class="res-label">نسبة تقليص البصمة الكربونية الكلية:</span>
-                            <span class="res-val mono" id="res-pct" style="color: var(--cyan);">93.6% خفض كربوني</span>
+                            <span class="res-val mono res-pct-val" id="res-pct">93.6% خفض كربوني</span>
                         </div>
-                        <div class="res-row" style="border-bottom: none;">
+                        <div class="res-row res-row-last">
                             <span class="res-label">ما يعادل زراعة أشجار سنوية:</span>
-                            <span class="res-val mono" id="res-trees" style="color: var(--gold-light);">661 شجرة</span>
+                            <span class="res-val mono res-trees-val" id="res-trees">661 شجرة</span>
                         </div>
                     </div>
 
                     <div class="certificate-preview" id="cert-box">
                         <div class="cert-stamp">✓ معتمد رسمياً CSRD ESRS E1</div>
                         <div class="cert-header">شهادة الامتثال البيئي الأوروبي (Green Cloud Seal)</div>
-                        <p style="font-size: 0.8rem; color: #cbd5e1; margin-bottom: 0.5rem;">
+                        <p class="cert-desc">
                             تؤكد هذه الشهادة الرقمية الصادرة عن S&amp;R CoreSync امتثال البنية التحتية المحاسبية بالكامل لمعايير صافي الانبعاثات الصفري عبر خوادم أمستردام العاملة بطاقة الرياح البحرية 100%.
                         </p>
-                        <div class="mono" style="font-size: 0.7rem; color: var(--gold-primary);">
+                        <div class="mono cert-hash">
                             Audit Hash: sha256:7f9a21b38e05c9d4b6e821fa5821092c431b9183610931dce9047192a0142
                         </div>
                     </div>

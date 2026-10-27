@@ -316,6 +316,8 @@
         .footer-link:hover {
             color: var(--gold-primary);
         }
+            .badge-entity { font-size: 0.8rem; color: var(--gold-light); }
+        .badge-status-sso { font-size: 0.75rem; color: var(--gold-light); }
     </style>
 </head>
 <body>
@@ -377,7 +379,7 @@
         <section class="sso-studio">
             <div class="studio-header">
                 <span class="studio-title"><span>⚙️</span> محاكي اختبار تدفق المصادقة (SSO Authentication Simulator)</span>
-                <span class="mono" style="font-size: 0.8rem; color: var(--gold-light);">SP Entity ID: https://sr-coresync.com/auth/saml/sp</span>
+                <span class="mono badge-entity">SP Entity ID: https://sr-coresync.com/auth/saml/sp</span>
             </div>
 
             <div class="form-row">
@@ -398,7 +400,7 @@
             <div class="claims-box" id="claims-box">
                 <div class="claims-header">
                     <span>✓ تم قبول تفويض الهوية وتأكيد الـ SAML Assertion بنجاح</span>
-                    <span class="mono" style="font-size: 0.75rem; color: var(--gold-light);">Status: HTTP 200 SUCCESS</span>
+                    <span class="mono badge-status-sso">Status: HTTP 200 SUCCESS</span>
                 </div>
                 <div class="claims-body mono" id="claims-output">
                     <!-- SAML Claims -->
