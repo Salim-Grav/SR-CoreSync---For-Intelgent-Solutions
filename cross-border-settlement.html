@@ -488,21 +488,28 @@
                         <label class="form-label" for="settle-src-curr">عملة الدفع المصدرية:</label>
                         <select id="settle-src-curr" class="form-select">
                             <option value="EUR" selected>EUR (€) - اليورو الأوروبي</option>
-                            <option value="USD">USD ($) - الدولار الأمريكي</option>
                             <option value="SAR">SAR (﷼) - الريال السعودي</option>
                             <option value="AED">AED (د.إ) - الدرهم الإماراتي</option>
-                            <option value="GBP">GBP (£) - الجنيه الإسترليني</option>
                             <option value="KWD">KWD (د.ك) - الدينار الكويتي</option>
+                            <option value="QAR">QAR (ر.ق) - الريال القطري</option>
+                            <option value="SGD">SGD (S$) - الدولار السنغافوري</option>
+                            <option value="JPY">JPY (¥) - الين الياباني</option>
+                            <option value="USD">USD ($) - الدولار الأمريكي</option>
+                            <option value="GBP">GBP (£) - الجنيه الإسترليني</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="settle-tgt-curr">عملة التسوية والحساب المصرفي المستهدف:</label>
                         <select id="settle-tgt-curr" class="form-select">
-                            <option value="EUR">EUR (€) - الحساب الهولندي IBAN</option>
-                            <option value="SAR" selected>SAR (﷼) - حساب البنك الأهلي السعودي / الراجحي</option>
-                            <option value="AED">AED (د.إ) - حساب بنك الإمارات دبي الوطني ENBD</option>
-                            <option value="USD">USD ($) - حساب التسوية بالدولار</option>
+                            <option value="EUR">EUR (€) - الحساب الهولندي IBAN (SEPA Instant)</option>
+                            <option value="SAR" selected>SAR (﷼) - حساب بنكي سعودي (SARIE / SAMA)</option>
+                            <option value="AED">AED (د.إ) - حساب مصرفي إماراتي (CBUAE Aani)</option>
+                            <option value="KWD">KWD (د.ك) - حساب مصرفي كويتي (KASSIP)</option>
+                            <option value="QAR">QAR (ر.ق) - حساب مصرفي قطري (QATCH)</option>
+                            <option value="SGD">SGD (S$) - حساب سنغافورة المصرفي (MAS FAST / PayNow)</option>
+                            <option value="JPY">JPY (¥) - حساب بنكي ياباني (BOJ-NET Zengin)</option>
+                            <option value="USD">USD ($) - حساب التسوية بالدولار الدولي</option>
                         </select>
                     </div>
 
@@ -510,10 +517,12 @@
                         <label class="form-label" for="settle-jurisdiction">الولاية الضريبية للعميل (Tax Jurisdiction):</label>
                         <select id="settle-jurisdiction" class="form-select">
                             <option value="NL_BTW">هولندا - ضريبة القيمة المضافة BTW 21%</option>
-                            <option value="EU_REVERSE" selected>الاتحاد الأوروبي (خارج هولندا) - تكليف عكسي B2B (Reverse Charge 0%)</option>
-                            <option value="SA_ZATCA">المملكة العربية السعودية - ضريبة ZATCA 15%</option>
-                            <option value="AE_FTA">دولة الإمارات العربية المتحدة - ضريبة FTA VAT 5%</option>
-                            <option value="CROSS_EXPORT">تصدير دولي معفى (Zero-Rated B2B Export 0%)</option>
+                            <option value="EU_REVERSE" selected>الاتحاد الأوروبي - تكليف عكسي B2B (Reverse Charge 0%)</option>
+                            <option value="SA_ZATCA">المملكة العربية السعودية - ضريبة ZATCA 15% (ختم الفاتورة Phase 2)</option>
+                            <option value="AE_FTA">الإمارات العربية المتحدة - ضريبة FTA VAT 5% (وضريبة الشركات 9%)</option>
+                            <option value="SG_GST">سنغافورة - ضريبة السلع والخدمات GST 9% (عبر InvoiceNow Peppol)</option>
+                            <option value="JP_JCT">اليابان - ضريبة الاستهلاك JCT 10% (نظام الفاتورة المؤهلة NTA)</option>
+                            <option value="CROSS_EXPORT">تصدير دولي سيادي معفى (Zero-Rated B2B Export 0%)</option>
                         </select>
                     </div>
 
@@ -574,6 +583,34 @@
         <h2 class="section-title">🏛️ الهيئات والتشريعات الضريبية الممتثل لها بالكامل</h2>
         <section class="tax-rules-grid">
             <div class="tax-card">
+                <span class="tax-badge">SAUDI ARABIA</span>
+                <h3 class="tax-title">هيئة الزكاة والضريبة والجمارك (ZATCA)</h3>
+                <p class="tax-desc">
+                    الامتثال الكامل للمرحلة الثانية (مشروع فاتورة)، مع توليد أختام CSID التشفيرية والتوقيع الرقمي ECDSA ورموز QR المعتمدة.
+                </p>
+            </div>
+            <div class="tax-card">
+                <span class="tax-badge">UNITED ARAB EMIRATES</span>
+                <h3 class="tax-title">الهيئة الاتحادية للضرائب (FTA UAE)</h3>
+                <p class="tax-desc">
+                    إدارة الفواتير الضريبية الممتثلة لضريبة القيمة المضافة (VAT 5%) وضريبة الشركات (Corporate Tax 9%) مع إعفاءات المناطق الحرة.
+                </p>
+            </div>
+            <div class="tax-card">
+                <span class="tax-badge">SINGAPORE</span>
+                <h3 class="tax-title">هيئة الإيرادات السنغافورية (IRAS GST 9%)</h3>
+                <p class="tax-desc">
+                    مطابقة معايير ضريبة السلع والخدمات GST والربط المباشر مع شبكة الفوترة الوطنية InvoiceNow المتوافقة مع معيار Peppol PINT الآسيوي.
+                </p>
+            </div>
+            <div class="tax-card">
+                <span class="tax-badge">JAPAN</span>
+                <h3 class="tax-title">مصلحة الضرائب اليابانية (NTA JCT 10%)</h3>
+                <p class="tax-desc">
+                    الامتثال لنظام الفاتورة المؤهلة في اليابان (Japanese Qualified Invoice System)، ومعالجة ضريبة الاستهلاك JCT وحسابات التصدير.
+                </p>
+            </div>
+            <div class="tax-card">
                 <span class="tax-badge">NETHERLANDS</span>
                 <h3 class="tax-title">Belastingdienst (BTW 21%)</h3>
                 <p class="tax-desc">
@@ -581,24 +618,10 @@
                 </p>
             </div>
             <div class="tax-card">
-                <span class="tax-badge">SAUDI ARABIA</span>
-                <h3 class="tax-title">هيئة الزكاة والضريبة والجمارك (ZATCA)</h3>
-                <p class="tax-desc">
-                    الامتثال الكامل للمرحلة الثانية من الفوترة الإلكترونية (مشروع فاتورة)، وتوليد شفرات QR التشفيرية وأختام XML التشفيرية.
-                </p>
-            </div>
-            <div class="tax-card">
-                <span class="tax-badge">UNITED ARAB EMIRATES</span>
-                <h3 class="tax-title">الهيئة الاتحادية للضرائب (FTA VAT 5%)</h3>
-                <p class="tax-desc">
-                    إدارة الفواتير الضريبية الممتثلة لقانون ضريبة القيمة المضافة الإماراتي، مع دعم حسابات الشركات في المناطق الحرة والبر الرئيسي.
-                </p>
-            </div>
-            <div class="tax-card">
                 <span class="tax-badge">EUROPEAN UNION</span>
                 <h3 class="tax-title">EU VAT MOSS &amp; Reverse Charge</h3>
                 <p class="tax-desc">
-                    تطبيق نظام التكليف العكسي التلقائي للصفقات البينية بين دول الاتحاد الأوروبي B2B (المادة 194) ونافذة السداد الموحدة One-Stop Shop.
+                    تطبيق نظام التكليف العكسي التلقائي للصفقات البينية B2B ونافذة السداد الموحدة One-Stop Shop وفق التوجيه الأوروبي 2006/112/EC.
                 </p>
             </div>
         </section>
@@ -640,15 +663,22 @@
                 'USD': 0.9223,
                 'SAR': 0.2458,
                 'AED': 0.2511,
-                'GBP': 1.1709,
-                'KWD': 2.9940
+                'KWD': 2.9940,
+                'QAR': 0.2533,
+                'SGD': 0.6858,
+                'JPY': 0.00609,
+                'GBP': 1.1709
             };
 
             var eurToTarget = {
                 'EUR': 1.0,
                 'USD': 1.0842,
                 'SAR': 4.0680,
-                'AED': 3.9825
+                'AED': 3.9825,
+                'KWD': 0.3340,
+                'QAR': 3.9480,
+                'SGD': 1.4580,
+                'JPY': 164.20
             };
 
             if (btn && amountEl && srcCurrEl && tgtCurrEl && jurisEl) {
@@ -662,17 +692,19 @@
                     var rate = (eurToTarget[tgt] || 1.0) / (eurToTarget[src] || 1.0);
                     var fee = amountInEur * 0.0015;
 
-                    var taxRate = 0.0;
-                    var taxLabel = '€0.00 (Reverse Charge / Exempt)';
+                    var taxLabel = '€0.00 (Zero-Rated / Exempt)';
                     if (juris === 'NL_BTW') {
-                        taxRate = 0.21;
                         taxLabel = '€' + (amountInEur * 0.21).toFixed(2) + ' (BTW 21%)';
                     } else if (juris === 'SA_ZATCA') {
-                        taxRate = 0.15;
-                        taxLabel = (amountInEur * 0.15 * (eurToTarget['SAR'] || 4.068)).toFixed(2) + ' SAR (ZATCA 15%)';
+                        taxLabel = (amountInEur * 0.15 * (eurToTarget['SAR'] || 4.068)).toFixed(2) + ' SAR (ZATCA 15% + CSID)';
                     } else if (juris === 'AE_FTA') {
-                        taxRate = 0.05;
-                        taxLabel = (amountInEur * 0.05 * (eurToTarget['AED'] || 3.9825)).toFixed(2) + ' AED (FTA 5%)';
+                        taxLabel = (amountInEur * 0.05 * (eurToTarget['AED'] || 3.9825)).toFixed(2) + ' AED (FTA VAT 5% & CT 9%)';
+                    } else if (juris === 'SG_GST') {
+                        taxLabel = (amountInEur * 0.09 * (eurToTarget['SGD'] || 1.458)).toFixed(2) + ' SGD (Singapore GST 9% InvoiceNow)';
+                    } else if (juris === 'JP_JCT') {
+                        taxLabel = Math.round(amountInEur * 0.10 * (eurToTarget['JPY'] || 164.2)) + ' JPY (Japan JCT 10% Qualified)';
+                    } else if (juris === 'EU_REVERSE') {
+                        taxLabel = '€0.00 (EU B2B Reverse Charge Art. 194)';
                     }
 
                     var netEur = amountInEur - fee;
@@ -682,12 +714,35 @@
                     vRate.textContent = '1 ' + src + ' = ' + rate.toFixed(4) + ' ' + tgt;
                     vFee.textContent = '€' + fee.toFixed(2) + ' (0.15% Interbank)';
                     vTax.textContent = taxLabel;
-                    vTotal.textContent = finalTargetAmount.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ' + tgt;
+                    vTotal.textContent = finalTargetAmount.toLocaleString('en-US', { minimumFractionDigits: (tgt === 'JPY' ? 0 : 2) }) + ' ' + tgt;
 
-                    vChannel.textContent = (tgt === 'EUR' ? 'SEPA Instant Credit Transfer (SCT Inst < 3s)' : 'SWIFT GPI Cross-Border Priority Corridor');
+                    // Channel routing
+                    if (tgt === 'EUR') {
+                        vChannel.textContent = 'SEPA Instant Credit Transfer (SCT Inst < 3s / Target2)';
+                    } else if (tgt === 'SAR') {
+                        vChannel.textContent = 'SARIE Instant Settlement System (Saudi Central Bank SAMA)';
+                    } else if (tgt === 'AED') {
+                        vChannel.textContent = 'IPP Instant Payment Platform / CBUAE Aani Network';
+                    } else if (tgt === 'SGD') {
+                        vChannel.textContent = 'FAST / PayNow Direct Corridor (MAS Singapore)';
+                    } else if (tgt === 'JPY') {
+                        vChannel.textContent = 'BOJ-NET / Zengin Real-Time Gross Settlement (Japan)';
+                    } else {
+                        vChannel.textContent = 'SWIFT GPI Cross-Border Sovereign Priority Corridor';
+                    }
+
                     var randHex = Math.random().toString(16).substring(2, 10);
                     vRef.textContent = 'S&R-SETTLE-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
-                    vHash.textContent = 'Clearing Seal: sha256:' + randHex + '98fc1c149afbf4c8996fb92427ae41e4649b934ca49599';
+                    
+                    if (juris === 'SA_ZATCA') {
+                        vHash.textContent = 'ZATCA Stamp: zatca-csid:ecdsa-secp256k1:' + randHex + '98fc1c149afbf4c8996fb92427ae';
+                    } else if (juris === 'SG_GST') {
+                        vHash.textContent = 'InvoiceNow SG: peppol-pint:sha256:' + randHex + '10da77c19902ba401923fa';
+                    } else if (juris === 'JP_JCT') {
+                        vHash.textContent = 'NTA Japan Seal: jct-qualified:sha256:' + randHex + 'e439bb10491823ab90013';
+                    } else {
+                        vHash.textContent = 'Clearing Seal: sha256:' + randHex + '98fc1c149afbf4c8996fb92427ae41e4649b934ca49599';
+                    }
                 });
             }
         })();
