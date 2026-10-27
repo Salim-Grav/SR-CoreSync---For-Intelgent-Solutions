@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز إدارة التراخيص والتوزيع الدولي للشركاء | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لإدارة شبكة الشركاء والموزعين والوكلاء الإقليميين المعتمدين، إصدار التراخيص المشفرة FIPS 140-3 وحساب العمولات متعددة العملات">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 12%, rgba(197, 168, 128, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 90% 88%, rgba(16, 185, 129, 0.05) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.1);
+            border-color: rgba(197, 168, 128, 0.3);
+        }
+
+        .btn-portal-back {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-portal-back:hover {
+            background: var(--emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 2.5rem 2rem 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            color: var(--gold-light);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            box-shadow: 0 0 8px var(--gold-primary);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            max-width: 1000px;
+            line-height: 1.65;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin: 1.75rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Workspace */
+        .workspace {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1024px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        /* Partner Tiers Grid */
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .tier-card {
+            background: rgba(3, 8, 6, 0.6);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .tier-card:hover, .tier-card.selected {
+            background: rgba(197, 168, 128, 0.12);
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        .tier-name {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .tier-rate {
+            font-size: 0.75rem;
+            color: var(--emerald);
+            font-weight: 700;
+        }
+
+        /* Form Controls */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-full {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        .form-input, .form-select {
+            background: rgba(3, 8, 6, 0.8);
+            border: 1px solid var(--border-dim);
+            color: #fff;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+        }
+
+        .btn-issue-license {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            font-weight: 800;
+            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .btn-issue-license:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Right Panel: License Certificate Box */
+        .license-certificate-card {
+            background: #020504;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .cert-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .cert-id {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .cert-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
+        }
+
+        .cert-label {
+            color: #94a3b8;
+        }
+
+        .cert-val {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .cert-val.gold {
+            color: var(--gold-light);
+        }
+
+        .license-key-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 8px;
+            padding: 0.85rem;
+            font-size: 0.72rem;
+            color: var(--gold-light);
+            line-height: 1.6;
+            word-break: break-all;
+        }
+
+        .btn-download-cert {
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.65rem 1rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-download-cert:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Global Partner Hub</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">لوحة القيادة المركزية 🏛️</a>
+                <a href="sovereign-contract-engine.html" class="nav-link">محرك العقود 📜</a>
+                <a href="smart-escrow-milestone.html" class="nav-link">الضمان الذكي Escrow 🤝</a>
+                <a href="predictive-cashflow-risk.html" class="nav-link">توقعات السيولة 📊</a>
+                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>برنامج الشركاء والموزعين السياديين الدوليين • إصدار تراخيص العتاد والسحابة FIPS 140-3</span>
+        </div>
+        <h1 class="hero-title">مركز إدارة التراخيص و<span>التوزيع الدولي للشركاء</span></h1>
+        <p class="hero-subtitle">
+            منظومة مؤسسية لإدارة شبكة الوكلاء والموزعين الإقليميين المعتمدين عبر أوروبا والشرق الأوسط وآسيا، وتوفير التراخيص المشفرة بعقد HSM، وإدارة عمولات التوزيع والتسوية التلقائية متعددة العملات (EUR, SAR, AED, SYP, USD, SGD).
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card gold">
+                <div class="stat-label">
+                    <span>شبكة الشركاء المعتمدين دولياً</span>
+                    <span>🤝</span>
+                </div>
+                <div class="stat-val mono">124 شريكاً</div>
+                <div class="stat-sub">في 22 دولة عبر 4 قارات</div>
+            </div>
+
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>العمولات المسواة فورياً</span>
+                    <span>💶</span>
+                </div>
+                <div class="stat-val mono">€ 2,490,000</div>
+                <div class="stat-sub">تحويل مباشر عبر محافظ الشركاء</div>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>التراخيص السيادية المصدرة</span>
+                    <span>🔑</span>
+                </div>
+                <div class="stat-val mono">1,820 ترخيصاً</div>
+                <div class="stat-sub">أختام عتادية FIPS 140-3 HSM Root</div>
+            </div>
+
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>اتفاقيات مستوى الخدمة (SLA)</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val mono">99.999%</div>
+                <div class="stat-sub">دعم سيادي مخصص 24/7</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Left: Partner Provisioning Form -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📝 تهيئة وإصدار ترخيص شريك مؤسسي جديد</span>
+                </div>
+                <span class="panel-badge mono">PROVISIONING-ACTIVE</span>
+            </div>
+
+            <!-- Tiers Selector -->
+            <div>
+                <div class="form-label">فئة الشراكة ومستوى الاعتماد (Partner Tier):</div>
+                <div class="tiers-grid">
+                    <div class="tier-card" id="tier-silver">
+                        <div class="tier-name">🥈 فضي (Silver Integrator)</div>
+                        <div class="tier-rate">عمولة 15% • تكامل الـ APIs</div>
+                    </div>
+                    <div class="tier-card selected" id="tier-gold">
+                        <div class="tier-name">🥇 ذهبي (Gold Distributor)</div>
+                        <div class="tier-rate">عمولة 25% • حلول ERP سحابية</div>
+                    </div>
+                    <div class="tier-card" id="tier-platinum">
+                        <div class="tier-name">💎 بلاتيني (Sovereign Alliance)</div>
+                        <div class="tier-rate">عمولة 35% • مشاريع حكومية</div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="partner-form" class="form-grid">
+                <div class="form-group form-full">
+                    <label for="partner-company" class="form-label">اسم الشريك / الشركة الموزعة</label>
+                    <input type="text" id="partner-company" class="form-input" value="Levant Sovereign Cloud & AI Systems Co." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="partner-region" class="form-label">النطاق الجغرافي والولاية القضائية</label>
+                    <select id="partner-region" class="form-select">
+                        <option value="LEVANT" selected>🇸🇾 بلاد الشام وسوريا (قانون رقم 4 لعام 2009)</option>
+                        <option value="GCC">🇸🇦🇦🇪 دول الخليج العربي (ZATCA • PDPL • FTA)</option>
+                        <option value="EU">🇪🇺 الاتحاد الأوروبي وهولندا (eIDAS &amp; GDPR)</option>
+                        <option value="ASIA">🇸🇬 آسيا وجنوب شرق آسيا (MAS &amp; APPI)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="license-seats" class="form-label">حجم الترخيص ونطاق المنشآت</label>
+                    <select id="license-seats" class="form-select">
+                        <option value="enterprise" selected>مؤسسي سيادي (غير محدود الخوادم On-Premise)</option>
+                        <option value="cluster">عنقودي إقليمي (حتى 50 خادماً معزولاً)</option>
+                        <option value="branch">فروع تجارية (حتى 10 خوادم)</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-full">
+                    <button type="submit" class="btn-issue-license" id="btn-create-license">
+                        <span>🔑 إصدار وتوقيع الترخيص السيادي المعتمد فوراً</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Right: Partner License Output -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📜 شهادة الترخيص ومفتاح التفعيل التشفيري</span>
+                </div>
+                <span class="panel-badge mono" id="license-ref">LIC-SR-2026-9042</span>
+            </div>
+
+            <div class="license-certificate-card">
+                <div class="cert-header">
+                    <div class="cert-title">شهادة شريك معتمد رسمياً (Certified Partner Certificate)</div>
+                    <div class="cert-id mono" id="license-timestamp">2026-10-27T04:40:00Z</div>
+                </div>
+
+                <div class="cert-row">
+                    <span class="cert-label">الجهة المرخصة:</span>
+                    <span class="cert-val" id="lic-company">Levant Sovereign Cloud &amp; AI Systems Co.</span>
+                </div>
+
+                <div class="cert-row">
+                    <span class="cert-label">مستوى الشراكة:</span>
+                    <span class="cert-val gold" id="lic-tier">🥇 ذهبي (Gold Regional Distributor)</span>
+                </div>
+
+                <div class="cert-row">
+                    <span class="cert-label">النطاق والولاية:</span>
+                    <span class="cert-val" id="lic-region">بلاد الشام وسوريا (قانون رقم 4 لعام 2009)</span>
+                </div>
+
+                <div class="cert-row">
+                    <span class="cert-label">صلاحية الترخيص:</span>
+                    <span class="cert-val mono">دائم وغير قابل للإلغاء (Perpetual Sovereign License)</span>
+                </div>
+
+                <div class="license-key-box mono" id="lic-key-box">
+                    Cryptographic Activation Key (FIPS 140-3 Level 4):<br>
+                    SRX-GOLD-2026-9941-8820-KVK84-ZATCA-SYRIA4<br>
+                    Root Signers: [Salim Aziza - Amsterdam, Raed Kaakeh - Middle East]
+                </div>
+
+                <button type="button" class="btn-download-cert" id="btn-export-partner-agreement">
+                    📥 تنزيل حزمة اتفاقية التوزيع والترخيص الموقعة (Signed Partner Dossier)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="sovereign-contract-engine.html">محرك العقود الذكية</a>
+            <a href="smart-escrow-milestone.html">العقود الذكية المشروطة</a>
+            <a href="predictive-cashflow-risk.html">توقعات السيولة</a>
+            <a href="fido2-webauthn-passkey.html">المصادقة البيومترية</a>
+            <a href="compliance-audit-center.html">مركز الامتثال الدولي</a>
+        </div>
+        <div>
+            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        (function() {
+            var selectedTier = '🥇 ذهبي (Gold Regional Distributor)';
+            var tiers = [
+                { id: 'tier-silver', name: '🥈 فضي (Silver Integrator)' },
+                { id: 'tier-gold', name: '🥇 ذهبي (Gold Regional Distributor)' },
+                { id: 'tier-platinum', name: '💎 بلاتيني (Sovereign Strategic Alliance)' }
+            ];
+
+            tiers.forEach(function(t) {
+                var el = document.getElementById(t.id);
+                if (el) {
+                    el.addEventListener('click', function() {
+                        document.querySelectorAll('.tier-card').forEach(function(c) {
+                            c.classList.remove('selected');
+                        });
+                        el.classList.add('selected');
+                        selectedTier = t.name;
+                    });
+                }
+            });
+
+            var form = document.getElementById('partner-form');
+            var btn = document.getElementById('btn-create-license');
+            var companyInput = document.getElementById('partner-company');
+            var regionSelect = document.getElementById('partner-region');
+            var licCompany = document.getElementById('lic-company');
+            var licTier = document.getElementById('lic-tier');
+            var licRegion = document.getElementById('lic-region');
+            var licenseRef = document.getElementById('license-ref');
+            var licenseTimestamp = document.getElementById('license-timestamp');
+            var licKeyBox = document.getElementById('lic-key-box');
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    btn.disabled = true;
+                    btn.innerHTML = '<span>⏳ جاري توليد المفاتيح العتادية وتوقيع اتفاقية التوزيع...</span>';
+
+                    setTimeout(function() {
+                        btn.disabled = false;
+                        btn.innerHTML = '<span>🔑 إصدار وتوقيع الترخيص السيادي المعتمد فوراً</span>';
+
+                        licCompany.textContent = companyInput.value.trim() || 'Partner Enterprise LLC';
+                        licTier.textContent = selectedTier;
+                        licRegion.textContent = regionSelect.options[regionSelect.selectedIndex].text.split('(')[0];
+
+                        var newId = 'LIC-SR-2026-' + Math.floor(1000 + Math.random() * 9000);
+                        licenseRef.textContent = newId;
+                        licenseTimestamp.textContent = new Date().toISOString();
+
+                        var randSegment = Math.random().toString(16).substring(2, 6).toUpperCase();
+                        licKeyBox.innerHTML = 
+                            'Cryptographic Activation Key (FIPS 140-3 Level 4):<br>' +
+                            'SRX-' + randSegment + '-2026-' + Math.floor(1000 + Math.random() * 9000) + '-PERPETUAL-HSM<br>' +
+                            'Root Signers: [Eng. Salim Aziza - Amsterdam, Mr. Raed Kaakeh - Middle East]';
+                    }, 650);
+                });
+            }
+
+            var btnExport = document.getElementById('btn-export-partner-agreement');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var data = {
+                        licenseId: licenseRef.textContent,
+                        issuedAt: licenseTimestamp.textContent,
+                        partnerName: licCompany.textContent,
+                        tier: licTier.textContent,
+                        territory: licRegion.textContent,
+                        cryptographicLicenseKey: licKeyBox.textContent,
+                        governingLaw: 'Netherlands Law & GCC Commercial Regulations'
+                    };
+
+                    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'partner_license_agreement_' + licenseRef.textContent + '.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
