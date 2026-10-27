@@ -494,6 +494,7 @@
                             <option value="QAR">QAR (ر.ق) - الريال القطري</option>
                             <option value="SGD">SGD (S$) - الدولار السنغافوري</option>
                             <option value="JPY">JPY (¥) - الين الياباني</option>
+                            <option value="SYP">SYP (ل.س) - الليرة السورية</option>
                             <option value="USD">USD ($) - الدولار الأمريكي</option>
                             <option value="GBP">GBP (£) - الجنيه الإسترليني</option>
                         </select>
@@ -509,6 +510,7 @@
                             <option value="QAR">QAR (ر.ق) - حساب مصرفي قطري (QATCH)</option>
                             <option value="SGD">SGD (S$) - حساب سنغافورة المصرفي (MAS FAST / PayNow)</option>
                             <option value="JPY">JPY (¥) - حساب بنكي ياباني (BOJ-NET Zengin)</option>
+                            <option value="SYP">SYP (ل.س) - حساب بنكي سوري (مصرف سورية المركزي CBS)</option>
                             <option value="USD">USD ($) - حساب التسوية بالدولار الدولي</option>
                         </select>
                     </div>
@@ -522,6 +524,7 @@
                             <option value="AE_FTA">الإمارات العربية المتحدة - ضريبة FTA VAT 5% (وضريبة الشركات 9%)</option>
                             <option value="SG_GST">سنغافورة - ضريبة السلع والخدمات GST 9% (عبر InvoiceNow Peppol)</option>
                             <option value="JP_JCT">اليابان - ضريبة الاستهلاك JCT 10% (نظام الفاتورة المؤهلة NTA)</option>
+                            <option value="SY_TAX">الجمهورية العربية السورية - ضريبة الأرباح واقتطاع الدخل (وزارة المالية)</option>
                             <option value="CROSS_EXPORT">تصدير دولي سيادي معفى (Zero-Rated B2B Export 0%)</option>
                         </select>
                     </div>
@@ -667,7 +670,8 @@
                 'QAR': 0.2533,
                 'SGD': 0.6858,
                 'JPY': 0.00609,
-                'GBP': 1.1709
+                'GBP': 1.1709,
+                'SYP': 0.000072
             };
 
             var eurToTarget = {
@@ -678,7 +682,8 @@
                 'KWD': 0.3340,
                 'QAR': 3.9480,
                 'SGD': 1.4580,
-                'JPY': 164.20
+                'JPY': 164.20,
+                'SYP': 13850.0
             };
 
             if (btn && amountEl && srcCurrEl && tgtCurrEl && jurisEl) {
@@ -703,6 +708,8 @@
                         taxLabel = (amountInEur * 0.09 * (eurToTarget['SGD'] || 1.458)).toFixed(2) + ' SGD (Singapore GST 9% InvoiceNow)';
                     } else if (juris === 'JP_JCT') {
                         taxLabel = Math.round(amountInEur * 0.10 * (eurToTarget['JPY'] || 164.2)) + ' JPY (Japan JCT 10% Qualified)';
+                    } else if (juris === 'SY_TAX') {
+                        taxLabel = (amountInEur * 0.10 * (eurToTarget['SYP'] || 13850)).toLocaleString('en-US', { maximumFractionDigits: 0 }) + ' SYP (ضريبة الأرباح السورية 10%)';
                     } else if (juris === 'EU_REVERSE') {
                         taxLabel = '€0.00 (EU B2B Reverse Charge Art. 194)';
                     }
@@ -727,6 +734,8 @@
                         vChannel.textContent = 'FAST / PayNow Direct Corridor (MAS Singapore)';
                     } else if (tgt === 'JPY') {
                         vChannel.textContent = 'BOJ-NET / Zengin Real-Time Gross Settlement (Japan)';
+                    } else if (tgt === 'SYP') {
+                        vChannel.textContent = 'CBS RTGS / مقاصة مصرف سورية المركزي المباشرة';
                     } else {
                         vChannel.textContent = 'SWIFT GPI Cross-Border Sovereign Priority Corridor';
                     }

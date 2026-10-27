@@ -668,7 +668,7 @@
             </div>
             <div class="region-tabs">
                 <button type="button" class="region-tab-btn active" data-filter="all">🌐 جميع الأقاليم الثلاثة (12 إطاراً سيادياً)</button>
-                <button type="button" class="region-tab-btn" data-filter="me">🇸🇦🇦🇪 الشرق الأوسط ومجلس التعاون الخليجي (ZATCA / PDPL / SAMA / FTA / AAOIFI)</button>
+                <button type="button" class="region-tab-btn" data-filter="me">🇸🇦🇦🇪🇸🇾 الشرق الأوسط وبلاد الشام والخليج (السعودية • الإمارات • سوريا • التمويل الإسلامي)</button>
                 <button type="button" class="region-tab-btn" data-filter="asia">🇸🇬🇯🇵🇭🇰 آسيا والمحيط الهادئ (Singapore MAS / Japan APPI / Peppol PINT)</button>
                 <button type="button" class="region-tab-btn" data-filter="eu">🇪🇺 الاتحاد الأوروبي وهولندا (ISO 27001 / GDPR / SOC 2 / eIDAS)</button>
             </div>
@@ -736,6 +736,22 @@
                     <span>Status: Certified Audited</span>
                 </div>
             </div>
+
+            <div class="pillar-card" data-region="me">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🇸🇾</span>
+                    <span class="pillar-region-tag">MIDDLE EAST &amp; LEVANT</span>
+                </div>
+                <h3 class="pillar-title">المعاملات والسيادة الرقمية السورية (قانون رقم 4 لعام 2009)</h3>
+                <p class="pillar-desc">
+                    الامتثال لقانون التوقيع والمعاملات الإلكترونية السوري، وحماية المعطيات، والحصانة السيادية التامة ضد قوانين Cloud Act عبر بنية خوادم معزولة ذاتياً (On-Premise / Air-Gapped).
+                </p>
+                <div class="pillar-meta mono">
+                    <span>Law: Syrian Law No. 4</span>
+                    <span>Residency: 100% Sovereign Local</span>
+                </div>
+            </div>
+
 
             <!-- ASIA PACIFIC -->
             <div class="pillar-card" data-region="asia">
@@ -915,6 +931,15 @@
                             <td><span class="badge-compliant">✓ مطابق وموثق</span></td>
                         </tr>
                         <tr data-region="me">
+                            <td>المعاملات والتوقيع الرقمي والسيادة</td>
+                            <td>🇸🇾 الجمهورية العربية السورية</td>
+                            <td>قانون المعاملات الإلكترونية (رقم 4)</td>
+                            <td>بنية تشغيل سيادية معزولة محلياً وتشفير عتادي مستقل</td>
+                            <td><span class="hash-code mono">3b99410...1278</span></td>
+                            <td>مستمر (Air-Gapped)</td>
+                            <td><span class="badge-compliant">✓ مطابق وموثق</span></td>
+                        </tr>
+                        <tr data-region="me">
                             <td>حوكمة المعاملات المالية الإسلامية</td>
                             <td>🕌 مجلس التعاون الخليجي</td>
                             <td>AAOIFI Sharia Governance</td>
@@ -1002,6 +1027,7 @@
                     <button type="button" class="btn-preset-token" data-token="ZATCA-CSID-KSA-9941">🇸🇦 هيئة الزكاة والضريبة ZATCA (السعودية)</button>
                     <button type="button" class="btn-preset-token" data-token="SAMA-CYBER-KSA-4410">🇸🇦 البنك المركزي السعودي SAMA</button>
                     <button type="button" class="btn-preset-token" data-token="FTA-VAT-UAE-7712">🇦🇪 الهيئة الاتحادية للضرائب FTA (الإمارات)</button>
+                    <button type="button" class="btn-preset-token" data-token="SYRIA-LAW4-DIGITAL-SIGN">🇸🇾 المعاملات والتوقيع السوري (قانون 4)</button>
                     <button type="button" class="btn-preset-token" data-token="AAOIFI-SHARIA-770">🕌 حوكمة التمويل الإسلامي AAOIFI</button>
                     <button type="button" class="btn-preset-token" data-token="MAS-TRM-SG-8820">🇸🇬 سلطة النقد السنغافورية MAS</button>
                     <button type="button" class="btn-preset-token" data-token="APPI-TOKYO-JP-5531">🇯🇵 خصوصية البيانات اليابانية APPI</button>
@@ -1077,6 +1103,14 @@
                     hash: 'sha256:ae4410912bc09138401923ba80194bc8819203914a091278',
                     csid: 'FTA-VAT-CT-9-REGISTERED-2026',
                     jurisdiction: 'United Arab Emirates (Federal Decree-Law on VAT & Corporate Tax)'
+                },
+                                'SYRIA-LAW4-DIGITAL-SIGN': {
+                    title: '✓ تم التحقق بنجاح — اعتماد قانون المعاملات والتوقيع الإلكتروني السوري (قانون رقم 4 لعام 2009)',
+                    signer: 'National Agency for Network Services (NSRC Sovereign Node)',
+                    subject: 'S&R CoreSync Sovereign Levantine ERP & Local Data Residency',
+                    hash: 'sha256:3b99410912bc09138401923ba80194bc8819203914a09127811a0',
+                    csid: 'SY-LAW4-ELECTRONIC-TRANSACTIONS-CERTIFIED',
+                    jurisdiction: 'Syrian Arab Republic (National Electronic Transactions & Data Sovereignty Law)'
                 },
                 'AAOIFI-SHARIA-770': {
                     title: '✓ تم التحقق بنجاح — اعتماد الحوكمة والتمويل الإسلامي لمعايير AAOIFI',
