@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الأرشفة الرقمية المحصنة وقفل السجلات القضائي WORM Vault | S&R CoreSync</title>
+    <meta name="description" content="البوابة السيادية لأرشفة السجلات المالية والضريبية غير القابلة للحذف أو التعديل (WORM) المتوافقة مع معايير SEC Rule 17a-4، وقوانين الضرائب الأوروبية والخليجية">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Top Header */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+        }
+
+        .brand-text h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            letter-spacing: -0.01em;
+        }
+
+        .brand-text p {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--emerald);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .btn-header {
+            padding: 7px 16px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .btn-header:hover {
+            background: rgba(197, 168, 128, 0.25);
+            transform: translateY(-1px);
+        }
+
+        /* Main Workspace */
+        main {
+            flex: 1;
+            max-width: 1720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(7, 21, 16, 0.95), rgba(4, 13, 10, 0.9));
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 10% 50%, rgba(197, 168, 128, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-title-wrap {
+            max-width: 960px;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid rgba(197, 168, 128, 0.4);
+            color: var(--gold-light);
+            padding: 0.25rem 0.8rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-heading {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .hero-stats-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            z-index: 1;
+        }
+
+        .hero-score-badge {
+            background: rgba(11, 31, 24, 0.85);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            padding: 1.25rem 1.75rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .score-val {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold-primary);
+        }
+
+        .score-sub {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        /* 4 Key Architecture Pillars */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 1200px) {
+            .pillars-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: all 0.25s ease;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        .pillar-icon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pillar-icon {
+            font-size: 1.5rem;
+        }
+
+        .pillar-status {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .pillar-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .pillar-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.55;
+        }
+
+        /* Two Columns Studio */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1050px) {
+            .studio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .studio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .studio-card-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.7);
+            padding-bottom: 0.75rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #cbd5e1;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            background: #020604;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: #ffffff;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-select:focus, .form-input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(4, 14, 10, 0.8);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+        }
+
+        .toggle-label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .toggle-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .toggle-sub {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: #1e3a2d;
+            transition: .3s;
+            border-radius: 26px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--crimson);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
+
+        .btn-archive {
+            padding: 0.85rem 1.75rem;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            border: none;
+            border-radius: 8px;
+            color: #030806;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-archive:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.1);
+        }
+
+        /* Certificate Voucher Panel */
+        .voucher-box {
+            background: #040e0a;
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .voucher-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--border-dim);
+            padding-bottom: 0.75rem;
+        }
+
+        .voucher-id {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .voucher-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+        }
+
+        .voucher-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
+        }
+
+        .voucher-row-label {
+            color: #94a3b8;
+        }
+
+        .voucher-row-val {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .worm-seal-box {
+            background: #020704;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.76rem;
+            color: var(--cyan);
+            line-height: 1.5;
+            word-break: break-all;
+        }
+
+        /* Table Section */
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .worm-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+
+        .worm-table th {
+            background: #040e0a;
+            color: #94a3b8;
+            padding: 0.85rem 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .worm-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(24, 51, 39, 0.5);
+            color: #cbd5e1;
+        }
+
+        .worm-table tr:hover td {
+            background: rgba(11, 31, 24, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            background: rgba(2, 7, 5, 0.9);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header -->
+    <header>
+        <div class="header-content">
+            <div class="brand-area">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div class="brand-text">
+                    <h1>منظومة الأرشفة الرقمية المحصنة وقفل السجلات القضائي WORM Vault</h1>
+                    <p>S&R CoreSync Immutable WORM Storage &amp; SEC Rule 17a-4 / ZATCA Legal Hold Hub</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span class="badge-status">
+                    <span class="status-dot"></span>
+                    قفل السجلات WORM: مفعل ونشط 100%
+                </span>
+                <a href="compliance-audit-center.html" class="btn-header">مركز الامتثال الدولي</a>
+                <a href="cross-border-settlement.html" class="btn-header">التسويات عبر الحدود</a>
+                <a href="index.html" class="btn-header">الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main>
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <div class="hero-title-wrap">
+                <span class="hero-tag">🔒 WRITE-ONCE-READ-MANY (WORM) COMPLIANCE LOCK</span>
+                <h2 class="hero-heading">أرشفة الوثائق المالية والضريبية المحصنة ضد التعديل أو الحذف</h2>
+                <p class="hero-desc">
+                    توفر منظومة S&amp;R CoreSync للأرشفة المحصنة حماية مطلقة للسجلات المحاسبية وفواتير ZATCA والعقود التجارية والبيانات الضريبية لمدة تمتد إلى 10 سنوات كاملة، مع إقفال تشفيري صارم يمنع حتى مسؤولي النظام وأعلى الصلاحيات (Super Admins) من حذف أو تعديل أي وثيقة قبل انقضاء فترة الاحتفاظ القانونية، مع دعم القفل القضائي الفوري (Legal Hold) للنزاعات والمراجعات الضريبية الرسمية.
+                </p>
+            </div>
+            <div class="hero-stats-group">
+                <div class="hero-score-badge">
+                    <div class="score-val mono">10 Yrs</div>
+                    <div class="score-sub">فترة الاحتفاظ الضريبي الإلزامية</div>
+                </div>
+                <div class="hero-score-badge">
+                    <div class="score-val mono">0 Delete</div>
+                    <div class="score-sub">مناعة تامة ضد الحذف والعبث</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Key Pillars -->
+        <section class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🏛️</span>
+                    <span class="pillar-status">SEC 17a-4(f)</span>
+                </div>
+                <h3 class="pillar-title">الامتثال المالي والرقابي الدولي</h3>
+                <p class="pillar-desc">
+                    تطابق كامل مع معايير هيئة الأوراق المالية الأمريكية SEC ومصلحة الضرائب الهولندية وهيئة الزكاة والضريبة والجمارك السعودية.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🔗</span>
+                    <span class="pillar-status">MERKLE TREE</span>
+                </div>
+                <h3 class="pillar-title">تسلسل التجزئة التشفيرية</h3>
+                <p class="pillar-desc">
+                    ربط كل وثيقة مؤرشفة بشجرة ميركل المستمرة (Merkle Tree Root)، مما يجعل أي محاولة لتغيير بايت واحد مستحيلة رياضياً.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">⚖️</span>
+                    <span class="pillar-status">LEGAL HOLD</span>
+                </div>
+                <h3 class="pillar-title">القفل القضائي الفوري</h3>
+                <p class="pillar-desc">
+                    إمكانية تجميد السجلات محل النزاع القضائي أو الفحص الضريبي بنقرة واحدة، لمنع التخلص التلقائي منها حتى فك القفل رسمياً.
+                </p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon-row">
+                    <span class="pillar-icon">🛡️</span>
+                    <span class="pillar-status">AIR-GAPPED WORM</span>
+                </div>
+                <h3 class="pillar-title">تخزين معزول جغرافياً</h3>
+                <p class="pillar-desc">
+                    مزامنة ثلاثية مشفرة بين مراكز بيانات أمستردام وفرانكفورت والرياض عبر قنوات مادية معزولة ضد هجمات برامج الفدية Ransomware.
+                </p>
+            </div>
+        </section>
+
+        <!-- Studio Simulator -->
+        <section class="studio-grid">
+            <!-- Archiving Form -->
+            <div class="studio-card">
+                <h3 class="studio-card-title">
+                    <span>🗄️</span>
+                    محاكي إيداع وقفل السجلات في خزينة الـ WORM السيادية
+                </h3>
+
+                <div class="form-group">
+                    <label class="form-label" for="doc-type">نوع الوثيقة أو السجل المحاسبي:</label>
+                    <select id="doc-type" class="form-select">
+                        <option value="ZATCA_INVOICE" selected>فاتورة ضريبية إلكترونية ZATCA Phase 2 XML (السعودية)</option>
+                        <option value="BTW_TAX_RETURN">الإقرار الضريبي الفصلي Belastingdienst BTW (هولندا)</option>
+                        <option value="FTA_CORP_TAX">ملف إقرار ضريبة الشركات والهيئة الاتحادية للضرائب (الإمارات)</option>
+                        <option value="FIN_LEDGER_ANNUAL">دفتر الأستاذ والقوائم المالية الختامية السنوية (Audit Ledger)</option>
+                        <option value="MAS_COMPLIANCE_LOG">سجلات تدقيق سلطة النقد السنغافورية MAS TRM Audit Logs</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="doc-ref">المعرف الرقمي للوثيقة (Document Reference ID):</label>
+                    <input type="text" id="doc-ref" class="form-input mono" value="SR-WORM-KSA-2026-98104">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="retention-period">مدة الحفظ الإلزامية (Mandatory Retention Period):</label>
+                    <select id="retention-period" class="form-select">
+                        <option value="10">10 سنوات (الامتثال الضريبي السعودي والهولندي الإلزامي)</option>
+                        <option value="7">7 سنوات (ضريبة الشركات الإماراتية وقانون التجارة)</option>
+                        <option value="5">5 سنوات (سجلات التوظيف والعمليات التشغيلية)</option>
+                        <option value="PERMANENT">دائم مدى الحياة (سجلات تأسيس الشركات والصكوك السيادية)</option>
+                    </select>
+                </div>
+
+                <div class="toggle-group">
+                    <div class="toggle-label">
+                        <span class="toggle-title">تفعيل القفل القضائي الاحترازي (Active Legal Hold)</span>
+                        <span class="toggle-sub">يمنع حذف أو تدوير الوثيقة نهائياً حتى في حال انتهاء فترة الحفظ القانونية.</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="legal-hold-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <button type="button" class="btn-archive" id="btn-lock-record">
+                    <span>🔒 إيداع وتوليد شهادة القفل التشفيري WORM</span>
+                </button>
+            </div>
+
+            <!-- Archiving Certificate Output -->
+            <div class="studio-card">
+                <h3 class="studio-card-title">
+                    <span>📜</span>
+                    شهادة الإيداع وسند الحصانة القضائية (WORM Vault Receipt)
+                </h3>
+
+                <div class="voucher-box" id="vault-receipt">
+                    <div class="voucher-header">
+                        <div>
+                            <span class="voucher-row-label">معرف شهادة الأرشفة:</span>
+                            <div class="voucher-id mono" id="receipt-id">WORM-SEAL-2026-88192</div>
+                        </div>
+                        <span class="voucher-badge" id="receipt-badge">✓ محصن ضد الحذف 100%</span>
+                    </div>
+
+                    <div class="voucher-row">
+                        <span class="voucher-row-label">نوع المستند:</span>
+                        <span class="voucher-row-val" id="r-type">فاتورة ضريبية ZATCA Phase 2</span>
+                    </div>
+
+                    <div class="voucher-row">
+                        <span class="voucher-row-label">تاريخ ووقت الإيداع المؤهل:</span>
+                        <span class="voucher-row-val mono" id="r-timestamp">2026-10-27 02:18:00 UTC</span>
+                    </div>
+
+                    <div class="voucher-row">
+                        <span class="voucher-row-label">تاريخ انتهاء القفل التشفيري:</span>
+                        <span class="voucher-row-val mono" id="r-expiry">2036-10-27 (10 Years Locked)</span>
+                    </div>
+
+                    <div class="voucher-row">
+                        <span class="voucher-row-label">حالة القفل القضائي (Legal Hold):</span>
+                        <span class="voucher-row-val" id="r-legal-hold">مفعل (قفل قضائي احترازي نشط)</span>
+                    </div>
+
+                    <div class="voucher-row">
+                        <span class="voucher-row-label">عقدة التخزين الفيزيائي:</span>
+                        <span class="voucher-row-val mono">AMS-WORM-01 (Amsterdam Primary) + FRA-WORM-02</span>
+                    </div>
+
+                    <div class="worm-seal-box mono" id="r-hash">
+                        Merkle Root: sha256:8f4c9b2e1a9041b38f8812c99a4192b0c399182390a4178ea01923fa8102c918<br>
+                        Object Lock: SEC-17A-4-COMPLIANCE-MODE (Immutable Hash Chain)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance Regulations Table -->
+        <section class="panel">
+            <h3 class="studio-card-title">
+                <span>⚖️</span>
+                التشريعات الدولية والإقليمية الملزمة لنظام الحفظ والأرشفة المحصنة WORM
+            </h3>
+
+            <div class="table-wrap">
+                <table class="worm-table">
+                    <thead>
+                        <tr>
+                            <th>التشريع / اللائحة</th>
+                            <th>الدولة / الإقليم</th>
+                            <th>المدة القانونية الإلزامية</th>
+                            <th>المتطلبات التقنية</th>
+                            <th>الحالة في S&amp;R CoreSync</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>نظام الفوترة الإلكترونية (ZATCA)</strong></td>
+                            <td>🇸🇦 المملكة العربية السعودية</td>
+                            <td>10 سنوات على الأقل</td>
+                            <td>حفظ ملفات XML والأختام المشفرة دون تعديل</td>
+                            <td><span class="voucher-badge">✓ مطبق بالكامل</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>قانون الإجراءات الضريبية الهولندي (AWR)</strong></td>
+                            <td>🇳🇱 هولندا / الاتحاد الأوروبي</td>
+                            <td>7 إلى 10 سنوات للدفاتر التجارية</td>
+                            <td>سجلات رقمية ثابتة قابلة للاسترجاع الفوري للمفتشين</td>
+                            <td><span class="voucher-badge">✓ مطبق بالكامل</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>قانون الإجراءات الضريبية الإماراتي (FTA)</strong></td>
+                            <td>🇦🇪 دولة الإمارات العربية المتحدة</td>
+                            <td>7 سنوات لضريبة القيمة المضافة والشركات</td>
+                            <td>حفظ الفواتير والسجلات المحاسبية والبيانات البنكية</td>
+                            <td><span class="voucher-badge">✓ مطبق بالكامل</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>قواعد هيئة الأوراق المالية SEC Rule 17a-4(f)</strong></td>
+                            <td>🌐 معيار المؤسسات المالية العالمي</td>
+                            <td>حسب فئة المعاملة (بين 3 إلى 7 سنوات)</td>
+                            <td>وسط تخزين رقمي بصيغة WORM حصرية غير قابلة للكتابة مجدداً</td>
+                            <td><span class="voucher-badge">✓ مطبق بالكامل</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>إرشادات سلطة النقد السنغافورية (MAS TRM)</strong></td>
+                            <td>🇸🇬 جمهورية سنغافورة</td>
+                            <td>5 إلى 7 سنوات لسجلات التدقيق المصرفي</td>
+                            <td>سجلات تدقيق أمنية مقاومة للتلاعب بالكامل</td>
+                            <td><span class="voucher-badge">✓ مطبق بالكامل</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                © 2026 S&amp;R CoreSync For Intelligent Solutions. All Rights Reserved. Sovereign WORM Vault.
+            </div>
+            <div class="footer-links">
+                <a href="compliance-audit-center.html" class="footer-link">مركز الامتثال الدولي</a>
+                <a href="cross-border-settlement.html" class="footer-link">محرك التسويات عبر الحدود</a>
+                <a href="digital-timestamping.html" class="footer-link">التوثيق الزمني eIDAS</a>
+                <a href="index.html" class="footer-link">الرئيسية</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        (function() {
+            var btn = document.getElementById('btn-lock-record');
+            var docTypeEl = document.getElementById('doc-type');
+            var docRefEl = document.getElementById('doc-ref');
+            var retentionEl = document.getElementById('retention-period');
+            var legalHoldEl = document.getElementById('legal-hold-toggle');
+
+            var receiptId = document.getElementById('receipt-id');
+            var rType = document.getElementById('r-type');
+            var rTimestamp = document.getElementById('r-timestamp');
+            var rExpiry = document.getElementById('r-expiry');
+            var rLegalHold = document.getElementById('r-legal-hold');
+            var rHash = document.getElementById('r-hash');
+
+            if (btn && docTypeEl && docRefEl && retentionEl && legalHoldEl) {
+                btn.addEventListener('click', function() {
+                    var docType = docTypeEl.options[docTypeEl.selectedIndex].text;
+                    var docRef = docRefEl.value.trim() || 'SR-WORM-DOC-2026';
+                    var years = retentionEl.value;
+                    var isLegalHold = legalHoldEl.checked;
+
+                    var now = new Date();
+                    var timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+
+                    var expiryText = '';
+                    if (years === 'PERMANENT') {
+                        expiryText = 'دائم مدى الحياة (No Expiry Date)';
+                    } else {
+                        var expiryYear = now.getFullYear() + parseInt(years, 10);
+                        expiryText = expiryYear + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0') + ' (' + years + ' Years Immutable)';
+                    }
+
+                    var randHex = Math.random().toString(16).substring(2, 10);
+                    receiptId.textContent = 'WORM-SEAL-' + now.getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+                    rType.textContent = docType;
+                    rTimestamp.textContent = timeStr;
+                    rExpiry.textContent = expiryText;
+                    rLegalHold.textContent = isLegalHold ? 'مفعل (قفل قضائي احترازي نشط)' : 'غير مفعل (يخضع للمدة المقررة)';
+
+                    rHash.innerHTML = 
+                        'Merkle Root: sha256:' + randHex + '9041b38f8812c99a4192b0c399182390a4178ea01923fa8102c918<br>' +
+                        'Object Lock: SEC-17A-4-COMPLIANCE-MODE (' + docRef + ')<br>' +
+                        'Chain Digest: 0x' + randHex + 'c84b1239aa8e45f918bb0234acfe188204910248abec71a0941829e84b';
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
