@@ -1578,9 +1578,58 @@
 4. **[assets/branding/coresync-emblem-8k.png](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/branding/coresync-emblem-8k.png):** تثبيت شعار الشركة 8K وحل تنبيه التحقق في 19 صفحة.
 5. **[assets/social-8k-branding/avatars/founder-raed-portrait-8k.png](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/avatars/founder-raed-portrait-8k.png):** تثبيت أفاتار المؤسس أ. محمد رائد كعكة وحل تنبيه التحقق.
 6. **[assets/social-8k-branding/avatars/founder-salim-portrait-8k.png](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/assets/social-8k-branding/avatars/founder-salim-portrait-8k.png):** تثبيت أفاتار المؤسس م. محمد سليم عزيزة وحل تنبيه التحقق.
-7. **[csp-hashes.txt](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/csp-hashes.txt):** تحديث التجزئات لتشمل 108 تجزئة أمنية بنجاح 100%.
-8. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** إغلاق المهام 80 و 81 و 82 بنسبة 100% وإضافة خطة المهام القادمة (83 - 85).
-9. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق المعماريات الفنية واللقطات الحية المباشرة من المتصفح.
+---
+
+## 🏆 المرحلة 83: منظومة الامتثال والحوكمة السيادية الدولية الثلاثية (أوروبا • الشرق الأوسط • آسيا) Tri-Regional Sovereign Compliance Architecture
+
+**🕒 تاريخ التوثيق:** الثلاثاء، 27 أكتوبر 2026 — الساعة 02:15 صباحاً  
+**🏢 المنصة:** S&R CoreSync For Intelligent Solutions  
+**🎯 نطاق الإنجاز للمرحلة 83:**
+
+استجابة للتوجيه الاستراتيجي القيادي في توسيع حسابات وحوكمة المنصة القانونية والضريبية لتشمل الشرق الأوسط وآسيا بجانب أوروبا، تم إعادة هندسة وترقية بوابتي الامتثال والتسويات الدولية:
+
+### 1. مركز الامتثال والحوكمة السيادية الدولية ([compliance-audit-center.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/compliance-audit-center.html)):
+- **تغطية شاملة لـ 12 إطاراً تشريعياً وسيادياً عبر القارات الثلاث:**
+  - **🇪🇺 الاتحاد الأوروبي وهولندا:** ISO/IEC 27001:2022 (93 ضابطاً معتمداً في أمستردام)، SOC 2 Type II، لائحة حماية البيانات العامة GDPR المادة 32 ومفاتيح تشفير BYOK، ومعايير eIDAS Qualified Digital Trust.
+  - **🇸🇦🇦🇪 الشرق الأوسط ومجلس التعاون الخليجي:**
+    - هيئة الزكاة والضريبة والجمارك (ZATCA Phase 2 FATOORA): تكامل API، وتوليد أختام CSID التشفيرية، ورموز QR وتوقيع XML الرقمي UBL 2.1.
+    - نظام حماية البيانات الشخصية السعودي (Saudi PDPL) وضوابط الهيئة الوطنية للأمن السيبراني (NCA ECC-1:2018) لسيادة وتوطين البيانات الحساسة.
+    - أمن القطاع المالي والمصرفي: إطار الأمن السيبراني للبنك المركزي السعودي (SAMA CSF) وإطار التمويل المفتوح لمصرف الإمارات المركزي (CBUAE Open Finance).
+    - الهيئة الاتحادية للضرائب الإماراتية (FTA): ضريبة القيمة المضافة VAT 5% وضريبة الشركات Corporate Tax 9%.
+    - الحوكمة والتمويل الإسلامي: معايير هيئة المحاسبة والمراجعة للمؤسسات المالية الإسلامية (AAOIFI) لعمليات المرابحة والمضاربة والصكوك.
+  - **🇸🇬🇯🇵 آسيا والمحيط الهادئ:**
+    - سلطة النقد السنغافورية (MAS TRM Guidelines) وإشعار النظافة السيبرانية MAS 644.
+    - شبكة الفوترة الوطنية InvoiceNow عبر معيار Peppol PINT الدولي.
+    - قانون حماية المعلومات الشخصية الياباني (APPI) ونظام الفاتورة المؤهلة JCT (10%).
+    - ضوابط سلطة النقد في هونغ كونغ (HKMA Fintech & Banking Cloud).
+- **مفاتيح التبديل الإقليمية التفاعلية (Interactive Regional Switcher):** فلترة فورية للركائز وجداول التدقيق حسب الإقليم (الكل / الشرق الأوسط والخليج / آسيا / أوروبا).
+- **المدقق التشفيري اللحظي متعدد الأقاليم (Multi-Regional Zero-Knowledge Verifier):** أزرار جاهزة للتحقق الفوري من شهادات ZATCA و SAMA و FTA و AAOIFI و MAS و APPI و ISO 27001.
+
+### 2. محرك التسويات والمقاصة متعدد العملات والأنظمة الضريبية ([cross-border-settlement.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/cross-border-settlement.html)):
+- **توسيع سلة العملات:** دمج وتفعيل عملات الدولار السنغافوري (SGD)، الين الياباني (JPY)، الريال القطري (QAR)، والدينار الكويتي (KWD) إلى جانب اليورو والدولار والريال السعودي والدرهم الإماراتي.
+- **توسيع الولايات الضريبية:** حساب فوري لضرائب سنغافورة (IRAS GST 9%)، واليابان (NTA JCT 10%)، والسعودية (ZATCA 15%)، والإمارات (FTA 5%)، وهولندا (BTW 21%)، والتكليف العكسي الأوروبي.
+- **مسارات التحويل اللحظية:** ربط مسارات الدفع الفورية المحلية SARIE (السعودية)، Aani (الإمارات)، FAST/PayNow (سنغافورة)، BOJ-NET (اليابان)، و SEPA Instant (أوروبا).
+
+---
+
+## 📸 لقطات حية ومباشرة من شاشة العرض (Live Visual Snapshots)
+
+### 1. مركز الامتثال والحوكمة السيادية الدولية بعد فلترة الشرق الأوسط والتحقق من شهادة ZATCA CSID
+![مركز الامتثال السيادي لشهادات الشرق الأوسط ZATCA و SAMA](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/compliance_verified_middle_east_1793063302290.png)
+
+### 2. واجهة الهيرو والتبديل الإقليمي الثلاثي (أوروبا • الشرق الأوسط • آسيا)
+![الهيرو وتبديل الأقاليم الثلاثة في مركز الامتثال](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/compliance_hero_banner_1793063257264.png)
+
+### 3. محرك التسويات متعدد العملات بعد احتساب تسويات آسيا والمقاصة الدولية
+![محرك التسويات والمقاصة متعدد العملات والضرائب الدولية](file:///C:/Users/msali/.gemini/antigravity-ide/brain/4298fc12-c0fc-40b5-a892-10065f93c586/cross_border_settlement_voucher_1793063481236.png)
+
+---
+
+## 🛠️ الملفات المعدلة في المرحلة 83:
+1. **[compliance-audit-center.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/compliance-audit-center.html):** تحويل البوابة إلى مركز الامتثال الثلاثي (أوروبا، الشرق الأوسط، آسيا) مع الفلترة الذكية والمدقق التشفيري المتعدد.
+2. **[cross-border-settlement.html](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/cross-border-settlement.html):** إضافة عملات آسيا والخليج (SGD, JPY, QAR, KWD) والأنظمة الضريبية لسنغافورة واليابان ومسارات المقاصة الفورية.
+3. **[task.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/task.md):** إغلاق وتوثيق المهمة 83 بنسبة 100% وإدراج خطة المهام القادمة.
+4. **[walkthrough.md](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/walkthrough.md):** توثيق المعمارية واللقطات الحية ونتائج الفحص.
 
 </div>
 
