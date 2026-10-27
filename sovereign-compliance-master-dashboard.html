@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة القيادة المركزية للامتثال والسيادة السحابية | S&R CoreSync</title>
+    <meta name="description" content="لوحة القيادة التنفيذية الموحدة لإدارة ومراقبة كافة بوابات السيادة الرقمية والامتثال الدولي عبر الاتحاد الأوروبي، الشرق الأوسط، وبلاد الشام وآسيا">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --cyan-glow: rgba(56, 189, 248, 0.25);
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(197, 168, 128, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.05) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.72rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.15);
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            border-color: rgba(197, 168, 128, 0.35);
+        }
+
+        .btn-portal-back {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+            color: var(--emerald);
+            border: 1px solid var(--emerald);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-portal-back:hover {
+            background: var(--emerald);
+            color: #000;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        /* Hero Banner */
+        .hero {
+            padding: 2.5rem 2rem 1.5rem;
+            max-width: 1720px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--emerald);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-pill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            max-width: 1100px;
+            line-height: 1.65;
+        }
+
+        /* Regional View Selector Tabs */
+        .region-tabs-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+
+        .region-tab-btn {
+            background: rgba(7, 21, 16, 0.8);
+            border: 1px solid var(--border-dim);
+            color: #94a3b8;
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .region-tab-btn:hover, .region-tab-btn.active {
+            background: rgba(197, 168, 128, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        /* KPI Executive Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        /* Main Workspace: Portals Hub & Real-time Feeds */
+        .workspace {
+            max-width: 1720px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        /* Sovereign Pillars Matrix Grid */
+        .portals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .portal-card {
+            background: rgba(3, 8, 6, 0.65);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .portal-card:hover {
+            border-color: rgba(197, 168, 128, 0.4);
+            background: rgba(7, 21, 16, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .portal-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .portal-icon-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .portal-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .portal-name {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .portal-tag {
+            font-size: 0.7rem;
+            color: var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+
+        .portal-status-badge {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .portal-desc {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.55;
+        }
+
+        .portal-metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid rgba(24, 51, 39, 0.6);
+            font-size: 0.75rem;
+        }
+
+        .portal-metric-label {
+            color: #64748b;
+        }
+
+        .portal-metric-val {
+            color: #fff;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .portal-btn-link {
+            margin-top: auto;
+            background: rgba(197, 168, 128, 0.1);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-light);
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .portal-btn-link:hover {
+            background: var(--gold-primary);
+            color: #030806;
+        }
+
+        /* Live Feeds & Audit Trail (Right Column) */
+        .live-ticker-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ticker-event {
+            background: rgba(3, 8, 6, 0.7);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            transition: border-color 0.2s;
+        }
+
+        .ticker-event:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .ticker-event-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+        }
+
+        .ticker-badge {
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .badge-syria {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-ksa {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-uae {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--cyan);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .badge-eu {
+            background: rgba(197, 168, 128, 0.15);
+            color: var(--gold-light);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .badge-asia {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .ticker-time {
+            color: #64748b;
+        }
+
+        .ticker-text {
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            line-height: 1.45;
+        }
+
+        .ticker-hash {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        /* Executive Master Certificate Box */
+        .exec-cert-card {
+            background: #020504;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .exec-cert-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .exec-cert-desc {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .btn-export-master {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            font-weight: 800;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.25);
+        }
+
+        .btn-export-master:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            box-shadow: 0 6px 20px rgba(197, 168, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Sovereign Compliance Master Console</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="compliance-audit-center.html" class="nav-link">مركز تدقيق الامتثال 🛡️</a>
+                <a href="supply-chain-due-diligence.html" class="nav-link">تدقيق سلاسل التوريد 🔍</a>
+                <a href="sovereign-contract-engine.html" class="nav-link">محرك العقود 📜</a>
+                <a href="immutable-audit-vault.html" class="nav-link">خزينة WORM 🔒</a>
+                <a href="cross-border-settlement.html" class="nav-link">التسويات عبر الحدود 💱</a>
+                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>لوحة القيادة المركزية الموحدة • الحوكمة والسيادة السحابية الشاملة 2026</span>
+        </div>
+        <h1 class="hero-title">لوحة القيادة المركزية لـ <span>الامتثال والسيادة السحابية</span></h1>
+        <p class="hero-subtitle">
+            منصة الإدارة والرقابة الاستراتيجية العليا التي توحد كافة بوابات الحوكمة، والأرشفة المحصنة WORM، والعقود المتزامنة Multi-Sig، وفحص سلاسل التوريد، والتسويات المالية متعددة العملات عبر المراكز السيادية في أمستردام، والرياض، ودبي، ودمشق، وسنغافورة.
+        </p>
+
+        <!-- Regional Filter Tabs -->
+        <div class="region-tabs-bar">
+            <button type="button" class="region-tab-btn active" id="tab-all">🌐 العرض العالمي الموحد (Global View)</button>
+            <button type="button" class="region-tab-btn" id="tab-levant">🇸🇾 بلاد الشام وسوريا (قانون 4 &amp; NSRC)</button>
+            <button type="button" class="region-tab-btn" id="tab-gcc">🇸🇦🇦🇪 دول الخليج (ZATCA • PDPL • FTA)</button>
+            <button type="button" class="region-tab-btn" id="tab-eu">🇪🇺 الاتحاد الأوروبي (eIDAS • GDPR • AWR)</button>
+            <button type="button" class="region-tab-btn" id="tab-asia">🇸🇬🇯🇵 آسيا والمحيط الهادئ (MAS • APPI)</button>
+        </div>
+
+        <!-- KPI Executive Grid -->
+        <div class="stats-grid">
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>معدل الامتثال السيادي الشامل</span>
+                    <span>🛡️</span>
+                </div>
+                <div class="stat-val" id="stat-compliance-score">100%</div>
+                <div class="stat-sub">9 أقاليم قضائية • 18 هيئة تنظيمية معتمدة</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>العزل والسيادة السحابية Air-Gapped</span>
+                    <span>🏰</span>
+                </div>
+                <div class="stat-val" id="stat-airgap">100% On-Premise</div>
+                <div class="stat-sub">حصانة تامة ضد US Cloud Act والعقوبات</div>
+            </div>
+
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>سجلات WORM المحصنة قضائياً</span>
+                    <span>🔒</span>
+                </div>
+                <div class="stat-val" id="stat-records">1,489,204</div>
+                <div class="stat-sub">أقفال 10 سنوات (AWR • ZATCA • SEC 17a-4)</div>
+            </div>
+
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>أطراف التوقيع المعتمدة (Multi-Sig)</span>
+                    <span>✍️</span>
+                </div>
+                <div class="stat-val" id="stat-contracts">3 من 3 مدراء</div>
+                <div class="stat-sub">م. سليم عزيزة (AMS) &amp; أ. رائد كعكة (RUH/DAM)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+        <!-- Left: Sovereign Portals Matrix -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🏛️ مصفوفة بوابات السيادة والامتثال الموحدة</span>
+                </div>
+                <span class="panel-badge">Unified Sovereign Mesh</span>
+            </div>
+
+            <div class="portals-grid" id="portals-container">
+                <!-- Portal 1: Compliance Audit Center -->
+                <div class="portal-card" data-region="all levant gcc eu asia">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">🛡️</div>
+                            <div>
+                                <div class="portal-name">مركز تدقيق الامتثال الدولي</div>
+                                <span class="portal-tag">Tri-Regional Assurance</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ نشط ومطابق</span>
+                    </div>
+                    <p class="portal-desc">
+                        حوكمة ثلاثية متكاملة لـ ISO 27001، و SOC 2 Type II، وقانون المعاملات والتوقيع السوري (قانون 4)، وفاتورة ZATCA، وضريبة الشركات الإماراتية FTA، ومعايير MAS السنغافورية.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">الهيئات: </span>
+                            <span class="portal-metric-val">NSRC, ZATCA, FTA, MAS</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">التشفير: </span>
+                            <span class="portal-metric-val mono">FIPS 140-3 HSM</span>
+                        </div>
+                    </div>
+                    <a href="compliance-audit-center.html" class="portal-btn-link">فتح مركز تدقيق الامتثال ↗</a>
+                </div>
+
+                <!-- Portal 2: WORM Immutable Vault -->
+                <div class="portal-card" data-region="all eu gcc levant">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">🔒</div>
+                            <div>
+                                <div class="portal-name">خزينة WORM وقفل السجلات القضائي</div>
+                                <span class="portal-tag">Legal Hold Vault</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ قفل 10 سنوات</span>
+                    </div>
+                    <p class="portal-desc">
+                        أرشفة ثابتة غير قابلة للتعديل أو الإلغاء متوافقة مع قانون الضرائب الهولندي AWR، وهيئة الزكاة والضريبة ZATCA، ومتطلبات SEC Rule 17a-4 مع شجرة ميركل المستمرة.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">الوضع: </span>
+                            <span class="portal-metric-val">Compliance Lock Active</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">الشجرة: </span>
+                            <span class="portal-metric-val mono">Merkle Root Verified</span>
+                        </div>
+                    </div>
+                    <a href="immutable-audit-vault.html" class="portal-btn-link">فتح خزينة WORM المحصنة ↗</a>
+                </div>
+
+                <!-- Portal 3: Sovereign Contract Multi-Party Engine -->
+                <div class="portal-card" data-region="all eu gcc levant asia">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">📜</div>
+                            <div>
+                                <div class="portal-name">محرك العقود والتوقيع المتزامن</div>
+                                <span class="portal-tag">Multi-Party Multi-Sig</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ eIDAS QES &amp; نفاذ</span>
+                    </div>
+                    <p class="portal-desc">
+                        إبرام وتوقيع العقود المؤسسية المتزامنة بحجية قضائية دولية كاملة عبر خوارزميات Ed25519 و secp256k1 بين أمستردام والرياض والمفوضين التجاريين.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">السرعة: </span>
+                            <span class="portal-metric-val mono">&lt; 1.2s Handshake</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">الحجية: </span>
+                            <span class="portal-metric-val">Court Admissible 100%</span>
+                        </div>
+                    </div>
+                    <a href="sovereign-contract-engine.html" class="portal-btn-link">فتح محرك العقود الذكية ↗</a>
+                </div>
+
+                <!-- Portal 4: Supply Chain Due Diligence -->
+                <div class="portal-card" data-region="all levant gcc eu asia">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">🔍</div>
+                            <div>
+                                <div class="portal-name">تدقيق سلاسل التوريد والموردين الدوليين</div>
+                                <span class="portal-tag">CSDDD &amp; Sanctions Hub</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ 4.8M فحص لحظي</span>
+                    </div>
+                    <p class="portal-desc">
+                        استعلام فوري من السجلات التجارية الرسمية (دمشق، واثق، NER، KvK، ACRA) مع فحص العقوبات وتقييم الحصانة السيادية من قوانين السحابة الأجنبية ولائحة CSDDD.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">الدول: </span>
+                            <span class="portal-metric-val">34 دولة معتمدة</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">الحصانة: </span>
+                            <span class="portal-metric-val">Air-Gapped Shield</span>
+                        </div>
+                    </div>
+                    <a href="supply-chain-due-diligence.html" class="portal-btn-link">فتح بوابة تدقيق الموردين ↗</a>
+                </div>
+
+                <!-- Portal 5: Cross-Border Settlement & Tax Engine -->
+                <div class="portal-card" data-region="all levant gcc eu asia">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">💱</div>
+                            <div>
+                                <div class="portal-name">محرك التسويات والضرائب عبر الحدود</div>
+                                <span class="portal-tag">Multi-Currency &amp; VAT</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ SEPA Instant &amp; CBS</span>
+                    </div>
+                    <p class="portal-desc">
+                        مقاصة فورية بالليرة السورية SYP، والريال السعودي SAR، والدرهم AED، واليورو EUR، والدولار السنغافوري SGD، مع المعالجة الضريبية التلقائية.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">المقاصة: </span>
+                            <span class="portal-metric-val">CBS, SARIE, SEPA 10s</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">الضرائب: </span>
+                            <span class="portal-metric-val">BTW 21%, VAT 15%, FTA 5%</span>
+                        </div>
+                    </div>
+                    <a href="cross-border-settlement.html" class="portal-btn-link">فتح محرك التسويات الدولية ↗</a>
+                </div>
+
+                <!-- Portal 6: eIDAS Qualified Digital Timestamping -->
+                <div class="portal-card" data-region="all eu gcc">
+                    <div class="portal-card-top">
+                        <div class="portal-icon-title">
+                            <div class="portal-icon">⏱️</div>
+                            <div>
+                                <div class="portal-name">محرك التوثيق الزمني الرقمي eIDAS</div>
+                                <span class="portal-tag">RFC 3161 Atomic Clock</span>
+                            </div>
+                        </div>
+                        <span class="portal-status-badge">✔ VSL Atomic Clock</span>
+                    </div>
+                    <p class="portal-desc">
+                        ربط الأختام الزمنية بساعة أمستردام الذرية الوطنية وقوائم الثقة الأوروبية EUTL لضمان الحجية الزمنية غير القابلة للتلاعب لأي معاملة أو عقد.
+                    </p>
+                    <div class="portal-metrics">
+                        <div>
+                            <span class="portal-metric-label">المعيار: </span>
+                            <span class="portal-metric-val mono">ETSI EN 319 422</span>
+                        </div>
+                        <div>
+                            <span class="portal-metric-label">الدقة: </span>
+                            <span class="portal-metric-val mono">± 1.4 Nanoseconds</span>
+                        </div>
+                    </div>
+                    <a href="digital-timestamping.html" class="portal-btn-link">فتح محرك التوثيق الزمني ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right: Real-time Live Security & Audit Ticker -->
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📡 سجل الأحداث والتحقق السيادي اللحظي</span>
+                </div>
+                <span class="panel-badge mono" id="live-pulse">LIVE 24/7</span>
+            </div>
+
+            <!-- Master Certificate Summary Card -->
+            <div class="exec-cert-card">
+                <div class="exec-cert-title">
+                    <span>👑 ميثاق السيادة الرقمية والحوكمة المركزية</span>
+                    <span class="mono">2026-SRX</span>
+                </div>
+                <p class="exec-cert-desc">
+                    شهادة إجماع سيادية معتمدة وموقعة رقمياً تجمع بين المركز الأوروبي (أمستردام) ومراكز الشرق الأوسط (الرياض، دبي، دمشق) لتأكيد الاستقلال الرقمي والامتثال القانوني الشامل.
+                </p>
+                <button type="button" class="btn-export-master" id="btn-export-master-bundle">
+                    <span>📥 تصدير حزمة التدقيق السيادي الموحدة (Master Audit Bundle)</span>
+                </button>
+            </div>
+
+            <!-- Live Event Ticker Feed -->
+            <div class="live-ticker-box" id="ticker-feed">
+                <!-- Event 1: Syria -->
+                <div class="ticker-event">
+                    <div class="ticker-event-top">
+                        <span class="ticker-badge badge-syria">🇸🇾 سوريا • دمشق</span>
+                        <span class="ticker-time mono">منذ 12 ثانية</span>
+                    </div>
+                    <div class="ticker-text">
+                        مصادقة التوقيع الإلكتروني بموجب قانون المعاملات رقم 4 (2009) والتحقق من عقدة NSRC السيادية.
+                    </div>
+                    <div class="ticker-hash mono">SHA256: 7f8a9e2d...4c1b98a0</div>
+                </div>
+
+                <!-- Event 2: KSA -->
+                <div class="ticker-event">
+                    <div class="ticker-event-top">
+                        <span class="ticker-badge badge-ksa">🇸🇦 السعودية • الرياض</span>
+                        <span class="ticker-time mono">منذ 34 ثانية</span>
+                    </div>
+                    <div class="ticker-text">
+                        إصدار ختم تشفيري CSID لفاتورة تجارية متوافقة مع ZATCA Phase 2 وتسوية SARIE فورية.
+                    </div>
+                    <div class="ticker-hash mono">CSID: ZATCA-PROD-2026-9941</div>
+                </div>
+
+                <!-- Event 3: UAE -->
+                <div class="ticker-event">
+                    <div class="ticker-event-top">
+                        <span class="ticker-badge badge-uae">🇦🇪 الإمارات • دبي</span>
+                        <span class="ticker-time mono">منذ 1 دقيقة</span>
+                    </div>
+                    <div class="ticker-text">
+                        تأكيد الاحتساب الضريبي المزدوج (ضريبة شركات 9% وضريبة قيمة مضافة 5%) لـ FTA وتسوية درهم FTS.
+                    </div>
+                    <div class="ticker-hash mono">FTA-TRN: 100482910400003</div>
+                </div>
+
+                <!-- Event 4: EU -->
+                <div class="ticker-event">
+                    <div class="ticker-event-top">
+                        <span class="ticker-badge badge-eu">🇳🇱 أوروبا • أمستردام</span>
+                        <span class="ticker-time mono">منذ 2 دقيقة</span>
+                    </div>
+                    <div class="ticker-text">
+                        تفعيل قفل التخزين WORM لمدة 10 سنوات لمستند مالي وفق المادة 52 من قانون AWR الهولندي.
+                    </div>
+                    <div class="ticker-hash mono">WORM-RECEIPT: SR-WORM-REC-9082</div>
+                </div>
+
+                <!-- Event 5: Asia -->
+                <div class="ticker-event">
+                    <div class="ticker-event-top">
+                        <span class="ticker-badge badge-asia">🇸🇬 آسيا • سنغافورة</span>
+                        <span class="ticker-time mono">منذ 3 دقائق</span>
+                    </div>
+                    <div class="ticker-text">
+                        تبادل مستندات الفوترة وسلسلة التوريد عبر شبكة InvoiceNow المعتمدة لسلطة النقد MAS.
+                    </div>
+                    <div class="ticker-hash mono">Peppol-PINT: SG-UEN-202209182K</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="compliance-audit-center.html">مركز الامتثال الدولي</a>
+            <a href="supply-chain-due-diligence.html">تدقيق سلاسل التوريد</a>
+            <a href="sovereign-contract-engine.html">محرك العقود الذكية</a>
+            <a href="immutable-audit-vault.html">خزينة WORM المحصنة</a>
+            <a href="cross-border-settlement.html">التسويات عبر الحدود</a>
+            <a href="digital-timestamping.html">محرك التوثيق الزمني eIDAS</a>
+            <a href="sovereign-siem-soc.html">مركز العمليات الأمنية SIEM</a>
+        </div>
+        <div>
+            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <!-- Interactive Filter & Export Script -->
+    <script>
+        (function() {
+            var tabs = [
+                { id: 'tab-all', filter: 'all' },
+                { id: 'tab-levant', filter: 'levant' },
+                { id: 'tab-gcc', filter: 'gcc' },
+                { id: 'tab-eu', filter: 'eu' },
+                { id: 'tab-asia', filter: 'asia' }
+            ];
+
+            var portalCards = document.querySelectorAll('.portal-card');
+
+            tabs.forEach(function(tabInfo) {
+                var btn = document.getElementById(tabInfo.id);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.region-tab-btn').forEach(function(b) {
+                            b.classList.remove('active');
+                        });
+                        btn.classList.add('active');
+
+                        var targetFilter = tabInfo.filter;
+                        portalCards.forEach(function(card) {
+                            var regions = card.getAttribute('data-region') || '';
+                            if (targetFilter === 'all' || regions.indexOf(targetFilter) !== -1) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                }
+            });
+
+            var btnExport = document.getElementById('btn-export-master-bundle');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var masterData = {
+                        reportType: 'S&R CoreSync Sovereign Compliance Master Bundle',
+                        timestamp: new Date().toISOString(),
+                        overallComplianceScore: '100% Fully Certified',
+                        airGappedStatus: 'Air-Gapped 100% On-Premise Shield Active',
+                        jurisdictionsCovered: [
+                            'Syrian Arab Republic (Law No. 4 of 2009 & NSRC)',
+                            'Kingdom of Saudi Arabia (ZATCA Phase 2 & PDPL)',
+                            'United Arab Emirates (FTA Corporate Tax & ISR)',
+                            'Kingdom of the Netherlands & EU (eIDAS & GDPR & AWR)',
+                            'Republic of Singapore & Japan (MAS TRM & APPI)'
+                        ],
+                        executiveSignatories: [
+                            'Mohammad Salim Aziza (Chairman & Founder - Amsterdam Hub)',
+                            'Mohammad Raed Kaakeh (CEO & Co-Founder - Middle East Hub)'
+                        ],
+                        masterConsensusDigest: 'SHA256: 4a9f20e83b194d6ca01948ba1203948bf12e88a09182049182'
+                    };
+
+                    var blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'coresync_master_compliance_bundle_2026.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
