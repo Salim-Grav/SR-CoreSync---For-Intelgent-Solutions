@@ -59,6 +59,13 @@ for lang in LANGUAGES:
     xml.append('  </url>')
     xml.append('')
 
+xml.append('  <url>')
+xml.append(f'    <loc>{BASE_URL}/autonomous-tax-audit.html</loc>')
+xml.append('    <lastmod>2026-10-28</lastmod>')
+xml.append('    <changefreq>weekly</changefreq>')
+xml.append('    <priority>0.85</priority>')
+xml.append('  </url>')
+
 xml.append('  <!-- ========================================================')
 xml.append('       2. Interactive Cloud ERP Demo Portals (29 Languages)')
 xml.append('       ======================================================== -->')
@@ -110,4 +117,4 @@ xml.append('</urlset>')
 with open(SITEMAP_PATH, 'w', encoding='utf-8') as f:
     f.write("\n".join(xml))
 
-print(f"International sitemap generated with {len(LANGUAGES) * 2 + len(features)} indexed URLs at: {SITEMAP_PATH}")
+print(f"International sitemap generated with {len(LANGUAGES) * 2 + len(features) + 1} indexed URLs at: {SITEMAP_PATH}")
