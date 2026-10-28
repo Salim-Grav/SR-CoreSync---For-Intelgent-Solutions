@@ -46,6 +46,14 @@ jobs:
       - name: Audit JavaScript Identifier Integrity
         run: python scripts/audit_js_identifiers.py
 
+      # Guards the exact failure class seen in Oct 2026: a template batch
+      # shipped the Launchpad button markup while the inline controller block
+      # defining window.toggleAppleDockLaunchpad was dropped - every click
+      # threw ReferenceError. Engine-agnostic invariant: any page that CALLS
+      # the handler from markup must DEFINE it in the same page.
+      - name: Audit Dock Handler Sync (markup requires definition)
+        run: python scripts/check_dock_handler.py
+
       - name: Audit Cross-language API Parity
         run: python scripts/audit_language_api_parity.py
 
@@ -54,6 +62,16 @@ jobs:
 
       - name: Audit Localized Relative Paths
         run: python scripts/audit_language_paths.py
+
+      # Catches the Oct 2026 regression where rewritten landing pages declared
+      # og:locale=en_US (or legacy ar_SA) regardless of their html lang.
+      - name: Audit og:locale vs page language
+        run: python scripts/fix_og_locale.py --check
+
+      # Protects the SEO discovery assets (IndexNow key file, RFC 6350 vCard,
+      # OfferCatalog JSON-LD) against silent loss in template batches.
+      - name: Audit SEO discovery assets
+        run: python scripts/check_seo_assets.py
 
       - name: Validate GitHub Pages Publish Set
         run: python scripts/validate_publish_set.py
