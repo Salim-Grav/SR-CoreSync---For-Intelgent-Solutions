@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة السيادة الفضائية وتوزيع المفاتيح الكمية QKD | S&R CoreSync</title>
+    <meta name="description" content="تأمين استمرارية الاتصال المالي والتشغيلي للمؤسسات السيادية عبر الأقمار الصناعية الليزرية LEO وتوزيع المفاتيح الكمية QKD BB84/E91 عند انقطاع الكابلات البحرية">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(197, 168, 128, 0.06) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1680px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--cyan);
+            background: rgba(56, 189, 248, 0.12);
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            border-color: var(--border-dim);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link.gold {
+            color: var(--gold-light);
+            border-color: rgba(197, 168, 128, 0.35);
+            background: rgba(197, 168, 128, 0.08);
+        }
+
+        .hero {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 2.2rem 2rem 1.2rem;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.38);
+            color: var(--cyan);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.98rem;
+            color: #94a3b8;
+            max-width: 1160px;
+            line-height: 1.65;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.15rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.15rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.74rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .workspace {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 1.75rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(56, 189, 248, 0.14);
+            color: var(--cyan);
+            font-size: 0.74rem;
+            padding: 0.22rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .mode-bar {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            background: rgba(3, 8, 6, 0.75);
+            border: 1px solid var(--border-dim);
+            color: #94a3b8;
+            padding: 0.55rem 0.95rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn:hover, .mode-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--cyan);
+            color: #fff;
+        }
+
+        .canvas-stage {
+            position: relative;
+            background: radial-gradient(circle at 50% 40%, #071f29 0%, #030806 100%);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 390px;
+        }
+
+        #qkd-orbital-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .canvas-overlay {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            pointer-events: none;
+        }
+
+        .overlay-pill {
+            background: rgba(3, 8, 6, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--cyan);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.73rem;
+            font-weight: 700;
+        }
+
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .station-btn {
+            background: rgba(3, 8, 6, 0.68);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: right;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .station-btn:hover, .station-btn.selected {
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.12);
+        }
+
+        .station-head {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            color: var(--gold-light);
+        }
+
+        .station-sub {
+            font-size: 0.72rem;
+            color: #94a3b8;
+        }
+
+        .qkd-inspector {
+            background: rgba(3, 8, 6, 0.78);
+            border: 1px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .qkd-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(24, 51, 39, 0.85);
+            padding-bottom: 0.55rem;
+            font-size: 0.85rem;
+            gap: 0.5rem;
+        }
+
+        .qkd-label {
+            color: #94a3b8;
+        }
+
+        .qkd-val {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .qkd-val.gold { color: var(--gold-light); }
+        .qkd-val.emerald { color: var(--emerald); }
+        .qkd-val.cyan { color: var(--cyan); }
+
+        .qkd-log {
+            background: #020504;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 0.9rem;
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: var(--cyan);
+            max-height: 175px;
+            overflow-y: auto;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            border: none;
+            border-radius: 10px;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-gold:hover {
+            filter: brightness(1.08);
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&amp;R CoreSync <span class="brand-badge">SATELLITE BACKHAUL &amp; QKD</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link gold">👑 غرفة القيادة المئوية 100</a>
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">🏛️ لوحة القيادة المركزية</a>
+                <a href="sovereign-digital-twin.html" class="nav-link">🧊 محاكي التوأم الرقمي</a>
+                <a href="ip-patent-escrow.html" class="nav-link">🛡️ براءات الاختراع الكمية</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-pill">
+            <span>🛰️ LEO LASER INTER-SATELLITE MESH • BB84 &amp; E91 QUANTUM KEY DISTRIBUTION (QKD)</span>
+        </div>
+        <h1 class="hero-title">بوابة السيادة الفضائية وتوزيع المفاتيح الكمية <span>(Sovereign Satellite Backhaul &amp; QKD)</span></h1>
+        <p class="hero-subtitle">
+            منظومة الاتصالات الفضائية الليزرية المشفرة كمياً لتأمين استمرارية العمليات المصرفية والتسويات السيادية للمؤسسات بنسبة 100% عند انقطاع الكابلات البحرية الدولية، مع توزيع مفاتيح التشفير الكمية ببروتوكولات الفوتونات المتشابكة BB84 و E91 بين محطات أمستردام والرياض ودبي ودمشق وسنغافورة.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>كوكبة الأقمار السيادية النشطة (LEO/MEO)</span>
+                    <span>🛰️</span>
+                </div>
+                <div class="stat-val mono" id="qkd-sat-count">12 / 12 SATS</div>
+                <div class="stat-sub">ارتباط ليزري فضائي 1550nm بسرعة 100 Gbps</div>
+            </div>
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>معدل خطأ البت الكمي (Quantum Bit Error Rate)</span>
+                    <span>🔬</span>
+                </div>
+                <div class="stat-val mono" id="qkd-qber-val">0.26% QBER</div>
+                <div class="stat-sub">أقل بكثير من عتبة الأمان الكمية الصارمة (11% Limit)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>معدل توليد المفاتيح الكمية النقية (Sifted Key Rate)</span>
+                    <span>🔑</span>
+                </div>
+                <div class="stat-val mono" id="qkd-keyrate-val">1.42 Mbps</div>
+                <div class="stat-sub">تشفير المرة الواحدة OTP + NIST FIPS 203 ML-KEM</div>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>زمن التحويل التلقائي عند انقطاع الكابلات البحرية</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val mono" id="qkd-failover-val">12.4 ms</div>
+                <div class="stat-sub">استمرارية 100% لمعاملات SEPA و SARIE و CBS</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="workspace">
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🌌 المسرح المداري للربط الليزري وتوزيع الفوتونات المتشابكة QKD</span>
+                </div>
+                <span class="panel-badge mono" id="qkd-mode-badge">ORBITAL STATUS: HYBRID FIBER + LEO QKD</span>
+            </div>
+
+            <div class="mode-bar">
+                <button type="button" class="mode-btn active" id="btn-qkd-nominal">🟢 التشغيل الهجين المتزامن (Hybrid Fiber + QKD)</button>
+                <button type="button" class="mode-btn" id="btn-qkd-seacut">🌊 محاكاة انقطاع الكابلات البحرية (Submarine Cable Cut Failover)</button>
+                <button type="button" class="mode-btn" id="btn-qkd-eavesdrop">🕵️ اختبار رصد التنصت الكمي (BB84 Photon Intercept Defense)</button>
+                <button type="button" class="mode-btn" id="btn-qkd-emp">☀️ درع العواصف الكهرومغناطيسية (EMP &amp; Solar Flare Shield)</button>
+            </div>
+
+            <div class="canvas-stage">
+                <canvas id="qkd-orbital-canvas" width="960" height="390"></canvas>
+                <div class="canvas-overlay">
+                    <span class="overlay-pill mono">PROTOCOL: BB84 + E91 ENTANGLEMENT</span>
+                    <span class="overlay-pill mono">OPTICAL WAVELENGTH: 1550nm LASER</span>
+                </div>
+            </div>
+
+            <div class="stations-grid">
+                <button type="button" class="station-btn selected" id="st-ams">
+                    <div class="station-head">
+                        <span>🇳🇱 محطة أمستردام</span>
+                        <span class="mono">AMS-OPT</span>
+                    </div>
+                    <div class="station-sub">تلسكوب بصري كمي • VSL Atomic Sync</div>
+                </button>
+                <button type="button" class="station-btn" id="st-ruh">
+                    <div class="station-head">
+                        <span>🇸🇦 محطة الرياض</span>
+                        <span class="mono">RUH-OPT</span>
+                    </div>
+                    <div class="station-sub">بوابة الصحراء الصافية • رؤية بصرية 99.8%</div>
+                </button>
+                <button type="button" class="station-btn" id="st-dam">
+                    <div class="station-head">
+                        <span>🇸🇾 محطة دمشق</span>
+                        <span class="mono">DAM-OPT</span>
+                    </div>
+                    <div class="station-sub">الارتباط السيادي المستقل • جبل قاسيون البصري</div>
+                </button>
+                <button type="button" class="station-btn" id="st-dxb">
+                    <div class="station-head">
+                        <span>🇦🇪 محطة دبي</span>
+                        <span class="mono">DXB-OPT</span>
+                    </div>
+                    <div class="station-sub">مقاصة الفضاء الخليجية • Free-Space Optics</div>
+                </button>
+                <button type="button" class="station-btn" id="st-sin">
+                    <div class="station-head">
+                        <span>🇸🇬 محطة سنغافورة</span>
+                        <span class="mono">SIN-OPT</span>
+                    </div>
+                    <div class="station-sub">بوابة آسيا الفضائية • Adaptive Optics</div>
+                </button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🔐 فاحص القناة الكمية وحقن مفاتيح HSM الفضائية</span>
+                </div>
+                <span class="panel-badge mono" id="st-code-badge">AMS-OPT-MASTER</span>
+            </div>
+
+            <div class="qkd-inspector">
+                <div class="qkd-row">
+                    <span class="qkd-label">المحطة الأرضية البصرية:</span>
+                    <span class="qkd-val gold" id="st-name-val">محطة أمستردام البصرية الكمية (AMS-OPT-1)</span>
+                </div>
+                <div class="qkd-row">
+                    <span class="qkd-label">القمر الصناعي المتصل حالياً:</span>
+                    <span class="qkd-val cyan mono" id="st-sat-val">SRX-SAT-04 (Altitude 540 km LEO)</span>
+                </div>
+                <div class="qkd-row">
+                    <span class="qkd-label">حالة التشابك الفوتوني (Bell State Fidelity):</span>
+                    <span class="qkd-val emerald mono" id="st-fidelity-val">99.64% Entanglement Fidelity</span>
+                </div>
+                <div class="qkd-row">
+                    <span class="qkd-label">حالة الكابلات البحرية البديلة:</span>
+                    <span class="qkd-val" id="st-cable-val">✔ نشطة ومحمية بمسار فضائي رديف فوري</span>
+                </div>
+                <div class="qkd-row">
+                    <span class="qkd-label">بصمة المفتاح الكمي المشترك (OTP Hash):</span>
+                    <span class="qkd-val mono" id="st-key-hash">QKD-SHA3: 0x8F41C90E...77A23B19</span>
+                </div>
+            </div>
+
+            <div class="qkd-log mono" id="qkd-telemetry-log">
+                [QKD-BB84 16:34:00Z] Entangled photon stream locked between SRX-SAT-04 &lt;--&gt; AMS-OPT-1 &lt;--&gt; DAM-OPT-1.<br>
+                [QBER-AUDIT] Quantum Bit Error Rate verified at 0.26% — Zero Eavesdropping detected.<br>
+                [HSM-INJECT] 256-bit One-Time Pad keys injected into FIPS 140-3 Level 4 Enclaves.<br>
+                [BACKHAUL-READY] Red Sea &amp; Mediterranean submarine cable bypass on hot-standby (12.4ms).
+            </div>
+
+            <button type="button" class="btn-gold" id="btn-export-qkd-cert">
+                📥 إصدار وتنزيل شهادة المفاتيح الكمية والارتباط الفضائي (QKD Orbital Certificate JSON)
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="centennial-sovereign-command-bridge.html">غرفة القيادة المئوية 100</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="sovereign-digital-twin.html">محاكي التوأم الرقمي</a>
+            <a href="ip-patent-escrow.html">بوابة الملكية الفكرية الكمية</a>
+            <a href="executive-boardroom-ai.html">مستشار مجلس الإدارة الذكي</a>
+        </div>
+        <div>
+            © 2026 S&amp;R CoreSync For Intelligent Solutions. جميع الحقوق السيادية والفضائية محفوظة (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var activeMode = 'nominal';
+            var activeStation = 'ams';
+
+            var stations = {
+                ams: {
+                    code: 'AMS-OPT-MASTER',
+                    name: 'محطة أمستردام البصرية الكمية (AMS-OPT-1)',
+                    sat: 'SRX-SAT-04 (Altitude 540 km LEO)',
+                    fidelity: '99.64% Entanglement Fidelity',
+                    cable: '✔ نشطة ومحمية بمسار فضائي رديف فوري',
+                    hash: 'QKD-SHA3: 0x8F41C90E...77A23B19'
+                },
+                ruh: {
+                    code: 'RUH-OPT-GCC',
+                    name: 'محطة الرياض الفضائية السيادية (RUH-OPT-1)',
+                    sat: 'SRX-SAT-07 (Altitude 550 km LEO)',
+                    fidelity: '99.82% Clear-Sky Desert Fidelity',
+                    cable: '✔ تزامن مباشر مع مقاصة SARIE و ZATCA',
+                    hash: 'QKD-SHA3: 0x3A92E11B...64D80C42'
+                },
+                dam: {
+                    code: 'DAM-OPT-LEVANT',
+                    name: 'محطة دمشق البصرية الوطنية (DAM-OPT-1)',
+                    sat: 'SRX-SAT-02 (Altitude 535 km LEO)',
+                    fidelity: '99.71% Sovereign Autonomous Link',
+                    cable: '✔ استقلال فضائي كامل عن الكابلات الخارجية',
+                    hash: 'QKD-SHA3: 0x7C15D84A...91E05F33'
+                },
+                dxb: {
+                    code: 'DXB-OPT-FINHUB',
+                    name: 'محطة دبي للاتصالات الكمية المالية (DXB-OPT-1)',
+                    sat: 'SRX-SAT-09 (Altitude 545 km LEO)',
+                    fidelity: '99.68% Free-Space Laser Lock',
+                    cable: '✔ حماية كاملة لمعاملات FTA والمقاصة الخليجية',
+                    hash: 'QKD-SHA3: 0x5E20B73C...12F94A88'
+                },
+                sin: {
+                    code: 'SIN-OPT-APAC',
+                    name: 'محطة سنغافورة البصرية التكيفية (SIN-OPT-1)',
+                    sat: 'SRX-SAT-11 (Altitude 560 km LEO)',
+                    fidelity: '99.59% Adaptive Optics Compensated',
+                    cable: '✔ مسار ليزري مباشر مع أوروبا والشرق الأوسط',
+                    hash: 'QKD-SHA3: 0x9D64A30F...48C17E20'
+                }
+            };
+
+            var modes = {
+                nominal: {
+                    btnId: 'btn-qkd-nominal',
+                    badge: 'ORBITAL STATUS: HYBRID FIBER + LEO QKD',
+                    sats: '12 / 12 SATS',
+                    qber: '0.26% QBER',
+                    keyrate: '1.42 Mbps',
+                    failover: '12.4 ms',
+                    beamColor: '#38bdf8',
+                    log: '[MODE-NOMINAL] Hybrid Terrestrial Fiber + LEO Laser QKD synchronized across all 5 ground stations.'
+                },
+                seacut: {
+                    btnId: 'btn-qkd-seacut',
+                    badge: 'ALERT DRILL: SUBMARINE CABLE CUT -> 100% SATELLITE BACKHAUL',
+                    sats: '12 / 12 ACTIVE',
+                    qber: '0.31% QBER',
+                    keyrate: '2.18 Mbps (Boost)',
+                    failover: '11.2 ms (Rerouted)',
+                    beamColor: '#10b981',
+                    log: '[FAILOVER-ACTIVE] Simulated Red Sea & Med fiber cut! 100% financial traffic routed via LEO Laser ISL in 11.2ms.'
+                },
+                eavesdrop: {
+                    btnId: 'btn-qkd-eavesdrop',
+                    badge: 'SECURITY DRILL: QUANTUM PHOTON INTERCEPT NEUTRALIZED',
+                    sats: '12 / 12 LOCKED',
+                    qber: '0.19% (Re-Keyed)',
+                    keyrate: '1.85 Mbps',
+                    failover: '4.8 ms Hop',
+                    beamColor: '#f59e0b',
+                    log: '[BB84-DEFENSE] Simulated eavesdropper caused wave-function collapse -> Compromised photons discarded & wavelength hopped in 4.8ms.'
+                },
+                emp: {
+                    btnId: 'btn-qkd-emp',
+                    badge: 'SHIELD ACTIVE: EMP & GEOMAGNETIC STORM HARDENED',
+                    sats: '12 / 12 HARDENED',
+                    qber: '0.29% QBER',
+                    keyrate: '1.50 Mbps',
+                    failover: '9.6 ms',
+                    beamColor: '#c5a880',
+                    log: '[EMP-SHIELD] Faraday & Optical Isolation active — Zero packet loss during simulated G5 solar storm.'
+                }
+            };
+
+            function logMsg(txt) {
+                var box = document.getElementById('qkd-telemetry-log');
+                if (!box) return;
+                var ts = new Date().toISOString().substring(11, 19) + 'Z';
+                box.innerHTML = '[' + ts + '] ' + txt + '<br>' + box.innerHTML;
+            }
+
+            function selectStation(k) {
+                activeStation = k;
+                var st = stations[k];
+                if (!st) return;
+                document.getElementById('st-code-badge').textContent = st.code;
+                document.getElementById('st-name-val').textContent = st.name;
+                document.getElementById('st-sat-val').textContent = st.sat;
+                document.getElementById('st-fidelity-val').textContent = st.fidelity;
+                document.getElementById('st-cable-val').textContent = st.cable;
+                document.getElementById('st-key-hash').textContent = st.hash;
+
+                ['ams', 'ruh', 'dam', 'dxb', 'sin'].forEach(function(id) {
+                    var b = document.getElementById('st-' + id);
+                    if (b) {
+                        if (id === k) b.classList.add('selected');
+                        else b.classList.remove('selected');
+                    }
+                });
+                logMsg('[STATION-LOCK] Quantum telescope aligned on ' + st.code + ' -> ' + st.sat);
+            }
+
+            ['ams', 'ruh', 'dam', 'dxb', 'sin'].forEach(function(id) {
+                var b = document.getElementById('st-' + id);
+                if (b) {
+                    b.addEventListener('click', function() { selectStation(id); });
+                }
+            });
+
+            function setMode(mKey) {
+                activeMode = mKey;
+                var m = modes[mKey];
+                if (!m) return;
+                document.getElementById('qkd-mode-badge').textContent = m.badge;
+                document.getElementById('qkd-sat-count').textContent = m.sats;
+                document.getElementById('qkd-qber-val').textContent = m.qber;
+                document.getElementById('qkd-keyrate-val').textContent = m.keyrate;
+                document.getElementById('qkd-failover-val').textContent = m.failover;
+
+                Object.keys(modes).forEach(function(k) {
+                    var btn = document.getElementById(modes[k].btnId);
+                    if (btn) {
+                        if (k === mKey) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                });
+                logMsg(m.log);
+            }
+
+            document.getElementById('btn-qkd-nominal').addEventListener('click', function() { setMode('nominal'); });
+            document.getElementById('btn-qkd-seacut').addEventListener('click', function() { setMode('seacut'); });
+            document.getElementById('btn-qkd-eavesdrop').addEventListener('click', function() { setMode('eavesdrop'); });
+            document.getElementById('btn-qkd-emp').addEventListener('click', function() { setMode('emp'); });
+
+            var canvas = document.getElementById('qkd-orbital-canvas');
+            if (canvas && canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                var phase = 0;
+                var groundNodes = [
+                    { key: 'ams', label: 'AMS-OPT (Amsterdam)', x: 170, y: 330 },
+                    { key: 'dam', label: 'DAM-OPT (Damascus)', x: 340, y: 330 },
+                    { key: 'ruh', label: 'RUH-OPT (Riyadh)', x: 500, y: 330 },
+                    { key: 'dxb', label: 'DXB-OPT (Dubai)', x: 660, y: 330 },
+                    { key: 'sin', label: 'SIN-OPT (Singapore)', x: 820, y: 330 }
+                ];
+                var satNodes = [
+                    { label: 'SRX-SAT-02', x: 220, y: 95 },
+                    { label: 'SRX-SAT-04', x: 400, y: 75 },
+                    { label: 'SRX-SAT-07', x: 580, y: 75 },
+                    { label: 'SRX-SAT-09', x: 760, y: 95 }
+                ];
+
+                function drawOrbital() {
+                    var cfg = modes[activeMode] || modes.nominal;
+                    phase += 0.022;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.beginPath();
+                    ctx.arc(480, 620, 540, Math.PI * 1.15, Math.PI * 1.85);
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    for (var i = 0; i < satNodes.length - 1; i++) {
+                        ctx.beginPath();
+                        ctx.moveTo(satNodes[i].x, satNodes[i].y);
+                        ctx.lineTo(satNodes[i + 1].x, satNodes[i + 1].y);
+                        ctx.strokeStyle = cfg.beamColor;
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
+
+                    groundNodes.forEach(function(g, gi) {
+                        var sat = satNodes[gi % satNodes.length];
+                        ctx.beginPath();
+                        ctx.moveTo(sat.x, sat.y);
+                        ctx.lineTo(g.x, g.y);
+                        ctx.strokeStyle = (g.key === activeStation) ? '#f3dfba' : 'rgba(56, 189, 248, 0.35)';
+                        ctx.lineWidth = (g.key === activeStation) ? 2.5 : 1.5;
+                        ctx.stroke();
+
+                        var p = (phase + gi * 0.21) % 1;
+                        var px = sat.x + (g.x - sat.x) * p;
+                        var py = sat.y + (g.y - sat.y) * p;
+                        ctx.beginPath();
+                        ctx.arc(px, py, 4, 0, Math.PI * 2);
+                        ctx.fillStyle = cfg.beamColor;
+                        ctx.fill();
+
+                        ctx.beginPath();
+                        ctx.arc(g.x, g.y, 14, 0, Math.PI * 2);
+                        ctx.fillStyle = (g.key === activeStation) ? '#c5a880' : '#071510';
+                        ctx.fill();
+                        ctx.strokeStyle = '#f3dfba';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = '700 11px "JetBrains Mono", monospace';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(g.label, g.x, g.y + 30);
+                    });
+
+                    satNodes.forEach(function(s) {
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, 16, 0, Math.PI * 2);
+                        ctx.fillStyle = '#071f29';
+                        ctx.fill();
+                        ctx.strokeStyle = cfg.beamColor;
+                        ctx.lineWidth = 2.5;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#38bdf8';
+                        ctx.font = '700 11px "JetBrains Mono", monospace';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(s.label, s.x, s.y - 24);
+                    });
+
+                    requestAnimationFrame(drawOrbital);
+                }
+                drawOrbital();
+            }
+
+            var btnExport = document.getElementById('btn-export-qkd-cert');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var cert = {
+                        certificateType: 'S&R CoreSync Sovereign Satellite Backhaul & QKD Certificate',
+                        protocol: 'BB84 / E91 Quantum Key Distribution + NIST FIPS 203 ML-KEM-1024',
+                        timestamp: new Date().toISOString(),
+                        operationalMode: activeMode,
+                        groundStation: stations[activeStation],
+                        quantumTelemetry: {
+                            activeSatellites: document.getElementById('qkd-sat-count').textContent,
+                            qberRate: document.getElementById('qkd-qber-val').textContent,
+                            siftedKeyRate: document.getElementById('qkd-keyrate-val').textContent,
+                            failoverLatency: document.getElementById('qkd-failover-val').textContent
+                        },
+                        foundersSignOff: [
+                            'Eng. Mohammad Salim Aziza (Chairman & Founder - Amsterdam Hub)',
+                            'Mr. Mohammad Raed Kaakeh (CEO & Co-Founder - Middle East & Levant Hub)'
+                        ]
+                    };
+                    var blob = new Blob([JSON.stringify(cert, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'sovereign_satellite_qkd_certificate_2026.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
