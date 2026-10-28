@@ -83,6 +83,16 @@ REQUIRED_PUBLISHED = [
     # published, the only remaining discovery path is the CNAME that fails its
     # certificate check, so failing the build is the correct response.
     '.well-known/autoconfig/mail/config-v1.1.xml',
+    # RFC 9116 security policy. If it silently disappears, security scanners
+    # and researchers lose the documented contact path, so fail the build.
+    '.well-known/security.txt',
+    # IndexNow ownership key (Bing/Yandex/Seznam/Naver). The filename IS the
+    # key; if content or name drift, search-engine submission breaks, so fail
+    # the build rather than publish a silent 404.
+    '28e2de90a2704782b40cbd444d5e764d.txt',
+    # RFC 6350 contact card, discovered via <link rel="alternate"> on the ar
+    # and en landing pages; losing it breaks those discovery links.
+    'SR-CoreSync.vcf',
 ]
 
 
