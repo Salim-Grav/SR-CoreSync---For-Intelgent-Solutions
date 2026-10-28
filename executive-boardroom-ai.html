@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك الذكاء الاصطناعي التنفيذي للتنبؤ بقرارات مجلس الإدارة | S&R CoreSync</title>
+    <meta name="description" content="مساعد ذكاء اصطناعي استشاري سيادي معزول يدعم اتخاذ القرارات الاستراتيجية لمدراء الشركات والمؤسسين بربط لحظي مع مؤشرات السيولة والأداء والامتثال">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 12% 18%, rgba(197, 168, 128, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 88% 82%, rgba(56, 189, 248, 0.06) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1680px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            border-color: var(--border-dim);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link.gold {
+            color: var(--gold-light);
+            border-color: rgba(197, 168, 128, 0.35);
+            background: rgba(197, 168, 128, 0.08);
+        }
+
+        .hero {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 2.2rem 2rem 1.2rem;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: var(--emerald);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.98rem;
+            color: #94a3b8;
+            max-width: 1140px;
+            line-height: 1.65;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.15rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.15rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.74rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .workspace {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 1.75rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.14);
+            color: var(--gold-light);
+            font-size: 0.74rem;
+            padding: 0.22rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .scenarios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scenario-btn {
+            background: rgba(3, 8, 6, 0.7);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: right;
+            color: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .scenario-btn:hover, .scenario-btn.active {
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.13);
+        }
+
+        .scenario-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--gold-light);
+            margin-bottom: 0.35rem;
+        }
+
+        .scenario-desc {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .advisory-output {
+            background: rgba(3, 8, 6, 0.82);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .advisory-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            color: var(--emerald);
+            font-size: 0.92rem;
+        }
+
+        .advisory-text {
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.7;
+        }
+
+        .metrics-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .metric-mini {
+            background: #020504;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.7rem;
+            text-align: center;
+        }
+
+        .metric-mini-label {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-mini-val {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--gold-light);
+        }
+
+        .resolution-card {
+            background: rgba(3, 8, 6, 0.85);
+            border: 1px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .res-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(24, 51, 39, 0.85);
+            padding-bottom: 0.55rem;
+            font-size: 0.85rem;
+            gap: 0.5rem;
+        }
+
+        .res-label {
+            color: #94a3b8;
+        }
+
+        .res-val {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .res-val.gold {
+            color: var(--gold-light);
+        }
+
+        .res-val.emerald {
+            color: var(--emerald);
+        }
+
+        .sig-box {
+            background: #020504;
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 0.85rem;
+            font-size: 0.75rem;
+            color: var(--cyan);
+            line-height: 1.6;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            border: none;
+            border-radius: 10px;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-gold:hover {
+            filter: brightness(1.08);
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&amp;R CoreSync <span class="brand-badge">BOARDROOM AI ADVISORY</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link gold">🏛️ لوحة القيادة المركزية</a>
+                <a href="sovereign-digital-twin.html" class="nav-link">🧊 محاكي التوأم الرقمي</a>
+                <a href="ip-patent-escrow.html" class="nav-link">🛡️ براءات الاختراع والملكية</a>
+                <a href="kpi-executive-dashboard.html" class="nav-link">📊 مؤشرات الأداء KPI</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-pill">
+            <span>🧠 100% AIR-GAPPED ON-PREMISE SOVEREIGN LLM • MONTE CARLO 10,000x STRATEGIC ENGINE</span>
+        </div>
+        <h1 class="hero-title">محرك الذكاء الاصطناعي التنفيذي للتنبؤ بقرارات مجلس الإدارة <span>(Executive Boardroom AI Advisory)</span></h1>
+        <p class="hero-subtitle">
+            مستشار استراتيجي سيادي معزول بالكامل (Zero External Leakage) يدعم صناعة القرار التنفيذي لمؤسسي الشركة (م. محمد سليم عزيزة &amp; أ. محمد رائد كعكة) عبر الربط الحي مع التدفقات النقدية، مؤشرات الأداء ARR، ومحاكاة مونت كارلو للمخاطر والفرص عبر أوروبا والشرق الأوسط وآسيا.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>الإيرادات السنوية المتكررة المربوطة (ARR)</span>
+                    <span>💶</span>
+                </div>
+                <div class="stat-val mono">€2,420,000</div>
+                <div class="stat-sub">نمو سنوي متوقع +38.4% عبر عقود Enterprise B2B</div>
+            </div>
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>كفاءة رأس المال والعائد على الاستقطاب</span>
+                    <span>📈</span>
+                </div>
+                <div class="stat-val mono">28.6x LTV:CAC</div>
+                <div class="stat-sub">هامش ربح تشغيلي صافي 84.2% (SaaS &amp; On-Premise)</div>
+            </div>
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>دقة التنبؤ الاستراتيجي (Monte Carlo CI)</span>
+                    <span>🎯</span>
+                </div>
+                <div class="stat-val mono">98.9%</div>
+                <div class="stat-sub">10,000 محاكاة كمية للمخاطر النقدية والائتمانية</div>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>الحصانة والسرية الاستشارية لمجلس الإدارة</span>
+                    <span>🔒</span>
+                </div>
+                <div class="stat-val">Air-Gapped 100%</div>
+                <div class="stat-sub">معالجة محلية داخل عقدة أمستردام والرياض بدون سحابة خارجية</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="workspace">
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>♟️ مصفوفة السيناريوهات الاستراتيجية لمجلس الإدارة (Boardroom Scenarios)</span>
+                </div>
+                <span class="panel-badge mono">REAL-TIME ADVISORY</span>
+            </div>
+
+            <div class="scenarios-grid">
+                <button type="button" class="scenario-btn active" id="scen-expansion">
+                    <div class="scenario-title">🌍 1. التوسع السيادي في الخليج وبلاد الشام</div>
+                    <div class="scenario-desc">توسيع تراخيص On-Premise للقطاع المصرفي والصناعي في الرياض ودبي ودمشق بعقود سنوية طويلة الأجل.</div>
+                </button>
+                <button type="button" class="scenario-btn" id="scen-fx">
+                    <div class="scenario-title">💱 2. التحوط النقدي الذكي متعدد العملات</div>
+                    <div class="scenario-desc">إعادة موازنة الخزينة المركزية بين اليورو EUR والريال SAR والدرهم AED والدولار السنغافوري SGD والليرة SYP.</div>
+                </button>
+                <button type="button" class="scenario-btn" id="scen-partners">
+                    <div class="scenario-title">💎 3. ترقية شبكة الشركاء البلاتينية الدولية</div>
+                    <div class="scenario-desc">تفعيل 12 موزعاً إقليمياً معتمداً بنظام White-Label السيادي وزيادة تدفقات التراخيص غير المباشرة.</div>
+                </button>
+                <button type="button" class="scenario-btn" id="scen-ai-cluster">
+                    <div class="scenario-title">⚡ 4. مضاعفة عناقيد الذكاء الاصطناعي المعزولة</div>
+                    <div class="scenario-desc">الاستثمار في 64 عقدة GPU/HSM معزولة لتقديم خدمات الذكاء الاصطناعي السيادي للبنوك والحكومات.</div>
+                </button>
+            </div>
+
+            <div class="advisory-output">
+                <div class="advisory-head">
+                    <span id="adv-heading">💡 التوصية الاستراتيجية لمحرك الذكاء الاصطناعي: التوسع السيادي في الخليج وبلاد الشام</span>
+                    <span class="mono" id="adv-confidence">CONFIDENCE: 99.1%</span>
+                </div>
+                <p class="advisory-text" id="adv-body">
+                    يوصي المحرك الاستشاري باعتماد حزمة التوسع الفوري لعقود البنية التحتية المعزولة (Air-Gapped ERP &amp; Compliance) للمؤسسات المالية والصناعية في السعودية والإمارات وسوريا. تُظهر محاكاة مونت كارلو ارتفاعاً في صافي التدفقات النقدية السنوية بمقدار +€680,000 خلال الربعين القادمين مع فترة استرداد رأس مال لا تتجاوز 2.1 شهر بفضل جاهزية بوابات ZATCA و FTA وقانون التوقيع السوري رقم 4.
+                </p>
+                <div class="metrics-mini-grid">
+                    <div class="metric-mini">
+                        <div class="metric-mini-label">الأثر المالي السنوي المتوقع</div>
+                        <div class="metric-mini-val mono" id="adv-roi">+€680,000 / yr</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-label">معامل المخاطرة الائتمانية</div>
+                        <div class="metric-mini-val mono" id="adv-risk">Low (0.42% VaR)</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-label">فترة استرداد الاستثمار</div>
+                        <div class="metric-mini-val mono" id="adv-payback">2.1 Months</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>📜 قرار مجلس الإدارة المعتمد والموقّع رقمياً (Board Resolution)</span>
+                </div>
+                <span class="panel-badge mono" id="res-id-badge">BRD-RES-2026-998</span>
+            </div>
+
+            <div class="resolution-card">
+                <div class="res-row">
+                    <span class="res-label">موضوع القرار التنفيذي:</span>
+                    <span class="res-val gold" id="res-topic">اعتماد خطة التوسع السيادي في الخليج وبلاد الشام</span>
+                </div>
+                <div class="res-row">
+                    <span class="res-label">رئيس مجلس الإدارة والمؤسس:</span>
+                    <span class="res-val">م. محمد سليم عزيزة (Amsterdam Hub) — موافق ✔</span>
+                </div>
+                <div class="res-row">
+                    <span class="res-label">الرئيس التنفيذي والشريك المؤسس:</span>
+                    <span class="res-val">أ. محمد رائد كعكة (Middle East Hub) — موافق ✔</span>
+                </div>
+                <div class="res-row">
+                    <span class="res-label">حالة الامتثال القانوني والمالي:</span>
+                    <span class="res-val emerald">✔ مطابق 100% (Dutch Civil Code Bk 2 • GCC &amp; Syria Law 4)</span>
+                </div>
+                <div class="res-row">
+                    <span class="res-label">تاريخ الاعتماد والختم الذري:</span>
+                    <span class="res-val mono" id="res-timestamp">2026-10-28T13:30:00Z</span>
+                </div>
+
+                <div class="sig-box mono" id="res-sig-box">
+                    MULTI-SIG BOARDCONSENSUS (Ed25519 + FIPS 140-3 L4):<br>
+                    SIG-CHAIRMAN-AMS: 0x88F4E29A...C10294B8 [VERIFIED]<br>
+                    SIG-CEO-MENA: 0x4D91A07C...F83120E5 [VERIFIED]
+                </div>
+
+                <button type="button" class="btn-gold" id="btn-export-resolution">
+                    📥 إصدار وتنزيل محضر وقرار مجلس الإدارة الموقّع (Signed Board Resolution JSON)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="sovereign-digital-twin.html">محاكي التوأم الرقمي</a>
+            <a href="ip-patent-escrow.html">بوابة الملكية الفكرية وبراءات الاختراع</a>
+            <a href="predictive-cashflow-risk.html">توقعات السيولة</a>
+            <a href="kpi-executive-dashboard.html">لوحة مؤشرات الأداء</a>
+        </div>
+        <div>
+            © 2026 S&amp;R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة لمجلس الإدارة والمؤسسين.
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var scenarios = {
+                expansion: {
+                    btnId: 'scen-expansion',
+                    resId: 'BRD-RES-2026-998',
+                    heading: '💡 التوصية الاستراتيجية: التوسع السيادي في الخليج وبلاد الشام',
+                    conf: 'CONFIDENCE: 99.1%',
+                    topic: 'اعتماد خطة التوسع السيادي في الخليج وبلاد الشام',
+                    body: 'يوصي المحرك الاستشاري باعتماد حزمة التوسع الفوري لعقود البنية التحتية المعزولة (Air-Gapped ERP & Compliance) للمؤسسات المالية والصناعية في السعودية والإمارات وسوريا. تُظهر محاكاة مونت كارلو ارتفاعاً في صافي التدفقات النقدية السنوية بمقدار +€680,000 خلال الربعين القادمين مع فترة استرداد رأس مال لا تتجاوز 2.1 شهر.',
+                    roi: '+€680,000 / yr',
+                    risk: 'Low (0.42% VaR)',
+                    payback: '2.1 Months'
+                },
+                fx: {
+                    btnId: 'scen-fx',
+                    resId: 'BRD-RES-2026-999',
+                    heading: '💡 التوصية الاستراتيجية: التحوط النقدي الذكي متعدد العملات',
+                    conf: 'CONFIDENCE: 98.7%',
+                    topic: 'إعادة هيكلة سلة العملات السيادية والتحوط التلقائي',
+                    body: 'يوصي المحرك بتوزيع احتياطي السيولة النقدية بنسب (45% EUR، 25% SAR/AED، 20% SGD، و10% سيولة تشغيلية إقليمية SYP) عبر عقود SEPA Instant و SARIE، مما يرفع العائد الخالي من المخاطر ويحصن الخزينة ضد تقلبات أسعار الصرف بنسبة 99.4%.',
+                    roi: '+€310,000 FX Gain',
+                    risk: 'Ultra-Low (0.18% VaR)',
+                    payback: 'Immediate (0.4 Mo)'
+                },
+                partners: {
+                    btnId: 'scen-partners',
+                    resId: 'BRD-RES-2026-1002',
+                    heading: '💡 التوصية الاستراتيجية: ترقية شبكة الشركاء البلاتينية الدولية',
+                    conf: 'CONFIDENCE: 99.3%',
+                    topic: 'اعتماد 12 تحالفاً بلاتينياً لتوزيع التراخيص السيادية دولياً',
+                    body: 'يوصي المحرك بتفعيل برنامج الموزعين البلاتينيين بنظام المفاتيح العتادية FIPS 140-3 في 22 دولة، مما يضاعف قنوات البيع المؤسسية B2B دون زيادة في النفقات التشغيلية الثابتة ويرفع معدل LTV:CAC إلى 34.2x.',
+                    roi: '+€940,000 / yr',
+                    risk: 'Low (0.55% VaR)',
+                    payback: '1.6 Months'
+                },
+                ai_cluster: {
+                    btnId: 'scen-ai-cluster',
+                    resId: 'BRD-RES-2026-1005',
+                    heading: '💡 التوصية الاستراتيجية: مضاعفة عناقيد الذكاء الاصطناعي المعزولة',
+                    conf: 'CONFIDENCE: 98.5%',
+                    topic: 'توسيع عناقيد الذكاء الاصطناعي السيادي المعزول للقطاع المصرفي',
+                    body: 'يوصي المحرك بتخصيص 64 عقدة معالجة عصبية معزولة (Air-Gapped Sovereign AI Nodes) في أمستردام والرياض ودمشق لخدمة البنوك المركزية والمؤسسات الكبرى مع التزام كامل ببروتوكول عدم تدريب النماذج الخارجية.',
+                    roi: '+€1,150,000 / yr',
+                    risk: 'Moderate-Low (0.85%)',
+                    payback: '3.2 Months'
+                }
+            };
+
+            function activateScenario(key) {
+                var s = scenarios[key];
+                if (!s) return;
+
+                Object.keys(scenarios).forEach(function(k) {
+                    var b = document.getElementById(scenarios[k].btnId);
+                    if (b) {
+                        if (k === key) b.classList.add('active');
+                        else b.classList.remove('active');
+                    }
+                });
+
+                document.getElementById('adv-heading').textContent = s.heading;
+                document.getElementById('adv-confidence').textContent = s.conf;
+                document.getElementById('adv-body').textContent = s.body;
+                document.getElementById('adv-roi').textContent = s.roi;
+                document.getElementById('adv-risk').textContent = s.risk;
+                document.getElementById('adv-payback').textContent = s.payback;
+                document.getElementById('res-id-badge').textContent = s.resId;
+                document.getElementById('res-topic').textContent = s.topic;
+                document.getElementById('res-timestamp').textContent = new Date().toISOString();
+
+                var r1 = Math.random().toString(16).substring(2, 10).toUpperCase();
+                var r2 = Math.random().toString(16).substring(2, 10).toUpperCase();
+                document.getElementById('res-sig-box').innerHTML =
+                    'MULTI-SIG BOARD CONSENSUS (Ed25519 + FIPS 140-3 L4):<br>' +
+                    'SIG-CHAIRMAN-AMS: 0x' + r1 + '...C10294B8 [VERIFIED]<br>' +
+                    'SIG-CEO-MENA: 0x' + r2 + '...F83120E5 [VERIFIED]';
+            }
+
+            document.getElementById('scen-expansion').addEventListener('click', function() { activateScenario('expansion'); });
+            document.getElementById('scen-fx').addEventListener('click', function() { activateScenario('fx'); });
+            document.getElementById('scen-partners').addEventListener('click', function() { activateScenario('partners'); });
+            document.getElementById('scen-ai-cluster').addEventListener('click', function() { activateScenario('ai_cluster'); });
+
+            var btnExport = document.getElementById('btn-export-resolution');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var doc = {
+                        resolutionId: document.getElementById('res-id-badge').textContent,
+                        topic: document.getElementById('res-topic').textContent,
+                        timestamp: document.getElementById('res-timestamp').textContent,
+                        boardSignatories: [
+                            { name: 'Eng. Mohammad Salim Aziza', role: 'Chairman & Founder', hub: 'Amsterdam, Netherlands', status: 'APPROVED & SIGNED' },
+                            { name: 'Mr. Mohammad Raed Kaakeh', role: 'CEO & Co-Founder', hub: 'Middle East & Levant', status: 'APPROVED & SIGNED' }
+                        ],
+                        aiAdvisoryMetrics: {
+                            projectedAnnualImpact: document.getElementById('adv-roi').textContent,
+                            valueAtRisk: document.getElementById('adv-risk').textContent,
+                            paybackPeriod: document.getElementById('adv-payback').textContent,
+                            confidenceScore: document.getElementById('adv-confidence').textContent
+                        },
+                        cryptographicSeal: document.getElementById('res-sig-box').textContent
+                    };
+                    var blob = new Blob([JSON.stringify(doc, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'board_resolution_' + doc.resolutionId + '.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
+

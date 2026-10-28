@@ -1,5 +1,16 @@
 #!/usr/bin/env node
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * Render the two official contract pages to real PDF files (vector text, A4).
  * Output: <outDir>/OF-2026-1021.pdf and <outDir>/OF-2026-1022-FIN.pdf
  *

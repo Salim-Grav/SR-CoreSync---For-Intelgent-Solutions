@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync - Deploy Top Hero & Header AI Voice Planner Call-to-Actions:
 1. Header Actions: Next to #headerLiveDemoPill (.btn-header-voice-ai)
 2. Hero Actions: Next to #hero-btn-demo (.hero-btn-voice-ai)

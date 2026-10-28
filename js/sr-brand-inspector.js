@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * S&R CoreSync For Intelligent Solutions - 4K Ultra-HD Image Zoom, Pan & Brand Kit Controller
  * Provides interactive vector & logo inspection with smooth hardware-accelerated pan/zoom
  * and authentic Brand Asset ZIP bundle downloads across all languages (AR, EN, NL).

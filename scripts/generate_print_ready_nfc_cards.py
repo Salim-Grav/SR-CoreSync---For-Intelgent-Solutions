@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync For Intelligent Solutions - Ultra High-Resolution Print-Ready NFC Smart Cards Generator
 Outputs 300 DPI CMYK-Safe CR80 standard physical card layouts (2048 x 1280 px)
 for Eng. Mohammad Salim Aziza & Mr. Mohammad Raed Kaaka.

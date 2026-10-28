@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي التوأم الرقمي للمؤسسات السيادية | S&R CoreSync</title>
+    <meta name="description" content="محاكاة البنية التحتية والتدفقات التشغيلية الحية للمؤسسات والشركات الصناعية عبر توأم رقمي ثلاثي الأبعاد تفاعلي متوافق مع معايير السيادة السحابية">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #030806;
+            --bg-card: #071510;
+            --bg-card-hover: #0b1f18;
+            --gold-primary: #c5a880;
+            --gold-light: #f3dfba;
+            --gold-dark: #917752;
+            --emerald: #10b981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --cyan: #38bdf8;
+            --amber: #f59e0b;
+            --crimson: #ef4444;
+            --border-dim: #183327;
+            --border-gold: #c5a880;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: #e2e8f0;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 12% 15%, rgba(56, 189, 248, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        header {
+            background: rgba(4, 19, 13, 0.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1680px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-badge {
+            font-size: 0.7rem;
+            color: var(--gold-light);
+            background: rgba(197, 168, 128, 0.12);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            margin-right: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 0.45rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #fff;
+            border-color: var(--border-dim);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link.gold {
+            color: var(--gold-light);
+            border-color: rgba(197, 168, 128, 0.35);
+            background: rgba(197, 168, 128, 0.08);
+        }
+
+        .hero {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 2.2rem 2rem 1.2rem;
+            width: 100%;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: var(--cyan);
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-title {
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 0.98rem;
+            color: #94a3b8;
+            max-width: 1120px;
+            line-height: 1.65;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.15rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            padding: 1.15rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gold-primary);
+        }
+
+        .stat-card.emerald::after { background: var(--emerald); }
+        .stat-card.cyan::after { background: var(--cyan); }
+        .stat-card.amber::after { background: var(--amber); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-val {
+            font-size: 1.65rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-sub {
+            font-size: 0.74rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+
+        .workspace {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem 3rem;
+            display: grid;
+            grid-template-columns: 1.65fr 1fr;
+            gap: 1.75rem;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 0.9rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-badge {
+            background: rgba(197, 168, 128, 0.14);
+            color: var(--gold-light);
+            font-size: 0.74rem;
+            padding: 0.22rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .mode-bar {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            background: rgba(3, 8, 6, 0.75);
+            border: 1px solid var(--border-dim);
+            color: #94a3b8;
+            padding: 0.55rem 0.95rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn:hover, .mode-btn.active {
+            background: rgba(197, 168, 128, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .canvas-stage {
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, #091d16 0%, #030806 100%);
+            border: 1px solid var(--border-dim);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 410px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #digital-twin-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .canvas-overlay-top {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            pointer-events: none;
+        }
+
+        .overlay-tag {
+            background: rgba(3, 8, 6, 0.85);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: var(--emerald);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+
+        .node-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .node-card-btn {
+            background: rgba(3, 8, 6, 0.65);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: right;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #e2e8f0;
+        }
+
+        .node-card-btn:hover, .node-card-btn.selected {
+            border-color: var(--gold-primary);
+            background: rgba(197, 168, 128, 0.12);
+        }
+
+        .node-card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 0.86rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .node-card-meta {
+            font-size: 0.73rem;
+            color: #94a3b8;
+        }
+
+        .inspector-box {
+            background: rgba(3, 8, 6, 0.75);
+            border: 1px solid rgba(197, 168, 128, 0.35);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .inspector-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(24, 51, 39, 0.8);
+            padding-bottom: 0.55rem;
+            font-size: 0.86rem;
+        }
+
+        .inspector-label {
+            color: #94a3b8;
+        }
+
+        .inspector-val {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .inspector-val.gold {
+            color: var(--gold-light);
+        }
+
+        .inspector-val.emerald {
+            color: var(--emerald);
+        }
+
+        .telemetry-log {
+            background: #020504;
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 0.9rem;
+            font-size: 0.76rem;
+            line-height: 1.6;
+            color: #10b981;
+            max-height: 185px;
+            overflow-y: auto;
+        }
+
+        .btn-action-gold {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            color: #030806;
+            border: none;
+            border-radius: 10px;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.92rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-action-gold:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-dim);
+            background: rgba(3, 8, 6, 0.95);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync" class="brand-logo">
+                <div>
+                    <div class="brand-title">S&amp;R CoreSync <span class="brand-badge">DIGITAL TWIN 3D</span></div>
+                </div>
+            </a>
+            <div class="header-actions">
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link gold">🏛️ لوحة القيادة المركزية</a>
+                <a href="ip-patent-escrow.html" class="nav-link">🛡️ براءات الاختراع والملكية الفكرية</a>
+                <a href="executive-boardroom-ai.html" class="nav-link">🧠 مستشار مجلس الإدارة الذكي</a>
+                <a href="sovereign-stress-testing.html" class="nav-link">⚡ اختبارات الأحمال</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-pill">
+            <span>🌐 TWIN-ENGINE v4.8 • ISO/IEC 30173 DIGITAL TWIN COMPLIANT</span>
+        </div>
+        <h1 class="hero-title">محاكي التوأم الرقمي للمؤسسات السيادية <span>(Sovereign Enterprise Digital Twin)</span></h1>
+        <p class="hero-subtitle">
+            محاكاة ثلاثية الأبعاد لحظية للبنية التحتية السحابية السيادية والتدفقات التشغيلية والمالية للمؤسسات والشركات الصناعية عبر 5 مراكز إقليمية (أمستردام • الرياض • دبي • دمشق • سنغافورة) مع رصد استباقي للأحمال وكفاءة الطاقة PUE 1.06 وعزل الأعطال في أقل من 180 جزءاً من الثانية.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card emerald">
+                <div class="stat-label">
+                    <span>حالة التزامن الحي للتوأم الرقمي</span>
+                    <span>🟢</span>
+                </div>
+                <div class="stat-val mono" id="metric-sync-rate">99.9998%</div>
+                <div class="stat-sub">تحديث قياسي كل 10ms عبر الألياف الضوئية المكررة</div>
+            </div>
+            <div class="stat-card cyan">
+                <div class="stat-label">
+                    <span>معدل التدفق التشغيلي والمالي</span>
+                    <span>⚡</span>
+                </div>
+                <div class="stat-val mono" id="metric-throughput">148.4 Gbps</div>
+                <div class="stat-sub" id="metric-tps-sub">64,200 معاملة سيادية / ثانية (TPS)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">
+                    <span>كفاءة الطاقة والتبريد السائل (PUE)</span>
+                    <span>🌱</span>
+                </div>
+                <div class="stat-val mono" id="metric-pue">1.06 PUE</div>
+                <div class="stat-sub">مراكز بيانات خضراء منعدمة الانبعاثات CSRD E1</div>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-label">
+                    <span>زمن التعافي والتكرار الجغرافي (RTO/RPO)</span>
+                    <span>🛡️</span>
+                </div>
+                <div class="stat-val mono" id="metric-latency">0.88 ms</div>
+                <div class="stat-sub">صفر فقدان بيانات (Zero-RPO Active-Active Mesh)</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="workspace">
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🧊 مسرح المحاكاة ثلاثي الأبعاد للعقد السيادية والتدفقات الصناعية</span>
+                </div>
+                <span class="panel-badge mono" id="sim-status-badge">MODE: NOMINAL SOVEREIGN MESH</span>
+            </div>
+
+            <div class="mode-bar">
+                <button type="button" class="mode-btn active" id="mode-nominal">🟢 التشغيل القياسي المتوازن (Nominal Mesh)</button>
+                <button type="button" class="mode-btn" id="mode-surge">🚀 ذروة التسويات المالية 250K TPS (Surge Load)</button>
+                <button type="button" class="mode-btn" id="mode-lockdown">🔒 عزل الطوارئ السيادي (Air-Gapped Lockdown)</button>
+                <button type="button" class="mode-btn" id="mode-failover">🔄 محاكاة التعافي الكارثي الفوري (Zero-RPO Failover)</button>
+            </div>
+
+            <div class="canvas-stage">
+                <canvas id="digital-twin-canvas" width="960" height="410"></canvas>
+                <div class="canvas-overlay-top">
+                    <span class="overlay-tag mono" id="canvas-fps-tag">60 FPS • ISOMETRIC TELEMETRY</span>
+                    <span class="overlay-tag mono" id="canvas-crypto-tag">FIPS 140-3 L4 HSM MESH</span>
+                </div>
+            </div>
+
+            <div class="node-selector-grid">
+                <button type="button" class="node-card-btn selected" id="node-btn-ams">
+                    <div class="node-card-head">
+                        <span>🇳🇱 عقدة أمستردام</span>
+                        <span class="mono">AMS-01</span>
+                    </div>
+                    <div class="node-card-meta">المركز الأوروبي الرئيسي • eIDAS &amp; HSM</div>
+                </button>
+                <button type="button" class="node-card-btn" id="node-btn-ruh">
+                    <div class="node-card-head">
+                        <span>🇸🇦 عقدة الرياض</span>
+                        <span class="mono">RUH-01</span>
+                    </div>
+                    <div class="node-card-meta">بوابة الخليج • ZATCA &amp; PDPL Tier-4</div>
+                </button>
+                <button type="button" class="node-card-btn" id="node-btn-dam">
+                    <div class="node-card-head">
+                        <span>🇸🇾 عقدة دمشق</span>
+                        <span class="mono">DAM-01</span>
+                    </div>
+                    <div class="node-card-meta">بوابة بلاد الشام • سيادة وطنية معزولة</div>
+                </button>
+                <button type="button" class="node-card-btn" id="node-btn-dxb">
+                    <div class="node-card-head">
+                        <span>🇦🇪 عقدة دبي</span>
+                        <span class="mono">DXB-01</span>
+                    </div>
+                    <div class="node-card-meta">مقاصة الخليج • FTA &amp; Multi-Currency</div>
+                </button>
+                <button type="button" class="node-card-btn" id="node-btn-sin">
+                    <div class="node-card-head">
+                        <span>🇸🇬 عقدة سنغافورة</span>
+                        <span class="mono">SIN-01</span>
+                    </div>
+                    <div class="node-card-meta">بوابة آسيا • MAS TRM &amp; Peppol PINT</div>
+                </button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <span>🔬 فاحص العقدة الحية والتنبؤ الصناعي بالصيانة</span>
+                </div>
+                <span class="panel-badge mono" id="selected-node-code">AMS-01-MASTER</span>
+            </div>
+
+            <div class="inspector-box">
+                <div class="inspector-row">
+                    <span class="inspector-label">اسم العقدة والمركز:</span>
+                    <span class="inspector-val gold" id="insp-name">المركز الأوروبي السيادي — أمستردام (AMS-01)</span>
+                </div>
+                <div class="inspector-row">
+                    <span class="inspector-label">الحمل الحاسوبي والعتادي (CPU / HSM Load):</span>
+                    <span class="inspector-val mono" id="insp-load">34.2% (Optimal Thermal Envelope)</span>
+                </div>
+                <div class="inspector-row">
+                    <span class="inspector-label">درجة حرارة الخزائن والتبريد السائل:</span>
+                    <span class="inspector-val mono" id="insp-temp">21.4 °C • Direct Liquid Cooling</span>
+                </div>
+                <div class="inspector-row">
+                    <span class="inspector-label">حالة العزل السيادي والامتثال:</span>
+                    <span class="inspector-val emerald" id="insp-compliance">✔ معزول 100% ضد Cloud Act • GDPR &amp; ISO 27001</span>
+                </div>
+                <div class="inspector-row">
+                    <span class="inspector-label">توقعات الذكاء الاصطناعي للصيانة (AI MTBF):</span>
+                    <span class="inspector-val mono" id="insp-mtbf">99.999% • 0 الأعطال المتوقعة خلال 180 يوماً</span>
+                </div>
+                <div class="inspector-row">
+                    <span class="inspector-label">بصمة التزامن التشفيري (Merkle State Root):</span>
+                    <span class="inspector-val mono" id="insp-hash">0x94F8...E21B8C04</span>
+                </div>
+            </div>
+
+            <div class="telemetry-log mono" id="twin-telemetry-log">
+                [TWIN-SYNC 14:30:01Z] AMS-01 &lt;--&gt; RUH-01 &lt;--&gt; DAM-01 State Consensus Verified (0.88ms)<br>
+                [HSM-HEARTBEAT] FIPS 140-3 Level 4 Enclave Keys Rotated &amp; Sealed.<br>
+                [ERP-STREAM] 64,200 TPS Industrial &amp; Financial Ledger Sync Active.<br>
+                [AI-PREDICT] Thermal &amp; Power Grid PUE steady at 1.06 — Zero Anomalies.
+            </div>
+
+            <button type="button" class="btn-action-gold" id="btn-export-twin-snapshot">
+                <span>📥 تصدير لقطة التوأم الرقمي الموقعة تشفيرياً (Signed Digital Twin Snapshot)</span>
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
+            <a href="ip-patent-escrow.html">بوابة الملكية الفكرية وبراءات الاختراع</a>
+            <a href="executive-boardroom-ai.html">مستشار مجلس الإدارة الذكي</a>
+            <a href="predictive-cashflow-risk.html">توقعات السيولة</a>
+            <a href="sovereign-partner-portal.html">بوابة الشركاء</a>
+        </div>
+        <div>
+            © 2026 S&amp;R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة (أمستردام • الرياض • دبي • دمشق • سنغافورة).
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var currentMode = 'nominal';
+            var currentNodeKey = 'ams';
+
+            var nodeDetails = {
+                ams: {
+                    code: 'AMS-01-MASTER',
+                    name: 'المركز الأوروبي السيادي — أمستردام (AMS-01)',
+                    load: '34.2% (Optimal Thermal Envelope)',
+                    temp: '21.4 °C • Direct Liquid Cooling',
+                    compliance: '✔ معزول 100% ضد Cloud Act • GDPR & eIDAS QTSP',
+                    mtbf: '99.999% • 0 أعطال متوقعة خلال 180 يوماً',
+                    hash: '0x94F8A20C...E21B8C04'
+                },
+                ruh: {
+                    code: 'RUH-01-GCC',
+                    name: 'مركز الخليج السيادي — الرياض (RUH-01)',
+                    load: '41.8% (High-Throughput ZATCA & SARIE)',
+                    temp: '22.1 °C • Adiabatic Chilled Loop',
+                    compliance: '✔ متوافق 100% مع NCA ECC-1 و PDPL و ZATCA Phase 2',
+                    mtbf: '99.998% • كفاءة مثالية لوحدات HSM العتادية',
+                    hash: '0x7B21D90A...44C19F88'
+                },
+                dam: {
+                    code: 'DAM-01-LEVANT',
+                    name: 'مركز بلاد الشام الوطني — دمشق (DAM-01)',
+                    load: '29.5% (Air-Gapped Sovereign Shield)',
+                    temp: '20.8 °C • Closed-Loop Sovereign Cooling',
+                    compliance: '✔ متوافق مع قانون التوقيع الإلكتروني السوري رقم 4 لعام 2009',
+                    mtbf: '99.999% • حصانة كاملة واستقلالية عتادية 100%',
+                    hash: '0x3E89C11F...99A02D71'
+                },
+                dxb: {
+                    code: 'DXB-01-FINHUB',
+                    name: 'مركز المقاصة والتسويات — دبي (DXB-01)',
+                    load: '38.6% (Multi-Currency FX & FTA Engine)',
+                    temp: '21.9 °C • Immersion Cooling Array',
+                    compliance: '✔ متوافق مع إطار TDRA و CBUAE وضرائب FTA',
+                    mtbf: '99.999% • جاهزية فورية على مدار الساعة 24/7',
+                    hash: '0x5C10E84B...18F43A92'
+                },
+                sin: {
+                    code: 'SIN-01-APAC',
+                    name: 'مركز آسيا والمحيط الهادئ — سنغافورة (SIN-01)',
+                    load: '36.0% (Peppol PINT & MAS Clearing)',
+                    temp: '21.6 °C • Tropical Green Data Center PUE 1.07',
+                    compliance: '✔ متوافق مع توجيهات MAS TRM Notice 644 و APPI',
+                    mtbf: '99.999% • ارتباط ضوئي مباشر مع أوروبا والخليج',
+                    hash: '0x8A42F77D...63B90E15'
+                }
+            };
+
+            var modeConfigs = {
+                nominal: {
+                    badge: 'MODE: NOMINAL SOVEREIGN MESH',
+                    sync: '99.9998%',
+                    throughput: '148.4 Gbps',
+                    tps: '64,200 معاملة سيادية / ثانية (TPS)',
+                    pue: '1.06 PUE',
+                    latency: '0.88 ms',
+                    speed: 1.2,
+                    color: '#10b981',
+                    logLine: '[MODE-SWITCH] Nominal Sovereign Mesh Active — Balanced load across all 5 hubs.'
+                },
+                surge: {
+                    badge: 'MODE: HIGH-FREQUENCY SURGE (250K TPS)',
+                    sync: '99.9995%',
+                    throughput: '412.8 Gbps',
+                    tps: '250,000 معاملة سيادية / ثانية (Auto-Scaled 32 Clusters)',
+                    pue: '1.08 PUE',
+                    latency: '1.04 ms',
+                    speed: 2.8,
+                    color: '#38bdf8',
+                    logLine: '[SURGE-SCALING] 250,000 TPS Settlement Surge simulated — 32 Ephemeral Workers online.'
+                },
+                lockdown: {
+                    badge: 'MODE: AIR-GAPPED SOVEREIGN LOCKDOWN',
+                    sync: '100.000%',
+                    throughput: '92.0 Gbps (Internal Ring)',
+                    tps: '48,500 معاملة داخلية معزولة بـ Post-Quantum ML-KEM',
+                    pue: '1.05 PUE',
+                    latency: '0.62 ms',
+                    speed: 0.9,
+                    color: '#c5a880',
+                    logLine: '[AIR-GAP-SHIELD] External BGP Ingress severed. Quantum-resistant internal mesh locked.'
+                },
+                failover: {
+                    badge: 'MODE: ZERO-RPO ACTIVE FAILOVER DRILL',
+                    sync: '99.9999%',
+                    throughput: '186.2 Gbps',
+                    tps: '78,900 معاملة مع توجيه تلقائي فوري في 142ms',
+                    pue: '1.07 PUE',
+                    latency: '0.94 ms',
+                    speed: 2.0,
+                    color: '#f59e0b',
+                    logLine: '[FAILOVER-DRILL] Simulated link cut rerouted via AMS <-> RUH <-> DAM with Zero RPO loss.'
+                }
+            };
+
+            function appendLog(msg) {
+                var logEl = document.getElementById('twin-telemetry-log');
+                if (!logEl) return;
+                var ts = new Date().toISOString().substring(11, 19) + 'Z';
+                logEl.innerHTML = '[' + ts + '] ' + msg + '<br>' + logEl.innerHTML;
+            }
+
+            function selectNode(key) {
+                currentNodeKey = key;
+                var d = nodeDetails[key];
+                if (!d) return;
+                document.getElementById('selected-node-code').textContent = d.code;
+                document.getElementById('insp-name').textContent = d.name;
+                document.getElementById('insp-load').textContent = d.load;
+                document.getElementById('insp-temp').textContent = d.temp;
+                document.getElementById('insp-compliance').textContent = d.compliance;
+                document.getElementById('insp-mtbf').textContent = d.mtbf;
+                document.getElementById('insp-hash').textContent = d.hash;
+
+                ['ams', 'ruh', 'dam', 'dxb', 'sin'].forEach(function(k) {
+                    var btn = document.getElementById('node-btn-' + k);
+                    if (btn) {
+                        if (k === key) btn.classList.add('selected');
+                        else btn.classList.remove('selected');
+                    }
+                });
+                appendLog('[NODE-INSPECT] Focused telemetry on ' + d.code + ' (' + d.hash + ')');
+            }
+
+            ['ams', 'ruh', 'dam', 'dxb', 'sin'].forEach(function(k) {
+                var btn = document.getElementById('node-btn-' + k);
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        selectNode(k);
+                    });
+                }
+            });
+
+            function setMode(modeKey) {
+                currentMode = modeKey;
+                var cfg = modeConfigs[modeKey];
+                if (!cfg) return;
+                document.getElementById('sim-status-badge').textContent = cfg.badge;
+                document.getElementById('metric-sync-rate').textContent = cfg.sync;
+                document.getElementById('metric-throughput').textContent = cfg.throughput;
+                document.getElementById('metric-tps-sub').textContent = cfg.tps;
+                document.getElementById('metric-pue').textContent = cfg.pue;
+                document.getElementById('metric-latency').textContent = cfg.latency;
+
+                ['nominal', 'surge', 'lockdown', 'failover'].forEach(function(m) {
+                    var b = document.getElementById('mode-' + m);
+                    if (b) {
+                        if (m === modeKey) b.classList.add('active');
+                        else b.classList.remove('active');
+                    }
+                });
+                appendLog(cfg.logLine);
+            }
+
+            ['nominal', 'surge', 'lockdown', 'failover'].forEach(function(m) {
+                var b = document.getElementById('mode-' + m);
+                if (b) {
+                    b.addEventListener('click', function() {
+                        setMode(m);
+                    });
+                }
+            });
+
+            var canvas = document.getElementById('digital-twin-canvas');
+            if (canvas && canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                var tick = 0;
+                var nodes = [
+                    { key: 'ams', label: 'AMS-01 (Amsterdam)', x: 480, y: 88, r: 24 },
+                    { key: 'dam', label: 'DAM-01 (Damascus)', x: 250, y: 185, r: 22 },
+                    { key: 'ruh', label: 'RUH-01 (Riyadh)', x: 480, y: 225, r: 24 },
+                    { key: 'dxb', label: 'DXB-01 (Dubai)', x: 700, y: 190, r: 22 },
+                    { key: 'sin', label: 'SIN-01 (Singapore)', x: 810, y: 325, r: 21 },
+                    { key: 'core', label: 'SOVEREIGN HSM & ERP CORE', x: 480, y: 340, r: 26 }
+                ];
+
+                var links = [
+                    [0, 1], [0, 2], [0, 3], [1, 2], [2, 3], [3, 4], [1, 5], [2, 5], [3, 5], [4, 5]
+                ];
+
+                function renderTwin() {
+                    var cfg = modeConfigs[currentMode] || modeConfigs.nominal;
+                    tick += 0.018 * cfg.speed;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.strokeStyle = 'rgba(24, 51, 39, 0.55)';
+                    ctx.lineWidth = 1;
+                    for (var gx = 40; gx < canvas.width; gx += 60) {
+                        ctx.beginPath();
+                        ctx.moveTo(gx, 0);
+                        ctx.lineTo(gx, canvas.height);
+                        ctx.stroke();
+                    }
+                    for (var gy = 35; gy < canvas.height; gy += 55) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, gy);
+                        ctx.lineTo(canvas.width, gy);
+                        ctx.stroke();
+                    }
+
+                    links.forEach(function(pair, idx) {
+                        var a = nodes[pair[0]];
+                        var b = nodes[pair[1]];
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.strokeStyle = 'rgba(197, 168, 128, 0.28)';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        var t = (tick + idx * 0.17) % 1;
+                        var px = a.x + (b.x - a.x) * t;
+                        var py = a.y + (b.y - a.y) * t;
+                        ctx.beginPath();
+                        ctx.arc(px, py, 4.2, 0, Math.PI * 2);
+                        ctx.fillStyle = cfg.color;
+                        ctx.fill();
+                    });
+
+                    nodes.forEach(function(n) {
+                        var isSelected = (n.key === currentNodeKey);
+                        ctx.beginPath();
+                        ctx.arc(n.x, n.y, n.r + (isSelected ? 6 : 0), 0, Math.PI * 2);
+                        ctx.fillStyle = isSelected ? 'rgba(197, 168, 128, 0.22)' : 'rgba(16, 185, 129, 0.12)';
+                        ctx.fill();
+
+                        ctx.beginPath();
+                        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                        ctx.fillStyle = '#071510';
+                        ctx.fill();
+                        ctx.lineWidth = isSelected ? 3 : 2;
+                        ctx.strokeStyle = isSelected ? '#f3dfba' : cfg.color;
+                        ctx.stroke();
+
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = '700 12px "JetBrains Mono", monospace';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(n.label, n.x, n.y + n.r + 18);
+                    });
+
+                    requestAnimationFrame(renderTwin);
+                }
+                renderTwin();
+            }
+
+            var btnExport = document.getElementById('btn-export-twin-snapshot');
+            if (btnExport) {
+                btnExport.addEventListener('click', function() {
+                    var payload = {
+                        artifact: 'S&R CoreSync Sovereign Enterprise Digital Twin Snapshot',
+                        standard: 'ISO/IEC 30173 & FIPS 140-3 Level 4 HSM',
+                        timestamp: new Date().toISOString(),
+                        simulationMode: currentMode,
+                        activeNodeFocus: nodeDetails[currentNodeKey],
+                        globalTelemetry: {
+                            syncIntegrity: document.getElementById('metric-sync-rate').textContent,
+                            throughput: document.getElementById('metric-throughput').textContent,
+                            pueEfficiency: document.getElementById('metric-pue').textContent,
+                            meshLatency: document.getElementById('metric-latency').textContent
+                        },
+                        executiveSigners: [
+                            'Eng. Mohammad Salim Aziza (Chairman & Founder - Amsterdam)',
+                            'Mr. Mohammad Raed Kaakeh (CEO & Co-Founder - Middle East)'
+                        ]
+                    };
+                    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'sovereign_digital_twin_snapshot_2026.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
+

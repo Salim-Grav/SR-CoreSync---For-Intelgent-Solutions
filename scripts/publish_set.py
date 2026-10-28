@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync For Intelligent Solutions - Publish Set Rules
 ===============================================================================
 Single source of truth for "what gets published to GitHub Pages".
@@ -19,8 +30,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Directories that are never published (at any depth).
 # ---------------------------------------------------------------------------
 EXCLUDED_DIRS = {
-    '.git', '_site', '.github', '.agents', '.vscode', '.zwork', 'api', 'config',
-    'workers', 'scripts', 'dist', 'deploy', 'scratch', 'node_modules', '__pycache__'
+    '.git', '_site', '.github', '.githooks', '.secrets', '.agents', '.vscode',
+    '.zwork', 'api', 'config', 'workers', 'scripts', 'dist', 'deploy',
+    'scratch', 'node_modules', '__pycache__', 'docs'
 }
 
 # Any other dot-directory is tooling state (editor caches, agent artefacts), not
@@ -32,7 +44,8 @@ ALLOWED_DOT_DIRS = {'.nojekyll', '.well-known'}
 # Root level files that are never published.
 # ---------------------------------------------------------------------------
 EXCLUDED_ROOT_FILES = {
-    '.env', '.env.example', '.env.local', '.gitignore', '.htaccess', 'serve.py'
+    '.env', '.env.example', '.env.local', '.env.vault', '.gitignore',
+    '.dockerignore', '.htaccess', 'LICENSE', 'serve.py'
 }
 
 # Root level file suffixes that are never published.
@@ -70,7 +83,7 @@ EXCLUDED_SUFFIXES = ('.pyc',)
 # ---------------------------------------------------------------------------
 FORBIDDEN_PUBLISHED = [
     'api', 'config', 'workers', 'scripts', 'dist', 'deploy',
-    '.htaccess', '.env', '.env.example', '.github'
+    '.htaccess', '.env', '.env.example', '.env.vault', '.github', '.githooks', '.secrets'
 ]
 
 # ---------------------------------------------------------------------------

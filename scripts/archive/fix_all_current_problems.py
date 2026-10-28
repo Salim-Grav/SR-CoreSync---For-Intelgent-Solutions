@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 fix_all_current_problems.py
 Resolves all warnings and errors reported in current_problems:
 1. Fix duplicate IDs for sovereignLangTrigger / sovereignLangSearch in footer across index.html, de/index.html, en/index.html, nl/index.html

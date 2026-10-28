@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*-
+"""
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
 """End-to-end check of the notification path: form -> D1 -> Telegram -> mailbox.
 
 The site's promise is "a real enquiry reaches a human". DNS checks cannot see

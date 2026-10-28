@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+"""
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
 """Configure the contact form endpoint for all pages.
 
 Primary  : https://api.sr-coresync.com/lead   (Cloudflare Worker, public + CORS)
