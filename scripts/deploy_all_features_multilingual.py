@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync For Intelligent Solutions - 4 High-Conversion Enterprise Features Deployer Across All 29 Languages
 1. VIP Branded Client Proposal Engine Banner (with custom company name)
 2. Interactive Smart ROI & Cost Savings Calculator Tab (3 sliders + live gold counters)

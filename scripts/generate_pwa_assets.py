@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync - PWA Infrastructure & Mobile App Generator (Stage 21)
 Generates standard 192x192 and 512x512 PNG icons (any + maskable),
 updates manifest.json, injects PWA manifest tags into all 29 demo.html portals,

@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync For Intelligent Solutions - Omnichannel Campaign Dispatcher 2026
 Automated Social Media Launchpad, Calendar Generator, and Webhook Dispatcher
 Universal Handle: @SRCoreSync

@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync - Sovereign ERP Live Operations & CRM Invoicing Dashboard Showcase (Milestone 69)
 =============================================================================================
 Generates an ultra-HD 1920x1080 visual snapshot showcasing:

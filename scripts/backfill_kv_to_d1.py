@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 Backfill KV leads into D1
 =========================
 D1 became the durable store after KV had already collected leads. This copies

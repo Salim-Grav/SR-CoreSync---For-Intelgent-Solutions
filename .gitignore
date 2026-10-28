@@ -9,13 +9,18 @@ __pycache__/
 .idea/
 .DS_Store
 
-# Environment variables & secrets
+# Environment variables & secrets (Strictly ignored)
 .env
 .env.local
 .env.*.local
+!.env.vault
+!.env.example
 
-# Local API tokens (Purelymail etc.) — never commit these
+# Local API tokens & Vault master keys (Purelymail, HSM etc.) — never commit these
 .secrets/
+*.key
+*.pem
+
 
 # ---------------------------------------------------------------------------
 # Build artifacts (regenerable - never commit binaries)

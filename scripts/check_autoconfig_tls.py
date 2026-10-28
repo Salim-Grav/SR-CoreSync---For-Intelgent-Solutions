@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*-
+"""
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
 """Check whether the autoconfig/autodiscover hostnames present a valid certificate.
 
 A CNAME keeps the original hostname for TLS, while an SRV record sends the client

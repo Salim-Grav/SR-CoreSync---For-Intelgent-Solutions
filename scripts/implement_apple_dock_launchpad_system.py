@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 scripts/implement_apple_dock_launchpad_system.py
 1. Completely removes all header dropdown remnants from all 60 pages (root + 28 languages).
 2. Implements Apple macOS Launchpad Modal alongside the Apple Dock with session-aware manual lock.

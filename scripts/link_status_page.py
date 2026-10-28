@@ -1,4 +1,15 @@
 # -*- coding: utf-8 -*-
+"""
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
 """Link the status page from every language portal's footer.
 
 The Arabic root and /en/ were linked by hand; the remaining 27 portals need the

@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 S&R CoreSync For Intelligent Solutions - Publish Set Validator
 ===============================================================================
 Verifies, locally, that the GitHub Pages artifact is safe to publish.
@@ -143,6 +154,9 @@ def main():
 
     print('PASSED - publish set is safe. No server-side material is exposed.')
     print('=' * 72)
+    import audit_secrets
+    if audit_secrets.main() != 0:
+        return 1
     return 0
 
 

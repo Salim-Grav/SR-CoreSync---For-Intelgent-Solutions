@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * S&R CoreSync For Intelligent Solutions - Enterprise Suite Engine v2.0
  * Fully Unified Multi-Language Enterprise Architecture (AR / EN / NL)
  * 1. Instant Official PDF Quotation Generator (Multi-Language)

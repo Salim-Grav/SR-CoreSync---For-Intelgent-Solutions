@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * Updates official contact numbers for Salim and Raed across all pages and configs
  * Salim: +31 6 1811 1116 (31618111116)
  * Raed:  +31 6 1811 1116 (31618111116)

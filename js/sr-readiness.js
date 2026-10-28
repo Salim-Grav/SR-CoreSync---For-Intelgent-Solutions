@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * S&R CoreSync For Intelligent Solutions — Sovereign AI Readiness Engine (shared AR / EN / NL / DE)
  * Renders the 5-axis assessment, live radar, diagnosis, WhatsApp report,
  * and a smart deep-link to the White-Label License Calculator and SLA Generator.

@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * S&R CoreSync For Intelligent Solutions - Brand Assets Generator
  * Creates authentic vector SVG, EPS, 4K PNG mockups, and PDF guidelines
  * for all portfolio brand identity projects, packaged into downloadable ZIPs.

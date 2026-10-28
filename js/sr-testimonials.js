@@ -1,4 +1,15 @@
 /**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
+/**
  * S&R CoreSync - Native Sovereign Testimonials Carousel & Interactive ROI Case Studies Modal
  * Zero-dependency, Touch-friendly, Responsive, Auto-looping, Enterprise Verified Metrics
  * Milestone 35 Engine

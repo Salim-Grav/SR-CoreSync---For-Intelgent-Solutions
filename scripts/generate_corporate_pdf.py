@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 Generate Official Corporate Profile PDF for S&R CoreSync For Intelligent Solutions
 Using ReportLab with Luxury Gold & Obsidian Styling.
 """

@@ -1,3 +1,14 @@
+/**
+ * ==============================================================================
+ * S&R CoreSync For Intelligent Solutions - Sovereign Platform
+ * PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+ * 
+ * Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+ * Unauthorized copying, decompilation, redistribution, or external model training
+ * of this file, via any medium, is strictly prohibited.
+ * ==============================================================================
+ */
+
 // Unit checks for the enquiry routing rules and the MIME builder.
 // The worker imports 'cloudflare:sockets', which Node cannot resolve, so the
 // import is stripped and the helpers are re-exported before the module loads.

@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+# ==============================================================================
+# S&R CoreSync For Intelligent Solutions - Sovereign Platform
+# PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+# Git Pre-Commit Hook: Local Secret & Credential Leakage Prevention Gate
+# ==============================================================================
+
+echo "🔒 [S&R CoreSync] Executing Sovereign Secret & Credential Pre-Commit Audit..."
+
+python scripts/audit_secrets.py --staged
+
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+    echo "❌ [S&R CoreSync] Commit rejected: Exposed secret, private key, or unauthorized token detected."
+    echo "Please remove the credential from your staged changes and use Sovereign Secret Vault instead."
+    exit 1
+fi
+
+echo "✅ [S&R CoreSync] Pre-commit audit passed: Zero secrets detected."
+exit 0

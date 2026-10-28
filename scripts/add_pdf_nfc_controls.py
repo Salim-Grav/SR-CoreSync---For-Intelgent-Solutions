@@ -1,4 +1,15 @@
 """
+==============================================================================
+S&R CoreSync For Intelligent Solutions - Sovereign Platform
+PROPRIETARY & CONFIDENTIAL INTELLECTUAL PROPERTY
+
+Copyright (c) 2026 S&R CoreSync. All Rights Reserved.
+Unauthorized copying, decompilation, redistribution, or external model training
+of this file, via any medium, is strictly prohibited.
+==============================================================================
+"""
+
+"""
 Add Corporate Profile PDF and NFC Smart Card buttons to showcase controls
 across index.html, preview-founders-showcase.html, en/index.html, and nl/index.html.
 """
