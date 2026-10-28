@@ -566,6 +566,8 @@
                 width: 100%;
                 box-shadow: none;
                 border: none;
+            }
+        }
         /* Utility classes for clean DOM */
         .status-pill-stripe {
             border-color: rgba(56, 189, 248, 0.4);
@@ -668,11 +670,29 @@
                 <div class="status-pill status-pill-stripe">
                     <span>PSD2 &amp; Stripe: Connected</span>
                 </div>
+                <a href="./templates/invoice-quote-email.html" class="btn-header">
+                    <span>🧾 قالب الفواتير وعروض الأسعار</span>
+                </a>
+                <a href="./autonomous-tax-audit.html" class="btn-header">
+                    <span>📊 التدقيق الضريبي Big-4</span>
+                </a>
+                <a href="./sovereign-gold-rwa-treasury.html" class="btn-header">
+                    <span>🪙 خزينة الذهب RWA</span>
+                </a>
+                <a href="./autonomous-cyber-range.html" class="btn-header">
+                    <span>⚔️ مختبر الدفاع السيبراني</span>
+                </a>
+                <a href="./centennial-sovereign-command-bridge.html" class="btn-header">
+                    <span>👑 غرفة القيادة المئوية</span>
+                </a>
                 <a href="./ai-concierge-simulator.html" class="btn-header">
                     <span>🤖 محاكي الكونسيرج الذكي</span>
                 </a>
                 <a href="https://wa.me/31618111116" target="_blank" rel="noopener noreferrer" class="btn-header">
                     <span>💬 WhatsApp VIP</span>
+                </a>
+                <a href="./index.html" class="btn-header">
+                    <span>🏠 الرئيسية</span>
                 </a>
             </div>
         </div>
@@ -757,7 +777,7 @@
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(0)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="0">📜 الفاتورة</button>
                                 </td>
                             </tr>
 
@@ -775,7 +795,7 @@
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(1)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="1">📜 الفاتورة</button>
                                 </td>
                             </tr>
 
@@ -793,7 +813,7 @@
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(2)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="2">📜 الفاتورة</button>
                                 </td>
                             </tr>
 
@@ -811,7 +831,7 @@
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(3)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="3">📜 الفاتورة</button>
                                 </td>
                             </tr>
 
@@ -829,7 +849,7 @@
                                 </td>
                                 <td><span class="client-badge badge-active">PAID • ACTIVE</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(4)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="4">📜 الفاتورة</button>
                                 </td>
                             </tr>
 
@@ -847,7 +867,7 @@
                                 </td>
                                 <td><span class="client-badge badge-vip">SOVEREIGN VIP</span></td>
                                 <td>
-                                    <button type="button" class="btn-action-sm" onclick="selectClientForInvoice(5)">📜 الفاتورة</button>
+                                    <button type="button" class="btn-action-sm js-select-invoice" data-client-index="5">📜 الفاتورة</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -891,12 +911,15 @@
                         <span>📜 محرك الفواتير السيادي المعتمد (PDF Invoicing Engine)</span>
                     </h2>
                     <div class="inv-actions-bar">
-                        <button type="button" class="btn-gold-lg" onclick="window.print()">
+                        <button type="button" class="btn-gold-lg" id="btn-print-invoice">
                             <span>🖨️ طباعة / تصدير PDF</span>
                         </button>
-                        <button type="button" class="btn-outline-lg" onclick="simulatePaymentSettlement()">
+                        <button type="button" class="btn-outline-lg" id="btn-simulate-settlement">
                             <span>⚡ تحصيل فوري</span>
                         </button>
+                        <a href="./templates/invoice-quote-email.html" class="btn-outline-lg">
+                            <span>🧾 قالب البريد والـ Quote</span>
+                        </a>
                     </div>
                 </div>
 
@@ -992,9 +1015,12 @@
                     <a href="https://wa.me/31618111116?text=مرحباً، أود الاستفسار عن فاتورة الاشتراك المؤسسي" target="_blank" rel="noopener noreferrer" class="btn-action-sm btn-action-lg">
                         <span>💬 إرسال الفاتورة عبر واتساب VIP</span>
                     </a>
-                    <button type="button" class="btn-action-sm btn-action-lg" onclick="copyInvoiceSummary()">
+                    <button type="button" class="btn-action-sm btn-action-lg" id="btn-copy-invoice">
                         <span>📋 نسخ ملخص الفاتورة</span>
                     </button>
+                    <a href="./autonomous-tax-audit.html" class="btn-action-sm btn-action-lg">
+                        <span>📊 فحص الفاتورة في محرك التدقيق الضريبي</span>
+                    </a>
                 </div>
             </section>
 
@@ -1078,7 +1104,7 @@
             document.getElementById('inv-method').textContent = c.method;
 
             const subtotal = c.price;
-            const btwRate = c.addr.includes('Netherlands') ? 0.21 : 0.0; // 21% in NL, 0% reverse charge for EU B2B/International
+            const btwRate = c.addr.includes('Netherlands') ? 0.21 : 0.0;
             const tax = subtotal * btwRate;
             const total = subtotal + tax;
 
@@ -1086,7 +1112,7 @@
                 <tr>
                     <td>
                         <strong>${c.pkg}</strong>
-                        <div style="font-size: 0.75rem; color: #64748b;">SKU: ${c.sku} • Monthly Sovereign Cloud Subscription & Support</div>
+                        <div class="inv-item-sku">SKU: ${c.sku} • Monthly Sovereign Cloud Subscription & Support</div>
                     </td>
                     <td>1</td>
                     <td>€${subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</td>
@@ -1114,7 +1140,6 @@
                 <span>CLEARED (100% PSD2 Verified)</span>
             `;
             stream.insertBefore(newRow, stream.firstChild);
-            alert('تم تأكيد التحصيل اللحظي وتسجيل الحركة في دفتر الأستاذ السحابي بنجاح!');
         }
 
         function copyInvoiceSummary() {
@@ -1122,10 +1147,44 @@
             const total = document.getElementById('inv-total').textContent;
             const num = document.getElementById('inv-num').textContent;
             const text = `فاتورة رقم: ${num}\nالعميل: ${name}\nالإجمالي: ${total}\nحالة الدفع: مدفوعة ومؤكدة بنظام التحصيل اللحظي S&R CoreSync.`;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('تم نسخ ملخص الفاتورة إلى الحافظة بنجاح!');
-            });
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+            }
         }
+
+        document.querySelectorAll('.js-select-invoice').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                selectClientForInvoice(Number(btn.getAttribute('data-client-index')) || 0);
+            });
+        });
+
+        const printBtn = document.getElementById('btn-print-invoice');
+        if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
+
+        const settleBtn = document.getElementById('btn-simulate-settlement');
+        if (settleBtn) settleBtn.addEventListener('click', simulatePaymentSettlement);
+
+        const copyBtn = document.getElementById('btn-copy-invoice');
+        if (copyBtn) copyBtn.addEventListener('click', copyInvoiceSummary);
+
+        // Support deep-linked invoice numbers (?invoice=INV-2601&supplier=...)
+        (function initFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const inv = params.get('invoice');
+            const sup = params.get('supplier');
+            const net = parseFloat(params.get('net') || '0');
+            const vat = parseFloat(params.get('vat') || '0');
+            if (inv) {
+                document.getElementById('inv-num').textContent = inv;
+                if (sup) document.getElementById('inv-client-name').textContent = sup;
+                if (net > 0) {
+                    const gross = net + vat;
+                    document.getElementById('inv-subtotal').textContent = '€' + net.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    document.getElementById('inv-tax').textContent = '€' + vat.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    document.getElementById('inv-total').textContent = '€' + gross.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                }
+            }
+        })();
     </script>
 </body>
 </html>
