@@ -47,6 +47,7 @@
 - [x] **تحسينات قسم الخدمات (Services):** روابط WhatsApp ديناميكية (data-wa-key) + نافذة تفاصيل خدمة (Service Detail Modal) + نموذج طلب عرض سعر (RFQ Modal → WhatsApp + worker) + Schema.org Service/Offer JSON-LD (9 خدمات) + CSS مخصص.
 - [x] **تحسينات إضافية (Round 2):** شارة "الأكثر طلباً" على خدمة cloud-software + بانر باقة "هوية + موقع" (€1,490، وفّر €80) + noscript fallback + Core Web Vitals (font-display swap مفعل).
 - [x] **تحسينات إضافية (Round 3):** FAQ accordion (6 أسئلة) + جدول مقارنة خدمات (9 ميزات × 4 tiers) + rate limiting على RFQ (30s) + newsletter signup (footer → worker) + preload LCP image + fetchpriority high + hreflang audit (30 tags، 0 missing) + ARIA role/tabindex على 9 بطاقات خدمات.
-- [x] **التحقق:** `validate_publish_set.py` PASSED، `audit_language_paths.py` PASSED، `check_inline_scripts.mjs` PASSED (472 block)، `build_csp.py --check` PASSED (135 hash)، `check_site_links.py` PASSED (0 broken)، `check_seo_assets.py` PASSED.
+- [x] **مدونة/رؤى (Round 4):** صفحة `blog.html` + 6 مقالات كاملة في `insights/` + تصفية حسب التصنيف + بحث فوري + شريط تقدم القراءة + JSON-LD Blog/BlogPosting + روابط في القائمة العلوية والهاتف والفوتر + قسم "أحدث المقالات" في الرئيسية + إدخال 7 روابط في `sitemap.xml` (80 URL).
+- [x] **التحقق (Round 4):** `validate_publish_set.py` PASSED، `audit_language_paths.py` PASSED، `check_inline_scripts.mjs` PASSED (95 JSON-LD)، `build_csp.py --check` PASSED (143 hash)، `check_site_links.py` PASSED (9120 refs، 0 broken)، `check_seo_assets.py` PASSED، المتصفح 0 أخطاء.
 
 </div>
