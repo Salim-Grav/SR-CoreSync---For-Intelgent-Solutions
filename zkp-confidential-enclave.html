@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة الحوسبة السرية وإثباتات المعرفة الصفرية | S&amp;R CoreSync</title>
+    <meta name="description" content="بيئة حوسبة سرية للمؤسسات المالية: إثبات الملاءة والامتثال دون كشف البيانات عبر التزامات تشفيرية SHA-256 وشهادات تحقق لبيئات التنفيذ الموثوقة TEE">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sovereign-mission-suite.css">
+</head>
+<body class="theme-violet">
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="brand-logo" width="44" height="44">
+                <div>
+                    <span class="brand-title">S&amp;R CoreSync Confidential Enclave</span>
+                    <span class="brand-sub">MISSION 106 • ZERO-KNOWLEDGE PROOFS &amp; CONFIDENTIAL COMPUTING</span>
+                </div>
+            </a>
+            <nav class="nav-links" aria-label="روابط الحوسبة السرية">
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link">👑 غرفة القيادة المئوية</a>
+                <a href="sovereign-kms-backup.html" class="nav-link">🔑 خزينة المفاتيح KMS</a>
+                <a href="compliance-audit-center.html" class="nav-link">📋 مركز تدقيق الامتثال</a>
+                <a href="sovereign-arbitration-hub.html" class="nav-link">⚖️ مركز التحكيم</a>
+                <a href="multi-cbdc-bridge.html" class="nav-link">💱 جسر CBDC</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner" aria-labelledby="zkp-hero-title">
+            <div>
+                <div class="badge-row">
+                    <span class="pill-badge">PROVE WITHOUT REVEALING</span>
+                    <span class="pill-badge gold">INTEL TDX • AMD SEV-SNP • NVIDIA H100 CC</span>
+                    <span class="pill-badge emerald">GDPR ART. 25 PRIVACY-BY-DESIGN</span>
+                </div>
+                <h1 id="zkp-hero-title" class="hero-title">منظومة الحوسبة السرية والخصوصية الصفرية للمؤسسات المالية (Zero-Knowledge Proof &amp; Confidential Computing Enclave)</h1>
+                <p class="hero-desc">
+                    أثبت للبنك أو الجهة الرقابية أو الشريك أن شرطاً مالياً متحقق — كالملاءة أو حد الائتمان أو عدم الإدراج في قوائم العقوبات — دون أن تكشف الرقم الفعلي. تتم المعالجة محلياً داخل المتصفح، ولا يغادره سوى الالتزام التشفيري (Commitment) ونتيجة الشرط. يوضح هذا العرض مبدأ الإثبات؛ أما الإثباتات الإنتاجية فتعتمد بروتوكولات zk-SNARK/Bulletproofs داخل بيئات تنفيذ موثوقة.
+                </p>
+            </div>
+            <div class="status-card" aria-label="حالة البيئة السرية">
+                <div class="status-row"><span>البيئة الموثوقة المختارة</span><strong class="mono" id="stat-enclave">Intel TDX</strong></div>
+                <div class="status-row"><span>قياس الشهادة (Measurement)</span><strong class="mono" id="stat-measure">—</strong></div>
+                <div class="status-row"><span>بيانات خام غادرت الجهاز</span><strong class="mono">0 bytes</strong></div>
+                <div class="status-row"><span>الإثباتات المُصدرة</span><strong class="mono" id="stat-proofs">0</strong></div>
+            </div>
+        </section>
+
+        <section class="kpi-grid" aria-label="مؤشرات الحوسبة السرية">
+            <article class="kpi-card">
+                <span class="kpi-label">مخطط الالتزام</span>
+                <strong class="kpi-value mono">SHA-256</strong>
+                <span class="kpi-foot">H(value ‖ 256-bit salt) عبر WebCrypto</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">حجم الإثبات المُرسل</span>
+                <strong class="kpi-value mono">~0.4 KB</strong>
+                <span class="kpi-foot">بدلاً من مشاركة كشوف الحسابات كاملة</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">زمن توليد الإثبات</span>
+                <strong class="kpi-value mono" id="kpi-time">— ms</strong>
+                <span class="kpi-foot">مقاس فعلياً على هذا الجهاز</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">الأطر التنظيمية</span>
+                <strong class="kpi-value mono">GDPR • DORA</strong>
+                <span class="kpi-foot">تقليل البيانات (Data Minimisation)</span>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">🛡️ اختر بيئة التنفيذ الموثوقة (TEE)</h2>
+                </div>
+                <div class="item-list" id="enclave-list">
+                    <button type="button" class="select-item active" aria-pressed="true" data-name="Intel TDX" data-vendor="Intel Trust Domain Extensions">
+                        <div class="item-head"><span class="item-name">Intel TDX</span><span class="item-tag mono">VM-level isolation</span></div>
+                        <p class="item-sub">عزل كامل للآلة الافتراضية عن نظام التشغيل المضيف ومزوّد السحابة.</p>
+                    </button>
+                    <button type="button" class="select-item" aria-pressed="false" data-name="AMD SEV-SNP" data-vendor="AMD Secure Encrypted Virtualization">
+                        <div class="item-head"><span class="item-name">AMD SEV-SNP</span><span class="item-tag mono">Memory integrity</span></div>
+                        <p class="item-sub">تشفير الذاكرة مع حماية سلامة الصفحات ضد إعادة التشغيل والتلاعب.</p>
+                    </button>
+                    <button type="button" class="select-item" aria-pressed="false" data-name="NVIDIA H100 CC" data-vendor="NVIDIA Hopper Confidential Computing">
+                        <div class="item-head"><span class="item-name">NVIDIA H100 CC</span><span class="item-tag mono">Confidential AI</span></div>
+                        <p class="item-sub">تشغيل نماذج الذكاء الاصطناعي على بيانات مالية مشفرة داخل وحدة GPU.</p>
+                    </button>
+                </div>
+
+                <h3 class="panel-title sub-title">🔏 مولّد الإثبات (Proof Generator)</h3>
+                <form id="zkp-form" novalidate>
+                    <div class="form-grid">
+                        <label class="form-field">نوع الإثبات
+                            <select id="f-claim">
+                                <option value="solvency">إثبات الملاءة: الأصول ≥ الالتزامات</option>
+                                <option value="credit">حد الائتمان: الدخل السنوي ≥ الحد الأدنى</option>
+                                <option value="age">التحقق العمري KYC: العمر ≥ 18</option>
+                                <option value="exposure">حد التعرض: التعرض ≤ السقف الرقابي</option>
+                            </select>
+                        </label>
+                        <label class="form-field">العتبة العامة (Public Threshold)
+                            <input id="f-threshold" type="number" step="any" value="12500000">
+                        </label>
+                        <label class="form-field">القيمة السرية (لا تغادر جهازك)
+                            <input id="f-secret" type="password" inputmode="decimal" autocomplete="off" value="18420000">
+                        </label>
+                        <label class="form-field">الجهة المُتحقِّقة (Verifier)
+                            <input id="f-verifier" type="text" maxlength="60" value="De Nederlandsche Bank (DNB)">
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-action">🔐 توليد الإثبات داخل البيئة السرية</button>
+                </form>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">📜 حزمة الإثبات المُرسلة للمُتحقِّق (Verifier View)</h2>
+                </div>
+                <div class="terminal-box mono" id="zkp-terminal" aria-live="polite"></div>
+                <div class="btn-row">
+                    <button type="button" id="btn-export-proof" class="btn-secondary">📥 تصدير حزمة الإثبات (JSON)</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        S&amp;R CoreSync For Intelligent Solutions • منظومة الحوسبة السرية وإثباتات المعرفة الصفرية (المهمة 106) • جميع الحقوق محفوظة © 2026
+    </footer>
+
+    <script src="js/sovereign-mission-core.js"></script>
+    <script src="js/zkp-confidential-enclave.js"></script>
+</body>
+</html>
