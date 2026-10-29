@@ -187,10 +187,10 @@
         if (!email) { return 'أدخل البريد الإلكتروني.'; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { return 'صيغة البريد الإلكتروني غير صحيحة.'; }
         if (!code) { return 'أدخل رمز الوصول.'; }
-        if (code.trim().toUpperCase() !== DEMO_CODE && code.trim().length < 6) {
+        if (code.trim().toUpperCase() !== DEMO_CODE) {
             return 'رمز الوصول غير صحيح. في النسخة التجريبية استخدم SRX-2026.';
         }
-        if (email.toLowerCase() !== DEMO_EMAIL && code.trim().toUpperCase() !== DEMO_CODE) {
+        if (email.toLowerCase() !== DEMO_EMAIL) {
             return 'الحساب غير موجود في النسخة التجريبية. استخدم client@demo.sr-coresync.com.';
         }
         return null;
