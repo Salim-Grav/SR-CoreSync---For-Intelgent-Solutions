@@ -35,6 +35,18 @@
 ## 🚀 خطة المهام المقترحة الجديدة للمرحلة القادمة (Next Actionable Missions — Missions 107 – 109):
 - [ ] **المهمة 107:** ربط مركز التحكيم بمحرك الأدلة الجنائية `digital-forensics-litigation-hub.html` والضمان الذكي `smart-escrow-milestone.html` (تجميد/تحرير الضمان تلقائياً وفق الحكم).
 - [ ] **المهمة 108:** توحيد البوابات القديمة (101–103) على البنية المشتركة الجديدة ونقل سكربتاتها المضمنة إلى ملفات خارجية لتقليص قائمة تجزئات CSP.
-- [ ] **المهمة 109:** لوحة مؤشرات موحدة للمهام 104–106 داخل `centennial-sovereign-command-bridge.html` مع تصدير تقرير تنفيذي PDF.
+- [x] **المهمة 109 (جزئي):** لوحة مؤشرات موحدة للمهام 104–106 — `sovereign-mission-suite-dashboard.html` + `js/sovereign-mission-suite-dashboard.js` (KPIs مجمّعة، سجل نشاط عابر للمهام، ختم SHA-256 موحّد، تصدير JSON + طباعة/PDF)، مربوطة من غرفة القيادة المئوية وبوابات 104/105/106، ومفهرسة في `sitemap.xml`.
+
+---
+
+## ✅ تحسينات ذكية متنوعة (Smart Improvements — Completed):
+- [x] **إصلاح مسارات ckb:** إصلاح 4 مراجع `./assets/...webp` → `../assets/...webp` في `ckb/index.html` (11 تكرار) — اجتياز `audit_language_paths.py`.
+- [x] **إصلاح og:locale:** ضبط 26 صفحة لغة على locale الصحيح (مثلاً `bg_BG`, `de_DE`) — اجتياز `fix_og_locale.py`.
+- [x] **تشغيل سكربت الإصلاح (untracked):** تنفيذ `scripts/fix_logos_and_dock_routing.py` (تحديث auto-detect في 58 صفحة، إصلاح شعارات Arabic index).
+- [x] **لوحة جناح المهام 104–106:** صفحة + JS + روابط + فهرسة sitemap.
+- [x] **تحسينات قسم الخدمات (Services):** روابط WhatsApp ديناميكية (data-wa-key) + نافذة تفاصيل خدمة (Service Detail Modal) + نموذج طلب عرض سعر (RFQ Modal → WhatsApp + worker) + Schema.org Service/Offer JSON-LD (9 خدمات) + CSS مخصص.
+- [x] **تحسينات إضافية (Round 2):** شارة "الأكثر طلباً" على خدمة cloud-software + بانر باقة "هوية + موقع" (€1,490، وفّر €80) + noscript fallback + Core Web Vitals (font-display swap مفعل).
+- [x] **تحسينات إضافية (Round 3):** FAQ accordion (6 أسئلة) + جدول مقارنة خدمات (9 ميزات × 4 tiers) + rate limiting على RFQ (30s) + newsletter signup (footer → worker) + preload LCP image + fetchpriority high + hreflang audit (30 tags، 0 missing) + ARIA role/tabindex على 9 بطاقات خدمات.
+- [x] **التحقق:** `validate_publish_set.py` PASSED، `audit_language_paths.py` PASSED، `check_inline_scripts.mjs` PASSED (472 block)، `build_csp.py --check` PASSED (135 hash)، `check_site_links.py` PASSED (0 broken)، `check_seo_assets.py` PASSED.
 
 </div>
