@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة العملاء | S&amp;R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="بوابة عملاء S&amp;R CoreSync: متابعة المشاريع، الفواتير، المستندات، وتذاكر الدعم في مكان واحد. نسخة تجريبية تعمل محلياً في المتصفح.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#030705">
+    <link rel="canonical" href="https://sr-coresync.com/client-portal.html">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/client-portal.css">
+    <link rel="stylesheet" href="./css/concierge.css">
+    <link rel="stylesheet" href="./css/sr-analytics.css">
+</head>
+<body class="srp-body">
+
+<a class="srp-skip" href="#srpMain">تجاوز إلى المحتوى</a>
+
+<header class="srp-header">
+    <div class="srp-container srp-header__inner">
+        <a class="srp-brand" href="./index.html" aria-label="S&amp;R CoreSync — الصفحة الرئيسية">
+            <img src="./assets/sr-core-emblem-official.webp" alt="" width="40" height="40">
+            <span>
+                <strong>S&amp;R <b>CoreSync</b></strong>
+                <small>بوابة العملاء التنفيذية</small>
+            </span>
+        </a>
+        <span class="srp-header__spacer"></span>
+
+        <span class="srp-session" id="srpSession" hidden>
+            الجلسة تنتهي بعد <b id="srpCountdown">--:--</b>
+        </span>
+
+        <div class="srp-user" id="srpUserChip" hidden>
+            <span class="srp-user__avatar" id="srpAvatar" aria-hidden="true">ع</span>
+            <span class="srp-user__meta">
+                <b id="srpUserName">—</b>
+                <span id="srpUserRole">عميل مؤسسي</span>
+            </span>
+        </div>
+
+        <button type="button" class="srp-icon-btn" id="srpLogout" aria-label="تسجيل الخروج" title="تسجيل الخروج" hidden>⏏</button>
+        <a class="srp-icon-btn" href="./index.html" aria-label="العودة إلى الموقع" title="الموقع">⌂</a>
+    </div>
+</header>
+
+<!-- ================= تسجيل الدخول ================= -->
+<main class="srp-auth" id="srpAuth">
+    <section class="srp-auth__card" aria-labelledby="srpAuthTitle">
+        <img class="srp-auth__emblem" src="./assets/sr-core-emblem-official.webp" alt="شعار S&amp;R CoreSync" width="62" height="62">
+        <h1 id="srpAuthTitle">بوابة العملاء</h1>
+        <p class="srp-auth__sub">تابع مشاريعك وفواتيرك ومستنداتك وطلبات الدعم في لوحة واحدة.</p>
+
+        <div class="srp-alert" id="srpAuthError" role="alert" hidden></div>
+        <div class="srp-alert srp-alert--ok" id="srpAuthOk" role="status" aria-live="polite" hidden></div>
+
+        <form id="srpLoginForm" novalidate>
+            <div class="srp-field">
+                <label for="srpEmail">البريد الإلكتروني للشركة</label>
+                <input id="srpEmail" name="email" type="email" autocomplete="username" inputmode="email" placeholder="name@company.com" required aria-describedby="srpEmailHint">
+                <div class="srp-hint" id="srpEmailHint">استخدم البريد المسجّل في العقد.</div>
+            </div>
+
+            <div class="srp-field">
+                <label for="srpCode">رمز الوصول</label>
+                <input id="srpCode" name="code" type="password" autocomplete="current-password" placeholder="SRX-••••" required aria-describedby="srpCodeHint">
+                <div class="srp-hint" id="srpCodeHint">رمز لمرة واحدة يُرسل من مدير الحساب.</div>
+            </div>
+
+            <label class="srp-check" for="srpRemember">
+                <input type="checkbox" id="srpRemember" name="remember">
+                <span>أبقني مسجلاً على هذا الجهاز لمدة 7 أيام</span>
+            </label>
+
+            <button class="srp-btn" type="submit" id="srpLoginBtn">دخول آمن ←</button>
+        </form>
+
+        <div class="srp-demo">
+            <b>بيانات النسخة التجريبية:</b><br>
+            البريد: <code>client@demo.sr-coresync.com</code><br>
+            رمز الوصول: <code>SRX-2026</code>
+        </div>
+
+        <p class="srp-auth__foot">
+            لا تملك رمز وصول؟
+            <a href="https://wa.me/31618111116?text=%D8%B7%D9%84%D8%A8%20%D8%B1%D9%85%D8%B2%20%D8%AF%D8%AE%D9%88%D9%84%20%D9%84%D8%A8%D9%88%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%B9%D9%85%D9%84%D8%A7%D8%A1" target="_blank" rel="noopener noreferrer">اطلب رمزاً عبر واتساب</a>
+            أو <a href="mailto:info@sr-coresync.com?subject=%D8%B7%D9%84%D8%A8%20%D8%B1%D9%85%D8%B2%20%D8%AF%D8%AE%D9%88%D9%84">راسلنا بالبريد</a>.
+        </p>
+
+        <p class="srp-note" style="margin-top:1rem;">
+            <strong>ملاحظة تقنية:</strong> هذه البوابة نسخة عرض تعمل محلياً في متصفحك ولا ترسل بيانات لأي خادم. النسخة الإنتاجية تتطلب خادم مصادقة (SSO/OIDC) وقاعدة بيانات — لم تُفعّل بعد.
+        </p>
+    </section>
+</main>
+
+<!-- ================= لوحة التحكم ================= -->
+<main class="srp-main" id="srpMain" hidden>
+    <div class="srp-container">
+
+        <section class="srp-hero" aria-labelledby="srpHeroTitle">
+            <div>
+                <h2 id="srpHeroTitle">مرحباً، <span id="srpHeroName">—</span> 👋</h2>
+                <p>هذه نظرة سريعة على محفظتك التشغيلية مع S&amp;R CoreSync. آخر تحديث: <span id="srpLastSync">—</span></p>
+            </div>
+            <a class="srp-btn" style="width:auto;padding:0.6rem 1.1rem;font-size:0.82rem;" href="https://wa.me/31618111116?text=%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D9%86%20%D8%A8%D9%88%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D8%B9%D9%85%D9%84%D8%A7%D8%A1" target="_blank" rel="noopener noreferrer">💬 مدير الحساب</a>
+        </section>
+
+        <section class="srp-kpis" aria-label="مؤشرات الحساب">
+            <div class="srp-kpi"><span>مشاريع نشطة</span><strong>2</strong><small>على المسار الصحيح</small></div>
+            <div class="srp-kpi"><span>فواتير مستحقة</span><strong>€1,890</strong><small class="is-warn">تستحق خلال 9 أيام</small></div>
+            <div class="srp-kpi"><span>تذاكر مفتوحة</span><strong id="srpTicketCount">1</strong><small>أولوية عادية</small></div>
+            <div class="srp-kpi"><span>جهوزية الخدمة</span><strong>99.98%</strong><small>آخر 30 يوماً</small></div>
+        </section>
+
+        <div class="srp-grid">
+            <div>
+                <section class="srp-card" aria-labelledby="srpProjectsTitle">
+                    <div class="srp-card__head">
+                        <h3 id="srpProjectsTitle">📁 المشاريع الجارية</h3>
+                        <span class="srp-spacer"></span>
+                        <span class="srp-tag">تحديث لحظي</span>
+                    </div>
+                    <div class="srp-card__body">
+                        <div class="srp-project">
+                            <div class="srp-project__top">
+                                <strong>منصة ERP السحابية — Full ERP Sync</strong>
+                                <span>المرحلة: ربط الحسابات</span>
+                                <b>72%</b>
+                            </div>
+                            <div class="srp-bar" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="تقدم مشروع ERP"><i style="width:72%"></i></div>
+                        </div>
+                        <div class="srp-project">
+                            <div class="srp-project__top">
+                                <strong>متجر إلكتروني + هوية بصرية</strong>
+                                <span>المرحلة: اختبار الدفع</span>
+                                <b>88%</b>
+                            </div>
+                            <div class="srp-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="تقدم المتجر"><i style="width:88%"></i></div>
+                        </div>
+                        <div class="srp-project">
+                            <div class="srp-project__top">
+                                <strong>مراجعة أمنية — Security &amp; Audit</strong>
+                                <span>المرحلة: مكتمل</span>
+                                <b>100%</b>
+                            </div>
+                            <div class="srp-bar is-done" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="تقدم المراجعة الأمنية"><i style="width:100%"></i></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="srp-card" aria-labelledby="srpInvoicesTitle">
+                    <div class="srp-card__head">
+                        <h3 id="srpInvoicesTitle">🧾 الفواتير</h3>
+                        <span class="srp-spacer"></span>
+                        <a href="./preview-invoice-quote.html">نموذج فاتورة ←</a>
+                    </div>
+                    <div class="srp-card__body">
+                        <table class="srp-table">
+                            <caption class="srp-hint" style="text-align:start;padding-bottom:0.4rem;">الأسعار باليورو، تُضاف ضريبة BTW 21% حيث ينطبق.</caption>
+                            <thead>
+                                <tr><th scope="col">الفاتورة</th><th scope="col">الخدمة</th><th scope="col">المبلغ</th><th scope="col">الحالة</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><b>INV-2026-118</b></td><td>Full ERP Sync</td><td>€3,490</td><td><span class="srp-tag">مدفوعة</span></td></tr>
+                                <tr><td><b>INV-2026-131</b></td><td>ERP Setup</td><td>€1,890</td><td><span class="srp-tag srp-tag--warn">مستحقة</span></td></tr>
+                                <tr><td><b>INV-2026-102</b></td><td>CoreCare Monthly</td><td>€149</td><td><span class="srp-tag">مدفوعة</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div>
+                <section class="srp-card" aria-labelledby="srpDocsTitle">
+                    <div class="srp-card__head"><h3 id="srpDocsTitle">📄 المستندات</h3></div>
+                    <div class="srp-card__body" style="padding-top:0.4rem;">
+                        <ul class="srp-list">
+                            <li><span class="srp-ico">📝</span><span><b><a href="./preview-invoice-quote.html">عرض السعر الرسمي</a></b><span>PDF · محدّث 12 أكتوبر</span></span></li>
+                            <li><span class="srp-ico srp-ico--green">✅</span><span><b><a href="./corporate-profile.html">الملف التعريفي للشركة</a></b><span>PDF · 2026</span></span></li>
+                            <li><span class="srp-ico srp-ico--blue">🔐</span><span><b><a href="./insights/zero-trust.html">تقرير المراجعة الأمنية</a></b><span>ملخص تنفيذي · سبتمبر</span></span></li>
+                            <li><span class="srp-ico">📦</span><span><b><a href="./index.html#pricing">ملحق الخدمات والباقات</a></b><span>الأسعار المعتمدة</span></span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="srp-card" aria-labelledby="srpTicketsTitle">
+                    <div class="srp-card__head">
+                        <h3 id="srpTicketsTitle">🎫 تذاكر الدعم</h3>
+                        <span class="srp-spacer"></span>
+                        <span class="srp-tag srp-tag--muted" id="srpTicketsBadge">1 مفتوحة</span>
+                    </div>
+                    <div class="srp-card__body">
+                        <ul class="srp-list" id="srpTicketsList">
+                            <li><span class="srp-ico">🛠️</span><span><b>ربط بوابة الدفع Mollie</b><span>تذكرة #SR-4471 · قيد المعالجة · أولوية عادية</span></span></li>
+                        </ul>
+
+                        <form class="srp-ticket-form" id="srpTicketForm">
+                            <label for="srpTicketSubject" style="font-size:0.75rem;font-weight:700;">تذكرة جديدة</label>
+                            <input id="srpTicketSubject" name="subject" type="text" maxlength="120" placeholder="الموضوع (مثال: صلاحية مستخدم)" required>
+                            <textarea id="srpTicketDetails" name="details" maxlength="600" placeholder="اشرح المشكلة بإيجاز…" required></textarea>
+                            <select id="srpTicketPriority" name="priority" aria-label="الأولوية">
+                                <option value="عادية">أولوية عادية</option>
+                                <option value="عالية">أولوية عالية</option>
+                                <option value="حرجة">حرجة — توقف الخدمة</option>
+                            </select>
+                            <button class="srp-btn" type="submit">إرسال التذكرة</button>
+                        </form>
+                    </div>
+                </section>
+
+                <p class="srp-note">
+                    <strong>الخصوصية:</strong> بيانات هذه النسخة التجريبية تُحفظ في متصفحك فقط (localStorage) ولا تُرسل لأي خادم. لأي بيانات حقيقية استخدم قنوات التواصل الرسمية.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="srp-toast" id="srpToast" role="status" aria-live="polite" hidden></div>
+
+<footer class="srp-footer">
+    <div class="srp-container">
+        © 2026 S&amp;R CoreSync For Intelligent Solutions — أمستردام ·
+        <a href="./privacy.html">الخصوصية</a> ·
+        <a href="./index.html#contact">تواصل</a> ·
+        <a href="./blog.html">المدونة</a>
+    </div>
+</footer>
+
+<script src="./js/sr-analytics.js" defer></script>
+<script src="./js/client-portal.js" defer></script>
+<script src="./js/concierge.js" defer></script>
+</body>
+</html>
