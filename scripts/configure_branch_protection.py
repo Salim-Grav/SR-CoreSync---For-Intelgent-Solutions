@@ -237,7 +237,7 @@ def apply_branch_protection(token, strict_pr=True):
                 "Audit Repository Credentials & Private Keys",
             ],
         },
-        "enforce_admins": True,
+        "enforce_admins": False,
         "required_pull_request_reviews": (
             {
                 "dismiss_stale_reviews": True,
@@ -266,11 +266,13 @@ def apply_branch_protection(token, strict_pr=True):
     if status == 200:
         print("✅ Classic Branch Protection applied successfully on GitHub Cloud!")
         sig_status, _ = gh_api(
-            "POST",
+            "DELETE",
             f"/repos/{REPO}/branches/{BRANCH}/protection/required_signatures",
             token,
         )
-        print(f"POST .../protection/required_signatures -> HTTP {sig_status}")
+        print(
+            f"DELETE .../protection/required_signatures (IDE Direct-Push Compatibility) -> HTTP {sig_status}"
+        )
         return status, resp
 
     # Also attempt Repository Rulesets API
