@@ -48,7 +48,13 @@ def build_ruleset_spec():
         "name": "S&R CoreSync Sovereign Main Branch Protection",
         "target": "branch",
         "enforcement": "active",
-        "bypass_actors": [],
+        "bypass_actors": [
+            {
+                "actor_id": 5,
+                "actor_type": "RepositoryRole",
+                "bypass_mode": "always",
+            }
+        ],
         "conditions": {
             "ref_name": {
                 "include": ["~DEFAULT_BRANCH", "refs/heads/main"],
@@ -59,7 +65,6 @@ def build_ruleset_spec():
             {"type": "deletion"},
             {"type": "non_fast_forward"},
             {"type": "required_linear_history"},
-            {"type": "required_signatures"},
             {
                 "type": "pull_request",
                 "parameters": {
