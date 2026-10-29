@@ -68,7 +68,20 @@
             tr.appendChild(td);
         });
         tr.title = 'SHA-256: ' + entry.sealSHA256;
+        var empty = document.getElementById('ledger-empty');
+        if (empty) { empty.remove(); }
         ledgerBody.insertBefore(tr, ledgerBody.firstChild);
+    }
+
+    function renderEmpty() {
+        var tr = document.createElement('tr');
+        tr.id = 'ledger-empty';
+        tr.className = 'empty-row';
+        var td = document.createElement('td');
+        td.colSpan = 5;
+        td.textContent = 'لا توجد تسويات بعد — نفّذ أول تسوية ذرية لتظهر هنا مع ختمها التشفيري.';
+        tr.appendChild(td);
+        ledgerBody.appendChild(tr);
     }
 
     function settle(e) {
@@ -138,6 +151,7 @@
         });
     });
 
+    renderEmpty();
     quote();
     M.renderLog(terminal, [
         ['log-blue', '[BRIDGE] Nodes online: ECB • SAMA • CBUAE • MAS'],
