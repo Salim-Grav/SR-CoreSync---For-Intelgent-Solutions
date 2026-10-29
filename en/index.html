@@ -1034,7 +1034,7 @@ main#wrapper:focus{outline:none}
                             <span class="dana-cur-label">💱 Active Currency:</span>
                             <button type="button" class="dana-cur-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
                             <button type="button" class="dana-cur-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
-                            <button type="button" class="dana-cur-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                            <button type="button" class="dana-cur-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (SR)</button>
                             <button type="button" class="dana-cur-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (AED)</button>
                         </div>
                     </div>
@@ -2612,7 +2612,7 @@ main#wrapper:focus{outline:none}
                         <span class="text-caption text-white-64 me-2">Financial Currency:</span>
                         <button type="button" class="roi-currency-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
                         <button type="button" class="roi-currency-pill" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
-                        <button type="button" class="roi-currency-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                        <button type="button" class="roi-currency-pill" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (SR)</button>
                         <button type="button" class="roi-currency-pill" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (AED)</button>
                         <button type="button" class="roi-currency-pill" data-currency="GBP" data-sr-call="switchCurrency" data-sr-args='["GBP"]'>🇬🇧 GBP (£)</button>
                     </div>
@@ -4757,7 +4757,7 @@ main#wrapper:focus{outline:none}
         }
 
         // CoreSync System Controller
-        // إدارة فتح وإغلاق القائمة الجانبية الفاخرة للهواتف والشاشات الصغيرة
+        // Luxury mobile side drawer open/close controller
         function openMobileMenu() {
             const m = document.getElementById('mobileMenu');
             if (m) {
@@ -7525,16 +7525,16 @@ let currentFoundersTarget = 'salim';
 
             if (!teamSlider || !hoursSlider || !salarySlider || !solutionSelect) return;
 
-            // استعلام العملة النشطة
+            // Active currency query
             const curCode = (typeof window.getActiveCurrency === 'function' ? window.getActiveCurrency() : (localStorage.getItem('coresync_currency') || 'EUR'));
             const cur = (window.CURRENCIES && window.CURRENCIES[curCode]) || { symbol: '€', rate: 1, name: 'Euro' };
 
-            // مزامنة حالة أزرار العملة
+            // Sync currency buttons state
             document.querySelectorAll('.roi-currency-pill').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.currency === curCode);
             });
 
-            // تحديث خط السحب الذهبي المتفاعل لكل شريط
+            // Update interactive gold track fill
             updateSliderTrack(teamSlider);
             updateSliderTrack(hoursSlider);
             updateSliderTrack(salarySlider);
@@ -7545,12 +7545,12 @@ let currentFoundersTarget = 'salim';
             const convertedHourlyRate = Math.round(hourlyRateEur * cur.rate);
             const efficiencyRate = parseFloat(solutionSelect.value) || 0.75;
 
-            // مزامنة حالة أزرار الخيارات السريعة
+            // Sync quick preset option buttons
             document.querySelectorAll('.roi-preset-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent.includes(`(${teamSize})`));
             });
 
-            // تحديث بطاقات القيم اللحظية (Badges)
+            // Update real-time value badges
             const isAr = document.documentElement.lang === 'ar' || !document.documentElement.lang;
             const isNl = document.documentElement.lang === 'nl';
 
@@ -7581,20 +7581,20 @@ let currentFoundersTarget = 'salim';
                 salaryValBadge.textContent = `${cur.symbol} ${convertedHourlyRate} / hr`;
             }
 
-            // تحديث تدريج شريط التكلفة للعملة المحددة
+            // Update cost scale labels for active currency
             const salaryScale = document.getElementById('roiSalaryScaleLabels');
             if (salaryScale) {
                 salaryScale.innerHTML = `<span>${cur.symbol} ${Math.round(15 * cur.rate)}</span><span>${cur.symbol} ${Math.round(45 * cur.rate)}</span><span>${cur.symbol} ${Math.round(80 * cur.rate)}+</span>`;
             }
 
-            // الحسابات الرياضية المعتمدة
+            // Verified mathematical calculations
             const weeksPerYear = 52;
             const totalAnnualManualHours = teamSize * manualHours * weeksPerYear;
             const annualHoursSaved = Math.round(totalAnnualManualHours * efficiencyRate);
             const grossAnnualSavingsEur = Math.round(annualHoursSaved * hourlyRateEur);
             const convertedAnnualSavings = Math.round(grossAnnualSavingsEur * cur.rate);
 
-            // حساب تقديري لفترة استرداد التكلفة (Payback Period)
+            // Estimated payback period calculation
             let baseCostEur = 10000;
             if (teamSize <= 10) baseCostEur = 7500;
             else if (teamSize <= 30) baseCostEur = 13500;
@@ -7606,7 +7606,7 @@ let currentFoundersTarget = 'salim';
             if (paybackMonths < 0.8) paybackMonths = "0.8";
             if (paybackMonths > 6.0) paybackMonths = "5.5";
 
-            // عرض النتائج المحدثة في واجهة المستخدم
+            // Display updated results in UI
             const savingsElem = document.getElementById('roiAnnualSavings');
             if (savingsElem) {
                 savingsElem.innerHTML = `<span>${cur.symbol}</span>${convertedAnnualSavings.toLocaleString('en-US')}`;
@@ -7800,7 +7800,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
             <img src="../assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="../index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
+        <a href="../index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="Arabic (HQ Master)" aria-label="Arabic (HQ Master)">
             <img src="../assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
@@ -8090,12 +8090,12 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">VAT 18%</span>
                 </a>
-                <a href="../index.html" class="apple-launchpad-card" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
+                <a href="../index.html" class="apple-launchpad-card" data-code="ar" data-name="arabic arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/sa.png" alt="AR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
-                            <span class="apple-launchpad-native">العربية</span>
-                            <span class="apple-launchpad-sub">Arabic (HQ Master)</span>
+                            <span class="apple-launchpad-native">Arabic</span>
+                            <span class="apple-launchpad-sub">HQ Master</span>
                         </div>
                     </div>
                     <span class="apple-launchpad-vat">VAT 15%</span>
@@ -8120,7 +8120,7 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                     </div>
                     <span class="apple-launchpad-vat">Tax 5%</span>
                 </a>
-                <a href="../ckb/index.html" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
+                <a href="../ckb/index.html" class="apple-launchpad-card" data-code="ckb" data-name="kurdish (sorani) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="../assets/flags/iq.png" alt="CKB" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
