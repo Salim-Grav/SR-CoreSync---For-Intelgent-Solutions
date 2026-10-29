@@ -107,6 +107,7 @@ features = [
     ("zkp-confidential-enclave.html", "0.80", "weekly"),
     ("sovereign-mission-suite-dashboard.html", "0.80", "weekly"),
     ("blog.html", "0.85", "weekly"),
+    ("privacy.html", "0.50", "yearly"),
     ("insights/erp-selection-2026.html", "0.75", "monthly"),
     ("insights/cloud-cost-30.html", "0.75", "monthly"),
     ("insights/ai-concierge-rag.html", "0.75", "monthly"),
