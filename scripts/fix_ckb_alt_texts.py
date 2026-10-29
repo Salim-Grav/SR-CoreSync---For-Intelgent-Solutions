@@ -240,3 +240,4 @@ print(f"Fixed: {before_imgs - after_imgs} image alt attributes")
 with open(CKB, 'w', encoding='utf-8') as f:
     f.write(content)
 print(f"Saved: {CKB}")
+
