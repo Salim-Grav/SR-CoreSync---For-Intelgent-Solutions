@@ -153,9 +153,11 @@ def main():
         return 1
 
     print('PASSED - publish set is safe. No server-side material is exposed.')
-    print('=' * 72)
     import audit_secrets
     if audit_secrets.main() != 0:
+        return 1
+    import audit_language_purity
+    if audit_language_purity.audit_purity() != 0:
         return 1
     return 0
 
