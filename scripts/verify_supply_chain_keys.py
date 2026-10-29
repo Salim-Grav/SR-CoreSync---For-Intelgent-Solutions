@@ -12,6 +12,12 @@ import os
 import sys
 import subprocess
 
+if sys.stdout.encoding != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 EXPECTED_FINGERPRINT = "FCF986EA15E6E293A5644F10B4322F04D67658D8"
 EXPECTED_UID = "FFmpeg release signing key <ffmpeg-devel@ffmpeg.org>"
 
@@ -35,7 +41,7 @@ def verify_key():
         return False
 
     cmd = [GPG_PATH, "--show-keys", KEY_PATH]
-    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8')
 
     if res.returncode != 0:
         print(f"[-] GPG inspection failed: {res.stderr}")
@@ -47,10 +53,10 @@ def verify_key():
     cleaned_output = output.replace(" ", "").replace("\r", "").replace("\n", "")
 
     if EXPECTED_FINGERPRINT in cleaned_output:
-        print("\n[✓] VERIFIED: Fingerprint MATCHES official policy:")
-        print(f"    Expected: {EXPECTED_FINGERPRINT}")
-        print(f"    UID     : {EXPECTED_UID}")
-        print("[✓] Status  : COMPLIANT WITH NIST SP 800-218 & EU CRA.")
+        print("\n[OK] VERIFIED: Fingerprint MATCHES official policy:")
+        print(f"     Expected: {EXPECTED_FINGERPRINT}")
+        print(f"     UID     : {EXPECTED_UID}")
+        print("[OK] Status  : COMPLIANT WITH NIST SP 800-218 & EU CRA.")
         return True
     else:
         print("\n[!] WARNING: Fingerprint mismatch! Potential security hazard.")
