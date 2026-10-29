@@ -170,15 +170,78 @@ self.addEventListener('fetch', (event) => {
       // Offline Navigation Fallback
       if (request.mode === 'navigate') {
         if (url.pathname.includes('/en/')) {
-          return cache.match('./en/index.html');
+          return cache.match('./en/index.html') || cache.match('./offline.html');
         }
         if (url.pathname.includes('/nl/')) {
-          return cache.match('./nl/index.html');
+          return cache.match('./nl/index.html') || cache.match('./offline.html');
         }
-        return cache.match('./index.html') || cache.match('./demo.html');
+        return cache.match('./offline.html') || cache.match('./index.html') || cache.match('./demo.html');
       }
 
       return new Response('Offline resource not available', { status: 503, statusText: 'Offline' });
     })
   );
+});
+
+/* --------------------------------------------------------------------------
+   Web Push (requires a backend with VAPID keys to actually deliver messages;
+   the handler is ready so no service-worker change is needed afterwards).
+   -------------------------------------------------------------------------- */
+self.addEventListener('push', (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (e) {
+    payload = { body: event.data ? event.data.text() : '' };
+  }
+
+  const title = payload.title || 'S&R CoreSync';
+  const options = {
+    body: payload.body || 'لديك تحديث جديد من S&R CoreSync.',
+    icon: payload.icon || './assets/icon-192.png',
+    badge: payload.badge || './assets/icon-192.png',
+    dir: 'rtl',
+    lang: 'ar',
+    tag: payload.tag || 'sr-coresync',
+    renotify: false,
+    data: { url: payload.url || './index.html' }
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || './index.html';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if ('focus' in client) {
+          client.navigate(target).catch(() => {});
+          return client.focus();
+        }
+      }
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(target);
+      }
+    })
+  );
+});
+
+/* Allow the page to activate a waiting worker and to warm specific URLs. */
+self.addEventListener('message', (event) => {
+  const data = event.data || {};
+  if (data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+  if (data.type === 'CACHE_URLS' && Array.isArray(data.urls)) {
+    event.waitUntil(
+      caches.open(CACHE_NAME).then((cache) => {
+        return Promise.all(
+          data.urls.map((url) => cache.add(url).catch(() => {}))
+        );
+      })
+    );
+  }
 });
