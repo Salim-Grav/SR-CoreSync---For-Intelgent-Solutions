@@ -50,4 +50,19 @@
 - [x] **مدونة/رؤى (Round 4):** صفحة `blog.html` + 6 مقالات كاملة في `insights/` + تصفية حسب التصنيف + بحث فوري + شريط تقدم القراءة + JSON-LD Blog/BlogPosting + روابط في القائمة العلوية والهاتف والفوتر + قسم "أحدث المقالات" في الرئيسية + إدخال 7 روابط في `sitemap.xml` (80 URL).
 - [x] **التحقق (Round 4):** `validate_publish_set.py` PASSED، `audit_language_paths.py` PASSED، `check_inline_scripts.mjs` PASSED (95 JSON-LD)، `build_csp.py --check` PASSED (143 hash)، `check_site_links.py` PASSED (9120 refs، 0 broken)، `check_seo_assets.py` PASSED، المتصفح 0 أخطاء.
 
+---
+
+## ✅ الجولة الخامسة: تفعيل المتطلبات المؤجلة (Deferred Features — 100% Completed):
+- [x] **المساعد الذكي (AI Concierge):** `css/concierge.css` + `js/concierge.js` — ويدجت عائم بأسئلة سريعة، قاعدة معرفة عربية من 24 مدخلاً (خدمات/أسعار حقيقية/ERP/مدة/ملكية/خصوصية)، تطبيع نص عربي، تحويل بشري إلى واتساب، فتح RFQ، حفظ الجلسة، ARIA dialog، واحترام `prefers-reduced-motion`.
+- [x] **القياس المحلي المحترم للخصوصية:** `css/sr-analytics.css` + `js/sr-analytics.js` — شريط موافقة، دعم DNT/GPC، تسجيل محلي لآخر 200 حدث، Core Web Vitals (LCP/CLS/INP/TTFB)، تتبع نقرات واتساب/البريد/الهاتف، ولوحة تصدير عبر `?analytics=1`، دون أي إرسال لطرف ثالث.
+- [x] **صفحة الخصوصية والكوكيز:** `privacy.html` + `js/privacy.js` — التزام GDPR، جدول مفاتيح التخزين المحلي، الأطراف الثالثة، الحقوق، وإعادة ضبط الموافقة (تُصلح رابط `#cookies` في التذييل).
+- [x] **صفحة عدم الاتصال:** `offline.html` + إضافتها إلى ذاكرة الـ Service Worker المؤقتة.
+- [x] **بوابة العملاء:** `client-portal.html` + `css/client-portal.css` + `js/client-portal.js` — بوابة تجريبية بجلسة منتهية الصلاحية (30 دقيقة/7 أيام)، مشاريع وفواتير ومستندات وتذاكر دعم مع إنشاء تذكرة محلياً، وتنبيه صريح بأن المصادقة الحقيقية تتطلب خادم OIDC/SSO.
+- [x] **تحسينات بطاقة NFC:** `js/nfc-card.js` — مشاركة أصلية (Web Share) أو نسخ الرابط، وتتبع عرض/تنزيل vCard وQR وحفظ الرابط لكل ملف تعريف.
+- [x] **Service Worker v16:** `coresync-prerender-v16-offline` — إضافة أصول المدونة/البوابة/المساعد/القياس، استخدام `offline.html` كبديل تنقل، ومعالجات `push` و`notificationclick` و`message` (SKIP_WAITING / CACHE_URLS).
+- [x] **صور متجاوبة:** توليد نسخ WebP/JPEG بعرض 640 و1280 لبانرات المؤسسين وربط `srcset`/`sizes` في الرئيسية والملف التعريفي (توفير يصل إلى ~90% على الجوال).
+- [x] **إصلاحات:** إزالة سكربت مسح الـ Service Worker القديم من `index.html`، تصحيح رابط الخصوصية، تصحيح تسعير الموقع في JSON-LD إلى €1,450، وإضافة `📊 مقارنة الخدمات` بالأسعار الفعلية.
+- [x] **Sitemap:** 81 URL بعد إضافة `privacy.html` (بوابة العملاء وصفحة عدم الاتصال `noindex` عمداً).
+- [x] **بوابة الجودة:** `prepare_publish_set` ✅ · `build_csp --check` ✅ (143 hash) · `check_inline_scripts` ✅ (471 سكربت / 95 JSON-LD) · `check_site_links` ✅ (9,198 مرجع / 0 مكسور) · `audit_language_paths` ✅ · `validate_publish_set` ✅ · `check_seo_assets` ✅ · فحص المتصفح: 0 أخطاء console و0 طلبات 404 على الرئيسية/المدونة/مقال/البطاقة/الخصوصية/عدم الاتصال/البوابة.
+
 </div>
