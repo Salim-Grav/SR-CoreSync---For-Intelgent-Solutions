@@ -73,8 +73,8 @@ jobs:
       - name: Audit SEO discovery assets
         run: python scripts/check_seo_assets.py
 
-      - name: Validate GitHub Pages Publish Set
-        run: python scripts/validate_publish_set.py
+      - name: Verify Supply Chain Keys
+        run: python scripts/verify_supply_chain_keys.py
 
       - name: Build the publish artifact
         run: python scripts/prepare_publish_set.py
