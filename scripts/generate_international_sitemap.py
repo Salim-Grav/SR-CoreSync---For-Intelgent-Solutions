@@ -102,9 +102,6 @@ features = [
     ("3d-mockup.html", "0.70", "monthly"),
     ("logo-studio.html", "0.75", "monthly"),
     ("status.html", "0.60", "daily"),
-    ("sovereign-arbitration-hub.html", "0.80", "weekly"),
-    ("multi-cbdc-bridge.html", "0.80", "weekly"),
-    ("zkp-confidential-enclave.html", "0.80", "weekly"),
 ]
 
 for feat, prio, freq in features:
