@@ -1,0 +1,89 @@
+/* ==========================================================================
+   S&R CoreSync — Privacy-first analytics UI (consent banner + debug panel)
+   ========================================================================== */
+
+.sr-consent {
+    position: fixed;
+    inset-inline: 1rem;
+    bottom: 1rem;
+    z-index: 100000;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 1rem 1.15rem;
+    border-radius: 14px;
+    border: 1px solid rgba(197, 168, 128, 0.45);
+    background: rgba(7, 19, 16, 0.97);
+    color: #e6ebe8;
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+    font-family: "Alexandria", "Tajawal", system-ui, sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sr-consent[hidden] { display: none; }
+
+.sr-consent p { margin: 0; flex: 1 1 260px; color: #cbd5e1; }
+.sr-consent a { color: #f3dfba; }
+
+.sr-consent__actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+.sr-consent button {
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 800;
+    cursor: pointer;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    background: transparent;
+    color: #e6ebe8;
+}
+
+.sr-consent button.sr-consent__accept {
+    background: linear-gradient(135deg, #d9bd93, #b8975f);
+    color: #04100b;
+    border-color: transparent;
+}
+
+.sr-consent button:hover { border-color: #f3dfba; }
+.sr-consent button:focus-visible { outline: 2px solid #f3dfba; outline-offset: 2px; }
+
+/* Debug panel */
+.sr-analytics-panel {
+    position: fixed;
+    inset-inline-end: 1rem;
+    bottom: 1rem;
+    z-index: 100001;
+    width: min(420px, calc(100vw - 2rem));
+    max-height: 60vh;
+    overflow: auto;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    background: rgba(4, 12, 9, 0.98);
+    color: #d1fae5;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 0.72rem;
+    line-height: 1.6;
+}
+
+.sr-analytics-panel h3 { margin: 0 0 0.5rem; font-size: 0.8rem; color: #6ee7b7; font-family: inherit; }
+.sr-analytics-panel table { width: 100%; border-collapse: collapse; }
+.sr-analytics-panel td, .sr-analytics-panel th { border-bottom: 1px solid rgba(110, 231, 183, 0.18); padding: 0.25rem 0.3rem; text-align: start; }
+.sr-analytics-panel button {
+    margin-top: 0.6rem;
+    margin-inline-end: 0.35rem;
+    font-family: inherit;
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(110, 231, 183, 0.35);
+    background: transparent;
+    color: #d1fae5;
+    cursor: pointer;
+}
