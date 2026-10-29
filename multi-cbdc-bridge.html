@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جسر المقاصة السيادي متعدد العملات الرقمية للبنوك المركزية | S&amp;R CoreSync</title>
+    <meta name="description" content="محاكي جسر مقاصة عابر للحدود للعملات الرقمية للبنوك المركزية (اليورو الرقمي، الريال الرقمي، الدرهم الرقمي، الدولار السنغافوري الرقمي) بتسوية ذرية PvP وسجل ختم SHA-256">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sovereign-mission-suite.css">
+</head>
+<body class="theme-emerald">
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="brand-logo" width="44" height="44">
+                <div>
+                    <span class="brand-title">S&amp;R CoreSync Multi-CBDC Bridge</span>
+                    <span class="brand-sub">MISSION 105 • ATOMIC PvP CROSS-BORDER CBDC SETTLEMENT</span>
+                </div>
+            </a>
+            <nav class="nav-links" aria-label="روابط جسر العملات الرقمية">
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link">👑 غرفة القيادة المئوية</a>
+                <a href="cross-border-settlement.html" class="nav-link">🌍 التسوية العابرة للحدود</a>
+                <a href="sovereign-gold-rwa-treasury.html" class="nav-link">🪙 خزينة الذهب RWA</a>
+                <a href="sovereign-arbitration-hub.html" class="nav-link">⚖️ مركز التحكيم</a>
+                <a href="zkp-confidential-enclave.html" class="nav-link">🔐 الحوسبة السرية ZKP</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner" aria-labelledby="cbdc-hero-title">
+            <div>
+                <div class="badge-row">
+                    <span class="pill-badge emerald">ATOMIC PAYMENT-vs-PAYMENT</span>
+                    <span class="pill-badge gold">ISO 20022 pacs.009 • BIS CPMI PRINCIPLES</span>
+                    <span class="pill-badge">SHA-256 SETTLEMENT LEDGER</span>
+                </div>
+                <h1 id="cbdc-hero-title" class="hero-title">بوابة المقاصة المصرفية للعملات الرقمية للبنوك المركزية <span class="ltr" lang="en">(Sovereign Multi-CBDC Cross-Border Bridge)</span></h1>
+                <p class="hero-desc">
+                    بيئة محاكاة مؤسسية لتسوية المدفوعات العابرة للحدود مباشرةً بين العملات الرقمية للبنوك المركزية — اليورو الرقمي، الريال السعودي الرقمي، الدرهم الإماراتي الرقمي، والدولار السنغافوري الرقمي — عبر تسوية ذرية (PvP) تُنفَّذ بالكامل أو تُلغى بالكامل، مع سجل مختوم تشفيرياً. أسعار الصرف إرشادية لأغراض العرض والتخطيط فقط.
+                </p>
+            </div>
+            <div class="status-card" aria-label="حالة الجسر">
+                <div class="status-row"><span>العُقد المصرفية المتصلة</span><strong class="mono">ECB • SAMA • CBUAE • MAS</strong></div>
+                <div class="status-row"><span>آلية التسوية</span><strong class="mono">Atomic PvP / HTLC</strong></div>
+                <div class="status-row"><span>متوسط زمن النهائية</span><strong class="mono" id="stat-finality">2.4 s</strong></div>
+                <div class="status-row"><span>آخر ختم تسوية</span><strong class="mono" id="stat-last-hash">—</strong></div>
+            </div>
+        </section>
+
+        <section class="kpi-grid" aria-label="مؤشرات الجسر">
+            <article class="kpi-card">
+                <span class="kpi-label">حجم التسويات (هذه الجلسة، EUR)</span>
+                <strong class="kpi-value mono" id="kpi-volume">€0</strong>
+                <span class="kpi-foot">مقوّم باليورو بالأسعار المرجعية</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">عدد التسويات الذرية</span>
+                <strong class="kpi-value mono" id="kpi-count">0</strong>
+                <span class="kpi-foot">0 تسوية جزئية • 0 مخاطر Herstatt</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">التوفير مقابل المراسلة التقليدية</span>
+                <strong class="kpi-value mono" id="kpi-saving">€0</strong>
+                <span class="kpi-foot">رسوم 0.05% مقابل ~1.5% عبر البنوك المراسلة</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">زمن التسوية</span>
+                <strong class="kpi-value mono">seconds</strong>
+                <span class="kpi-foot">بدلاً من T+2 أيام عمل</span>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">💱 أمر تسوية جديد (Settlement Instruction)</h2>
+                    <span class="pill-badge emerald mono" id="corridor-badge">EUR → SAR</span>
+                </div>
+                <form id="cbdc-form" novalidate>
+                    <div class="form-grid">
+                        <label class="form-field">من (العملة المصدر)
+                            <select id="f-from"></select>
+                        </label>
+                        <label class="form-field">إلى (العملة الوجهة)
+                            <select id="f-to"></select>
+                        </label>
+                        <label class="form-field">المبلغ
+                            <input id="f-amount" lang="en" type="number" min="1" step="any" value="250000">
+                        </label>
+                        <label class="form-field">المستفيد
+                            <input id="f-beneficiary" type="text" maxlength="80" value="Riyadh Branch — S&amp;R CoreSync">
+                        </label>
+                    </div>
+                    <div class="status-card" aria-live="polite">
+                        <div class="status-row"><span>السعر المرجعي</span><strong class="mono" id="q-rate">—</strong></div>
+                        <div class="status-row"><span>المبلغ المستلم</span><strong class="mono" id="q-receive">—</strong></div>
+                        <div class="status-row"><span>رسوم الجسر (0.05%)</span><strong class="mono" id="q-fee">—</strong></div>
+                    </div>
+                    <div class="btn-row">
+                        <button type="submit" class="btn-action">⚡ تنفيذ التسوية الذرية</button>
+                        <button type="button" id="btn-swap" class="btn-secondary">⇄ عكس الاتجاه</button>
+                    </div>
+                </form>
+                <div class="terminal-box mono" id="cbdc-terminal" aria-live="polite"></div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">📒 سجل التسويات المختوم (Settlement Ledger)</h2>
+                    <button type="button" id="btn-export-ledger" class="btn-secondary">📥 تصدير السجل (JSON)</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>المرجع</th><th>الممر</th><th>المُرسل</th><th>المُستلم</th><th>الحالة</th></tr>
+                    </thead>
+                    <tbody id="ledger-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        S&amp;R CoreSync For Intelligent Solutions • جسر المقاصة السيادي متعدد العملات الرقمية للبنوك المركزية (المهمة 105) • جميع الحقوق محفوظة © 2026
+    </footer>
+
+    <script src="js/sovereign-mission-core.js"></script>
+    <script src="js/multi-cbdc-bridge.js"></script>
+</body>
+</html>
