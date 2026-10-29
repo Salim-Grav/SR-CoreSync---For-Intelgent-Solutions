@@ -704,7 +704,7 @@ async function loadContractPdf(env, ref) {
 }
 
 function contractRecipients(env) {
-    const raw = (env && env.CONTRACT_RECIPIENTS) || 'mudar@nlbilarabi.nl,info@sr-coresync.com';
+    const raw = (env && env.CONTRACT_RECIPIENTS) || 'mudar@nlbilarabi.nl,info@sr-coresync.com,raed@sr-coresync.com';
     return raw.split(',').map(function (s) { return s.trim().toLowerCase(); }).filter(Boolean);
 }
 
