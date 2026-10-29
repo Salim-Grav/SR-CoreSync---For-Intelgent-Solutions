@@ -1,0 +1,14 @@
+/* S&R CoreSync - Services Section Enhancements (modal + RFQ) */
+.sr-service-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
+.sr-service-modal.open { display: flex; align-items: center; justify-content: center; }
+.sr-service-modal-backdrop { position: absolute; inset: 0; background: rgba(3, 8, 6, 0.85); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.sr-service-modal-card { position: relative; z-index: 1; width: min(640px, 92vw); max-height: 88vh; overflow-y: auto; background: #071510; border: 1px solid rgba(197, 168, 128, 0.45); border-radius: 18px; padding: 1.75rem; color: #e2e8f0; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+.sr-service-modal-close { position: absolute; top: 0.6rem; left: 0.9rem; background: transparent; border: none; color: #cbd5e1; font-size: 1.6rem; cursor: pointer; line-height: 1; }
+.sr-service-modal-title { font-size: 1.35rem; font-weight: 900; color: #f3dfba; margin-bottom: 0.4rem; }
+.sr-service-modal-price { color: #6ee7b7; font-weight: 700; margin-bottom: 0.8rem; font-family: 'JetBrains Mono', monospace; }
+.sr-service-modal-desc { color: #cbd5e1; line-height: 1.7; margin-bottom: 1rem; }
+.sr-service-modal-h4 { font-size: 0.95rem; color: #f3dfba; margin: 0.9rem 0 0.4rem; }
+.sr-service-modal-list { padding-right: 1.2rem; color: #94a3b8; line-height: 1.8; font-size: 0.88rem; }
+.sr-service-modal-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+.sr-service-modal-actions .dana-whatsapp-cta, .sr-service-modal-actions .dana-btn-booking { text-decoration: none; }
+@media (max-width: 640px) { .sr-service-modal-card { padding: 1.25rem; } }

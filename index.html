@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device & Media App Routing) -->
+            <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device & Media App Routing) -->
     <script id="srLangAutoDetect">
     (function() {
         try {
@@ -34,6 +34,12 @@
                 return;
             }
 
+            // If user is already on a dedicated language subfolder (e.g. /de/, /nl/, /fr/),
+            // NEVER auto-bounce them back to another language! Respect their direct visit!
+            if (isSubfolder) {
+                return;
+            }
+
             // 2. Active Session Manual Lock: User explicitly switched language during this visit
             var sessionLock = null;
             try { sessionLock = sessionStorage.getItem('sr_user_lang_locked'); } catch(e){}
@@ -45,11 +51,21 @@
                 return;
             }
 
-            // 3. Automatic Device, Mobile & Browser Language Detection (Media apps, WhatsApp, in-app webviews)
+            // 3. Persistent user preference
+            var prefLang = null;
+            try { prefLang = localStorage.getItem('sr_lang_pref'); } catch(e){}
+            if (prefLang && supported.indexOf(prefLang) !== -1) {
+                if (prefLang !== currentLang) {
+                    var targetPath = (prefLang === 'ar') ? targetFile : (prefLang + '/' + targetFile);
+                    window.location.replace(prefix + targetPath + window.location.hash);
+                }
+                return;
+            }
+
+            // 4. Automatic Device, Mobile & Browser Language Detection (Only on root entry!)
             var browserLangs = navigator.languages || [navigator.language || navigator.userLanguage || navigator.browserLanguage || ''];
             var targetLang = null;
 
-            // Check if device/browser prefers Arabic anywhere in its language profile
             for (var i = 0; i < browserLangs.length; i++) {
                 var raw = (browserLangs[i] || '').toLowerCase().trim();
                 var primary = raw.split('-')[0];
@@ -59,7 +75,6 @@
                 }
             }
 
-            // If not Arabic, inspect browser languages for Kurdish or matching European / Regional language
             if (!targetLang) {
                 for (var j = 0; j < browserLangs.length; j++) {
                     var rawJ = (browserLangs[j] || '').toLowerCase().trim();
@@ -79,18 +94,16 @@
                 }
             }
 
-            // Global fallback for international visitors
             if (!targetLang) {
                 targetLang = 'en';
             }
 
-            // Route instantly if detected language differs from current page
             if (targetLang && targetLang !== currentLang && supported.indexOf(targetLang) !== -1) {
                 var routePath = (targetLang === 'ar') ? targetFile : (targetLang + '/' + targetFile);
                 window.location.replace(prefix + routePath + window.location.search + window.location.hash);
             }
         } catch(e) {
-            // Fail-safe: stay on current page gracefully
+            // Fail-safe
         }
     })();
     </script>
@@ -294,12 +307,14 @@
     <!-- الخطوط الرسمية الأصلية لموقع دانا نجمة: Alexandria الفاخر بجميع أوزانه + Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="./assets/sr-emblem-gold-luxury.jpg" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- حزمة الأنماط الأساسية المعتمدة محلياً لتشغيل فوري بدون أي بطء -->
     <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
     <!-- حزمة الخدمات المؤسسية (عروض الأسعار PDF، نظام ملاحظات الزبائن، والامتثال لـ GDPR) -->
     <link rel="stylesheet" href="./css/enterprise-suite.min.css">
+    <link rel="stylesheet" href="./css/services-enhancements.css">
     <!-- محرك تشغيل برمجيات الويب السحابية والتطبيقات المستقلة PWA -->
     <link rel="stylesheet" href="./css/sr-software-apps.css?v=20261020_center">
     <!-- البنية السيادية الفاخرة للفوتر (Sovereign Luxury Footer) -->
@@ -1440,6 +1455,24 @@ main#wrapper:focus{outline:none}
 }
 
 </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "S&R CoreSync Services",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"item":{"@type":"Service","name":"الهوية البصرية","description":"هويات بصرية مميزة تُبنى باستراتيجية ووضوح واتساق.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"},"offers":{"@type":"Offer","price":"590","priceCurrency":"EUR"}}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Service","name":"تصميم المواقع وتحسينها","description":"مواقع عصرية عالية الأداء مصممة للوضوح والثقة والنمو.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"},"offers":{"@type":"Offer","price":"980","priceCurrency":"EUR"}}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Service","name":"متجر إلكتروني","description":"متجر إلكتروني متكامل: كتالوج، سلة، دفع، إدارة طلبات، VAT/BTW.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"},"offers":{"@type":"Offer","price":"1490","priceCurrency":"EUR"}}},
+        {"@type":"ListItem","position":4,"item":{"@type":"Service","name":"البرمجيات السحابية المخصصة","description":"برمجيات سحابية مخصصة: ERP/CRM/Portals، بنية microservices، أمان Zero-Trust.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}},
+        {"@type":"ListItem","position":5,"item":{"@type":"Service","name":"تطبيقات الجوال والويب","description":"تطبيقات جوال (iOS/Android) وويب (PWA) بتجربة مستخدم سلسة.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}},
+        {"@type":"ListItem","position":6,"item":{"@type":"Service","name":"حلول أنظمة المؤسسات والربط المالي","description":"ربط ERP/CRM/Banking (PSD2), توحيد بيانات المؤسسة, لوحات KPI, تدقيق.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}},
+        {"@type":"ListItem","position":7,"item":{"@type":"Service","name":"أتمتة العمليات والذكاء الاصطناعي","description":"أتمتة RPA + AI: استخراج فواتير، chatbots، تنبؤ، تحليل مستندات.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}},
+        {"@type":"ListItem","position":8,"item":{"@type":"Service","name":"استشارات مالية وحوكمة رقمية","description":"استشارات مالية: VAT/BTW, IFRS, CSRD/ESG, حوكمة, تدقيق.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}},
+        {"@type":"ListItem","position":9,"item":{"@type":"Service","name":"البنية السحابية والأمن السيبراني","description":"هندسة سحابية AWS/Azure + أمن: WAF, SIEM, SOC, penetration testing.","provider":{"@type":"Organization","name":"S&R CoreSync For Intelligent Solutions"}}}
+      ]
+    }
+    </script>
 </head>
 
 <body class="counter-scroll preloader-complete">
@@ -1511,7 +1544,7 @@ main#wrapper:focus{outline:none}
                 <div class="cinematic-scene">
                     <picture class="cinematic-emblem-picture">
                         <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                        <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official Luxury Emblem" class="cinematic-emblem-img" width="1920" height="1080" loading="eager">
+                        <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official Luxury Emblem" class="cinematic-emblem-img" width="1920" height="1080" loading="eager" fetchpriority="high" decoding="async">
                     </picture>
                     <div class="cinematic-emblem-ambient" aria-hidden="true"></div>
                 </div>
@@ -1547,6 +1580,7 @@ main#wrapper:focus{outline:none}
                                         <li class="menu-item"><a href="#roi-calculator" class="item-link link text-caption gold-accent"><span>05 /</span>ROI</a></li>
                                         <li class="menu-item"><a href="#software-hub" class="item-link link text-caption gold-accent"><span>06 /</span>المتجر</a></li>
                                         <li class="menu-item"><a href="#faq" class="item-link link text-caption"><span>07 /</span>الأسئلة</a></li>
+                                        <li class="menu-item"><a href="./blog.html" class="item-link link text-caption gold-accent"><span>08 /</span>المدونة</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1743,17 +1777,17 @@ main#wrapper:focus{outline:none}
                             <!-- الشريحة 0: شعار وهوية النخبة المؤسسية الفاخرة (S&R CoreSync Emblem) -->
                             <div class="showcase-slide-item active">
                                 <div class="showcase-banner-card">
-                                    <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)"]'>
+                                    <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions - Official Luxury Sovereign Emblem"]'>
                                         <picture>
                                             <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" width="1024" height="576" loading="eager">
+                                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="eager">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
                                         <div class="showcase-footer-meta">
                                             <div class="showcase-footer-avatar avatar-crown">👑</div>
                                             <div>
-                                                <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • الشعار الرسمي المعتمد</div>
+                                                <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • Official Sovereign Emblem</div>
                                                 <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
                                                 <div class="showcase-credentials-badges">
                                                     <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية المعتمدة</span>
@@ -1763,10 +1797,10 @@ main#wrapper:focus{outline:none}
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر", "emblem"]'>
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&R CoreSync Official Sovereign Emblem", "emblem"]'>
                                                 <span>تكبير 🔍</span>
                                             </button>
-                                            <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار بدقة 4K فائقة">
+                                            <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار الرسمي بدقة 4K فائقة">
                                                 <span>تحميل 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="عرض رمز QR المؤسسي المعتمد">
@@ -1787,7 +1821,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="assets/founder-banner-salim-4k.webp 3840w, assets/founder-banner-salim.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="assets/founder-banner-salim-4k.jpg 3840w, assets/founder-banner-salim.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -1831,7 +1865,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="assets/founder-banner-raed-4k.webp 3840w, assets/founder-banner-raed.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="assets/founder-banner-raed-4k.jpg 3840w, assets/founder-banner-raed.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -1901,17 +1935,17 @@ main#wrapper:focus{outline:none}
                 <!-- مسرح العرض الفردي: شعار الهوية المؤسسية الفاخرة -->
                 <div id="viewEmblem" class="showcase-single-view showcase-is-hidden">
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync (For Intelligent Solutions)"]'>
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions - Official Luxury Sovereign Emblem"]'>
                             <picture>
                                 <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر S&amp;R CoreSync" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
                             <div class="showcase-footer-meta">
                                 <div class="showcase-footer-avatar avatar-crown">👑</div>
                                 <div>
-                                    <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • الشعار الرسمي المعتمد</div>
+                                    <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • Official Sovereign Emblem</div>
                                     <div class="showcase-footer-role">For Intelligent Solutions • المنظومة السحابية والذكاء الاصطناعي وهندسة ERP</div>
                                     <div class="showcase-credentials-badges">
                                         <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية المعتمدة</span>
@@ -1921,10 +1955,10 @@ main#wrapper:focus{outline:none}
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر", "emblem"]'>
+                                            <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&R CoreSync Official Sovereign Emblem", "emblem"]'>
                                                 <span>تكبير 🔍</span>
                                             </button>
-                                            <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار بدقة 4K فائقة">
+                                            <a href="assets/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="تحميل الشعار الرسمي بدقة 4K فائقة">
                                                 <span>تحميل 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="عرض رمز QR المؤسسي المعتمد">
@@ -1944,7 +1978,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-salim-4k.jpg", "م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
-                                <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1987,7 +2021,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-raed-4k.jpg", "أ. محمد رائد كعكة - المستشار المالي ومطور نظم ERP"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
-                                <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2028,10 +2062,10 @@ main#wrapper:focus{outline:none}
                 <div id="viewDual" class="showcase-dual-grid showcase-is-hidden">
                     <!-- بانر الشعار الفاخر -->
                     <div class="showcase-banner-card">
-                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر - S&amp;R CoreSync"]'>
+                        <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&R CoreSync Official Sovereign Emblem"]'>
                             <picture>
                                 <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="شعار الهوية المؤسسية الفاخر" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2039,14 +2073,14 @@ main#wrapper:focus{outline:none}
                                 <div class="showcase-footer-avatar avatar-crown">👑</div>
                                 <div>
                                     <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions</div>
-                                    <div class="showcase-footer-role">الشعار الرسمي المعتمد • For Intelligent Solutions</div>
+                                    <div class="showcase-footer-role">Official Sovereign Emblem • For Intelligent Solutions</div>
                                     <div class="showcase-credentials-badges">
                                         <span class="cred-badge"><i class="badge-dot"></i> الهوية المؤسسية الرسمية</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
-                                <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "شعار الهوية المؤسسية الفاخر"]'>
+                                <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&R CoreSync Official Sovereign Emblem"]'>
                                     <span>تكبير 🔍</span>
                                 </button>
                             </div>
@@ -2058,7 +2092,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-salim-4k.jpg", "م. محمد سليم عزيزة"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
-                                <img src="./assets/founder-banner-salim.jpg" alt="بانر م. محمد سليم عزيزة" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2087,7 +2121,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-raed-4k.jpg", "أ. محمد رائد كعكة"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
-                                <img src="./assets/founder-banner-raed.jpg" alt="بانر أ. محمد رائد كعكة" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2132,6 +2166,17 @@ main#wrapper:focus{outline:none}
                         <span class="gold-dot"></span> استوديو الهوية الرقمية والنمو التجاري • أحدث التصاميم العصرية
                     </span>
                     <p class="text-caption text-white-64 mb-0">حلول بصرية ورقمية استراتيجية مصممة للوضوح والثقة وتحويل زوارك إلى عملاء دائمين بأسعار تنافسية مدروسة</p>
+                    <div class="dana-bundle-banner" style="margin-top:1.1rem;padding:1rem 1.25rem;background:linear-gradient(135deg,rgba(197,168,128,0.18),rgba(16,185,129,0.12));border:1px solid rgba(197,168,128,0.45);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;">
+                        <div>
+                            <strong style="color:#f3dfba;">📦 باقة "هوية + موقع"</strong>
+                            <span style="color:#cbd5e1;margin-right:0.5rem;">هوية بصرية + موقع عصري — €1,490</span>
+                            <span class="dana-price-badge-saving">وفّر €80</span>
+                        </div>
+                        <button type="button" class="dana-btn-booking" data-sr-call="openRfqModal" data-sr-args='["web"]'>طلب الباقة</button>
+                    </div>
+                    <div style="margin-top:0.9rem;text-align:center;">
+                        <button type="button" class="dana-btn-booking" data-sr-call="openRfqModal" data-sr-args='[null]' style="padding:0.6rem 1.4rem;">📋 طلب عرض سعر (RFQ)</button>
+                    </div>
                     <div class="dana-services-currency-bar">
                         <span class="dana-cur-label">💱 العملة المعروضة:</span>
                         <button type="button" class="dana-cur-pill active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
@@ -2143,7 +2188,7 @@ main#wrapper:focus{outline:none}
 
                 <div class="dana-signature-grid">
                     <!-- كرت 01: الهوية البصرية -->
-                    <div class="dana-signature-card" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
+                    <div class="dana-signature-card" role="button" tabindex="0" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
                         <span class="dana-corner dana-corner-tl"></span>
                         <span class="dana-corner dana-corner-br"></span>
                         
@@ -2174,10 +2219,11 @@ main#wrapper:focus{outline:none}
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["identity"]'>🔍 تفاصيل</button>
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["identity"]' data-sr-stop="1">
                                     <span>حجز استشارة 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D9%88%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B5%D8%B1%D9%8A%D8%A9%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%87%D9%88%D9%8A%D8%A9%20%D8%A8%D8%B5%D8%B1%D9%8A%D8%A9%20%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC590)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
+                                <a data-wa-key="identity" href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D9%88%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B5%D8%B1%D9%8A%D8%A9%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%87%D9%88%D9%8A%D8%A9%20%D8%A8%D8%B5%D8%B1%D9%8A%D8%A9%20%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84%D8%A9%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC590)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>طلب الخدمة عبر واتساب</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -2186,7 +2232,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- كرت 02: تصميم المواقع وتحسينها -->
-                    <div class="dana-signature-card" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
+                    <div class="dana-signature-card" role="button" tabindex="0" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
                         <span class="dana-corner dana-corner-tl"></span>
                         <span class="dana-corner dana-corner-br"></span>
                         
@@ -2217,10 +2263,11 @@ main#wrapper:focus{outline:none}
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["web"]'>🔍 تفاصيل</button>
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["web"]' data-sr-stop="1">
                                     <span>حجز استشارة 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D9%82%D8%B9%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B9%D8%B5%D8%B1%D9%8A%20%D8%B9%D8%A7%D9%84%D9%8A%20%D8%A7%D9%84%D8%A3%D8%AF%D8%A7%D8%A1%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC980)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
+                                <a data-wa-key="web" href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D9%85%D9%88%D8%A7%D9%82%D8%B9%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B9%D8%B5%D8%B1%D9%8A%20%D8%B9%D8%A7%D9%84%D9%8A%20%D8%A7%D9%84%D8%A3%D8%AF%D8%A7%D8%A1%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC980)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>طلب الخدمة عبر واتساب</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -2229,7 +2276,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- كرت 03: متجر إلكتروني -->
-                    <div class="dana-signature-card" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
+                    <div class="dana-signature-card" role="button" tabindex="0" data-sr-call="toggleDanaCardActive" data-sr-this="1" tabindex="0">
                         <span class="dana-corner dana-corner-tl"></span>
                         <span class="dana-corner dana-corner-br"></span>
                         
@@ -2271,10 +2318,11 @@ main#wrapper:focus{outline:none}
                                 <span class="dana-pay-badge" title="Apple Pay"><svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.66zM14.1 5.84c.63-.77 1.06-1.83.94-2.89-.91.04-2.01.61-2.66 1.37-.58.67-1.09 1.75-.96 2.79 1.02.08 2.05-.52 2.68-1.27z"/></svg>Apple&nbsp;Pay</span>
                             </div>
                             <div class="dana-card-actions-row">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["ecommerce"]'>🔍 تفاصيل</button>
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["store"]' data-sr-stop="1">
                                     <span>حجز استشارة 📅</span>
                                 </button>
-                                <a href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%AC%D8%B1%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%A5%D9%86%D8%B4%D8%A7%D8%A1%20%D9%85%D8%AA%D8%AC%D8%B1%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%20%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC1,450)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
+                                <a data-wa-key="ecommerce" href="https://wa.me/31618111116?text=%2A%D8%B7%D9%84%D8%A8%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%AC%D8%B1%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%20-%20S%26R%20CoreSync%2A%0A%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B7%D9%84%D8%A8%20%D8%A5%D9%86%D8%B4%D8%A7%D8%A1%20%D9%85%D8%AA%D8%AC%D8%B1%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%20%D9%85%D8%AA%D9%83%D8%A7%D9%85%D9%84%20%D8%A8%D8%A7%D9%84%D8%B3%D8%B9%D8%B1%20%D8%A7%D9%84%D8%AA%D9%86%D8%A7%D9%81%D8%B3%D9%8A%20(%E2%82%AC1,450)" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
                                     <span>طلب الخدمة عبر واتساب</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
@@ -2297,12 +2345,13 @@ main#wrapper:focus{outline:none}
 
                 <div class="tf-grid-layout lg-col-3">
                     <!-- الخدمة 1 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
                                     <span class="tech-card-num">01</span>
                                     <h5 class="tech-name letter-space--2">البرمجيات السحابية المخصصة</h5>
+                                    <span class="dana-price-badge-saving" style="margin-right:auto;">الأكثر طلباً</span>
                                 </div>
                                 <div class="ic-img service-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -2324,10 +2373,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["cloud-software"]'>🔍 تفاصيل</button>
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D8%AD%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D9%85%D8%AE%D8%B5%D8%B5%D8%A9%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="cloud-software" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AE%D8%AF%D9%85%D8%A9%20%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B3%D8%AD%D8%A7%D8%A8%D8%A9%20%D8%A7%D9%84%D9%85%D8%AE%D8%B5%D8%B5%D8%A9%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2335,7 +2385,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- الخدمة 2 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
@@ -2362,10 +2412,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["mobile-web"]'>🔍 تفاصيل</button>
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["web"]'>
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AA%D8%B7%D9%88%D9%8A%D8%B1%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D8%AC%D9%88%D8%A7%D9%84%20%D8%A3%D9%88%20%D9%85%D9%86%D8%B5%D8%A9%20%D9%88%D9%8A%D8%A8%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="mobile-web" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AA%D8%B7%D9%88%D9%8A%D8%B1%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D8%AC%D9%88%D8%A7%D9%84%20%D8%A3%D9%88%20%D9%85%D9%86%D8%B5%D8%A9%20%D9%88%D9%8A%D8%A8%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2373,7 +2424,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- الخدمة 3 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
@@ -2400,10 +2451,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["enterprise"]'>🔍 تفاصيل</button>
                             <a href="demo.html" class="tech-btn-consult tech-btn-consult--gold" title="تجربة نظام ERP المالي الحي">
                                 <span>تجربة النظام المؤسسي ديمو ⚡</span>
                             </a>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AD%D9%84%D9%88%D9%84%20%D8%A7%D9%84%D9%80%20ERP%20%D9%88%D8%A7%D9%84%D8%B1%D8%A8%D8%B7%20%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="enterprise" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%AD%D9%84%D9%88%D9%84%20%D8%A7%D9%84%D9%80%20ERP%20%D9%88%D8%A7%D9%84%D8%B1%D8%A8%D8%B7%20%D8%A7%D9%84%D9%85%D8%A7%D9%84%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2411,7 +2463,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- الخدمة 4 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
@@ -2438,10 +2490,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["automation-ai"]'>🔍 تفاصيل</button>
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%A3%D8%AA%D9%85%D8%AA%D8%A9%20%D8%A7%D9%84%D8%B9%D9%85%D9%84%D9%8A%D8%A7%D8%AA%20%D8%A9%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="automation-ai" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%A3%D8%AA%D9%85%D8%AA%D8%A9%20%D8%A7%D9%84%D8%B9%D9%85%D9%84%D9%8A%D8%A7%D8%AA%20%D8%A9%D9%88%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1%20%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2449,7 +2502,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- الخدمة 5 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
@@ -2476,10 +2529,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["finance-gov"]'>🔍 تفاصيل</button>
                             <a href="#roi-calculator" class="tech-btn-consult" title="حساب التوفير المالي عبر الحاسبة">
                                 <span>حاسبة التوفير 📊</span>
                             </a>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%A7%D9%84%D9%8A%D8%A9%20%D9%88%D8%AD%D9%88%D9%83%D9%85%D8%A9%20%D8%B1%D9%82%D9%85%D9%8A%D8%A9%20%D9%84%D8%B4%D8%B1%D9%83%D8%AA%D9%86%D8%A7%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="finance-gov" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%A7%D9%84%D9%8A%D8%A9%20%D9%88%D8%AD%D9%88%D9%83%D9%85%D8%A9%20%D8%B1%D9%82%D9%85%D9%8A%D8%A9%20%D9%84%D8%B4%D8%B1%D9%83%D8%AA%D9%86%D8%A7%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2487,7 +2541,7 @@ main#wrapper:focus{outline:none}
                     </div>
 
                     <!-- الخدمة 6 -->
-                    <div class="wg-tech-v2">
+                    <div class="wg-tech-v2" role="button" tabindex="0">
                         <div class="tech-content">
                             <div class="tech-card-top-bar">
                                 <div class="tech-card-title-group">
@@ -2514,10 +2568,11 @@ main#wrapper:focus{outline:none}
                             </div>
                         </div>
                         <div class="tech-card-footer-actions">
+                                    <button type="button" class="tech-btn-consult" data-sr-call="openServiceDetail" data-sr-args='["cloud-security"]'>🔍 تفاصيل</button>
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
                                 <span>حجز استشارة 📅</span>
                             </button>
-                            <a href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%A8%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B3%D8%AD%D8%A7%D8%A8%D8%A9%20%D8%A9%D9%88%D8%A7%D9%84%D8%A3%D9%85%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
+                            <a data-wa-key="cloud-security" href="https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%A8%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B3%D8%AD%D8%A7%D8%A8%D8%A9%20%D8%A9%D9%88%D8%A7%D9%84%D8%A3%D9%85%D9%86%20%D8%A7%D9%84%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="طلب استشارة مباشرة عبر واتساب">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 <span>واتساب 💬</span>
                             </a>
@@ -2527,7 +2582,21 @@ main#wrapper:focus{outline:none}
             </div>
         </section>
 
-        <!-- 3. قسم الأعمال والمشاريع المختارة (Selected Work & Digital Showcase) -->
+        <section class="flat-spacing" id="services-faq" data-section style="padding:2rem 0;">
+            <div class="container">
+                <h2 class="text-display-2 letter-space--3 text-center" style="margin-bottom:1.5rem;">? اسئلة شائعة (FAQ)</h2>
+                <div style="max-width:880px;margin:0 auto;">
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">كم يستغرق تنفيذ موقع/متجر؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">موقع: 2-4 اسابيع. متجر: 4-6 اسابيع.</p></details>
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">هل تشمل الأسعار الاستضافة والدومين؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">3 أشهر استضافة مجانية + دومين.</p></details>
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">ما طرق الدفع المقبولة؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">Stripe, Mollie (iDEAL), SEPA, PayPal.</p></details>
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">هل أملك الكود المصدري؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">نعم، 100%.</p></details>
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">هل تقدمون صيانة بعد التسليم؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">نعم — باقات صيانة.</p></details>
+                    <details style="margin-bottom:0.6rem;padding:0.8rem 1rem;background:rgba(13,26,45,0.7);border:1px solid rgba(197,168,128,0.3);border-radius:10px;"><summary style="cursor:pointer;font-weight:700;color:#f3dfba;">كيف أبدأ؟</summary><p style="margin-top:0.6rem;color:#cbd5e1;">RFQ أو WhatsApp — استشارة مجانية 30 دقيقة.</p></details>
+                </div>
+            </div>
+        </section>
+
+'''        <!-- 3. قسم الأعمال والمشاريع المختارة (Selected Work & Digital Showcase) -->
         <div class="section-selected-work section-selected-work--original flat-spacing flat-animate-tab" id="work" data-section>
             <div class="bg-img">
                 <img loading="lazy" width="1440" height="720" src="./assets/mountain.webp" alt="خلفية الجبل">
@@ -3547,7 +3616,7 @@ main#wrapper:focus{outline:none}
                                         <span class="text-white-64 text-decoration-line-through fs-6 me-2" data-eur-price="3020">€3,020</span>
                                         <span data-eur-price="1990">€1,990</span>
                                     </div>
-                                    <a href="https://wa.me/31618111116?text=مرحباً%20مهندس%20سليم%20وأستاذ%20رائد،%20أود%20حجز%20عرض%20الانطلاقة%20الشاملة%20All-in-One%20(€1,990)%20لشركتنا" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta">
+                                    <a data-wa-key="identity" href="https://wa.me/31618111116?text=مرحباً%20مهندس%20سليم%20وأستاذ%20رائد،%20أود%20حجز%20عرض%20الانطلاقة%20الشاملة%20All-in-One%20(€1,990)%20لشركتنا" target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta">
                                         <span>احجز عرض الانطلاقة الشاملة (€1,990)</span>
                                         <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                     </a>
@@ -5283,6 +5352,40 @@ main#wrapper:focus{outline:none}
         
         
 
+        <!-- 10. أحدث المقالات (Insights) -->
+        <section class="flat-spacing" id="insights" data-section aria-labelledby="insightsTitle">
+            <div class="container">
+                <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.6rem;">
+                    <div>
+                        <span style="display:inline-block;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:#c5a880;border:1px solid rgba(197,168,128,0.35);border-radius:999px;padding:0.3rem 0.85rem;margin-bottom:0.8rem;">Insights · رؤى تنفيذية</span>
+                        <h2 class="text-display-2 letter-space--3" id="insightsTitle" style="margin:0;">أحدث المقالات</h2>
+                        <p class="text-caption text-white-64" style="margin:0.5rem 0 0;max-width:620px;">مقالات عملية من مشاريع حقيقية: أنظمة ERP، السحابة، الذكاء الاصطناعي، والأمان المؤسسي.</p>
+                    </div>
+                    <a href="./blog.html" class="dana-btn-booking" style="text-decoration:none;">كل المقالات ←</a>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;">
+                    <article style="padding:1.35rem;border:1px solid rgba(197,168,128,0.28);border-radius:16px;background:linear-gradient(165deg,rgba(14,28,24,0.92),rgba(11,21,18,0.92));display:flex;flex-direction:column;gap:0.7rem;">
+                        <span style="align-self:flex-start;font-size:0.68rem;font-weight:800;color:#9fe6c6;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:0.15rem 0.6rem;">أنظمة ERP</span>
+                        <h3 style="margin:0;font-size:1.02rem;line-height:1.6;"><a href="./insights/erp-selection-2026.html" style="color:#fff;text-decoration:none;">كيف تختار نظام ERP لمتوسطة الحجم في 2026؟</a></h3>
+                        <p class="text-caption text-white-64" style="margin:0;flex:1;">سبعة معايير تفصل بين نظام يخدمك عشر سنوات ونظام يتوقف عند أول توسّع.</p>
+                        <a href="./insights/erp-selection-2026.html" style="font-size:0.8rem;font-weight:800;color:#f3dfba;text-decoration:none;">اقرأ المقال ←</a>
+                    </article>
+                    <article style="padding:1.35rem;border:1px solid rgba(197,168,128,0.28);border-radius:16px;background:linear-gradient(165deg,rgba(14,28,24,0.92),rgba(11,21,18,0.92));display:flex;flex-direction:column;gap:0.7rem;">
+                        <span style="align-self:flex-start;font-size:0.68rem;font-weight:800;color:#9fe6c6;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:0.15rem 0.6rem;">السحابة</span>
+                        <h3 style="margin:0;font-size:1.02rem;line-height:1.6;"><a href="./insights/cloud-cost-30.html" style="color:#fff;text-decoration:none;">خفض تكاليف السحابة 30% دون التنازل عن الأداء</a></h3>
+                        <p class="text-caption text-white-64" style="margin:0;flex:1;">خمس خطوات مُجرّبة: تدقيق الأحجام، التخزين المتدرج، إزالة الموارد المهجورة، والحجز المسبق.</p>
+                        <a href="./insights/cloud-cost-30.html" style="font-size:0.8rem;font-weight:800;color:#f3dfba;text-decoration:none;">اقرأ المقال ←</a>
+                    </article>
+                    <article style="padding:1.35rem;border:1px solid rgba(197,168,128,0.28);border-radius:16px;background:linear-gradient(165deg,rgba(14,28,24,0.92),rgba(11,21,18,0.92));display:flex;flex-direction:column;gap:0.7rem;">
+                        <span style="align-self:flex-start;font-size:0.68rem;font-weight:800;color:#9fe6c6;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:0.15rem 0.6rem;">الذكاء الاصطناعي</span>
+                        <h3 style="margin:0;font-size:1.02rem;line-height:1.6;"><a href="./insights/ai-concierge-rag.html" style="color:#fff;text-decoration:none;">المساعد الذكي السيادي: من مستنداتك إلى إجابات فورية</a></h3>
+                        <p class="text-caption text-white-64" style="margin:0;flex:1;">كيف يعمل RAG عملياً، ولماذا يقلّل الهلوسة، وكيف تحفظ بياناتك داخل نطاقك.</p>
+                        <a href="./insights/ai-concierge-rag.html" style="font-size:0.8rem;font-weight:800;color:#f3dfba;text-decoration:none;">اقرأ المقال ←</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <footer class="tf-footer tf-footer--original">
             <div class="footer-stars" aria-hidden="true"></div>
             
@@ -5299,6 +5402,11 @@ main#wrapper:focus{outline:none}
                         <p class="sr-footer-tagline">
                             نبتكر ونعمل عالميًا من أمستردام لتطوير البنى البرمجية السحابية، منظومات الـ ERP المتقدمة، وهندسة الذكاء الاصطناعي السيادي للشركات والمؤسسات الكبرى.
                         </p>
+                        <form id="newsletterForm" style="margin-top:0.9rem;display:flex;gap:0.5rem;flex-wrap:wrap;" novalidate>
+                            <input type="email" name="email" placeholder="بريدك الإلكتروني" required style="flex:1;min-width:180px;padding:0.55rem 0.8rem;border-radius:8px;border:1px solid rgba(197,168,128,0.4);background:#050b16;color:#fff;">
+                            <button type="submit" class="dana-btn-booking" style="padding:0.55rem 1.1rem;">اشتراك</button>
+                        </form>
+                        <span id="newsletter-msg" style="display:block;margin-top:0.4rem;font-size:0.78rem;color:#94a3b8;"></span>
                         <div class="sr-footer-hq-box">
                             <div class="sr-footer-hq-item">
                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -5343,6 +5451,7 @@ main#wrapper:focus{outline:none}
                             <li><a href="#service">الحلول والخدمات المؤسسية</a></li>
                             <li><a href="#pricing">باقات التراخيص والأسعار</a></li>
                             <li><a href="#faq">الأسئلة الشائعة والمعايير</a></li>
+                            <li><a href="./blog.html">المدونة والرؤى التنفيذية 📝</a></li>
                             <li><a href="./logo-studio.html">استوديو الشعار والهوية 🎨</a></li>
                             <li><a href="./status.html">حالة المنصة والخدمات — فحص مباشر 🟢</a></li>
                             <li><a href="#brandLogoLightboxModal" data-sr-call="openLogoLightbox" data-sr-event="1">فحص الشعار الرسمي 4K 🔍</a></li>
@@ -5680,6 +5789,7 @@ main#wrapper:focus{outline:none}
             <li><a href="demo.html" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">النظام السحابي التجريبي (Live Demo)</span><span class="mobile-menu-num">08 /</span></a></li>
             <li><a href="developer-portal.html" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">بوابة المطورين والـ API (3D Avatar)</span><span class="mobile-menu-num">09 /</span></a></li>
             <li><a href="partner-portal.html" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">بوابة الشركاء والوكلاء (White-Label)</span><span class="mobile-menu-num">10 /</span></a></li>
+            <li><a href="blog.html" class="gold-accent" data-sr-call="closeMobileMenu"><span class="menu-label">المدونة والرؤى التنفيذية</span><span class="mobile-menu-num">11 /</span></a></li>
         </ul>
         <div class="offcanvas-resizer-box">
             <span class="text-caption fw-medium text-white-64 d-flex align-items-center gap-2">
@@ -7146,7 +7256,7 @@ main#wrapper:focus{outline:none}
                         <span class="gold-dot"></span>
                         الهوية المؤسسية الرسمية المعتمدة
                     </span>
-                    <h3 id="brandLogoModalTitle" class="sr-logo-modal-title">شعار S&amp;R CoreSync For Intelligent Solutions</h3>
+                    <h3 id="brandLogoModalTitle" class="sr-logo-modal-title">S&amp;R CoreSync For Intelligent Solutions — Official Brandmark</h3>
                 </div>
                 <button type="button" class="sr-logo-modal-close" data-sr-call="closeLogoLightbox" aria-label="إغلاق النافذة" title="إغلاق (Esc)">
                     &times;
@@ -10249,6 +10359,7 @@ if (typeof window.openPublishSoftwareModal !== 'function') {
 }
 </script>
 <script src="./js/sr-events.js" defer></script>
+    <script src="./js/services-enhancements.js" defer></script>
     <script src="./js/sr-testimonials.js" defer></script>
 <!-- SRX:BEGIN:srx_behavior -->
 <script>
@@ -10282,31 +10393,31 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
 <!-- Apple macOS Sovereign Language & Flags Dock -->
 <aside class="apple-macos-dock-wrapper" id="appleMacosDockWrapper" aria-label="Sovereign Language Quick Dock">
     <div class="apple-macos-dock" id="appleMacosDock">
-        <a href="./de/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
+        <a href="./de/index.html?lang=de&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}" data-tooltip="Deutsch (German)" aria-label="Deutsch (German)">
             <img src="./assets/flags/de.png" alt="DE" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./fr/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
+        <a href="./fr/index.html?lang=fr&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}" data-tooltip="Français (French)" aria-label="Français (French)">
             <img src="./assets/flags/fr.png" alt="FR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./nl/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
+        <a href="./nl/index.html?lang=nl&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}" data-tooltip="Nederlands (Dutch)" aria-label="Nederlands (Dutch)">
             <img src="./assets/flags/nl.png" alt="NL" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./en/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
+        <a href="./en/index.html?lang=en&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}" data-tooltip="English (English)" aria-label="English (English)">
             <img src="./assets/flags/gb.png" alt="EN" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./es/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
+        <a href="./es/index.html?lang=es&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}" data-tooltip="Español (Spanish)" aria-label="Español (Spanish)">
             <img src="./assets/flags/es.png" alt="ES" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./index.html" class="apple-dock-item active" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
+        <a href="./index.html?lang=ar&noredirect=1" class="apple-dock-item active" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}" data-tooltip="العربية (Arabic (HQ Master))" aria-label="العربية (Arabic (HQ Master))">
             <img src="./assets/flags/sa.png" alt="AR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
-        <a href="./tr/index.html" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
+        <a href="./tr/index.html?lang=tr&noredirect=1" class="apple-dock-item" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}" data-tooltip="Türkçe (Turkish)" aria-label="Türkçe (Turkish)">
             <img src="./assets/flags/tr.png" alt="TR" class="apple-dock-flag" width="28" height="19" loading="lazy" decoding="async">
             <span class="apple-dock-dot"></span>
         </a>
@@ -10342,7 +10453,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
         </div>
         <div class="apple-launchpad-body">
             <div class="apple-launchpad-grid" id="appleLaunchpadGrid">
-                <a href="./de/index.html" class="apple-launchpad-card" data-code="de" data-name="deutsch german" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}">
+                <a href="./de/index.html?lang=de&noredirect=1" class="apple-launchpad-card" data-code="de" data-name="deutsch german" onclick="try{sessionStorage.setItem('sr_user_lang_locked','de');localStorage.setItem('sr_lang_pref','de');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/de.png" alt="DE" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10352,7 +10463,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">MwSt 19%</span>
                 </a>
-                <a href="./fr/index.html" class="apple-launchpad-card" data-code="fr" data-name="français french" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
+                <a href="./fr/index.html?lang=fr&noredirect=1" class="apple-launchpad-card" data-code="fr" data-name="français french" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fr');localStorage.setItem('sr_lang_pref','fr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/fr.png" alt="FR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10362,7 +10473,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">TVA 20%</span>
                 </a>
-                <a href="./nl/index.html" class="apple-launchpad-card" data-code="nl" data-name="nederlands dutch" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
+                <a href="./nl/index.html?lang=nl&noredirect=1" class="apple-launchpad-card" data-code="nl" data-name="nederlands dutch" onclick="try{sessionStorage.setItem('sr_user_lang_locked','nl');localStorage.setItem('sr_lang_pref','nl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/nl.png" alt="NL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10372,7 +10483,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">BTW 21%</span>
                 </a>
-                <a href="./en/index.html" class="apple-launchpad-card" data-code="en" data-name="english english" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}">
+                <a href="./en/index.html?lang=en&noredirect=1" class="apple-launchpad-card" data-code="en" data-name="english english" onclick="try{sessionStorage.setItem('sr_user_lang_locked','en');localStorage.setItem('sr_lang_pref','en');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/gb.png" alt="EN" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10382,7 +10493,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">VAT 20%</span>
                 </a>
-                <a href="./es/index.html" class="apple-launchpad-card" data-code="es" data-name="español spanish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}">
+                <a href="./es/index.html?lang=es&noredirect=1" class="apple-launchpad-card" data-code="es" data-name="español spanish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','es');localStorage.setItem('sr_lang_pref','es');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/es.png" alt="ES" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10392,7 +10503,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">IVA 21%</span>
                 </a>
-                <a href="./it/index.html" class="apple-launchpad-card" data-code="it" data-name="italiano italian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','it');localStorage.setItem('sr_lang_pref','it');}catch(e){}">
+                <a href="./it/index.html?lang=it&noredirect=1" class="apple-launchpad-card" data-code="it" data-name="italiano italian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','it');localStorage.setItem('sr_lang_pref','it');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/it.png" alt="IT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10402,7 +10513,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">IVA 22%</span>
                 </a>
-                <a href="./sv/index.html" class="apple-launchpad-card" data-code="sv" data-name="svenska swedish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sv');localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
+                <a href="./sv/index.html?lang=sv&noredirect=1" class="apple-launchpad-card" data-code="sv" data-name="svenska swedish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sv');localStorage.setItem('sr_lang_pref','sv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/se.png" alt="SV" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10412,7 +10523,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">MOMS 25%</span>
                 </a>
-                <a href="./no/index.html" class="apple-launchpad-card" data-code="no" data-name="norsk norwegian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','no');localStorage.setItem('sr_lang_pref','no');}catch(e){}">
+                <a href="./no/index.html?lang=no&noredirect=1" class="apple-launchpad-card" data-code="no" data-name="norsk norwegian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','no');localStorage.setItem('sr_lang_pref','no');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/no.png" alt="NO" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10422,7 +10533,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">MVA 25%</span>
                 </a>
-                <a href="./da/index.html" class="apple-launchpad-card" data-code="da" data-name="dansk danish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','da');localStorage.setItem('sr_lang_pref','da');}catch(e){}">
+                <a href="./da/index.html?lang=da&noredirect=1" class="apple-launchpad-card" data-code="da" data-name="dansk danish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','da');localStorage.setItem('sr_lang_pref','da');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/dk.png" alt="DA" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10432,7 +10543,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">MOMS 25%</span>
                 </a>
-                <a href="./fi/index.html" class="apple-launchpad-card" data-code="fi" data-name="suomi finnish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fi');localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
+                <a href="./fi/index.html?lang=fi&noredirect=1" class="apple-launchpad-card" data-code="fi" data-name="suomi finnish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','fi');localStorage.setItem('sr_lang_pref','fi');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/fi.png" alt="FI" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10442,7 +10553,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">ALV 25.5%</span>
                 </a>
-                <a href="./pl/index.html" class="apple-launchpad-card" data-code="pl" data-name="polski polish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pl');localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
+                <a href="./pl/index.html?lang=pl&noredirect=1" class="apple-launchpad-card" data-code="pl" data-name="polski polish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pl');localStorage.setItem('sr_lang_pref','pl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/pl.png" alt="PL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10452,7 +10563,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">VAT 23%</span>
                 </a>
-                <a href="./pt/index.html" class="apple-launchpad-card" data-code="pt" data-name="português portuguese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pt');localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
+                <a href="./pt/index.html?lang=pt&noredirect=1" class="apple-launchpad-card" data-code="pt" data-name="português portuguese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','pt');localStorage.setItem('sr_lang_pref','pt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/pt.png" alt="PT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10462,7 +10573,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">IVA 23%</span>
                 </a>
-                <a href="./el/index.html" class="apple-launchpad-card" data-code="el" data-name="ελληνικά greek" onclick="try{sessionStorage.setItem('sr_user_lang_locked','el');localStorage.setItem('sr_lang_pref','el');}catch(e){}">
+                <a href="./el/index.html?lang=el&noredirect=1" class="apple-launchpad-card" data-code="el" data-name="ελληνικά greek" onclick="try{sessionStorage.setItem('sr_user_lang_locked','el');localStorage.setItem('sr_lang_pref','el');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/gr.png" alt="EL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10472,7 +10583,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">ΦΠΑ 24%</span>
                 </a>
-                <a href="./cs/index.html" class="apple-launchpad-card" data-code="cs" data-name="čeština czech" onclick="try{sessionStorage.setItem('sr_user_lang_locked','cs');localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
+                <a href="./cs/index.html?lang=cs&noredirect=1" class="apple-launchpad-card" data-code="cs" data-name="čeština czech" onclick="try{sessionStorage.setItem('sr_user_lang_locked','cs');localStorage.setItem('sr_lang_pref','cs');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/cz.png" alt="CS" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10482,7 +10593,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">DPH 21%</span>
                 </a>
-                <a href="./ro/index.html" class="apple-launchpad-card" data-code="ro" data-name="română romanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ro');localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
+                <a href="./ro/index.html?lang=ro&noredirect=1" class="apple-launchpad-card" data-code="ro" data-name="română romanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ro');localStorage.setItem('sr_lang_pref','ro');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/ro.png" alt="RO" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10492,7 +10603,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">TVA 19%</span>
                 </a>
-                <a href="./hu/index.html" class="apple-launchpad-card" data-code="hu" data-name="magyar hungarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hu');localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
+                <a href="./hu/index.html?lang=hu&noredirect=1" class="apple-launchpad-card" data-code="hu" data-name="magyar hungarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hu');localStorage.setItem('sr_lang_pref','hu');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/hu.png" alt="HU" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10502,7 +10613,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">ÁFA 27%</span>
                 </a>
-                <a href="./bg/index.html" class="apple-launchpad-card" data-code="bg" data-name="български bulgarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','bg');localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
+                <a href="./bg/index.html?lang=bg&noredirect=1" class="apple-launchpad-card" data-code="bg" data-name="български bulgarian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','bg');localStorage.setItem('sr_lang_pref','bg');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/bg.png" alt="BG" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10512,7 +10623,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">ДДС 20%</span>
                 </a>
-                <a href="./sk/index.html" class="apple-launchpad-card" data-code="sk" data-name="slovenčina slovak" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sk');localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
+                <a href="./sk/index.html?lang=sk&noredirect=1" class="apple-launchpad-card" data-code="sk" data-name="slovenčina slovak" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sk');localStorage.setItem('sr_lang_pref','sk');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/sk.png" alt="SK" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10522,7 +10633,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">DPH 20%</span>
                 </a>
-                <a href="./hr/index.html" class="apple-launchpad-card" data-code="hr" data-name="hrvatski croatian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hr');localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
+                <a href="./hr/index.html?lang=hr&noredirect=1" class="apple-launchpad-card" data-code="hr" data-name="hrvatski croatian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','hr');localStorage.setItem('sr_lang_pref','hr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/hr.png" alt="HR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10532,7 +10643,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">PDV 25%</span>
                 </a>
-                <a href="./lt/index.html" class="apple-launchpad-card" data-code="lt" data-name="lietuvių lithuanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lt');localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
+                <a href="./lt/index.html?lang=lt&noredirect=1" class="apple-launchpad-card" data-code="lt" data-name="lietuvių lithuanian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lt');localStorage.setItem('sr_lang_pref','lt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/lt.png" alt="LT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10542,7 +10653,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">PVM 21%</span>
                 </a>
-                <a href="./sl/index.html" class="apple-launchpad-card" data-code="sl" data-name="slovenščina slovenian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sl');localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
+                <a href="./sl/index.html?lang=sl&noredirect=1" class="apple-launchpad-card" data-code="sl" data-name="slovenščina slovenian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','sl');localStorage.setItem('sr_lang_pref','sl');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/si.png" alt="SL" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10552,7 +10663,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">DDV 22%</span>
                 </a>
-                <a href="./lv/index.html" class="apple-launchpad-card" data-code="lv" data-name="latviešu latvian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lv');localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
+                <a href="./lv/index.html?lang=lv&noredirect=1" class="apple-launchpad-card" data-code="lv" data-name="latviešu latvian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','lv');localStorage.setItem('sr_lang_pref','lv');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/lv.png" alt="LV" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10562,7 +10673,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">PVN 21%</span>
                 </a>
-                <a href="./et/index.html" class="apple-launchpad-card" data-code="et" data-name="eesti estonian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','et');localStorage.setItem('sr_lang_pref','et');}catch(e){}">
+                <a href="./et/index.html?lang=et&noredirect=1" class="apple-launchpad-card" data-code="et" data-name="eesti estonian" onclick="try{sessionStorage.setItem('sr_user_lang_locked','et');localStorage.setItem('sr_lang_pref','et');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/ee.png" alt="ET" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10572,7 +10683,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">KM 22%</span>
                 </a>
-                <a href="./ga/index.html" class="apple-launchpad-card" data-code="ga" data-name="gaeilge irish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ga');localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
+                <a href="./ga/index.html?lang=ga&noredirect=1" class="apple-launchpad-card" data-code="ga" data-name="gaeilge irish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ga');localStorage.setItem('sr_lang_pref','ga');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/ie.png" alt="GA" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10582,7 +10693,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">CBL 23%</span>
                 </a>
-                <a href="./mt/index.html" class="apple-launchpad-card" data-code="mt" data-name="malti maltese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','mt');localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
+                <a href="./mt/index.html?lang=mt&noredirect=1" class="apple-launchpad-card" data-code="mt" data-name="malti maltese" onclick="try{sessionStorage.setItem('sr_user_lang_locked','mt');localStorage.setItem('sr_lang_pref','mt');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/mt.png" alt="MT" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10592,7 +10703,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">VAT 18%</span>
                 </a>
-                <a href="./index.html" class="apple-launchpad-card active" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
+                <a href="./index.html?lang=ar&noredirect=1" class="apple-launchpad-card active" data-code="ar" data-name="العربية arabic (hq master)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ar');localStorage.setItem('sr_lang_pref','ar');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/sa.png" alt="AR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10602,7 +10713,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">VAT 15%</span>
                 </a>
-                <a href="./tr/index.html" class="apple-launchpad-card" data-code="tr" data-name="türkçe turkish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
+                <a href="./tr/index.html?lang=tr&noredirect=1" class="apple-launchpad-card" data-code="tr" data-name="türkçe turkish" onclick="try{sessionStorage.setItem('sr_user_lang_locked','tr');localStorage.setItem('sr_lang_pref','tr');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/tr.png" alt="TR" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10612,7 +10723,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">KDV 20%</span>
                 </a>
-                <a href="./ku/index.html" class="apple-launchpad-card" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ku');localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
+                <a href="./ku/index.html?lang=ku&noredirect=1" class="apple-launchpad-card" data-code="ku" data-name="kurdî (kurmancî) kurdish (kurmanji)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ku');localStorage.setItem('sr_lang_pref','ku');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/iq.png" alt="KU" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -10622,7 +10733,7 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
                     </div>
                     <span class="apple-launchpad-vat">Tax 5%</span>
                 </a>
-                <a href="./ckb/index.html" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
+                <a href="./ckb/index.html?lang=ckb&noredirect=1" class="apple-launchpad-card" data-code="ckb" data-name="کوردی (سۆرانی) kurdish (sorani)" onclick="try{sessionStorage.setItem('sr_user_lang_locked','ckb');localStorage.setItem('sr_lang_pref','ckb');}catch(e){}">
                     <div class="apple-launchpad-card-left">
                         <img src="./assets/flags/iq.png" alt="CKB" class="apple-launchpad-flag" width="28" height="19" loading="lazy" decoding="async">
                         <div class="apple-launchpad-text">
@@ -11360,5 +11471,15 @@ try{(function(){var sl=document.querySelector('.srx-skip-link');if(sl&&!sl.hasAt
         }
 
 </script>
+<noscript>
+    <div style="position:fixed;inset:0;z-index:99999;background:#030806;color:#e2e8f0;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;font-family:Tajawal,sans-serif;">
+        <div>
+            <h1 style="color:#f3dfba;">S&R CoreSync For Intelligent Solutions</h1>
+            <p>هذا الموقع يتطلب JavaScript لعرض المحتوى التفاعلي.</p>
+            <p>يرجى تفعيل JavaScript في متصفحك، أو تواصل معنا:</p>
+            <p><a href="https://wa.me/31618111116" style="color:#6ee7b7;">واتساب: +31 6 1811 1116</a> • <a href="mailto:info@sr-coresync.com" style="color:#6ee7b7;">info@sr-coresync.com</a></p>
+        </div>
+    </div>
+</noscript>
 </body>
 </html>

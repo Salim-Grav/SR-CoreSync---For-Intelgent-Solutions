@@ -105,6 +105,14 @@ features = [
     ("sovereign-arbitration-hub.html", "0.80", "weekly"),
     ("multi-cbdc-bridge.html", "0.80", "weekly"),
     ("zkp-confidential-enclave.html", "0.80", "weekly"),
+    ("sovereign-mission-suite-dashboard.html", "0.80", "weekly"),
+    ("blog.html", "0.85", "weekly"),
+    ("insights/erp-selection-2026.html", "0.75", "monthly"),
+    ("insights/cloud-cost-30.html", "0.75", "monthly"),
+    ("insights/ai-concierge-rag.html", "0.75", "monthly"),
+    ("insights/ecommerce-conversion.html", "0.75", "monthly"),
+    ("insights/zero-trust.html", "0.75", "monthly"),
+    ("insights/brand-identity-roi.html", "0.75", "monthly"),
 ]
 
 for feat, prio, freq in features:

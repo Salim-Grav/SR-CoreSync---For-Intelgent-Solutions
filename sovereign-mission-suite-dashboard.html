@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الموحدة: مهام 104–106 (التحكيم • CBDC • ZKP) | S&amp;R CoreSync</title>
+    <meta name="description" content="لوحة مؤشرات موحدة (Unified Mission Suite Dashboard) للمهام 104 (التحكيم الدولي)، 105 (جسر CBDC متعدد العملات)، 106 (بيئة ZKP السرية): مؤشرات KPI مجمّعة، سجل نشاط عابر للمهام، ختم SHA-256 موحد، وتصدير تقرير تنفيذي (JSON/PDF).">
+    <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sovereign-mission-suite.css">
+</head>
+<body class="theme-violet">
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="brand-logo" width="44" height="44">
+                <div>
+                    <span class="brand-title">S&amp;R CoreSync Mission Suite</span>
+                    <span class="brand-sub">UNIFIED DASHBOARD • MISSIONS 104–106</span>
+                </div>
+            </a>
+            <nav class="nav-links" aria-label="روابط لوحة التحكم الموحدة">
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link">👑 غرفة القيادة المئوية</a>
+                <a href="sovereign-arbitration-hub.html" class="nav-link">⚖️ التحكيم (104)</a>
+                <a href="multi-cbdc-bridge.html" class="nav-link">💱 CBDC (105)</a>
+                <a href="zkp-confidential-enclave.html" class="nav-link">🔐 ZKP (106)</a>
+                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">🏛️ لوحة القيادة</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-banner" aria-labelledby="suite-hero-title">
+            <div>
+                <div class="badge-row">
+                    <span class="pill-badge gold">MISSION SUITE 104–106</span>
+                    <span class="pill-badge emerald">UNIFIED KPIs</span>
+                    <span class="pill-badge">SHA-256 SEALED REPORT</span>
+                </div>
+                <h1 id="suite-hero-title" class="hero-title">لوحة التحكم الموحدة للمهام 104–106 <span class="ltr" lang="en">(Sovereign Mission Suite Dashboard)</span></h1>
+                <p class="hero-desc">
+                    توحيد مؤشرات الأداء (KPIs) والسجلات (Logs) والختم (Seal) للمهام 104 (التحكيم الدولي)، 105 (جسر CBDC متعدد العملات)، 106 (بيئة ZKP السرية) في شاشة واحدة: تقييم صحي (Health Score)، سجل نشاط عابر للمهام، ختم SHA-256 موحّد عبر WebCrypto، وتصدير تقرير تنفيذي (JSON) قابل للطباعة (PDF).
+                </p>
+            </div>
+            <div class="status-card" aria-label="حالة جناح المهام">
+                <div class="status-row"><span>مهام الجناح (Suite Missions)</span><strong class="mono">3 / 3 ACTIVE</strong></div>
+                <div class="status-row"><span>الختم (Seal) الموحّد</span><strong class="mono" id="suite-seal">—</strong></div>
+                <div class="status-row"><span>الصحة (Health Score)</span><strong class="mono" id="suite-health">—</strong></div>
+                <div class="status-row"><span>آخر تحديث (UTC)</span><strong class="mono" id="suite-updated">—</strong></div>
+            </div>
+        </section>
+
+        <section class="kpi-grid" aria-label="مؤشرات KPI مجمّعة">
+            <article class="kpi-card">
+                <span class="kpi-label">التحكيم (104) — قضايا نشطة</span>
+                <strong class="kpi-value mono" id="kpi-arb-cases">0</strong>
+                <span class="kpi-foot">قيمة مطالبات: <span id="kpi-arb-value">—</span></span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">CBDC (105) — تسويات ذرية</span>
+                <strong class="kpi-value mono" id="kpi-cbdc-settles">0</strong>
+                <span class="kpi-foot">توفير: <span id="kpi-cbdc-savings">—</span></span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">ZKP (106) — بيئات TEE</span>
+                <strong class="kpi-value mono" id="kpi-zkp-enclaves">0</strong>
+                <span class="kpi-foot">إثباتات: <span id="kpi-zkp-proofs">—</span></span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">الصحة (Health Score)</span>
+                <strong class="kpi-value mono" id="kpi-health">0%</strong>
+                <span class="kpi-foot">مجمّع across 3 missions</span>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">📊 مصفوفة KPI مفصّلة (Per-Mission Breakdown)</h2>
+                    <span class="pill-badge gold mono">LIVE</span>
+                </div>
+                <table class="data-table" aria-label="مصفوفة KPI">
+                    <thead>
+                        <tr>
+                            <th>المهمة</th>
+                            <th>المؤشر (Metric)</th>
+                            <th>القيمة (Value)</th>
+                            <th>الحالة (Status)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kpi-matrix-body"></tbody>
+                </table>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">📜 سجل النشاط (Cross-Mission Activity Log)</h2>
+                    <span class="pill-badge gold mono" id="log-count">0</span>
+                </div>
+                <div class="terminal-box mono" id="suite-terminal" aria-live="polite"></div>
+                <div class="btn-row">
+                    <button type="button" id="btn-sync-suite" class="btn-action">⚡ مزامنة الجناح (Sync Suite)</button>
+                    <button type="button" id="btn-seal-suite" class="btn-secondary">🔐 ختم تقرير (Seal Report)</button>
+                    <button type="button" id="btn-export-suite" class="btn-secondary">📥 تصدير التقرير (JSON)</button>
+                    <button type="button" id="btn-print-suite" class="btn-secondary">🖨️ طباعة / PDF</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel-card" style="margin-bottom:1.75rem;">
+            <div class="panel-header">
+                <h2 class="panel-title">🔗 روابط سريعة (Quick Links)</h2>
+            </div>
+            <div class="form-grid">
+                <a href="sovereign-arbitration-hub.html" class="nav-link">⚖️ Mission 104 — التحكيم</a>
+                <a href="multi-cbdc-bridge.html" class="nav-link">💱 Mission 105 — CBDC</a>
+                <a href="zkp-confidential-enclave.html" class="nav-link">🔐 Mission 106 — ZKP</a>
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link">👑 غرفة القيادة المئوية</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        S&amp;R CoreSync For Intelligent Solutions • لوحة التحكم الموحدة للمهام 104–106 (Mission Suite Dashboard) • جميع الحقوق محفوظة © 2026
+    </footer>
+
+    <script src="js/sovereign-mission-core.js"></script>
+    <script src="js/sovereign-mission-suite-dashboard.js"></script>
+</body>
+</html>
