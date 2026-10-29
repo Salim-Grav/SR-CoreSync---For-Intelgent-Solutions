@@ -1,6 +1,6 @@
 // S&R CoreSync For Intelligent Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v15-srx
-const CACHE_NAME = 'coresync-prerender-v15-srx';
+// Version: coresync-prerender-v16-offline
+const CACHE_NAME = 'coresync-prerender-v16-offline';
 
 // 1. Critical assets: everything the first screen needs to paint.
 // Anything that is only reachable after a scroll (founder banners, portraits,
@@ -21,7 +21,12 @@ const CRITICAL_ASSETS = [
   './assets/about-founder-poster.webp',
   './css/dananajmah-bundle.min.css',
   './css/enterprise-suite.min.css',
-  './js/enterprise-suite.min.js'
+  './css/concierge.css',
+  './css/sr-analytics.css',
+  './js/enterprise-suite.min.js',
+  './js/concierge.js',
+  './js/sr-analytics.js',
+  './offline.html'
 ];
 
 // 2. Secondary assets: Cached gently in an idle background queue without choking Smart TV connections.
@@ -52,8 +57,22 @@ const SECONDARY_ASSETS = [
   './assets/work-2.webp',
   './assets/work-3.webp',
   './css/demo-portal.css',
+  './css/blog.css',
+  './css/client-portal.css',
   './js/sr-lead-dispatcher.js',
-  './js/sr-live-feed.js'
+  './js/sr-live-feed.js',
+  './js/blog.js',
+  './js/client-portal.js',
+  './js/nfc-card.js',
+  './blog.html',
+  './privacy.html',
+  './client-portal.html',
+  './insights/erp-selection-2026.html',
+  './insights/cloud-cost-30.html',
+  './insights/ai-concierge-rag.html',
+  './insights/ecommerce-conversion.html',
+  './insights/zero-trust.html',
+  './insights/brand-identity-roi.html'
 ];
 
 self.addEventListener('install', (event) => {
