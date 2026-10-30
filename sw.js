@@ -1,6 +1,6 @@
 // S&R CoreSync For Intelligent Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v16-offline
-const CACHE_NAME = 'coresync-prerender-v16-offline';
+// Version: coresync-prerender-v17-offline
+const CACHE_NAME = 'coresync-prerender-v17-offline';
 
 // 1. Critical assets: everything the first screen needs to paint.
 // Anything that is only reachable after a scroll (founder banners, portraits,
@@ -42,8 +42,8 @@ const SECONDARY_ASSETS = [
   './demo.html',
   './assets/salim-aziza.vcf',
   './assets/raed-kaaka.vcf',
-  './assets/founder-salim.png',
-  './assets/founder-raed.png',
+  './assets/founder-salim.webp',
+  './assets/founder-raed.webp',
   './assets/sr-emblem-gold-luxury.jpg',
   './assets/founder-banner-salim.webp',
   './assets/founder-banner-salim-640.webp',
