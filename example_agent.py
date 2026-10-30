@@ -47,7 +47,7 @@ async def main():
         async with Agent(config) as agent:
             response = await asyncio.wait_for(
                 agent.chat(prompt),
-                timeout=90.0
+                timeout=180.0
             )
         # طباعة النص الفعلي إذا كان متاحًا
         try:
