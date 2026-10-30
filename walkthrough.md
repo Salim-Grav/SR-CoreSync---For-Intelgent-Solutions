@@ -2029,4 +2029,9 @@
   - تشغيل `scripts/build_csp.py` وتحديث تجزئات CSP الصارمة.
   - اجتياز `scripts/validate_publish_set.py` بنجاح كامل لـ `947` ملفاً و `9,356` مرجعاً محلياً مفحوصاً و `0` أخطاء و `0` أسرار مكشوفة.
 
+- **تعميم الويدجت السيادي في كافة البوابات التنفيذية وتصدير الاستشارة (Chat Export):**
+  - تعميم تضمين `<script src="./js/sr-agent-widget.js" defer></script>` في كبرى البوابات: [`software.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/software.html) و [`work.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/work.html) و [`client-portal.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/client-portal.html).
+  - إضافة زر التصدير `⬇` في ترويسة نافذة الويدجت العائم لتصدير حوار الاستشارة بالكامل كملف نصي موثق ومختوم باسم `SR-CoreSync-Executive-Consultation-[Date].txt` يتضمن التاريخ، بيانات المقر، والرقم الرسمي لواتساب كبار الشخصيات.
+  - اجتياز التدقيق الصارم لـ `validate_publish_set.py` لـ `947` ملفاً و `9,358` مرجعاً، والتأكد من نقاء العزل اللغوي بنسبة 100% و `0` أسرار مكشوفة في جميع الملفات.
+
 </div>
