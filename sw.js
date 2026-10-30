@@ -1,5 +1,5 @@
 // S&R CoreSync For Intelligent Solutions - Enterprise Pre-render & Ultra-Low TTFB Service Worker
-// Version: coresync-prerender-v17-offline
+// Version: coresync-prerender-v18-offline
 const CACHE_NAME = 'coresync-prerender-v17-offline';
 
 // 1. Critical assets: everything the first screen needs to paint.
