@@ -117,7 +117,9 @@ def is_excluded(rel_path):
 
     if name in EXCLUDED_DIRS:
         return True
-    if name.startswith('.') and name not in ALLOWED_DOT_DIRS and len(parts) > 1:
+    # Any dot-directory (including at the repository root) is tooling state
+    # unless explicitly allow-listed. Stops .venv / .agents / etc. leaking.
+    if name.startswith('.') and name not in ALLOWED_DOT_DIRS:
         return True
     if name.endswith(EXCLUDED_SUFFIXES):
         return True
