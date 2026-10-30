@@ -72,6 +72,8 @@
 - [x] **2. إصلاح التثبيت:** إزالة التثبيت التحريري (editable) من النسخة المستنسخة `C:\Sandbox_Check` الذي كان ينقصه `localharness_pb2` وملف التشغيل الثنائي، وإعادة التثبيت من PyPI (`google-antigravity==0.1.23`) بصلاحيات المسؤول.
 - [x] **3. دعم الطباعة العربية:** `sys.stdout.reconfigure(encoding="utf-8")` لحل `UnicodeEncodeError` مع ترميز `cp1252`.
 - [x] **4. إنشاء `requirements.txt`:** تثبيت `google-antigravity==0.1.23`، والتحقق بـ `pip install -r requirements.txt --no-index` ← جميع الاعتماديات مُلبّاة.
-- [ ] **التالي:** تجهيز `GEMINI_API_KEY` في `.env` ← أول وكيل حقيقي عبر `Agent` + `LocalAgentConfig`.
+- [x] **5. تجهيز `GEMINI_API_KEY` في `.env` وتشغيل أول وكيل حقيقي (`example_agent.py`):** استدعاء `LocalAgentConfig(model="gemini-3.5-flash")` واستخدام `async with Agent(config) as agent` واستخراج النص النظيف عبر `await response.text()`.
+- [x] **6. إطلاق الوكيل التفاعلي الحي متعدد الأدوار (`interactive_agent.py`):** واجهة محادثة CLI حية تدعم اللغة العربية بالكامل، إدخال غير حاجبي للـ event loop عبر `asyncio.to_thread`، حفظ سجل الجلسة تلقائياً في `chat_history.txt` بطابع زمني، وتخطي إزعاج سجلات SDK الداخلية.
+- [ ] **التالي:** ربط الوكيل الذكي المحلي بأدوات سياق المشروع (Workspace Tools) وملفات المنظومة السيادية.
 
 </div>
