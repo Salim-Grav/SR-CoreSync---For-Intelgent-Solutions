@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معاينة المستشار الذكي التنفيذي (Floating AI Widget) | S&R CoreSync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sr-agent-widget.css">
+    <style>
+        :root {
+            --bg-deep: #020705;
+            --border-gold: rgba(197, 168, 128, 0.3);
+            --gold-bright: #dfc299;
+            --emerald: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: radial-gradient(circle at 50% 20%, #061912 0%, #020705 80%);
+            color: #f3f4f6;
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+        }
+        .container {
+            max-width: 860px;
+            background: rgba(6, 18, 14, 0.85);
+            border: 1px solid var(--border-gold);
+            border-radius: 24px;
+            padding: 48px 32px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(197, 168, 128, 0.1);
+            backdrop-filter: blur(16px);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            border-radius: 999px;
+            color: #34d399;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold-bright);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        p {
+            font-size: 1.05rem;
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 36px;
+            text-align: right;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+        }
+        .card h4 {
+            color: var(--gold-bright);
+            margin-bottom: 8px;
+            font-size: 0.98rem;
+        }
+        .card p {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #9ca3af;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #c5a880 0%, #a38258 100%);
+            color: #020705;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.35);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-bright);
+        }
+        .btn-secondary:hover {
+            background: rgba(197, 168, 128, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">
+            <span style="display:inline-block;width:8px;height:8px;background:#10b981;border-radius:50%;box-shadow:0 0 8px #10b981;"></span>
+            Google Antigravity SDK • Active Floating AI Component
+        </div>
+        <h1>المستشار الذكي التنفيذي العائم</h1>
+        <p>
+            هذه الصفحة تعرض ويدجت المحادثة الذكي العائم لمنظومة <strong>S&R CoreSync</strong>.
+            انقر على الزر الدائري الذهبي في أسفل يمين الشاشة لبدء محادثة فورية، أو تصفح وثائق Swagger لاختبار نقاط الـ API.
+        </p>
+
+        <div class="features-grid">
+            <div class="card">
+                <h4>🧠 ذاكرة الجلسات المستمرة</h4>
+                <p>حفظ حوارات كل عميل تلقائياً في SQLite للرجوع إليها بسلاسة.</p>
+            </div>
+            <div class="card">
+                <h4>⚡ تكامل فوري وسهل</h4>
+                <p>يمكن تضمينه في أي صفحة بإضافة سطرين كود فقط (CSS و JS).</p>
+            </div>
+            <div class="card">
+                <h4>📚 توثيق Swagger التفاعلي</h4>
+                <p>تجربة واختبار كافة الـ Endpoints بنقرة زر عبر المتصفح مباشرة.</p>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="http://127.0.0.1:8000/docs" target="_blank" class="btn btn-primary">📖 فتح توثيق Swagger UI</a>
+            <a href="ai-concierge-simulator.html" class="btn btn-secondary">🎮 فتح محاكي الـ Concierge</a>
+            <a href="index.html" class="btn btn-secondary">🏠 الرئيسية</a>
+        </div>
+    </div>
+
+    <!-- تضمين سكريبت الويدجت العائم -->
+    <script src="js/sr-agent-widget.js" defer></script>
+</body>
+</html>
+
