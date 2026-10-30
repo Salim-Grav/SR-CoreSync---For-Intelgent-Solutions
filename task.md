@@ -65,4 +65,13 @@
 - [x] **Sitemap:** 81 URL بعد إضافة `privacy.html` (بوابة العملاء وصفحة عدم الاتصال `noindex` عمداً).
 - [x] **بوابة الجودة:** `prepare_publish_set` ✅ · `build_csp --check` ✅ (143 hash) · `check_inline_scripts` ✅ (471 سكربت / 95 JSON-LD) · `check_site_links` ✅ (9,198 مرجع / 0 مكسور) · `audit_language_paths` ✅ · `validate_publish_set` ✅ · `check_seo_assets` ✅ · فحص المتصفح: 0 أخطاء console و0 طلبات 404 على الرئيسية/المدونة/مقال/البطاقة/الخصوصية/عدم الاتصال/البوابة.
 
+---
+
+## ✅ مهمة: تجهيز بيئة Google Antigravity SDK (الجمعة 30 أكتوبر 2026 - 10:57 صباحاً) - 100% Completed:
+- [x] **1. تصحيح مسار الاستيراد في `test_agent.py`:** `import google_antigravity` ← `from google import antigravity` (اسم الحزمة في pip يختلف عن مسار الاستيراد).
+- [x] **2. إصلاح التثبيت:** إزالة التثبيت التحريري (editable) من النسخة المستنسخة `C:\Sandbox_Check` الذي كان ينقصه `localharness_pb2` وملف التشغيل الثنائي، وإعادة التثبيت من PyPI (`google-antigravity==0.1.23`) بصلاحيات المسؤول.
+- [x] **3. دعم الطباعة العربية:** `sys.stdout.reconfigure(encoding="utf-8")` لحل `UnicodeEncodeError` مع ترميز `cp1252`.
+- [x] **4. إنشاء `requirements.txt`:** تثبيت `google-antigravity==0.1.23`، والتحقق بـ `pip install -r requirements.txt --no-index` ← جميع الاعتماديات مُلبّاة.
+- [ ] **التالي:** تجهيز `GEMINI_API_KEY` في `.env` ← أول وكيل حقيقي عبر `Agent` + `LocalAgentConfig`.
+
 </div>
