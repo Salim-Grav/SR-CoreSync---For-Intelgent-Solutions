@@ -82,10 +82,13 @@
 - [x] **11. ذاكرة المحادثة المستمرة (SQLite Session DB):** تطوير [`sr_session_db.py`](sr_session_db.py) لدعم حفظ الجلسات والرسائل مع التاريخ الزمني واسترجاع السياق التراكمي وتوفير مسارات `/api/sessions` و `/api/sessions/{id}/history`.
 - [x] **12. ويدجت المحادثة العائم الفاخر (Floating AI Web Component):** بناء [`js/sr-agent-widget.js`](js/sr-agent-widget.js) و [`css/sr-agent-widget.css`](css/sr-agent-widget.css) وصفحة المعاينة الحية [`preview-agent-widget.html`](preview-agent-widget.html) مع أزرار الإجراءات السريعة ورقاقات الأسئلة والتكامل المباشر مع الـ API المحلي، وحل كافة تنبيهات الفحص بالكامل (ترتيب بادئات CSS لـ `-webkit-backdrop-filter` ثم `backdrop-filter`، إخفاء أشرطة التمرير المتوافق عبر `-ms-overflow-style` و `::-webkit-scrollbar`، تأمين الروابط بـ `rel="noopener noreferrer"`، وفصل الأنماط المضمنة إلى فئات CSS).
 
+- [x] **13. تعميم الويدجت العائم في الصفحة الرئيسية (`index.html`):** إدراج `<script src="./js/sr-agent-widget.js" defer></script>` وضبط تموضعه الذكي في الجهة المقابلة لمساعد Concierge لتوفير تجربة مستخدم متوازنة.
+- [x] **14. فحص بوابة النشر وتحديث CSP (`scripts/build_csp.py` & `scripts/validate_publish_set.py`):** إعادة توليد تجزئات CSP واجتياز الفحص الصارم لـ 947 ملفاً بـ 9,356 مرجعاً محلياً مفحوصاً و 0 أخطاء و 0 أسرار مكشوفة بنسبة **100%**.
+
 ---
 
 ## 🚀 الخطوات المستقبلية المقترحة للمرحلة التالية:
-- [ ] دمج ويدجت المحادثة العائم في تذييل كافة صفحات البوابات المؤسسية (`index.html`, `software.html`, `work.html`).
+- [ ] تعميم ويدجت المحادثة العائم في بقية الصفحات التفاعلية (`software.html`, `work.html`, `client-portal.html`).
 - [ ] ربط الوكيل المحلي بذاكرة المتجهات (Local Vector Store / RAG) لفهرسة الأكواد والمكتبات كاملة.
 - [ ] تفعيل بروتوكول استدعاء الوكلاء الفرعيين (Autonomous Subagents) لتنفيذ مهام تدقيق واختبار الأمان آلياً.
 
