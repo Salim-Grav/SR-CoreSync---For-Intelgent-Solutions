@@ -45,10 +45,12 @@ async def main():
     try:
         # انتظار الرد مع مهلة 45 ثانية داخل جلسة الوكيل
         async with Agent(config) as agent:
+            print("✅ تم فتح جلسة الوكيل")
             response = await asyncio.wait_for(
                 agent.chat(prompt),
-                timeout=180.0
+                timeout=30.0
             )
+            print("✅ تم استلام استجابة (أو رفع استثناء)")
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
