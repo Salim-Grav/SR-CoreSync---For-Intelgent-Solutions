@@ -24,8 +24,8 @@ config = LocalAgentConfig(
     timeout=45.0                # مهلة أوسع
 )
 
-# إنشاء وكيل من الإعدادات
-agent = Agent(config)
+# إنشاء وكيل من الإعدادات (تم إلغاء الإنشاء هنا؛ سيُنشأ داخل async with)
+
 
 async def main():
     # يمكن تمرير نص من سطر الأوامر (اختياري)
@@ -43,11 +43,12 @@ async def main():
     print(f"جارٍ إرسال الطلب للوكيل: {prompt}")
 
     try:
-        # انتظار الرد مع مهلة 45 ثانية
-        response = await asyncio.wait_for(
-            agent.chat(prompt),   # use chat method to get response
-            timeout=45.0
-        )
+        # انتظار الرد مع مهلة 45 ثانية داخل جلسة الوكيل
+        async with Agent(config) as agent:
+            response = await asyncio.wait_for(
+                agent.chat(prompt),
+                timeout=45.0
+            )
         print(f"\nاستجابة الوكيل:\n{response}")
     except asyncio.TimeoutError:
         print("تنبيه: استغرق الوكيل وقتاً أطول من المتوقع (45 ث).")
