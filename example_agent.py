@@ -50,34 +50,20 @@ async def main():
                 agent.chat(prompt),
                 timeout=30.0
             )
-            print('نوع الاستجابة:', type(response))
-            print('سمات الاستجابة:', [a for a in dir(response) if not a.startswith('_')])
+            print("✅ تم استلام الاستجابة")
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
-            # استخراج نص الاستجابة باستخدام الدالة/الخاصية `text`
+            # استخراج النص: `response.text()` يُعيد coroutine يحتاج await
             printed = None
-            if hasattr(response, "text"):
+            try:
+                printed = await response.text()
+            except Exception as e_txt:
+                # إذا فشل text() جرّب تجميع الـ chunks
                 try:
-                    # قد تكون `text` دالة coroutine
-                    txt_candidate = response.text
-                    if callable(txt_candidate):
-                        maybe = txt_candidate()
-                        if hasattr(maybe, "__await__"):
-                            printed = await maybe
-                        else:
-                            printed = maybe
-                    else:
-                        # قد تكون خاصية coroutine يمكن انتظارها مباشرة
-                        printed = await txt_candidate
-                except Exception as e_txt:
-                    print(f"⚠️ فشل استخراج النص عبر `text`: {e_txt}")
-            # إذا لم يحصل على نص عبر `text`, جرّب تجميع الـ `chunks`
-            if printed is None and hasattr(response, "chunks"):
-                try:
-                    printed = "".join([c.text for c in response.chunks if hasattr(c, "text")])
-                except Exception as e_chunks:
-                    print(f"⚠️ فشل تجميع النص من `chunks`: {e_chunks}")
+                    printed = "".join([c.text async for c in response.chunks])
+                except Exception:
+                    printed = None
             if printed is not None:
                 print(f"\nاستجابة الوكيل:\n{printed}")
             else:
