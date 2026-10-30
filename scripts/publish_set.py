@@ -137,7 +137,7 @@ def iter_publish_files(root=None):
     """Yield every repository-relative path that belongs to the publish set."""
     base = root or ROOT
     for dirpath, dirnames, filenames in os.walk(base):
-        dirnames[:] = sorted(d for d in dirnames if d not in EXCLUDED_DIRS)
+        dirnames[:] = sorted(d for d in dirnames if d not in EXCLUDED_DIRS and not (d.startswith('.') and d not in ALLOWED_DOT_DIRS))
         rel_dir = os.path.relpath(dirpath, base).replace('\\', '/')
         if rel_dir == '.':
             rel_dir = ''
