@@ -4,7 +4,6 @@ import os
 import sys
 from datetime import datetime
 from dotenv import load_dotenv
-from google.antigravity import LocalAgentConfig, Agent
 
 # كتم تحذيرات إعادة المحاولة الداخلية للحفاظ على نظافة واجهة المستخدم
 logging.getLogger().setLevel(logging.ERROR)
@@ -14,18 +13,14 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 # تحميل مفتاح الاتصال من ملف .env
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
 
-if not api_key:
-    print("تنبيه: لم يتم العثور على مفتاح GEMINI_API_KEY في ملف .env")
-    sys.exit(1)
-
-# تكوين الوكيل المحلي مع مهلة زمنية للتنفيذ
-config = LocalAgentConfig(
-    model="gemini-3.5-flash",   # نموذج موثوق وسريع ويدعم العربية باحترافية
-    api_key=api_key,
-    timeout=60.0
+from sr_agent_core import (
+    create_sovereign_agent_config,
+    SOVEREIGN_SYSTEM_INSTRUCTIONS,
+    tool_get_service_details,
+    tool_list_project_portals
 )
+from google.antigravity import Agent
 
 # مسار ملف سجل المحادثة
 CHAT_HISTORY_FILE = os.path.join(
@@ -33,10 +28,13 @@ CHAT_HISTORY_FILE = os.path.join(
 )
 
 async def main():
-    print("=" * 60)
-    print("  مرحباً بك في واجهة الوكيل الذكي التفاعلي لـ S&R CoreSync")
-    print("  اكتب رسالتك أو سؤالك بحرية، أو اكتب 'خروج' لإنهاء الجلسة.")
-    print("=" * 60)
+    print("=" * 65)
+    print("  🏛️ المستشار الذكي التنفيذي لمنظومة S&R CoreSync For Intelligent Solutions")
+    print("  مدعوم بـ Google Antigravity SDK وأدوات استكشاف المشروع وسياق الميثاق")
+    print("  اكتب استفسارك، أو اكتب 'بوابات' لعرض الصفحات، أو 'خروج' للإغلاق.")
+    print("=" * 65)
+
+    config = create_sovereign_agent_config()
 
     # فتح جلسة محادثة متواصلة ومتعددة الأدوار (Multi-turn Chat)
     async with Agent(config) as agent:
@@ -46,20 +44,29 @@ async def main():
                 user_input = await asyncio.to_thread(input, "\nأنت: ")
                 if not user_input.strip():
                     continue
-                if user_input.strip().lower() in ["خروج", "exit", "quit", "q"]:
-                    print("\nإغلاق الجلسة. إلى اللقاء! 👋")
+
+                clean_cmd = user_input.strip().lower()
+                if clean_cmd in ["خروج", "exit", "quit", "q"]:
+                    print("\nإغلاق الجلسة المؤسسية. إلى اللقاء! 👋")
                     break
 
-                print("الوكيل: ", end="", flush=True)
+                if clean_cmd in ["بوابات", "صفحات", "portals", "pages"]:
+                    print("\n" + tool_list_project_portals())
+                    continue
+
+                print("المستشار: ", end="", flush=True)
 
                 # إرسال الرسالة للوكيل واستلام الرد
-                response = await asyncio.wait_for(
-                    agent.chat(user_input.strip()),
-                    timeout=90.0
-                )
+                try:
+                    response = await asyncio.wait_for(
+                        agent.chat(user_input.strip()),
+                        timeout=90.0
+                    )
+                    full_response = await response.text()
+                except Exception as e:
+                    # صمود سيادي عند ضغط الحصة
+                    full_response = tool_get_service_details(user_input.strip())
 
-                # استخراج النص الصافي والمرتب من الوكيل
-                full_response = await response.text()
                 print(full_response)
 
                 # حفظ المحادثة في ملف chat_history.txt مع الطابع الزمني
@@ -67,7 +74,7 @@ async def main():
                 log_entry = (
                     f"[{timestamp}]\n"
                     f"المستخدم: {user_input.strip()}\n"
-                    f"الوكيل:\n{full_response}\n"
+                    f"المستشار:\n{full_response}\n"
                     + "-" * 50 + "\n"
                 )
                 with open(CHAT_HISTORY_FILE, "a", encoding="utf-8") as log_file:
