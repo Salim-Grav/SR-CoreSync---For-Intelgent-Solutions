@@ -34,6 +34,7 @@
             border-radius: 24px;
             padding: 48px 32px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(197, 168, 128, 0.1);
+            -webkit-backdrop-filter: blur(16px);
             backdrop-filter: blur(16px);
         }
         .badge {
@@ -48,6 +49,14 @@
             font-size: 0.85rem;
             font-weight: 700;
             margin-bottom: 20px;
+        }
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--emerald);
         }
         h1 {
             font-size: 2.2rem;
@@ -123,7 +132,7 @@
 <body>
     <div class="container">
         <div class="badge">
-            <span style="display:inline-block;width:8px;height:8px;background:#10b981;border-radius:50%;box-shadow:0 0 8px #10b981;"></span>
+            <span class="status-dot"></span>
             Google Antigravity SDK • Active Floating AI Component
         </div>
         <h1>المستشار الذكي التنفيذي العائم</h1>
@@ -148,7 +157,7 @@
         </div>
 
         <div class="btn-group">
-            <a href="http://127.0.0.1:8000/docs" target="_blank" class="btn btn-primary">📖 فتح توثيق Swagger UI</a>
+            <a href="http://127.0.0.1:8000/docs" target="_blank" rel="noopener noreferrer" class="btn btn-primary">📖 فتح توثيق Swagger UI</a>
             <a href="ai-concierge-simulator.html" class="btn btn-secondary">🎮 فتح محاكي الـ Concierge</a>
             <a href="index.html" class="btn btn-secondary">🏠 الرئيسية</a>
         </div>
@@ -158,4 +167,3 @@
     <script src="js/sr-agent-widget.js" defer></script>
 </body>
 </html>
-

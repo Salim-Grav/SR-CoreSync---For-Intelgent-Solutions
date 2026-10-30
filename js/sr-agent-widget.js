@@ -46,11 +46,11 @@
                 <div class="sr-agent-header">
                     <div class="sr-agent-header-brand">
                         <div class="sr-agent-avatar">
-                            <span style="color:#dfc299;font-weight:900;font-size:0.9rem;">S&R</span>
+                            <span class="sr-agent-logo-text">S&R</span>
                         </div>
                         <div class="sr-agent-title">
                             <h3>المستشار الذكي التنفيذي</h3>
-                            <span><span style="display:inline-block;width:6px;height:6px;background:#10b981;border-radius:50%;"></span> متصل (Google Antigravity)</span>
+                            <span><span class="sr-agent-status-indicator"></span> متصل (Google Antigravity)</span>
                         </div>
                     </div>
                     <div class="sr-agent-header-actions">
