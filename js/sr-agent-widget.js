@@ -54,6 +54,7 @@
                         </div>
                     </div>
                     <div class="sr-agent-header-actions">
+                        <button id="sr-agent-export" title="تصدير الاستشارة كملف نصي">⬇</button>
                         <button id="sr-agent-clear" title="مسح المحادثة">↺</button>
                         <button id="sr-agent-close" title="إغلاق النافذة">✕</button>
                     </div>
@@ -95,6 +96,7 @@
         const windowEl = document.getElementById('sr-agent-window');
         const closeBtn = document.getElementById('sr-agent-close');
         const clearBtn = document.getElementById('sr-agent-clear');
+        const exportBtn = document.getElementById('sr-agent-export');
         const form = document.getElementById('sr-agent-form');
         const input = document.getElementById('sr-agent-input');
         const messagesEl = document.getElementById('sr-agent-messages');
@@ -117,6 +119,45 @@
             // تجديد معرّف الجلسة
             sessionId = 'sr_sess_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
             localStorage.setItem('sr_agent_session_id', sessionId);
+        });
+
+        exportBtn.addEventListener('click', () => {
+            const msgs = messagesEl.querySelectorAll('.sr-msg');
+            if (!msgs || msgs.length === 0) return;
+
+            const now = new Date();
+            const dateStr = now.toISOString().replace(/T/, ' ').replace(/\..+/, '');
+            let content = '======================================================================\n';
+            content += 'S&R CoreSync For Intelligent Solutions - سجل الاستشارة التنفيذية\n';
+            content += 'التاريخ والوقت: ' + dateStr + '\n';
+            content += 'المقر المؤسسي: أمستردام - الرياض - دبي | واتساب VIP: +31 618111116\n';
+            content += 'الموقع الرسمي: https://sr-coresync.com\n';
+            content += '======================================================================\n\n';
+
+            msgs.forEach(m => {
+                const isUser = m.classList.contains('sr-msg-user');
+                const role = isUser ? 'المستخدم' : 'المستشار الذكي التنفيذي';
+                // تنظيف النص من عناصر HTML والأزرار
+                const clone = m.cloneNode(true);
+                const actions = clone.querySelector('.sr-msg-actions');
+                if (actions) actions.remove();
+                const plainText = clone.textContent.trim().replace(/\s+/g, ' ');
+                content += `[${role}]:\n${plainText}\n\n`;
+            });
+
+            content += '----------------------------------------------------------------------\n';
+            content += 'تم استخراج هذا التقرير تلقائياً عبر المستشار الذكي التنفيذي لـ S&R CoreSync.\n';
+            content += '======================================================================\n';
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `SR-CoreSync-Executive-Consultation-${now.toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         });
 
         // النقر على الرقاقات السريعة
