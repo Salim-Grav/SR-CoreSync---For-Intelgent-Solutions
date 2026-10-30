@@ -45,7 +45,7 @@ async def main():
     try:
         # انتظار الرد مع مهلة 45 ثانية
         response = await asyncio.wait_for(
-            agent.send_message(prompt),   # استدعاء صحيح
+            agent.chat(prompt),   # use chat method to get response
             timeout=45.0
         )
         print(f"\nاستجابة الوكيل:\n{response}")
