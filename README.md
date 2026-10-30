@@ -6,7 +6,6 @@
 
 ## 1️⃣ تثبيت المتطلبات
 ```powershell
-# من جذر المشروع
 pip install -r requirements.txt
 ```
 > **ملاحظة:** ملف `requirements.txt` يحتوي على:
@@ -18,81 +17,66 @@ pip install -r requirements.txt
 ---
 
 ## 2️⃣ إعداد ملف البيئة `.env`
-إنشاء ملف `.env` في جذر المشروع (إن لم يكن موجودًا) وضع فيه مفتاح API الخاص بـ Gemini:
+أنشئ ملف `.env` في جذر المشروع وأضف مفتاح API الخاص بـ Gemini:
 ```text
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
 ```
-> **تنبيه:** لا تشارك المفتاح مع أي أحد. الملف مُدرج في `.gitignore` تلقائيًا.
+> **تنبيه:** لا تشارك المفتاح مع أي أحد. الملف مُدرج في `.gitignore`.
 
 ---
 
-## 3️⃣ تشغيل السكربت الأساسي
+## 3️⃣ تشغيل السكربت
+
+### التشغيل الأساسي (بالطلب الافتراضي)
 ```powershell
 python -u "d:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project\example_agent.py"
 ```
-سيظهر في الطرفية ما يلي (مثال):
+
+### تمرير طلب مخصص
+```powershell
+python -u "d:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project\example_agent.py" "ما هو أحدث نموذج Gemini؟"
 ```
-تم تحميل مفتاح الاتصال بنجاح!
-تم تكوين الوكيل الذكي المحلي (LocalAgentConfig) بنجاح وجاهز للإرسال.
-جارٍ إرسال الطلب للوكيل: قل لي التحية باللغة العربية واشرح بإيجاز كيف نعمل محلياً
+
+### مثال على الإخراج المتوقع
+```
+جارٍ إرسال الطلب للوكيل: ما هو أحدث نموذج Gemini؟
+✅ تم فتح جلسة الوكيل
+✅ تم استلام الاستجابة
 
 استجابة الوكيل:
-مرحبًا! نحن نعمل محليًا باستخدام نموذج Gemini …
+أحدث نموذج من عائلة نماذج جوجل هو Gemini 3.6 Flash (ضمن جيل Gemini 3).
+...
 ```
 
 ---
 
 ## 4️⃣ تعديل النموذج
-النموذج الافتراضي في السكربت هو `gemini-2.5-flash`، وهو قد لا يكون متاحًا للمستخدمين الجدد. إذا تلقيت خطأ 503 أو 401، استبدله بأحد النماذج المتاحة مثل:
+النموذج الافتراضي هو `gemini-3.5-flash`. يمكن تغييره في السكربت:
 ```python
 config = LocalAgentConfig(
-    model="gemini-3.5-flash",   # نموذج موثوق
+    model="gemini-3.5-flash",   # يمكن تغييره إلى gemini-3.6-flash مثلاً
     api_key=api_key,
-    timeout=30.0
+    timeout=60.0
 )
 ```
-أو `gemini-3.8-flash` إذا رغبت في أداء أعلى (قد يتطلب مهلة أطول).
 
 ---
 
 ## 5️⃣ ضبط مهلة التنفيذ
-القيمة الافتراضية للمهلة هي 30 ثانية. إذا استغرق الوكيل وقتًا أطول، يمكنك زيادة المهلة في كائن `LocalAgentConfig` أو في `asyncio.wait_for`:
 ```python
 config = LocalAgentConfig(
     model="gemini-3.5-flash",
     api_key=api_key,
-    timeout=45.0   # مهلة 45 ثانية
+    timeout=60.0   # المهلة بالثواني داخل LocalAgentConfig
 )
-
-# وفي داخل الدالة async
-response = await asyncio.wait_for(config.send_message(prompt), timeout=45.0)
+# وأيضاً داخل asyncio.wait_for
+response = await asyncio.wait_for(agent.chat(prompt), timeout=60.0)
 ```
 
 ---
 
-## 6️⃣ تمرير نص الطلب عبر سطر الأوامر (اختياري)
-لجعل السكربت أكثر مرونة، يمكنك استعمال `argparse` لتحديد النص المطلوب إرساله:
-```python
-import argparse
-parser = argparse.ArgumentParser(description="تشغيل وكيل Antigravity محلي")
-parser.add_argument("prompt", nargs="*", default=["قل لي التحية باللغة العربية واشرح بإيجاز كيف نعمل محلياً"])
-args = parser.parse_args()
-prompt = " ".join(args.prompt)
-```
-ثم تشغيله هكذا:
-```powershell
-python example_agent.py "ما هو أحدث نموذج Gemini؟"
-```
-
----
-
-## 7️⃣ مراجعة سجل التنفيذ (إن لزم)
-إذا لم تظهر استجابة الوكيل أو ظهرت رسائل خطأ، راجع سجل المهمة في المسار:
-```
-C:\Users\msali\.gemini\antigravity\brain\bf4ab143-8aba-421c-91f9-24d1a1f376a3\.system_generated\tasks\
-```
-ستجد ملفات `task-XXX.log` التي تحتوي على مخرجات التشغيل.
-
----
-
-**تم بنجاح** إضافة دليل التشغيل الكامل إلى `README.md`.
+## 6️⃣ ملاحظات تقنية مهمة
+- **`agent.chat(prompt)`** يُعيد كائن `ChatResponse`؛ لاستخراج النص يجب `await` على `response.text()`.
+- **`async with Agent(config) as agent`** يفتح جلسة الوكيل ويُغلقها تلقائيًا.
+- **`await response.text()`** يجب استدعاؤه داخل نفس كتلة `async with` قبل إغلاق الجلسة.
+- الاستيراد الصحيح هو `from google.antigravity import LocalAgentConfig, Agent` (وليس `google_antigravity`).
