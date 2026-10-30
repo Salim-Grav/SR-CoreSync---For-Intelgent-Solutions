@@ -54,7 +54,12 @@ async def main():
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
             txt_attr = getattr(response, "text", None)
             if callable(txt_attr):
-                printed = txt_attr()
+                maybe = txt_attr()
+                # إذا كان ما تم إرجاعه coroutine، انتظر نتيجته
+                if hasattr(maybe, '__await__'):
+                    printed = await maybe
+                else:
+                    printed = maybe
             else:
                 printed = txt_attr or getattr(response, "content", None)
             if printed is not None:
