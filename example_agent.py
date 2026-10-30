@@ -3,7 +3,7 @@ import sys
 import asyncio
 from dotenv import load_dotenv
 from google import antigravity
-from google_antigravity import LocalAgentConfig
+from google.antigravity import LocalAgentConfig
 
 # Ensure UTF‑8 output for Arabic characters
 sys.stdout.reconfigure(encoding="utf-8")
