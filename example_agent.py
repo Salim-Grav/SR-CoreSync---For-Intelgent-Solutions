@@ -4,7 +4,8 @@ import os
 import sys
 from dotenv import load_dotenv
 from google import genai
-from google.antigravity import LocalAgentConfig
+from google.antigravity import LocalAgentConfig, Agent
+
 # ضبط الترميز لدعم الطباعة باللغة العربية في التيرمينال
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -16,23 +17,42 @@ if not api_key:
     print("تنبيه: لم يتم العثور على مفتاح GEMINI_API_KEY في ملف .env")
     sys.exit(1)
 
-# تكوين الوكيل المحلي مع تحديد مهلة زمنية للتنفيذ (مثلاً 30 ثانية)
+# تكوين LocalAgentConfig (استخدام نموذج موثوق)
 config = LocalAgentConfig(
-    model="gemini-2.5-flash",
+    model="gemini-3.5-flash",   # أو gemini-3.8-flash إذا رغبت
     api_key=api_key,
-    timeout=30.0
+    timeout=45.0                # مهلة أوسع
 )
 
+# إنشاء وكيل من الإعدادات
+agent = Agent(config)
+
 async def main():
-    prompt = "قل لي التحية باللغة العربية واشرح بإيجاز كيف نعمل محلياً"
+    # يمكن تمرير نص من سطر الأوامر (اختياري)
+    parser = argparse.ArgumentParser(
+        description="تشغيل وكيل Antigravity محلي"
+    )
+    parser.add_argument(
+        "prompt",
+        nargs="*",
+        default=["قل لي التحية باللغة العربية واشرح بإيجاز كيف نعمل محلياً"]
+    )
+    args = parser.parse_args()
+    prompt = " ".join(args.prompt)
+
     print(f"جارٍ إرسال الطلب للوكيل: {prompt}")
-    
+
     try:
-        # الانتظار حتى استجابة الوكيل بالكامل ضمن المهلة المحددة (30 ثانية)
-        response = await asyncio.wait_for(config.send_message(prompt), timeout=30.0)
+        # انتظار الرد مع مهلة 45 ثانية
+        response = await asyncio.wait_for(
+            agent.send_message(prompt),   # استدعاء صحيح
+            timeout=45.0
+        )
         print(f"\nاستجابة الوكيل:\n{response}")
     except asyncio.TimeoutError:
-        print("تنبيه: استغرق الوكيل وقتاً أطول من المتوقع، وانتهت مهلة الـ 30 ثانية.")
+        print("تنبيه: استغرق الوكيل وقتاً أطول من المتوقع (45 ث).")
+    except Exception as e:
+        print(f"خطأ أثناء التواصل مع الوكيل: {e}")
 
 if __name__ == "__main__":
     asyncio.run(main())
