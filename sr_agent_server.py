@@ -177,3 +177,4 @@ if __name__ == "__main__":
     import uvicorn
     # التشغيل الافتراضي على المنفذ 8000
     uvicorn.run("sr_agent_server:app", host="127.0.0.1", port=8000, reload=False)
+
