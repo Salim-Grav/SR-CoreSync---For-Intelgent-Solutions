@@ -74,6 +74,14 @@
 - [x] **4. إنشاء `requirements.txt`:** تثبيت `google-antigravity==0.1.23`، والتحقق بـ `pip install -r requirements.txt --no-index` ← جميع الاعتماديات مُلبّاة.
 - [x] **5. تجهيز `GEMINI_API_KEY` في `.env` وتشغيل أول وكيل حقيقي (`example_agent.py`):** استدعاء `LocalAgentConfig(model="gemini-3.5-flash")` واستخدام `async with Agent(config) as agent` واستخراج النص النظيف عبر `await response.text()`.
 - [x] **6. إطلاق الوكيل التفاعلي الحي متعدد الأدوار (`interactive_agent.py`):** واجهة محادثة CLI حية تدعم اللغة العربية بالكامل، إدخال غير حاجبي للـ event loop عبر `asyncio.to_thread`، حفظ سجل الجلسة تلقائياً في `chat_history.txt` بطابع زمني، وتخطي إزعاج سجلات SDK الداخلية.
-- [ ] **التالي:** ربط الوكيل الذكي المحلي بأدوات سياق المشروع (Workspace Tools) وملفات المنظومة السيادية.
+- [x] **7. ربط الوكيل بأدوات استكشاف مساحة العمل (Workspace Tools):** تدشين `sr_agent_core.py` متضمناً دوال برمجية معتمدة تمكّن الوكيل من استكشاف صفحات المشروع الـ 80 HTML، الاستعلام عن تفاصيل الخدمات والتسعير، وقراءة مقتطفات الوثائق (`tool_list_project_portals`, `tool_get_service_details`, `tool_read_project_overview`).
+- [x] **8. دمج ميثاق وهوية S&R CoreSync المؤسسية (System Instructions):** صياغة سياق تنفيذي سيادي شامل يتضمن المقرات، القيادة، الخدمات التسع، الأسعار الرسمية، معايير السرية والدبلوماسية الراقية، ودمجها مباشرة في `LocalAgentConfig`.
+- [x] **9. بناء خادم الويب والـ API المصغر (FastAPI / SSE) وتكامل المحاكي:** تطوير `sr_agent_server.py` مع تفعيل كامل لـ CORS ونقاط النهاية `/api/ai-concierge` و `/api/chat` وبث الكلمات عبر Server-Sent Events (`/api/chat/stream`)، وتحديث محاكي المتصفح `ai-concierge-simulator.html` للاتصال التلقائي بالخادم المحلي مع الاحتفاظ بنظام الصمود السيادي البديل.
+
+---
+
+## 🚀 الخطوات المستقبلية المقترحة للمرحلة التالية:
+- [ ] ربط الوكيل المحلي بذاكرة المتجهات (Local Vector Store / RAG) لفهرسة الأكواد والمكتبات كاملة.
+- [ ] تفعيل بروتوكول استدعاء الوكلاء الفرعيين (Autonomous Subagents) لتنفيذ مهام تدقيق واختبار الأمان آلياً.
 
 </div>

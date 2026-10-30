@@ -1,82 +1,76 @@
-# مثال تشغيل وكيل Antigravity محلي
+# 🏛️ منظومة الوكيل الذكي المحلي لشركة S&R CoreSync (Google Antigravity SDK)
 
-هذا المستند يوضح كيفية تشغيل السكربت `example_agent.py` الذي يستخدم حزمة **Google Antigravity SDK** لإرسال طلب إلى نموذج Gemini وعرض النتيجة.
+توثيق شامل لبناء وتشغيل منظومة الوكلاء الأذكياء التنفيذيين محلياً باستخدام حزمة **Google Antigravity SDK** ونماذج **Gemini** المتقدمة، مع الربط الكامل بأدوات استكشاف مساحة العمل وخادم الويب المصغر وبوابات المشروع.
 
 ---
 
-## 1️⃣ تثبيت المتطلبات
+## 📁 هيكلية ملفات منظومة الذكاء الاصطناعي
+
+```text
+Project/
+├── sr_agent_core.py            # المحرك الأساسي: ميثاق الهوية، أدوات مساحة العمل (Workspace Tools)، ودالة التهيئة
+├── sr_agent_server.py          # خادم الويب المصغر (FastAPI / Uvicorn / SSE) ونقاط نهاية ai-concierge
+├── interactive_agent.py        # واجهة المحادثة التفاعلية الحية عبر سطر الأوامر (CLI Terminal)
+├── example_agent.py            # سكربت الإطلاق السريع لطلب واحد
+├── ai-concierge-simulator.html # المحاكي التفاعلي المربوط تلقائياً بخادم الوكيل المحلي
+├── requirements.txt            # الاعتماديات الرسمية (google-antigravity, fastapi, uvicorn, python-dotenv)
+└── chat_history.txt            # سجل المحادثات المؤرخ تلقائياً
+```
+
+---
+
+## 1️⃣ تثبيت الاعتماديات
 ```powershell
 pip install -r requirements.txt
 ```
-> **ملاحظة:** ملف `requirements.txt` يحتوي على:
-> ```
-> google-antigravity==0.1.23
-> python-dotenv>=1.0
-> ```
 
 ---
 
-## 2️⃣ إعداد ملف البيئة `.env`
-أنشئ ملف `.env` في جذر المشروع وأضف مفتاح API الخاص بـ Gemini:
+## 2️⃣ إعداد مفتاح الاتصال `.env`
+تأكد من وجود المتغير في ملف `.env`:
 ```text
-GEMINI_API_KEY=YOUR_GEMINI_API_KEY_HERE
+GEMINI_API_KEY=AIzaSy...
 ```
-> **تنبيه:** لا تشارك المفتاح مع أي أحد. الملف مُدرج في `.gitignore`.
 
 ---
 
-## 3️⃣ تشغيل السكربت
-
-### التشغيل الأساسي (بالطلب الافتراضي)
+## 3️⃣ التشغيل التفاعلي عبر التيرمينال (CLI)
+لبدء محادثة مباشرة مع المستشار التنفيذي الذكي:
 ```powershell
-python -u "d:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project\example_agent.py"
+python -u interactive_agent.py
 ```
+**المميزات:**
+- محادثة متعددة الأدوار (Multi-turn Chat) باللغة العربية الفصحى الراقية.
+- كتابة `بوابات` لاستعراض صفحات ومحاور المشروع مباشرة.
+- كتابة `خروج` لإنهاء الجلسة وحفظ السجل المؤرخ في `chat_history.txt`.
 
-### تمرير طلب مخصص
+---
+
+## 4️⃣ تشغيل خادم الويب المصغر (FastAPI & SSE)
+لتشغيل الخادم المحلي وربطه بالواجهات الرسومية:
 ```powershell
-python -u "d:\I-Ai\App\S&R CoreSync For Intelligent Solutions\Project\example_agent.py" "ما هو أحدث نموذج Gemini؟"
+python sr_agent_server.py
+```
+أو عبر Uvicorn:
+```powershell
+python -m uvicorn sr_agent_server:app --host 127.0.0.1 --port 8000
 ```
 
-### مثال على الإخراج المتوقع
-```
-جارٍ إرسال الطلب للوكيل: ما هو أحدث نموذج Gemini؟
-✅ تم فتح جلسة الوكيل
-✅ تم استلام الاستجابة
-
-استجابة الوكيل:
-أحدث نموذج من عائلة نماذج جوجل هو Gemini 3.6 Flash (ضمن جيل Gemini 3).
-...
-```
+### نقاط النهاية المتاحة (API Endpoints):
+- **`GET /`**: فحص حالة الخادم ومعلومات النموذج والخدمات.
+- **`POST /api/ai-concierge`**: متوافق تماماً مع محاكي [`ai-concierge-simulator.html`](ai-concierge-simulator.html) ويعيد الرد مصحوباً بإجراءات واتساب السريعة وروابط الـ RFQ.
+- **`POST /api/chat`**: نقطة نهاية برمجية عامة لاستقبال الأسئلة وإرجاع الإجابات.
+- **`GET /api/chat/stream?message=...`**: بث الكلمات لحظياً بتقنية **Server-Sent Events (SSE)**.
+- **`GET /api/workspace/portals`**: ملخص فوري لصفحات وبوابات المشروع.
 
 ---
 
-## 4️⃣ تعديل النموذج
-النموذج الافتراضي هو `gemini-3.5-flash`. يمكن تغييره في السكربت:
-```python
-config = LocalAgentConfig(
-    model="gemini-3.5-flash",   # يمكن تغييره إلى gemini-3.6-flash مثلاً
-    api_key=api_key,
-    timeout=60.0
-)
-```
+## 5️⃣ التكامل مع محاكي المتصفح (`ai-concierge-simulator.html`)
+عند فتح صفحة `ai-concierge-simulator.html` في المتصفح وتشغيل خادم `sr_agent_server.py` محلياً، تقوم الواجهة تلقائياً بتوجيه الرسائل إلى `http://127.0.0.1:8000/api/ai-concierge`، ليجيب الوكيل التنفيذي بذكاء فائق بناءً على ميثاق المنظمة وأدواتها. وفي حال توقف الخادم المحلي، تتحول الواجهة تلقائياً وسلساً إلى السحابة أو المحرك الداخلي بدون أي انقطاع.
 
 ---
 
-## 5️⃣ ضبط مهلة التنفيذ
-```python
-config = LocalAgentConfig(
-    model="gemini-3.5-flash",
-    api_key=api_key,
-    timeout=60.0   # المهلة بالثواني داخل LocalAgentConfig
-)
-# وأيضاً داخل asyncio.wait_for
-response = await asyncio.wait_for(agent.chat(prompt), timeout=60.0)
-```
-
----
-
-## 6️⃣ ملاحظات تقنية مهمة
-- **`agent.chat(prompt)`** يُعيد كائن `ChatResponse`؛ لاستخراج النص يجب `await` على `response.text()`.
-- **`async with Agent(config) as agent`** يفتح جلسة الوكيل ويُغلقها تلقائيًا.
-- **`await response.text()`** يجب استدعاؤه داخل نفس كتلة `async with` قبل إغلاق الجلسة.
-- الاستيراد الصحيح هو `from google.antigravity import LocalAgentConfig, Agent` (وليس `google_antigravity`).
+## 6️⃣ أدوات مساحة العمل (Workspace Tools المدمجة)
+1. **`tool_list_project_portals()`**: فحص وقراءة بوابات وصفحات المشروع HTML.
+2. **`tool_get_service_details(service_name)`**: جلب تفاصيل الخدمات التسع والباقات السعرية المعتمدة (€890 للسوشيال، €1,450 للموقع، €1,490 للباقة المتكاملة).
+3. **`tool_read_project_overview(file_name)`**: قراءة مقتطفات من وثائق ومخططات المشروع.
