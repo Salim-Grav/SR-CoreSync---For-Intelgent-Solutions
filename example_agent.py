@@ -54,16 +54,9 @@ async def main():
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
-            # استخراج النص: `response.text()` يُعيد coroutine يحتاج await
-            printed = None
-            try:
-                printed = await response.text()
-            except Exception as e_txt:
-                # إذا فشل text() جرّب تجميع الـ chunks
-                try:
-                    printed = "".join([c.text async for c in response.chunks])
-                except Exception:
-                    printed = None
+            # `resolve()` ينتظر اكتمال الاستجابة كاملاً، ثم `text()` يُعيد النص
+            await response.resolve()
+            printed = await response.text()
             if printed is not None:
                 print(f"\nاستجابة الوكيل:\n{printed}")
             else:
