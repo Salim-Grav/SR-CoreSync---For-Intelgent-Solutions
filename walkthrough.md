@@ -2014,5 +2014,15 @@
   - بناء خادم عالي الأداء بـ `FastAPI` + `Uvicorn` مع دعم كامل لـ CORS.
   - دعم نقاط النهاية `/api/ai-concierge` و `/api/chat` والبث اللحظي عبر `/api/chat/stream` بتقنية `Server-Sent Events`.
   - ربط محاكي الويب [`ai-concierge-simulator.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/ai-concierge-simulator.html) بالخادم المحلي مباشرة مع توفير صمود سيادي فوري (Sovereign Resilient Fallback).
+- **واجهة توثيق Swagger التفاعلية (`/docs` & `/redoc`):**
+  - تخصيص كامل لواجهة Swagger UI و ReDoc مع الشعار الرسمي والألوان المؤسسية (الذهبي والزمردي).
+  - إتاحة التجربة الفورية لجميع الـ Endpoints بنقرة زر من المتصفح مع مخططات Pydantic الدقيقة.
+- **تفعيل ذاكرة المحادثة المستمرة (`sr_session_db.py`):**
+  - قاعدة بيانات محلية SQLite في وضع `WAL` لتسجيل الجلسات وتتابع الحوارات واسترجاع السياق التراكمي.
+  - إتاحة نقاط النهاية `/api/sessions` لاستعراض الجلسات و `/api/sessions/{id}/history` لمراجعة الرسائل.
+- **ويدجت المحادثة العائم الفاخر (`js/sr-agent-widget.js` & `css/sr-agent-widget.css`):**
+  - مكون ويب عائم خفيف وأنيق مع أيقونة تشغيل دائرية متوهجة وتأثيرات نبضية.
+  - نافذة محادثة زجاجية تدعم التاريخ المستمر، أزرار الإجراءات السريعة، ورقاقات الاقتراحات الفورية.
+  - صفحة معاينة تفاعلية كاملة [`preview-agent-widget.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/preview-agent-widget.html) لتجربة الويدجت محلياً.
 
 </div>

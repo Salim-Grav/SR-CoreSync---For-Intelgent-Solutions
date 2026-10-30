@@ -78,9 +78,14 @@
 - [x] **8. دمج ميثاق وهوية S&R CoreSync المؤسسية (System Instructions):** صياغة سياق تنفيذي سيادي شامل يتضمن المقرات، القيادة، الخدمات التسع، الأسعار الرسمية، معايير السرية والدبلوماسية الراقية، ودمجها مباشرة في `LocalAgentConfig`.
 - [x] **9. بناء خادم الويب والـ API المصغر (FastAPI / SSE) وتكامل المحاكي:** تطوير `sr_agent_server.py` مع تفعيل كامل لـ CORS ونقاط النهاية `/api/ai-concierge` و `/api/chat` وبث الكلمات عبر Server-Sent Events (`/api/chat/stream`)، وتحديث محاكي المتصفح `ai-concierge-simulator.html` للاتصال التلقائي بالخادم المحلي مع الاحتفاظ بنظام الصمود السيادي البديل.
 
+- [x] **10. واجهة توثيق Swagger التفاعلية (`/docs` و `/redoc`):** تخصيص Swagger UI بهوية S&R CoreSync المؤسسية وإتاحة التجربة الفورية لجميع الـ Endpoints مع مخططات Pydantic الدقيقة ونماذج الطلب والاستجابة.
+- [x] **11. ذاكرة المحادثة المستمرة (SQLite Session DB):** تطوير [`sr_session_db.py`](sr_session_db.py) لدعم حفظ الجلسات والرسائل مع التاريخ الزمني واسترجاع السياق التراكمي وتوفير مسارات `/api/sessions` و `/api/sessions/{id}/history`.
+- [x] **12. ويدجت المحادثة العائم الفاخر (Floating AI Web Component):** بناء [`js/sr-agent-widget.js`](js/sr-agent-widget.js) و [`css/sr-agent-widget.css`](css/sr-agent-widget.css) وصفحة المعاينة الحية [`preview-agent-widget.html`](preview-agent-widget.html) مع أزرار الإجراءات السريعة ورقاقات الأسئلة والتكامل المباشر مع الـ API المحلي.
+
 ---
 
 ## 🚀 الخطوات المستقبلية المقترحة للمرحلة التالية:
+- [ ] دمج ويدجت المحادثة العائم في تذييل كافة صفحات البوابات المؤسسية (`index.html`, `software.html`, `work.html`).
 - [ ] ربط الوكيل المحلي بذاكرة المتجهات (Local Vector Store / RAG) لفهرسة الأكواد والمكتبات كاملة.
 - [ ] تفعيل بروتوكول استدعاء الوكلاء الفرعيين (Autonomous Subagents) لتنفيذ مهام تدقيق واختبار الأمان آلياً.
 

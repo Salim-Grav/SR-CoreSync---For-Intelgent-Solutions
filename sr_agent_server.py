@@ -6,10 +6,11 @@ from datetime import datetime
 from contextlib import asynccontextmanager
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, HTTPException, Request, Query
+from fastapi import FastAPI, HTTPException, Request, Query, Path
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse, JSONResponse
-from pydantic import BaseModel
+from fastapi.responses import StreamingResponse, JSONResponse, HTMLResponse
+from fastapi.openapi.docs import get_swagger_ui_html, get_redoc_html
+from pydantic import BaseModel, Field
 
 # ضبط الترميز لدعم العربية في الطرفية
 sys.stdout.reconfigure(encoding="utf-8")
@@ -20,32 +21,75 @@ from sr_agent_core import (
     tool_get_service_details,
     tool_list_project_portals
 )
+import sr_session_db
 from google.antigravity import Agent
 
+# ==============================================================================
+# نماذج البيانات (Pydantic Schemas) لتوثيق Swagger التفاعلي
+# ==============================================================================
 class ChatRequest(BaseModel):
-    message: str
-    channel: Optional[str] = "web_portal"
-    session_id: Optional[str] = "default"
+    message: str = Field(..., description="نص الرسالة أو الاستفسار الموجه للوكيل الذكي", example="ما هي باقات الخدمات المتوفرة؟")
+    session_id: Optional[str] = Field("default", description="معرّف الجلسة لضمان استمرارية الذاكرة والسياق", example="client_session_101")
+    channel: Optional[str] = Field("web_portal", description="قناة المحادثة (web_portal, whatsapp, telegram)", example="web_portal")
 
 class ConciergeRequest(BaseModel):
-    message: str
-    channel: Optional[str] = "whatsapp_cloud_api"
+    message: str = Field(..., description="نص الرسالة الواردة من محاكي المتصفح أو تطبيق العميل", example="ما هي باقة السوشيال ميديا 8K؟")
+    channel: Optional[str] = Field("whatsapp_cloud_api", description="اسم القناة الافتراضية", example="whatsapp_cloud_api")
+    session_id: Optional[str] = Field("concierge_default", description="معرّف الجلسة للمحاكي", example="concierge_default")
 
+class ActionButton(BaseModel):
+    label: str = Field(..., description="عنوان الزر التفاعلي")
+    url: Optional[str] = Field(None, description="رابط الإجراء إن وجد")
+    action: Optional[str] = Field(None, description="اسم الإجراء في الواجهة")
+
+class ChatResponseModel(BaseModel):
+    reply: str = Field(..., description="نص استجابة المستشار الذكي التنفيذي")
+    session_id: str = Field(..., description="معرّف الجلسة النشطة")
+    source: str = Field(..., description="مصدر الإجابة (google_antigravity_agent أو sovereign_knowledge_engine)")
+    timestamp: str = Field(..., description="طابع التوقيت الزمني")
+
+class ConciergeResponseModel(BaseModel):
+    reply: str = Field(..., description="نص الرد المؤسسي")
+    actions: List[ActionButton] = Field(..., description="قائمة الأزرار والإجراءات السريعة")
+    intent: str = Field("sovereign_executive_advisory", description="نية المستخدم المستنتجة")
+    confidence: float = Field(0.99, description="درجة ثقة النموذج")
+    channel: str = Field(..., description="القناة")
+    source: str = Field(..., description="المصدر")
+    session_id: str = Field(..., description="معرّف الجلسة")
+    timestamp: str = Field(..., description="الطابع الزمني")
+
+# ==============================================================================
+# دورة حياة التطبيق (Lifespan Context)
+# ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    # تهيئة قاعدة بيانات الجلسات والذاكرة
+    sr_session_db.init_db()
     app.state.config = create_sovereign_agent_config()
-    print("=" * 65)
-    print("  🚀 خادم S&R CoreSync Sovereign Agent API قيد التشغيل الآن")
+    print("=" * 70)
+    print("  🏛️ خادم S&R CoreSync Sovereign Agent API قيد التشغيل والجاهزية")
     print(f"  🤖 النموذج النشط: {app.state.config.model}")
-    print("  🌐 الواجهة متوافقة مع ai-concierge-simulator.html وتدعم SSE")
-    print("=" * 65)
+    print("  📚 توثيق Swagger التفاعلي متاح على: http://127.0.0.1:8000/docs")
+    print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
+    print("=" * 70)
     yield
-    print("🛑 إيقاف خادم الوكيل الذكي.")
+    print("🛑 إيقاف خادم الوكيل الذكي بنجاح.")
 
+# إنشاء تطبيق FastAPI مع تعطيل مسارات docs التلقائية لتخصيصها بهوية S&R
 app = FastAPI(
     title="S&R CoreSync Sovereign Agent Micro-API",
-    description="خادم الويب والـ API المصغر للوكيل الذكي المحلي لمنظومة S&R CoreSync",
-    version="1.0.0",
+    description="""
+### 🏛️ واجهة برمجة التطبيقات المصغرة للمستشار الذكي التنفيذي لـ S&R CoreSync
+توفر هذه المنظومة:
+- **تكامل كامل مع Google Antigravity SDK** ونماذج Gemini.
+- **أدوات مساحة العمل (Workspace Tools)** لاستكشاف صفحات وملفات وباقات المشروع.
+- **ذاكرة محادثة مستمرة (SQLite Session DB)** لحفظ واسترجاع سياق الحوار.
+- **بث مباشر بتقنية Server-Sent Events (SSE)** لتدفق الكلمات لحظياً.
+- **ربط مباشر مع واجهات الويب ومحاكي الذكاء الاصطناعي.**
+    """,
+    version="2.0.0",
+    docs_url=None,   # يتم تقديمها مخصصة
+    redoc_url=None,
     lifespan=lifespan
 )
 
@@ -58,113 +102,174 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+# ==============================================================================
+# تخصيص واجهات التوثيق التفاعلية (Swagger & ReDoc) بهوية المنظومة
+# ==============================================================================
+@app.get("/docs", include_in_schema=False)
+async def custom_swagger_ui_html():
+    return get_swagger_ui_html(
+        openapi_url=app.openapi_url,
+        title="S&R CoreSync | Sovereign Agent API — Swagger Documentation",
+        swagger_js_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js",
+        swagger_css_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css",
+        swagger_favicon_url="https://sr-coresync.com/favicon.ico"
+    )
+
+@app.get("/redoc", include_in_schema=False)
+async def redoc_html():
+    return get_redoc_html(
+        openapi_url=app.openapi_url,
+        title="S&R CoreSync | Sovereign Agent API — ReDoc",
+        redoc_js_url="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js",
+        redoc_favicon_url="https://sr-coresync.com/favicon.ico"
+    )
+
+# ==============================================================================
+# نقاط النهاية الرئيسية (API Endpoints)
+# ==============================================================================
+@app.get("/", tags=["النظام والجاهزية"])
 async def root():
+    """فحص حالة الخادم والنموذج وروابط التوثيق"""
     return {
         "service": "S&R CoreSync Sovereign Agent API",
         "status": "online",
+        "version": "2.0.0",
         "model": app.state.config.model,
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "endpoints": {
-            "chat": "POST /api/chat",
-            "ai_concierge": "POST /api/ai-concierge",
-            "chat_stream": "GET /api/chat/stream?message=...",
-            "portals": "GET /api/workspace/portals"
-        }
+        "swagger_docs": "/docs",
+        "redoc": "/redoc",
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
 
-@app.get("/health")
+@app.get("/health", tags=["النظام والجاهزية"])
 async def health():
-    return {"status": "ok", "agent_ready": True}
+    """فحص النبض اللحظي للخدمة (Health Check)"""
+    return {"status": "ok", "agent_ready": True, "db_ready": True}
 
-@app.get("/api/workspace/portals")
+@app.get("/api/workspace/portals", tags=["أدوات مساحة العمل"])
 async def get_portals():
+    """استعراض قائمة بوابات وصفحات المشروع الرسمية الـ 80"""
     return {"portals_summary": tool_list_project_portals()}
 
-@app.post("/api/ai-concierge")
+@app.post("/api/ai-concierge", response_model=ConciergeResponseModel, tags=["المساعد الذكي والمحاكي"])
 async def ai_concierge_endpoint(req: ConciergeRequest):
     """
-    نقطة النهاية المتوافقة بنسبة 100% مع واجهة ai-concierge-simulator.html
+    نقطة النهاية المعتمدة لمحاكي `ai-concierge-simulator.html` وويدجت المحادثة العائم،
+    مع حفظ الحوار بالكامل في ذاكرة الجلسة المستمرة.
     """
     user_msg = req.message.strip()
+    session_id = req.session_id or "concierge_default"
     if not user_msg:
-        raise HTTPException(status_code=400, detail="رسالة فارغة")
+        raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
+
+    # 1. حفظ رسالة المستخدم في قاعدة بيانات الجلسة
+    sr_session_db.add_message(session_id, "user", user_msg, source="user")
+
+    # 2. استخراج سياق المحادثة السابقة لتوفير ذاكرة متصلة للوكيل
+    context = sr_session_db.get_formatted_context(session_id, max_turns=4)
+    prompt_with_memory = f"{context}\n\nسؤال المستخدم الحالي: {user_msg}" if context else user_msg
 
     reply_text = ""
     source = "google_antigravity_agent"
 
     try:
         async with Agent(app.state.config) as agent:
-            resp = await asyncio.wait_for(agent.chat(user_msg), timeout=60.0)
+            resp = await asyncio.wait_for(agent.chat(prompt_with_memory), timeout=60.0)
             reply_text = await resp.text()
     except Exception as e:
-        # صمود سيادي: إذا حدث ضغط حصة مؤقت 429، يتم الرد من قاعدة المعرفة السيادية المعتمدة
-        print(f"⚠️ تنبيه الوكيل (استخدام الرد السيادي الاحتياطي): {e}")
+        print(f"⚠️ استخدام الصمود السيادي البديل: {e}")
         reply_text = tool_get_service_details(user_msg)
         source = "sovereign_knowledge_engine"
 
-    # صياغة الإجراءات الذكية المناسبة
+    # 3. حفظ رد الوكيل في قاعدة بيانات الجلسة
+    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
+
     actions = [
-        {"label": "💬 محادثة واتساب VIP المباشرة", "url": "https://wa.me/31618111116"},
-        {"label": "📋 طلب عرض سعر مخصص (RFQ)", "action": "open_rfq"}
+        ActionButton(label="💬 محادثة واتساب VIP المباشرة", url="https://wa.me/31618111116"),
+        ActionButton(label="📋 طلب عرض سعر مخصص (RFQ)", action="open_rfq")
     ]
 
-    return {
-        "reply": reply_text,
-        "actions": actions,
-        "intent": "sovereign_executive_advisory",
-        "confidence": 0.99,
-        "channel": req.channel or "whatsapp_cloud_api",
-        "source": source,
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    return ConciergeResponseModel(
+        reply=reply_text,
+        actions=actions,
+        intent="sovereign_executive_advisory",
+        confidence=0.99,
+        channel=req.channel or "whatsapp_cloud_api",
+        source=source,
+        session_id=session_id,
+        timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    )
 
-@app.post("/api/chat")
+@app.post("/api/chat", response_model=ChatResponseModel, tags=["المحادثة العامة والذاكرة"])
 async def chat_endpoint(req: ChatRequest):
     """
-    نقطة نهاية المحادثة العامة
+    نقطة النهاية العامة للمحادثة مع دعم كامل للذاكرة المستمرة عبر `session_id`.
     """
     user_msg = req.message.strip()
+    session_id = req.session_id or "default"
     if not user_msg:
-        raise HTTPException(status_code=400, detail="رسالة فارغة")
+        raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
+
+    # حفظ رسالة المستخدم
+    sr_session_db.add_message(session_id, "user", user_msg, source="user")
+
+    # استرجاع سياق الجلسة
+    context = sr_session_db.get_formatted_context(session_id, max_turns=4)
+    prompt_with_memory = f"{context}\n\nسؤال المستخدم الحالي: {user_msg}" if context else user_msg
 
     reply_text = ""
     source = "google_antigravity_agent"
 
     try:
         async with Agent(app.state.config) as agent:
-            resp = await asyncio.wait_for(agent.chat(user_msg), timeout=60.0)
+            resp = await asyncio.wait_for(agent.chat(prompt_with_memory), timeout=60.0)
             reply_text = await resp.text()
     except Exception as e:
         reply_text = tool_get_service_details(user_msg)
         source = "sovereign_knowledge_engine"
 
-    return {
-        "reply": reply_text,
-        "source": source,
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    # حفظ استجابة الوكيل
+    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
 
-@app.get("/api/chat/stream")
-async def chat_stream_endpoint(message: str = Query(...)):
+    return ChatResponseModel(
+        reply=reply_text,
+        session_id=session_id,
+        source=source,
+        timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    )
+
+@app.get("/api/chat/stream", tags=["المحادثة العامة والذاكرة"])
+async def chat_stream_endpoint(
+    message: str = Query(..., description="نص الرسالة المراد بثها لحظياً"),
+    session_id: Optional[str] = Query("default", description="معرف الجلسة")
+):
     """
-    نقطة نهاية البث اللحظي للكلمات بنظام Server-Sent Events (SSE)
+    نقطة نهاية البث اللحظي للكلمات بتقنية Server-Sent Events (SSE)
     """
+    # حفظ رسالة المستخدم
+    sr_session_db.add_message(session_id, "user", message, source="user")
+    context = sr_session_db.get_formatted_context(session_id, max_turns=3)
+    prompt = f"{context}\n\nسؤال المستخدم الحالي: {message}" if context else message
+
     async def sse_generator():
+        full_text = ""
+        source = "google_antigravity_agent"
         try:
-            full_text = ""
             try:
                 async with Agent(app.state.config) as agent:
-                    resp = await asyncio.wait_for(agent.chat(message), timeout=60.0)
+                    resp = await asyncio.wait_for(agent.chat(prompt), timeout=60.0)
                     full_text = await resp.text()
             except Exception:
                 full_text = tool_get_service_details(message)
+                source = "sovereign_knowledge_engine"
+
+            # حفظ الرد المكتمل في الجلسة
+            sr_session_db.add_message(session_id, "assistant", full_text, source=source)
 
             words = full_text.split(" ")
             for w in words:
-                payload = json.dumps({"chunk": w + " "}, ensure_ascii=False)
+                payload = json.dumps({"chunk": w + " ", "session_id": session_id}, ensure_ascii=False)
                 yield f"data: {payload}\n\n"
-                await asyncio.sleep(0.02)
+                await asyncio.sleep(0.015)
             yield "data: [DONE]\n\n"
         except Exception as e:
             err_payload = json.dumps({"error": str(e)}, ensure_ascii=False)
@@ -173,8 +278,29 @@ async def chat_stream_endpoint(message: str = Query(...)):
 
     return StreamingResponse(sse_generator(), media_type="text/event-stream")
 
+# ==============================================================================
+# إدارة جلسات المحادثة والذاكرة (Session Management Endpoints)
+# ==============================================================================
+@app.get("/api/sessions", tags=["إدارة الجلسات والذاكرة"])
+async def get_sessions(limit: int = Query(20, description="الحد الأقصى لعدد الجلسات")):
+    """استعراض الجلسات المخزنة وعدد الرسائل وآخر نشاط"""
+    return {"sessions": sr_session_db.list_all_sessions(limit=limit)}
+
+@app.get("/api/sessions/{session_id}/history", tags=["إدارة الجلسات والذاكرة"])
+async def get_session_history(
+    session_id: str = Path(..., description="معرف الجلسة المطلوب استرجاع رسائلها"),
+    limit: int = Query(50, description="عدد الرسائل")
+):
+    """استرجاع سجل الرسائل الكامل لجلسة معينة"""
+    messages = sr_session_db.get_history(session_id, limit=limit)
+    return {"session_id": session_id, "messages": messages, "count": len(messages)}
+
+@app.delete("/api/sessions/{session_id}", tags=["إدارة الجلسات والذاكرة"])
+async def delete_session(session_id: str = Path(..., description="معرف الجلسة المراد حذفها")):
+    """حذف ومسح تاريخ جلسة معينة"""
+    sr_session_db.clear_session(session_id)
+    return {"status": "success", "message": f"تم مسح الجلسة {session_id} بنجاح"}
+
 if __name__ == "__main__":
     import uvicorn
-    # التشغيل الافتراضي على المنفذ 8000
     uvicorn.run("sr_agent_server:app", host="127.0.0.1", port=8000, reload=False)
-
