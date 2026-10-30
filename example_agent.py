@@ -55,16 +55,21 @@ async def main():
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
+            # استخراج نص الاستجابة من الخاصية أو الدالة `text`
             txt_attr = getattr(response, "text", None)
-            if callable(txt_attr):
-                maybe = txt_attr()
-                # إذا كان ما تم إرجاعه coroutine، انتظر نتيجته
-                if hasattr(maybe, '__await__'):
-                    printed = await maybe
+            if txt_attr is not None:
+                # إذا كان `text` دالة/كوريoutine
+                if callable(txt_attr):
+                    maybe = txt_attr()
+                    if hasattr(maybe, "__await__"):
+                        printed = await maybe
+                    else:
+                        printed = maybe
                 else:
-                    printed = maybe
+                    # خاصية نصية مباشرة
+                    printed = txt_attr
             else:
-                printed = txt_attr or getattr(response, "content", None)
+                printed = getattr(response, "content", None)
             if printed is not None:
                 print(f"\nاستجابة الوكيل:\n{printed}")
             else:
