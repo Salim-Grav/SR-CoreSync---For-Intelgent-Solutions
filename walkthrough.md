@@ -2023,6 +2023,6 @@
 - **ويدجت المحادثة العائم الفاخر (`js/sr-agent-widget.js` & `css/sr-agent-widget.css`):**
   - مكون ويب عائم خفيف وأنيق مع أيقونة تشغيل دائرية متوهجة وتأثيرات نبضية.
   - نافذة محادثة زجاجية تدعم التاريخ المستمر، أزرار الإجراءات السريعة، ورقاقات الاقتراحات الفورية.
-  - صفحة معاينة تفاعلية كاملة [`preview-agent-widget.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/preview-agent-widget.html) لتجربة الويدجت محلياً.
+  - صفحة معاينة تفاعلية كاملة [`preview-agent-widget.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/preview-agent-widget.html) لتجربة الويدجت محلياً مع تطهير كامل لتنبيهات التوافق (Safari `-webkit-backdrop-filter`، أمان `rel="noopener noreferrer"`، وفصل الأنماط المضمنة إلى فئات CSS).
 
 </div>
