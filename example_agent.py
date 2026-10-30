@@ -50,7 +50,8 @@ async def main():
                 agent.chat(prompt),
                 timeout=30.0
             )
-            print("✅ تم استلام استجابة (أو رفع استثناء)")
+            print('نوع الاستجابة:', type(response))
+            print('سمات الاستجابة:', [a for a in dir(response) if not a.startswith('_')])
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
