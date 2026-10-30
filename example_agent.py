@@ -55,21 +55,33 @@ async def main():
         # طباعة النص الفعلي إذا كان متاحًا
         try:
             # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
-            # استخراج نص الاستجابة من الخاصية أو الدالة `text`
-            txt_attr = getattr(response, "text", None)
-            if txt_attr is not None:
-                # إذا كان `text` دالة/كوريoutine
-                if callable(txt_attr):
-                    maybe = txt_attr()
-                    if hasattr(maybe, "__await__"):
-                        printed = await maybe
+            # استخراج نص الاستجابة باستخدام الدالة/الخاصية `text`
+            printed = None
+            if hasattr(response, "text"):
+                try:
+                    # قد تكون `text` دالة coroutine
+                    txt_candidate = response.text
+                    if callable(txt_candidate):
+                        maybe = txt_candidate()
+                        if hasattr(maybe, "__await__"):
+                            printed = await maybe
+                        else:
+                            printed = maybe
                     else:
-                        printed = maybe
-                else:
-                    # خاصية نصية مباشرة
-                    printed = txt_attr
+                        # قد تكون خاصية coroutine يمكن انتظارها مباشرة
+                        printed = await txt_candidate
+                except Exception as e_txt:
+                    print(f"⚠️ فشل استخراج النص عبر `text`: {e_txt}")
+            # إذا لم يحصل على نص عبر `text`, جرّب تجميع الـ `chunks`
+            if printed is None and hasattr(response, "chunks"):
+                try:
+                    printed = "".join([c.text for c in response.chunks if hasattr(c, "text")])
+                except Exception as e_chunks:
+                    print(f"⚠️ فشل تجميع النص من `chunks`: {e_chunks}")
+            if printed is not None:
+                print(f"\nاستجابة الوكيل:\n{printed}")
             else:
-                printed = getattr(response, "content", None)
+                print(f"\nاستجابة الوكيل (كائن):\n{response}")
             if printed is not None:
                 print(f"\nاستجابة الوكيل:\n{printed}")
             else:
