@@ -115,13 +115,16 @@ WORKSPACE_TOOLS = [
 # ==============================================================================
 # 3. دالة تكوين الوكيل السيادي الشامل (Config Factory)
 # ==============================================================================
-def create_sovereign_agent_config(model: str = "gemini-3.5-flash", timeout: float = 60.0) -> LocalAgentConfig:
+def create_sovereign_agent_config(model: str = "gemini-3.1-flash-lite", timeout: float = 60.0) -> LocalAgentConfig:
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("لم يتم العثور على مفتاح GEMINI_API_KEY في ملف .env")
 
+    # يمكن تعيين النموذج عبر متغير بيئة AGENT_MODEL إن وجد
+    active_model = os.getenv("AGENT_MODEL", model)
+
     return LocalAgentConfig(
-        model=model,
+        model=active_model,
         api_key=api_key,
         system_instructions=SOVEREIGN_SYSTEM_INSTRUCTIONS,
         tools=WORKSPACE_TOOLS,
