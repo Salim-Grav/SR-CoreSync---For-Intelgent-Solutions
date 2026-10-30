@@ -2024,5 +2024,9 @@
   - مكون ويب عائم خفيف وأنيق مع أيقونة تشغيل دائرية متوهجة وتأثيرات نبضية.
   - نافذة محادثة زجاجية تدعم التاريخ المستمر، أزرار الإجراءات السريعة، ورقاقات الاقتراحات الفورية.
   - صفحة معاينة تفاعلية كاملة [`preview-agent-widget.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/preview-agent-widget.html) لتجربة الويدجت محلياً مع تطهير كامل لتنبيهات التوافق (ترتيب بادئات CSS لـ `-webkit-backdrop-filter` ثم `backdrop-filter`، دعم إخفاء شريط التمرير الشامل بـ `-ms-overflow-style` و `::-webkit-scrollbar`، أمان `rel="noopener noreferrer"`، وفصل الأنماط المضمنة إلى فئات CSS).
+- **التكامل في الصفحة الرئيسية وفحص بوابة النشر 100%:**
+  - إدراج سكريبت الويدجت في [`index.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html) في الجهة اليسرى المقابلة للـ Concierge لضمان توازن بصري وتنفيذي.
+  - تشغيل `scripts/build_csp.py` وتحديث تجزئات CSP الصارمة.
+  - اجتياز `scripts/validate_publish_set.py` بنجاح كامل لـ `947` ملفاً و `9,356` مرجعاً محلياً مفحوصاً و `0` أخطاء و `0` أسرار مكشوفة.
 
 </div>
