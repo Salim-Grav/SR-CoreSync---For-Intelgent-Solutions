@@ -51,8 +51,12 @@ async def main():
             )
         # طباعة النص الفعلي إذا كان متاحًا
         try:
-            # معظم إصدارات ChatResponse توفر الخاصية `text`
-            printed = getattr(response, "text", None) or getattr(response, "content", None)
+            # معظم إصدارات ChatResponse توفر طريقة `text()` أو الخاصية `text`
+            txt_attr = getattr(response, "text", None)
+            if callable(txt_attr):
+                printed = txt_attr()
+            else:
+                printed = txt_attr or getattr(response, "content", None)
             if printed is not None:
                 print(f"\nاستجابة الوكيل:\n{printed}")
             else:
