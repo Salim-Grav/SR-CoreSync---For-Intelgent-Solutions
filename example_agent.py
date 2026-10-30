@@ -49,7 +49,16 @@ async def main():
                 agent.chat(prompt),
                 timeout=45.0
             )
-        print(f"\nاستجابة الوكيل:\n{response}")
+        # طباعة النص الفعلي إذا كان متاحًا
+        try:
+            # معظم إصدارات ChatResponse توفر الخاصية `text`
+            printed = getattr(response, "text", None) or getattr(response, "content", None)
+            if printed is not None:
+                print(f"\nاستجابة الوكيل:\n{printed}")
+            else:
+                print(f"\nاستجابة الوكيل (كائن):\n{response}")
+        except Exception as exc:
+            print(f"\nخطأ أثناء استخراج النص من الاستجابة: {exc}")
     except asyncio.TimeoutError:
         print("تنبيه: استغرق الوكيل وقتاً أطول من المتوقع (45 ث).")
     except Exception as e:
