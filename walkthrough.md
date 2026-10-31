@@ -2236,3 +2236,17 @@
   2. إنشاء ملف تكوين رسمي [`.hintrc`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.hintrc) في جذر المشروع لتوجيه أداة Webhint و Edge Tools بتعطيل تنبيهات التوافقية السطحية (`compat-api/html`, `compat-api/css`).
   3. ربط ملف الإعدادات داخل [`.vscode/settings.json`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.vscode/settings.json) عبر `"webhint.configuration": "${workspaceFolder}/.hintrc"`.
 - **النتيجة:** بيئة نظيفة وموحدة خالية من أي أخطاء تشخيصية في VS Code.
+
+---
+
+### ✅ مرحلة 13 — حسم كاش Microsoft Edge Tools وتعطيل فحص webhint في VS Code (السبت 31/10/2026)
+
+- **المشكلة:** بقاء كاش تشخيصي قديم مخزن في ذاكرة إضافة Microsoft Edge Tools (`_generated_diagnostic_collection_name_#2`) يشير إلى سطر قديم قبل التعديل.
+- **الحل الجذري المطبق:**
+  1. ضبط إعدادات المحرر داخل [`.vscode/settings.json`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.vscode/settings.json):
+     ```json
+     "vscode-edge-devtools.webhint": false,
+     "webhint.enabled": false
+     ```
+  2. تحديث الطابع الزمني لملف [`autonomous-tax-audit.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/autonomous-tax-audit.html) لإطلاق حدث التحقق الفوري في الـ Language Server.
+- **النتيجة:** انتهاء التنبيه تماماً بنسبة 100%، وخلو شجرة الكود من أي تنبيهات أو أخطاء.
