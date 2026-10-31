@@ -3,814 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز التفتيش الجنائي السيادي وأدلة التقاضي الرقمية | S&R CoreSync</title>
-    <meta name="description" content="البوابة السيادية لإعداد وتوثيق وتصدير الأدلة الرقمية الجنائية وسلاسل الحيازة التشفيرية المقبولة أمام المحاكم الدولية والمحلية وفق معايير ISO/IEC 27037">
+    <title>محرك الأدلة الجنائية الرقمية والتقاضي السيادي | S&amp;R CoreSync</title>
+    <meta name="description" content="منصة سيادية لإدارة الأدلة الرقمية وسلسلة الحيازة الجنائية وسجلات التقاضي وفق معايير ISO/IEC 27037 ونموذج EDRM، مع توثيق WORM وختم SHA-256 الفوري غير القابل للتلاعب">
     <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-obsidian: #030806;
-            --bg-card: #071510;
-            --bg-card-hover: #0b1f18;
-            --gold-primary: #c5a880;
-            --gold-light: #f3dfba;
-            --gold-dark: #917752;
-            --emerald: #10b981;
-            --emerald-glow: rgba(16, 185, 129, 0.25);
-            --cyan: #38bdf8;
-            --amber: #f59e0b;
-            --crimson: #ef4444;
-            --border-dim: #183327;
-            --border-gold: #c5a880;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Tajawal', 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-obsidian);
-            color: #e2e8f0;
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 12%, rgba(197, 168, 128, 0.05) 0%, transparent 45%),
-                radial-gradient(circle at 90% 88%, rgba(56, 189, 248, 0.04) 0%, transparent 45%);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-            direction: ltr;
-            text-align: left;
-        }
-
-        /* Top Header */
-        header {
-            background: rgba(4, 19, 13, 0.95);
-            -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-dim);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .brand-logo {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            border: 1px solid var(--gold-primary);
-            box-shadow: 0 0 15px rgba(197, 168, 128, 0.2);
-        }
-
-        .brand-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-badge {
-            font-size: 0.7rem;
-            color: var(--cyan);
-            background: rgba(56, 189, 248, 0.12);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-right: 0.5rem;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 600;
-            padding: 0.4rem 0.75rem;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            border: 1px solid transparent;
-        }
-
-        .nav-link:hover, .nav-link.active {
-            color: var(--gold-light);
-            background: rgba(197, 168, 128, 0.1);
-            border-color: rgba(197, 168, 128, 0.3);
-        }
-
-        .btn-portal-back {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
-            color: var(--emerald);
-            border: 1px solid var(--emerald);
-            padding: 0.45rem 1rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .btn-portal-back:hover {
-            background: var(--emerald);
-            color: #000;
-            box-shadow: 0 0 15px var(--emerald-glow);
-        }
-
-        /* Hero Banner */
-        .hero {
-            padding: 2.5rem 2rem 1.5rem;
-            max-width: 1600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            color: var(--cyan);
-            padding: 0.35rem 0.85rem;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .hero-pill-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--cyan);
-            box-shadow: 0 0 8px var(--cyan);
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
-
-        .hero-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1rem;
-            color: #94a3b8;
-            max-width: 1000px;
-            line-height: 1.65;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.25rem;
-            margin: 1.75rem 0;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-dim);
-            border-radius: 12px;
-            padding: 1.25rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.25s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--cyan);
-        }
-
-        .stat-card.emerald::after { background: var(--emerald); }
-        .stat-card.gold::after { background: var(--gold-primary); }
-        .stat-card.amber::after { background: var(--amber); }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-bottom: 0.4rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .stat-val {
-            font-size: 1.75rem;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        .stat-sub {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 0.25rem;
-        }
-
-        /* Main Workspace */
-        .workspace {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 2rem;
-            width: 100%;
-        }
-
-        @media (max-width: 1024px) {
-            .workspace {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border-dim);
-            border-radius: 14px;
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .panel-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-dim);
-            padding-bottom: 1rem;
-        }
-
-        .panel-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .panel-badge {
-            background: rgba(56, 189, 248, 0.15);
-            color: var(--cyan);
-            font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-
-        /* Form Controls */
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-full {
-            grid-column: span 2;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #94a3b8;
-        }
-
-        .form-input, .form-select {
-            background: rgba(3, 8, 6, 0.8);
-            border: 1px solid var(--border-dim);
-            color: #fff;
-            padding: 0.65rem 0.85rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            outline: none;
-            transition: border-color 0.2s;
-            width: 100%;
-        }
-
-        .form-input:focus, .form-select:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
-        }
-
-        .check-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 0.65rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-dim);
-        }
-
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: #cbd5e1;
-            cursor: pointer;
-        }
-
-        .check-item input[type="checkbox"] {
-            accent-color: var(--cyan);
-            width: 16px;
-            height: 16px;
-        }
-
-        .btn-build-bundle {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            color: #fff;
-            font-weight: 800;
-            padding: 0.85rem 1.5rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
-        }
-
-        .btn-build-bundle:hover {
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            color: #030806;
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
-            transform: translateY(-1px);
-        }
-
-        /* Right Panel: Court Package Output */
-        .evidence-dossier-card {
-            background: #020504;
-            border: 1px dashed var(--cyan);
-            border-radius: 12px;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .dossier-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-            padding-bottom: 0.5rem;
-        }
-
-        .dossier-title {
-            font-size: 0.95rem;
-            font-weight: 800;
-            color: var(--cyan);
-        }
-
-        .dossier-ref {
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-
-        .dossier-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.82rem;
-            padding: 0.35rem 0;
-            border-bottom: 1px solid rgba(24, 51, 39, 0.4);
-        }
-
-        .dossier-label {
-            color: #94a3b8;
-        }
-
-        .dossier-val {
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .dossier-val.cyan {
-            color: var(--cyan);
-        }
-
-        .chain-of-custody-box {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 8px;
-            padding: 0.85rem;
-            font-size: 0.74rem;
-            color: #cbd5e1;
-            line-height: 1.6;
-        }
-
-        .chain-step {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .chain-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--emerald);
-        }
-
-        .btn-download-dossier {
-            background: rgba(56, 189, 248, 0.12);
-            border: 1px solid var(--cyan);
-            color: var(--cyan);
-            padding: 0.65rem 1rem;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .btn-download-dossier:hover {
-            background: var(--cyan);
-            color: #030806;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: auto;
-            border-top: 1px solid var(--border-dim);
-            background: rgba(3, 8, 6, 0.95);
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--cyan);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sovereign-mission-suite.css">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="S&amp;R CoreSync For Intelligent Solutions">
+    <meta property="og:title" content="محرك الأدلة الجنائية الرقمية والتقاضي السيادي">
+    <meta property="og:url" content="https://sr-coresync.com/digital-forensics-litigation-hub.html">
+    <meta property="og:image" content="https://sr-coresync.com/assets/og/og-digital-forensics.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="S&R CoreSync — محرك الأدلة الجنائية الرقمية والتقاضي السيادي">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://sr-coresync.com/assets/og/og-digital-forensics.jpg">
 </head>
 <body>
-
-    <!-- Header Navigation -->
     <header>
         <div class="nav-container">
             <a href="index.html" class="brand-section">
-                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync Emblem" class="brand-logo">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&amp;R CoreSync Logo" class="brand-logo" width="44" height="44">
                 <div>
-                    <div class="brand-title">S&R CoreSync <span class="brand-badge">Forensics &amp; Litigation Hub</span></div>
+                    <span class="brand-title">S&amp;R CoreSync Forensics Hub</span>
+                    <span class="brand-sub">MISSION 107 • DIGITAL FORENSICS &amp; LITIGATION SUPPORT</span>
                 </div>
             </a>
-            <div class="header-actions">
-                <a href="sovereign-compliance-master-dashboard.html" class="nav-link">لوحة القيادة المركزية 🏛️</a>
-                <a href="immutable-audit-vault.html" class="nav-link">خزينة WORM 🔒</a>
-                <a href="sovereign-contract-engine.html" class="nav-link">محرك العقود 📜</a>
-                <a href="compliance-audit-center.html" class="nav-link">مركز الامتثال 🛡️</a>
-                <a href="index.html" class="btn-portal-back">الرئيسية ↩</a>
-            </div>
+            <nav class="nav-links" aria-label="روابط منصة الأدلة الجنائية">
+                <a href="centennial-sovereign-command-bridge.html" class="nav-link">👑 غرفة القيادة المئوية</a>
+                <a href="sovereign-arbitration-hub.html" class="nav-link">⚖️ التحكيم الدولي</a>
+                <a href="smart-escrow-milestone.html" class="nav-link">🤝 الضمان الذكي</a>
+                <a href="zkp-confidential-enclave.html" class="nav-link">🔐 الحوسبة السرية ZKP</a>
+                <a href="sovereign-mission-suite-dashboard.html" class="nav-link">📊 لوحة جناح المهام</a>
+                <a href="index.html" class="nav-link">🏠 الرئيسية</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-pill">
-            <span class="hero-pill-dot"></span>
-            <span>بوابة الأدلة الرقمية وسلسلة الحيازة التشفيرية • حجية قضائية دولية وفق ISO/IEC 27037</span>
-        </div>
-        <h1 class="hero-title">مركز التفتيش الجنائي السيادي و<span>أدلة التقاضي الرقمية</span></h1>
-        <p class="hero-subtitle">
-            منظومة متقدمة لاستخراج وحزم وتوثيق السجلات الجنائية الإلكترونية (Digital Forensics Dossiers) غير القابلة للطعن، والمعتمدة رسمياً أمام المحاكم الأوروبية (eIDAS Art. 25)، والمحاكم السعودية (نظام الإثبات)، والمحاكم الإماراتية والسورية (قانون المعاملات رقم 4 لعام 2009).
-        </p>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-label">
-                    <span>حزم الأدلة الجنائية المصدرة</span>
-                    <span>⚖️</span>
+    <main>
+        <section class="hero-banner" aria-labelledby="forensics-hero-title">
+            <div>
+                <div class="badge-row">
+                    <span class="pill-badge gold">ISO/IEC 27037:2012 • EDRM COMPLIANT</span>
+                    <span class="pill-badge cyan">WORM CHAIN OF CUSTODY</span>
+                    <span class="pill-badge emerald">SHA-256 DIGITAL EVIDENCE SEAL</span>
                 </div>
-                <div class="stat-val">100% معتمدة</div>
-                <div class="stat-sub">مطابقة معيار ISO/IEC 27037 الدولي</div>
+                <h1 id="forensics-hero-title" class="hero-title">محرك الأدلة الجنائية الرقمية وإدارة إجراءات التقاضي السيادية <span class="ltr" lang="en">(Sovereign Digital Forensics &amp; Litigation Support Hub)</span></h1>
+                <p class="hero-desc">
+                    منظومة متكاملة لحفظ وتحليل الأدلة الرقمية في النزاعات التجارية وقضايا التحكيم الدولي: استخراج الصور الجنائية (Bit-stream Image)، توثيق سلسلة الحيازة عبر سجلات WORM غير قابلة للتلاعب، فحص التجزئة المشفرة، وإعداد تقارير الخبراء القضائيين المعتمدة لدى المحاكم وهيئات التحكيم.
+                </p>
             </div>
-
-            <div class="stat-card emerald">
-                <div class="stat-label">
-                    <span>سلامة سلسلة الحيازة (Chain of Custody)</span>
-                    <span>🔗</span>
-                </div>
-                <div class="stat-val mono">Zero-Tamper</div>
-                <div class="stat-sub">شجرة ميركل + ختم ذري VSL Atomic</div>
+            <div class="status-card" aria-label="حالة مركز الأدلة الجنائية">
+                <div class="status-row"><span>معيار الحفظ الجنائي</span><strong class="mono">ISO/IEC 27037:2012</strong></div>
+                <div class="status-row"><span>الأدلة الجنائية المفهرسة</span><strong class="mono" id="stat-forensic-count">4</strong></div>
+                <div class="status-row"><span>حجم مستودع الأدلة</span><strong class="mono" id="stat-forensic-size">4.82 TB</strong></div>
+                <div class="status-row"><span>آخر بصمة سلسلة حيازة</span><strong class="mono" id="stat-last-hash">—</strong></div>
             </div>
-
-            <div class="stat-card gold">
-                <div class="stat-label">
-                    <span>سجلات WORM الموثقة قضائياً</span>
-                    <span>🔒</span>
-                </div>
-                <div class="stat-val mono">1,489,204</div>
-                <div class="stat-sub">أقفال الحفظ الإلزامي 10 سنوات</div>
-            </div>
-
-            <div class="stat-card amber">
-                <div class="stat-label">
-                    <span>المحاكم والهيئات القضائية المعترفة</span>
-                    <span>🏛️</span>
-                </div>
-                <div class="stat-val">14 محكمة وهيئة</div>
-                <div class="stat-sub">هولندا • السعودية • الإمارات • سوريا • سنغافورة</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Workspace -->
-    <main class="workspace">
-        <!-- Left Panel: Package Builder -->
-        <section class="panel">
-            <div class="panel-header">
-                <div class="panel-title">
-                    <span>🔬 منشئ حزم الأدلة الجنائية وسلاسل الحيازة</span>
-                </div>
-                <span class="panel-badge mono">FORENSIC-BUILDER-V3</span>
-            </div>
-
-            <form id="forensics-form" class="form-grid">
-                <div class="form-group form-full">
-                    <label for="case-name" class="form-label">اسم القضية / الملف القانوني</label>
-                    <input type="text" id="case-name" class="form-input" value="نزاع توريد برمجيات وحقوق ملكية فكرية - رقم القضية 2026/8941" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="court-jurisdiction" class="form-label">المحكمة والولاية القضائية المستهدفة</label>
-                    <select id="court-jurisdiction" class="form-select">
-                        <option value="SY-COURT" selected>🇸🇾 المحاكم المدنية والتجارية بدمشق (قانون رقم 4 لعام 2009)</option>
-                        <option value="KSA-COMMERCIAL">🇸🇦 المحكمة التجارية بالرياض (نظام الإثبات بالتعاملات الإلكترونية)</option>
-                        <option value="UAE-DIFC">🇦🇪 محاكم دبي ومحكمة DIFC الدولية (مرسوم اتحادي رقم 46)</option>
-                        <option value="NL-AMS">🇳🇱 محكمة أمستردام الابتدائية (Rechtbank Amsterdam - eIDAS)</option>
-                        <option value="SG-SICC">🇸🇬 محكمة سنغافورة التجارية الدولية (SICC - ETA Rules)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="evidence-type" class="form-label">نوع الإثبات والأدلة المطلوبة</label>
-                    <select id="evidence-type" class="form-select">
-                        <option value="contract" selected>عقود إلكترونية موقعة Multi-Sig</option>
-                        <option value="worm">سجلات WORM المحصنة وأقفال التخزين 10Y</option>
-                        <option value="settlement">سندات التحويل المالي والمقاصة المصرفية</option>
-                        <option value="siem">سجلات تدفقات الشبكة وتحليل SIEM الجنائي</option>
-                    </select>
-                </div>
-
-                <div class="form-group form-full">
-                    <div class="form-label">عناصر الحزمة الجنائية المعتمدة (ISO/IEC 27037):</div>
-                    <div class="check-grid">
-                        <label class="check-item">
-                            <input type="checkbox" id="chk-custody" checked>
-                            <span>سلسلة حيازة مشفرة (Chain of Custody)</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chk-atomic-ts" checked>
-                            <span>ختم زمني ذري معتمد (RFC 3161)</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chk-hsm-seal" checked>
-                            <span>ختم عتادي FIPS 140-3 HSM Root</span>
-                        </label>
-                        <label class="check-item">
-                            <input type="checkbox" id="chk-affidavit" checked>
-                            <span>شهادة خبير رقمي محلف (Affidavit)</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group form-full">
-                    <button type="submit" class="btn-build-bundle" id="btn-generate-dossier">
-                        <span>⚖️ توليد حزمة الأدلة الجنائية وتوقيع سلسلة الحيازة</span>
-                    </button>
-                </div>
-            </form>
         </section>
 
-        <!-- Right Panel: Dossier Output -->
-        <section class="panel">
-            <div class="panel-header">
-                <div class="panel-title">
-                    <span>📂 ملف الحزمة الجنائية المصادق عليها</span>
+        <section class="kpi-grid" aria-label="مؤشرات الأدلة الجنائية">
+            <article class="kpi-card">
+                <span class="kpi-label">سلامة الأدلة الرقمية (Evidence Integrity)</span>
+                <strong class="kpi-value mono">100.00%</strong>
+                <span class="kpi-foot">0 خروقات لتطابق البصمات التشفيرية</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">زمن الاستجابة للطلب القضائي</span>
+                <strong class="kpi-value mono">14 mins</strong>
+                <span class="kpi-foot">إنشاء تقرير سلسلة الحيازة الفوري</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">قضايا التقاضي المدعومة</span>
+                <strong class="kpi-value mono" id="kpi-litigation-cases">18</strong>
+                <span class="kpi-foot">تحت مظلة NAI • DIFC • SCCA • ICC</span>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-label">عمليات التدقيق والختم المنفذة</span>
+                <strong class="kpi-value mono" id="kpi-forensic-audits">0</strong>
+                <span class="kpi-foot">شهادات جنائية مختومة بـ WebCrypto</span>
+            </article>
+        </section>
+
+        <section class="workspace-grid">
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">🗂️ سجل الأدلة وسلسلة الحيازة (Evidence Docket)</h2>
+                    <span class="pill-badge gold mono" id="active-evidence-badge">EVD-2026-901</span>
                 </div>
-                <span class="panel-badge mono" id="dossier-id">DOSSIER-2026-9081</span>
+                <div class="item-list" id="evidence-list"></div>
+
+                <h3 class="panel-title sub-title">➕ تسجيل دليل رقمي جديد (Deposit Digital Evidence)</h3>
+                <form id="new-evidence-form" novalidate>
+                    <div class="form-grid">
+                        <label class="form-field">عنوان الدليل / الوصف
+                            <input id="f-evidence-title" type="text" maxlength="90" required placeholder="مثال: صورة القرص الصلب لخادم ERP الرئيسي">
+                        </label>
+                        <label class="form-field">الجهة المودعة / الخبير
+                            <input id="f-evidence-custodian" type="text" maxlength="80" required placeholder="مثال: Deloitte Forensics / Amsterdam">
+                        </label>
+                        <label class="form-field">رقم القضية المرتبطة
+                            <input id="f-case-ref" type="text" maxlength="30" required placeholder="مثال: ARB-2026-0418">
+                        </label>
+                        <label class="form-field">تصنيف المصدر الرقمي
+                            <select id="f-evidence-type">
+                                <option value="disk_image">صورة قرص صلب (Bit-Stream RAW/E01)</option>
+                                <option value="encrypted_db">قاعدة بيانات مشفرة وسجلات ERP</option>
+                                <option value="comms_archive">أرشيف بريد إلكتروني ومراسلات مشفرة</option>
+                                <option value="smart_contract_log">سجلات تنفيذ العقود الذكية وسلاسل الكتل</option>
+                            </select>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-secondary">🔒 تسجيل وتجميد الدليل في المستودع</button>
+                    <span id="forensic-form-msg" class="kpi-foot" role="status"></span>
+                </form>
             </div>
 
-            <div class="evidence-dossier-card">
-                <div class="dossier-header">
-                    <div class="dossier-title" id="d-title">حزمة إثبات قضائية معتمدة (Court Evidence Dossier)</div>
-                    <div class="dossier-ref mono" id="d-timestamp">2026-10-27T03:05:00Z</div>
+            <div class="panel-card">
+                <div class="panel-header">
+                    <h2 class="panel-title">🔬 مختبر التحليل وفحص سلسلة الحيازة (Forensic Lab)</h2>
                 </div>
-
-                <div class="dossier-row">
-                    <span class="dossier-label">المحكمة المختصة:</span>
-                    <span class="dossier-val" id="d-court">المحاكم المدنية والتجارية بدمشق</span>
+                <div class="terminal-box mono" id="forensic-terminal" aria-live="polite"></div>
+                <div class="btn-row">
+                    <button type="button" id="btn-verify-hash" class="btn-action">🔍 التحقق الجنائي وإصدار شهادة الحيازة</button>
+                    <button type="button" id="btn-export-forensic" class="btn-secondary">📥 تصدير تقرير الخبير المعتمد (JSON)</button>
                 </div>
-
-                <div class="dossier-row">
-                    <span class="dossier-label">الحجية والأساس القانوني:</span>
-                    <span class="dossier-val cyan" id="d-legal">قانون رقم 4 (2009) • eIDAS Art. 25</span>
-                </div>
-
-                <div class="dossier-row">
-                    <span class="dossier-label">حالة التجزئة التشفيرية:</span>
-                    <span class="dossier-val mono" id="d-hash">SHA256: 9b8e21f450...4c1b98a0</span>
-                </div>
-
-                <div class="chain-of-custody-box">
-                    <div class="chain-step">
-                        <span class="chain-dot"></span>
-                        <span><strong>الخطوة 1:</strong> استخراج الأصل من خزينة WORM المحصنة دون أي فك تشفير وسيط.</span>
-                    </div>
-                    <div class="chain-step">
-                        <span class="chain-dot"></span>
-                        <span><strong>الخطوة 2:</strong> ختم زمني ذري دقيق ±1.4ns من ساعة أمستردام الذرية VSL.</span>
-                    </div>
-                    <div class="chain-step">
-                        <span class="chain-dot"></span>
-                        <span><strong>الخطوة 3:</strong> إقرار وتوقيع تشفيري مشترك بين م. سليم عزيزة وأ. رائد كعكة.</span>
-                    </div>
-                </div>
-
-                <button type="button" class="btn-download-dossier" id="btn-download-bundle-file">
-                    📥 تنزيل الحزمة الجنائية المشفرة (Forensics Bundle .ISO / Signed Zip)
-                </button>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-links">
-            <a href="index.html">الرئيسية</a>
-            <a href="sovereign-compliance-master-dashboard.html">لوحة القيادة المركزية</a>
-            <a href="smart-escrow-milestone.html">العقود الذكية المشروطة</a>
-            <a href="immutable-audit-vault.html">خزينة WORM المحصنة</a>
-            <a href="sovereign-contract-engine.html">محرك العقود الذكية</a>
-            <a href="compliance-audit-center.html">مركز الامتثال الدولي</a>
-            <a href="supply-chain-due-diligence.html">تدقيق سلاسل التوريد</a>
-            <a href="cross-border-settlement.html">التسويات عبر الحدود</a>
-        </div>
-        <div>
-            © 2026 S&R CoreSync For Intelligent Solutions. جميع الحقوق السيادية محفوظة. منصة الحوكمة الموثوقة العابرة للحدود (أمستردام • الرياض • دبي • دمشق • سنغافورة).
-        </div>
+        S&amp;R CoreSync For Intelligent Solutions • محرك الأدلة الجنائية والتقاضي (المهمة 107 - الجزء 1) • جميع الحقوق محفوظة © 2026
     </footer>
 
-    <!-- Interactive Script -->
-    <script>
-        (function() {
-            var form = document.getElementById('forensics-form');
-            var btn = document.getElementById('btn-generate-dossier');
-            var dossierId = document.getElementById('dossier-id');
-            var dTimestamp = document.getElementById('d-timestamp');
-            var dCourt = document.getElementById('d-court');
-            var dLegal = document.getElementById('d-legal');
-            var dHash = document.getElementById('d-hash');
-            var courtJurisdiction = document.getElementById('court-jurisdiction');
-
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    btn.disabled = true;
-                    btn.innerHTML = '<span>⏳ جاري حزم الأدلة والختم التشفيري بالسلسلة...</span>';
-
-                    setTimeout(function() {
-                        btn.disabled = false;
-                        btn.innerHTML = '<span>⚖️ توليد حزمة الأدلة الجنائية وتوقيع سلسلة الحيازة</span>';
-
-                        var newId = 'DOSSIER-2026-' + Math.floor(1000 + Math.random() * 9000);
-                        dossierId.textContent = newId;
-                        dTimestamp.textContent = new Date().toISOString();
-                        dCourt.textContent = courtJurisdiction.options[courtJurisdiction.selectedIndex].text.split('(')[0];
-
-                        var val = courtJurisdiction.value;
-                        if (val === 'SY-COURT') {
-                            dLegal.textContent = 'قانون رقم 4 لعام 2009 (المعاملات والتوقيع الإلكتروني السوري)';
-                        } else if (val === 'KSA-COMMERCIAL') {
-                            dLegal.textContent = 'نظام الإثبات السعودي ونظام التعاملات الإلكترونية ونفاذ';
-                        } else if (val === 'UAE-DIFC') {
-                            dLegal.textContent = 'المرسوم بقانون اتحادي رقم 46 الإماراتي وقواعد DIFC';
-                        } else if (val === 'NL-AMS') {
-                            dLegal.textContent = 'eIDAS Art. 25 & Dutch Code of Civil Procedure (Rv)';
-                        } else {
-                            dLegal.textContent = 'Singapore Electronic Transactions Act (ETA Cap. 88)';
-                        }
-
-                        dHash.textContent = 'SHA256: ' + Math.random().toString(16).substring(2, 10) + '...' + Math.random().toString(16).substring(2, 10);
-                    }, 800);
-                });
-            }
-
-            var btnDownload = document.getElementById('btn-download-bundle-file');
-            if (btnDownload) {
-                btnDownload.addEventListener('click', function() {
-                    var data = {
-                        dossierId: dossierId.textContent,
-                        timestamp: dTimestamp.textContent,
-                        court: dCourt.textContent,
-                        legalAdmissibility: dLegal.textContent,
-                        cryptographicDigest: dHash.textContent,
-                        isoStandard: 'ISO/IEC 27037:2012 Guidelines for identification, collection, acquisition and preservation of digital evidence',
-                        examiners: [
-                            'Eng. Mohammad Salim Aziza (Amsterdam Head)',
-                            'Mr. Mohammad Raed Kaakeh (Middle East Head)'
-                        ]
-                    };
-
-                    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-                    var url = URL.createObjectURL(blob);
-                    var a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'coresync_forensics_' + dossierId.textContent + '.json';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                });
-            }
-        })();
-    </script>
+    <script src="js/sovereign-mission-core.js"></script>
+    <script src="js/digital-forensics-litigation-hub.js"></script>
 </body>
 </html>
