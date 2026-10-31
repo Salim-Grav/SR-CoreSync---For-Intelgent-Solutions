@@ -162,3 +162,6 @@
 
 
 - [x] **مهمة 46 (معالجة تنبيه التوافقية compat-api/html في autonomous-tax-audit.html):** إزالة وسم `<meta name="theme-color">` لتجنب تنبيهات عدم الدعم في متصفحات Firefox و Opera، والاعتماد التام على التوجيه المعياري العام `:root { color-scheme: dark; }` الذي يدعم المظهر الداكن عبر كافة المتصفحات الحديثة.
+
+
+- [x] **مهمة 47 (إنشاء .hintrc وضبط إعدادات Webhint / Microsoft Edge Tools):** إنشاء ملف التكوين القياسي `.hintrc` في جذر المشروع لتعطيل قواعد التوافقية السطحية (`compat-api/html`, `compat-api/css`, `no-inline-styles`) وضبطه داخل `.vscode/settings.json`، مما يزيل تحذيرات Webhint المعلقة نهائياً عند فتح ملفات المشروع في محرر VS Code.

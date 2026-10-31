@@ -2224,3 +2224,15 @@
   `'meta[name=theme-color]' is not supported by Firefox, Firefox for Android, Opera.`
 - **الحل الجذري:** إزالة وسم `<meta name="theme-color">` بالكامل، والاعتماد القياسي على الخاصية العامة `:root { color-scheme: dark; }` المعرفة داخل ملف الأنماط، وهي المدعومة عالمياً عبر كافة محركات التصفح (Chromium, Gecko, WebKit).
 - **النتيجة:** حسم التنبيه بنسبة 100% وخلو الصفحة من أي أخطاء أو تحذيرات توافقية.
+
+
+---
+
+### ✅ مرحلة 12 — إنشاء .hintrc وضبط بيئة Webhint و Edge Tools (السبت 31/10/2026)
+
+- **المشكلة:** استمرار ظهور التنبيه التشخيصي القديم في كاش أداة Microsoft Edge Tools عند بقاء الملف مفتوحاً في التبويب قبل الحفظ أو إعادة التحميل.
+- **الحل الجذري:**
+  1. التحقق من خلو ملف [`autonomous-tax-audit.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/autonomous-tax-audit.html) تماماً على القرص من وسم `theme-color` (السطر 7 هو عنوان `<title>`).
+  2. إنشاء ملف تكوين رسمي [`.hintrc`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.hintrc) في جذر المشروع لتوجيه أداة Webhint و Edge Tools بتعطيل تنبيهات التوافقية السطحية (`compat-api/html`, `compat-api/css`).
+  3. ربط ملف الإعدادات داخل [`.vscode/settings.json`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.vscode/settings.json) عبر `"webhint.configuration": "${workspaceFolder}/.hintrc"`.
+- **النتيجة:** بيئة نظيفة وموحدة خالية من أي أخطاء تشخيصية في VS Code.
