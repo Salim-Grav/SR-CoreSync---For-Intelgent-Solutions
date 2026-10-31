@@ -2198,3 +2198,18 @@
 - **اختبار رفع وفهرسة المستندات القضائية:**
   - تم اختبار فهرسة مذكرة الدعوى القضائية [`uploads/sample_arbitration_claim_arb0418.txt`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/uploads/sample_arbitration_claim_arb0418.txt) في محرك RAG الهجين.
   - أظهر الفحص عبر [`scripts/test_judicial_rag_upload.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_judicial_rag_upload.py) استرجاعاً فورياً لبيانات الدعوى ومستودع WORM الجنائي برصيد 90 مستنداً و 506 أجزاء مفهرسة.
+
+
+---
+
+### ✅ مرحلة 10 — معالجة تدقيق Iubenda وتحديث بصمات CSP وفحص النشر الشامل (السبت 31/10/2026)
+
+- **المشكلة المرصودة في فحص النشر:**
+  - ظهور خطأ `Missing local resource: cdn.iubenda.com/cs/gpp/stub.js` نتيجة استخدام روابط بروتوكول نسبي (`//cdn.iubenda.com`) في 10 صفحات أُضيفت حديثاً لامتثال Iubenda GDPR.
+  - قدم ملف `csp-hashes.txt` إثر إضافة وسوم السكريبتات الجديدة.
+- **الإصلاحات المنفذة:**
+  1. تحويل كافة روابط Iubenda في 10 صفحات (`blog.html`, `index.html`, وصفحات `insights/`) إلى بروتوكول صريح آمن `https://cdn.iubenda.com/`.
+  2. تحديث فحص الروابط في [`scripts/validate_publish_set.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/validate_publish_set.py) لدعم واستثناء الروابط التي تبدأ بـ `//`.
+  3. تشغيل [`scripts/build_csp.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/build_csp.py) لتوليد وتحديث 150 بصمة SHA-256 فريدة في `csp-hashes.txt`.
+  4. تشغيل [`scripts/prepare_publish_set.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/prepare_publish_set.py) وإعادة بناء `_site/` (963 ملفاً بحجم 413.31 MB).
+  5. اجتياز الفحص الشامل لـ `validate_publish_set.py`: 9,365 رابط محلي تم فحصها، 0 أسرار في 1,343 ملفاً، و 54/54 صفحة لغوية معزولة 100%.
