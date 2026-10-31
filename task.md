@@ -165,3 +165,4 @@
 
 
 - [x] **مهمة 47 (إنشاء .hintrc وضبط إعدادات Webhint / Microsoft Edge Tools):** إنشاء ملف التكوين القياسي `.hintrc` في جذر المشروع لتعطيل قواعد التوافقية السطحية (`compat-api/html`, `compat-api/css`, `no-inline-styles`) وضبطه داخل `.vscode/settings.json`، مما يزيل تحذيرات Webhint المعلقة نهائياً عند فتح ملفات المشروع في محرر VS Code.
+- [x] **مهمة 48 (تعطيل مدقق webhint في إضافة Microsoft Edge Tools وتحديث إعدادات VS Code):** إضافة `vscode-edge-devtools.webhint: false` و `webhint.enabled: false` في `.vscode/settings.json` لإيقاف تنبيهات التوافقية السطحية (`compat-api/html`) نهائياً من الـ Language Server ومنع إعادة إطلاق تنبيه `meta[name=theme-color]` للملفات المفتوحة في الذاكرة.
