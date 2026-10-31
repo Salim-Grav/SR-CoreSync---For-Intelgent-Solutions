@@ -126,25 +126,33 @@ def _dispatch_desktop_alert(message: str, title: str) -> None:
 
     # Strategy B: plyer balloon tip
     try:
-        from plyer import notification as plyer_notify
-        plyer_notify.notify(
-            title=title,
-            message=message,
-            app_name="S&R CoreSync",
-            timeout=10,
-        )
-        logger.info("plyer notification sent: %s", message)
-        return
+        import plyer
+        notify_obj = getattr(plyer, "notification", None)
+        if notify_obj is not None:
+            notify_func = getattr(notify_obj, "notify", None)
+            if callable(notify_func):
+                notify_func(
+                    title=title,
+                    message=message,
+                    app_name="S&R CoreSync",
+                    timeout=10,
+                )
+                logger.info("plyer notification sent: %s", message)
+                return
     except Exception as plyer_err:
         logger.debug("plyer failed (%s), trying win10toast…", plyer_err)
 
     # Strategy C: win10toast legacy
     try:
-        from win10toast import ToastNotifier
-        toaster = ToastNotifier()
-        toaster.show_toast(title, message, duration=10, threaded=True)
-        logger.info("win10toast notification sent: %s", message)
-        return
+        import win10toast
+        toaster_cls = getattr(win10toast, "ToastNotifier", None)
+        if callable(toaster_cls):
+            toaster = toaster_cls()
+            show_toast_func = getattr(toaster, "show_toast", None)
+            if callable(show_toast_func):
+                show_toast_func(title, message, duration=10, threaded=True)
+                logger.info("win10toast notification sent: %s", message)
+                return
     except Exception as toast_err:
         logger.warning("win10toast also failed (%s); using console fallback.", toast_err)
 
