@@ -142,3 +142,6 @@
 
 
 - [x] **مهمة 38 (تفعيل إشعارات Webhook الخارجية للمطورين):** ترقية `sr_alert_dispatcher.py` لدعم Webhook متعدد القنوات (Slack / Discord / Telegram Bot / Generic HTTP) بشكل متوازٍ وغير حاجب (Non-blocking background thread) مع صيغ `text` و `content` الشاملة، والتحقق عبر `scripts/test_webhook_dispatcher.py` بنسبة نجاح 100%.
+
+
+- [x] **مهمة 39 (حل خطأ الفحص السكوني Pyrefly not-callable في sr_alert_dispatcher.py):** استبدال استدعاء `plyer_notify.notify(...)` المباشر بفحص أمان ديناميكي `getattr(plyer, "notification", None)` و `callable(notify_func)` مع تطبيق نفس الفحص الآمن على `win10toast`، مما أزال خطأ `Expected a callable, got None` نهائياً (0 أخطاء في VS Code / Pyrefly).

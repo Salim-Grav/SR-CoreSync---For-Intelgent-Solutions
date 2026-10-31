@@ -2136,3 +2136,20 @@
   4. **Generic Webhook:** عبر `ALERT_WEBHOOK_URL` أو تمرير `--webhook <url>` مباشرة
   5. **Native Desktop Alerts:** نوافذ Windows Toast و `MessageBoxW` و Console
 - **فحص التكامل:** تم التحقق بنجاح 100% عبر خادم mock محلي في [`scripts/test_webhook_dispatcher.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_webhook_dispatcher.py).
+
+
+---
+
+### ✅ مرحلة 6 — معالجة التنبيه التشخيصي لـ Pyrefly (السبت 01/11/2026)
+
+- **المشكلة:** تنبيه Pyrefly بالسطر 130: `Expected a callable, got None` بسبب إمكانية إرجاع كائن `None` من مكتبة `plyer.notification` عند غياب واجهة النظام.
+- **الحل الجذري:**
+  ```python
+  import plyer
+  notify_obj = getattr(plyer, "notification", None)
+  if notify_obj is not None:
+      notify_func = getattr(notify_obj, "notify", None)
+      if callable(notify_func):
+          notify_func(title=title, message=message, app_name="S&R CoreSync", timeout=10)
+  ```
+- **النتيجة:** حُل التنبيه بنسبة 100% وأصبحت بيئة Pyrefly نظيفة تماماً بدون أي خطأ أو تحذير (Commit: `ec8719c`).
