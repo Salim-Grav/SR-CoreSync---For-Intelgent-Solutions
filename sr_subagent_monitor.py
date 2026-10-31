@@ -15,7 +15,11 @@ import re
 import time
 import json
 import sqlite3
+import logging
 import argparse
+
+logger = logging.getLogger(__name__)
+
 import importlib.util
 
 # Dynamically import alert dispatcher if available
@@ -259,6 +263,16 @@ class AutonomousSecurityHealthSubagent:
         except Exception:
             pass
 
+        # Send native Windows toast if an ALERT is detected
+        if overall == "ALERT" and sr_alert:
+            try:
+                alert_msgs = []
+                for name, mod in report["modules"].items():
+                    if mod.get("status") == "ALERT":
+                        alert_msgs.append(f"{name}: {mod.get('message','')}")
+                sr_alert.send_alert("S&R CoreSync subagent ALERT: " + "; ".join(alert_msgs))
+            except Exception as e:
+                logger.error("Failed to send Windows toast alert: %s", e)
         return report
 
 def main():
