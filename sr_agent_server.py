@@ -1,12 +1,13 @@
 import os
 import sys
+import io
 import json
 import asyncio
 from datetime import datetime
 from contextlib import asynccontextmanager
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, HTTPException, Request, Query, Path
+from fastapi import FastAPI, HTTPException, Request, Query, Path, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, JSONResponse, HTMLResponse
 from fastapi.openapi.docs import get_swagger_ui_html, get_redoc_html
@@ -22,7 +23,7 @@ from sr_agent_core import (
     tool_list_project_portals
 )
 import sr_session_db
-from sr_rag_engine import SovereignRAGDatabase, build_or_update_knowledge_index, query_rag_knowledge
+from sr_rag_engine import SovereignRAGDatabase, build_or_update_knowledge_index, query_rag_knowledge, index_custom_document
 from sr_subagent_monitor import AutonomousSecurityHealthSubagent
 from google.antigravity import Agent
 
@@ -381,6 +382,90 @@ async def subagent_run_audit_endpoint():
     """تنفيذ دورة فحص وتدقيق أمني وصحي فوري"""
     report = app.state.subagent.run_full_audit()
     return {"status": "completed", "report": report}
+
+@app.get("/cockpit", include_in_schema=False)
+async def cockpit_page():
+    """عرض لوحة التحكم التنفيذية للوكيل والمراقب الذاتي وفهرس RAG"""
+    cockpit_file = os.path.join(os.path.dirname(__file__), "agent-cockpit.html")
+    if os.path.exists(cockpit_file):
+        with open(cockpit_file, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(content="<h1>Cockpit file not found</h1>", status_code=404)
+
+@app.post("/api/upload", tags=["تحليل المرفقات وفهرسة RAG"])
+async def upload_files_endpoint(files: List[UploadFile] = File(...)):
+    """
+    استلام مرفقات المستندات (PDF / DOCX) بحد أقصى 5 ميجابايت للملف،
+    استخراج النصوص وفهرستها فورياً داخل محرك RAG المحلي للمنظومة.
+    """
+    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+    processed = []
+    
+    for file in files:
+        filename = file.filename or "unknown_document"
+        content = await file.read()
+        
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=413,
+                detail=f"الملف {filename} يتجاوز الحد الأقصى المسموح به (5 ميجابايت)."
+            )
+            
+        lower_name = filename.lower()
+        extracted_text = ""
+        
+        try:
+            if lower_name.endswith(".pdf"):
+                import pdfplumber
+                with pdfplumber.open(io.BytesIO(content)) as pdf:
+                    pages_text = [page.extract_text() or "" for page in pdf.pages]
+                    extracted_text = "\n\n".join(pages_text).strip()
+            elif lower_name.endswith(".docx"):
+                import docx
+                doc = docx.Document(io.BytesIO(content))
+                paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
+                extracted_text = "\n\n".join(paragraphs).strip()
+            elif lower_name.endswith(".txt") or lower_name.endswith(".md"):
+                extracted_text = content.decode("utf-8", errors="ignore").strip()
+            else:
+                raise HTTPException(
+                    status_code=415,
+                    detail=f"نوع الملف {filename} غير مدعوم. الأنواع المدعومة: PDF, DOCX, TXT, MD"
+                )
+        except HTTPException:
+            raise
+        except Exception as err:
+            raise HTTPException(
+                status_code=422,
+                detail=f"تعذر استخراج المحتوى من الملف {filename}: {str(err)}"
+            )
+            
+        if not extracted_text:
+            raise HTTPException(
+                status_code=400,
+                detail=f"الملف {filename} لا يحتوي على أي نصوص قابلة للاستخراج."
+            )
+            
+        # فهرسة المستند في قاعدة بيانات RAG
+        index_result = index_custom_document(
+            title=f"مرفق: {filename}",
+            text_content=extracted_text,
+            source_identifier=f"uploads/{filename}",
+            category="user_attachment"
+        )
+        processed.append({
+            "filename": filename,
+            "size_bytes": len(content),
+            "chunks_indexed": index_result.get("chunks_indexed", 0),
+            "status": "indexed"
+        })
+        
+    return {
+        "status": "ok",
+        "message": f"تمت معالجة وفهرسة {len(processed)} ملف(ات) بنجاح في قاعدة RAG المحلية.",
+        "files_processed": len(processed),
+        "details": processed
+    }
 
 if __name__ == "__main__":
     import uvicorn
