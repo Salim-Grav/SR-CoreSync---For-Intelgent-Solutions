@@ -98,11 +98,18 @@ async def broadcast_live_event(event_type: str, payload: dict):
     for dq in dead_queues:
         sse_subscribers.discard(dq)
 
+pulse_shutdown_event = asyncio.Event()
+
 async def telemetry_pulse_loop(app: FastAPI):
     """حلقة البث النبضي الدوري (Heartbeat & Telemetry) لتغذية لوحة القيادة الموحدة"""
-    while True:
+    while not pulse_shutdown_event.is_set():
         try:
-            await asyncio.sleep(5)
+            try:
+                await asyncio.wait_for(pulse_shutdown_event.wait(), timeout=5.0)
+                break
+            except asyncio.TimeoutError:
+                pass
+
             if sse_subscribers:
                 stats = app.state.rag_db.get_stats() if hasattr(app.state, "rag_db") else {}
                 appeal_count = len(app.state.appeals) if hasattr(app.state, "appeals") else 0
@@ -127,14 +134,16 @@ async def telemetry_pulse_loop(app: FastAPI):
                 await broadcast_live_event("pulse_telemetry", pulse_data)
         except asyncio.CancelledError:
             break
-        except Exception as e:
-            await asyncio.sleep(5)
+        except Exception:
+            pass
 
 # ==============================================================================
 # دورة حياة التطبيق (Lifespan Context)
 # ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    pulse_shutdown_event.clear()
+
     # 1. تهيئة قاعدة بيانات الجلسات والذاكرة
     sr_session_db.init_db()
     
@@ -152,21 +161,22 @@ async def lifespan(app: FastAPI):
     app.state.config = create_sovereign_agent_config()
 
     # 5. تهيئة سجل الاستئنافات السيادية النشطة (Mission 112)
-    app.state.appeals = [
-        {
-            "appeal_id": "APP-2026-0418",
-            "case_id": "ARB-2026-0418",
-            "appellant": "Rotterdam Logistics B.V.",
-            "respondent": "Gulf Trade Holding LLC",
-            "grounds": "ظهور مستند WORM جنائي إضافي EVD-2026-901 يثبت تزوير بوليصة الشحن البحرية",
-            "evidence_worm_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-            "counsel_signature": "Counsel Hendrik Van Der Berg (NAI Netherlands)",
-            "status": "APPEAL_UNDER_REVIEW",
-            "escrow_action": "ESCROW_LOCKED_EUR_1850000",
-            "timestamp": "2026-10-31T11:20:00Z",
-            "seal_sha256": "8a7c2e4f01b965dd34c4980a31ecde01a54728fba0e9176395bcf6d3910a30b1"
-        }
-    ]
+    if not hasattr(app.state, "appeals") or not app.state.appeals:
+        app.state.appeals = [
+            {
+                "appeal_id": "APP-2026-0418",
+                "case_id": "ARB-2026-0418",
+                "appellant": "Rotterdam Logistics B.V.",
+                "respondent": "Gulf Trade Holding LLC",
+                "grounds": "ظهور مستند WORM جنائي إضافي EVD-2026-901 يثبت تزوير بوليصة الشحن البحرية",
+                "evidence_worm_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "counsel_signature": "Counsel Hendrik Van Der Berg (NAI Netherlands)",
+                "status": "APPEAL_UNDER_REVIEW",
+                "escrow_action": "ESCROW_LOCKED_EUR_1850000",
+                "timestamp": "2026-10-31T11:20:00Z",
+                "seal_sha256": "8a7c2e4f01b965dd34c4980a31ecde01a54728fba0e9176395bcf6d3910a30b1"
+            }
+        ]
 
     # 6. إطلاق مهمة البث النبضي الخلفي (Mission 110)
     pulse_task = asyncio.create_task(telemetry_pulse_loop(app))
@@ -181,11 +191,9 @@ async def lifespan(app: FastAPI):
     print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
     print("=" * 70)
     yield
-    pulse_task.cancel()
-    try:
-        await pulse_task
-    except asyncio.CancelledError:
-        pass
+    pulse_shutdown_event.set()
+    if pulse_task and not pulse_task.done():
+        pulse_task.cancel()
     print("🛑 إيقاف خادم الوكيل الذكي بنجاح.")
 
 # إنشاء تطبيق FastAPI مع تعطيل مسارات docs التلقائية لتخصيصها بهوية S&R
