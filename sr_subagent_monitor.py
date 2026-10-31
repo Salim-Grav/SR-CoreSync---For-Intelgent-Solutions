@@ -11,6 +11,7 @@ of this file, via any medium, is strictly prohibited.
 
 import os
 import sys
+import re
 import time
 import json
 import sqlite3
@@ -125,7 +126,12 @@ class AutonomousSecurityHealthSubagent:
     def check_secrets_and_vault(self) -> Dict[str, Any]:
         """فحص حراسة الأسرار والملكية الفكرية والتأكد من عدم تسريب أي مفاتيح في الملفات."""
         tracked_extensions = [".html", ".js", ".css", ".md", ".json"]
-        forbidden_patterns = ["sk_live_", "whsec_", "AIzaSy", "ghp_"]
+        forbidden_regexes = [
+            re.compile(r'sk_live_[0-9a-zA-Z]{20,}'),
+            re.compile(r'whsec_[0-9a-zA-Z]{20,}'),
+            re.compile(r'AIzaSy[0-9a-zA-Z\-_]{30,}'),
+            re.compile(r'ghp_[0-9a-zA-Z]{30,}')
+        ]
         
         suspicious_matches = []
         
@@ -135,9 +141,10 @@ class AutonomousSecurityHealthSubagent:
                 try:
                     with open(p, "r", encoding="utf-8", errors="ignore") as f:
                         content = f.read()
-                    for pattern in forbidden_patterns:
-                        if pattern in content:
-                            suspicious_matches.append(f"{p.name}: {pattern}")
+                    for rx in forbidden_regexes:
+                        match = rx.search(content)
+                        if match:
+                            suspicious_matches.append(f"{p.name}: {match.group(0)[:10]}...")
                 except Exception:
                     pass
 
