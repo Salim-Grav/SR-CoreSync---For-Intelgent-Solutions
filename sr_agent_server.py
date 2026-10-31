@@ -98,14 +98,21 @@ async def broadcast_live_event(event_type: str, payload: dict):
     for dq in dead_queues:
         sse_subscribers.discard(dq)
 
-pulse_shutdown_event = asyncio.Event()
+pulse_shutdown_event: Optional[asyncio.Event] = None
+
+def get_pulse_shutdown_event() -> asyncio.Event:
+    global pulse_shutdown_event
+    if pulse_shutdown_event is None:
+        pulse_shutdown_event = asyncio.Event()
+    return pulse_shutdown_event
 
 async def telemetry_pulse_loop(app: FastAPI):
     """حلقة البث النبضي الدوري (Heartbeat & Telemetry) لتغذية لوحة القيادة الموحدة"""
-    while not pulse_shutdown_event.is_set():
+    evt = get_pulse_shutdown_event()
+    while not evt.is_set():
         try:
             try:
-                await asyncio.wait_for(pulse_shutdown_event.wait(), timeout=5.0)
+                await asyncio.wait_for(evt.wait(), timeout=5.0)
                 break
             except asyncio.TimeoutError:
                 pass
