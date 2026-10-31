@@ -2122,3 +2122,17 @@
 | كود الضمان الذكي | `js/smart-escrow-milestone.js` | إفراج مرحلي + تجميد تحكيمي فوري ✅ |
 | تحديث خريطة الموقع | `sitemap.xml` | إدراج رابطي المهمة 107 ✅ |
 | الفحص الشامل | `scripts/validate_publish_set.py` | 964 ملفاً • 0 أسرار • PASSED 100% ✅ |
+
+
+---
+
+### ✅ مرحلة 5 — تفعيل إشعارات الـ Webhook الخارجية للمطورين (السبت 01/11/2026)
+
+- **الملف المطور:** [`sr_alert_dispatcher.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sr_alert_dispatcher.py)
+- **القنوات المدعومة:**
+  1. **Slack Webhook:** عبر `SLACK_WEBHOOK_URL` بصيغة `{"text": ...}`
+  2. **Discord Webhook:** عبر `DISCORD_WEBHOOK_URL` بصيغة `{"content": ...}`
+  3. **Telegram Bot API:** عبر `TELEGRAM_BOT_TOKEN` و `TELEGRAM_CHAT_ID`
+  4. **Generic Webhook:** عبر `ALERT_WEBHOOK_URL` أو تمرير `--webhook <url>` مباشرة
+  5. **Native Desktop Alerts:** نوافذ Windows Toast و `MessageBoxW` و Console
+- **فحص التكامل:** تم التحقق بنجاح 100% عبر خادم mock محلي في [`scripts/test_webhook_dispatcher.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_webhook_dispatcher.py).

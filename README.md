@@ -91,3 +91,30 @@ curl -X POST http://127.0.0.1:8000/api/upload \
 ```
 
 The uploaded content is extracted, added to the local RAG knowledge base, and becomes searchable by the agent.
+
+
+---
+
+## 7️⃣ Multi-Channel Alert & Webhook Dispatcher (`sr_alert_dispatcher.py`)
+
+The platform includes an automated sovereign watchdog and multi-channel notification engine for operational alerts and security monitoring:
+
+### Supported Notification Channels:
+1. **External Webhooks (Non-blocking):**
+   - **Slack Webhook**: Set `SLACK_WEBHOOK_URL` in `.env` (receives markdown alert cards).
+   - **Discord Webhook**: Set `DISCORD_WEBHOOK_URL` in `.env` (receives embedded messages).
+   - **Generic Webhook**: Set `ALERT_WEBHOOK_URL` in `.env` (works with Zapier, n8n, Make, or custom HTTP APIs).
+   - **Telegram Bot API**: Set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in `.env`.
+2. **Native Desktop Alerts (Windows GUI):**
+   - Non-blocking `ctypes MessageBoxW` modal notification.
+   - Cross-platform system tray balloon notifications (`plyer` / `win10toast`).
+   - Resilient `sys.stderr` console fallback.
+
+### CLI Usage:
+```powershell
+# Send alert across all configured channels:
+python sr_alert_dispatcher.py "High CPU utilization detected on RAG cluster"
+
+# Test specific webhook directly:
+python sr_alert_dispatcher.py "Test Alert" --webhook "https://hooks.slack.com/services/..."
+```
