@@ -4,6 +4,10 @@ Update and unify navigation across all Mission Suite pages
 """
 import re
 import os
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
 
 pages_and_labels = [
     ("sovereign-arbitration-hub.html", "روابط مركز التحكيم"),
