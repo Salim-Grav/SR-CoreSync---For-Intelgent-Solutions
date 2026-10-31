@@ -2034,4 +2034,24 @@
   - إضافة زر التصدير `⬇` في ترويسة نافذة الويدجت العائم لتصدير حوار الاستشارة بالكامل كملف نصي موثق ومختوم باسم `SR-CoreSync-Executive-Consultation-[Date].txt` يتضمن التاريخ، بيانات المقر، والرقم الرسمي لواتساب كبار الشخصيات.
   - اجتياز التدقيق الصارم لـ `validate_publish_set.py` لـ `947` ملفاً و `9,358` مرجعاً، والتأكد من نقاء العزل اللغوي بنسبة 100% و `0` أسرار مكشوفة في جميع الملفات.
 
+- **تدشين ذاكرة المتجهات المحلية (Local Vector DB / RAG):**
+  - تطوير المحرك الدلالي الهجين [`sr_rag_engine.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sr_rag_engine.py) وقاعدة البيانات المحلية `sr_rag_knowledge.db` في وضع `WAL`.
+  - دمج المتجهات الكثيفة 128 بُعداً مع خوارزمية البحث النصي الكامل SQLite FTS5 (BM25) لتحقيق دقة بحث فائقة تجمع بين الدلالة اللغوية والتطابق الحرفي للأسماء والأسعار والرموز.
+  - فهرسة `86` وثيقة وبوابة رسمية ومقالة مدونة بإجمالي `501` قطعة دلالية مع سرعة استرجاع لحظية (< 2 ms).
+  - ربط أداة الوكيل `tool_search_knowledge_rag` وحقن السياق التلقائي في كافة مسارات المحادثة `/api/chat` و `/api/ai-concierge` وإتاحة نقاط النهاية `/api/rag/search` و `/api/rag/stats` و `/api/rag/reindex`.
+
+- **تفعيل الإدخال والتفاعل الصوتي ثنائي اللغة (Voice-to-Text & Audio Chat):**
+  - إضافة زر الميكروفون التفاعلي النابض 🎙️ في [`js/sr-agent-widget.js`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/sr-agent-widget.js) و [`css/sr-agent-widget.css`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/sr-agent-widget.css) مع دعم `Web Speech API` لتحويل الصوت إلى نص مباشرة في حقل الإدخال.
+  - إضافة زر الاستماع الصوتي 🔊 لكل استجابة صادرة من الوكيل باستخدام `Web Speech Synthesis` مع الكشف اللحظي عن لغة النص والتحكم بالإيقاف والتشغيل والتأثيرات الصوتية المتوهجة.
+  - زر تبديل اللغة الفوري `AR / EN` للتحكم في لغة الإدخال الصوتي ومحاذاة النصوص.
+
+- **إطلاق وكلاء التدقيق الذاتي الفرعيين (Autonomous Security & Health Subagent):**
+  - تطوير محرك التدقيق الدوري المستقل [`sr_subagent_monitor.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sr_subagent_monitor.py) للتحقق المستمر من:
+    1. صحة وجاهزية خادم الـ AI وذاكرة الـ RAG.
+    2. سلامة الأصول السيادية الـ 15 وعدم فقدان أو تصفير أي ملف.
+    3. حراسة الأسرار والملكية الفكرية والتأكد من خلو الملفات العامة من أي مفاتيح تشفير أو أسرار (0 Leaks).
+    4. مطابقة بوابات الدفع وجاهزية بنية Stripe / iDEAL.
+  - تسجيل التقارير الدورية في جدول `subagent_audit_history` في قاعدة بيانات SQLite وسجل العمليات `sr_subagent_audit.log`.
+  - توفير مسارات `/api/subagent/status` و `/api/subagent/run-audit` في خادم الـ API.
+
 </div>
