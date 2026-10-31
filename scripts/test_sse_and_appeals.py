@@ -1,27 +1,22 @@
-"""
-S&R CoreSync - Test Suite for Mission 110 (SSE Live Pulse), 111 (Counsel WORM), 112 (Appeals)
-"""
 import sys
 import os
 import json
-import asyncio
-import httpx
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.stdout.reconfigure(encoding="utf-8")
 
+from fastapi.testclient import TestClient
 from sr_agent_server import app
 
-async def run_tests_async():
+def run():
     print("=" * 70)
     print("🚀 بدء فحص واجهات المهمة 110 (SSE Live Pulse) و 111 (Counsel) و 112 (Appeals)")
     print("=" * 70)
 
-    transport = httpx.ASGITransport(app=app)
-    async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
+    with TestClient(app) as client:
         # 1. فحص التحقق من مستند WORM الجنائي
         valid_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-        resp = await client.get(f"/api/counsel/worm-verify?hash={valid_hash}")
+        resp = client.get(f"/api/counsel/worm-verify?hash={valid_hash}")
         assert resp.status_code == 200, f"Expected 200, got {resp.status_code}"
         data = resp.json()
         assert data["status"] == "VERIFIED_IMMUTABLE", "WORM hash should be verified immutable"
@@ -30,7 +25,7 @@ async def run_tests_async():
 
         # فحص بصمة تالفة / معدلة
         tampered_hash = "0000000000000000000000000000000000000000000000000000000000000000"
-        resp = await client.get(f"/api/counsel/worm-verify?hash={tampered_hash}")
+        resp = client.get(f"/api/counsel/worm-verify?hash={tampered_hash}")
         assert resp.status_code == 200
         data = resp.json()
         assert data["status"] == "UNREGISTERED_OR_TAMPERED", "Expected tamper detection"
@@ -38,7 +33,7 @@ async def run_tests_async():
         print("  [✓] فحص كشف التلاعب WORM: تم رصد البصمة غير المطابقة بنجاح (Tamper Detected)")
 
         # 2. فحص قائمة أحكام التحكيم المعتمدة
-        resp = await client.get("/api/counsel/certified-awards")
+        resp = client.get("/api/counsel/certified-awards")
         assert resp.status_code == 200
         awards = resp.json()
         assert len(awards) >= 4, "Should have at least 4 certified awards"
@@ -53,7 +48,7 @@ async def run_tests_async():
                 "standard": "ISO/IEC 27037:2012"
             }
         }
-        resp = await client.post("/api/events/publish", json=pub_payload)
+        resp = client.post("/api/events/publish", json=pub_payload)
         assert resp.status_code == 200
         print("  [✓] فحص نشر الأحداث اللحظية (/api/events/publish): ناجح")
 
@@ -66,7 +61,7 @@ async def run_tests_async():
             "evidence_worm_hash": valid_hash,
             "counsel_signature": "Counsel Hendrik Van Der Berg (NAI Netherlands)"
         }
-        resp = await client.post("/api/appeals/lodge", json=appeal_payload)
+        resp = client.post("/api/appeals/lodge", json=appeal_payload)
         assert resp.status_code == 200, f"Expected 200, got {resp.status_code}: {resp.text}"
         appeal_res = resp.json()
         assert appeal_res["status"] == "ok"
@@ -75,7 +70,7 @@ async def run_tests_async():
         print(f"  [✓] فحص قيد الاستئناف الذاتي ({appeal_res['docket']['appeal_id']}): تم القيد والختم بـ SHA-256")
 
         # 5. فحص استرجاع قائمة ملفات الاستئناف
-        resp = await client.get("/api/appeals/list")
+        resp = client.get("/api/appeals/list")
         assert resp.status_code == 200
         appeals_list = resp.json()
         assert appeals_list["total_appeals"] >= 2
@@ -86,4 +81,4 @@ async def run_tests_async():
     print("=" * 70)
 
 if __name__ == "__main__":
-    asyncio.run(run_tests_async())
+    run()
