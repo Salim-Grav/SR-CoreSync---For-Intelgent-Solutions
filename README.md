@@ -74,3 +74,20 @@ python -m uvicorn sr_agent_server:app --host 127.0.0.1 --port 8000
 1. **`tool_list_project_portals()`**: فحص وقراءة بوابات وصفحات المشروع HTML.
 2. **`tool_get_service_details(service_name)`**: جلب تفاصيل الخدمات التسع والباقات السعرية المعتمدة (€890 للسوشيال، €1,450 للموقع، €1,490 للباقة المتكاملة).
 3. **`tool_read_project_overview(file_name)`**: قراءة مقتطفات من وثائق ومخططات المشروع.
+## File Attachment Support
+
+The platform now supports uploading PDF and DOCX documents for on‑the‑fly RAG indexing.
+
+- **Endpoint**: `POST /api/upload`
+- **Accepted file types**: `.pdf`, `.docx`
+- **Maximum file size**: **5 MB** per file (larger files will be rejected with HTTP 413).
+- **Response**: `{ "status": "ok", "files_processed": <int> }`
+
+You can test the endpoint with `curl`:
+```bash
+curl -X POST http://127.0.0.1:8000/api/upload \
+  -F "files=@path/to/document.pdf" \
+  -F "files=@path/to/another.docx"
+```
+
+The uploaded content is extracted, added to the local RAG knowledge base, and becomes searchable by the agent.
