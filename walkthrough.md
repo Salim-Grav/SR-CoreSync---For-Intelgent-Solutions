@@ -2086,3 +2086,22 @@
   - 9,359 مرجعاً سليماً بدون أي روابط مكسورة.
   - 0 أسرار أو مفاتيح أو بيانات اعتماد مكشوفة في 1,326 ملف تم فحصها.
   - جميع الأصول ثنائية اللغة معزولة تماماً ومنضبطة.
+
+
+---
+
+### ✅ مرحلة 3 — حل Pyrefly IDE + ترقية نظام الإشعارات (السبت 01/11/2026)
+
+| الخطوة | الملف | النتيجة |
+| :---: | :--- | :---: |
+| تثبيت حزم .venv | `.venv\Lib\site-packages` | fastapi 0.162.0 ✅ |
+| pyrefly.toml | `pyrefly.toml` (جديد) | Pyrefly → .venv + global paths ✅ |
+| .vscode/settings.json | `.vscode/settings.json` | defaultInterpreterPath = .venv ✅ |
+| requirements.txt | `requirements.txt` | 11 حزمة موثقة ✅ |
+| sr_alert_dispatcher.py | `sr_alert_dispatcher.py` | 4-layer fallback system ✅ |
+| Validation Suite | `scripts/validate_publish_set.py` | 953 files, 0 secrets PASSED ✅ |
+
+**التغييرات الجوهرية:**
+- **`pyrefly.toml`** — ملف جديد يحل خطأ `Cannot find module fastapi` في Pyrefly عبر توجيهه لمسارات الحزم الصحيحة.
+- **`sr_alert_dispatcher.py`** — ترقية لـ 4 استراتيجيات إشعار: `ctypes.windll.user32.MessageBoxW` → `plyer` → `win10toast` → `stderr`.
+- **`.venv` packages** — `fastapi 0.162`, `pdfplumber 0.11.10`, `python-docx`, `plyer`, `setuptools` مثبتة في venv مباشرةً.

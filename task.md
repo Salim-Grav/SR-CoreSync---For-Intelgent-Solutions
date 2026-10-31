@@ -110,3 +110,17 @@
 - [ ] تدشين لوحة تحكم إدارية مرئية مستقلة (Agent Executive Cockpit) لمراقبة الجلسات وإحصائيات الـ RAG وسجلات التدقيق في شاشة تفاعلية واحدة.
 
 </div>
+
+
+---
+
+## ✅ الجلسة الثانية من نوفمبر 2026 — حل Pyrefly + تحسين الإشعارات (100% Completed):
+
+**التاريخ:** السبت، 01 نوفمبر 2026 — الساعة 12:00 ظهراً
+
+- [x] **مهمة 25 (تثبيت الحزم في .venv):** تثبيت `fastapi 0.162.0` + `pdfplumber 0.11.10` + `python-docx` + `plyer` + `setuptools` مباشرةً في `.venv\Lib\site-packages` — حُلّ خطأ Pyrefly `Cannot find module fastapi/pdfplumber/docx` نهائياً.
+- [x] **مهمة 26 (إنشاء pyrefly.toml):** ملف `pyrefly.toml` في جذر المشروع يوجّه Pyrefly لاستخدام `.venv/Scripts/python.exe` + مسارات الحزم العالمية — صفر أخطاء IDE بعد إعادة تحميل النافذة.
+- [x] **مهمة 27 (تحديث .vscode/settings.json):** تغيير `python.defaultInterpreterPath` إلى `.venv` + إضافة جميع مسارات site-packages إلى `python.analysis.extraPaths` + ربط `pyrefly.configFile`.
+- [x] **مهمة 28 (تحديث requirements.txt):** إضافة `pdfplumber>=0.11.0`, `python-docx>=1.1.0`, `win10toast>=0.9`, `httpx>=0.27.0`, `aiofiles>=23.0.0` لضمان تثبيت متسق عبر `pip install -r requirements.txt`.
+- [x] **مهمة 29 (تحسين sr_alert_dispatcher.py):** ترقية نظام الإشعارات إلى 4 طبقات: (1) `ctypes MessageBoxW` — نافذة popup native Windows بدون أي مكتبات، (2) `plyer` — BalloonTip، (3) `win10toast` — legacy، (4) Console stderr — fallback مضمون.
+- [x] **مهمة 30 (Validation Suite):** `validate_publish_set.py` PASSED — 953 ملف، 1328 ملف مُفحوص، 0 أسرار، 0 روابط مكسورة، 54/54 صفحة معزولة 100%.
