@@ -65,11 +65,26 @@ class ConciergeResponseModel(BaseModel):
 # ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # تهيئة قاعدة بيانات الجلسات والذاكرة
+    # 1. تهيئة قاعدة بيانات الجلسات والذاكرة
     sr_session_db.init_db()
+    
+    # 2. تهيئة ذاكرة المتجهات المحلية (Local Vector DB / RAG)
+    app.state.rag_db = SovereignRAGDatabase()
+    stats = app.state.rag_db.get_stats()
+    if stats.get("total_chunks", 0) == 0:
+        print("  🔄 جاري الفهرسة التأسيسية لذاكرة المتجهات RAG...")
+        build_or_update_knowledge_index()
+
+    # 3. تهيئة الوكيل الفرعي الذاتي للتدقيق الأمني والصحي
+    app.state.subagent = AutonomousSecurityHealthSubagent()
+
+    # 4. تكوين وكيل Google Antigravity
     app.state.config = create_sovereign_agent_config()
+
     print("=" * 70)
     print("  🏛️ خادم S&R CoreSync Sovereign Agent API قيد التشغيل والجاهزية")
+    print(f"  🧠 ذاكرة المتجهات (RAG): {stats.get('total_documents', 0)} مستنداً و {stats.get('total_chunks', 0)} قطعة دلالية.")
+    print("  🛡️ الوكيل الفرعي للتدقيق الذاتي (Subagent Monitor): نشط وجاهز.")
     print(f"  🤖 النموذج النشط: {app.state.config.model}")
     print("  📚 توثيق Swagger التفاعلي متاح على: http://127.0.0.1:8000/docs")
     print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
@@ -166,9 +181,15 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
     # 1. حفظ رسالة المستخدم في قاعدة بيانات الجلسة
     sr_session_db.add_message(session_id, "user", user_msg, source="user")
 
-    # 2. استخراج سياق المحادثة السابقة لتوفير ذاكرة متصلة للوكيل
+    # 2. استخراج سياق المحادثة واسترجاع المعرفة عبر ذاكرة المتجهات (RAG)
     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
-    prompt_with_memory = f"{context}\n\nسؤال المستخدم الحالي: {user_msg}" if context else user_msg
+    rag_matches = app.state.rag_db.hybrid_search(user_msg, top_k=2)
+    rag_context = ""
+    if rag_matches and rag_matches[0]["score"] >= 0.40:
+        rag_snippets = "\n".join([f"• [{r['title']}]: {r['content'][:300]}" for r in rag_matches])
+        rag_context = f"\n[المعرفة الموثقة من مساحة عمل المشروع (Local RAG Context)]:\n{rag_snippets}\n"
+
+    prompt_with_memory = f"{context}\n{rag_context}\nسؤال المستخدم الحالي: {user_msg}".strip()
 
     reply_text = ""
     source = "google_antigravity_agent"
@@ -178,9 +199,13 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
             resp = await asyncio.wait_for(agent.chat(prompt_with_memory), timeout=60.0)
             reply_text = await resp.text()
     except Exception as e:
-        print(f"⚠️ استخدام الصمود السيادي البديل: {e}")
-        reply_text = tool_get_service_details(user_msg)
-        source = "sovereign_knowledge_engine"
+        print(f"⚠️ استخدام الصمود السيادي البديل مع RAG: {e}")
+        if rag_matches and rag_matches[0]["score"] >= 0.40:
+            top_m = rag_matches[0]
+            reply_text = f"بناءً على وثائق وبوابات المنظومة الرسمية ({top_m['title']}):\n{top_m['content'][:350]}...\n\nلطلب استشارة مخصصة، تواصل مع المبيعات على +31 618111116."
+        else:
+            reply_text = tool_get_service_details(user_msg)
+        source = "sovereign_rag_knowledge_engine"
 
     # 3. حفظ رد الوكيل في قاعدة بيانات الجلسة
     sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
@@ -214,9 +239,15 @@ async def chat_endpoint(req: ChatRequest):
     # حفظ رسالة المستخدم
     sr_session_db.add_message(session_id, "user", user_msg, source="user")
 
-    # استرجاع سياق الجلسة
+    # استرجاع سياق الجلسة ودمج ذاكرة المتجهات RAG
     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
-    prompt_with_memory = f"{context}\n\nسؤال المستخدم الحالي: {user_msg}" if context else user_msg
+    rag_matches = app.state.rag_db.hybrid_search(user_msg, top_k=2)
+    rag_context = ""
+    if rag_matches and rag_matches[0]["score"] >= 0.40:
+        rag_snippets = "\n".join([f"• [{r['title']}]: {r['content'][:300]}" for r in rag_matches])
+        rag_context = f"\n[المعرفة الموثقة من مساحة عمل المشروع (Local RAG Context)]:\n{rag_snippets}\n"
+
+    prompt_with_memory = f"{context}\n{rag_context}\nسؤال المستخدم الحالي: {user_msg}".strip()
 
     reply_text = ""
     source = "google_antigravity_agent"
@@ -226,8 +257,12 @@ async def chat_endpoint(req: ChatRequest):
             resp = await asyncio.wait_for(agent.chat(prompt_with_memory), timeout=60.0)
             reply_text = await resp.text()
     except Exception as e:
-        reply_text = tool_get_service_details(user_msg)
-        source = "sovereign_knowledge_engine"
+        if rag_matches and rag_matches[0]["score"] >= 0.40:
+            top_m = rag_matches[0]
+            reply_text = f"وفقاً للوثائق الرسمية ({top_m['title']}):\n{top_m['content'][:350]}...\n\nللمزيد تواصل عبر واتساب: +31 618111116."
+        else:
+            reply_text = tool_get_service_details(user_msg)
+        source = "sovereign_rag_knowledge_engine"
 
     # حفظ استجابة الوكيل
     sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
@@ -302,6 +337,50 @@ async def delete_session(session_id: str = Path(..., description="معرف ال�
     """حذف ومسح تاريخ جلسة معينة"""
     sr_session_db.clear_session(session_id)
     return {"status": "success", "message": f"تم مسح الجلسة {session_id} بنجاح"}
+
+# ==============================================================================
+# ذاكرة المتجهات واسترجاع المعرفة المحلية (Local Vector DB / RAG Endpoints)
+# ==============================================================================
+@app.get("/api/rag/search", tags=["ذاكرة المتجهات RAG"])
+async def rag_search_endpoint(
+    query: str = Query(..., description="نص الاستعلام للبحث في ذاكرة المتجهات"),
+    top_k: int = Query(4, description="عدد النتائج المسترجعة")
+):
+    """
+    البحث الهجين (Dense Vectors + FTS5 BM25) في كافة صفحات ووثائق المشروع ومقالات المدونة.
+    """
+    results = app.state.rag_db.hybrid_search(query, top_k=top_k)
+    return {
+        "query": query,
+        "count": len(results),
+        "results": results
+    }
+
+@app.get("/api/rag/stats", tags=["ذاكرة المتجهات RAG"])
+async def rag_stats_endpoint():
+    """استعراض إحصائيات ذاكرة المتجهات وعدد المستندات والقطع المفهرسة"""
+    return app.state.rag_db.get_stats()
+
+@app.post("/api/rag/reindex", tags=["ذاكرة المتجهات RAG"])
+async def rag_reindex_endpoint():
+    """إعادة فهرسة وتحديث متجهات المشروع بالكامل على الفور"""
+    stats = build_or_update_knowledge_index()
+    return {"status": "success", "message": "تم تحديث ذاكرة المتجهات بنجاح", "stats": stats}
+
+# ==============================================================================
+# وكيل التدقيق الذاتي الفرعي (Autonomous Subagent Monitoring Endpoints)
+# ==============================================================================
+@app.get("/api/subagent/status", tags=["وكيل التدقيق الذاتي الفرعي"])
+async def subagent_status_endpoint():
+    """استعراض الحالة الحالية للوكيل الفرعي وآخر تدقيق أمني وتشغيلي"""
+    report = app.state.subagent.run_full_audit()
+    return report
+
+@app.post("/api/subagent/run-audit", tags=["وكيل التدقيق الذاتي الفرعي"])
+async def subagent_run_audit_endpoint():
+    """تنفيذ دورة فحص وتدقيق أمني وصحي فوري"""
+    report = app.state.subagent.run_full_audit()
+    return {"status": "completed", "report": report}
 
 if __name__ == "__main__":
     import uvicorn
