@@ -2,11 +2,13 @@
 S&R CoreSync - Test Suite for Mission 110 (SSE Live Pulse), 111 (Counsel WORM), 112 (Appeals)
 """
 import sys
+import os
 import json
-from fastapi.testclient import TestClient
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.stdout.reconfigure(encoding="utf-8")
 
+from fastapi.testclient import TestClient
 from sr_agent_server import app
 
 def run_tests():
