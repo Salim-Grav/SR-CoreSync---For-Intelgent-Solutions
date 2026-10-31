@@ -2153,3 +2153,16 @@
           notify_func(title=title, message=message, app_name="S&R CoreSync", timeout=10)
   ```
 - **النتيجة:** حُل التنبيه بنسبة 100% وأصبحت بيئة Pyrefly نظيفة تماماً بدون أي خطأ أو تحذير (Commit: `ec8719c`).
+
+
+---
+
+### ✅ مرحلة 7 — إزالة الأنماط المضمنة من لوحة المهام الموحدة (السبت 01/11/2026)
+
+- **الملف المعالج:** [`sovereign-mission-suite-dashboard.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sovereign-mission-suite-dashboard.html)
+- **المشكلة:** تنبيه Webhint / Edge Tools `no-inline-styles` في السطر 125 لوجود `style="margin-bottom:1.75rem;"`.
+- **الحل:**
+  - إضافة `.panel-card.section-spaced { margin-bottom: 1.75rem; }` في [`css/sovereign-mission-suite.css`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/sovereign-mission-suite.css).
+  - استبدال التنسيق المضمن بفئة `.panel-card.section-spaced`.
+  - إعادة بناء حزمة النشر `scripts/prepare_publish_set.py` لنسخ الملفات ومطابقتها.
+- **النتيجة:** صفر تنبيهات Edge Tools وامتثال تام لمعايير CSP الصارمة.
