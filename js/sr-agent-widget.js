@@ -106,10 +106,136 @@
         const closeBtn = document.getElementById('sr-agent-close');
         const clearBtn = document.getElementById('sr-agent-clear');
         const exportBtn = document.getElementById('sr-agent-export');
+        const langBtn = document.getElementById('sr-agent-voice-lang');
+        const micBtn = document.getElementById('sr-agent-mic');
         const form = document.getElementById('sr-agent-form');
         const input = document.getElementById('sr-agent-input');
         const messagesEl = document.getElementById('sr-agent-messages');
         const typingEl = document.getElementById('sr-typing-indicator');
+
+        // حالة الصوت ثنائي اللغة (Bilingual Voice State)
+        let currentVoiceLang = 'ar-SA';
+        let isListening = false;
+        let recognition = null;
+
+        // تبديل لغة الصوت
+        langBtn.addEventListener('click', () => {
+            if (currentVoiceLang === 'ar-SA') {
+                currentVoiceLang = 'en-US';
+                langBtn.textContent = 'EN';
+                langBtn.title = 'Current voice language: English (Click for Arabic)';
+                input.placeholder = 'Type your question or speak...';
+            } else {
+                currentVoiceLang = 'ar-SA';
+                langBtn.textContent = 'AR';
+                langBtn.title = 'تغيير لغة الصوت (AR / EN)';
+                input.placeholder = 'اكتب سؤالك أو تحدث بالصوت...';
+            }
+            if (recognition) {
+                recognition.lang = currentVoiceLang;
+            }
+        });
+
+        // تهيئة محرك الإدخال الصوتي (Speech-to-Text via Web Speech API)
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRec) {
+            recognition = new SpeechRec();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = currentVoiceLang;
+
+            function stopListening() {
+                isListening = false;
+                micBtn.classList.remove('sr-listening');
+                input.placeholder = currentVoiceLang === 'ar-SA' ? 'اكتب سؤالك أو تحدث بالصوت...' : 'Type your question or speak...';
+            }
+
+            recognition.onstart = () => {
+                isListening = true;
+                micBtn.classList.add('sr-listening');
+                input.placeholder = currentVoiceLang === 'ar-SA' ? '🎙️ جارٍ الاستماع... تحدث الآن' : '🎙️ Listening... Speak now';
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                const spoken = (finalTranscript || interimTranscript).trim();
+                if (spoken) {
+                    input.value = spoken;
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.warn('[S&R Voice] Recognition error:', event.error);
+                stopListening();
+            };
+
+            recognition.onend = () => {
+                stopListening();
+            };
+
+            micBtn.addEventListener('click', () => {
+                if (isListening) {
+                    recognition.stop();
+                } else {
+                    recognition.lang = currentVoiceLang;
+                    try {
+                        recognition.start();
+                    } catch (e) {
+                        console.warn('[S&R Voice] Could not start recognition:', e);
+                    }
+                }
+            });
+        } else {
+            micBtn.addEventListener('click', () => {
+                alert(currentVoiceLang === 'ar-SA' ? 'المتصفح الحالي لا يدعم ميزة الإدخال الصوتي المباشر Web Speech API.' : 'Your browser does not support Web Speech API voice input.');
+            });
+        }
+
+        // تحويل النص إلى صوت (Text-to-Speech via Web Speech API)
+        function speakText(rawText, ttsButton) {
+            if (!('speechSynthesis' in window)) return;
+
+            if (window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+                document.querySelectorAll('.sr-agent-tts-btn').forEach(b => b.classList.remove('sr-speaking'));
+                return;
+            }
+
+            const cleanText = rawText
+                .replace(/<[^>]*>/g, ' ')
+                .replace(/\*\*(.*?)\*\*/g, '$1')
+                .replace(/https?:\/\/\S+/g, '')
+                .replace(/[•\-_#]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            if (!cleanText) return;
+
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            const isEnglish = /^[A-Za-z0-9\s.,!?'"()-]+$/.test(cleanText.slice(0, 50));
+            utterance.lang = isEnglish ? 'en-US' : 'ar-SA';
+            utterance.rate = 1.0;
+            utterance.pitch = 1.0;
+
+            if (ttsButton) ttsButton.classList.add('sr-speaking');
+
+            utterance.onend = () => {
+                if (ttsButton) ttsButton.classList.remove('sr-speaking');
+            };
+            utterance.onerror = () => {
+                if (ttsButton) ttsButton.classList.remove('sr-speaking');
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
 
         launcher.addEventListener('click', () => {
             windowEl.classList.toggle('sr-open');
