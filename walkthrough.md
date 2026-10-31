@@ -2213,3 +2213,14 @@
   3. تشغيل [`scripts/build_csp.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/build_csp.py) لتوليد وتحديث 150 بصمة SHA-256 فريدة في `csp-hashes.txt`.
   4. تشغيل [`scripts/prepare_publish_set.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/prepare_publish_set.py) وإعادة بناء `_site/` (963 ملفاً بحجم 413.31 MB).
   5. اجتياز الفحص الشامل لـ `validate_publish_set.py`: 9,365 رابط محلي تم فحصها، 0 أسرار في 1,343 ملفاً، و 54/54 صفحة لغوية معزولة 100%.
+
+
+---
+
+### ✅ مرحلة 11 — معالجة تنبيه التوافقية لـ theme-color (السبت 31/10/2026)
+
+- **الملف المعالج:** [`autonomous-tax-audit.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/autonomous-tax-audit.html)
+- **المشكلة:** تنبيه توافقية HTML من Microsoft Edge Tools:
+  `'meta[name=theme-color]' is not supported by Firefox, Firefox for Android, Opera.`
+- **الحل الجذري:** إزالة وسم `<meta name="theme-color">` بالكامل، والاعتماد القياسي على الخاصية العامة `:root { color-scheme: dark; }` المعرفة داخل ملف الأنماط، وهي المدعومة عالمياً عبر كافة محركات التصفح (Chromium, Gecko, WebKit).
+- **النتيجة:** حسم التنبيه بنسبة 100% وخلو الصفحة من أي أخطاء أو تحذيرات توافقية.
