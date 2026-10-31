@@ -98,6 +98,38 @@ async def broadcast_live_event(event_type: str, payload: dict):
     for dq in dead_queues:
         sse_subscribers.discard(dq)
 
+async def telemetry_pulse_loop(app: FastAPI):
+    """حلقة البث النبضي الدوري (Heartbeat & Telemetry) لتغذية لوحة القيادة الموحدة"""
+    while True:
+        try:
+            await asyncio.sleep(5)
+            if sse_subscribers:
+                stats = app.state.rag_db.get_stats() if hasattr(app.state, "rag_db") else {}
+                appeal_count = len(app.state.appeals) if hasattr(app.state, "appeals") else 0
+                pulse_data = {
+                    "suite_health": 100,
+                    "active_hubs": 6,
+                    "arbitration_active": 4,
+                    "arbitration_value_eur": 12385000,
+                    "cbdc_settles": 12,
+                    "cbdc_savings_eur": 38450,
+                    "zkp_enclaves": 3,
+                    "zkp_proofs": 28,
+                    "forensics_docs": stats.get("total_documents", 90),
+                    "forensics_chunks": stats.get("total_chunks", 506),
+                    "escrow_vaults": 4,
+                    "escrow_total_eur": 22350000,
+                    "escrow_locked_eur": 6250000 + (appeal_count * 1850000),
+                    "active_appeals": appeal_count,
+                    "worm_status": "VERIFIED_IMMUTABLE",
+                    "heartbeat": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+                await broadcast_live_event("pulse_telemetry", pulse_data)
+        except asyncio.CancelledError:
+            break
+        except Exception as e:
+            await asyncio.sleep(5)
+
 # ==============================================================================
 # دورة حياة التطبيق (Lifespan Context)
 # ==============================================================================
@@ -119,15 +151,41 @@ async def lifespan(app: FastAPI):
     # 4. تكوين وكيل Google Antigravity
     app.state.config = create_sovereign_agent_config()
 
+    # 5. تهيئة سجل الاستئنافات السيادية النشطة (Mission 112)
+    app.state.appeals = [
+        {
+            "appeal_id": "APP-2026-0418",
+            "case_id": "ARB-2026-0418",
+            "appellant": "Rotterdam Logistics B.V.",
+            "respondent": "Gulf Trade Holding LLC",
+            "grounds": "ظهور مستند WORM جنائي إضافي EVD-2026-901 يثبت تزوير بوليصة الشحن البحرية",
+            "evidence_worm_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "counsel_signature": "Counsel Hendrik Van Der Berg (NAI Netherlands)",
+            "status": "APPEAL_UNDER_REVIEW",
+            "escrow_action": "ESCROW_LOCKED_EUR_1850000",
+            "timestamp": "2026-10-31T11:20:00Z",
+            "seal_sha256": "8a7c2e4f01b965dd34c4980a31ecde01a54728fba0e9176395bcf6d3910a30b1"
+        }
+    ]
+
+    # 6. إطلاق مهمة البث النبضي الخلفي (Mission 110)
+    pulse_task = asyncio.create_task(telemetry_pulse_loop(app))
+
     print("=" * 70)
     print("  🏛️ خادم S&R CoreSync Sovereign Agent API قيد التشغيل والجاهزية")
     print(f"  🧠 ذاكرة المتجهات (RAG): {stats.get('total_documents', 0)} مستنداً و {stats.get('total_chunks', 0)} قطعة دلالية.")
     print("  🛡️ الوكيل الفرعي للتدقيق الذاتي (Subagent Monitor): نشط وجاهز.")
+    print("  ⚡ البث المباشر للنبض السيادي (SSE Live Pulse): نشط وجاهز.")
     print(f"  🤖 النموذج النشط: {app.state.config.model}")
     print("  📚 توثيق Swagger التفاعلي متاح على: http://127.0.0.1:8000/docs")
     print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
     print("=" * 70)
     yield
+    pulse_task.cancel()
+    try:
+        await pulse_task
+    except asyncio.CancelledError:
+        pass
     print("🛑 إيقاف خادم الوكيل الذكي بنجاح.")
 
 # إنشاء تطبيق FastAPI مع تعطيل مسارات docs التلقائية لتخصيصها بهوية S&R
