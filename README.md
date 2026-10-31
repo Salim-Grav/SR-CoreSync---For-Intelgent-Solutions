@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ## 2️⃣ إعداد مفتاح الاتصال `.env`
 تأكد من وجود المتغير في ملف `.env`:
 ```text
-GEMINI_API_KEY=AIzaSy...
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ---
