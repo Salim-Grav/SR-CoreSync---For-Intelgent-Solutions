@@ -22,6 +22,8 @@ from sr_agent_core import (
     tool_list_project_portals
 )
 import sr_session_db
+from sr_rag_engine import SovereignRAGDatabase, build_or_update_knowledge_index, query_rag_knowledge
+from sr_subagent_monitor import AutonomousSecurityHealthSubagent
 from google.antigravity import Agent
 
 # ==============================================================================
