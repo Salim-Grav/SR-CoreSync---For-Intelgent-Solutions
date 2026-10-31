@@ -54,6 +54,7 @@
                         </div>
                     </div>
                     <div class="sr-agent-header-actions">
+                        <button id="sr-agent-voice-lang" class="sr-voice-lang-btn" title="تغيير لغة الصوت (AR / EN)">AR</button>
                         <button id="sr-agent-export" title="تصدير الاستشارة كملف نصي">⬇</button>
                         <button id="sr-agent-clear" title="مسح المحادثة">↺</button>
                         <button id="sr-agent-close" title="إغلاق النافذة">✕</button>
@@ -79,7 +80,15 @@
                 </div>
 
                 <form class="sr-agent-input-box" id="sr-agent-form">
-                    <input type="text" class="sr-agent-input" id="sr-agent-input" placeholder="اكتب سؤالك أو استفسارك هنا..." autocomplete="off">
+                    <button type="button" class="sr-agent-mic-btn" id="sr-agent-mic" title="تحدث بالصوت (Speech-to-Text)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <input type="text" class="sr-agent-input" id="sr-agent-input" placeholder="اكتب سؤالك أو تحدث بالصوت..." autocomplete="off">
                     <button type="submit" class="sr-agent-send-btn" title="إرسال">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="22" y1="2" x2="11" y2="13"></line>
