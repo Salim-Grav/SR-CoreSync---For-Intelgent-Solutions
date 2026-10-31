@@ -4,6 +4,7 @@ import glob
 from pathlib import Path
 from dotenv import load_dotenv
 from google.antigravity import LocalAgentConfig, Agent
+from sr_rag_engine import query_rag_knowledge, build_or_update_knowledge_index
 
 # Ensure environment variables are loaded
 load_dotenv()
@@ -105,8 +106,18 @@ def tool_read_project_overview(file_name: str = "README.md") -> str:
     except Exception as e:
         return f"تعذر قراءة الملف: {e}"
 
+def tool_search_knowledge_rag(query: str) -> str:
+    """
+    البحث الدلالي بالمتجهات واسترجاع المعلومات الموثقة من صفحات وخدمات ومدونة ووثائق المشروع عبر RAG الهجين.
+    """
+    try:
+        return query_rag_knowledge(query, top_k=4)
+    except Exception as e:
+        return f"تعذر استعلام ذاكرة المتجهات: {e}"
+
 # قائمة الأدوات التي ستُمنح للوكيل
 WORKSPACE_TOOLS = [
+    tool_search_knowledge_rag,
     tool_list_project_portals,
     tool_get_service_details,
     tool_read_project_overview,
