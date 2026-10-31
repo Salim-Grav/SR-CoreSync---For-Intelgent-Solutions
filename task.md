@@ -145,3 +145,6 @@
 
 
 - [x] **مهمة 39 (حل خطأ الفحص السكوني Pyrefly not-callable في sr_alert_dispatcher.py):** استبدال استدعاء `plyer_notify.notify(...)` المباشر بفحص أمان ديناميكي `getattr(plyer, "notification", None)` و `callable(notify_func)` مع تطبيق نفس الفحص الآمن على `win10toast`، مما أزال خطأ `Expected a callable, got None` نهائياً (0 أخطاء في VS Code / Pyrefly).
+
+
+- [x] **مهمة 40 (إزالة النمط المضمن no-inline-styles من sovereign-mission-suite-dashboard.html):** استبدال `style="margin-bottom:1.75rem;"` بفئة CSS مخصصة `.panel-card.section-spaced` داخل `css/sovereign-mission-suite.css`، وتوليد حزمة النشر `prepare_publish_set.py` — متوافق 100% مع معايير Webhint و Edge Tools و Strict CSP.
