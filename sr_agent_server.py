@@ -62,6 +62,42 @@ class ConciergeResponseModel(BaseModel):
     session_id: str = Field(..., description="معرّف الجلسة")
     timestamp: str = Field(..., description="الطابع الزمني")
 
+class PublishEventRequest(BaseModel):
+    event_type: str = Field(..., description="نوع الحدث (e.g. new_evidence_uploaded, settlement_completed, appeal_lodged, escrow_frozen)")
+    payload: Dict[str, Any] = Field(..., description="بيانات الحدث التفصيلية")
+
+class AppealRequest(BaseModel):
+    case_id: str = Field(..., description="معرف القضية الأصلية", example="ARB-2026-0418")
+    appellant: str = Field(..., description="الطرف المستأنف", example="Rotterdam Logistics B.V.")
+    respondent: str = Field(..., description="المستأنف ضده", example="Gulf Trade Holding LLC")
+    grounds: str = Field(..., description="أسباب الاستئناف واكتشاف أدلة جنائية جديدة في WORM", example="اكتشاف سجلات تدقيق محاسبي إضافية EVD-2026-901 تثبت تسليم الشحنة")
+    evidence_worm_hash: Optional[str] = Field(None, description="بصمة SHA-256 للمستند الجنائي في WORM", example="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
+    counsel_signature: Optional[str] = Field("Counsel Salim Al-Din (Bar Reg. 104)", description="توقيع المستشار القانوني المعتمد")
+
+# ==============================================================================
+# إدارة البث المباشر للنبض السيادي (Mission 110: SSE Event Bus)
+# ==============================================================================
+sse_subscribers: set[asyncio.Queue] = set()
+
+async def broadcast_live_event(event_type: str, payload: dict):
+    """بث حدث لحظي لجميع الواجهات المتصلة عبر تقنية Server-Sent Events"""
+    if not sse_subscribers:
+        return
+    message = {
+        "event": event_type,
+        "timestamp": datetime.now().isoformat(),
+        "payload": payload
+    }
+    encoded = f"data: {json.dumps(message, ensure_ascii=False)}\n\n"
+    dead_queues = set()
+    for q in sse_subscribers:
+        try:
+            q.put_nowait(encoded)
+        except asyncio.QueueFull:
+            dead_queues.add(q)
+    for dq in dead_queues:
+        sse_subscribers.discard(dq)
+
 # ==============================================================================
 # دورة حياة التطبيق (Lifespan Context)
 # ==============================================================================
