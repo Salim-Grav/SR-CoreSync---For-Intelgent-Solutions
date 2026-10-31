@@ -148,3 +148,7 @@
 
 
 - [x] **مهمة 40 (إزالة النمط المضمن no-inline-styles من sovereign-mission-suite-dashboard.html):** استبدال `style="margin-bottom:1.75rem;"` بفئة CSS مخصصة `.panel-card.section-spaced` داخل `css/sovereign-mission-suite.css`، وتوليد حزمة النشر `prepare_publish_set.py` — متوافق 100% مع معايير Webhint و Edge Tools و Strict CSP.
+
+
+- [x] **مهمة 41 (المهمة 108 — تعميم تحسينات التجاوب والشبكة المتكيفة):** تطبيق استعلامات الوسائط `@media (max-width: 640px)` و `@media (max-width: 480px)` على لوحات `autonomous-tax-audit.html` (المهمة 101) و `sovereign-gold-rwa-treasury.html` (المهمة 102) لتحسين تخطيط الأزرار، والبطاقات الإحصائية، والجداول على كافة الهواتف والشاشات الصغيرة.
+- [x] **مهمة 42 (توحيد شريط التنقل المشترك عبر أجنحة المهام Cross-Navigation):** توحيد روابط التنقل في شريط Header عبر كافة لوحات المهام السيادية (104 التحكيم، 105 جسر CBDC، 106 حوسبة ZKP، 107 الأدلة الجنائية، 107 الضمان الذكي، ولوحة المهام الموحدة) لضمان انتقال سلس ومتبادل بنسبة 100%.
