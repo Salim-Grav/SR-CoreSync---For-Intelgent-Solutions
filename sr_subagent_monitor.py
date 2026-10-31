@@ -16,6 +16,15 @@ import time
 import json
 import sqlite3
 import argparse
+import importlib.util
+
+# Dynamically import alert dispatcher if available
+spec = importlib.util.find_spec('sr_alert_dispatcher')
+if spec:
+    sr_alert = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sr_alert)
+else:
+    sr_alert = None
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, List
