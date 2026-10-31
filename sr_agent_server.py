@@ -206,6 +206,23 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# التهيئة المسبقة لسجل الاستئنافات في app.state لضمان الجاهزية الفورية
+app.state.appeals = [
+    {
+        "appeal_id": "APP-2026-0418",
+        "case_id": "ARB-2026-0418",
+        "appellant": "Rotterdam Logistics B.V.",
+        "respondent": "Gulf Trade Holding LLC",
+        "grounds": "ظهور مستند WORM جنائي إضافي EVD-2026-901 يثبت تزوير بوليصة الشحن البحرية",
+        "evidence_worm_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "counsel_signature": "Counsel Hendrik Van Der Berg (NAI Netherlands)",
+        "status": "APPEAL_UNDER_REVIEW",
+        "escrow_action": "ESCROW_LOCKED_EUR_1850000",
+        "timestamp": "2026-10-31T11:20:00Z",
+        "seal_sha256": "8a7c2e4f01b965dd34c4980a31ecde01a54728fba0e9176395bcf6d3910a30b1"
+    }
+]
+
 # تفعيل CORS الشامل لجميع الأصول والمنافذ وصفحات file://
 app.add_middleware(
     CORSMiddleware,
