@@ -27,3 +27,4 @@ if __name__ == "__main__":
         send_alert(" ".join(sys.argv[1:]))
     else:
         print("Usage: python sr_alert_dispatcher.py <message>")
+

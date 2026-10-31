@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>S&R CoreSync – Executive Cockpit</title>
+  <style>
+    body {font-family: Arial, sans-serif; margin: 20px;}
+    .section {margin-bottom: 30px;}
+    .section h2 {border-bottom: 1px solid #ccc; padding-bottom: 5px;}
+    pre {background:#f5f5f5; padding:10px; overflow:auto;}
+  </style>
+</head>
+<body>
+  <h1>Executive Cockpit</h1>
+  <div class="section" id="rag-section">
+    <h2>RAG Index Statistics</h2>
+    <pre id="rag-stats">Loading…</pre>
+  </div>
+  <div class="section" id="subagent-section">
+    <h2>Sub‑agent Health</h2>
+    <pre id="subagent-status">Loading…</pre>
+  </div>
+  <div class="section" id="sessions-section">
+    <h2>Recent Sessions</h2>
+    <pre id="sessions-list">Loading…</pre>
+  </div>
+  <script>
+    async function fetchJson(url) {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error('Network error');
+      return await resp.json();
+    }
+    async function loadCockpit() {
+      try {
+        const rag = await fetchJson('/api/rag/stats');
+        document.getElementById('rag-stats').textContent = JSON.stringify(rag, null, 2);
+      } catch (e) { document.getElementById('rag-stats').textContent = e; }
+      try {
+        const sub = await fetchJson('/api/subagent/status');
+        document.getElementById('subagent-status').textContent = JSON.stringify(sub, null, 2);
+      } catch (e) { document.getElementById('subagent-status').textContent = e; }
+      try {
+        const sess = await fetchJson('/api/sessions?limit=10');
+        document.getElementById('sessions-list').textContent = JSON.stringify(sess, null, 2);
+      } catch (e) { document.getElementById('sessions-list').textContent = e; }
+    }
+    loadCockpit();
+    // Auto‑refresh every 30 seconds
+    setInterval(loadCockpit, 30000);
+  </script>
+</body>
+</html>
+
