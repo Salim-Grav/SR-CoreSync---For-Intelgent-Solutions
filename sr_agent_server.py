@@ -3,6 +3,7 @@ import sys
 import io
 import json
 import asyncio
+import hashlib
 from datetime import datetime
 from contextlib import asynccontextmanager
 from typing import Optional, List, Dict, Any
