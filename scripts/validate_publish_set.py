@@ -105,7 +105,7 @@ def main():
             ref = m.group(1).strip()
             if not ref or ref.startswith('#'):
                 continue
-            if urlparse(ref).scheme in ('http', 'https', 'ftp', 'mailto', 'tel'):
+            if ref.startswith('//') or urlparse(ref).scheme in ('http', 'https', 'ftp', 'mailto', 'tel'):
                 continue
             target = ref.split('#')[0].split('?')[0]
             if not target:
