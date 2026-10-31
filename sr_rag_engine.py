@@ -483,6 +483,52 @@ def query_rag_knowledge(query: str, top_k: int = 4) -> str:
         )
     return "\n".join(output)
 
+def index_custom_document(title: str, text_content: str, source_identifier: str, category: str = "uploaded_document") -> Dict[str, Any]:
+    """
+    فهرسة محتوى مستند مخصص (مثل مرفقات PDF أو DOCX المرفوعة) وتحديث قاعدة بيانات RAG فورياً.
+    """
+    db = SovereignRAGDatabase()
+    
+    # تقسيم النص إلى فقرات وقطع دلالية (Chunks)
+    paragraphs = [p.strip() for p in text_content.split("\n\n") if len(p.strip()) > 30]
+    if not paragraphs:
+        paragraphs = [p.strip() for p in text_content.split("\n") if len(p.strip()) > 30]
+    if not paragraphs:
+        paragraphs = [text_content.strip()]
+    
+    chunks = []
+    current_chunk = []
+    current_len = 0
+    
+    for para in paragraphs:
+        current_chunk.append(para)
+        current_len += len(para)
+        if current_len >= 450:
+            block = "\n".join(current_chunk).strip()
+            chunks.append({"title": title, "content": block})
+            current_chunk = []
+            current_len = 0
+            
+    if current_chunk:
+        block = "\n".join(current_chunk).strip()
+        if block:
+            chunks.append({"title": title, "content": block})
+            
+    content_hash = hashlib.md5(text_content.encode('utf-8')).hexdigest()
+    db.upsert_document(
+        path=source_identifier,
+        title=title,
+        category=category,
+        file_hash=content_hash,
+        chunks=chunks
+    )
+    return {
+        "status": "success",
+        "title": title,
+        "source": source_identifier,
+        "chunks_indexed": len(chunks)
+    }
+
 if __name__ == "__main__":
     print("=" * 70)
     print("S&R CoreSync - بناء وفهرسة ذاكرة المتجهات المحلية (Local Vector DB / RAG)")
