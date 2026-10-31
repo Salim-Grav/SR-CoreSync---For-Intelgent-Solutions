@@ -149,7 +149,7 @@ async def telemetry_pulse_loop(app: FastAPI):
 # ==============================================================================
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    pulse_shutdown_event.clear()
+    get_pulse_shutdown_event().clear()
 
     # 1. تهيئة قاعدة بيانات الجلسات والذاكرة
     sr_session_db.init_db()
@@ -195,7 +195,7 @@ async def lifespan(app: FastAPI):
     print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
     print("=" * 70)
     yield
-    pulse_shutdown_event.set()
+    get_pulse_shutdown_event().set()
     print("🛑 إيقاف خادم الوكيل الذكي بنجاح.")
 
 # إنشاء تطبيق FastAPI مع تعطيل مسارات docs التلقائية لتخصيصها بهوية S&R
