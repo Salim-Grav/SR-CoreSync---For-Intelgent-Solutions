@@ -178,22 +178,17 @@ async def lifespan(app: FastAPI):
             }
         ]
 
-    # 6. إطلاق مهمة البث النبضي الخلفي (Mission 110)
-    pulse_task = asyncio.create_task(telemetry_pulse_loop(app))
-
     print("=" * 70)
     print("  🏛️ خادم S&R CoreSync Sovereign Agent API قيد التشغيل والجاهزية")
     print(f"  🧠 ذاكرة المتجهات (RAG): {stats.get('total_documents', 0)} مستنداً و {stats.get('total_chunks', 0)} قطعة دلالية.")
     print("  🛡️ الوكيل الفرعي للتدقيق الذاتي (Subagent Monitor): نشط وجاهز.")
-    print("  ⚡ البث المباشر للنبض السيادي (SSE Live Pulse): نشط وجاهز.")
+    print("  ⚡ البث المباشر للنبض السيادي (SSE Live Pulse): جاهز للاشتراك.")
     print(f"  🤖 النموذج النشط: {app.state.config.model}")
     print("  📚 توثيق Swagger التفاعلي متاح على: http://127.0.0.1:8000/docs")
     print("  💾 ذاكرة الجلسات المستمرة (SQLite): نشطة وجاهزة")
     print("=" * 70)
     yield
     pulse_shutdown_event.set()
-    if pulse_task and not pulse_task.done():
-        pulse_task.cancel()
     print("🛑 إيقاف خادم الوكيل الذكي بنجاح.")
 
 # إنشاء تطبيق FastAPI مع تعطيل مسارات docs التلقائية لتخصيصها بهوية S&R
