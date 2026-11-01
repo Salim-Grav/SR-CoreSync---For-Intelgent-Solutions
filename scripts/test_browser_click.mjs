@@ -4,7 +4,7 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-const PORT = 8111;
+const PORT = 8113;
 const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 const MIME = {
@@ -38,33 +38,23 @@ server.listen(PORT, async () => {
     console.log(`Server listening on http://127.0.0.1:${PORT}`);
     const chrome = spawn(CHROME_PATH, [
         '--headless=new',
-        '--remote-debugging-port=9224',
+        '--remote-debugging-port=9226',
         '--no-sandbox',
         '--disable-gpu',
-        '--user-data-dir=' + join(process.cwd(), '.chrome-test-profile'),
-        `http://127.0.0.1:${PORT}/index.html`
+        '--user-data-dir=' + join(process.cwd(), '.chrome-test-profile-3')
     ]);
 
     await sleep(2500);
 
     try {
-        const listRes = await fetch('http://127.0.0.1:9224/json/list');
+        const listRes = await fetch('http://127.0.0.1:9226/json/list');
         const list = await listRes.json();
-        console.log('Pages in Chrome:', list.length);
-        const page = list.find(p => p.url.includes('8111')) || list[0];
-        if (!page) {
-            console.error('No page found');
-            process.exit(1);
-        }
+        const page = list.find(t => t.type === 'page') || list[0];
+        console.log('Connecting to DevTools WS:', page.webSocketDebuggerUrl);
+        const ws = new globalThis.WebSocket(page.webSocketDebuggerUrl);
 
-        const wsUrl = page.webSocketDebuggerUrl;
-        console.log('Connecting to DevTools WS:', wsUrl);
-
-        const ws = new globalThis.WebSocket(wsUrl);
-
-        ws.onopen = () => {
-            console.log('Connected to Chrome DevTools WebSocket!');
-            
+        ws.onopen = async () => {
+            console.log('Connected!');
             let id = 1;
             function send(method, params = {}) {
                 const curId = id++;
@@ -74,6 +64,7 @@ server.listen(PORT, async () => {
 
             send('Runtime.enable');
             send('Console.enable');
+            send('Page.enable');
 
             ws.onmessage = async (evt) => {
                 const msg = JSON.parse(evt.data);
@@ -88,64 +79,70 @@ server.listen(PORT, async () => {
                 }
             };
 
-            setTimeout(async () => {
-                console.log('--- Testing in Browser ---');
-                send('Runtime.evaluate', {
-                    expression: `
-                    (function() {
-                        return {
-                            hasWidget: Boolean(window.srAgentWidget),
-                            hasToggle: Boolean(window.toggleAiChat),
-                            widgetContainer: Boolean(document.getElementById('sr-agent-widget-container')),
-                            widgetWindow: Boolean(document.getElementById('sr-agent-window')),
-                            followChatBtn: Boolean(document.getElementById('floatingFollowChatBtn'))
-                        };
-                    })()
-                    `,
-                    returnByValue: true
-                });
+            console.log('Navigating to http://127.0.0.1:' + PORT + '/index.html...');
+            send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html` });
 
-                await sleep(1500);
+            // Wait 5 seconds for page load and scripts
+            await sleep(5000);
 
-                console.log('Simulating click on #floatingFollowChatBtn...');
-                send('Runtime.evaluate', {
-                    expression: `
-                    (function() {
-                        const btn = document.getElementById('floatingFollowChatBtn');
-                        if (!btn) return 'BUTTON NOT FOUND';
-                        btn.click();
-                        const win = document.getElementById('sr-agent-window');
-                        return {
-                            clicked: true,
-                            windowExists: Boolean(win),
-                            windowClasses: win ? win.className : null,
-                            windowDisplay: win ? window.getComputedStyle(win).display : null,
-                            windowOpacity: win ? window.getComputedStyle(win).opacity : null,
-                            windowVisibility: win ? window.getComputedStyle(win).visibility : null,
-                            windowZIndex: win ? window.getComputedStyle(win).zIndex : null,
-                            windowBBox: win ? win.getBoundingClientRect() : null
-                        };
-                    })()
-                    `,
-                    returnByValue: true
-                });
+            console.log('--- Checking Page State After Navigation ---');
+            send('Runtime.evaluate', {
+                expression: `
+                (function() {
+                    return {
+                        url: window.location.href,
+                        title: document.title,
+                        hasWidget: Boolean(window.srAgentWidget),
+                        hasToggle: Boolean(window.toggleAiChat),
+                        widgetContainer: Boolean(document.getElementById('sr-agent-widget-container')),
+                        widgetWindow: Boolean(document.getElementById('sr-agent-window')),
+                        followChatBtn: Boolean(document.getElementById('floatingFollowChatBtn'))
+                    };
+                })()
+                `,
+                returnByValue: true
+            });
 
-                await sleep(3000);
-                chrome.kill();
-                server.close();
-                process.exit(0);
-            }, 3000);
+            await sleep(2000);
+
+            console.log('--- Simulating Click on #floatingFollowChatBtn ---');
+            send('Runtime.evaluate', {
+                expression: `
+                (function() {
+                    const btn = document.getElementById('floatingFollowChatBtn');
+                    if (!btn) return 'BUTTON NOT FOUND';
+                    btn.click();
+                    const win = document.getElementById('sr-agent-window');
+                    return {
+                        clicked: true,
+                        windowExists: Boolean(win),
+                        windowClasses: win ? win.className : null,
+                        windowDisplay: win ? window.getComputedStyle(win).display : null,
+                        windowOpacity: win ? window.getComputedStyle(win).opacity : null,
+                        windowVisibility: win ? window.getComputedStyle(win).visibility : null,
+                        windowZIndex: win ? window.getComputedStyle(win).zIndex : null,
+                        windowBBox: win ? win.getBoundingClientRect() : null
+                    };
+                })()
+                `,
+                returnByValue: true
+            });
+
+            await sleep(3000);
+            chrome.kill();
+            server.close();
+            process.exit(0);
         };
 
-        ws.onerror = (err) => {
-            console.error('WS Error:', err);
+        ws.onerror = (e) => {
+            console.error('WS Error:', e);
             chrome.kill();
             server.close();
             process.exit(1);
         };
 
     } catch (e) {
-        console.error('Test error:', e);
+        console.error('Error:', e);
         chrome.kill();
         server.close();
         process.exit(1);
