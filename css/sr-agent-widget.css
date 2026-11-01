@@ -17,47 +17,57 @@
 /* Floating Launcher Trigger */
 .sr-agent-launcher {
     position: fixed;
-    bottom: 28px;
-    inset-inline-start: 28px;
+    bottom: 24px;
+    inset-inline-end: 24px;
     z-index: 99999;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0b231a 0%, #17382b 50%, #06150f 100%);
-    border: 2px solid var(--sr-widget-gold);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 18px var(--sr-widget-emerald-glow);
+    height: 48px;
+    padding: 0 18px 0 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(11, 35, 26, 0.95) 0%, rgba(23, 56, 43, 0.95) 50%, rgba(6, 21, 15, 0.98) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid var(--sr-widget-gold);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65), 0 0 18px var(--sr-widget-emerald-glow);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     outline: none;
+    color: #f3dfba;
+    font-family: 'Alexandria', 'Tajawal', system-ui, sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
 }
 
 .sr-agent-launcher:hover {
-    transform: scale(1.08) translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 28px rgba(197, 168, 128, 0.4);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), 0 0 25px rgba(197, 168, 128, 0.45);
     border-color: var(--sr-widget-gold-bright);
 }
 
 .sr-agent-launcher-icon {
-    width: 32px;
-    height: 32px;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
 }
 
 .sr-agent-pulse-dot {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    width: 14px;
-    height: 14px;
+    position: relative;
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
     background: var(--sr-widget-emerald);
-    border: 2px solid #06150f;
+    border: 1.5px solid #06150f;
     border-radius: 50%;
     animation: srPulse 2s infinite;
 }
 
+.sr-agent-launcher-text {
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
 @keyframes srPulse {
     0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
@@ -67,8 +77,8 @@
 /* Chat Window Box */
 .sr-agent-window {
     position: fixed;
-    bottom: 102px;
-    inset-inline-start: 28px;
+    bottom: 84px;
+    inset-inline-end: 24px;
     z-index: 99998;
     width: 390px;
     max-width: calc(100vw - 36px);
@@ -457,3 +467,43 @@
 }
 
 
+
+/* Trust Badge & Footer */
+.sr-agent-foot-trust {
+    padding: 7px 14px;
+    font-size: 0.7rem;
+    color: var(--sr-widget-text-muted);
+    text-align: center;
+    border-top: 1px solid rgba(197, 168, 128, 0.15);
+    background: rgba(6, 21, 15, 0.7);
+    letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+    .sr-agent-launcher {
+        bottom: 16px;
+        inset-inline-end: 16px;
+        height: 44px;
+        padding: 0 14px 0 10px;
+        font-size: 0.8rem;
+    }
+    .sr-agent-window {
+        bottom: 68px;
+        inset-inline-end: 12px;
+        width: calc(100vw - 24px);
+        height: calc(100vh - 82px);
+    }
+}
+
+@media (max-width: 420px) {
+    .sr-agent-launcher {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    .sr-agent-launcher-text {
+        display: none;
+    }
+}
