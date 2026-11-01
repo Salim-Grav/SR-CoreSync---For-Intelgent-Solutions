@@ -2313,4 +2313,24 @@
      - اجتياز `node scripts/validate.js` بنجاح 100%.
      - اجتياز فحص النحو لـ 590 ملف جافاسكربت بـ 0 أخطاء.
      - اجتياز `python scripts/build_csp.py --check` (148 بصمة أمنية موثقة).
+     - اجتياز `python scripts/validate_publish_set.py` (966 ملفاً، 0 أسرار، 9,387 رابطاً سليماً).
+
+---
+
+### ✅ مرحلة 17 — تخصيص وكيل شريط السوشيال ميديا كمنفذ وحيد للوكيل السيادي الجديد (الأحد 01/11/2026)
+
+- **الدافع والطلب الصريح:**
+  - طلب المستخدم تنظيف القسم الأول بالكامل بحيث لا يظهر أي وكيل على الإطلاق باستثناء الأيقونة المخصصة في شريط وسائل التواصل الاجتماعي (Social Media Floating Bar على الجانب الأيسر)، وتشغيلها بكافة ميزات وقدرات الوكيل السيادي الجديد.
+- **الإجراءات المطبقة:**
+  1. **تطهير واجهة القسم الأول (Hero Clean-up):**
+     - إزالة شارة التخطيط الصوتي `hero-emblem-voice-badge` ("خطط لمشروعك بالصوت التفاعلي") وشارة الأفاتار `hero-emblem-avatar-badge` ("المهندس سليم الرقمي • النسخة التفاعلية ثلاثية الأبعاد") وحاويتهما من ملفي [`index.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/index.html) و [`ckb/index.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/ckb/index.html).
+  2. **إخفاء زر الإطلاق العائم المنفصل (Hide Standalone Floating FAB):**
+     - إضافة قاعدة `display: none !important;` لعنصر `.sr-agent-launcher` داخل [`css/sr-agent-widget.css`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/sr-agent-widget.css) لمنع ظهور أي زر عائم في زوايا الشاشة السفلية.
+  3. **اعتماد زر السوشيال ميديا كمنفذ إطلاق حصري:**
+     - ربط زر المحادثة في شريط المتابعة الجانبي `#floatingFollowChatBtn` مباشرة بدالة `window.srAgentWidget.toggle()` داخل [`js/sr-agent-widget.js`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/sr-agent-widget.js).
+     - ضبط تموضع نافذة المحادثة الفاخرة لتفتح من الجانب الأيسر بجوار شريط الأيقونات مباشرة (`bottom: 24px; left: 72px;`) مع الحفاظ على التجاوب التام للأجهزة المحمولة.
+  4. **الفحص والتحقق الشامل:**
+     - اجتياز `node scripts/validate.js` بنجاح 100%.
+     - اجتياز `python scripts/build_csp.py --check` (148 بصمة).
+     - اجتياز `python scripts/validate_publish_set.py` (966 ملفاً، 9,387 رابطاً، 0 أسرار).
      - اجتياز `python scripts/validate_publish_set.py` (966 ملفاً، 0 أسرار، 9,389 رابطاً سليماً).
