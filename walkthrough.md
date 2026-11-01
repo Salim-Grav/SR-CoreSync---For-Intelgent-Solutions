@@ -2278,3 +2278,18 @@
   4. تحديث بصمات CSP في `csp-hashes.txt` (151 بصمة فريدة) عبر [`scripts/build_csp.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/build_csp.py).
   5. اجتياز الفحص الشامل لحزمة النشر [`scripts/validate_publish_set.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/validate_publish_set.py): 963 ملفاً (413.32 MB)، 144 صفحة، 9,388 رابطاً مفحوصاً، 0 أخطاء، 0 أسرار في 1,354 ملفاً، و 54/54 صفحة معزولة لغوياً.
   6. معالجة وتطهير تنبيهات الفحص السكوني Pyrefly في [`scripts/test_sse_and_appeals.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_sse_and_appeals.py): استبدال `reconfigure` بفحص `hasattr` و `getattr` الآمن، وإلزام القيمة النوعية الصريحة `Dict[str, Any]` و `List[Dict[str, Any]]` لمنع استنتاج `None | Any`، مما حقق صفراً تاماً في لوحة المشاكل لـ Pyrefly.
+
+---
+
+### ✅ مرحلة 15 — مزامنة بصمات CSP الدقيقة بعد إعادة بناء _site واجتياز CI بالكامل (الأحد 01/11/2026)
+
+- **السبب الجذري لفشل CI السحابي:**
+  - في بيئة GitHub Actions، يقوم سير العمل ببناء المجلد المؤقت النقي `_site/` أولاً عبر `prepare_publish_set.py`، ثم يُجري مقارنة بصمات السكربتات المضمنة `csp-hashes.txt` عبر `build_csp.py --check`.
+  - نظراً لتحويل 3 سكربتات مضمنة سابقة إلى ملفات خارجية معيارية، انخفض عدد البصمات المطلوبة فعلياً من 151 إلى 148 بصمة أمنية لـ 144 صفحة HTML.
+- **الإجراء المتخذ:**
+  1. تشغيل `python scripts/prepare_publish_set.py` لإعادة بناء `_site/` نظيفة وشاملة (966 ملفاً، 413.21 MB).
+  2. تشغيل `python scripts/build_email_templates.py` لضمان تكامل قوالب البريد.
+  3. تشغيل `python scripts/build_csp.py` لتحديث `csp-hashes.txt` بالبصمات الـ 148 الدقيقة.
+  4. التحقق عبر `python scripts/build_csp.py --check` وحصول نتيجة النجاح الفورية:
+     `PASSED - csp-hashes.txt matches the publish set (148 hashes).`
+- **النتيجة:** مطابقة تامة 100% بين الحزمة المحلية وسير العمل السحابي في CI.
