@@ -1,17 +1,24 @@
 /**
  * ==============================================================================
- * S&R CoreSync Sovereign Agent Floating Widget
+ * S&R CoreSync Sovereign Agent Floating Widget (Unified Master Edition)
+ * ==============================================================================
+ * Unifies the legacy Concierge and Enterprise Suite chat into a single master
+ * sovereign AI assistant featuring:
+ * - Real-time Google Antigravity & SQLite RAG Backend (/api/ai-concierge)
+ * - Offline Fallback Engine (32+ Topics, Instant Pricing & Service Knowledge)
+ * - Web Speech API: Bilingual Speech-to-Text & Text-to-Speech
+ * - Judicial & Business Document Upload (.pdf, .docx, .txt, .md)
+ * - Consultation Transcript Export & Session Management
  * ==============================================================================
  */
 
 (function () {
     'use strict';
 
-    // منع التكرار إذا كان الويدجت محملاً مسبقاً
     if (window.__SR_AGENT_WIDGET_INITIALIZED__) return;
     window.__SR_AGENT_WIDGET_INITIALIZED__ = true;
 
-    // الحصول على معرّف الجلسة المستمر أو إنشاؤه
+    // Session Management
     let sessionId = localStorage.getItem('sr_agent_session_id');
     if (!sessionId) {
         sessionId = 'sr_sess_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
@@ -20,29 +27,457 @@
 
     const API_ENDPOINT = (typeof localStorage !== 'undefined' && localStorage.getItem('sr_agent_endpoint')) || 'http://127.0.0.1:8000/api/ai-concierge';
 
-    // حقن رابط ملف التنسيقات CSS تلقائياً إن لم يكن موجوداً
+    // Auto-inject CSS stylesheet if not present
     if (!document.querySelector('link[href*="sr-agent-widget.css"]')) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = 'css/sr-agent-widget.css';
+        const isSubDir = window.location.pathname.includes('/insights/') || window.location.pathname.includes('/en/');
+        link.href = (isSubDir ? '../css/sr-agent-widget.css' : './css/sr-agent-widget.css') + '?v=20261101';
         document.head.appendChild(link);
     }
 
-    // بناء عناصر الواجهة
+    // Unified Offline Knowledge Base (Merged from legacy Concierge & Enterprise Suite)
+    const SOVEREIGN_OFFLINE_KB = [
+    {
+        "tags": "خدمات خدماتكم ماذا تقدمون حلول الشركة تخصص",
+        "q": "ما الخدمات التي تقدمونها؟",
+        "a": "نغطي ستة مجالات: <strong>الهوية البصرية</strong>، <strong>المواقع والمتاجر</strong>، <strong>البرمجيات السحابية وERP</strong>، <strong>تطبيقات الجوال</strong>، <strong>أتمتة العمليات والذكاء الاصطناعي</strong>، و<strong>الأمن والبنية السحابية</strong>.",
+        "actions": [
+            {
+                "label": "استعرض الخدمات",
+                "url": "./index.html#service"
+            }
+        ]
+    },
+    {
+        "tags": "سعر اسعار تكلفة كم بكم ميزانية باقات الباقات",
+        "q": "كم تكلفة الخدمات؟",
+        "a": "الأسعار المعلنة: الهوية البصرية <strong>€590</strong> · الموقع <strong>€980</strong> · المتجر <strong>€1,450</strong> · باقة السحابة Core Starter <strong>€1,490</strong> · تهيئة ERP <strong>€1,890</strong> · Enterprise Growth <strong>€2,890</strong> · Core MAX <strong>€4,990</strong>. وتوجد باقة انطلاقة شاملة <strong>€1,990</strong> بدلاً من €3,020.",
+        "actions": [
+            {
+                "label": "كل الباقات",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "هوية شعار لوجو تصميم هوية بصرية براند",
+        "q": "كم سعر الهوية البصرية؟",
+        "a": "الهوية البصرية المتكاملة <strong>€590</strong>: ثلاثة مفاهيم شعار، دليل هوية كامل، لوحة ألوان وخطوط، قرطاسية وبطاقات، وملفات المصدر. التسليم خلال 7–10 أيام عمل.",
+        "actions": [
+            {
+                "label": "تفاصيل الهوية",
+                "url": "./index.html#service"
+            }
+        ]
+    },
+    {
+        "tags": "موقع مواقع ويب تصميم موقع سعر الموقع",
+        "q": "كم سعر الموقع الإلكتروني؟",
+        "a": "الموقع الفاخر عالي الأداء <strong>€980</strong>: تصميم متجاوب، سرعة تتجاوز 98%، تهيئة SEO، دعم لغات متعددة، ربط واتساب، واستضافة ونطاق لسنة. التسليم 2–4 أسابيع.",
+        "actions": [
+            {
+                "label": "تفاصيل المواقع",
+                "url": "./index.html#service"
+            }
+        ]
+    },
+    {
+        "tags": "متجر متاجر تجارة الكترونية شوب شوبيفاي سلة",
+        "q": "كم سعر المتجر الإلكتروني؟",
+        "a": "المتجر الإلكتروني المتكامل <strong>€1,450</strong>: سلة ودفع بخطوة واحدة، iDEAL/Mollie/Stripe/Apple Pay، إدارة مخزون، كوبونات، فواتير متوافقة ضريبياً، وربط محاسبي. التسليم 4–6 أسابيع.",
+        "actions": [
+            {
+                "label": "دليل رفع التحويل",
+                "url": "./insights/ecommerce-conversion.html"
+            }
+        ]
+    },
+    {
+        "tags": "erp نظام تخطيط موارد المؤسسات محاسبة مخزون فواتير",
+        "q": "هل تقدمون أنظمة ERP؟",
+        "a": "نعم. <strong>ERP Setup €1,890</strong> (تهيئة وربط أساسي)، <strong>Full ERP Sync €3,490</strong> (سلاسل إمداد ورواتب وبنوك)، و<strong>Custom ERP €5,990</strong> (بناء مخصص بالكامل).",
+        "actions": [
+            {
+                "label": "كيف تختار ERP",
+                "url": "./insights/erp-selection-2026.html"
+            }
+        ]
+    },
+    {
+        "tags": "سحابة سحابي cloud برمجية برمجيات منصة saas",
+        "q": "ما هي باقات البرمجيات السحابية؟",
+        "a": "ثلاث باقات: <strong>Core Starter €1,490</strong> لمنصة أولى، <strong>Enterprise Growth €2,890</strong> مع تطبيقات جوال وأتمتة AI، و<strong>Core MAX Synergy €4,990</strong> لمنظومة مؤسسية متعددة الفروع والعملات.",
+        "actions": [
+            {
+                "label": "مقارنة الباقات",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "ذكاء اصطناعي ai أتمتة rpa شات بوت مساعد",
+        "q": "هل تستخدمون الذكاء الاصطناعي؟",
+        "a": "نعم: أتمتة RPA، استخراج الفواتير، مساعد ذكي مؤسسي (RAG) يقرأ مستندات شركتك ويجيب مع الاستشهاد، وتحليل تنبؤي. الباقة المؤسسية تشمل نموذجاً سيادياً معزولاً على أنظمتك.",
+        "actions": [
+            {
+                "label": "مقال RAG",
+                "url": "./insights/ai-concierge-rag.html"
+            }
+        ]
+    },
+    {
+        "tags": "أمان امن سيبراني اختراق حماية فحص أمني",
+        "q": "هل تقدمون فحصاً أمنياً؟",
+        "a": "نعم — <strong>Security &amp; Audit €490</strong>: فحص شامل للثغرات البرمجية والمالية مع تقرير رسمي وتوصيات إصلاح مرتبة بالأولوية.",
+        "actions": [
+            {
+                "label": "اطلب فحصاً",
+                "url": "./index.html#contact"
+            }
+        ]
+    },
+    {
+        "tags": "صيانة دعم شهري corecare sla",
+        "q": "هل توجد باقة صيانة شهرية؟",
+        "a": "<strong>CoreCare Monthly €149/شهر</strong>: إدارة سحابية، نسخ احتياطي يومي، مراقبة أداء 24/7، ودعم فوري مع اتفاقية مستوى خدمة (SLA).",
+        "actions": [
+            {
+                "label": "تفاصيل الدعم",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "باقة حزمة عرض توفير خصم انطلاقة bundle",
+        "q": "هل توجد باقة موحدة بسعر أقل؟",
+        "a": "نعم — <strong>باقة الانطلاقة الشاملة €1,990</strong> بدلاً من €3,020 (توفير 34%): الهوية البصرية + الموقع أو المتجر + الربط المحاسبي المالي.",
+        "actions": [
+            {
+                "label": "احجز الباقة",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "مدة وقت كم يستغرق تسليم جاهز متى",
+        "q": "كم يستغرق التنفيذ؟",
+        "a": "الهوية 7–10 أيام · الموقع 2–4 أسابيع · المتجر 4–6 أسابيع · ERP 3–6 أسابيع. المدة تبدأ من اعتماد المحتوى والتصاميم، لا من تاريخ العرض.",
+        "actions": [
+            {
+                "label": "الأسئلة الشائعة",
+                "url": "./index.html#services-faq"
+            }
+        ]
+    },
+    {
+        "tags": "دفع دفعكم طرق الدفع stripe mollie ideal paypal تحويل",
+        "q": "ما طرق الدفع؟",
+        "a": "Stripe (بطاقات)، Mollie (iDEAL / Bancontact)، تحويل بنكي SEPA، وPayPal. الفواتير رسمية ومتوافقة مع ضريبة BTW الهولندية.",
+        "actions": [
+            {
+                "label": "الأسعار والفوترة",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "ضريبة vat btw فاتورة محاسبة خصم",
+        "q": "هل الأسعار تشمل الضريبة؟",
+        "a": "الأسعار باليورو وتُضاف ضريبة <strong>BTW 21%</strong> حيث ينطبق. للشركات المسجلة في هولندا/الاتحاد الأوروبي الضريبة قابلة للخصم، وتصدر فاتورة رسمية متوافقة مع Belastingdienst.",
+        "actions": [
+            {
+                "label": "تفاصيل الفوترة",
+                "url": "./index.html#pricing"
+            }
+        ]
+    },
+    {
+        "tags": "ملكية كود مصدري ملكية الكود حقوق",
+        "q": "هل أملك الكود المصدري؟",
+        "a": "نعم، <strong>100%</strong>. تسليم الكود المصدري كاملاً مع الوثائق ونقل الملكية — بلا اشتراكات إجبارية ولا قيود على التعديل.",
+        "actions": [
+            {
+                "label": "الأسئلة الشائعة",
+                "url": "./index.html#services-faq"
+            }
+        ]
+    },
+    {
+        "tags": "استضافة دومين نطاق سيرفر هوستنج",
+        "q": "هل تشمل الأسعار الاستضافة والدومين؟",
+        "a": "باقة الموقع تشمل استضافة سحابية سريعة ونطاقاً مجانياً لسنة. الباقات السحابية تشمل تهيئة واستضافة مُدارة أولية، ثم يمكن الانتقال إلى CoreCare.",
+        "actions": [
+            {
+                "label": "تفاصيل أكثر",
+                "url": "./index.html#services-faq"
+            }
+        ]
+    },
+    {
+        "tags": "لغات لغة ترجمة عربي انجليزي هولندي",
+        "q": "هل الموقع يدعم عدة لغات؟",
+        "a": "نعم — الموقع الحالي يدعم <strong>29 لغة</strong> مع اتجاه صحيح للعربية والعبرية والفارسية، وتهيئة SEO لكل لغة على حدة.",
+        "actions": [
+            {
+                "label": "شاهد اللغات",
+                "url": "./index.html"
+            }
+        ]
+    },
+    {
+        "tags": "تجربة ديمو عرض تجريبي جرّب",
+        "q": "هل يمكنني تجربة النظام قبل الشراء؟",
+        "a": "نعم — النظام التجريبي السحابي متاح مباشرة، ويمكن ترتيب بيئة تجريبية ببياناتك لمدة أسبوعين قبل التوقيع.",
+        "actions": [
+            {
+                "label": "افتح العرض التجريبي",
+                "url": "./demo.html"
+            }
+        ]
+    },
+    {
+        "tags": "تواصل اتصال رقم هاتف واتساب بريد ايميل عنوان",
+        "q": "كيف أتواصل معكم؟",
+        "a": "واتساب: <a href=\"https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20S%26R%20CoreSync%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9.\" target=\"_blank\" rel=\"noopener noreferrer\">+31 6 1811 1116</a><br>البريد: <a href=\"mailto:info@sr-coresync.com\">info@sr-coresync.com</a><br>المقر: أمستردام، هولندا.",
+        "actions": [
+            {
+                "label": "نموذج التواصل",
+                "url": "./index.html#contact"
+            }
+        ]
+    },
+    {
+        "tags": "استشارة مجانية حجز موعد اجتماع",
+        "q": "هل توجد استشارة مجانية؟",
+        "a": "نعم — استشارة تنفيذية <strong>30 دقيقة مجاناً</strong>: نراجع وضعك الحالي ونعطيك خطة عملية واضحة بلا التزام.",
+        "actions": [
+            {
+                "label": "احجز الآن",
+                "url": "https://wa.me/31618111116?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20S%26R%20CoreSync%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%AA%D9%86%D9%81%D9%8A%D8%B0%D9%8A%D8%A9."
+            }
+        ]
+    },
+    {
+        "tags": "مدونة مقالات رؤى insights",
+        "q": "هل لديكم مقالات متخصصة؟",
+        "a": "نعم — مدونة الرؤى فيها مقالات عن ERP، تكاليف السحابة، RAG، تحويل المتاجر، Zero Trust، وعائد الهوية.",
+        "actions": [
+            {
+                "label": "افتح المدونة",
+                "url": "./blog.html"
+            }
+        ]
+    },
+    {
+        "tags": "شركاء وكيل وكلاء white label ترخيص",
+        "q": "هل يوجد برنامج شركاء أو وكلاء؟",
+        "a": "نعم — بوابة الشركاء والوكلاء (White-Label) مع تراخيص متعددة الكيانات: خصم 10% لكيانين إلى ثلاثة، و20% لأربعة كيانات أو أكثر.",
+        "actions": [
+            {
+                "label": "بوابة الشركاء",
+                "url": "./partner-portal.html"
+            }
+        ]
+    },
+    {
+        "tags": "خصوصية gdpr بيانات كوكيز",
+        "q": "كيف تتعاملون مع الخصوصية؟",
+        "a": "نلتزم بلائحة GDPR الأوروبية: لا نبيع بيانات، والقياس مجهول بلا تعريف شخصي، ويمكنك رفض القياس ويبقى الموقع يعمل كاملاً.",
+        "actions": [
+            {
+                "label": "سياسة الخصوصية",
+                "url": "./privacy.html"
+            }
+        ]
+    },
+    {
+        "tags": "تدريب فريق شرح ورشة",
+        "q": "هل تقدمون تدريباً للفريق؟",
+        "a": "نعم — جلسات تدريب وورشة تشغيل ضمن الباقات المؤسسية، مع وثائق تشغيلية وفيديوهات قصيرة لفريقك.",
+        "actions": [
+            {
+                "label": "الخدمات",
+                "url": "./index.html#service"
+            }
+        ]
+    },
+    {
+        "tags": "تحكيم تحكيمي نزاع محكمة دولية عقد نيويورك فض قضايا 104 arbitration",
+        "q": "ما هو مركز التحكيم السيادي التجاري الدولي (المهمة 104)؟",
+        "a": "بوابة التحكيم التجاري الدولي تتيح إدارة وفض النزاعات العابرة للحدود متوافقة 100% مع <strong>اتفاقية نيويورك 1958</strong>، مع سجل قضايا بقيمة €12.385M، إيداع طلبات إلكترونية، وتحليل ذكي للقانون والجدارة، ومسودة حكم مختومة تشفيرياً بـ SHA-256 قابلة للتصدير.",
+        "actions": [
+            {
+                "label": "⚖️ بوابة التحكيم الدولي",
+                "url": "./sovereign-arbitration-hub.html"
+            },
+            {
+                "label": "لوحة التحكم المركزية",
+                "url": "./sovereign-mission-suite-dashboard.html"
+            }
+        ]
+    },
+    {
+        "tags": "عملات رقمية cbdc بنك مركزي تسوية تسويات ذرية جسر مالي pvp htlc 105",
+        "q": "ما هو جسر تسوية العملات الرقمية السيادية (المهمة 105)؟",
+        "a": "جسر تسوية متعدد العملات الرقمية للبنوك المركزية (Multi-CBDC Bridge) يدعم 5 عملات رقمية كبرى مع تسوية ذرية فورية (PvP/HTLC) متوافقة مع معيار <strong>ISO 20022 pacs.009</strong> وتوفير فوري في السيولة وحساب العائد التراكمي.",
+        "actions": [
+            {
+                "label": "💳 جسر العملات الرقمية",
+                "url": "./multi-cbdc-bridge.html"
+            }
+        ]
+    },
+    {
+        "tags": "zkp حوسبة سرية بيئة معزولة enclave برهان تشفير خصوصية tee 106",
+        "q": "ما هي بيئة الحوسبة السرية وبراهين الصفر (المهمة 106)؟",
+        "a": "بيئة الحوسبة السرية (ZKP & Confidential Enclave) تتيح معالجة البيانات الحساسة وفحص الأصول دون كشف القيمة السرية، عبر 3 بيئات عزل موثوقة (TEE) وتوليد براهين صفرية (Zero-Knowledge Proofs) مختومة بالالتزام التشفيري.",
+        "actions": [
+            {
+                "label": "🛡️ بوابة الحوسبة السرية ZKP",
+                "url": "./zkp-confidential-enclave.html"
+            }
+        ]
+    },
+    {
+        "tags": "ادلة جنائية رقمية worm iso 27037 فحص جنائي احراز بصمة 107 forensics",
+        "q": "ما هو محرك الأدلة الجنائية الرقمية وخزينة WORM (المهمة 107)؟",
+        "a": "مركز الأدلة الجنائية للتقاضي السيادي يوفر مستودعاً حصيناً غير قابل للتعديل (WORM - Write Once, Read Many) متوافقاً مع معيار <strong>ISO/IEC 27037:2012</strong> لتوثيق الأدلة الرقمية وسلسلة الحيازة (Chain of Custody).",
+        "actions": [
+            {
+                "label": "🔬 بوابة الأدلة الجنائية",
+                "url": "./digital-forensics-litigation-hub.html"
+            }
+        ]
+    },
+    {
+        "tags": "ضمان مالي ذكي اسكرو تجميد تحرير ضمانات دفع عقود 107 escrow",
+        "q": "ما هو نظام الضمان المالي الذكي (المهمة 107)؟",
+        "a": "نظام الضمان المالي الذكي (Smart Milestone Escrow) يربط صرف الدفعات بإنجاز المعالم الفعلية أو أحكام التحكيم، مع إمكانية التجميد التلقائي للضمان (DISPUTE_FROZEN) عند نشوء أي نزاع قضائي.",
+        "actions": [
+            {
+                "label": "💰 بوابة الضمان المالي الذكي",
+                "url": "./smart-escrow-milestone.html"
+            }
+        ]
+    },
+    {
+        "tags": "مستشار قانوني مؤسسي محاماة كونسل worm تدقيق قضائي 111 counsel",
+        "q": "ما هي بوابة المستشار القانوني المؤسسي (المهمة 111)؟",
+        "a": "بوابة متخصصة لفرق المحاماة وهيئات التحكيم تتيح التحقق الفوري من بصمات WORM التشفيرية للأدلة والمستندات القضائية، ومطابقتها لاتفاقية نيويورك 1958 ومعايير الأرشفة الجنائية الدولية.",
+        "actions": [
+            {
+                "label": "🏛️ بوابة المستشار المؤسسي",
+                "url": "./corporate-counsel-portal.html"
+            }
+        ]
+    },
+    {
+        "tags": "استئناف طعن اعتراض اعادة نظر احكام نزاع 112 appeals",
+        "q": "ما هو مسار الاستئناف والاعتراض الذاتي (المهمة 112)؟",
+        "a": "تدفق استئنافي ذاتي يتيح قيد طلبات إعادة النظر والطعن القضائي في أحكام التحكيم تلقائياً فور ظهور أدلة WORM جنائية جديدة، مع تجميد فوري لضمانات التنفيذ المالي وبث إشعار SSE لكافة اللوحات.",
+        "actions": [
+            {
+                "label": "⚖️ قيد طلب استئناف",
+                "url": "./corporate-counsel-portal.html#appeals"
+            }
+        ]
+    },
+    {
+        "tags": "سوشيال ميديا باقة تسويق 8k سوشال حملات انستغرام لينكد 890",
+        "q": "ما هي باقة السوشيال ميديا الرسمية 8K (€890)؟",
+        "a": "باقة متكاملة بـ <strong>€890</strong> لإطلاق وتدشين 9 منصات تواصل (LinkedIn, Instagram, X, YouTube, Telegram, TikTok, Snapchat, Facebook, Pinterest) بهوية بصرية وأصول 8K، جدول نشر أسبوعي آلي، وربط واتساب VIP.",
+        "actions": [
+            {
+                "label": "🎨 منصة السوشيال ميديا 8K",
+                "url": "./social-campaign-hub.html"
+            },
+            {
+                "label": "واتساب VIP المباشر",
+                "url": "https://wa.me/31618111116"
+            }
+        ]
+    }
+];
+
+    function normalizeArabic(text) {
+        if (!text) return '';
+        return text.toLowerCase()
+            .replace(/[إأآا]/g, 'ا')
+            .replace(/ة/g, 'ه')
+            .replace(/ى/g, 'ي')
+            .replace(/[،,.\-?!؛:()[\]"']/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function stripDefiniteArticle(w) {
+        if (w.length > 3 && w.startsWith('ال')) {
+            return w.substring(2);
+        }
+        return w;
+    }
+
+    function findFallbackAnswer(query) {
+        if (!query || typeof query !== 'string') return null;
+        const cleanQ = normalizeArabic(query);
+        const queryTokens = cleanQ.split(' ').filter(w => w.length >= 2);
+        if (queryTokens.length === 0) return null;
+
+        let bestMatch = null;
+        let highestScore = 0;
+
+        for (let i = 0; i < SOVEREIGN_OFFLINE_KB.length; i++) {
+            const item = SOVEREIGN_OFFLINE_KB[i];
+            let score = 0;
+            const normTags = normalizeArabic(item.tags);
+            const tagWords = normTags.split(' ');
+            const normTitle = normalizeArabic(item.q);
+            const titleWords = normTitle.split(' ');
+
+            for (const token of queryTokens) {
+                const raw = token;
+                const stripped = stripDefiniteArticle(token);
+
+                if (titleWords.includes(raw) || titleWords.includes(stripped)) {
+                    score += 8;
+                } else if (normTitle.includes(stripped)) {
+                    score += 5;
+                }
+
+                if (tagWords.includes(raw) || tagWords.includes(stripped)) {
+                    score += 6;
+                } else if (normTags.includes(stripped)) {
+                    score += 3;
+                }
+            }
+
+            if (score > highestScore) {
+                highestScore = score;
+                bestMatch = item;
+            }
+        }
+
+        return highestScore >= 6 ? bestMatch : null;
+    }
+
     function buildWidgetUI() {
+        if (document.getElementById('sr-agent-widget-container')) return;
+
         const wrapper = document.createElement('div');
         wrapper.id = 'sr-agent-widget-container';
         wrapper.innerHTML = `
-            <!-- Floating Launcher Trigger -->
-            <button class="sr-agent-launcher" id="sr-agent-launcher" title="المستشار الذكي التنفيذي لـ S&R CoreSync" aria-label="فتح محادثة المستشار الذكي">
-                <span class="sr-agent-pulse-dot"></span>
-                <svg class="sr-agent-launcher-icon" viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Unified Floating Launcher Trigger -->
+            <button class="sr-agent-launcher" id="sr-agent-launcher" title="المستشار الذكي التنفيذي — اسأل المساعد" aria-label="المستشار الذكي التنفيذي — اسأل المساعد">
+                <span class="sr-agent-pulse-dot" aria-hidden="true"></span>
+                <svg class="sr-agent-launcher-icon" viewBox="0 0 24 24" fill="none" stroke="#c5a880" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
+                <span class="sr-agent-launcher-text">اسأل المستشار الذكي 🤖</span>
             </button>
 
-            <!-- Chat Window -->
-            <div class="sr-agent-window" id="sr-agent-window" role="dialog" aria-modal="false" aria-label="نافذة المستشار الذكي">
+            <!-- Chat Window Dialog -->
+            <div class="sr-agent-window" id="sr-agent-window" role="dialog" aria-modal="false" aria-label="نافذة المستشار الذكي التنفيذي">
                 <div class="sr-agent-header">
                     <div class="sr-agent-header-brand">
                         <div class="sr-agent-avatar">
@@ -50,20 +485,21 @@
                         </div>
                         <div class="sr-agent-title">
                             <h3>المستشار الذكي التنفيذي</h3>
-                            <span><span class="sr-agent-status-indicator"></span> متصل (Google Antigravity)</span>
+                            <span><span class="sr-agent-status-indicator"></span> متصل (Google Antigravity & RAG)</span>
                         </div>
                     </div>
                     <div class="sr-agent-header-actions">
                         <button id="sr-agent-voice-lang" class="sr-voice-lang-btn" title="تغيير لغة الصوت (AR / EN)">AR</button>
                         <button id="sr-agent-export" title="تصدير الاستشارة كملف نصي">⬇</button>
-                        <button id="sr-agent-clear" title="مسح المحادثة">↺</button>
+                        <button id="sr-agent-clear" title="مسح المحادثة وتجديد الجلسة">↺</button>
                         <button id="sr-agent-close" title="إغلاق النافذة">✕</button>
                     </div>
                 </div>
 
                 <div class="sr-agent-messages" id="sr-agent-messages">
                     <div class="sr-msg sr-msg-agent">
-                        مرحباً بك! أنا المستشار الذكي التنفيذي لمنظومة <strong>S&R CoreSync</strong>. كيف يمكنني مساعدة منشأتكم اليوم بخصوص حلولنا المؤسسية، الباقات، أو بوابات المنظومة؟
+                        مرحباً بك! 👋 أنا المستشار الذكي التنفيذي الموحد لمنظومة <strong>S&R CoreSync</strong>.<br>
+                        كيف يمكنني مساعدة منشأتكم اليوم بخصوص حلولنا المؤسسية، باقات الأسعار، بوابات التحكيم والـ CBDC، أو أتمتة الأعمال والـ RAG؟
                     </div>
                     <div class="sr-typing" id="sr-typing-indicator">
                         <div class="sr-typing-dot"></div>
@@ -73,10 +509,13 @@
                 </div>
 
                 <div class="sr-agent-chips">
-                    <button class="sr-chip" data-query="ما هي باقة السوشيال ميديا 8K؟">باقة السوشيال 8K</button>
-                    <button class="sr-chip" data-query="ما هي تكلفة الموقع المؤسسي؟">الموقع المؤسسي</button>
-                    <button class="sr-chip" data-query="استعرض أهم بوابات المنظومة">بوابات المنظومة</button>
-                    <button class="sr-chip" data-query="كيف أطلب عرض سعر مخصص؟">طلب عرض سعر</button>
+                    <button class="sr-chip" data-query="كم تكلفة الخدمات والباقات؟">💰 أسعار الباقات</button>
+                    <button class="sr-chip" data-query="كم سعر الموقع الإلكتروني والمتجر؟">🌐 المواقع والمتاجر</button>
+                    <button class="sr-chip" data-query="هل تقدمون أنظمة ERP وما هي باقاتها؟">🏢 تهيئة ERP</button>
+                    <button class="sr-chip" data-query="ما هي باقة السوشيال ميديا 8K؟">🎨 سوشيال 8K</button>
+                    <button class="sr-chip" data-query="ما هو مركز التحكيم السيادي التجاري الدولي؟">⚖️ التحكيم والضمان</button>
+                    <button class="sr-chip" data-query="كيف أطلب عرض سعر رسمي مخصص؟">📋 طلب عرض سعر</button>
+                    <button class="sr-chip" data-query="كيف أتواصل معكم مباشرة على واتساب؟">💬 واتساب VIP</button>
                 </div>
 
                 <form class="sr-agent-input-box" id="sr-agent-form">
@@ -102,11 +541,15 @@
                         </svg>
                     </button>
                 </form>
+
+                <div class="sr-agent-foot-trust">
+                    <span>يعمل بمحرك RAG السيادي · حماية البيانات وفق معايير ISO 27001 و GDPR</span>
+                </div>
             </div>
         `;
         document.body.appendChild(wrapper);
 
-        // ربط الأحداث
+        // Elements
         const launcher = document.getElementById('sr-agent-launcher');
         const windowEl = document.getElementById('sr-agent-window');
         const closeBtn = document.getElementById('sr-agent-close');
@@ -121,10 +564,9 @@
         const messagesEl = document.getElementById('sr-agent-messages');
         const typingEl = document.getElementById('sr-typing-indicator');
 
-        // حالة الصوت ثنائي اللغة (Bilingual Voice State)
         let currentVoiceLang = 'ar-SA';
 
-        // معالجة رفع وإرفاق المستندات للتحليل عبر RAG
+        // Document upload handler
         if (uploadBtn && fileInput) {
             uploadBtn.addEventListener('click', () => {
                 fileInput.click();
@@ -161,7 +603,6 @@
                             throw new Error(errData.detail || ('HTTP ' + res.status));
                         }
 
-                        const data = await res.json();
                         appendMessage(`✅ تم استخراج نصوص **${file.name}** وفهرستها بنجاح في قاعدة المعرفة السيادية (RAG)! يمكنك الآن توجيه أي أسئلة حول محتوى المستند.`, false);
                     } catch (err) {
                         typingEl.style.display = 'none';
@@ -172,10 +613,7 @@
             });
         }
 
-        let isListening = false;
-        let recognition = null;
-
-        // تبديل لغة الصوت
+        // Voice Language Switcher
         langBtn.addEventListener('click', () => {
             if (currentVoiceLang === 'ar-SA') {
                 currentVoiceLang = 'en-US';
@@ -193,8 +631,11 @@
             }
         });
 
-        // تهيئة محرك الإدخال الصوتي (Speech-to-Text via Web Speech API)
+        // Speech-to-Text Setup
+        let isListening = false;
+        let recognition = null;
         const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
         if (SpeechRec) {
             recognition = new SpeechRec();
             recognition.continuous = false;
@@ -256,7 +697,7 @@
             });
         }
 
-        // تحويل النص إلى صوت (Text-to-Speech via Web Speech API)
+        // Text-to-Speech (Audio Synthesis)
         function speakText(rawText, ttsButton) {
             if (!('speechSynthesis' in window)) return;
 
@@ -294,7 +735,7 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        // إضافة زر الاستماع الصوتي لرسالة الترحيب الأولى
+        // Attach TTS to first welcome message
         const firstAgentMsg = messagesEl.querySelector('.sr-msg-agent');
         if (firstAgentMsg) {
             const initTts = document.createElement('button');
@@ -312,6 +753,7 @@
             firstAgentMsg.appendChild(initTts);
         }
 
+        // Open / Close Handlers
         launcher.addEventListener('click', () => {
             windowEl.classList.toggle('sr-open');
             if (windowEl.classList.contains('sr-open')) {
@@ -324,9 +766,7 @@
         });
 
         clearBtn.addEventListener('click', () => {
-            // مسح الرسائل محلياً
             messagesEl.querySelectorAll('.sr-msg:not(:first-child)').forEach(m => m.remove());
-            // تجديد معرّف الجلسة
             sessionId = 'sr_sess_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
             localStorage.setItem('sr_agent_session_id', sessionId);
         });
@@ -347,7 +787,6 @@
             msgs.forEach(m => {
                 const isUser = m.classList.contains('sr-msg-user');
                 const role = isUser ? 'المستخدم' : 'المستشار الذكي التنفيذي';
-                // تنظيف النص من عناصر HTML والأزرار
                 const clone = m.cloneNode(true);
                 const actions = clone.querySelector('.sr-msg-actions');
                 if (actions) actions.remove();
@@ -370,7 +809,7 @@
             URL.revokeObjectURL(url);
         });
 
-        // النقر على الرقاقات السريعة
+        // Quick Chips
         document.querySelectorAll('.sr-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 const query = chip.getAttribute('data-query');
@@ -403,8 +842,10 @@
                     btn.textContent = a.label;
                     if (a.url) {
                         btn.href = a.url;
-                        btn.target = '_blank';
-                        btn.rel = 'noopener noreferrer';
+                        if (!a.url.startsWith('#') && !a.url.startsWith('./')) {
+                            btn.target = '_blank';
+                            btn.rel = 'noopener noreferrer';
+                        }
                     } else if (a.action === 'open_rfq') {
                         btn.href = '#';
                         btn.addEventListener('click', (ev) => {
@@ -448,7 +889,7 @@
 
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 25000);
+                const timeoutId = setTimeout(() => controller.abort(), 4000);
 
                 const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
@@ -471,17 +912,59 @@
                 appendMessage(data.reply, false, data.actions);
             } catch (err) {
                 typingEl.style.display = 'none';
-                console.warn('[S&R Agent Widget]: Falling back to local responder due to:', err);
-                appendMessage(
-                    "بصفتي المستشار الذكي التنفيذي لـ S&R CoreSync، أحيطكم علماً بأن المنظومة توفر 9 ركائز سيادية معتمدة تشمل السحابية والـ ERP، التحكيم الدولي، جسر الـ CBDC، وحزمة السوشيال ميديا 8K (€890). للتواصل المباشر مع مكتب القيادة: +31 618111116.",
-                    false,
-                    [
-                        { label: '💬 محادثة واتساب VIP المباشرة', url: 'https://wa.me/31618111116' },
-                        { label: '📋 طلب عرض سعر مخصص', action: 'open_rfq' }
-                    ]
-                );
+                console.log('[S&R Sovereign Agent]: Resolving via Offline Intelligence Engine...');
+                
+                // Smart Offline Knowledge Base Lookup
+                const match = findFallbackAnswer(text);
+                if (match) {
+                    appendMessage(match.a, false, match.actions || []);
+                } else {
+                    appendMessage(
+                        "بصفتي المستشار الذكي التنفيذي لـ S&R CoreSync، توفر منظومتنا 9 ركائز سيادية معتمدة تشمل: السحابة وERP، التحكيم الدولي (104)، جسر تسوية CBDC (105)، حوسبة ZKP (106)، الأدلة الجنائية WORM والضمان المالي (107)، بوابة المستشار القانوني (111)، وباقة السوشيال ميديا 8K (€890). يسعدنا تقديم استشارة مخصصة لمنشأتكم.",
+                        false,
+                        [
+                            { label: '💬 محادثة واتساب VIP المباشرة', url: 'https://wa.me/31618111116' },
+                            { label: '📋 طلب عرض سعر مخصص', action: 'open_rfq' },
+                            { label: '🌐 دليل الخدمات والباقات', url: './index.html#pricing' }
+                        ]
+                    );
+                }
             }
         }
+
+        // Public API on Window
+        window.srAgentWidget = {
+            open: function (query) {
+                windowEl.classList.add('sr-open');
+                if (input) {
+                    if (query) input.value = query;
+                    input.focus();
+                    if (query) sendMessage(query);
+                }
+            },
+            close: function () {
+                windowEl.classList.remove('sr-open');
+            },
+            toggle: function (query) {
+                if (windowEl.classList.contains('sr-open')) {
+                    this.close();
+                } else {
+                    this.open(query);
+                }
+            },
+            send: function (text) {
+                sendMessage(text);
+            },
+            isOpen: function () {
+                return windowEl.classList.contains('sr-open');
+            }
+        };
+
+        // Legacy compatibility routes
+        window.toggleAiChat = function () { window.srAgentWidget.toggle(); };
+        window.openAiChat = function (q) { window.srAgentWidget.open(q); };
+        window.openAiConcierge = function (q) { window.srAgentWidget.open(q); };
+        window.openConcierge = function (q) { window.srAgentWidget.open(q); };
     }
 
     if (document.readyState === 'loading') {
@@ -490,4 +973,3 @@
         buildWidgetUI();
     }
 })();
-
