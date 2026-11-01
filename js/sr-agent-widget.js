@@ -754,10 +754,32 @@
         }
 
         // Open / Close Handlers
-        launcher.addEventListener('click', () => {
-            windowEl.classList.toggle('sr-open');
-            if (windowEl.classList.contains('sr-open')) {
-                input.focus();
+        if (launcher) {
+            launcher.addEventListener('click', () => {
+                windowEl.classList.toggle('sr-open');
+                if (windowEl.classList.contains('sr-open')) {
+                    input.focus();
+                }
+            });
+        }
+
+        // Direct binding to the Social Media Bar Chat Button (#floatingFollowChatBtn)
+        const followChatBtn = document.getElementById('floatingFollowChatBtn');
+        if (followChatBtn) {
+            followChatBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                windowEl.classList.toggle('sr-open');
+                if (windowEl.classList.contains('sr-open')) {
+                    input.focus();
+                }
+            });
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && windowEl.classList.contains('sr-open')) {
+                windowEl.classList.remove('sr-open');
             }
         });
 
