@@ -149,6 +149,34 @@ body.theme-emerald .btn-action { background: linear-gradient(135deg, #6ee7b7, #0
 
 footer { border-top: 1px solid var(--border-dim); padding: 1.35rem 2rem; text-align: center; color: #94a3b8; font-size: 0.78rem; }
 
+/* Pulse Glow & SSE Live Indicators */
+.pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    margin-inline-end: 6px;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulse-glow 1.5s infinite;
+}
+.pulse-dot.offline {
+    background: #f43f5e;
+    box-shadow: 0 0 8px #f43f5e;
+    animation: none;
+}
+@keyframes pulse-glow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+.value-flash {
+    animation: flash-highlight 1.2s ease-out;
+}
+@keyframes flash-highlight {
+    0% { color: #f7df94; text-shadow: 0 0 14px rgba(247, 223, 148, 0.9); }
+    100% { color: inherit; text-shadow: none; }
+}
+
 @media (max-width: 1100px) {
     .hero-banner, .workspace-grid { grid-template-columns: 1fr; }
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }

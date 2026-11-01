@@ -2250,3 +2250,30 @@
      ```
   2. تحديث الطابع الزمني لملف [`autonomous-tax-audit.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/autonomous-tax-audit.html) لإطلاق حدث التحقق الفوري في الـ Language Server.
 - **النتيجة:** انتهاء التنبيه تماماً بنسبة 100%، وخلو شجرة الكود من أي تنبيهات أو أخطاء.
+
+---
+
+### ✅ مرحلة 14 — إنجاز المهام 110 و 111 و 112 (SSE Live Pulse • Corporate Counsel Vault • Autonomous Appeals) (السبت 31/10/2026)
+
+- **المهمة 110 (البث المباشر للنبض السيادي Server-Sent Events / Live Pulse):**
+  - تفعيل مسار البث المباشر `/api/stream/events` ومسار نشر الأحداث `/api/events/publish` في خادم بايثون [`sr_agent_server.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sr_agent_server.py).
+  - تفعيل حلقة البث النبضي الدوري `telemetry_pulse_loop` لبث نبض حي كل 5 ثوانٍ يغذي لوحات التحكم بالمؤشرات اللحظية.
+  - ترقية [`sovereign-mission-suite-dashboard.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sovereign-mission-suite-dashboard.html) و [`js/sovereign-mission-suite-dashboard.js`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/sovereign-mission-suite-dashboard.js) لاستقبال أحداث SSE تلقائياً عبر كائن `EventSource` مع شارة النبض المتوهجة (`.pulse-dot`) وعرض الأحداث الجنائية والمالية فور وقوعها دون إعادة تحميل الصفحة.
+
+- **المهمة 111 (بوابة المستشار القانوني المؤسسي Corporate Counsel Portal):**
+  - تدشين البوابة الرسمية [`corporate-counsel-portal.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/corporate-counsel-portal.html) والمنطق البرمجي الخارجي [`js/corporate-counsel-portal.js`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/corporate-counsel-portal.js).
+  - تطوير محرك فحص سلامة WORM التشفيري المتوافق 100% مع معيار ISO/IEC 27037:2012 عبر حساب بصمة SHA-256 محلياً في المتصفح باستخدام WebCrypto والتحقق من سجل الخزينة عبر مسار `/api/counsel/worm-verify`.
+  - مصفوفة أحكام التحكيم الدولية المعتمدة ومقاعدها القضائية (أمستردام NAI، دبي DIAC، سنغافورة SIAC، الرياض SCCA) المتوافقة مع اتفاقية نيويورك 1958.
+
+- **المهمة 112 (تدفق الاستئناف والاعتراض الذاتي وتجميد الضمان Smart Escrow Freeze):**
+  - تفعيل مساري قيد الاستئناف `/api/appeals/lodge` واسترجاع السجل `/api/appeals/list`.
+  - ربط تدفق الاعتراض التلقائي عند اكتشاف أدلة WORM جنائية جديدة بعد صدور الحكم المبدئي.
+  - تجميد مبالغ الضمان الذكي المرتبطة بالقضية تلقائياً بنظام النزاع التحكيمي (`DISPUTE_FROZEN`) في [`smart-escrow-milestone.html`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/smart-escrow-milestone.html).
+  - توليد ختم تشفيري موحد SHA-256 لملف الاستئناف، وأرشفته داخل محرك RAG السيادي، وبث إشعار لحظي عبر قناة SSE لكافة الواجهات المتصلة.
+
+- **الفحوصات والتحقق الشامل (100% Passed):**
+  1. اختبار [`scripts/test_sse_and_appeals.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_sse_and_appeals.py): اجتياز الفحوصات الـ 5 (WORM Verify, Tamper Detection, Awards List, SSE Event Publish, Appeal Lodge & Escrow Lock) بنسبة نجاح 100%.
+  2. توحيد شريط التنقل المشترك عبر 7 بوابات سيادية عبر [`scripts/update_suite_navigation.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/update_suite_navigation.py).
+  3. تسجيل البوابة الجديدة في خريطة الموقع [`sitemap.xml`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/sitemap.xml).
+  4. تحديث بصمات CSP في `csp-hashes.txt` (151 بصمة فريدة) عبر [`scripts/build_csp.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/build_csp.py).
+  5. اجتياز الفحص الشامل لحزمة النشر [`scripts/validate_publish_set.py`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/validate_publish_set.py): 963 ملفاً (413.32 MB)، 144 صفحة، 9,388 رابطاً مفحوصاً، 0 أخطاء، 0 أسرار في 1,354 ملفاً، و 54/54 صفحة معزولة لغوياً.
