@@ -3,9 +3,11 @@ S&R CoreSync - Deterministic Test Suite for Mission 110, 111, 112
 """
 import sys
 import os
+from typing import Any
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stdout, "reconfigure"):
+    getattr(sys.stdout, "reconfigure")(encoding="utf-8")
 
 from sr_agent_server import (
     verify_worm_evidence,
@@ -17,13 +19,14 @@ from sr_agent_server import (
     AppealRequest
 )
 
-def run_sync(coro):
+def run_sync(coro: Any) -> Any:
     try:
         coro.send(None)
     except StopIteration as e:
         return e.value
+    raise RuntimeError("Coroutine did not complete synchronously")
 
-def run_all():
+def run_all() -> None:
     print("=" * 70)
     print("🚀 بدء فحص المنطق التشغيلي للمهام 110 (SSE Live Pulse) و 111 (Counsel) و 112 (Appeals)")
     print("=" * 70)
@@ -31,6 +34,7 @@ def run_all():
     # 1. فحص التحقق من مستند WORM الجنائي (Mission 111)
     valid_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     res_valid = run_sync(verify_worm_evidence(hash=valid_hash))
+    assert res_valid is not None
     assert res_valid["status"] == "VERIFIED_IMMUTABLE", "WORM hash should be verified immutable"
     assert res_valid["iso_27037_compliant"] is True, "Must be ISO/IEC 27037 compliant"
     assert res_valid["is_tampered"] is False, "Document must not be tampered"
@@ -39,12 +43,14 @@ def run_all():
     # فحص كشف التلاعب للمستندات غير المعتمدة
     tampered_hash = "0000000000000000000000000000000000000000000000000000000000000000"
     res_invalid = run_sync(verify_worm_evidence(hash=tampered_hash))
+    assert res_invalid is not None
     assert res_invalid["status"] == "UNREGISTERED_OR_TAMPERED", "Expected tamper detection"
     assert res_invalid["is_tampered"] is True
     print("  [✓] فحص كشف التلاعب WORM: تم رصد البصمة غير المطابقة بنجاح (Tamper Detected)")
 
     # 2. فحص استرجاع قائمة أحكام التحكيم المعتمدة (Mission 111)
     awards = run_sync(list_certified_arbitral_awards())
+    assert awards is not None
     assert len(awards) >= 4, "Should have at least 4 certified awards"
     assert any(a["case_id"] == "ARB-2026-0418" for a in awards), "ARB-2026-0418 must be present"
     print(f"  [✓] فحص استرجاع أحكام التحكيم المعتمدة: تم استرجاع {len(awards)} أحكام تحكيمية متوافقة مع اتفاقية نيويورك 1958")
@@ -59,6 +65,7 @@ def run_all():
         }
     )
     pub_res = run_sync(publish_sovereign_event(pub_req))
+    assert pub_res is not None
     assert pub_res["status"] == "ok"
     assert pub_res["event_published"] == "evidence_uploaded"
     print("  [✓] فحص نشر الأحداث اللحظية (/api/events/publish): سليم 100%")
@@ -73,8 +80,10 @@ def run_all():
         counsel_signature="Counsel Hendrik Van Der Berg (NAI Netherlands)"
     )
     appeal_res = run_sync(lodge_appeal(appeal_req))
+    assert appeal_res is not None
     assert appeal_res["status"] == "ok"
     docket = appeal_res["docket"]
+    assert docket is not None
     assert "APP-2026-0418" in docket["appeal_id"]
     assert len(docket["seal_sha256"]) == 64
     assert docket["escrow_action"] == "ESCROW_LOCKED_PENDING_APPELLATE_RULING"
@@ -82,6 +91,7 @@ def run_all():
 
     # 5. فحص استرجاع قائمة ملفات الاستئناف النشطة (Mission 112)
     appeals_list = run_sync(list_appeals())
+    assert appeals_list is not None
     assert appeals_list["total_appeals"] >= 2
     assert any(a["appeal_id"] == docket["appeal_id"] for a in appeals_list["appeals"])
     print(f"  [✓] فحص سجل الاستئنافات: إجمالي {appeals_list['total_appeals']} ملفات استئناف نشطة ومؤرشفة في RAG")
