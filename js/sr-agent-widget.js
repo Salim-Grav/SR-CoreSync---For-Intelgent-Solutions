@@ -812,12 +812,12 @@
         // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && windowEl.classList.contains('sr-open')) {
-                windowEl.classList.remove('sr-open');
+                if (widgetInstance) widgetInstance.close();
             }
         });
 
         closeBtn.addEventListener('click', () => {
-            windowEl.classList.remove('sr-open');
+            if (widgetInstance) widgetInstance.close();
         });
 
         clearBtn.addEventListener('click', () => {
