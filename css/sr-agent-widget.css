@@ -55,37 +55,58 @@
 
 /* Chat Window Box */
 .sr-agent-window {
-    position: fixed;
-    bottom: 24px;
-    left: 72px;
-    right: auto;
-    z-index: 99998;
-    width: 410px;
-    max-width: calc(100vw - 88px);
-    height: 600px;
-    max-height: calc(100vh - 48px);
-    background: var(--sr-widget-bg);
-    border: 1px solid var(--sr-widget-border);
-    border-radius: 20px;
-    box-shadow: var(--sr-widget-shadow);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px) scale(0.96);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    direction: rtl;
-    text-align: right;
-    font-family: 'Alexandria', 'Tajawal', system-ui, sans-serif;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    position: fixed !important;
+    bottom: 24px !important;
+    left: 72px !important;
+    right: auto !important;
+    z-index: 999999 !important;
+    width: 410px !important;
+    max-width: calc(100vw - 88px) !important;
+    height: 600px !important;
+    max-height: calc(100vh - 48px) !important;
+    background: var(--sr-widget-bg, rgba(6, 15, 12, 0.96)) !important;
+    border: 1px solid var(--sr-widget-border, rgba(197, 168, 128, 0.35)) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(197, 168, 128, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+    transform: translateY(20px) scale(0.96) !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    direction: rtl !important;
+    text-align: right !important;
+    font-family: 'Alexandria', 'Tajawal', system-ui, sans-serif !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
 }
 
 .sr-agent-window.sr-open {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-    pointer-events: auto;
+    transform: translateY(0) scale(1) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+}
+
+html:not([dir="rtl"]) .sr-agent-window {
+    left: auto !important;
+    right: 72px !important;
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+@media (max-width: 640px) {
+    .sr-agent-window {
+        left: 10px !important;
+        right: 10px !important;
+        bottom: 10px !important;
+        width: calc(100vw - 20px) !important;
+        max-width: calc(100vw - 20px) !important;
+        height: min(80vh, 580px) !important;
+        max-height: calc(100vh - 20px) !important;
+    }
 }
 
 /* Header */
