@@ -992,6 +992,11 @@
             open: function (query) {
                 windowEl.classList.add('sr-open');
                 windowEl.setAttribute('aria-hidden', 'false');
+                windowEl.style.setProperty('display', 'flex', 'important');
+                windowEl.style.setProperty('opacity', '1', 'important');
+                windowEl.style.setProperty('visibility', 'visible', 'important');
+                windowEl.style.setProperty('pointer-events', 'auto', 'important');
+                windowEl.style.setProperty('transform', 'translateY(0) scale(1)', 'important');
                 if (input) {
                     if (query) input.value = query;
                     setTimeout(() => input.focus(), 60);
@@ -1001,9 +1006,13 @@
             close: function () {
                 windowEl.classList.remove('sr-open');
                 windowEl.setAttribute('aria-hidden', 'true');
+                windowEl.style.setProperty('opacity', '0', 'important');
+                windowEl.style.setProperty('visibility', 'hidden', 'important');
+                windowEl.style.setProperty('pointer-events', 'none', 'important');
+                windowEl.style.setProperty('transform', 'translateY(20px) scale(0.96)', 'important');
             },
             toggle: function (query) {
-                if (windowEl.classList.contains('sr-open')) {
+                if (windowEl.classList.contains('sr-open') && window.getComputedStyle(windowEl).opacity === '1') {
                     this.close();
                 } else {
                     this.open(query);
