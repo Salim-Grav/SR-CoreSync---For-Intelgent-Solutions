@@ -216,4 +216,79 @@
     addLog("log-green", "[HEALTH 100%] All 5 hubs synchronized and fully operational.");
 
     generateAndSealReport();
+
+    // Mission 110 — Server-Sent Events (SSE) Live Pulse Stream
+    var eventCount = 0;
+    var sseSource = null;
+
+    function initLivePulseSSE() {
+        var pulseBadge = document.getElementById("pulse-badge");
+        var pulseCountEl = document.getElementById("pulse-count");
+        var sseUrl = window.location.origin.startsWith("http") ? 
+            (window.location.origin + "/api/stream/events") : 
+            "http://127.0.0.1:8000/api/stream/events";
+
+        try {
+            sseSource = new EventSource(sseUrl);
+
+            sseSource.onopen = function () {
+                if (pulseBadge) {
+                    pulseBadge.textContent = "";
+                    var dot = document.createElement("span");
+                    dot.className = "pulse-dot";
+                    pulseBadge.appendChild(dot);
+                    pulseBadge.appendChild(document.createTextNode(" ONLINE (LIVE)"));
+                }
+                addLog("log-green", "[SSE LIVE PULSE] Stream connected to /api/stream/events • Real-time telemetry active.");
+            };
+
+            sseSource.onmessage = function (e) {
+                eventCount += 1;
+                if (pulseCountEl) pulseCountEl.textContent = String(eventCount);
+
+                try {
+                    var data = JSON.parse(e.data);
+                    if (data.event === "pulse_telemetry") {
+                        var p = data.payload;
+                        if (p.forensics_docs) forensics.evidenceCount = Math.max(forensics.evidenceCount, Math.round(p.forensics_docs / 10));
+                        if (p.escrow_locked_eur) escrow.disputedLockedEUR = p.escrow_locked_eur;
+                        if (p.cbdc_savings_eur) cbdc.savings = p.cbdc_savings_eur;
+                        renderKPIs();
+                        renderMatrix();
+                        updateTimestamp();
+                    } else if (data.event === "appeal_lodged") {
+                        var ap = data.payload;
+                        escrow.disputedLockedEUR += 1850000;
+                        renderKPIs();
+                        renderMatrix();
+                        addLog("log-red", "[APPEAL LODGED] Appeal " + ap.appeal_id + " filed on case " + ap.case_id + "! Escrow automatically LOCKED (" + ap.escrow_action + ").");
+                        addLog("log-gold", "[GROUNDS] " + ap.grounds);
+                    } else if (data.event === "evidence_uploaded") {
+                        forensics.evidenceCount += 1;
+                        renderKPIs();
+                        renderMatrix();
+                        addLog("log-blue", "[EVIDENCE UPLOAD] ISO/IEC 27037 forensic item ingested into WORM chain-of-custody.");
+                    } else if (data.event === "connected") {
+                        addLog("log-blue", "[PULSE INIT] " + (data.payload ? data.payload.message : "Live Stream OK"));
+                    }
+                } catch (err) {
+                    // Non-JSON comment or heartbeat
+                }
+            };
+
+            sseSource.onerror = function () {
+                if (pulseBadge) {
+                    pulseBadge.textContent = "";
+                    var dot = document.createElement("span");
+                    dot.className = "pulse-dot offline";
+                    pulseBadge.appendChild(dot);
+                    pulseBadge.appendChild(document.createTextNode(" STANDALONE / RECONNECTING"));
+                }
+            };
+        } catch (err) {
+            if (pulseBadge) pulseBadge.textContent = "STANDALONE MODE";
+        }
+    }
+
+    initLivePulseSSE();
 })();
