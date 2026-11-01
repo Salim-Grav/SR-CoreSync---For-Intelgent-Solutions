@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import http from 'node:http';
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
@@ -82,39 +82,50 @@ server.listen(PORT, async () => {
             // Click button
             const clickRes = await send('Runtime.evaluate', {
                 expression: `
-                (function() {
+                (async function() {
                     const btn = document.getElementById('floatingFollowChatBtn');
                     btn.click();
                     const win = document.getElementById('sr-agent-window');
                     
-                    // Let's inspect all style sheets matching win
-                    let matchedRules = [];
-                    for (const sheet of document.styleSheets) {
-                        try {
-                            for (const rule of sheet.cssRules || []) {
-                                if (rule.selectorText && (rule.selectorText.includes('sr-agent-window') || rule.selectorText.includes('sr-open'))) {
-                                    matchedRules.push({
-                                        sheet: sheet.href ? sheet.href.split('/').pop() : 'inline',
-                                        selector: rule.selectorText,
-                                        cssText: rule.cssText
-                                    });
-                                }
-                            }
-                        } catch(e) {}
-                    }
+                    // Wait for transition to complete
+                    await new Promise(r => setTimeout(r, 400));
 
+                    const rect = win.getBoundingClientRect();
                     return {
                         classList: win.className,
-                        matchedRules: matchedRules,
+                        inlineStyle: win.getAttribute('style'),
                         computedOpacity: window.getComputedStyle(win).opacity,
-                        computedVisibility: window.getComputedStyle(win).visibility
+                        computedVisibility: window.getComputedStyle(win).visibility,
+                        computedDisplay: window.getComputedStyle(win).display,
+                        rect: {
+                            top: rect.top,
+                            bottom: rect.bottom,
+                            left: rect.left,
+                            right: rect.right,
+                            width: rect.width,
+                            height: rect.height
+                        }
                     };
                 })()
                 `,
+                awaitPromise: true,
                 returnByValue: true
             });
 
             console.log('CLICK RESULT INSPECTION:', JSON.stringify(clickRes.result.value, null, 2));
+
+            // Capture live screenshot of the browser
+            const screenshotRes = await send('Page.captureScreenshot', {
+                format: 'jpeg',
+                quality: 85
+            });
+
+            if (screenshotRes && screenshotRes.data) {
+                const buf = Buffer.from(screenshotRes.data, 'base64');
+                const outPath = 'C:\\Users\\msali\\.gemini\\antigravity\\brain\\bf4ab143-8aba-421c-91f9-24d1a1f376a3\\live_terminal_snapshot.jpg';
+                writeFileSync(outPath, buf);
+                console.log('LIVE SCREENSHOT SAVED TO:', outPath);
+            }
 
             await sleep(1000);
             chrome.kill();
