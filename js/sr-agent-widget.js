@@ -27,6 +27,29 @@
 
     const API_ENDPOINT = (typeof localStorage !== 'undefined' && localStorage.getItem('sr_agent_endpoint')) || 'http://127.0.0.1:8000/api/ai-concierge';
 
+    // Immediate stub API
+    let widgetInstance = null;
+    let lastToggleTime = 0;
+    function safeToggle(query) {
+        const now = Date.now();
+        if (now - lastToggleTime < 320) return;
+        lastToggleTime = now;
+        if (widgetInstance) {
+            widgetInstance.toggle(query);
+        }
+    }
+    window.toggleAiChat = function (q) { safeToggle(q); };
+    window.openAiChat = function (q) { if (widgetInstance) widgetInstance.open(q); };
+    window.openAiConcierge = function (q) { if (widgetInstance) widgetInstance.open(q); };
+    window.openConcierge = function (q) { if (widgetInstance) widgetInstance.open(q); };
+    window.srAgentWidget = {
+        open: function (q) { if (widgetInstance) widgetInstance.open(q); },
+        close: function () { if (widgetInstance) widgetInstance.close(); },
+        toggle: function (q) { safeToggle(q); },
+        send: function (t) { if (widgetInstance) widgetInstance.send(t); },
+        isOpen: function () { return widgetInstance ? widgetInstance.isOpen() : false; }
+    };
+
     // Auto-inject CSS stylesheet if not present
     if (!document.querySelector('link[href*="sr-agent-widget.css"]')) {
         const link = document.createElement('link');
@@ -766,15 +789,25 @@
         // Direct binding to the Social Media Bar Chat Button (#floatingFollowChatBtn)
         const followChatBtn = document.getElementById('floatingFollowChatBtn');
         if (followChatBtn) {
-            followChatBtn.addEventListener('click', (e) => {
+            followChatBtn.onclick = function (e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                safeToggle();
+                return false;
+            };
+        }
+
+        // Global delegation for social chat and triggers
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('#floatingFollowChatBtn, [data-sr-call="toggleAiChat"], .floating-follow__link--chat');
+            if (trigger) {
                 e.preventDefault();
                 e.stopPropagation();
-                windowEl.classList.toggle('sr-open');
-                if (windowEl.classList.contains('sr-open')) {
-                    input.focus();
-                }
-            });
-        }
+                safeToggle();
+            }
+        });
 
         // Close on Escape key
         document.addEventListener('keydown', (e) => {
@@ -954,18 +987,20 @@
             }
         }
 
-        // Public API on Window
-        window.srAgentWidget = {
+        // Concrete Widget Implementation
+        widgetInstance = {
             open: function (query) {
                 windowEl.classList.add('sr-open');
+                windowEl.setAttribute('aria-hidden', 'false');
                 if (input) {
                     if (query) input.value = query;
-                    input.focus();
+                    setTimeout(() => input.focus(), 60);
                     if (query) sendMessage(query);
                 }
             },
             close: function () {
                 windowEl.classList.remove('sr-open');
+                windowEl.setAttribute('aria-hidden', 'true');
             },
             toggle: function (query) {
                 if (windowEl.classList.contains('sr-open')) {
@@ -981,12 +1016,6 @@
                 return windowEl.classList.contains('sr-open');
             }
         };
-
-        // Legacy compatibility routes
-        window.toggleAiChat = function () { window.srAgentWidget.toggle(); };
-        window.openAiChat = function (q) { window.srAgentWidget.open(q); };
-        window.openAiConcierge = function (q) { window.srAgentWidget.open(q); };
-        window.openConcierge = function (q) { window.srAgentWidget.open(q); };
     }
 
     if (document.readyState === 'loading') {
