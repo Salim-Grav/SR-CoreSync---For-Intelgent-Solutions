@@ -15,7 +15,6 @@ pages_and_labels = [
     ("zkp-confidential-enclave.html", "روابط الحوسبة السرية"),
     ("digital-forensics-litigation-hub.html", "روابط منصة الأدلة الجنائية"),
     ("smart-escrow-milestone.html", "روابط منصة الضمان الذكي"),
-    ("corporate-counsel-portal.html", "روابط بوابة المستشار القانوني"),
     ("sovereign-mission-suite-dashboard.html", "روابط لوحة التحكم الموحدة"),
 ]
 
@@ -27,7 +26,6 @@ def generate_nav(active_file, label):
         ("zkp-confidential-enclave.html", "🔐 الحوسبة السرية (106)"),
         ("digital-forensics-litigation-hub.html", "🔍 الأدلة الجنائية (107)"),
         ("smart-escrow-milestone.html", "🤝 الضمان الذكي (107)"),
-        ("corporate-counsel-portal.html", "🏛️ المستشار القانوني (111)"),
         ("sovereign-mission-suite-dashboard.html", "📊 لوحة جناح المهام"),
         ("index.html", "🏠 الرئيسية"),
     ]
@@ -50,3 +48,5 @@ for filename, label in pages_and_labels:
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(updated)
         print(f"✅ Updated navigation in: {filename}")
+
+print("\nAll Mission Suite pages unified with cross-navigation links!")

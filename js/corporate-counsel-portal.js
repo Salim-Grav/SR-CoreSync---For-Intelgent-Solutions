@@ -411,4 +411,3 @@
     addLog("log-violet", "[APPELLATE ENGINE] Autonomous appeals & milestone escrow dispute locks active.");
     addLog("log-green", "[STATUS 100%] All judicial modules verified and New York Convention 1958 compliant.");
 })();
-
