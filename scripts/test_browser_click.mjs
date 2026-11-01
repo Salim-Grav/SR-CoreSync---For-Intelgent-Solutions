@@ -38,7 +38,7 @@ server.listen(PORT, async () => {
     console.log(`Server listening on http://127.0.0.1:${PORT}`);
     const chrome = spawn(CHROME_PATH, [
         '--headless=new',
-        '--remote-debugging-port=9223',
+        '--remote-debugging-port=9224',
         '--no-sandbox',
         '--disable-gpu',
         '--user-data-dir=' + join(process.cwd(), '.chrome-test-profile'),
@@ -48,10 +48,10 @@ server.listen(PORT, async () => {
     await sleep(2500);
 
     try {
-        const listRes = await fetch('http://127.0.0.1:9223/json/list');
+        const listRes = await fetch('http://127.0.0.1:9224/json/list');
         const list = await listRes.json();
         console.log('Pages in Chrome:', list.length);
-        const page = list[0];
+        const page = list.find(p => p.url.includes('8111')) || list[0];
         if (!page) {
             console.error('No page found');
             process.exit(1);
@@ -60,49 +60,53 @@ server.listen(PORT, async () => {
         const wsUrl = page.webSocketDebuggerUrl;
         console.log('Connecting to DevTools WS:', wsUrl);
 
-        const WebSocket = (await import('ws')).default;
-        const ws = new WebSocket(wsUrl);
+        const ws = new globalThis.WebSocket(wsUrl);
 
-        ws.on('open', () => {
+        ws.onopen = () => {
             console.log('Connected to Chrome DevTools WebSocket!');
             
             let id = 1;
             function send(method, params = {}) {
-                ws.send(JSON.stringify({ id: id++, method, params }));
+                const curId = id++;
+                ws.send(JSON.stringify({ id: curId, method, params }));
+                return curId;
             }
 
             send('Runtime.enable');
             send('Console.enable');
 
-            ws.on('message', async (data) => {
-                const msg = JSON.parse(data.toString());
+            ws.onmessage = async (evt) => {
+                const msg = JSON.parse(evt.data);
                 if (msg.method === 'Runtime.consoleAPICalled') {
                     console.log('[BROWSER CONSOLE]', msg.params.type, msg.params.args.map(a => a.value || a.description).join(' '));
                 }
                 if (msg.method === 'Runtime.exceptionThrown') {
                     console.error('[BROWSER EXCEPTION]', msg.params.exceptionDetails.text, msg.params.exceptionDetails.exception?.description);
                 }
-            });
+                if (msg.result && msg.result.result) {
+                    console.log('[EVAL RESULT]', JSON.stringify(msg.result.result.value, null, 2));
+                }
+            };
 
             setTimeout(async () => {
                 console.log('--- Testing in Browser ---');
-                // Check if srAgentWidget is defined
                 send('Runtime.evaluate', {
                     expression: `
-                    JSON.stringify({
-                        hasWidget: Boolean(window.srAgentWidget),
-                        hasToggle: Boolean(window.toggleAiChat),
-                        widgetContainer: Boolean(document.getElementById('sr-agent-widget-container')),
-                        widgetWindow: Boolean(document.getElementById('sr-agent-window')),
-                        followChatBtn: Boolean(document.getElementById('floatingFollowChatBtn'))
-                    })
+                    (function() {
+                        return {
+                            hasWidget: Boolean(window.srAgentWidget),
+                            hasToggle: Boolean(window.toggleAiChat),
+                            widgetContainer: Boolean(document.getElementById('sr-agent-widget-container')),
+                            widgetWindow: Boolean(document.getElementById('sr-agent-window')),
+                            followChatBtn: Boolean(document.getElementById('floatingFollowChatBtn'))
+                        };
+                    })()
                     `,
                     returnByValue: true
                 });
 
-                await sleep(1000);
+                await sleep(1500);
 
-                // Simulate clicking floatingFollowChatBtn
                 console.log('Simulating click on #floatingFollowChatBtn...');
                 send('Runtime.evaluate', {
                     expression: `
@@ -115,7 +119,7 @@ server.listen(PORT, async () => {
                             clicked: true,
                             windowExists: Boolean(win),
                             windowClasses: win ? win.className : null,
-                            windowStyle: win ? window.getComputedStyle(win).display : null,
+                            windowDisplay: win ? window.getComputedStyle(win).display : null,
                             windowOpacity: win ? window.getComputedStyle(win).opacity : null,
                             windowVisibility: win ? window.getComputedStyle(win).visibility : null,
                             windowZIndex: win ? window.getComputedStyle(win).zIndex : null,
@@ -126,19 +130,19 @@ server.listen(PORT, async () => {
                     returnByValue: true
                 });
 
-                await sleep(2000);
+                await sleep(3000);
                 chrome.kill();
                 server.close();
                 process.exit(0);
             }, 3000);
-        });
+        };
 
-        ws.on('error', (err) => {
+        ws.onerror = (err) => {
             console.error('WS Error:', err);
             chrome.kill();
             server.close();
             process.exit(1);
-        });
+        };
 
     } catch (e) {
         console.error('Test error:', e);
