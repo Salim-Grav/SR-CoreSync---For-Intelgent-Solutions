@@ -2334,3 +2334,31 @@
      - اجتياز `python scripts/build_csp.py --check` (148 بصمة).
      - اجتياز `python scripts/validate_publish_set.py` (966 ملفاً، 9,387 رابطاً، 0 أسرار).
      - اجتياز `python scripts/validate_publish_set.py` (966 ملفاً، 0 أسرار، 9,389 رابطاً سليماً).
+
+
+---
+
+### ✅ مرحلة 18 — حل مشكلة عدم ظهور نافذة الوكيل بعد النقر وتثبيت الأنماط الصريحة (الإثنين 02/11/2026)
+
+- **الدافع والطلب:**
+  - أبلغ المستخدم بعدم ظهور نافذة المحادثة عند النقر على أيقونة المحادثة الفورية في شريط السوشيال ميديا الجانبي (`#floatingFollowChatBtn`).
+- **التشخيص المخبري الدقيق عبر بروتوكول DevTools (CDP):**
+  - فحص سلوك المتصفح الحقيقي أثبت أن حدث النقر يُطلق بنجاح ويضيف الفئة `.sr-open`، إلا أن المتصفح كان يُبقي الشفافية المحسوبة `computedOpacity: 0` و `visibility: hidden` نتيجة تصادم قواعد `!important` بين الحالة المغلقة الابتدائية في CSS والحالة المفتوحة.
+- **الحلول الهندسية المطبقة:**
+  1. **إعادة ضبط أولويات CSS (CSS Cascade Reset):**
+     - إزالة وسوم `!important` من الحالة الابتدائية المغلقة في [`css/sr-agent-widget.css`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/sr-agent-widget.css) (`opacity: 0; visibility: hidden; pointer-events: none;`).
+     - رفع درجة التخصيص للمحدد المركب `#sr-agent-widget-container .sr-agent-window.sr-open` ليفرض الشفافية والظهور الفوري بنسبة 100% (`opacity: 1 !important; visibility: visible !important; display: flex !important; transform: translateY(0) scale(1) !important;`).
+  2. **تحصين الجافاسكربت بالأنماط المضمنة الصريحة (Inline Specificity Injection):**
+     - تعديل دالة `open()` ودالة `close()` داخل [`js/sr-agent-widget.js`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/sr-agent-widget.js) لتطبيق الأنماط مباشرة عبر `windowEl.style.setProperty('opacity', '1', 'important')` و `windowEl.style.setProperty('visibility', 'visible', 'important')`، مما يمنح نافذة الوكيل الأولوية القصوى في شجرة العرض (1, 0, 0, 0) ويمنع أي تصادم مستقبلي.
+  3. **التحقق المرئي والفحص الآلي على المتصفح الحقيقي:**
+     - تشغيل سكربت الفحص [`scripts/test_click_in_browser.mjs`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/scripts/test_click_in_browser.mjs) بمحاكاة النقر وانتظار الانتقال:
+       - النتيجة: `computedOpacity: "1"`
+       - الحالة: `computedVisibility: "visible"`
+       - وضع العرض: `computedDisplay: "flex"`
+       - الأبعاد: `width: 410px` و `height: 377px`.
+  4. **التقاط اللقطة الحية (Live Visual Snapshot):**
+     - التقاط لقطة شاشة مرئية مباشرة من المتصفح وحفظها في `live_terminal_snapshot.jpg` امتثالاً للقاعدة الدائمة الأولى في `GEMINI.md`.
+  5. **فحوصات الجودة وخط الأنابيب CI/CD:**
+     - اجتياز `browser_console_audit.mjs` لجميع الصفحات الـ 30 بنسبة نجاح 100% (`passed: 30, failed: 0`).
+     - اجتياز `python scripts/build_csp.py --check` بـ 148 بصمة أمنية موثقة لـ 144 صفحة.
+     - اجتياز `python scripts/validate_publish_set.py` لـ 966 ملفاً مع حماية تامة من أي أسرار أو تسريبات.
