@@ -122,7 +122,9 @@ i.pitch = 0.88;const femaleKeywords = [
         "shakir", "hamed", "laith", "basel", "ali", "ismail", "taim", "fahd", "rami", "ahmed", "jamal", "abdullah", "moath", "hadi", "saleh", "maged", "tarik", "naayf", "male",
         "david", "mark", "george", "guy", "james", "bart", "stefan", "frank", "bernd", "conrad"
     ];
-    const allVoices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
+    const allVoices = (window._srCachedVoices && window._srCachedVoices.length > 0)
+        ? window._srCachedVoices
+        : ((window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : []);
     const targetVoices = allVoices.filter(v => (v.lang || "").toLowerCase().startsWith(targetLangPrefix));
 
     let s = targetVoices.find(v => {
@@ -347,7 +349,9 @@ function toggleBookingAudioGreeting() {
         "shakir", "hamed", "laith", "basel", "ali", "ismail", "taim", "fahd", "rami", "ahmed", "jamal", "abdullah", "moath", "hadi", "saleh", "maged", "tarik", "naayf", "male",
         "david", "mark", "george", "guy", "james", "bart", "stefan", "frank", "bernd", "conrad"
     ];
-    const allVoices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
+    const allVoices = (window._srCachedVoices && window._srCachedVoices.length > 0)
+        ? window._srCachedVoices
+        : ((window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : []);
     const targetVoices = allVoices.filter(v => (v.lang || "").toLowerCase().startsWith(targetLangPrefix));
 
     let matchedVoice = targetVoices.find(v => {
