@@ -1110,6 +1110,171 @@
     justify-content: space-between;
 }
 
+/* =============================================================================
+   S&R CoreSync - External Website Audit & Client Dispatch Modal Styles
+   ============================================================================= */
+.sr-audit-breakdown-card {
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 16px 0;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 158, 11, 0.1);
+}
+
+.sr-audit-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sr-audit-score-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.sr-audit-score-pill.warning {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: #f59e0b;
+}
+
+.sr-audit-score-pill.success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #10b981;
+}
+
+.sr-audit-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.sr-audit-metric-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.sr-audit-metric-item strong {
+    display: block;
+    font-size: 0.78rem;
+    color: #94a3b8;
+    margin-bottom: 4px;
+}
+
+.sr-audit-metric-item span {
+    font-size: 0.85rem;
+    color: #f8fafc;
+    font-weight: 600;
+}
+
+.sr-audit-issues-list {
+    margin: 0;
+    padding: 0 16px;
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.sr-audit-issues-list li {
+    margin-bottom: 6px;
+}
+
+.sr-client-dispatch-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(3, 7, 18, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.sr-client-dispatch-modal.active {
+    display: flex;
+}
+
+.sr-client-dispatch-card {
+    background: linear-gradient(145deg, #0f172a, #020617);
+    border: 1px solid rgba(197, 168, 128, 0.35);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    padding: 24px;
+    color: #f8fafc;
+    animation: srA4ModalSlideIn 0.28s ease-out;
+}
+
+.sr-dispatch-form-group {
+    margin-bottom: 14px;
+}
+
+.sr-dispatch-form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.sr-dispatch-form-group input,
+.sr-dispatch-form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 0.88rem;
+    transition: border-color 0.2s ease;
+}
+
+.sr-dispatch-form-group input:focus,
+.sr-dispatch-form-group textarea:focus {
+    border-color: #c5a880;
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sr-dispatch-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.sr-chip-clgid {
+    background: rgba(2, 132, 199, 0.15) !important;
+    border-color: rgba(2, 132, 199, 0.45) !important;
+    color: #7dd3fc !important;
+}
+
+.sr-chip-clgid:hover {
+    background: rgba(2, 132, 199, 0.28) !important;
+    border-color: #38bdf8 !important;
+}
+
 /* Pristine Print Stylesheet Rule */
 @media print {
     @page {

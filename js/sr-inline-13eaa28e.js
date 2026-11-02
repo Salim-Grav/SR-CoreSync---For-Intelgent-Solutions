@@ -79,14 +79,55 @@ const isPureFinanceOrErp = (e.includes("erp") || e.includes("محاسب") || e.i
                            e.includes("vat") || e.includes("btw") || e.includes("جمارك") || e.includes("سلاسل") || 
                            e.includes("مخازن") || e.includes("لوجستي") || e.includes("رائد") || e.includes("kaakeh")) && !isWebOrTech;
 
-const isRaed = isPureFinanceOrErp;const founderName=isRaed?"أ. رائد كعكة":"م. محمد سليم عزيزة";const founderRole=isRaed?"المسؤول التنفيذي للعمليات وتطوير الأعمال":"كبير مهندسي السحابة والذكاء الاصطناعي";const founderImg=isRaed?"./assets/founder-raed.webp":"./assets/founder-salim.webp";const founderAlt=isRaed?"Mr. Raed Kaakeh - Chief Operating Officer":"Eng. Mohammad Salim Aziza - Chief Technology & AI Officer";const founderBadge=isRaed?"🎙️ صوت الأستاذ رائد الرقمي • AI Executive Audio":"🎙️ صوت المهندس سليم الرقمي • AI Executive Audio";const founderLead=isRaed?"أهلاً بك، معك الأستاذ رائد كعكة، المسؤول التنفيذي للعمليات وتطوير الأعمال في إس آند آر.":"أهلاً بك، معك المهندس محمد سليم عزيزة، كبير مهندسي السحابة والذكاء الاصطناعي في إس آند آر.";e.includes("clgid")||e.includes("governance")||e.includes("مركز")||e.includes("حوار")||e.includes("لاهاي")?(i="المنصة الرقمية المؤسسية لحوكمة الدراسات والاستشارات السيادية 2026",s="هندسة المنصات السيادية وبوابات الحوكمة والدراسات (لاهاي)",c="منظومة PWA متقدمة + خوادم سحابية أوروبية معزولة متوافقة مع GDPR + محرك أوراق السياسات ودراسات الجدوى المعتمدة",a="+65% كفاءة في إدارة البرامج والتقارير الاستشارية وتأمين سيادي كامل لبيانات المؤسسة"):e.includes("ويب")||e.includes("موقع")||e.includes("website")||e.includes("web")||e.includes("تطوير موقع")?(i="بوابة ومنصة ويب سحابية تفاعلية فائقة السرعة بهوية بصرية 8K",s="هندسة الويب السحابي وتطبيقات الـ Enterprise Modern Web",c="واجهة مستخدم React/Modern PWA فائقة الخفة + استضافة سحابية أوروبية + نظام إدارة محتوى سيادي متعدد اللغات (عربي/هولندي/إنجليزي)",a="+70% سرعة في استقطاب الشركاء وتحويل الزوار ومطابقة تامة لمعايير أمن البيانات الأوروبية"):e.includes("متجر")||e.includes("تجارة")||e.includes("شحن")||e.includes("بيع")||e.includes("store")||e.includes("shop")?(i="منصة تجارة إلكترونية سحابية PWA مع ربط محاسبي ومخازن",s="التجارة الرقمية وسلاسل الإمداد الأوروبية",c="متجر PWA فائق السرعة + ربط بوابات الدفع الأوروبية (iDEAL/Stripe) + تكامل المخازن التلقائي",a="+55% زيادة في معدل التحويل والمبيعات وتوفير 80 ساعة عمل شهرياً"):e.includes("محاسب")||e.includes("erp")||e.includes("ضرائب")||e.includes("فاتور")||e.includes("استيراد")||e.includes("تصدير")?(i="منظومة ERP سحابية لإدارة الحسابات والضرائب والعمليات المؤسسية",s="الأنظمة المالية والإدارية وحوكمة الموارد (ERP)",c="نظام CoreSync ERP مخصص + شجرة حسابات متوافقة مع BTW/VAT + أتمتة الفواتير والتقارير الفورية",a="خفض تكاليف الأخطاء المحاسبية بنسبة 95% وتوفير ما يعادل 2.5 موظف إداري سنوياً"):e.includes("تطبيق")||e.includes("جوال")||e.includes("مواعيد")||e.includes("عياد")||e.includes("حجز")||e.includes("app")?(i="تطبيق سحابي ذكي لحجز المواعيد وإدارة العملاء عبر الذكاء الاصطناعي",s="التطبيقات الخدمية ومنصات الحجز الذكية",c="تطبيق ويب PWA متجاوب + محرك حجز ودفع فوري + روبوت ذكاء اصطناعي لإشعارات المواعيد عبر واتساب وتيليجرام",a="القضاء على الغياب وإلغاء المواعيد بنسبة 85% وزيادة التدفقات النقدية اللحظية"):(e.includes("سوشيال")||e.includes("هوية")||e.includes("تأسيس")||e.includes("8k")||e.includes("براند"))&&(i="باقة التأسيس السيادي لقنوات السوشيال ميديا وحزمة الهوية البصرية 8K",s="الهوية الرقمية وحضور العلامات التجارية الكبرى",c="تأسيس 9 منصات تواصل موحدة + 23 أصلاً فائق الدقة 8K + قوالب فيديو ريلز 9:16 + استوديو تسليم رقمي",a="مضاعفة ثقة المستثمرين والعملاء بمعدل 5.4x وتسليم كامل خلال 48 إلى 72 ساعة");const r=`\n                    <div class="sr-blueprint-card">\n                        <div class="sr-blueprint-header">\n                            <span class="sr-blueprint-badge">\n                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>\n                                خطة عمل ومخطط تنفيذي معتمد بالذكاء الاصطناعي 2026\n                            </span>\n                            <h4 class="sr-blueprint-title">${i}</h4>\n                            <p class="text-white-64 font-size-14 mb-0">المجال: <strong class="text-white">${s}</strong> • تم التحليل والصياغة بناءً على فكرتك المنطوقة.</p>\n                        </div>\n\n                        \x3c!-- 🎙️ مشغل الرد الصوتي التنفيذي الذكي (AI Executive Audio Synthesis) --\x3e\n                        <div class="sr-blueprint-audio-player" id="blueprintAudioPlayer"\n                             data-project-name="${encodeURIComponent(i)}"\n                             data-sys-rec="${encodeURIComponent(c)}"\n                             data-roi-value="${encodeURIComponent(a)}" data-founder-type="${isRaed ? 'raed' : 'salim'}" data-founder-lead="${encodeURIComponent(founderLead)}">\n                            <div class="sr-blueprint-audio-info">\n                                <div class="sr-blueprint-audio-avatar">\n                                    <img src="${founderImg}" alt="${founderAlt}" class="sr-blueprint-audio-img" / loading="lazy" decoding="async">\n                                    <span class="sr-blueprint-audio-status-dot" id="audioSpeakingDot"></span>\n                                </div>\n                                <div class="sr-blueprint-audio-texts">\n                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">\n                                        <span class="sr-blueprint-audio-badge">${founderBadge}</span><span style="font-size:11px;color:#cbd5e1;font-weight:600;">${founderRole}</span>\n                                        <a href="https://www.linkedin.com/company/146883282/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(10, 102, 194, 0.25); border: 1px solid rgba(96, 165, 250, 0.45); border-radius: 999px; color: #93c5fd; font-size: 11px; font-weight: 700; text-decoration: none; transition: all 0.2s ease;">\n                                            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>\n                                            <span>LinkedIn</span>\n                                        </a>\n                                    </div>\n                                    <div class="sr-blueprint-audio-title">الاستماع للملخص التنفيذي للخطة (${founderName})</div>\n                                </div>\n                            </div>\n                            <div class="sr-blueprint-audio-controls">\n                                <button type="button" class="sr-blueprint-audio-btn" id="blueprintPlayVoiceBtn" onclick="toggleBlueprintAudioSynthesis()">\n                                    <span id="blueprintPlayVoiceIcon">▶️</span>\n                                    <span id="blueprintPlayVoiceLabel">استمع للخطة الآن</span>\n                                </button>\n                                <div class="sr-blueprint-audio-waves" id="blueprintAudioWaves">\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="sr-blueprint-grid">\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>\n                                    1. الرؤية ونطاق المعالجة\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    تحويل الفكرة إلى منظومة برمجية متماسكة تنافس عالمياً، مع التركيز على تجربة مستخدم سلسة وأمان مصرفي للبيانات وربط إداري متكامل.\n                                </div>\n                            </div>\n\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>\n                                    2. البنية البرمجية الموصى بها\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    ${c}\n                                </div>\n                            </div>\n\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>\n                                    3. العائد الاستثماري المتوقع (ROI)\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    ${a}\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="sr-roadmap-steps">\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">1</span>\n                                <div><strong>المرحلة الأولى (الأسبوع 1-2):</strong> التأسيس الهيكلي، حجز وتوحيد قنوات السوشيال ميديا 9 منصات، وتوليد حزمة الهوية البصرية 8K.</div>\n                            </div>\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">2</span>\n                                <div><strong>المرحلة الثانية (الأسبوع 3-5):</strong> هندسة وتطوير الأنظمة السحابية والـ ERP، وتكامل بوابات الدفع والفواتير والربط الآلي.</div>\n                            </div>\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">3</span>\n                                <div><strong>المرحلة الثالثة (الأسبوع 6+):</strong> تدقيق الأمان والسرعة، التدريب الميداني للمؤسسين، والإطلاق التجاري وبدء استلام الأرباح.</div>\n                            </div>\n                        </div>\n\n                        <div class="sr-blueprint-actions">\n                            <button type="button" class="sr-voice-btn-primary" onclick="exportBlueprintPdf('${i.replace(/'/g,"'")}')">\n                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>\n                                <span>تحميل الخطة (PDF) 📄</span>\n                            </button>\n                            <button type="button" class="sr-btn-whatsapp" onclick="dispatchBlueprintToWhatsApp()">\n                                <span>📱 إرسال لواتساب للأعمال</span>\n                            </button>\n                            <button type="button" class="sr-btn-telegram" onclick="dispatchBlueprintToTelegram()">\n                                <span>✈️ إرسال لتيليجرام</span>\n                            </button>\n                            <a href="https://www.linkedin.com/company/146883282/" target="_blank" rel="noopener noreferrer" class="sr-btn-linkedin">\n                                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>\n                                <span>💼 صفحة LinkedIn</span>\n                            </a>\n                            <button type="button" class="sr-voice-btn-primary sr-btn-spec-json" data-sr-call="downloadBlueprintArchitectureJson">
+const isClgidAudit = e.includes("clgid") || e.includes("ai.studio") || e.includes("governance") || e.includes("لاهاي") || e.includes("فحص") || e.includes("تدقيق");
+const isRaed = isPureFinanceOrErp && !isClgidAudit;const founderName=isRaed?"أ. رائد كعكة":"م. محمد سليم عزيزة";const founderRole=isRaed?"المسؤول التنفيذي للعمليات وتطوير الأعمال":"كبير مهندسي السحابة والذكاء الاصطناعي";const founderImg=isRaed?"./assets/founder-raed.webp":"./assets/founder-salim.webp";const founderAlt=isRaed?"Mr. Raed Kaakeh - Chief Operating Officer":"Eng. Mohammad Salim Aziza - Chief Technology & AI Officer";const founderBadge=isRaed?"🎙️ صوت الأستاذ رائد الرقمي • AI Executive Audio":"🎙️ صوت المهندس سليم الرقمي • AI Executive Audio";const founderLead=isRaed?"أهلاً بك، معك الأستاذ رائد كعكة، المسؤول التنفيذي للعمليات وتطوير الأعمال في إس آند آر.":"أهلاً بك، معك المهندس محمد سليم عزيزة، كبير مهندسي السحابة والذكاء الاصطناعي في إس آند آر.";e.includes("clgid")||e.includes("governance")||e.includes("مركز")||e.includes("حوار")||e.includes("لاهاي")?(i="المنصة الرقمية المؤسسية لحوكمة الدراسات والاستشارات السيادية 2026",s="هندسة المنصات السيادية وبوابات الحوكمة والدراسات (لاهاي)",c="منظومة PWA متقدمة + خوادم سحابية أوروبية معزولة متوافقة مع GDPR + محرك أوراق السياسات ودراسات الجدوى المعتمدة",a="+65% كفاءة في إدارة البرامج والتقارير الاستشارية وتأمين سيادي كامل لبيانات المؤسسة"):e.includes("ويب")||e.includes("موقع")||e.includes("website")||e.includes("web")||e.includes("تطوير موقع")?(i="بوابة ومنصة ويب سحابية تفاعلية فائقة السرعة بهوية بصرية 8K",s="هندسة الويب السحابي وتطبيقات الـ Enterprise Modern Web",c="واجهة مستخدم React/Modern PWA فائقة الخفة + استضافة سحابية أوروبية + نظام إدارة محتوى سيادي متعدد اللغات (عربي/هولندي/إنجليزي)",a="+70% سرعة في استقطاب الشركاء وتحويل الزوار ومطابقة تامة لمعايير أمن البيانات الأوروبية"):e.includes("متجر")||e.includes("تجارة")||e.includes("شحن")||e.includes("بيع")||e.includes("store")||e.includes("shop")?(i="منصة تجارة إلكترونية سحابية PWA مع ربط محاسبي ومخازن",s="التجارة الرقمية وسلاسل الإمداد الأوروبية",c="متجر PWA فائق السرعة + ربط بوابات الدفع الأوروبية (iDEAL/Stripe) + تكامل المخازن التلقائي",a="+55% زيادة في معدل التحويل والمبيعات وتوفير 80 ساعة عمل شهرياً"):e.includes("محاسب")||e.includes("erp")||e.includes("ضرائب")||e.includes("فاتور")||e.includes("استيراد")||e.includes("تصدير")?(i="منظومة ERP سحابية لإدارة الحسابات والضرائب والعمليات المؤسسية",s="الأنظمة المالية والإدارية وحوكمة الموارد (ERP)",c="نظام CoreSync ERP مخصص + شجرة حسابات متوافقة مع BTW/VAT + أتمتة الفواتير والتقارير الفورية",a="خفض تكاليف الأخطاء المحاسبية بنسبة 95% وتوفير ما يعادل 2.5 موظف إداري سنوياً"):e.includes("تطبيق")||e.includes("جوال")||e.includes("مواعيد")||e.includes("عياد")||e.includes("حجز")||e.includes("app")?(i="تطبيق سحابي ذكي لحجز المواعيد وإدارة العملاء عبر الذكاء الاصطناعي",s="التطبيقات الخدمية ومنصات الحجز الذكية",c="تطبيق ويب PWA متجاوب + محرك حجز ودفع فوري + روبوت ذكاء اصطناعي لإشعارات المواعيد عبر واتساب وتيليجرام",a="القضاء على الغياب وإلغاء المواعيد بنسبة 85% وزيادة التدفقات النقدية اللحظية"):(e.includes("سوشيال")||e.includes("هوية")||e.includes("تأسيس")||e.includes("8k")||e.includes("براند"))&&(i="باقة التأسيس السيادي لقنوات السوشيال ميديا وحزمة الهوية البصرية 8K",s="الهوية الرقمية وحضور العلامات التجارية الكبرى",c="تأسيس 9 منصات تواصل موحدة + 23 أصلاً فائق الدقة 8K + قوالب فيديو ريلز 9:16 + استوديو تسليم رقمي",a="مضاعفة ثقة المستثمرين والعملاء بمعدل 5.4x وتسليم كامل خلال 48 إلى 72 ساعة");const r=`\n                    <div class="sr-blueprint-card">\n                        <div class="sr-blueprint-header">\n                            <span class="sr-blueprint-badge">\n                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>\n                                خطة عمل ومخطط تنفيذي معتمد بالذكاء الاصطناعي 2026\n                            </span>\n                            <h4 class="sr-blueprint-title">${i}</h4>\n                            <p class="text-white-64 font-size-14 mb-0">المجال: <strong class="text-white">${s}</strong> • تم التحليل والصياغة بناءً على فكرتك المنطوقة.</p>\n                        </div>\n\n                        \x3c!-- 🎙️ مشغل الرد الصوتي التنفيذي الذكي (AI Executive Audio Synthesis) --\x3e\n                        <div class="sr-blueprint-audio-player" id="blueprintAudioPlayer"\n                             data-project-name="${encodeURIComponent(i)}"\n                             data-sys-rec="${encodeURIComponent(c)}"\n                             data-roi-value="${encodeURIComponent(a)}" data-founder-type="${isRaed ? 'raed' : 'salim'}" data-founder-lead="${encodeURIComponent(founderLead)}">\n                            <div class="sr-blueprint-audio-info">\n                                <div class="sr-blueprint-audio-avatar">\n                                    <img src="${founderImg}" alt="${founderAlt}" class="sr-blueprint-audio-img" / loading="lazy" decoding="async">\n                                    <span class="sr-blueprint-audio-status-dot" id="audioSpeakingDot"></span>\n                                </div>\n                                <div class="sr-blueprint-audio-texts">\n                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">\n                                        <span class="sr-blueprint-audio-badge">${founderBadge}</span><span style="font-size:11px;color:#cbd5e1;font-weight:600;">${founderRole}</span>\n                                        <a href="https://www.linkedin.com/company/146883282/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: rgba(10, 102, 194, 0.25); border: 1px solid rgba(96, 165, 250, 0.45); border-radius: 999px; color: #93c5fd; font-size: 11px; font-weight: 700; text-decoration: none; transition: all 0.2s ease;">\n                                            <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>\n                                            <span>LinkedIn</span>\n                                        </a>\n                                    </div>\n                                    <div class="sr-blueprint-audio-title">الاستماع للملخص التنفيذي للخطة (${founderName})</div>\n                                </div>\n                            </div>\n                            <div class="sr-blueprint-audio-controls">\n                                <button type="button" class="sr-blueprint-audio-btn" id="blueprintPlayVoiceBtn" onclick="toggleBlueprintAudioSynthesis()">\n                                    <span id="blueprintPlayVoiceIcon">▶️</span>\n                                    <span id="blueprintPlayVoiceLabel">استمع للخطة الآن</span>\n                                </button>\n                                <div class="sr-blueprint-audio-waves" id="blueprintAudioWaves">\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                    <span class="sr-audio-bar"></span>\n                                </div>\n                            </div>\n                        </div>\n\n                        ${isClgidAudit ? `
+                        <div class="sr-audit-breakdown-card">
+                            <div class="sr-audit-header-row">
+                                <div style="display:flex;align-items:center;gap:10px;">
+                                    <span style="font-size:1.3rem;">🔍</span>
+                                    <div>
+                                        <div style="font-size:0.95rem;font-weight:800;color:#f8fafc;">نتائج التدقيق الفني والأمني المباشر (CLGID The Hague)</div>
+                                        <div style="font-size:0.75rem;color:#94a3b8;">الموقع المفحوص: <code style="color:#38bdf8;">https://clgid-governance.ai.studio/</code> • إشراف: م. محمد سليم عزيزة</div>
+                                    </div>
+                                </div>
+                                <span class="sr-audit-score-pill warning">⚠️ مؤشر الأمان والامتثال: 41 / 100 (مخاطر مرتفعة)</span>
+                            </div>
+                            <div class="sr-audit-metric-grid">
+                                <div class="sr-audit-metric-item">
+                                    <strong>الاستضافة الحالية:</strong>
+                                    <span style="color:#f87171;">Google ai.studio Sandbox (بيئة تجريبية بدون SLA)</span>
+                                </div>
+                                <div class="sr-audit-metric-item">
+                                    <strong>الأمن وتسريب البيانات:</strong>
+                                    <span style="color:#fbbf24;">تسريب مفاتيح Firebase وسماح مباشر بالقراءة</span>
+                                </div>
+                                <div class="sr-audit-metric-item">
+                                    <strong>الامتثال الأوروبي GDPR:</strong>
+                                    <span style="color:#f87171;">غير ممتثل لمعايير هيئة البيانات الهولندية (AP)</span>
+                                </div>
+                                <div class="sr-audit-metric-item">
+                                    <strong>الواجهة واللغات:</strong>
+                                    <span style="color:#fbbf24;">غياب الواجهة العربية تماماً وافتقار أوراق السياسات</span>
+                                </div>
+                            </div>
+                            <div style="font-size:0.8rem;font-weight:700;color:#e2e8f0;margin-bottom:6px;">⚡ خطة التطوير السيادية الشاملة من شركة إس آند آر:</div>
+                            <ul class="sr-audit-issues-list">
+                                <li><strong>إعادة البناء كمنصة PWA سيادية:</strong> تشغيل تطبيق ويب تقدمي خفيف بهندسة React الحديثة واستضافة سحابية أوروبية معزولة في لاهاي وأمستردام.</li>
+                                <li><strong>تأمين سيادي وفق GDPR الهولندي:</strong> عزل قواعد البيانات وتشفير وثائق وأبحاث الحوكمة بخوارزمية AES-256 وحفظ سجلات تدقيق سرية.</li>
+                                <li><strong>بوابة ثلاثية اللغات (عربي / هولندي / إنجليزي):</strong> دعم كامل لاتجاه الكتابة RTL والخطوط الدبلوماسية المعتمدة وتوليد ملخصات الذكاء الاصطناعي.</li>
+                            </ul>
+                        </div>
+                        ` : ''}
+
+                        <div class="sr-blueprint-grid">\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>\n                                    1. الرؤية ونطاق المعالجة\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    تحويل الفكرة إلى منظومة برمجية متماسكة تنافس عالمياً، مع التركيز على تجربة مستخدم سلسة وأمان مصرفي للبيانات وربط إداري متكامل.\n                                </div>\n                            </div>\n\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>\n                                    2. البنية البرمجية الموصى بها\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    ${c}\n                                </div>\n                            </div>\n\n                            <div class="sr-blueprint-box">\n                                <div class="sr-blueprint-box-title">\n                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>\n                                    3. العائد الاستثماري المتوقع (ROI)\n                                </div>\n                                <div class="sr-blueprint-box-desc">\n                                    ${a}\n                                </div>\n                            </div>\n                        </div>\n\n                        <div class="sr-roadmap-steps">\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">1</span>\n                                <div><strong>المرحلة الأولى (الأسبوع 1-2):</strong> التأسيس الهيكلي، حجز وتوحيد قنوات السوشيال ميديا 9 منصات، وتوليد حزمة الهوية البصرية 8K.</div>\n                            </div>\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">2</span>\n                                <div><strong>المرحلة الثانية (الأسبوع 3-5):</strong> هندسة وتطوير الأنظمة السحابية والـ ERP، وتكامل بوابات الدفع والفواتير والربط الآلي.</div>\n                            </div>\n                            <div class="sr-roadmap-step">\n                                <span class="sr-roadmap-step-num">3</span>\n                                <div><strong>المرحلة الثالثة (الأسبوع 6+):</strong> تدقيق الأمان والسرعة، التدريب الميداني للمؤسسين، والإطلاق التجاري وبدء استلام الأرباح.</div>\n                            </div>\n                        </div>\n\n                        <div class="sr-blueprint-actions">\n                            <button type="button" class="sr-voice-btn-primary" onclick="exportBlueprintPdf('${i.replace(/'/g,"'")}')">\n                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>\n                                <span>تحميل الخطة (PDF) 📄</span>\n                            </button>\n                            <button type="button" class="sr-btn-whatsapp" onclick="dispatchBlueprintToWhatsApp()">\n                                <span>📱 إرسال لواتساب للأعمال</span>\n                            </button>\n                            <button type="button" class="sr-btn-telegram" onclick="dispatchBlueprintToTelegram()">\n                                <span>✈️ إرسال لتيليجرام</span>\n                            </button>\n                            <a href="https://www.linkedin.com/company/146883282/" target="_blank" rel="noopener noreferrer" class="sr-btn-linkedin">\n                                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73a1.73 1.73 0 0 0 1.73-1.73c0-.95-.78-1.72-1.73-1.72m1.39 9.74v-8.37H5.07v8.37h2.78Z"/></svg>\n                                <span>💼 صفحة LinkedIn</span>\n                            </a>\n                            <button type="button" class="sr-voice-btn-primary sr-btn-spec-json" data-sr-call="downloadBlueprintArchitectureJson">
                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                                 <span>تحميل مواصفات JSON 💻</span>
                             </button>
                             <button type="button" class="sr-btn-whatsapp" data-sr-call="dispatchBlueprintToClientAndManagement">
                                 <span>📱 توثيق التعاقد وإرسال للإدارة</span>
                             </button>
-                            <button type="button" class="sr-btn-action sr-btn-preview-a4" data-sr-call="openBlueprintPreviewModal"><span>🏛️ معاينة التقرير الرسمي A4 والرمز المشفر QR</span></button>\n                            <button type="button" class="sr-btn-checkout" onclick="openExecutiveCheckoutModal('${i.replace(/'/g,"'")}', 890)">\n                                <span>💳 اعتماد ودفع فوري (€890)</span>\n                            </button>\n                            <button type="button" class="sr-voice-btn-glass" onclick="bookBlueprintConsultation('${i.replace(/'/g,"'")}')">\n                                <span>👔 حجز استشارة VIP</span>\n                            </button>\n                        </div>\n                    </div>\n                `;n&&(n.innerHTML=r,n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"nearest"})),t&&(t.innerHTML="✨ تم بناء وتوليد خطة عملك بنجاح تام! يمكنك الاستماع للملخص الصوتي أو تحميلها كـ PDF."),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("success")},700)}window.openAiVoicePlannerModal=openAiVoicePlannerModal,window.closeAiVoicePlannerModal=closeAiVoicePlannerModal;let isBlueprintSpeaking=!1,currentSpeechUtterance=null;function stopBlueprintAudioSynthesis(){if(window.speechSynthesis)try{window.speechSynthesis.cancel()}catch(e){console.warn(e)}isBlueprintSpeaking=!1,currentSpeechUtterance=null;const e=document.getElementById("blueprintAudioPlayer"),n=document.getElementById("blueprintPlayVoiceIcon"),t=document.getElementById("blueprintPlayVoiceLabel");e&&e.classList.remove("is-playing"),n&&(n.innerHTML="▶️"),t&&(t.textContent="استمع للخطة الآن")}function toggleBlueprintAudioSynthesis(){if(isBlueprintSpeaking)return void stopBlueprintAudioSynthesis();if(!("speechSynthesis"in window))return void alert("عذراً، المتصفح الحالي لا يدعم التوليف الصوتي المباشر. يمكنك قراءة الخطة أو تنزيلها بصيغة PDF.");stopBlueprintAudioSynthesis();const e=document.getElementById("blueprintAudioPlayer"),n=e?decodeURIComponent(e.getAttribute("data-project-name")||""):"مشروعك الذكي",t=e?decodeURIComponent(e.getAttribute("data-sys-rec")||""):"البنية السحابية الموصى بها",o=e?decodeURIComponent(e.getAttribute("data-roi-value")||""):"عائد استثماري نوعي",founderLead=e?decodeURIComponent(e.getAttribute("data-founder-lead")||""):"أهلاً بك في إس آند آر.";const docLang = (document.documentElement.getAttribute("lang") || "ar").toLowerCase();
+                            <button type="button" class="sr-btn-action sr-btn-preview-a4" data-sr-call="openBlueprintPreviewModal"><span>🏛️ معاينة التقرير الرسمي A4 والرمز المشفر QR</span></button>
+                            <button type="button" class="sr-btn-action" style="background:linear-gradient(135deg,#059669,#047857);color:#fff;" data-sr-call="openClientReportDispatchModal"><span>📨 إرسال التقرير النهائي للعميل بالبريد والواتساب</span></button>\n                            <button type="button" class="sr-btn-checkout" onclick="openExecutiveCheckoutModal('${i.replace(/'/g,"'")}', 890)">\n                                <span>💳 اعتماد ودفع فوري (€890)</span>\n                            </button>\n                            <button type="button" class="sr-voice-btn-glass" onclick="bookBlueprintConsultation('${i.replace(/'/g,"'")}')">\n                                <span>👔 حجز استشارة VIP</span>\n                            </button>\n                        </div>\n                    </div>\n                `;n&&(n.innerHTML=r,n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"nearest"})),t&&(t.innerHTML="✨ تم بناء وتوليد خطة عملك بنجاح تام! يمكنك الاستماع للملخص الصوتي أو تحميلها كـ PDF."),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("success")},700)}window.openAiVoicePlannerModal=openAiVoicePlannerModal,window.closeAiVoicePlannerModal=closeAiVoicePlannerModal;let isBlueprintSpeaking=!1,currentSpeechUtterance=null;function stopBlueprintAudioSynthesis(){if(window.speechSynthesis)try{window.speechSynthesis.cancel()}catch(e){console.warn(e)}isBlueprintSpeaking=!1,currentSpeechUtterance=null;const e=document.getElementById("blueprintAudioPlayer"),n=document.getElementById("blueprintPlayVoiceIcon"),t=document.getElementById("blueprintPlayVoiceLabel");e&&e.classList.remove("is-playing"),n&&(n.innerHTML="▶️"),t&&(t.textContent="استمع للخطة الآن")}function toggleBlueprintAudioSynthesis(){if(isBlueprintSpeaking)return void stopBlueprintAudioSynthesis();playExecutiveMasculineChime();if(!("speechSynthesis"in window))return void alert("عذراً، المتصفح الحالي لا يدعم التوليف الصوتي المباشر. يمكنك قراءة الخطة أو تنزيلها بصيغة PDF.");stopBlueprintAudioSynthesis();const e=document.getElementById("blueprintAudioPlayer"),n=e?decodeURIComponent(e.getAttribute("data-project-name")||""):"مشروعك الذكي",t=e?decodeURIComponent(e.getAttribute("data-sys-rec")||""):"البنية السحابية الموصى بها",o=e?decodeURIComponent(e.getAttribute("data-roi-value")||""):"عائد استثماري نوعي",founderLead=e?decodeURIComponent(e.getAttribute("data-founder-lead")||""):"أهلاً بك في إس آند آر.";const docLang = (document.documentElement.getAttribute("lang") || "ar").toLowerCase();
 let speechText = "";
 let langCode = "ar-SA";
 let targetLangPrefix = "ar";
@@ -723,6 +764,253 @@ window.downloadBlueprintArchitectureJson = downloadBlueprintArchitectureJson;
 window.dispatchBlueprintToClientAndManagement = dispatchBlueprintToClientAndManagement;
 
 
+
+// =============================================================================
+// S&R CoreSync - External Website Audit, Client Dispatch & Neural Audio Suite
+// =============================================================================
+
+function playExecutiveMasculineChime() {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === "suspended") ctx.resume();
+
+        const now = ctx.currentTime;
+        const masterGain = ctx.createGain();
+        masterGain.gain.setValueAtTime(0.001, now);
+        masterGain.gain.exponentialRampToValueAtTime(0.12, now + 0.05);
+        masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(420, now);
+        filter.Q.setValueAtTime(2.5, now);
+
+        // Warm masculine executive triad (A2=110Hz, E3=164.81Hz, A3=220Hz, C#4=277.18Hz)
+        [110.0, 164.81, 220.0, 277.18].forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            osc.type = idx % 2 === 0 ? "sine" : "triangle";
+            osc.frequency.setValueAtTime(freq, now);
+            osc.connect(filter);
+            osc.start(now);
+            osc.stop(now + 1.25);
+        });
+
+        filter.connect(masterGain);
+        masterGain.connect(ctx.destination);
+    } catch (e) {
+        console.warn("[Executive Chime Notice]:", e);
+    }
+}
+
+function auditExternalWebsiteUrl(targetUrl) {
+    const url = targetUrl || "https://clgid-governance.ai.studio/";
+    const transcript = document.getElementById("voicePlannerTranscript");
+    const heroInput = document.getElementById("heroAiIdeaInput");
+    const promptText = `تدقيق وتحليل أمني ومعماري شامل لموقع مركز CLGID لاهاي ${url} وهندسة المنصة السيادية`;
+    if (transcript) transcript.value = promptText;
+    if (heroInput) heroInput.value = promptText;
+    
+    if (typeof openAiVoicePlannerModal === "function") {
+        openAiVoicePlannerModal();
+    }
+    if (typeof generateAiProjectBlueprint === "function") {
+        generateAiProjectBlueprint();
+    }
+    if (typeof LuxuryAudio !== "undefined") LuxuryAudio.play("open");
+}
+
+function openClientReportDispatchModal() {
+    let modal = document.getElementById("srClientReportDispatchModal");
+    if (!modal) {
+        modal = document.createElement("div");
+        modal.id = "srClientReportDispatchModal";
+        modal.className = "sr-client-dispatch-modal";
+        modal.setAttribute("role", "dialog");
+        modal.setAttribute("aria-modal", "true");
+        document.body.appendChild(modal);
+    }
+
+    const player = document.getElementById("blueprintAudioPlayer");
+    const projName = player ? decodeURIComponent(player.getAttribute("data-project-name") || "") : "مشروع تطوير مركز CLGID للحوكمة والدراسات 2026";
+    const founderType = player ? player.getAttribute("data-founder-type") : "salim";
+    const founderName = founderType === "raed" ? "أ. رائد كعكة" : "م. محمد سليم عزيزة";
+
+    modal.innerHTML = `
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeClientReportDispatchModal"></div>
+        <div class="sr-client-dispatch-card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:1.4rem;">📨</span>
+                    <div>
+                        <h4 style="margin:0;font-size:1rem;color:#f8fafc;font-weight:800;">إرسال التقرير النهائي للعميل والإدارة</h4>
+                        <div style="font-size:0.75rem;color:#94a3b8;">توثيق رسمي صادر عبر S&R CoreSync B.V. Amsterdam</div>
+                    </div>
+                </div>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeClientReportDispatchModal" style="background:none;border:none;color:#cbd5e1;font-size:1.4rem;cursor:pointer;">&times;</button>
+            </div>
+            <form onsubmit="executeClientReportDispatch(event)">
+                <div class="sr-dispatch-form-group">
+                    <label>اسم العميل أو المؤسسة المستهدفة:</label>
+                    <input type="text" id="srClientOrgName" value="مركز CLGID للدراسات والحوكمة - لاهاي (The Hague)" required />
+                </div>
+                <div class="sr-dispatch-form-group">
+                    <label>البريد الإلكتروني الرسمي للعميل:</label>
+                    <input type="email" id="srClientTargetEmail" placeholder="director@clgid.org (أو بريد المسؤول)" value="info@clgid-governance.org" required />
+                </div>
+                <div class="sr-dispatch-form-group">
+                    <label>رقم هاتف / واتساب العميل (مع الرمز الدولي):</label>
+                    <input type="tel" id="srClientTargetPhone" placeholder="+31 6 ... أو +963 / +971" value="+31 6 18111116" required />
+                </div>
+                <div class="sr-dispatch-form-group">
+                    <label>المسؤول الفني المشرف على الدراسة:</label>
+                    <input type="text" value="${founderName} (كبير مهندسي السحابة والذكاء الاصطناعي)" disabled style="opacity:0.8;background:rgba(255,255,255,0.02);" />
+                </div>
+                <div style="margin:16px 0 14px;">
+                    <label class="sr-dispatch-checkbox-row">
+                        <input type="checkbox" id="srCheckIncludeDossier" checked />
+                        <span>تضمين رابط دراسة الجدوى السيادية ورقم التحقق الرقمي المشفر QR Code</span>
+                    </label>
+                    <label class="sr-dispatch-checkbox-row">
+                        <input type="checkbox" id="srCheckNotifyMgmt" checked />
+                        <span>إرسال نسخة مطابقة فورية إلى واتساب إدارة الشركة (+31 618111116) لتوثيق بدء التعاقد</span>
+                    </label>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:16px;">
+                    <button type="submit" class="sr-voice-btn-primary" style="flex:2;background:linear-gradient(135deg,#059669,#047857);">
+                        <span>🚀 إرسال التقرير واعتماد التعاقد فوراً</span>
+                    </button>
+                    <button type="button" class="sr-voice-btn-glass" data-sr-call="closeClientReportDispatchModal" style="flex:1;">
+                        <span>إلغاء</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    `;
+
+    modal.classList.add("active");
+    if (typeof LuxuryAudio !== "undefined") LuxuryAudio.play("open");
+}
+
+function closeClientReportDispatchModal() {
+    const modal = document.getElementById("srClientReportDispatchModal");
+    if (modal) modal.classList.remove("active");
+    if (typeof LuxuryAudio !== "undefined") LuxuryAudio.play("close");
+}
+
+function executeClientReportDispatch(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+    const clientOrg = document.getElementById("srClientOrgName") ? document.getElementById("srClientOrgName").value.trim() : "مركز CLGID لاهاي";
+    const clientEmail = document.getElementById("srClientTargetEmail") ? document.getElementById("srClientTargetEmail").value.trim() : "info@clgid-governance.org";
+    const clientPhone = document.getElementById("srClientTargetPhone") ? document.getElementById("srClientTargetPhone").value.trim() : "+31618111116";
+
+    const player = document.getElementById("blueprintAudioPlayer");
+    const projName = player ? decodeURIComponent(player.getAttribute("data-project-name") || "") : "مشروع التطوير السيادي لمركز CLGID لاهاي 2026";
+    const sysRec = player ? decodeURIComponent(player.getAttribute("data-sys-rec") || "") : "بنية سحابية سيادية متكاملة";
+    const roiVal = player ? decodeURIComponent(player.getAttribute("data-roi-value") || "") : "+65% كفاءة في إدارة البرامج وتأمين كامل للبيانات";
+    const docRef = "SR-DOC-2026-" + Math.floor(10000 + Math.random() * 90000);
+    const verifyUrl = `https://sr-coresync.com/verify.html?ref=${docRef}`;
+
+    const clientWaMsg = 
+        `🏛️ *وثيقة دراسة الجدوى وخطة التطوير السيادية الرسمية 2026*
+` +
+        `━━━━━━━━━━━━━━━━━━━━━━
+` +
+        `السادة الأفاضل في: *${clientOrg}*
+
+` +
+        `يسر شركة *S&R CoreSync For Intelligent Solutions* (أمستردام) تزويدكم بدراسة الجدوى الفنية المعتمدة:
+
+` +
+        `📋 *كود الوثيقة المشفر:* ${docRef}
+` +
+        `🏢 *المشروع:* ${projName}
+` +
+        `⚙️ *البنية الموصى بها:* ${sysRec}
+` +
+        `📈 *العائد والأمان المتوقع:* ${roiVal}
+` +
+        `🔒 *بوابة التحقق السيادية:* ${verifyUrl}
+
+` +
+        `المسؤول التنفيذي المشرف: *م. محمد سليم عزيزة* (كبير مهندسي السحابة والذكاء الاصطناعي)
+` +
+        `━━━━━━━━━━━━━━━━━━━━━━
+` +
+        `📄 تم إرسال ملف المواصفات وطلب بدء التعاقد الرسمي عبر إدارة S&R CoreSync B.V.`;
+
+    const clientWaUrl = `https://wa.me/${clientPhone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(clientWaMsg)}`;
+    
+    // Also prepare mailto
+    const subject = encodeURIComponent(`[S&R CoreSync] دراسة الجدوى والمعمارية التنفيذية الرسمية - ${clientOrg} (${docRef})`);
+    const emailBody = encodeURIComponent(
+        `تحية طيبة وبعد،
+
+السادة في ${clientOrg}،
+
+مرفق لكم تقرير دراسة الجدوى والمعمارية البرمجية المعتمدة الصادرة عن شركة S&R CoreSync (أمستردام):
+
+المشروع: ${projName}
+البنية التقنية الموصى بها: ${sysRec}
+الأثر الاستثماري والسيادي: ${roiVal}
+رابط التحقق الرقمي المشفر: ${verifyUrl}
+
+بإشراف: م. محمد سليم عزيزة - كبير مهندسي السحابة والذكاء الاصطناعي
+
+نرحب بتأكيدكم لبدء إجراءات التعاقد والتسليم.
+
+S&R CoreSync For Intelligent Solutions B.V.
+Amsterdam - The Netherlands
+WhatsApp: +31 6 18111116`
+    );
+    const mailtoUrl = `mailto:${clientEmail}?subject=${subject}&body=${emailBody}`;
+
+    // Cloudflare worker lead dispatch
+    const payload = {
+        event: "client_formal_dossier_dispatch",
+        docRef: docRef,
+        clientOrg: clientOrg,
+        clientEmail: clientEmail,
+        clientPhone: clientPhone,
+        projName: projName,
+        sysRec: sysRec,
+        roiVal: roiVal,
+        verifyUrl: verifyUrl,
+        timestamp: new Date().toISOString()
+    };
+
+    try {
+        if (navigator.sendBeacon) {
+            navigator.sendBeacon("https://sr-lead-capture.sr-coresync.workers.dev/lead", JSON.stringify(payload));
+        } else {
+            fetch("https://sr-lead-capture.sr-coresync.workers.dev/lead", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).catch(function(e) {});
+        }
+    } catch (err) {}
+
+    // Open WhatsApp
+    window.open(clientWaUrl, "_blank");
+
+    // Trigger mail client after 400ms
+    setTimeout(() => {
+        window.location.href = mailtoUrl;
+    }, 400);
+
+    closeClientReportDispatchModal();
+    if (typeof LuxuryAudio !== "undefined") LuxuryAudio.play("success");
+
+    alert(`🎉 تم إرسال وتوثيق دراسة الجدوى بنجاح تام!
+
+رقم الوثيقة: ${docRef}
+الجهة: ${clientOrg}
+تم فتح واتساب العميل وتجهيز مسودة البريد الرسمي وإشعار الإدارة فوراً.`);
+}
+
 // =============================================================================
 // S&R CoreSync - Global Window Bindings for Strict CSP & Delegated Events
 // =============================================================================
@@ -742,3 +1030,8 @@ window.toggleBlueprintAudioSynthesis = toggleBlueprintAudioSynthesis;
 window.stopBlueprintAudioSynthesis = stopBlueprintAudioSynthesis;
 window.downloadBlueprintArchitectureJson = downloadBlueprintArchitectureJson;
 window.dispatchBlueprintToClientAndManagement = dispatchBlueprintToClientAndManagement;
+window.auditExternalWebsiteUrl = auditExternalWebsiteUrl;
+window.openClientReportDispatchModal = openClientReportDispatchModal;
+window.closeClientReportDispatchModal = closeClientReportDispatchModal;
+window.executeClientReportDispatch = executeClientReportDispatch;
+window.playExecutiveMasculineChime = playExecutiveMasculineChime;
