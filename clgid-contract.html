@@ -574,6 +574,31 @@
 
     </div>
 
+    <!-- Electronic Signature Certificate Modal -->
+    <div id="srContractSignModal" style="display:none; position:fixed; inset:0; background:rgba(2,6,23,0.75); z-index:99999; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:16px;">
+        <div style="background:#ffffff; border-radius:18px; max-width:480px; width:100%; padding:28px 24px; text-align:center; box-shadow:0 25px 50px -12px rgba(0,0,0,0.35); border:1px solid #e2e8f0; animation:modalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);">
+            <div style="width:68px; height:68px; background:linear-gradient(135deg, #10b981, #059669); border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#ffffff; font-size:2rem; box-shadow:0 10px 25px rgba(16,185,129,0.35); margin-bottom:16px;">✓</div>
+            <h3 style="font-size:1.35rem; color:#0f172a; margin-bottom:8px; font-weight:800; font-family:'Cairo', sans-serif;">تم توثيق واعتماد التوقيع الرقمي بنجاح</h3>
+            <p style="font-size:0.88rem; color:#475569; line-height:1.6; margin-bottom:18px;">
+                تم قيد التوقيع الإلكتروني للأستاذ <strong>محمود الناصر</strong> (مدير مركز CLGID لاهاي) بموجب القانون التجاري الهولندي (BW 3:15a) ولائحة الاتحاد الأوروبي (eIDAS No 910/2014).
+            </p>
+            <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:10px; padding:12px; margin-bottom:20px; font-size:0.75rem; color:#64748b; text-align:right;">
+                <div>• مرجع العقد: <strong>SR-CLGID-2026-NL</strong></div>
+                <div>• بصمة التحقق: <strong>SHA256: 8f4e2b...9a12</strong></div>
+                <div>• التاريخ والوقت: <strong id="srModalSignDate"></strong></div>
+                <div>• الحالة: <span style="color:#059669; font-weight:700;">APPROVED & LEGALLY BINDING</span></div>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button type="button" onclick="window.print();" style="flex:1; background:#0f172a; color:#ffffff; border:none; padding:12px 16px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:6px;">
+                    <span>🖨️ حفظ كـ PDF</span>
+                </button>
+                <button type="button" onclick="document.getElementById('srContractSignModal').style.display='none';" style="background:#f1f5f9; color:#334155; border:1px solid #cbd5e1; padding:12px 18px; border-radius:10px; font-weight:600; font-size:0.85rem; cursor:pointer;">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="./js/clgid-contract.js" defer></script>
     <script src="./js/sr-geo-lang.js" defer></script>
 </body>
