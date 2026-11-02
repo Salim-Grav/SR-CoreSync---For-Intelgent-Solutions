@@ -632,8 +632,8 @@
     // 1. Initialize DOM Elements
     function initEnterpriseSuite() {
         injectPDFModal();
-        injectFloatingHub();
-        injectGDPRBanner();
+        // injectFloatingHub(); // Retired
+        // injectGDPRBanner(); // Retired
         injectSchedulerModal();
         injectReadinessModal();
         injectCaseStudyModal();
