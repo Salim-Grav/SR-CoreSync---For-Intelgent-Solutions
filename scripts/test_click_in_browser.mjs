@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync, existsSync, statSync, rmSync } from 'node:
 import { join, extname } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-const PORT = 8099;
+const PORT = 8097;
 const CHROME_PATH = process.env.SR_BROWSER || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 const MIME = {
@@ -45,7 +45,7 @@ if (existsSync(profileDir)) {
 server.listen(PORT, async () => {
     const chrome = spawn(CHROME_PATH, [
         '--headless=new',
-        '--remote-debugging-port=9233',
+        '--remote-debugging-port=9244',
         '--no-sandbox',
         '--disable-gpu',
         '--disk-cache-size=1',
@@ -54,10 +54,10 @@ server.listen(PORT, async () => {
         '--user-data-dir=' + profileDir
     ]);
 
-    await sleep(2500);
+    await sleep(3500);
 
     try {
-        const listRes = await fetch('http://127.0.0.1:9233/json/list');
+        const listRes = await fetch('http://127.0.0.1:9244/json/list');
         const list = await listRes.json();
         const page = list.find(t => t.type === 'page') || list[0];
         const ws = new globalThis.WebSocket(page.webSocketDebuggerUrl);
