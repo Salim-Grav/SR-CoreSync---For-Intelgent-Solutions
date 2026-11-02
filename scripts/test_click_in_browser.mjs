@@ -76,7 +76,7 @@ server.listen(PORT, async () => {
                 deviceScaleFactor: 1,
                 mobile: false
             });
-            await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html` });
+            await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html?lang=ar&noredirect=1` });
 
             for (let i = 0; i < 20; i++) {
                 await sleep(300);
@@ -127,6 +127,33 @@ server.listen(PORT, async () => {
             console.log('GEOMETRY INSPECTION:', JSON.stringify(geoRes.result.value, null, 2));
 
             // Capture live screenshot of the browser
+            
+            // Test opening Header Support Dropdown
+            const testDropdownRes = await send("Runtime.evaluate", {
+                expression: `
+                (function() {
+                    const btn = document.getElementById("headerSupportBtn");
+                    const wrap = document.getElementById("headerSupportDropdownWrap");
+                    const menu = document.getElementById("headerSupportMenu");
+                    if (!btn || !wrap || !menu) return { success: false, reason: "elements missing", url: window.location.href, btn: !!btn, wrap: !!wrap, menu: !!menu };
+
+                    btn.click();
+                    const style = window.getComputedStyle(menu);
+                    return {
+                        success: true,
+                        hasActive: wrap.classList.contains("is-active"),
+                        display: style.display,
+                        opacity: style.opacity,
+                        visibility: style.visibility,
+                        itemsCount: menu.querySelectorAll(".support-menu-item").length
+                    };
+                })()
+                `,
+                returnByValue: true
+            });
+            console.log("HEADER SUPPORT DROPDOWN TEST:", JSON.stringify(testDropdownRes.result.value, null, 2));
+            await sleep(500);
+
             const screenshotRes = await send('Page.captureScreenshot', {
                 format: 'jpeg',
                 quality: 85

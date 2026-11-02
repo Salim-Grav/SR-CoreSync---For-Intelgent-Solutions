@@ -2448,3 +2448,32 @@ eturn; صريح ومباشر في بداية دالة injectFloatingHub() لمن
      - إعادة بناء _site/ (968 ملفاً).
      - مطابقة python scripts/build_csp.py --check بـ 147 بصمة أمنية موثقة.
      - اجتياز python scripts/validate_publish_set.py بنسبة نجاح 100% وخلو تام من الأسرار.
+
+---
+
+### 🏛️ مرحلة 22 — تدشين قائمة [أدوات الدعم ⚡] الفاخرة في الترويسة العلوية (الإثنين 02/11/2026)
+
+- **طلب وتوجيهات المستخدم الصريحة:**
+  - استشارة الذكاء الاصطناعي حول الموضع الأفضل هندسياً واحترافياً لزر [أدوات الدعم ⚡] بعد ملاحظة سوء موضعه القديم كعنصر عائم.
+  - الموافقة التامة على التوصية الهندسية الاحترافية بدمجها كقائمة منسدلة فاخرة (Header Dropdown) في الترويسة الرئيسية بجانب زر بوابة الوكلاء.
+- **التنفيذ الهندسي البرمجي:**
+  1. **تصميم وبرمجة القائمة المنسدلة الملكية (Header Support Tools Dropdown):**
+     - إنشاء [css/sr-header-support.css](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/css/sr-header-support.css): بتصميم زجاجي داكن وتأثير ضبابي كربوني (ackdrop-filter: blur(20px)) مع تطعيمات ذهبية ناعمة ونبض حي زمردي متوهج ومحاذاة RTL/LTR مثالية.
+     - إنشاء [js/sr-header-support.js](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/js/sr-header-support.js): محرك تحكم مستقل وخفيف لإدارة القائمة بنقرة واحدة، وإغلاق تلقائي عند النقر خارجها أو عبر زر Escape، وربط نقي بالأحداث متوافق مع Strict CSP.
+  2. **دمج الترويسة في الصفحات الرئيسية:**
+     - دمج القائمة في index.html و ckb/index.html داخل حاوية إجراءات الترويسة .header-col-actions، لتوفر وصولاً فورياً للأدوات الثلاث:
+       - 🎯 **فحص الجاهزية الرقمية:** تقييم نضج البنية السحابية والأتمتة (openReadinessModal).
+       - 👔 **جدولة استشارة تنفيذية:** حجز موعد استراتيجي مع المؤسسين (openSchedulerModal).
+       - 💬 **تقييم وملاحظات التجربة:** إرسال تقييم فوري لتطوير الخدمة (openFeedbackModal).
+  3. **التحقق الهندسي المباشر عبر بروتوكول CDP والمتصفح الحقيقي:**
+     - كشف الاختبار البرمجي:
+       - success: true
+       - hasActive: true
+       - display: flex, opacity: 1, isibility: visible
+       - itemsCount: 3
+       - supportBtn (floating): btnExists: false, suiteExists: false (اختفاء تام للعناصر العائمة القديمة).
+     - التقاط لقطة شاشة مرئية مباشرة وحفظها في live_terminal_snapshot.jpg.
+  4. **فحوصات الجودة والنشر:**
+     - بناء حزمة _site/ بنجاح (970 ملفاً).
+     - مطابقة python scripts/build_csp.py --check بـ 147 بصمة أمنية موثقة.
+     - اجتياز python scripts/validate_publish_set.py لـ 9,413 مرجعاً محلياً وخلو تام من الأسرار في 3,188 ملفاً.
