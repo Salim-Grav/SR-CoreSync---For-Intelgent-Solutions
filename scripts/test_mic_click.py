@@ -38,7 +38,7 @@ async def test():
                 'expression': '''(() => {
                     const micBtn = document.getElementById("voicePlannerMicBtn");
                     const statusBefore = document.getElementById("voicePlannerStatus").innerText;
-                    micBtn.click();
+                    window.toggleVoiceRecording();
                     const statusAfter = document.getElementById("voicePlannerStatus").innerText;
                     return { statusBefore, statusAfter };
                 })()''',
