@@ -573,31 +573,6 @@
         <div style="margin-top:6px; color:#94a3b8;">هندسة وتطوير البنية السحابية السيادية: <strong style="color:var(--clgid-gold);">S&amp;R CoreSync For Intelligent Solutions B.V. (Amsterdam)</strong> • إشراف: المهندس محمد سليم عزيزة</div>
     </footer>
 
-    <script>
-        function publishClgidArticle(e) {
-            e.preventDefault();
-            const titleInput = document.getElementById('articleTitleInput');
-            const catInput = document.getElementById('articleCategoryInput');
-            const feed = document.getElementById('clgidArticlesFeed');
-            
-            const title = titleInput.value.trim();
-            const cat = catInput.value;
-            if (!title) return;
-
-            const newCard = document.createElement('div');
-            newCard.style.cssText = "background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; animation: fadeIn 0.3s ease;";
-            newCard.innerHTML = `
-                <div>
-                    <span style="font-size:0.75rem; color:#34d399; font-weight:700;">[${cat}]</span>
-                    <strong style="color:#ffffff; margin-inline-start:8px;">${title}</strong>
-                </div>
-                <span style="font-size:0.75rem; color:#34d399; font-weight:700;">✓ نُشر للتو على الموقع!</span>
-            `;
-
-            feed.prepend(newCard);
-            titleInput.value = '';
-            alert('🎉 تم نشر المقال بنجاح تام! هذا مثال حي على سهولة إدارة الموقع الجديد.');
-        }
-    </script>
+    <script src="./js/clgid-prototype.js" defer></script>
 </body>
 </html>
