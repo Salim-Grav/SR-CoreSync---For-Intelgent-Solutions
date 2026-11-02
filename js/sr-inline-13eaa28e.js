@@ -127,29 +127,28 @@ i.pitch = 0.88;const femaleKeywords = [
         : ((window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : []);
     const targetVoices = allVoices.filter(v => (v.lang || "").toLowerCase().startsWith(targetLangPrefix));
 
-    let s = targetVoices.find(v => {
+    const nonFemaleVoices = targetVoices.filter(v => {
         const n = (v.name || "").toLowerCase();
-        return malePreferred.some(m => n.includes(m.toLowerCase())) && !femaleKeywords.some(f => n.includes(f.toLowerCase()));
+        return !femaleKeywords.some(f => n.includes(f.toLowerCase()));
     });
-    if (!s) {
-        s = targetVoices.find(v => {
-            const n = (v.name || "").toLowerCase();
-            return !femaleKeywords.some(f => n.includes(f.toLowerCase()));
-        });
-    }
-    if (!s && targetVoices.length > 0) {
-        s = targetVoices[0];
+
+    let s = nonFemaleVoices.find(v => {
+        const n = (v.name || "").toLowerCase();
+        return malePreferred.some(m => n.includes(m.toLowerCase()));
+    });
+    if (!s && nonFemaleVoices.length > 0) {
+        s = nonFemaleVoices[0];
     }
 
     if (s) {
         i.voice = s;
-        const voiceName = (s.name || "").toLowerCase();
-        const isTrueMale = malePreferred.some(m => voiceName.includes(m.toLowerCase()));
-        i.pitch = isTrueMale ? 0.82 : 0.50;
-        i.rate = 0.90;
+        i.pitch = 0.85;
+        i.rate = 0.92;
     } else {
-        i.pitch = 0.50;
-        i.rate = 0.90;
+        // Absolutely NEVER force or fallback to a female voice
+        i.voice = null;
+        i.pitch = 0.78;
+        i.rate = 0.92;
     }const c=document.getElementById("blueprintPlayVoiceIcon"),a=document.getElementById("blueprintPlayVoiceLabel");i.onstart=function(){isBlueprintSpeaking=!0,e&&e.classList.add("is-playing"),c&&(c.innerHTML="⏸️"),a&&(a.textContent="إيقاف الملخص الصوتي"),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("hover")},i.onend=function(){stopBlueprintAudioSynthesis()},i.onerror=function(e){console.warn("Speech synthesis notice:",e),stopBlueprintAudioSynthesis()},window.speechSynthesis.speak(i)}function dispatchBlueprintToWhatsApp(){const e=document.getElementById("blueprintAudioPlayer"),n=e?decodeURIComponent(e.getAttribute("data-project-name")||""):"مشروع ذكي",t=e?decodeURIComponent(e.getAttribute("data-sys-rec")||""):"بنية سحابية متقدمة",o=e?decodeURIComponent(e.getAttribute("data-roi-value")||""):"+42% توفير تشغيلي",isRaed=e?("raed"===e.getAttribute("data-founder-type")):!1,targetFounder=isRaed?"الأستاذ رائد كعكة (مسؤول العمليات والـ ERP)":"المهندس محمد سليم عزيزة (المسؤول التقني والسحابي)",msg=`مرحباً فريق شركة إس آند آر، قمت بهندسة خطة مشروعي بإشراف ${targetFounder}:\n\n📋 *المشروع:* ${n}\n⚙️ *المنظومة المقترحة:* ${t}\n📈 *العائد الاستثماري:* ${o}\n\nأرغب باعتماد الخطة وحجز جلسة تنفيذ فورية.`;window.open(`https://wa.me/31618111116?text=${encodeURIComponent(msg)}`,"_blank"),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("success")}function dispatchBlueprintToTelegram(){const e=document.getElementById("blueprintAudioPlayer"),n=`خطة عمل تنفيذية معتمدة من S&R CoreSync AI Project Architect:\n🎯 ${e?decodeURIComponent(e.getAttribute("data-project-name")||""):"مشروع ذكي"}\n⚡ البنية: ${e?decodeURIComponent(e.getAttribute("data-sys-rec")||""):"بنية سحابية متقدمة"}\nللتواصل المباشر مع المؤسسين: https://t.me/SRCoreSync`,t=`https://t.me/share/url?url=${encodeURIComponent("https://sr-coresync.com")}&text=${encodeURIComponent(n)}`;window.open(t,"_blank"),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("success")}function openExecutiveCheckoutModal(e,n){const t=document.getElementById("srCheckoutModal");if(t){if(e){const n=document.getElementById("checkoutItemTitle");n&&(n.textContent=e)}if(n){const e=document.getElementById("checkoutAmountDisplay");e&&(e.innerHTML=`€${n}.00 <span style="font-size:12px; font-weight:normal; color:#94a3b8;">(BTW B2B Compliant)</span>`)}t.classList.add("active"),document.body.style.overflow="hidden","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("open")}}function closeExecutiveCheckoutModal(){const e=document.getElementById("srCheckoutModal");e&&(e.classList.remove("active"),document.body.style.overflow="","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("close"))}function selectPaymentMethod(e,n){document.querySelectorAll(".sr-checkout-method-btn").forEach(e=>e.classList.remove("active")),e.classList.add("active");const t=document.getElementById("checkoutBankSelect");t&&(t.style.display="ideal"===n?"block":"none"),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("click")}function processLiveCheckout(e){e.preventDefault();const n=document.getElementById("srLiveCheckoutSubmitBtn"),t=document.getElementById("checkoutSubmitBtnLabel"),o=document.getElementById("checkoutStatusMsg"),i=(document.getElementById("checkoutClientName").value,document.getElementById("checkoutClientEmail").value);n&&(n.disabled=!0),t&&(t.textContent="⏳ جاري الاتصال الآمن مع بوابة الدفع الأوروبية..."),o&&(o.style.display="block",o.style.background="rgba(197, 168, 128, 0.15)",o.style.color="#f3dfba",o.innerHTML="🔒 جاري تشفير المعاملة والتحقق من الحساب وتأكيد التسوية الفورية..."),setTimeout(()=>{const e="INV-2026-SR-"+Math.floor(1e3+9e3*Math.random());t&&(t.textContent="✓ تم تأكيد الدفع وإصدار الفاتورة!"),o&&(o.style.background="rgba(16, 185, 129, 0.2)",o.style.color="#4ade80",o.innerHTML=`🎉 <strong>تهانينا! تم تأكيد الدفع والتسوية بنجاح.</strong><br>رقم الفاتورة الرسمية: <strong>${e}</strong><br>تم إرسال إشعار التأكيد ووثائق الترخيص إلى ${i}. سيبدأ التنفيذ فوراً.`),"undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("success"),setTimeout(()=>{closeExecutiveCheckoutModal(),n&&(n.disabled=!1),t&&(t.textContent="تأكيد الدفع والتسوية الفورية 🔒"),o&&(o.style.display="none")},4e3)},1600)}function exportBlueprintPdf(e) {
     if (typeof openBlueprintPreviewModal === "function") {
         openBlueprintPreviewModal();
@@ -354,29 +353,28 @@ function toggleBookingAudioGreeting() {
         : ((window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : []);
     const targetVoices = allVoices.filter(v => (v.lang || "").toLowerCase().startsWith(targetLangPrefix));
 
-    let matchedVoice = targetVoices.find(v => {
+    const nonFemaleVoices = targetVoices.filter(v => {
         const n = (v.name || "").toLowerCase();
-        return malePreferred.some(m => n.includes(m.toLowerCase())) && !femaleKeywords.some(f => n.includes(f.toLowerCase()));
+        return !femaleKeywords.some(f => n.includes(f.toLowerCase()));
     });
-    if (!matchedVoice) {
-        matchedVoice = targetVoices.find(v => {
-            const n = (v.name || "").toLowerCase();
-            return !femaleKeywords.some(f => n.includes(f.toLowerCase()));
-        });
-    }
-    if (!matchedVoice && targetVoices.length > 0) {
-        matchedVoice = targetVoices[0];
+
+    let matchedVoice = nonFemaleVoices.find(v => {
+        const n = (v.name || "").toLowerCase();
+        return malePreferred.some(m => n.includes(m.toLowerCase()));
+    });
+    if (!matchedVoice && nonFemaleVoices.length > 0) {
+        matchedVoice = nonFemaleVoices[0];
     }
 
     if (matchedVoice) {
         utt.voice = matchedVoice;
-        const voiceName = (matchedVoice.name || "").toLowerCase();
-        const isTrueMale = malePreferred.some(m => voiceName.includes(m.toLowerCase()));
-        utt.pitch = isTrueMale ? 0.82 : 0.50;
-        utt.rate = 0.90;
+        utt.pitch = 0.85;
+        utt.rate = 0.92;
     } else {
-        utt.pitch = 0.50;
-        utt.rate = 0.90;
+        // Absolutely NEVER force or fallback to a female voice
+        utt.voice = null;
+        utt.pitch = 0.78;
+        utt.rate = 0.92;
     }
 
     const strip = document.getElementById("bookingAudioGreetingStrip");
