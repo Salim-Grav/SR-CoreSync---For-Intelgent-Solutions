@@ -30,3 +30,4 @@ function publishClgidArticle(e) {
 }
 
 window.publishClgidArticle = publishClgidArticle;
+

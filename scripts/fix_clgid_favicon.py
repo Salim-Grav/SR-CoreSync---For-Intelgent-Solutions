@@ -7,3 +7,4 @@ with open('clgid-prototype.html', 'w', encoding='utf-8') as f:
     f.write(cnt)
 
 print("Updated favicon in clgid-prototype.html")
+

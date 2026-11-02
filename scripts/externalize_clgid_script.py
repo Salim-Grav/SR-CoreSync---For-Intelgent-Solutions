@@ -11,3 +11,4 @@ if re.search(pattern, cnt, re.DOTALL):
     print('SUCCESS: Replaced inline script with external script tag.')
 else:
     print('Pattern not matched!')
+

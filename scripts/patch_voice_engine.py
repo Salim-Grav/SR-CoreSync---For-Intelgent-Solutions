@@ -114,3 +114,4 @@ with open('js/sr-inline-13eaa28e.js', 'w', encoding='utf-8') as f:
     code = f.write(code)
 
 print("File updated successfully.")
+
