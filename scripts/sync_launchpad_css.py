@@ -36,3 +36,4 @@ if start_idx != -1 and end_idx != -1:
         print("Already present in css/demo-portal.css")
 else:
     print("ERROR: Markers not found in enterprise-suite.css")
+

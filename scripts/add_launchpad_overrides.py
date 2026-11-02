@@ -34,3 +34,4 @@ if '/* Robust Sovereign Launchpad Link & Card Protections */' not in demo_css:
     with open('css/demo-portal.css', 'w', encoding='utf-8') as f:
         f.write(demo_css)
     print("SUCCESS: Added robust link protections to demo-portal.css")
+
