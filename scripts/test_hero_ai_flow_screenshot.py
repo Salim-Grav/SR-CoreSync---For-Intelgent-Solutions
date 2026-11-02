@@ -31,81 +31,42 @@ async def capture():
         page_target = next((t for t in targets if t.get('type') == 'page' and not t.get('url', '').startswith('chrome-extension://')), targets[0])
         ws_url = page_target['webSocketDebuggerUrl']
 
-        async with websockets.connect(ws_url, max_size=20*1024*1024) as ws:
-            msg_id = 1
+        async with websockets.connect(ws_url, max_size=30*1024*1024) as ws:
+            mid = 1
             async def send_cdp(method, params=None):
-                nonlocal msg_id
-                cur = msg_id
-                msg_id += 1
-                payload = {'id': cur, 'method': method}
-                if params:
-                    payload['params'] = params
+                nonlocal mid; c = mid; mid += 1
+                payload = {'id': c, 'method': method}
+                if params: payload['params'] = params
                 await ws.send(json.dumps(payload))
                 while True:
                     raw = await ws.recv()
                     data = json.loads(raw)
-                    if data.get('id') == cur:
-                        return data
+                    if data.get('id') == c: return data
 
             await send_cdp('Page.enable')
             await send_cdp('DOM.enable')
 
             file_url = 'file:' + urllib.request.pathname2url(os.path.abspath('index.html'))
             await send_cdp('Page.navigate', {'url': file_url})
-            await asyncio.sleep(3.0)
+            await asyncio.sleep(3.5)
 
-            # Trigger ERP Blueprint generation directly
+            # Trigger CLGID / Web Governance Plan -> Salim Aziza
+            prompt = "تطوير وإعادة بناء المنظومة الرقمية لمركز CLGID للدراسات والحوكمة في لاهاي وبناء موقع ويبسايت سحابي سيادي"
             await send_cdp('Runtime.evaluate', {
-                'expression': 'window.fillHeroPromptSample("نظام CoreSync ERP لإدارة المحاسبة والضرائب الأوروبية BTW وسلاسل الإمداد");',
+                'expression': f'window.fillHeroPromptSample("{prompt}");',
                 'returnByValue': True
             })
-            
-            # Wait for AI blueprint generation and animation
-            await asyncio.sleep(2.0)
+            await asyncio.sleep(2.5)
 
-            # Now open the A4 Blueprint Preview Modal featuring Option 1 (Live QR), Option 2 (JSON spec button), Option 3 (Dispatch button)
+            # Center the generated blueprint card in the viewport
             await send_cdp('Runtime.evaluate', {
-                'expression': 'if (typeof openBlueprintPreviewModal === "function") openBlueprintPreviewModal();',
-                'returnByValue': True
-            })
-
-            await asyncio.sleep(1.5)
-
-            # Check if modal is active, verify QR code, seal and toolbar buttons
-            audit_state = await send_cdp('Runtime.evaluate', {
-                'expression': '''
-                (function() {
-                    const modal = document.getElementById("srBlueprintPreviewModal");
-                    const qrImg = modal ? modal.querySelector(".sr-a4-qr-img") : null;
-                    const qrLink = modal ? modal.querySelector(".sr-a4-qr-badge-link") : null;
-                    const jsonBtn = modal ? modal.querySelector(".sr-a4-btn-json") : null;
-                    const dispatchBtn = modal ? modal.querySelector(".sr-a4-btn-dispatch") : null;
-                    const founderSign = modal ? modal.querySelector(".sr-a4-founder-sign-name") : null;
-                    const seal = modal ? modal.querySelector(".sr-a4-official-seal") : null;
-                    const docRef = modal ? modal.querySelector(".sr-a4-doc-ref") : null;
-
-                    // Scroll the endorsement and QR section into nice view inside modal wrapper
-                    const endorsement = modal ? modal.querySelector(".sr-a4-endorsement-strip") : null;
-                    if (endorsement) {
-                        endorsement.scrollIntoView({ behavior: 'instant', block: 'center' });
+                'expression': '''(() => {
+                    const player = document.getElementById("blueprintAudioPlayer");
+                    if (player) {
+                        player.scrollIntoView({ behavior: 'instant', block: 'center' });
                     }
-
-                    return {
-                        modalActive: modal ? modal.classList.contains("active") : false,
-                        docRef: docRef ? docRef.innerText : "",
-                        qrSrc: qrImg ? qrImg.getAttribute("src") : "",
-                        qrHref: qrLink ? qrLink.getAttribute("href") : "",
-                        jsonBtnText: jsonBtn ? jsonBtn.innerText : "",
-                        dispatchBtnText: dispatchBtn ? dispatchBtn.innerText : "",
-                        founderSignName: founderSign ? founderSign.innerText : "",
-                        hasSeal: !!seal
-                    };
-                })()
-                ''',
-                'returnByValue': True
+                })()'''
             })
-            print("A4 Dossier Audit State (Option 1+2+3):", json.dumps(audit_state['result']['result'].get('value', {}), ensure_ascii=False))
-
             await asyncio.sleep(1.0)
 
             # Capture live modal & blueprint snapshot
@@ -118,12 +79,11 @@ async def capture():
             with open(SNAPSHOT_PATH, 'wb') as f:
                 f.write(img_data)
             print(f"Captured live simulation snapshot ({len(img_data)} bytes) to {SNAPSHOT_PATH}")
+
     finally:
         proc.terminate()
-        try:
-            proc.wait(timeout=2)
-        except:
-            proc.kill()
+        try: proc.wait(timeout=2)
+        except: proc.kill()
 
 if __name__ == '__main__':
     asyncio.run(capture())
