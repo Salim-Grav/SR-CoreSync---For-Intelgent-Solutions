@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&R CoreSync | منصة الإملاء الصوتي العربي الذكي</title>
+    <link rel="icon" type="image/png" href="./assets/favicon-96.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #010907;
+            --bg-card: rgba(14, 28, 22, 0.75);
+            --gold: #c5a880;
+            --gold-glow: rgba(197, 168, 128, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(197, 168, 128, 0.2);
+            --emerald: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: radial-gradient(circle at 50% 20%, #061912 0%, #010907 80%);
+            color: var(--text-main);
+            font-family: 'Alexandria', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .voice-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            max-width: 680px;
+            width: 100%;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .voice-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--border-glass);
+            color: var(--gold);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+        h1 {
+            font-size: 1.65rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffffff, #c5a880);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .dialect-select-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .dialect-select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-glass);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .mic-button-container {
+            position: relative;
+            margin: 20px auto;
+            width: 110px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mic-btn {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c5a880, #8f7450);
+            border: none;
+            color: #010907;
+            font-size: 2.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px var(--gold-glow);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 2;
+        }
+        .mic-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 45px rgba(197, 168, 128, 0.6);
+        }
+        .mic-btn.recording {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: #ffffff;
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+            animation: pulseRecord 1.2s infinite ease-in-out;
+        }
+        @keyframes pulseRecord {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .transcript-box {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 18px;
+            min-height: 120px;
+            max-height: 240px;
+            overflow-y: auto;
+            text-align: right;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #ffffff;
+            margin: 24px 0 18px 0;
+            white-space: pre-wrap;
+        }
+        .transcript-placeholder {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 36px;
+        }
+        .controls-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+        }
+        .btn-copy {
+            background: #10b981;
+            color: #ffffff;
+        }
+        .btn-copy:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        .btn-clear {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+        .btn-clear:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+        }
+        .status-tag {
+            font-size: 0.8rem;
+            margin-top: 14px;
+            color: var(--text-muted);
+        }
+        .status-tag.active {
+            color: #34d399;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="voice-card">
+        <div class="voice-badge">🎙️ محرك الإملاء الصوتي العربي الذكي • S&R CoreSync</div>
+        <h1>تحدث بصوتك بالعربية ليتم كتابته فوراً</h1>
+        <p class="subtitle">محرك صوتي متطور يعتمد على تقنية Google Web Speech للتعرف الفوري على اللهجة السورية والفصحى وجميع اللهجات العربية مع ميزة النسخ التلقائي بنقرة واحدة.</p>
+
+        <div class="dialect-select-wrap">
+            <label for="dialectSelect" style="font-size:0.85rem; color:var(--text-muted);">اللهجة المفضلة:</label>
+            <select id="dialectSelect" class="dialect-select">
+                <option value="ar-SY" selected>🇸🇾 العربية (سوريا وبلاد الشام)</option>
+                <option value="ar-SA">🇸🇦 العربية (المملكة العربية السعودية والفصحى)</option>
+                <option value="ar-EG">🇪🇬 العربية (مصر)</option>
+                <option value="ar">🌍 العربية العامة (All Dialects)</option>
+            </select>
+        </div>
+
+        <div class="mic-button-container">
+            <button type="button" id="startMicBtn" class="mic-btn" title="انقر للبدء أو الإيقاف">🎙️</button>
+        </div>
+
+        <div id="statusTag" class="status-tag">اضغط على زر الميكروفون وابدأ بالتحدث مباشرة</div>
+
+        <div id="transcriptBox" class="transcript-box">
+            <div id="placeholderText" class="transcript-placeholder">سيظهر كلامك المنطوق هنا مباشرة أثناء التحدث...</div>
+        </div>
+
+        <div class="controls-row">
+            <button type="button" id="copyBtn" class="btn-action btn-copy">
+                <span>📋 نسخ النص فوراً</span>
+            </button>
+            <button type="button" id="clearBtn" class="btn-action btn-clear">
+                <span>مسح</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const startMicBtn = document.getElementById('startMicBtn');
+        const transcriptBox = document.getElementById('transcriptBox');
+        const placeholderText = document.getElementById('placeholderText');
+        const statusTag = document.getElementById('statusTag');
+        const copyBtn = document.getElementById('copyBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const dialectSelect = document.getElementById('dialectSelect');
+
+        let recognition = null;
+        let isRecording = false;
+        let finalTranscript = '';
+
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (!SpeechRec) {
+            statusTag.innerHTML = '⚠️ المتصفح الحالي لا يدعم Web Speech API. يرجى فتح هذه الصفحة عبر متصفح Google Chrome أو Edge.';
+            statusTag.style.color = '#ef4444';
+            startMicBtn.disabled = true;
+            startMicBtn.style.opacity = '0.5';
+        } else {
+            recognition = new SpeechRec();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+
+            recognition.onstart = function() {
+                isRecording = true;
+                startMicBtn.classList.add('recording');
+                statusTag.innerHTML = '🔴 جاري الاستماع لصوتك الآن... تحدث بحرية';
+                statusTag.classList.add('active');
+            };
+
+            recognition.onresult = function(event) {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript + ' ';
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                const displayText = (finalTranscript + interimTranscript).trim();
+                if (displayText) {
+                    transcriptBox.innerText = displayText;
+                }
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech error:', event.error);
+                if (event.error === 'not-allowed') {
+                    statusTag.innerHTML = '⚠️ يرجى السماح للمتصفح بالوصول إلى الميكروفون من أعلى شريط العنوان.';
+                    statusTag.style.color = '#ef4444';
+                }
+            };
+
+            recognition.onend = function() {
+                isRecording = false;
+                startMicBtn.classList.remove('recording');
+                statusTag.innerHTML = 'تم الإيقاف. يمكنك الضغط على "نسخ النص فوراً" ولصقه في المحادثة.';
+                statusTag.classList.remove('active');
+            };
+
+            startMicBtn.addEventListener('click', function() {
+                if (isRecording) {
+                    recognition.stop();
+                } else {
+                    recognition.lang = dialectSelect.value || 'ar-SY';
+                    try {
+                        recognition.start();
+                    } catch(e) {
+                        recognition.stop();
+                    }
+                }
+            });
+
+            dialectSelect.addEventListener('change', function() {
+                if (isRecording) {
+                    recognition.stop();
+                    setTimeout(() => {
+                        recognition.lang = dialectSelect.value;
+                        recognition.start();
+                    }, 300);
+                }
+            });
+        }
+
+        copyBtn.addEventListener('click', function() {
+            const text = transcriptBox.innerText.replace('سيظهر كلامك المنطوق هنا مباشرة أثناء التحدث...', '').trim();
+            if (text) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<span>✓ تم النسخ إلى الحافظة!</span>';
+                    copyBtn.style.background = '#059669';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                        copyBtn.style.background = '#10b981';
+                    }, 2000);
+                });
+            } else {
+                alert('لا يوجد نص لنسخه بعد. تحدث أولاً!');
+            }
+        });
+
+        clearBtn.addEventListener('click', function() {
+            finalTranscript = '';
+            transcriptBox.innerHTML = '<div id="placeholderText" class="transcript-placeholder">سيظهر كلامك المنطوق هنا مباشرة أثناء التحدث...</div>';
+            statusTag.innerHTML = 'تم مسح النص. اضغط على زر الميكروفون لبدء تسجيل جديد.';
+        });
+    </script>
+</body>
+</html>
