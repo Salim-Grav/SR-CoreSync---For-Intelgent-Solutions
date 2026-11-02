@@ -41,6 +41,8 @@ for f in PATCHED_FROM_PACKAGE:
     shutil.copy(FULL_FILES / f, APP / f)
 for f in FROM_REPO:
     shutil.copy(SRC_DIR / f, APP / f)
+if (SRC_DIR / "sr_rag_knowledge.db").is_file():
+    shutil.copy(SRC_DIR / "sr_rag_knowledge.db", APP / "sr_rag_knowledge.db")
 sys.path.insert(0, str(APP))
 sys.path.insert(0, str(STUBS_DIR))
 os.chdir(APP)
@@ -55,7 +57,7 @@ results = []
 
 def record(name, ok, detail=""):
     results.append((name, ok))
-    print(f"  {'✅' if ok else '❌'} {name} {detail}")
+    print(f"  {'✅' if ok else '❌'} {name} {detail}", flush=True)
 
 print("=" * 70)
 print("Phase 1 — server WITH configured API keys")
