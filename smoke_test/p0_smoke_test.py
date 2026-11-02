@@ -18,9 +18,12 @@ import shutil
 import tempfile
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
 PACKAGE_DIR = Path(__file__).resolve().parent.parent          # جذر الحزمة
-FULL_FILES = PACKAGE_DIR / "full_files"
-STUBS_DIR = PACKAGE_DIR / "smoke_test" / "stubs"
+FULL_FILES = (PACKAGE_DIR / "SR-CoreSync_P0_Patches" / "full_files") if (PACKAGE_DIR / "SR-CoreSync_P0_Patches" / "full_files").is_dir() else (PACKAGE_DIR / "full_files")
+STUBS_DIR = (PACKAGE_DIR / "SR-CoreSync_P0_Patches" / "smoke_test" / "stubs") if (PACKAGE_DIR / "SR-CoreSync_P0_Patches" / "smoke_test" / "stubs").is_dir() else (PACKAGE_DIR / "smoke_test" / "stubs")
 SRC_DIR = Path(os.environ.get("CORESYNC_REPO_DIR", os.getcwd()))  # جذر المستودع
 
 PATCHED_FROM_PACKAGE = ["sr_auth.py", "sr_agent_server.py", "sr_session_db.py"]
