@@ -45,7 +45,7 @@ if (existsSync(profileDir)) {
 server.listen(PORT, async () => {
     const chrome = spawn(CHROME_PATH, [
         '--headless=new',
-        '--remote-debugging-port=9232',
+        '--remote-debugging-port=9233',
         '--no-sandbox',
         '--disable-gpu',
         '--disk-cache-size=1',
@@ -57,7 +57,7 @@ server.listen(PORT, async () => {
     await sleep(2500);
 
     try {
-        const listRes = await fetch('http://127.0.0.1:9232/json/list');
+        const listRes = await fetch('http://127.0.0.1:9233/json/list');
         const list = await listRes.json();
         const page = list.find(t => t.type === 'page') || list[0];
         const ws = new globalThis.WebSocket(page.webSocketDebuggerUrl);
@@ -96,87 +96,33 @@ server.listen(PORT, async () => {
                 const r = await send('Runtime.evaluate', { expression: 'document.readyState', returnByValue: true });
                 if (r && r.result && r.result.value === 'complete') break;
             }
-            await sleep(2000);
+            await sleep(1500);
 
-            // Measure title lines and emblem geometry
-            const geoRes = await send('Runtime.evaluate', {
+            // Open Sovereign Privacy Modal
+            const testModalRes = await send("Runtime.evaluate", {
                 expression: `
                 (function() {
-                    const emblem = document.querySelector('.hero-emblem-card-3d');
-                    const emblemRect = emblem.getBoundingClientRect();
-                    const lines = Array.from(document.querySelectorAll('.hero-reference__title .hero-title-line__text')).map(el => {
-                        const r = el.getBoundingClientRect();
+                    if (typeof window.openSrPrivacyModal === 'function') {
+                        window.openSrPrivacyModal();
+                        const modal = document.getElementById('srPrivacyModalOverlay');
+                        if (!modal) return { success: false, reason: 'modal not created' };
+                        const style = window.getComputedStyle(modal);
+                        const card = modal.querySelector('.sr-privacy-modal-card');
+                        const cardRect = card ? card.getBoundingClientRect() : null;
                         return {
-                            text: el.innerText,
-                            left: r.left,
-                            right: r.right,
-                            width: r.width,
-                            collidesWithEmblem: r.left < emblemRect.right
+                            success: true,
+                            modalVisible: modal.classList.contains('sr-visible'),
+                            opacity: style.opacity,
+                            cardRect: cardRect
                         };
-                    });
-
-                    const heroActions = document.querySelector('.hero-reference__actions');
-                    const heroActionBtns = Array.from(heroActions ? heroActions.querySelectorAll('.tf-btn') : []).map(b => ({
-                        text: b.innerText.trim(),
-                        className: b.className,
-                        width: b.getBoundingClientRect().width,
-                        height: b.getBoundingClientRect().height
-                    }));
-
-                    const headerAgentBtn = document.querySelector('.btn-partner-portal-header');
-
-                    return {
-                        emblem: {
-                            left: emblemRect.left,
-                            right: emblemRect.right,
-                            width: emblemRect.width
-                        },
-                        lines: lines,
-                        heroActionBtns: heroActionBtns,
-                        headerAgentBtnExists: !!headerAgentBtn
-                    };
+                    }
+                    return { success: false, reason: 'openSrPrivacyModal is not a function' };
                 })()
                 `,
                 returnByValue: true
             });
-
-            console.log('GEOMETRY & BUTTONS INSPECTION:', JSON.stringify(geoRes.result.value, null, 2));
-
-            // Test opening Header Support Dropdown
-            const testDropdownRes = await send("Runtime.evaluate", {
-                expression: `
-                (function() {
-                    const btn = document.getElementById("headerSupportBtn");
-                    const wrap = document.getElementById("headerSupportDropdownWrap");
-                    const menu = document.getElementById("headerSupportMenu");
-                    if (!btn || !wrap || !menu) return { success: false, reason: "elements missing", btn: !!btn, wrap: !!wrap, menu: !!menu };
-
-                    btn.click();
-                    const menuRect = menu.getBoundingClientRect();
-                    const style = window.getComputedStyle(menu);
-                    return {
-                        success: true,
-                        hasActive: wrap.classList.contains("is-active"),
-                        display: style.display,
-                        opacity: style.opacity,
-                        rect: {
-                            left: menuRect.left,
-                            right: menuRect.right,
-                            top: menuRect.top,
-                            bottom: menuRect.bottom,
-                            width: menuRect.width,
-                            height: menuRect.height
-                        },
-                        clippedLeft: menuRect.left < 0,
-                        clippedRight: menuRect.right > window.innerWidth,
-                        itemsCount: menu.querySelectorAll(".support-menu-item").length
-                    };
-                })()
-                `,
-                returnByValue: true
-            });
-            console.log("HEADER SUPPORT DROPDOWN TEST:", JSON.stringify(testDropdownRes.result.value, null, 2));
-            await sleep(500);
+            console.log("SOVEREIGN PRIVACY MODAL TEST:", JSON.stringify(testModalRes.result.value, null, 2));
+            await sleep(600);
 
             const screenshotRes = await send('Page.captureScreenshot', {
                 format: 'jpeg',
