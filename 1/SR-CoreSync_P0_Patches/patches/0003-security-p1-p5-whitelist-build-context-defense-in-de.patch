@@ -1,0 +1,261 @@
+From 0f7c172a16a7f27b032ad4c87a61c1c8ac5703ab Mon Sep 17 00:00:00 2001
+From: S&R Security Remediation <dev@sr-coresync.com>
+Date: Sun, 1 Nov 2026 03:55:07 +0000
+Subject: [PATCH 3/4] security(p1,p5): whitelist build context +
+ defense-in-depth webroot (P0-3)
+
+- .dockerignore: deny-by-default ('*') then re-include ONLY public site
+  assets; .env.vault, *.db, *.log, uploads/, chat_history.txt, all Python
+  code and internal docs never enter the build context
+- Dockerfile: keep non-root nginx, add second-layer webroot purge,
+  chmod 644 files, healthcheck on /robots.txt
+- docker-compose.yml: fix healthcheck path /health -> /robots.txt (P5)
+---
+ .dockerignore      | 142 +++++++++++++++++++++++++++++++++++++++------
+ Dockerfile         |  39 +++++++++++--
+ docker-compose.yml |   3 +-
+ 3 files changed, 158 insertions(+), 26 deletions(-)
+
+diff --git a/.dockerignore b/.dockerignore
+index d62d661..4f40fd6 100644
+--- a/.dockerignore
++++ b/.dockerignore
+@@ -1,19 +1,123 @@
+-.git
+-.github
+-.vscode
+-.secrets
+-.agents
+-.zwork
+-*.log
+-*.tmp
+-*.bat
+-*.sh
+-*.url
+-scripts/__pycache__
+-__pycache__
+-.tempmediaStorage
+-.user_uploaded
+-node_modules
+-coverage
+-.DS_Store
+-Thumbs.db
++# ==============================================================================
++# S&R CoreSync - Docker Build Context Whitelist (Security Remediation P0-3)
++# ==============================================================================
++# نمط "المنع الافتراضي": السطر الأول (*) يستبعد كل شيء من سياق البناء، ثم
++# تُعاد قائمة الأصول العامة للموقع فقط. هذا يعالج نتيجة التدقيق الحرجة P1:
++#   - .env.vault (خزنة أسرار الإنتاج) لن تدخل سياق البناء إطلاقاً.
++#   - قواعد بيانات الجلسات والمعرفة (*.db) وسجلات التشغيل (*.log) مُستبعدة.
++#   - مجلد uploads/ وسجل المحادثات chat_history.txt مُستبعدان.
++#   - كامل الكود البرمجي (Python) ووثائق التشغيل الداخلية مُستبعدة.
++# أضف أي أصلاً عاماً جديداً للموقع هنا، وإلا فلن يدخل الصورة.
++# ==============================================================================
++
++*
++
++# --- ملفات الجذر العامة للموقع ---
++!/.nojekyll
++!/.htaccess
++!/_headers
++!/_redirects
++!/CNAME
++!/favicon.ico
++!/robots.txt
++!/sitemap.xml
++!/feed.xml
++!/manifest.json
++!/sw.js
++!/csp-hashes.txt
++!/28e2de90a2704782b40cbd444d5e764d.txt
++!/SR-CoreSync.vcf
++
++# --- ملف التحقق الخاص بنطاق العمل (Domain verification) ---
++# (الملف يبدأ برقم سداسي عشري؛ أُعيد تضمينه بالاسم الصريح أعلاه)
++
++# --- جميع صفحات HTML في الجذر (82 صفحة بوابة) ---
++!/*.html
++
++# --- مجلدات الأصول العامة ---
++!/assets
++!/assets/**
++!/css
++!/css/**
++!/js
++!/js/**
++!/insights
++!/insights/**
++!/templates
++!/templates/**
++!/downloads
++!/downloads/**
++
++# --- مجلدات اللغات (29 دليل لغة/مخطط كتابة) ---
++!/bg
++!/bg/**
++!/ckb
++!/ckb/**
++!/cs
++!/cs/**
++!/da
++!/da/**
++!/de
++!/de/**
++!/el
++!/el/**
++!/en
++!/en/**
++!/es
++!/es/**
++!/et
++!/et/**
++!/fi
++!/fi/**
++!/fr
++!/fr/**
++!/ga
++!/ga/**
++!/hr
++!/hr/**
++!/hu
++!/hu/**
++!/it
++!/it/**
++!/ku
++!/ku/**
++!/lt
++!/lt/**
++!/lv
++!/lv/**
++!/mt
++!/mt/**
++!/nl
++!/nl/**
++!/no
++!/no/**
++!/pl
++!/pl/**
++!/pt
++!/pt/**
++!/ro
++!/ro/**
++!/sk
++!/sk/**
++!/sl
++!/sl/**
++!/sv
++!/sv/**
++!/sw
++!/sw/**
++!/tr
++!/tr/**
++
++# --- ملفات الخدمة الموحدة (.well-known) ---
++!/.well-known
++!/.well-known/**
++
++# ==============================================================================
++# ملاحظات أمنية:
++#   1. nginx.conf يُنسخ عبر COPY صريح في Dockerfile قبل القائمة أعلاه؛
++#      لم يُضمن القائمة حتى لا يُنشر داخل الـ webroot المعرض للعامة.
++#   2. docs/ مُستبعد عمداً من الـ webroot (يحتوي وثائق تشغيل داخلية) ولم يُرصد
++#      أي رابط عام يشير إليه في صفحات الموقع.
++#   3. أي ملف إعدادات/نشر (Dockerfile, docker-compose.yml, *.py, *.md, .env*)
++#      لا يصل سياق البناء أصلاً بفضل قاعدة المنع الافتراضية.
++# ==============================================================================
+diff --git a/Dockerfile b/Dockerfile
+index 4c06c9f..25aaa01 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -1,13 +1,22 @@
+ # ==============================================================================
+ # S&R CoreSync For Intelligent Solutions - Sovereign Cloud Production Container
+ # High-Performance Nginx Alpine Web Server with 8K Asset Caching & Security
++#
++# [P0-3] إعادة بناء آمنة: سياق البناء نفسه مقيّد بقائمة بيضاء صارمة عبر
++#        .dockerignore (منع-افتراضي). لا يُنسخ إلى الـ webroot إلا أصول الموقع
++#        العامة: صفحات HTML، مجلدات الأصول، ومجلدات اللغات.
++#        الملفات المستبعدة نهائياً من سياق البناء تشمل:
++#          .env.vault / *.db / *.log / uploads/ / chat_history.txt /
++#          كامل الكود البرمجي (Python) / سكربتات التشغيل / وثائق التشغيل الداخلية
++#        بحيث يستحيل تسريب خزنة الأسرار أو قواعد بيانات الجلسات داخل الصورة.
+ # ==============================================================================
+ 
+ FROM nginx:1.27-alpine
+ 
+ LABEL maintainer="S&R CoreSync Engineering <dev@sr-coresync.com>"
+ LABEL description="S&R CoreSync Omnichannel 8K & Sovereign Cloud Web Platform"
+-LABEL version="2026.1.0"
++LABEL version="2026.1.1"
++LABEL security.p0="whitelist-build-context (see .dockerignore)"
+ 
+ # Remove default nginx configurations
+ RUN rm -rf /etc/nginx/conf.d/* /usr/share/nginx/html/*
+@@ -15,27 +24,45 @@ RUN rm -rf /etc/nginx/conf.d/* /usr/share/nginx/html/*
+ # Copy custom Nginx configuration
+ COPY nginx.conf /etc/nginx/nginx.conf
+ 
+-# Copy production web assets
++# Copy production web assets (whitelisted exclusively by .dockerignore)
+ COPY . /usr/share/nginx/html/
+ 
+-# Clean up development & VCS files from the runtime webroot
+-RUN rm -rf /usr/share/nginx/html/.git \
++# Defense-in-depth: أي ملف حساس تسرب للمصادفة عبر سياق البناء يُحذف من الصورة
++# (هذه طبقة احتياطية ثانية؛ القاعدة الأساسية هي .dockerignore)
++RUN rm -rf /usr/share/nginx/html/.git* \
++           /usr/share/nginx/html/.env* \
+            /usr/share/nginx/html/.github \
+            /usr/share/nginx/html/.vscode \
+            /usr/share/nginx/html/.secrets \
+            /usr/share/nginx/html/.agents \
++           /usr/share/nginx/html/.githooks \
+            /usr/share/nginx/html/.zwork \
++           /usr/share/nginx/html/*.db \
++           /usr/share/nginx/html/*.log \
++           /usr/share/nginx/html/*.py \
+            /usr/share/nginx/html/*.bat \
+            /usr/share/nginx/html/*.sh \
+-           /usr/share/nginx/html/*.url
++           /usr/share/nginx/html/*.ps1 \
++           /usr/share/nginx/html/*.url \
++           /usr/share/nginx/html/*.md \
++           /usr/share/nginx/html/scripts \
++           /usr/share/nginx/html/sdk \
++           /usr/share/nginx/html/uploads \
++           /usr/share/nginx/html/workers \
++           /usr/share/nginx/html/deploy \
++           /usr/share/nginx/html/docs \
++           /usr/share/nginx/html/dist \
++           /usr/share/nginx/html/archive_agents \
++           /usr/share/nginx/html/templates || true
+ 
+ # Set proper ownership and permissions for nginx
+ RUN chown -R nginx:nginx /usr/share/nginx/html && \
+     chmod -R 755 /usr/share/nginx/html && \
++    find /usr/share/nginx/html -type f -exec chmod 644 {} + && \
+     touch /var/run/nginx.pid && \
+     chown -R nginx:nginx /var/run/nginx.pid /var/cache/nginx
+ 
+-# Healthcheck
++# Healthcheck (على /robots.txt الموجودة فعلاً في الـ webroot)
+ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+   CMD wget --quiet --tries=1 --spider http://localhost:80/robots.txt || exit 1
+ 
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 23ea3c3..48d3fa4 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -20,7 +20,8 @@ services:
+       - PLATFORM_NAME=SR-CoreSync-For-Intelligent-Solutions
+       - DOMAIN=sr-coresync.com
+     healthcheck:
+-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
++      # [P5] المسار /health لا وجود له في خادم nginx الثابت؛ الفحص الصحيح على /robots.txt
++      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/robots.txt"]
+       interval: 30s
+       timeout: 5s
+       retries: 3
+-- 
+2.47.3
+
