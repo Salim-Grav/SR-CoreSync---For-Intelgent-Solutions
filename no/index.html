@@ -4874,100 +4874,7 @@ main#wrapper:focus{outline:none}
     </div>
 
     <!-- 1. Executive VIP Consultation Booking Modal -->
-    <div class="sr-exec-modal" id="executiveBookingModal" role="dialog" aria-modal="true" aria-labelledby="execBookingTitle">
-        <div class="sr-exec-modal-backdrop" data-sr-call="closeExecutiveBookingModal"></div>
-        <div class="sr-exec-modal-container">
-            <div class="sr-exec-modal-header">
-                <div>
-                    <div class="sr-exec-modal-badge">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                        <span>C-Level Executive Advisory • S&R CoreSync</span>
-                    </div>
-                    <h3 class="sr-exec-modal-title" id="execBookingTitle">Strategic Advisory Session with Founding Partners</h3>
-                    <p class="sr-exec-modal-subtitle">Velg din ledelsesrådgiver for å ta direkte tak i programvarearkitektur, skyløsninger og ERP-veikart.</p>
-                </div>
-                <button type="button" class="sr-exec-modal-close" data-sr-call="closeExecutiveBookingModal" aria-label="Close">&times;</button>
-            </div>
-
-            <!-- Advisor Selection -->
-            <label class="sr-exec-label mb-2 d-block">Select Executive Advisor for the Session:</label>
-            <div class="sr-advisor-select-grid" role="radiogroup">
-                <button type="button" class="sr-advisor-card-btn active" id="advisorBtnSalim" data-sr-call="selectBookingAdvisor" data-sr-args='["salim"]'>
-                    <span class="name">Eng. Salim Azizah</span>
-                    <span class="role">Chief Cloud &amp; AI Architect // CTO</span>
-                </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnRaed" data-sr-call="selectBookingAdvisor" data-sr-args='["raed"]'>
-                    <span class="name">Mr. Raed Kaakeh</span>
-                    <span class="role">Financial Systems &amp; ERP Consultant // CFO</span>
-                </button>
-                <button type="button" class="sr-advisor-card-btn" id="advisorBtnBoth" data-sr-call="selectBookingAdvisor" data-sr-args='["both"]'>
-                    <span class="name">Joint Board (VIP)</span>
-                    <span class="role">Comprehensive (Software Engineering + Financial Governance)</span>
-                </button>
-            </div>
-
-            <!-- Booking Form -->
-            <form id="executiveBookingForm" data-sr-call="submitExecutiveBooking" data-sr-event="1" data-sr-on="submit">
-                <input type="hidden" id="selectedAdvisorField" value="salim" />
-                <div class="sr-exec-form-grid">
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingClientName">Full Name / Decision Maker *</label>
-                        <input type="text" id="bookingClientName" class="sr-exec-input" required placeholder="e.g. Alexander de Jong" />
-                    </div>
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingCompanyName">Company / Organization *</label>
-                        <input type="text" id="bookingCompanyName" class="sr-exec-input" required placeholder="e.g. Apex Global Logistics" />
-                    </div>
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingPhone">WhatsApp / Direct Phone *</label>
-                        <input type="tel" id="bookingPhone" class="sr-exec-input" required placeholder="+31 6 ... or +44 ..." />
-                    </div>
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingSessionType">Consultation Type / Channel *</label>
-                        <select id="bookingSessionType" class="sr-exec-select" title="Consultation Session Type" aria-label="Consultation Session Type" data-sr-call="togglePackageField" data-sr-on="change">
-                            <option value="creative">Visual Identity / Website / E-Commerce Store Request</option>
-                            <option value="online">Online Video Conference (Google Meet / Teams)</option>
-                            <option value="phone">Direct WhatsApp / Phone Call</option>
-                            <option value="office">In-Person Consultation (Netherlands / Europe)</option>
-                        </select>
-                    </div>
-                    <div class="sr-exec-form-group full-width sr-package-group" id="bookingPackageGroup">
-                        <label class="sr-exec-label" for="bookingPackage">Target Package (Optional)</label>
-                        <select id="bookingPackage" class="sr-exec-select" title="Consultation Package" aria-label="Consultation Package">
-                            <option value="">Not decided yet — I'd like guidance</option>
-                            <option value="identity">Complete Visual Identity — €590</option>
-                            <option value="website">High-Performance Luxury Website — €980</option>
-                            <option value="store">Complete E-Commerce Store — €1,450</option>
-                            <option value="bundle">⭐ All-in-One Digital Growth Bundle (save €1,030) — €1,990</option>
-                        </select>
-                        <span class="sr-package-hint">Selecting a package speeds up your final quote and project kickoff.</span>
-                    </div>
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingPreferredDate">Preferred Date (Optional)</label>
-                        <input type="date" id="bookingPreferredDate" class="sr-exec-input" />
-                    </div>
-                    <div class="sr-exec-form-group">
-                        <label class="sr-exec-label" for="bookingTimeSlot">Preferred Time Window *</label>
-                        <select id="bookingTimeSlot" class="sr-exec-select" title="Preferred Time Slot" aria-label="Preferred Time Slot">
-                            <option value="morning">Morning Window (10:00 - 12:00 CET)</option>
-                            <option value="afternoon" selected>Afternoon Window (13:00 - 15:00 CET)</option>
-                            <option value="evening">Evening Window (16:00 - 18:00 CET)</option>
-                            <option value="flexible">Flexible (Next Available Executive Slot)</option>
-                        </select>
-                    </div>
-                    <div class="sr-exec-form-group full-width">
-                        <label class="sr-exec-label" for="bookingNotes">Consultation Scope / Challenges (Optional)</label>
-                        <textarea id="bookingNotes" class="sr-exec-textarea" rows="2" placeholder="Brief outline of your software, cloud or ERP requirements..."></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" class="sr-exec-submit-btn">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19.01L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
-                    <span>Confirm &amp; Dispatch VIP Session Request via WhatsApp</span>
-                </button>
-            </form>
-        </div>
-    </div>
+    
 
     <!-- 2. Interactive ROI Savings Calculator Modal -->
     <div class="sr-exec-modal" id="roiCalculatorModal" role="dialog" aria-modal="true" aria-labelledby="roiModalTitle">
@@ -8176,5 +8083,62 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
 })();
 </script>
 
+    <script src="../js/sr-inline-13eaa28e.js?v=20261102-p0-matrix" defer></script>
+<div class="sr-exec-modal" id="aiVoicePlannerModal" role="dialog" aria-modal="true" aria-labelledby="voicePlannerModalTitle">
+        <div class="sr-exec-modal-backdrop" data-sr-call="closeAiVoicePlannerModal"></div>
+        <div class="sr-exec-modal-container sr-voice-modal-container">
+            <div class="sr-exec-modal-header">
+                <div>
+                    <div class="sr-exec-modal-badge">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                        <span>محرك التخطيط الصوتي الذكي للمشاريع 2026 • AI Voice Project Architect</span>
+                    </div>
+                    <h3 class="sr-exec-modal-title" id="voicePlannerModalTitle">تحدث بفكرة مشروعك... وسيقوم الذكاء الاصطناعي ببناء خطة عملك فوراً!</h3>
+                    <p class="sr-exec-modal-subtitle">لا داعي لكتابة ملفات معقدة. اضغط على المايك وتحدث بعفوية بأي لغة، وسيقوم نظامنا بتحليل فكرتك وهندسة خطة عمل رقمية وخارطة طريق تقنية وتنفيذية في ثوانٍ.</p>
+                </div>
+                <button type="button" class="sr-exec-modal-close" data-sr-call="closeAiVoicePlannerModal" aria-label="إغلاق">&times;</button>
+            </div>
+
+            <div class="sr-voice-mic-box">
+                <button type="button" id="voicePlannerMicBtn" class="sr-voice-mic-btn" data-sr-call="toggleVoiceRecording" title="اضغط لبدء التحدث أو إيقافه">
+                    <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+                </button>
+
+                <div class="sr-voice-waves" id="voicePlannerWaves" aria-hidden="true">
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                    <span class="sr-voice-wave-bar"></span>
+                </div>
+
+                <div class="sr-voice-status" id="voicePlannerStatus">اضغط على المايكروفون وتحدث بفكرة أو متطلبات مشروعك...</div>
+
+                <textarea id="voicePlannerTranscript" class="sr-voice-transcript-box" placeholder="الكلمات المنطوقة ستظهر هنا لحظياً أثناء حديثك... (أو يمكنك كتابة فكرتك هنا مباشرة)"></textarea>
+
+                <div class="sr-voice-chips-row">
+                    <span class="sr-voice-chip" data-sr-call="fillVoiceSample" data-sr-args='["متجر سحابي أوروبي متكامل مع تطبيق PWA وربط محاسبي أوتوماتيكي ومخازن"]'>💡 متجر وتطبيق مع ربط محاسبي</span>
+                    <span class="sr-voice-chip" data-sr-call="fillVoiceSample" data-sr-args='["أتمتة العمليات ونظام ERP كامل وربط الضرائب والفواتير لشركة استيراد وتصدير"]'>📊 أتمتة ERP لشركة استيراد</span>
+                    <span class="sr-voice-chip" data-sr-call="fillVoiceSample" data-sr-args='["تأسيس شركة تقنية جديدة مع بناء قنوات السوشيال ميديا وحزمة الهوية 8K كاملة"]'>🌐 تأسيس شركة وهوية سوشيال 8K</span>
+                    <span class="sr-voice-chip" data-sr-call="fillVoiceSample" data-sr-args='["تطبيق سحابي ذكي للعيادات وحجز المواعيد مع دفع إلكتروني وأتمتة AI"]'>📱 تطبيق ذكي لحجز المواعيد</span>
+                </div>
+
+                <div class="sr-voice-actions-row">
+                    <button type="button" class="sr-voice-btn-primary" data-sr-call="generateAiProjectBlueprint">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                        <span>توليد خطة العمل وخارطة الطريق بالذكاء الاصطناعي ⚡</span>
+                    </button>
+                    <button type="button" class="sr-voice-btn-glass" data-sr-call="resetVoicePlanner">
+                        <span>↺ مسح وإعادة</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blueprint Generated Result -->
+            <div id="voicePlannerResult" class="sr-voice-planner-result"></div>
+        </div>
+    </div>
 </body>
 </html>
