@@ -134,3 +134,4 @@ for lang in ['nl', 'de', 'fr']:
         print(f"✅ Updated internal portal links in {idx_p} to point to local portals!")
 
 print("All European localized portals built and linked successfully!")
+
