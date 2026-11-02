@@ -84,7 +84,7 @@ server.listen(PORT, async () => {
                 deviceScaleFactor: 1,
                 mobile: false
             });
-            await send('Page.navigate', { url: http://127.0.0.1:/index.html?lang=ar&noredirect=1&ts= });
+            await send('Page.navigate', { url: http://127.0.0.1:8098/index.html?lang=ar&noredirect=1 });
 
             for (let i = 0; i < 20; i++) {
                 await sleep(300);
