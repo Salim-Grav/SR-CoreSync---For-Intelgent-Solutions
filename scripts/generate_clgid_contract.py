@@ -1,0 +1,585 @@
+contract_html = """<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>اتفاقية تطوير برمجيات رسمية B2B | S&R CoreSync - CLGID The Hague</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/favicon-96.png">
+    <style>
+        :root {
+            --primary: #0a1e36;
+            --secondary: #031326;
+            --gold: #c5a880;
+            --gold-dark: #9a7b52;
+            --accent-green: #059669;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --bg-sheet: #ffffff;
+            --bg-page: #010907;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contract-actions-bar {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 20, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(197, 168, 128, 0.3);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .contract-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #c5a880, #9a7b52);
+            color: #010907;
+        }
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.4);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #ffffff;
+        }
+
+        .btn-return {
+            background: rgba(255, 255, 255, 0.08);
+            color: #f8fafc;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* A4 Sheet Container */
+        .contract-sheet {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-sheet);
+            padding: 40px 48px;
+            border-radius: 6px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+            border-top: 8px solid var(--primary);
+        }
+
+        .header-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .doc-badge {
+            text-align: left;
+        }
+
+        .doc-badge-pill {
+            display: inline-block;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .contract-title-banner {
+            background: linear-gradient(135deg, #0a1e36, #031326);
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 24px;
+            border-right: 4px solid var(--gold);
+            border-left: 4px solid var(--gold);
+        }
+
+        .contract-title-banner h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .contract-title-banner p {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+        }
+
+        /* Parties Section */
+        .parties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .party-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .party-card h3 {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--primary);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 6px;
+            margin-bottom: 8px;
+        }
+
+        .clause-box {
+            margin-bottom: 20px;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            color: #1e293b;
+        }
+
+        .clause-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clause-title span.clause-num {
+            background: var(--gold);
+            color: #010907;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
+
+        .bilingual-text {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            background: #fdfdfd;
+            border: 1px solid #f1f5f9;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-top: 6px;
+        }
+
+        .ar-clause {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .en-clause {
+            direction: ltr;
+            text-align: left;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #475569;
+            border-left: 1px solid #e2e8f0;
+            padding-left: 10px;
+        }
+
+        /* Pricing Table */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            margin-top: 8px;
+        }
+
+        .price-table th, .price-table td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 10px;
+        }
+
+        .price-table th {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        /* Signatures Area */
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            padding-top: 24px;
+        }
+
+        .sign-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            position: relative;
+        }
+
+        .sign-box h4 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .signature-placeholder {
+            height: 80px;
+            border: 1px dashed #94a3b8;
+            background: #ffffff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            font-size: 0.8rem;
+            color: #64748b;
+            position: relative;
+        }
+
+        .digital-seal {
+            position: absolute;
+            left: 14px;
+            top: 20px;
+            width: 75px;
+            height: 75px;
+            border: 2px dashed #059669;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #059669;
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-align: center;
+            transform: rotate(-12deg);
+            opacity: 0.9;
+        }
+
+        .qr-seal-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+            }
+            .contract-actions-bar {
+                display: none !important;
+            }
+            .contract-sheet {
+                box-shadow: none !important;
+                border-top: none !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 12mm 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Executive Action Bar -->
+    <div class="contract-actions-bar">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="clgid-prototype.html" class="contract-btn btn-return">
+                <span>← العودة للنموذج الأولي</span>
+            </a>
+            <span style="color:#94a3b8; font-size:0.8rem;">وثيقة تجارية رسمية ملزمة بموجب القانون المدني الهولندي</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+            <a href="https://wa.me/31683709854" target="_blank" rel="noopener noreferrer" class="contract-btn btn-whatsapp">
+                <span>📱 إرسال للأستاذ محمود الناصر (واتساب)</span>
+            </a>
+            <button type="button" class="contract-btn btn-print" onclick="window.print()">
+                <span>🖨️ طباعة وحفظ الاتفاقية الرسمية (PDF)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Official A4 Contract Paper -->
+    <div class="contract-sheet">
+        
+        <!-- Header -->
+        <div class="header-grid">
+            <div>
+                <div class="brand-title">S&R CoreSync For Intelligent Solutions B.V.</div>
+                <div class="brand-sub">مملكة هولندا • مقيدة بالسجل التجاري ومصلحة الضرائب الهولندية (KvK / BTW Compliant)</div>
+                <div class="brand-sub" style="color:#c5a880; font-weight:700;">قسم الهندسة السحابية وحوكمة الأنظمة الرقمية</div>
+            </div>
+            <div class="doc-badge">
+                <span class="doc-badge-pill">كود العقد: SR-CLGID-2026-NL</span>
+                <div style="font-size:0.75rem; color:#64748b;">تاريخ الإصدار: 02 نوفمبر 2026</div>
+                <div style="font-size:0.75rem; color:#059669; font-weight:700;">الحالة: مسودة معتمدة جاهزة للتوقيع</div>
+            </div>
+        </div>
+
+        <!-- Banner Title -->
+        <div class="contract-title-banner">
+            <h1>اتفاقية تقديم خدمات تطوير برمجيات واستضافة سحابية (B2B)</h1>
+            <p>Master Software Development, Cloud Architecture & SLA Agreement</p>
+        </div>
+
+        <!-- Parties -->
+        <div class="parties-grid">
+            <div class="party-card">
+                <h3>الطرف الأول: مقدم الخدمة (Dienstverlener)</h3>
+                <strong>شركة S&R CoreSync For Intelligent Solutions B.V.</strong><br>
+                المقر: أمستردام، مملكة هولندا.<br>
+                يمثلها بالتوقيع: <strong>م. محمد سليم عزيزة</strong><br>
+                الصفة: كبير مهندسي السحابة والذكاء الاصطناعي (CTO).<br>
+                هاتف: +31 6 18111116 | بريد: contact@sr-coresync.com
+            </div>
+            <div class="party-card">
+                <h3>الطرف الثاني: العميل (Opdrachtgever)</h3>
+                <strong>مركز CLGID للحوار والمناصرة والاستشارات والتنمية</strong><br>
+                المقر: لاهاي (Den Haag)، مملكة هولندا.<br>
+                يمثله بالتوقيع: <strong>الأستاذ محمود الناصر</strong><br>
+                الصفة: مدير المركز (Director).<br>
+                هاتف / واتساب: +31 6 83709854 | بريد: Mahmoud.alnaser1996@gmail.com
+            </div>
+        </div>
+
+        <!-- Clauses -->
+        <div class="clause-box">
+            <div class="clause-title">
+                <span class="clause-num">1</span>
+                <span>موضوع الاتفاقية ونطاق العمل الهندسي (Scope of Deliverables)</span>
+            </div>
+            <div class="bilingual-text">
+                <div class="ar-clause">
+                    يعهد الطرف الثاني إلى الطرف الأول بمهمة إعادة هيكلة وتطوير المنصة الرقمية الرسمية لمركز CLGID باللغات الثلاث (العربية، الإنجليزية، الهولندية) وفق أفضل المعايير الدبلوماسية والأمنية، بما يشمل لوحة تحكم سهلة لإدارة المقالات والأخبار بدون مبرمج، مستودع مقفل لأوراق السياسات وأبحاث الحوكمة، واستضافة سحابية أوروبية فائقة السرعة والأمان.
+                </div>
+                <div class="en-clause">
+                    The Client engages the Service Provider to execute the complete modernization and deployment of the trilingual (Arabic, English, Dutch) official digital platform for CLGID The Hague, including a lightweight publishing CMS, encrypted policy papers repository, and high-performance EU cloud hosting.
+                </div>
+            </div>
+        </div>
+
+        <!-- Clause 2: Financial Schedule -->
+        <div class="clause-box">
+            <div class="clause-title">
+                <span class="clause-num">2</span>
+                <span>التكاليف والدفعات المالية المرحلية (Commercial Phased Budget)</span>
+            </div>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>المرحلة</th>
+                        <th>المخرجات الهندسية والتسليمات</th>
+                        <th>المدة</th>
+                        <th style="text-align:left;">القيمة (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>المرحلة الأولى</strong></td>
+                        <td>إعادة تصميم واجهة المستخدم بالكامل متجاوبة 100% مع الموبايل + واجهة عربية RTL كاملة وازدواجية لغوية دبلوماسية</td>
+                        <td>3 - 5 أيام عمل</td>
+                        <td style="text-align:left; font-weight:700;">€650.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>المرحلة الثانية</strong></td>
+                        <td>الاستضافة السحابية الأوروبية فائقة السرعة + لوحة تحكم سهلة وسريعة لنشر المقالات بدون مبرمج + مستودع أوراق السياسات المشفر (GDPR)</td>
+                        <td>3 - 5 أيام عمل</td>
+                        <td style="text-align:left; font-weight:700;">€450.00</td>
+                    </tr>
+                    <tr>
+                        <td><strong>المرحلة الثالثة</strong></td>
+                        <td>ربط النطاق المخصص للمركز + شهادة أمان SSL مشفرة + تدريب فريق المركز ودعم فني وصيانة لمدة 30 يوماً</td>
+                        <td>2 - 3 أيام عمل</td>
+                        <td style="text-align:left; font-weight:700;">€250.00</td>
+                    </tr>
+                    <tr style="background:#f8fafc; font-weight:800;">
+                        <td colspan="3"><strong>المجموع الصافي الأساسي (المرحلة 1 + 2):</strong></td>
+                        <td style="text-align:left; color:#b45309; font-size:0.9rem;">€1,100.00</td>
+                    </tr>
+                    <tr style="background:#f1f5f9; font-weight:900;">
+                        <td colspan="3"><strong>المجموع الكلي لكامل المنظومة (1 + 2 + 3):</strong></td>
+                        <td style="text-align:left; color:#059669; font-size:0.95rem;">€1,350.00</td>
+                    </tr>
+                    <tr style="font-size:0.72rem; color:#64748b;">
+                        <td colspan="4">
+                            * <strong>بند الإعفاء الضريبي:</strong> تطبق آلية النقل الضريبي للشركات والمنظمات غير الربحية المعفاة في هولندا والاتحاد الأوروبي (BTW Verlegd / Reverse Charge 0%).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Clause 3: IP & Confidentiality -->
+        <div class="clause-box">
+            <div class="clause-title">
+                <span class="clause-num">3</span>
+                <span>الملكية الفكرية والسرية (Intellectual Property & Confidentiality)</span>
+            </div>
+            <div class="bilingual-text">
+                <div class="ar-clause">
+                    تؤول كافة حقوق الملكية الفكرية، الأكواد المصدرية، التصاميم، والمحتوى المطور للطرف الثاني (مركز CLGID) بمجرد سداد القيمة المتفق عليها، ويلتزم الطرف الأول بالمحافظة المطلقة على سرية وثائق وأبحاث المركز وعدم مشاركتها مع أي جهة خارجية.
+                </div>
+                <div class="en-clause">
+                    All intellectual property rights, source code, and assets shall transfer entirely to the Client upon settlement of agreed milestones. The Service Provider guarantees strict non-disclosure of all policy papers, governance assets, and organizational data.
+                </div>
+            </div>
+        </div>
+
+        <!-- Clause 4: GDPR / AVG Compliance -->
+        <div class="clause-box">
+            <div class="clause-title">
+                <span class="clause-num">4</span>
+                <span>الامتثال للائحة الأوروبية لحماية البيانات (GDPR / AVG Compliance)</span>
+            </div>
+            <div class="bilingual-text">
+                <div class="ar-clause">
+                    تضمن شركة S&R CoreSync التزام البنية السحابية بقانون حماية البيانات الهولندي (Algemene Verordening Gegevensbescherming - AVG)، وتوطين البيانات حصرياً داخل خوادم أوروبية مشفرة، مع تقديم اتفاقية معالجة بيانات ملحقة (DPA).
+                </div>
+                <div class="en-clause">
+                    The platform architecture fully adheres to Dutch AVG / European GDPR standards, enforcing mandatory EU data residency, end-to-end encryption for policy archives, and an embedded Data Processing Agreement (DPA).
+                </div>
+            </div>
+        </div>
+
+        <!-- Clause 5: Applicable Law -->
+        <div class="clause-box">
+            <div class="clause-title">
+                <span class="clause-num">5</span>
+                <span>القانون الواجب التطبيق وحجية التوقيع الإلكتروني (Governing Law & e-Signatures)</span>
+            </div>
+            <div class="bilingual-text">
+                <div class="ar-clause">
+                    يخضع هذا العقد وتفسيره للقوانين السارية في مملكة هولندا (Nederlands recht). يعتبر التوقيع الرقمي لكلا الطرفين نافذاً وملزماً قانوناً بموجب اللائحة الأوروبية eIDAS (EU No 910/2014) والمادة 15أ من القانون المدني الهولندي (Burgerlijk Wetboek Boek 3).
+                </div>
+                <div class="en-clause">
+                    This Agreement is governed by the laws of the Netherlands. Electronic signatures executed herein are legally binding under EU Regulation No 910/2014 (eIDAS) and Dutch Civil Code Book 3, Section 15a.
+                </div>
+            </div>
+        </div>
+
+        <!-- Signatures Grid -->
+        <div class="signatures-grid">
+            <div class="sign-box">
+                <h4>عن الطرف الأول: S&R CoreSync B.V.</h4>
+                <div style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">المهندس محمد سليم عزيزة (كبير مهندسي السحابة والذكاء الاصطناعي)</div>
+                <div class="signature-placeholder" style="background:rgba(5, 150, 105, 0.03); border:1px solid #10b981;">
+                    <div style="font-family:'Playfair Display', serif; font-size:1.1rem; color:#0a1e36; font-weight:700;">Eng. Salim Aziza</div>
+                    <div class="digital-seal">
+                        <span>VERIFIED</span>
+                        <span>S&R B.V.</span>
+                        <span>2026</span>
+                    </div>
+                </div>
+                <div style="font-size:0.7rem; color:#059669; font-weight:700;">✓ التوقيع الرقمي معتمد وموثق سحابياً (eIDAS Verified)</div>
+            </div>
+
+            <div class="sign-box">
+                <h4>عن الطرف الثاني: مركز CLGID لاهاي</h4>
+                <div style="font-size:0.75rem; color:#64748b; margin-bottom:6px;">الأستاذ محمود الناصر (مدير المركز)</div>
+                <div class="signature-placeholder" id="clientSignPlaceholder">
+                    <span id="clientSignText">بانتظار التوقيع الإلكتروني للعميل</span>
+                </div>
+                <button type="button" class="contract-btn btn-print" id="clientSignBtn" onclick="confirmClientElectronicSignature()" style="width:100%; justify-content:center; padding:6px 12px; font-size:0.75rem;">
+                    <span>✍️ اعتماد وتثبيت التوقيع الإلكتروني المباشر</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Verification & QR Footer -->
+        <div class="qr-seal-box">
+            <div style="font-size:1.5rem;">🔒</div>
+            <div style="flex:1;">
+                <strong>رمز التوثيق السيادي المشفر:</strong> SR-VERIFY-CLGID-2026-NL-7890<br>
+                <span>وثيقة تعاقدية رقمية معتمدة صادرة عن شركة S&R CoreSync For Intelligent Solutions B.V. (أمستردام).</span>
+            </div>
+            <div style="text-align:left; font-family:'Inter',sans-serif; font-weight:700; color:#0f172a;">
+                STATUS: APPROVED
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/clgid-contract.js" defer></script>
+</body>
+</html>
+"""
+
+with open('clgid-contract.html', 'w', encoding='utf-8') as f:
+    f.write(contract_html)
+
+print("SUCCESS: Generated clgid-contract.html")
