@@ -730,21 +730,42 @@
                 return;
             }
 
-            const cleanText = rawText
+            let cleanText = rawText
                 .replace(/<[^>]*>/g, ' ')
                 .replace(/\*\*(.*?)\*\*/g, '$1')
+                .replace(/\*(.*?)\*/g, '$1')
+                .replace(/`(.*?)`/g, '$1')
+                .replace(/#{1,6}\s/g, '')
                 .replace(/https?:\/\/\S+/g, '')
-                .replace(/[•\-_#]/g, ' ')
-                .replace(/\s+/g, ' ')
+                .replace(/S&R\s*CoreSync/gi, 'شركة إس آند آر')
+                .replace(/S&R/gi, 'إس آند آر')
                 .trim();
 
             if (!cleanText) return;
 
             const utterance = new SpeechSynthesisUtterance(cleanText);
-            const isEnglish = /^[A-Za-z0-9\s.,!?'"()-]+$/.test(cleanText.slice(0, 50));
+            const isEnglish = /^[A-Za-z0-9\s.,!?\'"()-]+$/.test(cleanText.slice(0, 50));
             utterance.lang = isEnglish ? 'en-US' : 'ar-SA';
-            utterance.rate = 1.0;
-            utterance.pitch = 1.0;
+            utterance.pitch = 0.88; // Deep masculine tone
+            utterance.rate = 0.95;  // Authoritative executive cadence
+
+            const femaleKeywords = ["laila", "zeina", "salma", "hoda", "maryam", "fatima", "yasmin", "zari", "sara", "noor", "female", "woman"];
+            const malePreferred = ["maged", "tarik", "naayf", "shakir", "zayd", "hamed", "bassam", "male"];
+            const allVoices = (window.speechSynthesis && window.speechSynthesis.getVoices) ? window.speechSynthesis.getVoices() : [];
+
+            let maleVoice = allVoices.find(v => {
+                const name = (v.name || "").toLowerCase(), lang = (v.lang || "").toLowerCase();
+                if (!lang.startsWith(isEnglish ? 'en' : 'ar')) return false;
+                if (femaleKeywords.some(f => name.includes(f))) return false;
+                return isEnglish ? true : malePreferred.some(m => name.includes(m));
+            });
+            if (!maleVoice) {
+                maleVoice = allVoices.find(v => {
+                    const name = (v.name || "").toLowerCase(), lang = (v.lang || "").toLowerCase();
+                    return lang.startsWith(isEnglish ? 'en' : 'ar') && !femaleKeywords.some(f => name.includes(f));
+                });
+            }
+            if (maleVoice) utterance.voice = maleVoice;
 
             if (ttsButton) ttsButton.classList.add('sr-speaking');
 
