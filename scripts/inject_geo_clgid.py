@@ -8,3 +8,4 @@ for p in ['clgid-prototype.html', 'clgid-contract.html']:
         print(f"SUCCESS: Injected sr-geo-lang.js into {p}")
     else:
         print(f"sr-geo-lang.js already in {p}")
+

@@ -66,3 +66,4 @@ for d in localized_demos:
         updated_count += 1
 
 print(f"SUCCESS: Injected sr-geo-lang.js into {updated_count} localized demo.html pages!")
+

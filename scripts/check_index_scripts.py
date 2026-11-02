@@ -5,3 +5,4 @@ with open('index.html', 'r', encoding='utf-8') as f:
 
 scripts = re.findall(r'<script[^>]*src=["\']([^"\']+)["\']', text)
 print("index.html scripts:", scripts)
+
