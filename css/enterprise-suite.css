@@ -966,6 +966,118 @@
     box-shadow: 0 0 10px rgba(197, 168, 128, 0.3);
 }
 
+/* Option 1: Live Verification QR Box */
+.sr-a4-verification-qr-box {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.sr-a4-qr-badge-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.sr-a4-qr-badge-link:hover {
+    transform: scale(1.02);
+}
+
+.sr-a4-qr-frame {
+    position: relative;
+    display: inline-flex;
+    border: 1.5px solid #c5a880;
+    border-radius: 6px;
+    padding: 2px;
+    background: #ffffff;
+}
+
+.sr-a4-qr-img {
+    display: block;
+    border-radius: 4px;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.sr-a4-qr-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #10b981;
+    color: #ffffff;
+    font-size: 0.52rem;
+    font-weight: 800;
+    padding: 1px 4px;
+    border-radius: 999px;
+    line-height: 1;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.sr-a4-qr-text-meta {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+[dir="ltr"] .sr-a4-qr-text-meta {
+    text-align: left;
+}
+
+.sr-a4-qr-label {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.2px;
+}
+
+.sr-a4-qr-sub {
+    font-size: 0.62rem;
+    color: #64748b;
+}
+
+/* Option 2 & 3: Toolbar and Action Buttons */
+.sr-a4-btn-json {
+    background: rgba(30, 41, 59, 0.95);
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.sr-a4-btn-json:hover {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+    transform: translateY(-1px);
+}
+
+.sr-a4-btn-dispatch {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.4));
+    color: #34d399 !important;
+    border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.sr-a4-btn-dispatch:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(5, 150, 105, 0.55));
+    border-color: #10b981;
+    transform: translateY(-1px);
+}
+
+.sr-btn-spec-json {
+    background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+    color: #ffffff !important;
+}
+
+.sr-btn-spec-json:hover {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+}
+
+
 .sr-a4-seal-title {
     font-size: 0.55rem;
     font-weight: 800;
