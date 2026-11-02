@@ -237,3 +237,4 @@ def patch_agent_widget_js():
 if __name__ == '__main__':
     patch_inline_js()
     patch_agent_widget_js()
+
