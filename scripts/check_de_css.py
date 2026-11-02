@@ -6,3 +6,4 @@ matches = re.findall(r'<link[^>]+>', text)
 for m in matches:
     if 'stylesheet' in m:
         print('de/demo.html css:', m)
+
