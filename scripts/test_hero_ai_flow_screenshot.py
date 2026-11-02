@@ -18,7 +18,7 @@ async def capture():
         '--remote-debugging-port=9288',
         '--no-sandbox',
         '--disable-gpu',
-        '--window-size=1440,960',
+        '--window-size=1440,1050',
         f'--user-data-dir={PROFILE_DIR}'
     ]
     proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -63,34 +63,48 @@ async def capture():
             # Wait for AI blueprint generation and animation
             await asyncio.sleep(2.0)
 
-            # Check if modal is active, verify Raed's name, avatar and speech lead
+            # Now open the A4 Blueprint Preview Modal featuring Option 1 (Live QR), Option 2 (JSON spec button), Option 3 (Dispatch button)
+            await send_cdp('Runtime.evaluate', {
+                'expression': 'if (typeof openBlueprintPreviewModal === "function") openBlueprintPreviewModal();',
+                'returnByValue': True
+            })
+
+            await asyncio.sleep(1.5)
+
+            # Check if modal is active, verify QR code, seal and toolbar buttons
             audit_state = await send_cdp('Runtime.evaluate', {
                 'expression': '''
                 (function() {
-                    const player = document.getElementById("blueprintAudioPlayer");
-                    const img = player ? player.querySelector(".sr-blueprint-audio-img") : null;
-                    const badge = player ? player.querySelector(".sr-blueprint-audio-badge") : null;
-                    const title = player ? player.querySelector(".sr-blueprint-audio-title") : null;
-                    const lead = player ? decodeURIComponent(player.getAttribute("data-founder-lead") || "") : "";
-                    const founderType = player ? player.getAttribute("data-founder-type") : "";
+                    const modal = document.getElementById("srBlueprintPreviewModal");
+                    const qrImg = modal ? modal.querySelector(".sr-a4-qr-img") : null;
+                    const qrLink = modal ? modal.querySelector(".sr-a4-qr-badge-link") : null;
+                    const jsonBtn = modal ? modal.querySelector(".sr-a4-btn-json") : null;
+                    const dispatchBtn = modal ? modal.querySelector(".sr-a4-btn-dispatch") : null;
+                    const founderSign = modal ? modal.querySelector(".sr-a4-founder-sign-name") : null;
+                    const seal = modal ? modal.querySelector(".sr-a4-official-seal") : null;
+                    const docRef = modal ? modal.querySelector(".sr-a4-doc-ref") : null;
 
-                    // Scroll the modal card into center view
-                    if (player) {
-                        player.scrollIntoView({ behavior: 'instant', block: 'center' });
+                    // Scroll the endorsement and QR section into nice view inside modal wrapper
+                    const endorsement = modal ? modal.querySelector(".sr-a4-endorsement-strip") : null;
+                    if (endorsement) {
+                        endorsement.scrollIntoView({ behavior: 'instant', block: 'center' });
                     }
 
                     return {
-                        founderType: founderType,
-                        avatarSrc: img ? img.getAttribute("src") : "",
-                        badgeText: badge ? badge.innerText : "",
-                        titleText: title ? title.innerText : "",
-                        speechLead: lead
+                        modalActive: modal ? modal.classList.contains("active") : false,
+                        docRef: docRef ? docRef.innerText : "",
+                        qrSrc: qrImg ? qrImg.getAttribute("src") : "",
+                        qrHref: qrLink ? qrLink.getAttribute("href") : "",
+                        jsonBtnText: jsonBtn ? jsonBtn.innerText : "",
+                        dispatchBtnText: dispatchBtn ? dispatchBtn.innerText : "",
+                        founderSignName: founderSign ? founderSign.innerText : "",
+                        hasSeal: !!seal
                     };
                 })()
                 ''',
                 'returnByValue': True
             })
-            print("Founder Audit State in Blueprint:", json.dumps(audit_state['result']['result'].get('value', {}), ensure_ascii=False))
+            print("A4 Dossier Audit State (Option 1+2+3):", json.dumps(audit_state['result']['result'].get('value', {}), ensure_ascii=False))
 
             await asyncio.sleep(1.0)
 
