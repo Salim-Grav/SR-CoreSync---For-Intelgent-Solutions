@@ -581,34 +581,38 @@ function openBlueprintPreviewModal() {
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>${isAr ? 'المرحلة 1: التصميم والهوية' : 'Phase 1: Design & Identity'}</strong></td>
-                                <td>${isAr ? 'إعادة تصميم واجهة المستخدم بالكامل متجاوبة 100% مع الموبايل + هوية بصرية عصرية + واجهة عربية RTL وأجنبية' : 'Complete modern UI/UX redesign, 100% mobile-first responsiveness, RTL Arabic & English/Dutch duality'}</td>
+                                <td><strong>${isAr ? 'المرحلة 1: التصميم والواجهة العربية' : 'Phase 1: Design & Arabic Portal'}</strong></td>
+                                <td>${isAr ? 'إعادة تصميم واجهة المستخدم بالكامل متجاوبة 100% مع الموبايل + هوية بصرية عصرية + واجهة عربية RTL كاملة وازدواجية لغوية (عربي / هولندي / إنجليزي)' : 'Complete modern UI/UX redesign, 100% mobile-first responsiveness, full Arabic RTL & English/Dutch duality'}</td>
                                 <td>3 - 5 ${isAr ? 'أيام عمل' : 'days'}</td>
                                 <td style="text-align:left; font-weight:700;">€650.00</td>
                             </tr>
                             <tr>
-                                <td><strong>${isAr ? 'المرحلة 2: البرمجة والتحكم' : 'Phase 2: CMS & Security'}</strong></td>
-                                <td>${isAr ? 'لوحة تحكم سهلة وسريعة لإدارة المقالات والأخبار بدون مبرمج + مستودع أوراق السياسات المشفر + توافق تام مع GDPR' : 'Lightweight CMS for instant article publishing, encrypted policy paper repository, strict Dutch GDPR compliance'}</td>
-                                <td>4 - 6 ${isAr ? 'أيام عمل' : 'days'}</td>
-                                <td style="text-align:left; font-weight:700;">€550.00</td>
+                                <td><strong>${isAr ? 'المرحلة 2: الاستضافة ولوحة التحكم' : 'Phase 2: Hosting & Easy CMS'}</strong></td>
+                                <td>${isAr ? 'استضافة سحابية أوروبية فائقة السرعة والأمان + لوحة تحكم سهلة وسريعة لإدارة المقالات والأخبار بدون مبرمج + مستودع أوراق السياسات المشفر (GDPR)' : 'Fast EU Cloud hosting + lightweight CMS for non-technical article publishing + encrypted policy papers repository (GDPR Compliant)'}</td>
+                                <td>3 - 5 ${isAr ? 'أيام عمل' : 'days'}</td>
+                                <td style="text-align:left; font-weight:700;">€450.00</td>
                             </tr>
                             <tr>
-                                <td><strong>${isAr ? 'المرحلة 3: النشر والتدريب' : 'Phase 3: Deploy & Training'}</strong></td>
-                                <td>${isAr ? 'استضافة سحابية أوروبية فائقة السرعة + شهادة SSL مجانية + ربط النطاق المخصص + تدريب فريق المركز ودعم فني' : 'High-speed European cloud hosting, SSL tier-3 certificate, custom domain routing, staff onboarding & support'}</td>
+                                <td><strong>${isAr ? 'المرحلة 3: النشر الرسمي والدعم' : 'Phase 3: Deploy & Support'}</strong></td>
+                                <td>${isAr ? 'ربط النطاق المخصص للمركز + شهادة أمان SSL مشفرة + تدريب فريق المركز على إدارة المحتوى + دعم فني وصيانة لمدة شهر' : 'Custom domain routing + Tier-3 SSL security + staff training session + 30 days direct SLA engineering support'}</td>
                                 <td>2 - 3 ${isAr ? 'أيام عمل' : 'days'}</td>
-                                <td style="text-align:left; font-weight:700;">€290.00</td>
+                                <td style="text-align:left; font-weight:700;">€250.00</td>
                             </tr>
                             <tr style="background:#f8fafc; font-weight:700;">
-                                <td colspan="3"><strong>${isAr ? 'المجموع الصافي (Subtotal Net):' : 'Subtotal Net:'}</strong></td>
-                                <td style="text-align:left; color:#b45309;">€1,490.00</td>
+                                <td colspan="3"><strong>${isAr ? 'المجموع الصافي الأساسي (المرحلة 1 + المرحلة 2):' : 'Core Subtotal Net (Phase 1 + 2):'}</strong></td>
+                                <td style="text-align:left; color:#b45309; font-size:0.85rem;">€1,100.00</td>
+                            </tr>
+                            <tr style="background:#f1f5f9; font-weight:800;">
+                                <td colspan="3"><strong>${isAr ? 'المجموع الكلي لكامل المنظومة (المراحل 1 + 2 + 3):' : 'Full Project Total (Phases 1 + 2 + 3):'}</strong></td>
+                                <td style="text-align:left; color:#047857; font-size:0.9rem;">€1,350.00</td>
                             </tr>
                             <tr style="font-size:0.7rem; color:#64748b;">
                                 <td colspan="3">${isAr ? 'ضريبة القيمة المضافة الهولندية (BTW 21%): (ملاحظة: يُعفى منها بنظام B2B Reverse Charge للجهات المؤهلة)' : 'Dutch BTW (21%): (Reverse charge applicable for eligible B2B entities)'}</td>
-                                <td style="text-align:left;">€312.90</td>
+                                <td style="text-align:left;">€231.00 <span style="font-size:0.65rem;">(${isAr ? 'على الأساسية' : 'on Core'})</span></td>
                             </tr>
                             <tr style="background:#0f172a; color:#ffffff; font-weight:800; font-size:0.8rem;">
-                                <td colspan="3"><strong>${isAr ? 'الإجمالي النهائي الشامل للضريبة (Total Incl. BTW):' : 'Total Incl. BTW:'}</strong></td>
-                                <td style="text-align:left; color:#10b981;">€1,802.90</td>
+                                <td colspan="3"><strong>${isAr ? 'الإجمالي النهائي الشامل للضريبة (الحزمة الأساسية):' : 'Total Incl. BTW (Core Package):'}</strong></td>
+                                <td style="text-align:left; color:#10b981;">€1,331.00</td>
                             </tr>
                         </tbody>
                     </table>
