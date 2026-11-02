@@ -85,27 +85,29 @@ server.listen(PORT, async () => {
             }
             await sleep(1500);
 
-            // Measure title and emblem geometry to verify zero collision
+            // Measure title lines and emblem geometry
             const geoRes = await send('Runtime.evaluate', {
                 expression: `
                 (function() {
-                    const title = document.querySelector('.hero-reference__title');
                     const emblem = document.querySelector('.hero-emblem-card-3d');
-                    const titleRect = title.getBoundingClientRect();
                     const emblemRect = emblem.getBoundingClientRect();
+                    const lines = Array.from(document.querySelectorAll('.hero-reference__title .hero-title-line__text')).map(el => {
+                        const r = el.getBoundingClientRect();
+                        return {
+                            text: el.innerText,
+                            left: r.left,
+                            right: r.right,
+                            width: r.width,
+                            collidesWithEmblem: r.left < emblemRect.right
+                        };
+                    });
                     return {
-                        title: {
-                            text: title.innerText,
-                            left: titleRect.left,
-                            right: titleRect.right,
-                            width: titleRect.width
-                        },
                         emblem: {
                             left: emblemRect.left,
                             right: emblemRect.right,
                             width: emblemRect.width
                         },
-                        collision: titleRect.left < emblemRect.right && titleRect.right > emblemRect.left
+                        lines: lines
                     };
                 })()
                 `,
