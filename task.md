@@ -495,3 +495,13 @@
     2. توجيه المستخدم لخطوات تفعيل التعرف الصوتي في ويندوز (Windows Settings > Privacy > Speech > Online Speech Recognition) لتشغيل Win + H فورياً باللغة العربية.
     3. تقديم مسار تثبيت إضافة VS Code Speech من متجر الإضافات Ctrl + Shift + X لإعادة زر المايك 🎙️ الفعلي داخل الشريط.
     4. تحديث لقطة الشاشة الحية المباشرة live_terminal_snapshot.jpg.
+
+
+<!-- id: 98 -->
+- [x] **المرحلة 98: تثبيت إضافة VS Code Speech وضبط إعدادات الصوت العربية في Antigravity IDE**
+  - **الهدف**: تنفيذ الخيار الثاني بتثبيت إضافة الصوت الرسمية ms-vscode.vscode-speech وضبط دعم اللغة العربية لإظهار أيقونة الميكروفون الدائمة داخل شريط المحادثة.
+  - **الإنجازات**:
+    1. تشغيل أمر التثبيت الرسمي لحزمة ms-vscode.vscode-speech v0.16.0 واكتمال التثبيت بنجاح تام.
+    2. حقن وضبط إعدادات التعرف الصوتي باللغة العربية (accessibility.voice.speechLanguage: ar) في ملفات إعدادات المستخدم لكل من Antigravity IDE و VS Code.
+    3. تزويد المستخدم بخطوة إعادة التحميل اللحظية السلسة (Ctrl + Shift + P ثم كتابة Developer: Reload Window).
+    4. تحديث لقطة الشاشة الحية المباشرة live_terminal_snapshot.jpg.
