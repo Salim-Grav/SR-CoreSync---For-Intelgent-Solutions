@@ -12,3 +12,4 @@ for p in sorted(glob.glob('*/index.html')):
     demo_txt = m_demo.group(1).strip() if m_demo else 'N/A'
     vip_txt = m_vip.group(1).strip() if m_vip else 'N/A'
     print(f'{lang:5}: DEMO="{demo_txt}" | VIP="{vip_txt}"')
+

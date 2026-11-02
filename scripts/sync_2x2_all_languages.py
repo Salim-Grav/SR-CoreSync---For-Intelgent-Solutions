@@ -268,3 +268,4 @@ for d in dirs:
     print(f"Updated {d}/index.html successfully.")
 
 print(f"\nTotal languages updated: {updated_count}/{len(dirs)}")
+

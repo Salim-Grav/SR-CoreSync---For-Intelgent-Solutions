@@ -12,3 +12,4 @@ for d in ['en', 'fr', 'de']:
     idx_end = content.find('</div>', content.find('</div>', idx) + 1)
     print(f"=== {d} ===")
     print(content[idx:idx_end+6])
+
