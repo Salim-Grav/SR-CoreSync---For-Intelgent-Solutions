@@ -47,3 +47,4 @@ with open('clgid-prototype.html', 'w', encoding='utf-8') as f:
     f.write(cnt)
 
 print("SUCCESS: Updated clgid-prototype.html pricing table!")
+

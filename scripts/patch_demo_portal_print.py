@@ -21,3 +21,4 @@ with open('css/demo-portal.css', 'w', encoding='utf-8') as f:
     f.write(cnt)
 
 print("SUCCESS: Updated css/demo-portal.css print whitelist!")
+

@@ -17,3 +17,4 @@ if 'srBlueprintPreviewModal' in html:
     print('FOUND IN index.html!')
 else:
     print('NOT in index.html (created dynamically)')
+

@@ -78,3 +78,4 @@ if old_tbody in cnt:
     print("SUCCESS: Updated clgid-prototype.html pricing table!")
 else:
     print("WARNING: old_tbody not matched")
+

@@ -62,3 +62,4 @@ if start_idx != -1:
     print("SUCCESS: Replaced quotation table with updated €650 + €450 + €250 pricing!")
 else:
     print("ERROR: start_marker not found!")
+
