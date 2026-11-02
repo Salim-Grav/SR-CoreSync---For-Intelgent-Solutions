@@ -74,3 +74,4 @@ with open(p, 'w', encoding='utf-8', newline='\r\n') as f:
     f.write(norm_text)
 
 print("Patch complete!")
+

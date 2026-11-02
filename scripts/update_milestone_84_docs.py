@@ -63,3 +63,4 @@ if "المرحلة 84" not in walkthrough_content:
     print("Updated walkthrough.md successfully.")
 else:
     print("Milestone 84 already in walkthrough.md")
+
