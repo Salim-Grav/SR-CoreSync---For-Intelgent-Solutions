@@ -25,3 +25,4 @@ if os.path.exists(pdf_path):
     print("SUCCESS: PDF created! Size:", os.path.getsize(pdf_path), "bytes")
 else:
     print("FAILED: PDF not found")
+
