@@ -23,3 +23,4 @@ for css_file in ['enterprise-suite.css', 'enterprise-suite.min.css']:
         print(f"Copied {css_file} to _site/css/")
 
 print(f"Synced {count} language index.html files to _site successfully.")
+

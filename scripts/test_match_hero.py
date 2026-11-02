@@ -21,3 +21,4 @@ for d in dirs:
         has_demo = 'demo' in inner
         has_vip = 'vip' in inner or 'openExecutiveBookingModal' in inner
         print(f"{d}: OK (demo={has_demo}, vip={has_vip})")
+
