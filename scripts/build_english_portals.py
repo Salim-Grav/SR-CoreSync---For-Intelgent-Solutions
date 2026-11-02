@@ -81,3 +81,4 @@ en_idx = en_idx.replace('href="../partner-portal.html"', 'href="./partner-portal
 with open('en/index.html', 'w', encoding='utf-8') as f:
     f.write(en_idx)
 print('✅ Updated en/index.html internal portal links to ./developer-portal.html and ./partner-portal.html')
+

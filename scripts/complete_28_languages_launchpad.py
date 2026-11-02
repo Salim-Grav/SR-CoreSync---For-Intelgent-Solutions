@@ -326,3 +326,4 @@ for l in langs:
         updated_count += 1
 
 print(f'Successfully updated {updated_count}/28 language index.html files with all 29 sovereign languages!')
+
