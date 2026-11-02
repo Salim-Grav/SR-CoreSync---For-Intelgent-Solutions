@@ -98,30 +98,47 @@ server.listen(PORT, async () => {
             }
             await sleep(1500);
 
-            // Open Sovereign Privacy Modal
-            const testModalRes = await send("Runtime.evaluate", {
+            // Audit the 2x2 Hero Actions Grid Geometry
+            const heroAuditRes = await send("Runtime.evaluate", {
                 expression: `
                 (function() {
-                    if (typeof window.openSrPrivacyModal === 'function') {
-                        window.openSrPrivacyModal();
-                        const modal = document.getElementById('srPrivacyModalOverlay');
-                        if (!modal) return { success: false, reason: 'modal not created' };
-                        const style = window.getComputedStyle(modal);
-                        const card = modal.querySelector('.sr-privacy-modal-card');
-                        const cardRect = card ? card.getBoundingClientRect() : null;
-                        return {
-                            success: true,
-                            modalVisible: modal.classList.contains('sr-visible'),
-                            opacity: style.opacity,
-                            cardRect: cardRect
-                        };
-                    }
-                    return { success: false, reason: 'openSrPrivacyModal is not a function' };
+                    const container = document.querySelector('.hero-actions-2x2');
+                    if (!container) return { success: false, reason: 'hero-actions-2x2 not found' };
+                    const rows = container.querySelectorAll('.hero-actions-row');
+                    const buttons = container.querySelectorAll('.tf-btn.hero-reference__action');
+                    const rowInfo = [];
+                    rows.forEach((r, idx) => {
+                        const rBtns = r.querySelectorAll('.tf-btn.hero-reference__action');
+                        rowInfo.push({
+                            rowIndex: idx + 1,
+                            buttonCount: rBtns.length,
+                            buttons: Array.from(rBtns).map(b => ({
+                                text: b.textContent.trim().replace(/\\s+/g, ' '),
+                                classes: b.className,
+                                width: Math.round(b.getBoundingClientRect().width),
+                                height: Math.round(b.getBoundingClientRect().height),
+                                top: Math.round(b.getBoundingClientRect().top),
+                                left: Math.round(b.getBoundingClientRect().left)
+                            }))
+                        });
+                    });
+
+                    // Check header buttons
+                    const headerSupport = document.getElementById('headerSupportBtn');
+                    const headerPartner = document.querySelector('.header-partner-portal-btn');
+
+                    return {
+                        success: true,
+                        totalButtons: buttons.length,
+                        rows: rowInfo,
+                        headerSupportFound: !!headerSupport,
+                        headerPartnerFoundInHeader: !!headerPartner
+                    };
                 })()
                 `,
                 returnByValue: true
             });
-            console.log("SOVEREIGN PRIVACY MODAL TEST:", JSON.stringify(testModalRes.result.value, null, 2));
+            console.log("HERO 2x2 GEOMETRY AUDIT:", JSON.stringify(heroAuditRes.result.value, null, 2));
             await sleep(600);
 
             const screenshotRes = await send('Page.captureScreenshot', {
