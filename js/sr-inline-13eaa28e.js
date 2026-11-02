@@ -1005,6 +1005,8 @@ function executeClientReportDispatch(e) {
         `*(ملاحظة: تُعفى المنظمات المؤهلة من ضريبة BTW 21% بنظام Reverse Charge 0%)*\n\n` +
         `🌐 *رابط النموذج الأولي الحي للواجهة العربية:*\n` +
         `https://sr-coresync.com/clgid-prototype.html\n\n` +
+        `📜 *رابط مراجعة واعتماد مسودة العقد الرسمي B2B (التوقيع المباشر):*\n` +
+        `https://sr-coresync.com/clgid-contract.html\n\n` +
         `🔒 *بوابة التحقق السيادية الرقمية:*\n` +
         `https://sr-coresync.com/verify.html?ref=${docRef}\n\n` +
         `المسؤول الفني المشرف: *م. محمد سليم عزيزة*\n` +

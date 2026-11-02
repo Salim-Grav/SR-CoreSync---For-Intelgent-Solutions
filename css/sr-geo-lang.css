@@ -26,44 +26,69 @@
 /* ── Banner Container ── */
 .sr-geolang-banner {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    bottom: 24px;
+    right: 24px;
+    top: auto;
+    left: auto;
+    max-width: min(580px, calc(100vw - 40px));
     z-index: 100000;
-    transform: translateY(-110%);
+    transform: translateY(130%) scale(0.96);
     opacity: 0;
-    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.4s ease;
+    transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.35s ease;
     pointer-events: none;
     font-family: 'Alexandria', 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
+[dir="rtl"] .sr-geolang-banner,
+html[dir="rtl"] .sr-geolang-banner {
+    right: auto;
+    left: 24px;
+}
+
 .sr-geolang-banner.visible {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
     pointer-events: auto;
 }
 
 .sr-geolang-banner.hiding {
-    transform: translateY(-110%);
+    transform: translateY(130%) scale(0.96);
     opacity: 0;
     pointer-events: none;
 }
 
-/* ── Inner Panel ── */
+/* ── Luxury Bottom Floating Pill ── */
 .sr-geolang-inner {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 14px;
-    padding: 12px 22px;
-    background: var(--sr-geolang-bg);
-    border-bottom: 1px solid var(--sr-geolang-border);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65),
-                0 0 20px rgba(197, 168, 128, 0.08);
-    flex-wrap: wrap;
+    padding: 10px 18px;
+    background: rgba(7, 16, 12, 0.94);
+    border: 1px solid rgba(197, 168, 128, 0.45);
+    border-radius: 999px;
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    backdrop-filter: blur(28px) saturate(190%);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75),
+                0 0 25px rgba(197, 168, 128, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 640px) {
+    .sr-geolang-banner {
+        bottom: 84px;
+        left: 12px !important;
+        right: 12px !important;
+        max-width: calc(100vw - 24px);
+    }
+    .sr-geolang-inner {
+        border-radius: 16px;
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 /* ── Flag Icon ── */
