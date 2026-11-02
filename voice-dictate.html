@@ -358,6 +358,17 @@
             transcriptBox.innerHTML = '<div id="placeholderText" class="transcript-placeholder">سيظهر كلامك المنطوق هنا مباشرة أثناء التحدث...</div>';
             statusTag.innerHTML = 'تم مسح النص. اضغط على زر الميكروفون لبدء تسجيل جديد.';
         });
+
+        const popoutBtn = document.getElementById('popoutBtn');
+        if (popoutBtn) {
+            popoutBtn.addEventListener('click', function() {
+                const width = 420;
+                const height = 580;
+                const left = screen.width - width - 20;
+                const top = 60;
+                window.open(window.location.href, 'SR_Voice_Dictate_Window', `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`);
+            });
+        }
     </script>
 </body>
 </html>
