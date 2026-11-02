@@ -107,7 +107,17 @@ server.listen(PORT, async () => {
                             right: emblemRect.right,
                             width: emblemRect.width
                         },
-                        lines: lines
+                        lines: lines,
+                        supportBtn: (function() {
+                            const btn = document.getElementById('esFloatingMinBtn');
+                            const suite = document.getElementById('esFloatingSuite');
+                            return {
+                                btnExists: !!btn,
+                                suiteExists: !!suite,
+                                btnDisplay: btn ? window.getComputedStyle(btn).display : 'none',
+                                suiteDisplay: suite ? window.getComputedStyle(suite).display : 'none'
+                            };
+                        })()
                     };
                 })()
                 `,
