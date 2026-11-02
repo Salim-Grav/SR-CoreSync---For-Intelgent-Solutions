@@ -25,13 +25,17 @@
             acceptAll: 'قبول الكل 👑',
             essentialOnly: 'الضروري فقط',
             customize: 'تخصيص الخيارات ⚙️',
-            modalTitle: 'خيارات وإعدادات الخصوصية',
-            essentialTitle: 'ملفات تعريف الارتباط الضرورية (إلزامية)',
-            essentialDesc: 'أساسية لأمان الجلسة، الحماية من الاحتيال، وعمل المنظومة السحابية وفق لوائح الاتحاد الأوروبي. لا يمكن تعطيلها.',
-            analyticsTitle: 'تحليلات الأداء وتجربة المستخدم (Google Analytics)',
-            analyticsDesc: 'تساعدنا على قياس كفاءة المنصة وفهم احتياجات المؤسسات لتحسين سرعة واستجابة الأنظمة دون جمع أي بيانات شخصية حساسة.',
-            savePreferences: 'حفظ التفضيلات وتأكيد',
-            alwaysActive: 'نشطة دائماً'
+            modalTitle: 'مركز إدارة الخصوصية وملفات الارتباط',
+            modalSubtitle: 'امتثال تام لمعايير اللائحة العامة لحماية البيانات الأوروبية (GDPR) وقانون الخصوصية الهولندي (AVG)',
+            essentialTitle: 'ملفات تعريف الارتباط التشغيلية (إلزامية)',
+            essentialDesc: 'ضرورية لأمان الجلسات المشفرة، الحماية من التهديدات، وعمل الأنظمة السحابية والربط المؤسسي. لا يمكن تعطيلها.',
+            alwaysActiveBadge: 'نشطة دائماً (إلزامية)',
+            analyticsTitle: 'تحليلات الأداء والسرعة (Google Analytics)',
+            analyticsDesc: 'تساعد كوادرنا على قياس كفاءة المنصة وسرعة استجابة السحابة بصورة مجهولة الهوية تماماً دون جمع أي بيانات شخصية.',
+            uiPrefTitle: 'تفضيلات التجربة المؤسسية والواجهة (UI State)',
+            uiPrefDesc: 'حفظ خيارات لغة العرض، نمط التباين البصري، وحالة أدوات الدعم لتوفير تجربة فورية متكاملة عند زيارتك القادمة.',
+            savePreferences: 'حفظ التفضيلات المحددة 🛡️',
+            close: 'إغلاق'
         },
         en: {
             title: 'Privacy & European Compliance',
@@ -40,13 +44,17 @@
             acceptAll: 'Accept All 👑',
             essentialOnly: 'Essential Only',
             customize: 'Customize Choices ⚙️',
-            modalTitle: 'Privacy & Cookie Preferences',
-            essentialTitle: 'Essential Cookies (Mandatory)',
-            essentialDesc: 'Crucial for session integrity, CSRF defense, and core cloud operations under EU regulations. Cannot be disabled.',
-            analyticsTitle: 'Performance & Analytics (Google Analytics)',
-            analyticsDesc: 'Enables aggregate measurement of platform throughput and responsiveness without collecting sensitive personal credentials.',
-            savePreferences: 'Save Preferences',
-            alwaysActive: 'Always Active'
+            modalTitle: 'Privacy & Cookie Consent Center',
+            modalSubtitle: 'Strict adherence to EU GDPR and Dutch Telecommunications Act (AVG) standards',
+            essentialTitle: 'Core Operational Cookies (Mandatory)',
+            essentialDesc: 'Crucial for session integrity, cryptographic defense, and foundational cloud platform operations. Cannot be disabled.',
+            alwaysActiveBadge: 'Always Active (Required)',
+            analyticsTitle: 'Performance & Latency Telemetry (Google Analytics)',
+            analyticsDesc: 'Enables aggregate measurement of platform throughput and system performance anonymously without storing identifiable data.',
+            uiPrefTitle: 'Enterprise Interface Preferences (UI State)',
+            uiPrefDesc: 'Persists language selection, high-contrast themes, and workspace presets across browser sessions.',
+            savePreferences: 'Save Preferences 🛡️',
+            close: 'Close'
         },
         nl: {
             title: 'Privacy & Europese Naleving',
@@ -55,13 +63,17 @@
             acceptAll: 'Alles Accepteren 👑',
             essentialOnly: 'Alleen Noodzakelijk',
             customize: 'Voorkeuren Aanpassen ⚙️',
-            modalTitle: 'Privacy- & Cookie-instellingen',
-            essentialTitle: 'Noodzakelijke Cookies (Verplicht)',
-            essentialDesc: 'Essentieel voor veilige sessies en de werking van het platform conform EU-richtlijnen. Kan niet worden uitgeschakeld.',
+            modalTitle: 'Privacy- & Cookiebeheer',
+            modalSubtitle: 'Volledige naleving van de Algemene Verordening Gegevensbescherming (AVG / GDPR)',
+            essentialTitle: 'Noodzakelijke Functionele Cookies (Verplicht)',
+            essentialDesc: 'Essentieel voor veilige sessies en de werking van het cloudplatform conform EU-richtlijnen. Kan niet worden uitgeschakeld.',
+            alwaysActiveBadge: 'Altijd Actief (Vereist)',
             analyticsTitle: 'Prestaties & Analytics (Google Analytics)',
-            analyticsDesc: 'Helpt ons de systeemprestaties te meten zonder identificeerbare privégegevens te verzamelen.',
-            savePreferences: 'Voorkeuren Opslaan',
-            alwaysActive: 'Altijd Actief'
+            analyticsDesc: 'Helpt ons de systeemprestaties en responstijden anoniem te meten zonder privégegevens op te slaan.',
+            uiPrefTitle: 'Gebruikersvoorkeuren (UI State)',
+            uiPrefDesc: 'Onthoudt taalvoorkeuren en interface-instellingen voor een naadloze ervaring.',
+            savePreferences: 'Voorkeuren Opslaan 🛡️',
+            close: 'Sluiten'
         },
         de: {
             title: 'Datenschutz & EU-Konformität',
@@ -70,13 +82,17 @@
             acceptAll: 'Alle Akzeptieren 👑',
             essentialOnly: 'Nur Notwendige',
             customize: 'Anpassen ⚙️',
-            modalTitle: 'Datenschutzeinstellungen',
+            modalTitle: 'Datenschutz- & Cookie-Einstellungen',
+            modalSubtitle: 'Vollständige Konformität mit DSGVO und niederländischen Datenschutzgesetzen (AVG)',
             essentialTitle: 'Essenzielle Cookies (Erforderlich)',
             essentialDesc: 'Erforderlich für die Systemsicherheit und Grundfunktionen gemäß DSGVO.',
+            alwaysActiveBadge: 'Immer Aktiv (Erforderlich)',
             analyticsTitle: 'Analyse & Leistung (Google Analytics)',
-            analyticsDesc: 'Hilft uns, die Plattformgeschwindigkeit anonymisiert zu überwachen.',
-            savePreferences: 'Einstellungen Speichern',
-            alwaysActive: 'Immer Aktiv'
+            analyticsDesc: 'Ermöglicht anonyme Messung der Plattformgeschwindigkeit ohne personenbezogene Speicherung.',
+            uiPrefTitle: 'Benutzer- und Spracheinstellungen',
+            uiPrefDesc: 'Speichert Sprache und Darstellungseinstellungen.',
+            savePreferences: 'Einstellungen Speichern 🛡️',
+            close: 'Schließen'
         },
         fr: {
             title: 'Confidentialité & Conformité Européenne',
@@ -85,13 +101,17 @@
             acceptAll: 'Tout Accepter 👑',
             essentialOnly: 'Essentiels Uniquement',
             customize: 'Personnaliser ⚙️',
-            modalTitle: 'Préférences de Confidentialité',
-            essentialTitle: 'Cookies Essentiels (Obligatoires)',
-            essentialDesc: 'Indispensables pour la sécurité des sessions et les opérations de base.',
-            analyticsTitle: 'Performance & Analyse (Google Analytics)',
-            analyticsDesc: 'Permet de mesurer l\'efficacité de la plateforme de manière anonyme.',
-            savePreferences: 'Enregistrer les Préférences',
-            alwaysActive: 'Toujours Actif'
+            modalTitle: 'Centre de Préférences de Confidentialité',
+            modalSubtitle: 'Conformité stricte avec le RGPD européen et la loi néerlandaise (AVG)',
+            essentialTitle: 'Cookies Opérationnels Essentiels (Obligatoires)',
+            essentialDesc: 'Indispensables pour la sécurité des sessions et les opérations de base de la plateforme cloud.',
+            alwaysActiveBadge: 'Toujours Actif (Requis)',
+            analyticsTitle: 'Performance & Télémétrie (Google Analytics)',
+            analyticsDesc: 'Permet de mesurer l\'efficacité de la plateforme de manière totalement anonyme.',
+            uiPrefTitle: 'Préférences d\'Interface Utilisateur',
+            uiPrefDesc: 'Mémorise la langue et les préférences d\'affichage.',
+            savePreferences: 'Enregistrer les Préférences 🛡️',
+            close: 'Fermer'
         },
         tr: {
             title: 'Gizlilik ve Avrupa Uyumluluğu',
@@ -100,13 +120,17 @@
             acceptAll: 'Tümünü Kabul Et 👑',
             essentialOnly: 'Yalnızca Gerekli',
             customize: 'Özelleştir ⚙️',
-            modalTitle: 'Gizlilik ve Çerez Tercihleri',
-            essentialTitle: 'Zorunlu Çerezler (Gerekli)',
+            modalTitle: 'Gizlilik ve Çerez Yönetim Merkezi',
+            modalSubtitle: 'Avrupa GDPR ve Hollanda AVG mevzuatına tam uyumluluk',
+            essentialTitle: 'Zorunlu İşletim Çerezleri (Gerekli)',
             essentialDesc: 'Oturum güvenliği ve temel platform işlevleri için gereklidir.',
+            alwaysActiveBadge: 'Her Zaman Aktif (Zorunlu)',
             analyticsTitle: 'Performans ve Analitik (Google Analytics)',
-            analyticsDesc: 'Kişisel veri toplamaksızın sistem verimliliğini ölçmemize yardımcı olur.',
-            savePreferences: 'Tercihleri Kaydet',
-            alwaysActive: 'Her Zaman Aktif'
+            analyticsDesc: 'Kişisel veri toplamaksızın sistem verimliliğini anonim olarak ölçmemize yardımcı olur.',
+            uiPrefTitle: 'Arayüz ve Dil Tercihleri',
+            uiPrefDesc: 'Dil ve ekran tercihlerini hatırlar.',
+            savePreferences: 'Tercihleri Kaydet 🛡️',
+            close: 'Kapat'
         }
     };
 
@@ -185,14 +209,13 @@
 
         document.body.appendChild(wrap);
 
-        // Events
         document.getElementById('srPrivacyAcceptAll').addEventListener('click', function () {
-            saveConsent({ essential: true, analytics: true, timestamp: Date.now() });
+            saveConsent({ essential: true, analytics: true, preferences: true, timestamp: Date.now() });
             hideBanner();
         });
 
         document.getElementById('srPrivacyEssentialOnly').addEventListener('click', function () {
-            saveConsent({ essential: true, analytics: false, timestamp: Date.now() });
+            saveConsent({ essential: true, analytics: false, preferences: false, timestamp: Date.now() });
             hideBanner();
         });
 
@@ -200,7 +223,6 @@
             openPreferencesModal();
         });
 
-        // Trigger smooth reveal
         requestAnimationFrame(() => {
             setTimeout(() => {
                 wrap.classList.add('sr-visible');
@@ -222,7 +244,7 @@
         let modal = document.getElementById('srPrivacyModalOverlay');
         const lang = detectLang();
         const t = I18N[lang] || I18N.ar;
-        const consent = getConsent() || { essential: true, analytics: true };
+        const consent = getConsent() || { essential: true, analytics: true, preferences: true };
 
         if (!modal) {
             modal = document.createElement('div');
@@ -231,18 +253,26 @@
             modal.innerHTML = `
                 <div class="sr-privacy-modal-card" role="dialog" aria-modal="true" aria-labelledby="srPrivacyModalTitle">
                     <div class="sr-privacy-modal-header">
-                        <h3 id="srPrivacyModalTitle">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#c5a880" stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            </svg>
-                            ${t.modalTitle}
-                        </h3>
-                        <button type="button" class="sr-privacy-modal-close" id="srPrivacyModalClose" aria-label="Close">&times;</button>
+                        <div class="sr-privacy-modal-title-wrap">
+                            <h3 id="srPrivacyModalTitle">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#c5a880" stroke-width="2.2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                </svg>
+                                <span>${t.modalTitle}</span>
+                            </h3>
+                            <span class="sr-privacy-modal-sub">${t.modalSubtitle}</span>
+                        </div>
+                        <button type="button" class="sr-privacy-modal-close" id="srPrivacyModalClose" aria-label="${t.close}">&times;</button>
                     </div>
+
                     <div class="sr-privacy-pref-group">
+                        <!-- فئة 1: الملفات التشغيلية الضرورية -->
                         <div class="sr-privacy-pref-item">
                             <div class="sr-privacy-pref-info">
-                                <h4>${t.essentialTitle}</h4>
+                                <div class="sr-privacy-pref-header-row">
+                                    <h4>${t.essentialTitle}</h4>
+                                    <span class="badge-pref-status badge-pref-status--locked">${t.alwaysActiveBadge}</span>
+                                </div>
                                 <p>${t.essentialDesc}</p>
                             </div>
                             <label class="sr-privacy-switch">
@@ -250,9 +280,13 @@
                                 <span class="sr-privacy-slider"></span>
                             </label>
                         </div>
+
+                        <!-- فئة 2: تحليلات الأداء والسرعة -->
                         <div class="sr-privacy-pref-item">
                             <div class="sr-privacy-pref-info">
-                                <h4>${t.analyticsTitle}</h4>
+                                <div class="sr-privacy-pref-header-row">
+                                    <h4>${t.analyticsTitle}</h4>
+                                </div>
                                 <p>${t.analyticsDesc}</p>
                             </div>
                             <label class="sr-privacy-switch">
@@ -260,10 +294,31 @@
                                 <span class="sr-privacy-slider"></span>
                             </label>
                         </div>
+
+                        <!-- فئة 3: تفضيلات الواجهة والمستخدم -->
+                        <div class="sr-privacy-pref-item">
+                            <div class="sr-privacy-pref-info">
+                                <div class="sr-privacy-pref-header-row">
+                                    <h4>${t.uiPrefTitle}</h4>
+                                </div>
+                                <p>${t.uiPrefDesc}</p>
+                            </div>
+                            <label class="sr-privacy-switch">
+                                <input type="checkbox" id="srPrefToggleUi" ${consent.preferences !== false ? 'checked' : ''} />
+                                <span class="sr-privacy-slider"></span>
+                            </label>
+                        </div>
                     </div>
+
                     <div class="sr-privacy-modal-actions">
-                        <button type="button" class="sr-privacy-btn sr-privacy-btn--accept" id="srPrivacySavePrefs">
+                        <button type="button" class="sr-privacy-btn sr-privacy-btn--accept" id="srPrivacyModalAcceptAll">
+                            ${t.acceptAll}
+                        </button>
+                        <button type="button" class="sr-privacy-btn sr-privacy-btn--save" id="srPrivacySavePrefs">
                             ${t.savePreferences}
+                        </button>
+                        <button type="button" class="sr-privacy-btn sr-privacy-btn--reject" id="srPrivacyModalEssentialOnly">
+                            ${t.essentialOnly}
                         </button>
                     </div>
                 </div>
@@ -275,9 +330,22 @@
                 if (e.target === modal) closePreferencesModal();
             });
 
+            document.getElementById('srPrivacyModalAcceptAll').addEventListener('click', function () {
+                saveConsent({ essential: true, analytics: true, preferences: true, timestamp: Date.now() });
+                closePreferencesModal();
+                hideBanner();
+            });
+
+            document.getElementById('srPrivacyModalEssentialOnly').addEventListener('click', function () {
+                saveConsent({ essential: true, analytics: false, preferences: false, timestamp: Date.now() });
+                closePreferencesModal();
+                hideBanner();
+            });
+
             document.getElementById('srPrivacySavePrefs').addEventListener('click', function () {
                 const isAnalyticsChecked = document.getElementById('srPrefToggleAnalytics').checked;
-                saveConsent({ essential: true, analytics: isAnalyticsChecked, timestamp: Date.now() });
+                const isUiChecked = document.getElementById('srPrefToggleUi').checked;
+                saveConsent({ essential: true, analytics: isAnalyticsChecked, preferences: isUiChecked, timestamp: Date.now() });
                 closePreferencesModal();
                 hideBanner();
             });
@@ -324,4 +392,3 @@
         init();
     }
 })();
-
