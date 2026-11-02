@@ -2419,3 +2419,32 @@
      - توليد حزمة `_site/` بنجاح (968 ملفاً).
      - فحص `python scripts/build_csp.py --check` بنجاح (147 بصمة أمنية موثقة).
      - فحص `python scripts/validate_publish_set.py` بنجاح (0 أسرار، 9,410 مرجع محلي سليم، 54/54 عزلة لغوية).
+
+---
+
+### ⚡ مرحلة 21 — الاستئصال الجذري لزر [أدوات الدعم ⚡] وتحقيق نقاء الواجهة بنسبة 100% (الإثنين 02/11/2026)
+
+- **طلب وتوجيهات المستخدم الصريحة:**
+  - إرفاق صورة مقربة لزر [ 🟢 ⚡ أدوات الدعم ] والمطالبة بعدم ظهوره مع حصر كافة التفاعلات الذكية حصرياً في وكيل شريط السوشيال ميديا فقط.
+- **التشخيص والتحليل البرمجي:**
+  - تبين أن دالة injectFloatingHub() في سكربت nterprise-suite.min.js (الموروثة من حزمة الدعم القديمة) كانت تقوم بحقن عنصر #esFloatingSuite في أسفل الشاشة، والذي يظهر تلقائياً كزر مصغر #esFloatingMinBtn يحمل الشارة الخضراء وعنوان ⚡ أدوات الدعم.
+- **الحلول الهندسية المنفذة:**
+  1. **تعطيل الحقن البرمجي بالكامل (No-Op):**
+     - تم إيقاف استدعاء injectFloatingHub(); و injectGDPRBanner(); في دالة التهيئة initEnterpriseSuite() في كل من css/enterprise-suite.js و js/enterprise-suite.min.js.
+     - تم وضع 
+eturn; صريح ومباشر في بداية دالة injectFloatingHub() لمنع إنشاء أو إلحاق عناصر الدعم في DOM تحت أي ظرف.
+  2. **الحظر الشامل عبر الأنماط (Bulletproof CSS Suppression):**
+     - إضافة قواعد إخفاء قسرية في css/sr-agent-widget.css و css/enterprise-suite.css و css/enterprise-suite.min.css:
+       #esFloatingSuite, .es-floating-suite, #esFloatingMinBtn, .es-feedback-fab-min { display: none !important; visibility: hidden !important; pointer-events: none !important; }
+  3. **تحديث كاسر الذاكرة المؤقتة (Cache Busting):**
+     - ترقية إصدار ملف السكربت في index.html و ckb/index.html إلى ?v=20261102 لضمان تحميل النسخة المحدثة فوراً في متصفح الزائر دون الاحتفاظ بالنسخة المخزنة.
+  4. **التحقق الهندسي المباشر عبر المتصفح Headless Chrome:**
+     - كشف فحص DOM المجهري:
+       - tnExists: false (غير موجود نهائياً)
+       - suiteExists: false (غير موجود نهائياً)
+       - tnDisplay: none
+       - التقاط لقطة شاشة مرئية حية محدثة وتخزينها في live_terminal_snapshot.jpg.
+  5. **فحوصات الجودة والنشر CI/CD:**
+     - إعادة بناء _site/ (968 ملفاً).
+     - مطابقة python scripts/build_csp.py --check بـ 147 بصمة أمنية موثقة.
+     - اجتياز python scripts/validate_publish_set.py بنسبة نجاح 100% وخلو تام من الأسرار.
