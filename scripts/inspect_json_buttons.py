@@ -11,3 +11,4 @@ while idx != -1:
     print(text[max(0, idx-100):min(len(text), idx+250)])
     print('='*50)
     idx = text.find('downloadBlueprintArchitectureJson', idx+1)
+
