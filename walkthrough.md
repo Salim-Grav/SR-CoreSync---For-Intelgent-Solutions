@@ -3158,6 +3158,27 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
   - التقاط وتحديث لقطة الشاشة الحية `live_terminal_snapshot.jpg` بحجم 93 KB.
   - توثيق المرحلة رقم 100 في `task.md` وإغلاقها بنسبة 100%.
 
+---
+
+## 🏛️ الجولة 94: حل جذري وتثبيت إضافة الصوت داخل مسار Antigravity IDE الفعلي
+
+**التاريخ والوقت:** الإثنين، 02 نوفمبر 2026 — الساعة 08:51 مساءً (توقيت أمستردام)
+
+### 1. الإنجازات المحققة في هذه الجولة:
+- **كشف السبب الجذري الدقيق لعدم ظهور المايك:**
+  - اتضح أن أمر التثبيت التلقائي السابق قام بتثبيت الإضافة داخل مسار VS Code الافتراضي (`C:\Users\msali\.vscode\extensions`)، بينما البرنامج الذي يعمل حالياً هو **Antigravity IDE** الذي يقرأ إضافاته حصرياً من مسار منفصل تماماً: `C:\Users\msali\.antigravity-ide\extensions`.
+- **نقل الإضافة وتفعيلها في مسار Antigravity IDE:**
+  - تم نقل مجلد الإضافة بالكامل `ms-vscode.vscode-speech-0.16.0-win32-x64` إلى داخل `C:\Users\msali\.antigravity-ide\extensions\`.
+  - تم تسجيل الإضافة في ملف `extensions.json` التابع لـ Antigravity IDE.
+  - تم حقن إعدادات الصوت الكاملة في `settings.json` لـ Antigravity IDE:
+    - `"accessibility.voice.speechLanguage": "ar"`
+    - `"accessibility.voice.speechTimeout": 10000`
+    - `"chat.editor.speech.enabled": true`
+    - `"speech.speechLanguage": "ar"`
+- **الفحص والأمان والتوثيق واللقطة المرئية المباشرة:**
+  - التقاط وتحديث لقطة الشاشة الحية المباشرة `live_terminal_snapshot.jpg` بنجاح بحجم 364 KB.
+  - توثيق كافة المراحل وإغلاقها كمنجزة بنسبة 100%.
+
 
 ---
 
@@ -3341,3 +3362,24 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
 - **الفحص والأمان والتوثيق واللقطة المرئية المباشرة:**
   - التقاط وتحديث لقطة الشاشة الحية `live_terminal_snapshot.jpg` بحجم 93 KB.
   - توثيق المرحلة رقم 100 في `task.md` وإغلاقها بنسبة 100%.
+
+---
+
+## 🏛️ الجولة 94: حل جذري وتثبيت إضافة الصوت داخل مسار Antigravity IDE الفعلي
+
+**التاريخ والوقت:** الإثنين، 02 نوفمبر 2026 — الساعة 08:51 مساءً (توقيت أمستردام)
+
+### 1. الإنجازات المحققة في هذه الجولة:
+- **كشف السبب الجذري الدقيق لعدم ظهور المايك:**
+  - اتضح أن أمر التثبيت التلقائي السابق قام بتثبيت الإضافة داخل مسار VS Code الافتراضي (`C:\Users\msali\.vscode\extensions`)، بينما البرنامج الذي يعمل حالياً هو **Antigravity IDE** الذي يقرأ إضافاته حصرياً من مسار منفصل تماماً: `C:\Users\msali\.antigravity-ide\extensions`.
+- **نقل الإضافة وتفعيلها في مسار Antigravity IDE:**
+  - تم نقل مجلد الإضافة بالكامل `ms-vscode.vscode-speech-0.16.0-win32-x64` إلى داخل `C:\Users\msali\.antigravity-ide\extensions\`.
+  - تم تسجيل الإضافة في ملف `extensions.json` التابع لـ Antigravity IDE.
+  - تم حقن إعدادات الصوت الكاملة في `settings.json` لـ Antigravity IDE:
+    - `"accessibility.voice.speechLanguage": "ar"`
+    - `"accessibility.voice.speechTimeout": 10000`
+    - `"chat.editor.speech.enabled": true`
+    - `"speech.speechLanguage": "ar"`
+- **الفحص والأمان والتوثيق واللقطة المرئية المباشرة:**
+  - التقاط وتحديث لقطة الشاشة الحية المباشرة `live_terminal_snapshot.jpg` بنجاح بحجم 364 KB.
+  - توثيق كافة المراحل وإغلاقها كمنجزة بنسبة 100%.
