@@ -394,3 +394,65 @@
 [dir="ltr"] .hero-emblem-voice-badge:hover .emblem-voice-arrow {
     transform: translateX(3px) !important;
 }
+
+
+/* Quick Prompt Chips under Hero AI Idea Bar */
+.hero-ai-chips-wrap {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+}
+
+.hero-ai-chips-label {
+    font-size: 0.78rem !important;
+    color: #c5a880 !important;
+    font-weight: 700 !important;
+    margin-left: 4px !important;
+    margin-right: 2px !important;
+    opacity: 0.9 !important;
+}
+
+[dir="ltr"] .hero-ai-chips-label {
+    margin-left: 2px !important;
+    margin-right: 4px !important;
+}
+
+.hero-ai-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 4px 11px !important;
+    background: rgba(16, 28, 22, 0.7) !important;
+    border: 1px solid rgba(197, 168, 128, 0.3) !important;
+    border-radius: 999px !important;
+    color: #ecfdf5 !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.22s ease !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    white-space: nowrap !important;
+}
+
+.hero-ai-chip:hover {
+    background: rgba(197, 168, 128, 0.22) !important;
+    border-color: #f3dfba !important;
+    color: #ffffff !important;
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 4px 14px rgba(197, 168, 128, 0.3) !important;
+}
+
+@media (max-width: 680px) {
+    .hero-ai-chips-wrap {
+        gap: 6px !important;
+        margin-top: 8px !important;
+    }
+    .hero-ai-chip {
+        font-size: 0.72rem !important;
+        padding: 4px 9px !important;
+    }
+}
