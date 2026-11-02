@@ -3,17 +3,21 @@ import os
 import shutil
 
 SNAPSHOT_PATH = r'C:\Users\msali\.gemini\antigravity\brain\bf4ab143-8aba-421c-91f9-24d1a1f376a3\live_terminal_snapshot.jpg'
+TEMP_PROFILE = r'C:\Users\msali\.gemini\antigravity\brain\bf4ab143-8aba-421c-91f9-24d1a1f376a3\chrome_snapshot_profile'
 
 def capture(url=None):
     if not url:
-        url = 'file:///' + os.path.abspath('demo.html').replace('\\', '/')
+        url = 'file:///' + os.path.abspath('voice-dictate.html').replace('\\', '/')
     
+    os.makedirs(TEMP_PROFILE, exist_ok=True)
     temp_shot = os.path.abspath('temp_screenshot_capture.png')
     cmd = [
         r'C:\Program Files\Google\Chrome\Application\chrome.exe',
         '--headless=new',
         '--disable-gpu',
         '--no-sandbox',
+        f'--user-data-dir={TEMP_PROFILE}',
+        '--virtual-time-budget=2000',
         f'--screenshot={temp_shot}',
         '--window-size=1280,800',
         url
@@ -30,3 +34,4 @@ def capture(url=None):
 
 if __name__ == '__main__':
     capture()
+
