@@ -20,7 +20,8 @@ services:
       - PLATFORM_NAME=SR-CoreSync-For-Intelligent-Solutions
       - DOMAIN=sr-coresync.com
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      # [P5] المسار /health لا وجود له في خادم nginx الثابت؛ الفحص الصحيح على /robots.txt
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/robots.txt"]
       interval: 30s
       timeout: 5s
       retries: 3

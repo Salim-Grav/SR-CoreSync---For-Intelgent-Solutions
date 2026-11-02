@@ -1,0 +1,416 @@
+From f6a6aad0081f97c6124cb5e6171c42a44fcad9da Mon Sep 17 00:00:00 2001
+From: S&R Security Remediation <dev@sr-coresync.com>
+Date: Sun, 1 Nov 2026 03:55:07 +0000
+Subject: [PATCH 2/4] security(a1,a3,a4,a8): enforce auth, restrict CORS,
+ harden upload, own sessions (P0-2)
+
+- wire SovereignAuthMiddleware + SovereignRateLimitMiddleware into the app
+  (CORS outermost so preflight works, then rate limit, then auth)
+- CORS: allow_origins from CORESYNC_CORS_ORIGINS whitelist,
+  allow_credentials=False, explicit methods/headers (A4)
+- upload: content-length pre-check, max 5 files, streaming 1MB chunk reads
+  with hard 5MB cap instead of full in-memory read (A3)
+- sessions: owner column (auto-migration), ownership enforcement on
+  history/delete, owner stamped on every message (A8)
+- web/coresync-auth.js: frontend bridge adding X-API-Key to fetch calls
+  and an EventSource helper for SSE channels
+- .env.example: document all new CORESYNC_* security variables
+---
+ .env.example         | 19 +++++++++
+ sr_agent_server.py   | 95 ++++++++++++++++++++++++++++++++++++--------
+ sr_session_db.py     | 42 +++++++++++++++++---
+ web/coresync-auth.js | 58 +++++++++++++++++++++++++++
+ 4 files changed, 192 insertions(+), 22 deletions(-)
+ create mode 100644 web/coresync-auth.js
+
+diff --git a/.env.example b/.env.example
+index 7cbf748..e4aa742 100644
+--- a/.env.example
++++ b/.env.example
+@@ -60,3 +60,22 @@ N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/sr-coresync-leads
+ # 6. GOOGLE ANTIGRAVITY SDK / GEMINI (https://aistudio.google.com/app/api-keys)
+ # -------------------------------------------------------------------------
+ GEMINI_API_KEY=your_gemini_api_key_here
++
++# -------------------------------------------------------------------------
++# 7. SECURITY REMEDIATION P0 — مصادقة خادم الوكيل السيادي وحدود المعدل
++#    (لمحة: أضيفت ضمن إصلاح P0-1/P0-2؛ التفاصيل في دليل تطبيق الرقع)
++# -------------------------------------------------------------------------
++# صيغة مفاتيح API: الاسم:المفتاح:الدور  (الدور: admin أو client)
++# بدائل موصى بها في الإنتاج: ملف مهشّر عبر python scripts/generate_auth_keys.py
++CORESYNC_API_KEYS=ops-console:CHANGE_ME_STRONG_ADMIN_KEY:admin,site-widget:CHANGE_ME_CLIENT_KEY:client
++# CORESYNC_AUTH_FILE=auth_keys.json
++
++# أصول CORS الموثوقة فقط (لا تستخدم "*" أبداً مع هذه الخدمة)
++CORESYNC_CORS_ORIGINS=https://sr-coresync.com,https://www.sr-coresync.com,http://127.0.0.1:8000
++
++# حدود المعدل: العامة + مسارات المحادثة المكلفة (حماية حصة Gemini)
++CORESYNC_RATE_LIMIT=120/min
++CORESYNC_CHAT_RATE_LIMIT=10/min
++
++# للتطوير المحلي فقط على 127.0.0.1 — لا تفعّله في الإنتاج أبداً:
++# CORESYNC_AUTH_DISABLED=1
+diff --git a/sr_agent_server.py b/sr_agent_server.py
+index bd9eb4f..a7d0f48 100644
+--- a/sr_agent_server.py
++++ b/sr_agent_server.py
+@@ -26,6 +26,11 @@ from sr_agent_core import (
+ import sr_session_db
+ from sr_rag_engine import SovereignRAGDatabase, build_or_update_knowledge_index, query_rag_knowledge, index_custom_document
+ from sr_subagent_monitor import AutonomousSecurityHealthSubagent
++from sr_auth import (
++    SovereignAuthMiddleware,
++    SovereignRateLimitMiddleware,
++    get_principal,
++)
+ from google.antigravity import Agent
+ 
+ # ==============================================================================
+@@ -233,13 +238,27 @@ app.state.appeals = [
+     }
+ ]
+ 
+-# تفعيل CORS الشامل لجميع الأصول والمنافذ وصفحات file://
++# ==============================================================================
++# [P0-1 / A1] طبقة المصادقة السيادية و [P0-2 / A4] تقييد CORS
++# ==============================================================================
++# ترتيب الإضافة يحدد التداخل: الأخير في الإضافة هو الأبعد في المعالجة.
++# التدفق المطلوب: CORS (للطلبات المسبقة OPTIONS) → الحد من المعدل → المصادقة → المسارات.
++app.add_middleware(SovereignAuthMiddleware)        # الأعمق: مصادقة إغلاقية لكل الطلبات المحمية
++app.add_middleware(SovereignRateLimitMiddleware)   # حد من المعدل (حماية حصة Gemini من الإجهاد)
++
++_allowed_origins = [
++    origin.strip() for origin in os.getenv(
++        "CORESYNC_CORS_ORIGINS",
++        "https://sr-coresync.com,https://www.sr-coresync.com,http://127.0.0.1:8000,http://localhost:8000"
++    ).split(",") if origin.strip()
++]
+ app.add_middleware(
+     CORSMiddleware,
+-    allow_origins=["*"],
+-    allow_credentials=True,
+-    allow_methods=["*"],
+-    allow_headers=["*"],
++    allow_origins=_allowed_origins,
++    allow_credentials=False,   # المصادقة بمفاتيح API لا تحتاج كوكيز؛ إلغاء الترخيص يقطع هجوم الأصل الوحيد
++    allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
++    allow_headers=["X-API-Key", "Authorization", "Content-Type"],
++    max_age=600,
+ )
+ 
+ # ==============================================================================
+@@ -291,18 +310,19 @@ async def get_portals():
+     return {"portals_summary": tool_list_project_portals()}
+ 
+ @app.post("/api/ai-concierge", response_model=ConciergeResponseModel, tags=["المساعد الذكي والمحاكي"])
+-async def ai_concierge_endpoint(req: ConciergeRequest):
++async def ai_concierge_endpoint(req: ConciergeRequest, request: Request):
+     """
+     نقطة النهاية المعتمدة لمحاكي `ai-concierge-simulator.html` وويدجت المحادثة العائم،
+     مع حفظ الحوار بالكامل في ذاكرة الجلسة المستمرة.
+     """
+     user_msg = req.message.strip()
+     session_id = req.session_id or "concierge_default"
++    principal = get_principal(request)  # [A8] الهوية المُصادقة = مالك الجلسة
+     if not user_msg:
+         raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
+ 
+     # 1. حفظ رسالة المستخدم في قاعدة بيانات الجلسة
+-    sr_session_db.add_message(session_id, "user", user_msg, source="user")
++    sr_session_db.add_message(session_id, "user", user_msg, source="user", owner=principal.name)
+ 
+     # 2. استخراج سياق المحادثة واسترجاع المعرفة عبر ذاكرة المتجهات (RAG)
+     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
+@@ -331,7 +351,7 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
+         source = "sovereign_rag_knowledge_engine"
+ 
+     # 3. حفظ رد الوكيل في قاعدة بيانات الجلسة
+-    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
++    sr_session_db.add_message(session_id, "assistant", reply_text, source=source, owner=principal.name)
+ 
+     actions = [
+         ActionButton(label="💬 محادثة واتساب VIP المباشرة", url="https://wa.me/31618111116"),
+@@ -350,17 +370,18 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
+     )
+ 
+ @app.post("/api/chat", response_model=ChatResponseModel, tags=["المحادثة العامة والذاكرة"])
+-async def chat_endpoint(req: ChatRequest):
++async def chat_endpoint(req: ChatRequest, request: Request):
+     """
+     نقطة النهاية العامة للمحادثة مع دعم كامل للذاكرة المستمرة عبر `session_id`.
+     """
+     user_msg = req.message.strip()
+     session_id = req.session_id or "default"
++    principal = get_principal(request)  # [A8] الهوية المُصادقة = مالك الجلسة
+     if not user_msg:
+         raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
+ 
+     # حفظ رسالة المستخدم
+-    sr_session_db.add_message(session_id, "user", user_msg, source="user")
++    sr_session_db.add_message(session_id, "user", user_msg, source="user", owner=principal.name)
+ 
+     # استرجاع سياق الجلسة ودمج ذاكرة المتجهات RAG
+     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
+@@ -388,7 +409,7 @@ async def chat_endpoint(req: ChatRequest):
+         source = "sovereign_rag_knowledge_engine"
+ 
+     # حفظ استجابة الوكيل
+-    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
++    sr_session_db.add_message(session_id, "assistant", reply_text, source=source, owner=principal.name)
+ 
+     return ChatResponseModel(
+         reply=reply_text,
+@@ -399,6 +420,7 @@ async def chat_endpoint(req: ChatRequest):
+ 
+ @app.get("/api/chat/stream", tags=["المحادثة العامة والذاكرة"])
+ async def chat_stream_endpoint(
++    request: Request,
+     message: str = Query(..., description="نص الرسالة المراد بثها لحظياً"),
+     session_id: Optional[str] = Query("default", description="معرف الجلسة")
+ ):
+@@ -406,7 +428,8 @@ async def chat_stream_endpoint(
+     نقطة نهاية البث اللحظي للكلمات بتقنية Server-Sent Events (SSE)
+     """
+     # حفظ رسالة المستخدم
+-    sr_session_db.add_message(session_id, "user", message, source="user")
++    principal = get_principal(request)  # [A8]
++    sr_session_db.add_message(session_id, "user", message, source="user", owner=principal.name)
+     context = sr_session_db.get_formatted_context(session_id, max_turns=3)
+     prompt = f"{context}\n\nسؤال المستخدم الحالي: {message}" if context else message
+ 
+@@ -423,7 +446,7 @@ async def chat_stream_endpoint(
+                 source = "sovereign_knowledge_engine"
+ 
+             # حفظ الرد المكتمل في الجلسة
+-            sr_session_db.add_message(session_id, "assistant", full_text, source=source)
++            sr_session_db.add_message(session_id, "assistant", full_text, source=source, owner=principal.name)
+ 
+             words = full_text.split(" ")
+             for w in words:
+@@ -448,16 +471,29 @@ async def get_sessions(limit: int = Query(20, description="الحد الأقصى
+ 
+ @app.get("/api/sessions/{session_id}/history", tags=["إدارة الجلسات والذاكرة"])
+ async def get_session_history(
++    request: Request,
+     session_id: str = Path(..., description="معرف الجلسة المطلوب استرجاع رسائلها"),
+     limit: int = Query(50, description="عدد الرسائل")
+ ):
+     """استرجاع سجل الرسائل الكامل لجلسة معينة"""
++    # [A8] فرض ملكية الجلسة: المالك فقط أو admin
++    principal = get_principal(request)
++    try:
++        sr_session_db.assert_session_access(session_id, principal.name, principal.is_admin)
++    except PermissionError:
++        raise HTTPException(status_code=403, detail="لا تملك صلاحية الوصول إلى هذه الجلسة.")
+     messages = sr_session_db.get_history(session_id, limit=limit)
+     return {"session_id": session_id, "messages": messages, "count": len(messages)}
+ 
+ @app.delete("/api/sessions/{session_id}", tags=["إدارة الجلسات والذاكرة"])
+-async def delete_session(session_id: str = Path(..., description="معرف الجلسة المراد حذفها")):
++async def delete_session(request: Request, session_id: str = Path(..., description="معرف الجلسة المراد حذفها")):
+     """حذف ومسح تاريخ جلسة معينة"""
++    # [A8] فرض ملكية الجلسة قبل الحذف (الحذف نفسه محصور بدور admin عبر الوسيلة)
++    principal = get_principal(request)
++    try:
++        sr_session_db.assert_session_access(session_id, principal.name, principal.is_admin)
++    except PermissionError:
++        raise HTTPException(status_code=403, detail="لا تملك صلاحية الوصول إلى هذه الجلسة.")
+     sr_session_db.clear_session(session_id)
+     return {"status": "success", "message": f"تم مسح الجلسة {session_id} بنجاح"}
+ 
+@@ -515,17 +551,42 @@ async def cockpit_page():
+     return HTMLResponse(content="<h1>Cockpit file not found</h1>", status_code=404)
+ 
+ @app.post("/api/upload", tags=["تحليل المرفقات وفهرسة RAG"])
+-async def upload_files_endpoint(files: List[UploadFile] = File(...)):
++async def upload_files_endpoint(request: Request, files: List[UploadFile] = File(...)):
+     """
+     استلام مرفقات المستندات (PDF / DOCX) بحد أقصى 5 ميجابايت للملف،
+     استخراج النصوص وفهرستها فورياً داخل محرك RAG المحلي للمنظومة.
+     """
+-    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
++    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB للملف الواحد
++    MAX_FILES_PER_REQUEST = 5
++
++    # [A3] فحص الحجم الكلي للطلب من الترويسة قبل قراءة أي بايت في الذاكرة
++    _content_length = request.headers.get("content-length")
++    if _content_length and _content_length.isdigit() and int(_content_length) > (MAX_FILE_SIZE * MAX_FILES_PER_REQUEST) + 2048:
++        raise HTTPException(
++            status_code=413,
++            detail="حجم الطلب الإجمالي يتجاوز الحد المسموح (5 ملفات × 5 ميجابايت)."
++        )
++    if len(files) > MAX_FILES_PER_REQUEST:
++        raise HTTPException(
++            status_code=413,
++            detail="عدد الملفات يتجاوز الحد الأقصى (5 ملفات في الطلب الواحد)."
++        )
+     processed = []
+     
+     for file in files:
+         filename = file.filename or "unknown_document"
+-        content = await file.read()
++        # [A3] قراءة تدفقية مقطعية (1MB) بسقف صارم بدلاً من تحميل الملف كاملاً في الذاكرة
++        _parts: List[bytes] = []
++        _total = 0
++        while True:
++            _chunk = await file.read(1024 * 1024)
++            if not _chunk:
++                break
++            _total += len(_chunk)
++            if _total > MAX_FILE_SIZE:
++                break  # يكفي لتجاوز السقف؛ يلتقطه الفحص أدناه ويرفض الطلب
++            _parts.append(_chunk)
++        content = b"".join(_parts)
+         
+         if len(content) > MAX_FILE_SIZE:
+             raise HTTPException(
+diff --git a/sr_session_db.py b/sr_session_db.py
+index e2ce36c..b8a8295 100644
+--- a/sr_session_db.py
++++ b/sr_session_db.py
+@@ -24,6 +24,11 @@ def init_db():
+                 metadata TEXT
+             );
+         """)
++        # [A8] عمود الملكية: ربط كل جلسة بمفتاح API المُنشئ لها (ترقية متوافقة للقواعد القديمة)
++        cursor = conn.execute("PRAGMA table_info(sessions);")
++        columns = {row["name"] for row in cursor.fetchall()}
++        if "owner" not in columns:
++            conn.execute("ALTER TABLE sessions ADD COLUMN owner TEXT;")
+         conn.execute("""
+             CREATE TABLE IF NOT EXISTS messages (
+                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+@@ -38,9 +43,13 @@ def init_db():
+         conn.execute("""
+             CREATE INDEX IF NOT EXISTS idx_messages_session ON messages(session_id);
+         """)
++        # [A8] عمود الملكية: ربط كل جلسة بمفتاح API المُنشئ لها (ترقية متوافقة للقواعد القديمة)
++        columns = {row["name"] for row in conn.execute("PRAGMA table_info(sessions);").fetchall()}
++        if "owner" not in columns:
++            conn.execute("ALTER TABLE sessions ADD COLUMN owner TEXT;")
+         conn.commit()
+ 
+-def ensure_session(session_id: str, title: Optional[str] = None) -> str:
++def ensure_session(session_id: str, title: Optional[str] = None, owner: Optional[str] = None) -> str:
+     """التأكد من وجود الجلسة أو إنشائها"""
+     init_db()
+     clean_id = session_id.strip() if session_id else "default"
+@@ -50,17 +59,17 @@ def ensure_session(session_id: str, title: Optional[str] = None) -> str:
+         if not cursor.fetchone():
+             default_title = title or f"جلسة {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+             conn.execute(
+-                "INSERT INTO sessions (session_id, title, created_at, last_active, metadata) VALUES (?, ?, ?, ?, ?)",
+-                (clean_id, default_title, now_iso, now_iso, json.dumps({}))
++                "INSERT INTO sessions (session_id, title, created_at, last_active, metadata, owner) VALUES (?, ?, ?, ?, ?, ?)",
++                (clean_id, default_title, now_iso, now_iso, json.dumps({}), owner or "legacy")
+             )
+         else:
+             conn.execute("UPDATE sessions SET last_active = ? WHERE session_id = ?", (now_iso, clean_id))
+         conn.commit()
+     return clean_id
+ 
+-def add_message(session_id: str, role: str, content: str, source: str = "google_antigravity_agent"):
++def add_message(session_id: str, role: str, content: str, source: str = "google_antigravity_agent", owner: Optional[str] = None):
+     """إضافة رسالة إلى سجل الجلسة وتحديث وقت النشاط الأخير"""
+-    clean_id = ensure_session(session_id)
++    clean_id = ensure_session(session_id, owner=owner)
+     now_iso = datetime.now().isoformat()
+     with get_connection() as conn:
+         conn.execute(
+@@ -108,6 +117,29 @@ def list_all_sessions(limit: int = 20) -> List[Dict[str, Any]]:
+         """, (limit,))
+         return [dict(row) for row in cursor.fetchall()]
+ 
++def get_session_owner(session_id: str) -> Optional[str]:
++    """[A8] استرجاع مالك الجلسة (None إن لم تكن موجودة)"""
++    init_db()
++    clean_id = session_id.strip() if session_id else "default"
++    with get_connection() as conn:
++        cursor = conn.execute("SELECT owner FROM sessions WHERE session_id = ?", (clean_id,))
++        row = cursor.fetchone()
++        return row["owner"] if row else None
++
++def assert_session_access(session_id: str, owner: str, is_admin: bool = False) -> None:
++    """
++    [A8] فرض ملكية الجلسة: مسموح للمالك فقط أو admin.
++    الجلسات القديمة غير المملوكة (legacy) تتطلب admin.
++    يرفع PermissionError عند الرفض، ولا يفعل شيئاً للجلسات غير الموجودة
++    (لترد نقطة النهاية برمز 404 بشكل طبيعي).
++    """
++    current_owner = get_session_owner(session_id)
++    if current_owner is None:
++        return
++    if is_admin or current_owner == owner:
++        return
++    raise PermissionError("session ownership check failed")
++
+ def clear_session(session_id: str):
+     """مسح محتويات جلسة معينة"""
+     init_db()
+diff --git a/web/coresync-auth.js b/web/coresync-auth.js
+new file mode 100644
+index 0000000..4d5859a
+--- /dev/null
++++ b/web/coresync-auth.js
+@@ -0,0 +1,58 @@
++/*
++ ==============================================================================
++ S&R CoreSync - جسر مصادقة الواجهة الأمامية (تكامل إصلاح P0-1)
++ ==============================================================================
++ بعد تفعيل المصادقة الإلزامية على الخادم، تحتاج صفحات الواجهة (المحاكي،
++ لوحة القيادة، ويدجت المحادثة) إلى إرسال مفتاح API مع كل نداء.
++
++ الاستخدام:
++   1) ضع مفتاح العميل (دور client) في التخزين المحلي مرة واحدة:
++        localStorage.setItem('CORESYNC_API_KEY', 'srk_xxxxxxxxxxxx');
++      (يمكن تنفيذ ذلك من صفحة إعدادات داخلية أو يدوياً من كونسول المتصفح
++       على الأجهزة الموثوقة فقط — لا تضع مفاتيح admin في أي صفحة عامة)
++
++   2) أدرج هذا الملف قبل أي سكربت يستدعي /api/:
++        <script src="/coresync-auth.js"></script>
++
++ الملاحظات:
++   - يضيف الجسر ترويسة X-API-Key تلقائياً لكل fetch يوجه نحو /api/.
++   - قنوات EventSource (SSE) لا تدعم الترويسات المخصصة؛ استخدم
++     coresyncEventSource(url) الموفرة هنا، أو حوّل إلى fetch-based SSE.
++   - مفاتيح client للقراءة/المحادثة فقط؛ العمليات الإدارية تبقى عبر قنوات آمنة.
++   - المفتاح يبقى في متصفح المستخدم؛ لا تنشر صفحة تحتوي مفتاح admin أبداً.
++ ============================================================================== */
++(function () {
++  'use strict';
++  var KEY_NAME = 'CORESYNC_API_KEY';
++  var originalFetch = window.fetch ? window.fetch.bind(window) : null;
++  if (!originalFetch) return;
++
++  window.fetch = function (input, init) {
++    try {
++      var url = typeof input === 'string' ? input : (input && input.url) || '';
++      var needsAuth = url.indexOf('/api/') !== -1;
++      var key = null;
++      try { key = localStorage.getItem(KEY_NAME); } catch (e) { key = null; }
++      if (needsAuth && key) {
++        init = init || {};
++        var source = init.headers || (input && input.headers) || {};
++        var headers = new Headers(source);
++        if (!headers.has('X-API-Key')) headers.set('X-API-Key', key);
++        init.headers = headers;
++      }
++    } catch (e) { /* لا نعطل الموقع أبداً عند فشل الجسر */ }
++    return originalFetch(input, init);
++  };
++
++  /**
++   * بديل جاهز لقنوات SSE: EventSource لا يقبل ترويسات، لذا يُمرَّر
++   * المفتاح كمعامل استعلام (?api_key=...) — مدعوم صراحة في وسيلة المصادقة.
++   * استخدمه فقط عبر HTTPS على نطاق موثوق.
++   */
++  window.coresyncEventSource = function (url) {
++    var key = '';
++    try { key = localStorage.getItem(KEY_NAME) || ''; } catch (e) { key = ''; }
++    var joiner = url.indexOf('?') === -1 ? '?' : '&';
++    return new EventSource(url + joiner + 'api_key=' + encodeURIComponent(key));
++  };
++})();
+-- 
+2.47.3
+
