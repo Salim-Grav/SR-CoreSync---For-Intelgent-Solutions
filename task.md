@@ -523,3 +523,13 @@
     1. تأكيد اكتمال ضبط إعدادات الصوت العربي وحزمة VS Code Speech بنجاح.
     2. التقاط وتحديث لقطة الشاشة الحية المباشرة لنموذج واجهة مركز لاهاي clgid-prototype.html.
     3. تثبيت رابط المراسلة السحابي للواتساب مع الأستاذ محمود الناصر بنقرة واحدة.
+
+
+<!-- id: 101 -->
+- [x] **المرحلة 101: نقل وتثبيت إضافة الصوت في مسار Antigravity IDE الفعلي وحل المشكلة جذرياً**
+  - **الهدف**: حل عدم ظهور زر المايك بعد التثبيت السابق عبر نقل الإضافة إلى المسار المخصص لـ Antigravity IDE.
+  - **الإنجازات**:
+    1. كشف السبب الجذري: كانت الإضافة مثبتة في .vscode/extensions بينما بيئة التطوير النشطة تقرأ من .antigravity-ide/extensions.
+    2. نسخ حزمة ms-vscode.vscode-speech-0.16.0-win32-x64 كاملة إلى .antigravity-ide/extensions وتحديث سجل extensions.json.
+    3. تفعيل كافة إعدادات الصوت (chat.editor.speech.enabled: true, speechLanguage: ar) في settings.json لـ Antigravity IDE.
+    4. تحديث لقطة الشاشة الحية المباشرة live_terminal_snapshot.jpg.
