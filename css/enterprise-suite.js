@@ -807,6 +807,7 @@
 
     // 3. Inject Floating Hub (Feedback, Quiz, Scheduler)
     function injectFloatingHub() {
+        return;
         if (document.getElementById('esFloatingSuite')) return;
 
         const lang = getPageLang();
