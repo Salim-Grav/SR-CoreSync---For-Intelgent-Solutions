@@ -11,3 +11,4 @@ with open('de/demo.html', 'r', encoding='utf-8') as f:
 
 scripts_de = re.findall(r'<script[^>]*src=["\']([^"\']+)["\']', text_de)
 print("de/demo.html scripts:", scripts_de)
+

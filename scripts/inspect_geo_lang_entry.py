@@ -6,3 +6,4 @@ print("Length of sr-geo-lang.js:", len(text))
 idx = text.find('function i()')
 if idx != -1:
     print(text[idx:idx+1500])
+
