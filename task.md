@@ -505,3 +505,12 @@
     2. حقن وضبط إعدادات التعرف الصوتي باللغة العربية (accessibility.voice.speechLanguage: ar) في ملفات إعدادات المستخدم لكل من Antigravity IDE و VS Code.
     3. تزويد المستخدم بخطوة إعادة التحميل اللحظية السلسة (Ctrl + Shift + P ثم كتابة Developer: Reload Window).
     4. تحديث لقطة الشاشة الحية المباشرة live_terminal_snapshot.jpg.
+
+
+<!-- id: 99 -->
+- [x] **المرحلة 99: تثبيت ومطابقة إعدادات الصوت العربية في مساحة عمل المشروع (.vscode/settings.json)**
+  - **الهدف**: تثبيت إعدادات التعرف الصوتي باللغة العربية داخل ملف إعدادات مساحة العمل لضمان استجابة وتفعيل المايك بدقة.
+  - **الإنجازات**:
+    1. إضافة إعدادات الصوت الرسمية (accessibility.voice.speechLanguage: ar و chat.editor.speech.enabled: true) داخل .vscode/settings.json.
+    2. التأكد من تطابق الإعداد في ملف إعدادات المستخدم الرئيسي لبرنامج Antigravity IDE.
+    3. تحديث لقطة الشاشة الحية المباشرة live_terminal_snapshot.jpg.
