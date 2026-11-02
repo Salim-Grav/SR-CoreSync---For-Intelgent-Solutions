@@ -70,6 +70,12 @@ server.listen(PORT, async () => {
 
             await send('Runtime.enable');
             await send('Page.enable');
+            await send('Emulation.setDeviceMetricsOverride', {
+                width: 1366,
+                height: 768,
+                deviceScaleFactor: 1,
+                mobile: false
+            });
             await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html` });
 
             for (let i = 0; i < 20; i++) {
@@ -79,40 +85,34 @@ server.listen(PORT, async () => {
             }
             await sleep(1500);
 
-            // Click button
-            const clickRes = await send('Runtime.evaluate', {
+            // Measure title and emblem geometry to verify zero collision
+            const geoRes = await send('Runtime.evaluate', {
                 expression: `
-                (async function() {
-                    const btn = document.getElementById('floatingFollowChatBtn');
-                    btn.click();
-                    const win = document.getElementById('sr-agent-window');
-                    
-                    // Wait for transition to complete
-                    await new Promise(r => setTimeout(r, 400));
-
-                    const rect = win.getBoundingClientRect();
+                (function() {
+                    const title = document.querySelector('.hero-reference__title');
+                    const emblem = document.querySelector('.hero-emblem-card-3d');
+                    const titleRect = title.getBoundingClientRect();
+                    const emblemRect = emblem.getBoundingClientRect();
                     return {
-                        classList: win.className,
-                        inlineStyle: win.getAttribute('style'),
-                        computedOpacity: window.getComputedStyle(win).opacity,
-                        computedVisibility: window.getComputedStyle(win).visibility,
-                        computedDisplay: window.getComputedStyle(win).display,
-                        rect: {
-                            top: rect.top,
-                            bottom: rect.bottom,
-                            left: rect.left,
-                            right: rect.right,
-                            width: rect.width,
-                            height: rect.height
-                        }
+                        title: {
+                            text: title.innerText,
+                            left: titleRect.left,
+                            right: titleRect.right,
+                            width: titleRect.width
+                        },
+                        emblem: {
+                            left: emblemRect.left,
+                            right: emblemRect.right,
+                            width: emblemRect.width
+                        },
+                        collision: titleRect.left < emblemRect.right && titleRect.right > emblemRect.left
                     };
                 })()
                 `,
-                awaitPromise: true,
                 returnByValue: true
             });
 
-            console.log('CLICK RESULT INSPECTION:', JSON.stringify(clickRes.result.value, null, 2));
+            console.log('GEOMETRY INSPECTION:', JSON.stringify(geoRes.result.value, null, 2));
 
             // Capture live screenshot of the browser
             const screenshotRes = await send('Page.captureScreenshot', {
