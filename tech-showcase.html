@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,13 +20,7 @@
             --cyan: #38bdf8;
             --card-radius: 20px;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: radial-gradient(circle at 50% 10%, #082117 0%, #010907 80%);
             color: var(--text-main);
@@ -35,17 +28,14 @@
             min-height: 100vh;
             padding: 30px 20px 80px;
         }
-
         .container {
             max-width: 1360px;
             margin: 0 auto;
         }
-
         .studio-header {
             text-align: center;
             margin-bottom: 35px;
         }
-
         .studio-badge {
             display: inline-flex;
             align-items: center;
@@ -59,7 +49,6 @@
             font-weight: 700;
             margin-bottom: 14px;
         }
-
         h1.studio-title {
             font-size: 2.1rem;
             font-weight: 900;
@@ -68,7 +57,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         p.studio-sub {
             font-size: 0.96rem;
             color: var(--text-muted);
@@ -76,7 +64,6 @@
             margin: 0 auto 24px;
             line-height: 1.6;
         }
-
         .mode-switcher-bar {
             display: inline-flex;
             align-items: center;
@@ -86,9 +73,8 @@
             padding: 5px;
             gap: 6px;
             margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
         .mode-btn {
             background: transparent;
             border: none;
@@ -104,12 +90,10 @@
             align-items: center;
             gap: 8px;
         }
-
         .mode-btn:hover {
             color: #ffffff;
             background: rgba(255, 255, 255, 0.08);
         }
-
         .mode-btn.active {
             background: linear-gradient(135deg, var(--gold), #98784d);
             color: #010907;
@@ -121,21 +105,12 @@
             display: none;
             animation: fadeIn 0.35s ease;
         }
-
         .view-section.active {
             display: block;
         }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* MODEL 1: THE 6 PILLARS GRID */
@@ -151,18 +126,15 @@
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .model-banner-info h2 {
             font-size: 1.25rem;
             color: var(--gold-light);
             margin-bottom: 4px;
         }
-
         .model-banner-info p {
             font-size: 0.84rem;
             color: var(--text-muted);
         }
-
         .model-pill-tag {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.4);
@@ -179,17 +151,11 @@
             gap: 22px;
             margin-bottom: 40px;
         }
-
         @media (max-width: 1024px) {
-            .pillars-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .pillars-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 640px) {
-            .pillars-grid {
-                grid-template-columns: 1fr;
-            }
+            .pillars-grid { grid-template-columns: 1fr; }
         }
 
         .pillar-card {
@@ -205,22 +171,19 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
         }
-
         .pillar-card:hover {
             transform: translateY(-6px);
             border-color: var(--gold);
-            box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(197, 168, 128, 0.25);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.7), 0 0 30px rgba(197, 168, 128, 0.25);
         }
-
         .pillar-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 18px;
         }
-
         .pillar-icon-wrap {
             width: 52px;
             height: 52px;
@@ -232,7 +195,6 @@
             justify-content: center;
             font-size: 1.6rem;
         }
-
         .pillar-status {
             display: inline-flex;
             align-items: center;
@@ -244,7 +206,6 @@
             border-radius: 999px;
             font-weight: 700;
         }
-
         .status-dot {
             width: 7px;
             height: 7px;
@@ -253,49 +214,34 @@
             box-shadow: 0 0 8px #10b981;
             animation: pulseDot 1.8s infinite;
         }
-
         @keyframes pulseDot {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.3);
-                opacity: 0.5;
-            }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.5; }
         }
-
         .pillar-title {
             font-size: 1.15rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 6px;
         }
-
         .pillar-subtitle {
             font-size: 0.78rem;
             color: var(--gold-light);
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .pillar-desc {
             font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 18px;
         }
-
         .pillar-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
             margin-bottom: 20px;
         }
-
         .pillar-tag {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -305,31 +251,27 @@
             border-radius: 6px;
             font-weight: 600;
         }
-
         .pillar-metrics-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 12px;
             padding: 10px;
             margin-bottom: 16px;
             text-align: center;
         }
-
         .metric-val {
             font-size: 1.1rem;
             font-weight: 900;
             color: var(--gold);
         }
-
         .metric-lbl {
             font-size: 0.68rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
-
         .pillar-btn {
             width: 100%;
             background: rgba(197, 168, 128, 0.12);
@@ -344,7 +286,6 @@
             transition: all 0.2s ease;
             text-align: center;
         }
-
         .pillar-btn:hover {
             background: var(--gold);
             color: #010907;
@@ -358,13 +299,9 @@
             gap: 24px;
             align-items: start;
         }
-
         @media (max-width: 960px) {
-            .radar-stage-grid {
-                grid-template-columns: 1fr;
-            }
+            .radar-stage-grid { grid-template-columns: 1fr; }
         }
-
         .radar-canvas-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -372,9 +309,8 @@
             padding: 24px;
             position: relative;
             backdrop-filter: blur(16px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
-
         .topology-layers-nav {
             display: flex;
             gap: 8px;
@@ -382,9 +318,8 @@
             overflow-x: auto;
             padding-bottom: 6px;
         }
-
         .topo-tab {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0,0,0,0.45);
             border: 1px solid var(--border-glass);
             color: var(--text-muted);
             font-family: inherit;
@@ -396,15 +331,13 @@
             white-space: nowrap;
             transition: all 0.2s ease;
         }
-
         .topo-tab.active {
             background: var(--gold);
             color: #010907;
             border-color: var(--gold);
         }
-
         .radar-display-area {
-            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(0, 0, 0, 0.6) 70%);
+            background: radial-gradient(circle at center, rgba(16, 185, 129, 0.08) 0%, rgba(0,0,0,0.6) 70%);
             border: 1px solid rgba(197, 168, 128, 0.15);
             border-radius: 18px;
             height: 380px;
@@ -414,29 +347,15 @@
             align-items: center;
             justify-content: center;
         }
-
         .radar-circle {
             position: absolute;
             border: 1px dashed rgba(197, 168, 128, 0.25);
             border-radius: 50%;
             pointer-events: none;
         }
-
-        .radar-circle.c1 {
-            width: 100px;
-            height: 100px;
-        }
-
-        .radar-circle.c2 {
-            width: 200px;
-            height: 200px;
-        }
-
-        .radar-circle.c3 {
-            width: 310px;
-            height: 310px;
-        }
-
+        .radar-circle.c1 { width: 100px; height: 100px; }
+        .radar-circle.c2 { width: 200px; height: 200px; }
+        .radar-circle.c3 { width: 310px; height: 310px; }
         .radar-sweep {
             position: absolute;
             width: 320px;
@@ -446,17 +365,10 @@
             animation: sweep 5s linear infinite;
             pointer-events: none;
         }
-
         @keyframes sweep {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-
         .radar-node {
             position: absolute;
             background: rgba(14, 28, 22, 0.95);
@@ -470,13 +382,11 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             z-index: 5;
         }
-
-        .radar-node:hover,
-        .radar-node.active {
+        .radar-node:hover, .radar-node.active {
             transform: scale(1.12);
             border-color: var(--gold);
             background: var(--gold);
@@ -490,9 +400,8 @@
             border-radius: var(--card-radius);
             padding: 26px;
             backdrop-filter: blur(16px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
-
         .spec-badge {
             display: inline-block;
             background: rgba(56, 189, 248, 0.15);
@@ -504,47 +413,36 @@
             font-weight: 800;
             margin-bottom: 12px;
         }
-
         .spec-title {
             font-size: 1.35rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 8px;
         }
-
         .spec-desc {
             font-size: 0.88rem;
             color: var(--text-muted);
             line-height: 1.7;
             margin-bottom: 20px;
         }
-
         .spec-attr-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 24px;
         }
-
         .spec-attr-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 10px;
             padding: 10px 14px;
             font-size: 0.84rem;
         }
-
-        .spec-attr-label {
-            color: var(--text-muted);
-        }
-
-        .spec-attr-val {
-            font-weight: 800;
-            color: var(--gold-light);
-        }
+        .spec-attr-label { color: var(--text-muted); }
+        .spec-attr-val { font-weight: 800; color: var(--gold-light); }
 
         /* SPLIT COMPARISON VIEW */
         .split-view-container {
@@ -552,20 +450,15 @@
             grid-template-columns: 1fr 1fr;
             gap: 24px;
         }
-
         @media (max-width: 960px) {
-            .split-view-container {
-                grid-template-columns: 1fr;
-            }
+            .split-view-container { grid-template-columns: 1fr; }
         }
-
         .split-col {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0,0,0,0.3);
             border: 1px solid var(--border-glass);
             border-radius: var(--card-radius);
             padding: 24px;
         }
-
         .split-col-header {
             border-bottom: 1px solid var(--border-glass);
             padding-bottom: 14px;
@@ -574,7 +467,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         .split-col-header h3 {
             font-size: 1.15rem;
             color: var(--gold-light);
@@ -588,7 +480,6 @@
             border-radius: 20px;
             padding: 30px 20px;
         }
-
         .btn-choose {
             background: linear-gradient(135deg, var(--gold), #98784d);
             color: #010907;
@@ -603,7 +494,6 @@
             box-shadow: 0 6px 20px rgba(197, 168, 128, 0.35);
             margin: 6px;
         }
-
         .btn-choose:hover {
             transform: translateY(-2px);
             background: var(--gold-light);
@@ -611,15 +501,13 @@
         }
     </style>
 </head>
-
 <body>
 
     <div class="container">
         <header class="studio-header">
             <div class="studio-badge">🏛️ استوديو هندسة المعمارية والتقنيات • S&R CoreSync Architecture Studio</div>
             <h1 class="studio-title">مقارنة وتصميم أقسام التكنولوجيا الحية</h1>
-            <p class="studio-sub">قمنا ببناء النموذجين الأول والثاني حياً ومباشراً أمامك لتقارن بينهما بالعين المجردة،
-                وتختار الأسلوب الأمثل لتمثيل قوة الشركة ومشاريعها العالمية.</p>
+            <p class="studio-sub">قمنا ببناء النموذجين الأول والثاني حياً ومباشراً أمامك لتقارن بينهما بالعين المجردة، وتختار الأسلوب الأمثل لتمثيل قوة الشركة ومشاريعها العالمية.</p>
 
             <div class="mode-switcher-bar">
                 <button type="button" class="mode-btn active" data-target="view-model1">
@@ -639,8 +527,7 @@
             <div class="model-banner">
                 <div class="model-banner-info">
                     <h2>النموذج الأول: شبكة الركائز التكنولوجية الست (The 6 Sovereign Pillars)</h2>
-                    <p>تصميم بطاقات زجاجية فاخرة (Glassmorphism Cards) يعكس كل قطاع تكنولوجي ببطاقة شاملة تحوي مؤشرات
-                        الأداء، حزم البرمجة، وحالة التشغيل.</p>
+                    <p>تصميم بطاقات زجاجية فاخرة (Glassmorphism Cards) يعكس كل قطاع تكنولوجي ببطاقة شاملة تحوي مؤشرات الأداء، حزم البرمجة، وحالة التشغيل.</p>
                 </div>
                 <span class="model-pill-tag">✨ مثالي للموقع الرئيسي index.html</span>
             </div>
@@ -655,8 +542,7 @@
                         </div>
                         <h3 class="pillar-title">الذكاء الاصطناعي السيادي والوكلاء</h3>
                         <div class="pillar-subtitle">Autonomous AI Agents & Enterprise LLMs</div>
-                        <p class="pillar-desc">بناء وكلاء ذكاء اصطناعي ذاتيي الحركة لأتمتة المهام المعقدة، مع نماذج
-                            لغوية مؤسسية معزولة 100% عن أي تدريب خارجي لحماية البيانات الدبلوماسية والتجارية.</p>
+                        <p class="pillar-desc">بناء وكلاء ذكاء اصطناعي ذاتيي الحركة لأتمتة المهام المعقدة، مع نماذج لغوية مؤسسية معزولة 100% عن أي تدريب خارجي لحماية البيانات الدبلوماسية والتجارية.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">Private LLMs</span>
                             <span class="pillar-tag">RAG Pipelines</span>
@@ -666,17 +552,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">&lt; 150ms</div>
-                                <div class="metric-lbl">سرعة الاستجابة</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">100%</div>
-                                <div class="metric-lbl">عزل البيانات</div>
-                            </div>
+                            <div><div class="metric-val">&lt; 150ms</div><div class="metric-lbl">سرعة الاستجابة</div></div>
+                            <div><div class="metric-val">100%</div><div class="metric-lbl">عزل البيانات</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('AI')">استعراض مواصفات المعمارية
-                            ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('AI')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
 
@@ -689,8 +568,7 @@
                         </div>
                         <h3 class="pillar-title">الحوسبة السحابية والبنية المعزولة</h3>
                         <div class="pillar-subtitle">Sovereign Zero-Trust Cloud & Microservices</div>
-                        <p class="pillar-desc">خوادم سحابية فائقة السرعة مستضافة في مراكز بيانات أمستردام المحمية، ترحيل
-                            سحابي بلا أي توقف (Zero-Downtime)، وامتثال لتوجيهات NIS2 و GDPR.</p>
+                        <p class="pillar-desc">خوادم سحابية فائقة السرعة مستضافة في مراكز بيانات أمستردام المحمية، ترحيل سحابي بلا أي توقف (Zero-Downtime)، وامتثال لتوجيهات NIS2 و GDPR.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">Amsterdam Cloud</span>
                             <span class="pillar-tag">Kubernetes</span>
@@ -700,17 +578,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">99.995%</div>
-                                <div class="metric-lbl">ضمان التوفر SLA</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">&lt; 8ms</div>
-                                <div class="metric-lbl">زمن الوصول بالاتحاد الأوروبي</div>
-                            </div>
+                            <div><div class="metric-val">99.995%</div><div class="metric-lbl">ضمان التوفر SLA</div></div>
+                            <div><div class="metric-val">&lt; 8ms</div><div class="metric-lbl">زمن الوصول بالاتحاد الأوروبي</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('Cloud')">استعراض مواصفات
-                            المعمارية ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('Cloud')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
 
@@ -723,8 +594,7 @@
                         </div>
                         <h3 class="pillar-title">النظم المؤسسية وسلاسل الإمداد</h3>
                         <div class="pillar-subtitle">Next-Gen Enterprise ERP & Real-Time Sync</div>
-                        <p class="pillar-desc">منظومة ERP قابلة للتخصيص الكامل للشركات والمؤسسات الدولية؛ إدارة
-                            المستودعات، المخزون، تتبع تدفق السلع والطلبات، ولوحات القيادة اللحظية.</p>
+                        <p class="pillar-desc">منظومة ERP قابلة للتخصيص الكامل للشركات والمؤسسات الدولية؛ إدارة المستودعات، المخزون، تتبع تدفق السلع والطلبات، ولوحات القيادة اللحظية.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">ERP Modular</span>
                             <span class="pillar-tag">Supply Chain</span>
@@ -734,17 +604,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">100K+</div>
-                                <div class="metric-lbl">معاملة بالدقيقة</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">0 Delay</div>
-                                <div class="metric-lbl">مزامنة المخازن</div>
-                            </div>
+                            <div><div class="metric-val">100K+</div><div class="metric-lbl">معاملة بالدقيقة</div></div>
+                            <div><div class="metric-val">0 Delay</div><div class="metric-lbl">مزامنة المخازن</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('ERP')">استعراض مواصفات المعمارية
-                            ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('ERP')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
 
@@ -757,8 +620,7 @@
                         </div>
                         <h3 class="pillar-title">التكنولوجيا المالية والامتثال الضريبي</h3>
                         <div class="pillar-subtitle">FinTech, PEPPOL & ViDA Compliance</div>
-                        <p class="pillar-desc">الفوترة الإلكترونية الأوروبية الإلزامية عبر شبكة PEPPOL، الربط الضريبي
-                            اللحظي مع مصلحة الضرائب الهولندية Belastingdienst، وتكامل بوابات iDEAL و SEPA.</p>
+                        <p class="pillar-desc">الفوترة الإلكترونية الأوروبية الإلزامية عبر شبكة PEPPOL، الربط الضريبي اللحظي مع مصلحة الضرائب الهولندية Belastingdienst، وتكامل بوابات iDEAL و SEPA.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">PEPPOL Network</span>
                             <span class="pillar-tag">Belastingdienst</span>
@@ -768,17 +630,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">28 دولة</div>
-                                <div class="metric-lbl">تغطية ضريبية</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">100%</div>
-                                <div class="metric-lbl">مطابقة محاسبية</div>
-                            </div>
+                            <div><div class="metric-val">28 دولة</div><div class="metric-lbl">تغطية ضريبية</div></div>
+                            <div><div class="metric-val">100%</div><div class="metric-lbl">مطابقة محاسبية</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('FinTech')">استعراض مواصفات
-                            المعمارية ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('FinTech')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
 
@@ -791,8 +646,7 @@
                         </div>
                         <h3 class="pillar-title">الأمن السيبراني والتوقيع الرقمي</h3>
                         <div class="pillar-subtitle">Cybersecurity, Cryptography & eIDAS</div>
-                        <p class="pillar-desc">توقيع العقود والمستندات الرقمية المؤهل والمقبول قانونياً في المحاكم
-                            الأوروبية (eIDAS No 910/2014)، تشفير عسكري AES-256، وبوابات وصول محصنة بنظام Zero-Trust.</p>
+                        <p class="pillar-desc">توقيع العقود والمستندات الرقمية المؤهل والمقبول قانونياً في المحاكم الأوروبية (eIDAS No 910/2014)، تشفير عسكري AES-256، وبوابات وصول محصنة بنظام Zero-Trust.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">eIDAS Signatures</span>
                             <span class="pillar-tag">AES-256 / SHA-256</span>
@@ -802,17 +656,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">256-bit</div>
-                                <div class="metric-lbl">تشفير عسكري</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">قانوني 100%</div>
-                                <div class="metric-lbl">محاكم لاهاي</div>
-                            </div>
+                            <div><div class="metric-val">256-bit</div><div class="metric-lbl">تشفير عسكري</div></div>
+                            <div><div class="metric-val">قانوني 100%</div><div class="metric-lbl">محاكم لاهاي</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('Security')">استعراض مواصفات
-                            المعمارية ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('Security')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
 
@@ -825,8 +672,7 @@
                         </div>
                         <h3 class="pillar-title">منصات وتطبيقات الويب الفائقة</h3>
                         <div class="pillar-subtitle">Next-Gen Web Platforms & Headless UI</div>
-                        <p class="pillar-desc">واجهات مستخدم سحابية بتصميم زجاجي معتم فائق الأناقة (Glassmorphism)، محرك
-                            العلامة البيضاء لتغيير الهوية كلياً (White-Label)، وتوافق كامل متعدد اللغات والعملات.</p>
+                        <p class="pillar-desc">واجهات مستخدم سحابية بتصميم زجاجي معتم فائق الأناقة (Glassmorphism)، محرك العلامة البيضاء لتغيير الهوية كلياً (White-Label)، وتوافق كامل متعدد اللغات والعملات.</p>
                         <div class="pillar-tags">
                             <span class="pillar-tag">Headless React</span>
                             <span class="pillar-tag">Glassmorphism</span>
@@ -836,17 +682,10 @@
                     </div>
                     <div>
                         <div class="pillar-metrics-row">
-                            <div>
-                                <div class="metric-val">&lt; 0.6s</div>
-                                <div class="metric-lbl">زمن تحميل الصفحة</div>
-                            </div>
-                            <div>
-                                <div class="metric-val">100/100</div>
-                                <div class="metric-lbl">نقاط الأداء العالمي</div>
-                            </div>
+                            <div><div class="metric-val">&lt; 0.6s</div><div class="metric-lbl">زمن تحميل الصفحة</div></div>
+                            <div><div class="metric-val">100/100</div><div class="metric-lbl">نقاط الأداء العالمي</div></div>
                         </div>
-                        <button type="button" class="pillar-btn" onclick="selectPillar('Web')">استعراض مواصفات المعمارية
-                            ⬅</button>
+                        <button type="button" class="pillar-btn" onclick="selectPillar('Web')">استعراض مواصفات المعمارية ⬅</button>
                     </div>
                 </div>
             </div>
@@ -857,20 +696,16 @@
             <div class="model-banner">
                 <div class="model-banner-info">
                     <h2>النموذج الثاني: رادار التقنيات والمخطط المعماري التفاعلي (Interactive Tech Radar)</h2>
-                    <p>عرض تفاعلي حي بموجات الرادار الدائرية والطبقات المعمارية؛ انقر على أي تقنية لاستكشاف مواصفاتها
-                        وشهادات اعتمادها فوراً.</p>
+                    <p>عرض تفاعلي حي بموجات الرادار الدائرية والطبقات المعمارية؛ انقر على أي تقنية لاستكشاف مواصفاتها وشهادات اعتمادها فوراً.</p>
                 </div>
-                <span class="model-pill-tag"
-                    style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);">🎯 مثالي للوحة
-                    القيادة وعروض الشركاء demo.html</span>
+                <span class="model-pill-tag" style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);">🎯 مثالي للوحة القيادة وعروض الشركاء demo.html</span>
             </div>
 
             <div class="radar-stage-grid">
                 <!-- Left: Radar canvas -->
                 <div class="radar-canvas-card">
                     <div class="topology-layers-nav">
-                        <button type="button" class="topo-tab active" data-layer="all">🌐 الرادار الكلي (All
-                            Tech)</button>
+                        <button type="button" class="topo-tab active" data-layer="all">🌐 الرادار الكلي (All Tech)</button>
                         <button type="button" class="topo-tab" data-layer="ai">🤖 طبقة الذكاء الاصطناعي</button>
                         <button type="button" class="topo-tab" data-layer="cloud">☁️ طبقة السحابة المعزولة</button>
                         <button type="button" class="topo-tab" data-layer="security">🛡️ طبقة الأمن السيبراني</button>
@@ -883,18 +718,12 @@
                         <div class="radar-sweep"></div>
 
                         <!-- Interactive Nodes -->
-                        <div class="radar-node active" style="top:25%; left:30%;" data-tech="ai-private"
-                            onclick="showTechDetail('ai-private')">🤖 Private LLM Core</div>
-                        <div class="radar-node" style="top:20%; right:22%;" data-tech="cloud-ams"
-                            onclick="showTechDetail('cloud-ams')">☁️ Amsterdam DC</div>
-                        <div class="radar-node" style="top:55%; left:18%;" data-tech="peppol"
-                            onclick="showTechDetail('peppol')">💳 PEPPOL Gateway</div>
-                        <div class="radar-node" style="bottom:22%; left:40%;" data-tech="eidas"
-                            onclick="showTechDetail('eidas')">🛡️ eIDAS Signature</div>
-                        <div class="radar-node" style="top:60%; right:20%;" data-tech="zerotrust"
-                            onclick="showTechDetail('zerotrust')">🔒 Zero-Trust WAF</div>
-                        <div class="radar-node" style="bottom:20%; right:30%;" data-tech="erp-core"
-                            onclick="showTechDetail('erp-core')">📦 ERP Real-Time</div>
+                        <div class="radar-node active" style="top:25%; left:30%;" data-tech="ai-private" onclick="showTechDetail('ai-private')">🤖 Private LLM Core</div>
+                        <div class="radar-node" style="top:20%; right:22%;" data-tech="cloud-ams" onclick="showTechDetail('cloud-ams')">☁️ Amsterdam DC</div>
+                        <div class="radar-node" style="top:55%; left:18%;" data-tech="peppol" onclick="showTechDetail('peppol')">💳 PEPPOL Gateway</div>
+                        <div class="radar-node" style="bottom:22%; left:40%;" data-tech="eidas" onclick="showTechDetail('eidas')">🛡️ eIDAS Signature</div>
+                        <div class="radar-node" style="top:60%; right:20%;" data-tech="zerotrust" onclick="showTechDetail('zerotrust')">🔒 Zero-Trust WAF</div>
+                        <div class="radar-node" style="bottom:20%; right:30%;" data-tech="erp-core" onclick="showTechDetail('erp-core')">📦 ERP Real-Time</div>
                     </div>
                 </div>
 
@@ -902,8 +731,7 @@
                 <div class="radar-spec-card" id="specPanel">
                     <span class="spec-badge" id="specBadge">🤖 الذكاء الاصطناعي السيادي</span>
                     <h3 class="spec-title" id="specTitle">Private LLM Core • النماذج اللغوية المعزولة</h3>
-                    <p class="spec-desc" id="specDesc">محرك ذكاء اصطناعي مؤسسي يتم تنصيبه على خوادم سحابية هولندية خاصة،
-                        معزولة تماماً عن أي وصول أو تدريب عام لضمان سرية القرارات والمستندات بنسبة 100%.</p>
+                    <p class="spec-desc" id="specDesc">محرك ذكاء اصطناعي مؤسسي يتم تنصيبه على خوادم سحابية هولندية خاصة، معزولة تماماً عن أي وصول أو تدريب عام لضمان سرية القرارات والمستندات بنسبة 100%.</p>
 
                     <div class="spec-attr-list" id="specAttrList">
                         <div class="spec-attr-item">
@@ -920,8 +748,7 @@
                         </div>
                         <div class="spec-attr-item">
                             <span class="spec-attr-label">حالة التفعيل والتشغيل</span>
-                            <span class="spec-attr-val" style="color:#34d399;">جاهز للإنتاج فوراً (Production
-                                Ready)</span>
+                            <span class="spec-attr-val" style="color:#34d399;">جاهز للإنتاج فوراً (Production Ready)</span>
                         </div>
                     </div>
                 </div>
@@ -938,11 +765,9 @@
                         <span class="model-pill-tag">الموقع الرئيسي index.html</span>
                     </div>
                     <p style="font-size:0.86rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
-                        <strong>نقاط القوة:</strong> وضوح تسويقي فوري، سهولة قراءة لكافة الزوار والعملاء التنفيذيين،
-                        أرقام ومؤشرات أداء مباشرة، وإبراز كامل للخدمات الست بنظرة واحدة.
+                        <strong>نقاط القوة:</strong> وضوح تسويقي فوري، سهولة قراءة لكافة الزوار والعملاء التنفيذيين، أرقام ومؤشرات أداء مباشرة، وإبراز كامل للخدمات الست بنظرة واحدة.
                     </p>
-                    <div
-                        style="background:rgba(0,0,0,0.5); border:1px solid var(--border-glass); border-radius:12px; padding:14px; font-size:0.82rem; color:var(--gold-light);">
+                    <div style="background:rgba(0,0,0,0.5); border:1px solid var(--border-glass); border-radius:12px; padding:14px; font-size:0.82rem; color:var(--gold-light);">
                         ✔ مناسب جداً كواجهة استقبال للعملاء والمستثمرين.<br>
                         ✔ يرفع معدل التحويل (Conversion Rate) بفضل الترتيب النظيف.<br>
                         ✔ يتناسق بسلاسة مع تصميم أقسام الموقع الحالي.
@@ -953,16 +778,12 @@
                 <div class="split-col">
                     <div class="split-col-header">
                         <h3>🎯 النموذج الثاني: رادار المعمارية التفاعلي</h3>
-                        <span class="model-pill-tag"
-                            style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);">لوحة القيادة
-                            demo.html</span>
+                        <span class="model-pill-tag" style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);">لوحة القيادة demo.html</span>
                     </div>
                     <p style="font-size:0.86rem; color:var(--text-muted); line-height:1.6; margin-bottom:16px;">
-                        <strong>نقاط القوة:</strong> إبهار بصري وتقني فائق، يعكس عمق وخبرة الشركة الهندسية، مناسب
-                        للاجتماعات الدبلوماسية وعروض الشركاء، وتفاعل حي بالنقر على التقنيات.
+                        <strong>نقاط القوة:</strong> إبهار بصري وتقني فائق، يعكس عمق وخبرة الشركة الهندسية، مناسب للاجتماعات الدبلوماسية وعروض الشركاء، وتفاعل حي بالنقر على التقنيات.
                     </p>
-                    <div
-                        style="background:rgba(0,0,0,0.5); border:1px solid var(--border-glass); border-radius:12px; padding:14px; font-size:0.82rem; color:#7dd3fc;">
+                    <div style="background:rgba(0,0,0,0.5); border:1px solid var(--border-glass); border-radius:12px; padding:14px; font-size:0.82rem; color:#7dd3fc;">
                         ✔ يعطي انطباعاً بأن النظام يعمل كمنصة حية متكاملة.<br>
                         ✔ ممتاز للشركاء المهتمين بالتفاصيل التكنولوجية والأمنية.<br>
                         ✔ يقدم تجربة مستخدم فريدة لا تجدها في الشركات التقليدية.
@@ -974,19 +795,11 @@
         <!-- CTA Bottom Decision Bar -->
         <div class="cta-bottom-bar">
             <h3 style="font-size:1.3rem; margin-bottom:8px; color:#ffffff;">أي النموذجين تفضل اعتماده الآن؟</h3>
-            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:20px;">يمكنك اختيار النموذج الأول، أو
-                النموذج الثاني، أو دمج كليهما (الأول في الصفحة الرئيسية، والثاني في صفحة العرض التجريبي)!</p>
+            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:20px;">يمكنك اختيار النموذج الأول، أو النموذج الثاني، أو دمج كليهما (الأول في الصفحة الرئيسية، والثاني في صفحة العرض التجريبي)!</p>
             <div>
-                <button type="button" class="btn-choose"
-                    onclick="alert('تم اختيار النموذج الأول! سنقوم بتطبيقه في الصفحة الرئيسية index.html فوراً.')">اعتماد
-                    النموذج الأول (الركائز الست في index.html)</button>
-                <button type="button" class="btn-choose"
-                    onclick="alert('تم اختيار النموذج الثاني! سنقوم بتطبيقه في صفحة المعاينة demo.html فوراً.')">اعتماد
-                    النموذج الثاني (الرادار التفاعلي في demo.html)</button>
-                <button type="button" class="btn-choose"
-                    style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;"
-                    onclick="alert('تم اختيار دمج النموذجين معاً! هذا الخيار الأقوى والأشمل للشركة.')">💎 الخيار الذكي:
-                    دمج النموذجين معاً في الموقع</button>
+                <button type="button" class="btn-choose" onclick="alert('تم اختيار النموذج الأول! سنقوم بتطبيقه في الصفحة الرئيسية index.html فوراً.')">اعتماد النموذج الأول (الركائز الست في index.html)</button>
+                <button type="button" class="btn-choose" onclick="alert('تم اختيار النموذج الثاني! سنقوم بتطبيقه في صفحة المعاينة demo.html فوراً.')">اعتماد النموذج الثاني (الرادار التفاعلي في demo.html)</button>
+                <button type="button" class="btn-choose" style="background:linear-gradient(135deg, #10b981, #059669); color:#fff;" onclick="alert('تم اختيار دمج النموذجين معاً! هذا الخيار الأقوى والأشمل للشركة.')">💎 الخيار الذكي: دمج النموذجين معاً في الموقع</button>
             </div>
         </div>
     </div>
@@ -1131,5 +944,5 @@
         });
     </script>
 </body>
-
 </html>
+
