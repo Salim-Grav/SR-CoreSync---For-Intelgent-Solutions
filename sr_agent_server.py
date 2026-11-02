@@ -26,6 +26,11 @@ from sr_agent_core import (
 import sr_session_db
 from sr_rag_engine import SovereignRAGDatabase, build_or_update_knowledge_index, query_rag_knowledge, index_custom_document
 from sr_subagent_monitor import AutonomousSecurityHealthSubagent
+from sr_auth import (
+    SovereignAuthMiddleware,
+    SovereignRateLimitMiddleware,
+    get_principal,
+)
 from google.antigravity import Agent
 
 # ==============================================================================
@@ -233,13 +238,27 @@ app.state.appeals = [
     }
 ]
 
-# تفعيل CORS الشامل لجميع الأصول والمنافذ وصفحات file://
+# ==============================================================================
+# [P0-1 / A1] طبقة المصادقة السيادية و [P0-2 / A4] تقييد CORS
+# ==============================================================================
+# ترتيب الإضافة يحدد التداخل: الأخير في الإضافة هو الأبعد في المعالجة.
+# التدفق المطلوب: CORS (للطلبات المسبقة OPTIONS) → الحد من المعدل → المصادقة → المسارات.
+app.add_middleware(SovereignAuthMiddleware)        # الأعمق: مصادقة إغلاقية لكل الطلبات المحمية
+app.add_middleware(SovereignRateLimitMiddleware)   # حد من المعدل (حماية حصة Gemini من الإجهاد)
+
+_allowed_origins = [
+    origin.strip() for origin in os.getenv(
+        "CORESYNC_CORS_ORIGINS",
+        "https://sr-coresync.com,https://www.sr-coresync.com,http://127.0.0.1:8000,http://localhost:8000"
+    ).split(",") if origin.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_allowed_origins,
+    allow_credentials=False,   # المصادقة بمفاتيح API لا تحتاج كوكيز؛ إلغاء الترخيص يقطع هجوم الأصل الوحيد
+    allow_methods=["GET", "POST", "DELETE", "OPTIONS"],
+    allow_headers=["X-API-Key", "Authorization", "Content-Type"],
+    max_age=600,
 )
 
 # ==============================================================================
@@ -291,18 +310,19 @@ async def get_portals():
     return {"portals_summary": tool_list_project_portals()}
 
 @app.post("/api/ai-concierge", response_model=ConciergeResponseModel, tags=["المساعد الذكي والمحاكي"])
-async def ai_concierge_endpoint(req: ConciergeRequest):
+async def ai_concierge_endpoint(req: ConciergeRequest, request: Request):
     """
     نقطة النهاية المعتمدة لمحاكي `ai-concierge-simulator.html` وويدجت المحادثة العائم،
     مع حفظ الحوار بالكامل في ذاكرة الجلسة المستمرة.
     """
     user_msg = req.message.strip()
     session_id = req.session_id or "concierge_default"
+    principal = get_principal(request)  # [A8] الهوية المُصادقة = مالك الجلسة
     if not user_msg:
         raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
 
     # 1. حفظ رسالة المستخدم في قاعدة بيانات الجلسة
-    sr_session_db.add_message(session_id, "user", user_msg, source="user")
+    sr_session_db.add_message(session_id, "user", user_msg, source="user", owner=principal.name)
 
     # 2. استخراج سياق المحادثة واسترجاع المعرفة عبر ذاكرة المتجهات (RAG)
     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
@@ -331,7 +351,7 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
         source = "sovereign_rag_knowledge_engine"
 
     # 3. حفظ رد الوكيل في قاعدة بيانات الجلسة
-    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
+    sr_session_db.add_message(session_id, "assistant", reply_text, source=source, owner=principal.name)
 
     actions = [
         ActionButton(label="💬 محادثة واتساب VIP المباشرة", url="https://wa.me/31618111116"),
@@ -350,17 +370,18 @@ async def ai_concierge_endpoint(req: ConciergeRequest):
     )
 
 @app.post("/api/chat", response_model=ChatResponseModel, tags=["المحادثة العامة والذاكرة"])
-async def chat_endpoint(req: ChatRequest):
+async def chat_endpoint(req: ChatRequest, request: Request):
     """
     نقطة النهاية العامة للمحادثة مع دعم كامل للذاكرة المستمرة عبر `session_id`.
     """
     user_msg = req.message.strip()
     session_id = req.session_id or "default"
+    principal = get_principal(request)  # [A8] الهوية المُصادقة = مالك الجلسة
     if not user_msg:
         raise HTTPException(status_code=400, detail="الرسالة لا يمكن أن تكون فارغة")
 
     # حفظ رسالة المستخدم
-    sr_session_db.add_message(session_id, "user", user_msg, source="user")
+    sr_session_db.add_message(session_id, "user", user_msg, source="user", owner=principal.name)
 
     # استرجاع سياق الجلسة ودمج ذاكرة المتجهات RAG
     context = sr_session_db.get_formatted_context(session_id, max_turns=4)
@@ -388,7 +409,7 @@ async def chat_endpoint(req: ChatRequest):
         source = "sovereign_rag_knowledge_engine"
 
     # حفظ استجابة الوكيل
-    sr_session_db.add_message(session_id, "assistant", reply_text, source=source)
+    sr_session_db.add_message(session_id, "assistant", reply_text, source=source, owner=principal.name)
 
     return ChatResponseModel(
         reply=reply_text,
@@ -399,6 +420,7 @@ async def chat_endpoint(req: ChatRequest):
 
 @app.get("/api/chat/stream", tags=["المحادثة العامة والذاكرة"])
 async def chat_stream_endpoint(
+    request: Request,
     message: str = Query(..., description="نص الرسالة المراد بثها لحظياً"),
     session_id: Optional[str] = Query("default", description="معرف الجلسة")
 ):
@@ -406,7 +428,8 @@ async def chat_stream_endpoint(
     نقطة نهاية البث اللحظي للكلمات بتقنية Server-Sent Events (SSE)
     """
     # حفظ رسالة المستخدم
-    sr_session_db.add_message(session_id, "user", message, source="user")
+    principal = get_principal(request)  # [A8]
+    sr_session_db.add_message(session_id, "user", message, source="user", owner=principal.name)
     context = sr_session_db.get_formatted_context(session_id, max_turns=3)
     prompt = f"{context}\n\nسؤال المستخدم الحالي: {message}" if context else message
 
@@ -423,7 +446,7 @@ async def chat_stream_endpoint(
                 source = "sovereign_knowledge_engine"
 
             # حفظ الرد المكتمل في الجلسة
-            sr_session_db.add_message(session_id, "assistant", full_text, source=source)
+            sr_session_db.add_message(session_id, "assistant", full_text, source=source, owner=principal.name)
 
             words = full_text.split(" ")
             for w in words:
@@ -448,16 +471,29 @@ async def get_sessions(limit: int = Query(20, description="الحد الأقصى
 
 @app.get("/api/sessions/{session_id}/history", tags=["إدارة الجلسات والذاكرة"])
 async def get_session_history(
+    request: Request,
     session_id: str = Path(..., description="معرف الجلسة المطلوب استرجاع رسائلها"),
     limit: int = Query(50, description="عدد الرسائل")
 ):
     """استرجاع سجل الرسائل الكامل لجلسة معينة"""
+    # [A8] فرض ملكية الجلسة: المالك فقط أو admin
+    principal = get_principal(request)
+    try:
+        sr_session_db.assert_session_access(session_id, principal.name, principal.is_admin)
+    except PermissionError:
+        raise HTTPException(status_code=403, detail="لا تملك صلاحية الوصول إلى هذه الجلسة.")
     messages = sr_session_db.get_history(session_id, limit=limit)
     return {"session_id": session_id, "messages": messages, "count": len(messages)}
 
 @app.delete("/api/sessions/{session_id}", tags=["إدارة الجلسات والذاكرة"])
-async def delete_session(session_id: str = Path(..., description="معرف الجلسة المراد حذفها")):
+async def delete_session(request: Request, session_id: str = Path(..., description="معرف الجلسة المراد حذفها")):
     """حذف ومسح تاريخ جلسة معينة"""
+    # [A8] فرض ملكية الجلسة قبل الحذف (الحذف نفسه محصور بدور admin عبر الوسيلة)
+    principal = get_principal(request)
+    try:
+        sr_session_db.assert_session_access(session_id, principal.name, principal.is_admin)
+    except PermissionError:
+        raise HTTPException(status_code=403, detail="لا تملك صلاحية الوصول إلى هذه الجلسة.")
     sr_session_db.clear_session(session_id)
     return {"status": "success", "message": f"تم مسح الجلسة {session_id} بنجاح"}
 
@@ -515,17 +551,42 @@ async def cockpit_page():
     return HTMLResponse(content="<h1>Cockpit file not found</h1>", status_code=404)
 
 @app.post("/api/upload", tags=["تحليل المرفقات وفهرسة RAG"])
-async def upload_files_endpoint(files: List[UploadFile] = File(...)):
+async def upload_files_endpoint(request: Request, files: List[UploadFile] = File(...)):
     """
     استلام مرفقات المستندات (PDF / DOCX) بحد أقصى 5 ميجابايت للملف،
     استخراج النصوص وفهرستها فورياً داخل محرك RAG المحلي للمنظومة.
     """
-    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB للملف الواحد
+    MAX_FILES_PER_REQUEST = 5
+
+    # [A3] فحص الحجم الكلي للطلب من الترويسة قبل قراءة أي بايت في الذاكرة
+    _content_length = request.headers.get("content-length")
+    if _content_length and _content_length.isdigit() and int(_content_length) > (MAX_FILE_SIZE * MAX_FILES_PER_REQUEST) + 2048:
+        raise HTTPException(
+            status_code=413,
+            detail="حجم الطلب الإجمالي يتجاوز الحد المسموح (5 ملفات × 5 ميجابايت)."
+        )
+    if len(files) > MAX_FILES_PER_REQUEST:
+        raise HTTPException(
+            status_code=413,
+            detail="عدد الملفات يتجاوز الحد الأقصى (5 ملفات في الطلب الواحد)."
+        )
     processed = []
     
     for file in files:
         filename = file.filename or "unknown_document"
-        content = await file.read()
+        # [A3] قراءة تدفقية مقطعية (1MB) بسقف صارم بدلاً من تحميل الملف كاملاً في الذاكرة
+        _parts: List[bytes] = []
+        _total = 0
+        while True:
+            _chunk = await file.read(1024 * 1024)
+            if not _chunk:
+                break
+            _total += len(_chunk)
+            if _total > MAX_FILE_SIZE:
+                break  # يكفي لتجاوز السقف؛ يلتقطه الفحص أدناه ويرفض الطلب
+            _parts.append(_chunk)
+        content = b"".join(_parts)
         
         if len(content) > MAX_FILE_SIZE:
             raise HTTPException(

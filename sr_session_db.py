@@ -24,6 +24,11 @@ def init_db():
                 metadata TEXT
             );
         """)
+        # [A8] عمود الملكية: ربط كل جلسة بمفتاح API المُنشئ لها (ترقية متوافقة للقواعد القديمة)
+        cursor = conn.execute("PRAGMA table_info(sessions);")
+        columns = {row["name"] for row in cursor.fetchall()}
+        if "owner" not in columns:
+            conn.execute("ALTER TABLE sessions ADD COLUMN owner TEXT;")
         conn.execute("""
             CREATE TABLE IF NOT EXISTS messages (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,9 +43,13 @@ def init_db():
         conn.execute("""
             CREATE INDEX IF NOT EXISTS idx_messages_session ON messages(session_id);
         """)
+        # [A8] عمود الملكية: ربط كل جلسة بمفتاح API المُنشئ لها (ترقية متوافقة للقواعد القديمة)
+        columns = {row["name"] for row in conn.execute("PRAGMA table_info(sessions);").fetchall()}
+        if "owner" not in columns:
+            conn.execute("ALTER TABLE sessions ADD COLUMN owner TEXT;")
         conn.commit()
 
-def ensure_session(session_id: str, title: Optional[str] = None) -> str:
+def ensure_session(session_id: str, title: Optional[str] = None, owner: Optional[str] = None) -> str:
     """التأكد من وجود الجلسة أو إنشائها"""
     init_db()
     clean_id = session_id.strip() if session_id else "default"
@@ -50,17 +59,17 @@ def ensure_session(session_id: str, title: Optional[str] = None) -> str:
         if not cursor.fetchone():
             default_title = title or f"جلسة {datetime.now().strftime('%Y-%m-%d %H:%M')}"
             conn.execute(
-                "INSERT INTO sessions (session_id, title, created_at, last_active, metadata) VALUES (?, ?, ?, ?, ?)",
-                (clean_id, default_title, now_iso, now_iso, json.dumps({}))
+                "INSERT INTO sessions (session_id, title, created_at, last_active, metadata, owner) VALUES (?, ?, ?, ?, ?, ?)",
+                (clean_id, default_title, now_iso, now_iso, json.dumps({}), owner or "legacy")
             )
         else:
             conn.execute("UPDATE sessions SET last_active = ? WHERE session_id = ?", (now_iso, clean_id))
         conn.commit()
     return clean_id
 
-def add_message(session_id: str, role: str, content: str, source: str = "google_antigravity_agent"):
+def add_message(session_id: str, role: str, content: str, source: str = "google_antigravity_agent", owner: Optional[str] = None):
     """إضافة رسالة إلى سجل الجلسة وتحديث وقت النشاط الأخير"""
-    clean_id = ensure_session(session_id)
+    clean_id = ensure_session(session_id, owner=owner)
     now_iso = datetime.now().isoformat()
     with get_connection() as conn:
         conn.execute(
@@ -107,6 +116,29 @@ def list_all_sessions(limit: int = 20) -> List[Dict[str, Any]]:
             LIMIT ?;
         """, (limit,))
         return [dict(row) for row in cursor.fetchall()]
+
+def get_session_owner(session_id: str) -> Optional[str]:
+    """[A8] استرجاع مالك الجلسة (None إن لم تكن موجودة)"""
+    init_db()
+    clean_id = session_id.strip() if session_id else "default"
+    with get_connection() as conn:
+        cursor = conn.execute("SELECT owner FROM sessions WHERE session_id = ?", (clean_id,))
+        row = cursor.fetchone()
+        return row["owner"] if row else None
+
+def assert_session_access(session_id: str, owner: str, is_admin: bool = False) -> None:
+    """
+    [A8] فرض ملكية الجلسة: مسموح للمالك فقط أو admin.
+    الجلسات القديمة غير المملوكة (legacy) تتطلب admin.
+    يرفع PermissionError عند الرفض، ولا يفعل شيئاً للجلسات غير الموجودة
+    (لترد نقطة النهاية برمز 404 بشكل طبيعي).
+    """
+    current_owner = get_session_owner(session_id)
+    if current_owner is None:
+        return
+    if is_admin or current_owner == owner:
+        return
+    raise PermissionError("session ownership check failed")
 
 def clear_session(session_id: str):
     """مسح محتويات جلسة معينة"""

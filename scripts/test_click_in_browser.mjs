@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import http from 'node:http';
-import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync, rmSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { setTimeout as sleep } from 'node:timers/promises';
 
@@ -26,7 +26,10 @@ const server = http.createServer((req, res) => {
     const filepath = join(process.cwd(), '_site', p);
     if (existsSync(filepath) && statSync(filepath).isFile()) {
         const ext = extname(filepath).toLowerCase();
-        res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+        res.writeHead(200, {
+            'Content-Type': MIME[ext] || 'application/octet-stream',
+            'Cache-Control': 'no-store, no-cache, must-revalidate'
+        });
         res.end(readFileSync(filepath));
     } else {
         res.writeHead(404);
@@ -34,19 +37,27 @@ const server = http.createServer((req, res) => {
     }
 });
 
+const profileDir = join(process.cwd(), '.chrome-audit-fresh');
+if (existsSync(profileDir)) {
+    try { rmSync(profileDir, { recursive: true, force: true }); } catch(e) {}
+}
+
 server.listen(PORT, async () => {
     const chrome = spawn(CHROME_PATH, [
         '--headless=new',
-        '--remote-debugging-port=9231',
+        '--remote-debugging-port=9232',
         '--no-sandbox',
         '--disable-gpu',
-        '--user-data-dir=' + join(process.cwd(), '.chrome-audit-profile-2')
+        '--disk-cache-size=1',
+        '--media-cache-size=1',
+        '--disable-application-cache',
+        '--user-data-dir=' + profileDir
     ]);
 
     await sleep(2500);
 
     try {
-        const listRes = await fetch('http://127.0.0.1:9231/json/list');
+        const listRes = await fetch('http://127.0.0.1:9232/json/list');
         const list = await listRes.json();
         const page = list.find(t => t.type === 'page') || list[0];
         const ws = new globalThis.WebSocket(page.webSocketDebuggerUrl);
@@ -70,20 +81,22 @@ server.listen(PORT, async () => {
 
             await send('Runtime.enable');
             await send('Page.enable');
+            await send('Network.enable');
+            await send('Network.clearBrowserCache');
             await send('Emulation.setDeviceMetricsOverride', {
                 width: 1366,
                 height: 768,
                 deviceScaleFactor: 1,
                 mobile: false
             });
-            await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html?lang=ar&noredirect=1` });
+            await send('Page.navigate', { url: `http://127.0.0.1:${PORT}/index.html?lang=ar&noredirect=1&ts=${Date.now()}` });
 
             for (let i = 0; i < 20; i++) {
                 await sleep(300);
                 const r = await send('Runtime.evaluate', { expression: 'document.readyState', returnByValue: true });
                 if (r && r.result && r.result.value === 'complete') break;
             }
-            await sleep(1500);
+            await sleep(2000);
 
             // Measure title lines and emblem geometry
             const geoRes = await send('Runtime.evaluate', {
@@ -101,6 +114,17 @@ server.listen(PORT, async () => {
                             collidesWithEmblem: r.left < emblemRect.right
                         };
                     });
+
+                    const heroActions = document.querySelector('.hero-reference__actions');
+                    const heroActionBtns = Array.from(heroActions ? heroActions.querySelectorAll('.tf-btn') : []).map(b => ({
+                        text: b.innerText.trim(),
+                        className: b.className,
+                        width: b.getBoundingClientRect().width,
+                        height: b.getBoundingClientRect().height
+                    }));
+
+                    const headerAgentBtn = document.querySelector('.btn-partner-portal-header');
+
                     return {
                         emblem: {
                             left: emblemRect.left,
@@ -108,26 +132,16 @@ server.listen(PORT, async () => {
                             width: emblemRect.width
                         },
                         lines: lines,
-                        supportBtn: (function() {
-                            const btn = document.getElementById('esFloatingMinBtn');
-                            const suite = document.getElementById('esFloatingSuite');
-                            return {
-                                btnExists: !!btn,
-                                suiteExists: !!suite,
-                                btnDisplay: btn ? window.getComputedStyle(btn).display : 'none',
-                                suiteDisplay: suite ? window.getComputedStyle(suite).display : 'none'
-                            };
-                        })()
+                        heroActionBtns: heroActionBtns,
+                        headerAgentBtnExists: !!headerAgentBtn
                     };
                 })()
                 `,
                 returnByValue: true
             });
 
-            console.log('GEOMETRY INSPECTION:', JSON.stringify(geoRes.result.value, null, 2));
+            console.log('GEOMETRY & BUTTONS INSPECTION:', JSON.stringify(geoRes.result.value, null, 2));
 
-            // Capture live screenshot of the browser
-            
             // Test opening Header Support Dropdown
             const testDropdownRes = await send("Runtime.evaluate", {
                 expression: `
@@ -135,16 +149,26 @@ server.listen(PORT, async () => {
                     const btn = document.getElementById("headerSupportBtn");
                     const wrap = document.getElementById("headerSupportDropdownWrap");
                     const menu = document.getElementById("headerSupportMenu");
-                    if (!btn || !wrap || !menu) return { success: false, reason: "elements missing", url: window.location.href, btn: !!btn, wrap: !!wrap, menu: !!menu };
+                    if (!btn || !wrap || !menu) return { success: false, reason: "elements missing", btn: !!btn, wrap: !!wrap, menu: !!menu };
 
                     btn.click();
+                    const menuRect = menu.getBoundingClientRect();
                     const style = window.getComputedStyle(menu);
                     return {
                         success: true,
                         hasActive: wrap.classList.contains("is-active"),
                         display: style.display,
                         opacity: style.opacity,
-                        visibility: style.visibility,
+                        rect: {
+                            left: menuRect.left,
+                            right: menuRect.right,
+                            top: menuRect.top,
+                            bottom: menuRect.bottom,
+                            width: menuRect.width,
+                            height: menuRect.height
+                        },
+                        clippedLeft: menuRect.left < 0,
+                        clippedRight: menuRect.right > window.innerWidth,
                         itemsCount: menu.querySelectorAll(".support-menu-item").length
                     };
                 })()
