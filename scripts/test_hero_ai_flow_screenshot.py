@@ -54,41 +54,45 @@ async def capture():
             await send_cdp('Page.navigate', {'url': file_url})
             await asyncio.sleep(2.5)
 
-            # Test Option 1 & 3: Click a prompt chip to simulate instant AI blueprint generation!
+            # Click the second chip: CoreSync ERP (Raed Aziza's domain)
             res = await send_cdp('Runtime.evaluate', {
                 'expression': '''
                 (function() {
-                    const chip = document.querySelector(".hero-ai-chip");
-                    if (chip) {
-                        chip.click();
-                        return { clicked: true, text: chip.innerText };
+                    const chips = document.querySelectorAll(".hero-ai-chip");
+                    if (chips && chips.length > 1) {
+                        chips[1].click(); // Click ERP chip
+                        return { clicked: true, text: chips[1].innerText };
                     }
                     return { clicked: false };
                 })()
                 ''',
                 'returnByValue': True
             })
-            print("Prompt Chip Click Evaluation:", json.dumps(res, ensure_ascii=False))
+            print("ERP Prompt Chip Click Evaluation:", json.dumps(res, ensure_ascii=False))
             
             # Wait for AI blueprint generation and animation
             await asyncio.sleep(2.5)
 
-            # Check if modal is active and blueprint generated
-            modal_state = await send_cdp('Runtime.evaluate', {
+            # Check if modal is active, verify Raed's avatar and speech lead
+            audit_state = await send_cdp('Runtime.evaluate', {
                 'expression': '''
                 (function() {
-                    const modal = document.getElementById("aiVoicePlannerModal");
-                    const resBox = document.getElementById("voicePlannerResult");
+                    const player = document.getElementById("blueprintAudioPlayer");
+                    const img = player ? player.querySelector(".sr-blueprint-audio-img") : null;
+                    const badge = player ? player.querySelector(".sr-blueprint-audio-badge") : null;
+                    const lead = player ? decodeURIComponent(player.getAttribute("data-founder-lead") || "") : "";
+                    const founderType = player ? player.getAttribute("data-founder-type") : "";
                     return {
-                        modalActive: modal ? modal.classList.contains("active") : false,
-                        resultHasContent: resBox ? (resBox.innerHTML.length > 50) : false,
-                        storedIdea: localStorage.getItem("sr_last_ai_idea")
+                        founderType: founderType,
+                        avatarSrc: img ? img.getAttribute("src") : "",
+                        badgeText: badge ? badge.innerText : "",
+                        speechLead: lead
                     };
                 })()
                 ''',
                 'returnByValue': True
             })
-            print("Modal & Telemetry State:", json.dumps(modal_state, ensure_ascii=False))
+            print("Founder Audit State in Blueprint:", json.dumps(audit_state, ensure_ascii=False))
 
             # Capture live modal & blueprint snapshot
             ss = await send_cdp('Page.captureScreenshot', {
