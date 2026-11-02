@@ -46,3 +46,4 @@ function confirmClientElectronicSignature() {
 }
 
 window.confirmClientElectronicSignature = confirmClientElectronicSignature;
+

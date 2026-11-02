@@ -583,3 +583,4 @@ with open('clgid-contract.html', 'w', encoding='utf-8') as f:
     f.write(contract_html)
 
 print("SUCCESS: Generated clgid-contract.html")
+
