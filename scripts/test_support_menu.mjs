@@ -93,32 +93,37 @@ server.listen(PORT, async () => {
             }
             await sleep(1500);
 
-            // Click Support Button
             const clickRes = await send('Runtime.evaluate', {
-                expression: 
+                expression: `
                 (function() {
-                    const btn = document.getElementById('headerSupportBtn');
+                    var btn = document.getElementById('headerSupportBtn');
                     if (!btn) return { error: 'headerSupportBtn not found' };
                     btn.click();
-                    const menu = document.getElementById('headerSupportMenu');
-                    const wrap = document.getElementById('headerSupportDropdownWrap');
-                    const items = menu ? Array.from(menu.querySelectorAll('.support-menu-item')) : [];
-                    const menuRect = menu ? menu.getBoundingClientRect() : null;
-                    const btnRect = btn.getBoundingClientRect();
+                    var menu = document.getElementById('headerSupportMenu');
+                    var wrap = document.getElementById('headerSupportDropdownWrap');
+                    var items = menu ? Array.from(menu.querySelectorAll('.support-menu-item')) : [];
+                    var menuRect = menu ? menu.getBoundingClientRect() : null;
+                    var btnRect = btn.getBoundingClientRect();
                     return {
                         clicked: true,
                         isActive: wrap ? wrap.classList.contains('is-active') : false,
                         menuDisplay: menu ? window.getComputedStyle(menu).display : null,
-                        menuRect: menuRect ? { top: menuRect.top, bottom: menuRect.bottom, left: menuRect.left, right: menuRect.right, width: menuRect.width, height: menuRect.height } : null,
-                        btnRect: { top: btnRect.top, bottom: btnRect.bottom, left: btnRect.left, right: btnRect.right, width: btnRect.width, height: btnRect.height },
+                        menuRect: menuRect ? { top: Math.round(menuRect.top), bottom: Math.round(menuRect.bottom), left: Math.round(menuRect.left), right: Math.round(menuRect.right), width: Math.round(menuRect.width), height: Math.round(menuRect.height) } : null,
+                        btnRect: { top: Math.round(btnRect.top), bottom: Math.round(btnRect.bottom), left: Math.round(btnRect.left), right: Math.round(btnRect.right), width: Math.round(btnRect.width), height: Math.round(btnRect.height) },
                         itemCount: items.length,
-                        items: items.map(it => ({
-                            text: it.textContent.trim().replace(/\s+/g, ' '),
-                            rect: it.getBoundingClientRect()
-                        }))
+                        items: items.map(function(it) {
+                            var r = it.getBoundingClientRect();
+                            return {
+                                text: it.textContent.trim().replace(/\\s+/g, ' '),
+                                top: Math.round(r.top),
+                                bottom: Math.round(r.bottom),
+                                height: Math.round(r.height),
+                                visible: r.height > 0 && r.bottom <= window.innerHeight
+                            };
+                        })
                     };
                 })()
-                ,
+                `,
                 returnByValue: true
             });
             console.log('SUPPORT MENU AUDIT:', JSON.stringify(clickRes.result.value, null, 2));
