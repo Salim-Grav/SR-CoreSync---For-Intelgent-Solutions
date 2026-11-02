@@ -1,4 +1,72 @@
-let voiceRecognition=null,isVoiceRecording=!1;function openAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&(e.classList.add("active"),document.body.style.overflow="hidden","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("open"))}function closeAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&e.classList.contains("active")&&(stopVoiceRecording(),stopBlueprintAudioSynthesis(),e.classList.remove("active"),document.body.style.overflow="","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("close"))}function toggleVoiceRecording(){isVoiceRecording?stopVoiceRecording():startVoiceRecording()}function startVoiceRecording(){const e=window.SpeechRecognition||window.webkitSpeechRecognition,n=document.getElementById("voicePlannerMicBtn"),t=document.getElementById("voicePlannerStatus"),o=document.getElementById("voicePlannerTranscript");if(!e)return t&&(t.innerHTML="⚠️ المتصفح لا يدعم التسجيل الصوتي المباشر، يمكنك كتابة فكرتك في المربع أدناه!"),void(o&&o.focus());try{voiceRecognition=new e,voiceRecognition.continuous=!0,voiceRecognition.interimResults=!0,voiceRecognition.lang=document.documentElement.getAttribute("lang")||"ar-SA",voiceRecognition.onstart=function(){isVoiceRecording=!0,n&&n.classList.add("is-recording"),t&&(t.innerHTML="🔴 جاري الاستماع... تحدث بحرية عن فكرة مشروعك ومتطلباتك الآن!")},voiceRecognition.onresult=function(e){let n="";for(let t=0;t<e.results.length;t++)n+=e.results[t][0].transcript+" ";o&&(o.value=n.trim())},voiceRecognition.onerror=function(e){console.warn("Speech recognition notice:",e),stopVoiceRecording(),t&&(t.innerHTML="اضغط على المايكروفون للتحدث أو اكتب فكرتك مباشرة.")},voiceRecognition.onend=function(){stopVoiceRecording()},voiceRecognition.start()}catch(e){console.error(e),stopVoiceRecording()}}function stopVoiceRecording(){isVoiceRecording=!1;const e=document.getElementById("voicePlannerMicBtn"),n=document.getElementById("voicePlannerStatus");if(e&&e.classList.remove("is-recording"),n&&(n.innerHTML="✓ تم تسجيل الفكرة. انقر على الزر الذهبي أدناه لتوليد خطة العمل!"),voiceRecognition){try{voiceRecognition.stop()}catch(e){}voiceRecognition=null}}function fillVoiceSample(e){const n=document.getElementById("voicePlannerTranscript");n&&(n.value=e,generateAiProjectBlueprint())}function resetVoicePlanner(){stopVoiceRecording(),stopBlueprintAudioSynthesis();const e=document.getElementById("voicePlannerTranscript"),n=document.getElementById("voicePlannerResult"),t=document.getElementById("voicePlannerStatus");e&&(e.value=""),n&&(n.innerHTML="",n.style.display="none"),t&&(t.innerHTML="اضغط على المايكروفون وتحدث بفكرة أو متطلبات مشروعك...")}function generateAiProjectBlueprint(){stopBlueprintAudioSynthesis();const e=document.getElementById("voicePlannerTranscript"),n=document.getElementById("voicePlannerResult"),t=document.getElementById("voicePlannerStatus"),o=e?e.value.trim():"";if(!o||o.length<5)return t&&(t.innerHTML="⚠️ الرجاء التحدث بصوتك أو كتابة نبذة بسيطة عن فكرتك أولاً لتوليد الخطة!"),void(e&&e.focus());t&&(t.innerHTML="⚡ جاري المعالجة وهندسة خطة العمل التنفيذية بواسطة الذكاء الاصطناعي..."),setTimeout(()=>{const e=o.toLowerCase();let i="منظومة سحابية وحلول متكاملة للأعمال 2026",s="التحول الرقمي وأتمتة الشركات",c="بنية سحابية فائقة السرعة مع لوحة تحكم ذكية",a="+42% توفير بالتكاليف التشغيلية و 3.8x سرعة في إنجاز العمليات";// Smart Domain Routing: Tech, Web, Cloud, AI, Portals, CLGID Governance -> Eng. Salim Aziza
+let voiceRecognition=null,isVoiceRecording=!1;function openAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&(e.classList.add("active"),document.body.style.overflow="hidden","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("open"))}function closeAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&e.classList.contains("active")&&(stopVoiceRecording(),stopBlueprintAudioSynthesis(),e.classList.remove("active"),document.body.style.overflow="","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("close"))}function toggleVoiceRecording(){isVoiceRecording?stopVoiceRecording():startVoiceRecording()}function startVoiceRecording() {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const btn = document.getElementById("voicePlannerMicBtn");
+    const status = document.getElementById("voicePlannerStatus");
+    const transcript = document.getElementById("voicePlannerTranscript");
+
+    if (!SpeechRec) {
+        if (status) status.innerHTML = "⚠️ المتصفح لا يدعم التسجيل الصوتي المباشر، يمكنك كتابة فكرتك في المربع أدناه وسيتولى الذكاء الاصطناعي هندستها فوراً!";
+        if (transcript) transcript.focus();
+        return;
+    }
+
+    try {
+        if (voiceRecognition) {
+            try { voiceRecognition.abort(); } catch(e) {}
+            voiceRecognition = null;
+        }
+        voiceRecognition = new SpeechRec();
+        voiceRecognition.continuous = true;
+        voiceRecognition.interimResults = true;
+        voiceRecognition.lang = document.documentElement.getAttribute("lang") || "ar-SA";
+
+        voiceRecognition.onstart = function() {
+            isVoiceRecording = true;
+            if (btn) btn.classList.add("is-recording");
+            if (status) status.innerHTML = "🔴 <strong>جاري الاستماع لصوتك الآن...</strong> تحدث بحرية عن فكرة مشروعك ومتطلباتك وسيقوم النظام بتفريغها لحظياً!";
+            if (typeof LuxuryAudio !== "undefined") LuxuryAudio.play("tap");
+        };
+
+        voiceRecognition.onresult = function(e) {
+            let text = "";
+            for (let i = 0; i < e.results.length; i++) {
+                text += e.results[i][0].transcript + " ";
+            }
+            if (transcript) transcript.value = text.trim();
+        };
+
+        voiceRecognition.onerror = function(e) {
+            console.warn("Speech recognition notice:", e);
+            isVoiceRecording = false;
+            if (btn) btn.classList.remove("is-recording");
+            if (status) {
+                if (e.error === 'not-allowed') {
+                    status.innerHTML = "⚠️ تم حظر إذن الميكروفون في المتصفح. يُرجى السماح بالمايك أو كتابة الفكرة مباشرة.";
+                } else if (e.error === 'no-speech') {
+                    status.innerHTML = "لم نسمع صوتاً. اضغط على المايك وتحدث بوضوح أو اكتب فكرتك مباشرة.";
+                } else {
+                    status.innerHTML = "اضغط على المايكروفون وتحدث أو اكتب فكرتك مباشرة في المربع أدناه.";
+                }
+            }
+        };
+
+        voiceRecognition.onend = function() {
+            isVoiceRecording = false;
+            if (btn) btn.classList.remove("is-recording");
+            if (status && transcript && transcript.value.trim().length > 0) {
+                status.innerHTML = "✓ تم تسجيل فكرتك بنجاح! اضغط على الزر الذهبي بالأسفل لتوليد خطة العمل فوراً.";
+            }
+        };
+
+        voiceRecognition.start();
+        if (status) status.innerHTML = "🎙️ جاري فتح الميكروفون والاتصال بمحرك الصوت...";
+    } catch(err) {
+        console.error("Speech recognition start error:", err);
+        isVoiceRecording = false;
+        if (btn) btn.classList.remove("is-recording");
+        if (status) status.innerHTML = "⚠️ تعذر تشغيل المايكروفون. يمكنك كتابة فكرتك مباشرة وسيقوم النظام بهندستها.";
+    }
+}function stopVoiceRecording(){isVoiceRecording=!1;const e=document.getElementById("voicePlannerMicBtn"),n=document.getElementById("voicePlannerStatus");if(e&&e.classList.remove("is-recording"),n&&(n.innerHTML="✓ تم تسجيل الفكرة. انقر على الزر الذهبي أدناه لتوليد خطة العمل!"),voiceRecognition){try{voiceRecognition.stop()}catch(e){}voiceRecognition=null}}function fillVoiceSample(e){const n=document.getElementById("voicePlannerTranscript");n&&(n.value=e,generateAiProjectBlueprint())}function resetVoicePlanner(){stopVoiceRecording(),stopBlueprintAudioSynthesis();const e=document.getElementById("voicePlannerTranscript"),n=document.getElementById("voicePlannerResult"),t=document.getElementById("voicePlannerStatus");e&&(e.value=""),n&&(n.innerHTML="",n.style.display="none"),t&&(t.innerHTML="اضغط على المايكروفون وتحدث بفكرة أو متطلبات مشروعك...")}function generateAiProjectBlueprint(){stopBlueprintAudioSynthesis();const e=document.getElementById("voicePlannerTranscript"),n=document.getElementById("voicePlannerResult"),t=document.getElementById("voicePlannerStatus"),o=e?e.value.trim():"";if(!o||o.length<5)return t&&(t.innerHTML="⚠️ الرجاء التحدث بصوتك أو كتابة نبذة بسيطة عن فكرتك أولاً لتوليد الخطة!"),void(e&&e.focus());t&&(t.innerHTML="⚡ جاري المعالجة وهندسة خطة العمل التنفيذية بواسطة الذكاء الاصطناعي..."),setTimeout(()=>{const e=o.toLowerCase();let i="منظومة سحابية وحلول متكاملة للأعمال 2026",s="التحول الرقمي وأتمتة الشركات",c="بنية سحابية فائقة السرعة مع لوحة تحكم ذكية",a="+42% توفير بالتكاليف التشغيلية و 3.8x سرعة في إنجاز العمليات";// Smart Domain Routing: Tech, Web, Cloud, AI, Portals, CLGID Governance -> Eng. Salim Aziza
 const isWebOrTech = e.includes("ويب") || e.includes("موقع") || e.includes("منصة") || e.includes("بوابة") || 
                     e.includes("تطبيق") || e.includes("سحاب") || e.includes("برمج") || e.includes("كود") || 
                     e.includes("ذكاء") || e.includes("api") || e.includes("web") || e.includes("website") || 
@@ -670,3 +738,5 @@ window.openExecutiveCheckoutModal = openExecutiveCheckoutModal;
 window.closeExecutiveCheckoutModal = closeExecutiveCheckoutModal;
 window.toggleBlueprintAudioSynthesis = toggleBlueprintAudioSynthesis;
 window.stopBlueprintAudioSynthesis = stopBlueprintAudioSynthesis;
+window.downloadBlueprintArchitectureJson = downloadBlueprintArchitectureJson;
+window.dispatchBlueprintToClientAndManagement = dispatchBlueprintToClientAndManagement;
