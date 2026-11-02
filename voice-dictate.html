@@ -226,6 +226,15 @@
             <button type="button" id="clearBtn" class="btn-action btn-clear">
                 <span>مسح</span>
             </button>
+            <button type="button" id="popoutBtn" class="btn-action btn-clear" title="فتح كنافذة عائمة صغيرة بجانب المحادثة">
+                <span>🗗 نافذة مصغرة</span>
+            </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="checkbox" id="autoCopyCheck" checked style="accent-color: var(--gold); cursor: pointer;">
+                <span>⚡ نسخ تلقائي إلى الحافظة فور الانتهاء من التحدث</span>
+            </label>
         </div>
     </div>
 
@@ -287,8 +296,20 @@
             recognition.onend = function() {
                 isRecording = false;
                 startMicBtn.classList.remove('recording');
-                statusTag.innerHTML = 'تم الإيقاف. يمكنك الضغط على "نسخ النص فوراً" ولصقه في المحادثة.';
+                statusTag.innerHTML = 'تم الإيقاف. النص جاهز.';
                 statusTag.classList.remove('active');
+
+                // Auto copy to clipboard if enabled
+                const autoCopyCheck = document.getElementById('autoCopyCheck');
+                if (autoCopyCheck && autoCopyCheck.checked) {
+                    const text = transcriptBox.innerText.replace('سيظهر كلامك المنطوق هنا مباشرة أثناء التحدث...', '').trim();
+                    if (text) {
+                        navigator.clipboard.writeText(text).then(() => {
+                            statusTag.innerHTML = '⚡ تم النسخ التلقائي إلى الحافظة بنجاح! اضغط Ctrl + V في المحادثة فوراً.';
+                            statusTag.style.color = '#34d399';
+                        }).catch(() => {});
+                    }
+                }
             };
 
             startMicBtn.addEventListener('click', function() {
