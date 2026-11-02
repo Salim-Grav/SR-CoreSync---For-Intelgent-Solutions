@@ -56,3 +56,4 @@ for p in PURGE_PATHS:
     print(f"  • {p:<25}: {'IGNORED (Protected) ✅' if ignored else 'NOT IGNORED ⚠️'}")
 
 print("=" * 70)
+

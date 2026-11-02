@@ -54,3 +54,4 @@ for hf in html_files:
         print(f"  • Updated cache tags in: {hf}")
 
 print(f"\nDone! Updated {updated_count}/{len(html_files)} HTML files with ?{VERSION_TAG}.")
+
