@@ -63,6 +63,9 @@ jobs:
       - name: Audit Localized Relative Paths
         run: python scripts/audit_language_paths.py
 
+      - name: Audit Multilingual Page Structure and Direction
+        run: python scripts/check_multilingual_page_parity.py
+
       # Catches the Oct 2026 regression where rewritten landing pages declared
       # og:locale=en_US (or legacy ar_SA) regardless of their html lang.
       - name: Audit og:locale vs page language
