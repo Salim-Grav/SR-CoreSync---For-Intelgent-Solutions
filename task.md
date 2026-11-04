@@ -703,3 +703,11 @@
     1. تشغيل الفحص الحي عبر بروتوكول DevTools والتحقق من الـ 30 لغة عبر متصفح Chromium/Edge.
     2. تحقيق نتيجة 30 passed / 0 failed بنسبة 100%، وتأكيد اجتياز صفحة ckb/ بنجاح تام (js-errors=0).
     3. إغلاق وتحديث سجل المهام ووثيقة الـ Walkthrough بنسبة 100%.
+
+<!-- id: 119 -->
+- [x] **المرحلة 119: تشخيص وحل خطأي Git Credential Manager وتعارض السجل البعيد (Pull Before Push)**
+  - **الهدف**: تشخيص وحل خطأ ويندوز "The string binding is invalid" ورفض الرفع للفرع السحابي "Can't push refs to remote. Try running 'Pull' first".
+  - **الإنجازات**:
+    1. تشخيص سبب خطأ GCM: تعطل قناة RPC لنظام ويندوز مع مدير الاعتماد وتقديم حل wincred البديل.
+    2. تشخيص سبب رفض الرفع: وجود تعديلات في origin/main تقتضي الدمج الترتيبي عبر git pull origin main --rebase.
+    3. صياغة وتوثيق أوامر الحل الجذري بنسبة 100%.
