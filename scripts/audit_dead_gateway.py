@@ -25,7 +25,6 @@ and must not fail the build.  Therefore comments are stripped before the
 search.
 """
 
-from __future__ import print_function
 
 import io
 import os
