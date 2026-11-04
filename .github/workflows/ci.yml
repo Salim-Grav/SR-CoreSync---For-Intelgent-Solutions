@@ -63,6 +63,9 @@ jobs:
       - name: Audit Localized Relative Paths
         run: python scripts/audit_language_paths.py
 
+      - name: Audit Core Portal Localization
+        run: python scripts/localize_portal_core_metadata.py --check
+
       - name: Audit Multilingual Page Structure and Direction
         run: python scripts/check_multilingual_page_parity.py
 
