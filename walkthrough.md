@@ -3676,3 +3676,16 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
    - تم بناء المنصة عبر سكربت خارجي `js/smart-business-advisor.js` متوافق تماماً مع سياسة CSP الصارمة.
    - اجتاز المشروع فحص `python scripts/build_csp.py --check` (149 بصمة عبر 157 صفحة) وفحص `node scripts/validate.js` بنجاح 100%.
    - التقاط لقطة شاشة مرئية حية للمنصة الجديدة وحفظها في `live_terminal_snapshot.jpg`.
+
+---
+
+## 108. الجولة الثامنة بعد المائة: حل خطأ SyntaxError في فحص المتصفح الحي (ckb/index.html) وتأكيد سلامة 30 لغة
+
+### 1. تشخيص سبب فشل فحص الكونسول في `/ckb/`:
+- **الخطأ:** `FAIL /ckb/ js-errors=1 ! SyntaxError: Identifier 'voiceRecognition' has already been declared`.
+- **السبب الجذري:** صفحة الكردية السورانية `ckb/index.html` كانت لا تزال تحتفظ بكتلة سكربت مضمنة قديمة للتخطيط الصوتي (الأسطر 11441 - 11953) بالتوازي مع تحميلها للمكتبة الخارجية الموحدة `../js/sr-inline-13eaa28e.js`. وحيث إن كلاً من الكتلتين تعرّف `let voiceRecognition = null;` بنطاق عام، رمى محرك جافاسكربت في المتصفح خطأ Redeclaration فوري.
+- **الحل الجذري المطبق:**
+  - تم استئصال كتلة السكربت المضمنة المكررة بالكامل من `ckb/index.html`، والاعتماد الحصري النظيف على `../js/sr-inline-13eaa28e.js` مثلها مثل بقية الصفحات الـ 29 (en, de, tr, ku, ar, nl, fr...).
+  - تصحيح مسار الأيقونات في `smart-business-advisor.html` ليطابق مسار الأصول الرسمي `./assets/`.
+  - إعادة بناء حزمة النشر `_site` واجتياز فحص الروابط `python scripts/check_site_links.py` (9461 رابطاً، 0 أخطاء).
+  - مزامنة وتأكيد فحص الأمان `python scripts/build_csp.py --check` (148 بصمة أمنية) وفحص السكربتات المضمنة `node scripts/check_inline_scripts.mjs` بنسبة 100%.
