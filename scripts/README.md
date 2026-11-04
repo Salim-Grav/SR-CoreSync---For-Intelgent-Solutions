@@ -15,6 +15,7 @@
 | `audit_js_identifiers.py` | لا معرّفات JavaScript مترجمة/تالفة |
 | `audit_language_api_parity.py` | تكافؤ واجهات JS بين اللغات |
 | `localize_portal_core_metadata.py --check` | اكتمال العناوين والأوصاف الأساسية المترجمة وعناوين صفحات العرض |
+| `build_csp.py --check` | تطابق بصمات CSP مع مجموعة النشر المبنية |
 | `check_multilingual_page_parity.py` | ترتيب الأقسام المشتركة واتجاه `lang`/`dir` في صفحتي الرئيسية والعرض لكل لغة |
 | `audit_dead_gateway.py` | لا إشارة إلى بوابة PHP الميتة |
 | `validate_publish_set.py` | لا مواد خادم داخل ما سيُنشر |
