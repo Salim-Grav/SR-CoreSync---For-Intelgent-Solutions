@@ -93,6 +93,38 @@ def replace_once(content, pattern, replacement, label, path, check_only):
     return updated
 
 
+def update_launchpad_language_count(content, path, check_only):
+    language_count = str(len(LANGUAGES))
+    updated = re.sub(
+        r'(<span class="apple-dock-badge">)28(</span>)',
+        rf"\g<1>{language_count}\2",
+        content,
+    )
+    replacements = (
+        ("All 28 Languages", f"All {language_count} Languages"),
+        ("Open Full 28 Languages Menu", f"Open Full {language_count} Languages Menu"),
+        ("28 Sovereign Languages Grid", f"{language_count} Sovereign Languages Grid"),
+        (
+            "28 Supported Nations & VAT Regimes",
+            f"{language_count} Supported Languages & VAT Regimes",
+        ),
+        (
+            "28 Supported Languages & VAT Regimes",
+            f"{language_count} Supported Languages & VAT Regimes",
+        ),
+        ("اللغات الـ 28", f"اللغات الـ {language_count}"),
+        ("(28 دولة ونظاماً ضريبياً)", f"({language_count} لغة ونظاماً ضريبياً)"),
+    )
+    for source, replacement in replacements:
+        updated = updated.replace(source, replacement)
+    if check_only and updated != content:
+        raise ValueError(f"{path}: launchpad language count is not {language_count}")
+    badges = re.findall(r'<span class="apple-dock-badge">(\d+)</span>', updated)
+    if not badges or any(badge != language_count for badge in badges):
+        raise ValueError(f"{path}: launchpad badge does not match {language_count} configured languages")
+    return updated
+
+
 def update_index(path, code, locale, check_only):
     content = path.read_text(encoding="utf-8")
     escaped_title = html.escape(locale["page_title"], quote=False)
@@ -115,6 +147,7 @@ def update_index(path, code, locale, check_only):
         relative,
         check_only,
     )
+    content = update_launchpad_language_count(content, relative, check_only)
 
     if code not in {"ar", "en"}:
         og_title = html.escape(locale["page_title"], quote=True)
@@ -178,13 +211,15 @@ def update_index(path, code, locale, check_only):
 
 def update_demo(path, code, locale, ui_locale, check_only):
     content = path.read_text(encoding="utf-8")
+    relative = path.relative_to(BASE_DIR)
+    content = update_launchpad_language_count(content, relative, check_only)
     title = html.escape(locale["demo_title"], quote=False)
     content = replace_once(
         content,
         r"<title>.*?</title>",
         f"<title>{title}</title>",
         "demo page title",
-        path.relative_to(BASE_DIR),
+        relative,
         check_only,
     )
     if code == "en":
