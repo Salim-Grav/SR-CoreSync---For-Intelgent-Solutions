@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستشار القانوني والمحاسبي الذكي للأعمال | S&R CoreSync Sovereign Business Advisor</title>
+    <meta name="description" content="منصة المستشار القانوني والمحاسبي الذكي لأصحاب الأنشطة التجارية والمطاعم - حل وتخفيض الغرامات الضريبية، أتمتة الاعتراضات، وتوجيه القضايا للمحاسبين المعتمدين.">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/sovereign-mission-suite.css">
+    <style>
+        .advisor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+        @media (max-width: 992px) { .advisor-grid { grid-template-columns: 1fr; } }
+        .card-advisor { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden; }
+        .card-advisor::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold-primary), var(--accent)); }
+        .mic-btn-pulse { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #b8860b); border: 2px solid #fff; color: #04070d; font-size: 1.7rem; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: all 0.3s; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+        .mic-btn-pulse.recording { animation: pulseRecord 1.2s infinite; background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; box-shadow: 0 0 25px rgba(239,68,68,0.7); }
+        @keyframes pulseRecord { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .quick-tag { display: inline-block; background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.3); color: var(--accent); padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; margin: 0.2rem; }
+        .quick-tag:hover { background: rgba(212,175,55,0.2); border-color: var(--gold-primary); color: #fff; }
+        .status-badge-live { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.65rem; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
+        .status-badge-live.pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .status-badge-live.resolved { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .status-badge-live.assigned { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3); }
+        .timeline-box { border-right: 2px solid var(--accent); padding-right: 1rem; margin: 1rem 0; }
+    </style>
+</head>
+<body class="theme-gold">
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="brand-section">
+                <img src="assets/images/sr-core-emblem.svg" alt="S&R CoreSync" class="brand-logo">
+                <div>
+                    <span class="brand-title">S&R CoreSync Business Advisor</span>
+                    <span class="brand-sub">المستشار القانوني والمحاسبي الذكي لأصحاب الأنشطة التجارية والمطاعم</span>
+                </div>
+            </a>
+            <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                <span class="status-badge-live resolved">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
+                    نظام الاعتراض الضريبي متصل بنظام مصلحة الضرائب الهولندية (Belastingdienst)
+                </span>
+                <a href="index.html" class="btn" style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid var(--border-dim); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">الرئيسية</a>
+                <a href="demo.html" class="btn" style="background: rgba(212,175,55,0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">لوحة القيادة</a>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 1640px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1;">
+        <!-- Banner Summary -->
+        <div style="background: linear-gradient(135deg, rgba(9,18,32,0.9), rgba(13,26,45,0.95)); border: 1px solid var(--border-gold); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h1 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 0.4rem;">
+                    🏛️ المستشار المحاسبي والقانوني الذكي لأصحاب المطاعم والفعاليات التجارية
+                </h1>
+                <p style="color: #94a3b8; font-size: 0.92rem; max-width: 900px;">
+                    منظومة ذكية مخصصة لخدمة أكثر من 400 نشاط تجاري ومطعم من أبناء الجالية: طرح المشاكل المالية والمخالفات الضريبية بالصوت أو النص، تجهيز مسودات الاعتراض القانوني فورياً، وتخصيص الملفات مباشرة للشريك المحاسبي القانوني المعتمد (الأستاذ رودين).
+                </p>
+            </div>
+            <div style="display: flex; gap: 0.6rem; align-items: center;">
+                <button id="btn-export-all-cases" class="btn" style="background: rgba(56,189,248,0.15); color: var(--cyan); border: 1px solid var(--border-dim); padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                    📥 تصدير سجل القضايا (JSON)
+                </button>
+                <button id="btn-whatsapp-dispatch" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                    💬 مشاركة عاجلة عبر الواتساب
+                </button>
+            </div>
+        </div>
+
+        <!-- 4 Pillars Navigation Tabs -->
+        <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-dim); padding-bottom: 0.8rem; overflow-x: auto;">
+            <button id="tab-btn-voice" class="btn active" style="background: var(--gold-primary); color: #04070d; border: none; padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 800; cursor: pointer;">
+                🎙️ المستشار الصوتي الفوري (حل الغرامات)
+            </button>
+            <button id="tab-btn-onboarding" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                📋 انضمام أصحاب الأنشطة (Onboarding السريع)
+            </button>
+            <button id="tab-btn-accountant" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                ⚖️ لوحة المحاسب القانوني (الأستاذ رودين)
+            </button>
+            <button id="tab-btn-stats" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                📊 إحصائيات التوفير واسترداد المبالغ
+            </button>
+        </div>
+
+        <!-- Section 1: Voice & Quick Dispute Triage -->
+        <div id="section-voice" class="advisor-tab-content">
+            <div class="advisor-grid">
+                <!-- Left: Input Console -->
+                <div class="card-advisor">
+                    <h2 style="color: var(--gold-primary); font-size: 1.2rem; font-weight: 800; margin-bottom: 0.8rem;">
+                        🎙️ تحدث بصوتك أو اكتب مشكلتك المالية/الضريبية
+                    </h2>
+                    <p style="color: #94a3b8; font-size: 0.86rem; margin-bottom: 1rem;">
+                        لا داعي للقلق أو كتابة مصطلحات قانونية معقدة. تحدث بلغتك وسيقوم الذكاء الاصطناعي بتشخيص الحالة وتجهيز المسودة للمحاسب فوراً:
+                    </p>
+
+                    <!-- Mic Pulse Trigger -->
+                    <div style="text-align: center; margin: 1.5rem 0;">
+                        <button id="mic-trigger" class="mic-btn-pulse" title="انقر للتحدث بالصوت">
+                            🎤
+                        </button>
+                        <p id="mic-status-label" style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.6rem;">
+                            انقر على الميكروفون للتحدث بالعربية مباشرة
+                        </p>
+                    </div>
+
+                    <!-- Quick Pre-sets -->
+                    <div style="margin-bottom: 1rem;">
+                        <span style="font-size: 0.8rem; color: #cbd5e1; display: block; margin-bottom: 0.4rem;">
+                            ⚡ قوالب وحالات شائعة للاختيار السريع:
+                        </span>
+                        <span class="quick-tag" data-case="ابو جميل: وصلتني غرامة تأخير من مصلحة الضرائب الهولندية بقيمة 4500 يورو عن إقرار ضريبة القيمة المضافة BTW، ومعي مهلة أسبوعين للاعتراض، والمحاسب السابق أهمل الموعد.">
+                            🔴 غرامة تأخير BTW مصلحة الضرائب (مثل حالة أبو جميل)
+                        </span>
+                        <span class="quick-tag" data-case="مخالفة بلدية للترخيص وإشغال الرصيف الخارجي للمطعم بقيمة 1850 يورو بدون إشعار مسبق من مفتش البلدية.">
+                            🏪 مخالفة بلدية وترخيص مطعم
+                        </span>
+                        <span class="quick-tag" data-case="تراكم فواتير ضريبة الرواتب والأجور Loonheffing عن 4 موظفين عن الربع الثاني ونحتاج جدولة فورية مع الضرائب.">
+                            👥 ضرائب رواتب وأجور موظفين
+                        </span>
+                    </div>
+
+                    <!-- Input Box -->
+                    <label for="case-input-text" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">تفاصيل المشكلة / ملخص الموقف:</label>
+                    <textarea id="case-input-text" rows="5" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.8rem; font-size: 0.9rem; resize: vertical;" placeholder="اكتب هنا أو استخدم الميكروفون... مثلاً: وصلتني غرامة من مصلحة الضرائب الهولندية بمبلغ..."></textarea>
+
+                    <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+                        <button id="btn-analyze-case" class="btn" style="flex: 1; background: linear-gradient(135deg, var(--gold-primary), #b8860b); color: #04070d; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.95rem;">
+                            ⚡ تشخيص المشكلة وتوليد مسودة الاعتراض
+                        </button>
+                        <button id="btn-clear-input" class="btn" style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid var(--border-dim); padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">
+                            مسح
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Analysis & Generated Draft -->
+                <div class="card-advisor">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                        <h2 style="color: var(--accent); font-size: 1.2rem; font-weight: 800;">
+                            📑 التشخيص ومسودة الاعتراض القانوني
+                        </h2>
+                        <span id="analysis-status-pill" class="status-badge-live pending">في انتظار المدخلات</span>
+                    </div>
+
+                    <div id="analysis-output-container">
+                        <div style="background: #060b13; border: 1px dashed var(--border-dim); border-radius: 10px; padding: 2rem; text-align: center; color: #64748b;">
+                            <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">⚖️</span>
+                            تحدث بالصوت أو اضغط على أحد القوالب الشائعة ثم انقر "تشخيص المشكلة" لعرض التكييف القانوني، نسبة النجاح في الإسقاط، ومسودة الخطاب الجاهز.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Rapid Onboarding -->
+        <div id="section-onboarding" class="advisor-tab-content" style="display: none;">
+            <div class="card-advisor" style="max-width: 900px; margin: 0 auto;">
+                <h2 style="color: var(--gold-primary); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem;">
+                    🚀 انضمام وتسجيل أصحاب الأنشطة التجارية والمطاعم (بضغطة زر واحدة)
+                </h2>
+                <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.5rem;">
+                    استثمار شبكة العلاقات والأنشطة التجارية في هولندا والجالية العربية (أكثر من 400 مطعم ونشاط) لحماية مصالحهم وتنظيم ملفاتهم الضريبية والمحاسبية تحت مظلة واحدة:
+                </p>
+
+                <form id="onboarding-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label for="business-name" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم النشاط / المطعم:</label>
+                        <input id="business-name" type="text" required placeholder="مثال: مطعم الأندلس / كافيه دمشق" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                    </div>
+                    <div>
+                        <label for="owner-name" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم المالك / المدير المسؤول:</label>
+                        <input id="owner-name" type="text" required placeholder="مثال: السيد أبو جميل" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                    </div>
+                    <div>
+                        <label for="contact-phone" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">رقم الهاتف / الواتساب:</label>
+                        <input id="contact-phone" type="tel" required placeholder="+31 6 12345678" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem; direction: ltr; text-align: right;">
+                    </div>
+                    <div>
+                        <label for="business-city" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">المدينة / البلدية في هولندا:</label>
+                        <input id="business-city" type="text" required placeholder="أمستردام / روتردام / أوترخت..." style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                    </div>
+                    <div style="grid-column: span 2;">
+                        <label for="primary-need" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">الحاجة الأساسية العاجلة:</label>
+                        <select id="primary-need" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                            <option value="غرامات ومخالفات ضريبية متراكمة (Belastingdienst)">حل وتخفيض غرامات ومخالفات مصلحة الضرائب المتراكمة</option>
+                            <option value="إدارة محاسبية شهرية وإقرارات BTW">إدارة محاسبية شهرية وتقديم إقرارات BTW بانتظام</option>
+                            <option value="استشارات عقود وإيجار وترخيص المطاعم">استشارات عقود إيجار وترخيص ومخالفات البلدية (Gemeente)</option>
+                            <option value="تأسيس أو نقل سجل تجاري KVK">تأسيس أو تسوية شركة وسجل تجاري KVK</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: span 2; margin-top: 0.5rem;">
+                        <button type="submit" class="btn" style="width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.85rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;">
+                            ✅ تسجيل الانضمام وإنشاء بطاقة العميل الذكية
+                        </button>
+                    </div>
+                </form>
+
+                <div id="onboarding-result" style="display: none; margin-top: 1.5rem; background: #060b13; border: 1px solid #10b981; border-radius: 10px; padding: 1.2rem;">
+                    <!-- Result dynamically rendered -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Accountant / Rodin Central Console -->
+        <div id="section-accountant" class="advisor-tab-content" style="display: none;">
+            <div class="card-advisor">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
+                    <div>
+                        <h2 style="color: var(--gold-primary); font-size: 1.3rem; font-weight: 800;">
+                            ⚖️ لوحة تحكم المحاسب القانوني المعتمد (الأستاذ رودين وفريق العمل)
+                        </h2>
+                        <p style="color: #94a3b8; font-size: 0.88rem;">
+                            إدارة قضايا الغرامات وتعيين المهام ومتابعة المواعيد القانونية والاعتراضات الرسمية مع Belastingdienst:
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.6rem;">
+                        <span class="status-badge-live assigned">المحاسب المسؤول: أ. رودين (مكتب المحاسبة المعتمد)</span>
+                    </div>
+                </div>
+
+                <!-- Cases Table -->
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: right;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-dim); color: #94a3b8;">
+                                <th style="padding: 0.8rem;">رقم القضية</th>
+                                <th style="padding: 0.8rem;">العميل / النشاط</th>
+                                <th style="padding: 0.8rem;">نوع الغرامة / المشكلة</th>
+                                <th style="padding: 0.8rem;">المبلغ المطلوب</th>
+                                <th style="padding: 0.8rem;">المهلة القصوى</th>
+                                <th style="padding: 0.8rem;">الحالة الحالية</th>
+                                <th style="padding: 0.8rem;">الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountant-cases-table-body">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Stats -->
+        <div id="section-stats" class="advisor-tab-content" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
+                <div class="card-advisor" style="text-align: center;">
+                    <span style="font-size: 2rem; color: var(--gold-primary); font-weight: 900; display: block;">400+</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">الأنشطة والمطاعم المستهدفة</span>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">شبكة أعمال الجالية في هولندا</p>
+                </div>
+                <div class="card-advisor" style="text-align: center;">
+                    <span style="font-size: 2rem; color: #10b981; font-weight: 900; display: block;">€184,200</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">غرامات تم إسقاطها وتخفيضها</span>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">عبر مذكرات الاعتراض القانوني</p>
+                </div>
+                <div class="card-advisor" style="text-align: center;">
+                    <span style="font-size: 2rem; color: var(--cyan); font-weight: 900; display: block;">100%</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">حماية المواعيد (Deadlines)</span>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">لا قضايا تسقط بفوات المهلة</p>
+                </div>
+                <div class="card-advisor" style="text-align: center;">
+                    <span style="font-size: 2rem; color: #a78bfa; font-weight: 900; display: block;">6 أسابيع</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">مهلة الاعتراض الرسمية (Bezwaar)</span>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">وفق القانون الضريبي الهولندي</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: rgba(4, 10, 20, 0.95); border-top: 1px solid var(--border-dim); padding: 1.2rem; text-align: center; font-size: 0.82rem; color: #64748b;">
+        جميع الحقوق محفوظة © 2026 S&R CoreSync For Intelligent Solutions — منصة المستشار القانوني والمحاسبي السيادية
+    </footer>
+
+    <script src="js/sovereign-mission-core.js"></script>
+    <script src="js/smart-business-advisor.js"></script>
+</body>
+</html>
