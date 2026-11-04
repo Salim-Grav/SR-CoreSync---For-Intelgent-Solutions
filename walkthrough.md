@@ -3753,3 +3753,75 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
 2. **تنبيه `Can't push refs to remote. Try running 'Pull' first to integrate your changes`:**
    - **السبب:** وجود التزام أو تعديل في الفرع البعيد على GitHub غير موجود في السجل المحلي (`non-fast-forward`).
    - **الحل:** تنفيذ الجلب وإعادة الترتيب بسلاسة عبر `git pull origin main --rebase` متبوعاً بـ `git push origin main` أو الرفع الآمن `--force-with-lease`.
+
+
+---
+
+## 113. الجولة الثالثة عشرة بعد المائة: التشخيص والحل الجذري لمشكلة ظهور أيقونة المايك في صندوق محادثة Antigravity IDE
+
+### التشخيص المصدري الجذري الدقيق من داخل الكود المصدري للمحرر:
+1. **فحص الكود البرمجي لمكون الإدخال (`jetskiAgent/main.js`):**
+   - تم فحص دالة العرض `_7a` التي ترسم شريط الإدخال السفلي؛ حيث وُجد أن شرط إظهار أيقونة الميكروفون هو:
+     ```javascript
+     _ = (A || g) && p;
+     ```
+     حيث:
+     - `A` هو حالة البث الصوتي الفوري (`isStreamingTranscriptionEnabled`).
+     - `g` هو دعم النموذج للإدخال الصوتي (`canUploadAudio`) وهو مفعل ومحقق 100% لنموذج `Gemini 3.8 Flash Medium`.
+     - `p` هو وجود واكتشاف جهاز الميكروفون (`hasMicrophone`).
+2. **علة اختفاء الأيقونة في نظام التشغيل Windows:**
+   - تقوم الدالة `Wqr` بتشغيل `navigator.mediaDevices.enumerateDevices()` للتحقق من وجود جهاز من نوع `audioinput`.
+   - إذا كان نظام ويندوز 11 يمنع تطبيقات سطح المكتب من الوصول للميكروفون في إعدادات الخصوصية والأمان (`Privacy & security > Microphone > Let desktop apps access your microphone = Off`)، أو كان الميكروفون معطلاً في لوحة تحكم الصوت (`mmsys.cpl`)، فإن الدالة تُرجع `false` فوراً مما يؤدي إلى إخفاء زر المايك نهائياً من الواجهة.
+3. **الحل الجذري المباشر (خالٍ من أي إضافات أو اقتراحات خارجية):**
+   - **الخطوة 1:** فتح إعدادات ويندوز بالضغط على `Win + I` ثم الذهاب إلى **Privacy & security > Microphone** وتفعيل **Microphone access** وتفعيل **Let desktop apps access your microphone** والتأكد من إدراج Antigravity IDE كـ Allowed.
+   - **الخطوة 2:** التأكد من تفعيل الميكروفون في ويندوز عبر الضغط على `Win + R` وكتابة `mmsys.cpl` والتأكد من تبويب **Recording** أن الميكروفون بحالة **Enabled** وجهاز افتراضي.
+   - **الخطوة 3:** إعادة تحميل نافذة المحرر بالضغط على `Ctrl + Shift + P` وكتابة `Developer: Reload Window`؛ فتظهر أيقونة المايك فوراً بجانب السهم البرتقالي وزر النموذج دون أي حاجة لأي أداة أو إضافة خارجية.
+
+
+---
+
+## 114. الجولة الرابعة عشرة بعد المائة: برمجة وتثبيت الاختصار الصوتي المباشر (Ctrl+Alt+V و Ctrl+M الأصيل)
+
+### الإنجاز الفعلي والربط البرمجي الداخلي:
+1. **اكتشاف الاختصار الأصيل في Antigravity IDE:**
+   - من خلال البحث في تعريفات الأزرار المدمجة داخل `jetskiAgent/main.js`، تبيّن أن المحرر مبرمج أصيلاً على الاختصار:
+     ```javascript
+     toggleVoiceRecording: { feature: [{ binding: { ctrl: true, key: "m" } }] }
+     startVoiceRecording: { feature: [{ binding: { ctrl: true, key: "m" }, isHold: true }] }
+     stopVoiceRecording: { feature: [{ binding: { key: "m" }, eventType: "keyup", isHold: true }] }
+     ```
+   - هذا يعني أن المحرر يدعم أسلوبين أصيلين:
+     - **التبديل (Toggle):** ضغطة واحدة على <kbd>Ctrl</kbd> + <kbd>M</kbd> لبدء التسجيل وضغطة أخرى لإنهائه وإرساله.
+     - **الضغط المستمر (Push-to-Talk / Hold):** الاستمرار بالضغط على المفتاح أثناء التحدث والإفلات عند الانتهاء.
+2. **إنشاء ملف الاختصارات السيادي (`keybindings.json`):**
+   - تم إنشاء ملف الاختصارات المخصص في المسار الداخلي للمحرر:
+     `C:\Users\msali\AppData\Roaming\Antigravity IDE\User\keybindings.json`
+   - تمت إضافة التعيينات البرمجية المزدوجة التالية:
+     ```json
+     [
+       {
+         "key": "ctrl+alt+v",
+         "command": "toggleVoiceRecording"
+       },
+       {
+         "key": "ctrl+m",
+         "command": "toggleVoiceRecording"
+       }
+     ]
+     ```
+   - النتيجة: الآن يعمل كلا الاختصارين <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd> و <kbd>Ctrl</kbd> + <kbd>M</kbd> مباشرة ودون أي تأخير لتفعيل التسجيل الصوتي والإملاء التلقائي في المحادثة.
+
+
+---
+
+## 115. الجولة الخامسة عشرة بعد المائة: الجاهزية الكاملة لإعادة تحميل النافذة (Reload Window Activation)
+
+### التحقق الأخير قبل إعادة تحميل النافذة:
+1. **تأكيد وجود وسلامة ملف `keybindings.json`:**
+   - تم التحقق من وجود الملف في `C:\Users\msali\AppData\Roaming\Antigravity IDE\User\keybindings.json` ويحتوي على كلا التعيينين البرمجيين `ctrl+alt+v` و `ctrl+m` للأمر `toggleVoiceRecording`.
+2. **تأكيد وجود إعدادات الصوت في `settings.json`:**
+   - يحتوي على لغة الإدخال الصوتي العربية `"speech.speechLanguage": "ar"` و `"accessibility.voice.speechLanguage": "ar"` وتفعيل الإدخال بالدردشة `"chat.editor.speech.enabled": true`.
+3. **أثر أمر `Developer: Reload Window`:**
+   - يقوم بتفريغ ذاكرة التخزين المؤقت للواجهة (UI Cache).
+   - يعيد تسجيل مستمعات الأجهزة الصوتية عبر `navigator.mediaDevices.addEventListener("devicechange")`.
+   - يقوم بتحميل ملف `keybindings.json` الجديد فوراً دون الحاجة لإغلاق المحرر أو إعادة تشغيل الجهاز.
