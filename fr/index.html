@@ -576,6 +576,45 @@ main#wrapper:focus{outline:none}
                                         </div>
                                     </div>
                                     </div>
+                                    <!-- شريط كتابة الفكرة وهندسة المشروع الفوري بالذكاء الاصطناعي (Hero AI Idea Prompt Bar) -->
+                                    <div class="hero-ai-idea-bar" id="heroAiIdeaBar">
+                                        <form class="hero-ai-idea-form" data-sr-call="submitHeroAiIdea" data-sr-on="submit" data-sr-prevent="1">
+                                            <div class="hero-ai-idea-icon-wrap" aria-hidden="true">
+                                                <span class="hero-ai-idea-sparkle">✨</span>
+                                            </div>
+                                            <div class="hero-ai-idea-input-wrap">
+                                                <input type="text" id="heroAiIdeaInput" class="hero-ai-idea-input" placeholder="Saisissez votre idée de projet ici (ex. Boutique e-commerce, ERP Cloud, App IA)..." autocomplete="off" aria-label="Project Idea AI Input">
+                                            </div>
+                                            <div class="hero-ai-idea-btns">
+                                                <button type="button" class="hero-ai-idea-mic-btn" data-sr-call="openVoicePlannerFromHero" title="Exprimez votre idée de projet vocalement" aria-label="Exprimez votre idée de projet vocalement">
+                                                    <span class="hero-ai-mic-icon">🎙️</span>
+                                                </button>
+                                                <button type="submit" class="hero-ai-idea-submit-btn" title="Analyser avec l'IA ⚡" aria-label="Analyser avec l'IA ⚡">
+                                                    <span class="hero-ai-submit-text">Analyser avec l'IA ⚡</span>
+                                                    <span class="hero-ai-submit-arrow">→</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <!-- رقاقات الأفكار والقطاعات التخصصية (Executive Sector Chips) -->
+                                        <div class="hero-ai-chips-wrap" aria-label="Secteurs d'expertise :">
+                                            <span class="hero-ai-chips-label">Secteurs d'expertise :</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Architecture de paiement FinTech européenne conforme PSD2 et passerelles Stripe/iDEAL"]'>
+                                                <span>💳 FinTech & Systèmes de Paiement</span>
+                                            </button>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Suite ERP Cloud CoreSync pour la comptabilité, la conformité TVA et la logistique"]'>
+                                                <span>🏢 ERP CoreSync & Fiscalité TVA</span>
+                                            </button>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Flux d'agents IA autonomes et base de connaissances RAG pour l'automatisation"]'>
+                                                <span>🤖 Agents IA Autonomes</span>
+                                            </button>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Gestion intelligente des stocks européens et orchestration logistique intégrée"]'>
+                                                <span>📦 Logistique & Chaîne d'approvisionnement</span>
+                                            </button>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Plateforme e-commerce PWA à haute conversion avec synchronisation ERP"]'>
+                                                <span>🛒 Boutique E-Commerce PWA</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Right Column: Interactive 3D Luxury Master Emblem Showcase -->
