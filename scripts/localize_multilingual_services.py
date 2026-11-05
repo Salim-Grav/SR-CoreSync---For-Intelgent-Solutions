@@ -14,11 +14,16 @@ if hasattr(sys.stdout, "reconfigure"):
 SCRIPTS_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPTS_DIR.parent
 LOCALES_PATH = SCRIPTS_DIR / "portal_services_locales.json"
+UI_LOCALES_PATH = SCRIPTS_DIR / "portal_service_ui_locales.json"
 SECTION_PATTERN = re.compile(
     r'<section\b(?=[^>]*\bid=["\']services["\'])[^>]*>.*?</section>',
     re.IGNORECASE | re.DOTALL,
 )
 TEXT_NODE = re.compile(r">([^<>]+)<")
+VISIBLE_ATTRIBUTE = re.compile(
+    r'\b(data-text|aria-label|title|placeholder)\s*=\s*(["\'])(.*?)\2',
+    re.IGNORECASE | re.DOTALL,
+)
 SOURCE_KEYS = (
     "Our Services",
     "Visual Identity",
@@ -47,6 +52,12 @@ SOURCE_KEYS = (
     "Live ERP Demo ⚡",
     "ROI Calculator 📊",
     "WhatsApp 💬",
+)
+UI_SOURCE_KEYS = (
+    "Transparent Price:",
+    "Direct Savings",
+    "🚀 40% Reduction in Legacy Infrastructure Overhead",
+    "⚡ Sub-second response & offline PWA readiness",
 )
 
 
@@ -78,6 +89,26 @@ def load_locales():
 
 
 LOCALES = load_locales()
+
+
+def load_ui_locales():
+    try:
+        locales = json.loads(UI_LOCALES_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        fail(f"{UI_LOCALES_PATH.name}: cannot load locale data: {error}")
+    expected = set(LOCALES)
+    if set(locales) != expected:
+        fail(
+            f"{UI_LOCALES_PATH.name}: locale mismatch; missing="
+            f"{sorted(expected - set(locales))}, extra={sorted(set(locales) - expected)}"
+        )
+    for code, values in locales.items():
+        if set(values) != set(UI_SOURCE_KEYS):
+            fail(f"{UI_LOCALES_PATH.name}: incomplete UI translations for {code}")
+    return locales
+
+
+UI_LOCALES = load_ui_locales()
 
 
 def section_bounds(content, code):
@@ -116,14 +147,27 @@ def localize_section(section, translations):
         escaped = html.escape(html.unescape(translation), quote=False)
         return f">{leading}{escaped}{trailing}<"
 
-    return TEXT_NODE.sub(replace_text, section)
+    section = TEXT_NODE.sub(replace_text, section)
+
+    def replace_attribute(match):
+        source = normalize_text(match.group(3))
+        translation = normalized.get(source)
+        if translation is None:
+            return match.group(0)
+        quote = match.group(2)
+        escaped = html.escape(html.unescape(translation), quote=False)
+        escaped = escaped.replace(quote, "&quot;" if quote == '"' else "&#x27;")
+        return f'{match.group(1)}={quote}{escaped}{quote}'
+
+    return VISIBLE_ATTRIBUTE.sub(replace_attribute, section)
 
 
 def normalize_index_html(content, code):
     if code in {"ar", "en"}:
         return content
     start, end = section_bounds(content, code)
-    return content[:start] + localize_section(content[start:end], LOCALES[code]) + content[end:]
+    translations = {**LOCALES[code], **UI_LOCALES[code]}
+    return content[:start] + localize_section(content[start:end], translations) + content[end:]
 
 
 def validate_index_content(content, code):
@@ -135,10 +179,14 @@ def validate_index_content(content, code):
         normalize_text(match.group(1))
         for match in TEXT_NODE.finditer(section)
     }
+    visible.update(
+        normalize_text(match.group(3))
+        for match in VISIBLE_ATTRIBUTE.finditer(section)
+    )
     return [
         f"{code}/index.html: untranslated service text remains: {key}"
-        for key in SOURCE_KEYS
-        if normalize_text(LOCALES[code][key]) != normalize_text(key)
+        for key in (*SOURCE_KEYS, *UI_SOURCE_KEYS)
+        if normalize_text({**LOCALES[code], **UI_LOCALES[code]}[key]) != normalize_text(key)
         and normalize_text(key) in visible
     ] + (
         [f"{code}/index.html: double-escaped entity in #services"]
@@ -170,7 +218,7 @@ def main():
         localized = normalize_index_html(content, code) if args.apply else content
         issues.extend(validate_index_content(localized, code))
         if args.apply and localized != content:
-            path.write_text(localized, encoding="utf-8", newline="")
+            path.write_text(localized, encoding="utf-8", newline="\n")
 
     if issues:
         print("Service localization check failed:")

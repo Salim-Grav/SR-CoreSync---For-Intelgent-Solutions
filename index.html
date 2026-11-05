@@ -3,7 +3,6 @@
 <html lang="ar" dir="rtl" data-page-language="ar">
 
 <head>
-    <link rel="preload" as="image" href="./assets/about-founder-poster-640.webp" fetchpriority="high">
     <meta charset="utf-8">
             <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device & Media App Routing) -->
     <script id="srLangAutoDetect">!function(){try{if(/bot|crawl|spider|slurp|google|bing|yandex|lighthouse|headless/i.test(navigator.userAgent))return;var a=new URLSearchParams(window.location.search);if("1"===a.get("noredirect"))return;var e=a.get("lang"),r=["ar","en","nl","de","fr","tr","sv","no","es","it","ku","ckb","pl","pt","da","fi","cs","el","ro","hu","bg","sk","hr","lt","sl","lv","et","ga","mt"],t=(document.documentElement.getAttribute("lang")||"ar").toLowerCase().split("-")[0],n=-1!==window.location.pathname.indexOf("demo.html")?"demo.html":"index.html",o=!!window.location.pathname.match(/\/[a-z]{2,3}\//),i=o?"../":"./";if(e&&-1!==r.indexOf(e.toLowerCase())){var l=e.toLowerCase();try{sessionStorage.setItem("sr_user_lang_locked",l),localStorage.setItem("sr_lang_pref",l)}catch(a){}if(l!==t){var s="ar"===l?n:l+"/"+n;window.location.replace(i+s+window.location.hash)}return}if(o)return;var c=null;try{c=sessionStorage.getItem("sr_user_lang_locked")}catch(a){}if(c&&-1!==r.indexOf(c)){if(c!==t){s="ar"===c?n:c+"/"+n;window.location.replace(i+s+window.location.hash)}return}var g=null;try{g=localStorage.getItem("sr_lang_pref")}catch(a){}if(g&&-1!==r.indexOf(g)){if(g!==t){s="ar"===g?n:g+"/"+n;window.location.replace(i+s+window.location.hash)}return}for(var d=navigator.languages||[navigator.language||navigator.userLanguage||navigator.browserLanguage||""],f=null,w=0;w<d.length;w++){var h=(d[w]||"").toLowerCase().trim();if("ar"===h.split("-")[0]||-1!==h.indexOf("ar")){f="ar";break}}if(!f)for(var u=0;u<d.length;u++){var m=(d[u]||"").toLowerCase().trim(),v=m.split("-")[0];if(-1!==m.indexOf("ckb")||-1!==m.indexOf("sorani")){f="ckb";break}if(-1!==m.indexOf("ku")||-1!==m.indexOf("kurmanji")){f="ku";break}if(-1!==r.indexOf(v)){f=v;break}}if(f||(f="en"),f&&f!==t&&-1!==r.indexOf(f)){var p="ar"===f?n:f+"/"+n;window.location.replace(i+p+window.location.search+window.location.hash)}}catch(a){}}();</script>
@@ -210,7 +209,6 @@
     <!-- الخطوط الرسمية الأصلية لموقع دانا نجمة: Alexandria الفاخر بجميع أوزانه + Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="./assets/about-founder-poster.webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- حزمة الأنماط الأساسية المعتمدة محلياً لتشغيل فوري بدون أي بطء -->
@@ -1542,6 +1540,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
 <link rel="stylesheet" href="./css/sr-privacy-banner.css?v=20261102-p0-matrix">
     <link rel="stylesheet" href="./css/sr-header-support.css?v=20261102-p0-matrix">
 <script src="./js/sr-privacy-banner.js?v=20261102-p0-matrix" defer></script>
+    <script src="./js/lazy-founder-media.js" defer></script>
 </head>
 
 <body class="counter-scroll preloader-complete">
@@ -1844,7 +1843,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                         <div class="hero-emblem-frame">
                                             <picture class="hero-emblem-render-picture">
                                                 <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager">
+                                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager" fetchpriority="high">
                                             </picture>
                                             <div class="hero-emblem-glare" aria-hidden="true"></div>
                                         </div>
@@ -1927,7 +1926,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                     <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions - Official Luxury Sovereign Emblem"]'>
                                         <picture>
                                             <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="eager">
+                                            <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -1968,7 +1967,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                         <picture>
                                             <source srcset="assets/founder-banner-salim-640.webp 640w, assets/founder-banner-salim-1280.webp 1280w, assets/founder-banner-salim.webp 2560w, assets/founder-banner-salim-4k.webp 3840w" sizes="(max-width: 640px) 92vw, (max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="assets/founder-banner-salim-640.jpg 640w, assets/founder-banner-salim-1280.jpg 1280w, assets/founder-banner-salim.jpg 2560w, assets/founder-banner-salim-4k.jpg 3840w" sizes="(max-width: 640px) 92vw, (max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -2012,7 +2011,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                         <picture>
                                             <source srcset="assets/founder-banner-raed-640.webp 640w, assets/founder-banner-raed-1280.webp 1280w, assets/founder-banner-raed.webp 2560w, assets/founder-banner-raed-4k.webp 3840w" sizes="(max-width: 640px) 92vw, (max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="assets/founder-banner-raed-640.jpg 640w, assets/founder-banner-raed-1280.jpg 1280w, assets/founder-banner-raed.jpg 2560w, assets/founder-banner-raed-4k.jpg 3840w" sizes="(max-width: 640px) 92vw, (max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -2085,7 +2084,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions - Official Luxury Sovereign Emblem"]'>
                             <picture>
                                 <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2125,7 +2124,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-salim-4k.jpg", "م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة والذكاء الاصطناعي"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
-                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2168,7 +2167,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-raed-4k.jpg", "أ. رائد كعكة - المستشار المالي ومطور نظم ERP"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
-                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2212,7 +2211,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/sr-emblem-gold-luxury.jpg", "S&R CoreSync Official Sovereign Emblem"]'>
                             <picture>
                                 <source srcset="./assets/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Sovereign Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2239,7 +2238,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-salim-4k.jpg", "م. محمد سليم عزيزة"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-salim.webp" type="image/webp">
-                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -2268,7 +2267,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["assets/founder-banner-raed-4k.jpg", "أ. رائد كعكة"]'>
                             <picture>
                                 <source srcset="./assets/founder-banner-raed.webp" type="image/webp">
-                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="./assets/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaakeh Executive Banner" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -3195,8 +3194,8 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                     <div class="exec-stage-visual">
                         <div class="exec-visual-spotlight" aria-hidden="true"></div>
                         <div class="exec-visual-frame">
-                            <img id="execVisualImgSalim" src="./assets/hero-founder-salim-chair.webp" alt="م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة" class="exec-visual-img active" / loading="lazy" decoding="async">
-                            <img id="execVisualImgRaed" src="./assets/hero-founder-raed-chair.webp" alt="أ. رائد كعكة - المستشار المالي ونظم المؤسسات" class="exec-visual-img" / loading="lazy" decoding="async">
+                            <img id="execVisualImgSalim" src="./assets/hero-founder-salim-chair.webp" alt="م. محمد سليم عزيزة - المسؤول التقني وكبير مهندسي السحابة" class="exec-visual-img active" / decoding="async" loading="lazy">
+                            <img id="execVisualImgRaed" src="./assets/hero-founder-raed-chair.webp" alt="أ. رائد كعكة - المستشار المالي ونظم المؤسسات" class="exec-visual-img" / decoding="async" loading="lazy">
                             <div class="exec-visual-vignette" aria-hidden="true"></div>
                             
                             <div class="exec-visual-badge">
@@ -3229,7 +3228,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
                                     <span>عرض سينمائي حي مكبّر</span>
                                 </div>
-                                <video class="video" muted loop autoplay preload="metadata" poster="./assets/about-founder-poster-640.webp" src="./assets/about-founder-cinematic-opt.mp4" fetchpriority="high"></video>
+                                <video class="video" muted loop fetchpriority="high" data-lazy-src="./assets/about-founder-cinematic-opt.mp4" data-lazy-autoplay="true" preload="none" data-lazy-poster="./assets/about-founder-poster-640.webp"></video>
                                 <div class="overlay v1"></div>
                                 <div class="overlay mark-1"></div>
                                 <div class="overlay mark-2"></div>
@@ -3312,7 +3311,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                     <div class="founder-editorial-card founder-card--salim">
                         <div class="founder-card-header">
                             <div class="founder-avatar-img-wrap" role="button" tabindex="0" data-sr-call="openFounderCinema" data-sr-args='["salim"]' title="انقر للتكبير والعرض السينمائي المباشر">
-                                <img src="./assets/founder-salim.webp?v=color_v2" alt="م. محمد سليم عزيزة" class="founder-avatar-img" / loading="lazy" decoding="async">
+                                <img src="./assets/founder-salim.webp?v=color_v2" alt="م. محمد سليم عزيزة" class="founder-avatar-img" / decoding="async" loading="lazy">
                             </div>
                             <div class="founder-card-titles">
                                 <h4 class="text-white fw-bold mb-1">م. محمد سليم عزيزة</h4>
@@ -3342,7 +3341,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                                 <p class="text-caption text-white-64 mb-0 mt-1">كبير مطوري أنظمة المؤسسات والتشريعات المالية الأوروبية</p>
                             </div>
                             <div class="founder-avatar-img-wrap" role="button" tabindex="0" data-sr-call="openFounderCinema" data-sr-args='["raed"]' title="انقر للتكبير والعرض السينمائي المباشر">
-                                <img src="./assets/founder-raed.webp?v=color_v2" alt="أ. رائد كعكة" class="founder-avatar-img" / loading="lazy" decoding="async">
+                                <img src="./assets/founder-raed.webp?v=color_v2" alt="أ. رائد كعكة" class="founder-avatar-img" / decoding="async" loading="lazy">
                             </div>
                         </div>
                         <p class="text-body-2 text-white-64 mb-3">
@@ -6685,7 +6684,7 @@ html[lang="ar"] .hero-cinematic .hero-reference__title .hero-title-line__text,
                 <div class="sr-cinema-stage" id="cinemaStage">
                     <!-- شاشة سليم (فيديو سينمائي حي) -->
                     <div class="sr-cinema-media-pane" id="cinemaPaneSalim">
-                        <video id="cinemaVideoSalim" class="sr-cinema-video" muted loop preload="none" src="./assets/about-founder-cinematic-opt.mp4"></video></video>
+                        <video id="cinemaVideoSalim" class="sr-cinema-video" muted loop data-lazy-src="./assets/about-founder-cinematic-opt.mp4" data-lazy-autoplay="true" preload="none"></video></video>
                         <div class="cinema-vignette-overlay" aria-hidden="true"></div>
                         <div class="cinema-ambient-glow" aria-hidden="true"></div>
                         <!-- عناصر التحكم بالفيديو -->
