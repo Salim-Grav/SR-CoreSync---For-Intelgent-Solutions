@@ -16,7 +16,7 @@
 | `audit_language_api_parity.py` | تكافؤ واجهات JS بين اللغات |
 | `localize_portal_core_metadata.py --check` | اكتمال العناوين والأوصاف الأساسية المترجمة وعناوين صفحات العرض |
 | `localize_multilingual_shared_sections.py --check` | اكتمال توطين الأقسام المشتركة للصفحة الرئيسية ولوحة تتبع العرض المنقحة |
-| `localize_founder_showcase.py --check` | بقاء عنوان وأزرار قسم المؤسسين مترجمة في صفحات الهبوط |
+| `localize_founder_showcase.py --check` | اكتمال توطين عناوين وسير وأوصاف وأزرار قسم المؤسسين |
 | `build_csp.py --check` | تطابق بصمات CSP مع مجموعة النشر المبنية |
 | `check_multilingual_page_parity.py` | ترتيب الأقسام المشتركة واتجاه `lang`/`dir` في صفحتي الرئيسية والعرض لكل لغة |
 | `audit_dead_gateway.py` | لا إشارة إلى بوابة PHP الميتة |
@@ -62,11 +62,12 @@
 المحتوى المولد دون كتابة ملفات؛ كما يفرض تطابق مجموعة المفاتيح كاملة مع النص
 المصدر، وعدم وجود قيم ترجمة فارغة أو بقاء العناوين التقنية المحددة بالإنجليزية.
 
-تُحفظ ترجمات عنوان وأزرار قسم المؤسسين المشتركة في
-`portal_founder_showcase_locales.json`. يقتصر `localize_founder_showcase.py`
-على 13 تسمية وعنواناً ظاهراً في قسم `founders-showcase` بصفحات `index.html`؛ يدعم
-`--apply` للتطبيق الموضعي و`--check` لمنع بقاء النص المصدر، ولا يعيد توليد
-الصفحات أو يغيّر أسماء المؤسسين والعلامة التجارية.
+تُحفظ ترجمات العناوين والأزرار في `portal_founder_showcase_locales.json`
+وترجمات وصف القسم والسير المهنية في `portal_founder_bio_locales.json`.
+يقتصر `localize_founder_showcase.py` على 22 عبارة ظاهرة داخل قسم
+`founders-showcase` بصفحات `index.html`؛ يدعم `--apply` للتطبيق الموضعي
+و`--check` لمنع بقاء النص المصدر، ولا يعيد توليد الصفحات أو يغيّر أسماء
+المؤسسين والعلامة التجارية.
 
 تُحفظ ترجمة لوحة تتبع العرض المنقحة في `portal_demo_tracker_locales.json`.
 يضيف `--apply` تبويباً وعنصر تنقل مطابقين في 28 عرضاً غير عربي، مع نموذج

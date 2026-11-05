@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Localize the shared founder-showcase heading and controls."""
+"""Localize the shared founder-showcase copy and controls."""
 
 import argparse
 import html
@@ -14,6 +14,7 @@ if hasattr(sys.stdout, "reconfigure"):
 SCRIPTS_DIR = Path(__file__).resolve().parent
 BASE_DIR = SCRIPTS_DIR.parent
 LOCALES_PATH = SCRIPTS_DIR / "portal_founder_showcase_locales.json"
+BIO_LOCALES_PATH = SCRIPTS_DIR / "portal_founder_bio_locales.json"
 SECTION_PATTERN = re.compile(
     r'<section\b(?=[^>]*\bid=["\']founders-showcase["\'])[^>]*>.*?</section>',
     re.IGNORECASE | re.DOTALL,
@@ -33,26 +34,40 @@ SOURCE_KEYS = (
     "Download 4K 🌟",
     "Services 🚀",
     "Pause",
+    "Merging advanced cloud architecture and generative AI with high-precision financial acumen, managerial accounting, and enterprise ERP solutions for ambitious companies across Europe and the Middle East.",
+    "Chief Technology Officer &amp; Principal Cloud &amp; AI Architect &amp; CTO",
+    "Certified Principal Cloud Architect",
+    "Enterprise AI &amp; LLM Automation",
+    "12+ Years Software Systems Engineering",
+    "Chief Financial Officer &amp; Financial ERP Systems Architect &amp; CFO",
+    "Senior Financial &amp; ERP Consultant",
+    "Odoo &amp; Enterprise ERP Systems Architect",
+    "IFRS &amp; European Corporate Tax Compliance",
 )
 
 
 def load_locales():
     locales = json.loads(LOCALES_PATH.read_text(encoding="utf-8"))
+    bio_locales = json.loads(BIO_LOCALES_PATH.read_text(encoding="utf-8"))
     sys.path.insert(0, str(SCRIPTS_DIR))
     from deploy_sovereign_multilingual import LANGUAGES
 
     expected = {language["code"] for language in LANGUAGES if language["code"] != "ar"}
-    if set(locales) != expected:
+    if set(locales) != expected or set(bio_locales) != expected:
         raise ValueError(
-            f"{LOCALES_PATH.name}: locale mismatch; "
-            f"missing={sorted(expected - set(locales))}, "
-            f"extra={sorted(set(locales) - expected)}"
+            "Founder locale mismatch; "
+            f"{LOCALES_PATH.name} missing={sorted(expected - set(locales))}, "
+            f"extra={sorted(set(locales) - expected)}; "
+            f"{BIO_LOCALES_PATH.name} missing={sorted(expected - set(bio_locales))}, "
+            f"extra={sorted(set(bio_locales) - expected)}"
         )
     for code, values in locales.items():
-        if set(values) != set(SOURCE_KEYS):
+        merged = values | bio_locales[code]
+        if set(merged) != set(SOURCE_KEYS):
             raise ValueError(f"{LOCALES_PATH.name}: incomplete source keys for {code}")
-        if any(not isinstance(value, str) or not value.strip() for value in values.values()):
+        if any(not isinstance(value, str) or not value.strip() for value in merged.values()):
             raise ValueError(f"{LOCALES_PATH.name}: empty translation for {code}")
+        values.update(bio_locales[code])
     return locales
 
 
