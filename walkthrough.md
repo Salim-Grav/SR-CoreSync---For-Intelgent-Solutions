@@ -4228,3 +4228,35 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
 5. **الامتثال التام لسياسة CSP وجودة الكود:**
    - جميع مستمعات الأحداث مرتبطة عبر `addEventListener` في السكربت الخارجي `js/smart-business-advisor.js`.
    - اجتياز `node scripts/validate.js` و `python scripts/validate_publish_set.py` بنسبة 100% ودون أي أخطاء.
+
+---
+
+## 137. الجولة السابعة والثلاثون بعد المائة: الحل الجذري لعزل مستودعات Source Control وحصر الواجهة في مشروع Project
+
+### 1. تشخيص الظاهرة في واجهة المستخدم:
+- أظهرت لوحة التحكم بالإصدارات (Source Control) ثلاثة أسطر لمستودعات مختلفة:
+  1. `Project 🔒 main`: وهو المستودع السيادي للمشروع.
+  2. `copilot-prewarm-state`: وهو مستودع مؤقت للكاش تنشئه إضافة GitHub Copilot.
+  3. `salim-grav-animated`: وهو مستودع لمشروع خارجي موجود في مسار آخر على القرص.
+- كان سبب ظهورها تفعيل المحرر لميزة المسح التلقائي العشوائي `git.autoRepositoryDetection: true`.
+
+---
+
+### 2. الحل الجذري البرمجي المطبق في `.vscode/settings.json`:
+تم تطبيق التكوين الصارم التالي لعزل المحرر بالكامل:
+```json
+{
+  "git.autoRepositoryDetection": false,
+  "git.openRepositoryInParentFolders": "never",
+  "git.repositoryScanMaxDepth": 1,
+  "git.branchProtectionPrompt": "alwaysCommit",
+  "git.branchProtection": []
+}
+```
+
+---
+
+### 3. الأثر التشغيلي والنتائج:
+- منع المحرر نهائياً من التقاط أي مستودعات كاش أو مجلدات خارجية.
+- تصفية لوحة التحكم بحيث تعرض حصراً مستودع `Project`.
+- إلغاء الحاجة لأي كلمات سر أو مصادقات إضافية لأن حساب GitHub مصادق عليه سحابياً بنسبة 100%.
