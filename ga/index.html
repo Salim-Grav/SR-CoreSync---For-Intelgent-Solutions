@@ -296,7 +296,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/about-founder-poster.webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Local High-Performance Stylesheet Bundle -->
@@ -396,6 +395,7 @@
 main#wrapper:focus{outline:none}
 </style>
     <!-- SRX:END:srx_css -->
+    <script src="../js/lazy-founder-media.js" defer></script>
 </head>
 
 <body class="counter-scroll preloader-complete">
@@ -598,20 +598,20 @@ main#wrapper:focus{outline:none}
                                         <!-- رقاقات الأفكار والقطاعات التخصصية (Executive Sector Chips) -->
                                         <div class="hero-ai-chips-wrap" aria-label="Earnálacha gnó:">
                                             <span class="hero-ai-chips-label">Earnálacha gnó:</span>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["European FinTech payment rail architecture compliant with PSD2 and iDEAL"]'>
-                                                <span>💳 FinTech agus líonraí íocaíochta</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Cruthaigh réiteach íocaíochta FinTech Eorpach a chomhlíonann PSD2 agus iDEAL."]'>
+                                                <span>FinTech agus líonraí íocaíochta</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["CoreSync Cloud ERP suite for corporate accounting, Dutch BTW compliance, and operations"]'>
-                                                <span>🏢 CoreSync ERP agus comhlíonadh cánach</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Pleanáil ERP néalbhunaithe don chuntasaíocht, do chánacha Ollannacha agus d’oibríochtaí."]'>
+                                                <span>CoreSync ERP agus comhlíonadh cánach</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Autonomous AI agent workflows and sovereign local RAG knowledgebase for operations"]'>
-                                                <span>🤖 Gníomhairí AI uathrialacha</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Dear gníomhairí uathrialacha AI agus bunachar eolais RAG áitiúil d’oibríochtaí."]'>
+                                                <span>Gníomhairí AI uathrialacha</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Smart European supply chain orchestration, multi-warehouse ERP, and distribution"]'>
-                                                <span>📦 Lóistíocht agus slabhra soláthair</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Barrfheabhsaigh slabhra soláthair Eorpach le stóras ilshuímh agus dáileadh."]'>
+                                                <span>Lóistíocht agus slabhra soláthair</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["High-conversion PWA e-commerce platform with automated iDEAL checkout and ERP sync"]'>
-                                                <span>🛒 Siopa ríomhthráchtála</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Cruthaigh siopa PWA éifeachtach le híocaíochtaí iDEAL agus comhtháthú ERP."]'>
+                                                <span>Siopa ríomhthráchtála</span>
                                             </button>
                                         </div>
                                     </div>
@@ -633,7 +633,7 @@ main#wrapper:focus{outline:none}
                                         <div class="hero-emblem-frame">
                                             <picture class="hero-emblem-render-picture">
                                                 <source srcset="../assets/i18n/ga/sr-emblem-gold-luxury.webp" type="image/webp">
-                                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager">
+                                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager" fetchpriority="high">
                                             </picture>
                                             <div class="hero-emblem-glare" aria-hidden="true"></div>
                                         </div>
@@ -667,7 +667,7 @@ main#wrapper:focus{outline:none}
                         <span>Executive Leadership &amp; Founders Vision • S&amp;R CoreSync For Intelligent Solutions</span>
                     </div>
                     <h2 class="showcase-title">
-                        Visionary Leadership Driving <span class="gold-accent">Digital Transformation &amp; ERP</span>
+                        Cuireann ceannaireacht fhísiúil chun cinn <span class="gold-accent">claochlú digiteach agus ERP</span>
                     </h2>
                     <p class="showcase-subtitle">Ailtireacht scamail chun cinn agus AI gineadach á gcomhcheangal le saineolas airgeadais an-bheacht, le cuntasacht bhainistíochta agus le réitigh ERP fiontraíochta do chuideachtaí uaillmhianacha ar fud na hEorpa agus an Mheán-Oirthir.</p>
 
@@ -675,11 +675,11 @@ main#wrapper:focus{outline:none}
                     <div class="showcase-controls">
                         <button type="button" class="showcase-tab-btn active" id="tabSlider" data-sr-call="setShowcaseView" data-sr-args='["slider"]'>
                             <span class="showcase-tab-dot"></span>
-                            <span>Interactive Auto Slider 🔄</span>
+                            <span>Taispeántas sleamhnán uathoibríoch idirghníomhach 🔄</span>
                         </button>
                         <button type="button" class="showcase-tab-btn" id="tabEmblem" data-sr-call="setShowcaseView" data-sr-args='["emblem"]'>
                             <span class="showcase-tab-dot"></span>
-                            <span>Corporate Emblem 👑</span>
+                            <span>Feathal corparáideach 👑</span>
                         </button>
                         <button type="button" class="showcase-tab-btn" id="tabSalim" data-sr-call="setShowcaseView" data-sr-args='["salim"]'>
                             <span class="showcase-tab-dot"></span>
@@ -691,15 +691,15 @@ main#wrapper:focus{outline:none}
                         </button>
                         <button type="button" class="showcase-tab-btn" id="tabDual" data-sr-call="setShowcaseView" data-sr-args='["dual"]'>
                             <span class="showcase-tab-dot"></span>
-                            <span>Full Suite Showcase</span>
+                            <span>An tsraith iomlán</span>
                         </button>
                         <a href="../assets/SR-CoreSync-Corporate-Profile-2026.pdf" download="SR-CoreSync-Corporate-Profile-2026.pdf" class="showcase-tab-btn showcase-tab-btn-pdf" title="Download Official Corporate Profile (PDF)">
                             <span class="showcase-tab-dot"></span>
-                            <span>Corporate Profile (PDF) 📄</span>
+                            <span>Próifíl chorparáideach (PDF) 📄</span>
                         </a>
                         <a href="../card.html?lang=en" target="_blank" class="showcase-tab-btn showcase-tab-btn-nfc" title="View Smart NFC Digital Business Card">
                             <span class="showcase-tab-dot"></span>
-                            <span>Smart NFC Card 📲</span>
+                            <span>Cárta gnó cliste NFC 📲</span>
                         </a>
                     </div>
                 </div>
@@ -718,7 +718,7 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                                         <picture>
                                             <source srcset="../assets/i18n/ga/sr-emblem-gold-luxury.webp" type="image/webp">
-                                            <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="eager">
+                                            <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -728,24 +728,24 @@ main#wrapper:focus{outline:none}
                                                 <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem</div>
                                                 <div class="showcase-footer-role">For Intelligent Solutions • Cloud Architecture, AI &amp; Enterprise ERP Systems</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Certified Corporate Emblem</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Enterprise Innovation Symbol</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Feathal corparáideach deimhnithe</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Siombail nuálaíochta fiontraíochta</span>
                                                     <span class="cred-badge"><i class="badge-dot"></i> Amsterdam, Netherlands</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem", "emblem"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Emblem">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="View Corporate Contact Card QR">
                                                 <span>vCard QR 📲</span>
                                             </button>
                                             <a href="#services" class="showcase-action-btn">
-                                                <span>Services 🚀</span>
+                                                <span>Seirbhísí 🚀</span>
                                             </a>
                                         </div>
                                     </div>
@@ -759,7 +759,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="../assets/i18n/ga/founder-banner-salim-4k.webp 3840w, ../assets/i18n/ga/founder-banner-salim.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="../assets/i18n/ga/founder-banner-salim-4k.jpg 3840w, ../assets/i18n/ga/founder-banner-salim.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -769,18 +769,18 @@ main#wrapper:focus{outline:none}
                                                 <div class="showcase-footer-title">Eng. Mohammad Salim Aziza</div>
                                                 <div class="showcase-footer-role">Innealtóir Mohammad Salim Aziza | CTO & Príomh-Ailtire Néalríomhaireachta & AI</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Certified Principal Cloud Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Enterprise AI &amp; LLM Automation</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> 12+ Years Software Systems Engineering</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Príomh-ailtire néil deimhnithe</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> IS fiontraíochta agus uathoibriú LLM</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Níos mó ná 12 bliain d’eispéireas in innealtóireacht bogearraí</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza", "salim"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["salim"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
@@ -800,7 +800,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="../assets/i18n/ga/founder-banner-raed-4k.webp 3840w, ../assets/i18n/ga/founder-banner-raed.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="../assets/i18n/ga/founder-banner-raed-4k.jpg 3840w, ../assets/i18n/ga/founder-banner-raed.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -810,18 +810,18 @@ main#wrapper:focus{outline:none}
                                                 <div class="showcase-footer-title">Mr. Mohammad Raed Kaaka</div>
                                                 <div class="showcase-footer-role">An tUas. Mohammad Raed Kaaka | Comhairleoir Airgeadais & Ailtire ERP</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Senior Financial &amp; ERP Consultant</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Odoo &amp; Enterprise ERP Systems Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> IFRS &amp; European Corporate Tax Compliance</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Sainchomhairleoir sinsearach airgeadais agus ERP</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Ailtire Odoo agus córas ERP fiontraíochta</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Comhlíonadh IFRS agus cánach corparáidí na hEorpa</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka", "raed"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["raed"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
@@ -841,7 +841,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-dots-group">
                             <button type="button" class="showcase-dot-item active" id="slideDot0" data-sr-call="goToSlide" data-sr-args='[0]'>
                                 <span class="showcase-dot-indicator"></span>
-                                <span>Corporate Emblem 👑</span>
+                                <span>Feathal corparáideach 👑</span>
                             </button>
                             <button type="button" class="showcase-dot-item" id="slideDot1" data-sr-call="goToSlide" data-sr-args='[1]'>
                                 <span class="showcase-dot-indicator"></span>
@@ -859,7 +859,7 @@ main#wrapper:focus{outline:none}
 
                         <button type="button" class="showcase-slider-playback-btn" id="playbackToggleBtn" data-sr-call="togglePlayback">
                             <span id="playbackIcon">⏸</span>
-                            <span id="playbackText">Pause</span>
+                            <span id="playbackText">Cuir ar sos</span>
                         </button>
                     </div>
                 </div>
@@ -870,7 +870,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -880,24 +880,24 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem</div>
                                     <div class="showcase-footer-role">For Intelligent Solutions • Cloud Architecture, AI &amp; Enterprise ERP Systems</div>
                                     <div class="showcase-credentials-badges">
-                                        <span class="cred-badge"><i class="badge-dot"></i> Certified Corporate Emblem</span>
-                                        <span class="cred-badge"><i class="badge-dot"></i> Enterprise Innovation Symbol</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> Feathal corparáideach deimhnithe</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> Siombail nuálaíochta fiontraíochta</span>
                                         <span class="cred-badge"><i class="badge-dot"></i> Amsterdam, Netherlands</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem", "emblem"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/sr-emblem-gold-luxury-4k.jpg" download="SR-CoreSync-Luxury-Emblem-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Emblem">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["emblem"]' title="View Corporate Contact Card QR">
                                                 <span>vCard QR 📲</span>
                                             </button>
                                             <a href="#services" class="showcase-action-btn">
-                                                <span>Services 🚀</span>
+                                                <span>Seirbhísí 🚀</span>
                                             </a>
                                         </div>
                         </div>
@@ -910,7 +910,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/founder-banner-salim.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -920,18 +920,18 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">Eng. Mohammad Salim Aziza</div>
                                     <div class="showcase-footer-role">Innealtóir Mohammad Salim Aziza | CTO & Príomh-Ailtire Néalríomhaireachta & AI</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Certified Principal Cloud Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Enterprise AI &amp; LLM Automation</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> 12+ Years Software Systems Engineering</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Príomh-ailtire néil deimhnithe</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> IS fiontraíochta agus uathoibriú LLM</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Níos mó ná 12 bliain d’eispéireas in innealtóireacht bogearraí</span>
                                                 </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza", "salim"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/founder-banner-salim-4k.jpg" download="SR-CoreSync-Founder-Salim-Aziza-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["salim"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
@@ -950,7 +950,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/founder-banner-raed.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -960,18 +960,18 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">Mr. Mohammad Raed Kaaka</div>
                                     <div class="showcase-footer-role">An tUas. Mohammad Raed Kaaka | Comhairleoir Airgeadais & Ailtire ERP</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Senior Financial &amp; ERP Consultant</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Odoo &amp; Enterprise ERP Systems Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> IFRS &amp; European Corporate Tax Compliance</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Sainchomhairleoir sinsearach airgeadais agus ERP</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Ailtire Odoo agus córas ERP fiontraíochta</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Comhlíonadh IFRS agus cánach corparáidí na hEorpa</span>
                                                 </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                             <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka", "raed"]'>
-                                                <span>Inspect 🔍</span>
+                                                <span>Scrúdaigh 🔍</span>
                                             </button>
                                             <a href="../assets/i18n/ga/founder-banner-raed-4k.jpg" download="SR-CoreSync-Founder-Raed-Kaaka-4K.jpg" class="showcase-action-btn showcase-action-4k" title="Download Ultra HD 4K Banner (3840×2160)">
-                                                <span>Download 4K 🌟</span>
+                                                <span>Íoslódáil i 4K 🌟</span>
                                             </a>
                                             <button type="button" class="showcase-action-btn showcase-action-qr" data-sr-call="openFoundersQrModal" data-sr-args='["raed"]' title="View Smart Digital Contact Card (vCard)">
                                                 <span>vCard QR 📲</span>
@@ -991,7 +991,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1001,13 +1001,13 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">S&amp;R CoreSync For Intelligent Solutions</div>
                                     <div class="showcase-footer-role">Official Corporate Emblem • For Intelligent Solutions</div>
                                     <div class="showcase-credentials-badges">
-                                        <span class="cred-badge"><i class="badge-dot"></i> Certified Corporate Emblem</span>
+                                        <span class="cred-badge"><i class="badge-dot"></i> Feathal corparáideach deimhnithe</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                 <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync Official Emblem"]'>
-                                    <span>Inspect 🔍</span>
+                                    <span>Scrúdaigh 🔍</span>
                                 </button>
                             </div>
                         </div>
@@ -1018,7 +1018,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/founder-banner-salim.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1028,15 +1028,15 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">Eng. Mohammad Salim Aziza (CTO)</div>
                                     <div class="showcase-footer-role">Enterprise Cloud Systems &amp; Autonomous AI</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Certified Principal Cloud Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Enterprise AI &amp; LLM Automation</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> 12+ Years Software Systems Engineering</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Príomh-ailtire néil deimhnithe</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> IS fiontraíochta agus uathoibriú LLM</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Níos mó ná 12 bliain d’eispéireas in innealtóireacht bogearraí</span>
                                                 </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                 <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
-                                    <span>Inspect 🔍</span>
+                                    <span>Scrúdaigh 🔍</span>
                                 </button>
                             </div>
                         </div>
@@ -1047,7 +1047,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/i18n/ga/founder-banner-raed.webp" type="image/webp">
-                                <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/ga/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1057,15 +1057,15 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-footer-title">Mr. Mohammad Raed Kaaka (CFO)</div>
                                     <div class="showcase-footer-role">Advanced Software Systems &amp; Financial ERP</div>
                                                 <div class="showcase-credentials-badges">
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Senior Financial &amp; ERP Consultant</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> Odoo &amp; Enterprise ERP Systems Architect</span>
-                                                    <span class="cred-badge"><i class="badge-dot"></i> IFRS &amp; European Corporate Tax Compliance</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Sainchomhairleoir sinsearach airgeadais agus ERP</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Ailtire Odoo agus córas ERP fiontraíochta</span>
+                                                    <span class="cred-badge"><i class="badge-dot"></i> Comhlíonadh IFRS agus cánach corparáidí na hEorpa</span>
                                                 </div>
                                 </div>
                             </div>
                             <div class="showcase-footer-actions">
                                 <button type="button" class="showcase-action-btn" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/ga/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
-                                    <span>Inspect 🔍</span>
+                                    <span>Scrúdaigh 🔍</span>
                                 </button>
                             </div>
                         </div>
@@ -1087,8 +1087,8 @@ main#wrapper:focus{outline:none}
                         </span>
                     </div>
                     <h2 class="text-display-2 letter-space--3 text-center effectFade fadeUp">
-                        <span class="s-kashida" data-text="Our Services" aria-hidden="true"></span>
-                        <span class="s-plain">Our Services</span>
+                        <span class="s-kashida" data-text="Ár Seirbhísí" aria-hidden="true"></span>
+                        <span class="s-plain">Ár Seirbhísí</span>
                     </h2>
                     <div class="text-center">
                         <div class="dana-services-currency-bar">
@@ -1112,8 +1112,8 @@ main#wrapper:focus{outline:none}
                             <div class="dana-card-top-row">
                                 <span class="dana-card-num">01</span>
                                 <div class="dana-card-title-wrap">
-                                    <h3 class="dana-card-title">Visual Identity</h3>
-                                    <span class="dana-card-icon" title="Visual Identity">
+                                    <h3 class="dana-card-title">Féiniúlacht Amhairc</h3>
+                                    <span class="dana-card-icon" title="Féiniúlacht Amhairc">
                                         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
                                     </span>
                                 </div>
@@ -1128,18 +1128,18 @@ main#wrapper:focus{outline:none}
 
                         <div class="dana-card-footer">
                             <div class="dana-price-row">
-                                <span class="dana-price-label">Transparent Price:</span>
+                                <span class="dana-price-label">Praghas trédhearcach:</span>
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="dana-price-badge-saving">Direct Savings</span>
+                                    <span class="dana-price-badge-saving">Coigilteas díreach</span>
                                     <span class="dana-price-value" data-eur-price="590"><span>€</span>590</span>
                                 </div>
                             </div>
                             <div class="dana-card-actions-row">
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["identity"]' data-sr-stop="1">
-                                    <span>Book Session 📅</span>
+                                    <span>Cuir seisiún in áirithe 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20Visual%20Identity%20Package%20(%E2%82%AC590)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20the%20complete%20visual%20identity%20package." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
-                                    <span>Order via WhatsApp</span>
+                                    <span>Ordú trí WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
                             </div>
@@ -1155,7 +1155,7 @@ main#wrapper:focus{outline:none}
                             <div class="dana-card-top-row">
                                 <span class="dana-card-num">02</span>
                                 <div class="dana-card-title-wrap">
-                                    <h3 class="dana-card-title">Website Design &amp; Optimization</h3>
+                                    <h3 class="dana-card-title">Dearadh agus barrfheabhsú suíomhanna gréasáin</h3>
                                     <span class="dana-card-icon" title="Websites">
                                         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                                     </span>
@@ -1171,7 +1171,7 @@ main#wrapper:focus{outline:none}
 
                         <div class="dana-card-footer">
                             <div class="dana-price-row">
-                                <span class="dana-price-label">Transparent Price:</span>
+                                <span class="dana-price-label">Praghas trédhearcach:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Most Popular</span>
                                     <span class="dana-price-value" data-eur-price="980"><span>€</span>980</span>
@@ -1179,10 +1179,10 @@ main#wrapper:focus{outline:none}
                             </div>
                             <div class="dana-card-actions-row">
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["website"]' data-sr-stop="1">
-                                    <span>Book Session 📅</span>
+                                    <span>Cuir seisiún in áirithe 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20Website%20Design%20Package%20(%E2%82%AC980)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20the%20high-performance%20website%20design%20package." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
-                                    <span>Order via WhatsApp</span>
+                                    <span>Ordú trí WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
                             </div>
@@ -1198,8 +1198,8 @@ main#wrapper:focus{outline:none}
                             <div class="dana-card-top-row">
                                 <span class="dana-card-num">03</span>
                                 <div class="dana-card-title-wrap">
-                                    <h3 class="dana-card-title">E-Commerce Store</h3>
-                                    <span class="dana-card-icon" title="E-Commerce Store">
+                                    <h3 class="dana-card-title">Siopa ríomhthráchtála</h3>
+                                    <span class="dana-card-icon" title="Siopa ríomhthráchtála">
                                         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                                     </span>
                                 </div>
@@ -1214,7 +1214,7 @@ main#wrapper:focus{outline:none}
 
                         <div class="dana-card-footer">
                             <div class="dana-price-row">
-                                <span class="dana-price-label">Transparent Price:</span>
+                                <span class="dana-price-label">Praghas trédhearcach:</span>
                                 <div class="d-flex align-items-center gap-2">
                                     <span class="dana-price-badge-saving">Full ERP Bridge</span>
                                     <span class="dana-price-value" data-eur-price="1450"><span>€</span>1,450</span>
@@ -1232,10 +1232,10 @@ main#wrapper:focus{outline:none}
                             </div>
                             <div class="dana-card-actions-row">
                                 <button type="button" class="dana-btn-booking" data-sr-call="openExecutiveBookingModal" data-sr-args='["store"]' data-sr-stop="1">
-                                    <span>Book Session 📅</span>
+                                    <span>Cuir seisiún in áirithe 📅</span>
                                 </button>
                                 <a href="https://wa.me/31618111116?text=%2AOrder%20E-Commerce%20Store%20Package%20(%E2%82%AC1,450)%20-%20S%26R%20CoreSync%2A%0AI%20would%20like%20to%20order%20an%20intuitive%20online%20store%20with%20seamless%20checkout." target="_blank" rel="noopener noreferrer" class="dana-whatsapp-cta" data-sr-stop="1">
-                                    <span>Order via WhatsApp</span>
+                                    <span>Ordú trí WhatsApp</span>
                                     <svg viewBox="0 0 32 32" width="16" height="16" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
                                 </a>
                             </div>
@@ -1246,23 +1246,23 @@ main#wrapper:focus{outline:none}
                 <!-- Package Comparison Button -->
                 <div class="dana-compare-trigger-wrap">
                     <button type="button" class="dana-btn-compare" data-sr-call="openServicesComparisonModal">
-                        <span>📊 Comprehensive Package &amp; Feature Comparison</span>
+                        <span>📊 Comparáid chuimsitheach idir pacáistí agus gnéithe</span>
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </button>
                 </div>
 
                 <div class="services-orbit-divider">
-                    <span>Enterprise Systems &amp; Cloud Architectures</span>
+                    <span>Córais fiontraíochta agus ailtireachtaí néil</span>
                 </div>
 
                 <div class="tf-grid-layout lg-col-3">
                     <!-- Service 1 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">Custom Cloud Software</h5>
-                            <p class="tech-desc letter-space--1" data-short="Resilient, Highly Scalable Cloud Systems">Engineering high-assurance enterprise cloud backbones with modular microservices, unyielding security, and infinite elasticity.</p>
+                            <h5 class="tech-name letter-space--2">Bogearraí néil saincheaptha</h5>
+                            <p class="tech-desc letter-space--1" data-short="Resilient, Highly Scalable Cloud Systems">Tógaimid ardáin néil fiontraíochta atá slán agus inscálaithe le micreasheirbhísí modúlacha.</p>
                             <div class="tech-metric-tag">
-                                <span>🚀 40% Reduction in Legacy Infrastructure Overhead</span>
+                                <span>🚀 40% níos lú costas ar bhonneagar oidhreachta</span>
                             </div>
                             <!-- Photorealistic 3D Mockup -->
                             <div class="tech-card-media">
@@ -1274,7 +1274,7 @@ main#wrapper:focus{outline:none}
                         </div>
                         <div class="tech-card-footer-actions">
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
-                                <span>Book Consultation 📅</span>
+                                <span>Cuir comhairliúchán in áirithe 📅</span>
                             </button>
                             <a href="https://wa.me/31618111116?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Custom%20Cloud%20Software%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
@@ -1286,10 +1286,10 @@ main#wrapper:focus{outline:none}
                     <!-- Service 2 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">High-Performance Mobile & Web Apps</h5>
-                            <p class="tech-desc letter-space--1" data-short="Ultra-Fast Responsive Applications">Developing native iOS & Android applications and responsive web applications engineered for sub-second execution speeds.</p>
+                            <h5 class="tech-name letter-space--2">Aipeanna móibíleacha agus gréasáin ardfheidhmíochta</h5>
+                            <p class="tech-desc letter-space--1" data-short="Ultra-Fast Responsive Applications">Forbraímid aipeanna dúchasacha iOS agus Android agus aipeanna gréasáin freagrúla a fhreagraíonn i níos lú ná soicind.</p>
                             <div class="tech-metric-tag">
-                                <span>⚡ Sub-second response & offline PWA readiness</span>
+                                <span>⚡ Freagairt faoi shoicind agus PWA réidh as líne</span>
                             </div>
                             <!-- Photorealistic 3D Mockup -->
                             <div class="tech-card-media">
@@ -1301,7 +1301,7 @@ main#wrapper:focus{outline:none}
                         </div>
                         <div class="tech-card-footer-actions">
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["web"]'>
-                                <span>Book Consultation 📅</span>
+                                <span>Cuir comhairliúchán in áirithe 📅</span>
                             </button>
                             <a href="https://wa.me/31618111116?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Mobile%20and%20Web%20Apps%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
@@ -1313,8 +1313,8 @@ main#wrapper:focus{outline:none}
                     <!-- Service 3 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">Cloud ERP & Financial Integration</h5>
-                            <p class="tech-desc letter-space--1" data-short="Resource Management & Precision Accounting">End-to-end ERP integration with automated multi-currency accounting, inventory tracking, and full Dutch/EU tax compliance.</p>
+                            <h5 class="tech-name letter-space--2">ERP néil agus comhtháthú airgeadais</h5>
+                            <p class="tech-desc letter-space--1" data-short="Resource Management & Precision Accounting">Comhtháthú ERP ceann go ceann le cuntasaíocht uathoibrithe ilairgeadra, rianú fardail agus comhlíonadh cánach na hÍsiltíre agus an AE.</p>
                             <div class="tech-metric-tag">
                                 <span>🛡️ Verified SEPA & Dutch BTW Tax Compliance</span>
                             </div>
@@ -1340,8 +1340,8 @@ main#wrapper:focus{outline:none}
                     <!-- Service 4 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">Process Automation & AI Workflows</h5>
-                            <p class="tech-desc letter-space--1" data-short="RPA Automation & Autonomous Agents">Deploying autonomous AI agents, intelligent document recognition, and Robotic Process Automation to eliminate administrative friction.</p>
+                            <h5 class="tech-name letter-space--2">Uathoibriú próiseas agus sreafaí oibre IS</h5>
+                            <p class="tech-desc letter-space--1" data-short="RPA Automation & Autonomous Agents">Laghdaíonn gníomhairí uathrialacha IS, aithint chliste doiciméad agus uathoibriú róbatach an obair riaracháin.</p>
                             <div class="tech-metric-tag">
                                 <span>⏱️ 65% Reduction in Manual Processing Hours</span>
                             </div>
@@ -1355,7 +1355,7 @@ main#wrapper:focus{outline:none}
                         </div>
                         <div class="tech-card-footer-actions">
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
-                                <span>Book Consultation 📅</span>
+                                <span>Cuir comhairliúchán in áirithe 📅</span>
                             </button>
                             <a href="https://wa.me/31618111116?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20AI%20and%20Automation%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
@@ -1367,8 +1367,8 @@ main#wrapper:focus{outline:none}
                     <!-- Service 5 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">Financial Strategy & Digital Governance</h5>
-                            <p class="tech-desc letter-space--1" data-short="Financial Analytics & Fiscal Controls">Engineering real-time CFO executive dashboards, cashflow forecasting, and automated audits compliant with European regulatory laws.</p>
+                            <h5 class="tech-name letter-space--2">Straitéis airgeadais agus rialachas digiteach</h5>
+                            <p class="tech-desc letter-space--1" data-short="Financial Analytics & Fiscal Controls">Painéil CFO fíor-ama, réamhaisnéisí sreafa airgid agus iniúchtaí uathoibrithe a chomhlíonann rialacha Eorpacha.</p>
                             <div class="tech-metric-tag">
                                 <span>📈 Real-Time Cashflow & Profit Margin Analytics</span>
                             </div>
@@ -1382,7 +1382,7 @@ main#wrapper:focus{outline:none}
                         </div>
                         <div class="tech-card-footer-actions">
                             <a href="#roi-calculator" class="tech-btn-consult" title="Calculate Financial Savings via ROI Tool">
-                                <span>ROI Calculator 📊</span>
+                                <span>Áireamhán ROI 📊</span>
                             </a>
                             <a href="https://wa.me/31618111116?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Financial%20Strategy%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
@@ -1394,7 +1394,7 @@ main#wrapper:focus{outline:none}
                     <!-- Service 6 -->
                     <div class="wg-tech-v2">
                         <div class="tech-content">
-                            <h5 class="tech-name letter-space--2">Cloud Infrastructure & Cybersecurity</h5>
+                            <h5 class="tech-name letter-space--2">Bonneagar néil agus cibearshlándáil</h5>
                             <p class="tech-desc letter-space--1" data-short="Advanced Hardening & 99.9% Uptime">Bonneagar ilréigiúnach treisithe ar AWS agus Azure, le failover uathoibríoch, slándáil zero-trust agus SLA uptime de 99.98%.</p>
                             <div class="tech-metric-tag">
                                 <span>🔒 99.99% Availability & Bank-Grade Encryption</span>
@@ -1409,7 +1409,7 @@ main#wrapper:focus{outline:none}
                         </div>
                         <div class="tech-card-footer-actions">
                             <button type="button" class="tech-btn-consult" data-sr-call="openExecutiveBookingModal" data-sr-args='["cloud"]'>
-                                <span>Book Consultation 📅</span>
+                                <span>Cuir comhairliúchán in áirithe 📅</span>
                             </button>
                             <a href="https://wa.me/31618111116?text=Hello%2C%20I%20would%20like%20to%20consult%20regarding%20Cloud%20Infrastructure%20and%20Cybersecurity%20-%20S%26R%20CoreSync" target="_blank" rel="noopener noreferrer" class="tech-btn-whatsapp" title="Direct WhatsApp Consultation">
                                 <svg viewBox="0 0 32 32" width="13" height="13" fill="currentColor"><path d="M16.02 3.2a12.7 12.7 0 0 0-10.95 19.14L3.2 28.8l6.62-1.74A12.8 12.8 0 1 0 16.02 3.2Zm0 23.24a10.48 10.48 0 0 1-5.35-1.46l-.38-.23-3.93 1.03 1.05-3.83-.25-.4a10.5 10.5 0 1 1 8.86 4.89Zm5.76-7.85c-.32-.16-1.9-.94-2.19-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.26-.19.21-.38.24-.7.08a8.65 8.65 0 0 1-2.55-1.57 9.57 9.57 0 0 1-1.77-2.2c-.18-.32 0-.49.14-.65.14-.14.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.39-.26-.62-.53-.54-.73-.55h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69s1.16 3.13 1.32 3.35c.16.21 2.27 3.46 5.5 4.85.77.33 1.37.53 1.84.68.77.24 1.47.2 2.03.12.62-.09 1.9-.78 2.17-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.37Z"/></svg>
@@ -1710,8 +1710,8 @@ main#wrapper:focus{outline:none}
                     <div class="exec-stage-visual">
                         <div class="exec-visual-spotlight" aria-hidden="true"></div>
                         <div class="exec-visual-frame">
-                            <img id="execVisualImgSalim" src="../assets/hero-founder-salim-chair.webp" alt="Eng. Salim Azizah - CTO" class="exec-visual-img active" />
-                            <img id="execVisualImgRaed" src="../assets/hero-founder-raed-chair.webp" alt="Mr. Raed Kaakeh - CFO" class="exec-visual-img" />
+                            <img id="execVisualImgSalim" src="../assets/hero-founder-salim-chair.webp" alt="Eng. Salim Azizah - CTO" class="exec-visual-img active" loading="lazy" decoding="async" />
+                            <img id="execVisualImgRaed" src="../assets/hero-founder-raed-chair.webp" alt="Mr. Raed Kaakeh - CFO" class="exec-visual-img" loading="lazy" decoding="async" />
                             <div class="exec-visual-vignette" aria-hidden="true"></div>
                             
                             <div class="exec-visual-badge">
@@ -1908,7 +1908,7 @@ main#wrapper:focus{outline:none}
                     <div class="executive-grid-salim">
                         <div class="col-left mb-0">
                             <div class="about-media about-media--salim">
-                                <video class="video" muted loop autoplay preload="metadata" poster="../assets/about-founder-poster.webp" src="../assets/about-founder-cinematic-opt.mp4"></video>
+                                <video class="video" muted loop data-lazy-src="../assets/about-founder-cinematic-opt.mp4" data-lazy-autoplay="true" preload="none" data-lazy-poster="../assets/about-founder-poster.webp"></video>
                                 <div class="overlay v1"></div>
                                 <div class="overlay mark-1"></div>
                                 <div class="overlay mark-2"></div>
@@ -1985,7 +1985,7 @@ main#wrapper:focus{outline:none}
                     <div class="founder-editorial-card founder-card--salim">
                         <div class="founder-card-header">
                             <div class="founder-avatar-img-wrap">
-                                <img src="../assets/founder-salim.webp?v=color_v2" alt="Ir. Mohammad Salim Aziza" class="founder-avatar-img" />
+                                <img src="../assets/founder-salim.webp?v=color_v2" alt="Ir. Mohammad Salim Aziza" class="founder-avatar-img" loading="lazy" decoding="async" />
                             </div>
                             <div class="founder-card-titles">
                                 <h4 class="text-white fw-bold mb-1">Ir. Mohammad Salim Aziza</h4>
@@ -2013,7 +2013,7 @@ main#wrapper:focus{outline:none}
                                 <p class="text-caption text-white-64 mb-0 mt-1">Senior Financial Systems Architect & EU Regulatory Specialist</p>
                             </div>
                             <div class="founder-avatar-img-wrap">
-                                <img src="../assets/founder-raed.webp?v=color_v2" alt="Dhr. Mohammad Raed Kaakeh" class="founder-avatar-img" />
+                                <img src="../assets/founder-raed.webp?v=color_v2" alt="Dhr. Mohammad Raed Kaakeh" class="founder-avatar-img" loading="lazy" decoding="async" />
                             </div>
                         </div>
                         <p class="text-body-2 text-white-64 mb-3">Speisialaithe in ailtireacht bunstruchtúir ERP airgeadais agus corparáideacha, i mbainistíocht saolré bunachar sonraí agus in iontogaí comhlíonta gan uaim le Belastingdienst na hÍsiltíre, le KvK agus le dlíthe GDPR na hEorpa, ag tabhairt trédhearcachta cánach uathoibríoch.</p>

@@ -296,7 +296,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="../assets/about-founder-poster.webp" fetchpriority="high">
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@200;300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Local High-Performance Stylesheet Bundle -->
@@ -396,6 +395,7 @@
 main#wrapper:focus{outline:none}
 </style>
     <!-- SRX:END:srx_css -->
+    <script src="../js/lazy-founder-media.js" defer></script>
 </head>
 
 <body class="counter-scroll preloader-complete">
@@ -599,20 +599,20 @@ main#wrapper:focus{outline:none}
                                         <!-- رقاقات الأفكار والقطاعات التخصصية (Executive Sector Chips) -->
                                         <div class="hero-ai-chips-wrap" aria-label="Executive Sectors:">
                                             <span class="hero-ai-chips-label">Executive Sectors:</span>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["European FinTech payment rail architecture compliant with PSD2 and iDEAL"]'>
-                                                <span>💳 FinTech & Payment Rails</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Build a European FinTech payment solution compliant with PSD2 and iDEAL."]'>
+                                                <span>FinTech & Payment Rails</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["CoreSync Cloud ERP suite for corporate accounting, Dutch BTW compliance, and operations"]'>
-                                                <span>🏢 CoreSync ERP & Tax Compliance</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Plan cloud ERP for accounting, Dutch tax compliance, and operations."]'>
+                                                <span>CoreSync ERP & Tax Compliance</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Autonomous AI agent workflows and sovereign local RAG knowledgebase for operations"]'>
-                                                <span>🤖 Autonomous AI Agents</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Design autonomous AI agents and a local RAG knowledge base for operations."]'>
+                                                <span>Autonomous AI Agents</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Smart European supply chain orchestration, multi-warehouse ERP, and distribution"]'>
-                                                <span>📦 Logistics & Supply Chain</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Optimize a European supply chain with multi-warehouse inventory and distribution."]'>
+                                                <span>Logistics & Supply Chain</span>
                                             </button>
-                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["High-conversion PWA e-commerce platform with automated iDEAL checkout and ERP sync"]'>
-                                                <span>🛒 E-Commerce Webshop</span>
+                                            <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='["Create a conversion-focused PWA webshop with iDEAL and ERP integration."]'>
+                                                <span>E-Commerce Webshop</span>
                                             </button>
                                         </div>
                                     </div>
@@ -634,7 +634,7 @@ main#wrapper:focus{outline:none}
                                         <div class="hero-emblem-frame">
                                             <picture class="hero-emblem-render-picture">
                                                 <source srcset="../assets/i18n/en/sr-emblem-gold-luxury.webp" type="image/webp">
-                                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager">
+                                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&R CoreSync For Intelligent Solutions Official 3D Luxury Emblem" class="hero-emblem-render-img" width="580" height="580" loading="eager" fetchpriority="high">
                                             </picture>
                                             <div class="hero-emblem-glare" aria-hidden="true"></div>
                                         </div>
@@ -721,7 +721,7 @@ main#wrapper:focus{outline:none}
                                     <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                                         <picture>
                                             <source srcset="../assets/i18n/en/sr-emblem-gold-luxury.webp" type="image/webp">
-                                            <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="eager">
+                                            <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -762,7 +762,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="../assets/i18n/en/founder-banner-salim-4k.webp 3840w, ../assets/i18n/en/founder-banner-salim.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="../assets/i18n/en/founder-banner-salim-4k.jpg 3840w, ../assets/i18n/en/founder-banner-salim.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -803,7 +803,7 @@ main#wrapper:focus{outline:none}
                                         <picture>
                                             <source srcset="../assets/i18n/en/founder-banner-raed-4k.webp 3840w, ../assets/i18n/en/founder-banner-raed.webp 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/webp">
                                             <source srcset="../assets/i18n/en/founder-banner-raed-4k.jpg 3840w, ../assets/i18n/en/founder-banner-raed.jpg 2560w" sizes="(max-width: 1200px) 100vw, 1920px" type="image/jpeg">
-                                            <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka Executive Banner" class="showcase-img" width="2560" height="1440" loading="eager">
+                                            <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka Executive Banner" class="showcase-img" width="2560" height="1440" loading="lazy" decoding="async">
                                         </picture>
                                     </div>
                                     <div class="showcase-banner-footer">
@@ -873,7 +873,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync For Intelligent Solutions Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -913,7 +913,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/founder-banner-salim.webp" type="image/webp">
-                                <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -953,7 +953,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/founder-banner-raed.webp" type="image/webp">
-                                <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -994,7 +994,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/sr-emblem-gold-luxury.jpg", "S&amp;R CoreSync For Intelligent Solutions • Official Corporate Emblem"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/sr-emblem-gold-luxury.webp" type="image/webp">
-                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/sr-emblem-gold-luxury.jpg" alt="S&amp;R CoreSync Official Luxury Emblem" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1021,7 +1021,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/founder-banner-salim.jpg", "Eng. Mohammad Salim Aziza"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/founder-banner-salim.webp" type="image/webp">
-                                <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/founder-banner-salim.jpg" alt="Eng. Mohammad Salim Aziza" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1050,7 +1050,7 @@ main#wrapper:focus{outline:none}
                         <div class="showcase-img-wrap" data-sr-call="openFoundersLightbox" data-sr-args='["../assets/i18n/en/founder-banner-raed.jpg", "Mr. Mohammad Raed Kaaka"]'>
                             <picture>
                                 <source srcset="../assets/i18n/en/founder-banner-raed.webp" type="image/webp">
-                                <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy">
+                                <img src="../assets/i18n/en/founder-banner-raed.jpg" alt="Mr. Mohammad Raed Kaaka" class="showcase-img" width="1024" height="576" loading="lazy" decoding="async">
                             </picture>
                         </div>
                         <div class="showcase-banner-footer">
@@ -1715,8 +1715,8 @@ main#wrapper:focus{outline:none}
                     <div class="exec-stage-visual">
                         <div class="exec-visual-spotlight" aria-hidden="true"></div>
                         <div class="exec-visual-frame">
-                            <img id="execVisualImgSalim" src="../assets/hero-founder-salim-chair.webp" alt="Eng. Salim Azizah - CTO" class="exec-visual-img active" />
-                            <img id="execVisualImgRaed" src="../assets/hero-founder-raed-chair.webp" alt="Mr. Raed Kaakeh - CFO" class="exec-visual-img" />
+                            <img id="execVisualImgSalim" src="../assets/hero-founder-salim-chair.webp" alt="Eng. Salim Azizah - CTO" class="exec-visual-img active" loading="lazy" decoding="async" />
+                            <img id="execVisualImgRaed" src="../assets/hero-founder-raed-chair.webp" alt="Mr. Raed Kaakeh - CFO" class="exec-visual-img" loading="lazy" decoding="async" />
                             <div class="exec-visual-vignette" aria-hidden="true"></div>
                             
                             <div class="exec-visual-badge">
@@ -1913,7 +1913,7 @@ main#wrapper:focus{outline:none}
                     <div class="executive-grid-salim">
                         <div class="col-left mb-0">
                             <div class="about-media about-media--salim">
-                                <video class="video" muted loop autoplay preload="metadata" poster="../assets/about-founder-poster.webp" src="../assets/about-founder-cinematic-opt.mp4"></video>
+                                <video class="video" muted loop data-lazy-src="../assets/about-founder-cinematic-opt.mp4" data-lazy-autoplay="true" preload="none" data-lazy-poster="../assets/about-founder-poster.webp"></video>
                                 <div class="overlay v1"></div>
                                 <div class="overlay mark-1"></div>
                                 <div class="overlay mark-2"></div>
@@ -1992,7 +1992,7 @@ main#wrapper:focus{outline:none}
                     <div class="founder-editorial-card founder-card--salim">
                         <div class="founder-card-header">
                             <div class="founder-avatar-img-wrap">
-                                <img src="../assets/founder-salim.webp?v=color_v2" alt="Ir. Mohammad Salim Aziza" class="founder-avatar-img" />
+                                <img src="../assets/founder-salim.webp?v=color_v2" alt="Ir. Mohammad Salim Aziza" class="founder-avatar-img" loading="lazy" decoding="async" />
                             </div>
                             <div class="founder-card-titles">
                                 <h4 class="text-white fw-bold mb-1">Ir. Mohammad Salim Aziza</h4>
@@ -2022,7 +2022,7 @@ main#wrapper:focus{outline:none}
                                 <p class="text-caption text-white-64 mb-0 mt-1">Senior Financial Systems Architect & EU Regulatory Specialist</p>
                             </div>
                             <div class="founder-avatar-img-wrap">
-                                <img src="../assets/founder-raed.webp?v=color_v2" alt="Dhr. Mohammad Raed Kaakeh" class="founder-avatar-img" />
+                                <img src="../assets/founder-raed.webp?v=color_v2" alt="Dhr. Mohammad Raed Kaakeh" class="founder-avatar-img" loading="lazy" decoding="async" />
                             </div>
                         </div>
                         <p class="text-body-2 text-white-64 mb-3">

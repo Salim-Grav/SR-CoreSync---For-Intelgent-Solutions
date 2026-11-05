@@ -32,15 +32,13 @@ Two changes, neither of which touches the design:
    `<noscript>` fallback so a JavaScript-less client still receives the full
    design.
 
-2. The LCP resource is prioritised and its duplicate is dropped.
-   The emblem was preloaded as both `.jpg` (188 KB, unused by any layout) and
-   `.webp`, while the actual largest-contentful element - the founder cinema
-   `<video>` poster - went unpreloaded. The `.jpg` preload is removed and the
-   poster is preloaded at high priority using the exact `poster` path that the
-   page already declares.
+2. The hero emblem is prioritized while below-the-fold media is deferred.
+   The cinema poster is not the LCP element on the multilingual pages, so its
+   preload is removed. Founder images and the autoplay video are loaded only
+   when their section approaches the viewport.
 
 Deliberate limits:
-  * Only `<link>` tags are rewritten. No HTML structure, text or styling moves.
+  * Only known below-the-fold media attributes and resource hints are changed.
   * Every edit is idempotent; a second run reports "already optimised".
   * Nothing is written unless --apply is passed.
 
@@ -81,7 +79,9 @@ LANGUAGES = [
 DEFERRABLE_CSS = []
 
 # The largest-contentful element on the homepage is this video poster.
-LCP_POSTER_NAME = 'about-founder-poster.webp'
+LCP_IMAGE_CLASS = 'hero-emblem-render-img'
+BELOW_FOLD_IMAGE_CLASSES = ('showcase-img', 'exec-visual-img', 'founder-avatar-img')
+FOUNDER_VIDEO_SCRIPT = 'lazy-founder-media.js'
 
 # Preloaded at high priority but never rendered by any layout: the layout uses
 # the .webp sibling or a localized copy under assets/i18n/<lang>/.
@@ -112,29 +112,89 @@ def drop_heavy_emblem_preload(text):
     return PRELOAD_LINE_RE.sub(repl, text), removed
 
 
-def poster_preload(text):
-    """Build the LCP preload tag from the poster path the page already uses."""
-    m = re.search(r'poster="([^"]*' + re.escape(LCP_POSTER_NAME) + r')"', text)
-    if not m:
-        return None, None
-    href = m.group(1)
-    return href, '<link rel="preload" as="image" href="%s" fetchpriority="high">' % href
+def prioritize_hero_image(text):
+    """Keep the measured LCP image eager and assign it high fetch priority."""
+    image_re = re.compile(r'<img\b[^>]*>', re.IGNORECASE)
+
+    def replace(match):
+        tag = match.group(0)
+        class_match = re.search(r'\bclass=["\']([^"\']*)["\']', tag, re.IGNORECASE)
+        if not class_match or LCP_IMAGE_CLASS not in class_match.group(1).split():
+            return tag
+        if re.search(r'\bfetchpriority=', tag, re.IGNORECASE):
+            return tag
+        return tag[:-1].rstrip() + ' fetchpriority="high">'
+
+    return image_re.sub(replace, text)
 
 
-def has_poster_preload(text, href):
-    return re.search(r'rel="preload"[^>]*href="' + re.escape(href) + r'"', text) is not None
+def optimize_below_fold_images(text):
+    image_re = re.compile(r'<img\b[^>]*>', re.IGNORECASE)
+    target_classes = set(BELOW_FOLD_IMAGE_CLASSES)
+    changed = []
+
+    def add_attribute(tag, attribute):
+        closing = re.search(r'\s*/?>$', tag).group(0)
+        return tag[:-len(closing)] + ' ' + attribute + closing
+
+    def replace(match):
+        tag = match.group(0)
+        class_match = re.search(r'\bclass=["\']([^"\']*)["\']', tag, re.IGNORECASE)
+        if not class_match or not (target_classes & set(class_match.group(1).split())):
+            return tag
+        updated = re.sub(
+            r'(\bloading=["\'])eager(["\'])',
+            r'\1lazy\2',
+            tag,
+            flags=re.IGNORECASE,
+        )
+        if not re.search(r'\bloading=', updated, re.IGNORECASE):
+            updated = add_attribute(updated, 'loading="lazy"')
+        if not re.search(r'\bdecoding=', updated, re.IGNORECASE):
+            updated = add_attribute(updated, 'decoding="async"')
+        if updated != tag:
+            changed.append(True)
+        return updated
+
+    return image_re.sub(replace, text), len(changed)
 
 
-def insert_poster_preload(text, tag):
-    """Place the preload immediately before the first stylesheet in <head>."""
-    m = STYLESHEET_RE.search(text)
-    if not m:
-        return text, False
-    line_start = text.rfind('\n', 0, m.start()) + 1
-    indent = re.match(r'[ \t]*', text[line_start:m.start()]).group(0)
-    newline = '\r\n' if '\r\n' in text[:4000] else '\n'
-    text = text[:line_start] + indent + tag + newline + text[line_start:]
-    return text, True
+def defer_founder_video(text):
+    video_re = re.compile(
+        r'<video\b(?=[^>]*\bclass=["\'][^"\']*\bvideo\b[^"\']*["\'])[^>]*>\s*</video>',
+        re.IGNORECASE,
+    )
+    changed = []
+
+    def replace(match):
+        tag = match.group(0)
+        if re.search(r'\bdata-lazy-src=', tag, re.IGNORECASE):
+            return tag
+        src = re.search(r'\bsrc=["\']([^"\']+)["\']', tag, re.IGNORECASE)
+        if not src:
+            return tag
+        poster = re.search(r'\bposter=["\']([^"\']+)["\']', tag, re.IGNORECASE)
+        updated = re.sub(r'\s+(?:src|poster)=["\'][^"\']*["\']', '', tag, flags=re.IGNORECASE)
+        updated = re.sub(r'\s+autoplay(?=[\s>])', '', updated, flags=re.IGNORECASE)
+        updated = re.sub(r'\s+preload=["\'][^"\']*["\']', '', updated, flags=re.IGNORECASE)
+        attributes = ' data-lazy-src="%s" data-lazy-autoplay="true" preload="none"' % src.group(1)
+        if poster:
+            attributes += ' data-lazy-poster="%s"' % poster.group(1)
+        updated = updated.replace('>', attributes + '>', 1)
+        changed.append(True)
+        return updated
+
+    return video_re.sub(replace, text), bool(changed)
+
+
+def drop_founder_poster_preloads(text):
+    def replace(match):
+        tag = match.group(0)
+        if 'rel="preload"' in tag and 'about-founder-poster' in tag:
+            return ''
+        return tag
+
+    return PRELOAD_LINE_RE.sub(replace, text)
 
 
 def defer_component_css(text):
@@ -187,21 +247,27 @@ def defer_component_css(text):
     return text, deferred
 
 
-def transform(text):
+def transform(text, rel):
     notes = []
 
     text, removed = drop_heavy_emblem_preload(text)
     if removed:
         notes.append('dropped unused %s preload' % HEAVY_EMBLEM)
 
-    href, tag = poster_preload(text)
-    if not href:
-        notes.append('no cinema poster on this page - skipped LCP preload')
-    elif has_poster_preload(text, href):
-        notes.append('LCP poster already preloaded')
-    else:
-        text, ok = insert_poster_preload(text, tag)
-        notes.append('LCP poster preloaded' if ok else 'could not place LCP preload')
+    text = drop_founder_poster_preloads(text)
+    text = prioritize_hero_image(text)
+    text, lazy_images = optimize_below_fold_images(text)
+    notes.append('prioritized hero image and deferred %d below-fold image(s)' % lazy_images)
+
+    text, lazy_video = defer_founder_video(text)
+    if lazy_video:
+        script_path = './js/' if rel == 'index.html' else '../js/'
+        script_tag = '<script src="%s%s" defer></script>' % (script_path, FOUNDER_VIDEO_SCRIPT)
+        if script_tag not in text:
+            head_end = text.lower().rfind('</head>')
+            if head_end != -1:
+                text = text[:head_end] + '    ' + script_tag + '\n' + text[head_end:]
+        notes.append('deferred founder video until near viewport')
 
     text, deferred = defer_component_css(text)
     notes.append('deferred %d component sheet(s): %s' % (len(deferred), ', '.join(deferred))
@@ -212,7 +278,9 @@ def transform(text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--apply', action='store_true', help='write the files')
+    mode = ap.add_mutually_exclusive_group()
+    mode.add_argument('--apply', action='store_true', help='write the files')
+    mode.add_argument('--check', action='store_true', help='fail if any file needs optimization')
     ap.add_argument('--only', default=None, help='single page, repository-relative')
     args = ap.parse_args()
 
@@ -226,7 +294,7 @@ def main():
             continue
         with io.open(path, 'r', encoding='utf-8', newline='') as fh:
             text = fh.read()
-        new_text, notes = transform(text)
+        new_text, notes = transform(text, rel)
         if new_text == text:
             unchanged += 1
             print('SKIP     %-22s %s' % (rel, ' | '.join(notes)))
@@ -239,10 +307,11 @@ def main():
 
     print('-' * 78)
     print('%s: %d changed, %d unchanged' % (
-        'APPLIED' if args.apply else 'DRY RUN', changed, unchanged))
-    if not args.apply:
+        'APPLIED' if args.apply else 'CHECK' if args.check else 'DRY RUN',
+        changed, unchanged))
+    if not args.apply and not args.check:
         print('Re-run with --apply to write.')
-    return 0
+    return 1 if args.check and changed else 0
 
 
 if __name__ == '__main__':

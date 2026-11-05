@@ -7,7 +7,23 @@ Deploy 5 Sector-Specialized Executive Quick Chips across all 29 index pages:
 4. Logistics & Supply Chain (Raed)
 5. E-Commerce Platform (Salim)
 """
-import io, os, re, json
+import argparse, io, os, re, json, sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+HERO_LOCALES_PATH = os.path.join(ROOT, 'scripts', 'portal_hero_locales.json')
+PROMPT_LOCALES_PATH = os.path.join(ROOT, 'scripts', 'portal_hero_prompts_locales.json')
+CHIP_KEYS = (
+    'FinTech & Payment Rails',
+    'CoreSync ERP & Tax Compliance',
+    'Autonomous AI Agents',
+    'Logistics & Supply Chain',
+    'E-Commerce Webshop',
+)
+
+with io.open(HERO_LOCALES_PATH, 'r', encoding='utf-8') as f:
+    HERO_LOCALES = json.load(f)
+with io.open(PROMPT_LOCALES_PATH, 'r', encoding='utf-8') as f:
+    PROMPT_LOCALES = json.load(f)
 
 CHIPS_5_DATA = {
     'ar': {
@@ -72,16 +88,18 @@ CHIPS_5_DATA = {
     }
 }
 
-# For all other languages, generate tailored English-based localized sector chips
-for lang in ['es', 'it', 'pt', 'tr', 'el', 'pl', 'sv', 'da', 'no', 'fi', 'cs', 'sk', 'ro', 'bg', 'hu', 'hr', 'sl', 'et', 'lv', 'lt', 'mt', 'ga', 'ku']:
-    CHIPS_5_DATA[lang] = CHIPS_5_DATA['en']
-
 def make_chips_5_html(lang):
-    cd = CHIPS_5_DATA.get(lang, CHIPS_5_DATA['en'])
+    if lang not in HERO_LOCALES or lang not in PROMPT_LOCALES:
+        raise ValueError(f'Missing sector-chip translations for {lang}')
+    cd = HERO_LOCALES[lang]
+    prompts = PROMPT_LOCALES[lang]
+    if len(prompts) != len(CHIP_KEYS):
+        raise ValueError(f'Expected {len(CHIP_KEYS)} prompts for {lang}')
     chips_html = f'''                                        <!-- رقاقات الأفكار والقطاعات التخصصية (Executive Sector Chips) -->
-                                        <div class="hero-ai-chips-wrap" aria-label="{cd['label']}">
-                                            <span class="hero-ai-chips-label">{cd['label']}</span>'''
-    for title, prompt in cd['chips']:
+                                        <div class="hero-ai-chips-wrap" aria-label="{cd['Executive Sectors:']}">
+                                            <span class="hero-ai-chips-label">{cd['Executive Sectors:']}</span>'''
+    for key, prompt in zip(CHIP_KEYS, prompts):
+        title = cd[key]
         args_json = json.dumps([prompt], ensure_ascii=False)
         chips_html += f'''
                                             <button type="button" class="hero-ai-chip" data-sr-call="fillHeroPromptSample" data-sr-args='{args_json}'>
@@ -90,41 +108,55 @@ def make_chips_5_html(lang):
     chips_html += '\n                                        </div>'
     return chips_html
 
-def replace_chips_in_file(filepath, lang):
+def replace_chips_in_file(filepath, lang, apply):
     with io.open(filepath, 'r', encoding='utf-8') as f:
         c = f.read()
 
-    # Look for existing .hero-ai-chips-wrap and replace it
     m = re.search(r'([ \t]*<!-- [^\n]*chips[^\n]*-->\s*)?<div class="hero-ai-chips-wrap".*?</div>', c, re.DOTALL | re.IGNORECASE)
-    if m:
-        new_html = make_chips_5_html(lang)
-        c = c[:m.start()] + new_html + c[m.end():]
-        with io.open(filepath, 'w', encoding='utf-8', newline='\n') as f:
-            f.write(c)
-        print(f"[{lang}] Updated with 5 sector chips in {filepath}")
-    else:
-        # If not present, insert after </form> in hero-ai-idea-bar
-        m2 = re.search(r'(<div class="hero-ai-idea-bar"[^>]*>.*?)(</form>)', c, re.DOTALL)
-        if m2:
-            new_html = make_chips_5_html(lang)
-            insert_pos = m2.end()
-            c = c[:insert_pos] + "\n" + new_html + c[insert_pos:]
-            with io.open(filepath, 'w', encoding='utf-8', newline='\n') as f:
-                f.write(c)
-            print(f"[{lang}] Inserted 5 sector chips in {filepath}")
-        else:
-            print(f"[{lang}] ERROR: hero-ai-idea-bar not found in {filepath}!")
+    if not m:
+        raise ValueError(f'[{lang}] hero-ai-chips-wrap not found in {filepath}')
+    block = m.group(0)
+    locale = HERO_LOCALES[lang]
+    prompts = PROMPT_LOCALES[lang]
+    expected = [locale['Executive Sectors:'], *[locale[key] for key in CHIP_KEYS], *prompts]
+    if all(value in block for value in expected) and len(re.findall(r'class="hero-ai-chip"', block)) == 5:
+        print(f"[{lang}] Sector chips are localized in {filepath}")
+        return False
+    if not apply:
+        print(f"[{lang}] Sector chip translations need updating in {filepath}")
+        return True
+
+    updated = c[:m.start()] + make_chips_5_html(lang) + c[m.end():]
+    with io.open(filepath, 'w', encoding='utf-8', newline='') as f:
+        f.write(updated)
+    print(f"[{lang}] Updated localized sector chips in {filepath}")
+    return True
 
 def main():
-    print("--- Updating 5 Sector Chips across all 29 pages ---")
-    replace_chips_in_file('index.html', 'ar')
-    for lang in sorted(CHIPS_5_DATA.keys()):
-        if lang == 'ar':
-            continue
-        p = os.path.join(lang, 'index.html')
-        if os.path.exists(p):
-            replace_chips_in_file(p, lang)
+    parser = argparse.ArgumentParser(description='Check or update localized sector chips.')
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--check', action='store_true', help='check without writing files')
+    mode.add_argument('--apply', action='store_true', help='apply localized sector-chip data')
+    args = parser.parse_args()
+    apply = args.apply
+
+    print("--- Checking localized sector chips across all 29 pages ---")
+    issues = 0
+    sys.path.insert(0, os.path.join(ROOT, 'scripts'))
+    from deploy_sovereign_multilingual import LANGUAGES
+    languages = [language['code'] for language in LANGUAGES if language['code'] != 'ar']
+    if set(HERO_LOCALES) != set(languages) or set(PROMPT_LOCALES) != set(languages) | {'ar'}:
+        raise ValueError('Sector-chip locale files must cover every non-Arabic language.')
+    for lang in sorted(languages):
+        p = os.path.join(ROOT, lang, 'index.html')
+        if not os.path.isfile(p):
+            raise ValueError(f'Missing landing page: {p}')
+        issues += replace_chips_in_file(p, lang, apply)
+    if issues and not apply:
+        print(f'{issues} page(s) need localized sector-chip updates.')
+        return 1
+    print('Sector-chip localization check passed.')
+    return 0
 
 if __name__ == '__main__':
-    main()
-
+    raise SystemExit(main())

@@ -26,3 +26,10 @@ html:not([lang="ar"]) .hero-emblem-voice-badge-wrap {
     margin-top: 1.5rem !important;
     width: 100% !important;
 }
+
+@supports (content-visibility: auto) {
+    main > section[data-section] {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 1400px;
+    }
+}
