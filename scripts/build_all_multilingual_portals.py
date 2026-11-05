@@ -35,6 +35,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.dirname(__file__))
 from fix_multilingual_hero import normalize_index_html
+from localize_founder_showcase import normalize_index_html as normalize_founder_showcase
 
 DEMO_AR_PATH = os.path.join(BASE_DIR, 'demo.html')
 DEMO_EN_PATH = os.path.join(BASE_DIR, 'en', 'demo.html')
@@ -901,6 +902,7 @@ for code, data in LANG_DATA.items():
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
     idx_c = inject_or_replace_apple_dock(idx_c, code, page_type="index", is_subfolder=True)
     idx_c = normalize_index_html(idx_c, code)
+    idx_c = normalize_founder_showcase(idx_c, code)
 
     with open(target_index, 'w', encoding='utf-8') as f:
         f.write(idx_c)
@@ -932,6 +934,7 @@ for code, native_name, en_name, flag, vat in EU_REMAINING:
     idx_c = replace_any_switcher(idx_c, idx_dropdown, page_type="index")
     idx_c = inject_or_replace_apple_dock(idx_c, code, page_type="index", is_subfolder=True)
     idx_c = normalize_index_html(idx_c, code)
+    idx_c = normalize_founder_showcase(idx_c, code)
 
     with open(target_index, 'w', encoding='utf-8') as f:
         f.write(idx_c)
