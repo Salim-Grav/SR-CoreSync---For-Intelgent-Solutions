@@ -259,7 +259,13 @@
             </div>
 
 
-            <div class="sidebar-spacer"></div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>Prosjektfaser</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
+<div class="sidebar-spacer"></div>
 
             
             <div class="sidebar-sync-box">
@@ -1231,7 +1237,124 @@
             </div>
         </section>
 
-        </main>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">Prosjektoversikt</h2>
+            <p>En tydelig oversikt over faser og fremdrift.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">Eksempel på en digital plattform</div>
+        <div class="tracker-project-sub">Illustrerende oversikt for et fiktivt prosjekt.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>Samlet status</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% Fullført</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Planlagte faser</div>
+                <div class="tracker-stat-val">Fem faser</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Nåværende fokus</div>
+                <div class="tracker-stat-val">Planlegging og grunnlag</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Leveranseplanlegging</div>
+                <div class="tracker-stat-val">Eksempelomfang</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Sikkerhetsgjennomgang</div>
+                <div class="tracker-stat-val">Fastsettes senere</div>
+            </div>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Fullført</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Planlegging og grunnlag</h3>
+                <p class="tracker-stage-desc">Fastsett mål, omfang og viktige brukerreiser.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Avklar krav</li>
+                    <li class="done-item">Skisser brukerreiser</li>
+                    <li class="pending-item">Noter åpne spørsmål</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">Pågår</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Grensesnitt og opplevelse</h3>
+                <p class="tracker-stage-desc">Utform tydelige og tilgjengelige visninger.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Lage sideoppsett</li>
+                    <li class="done-item">Kontrollere tilgjengelighet</li>
+                    <li class="pending-item">Kontroller innholdsstrukturen</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planlagt</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Kjernefunksjoner og integrasjoner</h3>
+                <p class="tracker-stage-desc">Bygg viktige arbeidsflyter og koble til godkjente API-er.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Utvikle kjernefunksjoner</li>
+                    <li class="done-item">Kontrollere API-koblinger</li>
+                    <li class="pending-item">Dokumenter dataflyt</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planlagt</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Testing og forbedring</h3>
+                <p class="tracker-stage-desc">Test viktige brukerreiser og løs oppdagede problemer.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Teste brukerreiser</li>
+                    <li class="done-item">Følge opp tilbakemeldinger</li>
+                    <li class="pending-item">Noter testfunn</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planlagt</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Lansering og overlevering</h3>
+                <p class="tracker-stage-desc">Forbered lanseringen og dokumenter driften.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Lage lanseringssjekkliste</li>
+                    <li class="done-item">Levere driftsveiledning</li>
+                    <li class="pending-item">Noter trinn for overlevering</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
+
+</main>
     </div>
 
     

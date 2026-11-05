@@ -259,7 +259,13 @@
             </div>
 
 
-            <div class="sidebar-spacer"></div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>Projektfaser</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
+<div class="sidebar-spacer"></div>
 
             
             <div class="sidebar-sync-box">
@@ -1231,7 +1237,124 @@
             </div>
         </section>
 
-        </main>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">Projektöversikt</h2>
+            <p>En tydlig bild av projektets faser och framsteg.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">Exempel på en digital plattform</div>
+        <div class="tracker-project-sub">Illustrativ översikt för ett fiktivt projekt.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>Övergripande status</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% Slutförd</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Planerade faser</div>
+                <div class="tracker-stat-val">Fem faser</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Aktuellt fokus</div>
+                <div class="tracker-stat-val">Planering och grund</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Leveransplanering</div>
+                <div class="tracker-stat-val">Exempelomfattning</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Säkerhetsgranskning</div>
+                <div class="tracker-stat-val">Fastställs senare</div>
+            </div>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Slutförd</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Planering och grund</h3>
+                <p class="tracker-stage-desc">Fastställ mål, omfattning och viktiga användarflöden.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Enas om krav</li>
+                    <li class="done-item">Skissa användarflöden</li>
+                    <li class="pending-item">Anteckna öppna frågor</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">Pågår</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Gränssnitt och upplevelse</h3>
+                <p class="tracker-stage-desc">Utforma tydliga och tillgängliga vyer.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Ta fram sidlayouter</li>
+                    <li class="done-item">Granska tillgänglighet</li>
+                    <li class="pending-item">Granska innehållsstrukturen</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planerad</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Kärnfunktioner och integrationer</h3>
+                <p class="tracker-stage-desc">Bygg viktiga arbetsflöden och anslut godkända API:er.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Utveckla kärnfunktioner</li>
+                    <li class="done-item">Kontrollera API-anslutningar</li>
+                    <li class="pending-item">Dokumentera dataflöden</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planerad</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Testning och förbättring</h3>
+                <p class="tracker-stage-desc">Testa viktiga flöden och åtgärda upptäckta problem.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Testa användarflöden</li>
+                    <li class="done-item">Ta hand om återkoppling</li>
+                    <li class="pending-item">Anteckna testresultat</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Planerad</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Lansering och överlämning</h3>
+                <p class="tracker-stage-desc">Förbered lanseringen och dokumentera driften.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Skapa en lanseringslista</li>
+                    <li class="done-item">Lämna en driftguide</li>
+                    <li class="pending-item">Notera överlämningssteg</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
+
+</main>
     </div>
 
     

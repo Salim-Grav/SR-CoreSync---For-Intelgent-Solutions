@@ -15,6 +15,9 @@ from deploy_sovereign_multilingual import LANGUAGES  # noqa: E402
 INDEX_SECTIONS = (
     "founders-showcase",
     "services",
+    "services-faq",
+    "services-compare",
+    "tech-pillars",
     "executive-solutions-stage",
     "about",
     "testimonials",
@@ -25,6 +28,7 @@ INDEX_SECTIONS = (
     "contact",
     "compliance",
     "newsletter",
+    "insights",
 )
 
 DEMO_TABS = (
@@ -36,6 +40,7 @@ DEMO_TABS = (
     "tab-whitelabel",
     "tab-software",
     "tab-roi",
+    "tab-tracker",
 )
 
 
@@ -44,16 +49,19 @@ class PortalParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.html_tags = []
         self.sections = []
+        self.tracker_navs = []
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
         if tag == "html":
             self.html_tags.append(attributes)
+        elif attributes.get("id") == "tourNav-tracker":
+            self.tracker_navs.append(attributes)
         elif tag == "section" and attributes.get("id"):
             self.sections.append(attributes["id"])
 
 
-def inspect_page(path, lang, direction, required_ids):
+def inspect_page(path, lang, direction, required_ids, require_tracker_nav=False):
     if not path.is_file():
         return [f"{path.relative_to(BASE_DIR)}: page is missing"]
 
@@ -92,6 +100,17 @@ def inspect_page(path, lang, direction, required_ids):
 
     if len(positions) == len(required_ids) and positions != sorted(positions):
         issues.append(f"{relative_path}: shared sections are out of canonical order")
+    if require_tracker_nav:
+        if len(parser.tracker_navs) != 1:
+            issues.append(
+                f"{relative_path}: expected one tracker navigation item, "
+                f"found {len(parser.tracker_navs)}"
+            )
+        elif (
+            parser.tracker_navs[0].get("data-sr-call") != "switchPortalTab"
+            or parser.tracker_navs[0].get("data-sr-args") != '["tracker"]'
+        ):
+            issues.append(f"{relative_path}: tracker navigation does not target #tab-tracker")
     return issues
 
 
@@ -108,7 +127,13 @@ def main():
             inspect_page(portal_dir / "index.html", code, language["dir"], INDEX_SECTIONS)
         )
         issues.extend(
-            inspect_page(portal_dir / "demo.html", code, language["dir"], DEMO_TABS)
+            inspect_page(
+                portal_dir / "demo.html",
+                code,
+                language["dir"],
+                DEMO_TABS,
+                require_tracker_nav=True,
+            )
         )
 
     if issues:

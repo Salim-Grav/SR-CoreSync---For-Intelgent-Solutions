@@ -259,7 +259,13 @@
             </div>
 
 
-            <div class="sidebar-spacer"></div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>Etapy projektu</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
+<div class="sidebar-spacer"></div>
 
             
             <div class="sidebar-sync-box">
@@ -1231,7 +1237,124 @@
             </div>
         </section>
 
-        </main>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">Przegląd projektu</h2>
+            <p>Przejrzysty obraz etapów i postępów.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">Przykładowa platforma cyfrowa</div>
+        <div class="tracker-project-sub">Poglądowy tracker fikcyjnego projektu.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>Status ogólny</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% Ukończono</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Planowane etapy</div>
+                <div class="tracker-stat-val">Pięć etapów</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Bieżący zakres prac</div>
+                <div class="tracker-stat-val">Planowanie i podstawy</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Planowanie dostarczenia</div>
+                <div class="tracker-stat-val">Przykładowy zakres</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Przegląd bezpieczeństwa</div>
+                <div class="tracker-stat-val">Do ustalenia</div>
+            </div>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Ukończony</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Planowanie i podstawy</h3>
+                <p class="tracker-stage-desc">Określ cele, zakres i kluczowe ścieżki użytkowników.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Uzgodnić wymagania</li>
+                    <li class="done-item">Naszkicować ścieżki użytkowników</li>
+                    <li class="pending-item">Zanotować otwarte pytania</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">W trakcie</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Interfejs i wygoda użytkowania</h3>
+                <p class="tracker-stage-desc">Zaprojektuj czytelne i dostępne widoki.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Przygotować układy stron</li>
+                    <li class="done-item">Sprawdzić dostępność</li>
+                    <li class="pending-item">Sprawdzić strukturę treści</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Zaplanowany</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Kluczowe funkcje i integracje</h3>
+                <p class="tracker-stage-desc">Zbuduj podstawowe procesy i połącz zatwierdzone API.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Opracować kluczowe funkcje</li>
+                    <li class="done-item">Sprawdzić połączenia API</li>
+                    <li class="pending-item">Udokumentować przepływy danych</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Zaplanowany</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Testy i dopracowanie</h3>
+                <p class="tracker-stage-desc">Przetestuj ścieżki i usuń wykryte problemy.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Testować ścieżki użytkowników</li>
+                    <li class="done-item">Uwzględnić uwagi</li>
+                    <li class="pending-item">Zapisać wyniki testów</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Zaplanowany</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Uruchomienie i przekazanie</h3>
+                <p class="tracker-stage-desc">Przygotuj publikację i opisz sposób obsługi.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Przygotować listę uruchomienia</li>
+                    <li class="done-item">Przekazać instrukcję obsługi</li>
+                    <li class="pending-item">Odnotować etapy przekazania</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
+
+</main>
     </div>
 
     
