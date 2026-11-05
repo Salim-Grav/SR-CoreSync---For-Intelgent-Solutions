@@ -17,6 +17,7 @@
 | `localize_portal_core_metadata.py --check` | اكتمال العناوين والأوصاف الأساسية المترجمة وعناوين صفحات العرض |
 | `localize_multilingual_shared_sections.py --check` | اكتمال توطين الأقسام المشتركة للصفحة الرئيسية ولوحة تتبع العرض المنقحة |
 | `localize_founder_showcase.py --check` | اكتمال توطين عناوين وسير وأوصاف وأزرار قسم المؤسسين |
+| `localize_multilingual_services.py --check` | اكتمال توطين أسماء الخدمات وأوصافها وأزرارها في الصفحات الرئيسية |
 | `build_csp.py --check` | تطابق بصمات CSP مع مجموعة النشر المبنية |
 | `check_multilingual_page_parity.py` | ترتيب الأقسام المشتركة واتجاه `lang`/`dir` في صفحتي الرئيسية والعرض لكل لغة |
 | `audit_dead_gateway.py` | لا إشارة إلى بوابة PHP الميتة |
@@ -68,6 +69,11 @@
 `founders-showcase` بصفحات `index.html`؛ يدعم `--apply` للتطبيق الموضعي
 و`--check` لمنع بقاء النص المصدر، ولا يعيد توليد الصفحات أو يغيّر أسماء
 المؤسسين والعلامة التجارية.
+
+تُحفظ ترجمات أسماء الخدمات وأوصافها وأزرار الحجز والتواصل في
+`portal_services_locales.json`. يقتصر `localize_multilingual_services.py`
+على عنوان وقسم الخدمات `#services` في صفحات `index.html`؛ يدعم `--apply`
+و`--check`، ولا يغيّر الأسعار أو الروابط أو رسائل الطلب.
 
 تُحفظ ترجمة لوحة تتبع العرض المنقحة في `portal_demo_tracker_locales.json`.
 يضيف `--apply` تبويباً وعنصر تنقل مطابقين في 28 عرضاً غير عربي، مع نموذج
