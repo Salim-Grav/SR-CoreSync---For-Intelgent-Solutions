@@ -153,7 +153,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>S&R CoreSync | Live Interactive Cloud ERP Portal (Demo)</title>
+    <title>S&amp;R CoreSync | Interactieve cloud-ERP-demonstratie</title>
     <link rel="icon" type="image/png" sizes="256x256" href="../assets/i18n/intl/sr-core-emblem-256.png?v=sovereign2026_fixed">
     <link rel="icon" type="image/svg+xml" href="../assets/i18n/intl/sr-core-emblem.svg?v=sovereign2026_fixed">
     <link rel="alternate icon" type="image/png" href="../assets/favicon-96.png">
@@ -189,16 +189,16 @@
         <div class="header-controls">
             <div class="live-status-pill">
                 <span class="live-status-dot"></span>
-                <span>Cloud Node Online (EU Central)</span>
+                <span>Cloudknooppunt online (EU-centraal)</span>
             </div>
             
             <button type="button" class="btn-tour-start" id="btnStartTour" data-sr-call="startGuidedTour" title="Start step-by-step interactive guided tour of the ERP architecture">
-                <span>🚀 Start Tour</span>
+                <span>🚀 Rondleiding starten</span>
             </button>
             
             <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" data-sr-call="openExecutivePdfModal" title="Export executive proposal brief to an elegant client PDF">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                <span>Proposal Brief (PDF)</span>
+                <span>Offerteoverzicht (PDF)</span>
             </button>
             <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" data-sr-call="togglePresentationMode" title="Client presentation mode (Full screen executive walkthrough)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
@@ -242,7 +242,7 @@
             </div>
             <div class="nav-item" id="tourNav-cloud" data-sr-call="switchPortalTab" data-sr-args='["cloud"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
-                <span>Cloud Server Status</span>
+                <span>Cloudserverstatus</span>
             </div>
             <div class="nav-item" id="tourNav-whitelabel" data-sr-call="switchPortalTab" data-sr-args='["whitelabel"]' data-sr-this="last">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
@@ -259,7 +259,13 @@
             </div>
 
 
-            <div class="sidebar-spacer"></div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>Projectfasen</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
+<div class="sidebar-spacer"></div>
 
             
             <div class="sidebar-sync-box">
@@ -290,11 +296,11 @@
                 <div class="currency-vat-bar" id="currencyVatSimulatorBar">
                     <div class="cur-vat-title">
                         <span class="cur-badge-pulse"></span>
-                        <strong>Live Currency & VAT Simulator:</strong>
+                        <strong>Live valuta- en btw-simulator:</strong>
                     </div>
                     <div class="cur-vat-controls">
                         <div class="cur-selector-group">
-                            <span class="cur-label">Currency:</span>
+                            <span class="cur-label">Valuta:</span>
                             <div class="cur-pill-toggle">
                                 <button type="button" class="cur-pill active" id="curPill-EUR" data-sr-call="setCurrency" data-sr-args='["EUR"]'>€ EUR</button>
                                 <button type="button" class="cur-pill" id="curPill-USD" data-sr-call="setCurrency" data-sr-args='["USD"]'>$ USD</button>
@@ -302,24 +308,24 @@
                             </div>
                         </div>
                         <div class="cur-selector-group">
-                            <span class="cur-label">Tax Regime:</span>
+                            <span class="cur-label">Belastingstelsel:</span>
                             <select id="globalVatSelector" onchange="setGlobalVat(this.value)" class="cur-select-vat" title="Select financial tax regime" aria-label="Select financial tax regime">
-                                <option value="0.21" selected>🇳🇱 Dutch BTW (21%)</option>
-                                <option value="0.09">🇳🇱 Reduced BTW (9%)</option>
-                                <option value="0.15">🇸🇦 GCC VAT (15%)</option>
-                                <option value="0.00">🌐 Tax Exempt (0%)</option>
+                                <option value="0.21" selected>🇳🇱 Nederlandse btw (21%)</option>
+                                <option value="0.09">🇳🇱 Verlaagd btw-tarief (9%)</option>
+                                <option value="0.15">🇸🇦 Btw GCC (15%)</option>
+                                <option value="0.00">🌐 Vrijgesteld van belasting (0%)</option>
                             </select>
                         </div>
                         <div class="cur-summary-chip">
-                            <span>Calculated Tax: <strong id="globalVatEst">€ 176,925.00</strong></span>
+                            <span>Berekende belasting: <strong id="globalVatEst">€ 176,925.00</strong></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <h2>Real-Time Financial Dashboard & Cash Flow Telemetry</h2>
-                        <p>Live simulation engine for automated enterprise revenue, cloud expenses, and cash telemetry</p>
+                        <h2>Financieel dashboard en cashflow in realtime</h2>
+                        <p>Live simulatie van bedrijfsomzet, cloudkosten en cashflow</p>
                     </div>
 
             <!-- Feature 1: Instant Branded Client Proposal Engine -->
@@ -1231,7 +1237,124 @@
             </div>
         </section>
 
-        </main>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">Projectoverzicht</h2>
+            <p>Een helder overzicht van fasen en voortgang.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">Voorbeeld van een digitaal platform</div>
+        <div class="tracker-project-sub">Illustratief overzicht van een fictief project.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>Algemene status</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% Voltooid</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Geplande fasen</div>
+                <div class="tracker-stat-val">Vijf fasen</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Huidige focus</div>
+                <div class="tracker-stat-val">Planning en basis</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Leveringsplanning</div>
+                <div class="tracker-stat-val">Voorbeeldscope</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Beveiligingscontrole</div>
+                <div class="tracker-stat-val">Nog te bepalen</div>
+            </div>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Voltooid</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Planning en basis</h3>
+                <p class="tracker-stage-desc">Doelen, reikwijdte en belangrijke gebruikersroutes bepalen.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Behoeften afstemmen</li>
+                    <li class="done-item">Gebruikersroutes schetsen</li>
+                    <li class="pending-item">Open vragen vastleggen</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">In uitvoering</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Interface en gebruikservaring</h3>
+                <p class="tracker-stage-desc">Heldere en toegankelijke schermen ontwerpen.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Pagina-indelingen maken</li>
+                    <li class="done-item">Toegankelijkheid controleren</li>
+                    <li class="pending-item">Inhoudsstructuur controleren</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Gepland</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Kernfuncties en koppelingen</h3>
+                <p class="tracker-stage-desc">Belangrijke functies bouwen en goedgekeurde API's koppelen.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Kernfuncties ontwikkelen</li>
+                    <li class="done-item">API-koppelingen controleren</li>
+                    <li class="pending-item">Gegevensstromen documenteren</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Gepland</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Testen en verfijnen</h3>
+                <p class="tracker-stage-desc">Gebruikersroutes testen en gevonden problemen oplossen.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Gebruikersroutes testen</li>
+                    <li class="done-item">Feedback verwerken</li>
+                    <li class="pending-item">Testbevindingen vastleggen</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Gepland</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Lancering en overdracht</h3>
+                <p class="tracker-stage-desc">De introductie voorbereiden en het gebruik documenteren.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Lanceringchecklist opstellen</li>
+                    <li class="done-item">Beheergids opleveren</li>
+                    <li class="pending-item">Overdrachtsstappen noteren</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
+
+</main>
     </div>
 
     
@@ -1272,7 +1395,7 @@
     <div class="modal-overlay" id="newInvoiceModal" data-sr-backdrop-call="closeInvoiceGeneratorModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">Generate Certified E-Invoice</h3>
-            <p class="text-caption text-white-64 mb-4">Generate compliant cloud e-invoices with Dutch BTW (21%), EU Reverse Charge, and GCC VAT</p>
+            <p class="text-caption text-white-64 mb-4">Generate compliant cloud e-invoices with Nederlandse btw (21%), EU Reverse Charge, and GCC VAT</p>
             
             <div class="modal-form-fields">
                 <div>
@@ -3388,7 +3511,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                             </tr>
                             <tr class="ds-u96">
                                 <td class="ds-u97">Applied Tax Regime in Session</td>
-                                <td class="ds-u100" id="pdfVatScheme">Dutch BTW (21%)</td>
+                                <td class="ds-u100" id="pdfVatScheme">Nederlandse btw (21%)</td>
                                 <td class="ds-u101">Compliant with AWR Art. 52</td>
                             </tr>
                             <tr class="ds-u96">
@@ -3879,21 +4002,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
@@ -3931,18 +4054,18 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="apple-dock-dot"></span>
         </a>
         <div class="apple-dock-separator"></div>
-        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="All 28 Languages (Launchpad)" aria-label="Open Full 28 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
+        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="All 29 Languages (Launchpad)" aria-label="Open Full 29 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            <span class="apple-dock-badge">28</span>
+            <span class="apple-dock-badge">29</span>
         </button>
     </div>
 </aside>
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
-<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
+<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 29 Languages">
     <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>
     <div class="apple-launchpad-window">
         <div class="apple-launchpad-header">
@@ -3952,7 +4075,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="apple-dot apple-dot-yellow"></span>
                     <span class="apple-dot apple-dot-green"></span>
                 </div>
-                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (28 Supported Nations & VAT Regimes)</h3>
+                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (29 Supported Languages & VAT Regimes)</h3>
             </div>
             <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>
         </div>

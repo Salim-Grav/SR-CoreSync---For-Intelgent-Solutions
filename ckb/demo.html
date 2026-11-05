@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<html lang="ckb" dir="rtl" data-page-language="ckb">
 <head>
     <meta charset="UTF-8">
             <!-- Sovereign Intelligent System Language Auto-Detector (0ms Frictionless Device & Media App Routing) -->
@@ -150,7 +150,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>S&R CoreSync | المنصة السحابية التجريبية (Live Interactive Demo Portal)</title>
+    <title>S&amp;R CoreSync | پیشاندانی زیندووی ERPی هەوری کارلێککار</title>
     <link rel="icon" type="image/png" sizes="256x256" href="../assets/sr-core-emblem-256.png?v=sovereign2026_fixed">
     <link rel="icon" type="image/svg+xml" href="../assets/sr-core-emblem.svg?v=sovereign2026_fixed">
     <link rel="alternate icon" type="image/png" href="../assets/favicon-96.png">
@@ -264,10 +264,12 @@
                 <span>حاسبة التوفير والعائد (ROI)</span>
             </div>
 
-            <div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                <span>مراحل المشروع (Sprint Tracker)</span>
-            </div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>قۆناغەکانی پڕۆژە</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
 
             <a href="../verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="nav-item nav-link-verify">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -1393,230 +1395,122 @@
         </section>
 
         <!-- 8. شاشة تتبع مراحل المشروع والسبرنتات (Project Milestone & Sprint Tracker) -->
-        <section class="tab-section" id="tab-tracker">
-            <div class="section-header">
-                <div class="section-title-wrap">
-                    <h2>لوحة المتابعة الحية لمراحل المشروع (Live Milestone & Sprint Tracker)</h2>
-                    <p>المتابعة الهندسية اللحظية للمراحل الـ 5 المعتمدة في العقد التجاري الرسمي (OF-2026-1021)</p>
-                </div>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">پوختەی پڕۆژە</h2>
+            <p>وێنەیەکی ڕوون لە قۆناغ و پێشکەوتن.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">نموونەی پلاتفۆرمێکی دیجیتاڵی</div>
+        <div class="tracker-project-sub">شوێنکەوتنی نموونەیی بۆ پڕۆژەیەکی خەیاڵی.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>دۆخی گشتی</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% تەواوبووە</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">قۆناغە پلاندانراوەکان</div>
+                <div class="tracker-stat-val">پێنج قۆناغ</div>
             </div>
-
-            <div class="tracker-header-box">
-                <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
-                    <div>
-                        <div class="tracker-project-title">منظومة منصة NL بالعربي في هولندا (NL bil Arabi Platform)</div>
-                        <div class="tracker-project-sub">
-                            المرجع التعاقدي: <strong class="text-gold font-num">OF-2026-1021</strong> • العميل المالك: <strong>السيد مضر أبو فاشة</strong> • المقر: هولندا
-                        </div>
-                    </div>
-                    <div class="d-flex gap-2 flex-wrap">
-                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026Modal">
-                            💻 العقد التقني (€ 21k)
-                        </button>
-                        <button type="button" class="btn-cert-print" data-sr-call="openContractOf2026FinModal">
-                            📊 العقد المالي (استرداد 4,410 €)
-                        </button>
-                        <a href="../verify.html?doc=OF-2026-1021" target="_blank" rel="noopener noreferrer" class="table-action-btn table-action-verify-flex">
-                            🛡️ فحص التوثيق المشفر
-                        </a>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
-                    <span>مؤشر الجاهزية الإجمالية للمشروع (Overall Architecture & Development Readiness):</span>
-                    <strong class="text-gold font-num tracker-readiness-highlight">78% مكتمل</strong>
-                </div>
-                <div class="tracker-progress-bar-wrap">
-                    <div class="tracker-progress-bar-fill"></div>
-                </div>
-
-                <div class="tracker-top-stats">
-                    <div class="tracker-stat-box">
-                        <div class="tracker-stat-lbl">إجمالي المراحل المعتمدة</div>
-                        <div class="tracker-stat-val">5 مراحل برمجية</div>
-                    </div>
-                    <div class="tracker-stat-box">
-                        <div class="tracker-stat-lbl">المرحلة النشطة الحالية</div>
-                        <div class="tracker-stat-val tracker-val-sprint">المرحلة 1 &amp; 2 (Sprint 1)</div>
-                    </div>
-                    <div class="tracker-stat-box">
-                        <div class="tracker-stat-lbl">الدفعة المستحقة لبدء التأسيس</div>
-                        <div class="tracker-stat-val tracker-val-deposit">€ 7,623 (30%)</div>
-                    </div>
-                    <div class="tracker-stat-box">
-                        <div class="tracker-stat-lbl">الامتثال الأوروبي والضريبي</div>
-                        <div class="tracker-stat-val tracker-val-compliance">GDPR &amp; BTW 100%</div>
-                    </div>
-                </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">ئامانجی ئێستا</div>
+                <div class="tracker-stat-val">پلان دانان و بنەما</div>
             </div>
-
-            <!-- شبكة بطاقات المراحل الـ 5 -->
-            <div class="tracker-stages-grid">
-                
-                <!-- المرحلة 1 -->
-                <div class="tracker-stage-card in-progress">
-                    <div>
-                        <div class="tracker-stage-header">
-                            <span class="tracker-stage-badge active">سبرنت حالي · 85% مكتمل</span>
-                            <span class="font-num text-caption text-white-64">Sprint 1</span>
-                        </div>
-                        <div class="tracker-stage-name">1. المنصة الأساسية والاشتراكات (Core Web &amp; Subscriptions)</div>
-                        <div class="tracker-stage-desc">
-                            بنية تحتية سحابية هجينة معزولة، دعم كامل للغات الثلاث (عربي RTL، هولندي، إنجليزي)، باقات 2€ و 5€، بوابة دفع iDEAL لتفادي عمولة المتاجر.
-                        </div>
-                        <ul class="tracker-items-list">
-                            <li class="done-item">المعمارية السحابية وقواعد البيانات المعزولة</li>
-                            <li class="done-item">نظام باقات المشتركين والتسجيل الآمن OTP</li>
-                            <li class="done-item">بوابة iDEAL والتحويل البنكي الأوروبي SEPA</li>
-                            <li class="pending-item">اللمسات النهائية لحسابات الأطفال والرقابة الأبوية</li>
-                        </ul>
-                    </div>
-                    <div class="tracker-stage-footer">
-                        <span>المخصص المالي:</span>
-                        <span class="tracker-stage-fee">€ 4,800.00</span>
-                    </div>
-                </div>
-
-                <!-- المرحلة 2 -->
-                <div class="tracker-stage-card in-progress">
-                    <div>
-                        <div class="tracker-stage-header">
-                            <span class="tracker-stage-badge active">قيد التطوير والتكامل</span>
-                            <span class="font-num text-caption text-white-64">Sprint 2</span>
-                        </div>
-                        <div class="tracker-stage-name">2. محرك القسائم الذكية وبوابة المتاجر (Vouchers &amp; WhatsApp)</div>
-                        <div class="tracker-stage-desc">
-                            توليد قسائم QR مشفرة لمشتركي باقة 5€، ربط آلي مع WhatsApp Business API، وبوابة مسح خفيفة للمتاجر تعمل عبر المتصفح بدون تطبيقات.
-                        </div>
-                        <ul class="tracker-items-list">
-                            <li class="done-item">خوارزمية توليد وتشفير أكواد الـ QR الشهرية</li>
-                            <li class="done-item">واجهة مسح القسائم للمتاجر عبر كاميرا الهاتف</li>
-                            <li class="pending-item">تكامل WhatsApp Business لإرسال القسائم فورياً</li>
-                            <li class="pending-item">نظام إصدار تقارير تسوية المتاجر الضريبية PDF</li>
-                        </ul>
-                    </div>
-                    <div class="tracker-stage-footer">
-                        <span>المخصص المالي:</span>
-                        <span class="tracker-stage-fee">€ 4,200.00</span>
-                    </div>
-                </div>
-
-                <!-- المرحلة 3 -->
-                <div class="tracker-stage-card">
-                    <div>
-                        <div class="tracker-stage-header">
-                            <span class="tracker-stage-badge upcoming">مجدولة للسبرنت القادم</span>
-                            <span class="font-num text-caption text-white-64">Sprint 3</span>
-                        </div>
-                        <div class="tracker-stage-name">3. استوديو البث الحي والترجمة بالذكاء الاصطناعي (Live &amp; AI)</div>
-                        <div class="tracker-stage-desc">
-                            استوديو سحابي لدمج عدة كاميرات وهواتف، مشغل تفاعلي يدعم 3 مسارات صوتية، محرك الترجمة الفورية بالذكاء الاصطناعي، وطابور موافقة مقاطع الجمهور.
-                        </div>
-                        <ul class="tracker-items-list">
-                            <li class="done-item">تصميم مواصفات بروتوكول البث فائق السرعة (HLS/WebRTC)</li>
-                            <li class="pending-item">برمجة استوديو البث التلفزيوني السحابي المدمج</li>
-                            <li class="pending-item">تكامل الذكاء الاصطناعي للترجمة التلقائية متعددة اللغات</li>
-                        </ul>
-                    </div>
-                    <div class="tracker-stage-footer">
-                        <span>المخصص المالي:</span>
-                        <span class="tracker-stage-fee">€ 5,200.00</span>
-                    </div>
-                </div>
-
-                <!-- المرحلة 4 -->
-                <div class="tracker-stage-card">
-                    <div>
-                        <div class="tracker-stage-header">
-                            <span class="tracker-stage-badge upcoming">مرحلة الإدارة والرعايات</span>
-                            <span class="font-num text-caption text-white-64">Sprint 4</span>
-                        </div>
-                        <div class="tracker-stage-name">4. لوحة الإدارة المركزية وبوابة المعلنين (Admin &amp; Ads)</div>
-                        <div class="tracker-stage-desc">
-                            إدارة برامج المنصة وصلاحيات فرق العمل وسجل التدقيق، التصويت الحصري لباقة 5€، وبوابة المعلنين لحجز المساحات والربط المالي الآلي.
-                        </div>
-                        <ul class="tracker-items-list">
-                            <li class="done-item">بنية التحقق وصلاحيات الفرق وسجلات التدقيق</li>
-                            <li class="pending-item">بوابة المعلنين والربط المحاسبي التلقائي للفواتير</li>
-                            <li class="pending-item">تطبيق الامتثال الأوروبي الصارم للخصوصية GDPR/AVG</li>
-                        </ul>
-                    </div>
-                    <div class="tracker-stage-footer">
-                        <span>المخصص المالي:</span>
-                        <span class="tracker-stage-fee">€ 3,300.00</span>
-                    </div>
-                </div>
-
-                <!-- المرحلة 5 -->
-                <div class="tracker-stage-card">
-                    <div>
-                        <div class="tracker-stage-header">
-                            <span class="tracker-stage-badge upcoming">المرحلة الإنتاجية النهائية</span>
-                            <span class="font-num text-caption text-white-64">Sprint 5</span>
-                        </div>
-                        <div class="tracker-stage-name">5. تطبيقات الهواتف الذكية (Mobile Apps - iOS &amp; Android)</div>
-                        <div class="tracker-stage-desc">
-                            تطبيق موحد بنظام Reader App لتفادي عمولة الـ 30% لمتجري آبل وجوجل، إشعارات فورية ذكية، ووصول كامل للبث والأرشيف.
-                        </div>
-                        <ul class="tracker-items-list">
-                            <li class="done-item">معمارية التوافق والامتثال لقوانين App Store و Play Store</li>
-                            <li class="pending-item">تطوير حزمة التطبيقات الأصلية وتجهيز ملفات النشر</li>
-                            <li class="pending-item">الإطلاق التجريبي واختبارات الاستقرار لمدة 14 يوماً</li>
-                        </ul>
-                    </div>
-                    <div class="tracker-stage-footer">
-                        <span>المخصص المالي:</span>
-                        <span class="tracker-stage-fee">€ 3,500.00</span>
-                    </div>
-                </div>
-
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">پلاندانانی ڕادەستکردن</div>
+                <div class="tracker-stat-val">سنووری نموونەیی</div>
             </div>
-
-            <!-- أداة حاسبة سعة السيرفرات والبث المباشر (Cloud Infrastructure Sizing Calculator) -->
-            <div class="tracker-sizing-card">
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                    <div>
-                        <h4 class="text-white fw-bold mb-1">☁️ حاسبة سعة الخوادم السحابية واستهلاك البث التقديري (Cloud Sizing &amp; Bandwidth)</h4>
-                        <p class="text-caption text-white-64 mb-0">قدر السيرفرات السحابية والباندويث الشهري الموصى به لمنصة NL بالعربي حسب حجم المشتركين وساعات البث الحي</p>
-                    </div>
-                    <span class="badge-status-sepa font-num">Hetzner / AWS EU (Frankfurt)</span>
-                </div>
-
-                <div class="tracker-sizing-grid">
-                    <div class="roi-slider-box">
-                        <div class="roi-slider-header">
-                            <span>👥 عدد المشتركين النشطين المتوقع</span>
-                            <span class="roi-val-display font-num" id="dispSubscribersCount">5,000 مشترك</span>
-                        </div>
-                        <input type="range" min="500" max="50000" step="500" value="5000" class="roi-range-input" id="slideSubscribersCount" title="Subscribers Count" aria-label="Subscribers Count" data-sr-call="calcCloudSizing" data-sr-on="input" />
-                    </div>
-
-                    <div class="roi-slider-box">
-                        <div class="roi-slider-header">
-                            <span>🎥 ساعات البث المباشر أسبوعياً</span>
-                            <span class="roi-val-display font-num" id="dispStreamHours">10 ساعات/أسبوع</span>
-                        </div>
-                        <input type="range" min="2" max="50" step="2" value="10" class="roi-range-input" id="slideStreamHours" title="Streaming Hours" aria-label="Streaming Hours" data-sr-call="calcCloudSizing" data-sr-on="input" />
-                    </div>
-                </div>
-
-                <div class="roi-results-row mt-3">
-                    <div class="roi-metric-result">
-                        <div class="roi-metric-num text-cyan font-num" id="resCloudServerSpec">Cloud Dedicated (8 vCPU / 32 GB)</div>
-                        <div class="roi-metric-lbl">مواصفات السيرفر السحابي الموصى به</div>
-                    </div>
-                    <div class="roi-metric-result">
-                        <div class="roi-metric-num text-white font-num" id="resCloudBandwidth">4.2 TB / شهر</div>
-                        <div class="roi-metric-lbl">استهلاك الباندويث المقدر شهرياً</div>
-                    </div>
-                    <div class="roi-metric-result">
-                        <div class="roi-metric-num text-gold font-num" id="resCloudCost">€ 85 / شهر</div>
-                        <div class="roi-metric-lbl">التكلفة السحابية الصافية التقديرية (وفر 48%)</div>
-                    </div>
-                </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">پشکنینی ئاسایش</div>
+                <div class="tracker-stat-val">پێویستی بە دیاریکردنە</div>
             </div>
-
-        </section>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">تەواوبووە</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">پلان دانان و بنەما</h3>
+                <p class="tracker-stage-desc">ئامانج، سنوور و ڕێڕەوی سەرەکی بەکارهێنەران دیاری بکە.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">داواکارییەکان یەک بخە</li>
+                    <li class="done-item">ڕێڕەوی بەکارهێنەران وێنا بکە</li>
+                    <li class="pending-item">پرسیارە کراوەکان تۆمار بکە</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">لە پێشکەوتندایە</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">ڕووکار و ئەزموون</h3>
+                <p class="tracker-stage-desc">شاشەی ڕوون و دەستڕاگەیشتوو دیزاین بکە.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">نەخشەی پەڕەکان ئامادە بکە</li>
+                    <li class="done-item">دەستڕاگەیشتن بپشکنە</li>
+                    <li class="pending-item">پێکهاتەی ناوەڕۆک بپشکنە</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">پلاندانراوە</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">تایبەتمەندییە بنەڕەتییەکان و یەکخستن</h3>
+                <p class="tracker-stage-desc">کارڕەوتە گرنگەکان دروست بکە و API ـی پەسەندکراو ببەستەوە.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">تایبەتمەندییە بنەڕەتییەکان پەرە پێ بدە</li>
+                    <li class="done-item">بەستەرەکانی API بپشکنە</li>
+                    <li class="pending-item">ڕەوتی داتا بەڵگە بکە</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">پلاندانراوە</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">تاقیکردنەوە و باشترکردن</h3>
+                <p class="tracker-stage-desc">ڕێڕەوەکان تاقی بکەرەوە و کێشە دۆزراوەکان چارەسەر بکە.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">ڕێڕەوی بەکارهێنەر تاقی بکەرەوە</li>
+                    <li class="done-item">تێبینییەکان جێبەجێ بکە</li>
+                    <li class="pending-item">دەرئەنجامی تاقیکردنەوە تۆمار بکە</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">پلاندانراوە</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">بڵاوکردنەوە و ڕادەستکردن</h3>
+                <p class="tracker-stage-desc">بڵاوکردنەوە ئامادە بکە و شێوازی بەڕێوەبردن بنووسە.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">لیستی پشکنینی بڵاوکردنەوە ئامادە بکە</li>
+                    <li class="done-item">ڕێنمایی بەڕێوەبردن پێشکەش بکە</li>
+                    <li class="pending-item">هەنگاوەکانی ڕادەستکردن بنووسە</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
 
         </main>
     </div>
@@ -5079,7 +4973,7 @@ function calcCloudSizing() {
 <script src="../js/sr-events.js" defer></script>
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
@@ -5121,18 +5015,18 @@ function calcCloudSizing() {
             <span class="apple-dock-dot"></span>
         </a>
         <div class="apple-dock-separator"></div>
-        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="جميع اللغات الـ 28 (Launchpad)" aria-label="Open Full 28 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
+        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="جميع اللغات الـ 29 (Launchpad)" aria-label="Open Full 29 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            <span class="apple-dock-badge">28</span>
+            <span class="apple-dock-badge">29</span>
         </button>
     </div>
 </aside>
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
-<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
+<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 29 Languages">
     <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>
     <div class="apple-launchpad-window">
         <div class="apple-launchpad-header">
@@ -5142,7 +5036,7 @@ function calcCloudSizing() {
                     <span class="apple-dot apple-dot-yellow"></span>
                     <span class="apple-dot apple-dot-green"></span>
                 </div>
-                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (28 Supported Nations & VAT Regimes)</h3>
+                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (29 Supported Languages & VAT Regimes)</h3>
             </div>
             <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>
         </div>
@@ -5446,8 +5340,8 @@ function calcCloudSizing() {
         </div>
     </div>
 </div>
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
-<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
+<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 29 Languages">
     <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>
     <div class="apple-launchpad-window">
         <div class="apple-launchpad-header">
@@ -5457,7 +5351,7 @@ function calcCloudSizing() {
                     <span class="apple-dot apple-dot-yellow"></span>
                     <span class="apple-dot apple-dot-green"></span>
                 </div>
-                <h3 class="apple-launchpad-title">🌐 اللغات السيادية المعتمدة (28 دولة ونظاماً ضريبياً)</h3>
+                <h3 class="apple-launchpad-title">🌐 اللغات السيادية المعتمدة (29 لغة ونظاماً ضريبياً)</h3>
             </div>
             <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>
         </div>

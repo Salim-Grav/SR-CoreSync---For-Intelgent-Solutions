@@ -153,7 +153,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>S&R CoreSync | Live Interactive Cloud ERP Portal (Demo)</title>
+    <title>S&amp;R CoreSync | Demostración interactiva de ERP en la nube</title>
     <link rel="icon" type="image/png" sizes="256x256" href="../assets/i18n/intl/sr-core-emblem-256.png?v=sovereign2026_fixed">
     <link rel="icon" type="image/svg+xml" href="../assets/i18n/intl/sr-core-emblem.svg?v=sovereign2026_fixed">
     <link rel="alternate icon" type="image/png" href="../assets/favicon-96.png">
@@ -189,16 +189,16 @@
         <div class="header-controls">
             <div class="live-status-pill">
                 <span class="live-status-dot"></span>
-                <span>Cloud Node Online (EU Central)</span>
+                <span>Nodo en la nube conectado (centro de la UE)</span>
             </div>
             
             <button type="button" class="btn-tour-start" id="btnStartTour" data-sr-call="startGuidedTour" title="Start step-by-step interactive guided tour of the ERP architecture">
-                <span>🚀 Start Tour</span>
+                <span>🚀 Iniciar recorrido</span>
             </button>
             
             <button type="button" class="btn-export-pdf" id="btnExportBriefPdf" data-sr-call="openExecutivePdfModal" title="Export executive proposal brief to an elegant client PDF">
                 <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-                <span>Proposal Brief (PDF)</span>
+                <span>Resumen de propuesta (PDF)</span>
             </button>
             <button type="button" class="btn-presentation-mode" id="btnPresentationToggle" data-sr-call="togglePresentationMode" title="Client presentation mode (Full screen executive walkthrough)">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
@@ -259,7 +259,13 @@
             </div>
 
 
-            <div class="sidebar-spacer"></div>
+            <!-- localized-demo-tracker-nav:start -->
+<div class="nav-item" id="tourNav-tracker" data-sr-call="switchPortalTab" data-sr-args='["tracker"]' data-sr-this="last">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    <span>Etapas del proyecto</span>
+</div>
+<!-- localized-demo-tracker-nav:end -->
+<div class="sidebar-spacer"></div>
 
             
             <div class="sidebar-sync-box">
@@ -290,11 +296,11 @@
                 <div class="currency-vat-bar" id="currencyVatSimulatorBar">
                     <div class="cur-vat-title">
                         <span class="cur-badge-pulse"></span>
-                        <strong>Live Currency & VAT Simulator:</strong>
+                        <strong>Simulador de divisas e IVA en directo:</strong>
                     </div>
                     <div class="cur-vat-controls">
                         <div class="cur-selector-group">
-                            <span class="cur-label">Currency:</span>
+                            <span class="cur-label">Moneda:</span>
                             <div class="cur-pill-toggle">
                                 <button type="button" class="cur-pill active" id="curPill-EUR" data-sr-call="setCurrency" data-sr-args='["EUR"]'>€ EUR</button>
                                 <button type="button" class="cur-pill" id="curPill-USD" data-sr-call="setCurrency" data-sr-args='["USD"]'>$ USD</button>
@@ -302,24 +308,24 @@
                             </div>
                         </div>
                         <div class="cur-selector-group">
-                            <span class="cur-label">Tax Regime:</span>
+                            <span class="cur-label">Régimen fiscal:</span>
                             <select id="globalVatSelector" onchange="setGlobalVat(this.value)" class="cur-select-vat" title="Select financial tax regime" aria-label="Select financial tax regime">
-                                <option value="0.21" selected>🇳🇱 Dutch BTW (21%)</option>
-                                <option value="0.09">🇳🇱 Reduced BTW (9%)</option>
-                                <option value="0.15">🇸🇦 GCC VAT (15%)</option>
-                                <option value="0.00">🌐 Tax Exempt (0%)</option>
+                                <option value="0.21" selected>🇳🇱 IVA neerlandés (21 %)</option>
+                                <option value="0.09">🇳🇱 IVA reducido (9 %)</option>
+                                <option value="0.15">🇸🇦 IVA del CCG (15 %)</option>
+                                <option value="0.00">🌐 Exento de impuestos (0 %)</option>
                             </select>
                         </div>
                         <div class="cur-summary-chip">
-                            <span>Calculated Tax: <strong id="globalVatEst">€ 176,925.00</strong></span>
+                            <span>Impuesto calculado: <strong id="globalVatEst">€ 176,925.00</strong></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="section-header">
                     <div class="section-title-wrap">
-                        <h2>Real-Time Financial Dashboard & Cash Flow Telemetry</h2>
-                        <p>Live simulation engine for automated enterprise revenue, cloud expenses, and cash telemetry</p>
+                        <h2>Panel financiero y flujo de caja en tiempo real</h2>
+                        <p>Simulación en directo de ingresos, gastos en la nube y flujo de caja</p>
                     </div>
 
             <!-- Feature 1: Instant Branded Client Proposal Engine -->
@@ -1231,7 +1237,124 @@
             </div>
         </section>
 
-        </main>
+        <!-- localized-demo-tracker:start -->
+<section class="tab-section" id="tab-tracker" aria-labelledby="trackerTitle">
+    <div class="section-header">
+        <div class="section-title-wrap">
+            <h2 id="trackerTitle">Seguimiento del proyecto</h2>
+            <p>Una visión clara de las fases y el progreso.</p>
+        </div>
+    </div>
+    <div class="tracker-header-box">
+        <div class="tracker-project-title">Ejemplo de plataforma digital</div>
+        <div class="tracker-project-sub">Seguimiento ilustrativo de un proyecto ficticio.</div>
+        <div class="d-flex justify-content-between align-items-center mt-3 text-caption text-white-64">
+            <span>Estado general</span>
+            <strong class="text-gold font-num tracker-readiness-highlight">78% Completado</strong>
+        </div>
+        <div class="tracker-progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+            <div class="tracker-progress-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="tracker-top-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:12px;">
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Fases previstas</div>
+                <div class="tracker-stat-val">Cinco fases</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Enfoque actual</div>
+                <div class="tracker-stat-val">Planificación y bases</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Planificación de entrega</div>
+                <div class="tracker-stat-val">Alcance ilustrativo</div>
+            </div>
+            <div class="tracker-stat-box">
+                <div class="tracker-stat-lbl">Revisión de seguridad</div>
+                <div class="tracker-stat-val">Por definir</div>
+            </div>
+        </div>
+    </div>
+    <div class="tracker-stages-grid">
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Completado</span>
+                    <span class="font-num text-caption text-white-64">1/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Planificación y bases</h3>
+                <p class="tracker-stage-desc">Definir objetivos, alcance y recorridos principales.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Acordar requisitos</li>
+                    <li class="done-item">Esbozar recorridos</li>
+                    <li class="pending-item">Anotar preguntas pendientes</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card in-progress">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge active">En curso</span>
+                    <span class="font-num text-caption text-white-64">2/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Interfaz y experiencia</h3>
+                <p class="tracker-stage-desc">Diseñar pantallas claras y accesibles.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Preparar diseños de página</li>
+                    <li class="done-item">Revisar accesibilidad</li>
+                    <li class="pending-item">Revisar la estructura del contenido</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Previsto</span>
+                    <span class="font-num text-caption text-white-64">3/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Funciones principales e integraciones</h3>
+                <p class="tracker-stage-desc">Crear flujos esenciales y conectar las API aprobadas.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Desarrollar funciones principales</li>
+                    <li class="done-item">Comprobar conexiones API</li>
+                    <li class="pending-item">Documentar flujos de datos</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Previsto</span>
+                    <span class="font-num text-caption text-white-64">4/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Pruebas y mejoras</h3>
+                <p class="tracker-stage-desc">Probar los recorridos y resolver los problemas detectados.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Probar recorridos de usuario</li>
+                    <li class="done-item">Aplicar comentarios</li>
+                    <li class="pending-item">Registrar resultados de pruebas</li>
+                </ul>
+            </div>
+        </article>
+        <article class="tracker-stage-card">
+            <div>
+                <div class="tracker-stage-header">
+                    <span class="tracker-stage-badge">Previsto</span>
+                    <span class="font-num text-caption text-white-64">5/5</span>
+                </div>
+                <h3 class="tracker-stage-name">Lanzamiento y entrega</h3>
+                <p class="tracker-stage-desc">Preparar la publicación y documentar el funcionamiento.</p>
+                <ul class="tracker-items-list">
+                    <li class="done-item">Preparar lista de lanzamiento</li>
+                    <li class="done-item">Entregar guía operativa</li>
+                    <li class="pending-item">Anotar pasos de entrega</li>
+                </ul>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- localized-demo-tracker:end -->
+
+</main>
     </div>
 
     
@@ -1272,7 +1395,7 @@
     <div class="modal-overlay" id="newInvoiceModal" data-sr-backdrop-call="closeInvoiceGeneratorModal">
         <div class="modal-card">
             <h3 class="text-white mb-2 fw-bold">Generate Certified E-Invoice</h3>
-            <p class="text-caption text-white-64 mb-4">Generate compliant cloud e-invoices with Dutch BTW (21%), EU Reverse Charge, and GCC VAT</p>
+            <p class="text-caption text-white-64 mb-4">Generate compliant cloud e-invoices with IVA neerlandés (21 %), EU Reverse Charge, and GCC VAT</p>
             
             <div class="modal-form-fields">
                 <div>
@@ -3388,7 +3511,7 @@ STATUS: COMPLIANT WITH BELASTINGDIENST REQUIREMENTS (100% READY FOR SUBMISSION)`
                             </tr>
                             <tr class="ds-u96">
                                 <td class="ds-u97">Applied Tax Regime in Session</td>
-                                <td class="ds-u100" id="pdfVatScheme">Dutch BTW (21%)</td>
+                                <td class="ds-u100" id="pdfVatScheme">IVA neerlandés (21 %)</td>
                                 <td class="ds-u101">Compliant with AWR Art. 52</td>
                             </tr>
                             <tr class="ds-u96">
@@ -3879,21 +4002,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
 
 
 
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
 
 
 
@@ -3931,18 +4054,18 @@ document.addEventListener('DOMContentLoaded', function() {
             <span class="apple-dock-dot"></span>
         </a>
         <div class="apple-dock-separator"></div>
-        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="All 28 Languages (Launchpad)" aria-label="Open Full 28 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
+        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="All 29 Languages (Launchpad)" aria-label="Open Full 29 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
             </svg>
-            <span class="apple-dock-badge">28</span>
+            <span class="apple-dock-badge">29</span>
         </button>
     </div>
 </aside>
-<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->
-<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">
+<!-- Apple macOS Launchpad Modal (29 Sovereign Languages Grid) -->
+<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 29 Languages">
     <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>
     <div class="apple-launchpad-window">
         <div class="apple-launchpad-header">
@@ -3952,7 +4075,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span class="apple-dot apple-dot-yellow"></span>
                     <span class="apple-dot apple-dot-green"></span>
                 </div>
-                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (28 Supported Nations & VAT Regimes)</h3>
+                <h3 class="apple-launchpad-title">🌐 Sovereign Global Languages (29 Supported Languages & VAT Regimes)</h3>
             </div>
             <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>
         </div>

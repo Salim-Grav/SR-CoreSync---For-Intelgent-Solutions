@@ -12,7 +12,7 @@ of this file, via any medium, is strictly prohibited.
 
 """
 S&R CoreSync For Intelligent Solutions - Sovereign Global Multilingual Infrastructure
-Generates and maintains 28 Languages:
+Generates and maintains the configured multilingual portals:
 - All 24 European Union Official Languages
 - Norwegian (Scandinavia / EEA)
 - Turkish (Strategic Regional Partner)
@@ -82,10 +82,11 @@ def build_dropdown_html(current_lang_code, page_type="demo", is_subfolder=False)
 def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=False):
     """
     Builds the Apple macOS floating dock for languages and country flags,
-    along with the Apple macOS Launchpad Modal (Full 28 Languages Grid).
+    along with the Apple macOS Launchpad Modal for all configured languages.
     """
     prefix = "../" if is_subfolder else "./"
     target_file = f"{page_type}.html"
+    language_count = len(LANGUAGES)
     
     primary_codes = ["ar", "en", "nl", "de", "fr", "es", "tr"]
     dock_langs = [l for l in LANGUAGES if l["code"] in primary_codes]
@@ -121,20 +122,20 @@ def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=Fals
         html.append(f'        </a>')
         
     html.append('        <div class="apple-dock-separator"></div>')
-    html.append('        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="جميع اللغات الـ 28 (Launchpad)" aria-label="Open Full 28 Languages Menu" onclick="toggleAppleDockLaunchpad(event)">')
+    html.append(f'        <button type="button" class="apple-dock-item apple-dock-launchpad-btn" id="appleDockLaunchpadBtn" data-tooltip="جميع اللغات الـ {language_count} (Launchpad)" aria-label="Open Full {language_count} Languages Menu" onclick="toggleAppleDockLaunchpad(event)">')
     html.append('            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">')
     html.append('                <circle cx="12" cy="12" r="10"></circle>')
     html.append('                <line x1="2" y1="12" x2="22" y2="12"></line>')
     html.append('                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>')
     html.append('            </svg>')
-    html.append('            <span class="apple-dock-badge">28</span>')
+    html.append(f'            <span class="apple-dock-badge">{language_count}</span>')
     html.append('        </button>')
     html.append('    </div>')
     html.append('</aside>')
     
-    # 2. Apple macOS Launchpad Modal (Full 28 Languages Grid)
-    html.append('<!-- Apple macOS Launchpad Modal (28 Sovereign Languages Grid) -->')
-    html.append('<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All 28 Languages">')
+    # 2. Apple macOS Launchpad Modal (all configured languages)
+    html.append(f'<!-- Apple macOS Launchpad Modal ({language_count} Sovereign Languages Grid) -->')
+    html.append(f'<div class="apple-launchpad-overlay" id="appleMacosLaunchpadOverlay" aria-modal="true" role="dialog" aria-label="Apple Launchpad - All {language_count} Languages">')
     html.append('    <div class="apple-launchpad-backdrop" onclick="toggleAppleDockLaunchpad(event)"></div>')
     html.append('    <div class="apple-launchpad-window">')
     html.append('        <div class="apple-launchpad-header">')
@@ -144,7 +145,11 @@ def build_apple_dock_html(current_lang_code, page_type="demo", is_subfolder=Fals
     html.append('                    <span class="apple-dot apple-dot-yellow"></span>')
     html.append('                    <span class="apple-dot apple-dot-green"></span>')
     html.append('                </div>')
-    lp_title = "🌐 اللغات السيادية المعتمدة (28 دولة ونظاماً ضريبياً)" if current_lang_code == "ar" else "🌐 Sovereign Global Languages (28 Supported Nations & VAT Regimes)"
+    lp_title = (
+        f"🌐 اللغات السيادية المعتمدة ({language_count} لغة ونظاماً ضريبياً)"
+        if current_lang_code == "ar"
+        else f"🌐 Sovereign Global Languages ({language_count} Supported Languages & VAT Regimes)"
+    )
     html.append(f'                <h3 class="apple-launchpad-title">{lp_title}</h3>')
     html.append('            </div>')
     html.append('            <button type="button" class="apple-launchpad-close-btn" onclick="toggleAppleDockLaunchpad(event)" aria-label="Close">✕</button>')
