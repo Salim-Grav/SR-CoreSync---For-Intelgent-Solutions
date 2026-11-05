@@ -10,6 +10,7 @@ BASE_DIR = SCRIPTS_DIR.parent
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from deploy_sovereign_multilingual import LANGUAGES  # noqa: E402
+from fix_multilingual_hero import validate_index_content  # noqa: E402
 
 
 INDEX_SECTIONS = (
@@ -126,6 +127,10 @@ def main():
         issues.extend(
             inspect_page(portal_dir / "index.html", code, language["dir"], INDEX_SECTIONS)
         )
+        if code != "ar":
+            index_path = portal_dir / "index.html"
+            if index_path.is_file():
+                issues.extend(validate_index_content(index_path.read_text(encoding="utf-8"), code))
         issues.extend(
             inspect_page(
                 portal_dir / "demo.html",
