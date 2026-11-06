@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو محاكاة الأجهزة ثلاثية الأبعاد • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="عارض تفاعلي لمعاينة المواقع والمتاجر الإلكترونية الحية داخل مجسمات أجهزة حقيقية — هواتف، أجهزة لوحية، وشاشات عريضة — بتأثيرات ثلاثية الأبعاد.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold:        #c5a880;
+            --sr-gold-light:  #f3dfba;
+            --sr-gold-dark:   #8c734b;
+            --sr-bg-root:     #030705;
+            --sr-bg-card:     rgba(8, 18, 12, 0.88);
+            --sr-border:      rgba(197, 168, 128, 0.22);
+            --sr-cyan:        #38bdf8;
+            --sr-emerald:     #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(ellipse at 50% 0%, #071a0e 0%, #030705 70%);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        /* رأس الصفحة */
+        .page-hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .page-title {
+            font-size: 2.4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .page-desc {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+        }
+
+        /* شريط التحكم */
+        .control-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .device-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1.5px solid var(--sr-border);
+            background: rgba(10, 20, 15, 0.6);
+            color: #cbd5e1;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s ease;
+        }
+
+        .device-btn.active,
+        .device-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+            color: #fff;
+            box-shadow: 0 0 18px rgba(197, 168, 128, 0.2);
+        }
+
+        .url-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            border-radius: 14px;
+            padding: 10px 16px;
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto 36px;
+        }
+
+        .url-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #f8fafc;
+            font-size: 0.88rem;
+            outline: none;
+            font-family: 'Space Grotesk', monospace;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .url-bar input::placeholder { color: #64748b; }
+
+        .url-go-btn {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* ==========================================================
+           مجسمات الأجهزة ثلاثية الأبعاد
+        ========================================================== */
+        .stage {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 48px;
+            padding: 0 24px 80px;
+            perspective: 1800px;
+            flex-wrap: wrap;
+        }
+
+        /* --- الهاتف الذكي --- */
+        .phone-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.5s ease;
+        }
+
+        .phone-shell {
+            width: 240px;
+            height: 490px;
+            background: linear-gradient(160deg, #1a1a2a 0%, #0d0d16 100%);
+            border-radius: 40px;
+            border: 2px solid rgba(255,255,255,0.12);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 40px 80px rgba(0,0,0,0.9),
+                inset 0 1px 0 rgba(255,255,255,0.08);
+            position: relative;
+            overflow: hidden;
+            transform: rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .phone-shell:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9), 0 0 30px rgba(197,168,128,0.15);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 26px;
+            background: #0d0d16;
+            border-radius: 0 0 18px 18px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            overflow: hidden;
+        }
+
+        .phone-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        /* --- الجهاز اللوحي --- */
+        .tablet-shell {
+            width: 420px;
+            height: 580px;
+            background: linear-gradient(160deg, #1c1c2e 0%, #0e0e1a 100%);
+            border-radius: 28px;
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.04),
+                0 50px 90px rgba(0,0,0,0.85),
+                inset 0 1px 0 rgba(255,255,255,0.07);
+            position: relative;
+            overflow: hidden;
+            transform: rotateY(0deg) rotateX(4deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .tablet-shell:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 60px 110px rgba(0,0,0,0.85), 0 0 35px rgba(197,168,128,0.12);
+        }
+
+        .tablet-camera {
+            position: absolute;
+            top: 12px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 10px;
+            height: 10px;
+            background: #222;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 10;
+        }
+
+        .tablet-screen {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            overflow: hidden;
+        }
+
+        .tablet-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        /* --- الشاشة المكتبية العريضة --- */
+        .desktop-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .desktop-shell {
+            width: 620px;
+            height: 390px;
+            background: linear-gradient(170deg, #111 0%, #0a0a0a 100%);
+            border-radius: 12px 12px 0 0;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-bottom: none;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.85);
+            position: relative;
+            overflow: hidden;
+            transform: rotateX(5deg);
+            transform-origin: bottom center;
+            transition: transform 0.4s ease;
+        }
+
+        .desktop-shell:hover {
+            transform: rotateX(0deg);
+        }
+
+        .desktop-top-bar {
+            height: 28px;
+            background: rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 6px;
+        }
+
+        .desktop-top-bar span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .desktop-screen {
+            position: absolute;
+            inset: 28px 0 0 0;
+            overflow: hidden;
+        }
+
+        .desktop-screen iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            pointer-events: none;
+        }
+
+        .desktop-stand-neck {
+            width: 60px;
+            height: 28px;
+            background: linear-gradient(to bottom, #1a1a1a, #101010);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .desktop-stand-base {
+            width: 180px;
+            height: 14px;
+            background: linear-gradient(to bottom, #181818, #0e0e0e);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        /* التسميات */
+        .device-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #64748b;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* شريط الروابط السريعة */
+        .quick-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .ql-btn {
+            background: rgba(10, 20, 15, 0.7);
+            border: 1px solid var(--sr-border);
+            color: #cbd5e1;
+            padding: 7px 16px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .ql-btn:hover {
+            border-color: var(--sr-gold);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="nav-bar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">استوديو محاكاة الأجهزة 3D</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-link">استوديو الهوية 8K</a>
+            <a href="web-showcase-studio.html" class="nav-link">استوديو المواقع</a>
+            <a href="device-simulator-studio.html" style="color:var(--sr-gold-light); font-weight:800; font-size:0.88rem; text-decoration:none;">محاكي الأجهزة ✦</a>
+            <a href="invoice-engine.html" class="nav-link">محرك الفواتير</a>
+        </nav>
+    </header>
+
+    <!-- رأس الصفحة -->
+    <section class="page-hero">
+        <div class="hero-badge">📱 استوديو محاكاة الأجهزة ثلاثية الأبعاد — Multi-Device 3D Simulator</div>
+        <h1 class="page-title">معاينة موقعك أو متجرك على كل الأجهزة في آنٍ واحد</h1>
+        <p class="page-desc">
+            أدخل رابط أي صفحة أو اختر من الروابط السريعة أدناه لمعاينتها حية داخل مجسمات ثلاثية الأبعاد حقيقية — هاتف، جهاز لوحي، وشاشة مكتبية عريضة — بتأثيرات توهج وإضاءة واقعية.
+        </p>
+
+        <!-- شريط اختيار الجهاز -->
+        <div class="control-strip">
+            <button class="device-btn active" id="btn-all" onclick="setDeviceView('all')">🖥️📱 جميع الأجهزة</button>
+            <button class="device-btn" id="btn-phone" onclick="setDeviceView('phone')">📱 الهاتف الذكي</button>
+            <button class="device-btn" id="btn-tablet" onclick="setDeviceView('tablet')">🖥️ الجهاز اللوحي</button>
+            <button class="device-btn" id="btn-desktop" onclick="setDeviceView('desktop')">🖥️ الشاشة العريضة</button>
+        </div>
+
+        <!-- شريط إدخال URL -->
+        <div class="url-bar">
+            <span style="color:#c5a880; font-size:0.85rem; font-weight:700; white-space:nowrap;">🔗 معاينة رابط:</span>
+            <input type="text" id="urlInput" placeholder="https://sr-coresync.com أو أي رابط..." value="./index.html" dir="ltr">
+            <button class="url-go-btn" onclick="loadURL()">عرض</button>
+        </div>
+
+        <!-- روابط سريعة -->
+        <div class="quick-links">
+            <span style="color:#94a3b8; font-size:0.82rem; font-weight:700;">روابط سريعة:</span>
+            <button class="ql-btn" onclick="quickLoad('./index.html')">🏠 الرئيسية</button>
+            <button class="ql-btn" onclick="quickLoad('./demo.html')">⚡ النموذج التجريبي</button>
+            <button class="ql-btn" onclick="quickLoad('./web-showcase-studio.html')">🌐 استوديو المواقع</button>
+            <button class="ql-btn" onclick="quickLoad('./brand-identity-studio.html')">🎨 استوديو الهوية</button>
+            <button class="ql-btn" onclick="quickLoad('./voice-dictate.html')">🎙️ التخطيط الصوتي</button>
+        </div>
+    </section>
+
+    <!-- منصة عرض الأجهزة ثلاثية الأبعاد -->
+    <main class="stage" id="deviceStage">
+
+        <!-- الهاتف الذكي -->
+        <div class="phone-wrap sr-tilt-card" id="phoneWrap">
+            <div class="phone-shell">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <iframe id="phoneFrame" src="./index.html" title="معاينة الهاتف" loading="lazy" sandbox="allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+            <div class="device-label">📱 هاتف ذكي — 375px</div>
+        </div>
+
+        <!-- الجهاز اللوحي -->
+        <div class="sr-tilt-card" id="tabletWrap">
+            <div class="tablet-shell">
+                <div class="tablet-camera"></div>
+                <div class="tablet-screen">
+                    <iframe id="tabletFrame" src="./index.html" title="معاينة الجهاز اللوحي" loading="lazy" sandbox="allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+            <div class="device-label">🖥️ جهاز لوحي — 768px</div>
+        </div>
+
+        <!-- الشاشة المكتبية العريضة -->
+        <div class="desktop-wrap" id="desktopWrap">
+            <div class="desktop-shell">
+                <div class="desktop-top-bar">
+                    <span style="background:#ff5f56;"></span>
+                    <span style="background:#ffbd2e;"></span>
+                    <span style="background:#27c93f;"></span>
+                </div>
+                <div class="desktop-screen">
+                    <iframe id="desktopFrame" src="./index.html" title="معاينة الشاشة المكتبية" loading="lazy" sandbox="allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+            <div class="desktop-stand-neck"></div>
+            <div class="desktop-stand-base"></div>
+            <div class="device-label" style="margin-top:10px;">🖥️ شاشة مكتبية عريضة — 1280px+</div>
+        </div>
+
+    </main>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        function loadURL() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return;
+            ['phoneFrame', 'tabletFrame', 'desktopFrame'].forEach(id => {
+                document.getElementById(id).src = url;
+            });
+        }
+
+        function quickLoad(url) {
+            document.getElementById('urlInput').value = url;
+            loadURL();
+        }
+
+        function setDeviceView(mode) {
+            document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + mode).classList.add('active');
+
+            const phone   = document.getElementById('phoneWrap');
+            const tablet  = document.getElementById('tabletWrap');
+            const desktop = document.getElementById('desktopWrap');
+
+            const show = (el, v) => el.style.display = v ? '' : 'none';
+
+            show(phone,   mode === 'all' || mode === 'phone');
+            show(tablet,  mode === 'all' || mode === 'tablet');
+            show(desktop, mode === 'all' || mode === 'desktop');
+        }
+    </script>
+</body>
+</html>
