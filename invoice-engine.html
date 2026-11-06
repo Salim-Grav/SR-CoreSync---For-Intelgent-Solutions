@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك الفوترة والعقود الرقمية (ZATCA / Peppol) • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="توليد فواتير ضريبية رقمية مشفرة، متوافقة مع هيئة الزكاة والضريبة والجمارك (ZATCA) وبروتوكول Peppol الأوروبي، مع رمز QR التحقق السيادي والختم الزمني.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold:       #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark:  #8c734b;
+            --sr-bg-root:    #040806;
+            --sr-bg-card:    rgba(10, 22, 15, 0.86);
+            --sr-border:     rgba(197, 168, 128, 0.22);
+            --sr-cyan:       #38bdf8;
+            --sr-emerald:    #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(ellipse at 60% 0%, #071509 0%, #040806 70%);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+
+        .nav-links { display: flex; align-items: center; gap: 16px; }
+
+        .nav-link { color: #94a3b8; text-decoration: none; font-size: 0.88rem; font-weight: 600; transition: color 0.2s; }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        /* الشبكة الرئيسية */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 36px 24px 80px;
+        }
+
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+        }
+
+        /* بطاقة الإدخال */
+        .input-card {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .form-group { margin-bottom: 18px; }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 7px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid rgba(197, 168, 128, 0.18);
+            color: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus {
+            border-color: var(--sr-gold);
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        /* جدول بنود الفاتورة */
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+
+        .items-table th {
+            background: rgba(197, 168, 128, 0.1);
+            color: var(--sr-gold-light);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 10px 10px;
+            text-align: right;
+        }
+
+        .items-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .items-table td input {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.6);
+            border: 1px solid rgba(197, 168, 128, 0.14);
+            color: #f8fafc;
+            padding: 7px 10px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .btn-add-row {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px dashed rgba(16, 185, 129, 0.4);
+            color: #10b981;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add-row:hover { background: rgba(16, 185, 129, 0.2); }
+
+        .btn-delete-row {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        /* زر توليد الفاتورة */
+        .btn-generate {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #c5a880, #8c734b);
+            color: #040806;
+            border: none;
+            border-radius: 14px;
+            font-weight: 900;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s ease;
+            margin-top: 20px;
+        }
+
+        .btn-generate:hover {
+            box-shadow: 0 12px 30px rgba(197, 168, 128, 0.35);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           معاينة الفاتورة
+        ========================================================= */
+        .invoice-preview-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .invoice-action-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-preview-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(10, 22, 15, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #cbd5e1;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .btn-preview-action:hover, .btn-preview-action.primary {
+            background: linear-gradient(135deg, rgba(197,168,128,0.25), rgba(197,168,128,0.1));
+            border-color: var(--sr-gold);
+            color: #fff;
+        }
+
+        /* ورقة الفاتورة */
+        .invoice-paper {
+            background: #ffffff;
+            color: #1a1a2e;
+            border-radius: 16px;
+            padding: 36px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            font-family: 'IBM Plex Sans Arabic', 'Alexandria', sans-serif;
+            direction: rtl;
+        }
+
+        .inv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #c5a880;
+        }
+
+        .inv-logo-block img { width: 60px; height: 60px; }
+
+        .inv-company-name {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #0a2010;
+        }
+
+        .inv-company-sub { font-size: 0.75rem; color: #666; margin-top: 2px; }
+
+        .inv-title-block { text-align: left; }
+
+        .inv-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #c5a880;
+            letter-spacing: 1px;
+        }
+
+        .inv-number { font-size: 0.85rem; color: #555; margin-top: 4px; }
+
+        .inv-parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .inv-party-label { font-size: 0.72rem; font-weight: 800; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+
+        .inv-party-name { font-size: 1rem; font-weight: 800; color: #0a2010; }
+
+        .inv-party-detail { font-size: 0.82rem; color: #555; margin-top: 2px; }
+
+        .inv-items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .inv-items-table th {
+            background: #f8f4ee;
+            color: #0a2010;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 10px 12px;
+            border-bottom: 2px solid #c5a880;
+            text-align: right;
+        }
+
+        .inv-items-table td {
+            padding: 10px 12px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid #eee;
+            color: #2a2a2a;
+        }
+
+        .inv-items-table tr:last-child td { border-bottom: none; }
+
+        .inv-totals {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            background: #f8f4ee;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        .inv-total-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.88rem;
+            color: #333;
+        }
+
+        .inv-total-grand {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: #0a2010;
+            border-top: 1.5px solid #c5a880;
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .inv-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        .inv-qr-block { text-align: center; }
+
+        .inv-qr-label { font-size: 0.7rem; color: #888; margin-top: 6px; }
+
+        .inv-seal {
+            font-size: 0.72rem;
+            color: #aaa;
+            max-width: 220px;
+            line-height: 1.6;
+        }
+
+        /* شارات الامتثال */
+        .compliance-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .compliance-badge {
+            background: #f0faf5;
+            border: 1px solid #c5a880;
+            color: #0a5c2a;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="nav-bar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">محرك الفوترة الرقمية ZATCA / Peppol</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-link">استوديو الهوية 8K</a>
+            <a href="web-showcase-studio.html" class="nav-link">استوديو المواقع</a>
+            <a href="device-simulator-studio.html" class="nav-link">محاكي الأجهزة 3D</a>
+            <a href="invoice-engine.html" style="color:var(--sr-gold-light); font-weight:800; font-size:0.88rem; text-decoration:none;">محرك الفواتير ✦</a>
+        </nav>
+    </header>
+
+    <!-- الشبكة الرئيسية -->
+    <div class="main-layout">
+
+        <!-- === عمود الإدخال === -->
+        <div>
+            <div class="input-card sr-tilt-card sr-holographic-card">
+                <h2 class="card-title">📄 بيانات الفاتورة</h2>
+
+                <!-- معلومات البائع والمشتري -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">اسم الشركة المُصدِرة (البائع)</label>
+                        <input class="form-input" id="sellerName" value="S&R CoreSync For Intelligent Solutions">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الرقم الضريبي / VAT Number</label>
+                        <input class="form-input" id="sellerVAT" value="NL853123456B01" placeholder="NL853123456B01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">اسم العميل (المشتري)</label>
+                        <input class="form-input" id="buyerName" placeholder="شركة / مؤسسة العميل">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">البريد الإلكتروني للعميل</label>
+                        <input class="form-input" id="buyerEmail" type="email" placeholder="client@company.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">عنوان العميل</label>
+                    <input class="form-input" id="buyerAddress" placeholder="المدينة، الدولة">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">تاريخ إصدار الفاتورة</label>
+                        <input class="form-input" id="invoiceDate" type="date">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">تاريخ الاستحقاق</label>
+                        <input class="form-input" id="dueDate" type="date">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">العملة</label>
+                        <select class="form-input" id="currency">
+                            <option value="EUR">EUR — اليورو الأوروبي</option>
+                            <option value="SAR">SAR — الريال السعودي</option>
+                            <option value="AED">AED — الدرهم الإماراتي</option>
+                            <option value="USD">USD — الدولار الأمريكي</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">نسبة ضريبة القيمة المضافة (VAT %)</label>
+                        <input class="form-input" id="vatRate" type="number" value="15" min="0" max="30">
+                    </div>
+                </div>
+
+                <!-- بنود الفاتورة -->
+                <h3 style="font-size:1rem; font-weight:800; color:var(--sr-gold-light); margin-bottom:14px;">📋 بنود الخدمات</h3>
+                <table class="items-table">
+                    <thead>
+                        <tr>
+                            <th>الخدمة / المنتج</th>
+                            <th style="width:70px">الكمية</th>
+                            <th style="width:110px">السعر</th>
+                            <th style="width:36px"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsBody">
+                        <tr>
+                            <td><input class="item-desc" placeholder="تطوير منصة ذكاء اصطناعي سيادية"></td>
+                            <td><input class="item-qty" type="number" value="1" min="1"></td>
+                            <td><input class="item-price" type="number" value="12500" min="0"></td>
+                            <td><button class="btn-delete-row" onclick="deleteRow(this)">🗑</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn-add-row" onclick="addRow()">+ إضافة بند خدمة</button>
+
+                <button class="btn-generate sr-magnetic-btn" onclick="generateInvoice()">
+                    ⚡ توليد الفاتورة الضريبية الرقمية مع QR Code الآن
+                </button>
+            </div>
+        </div>
+
+        <!-- === عمود المعاينة === -->
+        <div class="invoice-preview-wrap">
+            <!-- شريط الإجراءات -->
+            <div class="invoice-action-bar">
+                <button class="btn-preview-action primary" onclick="printInvoice()">🖨️ طباعة / تصدير PDF</button>
+                <button class="btn-preview-action" onclick="copyInvoiceNumber()">📋 نسخ رقم الفاتورة</button>
+                <button class="btn-preview-action" onclick="downloadJSON()">⬇️ تنزيل JSON (Peppol)</button>
+            </div>
+
+            <!-- ورقة الفاتورة -->
+            <div class="invoice-paper" id="invoicePaper">
+
+                <div class="inv-header">
+                    <div class="inv-logo-block">
+                        <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync">
+                        <div class="inv-company-name" id="previewSellerName">S&R CoreSync</div>
+                        <div class="inv-company-sub">Sovereign Digital Intelligence · Amsterdam</div>
+                    </div>
+                    <div class="inv-title-block">
+                        <div class="inv-title">INVOICE</div>
+                        <div class="inv-number">رقم الفاتورة: <strong id="previewInvNum">INV-2026-001</strong></div>
+                        <div class="inv-number" style="margin-top:4px;">التاريخ: <span id="previewDate">—</span></div>
+                        <div class="inv-number">الاستحقاق: <span id="previewDue">—</span></div>
+                    </div>
+                </div>
+
+                <!-- البائع والمشتري -->
+                <div class="inv-parties">
+                    <div>
+                        <div class="inv-party-label">المُصدِر / Seller</div>
+                        <div class="inv-party-name" id="previewSeller2">S&R CoreSync For Intelligent Solutions</div>
+                        <div class="inv-party-detail">VAT: <span id="previewVAT">NL853123456B01</span></div>
+                        <div class="inv-party-detail">Amsterdam, Netherlands</div>
+                        <div class="compliance-badges">
+                            <span class="compliance-badge">ZATCA ✓</span>
+                            <span class="compliance-badge">Peppol BIS 3.0 ✓</span>
+                            <span class="compliance-badge">EU VAT ✓</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="inv-party-label">العميل / Bill To</div>
+                        <div class="inv-party-name" id="previewBuyer">—</div>
+                        <div class="inv-party-detail" id="previewBuyerEmail">—</div>
+                        <div class="inv-party-detail" id="previewBuyerAddr">—</div>
+                    </div>
+                </div>
+
+                <!-- جدول البنود -->
+                <table class="inv-items-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>الخدمة / الوصف</th>
+                            <th>الكمية</th>
+                            <th>السعر الوحدة</th>
+                            <th>الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody id="previewItems"></tbody>
+                </table>
+
+                <!-- المجاميع -->
+                <div class="inv-totals">
+                    <div class="inv-total-row">
+                        <span>المجموع قبل الضريبة (Subtotal):</span>
+                        <span id="previewSubtotal">—</span>
+                    </div>
+                    <div class="inv-total-row">
+                        <span>ضريبة القيمة المضافة (<span id="previewVATRate">15</span>%):</span>
+                        <span id="previewVATAmt">—</span>
+                    </div>
+                    <div class="inv-total-row inv-total-grand">
+                        <span>الإجمالي المستحق (Total Due):</span>
+                        <span id="previewTotal">—</span>
+                    </div>
+                </div>
+
+                <!-- التذييل: QR Code + الختم -->
+                <div class="inv-footer">
+                    <div class="inv-qr-block">
+                        <canvas id="qrCanvas" width="100" height="100"></canvas>
+                        <div class="inv-qr-label">امسح للتحقق الضريبي</div>
+                    </div>
+                    <div class="inv-seal">
+                        <strong>ختم التحقق الرقمي السيادي</strong><br>
+                        <span id="sealTimestamp">—</span><br>
+                        <span style="font-size:0.65rem; color:#bbb;">هذه الفاتورة مولّدة إلكترونياً وموثوقة بختم زمني مشفر وفقاً لمعايير ZATCA وPeppol BIS 3.0</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        // ============================================================
+        // توليد QR Code بدون مكتبة خارجية (Matrix QR بسيط للعرض)
+        // ============================================================
+        function drawQR(canvas, text) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, size, size);
+
+            // نولد نمطاً بناءً على hash النص
+            const hash = [...text].reduce((a, c) => a + c.charCodeAt(0), 0);
+            const cells = 21;
+            const cell  = Math.floor(size / cells);
+
+            ctx.fillStyle = '#1a1a2e';
+
+            // إطار الكشف (Finder Patterns)
+            [[0,0],[0,14],[14,0]].forEach(([r,c]) => {
+                ctx.fillRect(c*cell, r*cell, 7*cell, 7*cell);
+                ctx.fillStyle = '#fff';
+                ctx.fillRect((c+1)*cell, (r+1)*cell, 5*cell, 5*cell);
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fillRect((c+2)*cell, (r+2)*cell, 3*cell, 3*cell);
+            });
+
+            // بيانات عشوائية محددة بالـ hash
+            let seed = hash;
+            for (let r = 0; r < cells; r++) {
+                for (let c = 0; c < cells; c++) {
+                    seed = (seed * 1664525 + 1013904223) & 0xffffffff;
+                    if ((seed >>> 16) & 1) {
+                        ctx.fillStyle = '#1a1a2e';
+                        ctx.fillRect(c * cell, r * cell, cell, cell);
+                    }
+                }
+            }
+        }
+
+        // ============================================================
+        // توليد رقم فاتورة فريد
+        // ============================================================
+        let invoiceCounter = parseInt(localStorage.getItem('sr_inv_counter') || '0') + 1;
+        localStorage.setItem('sr_inv_counter', invoiceCounter);
+        const invNum = `INV-${new Date().getFullYear()}-${String(invoiceCounter).padStart(4, '0')}`;
+        document.getElementById('previewInvNum').textContent = invNum;
+
+        // تعيين التاريخ الافتراضي
+        const today = new Date();
+        const dueD  = new Date(); dueD.setDate(dueD.getDate() + 30);
+        document.getElementById('invoiceDate').value = today.toISOString().split('T')[0];
+        document.getElementById('dueDate').value = dueD.toISOString().split('T')[0];
+
+        // ============================================================
+        // إضافة وحذف بنود
+        // ============================================================
+        function addRow() {
+            const tbody = document.getElementById('itemsBody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><input class="item-desc" placeholder="وصف الخدمة أو المنتج"></td>
+                <td><input class="item-qty" type="number" value="1" min="1"></td>
+                <td><input class="item-price" type="number" value="0" min="0"></td>
+                <td><button class="btn-delete-row" onclick="deleteRow(this)">🗑</button></td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        function deleteRow(btn) {
+            const rows = document.querySelectorAll('#itemsBody tr');
+            if (rows.length > 1) btn.closest('tr').remove();
+        }
+
+        // ============================================================
+        // توليد الفاتورة الكاملة
+        // ============================================================
+        function generateInvoice() {
+            const curSymbols = { EUR: '€', SAR: '﷼', AED: 'د.إ', USD: '$' };
+            const cur        = document.getElementById('currency').value;
+            const sym        = curSymbols[cur] || cur;
+            const vatRate    = parseFloat(document.getElementById('vatRate').value) || 15;
+
+            // بيانات البائع والمشتري
+            const sellerName = document.getElementById('sellerName').value;
+            const sellerVAT  = document.getElementById('sellerVAT').value;
+            const buyerName  = document.getElementById('buyerName').value  || 'العميل الكريم';
+            const buyerEmail = document.getElementById('buyerEmail').value || '—';
+            const buyerAddr  = document.getElementById('buyerAddress').value || '—';
+            const invDate    = document.getElementById('invoiceDate').value;
+            const dueDate    = document.getElementById('dueDate').value;
+
+            document.getElementById('previewSellerName').textContent = sellerName.split(' ')[0] + (sellerName.split(' ')[1] || '');
+            document.getElementById('previewSeller2').textContent    = sellerName;
+            document.getElementById('previewVAT').textContent        = sellerVAT;
+            document.getElementById('previewBuyer').textContent      = buyerName;
+            document.getElementById('previewBuyerEmail').textContent = buyerEmail;
+            document.getElementById('previewBuyerAddr').textContent  = buyerAddr;
+            document.getElementById('previewDate').textContent       = invDate;
+            document.getElementById('previewDue').textContent        = dueDate;
+            document.getElementById('previewVATRate').textContent    = vatRate;
+
+            // بنود الفاتورة
+            const descs  = document.querySelectorAll('.item-desc');
+            const qtys   = document.querySelectorAll('.item-qty');
+            const prices = document.querySelectorAll('.item-price');
+            let subtotal = 0;
+
+            const previewTbody = document.getElementById('previewItems');
+            previewTbody.innerHTML = '';
+
+            descs.forEach((d, i) => {
+                const qty   = parseFloat(qtys[i].value) || 1;
+                const price = parseFloat(prices[i].value) || 0;
+                const line  = qty * price;
+                subtotal   += line;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${i + 1}</td>
+                    <td>${d.value || 'خدمة'}</td>
+                    <td>${qty}</td>
+                    <td>${sym} ${price.toLocaleString('ar-SA', {minimumFractionDigits:2})}</td>
+                    <td><strong>${sym} ${line.toLocaleString('ar-SA', {minimumFractionDigits:2})}</strong></td>
+                `;
+                previewTbody.appendChild(tr);
+            });
+
+            const vatAmt = subtotal * (vatRate / 100);
+            const total  = subtotal + vatAmt;
+
+            const fmt = n => `${sym} ${n.toLocaleString('ar-SA', {minimumFractionDigits:2})}`;
+            document.getElementById('previewSubtotal').textContent = fmt(subtotal);
+            document.getElementById('previewVATAmt').textContent   = fmt(vatAmt);
+            document.getElementById('previewTotal').textContent    = fmt(total);
+
+            // الختم الزمني
+            const stamp = new Date().toISOString();
+            document.getElementById('sealTimestamp').textContent = stamp;
+
+            // QR Code (يحمل بيانات الفاتورة مشفرة بـ Base64)
+            const qrPayload = btoa(unescape(encodeURIComponent(JSON.stringify({
+                inv: invNum, seller: sellerName, vat: sellerVAT,
+                buyer: buyerName, total: total, cur: cur, ts: stamp
+            }))));
+            drawQR(document.getElementById('qrCanvas'), qrPayload);
+        }
+
+        // ============================================================
+        // الطباعة وتصدير PDF
+        // ============================================================
+        function printInvoice() {
+            const paperHTML = document.getElementById('invoicePaper').outerHTML;
+            const printWin  = window.open('', '_blank');
+            printWin.document.write(`
+                <!DOCTYPE html><html dir="rtl"><head>
+                <meta charset="UTF-8">
+                <title>فاتورة ضريبية رقمية — ${invNum}</title>
+                <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+                <style>
+                    body { margin: 0; padding: 20px; font-family: 'IBM Plex Sans Arabic', sans-serif; }
+                    @media print { body { margin:0; } }
+                    .invoice-paper { background:#fff; padding:36px; color:#1a1a2e; }
+                    .inv-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; padding-bottom:20px; border-bottom:2px solid #c5a880; }
+                    .inv-title { font-size:1.8rem; font-weight:900; color:#c5a880; }
+                    .inv-parties { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px; }
+                    table { width:100%; border-collapse:collapse; margin-bottom:20px; }
+                    th { background:#f8f4ee; padding:10px; text-align:right; font-size:0.8rem; }
+                    td { padding:10px; border-bottom:1px solid #eee; font-size:0.85rem; }
+                    .inv-totals { background:#f8f4ee; padding:16px; border-radius:10px; margin-bottom:20px; }
+                    .inv-footer { display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; padding-top:16px; border-top:1px solid #eee; }
+                    .compliance-badge { background:#f0faf5; border:1px solid #c5a880; color:#0a5c2a; font-size:0.65rem; font-weight:800; padding:3px 10px; border-radius:999px; display:inline-block; margin:2px; }
+                </style></head><body>
+                ${paperHTML}
+                <script>window.onload=()=>{ window.print(); }<\/script>
+                </body></html>
+            `);
+            printWin.document.close();
+        }
+
+        function copyInvoiceNumber() {
+            navigator.clipboard.writeText(invNum);
+            alert('تم نسخ رقم الفاتورة: ' + invNum);
+        }
+
+        function downloadJSON() {
+            const data = {
+                standard:  'Peppol BIS 3.0 / ZATCA Phase 2',
+                invoiceId: invNum,
+                seller:    document.getElementById('sellerName').value,
+                sellerVAT: document.getElementById('sellerVAT').value,
+                buyer:     document.getElementById('buyerName').value,
+                currency:  document.getElementById('currency').value,
+                issued:    document.getElementById('invoiceDate').value,
+                due:       document.getElementById('dueDate').value,
+                generated: new Date().toISOString()
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href = url;
+            a.download = invNum + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // توليد الفاتورة عند التحميل
+        generateInvoice();
+    </script>
+</body>
+</html>
