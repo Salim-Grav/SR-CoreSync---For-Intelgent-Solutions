@@ -688,5 +688,43 @@ S&R CoreSync Business Advisory Services & Partner (Rodin Accounting)</pre>
     // Auto-run once to initialize the dashboard with baseline values
     runFinancialAdvisoryEngine();
 
+    // ═══════════════════════════════════════════════════════════
+    // ربط المستشار الذكي بمحرك التدقيق الضريبي (Option 3)
+    // يحفظ الجلسة ويُتيح الانتقال المباشر مع الربط التلقائي
+    // ═══════════════════════════════════════════════════════════
+    function saveAdvisorSessionAndLink() {
+        if (!latestEngineAnalysis) runFinancialAdvisoryEngine();
+        var session = {
+            id: 'sess_' + Date.now(),
+            timestamp: new Date().toISOString(),
+            revenue: latestEngineAnalysis.revenue,
+            sector: latestEngineAnalysis.sector,
+            entity: latestEngineAnalysis.entity,
+            operatingProfit: latestEngineAnalysis.operatingProfit,
+            taxSavings: latestEngineAnalysis.taxSavings,
+            auditScore: latestEngineAnalysis.auditScore,
+            kia: latestEngineAnalysis.kia,
+            zelfstandigenaftrek: latestEngineAnalysis.zelfstandigenaftrek
+        };
+        sessionStorage.setItem('coresync_advisor_session', JSON.stringify(session));
+        return session;
+    }
+
+    // زر "إرسال إلى محرك التدقيق"
+    var btnAuditLink = document.getElementById('btn-send-to-audit');
+    if (btnAuditLink) {
+        btnAuditLink.addEventListener('click', function () {
+            var session = saveAdvisorSessionAndLink();
+            window.location.href = 'autonomous-tax-audit.html?advisor_session=' + session.id;
+        });
+    }
+
+    // حفظ تلقائي عند كل تحليل
+    var originalRun = runFinancialAdvisoryEngine;
+    runFinancialAdvisoryEngine = function () {
+        originalRun();
+        if (latestEngineAnalysis) saveAdvisorSessionAndLink();
+    };
+
 })();
 
