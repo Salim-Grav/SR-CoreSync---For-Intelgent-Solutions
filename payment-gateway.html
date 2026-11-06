@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة المدفوعات الدولية الموحدة • S&R CoreSync</title>
+    <meta name="description" content="بوابة دفع متكاملة تقبل بطاقات Stripe والمحافظ الرقمية (Apple Pay/Google Pay/iDEAL) وتحويلات SEPA البنكية، مع إيصال دفع فوري متوافق مع ZATCA.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+    <style>
+        :root { --gold:#c5a880; --gold-l:#f3dfba; --gold-d:#8c734b; --bg:#040608; --card:rgba(8,12,22,.9); --border:rgba(197,168,128,.22); --cyan:#38bdf8; --emerald:#10b981; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:radial-gradient(ellipse at 60% 0%,#060814 0%,#040608 70%); color:#f8fafc; font-family:'Alexandria','IBM Plex Sans Arabic',system-ui,sans-serif; min-height:100vh; overflow-x:hidden; }
+
+        /* ناف */
+        .nav { display:flex; align-items:center; justify-content:space-between; padding:14px 28px; background:rgba(3,4,10,.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; }
+        .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+        .nav-links { display:flex; align-items:center; gap:14px; }
+        .nav-a { color:#94a3b8; text-decoration:none; font-size:.88rem; font-weight:600; transition:color .2s; }
+        .nav-a:hover { color:var(--gold-l); }
+
+        /* Hero */
+        .hero { text-align:center; padding:50px 20px 36px; max-width:800px; margin:0 auto; position:relative; z-index:2; }
+        .badge { display:inline-flex; align-items:center; gap:8px; background:rgba(197,168,128,.12); border:1px solid var(--border); color:var(--gold-l); padding:6px 18px; border-radius:999px; font-size:.85rem; font-weight:700; margin-bottom:16px; }
+        .hero h1 { font-size:2.4rem; font-weight:900; background:linear-gradient(135deg,#fff 40%,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.3; margin-bottom:14px; }
+        .hero p { color:#cbd5e1; font-size:1.05rem; margin-bottom:28px; }
+
+        /* الحاوية الرئيسية */
+        .checkout-layout { max-width:1050px; margin:0 auto; padding:0 24px 80px; display:grid; grid-template-columns:5fr 4fr; gap:28px; }
+        @media(max-width:900px){ .checkout-layout { grid-template-columns:1fr; } }
+
+        /* بطاقة */
+        .panel { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; backdrop-filter:blur(14px); }
+        .panel-title { font-size:1.15rem; font-weight:800; color:var(--gold-l); display:flex; align-items:center; gap:10px; margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.07); }
+
+        /* طرق الدفع */
+        .payment-methods { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+        .pay-method-btn { background:rgba(10,15,30,.7); border:1.5px solid var(--border); border-radius:14px; padding:14px; display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; transition:all .25s; font-family:inherit; }
+        .pay-method-btn .pm-icon { font-size:1.6rem; }
+        .pay-method-btn .pm-label { font-size:.8rem; font-weight:700; color:#94a3b8; }
+        .pay-method-btn.active, .pay-method-btn:hover { border-color:var(--gold); background:rgba(197,168,128,.12); }
+        .pay-method-btn.active .pm-label { color:#fff; }
+        .pay-method-btn.instant { border-color:rgba(56,189,248,.35); }
+        .pay-method-btn.instant:hover, .pay-method-btn.instant.active { border-color:var(--cyan); background:rgba(56,189,248,.1); }
+
+        /* نموذج البطاقة */
+        .card-form { display:flex; flex-direction:column; gap:14px; }
+        .form-label { font-size:.82rem; font-weight:700; color:var(--gold); display:block; margin-bottom:6px; }
+        .form-input { width:100%; background:rgba(5,8,18,.8); border:1.5px solid rgba(197,168,128,.18); color:#f8fafc; padding:12px 16px; border-radius:12px; font-family:'Space Grotesk',monospace; font-size:.92rem; outline:none; letter-spacing:.5px; transition:border-color .2s; }
+        .form-input:focus { border-color:var(--gold); }
+        .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .security-badges { display:flex; align-items:center; gap:10px; margin-top:4px; flex-wrap:wrap; }
+        .sec-badge { font-size:.7rem; font-weight:800; color:#64748b; display:flex; align-items:center; gap:4px; }
+
+        /* ملخص الطلب */
+        .order-summary { display:flex; flex-direction:column; gap:12px; }
+        .order-item { display:flex; align-items:center; gap:14px; padding:14px; background:rgba(5,8,18,.7); border-radius:14px; border:1px solid rgba(255,255,255,.06); }
+        .order-item-icon { font-size:1.6rem; flex-shrink:0; }
+        .order-item-name { font-size:.9rem; font-weight:700; color:#fff; }
+        .order-item-desc { font-size:.78rem; color:#94a3b8; margin-top:2px; }
+        .order-item-price { font-size:.95rem; font-weight:800; color:var(--gold-l); font-family:'Space Grotesk',sans-serif; white-space:nowrap; }
+        .divider { height:1px; background:rgba(255,255,255,.07); }
+        .summary-row { display:flex; justify-content:space-between; font-size:.88rem; color:#94a3b8; padding:4px 0; }
+        .summary-total { display:flex; justify-content:space-between; font-size:1.1rem; font-weight:900; color:#fff; padding-top:10px; }
+
+        /* زر الدفع */
+        .btn-pay { width:100%; padding:16px; background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#040806; border:none; border-radius:14px; font-weight:900; font-size:1.05rem; cursor:pointer; font-family:inherit; transition:all .25s; display:flex; align-items:center; justify-content:center; gap:10px; margin-top:16px; }
+        .btn-pay:hover { box-shadow:0 12px 30px rgba(197,168,128,.4); transform:translateY(-2px); }
+
+        /* شاشة النجاح */
+        .success-screen { display:none; text-align:center; padding:40px 24px; }
+        .success-screen.show { display:block; }
+        .success-icon { font-size:4rem; margin-bottom:16px; animation:popIn .5s ease; }
+        @keyframes popIn { from{transform:scale(.5);opacity:0;} to{transform:scale(1);opacity:1;} }
+        .success-title { font-size:1.6rem; font-weight:900; color:var(--emerald); margin-bottom:8px; }
+        .success-ref { font-size:.9rem; color:#94a3b8; margin-bottom:20px; }
+        .receipt-box { background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.25); border-radius:14px; padding:20px; text-align:right; }
+        .receipt-row { display:flex; justify-content:space-between; font-size:.88rem; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+        .receipt-row:last-child { border-bottom:none; font-weight:800; color:#fff; }
+
+        /* شارة الأمان */
+        .security-bar { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:16px; border-top:1px solid rgba(255,255,255,.05); margin-top:20px; }
+        .sec-pill { display:flex; align-items:center; gap:5px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:5px 12px; border-radius:999px; font-size:.72rem; color:#64748b; font-weight:700; }
+
+        /* رموز طرق الدفع */
+        .payment-logos { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:14px; }
+        .pay-logo { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:5px 10px; font-size:.72rem; font-weight:800; color:#94a3b8; }
+    </style>
+</head>
+<body>
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <header class="nav">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--gold-l);">S&R CoreSync</strong>
+                <span style="display:block; font-size:.72rem; color:#94a3b8;">بوابة المدفوعات الدولية الموحدة</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="smart-proposal-portal.html" class="nav-a">عروض الأسعار</a>
+            <a href="crm-dashboard.html" class="nav-a">لوحة CRM</a>
+            <a href="invoice-engine.html" class="nav-a">الفوترة ZATCA</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">💳 بوابة المدفوعات الدولية الموحدة — Multi-Currency Payment Gateway</div>
+        <h1>دفع آمن فوري بأي عملة وأي وسيلة</h1>
+        <p>Stripe · Apple Pay · Google Pay · iDEAL · SEPA · تحويل بنكي — جميعها في بوابة واحدة آمنة بتشفير SSL 256-Bit وإيصال ZATCA فوري.</p>
+    </section>
+
+    <div class="checkout-layout">
+
+        <!-- === عمود الدفع === -->
+        <div>
+            <!-- طرق الدفع -->
+            <div class="panel sr-holographic-card" style="margin-bottom:22px;">
+                <h2 class="panel-title">💳 اختر طريقة الدفع</h2>
+                <div class="payment-methods">
+                    <button class="pay-method-btn active" id="pm-card" onclick="selectMethod('card')">
+                        <span class="pm-icon">💳</span>
+                        <span class="pm-label">بطاقة ائتمانية</span>
+                    </button>
+                    <button class="pay-method-btn instant" id="pm-apple" onclick="selectMethod('apple')">
+                        <span class="pm-icon">🍎</span>
+                        <span class="pm-label">Apple Pay</span>
+                    </button>
+                    <button class="pay-method-btn instant" id="pm-google" onclick="selectMethod('google')">
+                        <span class="pm-icon">🤖</span>
+                        <span class="pm-label">Google Pay</span>
+                    </button>
+                    <button class="pay-method-btn instant" id="pm-ideal" onclick="selectMethod('ideal')">
+                        <span class="pm-icon">🏦</span>
+                        <span class="pm-label">iDEAL (هولندا)</span>
+                    </button>
+                    <button class="pay-method-btn instant" id="pm-sepa" onclick="selectMethod('sepa')">
+                        <span class="pm-icon">🇪🇺</span>
+                        <span class="pm-label">SEPA بنك أوروبي</span>
+                    </button>
+                    <button class="pay-method-btn instant" id="pm-wire" onclick="selectMethod('wire')">
+                        <span class="pm-icon">🏛️</span>
+                        <span class="pm-label">تحويل بنكي</span>
+                    </button>
+                </div>
+
+                <div class="payment-logos">
+                    <div class="pay-logo">VISA</div>
+                    <div class="pay-logo">Mastercard</div>
+                    <div class="pay-logo">Amex</div>
+                    <div class="pay-logo">Stripe</div>
+                    <div class="pay-logo">iDEAL</div>
+                    <div class="pay-logo">SEPA</div>
+                    <div class="pay-logo">SWIFT</div>
+                </div>
+            </div>
+
+            <!-- نموذج الدفع -->
+            <div class="panel sr-holographic-card" id="cardFormPanel">
+                <h2 class="panel-title" id="formPanelTitle">🔒 بيانات البطاقة الائتمانية</h2>
+
+                <!-- نموذج البطاقة -->
+                <div class="card-form" id="cardFormContent">
+                    <div>
+                        <label class="form-label">الاسم كما هو على البطاقة</label>
+                        <input class="form-input" id="cardName" placeholder="Mohammed Al-Salim" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="form-label">رقم البطاقة</label>
+                        <input class="form-input" id="cardNum" placeholder="4242 4242 4242 4242" maxlength="19" dir="ltr" oninput="formatCardNum(this)">
+                    </div>
+                    <div class="form-row-2">
+                        <div>
+                            <label class="form-label">تاريخ الانتهاء</label>
+                            <input class="form-input" id="cardExp" placeholder="MM / YY" maxlength="7" dir="ltr" oninput="formatExp(this)">
+                        </div>
+                        <div>
+                            <label class="form-label">رمز الأمان CVV</label>
+                            <input class="form-input" id="cardCVV" placeholder="•••" maxlength="4" type="password" dir="ltr">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label">البريد الإلكتروني للإيصال</label>
+                        <input class="form-input" id="payerEmail" type="email" placeholder="client@company.com" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="form-label">العملة المفضلة</label>
+                        <select class="form-input" id="payCurrency" onchange="updateSummary()">
+                            <option value="EUR">EUR — اليورو الأوروبي €</option>
+                            <option value="SAR">SAR — الريال السعودي ﷼</option>
+                            <option value="AED">AED — الدرهم الإماراتي د.إ</option>
+                            <option value="USD">USD — الدولار الأمريكي $</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- نموذج iDEAL -->
+                <div id="idealFormContent" style="display:none; padding:20px; text-align:center;">
+                    <div style="font-size:2rem; margin-bottom:12px;">🏦</div>
+                    <div style="font-size:1rem; font-weight:800; color:#fff; margin-bottom:8px;">iDEAL — الدفع الفوري عبر البنوك الهولندية</div>
+                    <div style="font-size:.88rem; color:#94a3b8; margin-bottom:16px;">اختر بنكك للمتابعة. يتم التحويل فورياً.</div>
+                    <select class="form-input" style="direction:ltr; text-align:left;">
+                        <option>ABN AMRO</option>
+                        <option>ING</option>
+                        <option>Rabobank</option>
+                        <option>SNS Bank</option>
+                        <option>ASN Bank</option>
+                        <option>Triodos Bank</option>
+                    </select>
+                </div>
+
+                <!-- نموذج SEPA -->
+                <div id="sepaFormContent" style="display:none;">
+                    <div>
+                        <label class="form-label">رقم الحساب IBAN</label>
+                        <input class="form-input" id="sepaIBAN" placeholder="NL91 ABNA 0417 1643 00" dir="ltr">
+                    </div>
+                    <div style="margin-top:12px;">
+                        <label class="form-label">اسم صاحب الحساب</label>
+                        <input class="form-input" id="sepaName" placeholder="Mohammed Al-Salim" dir="ltr">
+                    </div>
+                </div>
+
+                <!-- نموذج التحويل البنكي -->
+                <div id="wireFormContent" style="display:none; background:rgba(197,168,128,.06); border:1px solid var(--border); border-radius:12px; padding:16px;">
+                    <div style="font-size:.88rem; font-weight:700; color:var(--gold-l); margin-bottom:12px;">بيانات التحويل البنكي لـ S&R CoreSync:</div>
+                    <div style="display:flex; flex-direction:column; gap:8px; font-size:.85rem; direction:ltr;">
+                        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">Bank:</span><span style="color:#fff; font-weight:700;">ABN AMRO Bank N.V.</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">IBAN:</span><span style="color:#fff; font-weight:700;">NL91 ABNA 0417 1643 00</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">BIC/SWIFT:</span><span style="color:#fff; font-weight:700;">ABNANL2A</span></div>
+                        <div style="display:flex; justify-content:space-between;"><span style="color:#94a3b8;">Beneficiary:</span><span style="color:#fff; font-weight:700;">S&R CoreSync BV</span></div>
+                    </div>
+                </div>
+
+                <button class="btn-pay sr-magnetic-btn" onclick="processPayment()" id="payBtn">
+                    <span>🔒</span> <span id="payBtnText">إتمام الدفع الآمن الآن</span>
+                </button>
+
+                <div class="security-bar">
+                    <div class="sec-pill">🔒 SSL 256-Bit</div>
+                    <div class="sec-pill">🛡️ PCI DSS Level 1</div>
+                    <div class="sec-pill">✅ 3D Secure</div>
+                    <div class="sec-pill">🧾 ZATCA متوافق</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === ملخص الطلب === -->
+        <div>
+            <div class="panel sr-holographic-card" style="position:sticky; top:84px;">
+                <h2 class="panel-title">🧾 ملخص الطلب</h2>
+
+                <div class="order-summary">
+                    <div class="order-item">
+                        <span class="order-item-icon">🌐</span>
+                        <div style="flex:1;">
+                            <div class="order-item-name">حزمة الموقع المؤسسي السيادي</div>
+                            <div class="order-item-desc">تصميم + تطوير + SEO + 12 شهر دعم</div>
+                        </div>
+                        <div class="order-item-price" data-eur="8800">€ 8,800</div>
+                    </div>
+                    <div class="order-item">
+                        <span class="order-item-icon">🎨</span>
+                        <div style="flex:1;">
+                            <div class="order-item-name">الهوية البصرية الكاملة 8K</div>
+                            <div class="order-item-desc">شعار + دليل الاستخدام + حزمة الأصول</div>
+                        </div>
+                        <div class="order-item-price" data-eur="4500">€ 4,500</div>
+                    </div>
+                </div>
+
+                <div class="divider" style="margin:16px 0;"></div>
+
+                <div class="summary-row">
+                    <span>المجموع الفرعي:</span>
+                    <span id="sumSubtotal">€ 13,300</span>
+                </div>
+                <div class="summary-row">
+                    <span>ضريبة القيمة المضافة (21% — NL):</span>
+                    <span id="sumVAT">€ 2,793</span>
+                </div>
+                <div class="summary-row">
+                    <span>رسوم المعالجة:</span>
+                    <span style="color:var(--emerald);">مجاني ✓</span>
+                </div>
+
+                <div class="divider" style="margin:12px 0;"></div>
+
+                <div class="summary-total">
+                    <span>الإجمالي المستحق:</span>
+                    <span id="sumTotal" style="color:var(--gold-l); font-family:'Space Grotesk',sans-serif;">€ 16,093</span>
+                </div>
+
+                <div style="margin-top:16px; padding:12px; background:rgba(197,168,128,.06); border-radius:12px; font-size:.8rem; color:#94a3b8; border:1px solid rgba(197,168,128,.12);">
+                    <strong style="color:var(--gold-l); display:block; margin-bottom:4px;">🛡️ ضمان استرداد الأموال</strong>
+                    استرداد كامل خلال 14 يوماً إذا لم تُبدأ الخدمة. الدفع مشفر بـ SSL 256-Bit ومحمي بـ 3D Secure.
+                </div>
+
+                <!-- شاشة النجاح -->
+                <div class="success-screen" id="successScreen">
+                    <div class="success-icon">✅</div>
+                    <div class="success-title">تم الدفع بنجاح!</div>
+                    <div class="success-ref">رقم العملية: <strong id="txRef" style="color:var(--gold);">—</strong></div>
+                    <div class="receipt-box">
+                        <div class="receipt-row"><span>المبلغ المدفوع:</span><span id="rcptAmt">—</span></div>
+                        <div class="receipt-row"><span>طريقة الدفع:</span><span id="rcptMethod">—</span></div>
+                        <div class="receipt-row"><span>التاريخ والوقت:</span><span id="rcptDate">—</span></div>
+                        <div class="receipt-row"><span>الإجمالي المدفوع:</span><span id="rcptTotal">—</span></div>
+                    </div>
+                    <a href="invoice-engine.html" class="btn-pay" style="margin-top:16px; text-decoration:none;">
+                        <span>🧾 تحميل الإيصال الضريبي ZATCA</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        const curRates = { EUR:1, SAR:4.05, AED:3.97, USD:1.08 };
+        const curSyms  = { EUR:'€', SAR:'﷼', AED:'د.إ', USD:'$' };
+        const basePrices = { subtotal:13300, vat:2793, total:16093 };
+
+        let currentMethod = 'card';
+
+        function selectMethod(method) {
+            currentMethod = method;
+            document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('pm-' + method).classList.add('active');
+
+            // إخفاء جميع النماذج
+            document.getElementById('cardFormContent').style.display = 'none';
+            document.getElementById('idealFormContent').style.display = 'none';
+            document.getElementById('sepaFormContent').style.display = 'none';
+            document.getElementById('wireFormContent').style.display = 'none';
+
+            const labels = {
+                card:'💳 بيانات البطاقة الائتمانية',
+                apple:'🍎 الدفع عبر Apple Pay',
+                google:'🤖 الدفع عبر Google Pay',
+                ideal:'🏦 iDEAL — البنوك الهولندية',
+                sepa:'🇪🇺 تحويل SEPA البنكي الأوروبي',
+                wire:'🏛️ التحويل البنكي الدولي (SWIFT)'
+            };
+            document.getElementById('formPanelTitle').textContent = labels[method] || labels['card'];
+
+            if (method === 'card') {
+                document.getElementById('cardFormContent').style.display = 'flex';
+            } else if (method === 'apple' || method === 'google') {
+                document.getElementById('cardFormContent').style.display = 'flex';
+            } else if (method === 'ideal') {
+                document.getElementById('idealFormContent').style.display = 'block';
+            } else if (method === 'sepa') {
+                document.getElementById('sepaFormContent').style.display = 'flex';
+                document.getElementById('sepaFormContent').style.flexDirection = 'column';
+                document.getElementById('sepaFormContent').style.gap = '12px';
+            } else if (method === 'wire') {
+                document.getElementById('wireFormContent').style.display = 'block';
+            }
+        }
+
+        function updateSummary() {
+            const cur  = document.getElementById('payCurrency').value;
+            const rate = curRates[cur] || 1;
+            const sym  = curSyms[cur] || '€';
+            const fmt  = n => `${sym} ${(n * rate).toLocaleString('ar-SA', {minimumFractionDigits:2})}`;
+            document.getElementById('sumSubtotal').textContent = fmt(basePrices.subtotal);
+            document.getElementById('sumVAT').textContent      = fmt(basePrices.vat);
+            document.getElementById('sumTotal').textContent    = fmt(basePrices.total);
+            document.querySelectorAll('[data-eur]').forEach(el => {
+                const eur = parseFloat(el.dataset.eur);
+                el.textContent = fmt(eur);
+            });
+        }
+
+        function formatCardNum(input) {
+            let v = input.value.replace(/\D/g,'').substring(0,16);
+            input.value = v.match(/.{1,4}/g)?.join(' ') || v;
+        }
+
+        function formatExp(input) {
+            let v = input.value.replace(/\D/g,'');
+            if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2,4);
+            input.value = v;
+        }
+
+        function processPayment() {
+            const btn = document.getElementById('payBtn');
+            btn.innerHTML = '<span>⏳ جاري معالجة الدفع بأمان...</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const cur = document.getElementById('payCurrency').value;
+                const rate = curRates[cur] || 1;
+                const sym  = curSyms[cur] || '€';
+                const methodLabels = { card:'بطاقة ائتمانية (Stripe)', apple:'Apple Pay', google:'Google Pay', ideal:'iDEAL', sepa:'SEPA', wire:'تحويل بنكي SWIFT' };
+                const txId = 'TXN-' + Date.now().toString(36).toUpperCase();
+
+                document.getElementById('txRef').textContent   = txId;
+                document.getElementById('rcptAmt').textContent = `${sym} ${(basePrices.total * rate).toLocaleString('ar-SA', {minimumFractionDigits:2})}`;
+                document.getElementById('rcptMethod').textContent = methodLabels[currentMethod] || currentMethod;
+                document.getElementById('rcptDate').textContent = new Date().toLocaleString('ar-SA');
+                document.getElementById('rcptTotal').textContent = `${sym} ${(basePrices.total * rate).toLocaleString('ar-SA', {minimumFractionDigits:2})}`;
+
+                document.getElementById('successScreen').classList.add('show');
+                document.getElementById('cardFormPanel').style.display = 'none';
+            }, 2200);
+        }
+    </script>
+</body>
+</html>
+
