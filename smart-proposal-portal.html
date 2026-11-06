@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة العروض والتعاقد الذكي المباشر • S&R CoreSync</title>
+    <meta name="description" content="بوابة عروض الأسعار الرقمية التفاعلية مع التوقيع الإلكتروني المباشر وإشعارات واتساب والبريد الإلكتروني المؤتمت.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --gold: #c5a880; --gold-l: #f3dfba; --gold-d: #8c734b;
+            --bg: #040806; --card: rgba(10,22,15,0.86);
+            --border: rgba(197,168,128,0.22);
+            --cyan: #38bdf8; --emerald: #10b981;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: radial-gradient(ellipse at 40% 0%, #081509 0%, #040806 70%);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* شريط التنقل */
+        .nav { display:flex; align-items:center; justify-content:space-between; padding:14px 28px; background:rgba(3,8,5,.94); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; }
+        .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+        .nav-links { display:flex; align-items:center; gap:14px; }
+        .nav-a { color:#94a3b8; text-decoration:none; font-size:.88rem; font-weight:600; transition:color .2s; }
+        .nav-a:hover, .nav-a.active { color:var(--gold-l); }
+
+        /* Hero */
+        .hero { text-align:center; padding:50px 20px 30px; max-width:860px; margin:0 auto; position:relative; z-index:2; }
+        .badge { display:inline-flex; align-items:center; gap:8px; background:rgba(197,168,128,.12); border:1px solid var(--border); color:var(--gold-l); padding:6px 18px; border-radius:999px; font-size:.85rem; font-weight:700; margin-bottom:16px; }
+        .hero h1 { font-size:2.4rem; font-weight:900; background:linear-gradient(135deg,#fff 40%,var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.3; margin-bottom:14px; }
+        .hero p { color:#cbd5e1; font-size:1.05rem; margin-bottom:28px; }
+
+        /* التبويبات الرئيسية */
+        .tabs-row { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+        .tab-btn { padding:10px 22px; border-radius:12px; font-size:.9rem; font-weight:700; border:1.5px solid var(--border); background:rgba(10,20,15,.6); color:#cbd5e1; cursor:pointer; font-family:inherit; transition:all .25s; }
+        .tab-btn.active, .tab-btn:hover { border-color:var(--gold); background:rgba(197,168,128,.15); color:#fff; box-shadow:0 0 18px rgba(197,168,128,.2); }
+
+        /* الشبكة */
+        .layout { max-width:1280px; margin:0 auto; padding:0 24px 80px; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+        @media(max-width:900px){ .layout { grid-template-columns:1fr; } }
+
+        /* البطاقات */
+        .panel { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:28px; backdrop-filter:blur(12px); }
+        .panel-title { font-size:1.2rem; font-weight:800; color:var(--gold-l); display:flex; align-items:center; gap:10px; margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.07); }
+        .form-label { display:block; font-size:.82rem; font-weight:700; color:var(--gold); margin-bottom:7px; }
+        .form-input { width:100%; background:rgba(5,12,8,.8); border:1px solid rgba(197,168,128,.18); color:#f8fafc; padding:10px 14px; border-radius:10px; font-family:inherit; font-size:.9rem; outline:none; transition:border-color .2s; margin-bottom:16px; }
+        .form-input:focus { border-color:var(--gold); }
+        select.form-input { cursor:pointer; }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+        /* بنود العرض */
+        .proposal-items { width:100%; border-collapse:collapse; margin-bottom:14px; }
+        .proposal-items th { background:rgba(197,168,128,.1); color:var(--gold-l); font-size:.78rem; font-weight:700; padding:9px 10px; text-align:right; }
+        .proposal-items td { padding:7px 6px; border-bottom:1px solid rgba(255,255,255,.05); }
+        .proposal-items td input { width:100%; background:rgba(5,12,8,.6); border:1px solid rgba(197,168,128,.14); color:#f8fafc; padding:7px 10px; border-radius:8px; font-family:inherit; font-size:.84rem; outline:none; }
+        .btn-add { background:rgba(16,185,129,.12); border:1px dashed rgba(16,185,129,.4); color:var(--emerald); padding:7px 14px; border-radius:10px; font-weight:700; font-size:.84rem; cursor:pointer; font-family:inherit; transition:all .2s; margin-bottom:16px; }
+        .btn-add:hover { background:rgba(16,185,129,.22); }
+        .btn-del { background:none; border:none; color:#ef4444; font-size:1.05rem; cursor:pointer; padding:2px 6px; border-radius:6px; }
+
+        /* زر التوليد */
+        .btn-gen { width:100%; padding:14px; background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#040806; border:none; border-radius:14px; font-weight:900; font-size:1rem; cursor:pointer; font-family:inherit; transition:all .25s; margin-top:4px; }
+        .btn-gen:hover { box-shadow:0 12px 30px rgba(197,168,128,.35); transform:translateY(-2px); }
+
+        /* ورقة العرض (Preview) */
+        .proposal-sheet { background:#fff; color:#1a1a2e; border-radius:16px; padding:32px; box-shadow:0 20px 50px rgba(0,0,0,.6); font-family:'IBM Plex Sans Arabic','Alexandria',sans-serif; direction:rtl; }
+        .ps-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:22px; padding-bottom:18px; border-bottom:2.5px solid #c5a880; }
+        .ps-logo img { width:52px; height:52px; }
+        .ps-company { font-size:1.1rem; font-weight:900; color:#0a2010; }
+        .ps-company-sub { font-size:.72rem; color:#666; margin-top:2px; }
+        .ps-title { font-size:1.6rem; font-weight:900; color:#c5a880; }
+        .ps-ref { font-size:.82rem; color:#555; margin-top:4px; }
+        .ps-parties { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:20px; }
+        .ps-label { font-size:.7rem; font-weight:800; color:#888; text-transform:uppercase; letter-spacing:.5px; margin-bottom:5px; }
+        .ps-name { font-size:.98rem; font-weight:800; color:#0a2010; }
+        .ps-detail { font-size:.8rem; color:#555; margin-top:2px; }
+
+        /* جدول بنود العرض */
+        .ps-table { width:100%; border-collapse:collapse; margin-bottom:18px; }
+        .ps-table th { background:#f8f4ee; color:#0a2010; font-size:.78rem; font-weight:800; padding:9px 12px; border-bottom:2px solid #c5a880; text-align:right; }
+        .ps-table td { padding:9px 12px; font-size:.86rem; border-bottom:1px solid #eee; color:#2a2a2a; }
+        .ps-totals { background:#f8f4ee; padding:16px; border-radius:10px; margin-bottom:20px; }
+        .ps-row { display:flex; justify-content:space-between; font-size:.87rem; color:#333; margin-bottom:4px; }
+        .ps-grand { font-weight:900; font-size:1.08rem; color:#0a2010; border-top:1.5px solid #c5a880; padding-top:8px; margin-top:4px; }
+
+        /* التوقيع الإلكتروني */
+        .sig-box { border:2px dashed #c5a880; border-radius:12px; height:90px; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:.88rem; cursor:crosshair; position:relative; background:#fafaf8; overflow:hidden; margin-bottom:12px; }
+        .sig-canvas { position:absolute; inset:0; cursor:crosshair; }
+        .sig-actions { display:flex; gap:10px; margin-bottom:18px; }
+        .btn-sig-clear { background:rgba(239,68,68,.12); border:1px solid rgba(239,68,68,.3); color:#ef4444; padding:6px 14px; border-radius:8px; font-size:.82rem; font-weight:700; cursor:pointer; font-family:inherit; }
+        .ps-footer { display:flex; justify-content:space-between; align-items:flex-end; padding-top:14px; border-top:1px solid #eee; margin-top:12px; }
+        .ps-seal { font-size:.7rem; color:#aaa; max-width:200px; line-height:1.6; }
+        .ps-sig-preview { text-align:center; }
+        .ps-sig-label { font-size:.7rem; color:#888; margin-top:4px; }
+
+        /* أزرار الإجراءات */
+        .action-bar { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+        .btn-action { display:inline-flex; align-items:center; gap:7px; background:rgba(10,22,15,.8); border:1px solid var(--border); color:#cbd5e1; padding:9px 18px; border-radius:10px; font-size:.85rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .2s; }
+        .btn-action:hover, .btn-action.primary { background:linear-gradient(135deg,rgba(197,168,128,.25),rgba(197,168,128,.1)); border-color:var(--gold); color:#fff; }
+
+        /* مؤشر الخطوات */
+        .steps-row { display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:30px; }
+        .step { display:flex; align-items:center; }
+        .step-dot { width:34px; height:34px; border-radius:50%; background:rgba(197,168,128,.15); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.85rem; color:#94a3b8; transition:all .3s; }
+        .step-dot.active { background:var(--gold); border-color:var(--gold-l); color:#040806; }
+        .step-dot.done { background:var(--emerald); border-color:var(--emerald); color:#fff; }
+        .step-label { font-size:.75rem; color:#64748b; margin-top:4px; text-align:center; }
+        .step-line { width:50px; height:2px; background:rgba(197,168,128,.18); }
+        .step-line.done { background:var(--emerald); }
+        .step-col { display:flex; flex-direction:column; align-items:center; }
+
+        /* نجاح */
+        .success-msg { background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.35); border-radius:14px; padding:20px; text-align:center; display:none; }
+        .success-msg.show { display:block; }
+    </style>
+</head>
+<body>
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="nav">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--gold-l);">S&R CoreSync</strong>
+                <span style="display:block; font-size:.72rem; color:#94a3b8;">بوابة العروض والتعاقد الذكي</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-a">استوديو الهوية 8K</a>
+            <a href="device-simulator-studio.html" class="nav-a">محاكي الأجهزة 3D</a>
+            <a href="invoice-engine.html" class="nav-a">محرك الفوترة</a>
+            <a href="crm-dashboard.html" class="nav-a">لوحة CRM</a>
+            <a href="payment-gateway.html" class="nav-a">بوابة الدفع</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="badge">🤝 بوابة العروض والتعاقد الذكي المباشر — Smart Proposal Portal</div>
+        <h1>من العرض التفاعلي إلى التوقيع الرقمي في دقائق</h1>
+        <p>أنشئ عروض أسعار احترافية، أرسلها للعميل فورياً، واحصل على التوقيع الإلكتروني المباشر مع إشعار واتساب وبريد إلكتروني مؤتمت.</p>
+
+        <!-- مؤشر الخطوات -->
+        <div class="steps-row">
+            <div class="step-col">
+                <div class="step-dot active" id="dot1">1</div>
+                <div class="step-label">بيانات العرض</div>
+            </div>
+            <div class="step-line" id="line1"></div>
+            <div class="step-col">
+                <div class="step-dot" id="dot2">2</div>
+                <div class="step-label">معاينة وتأكيد</div>
+            </div>
+            <div class="step-line" id="line2"></div>
+            <div class="step-col">
+                <div class="step-dot" id="dot3">3</div>
+                <div class="step-label">التوقيع والإرسال</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الشبكة الرئيسية -->
+    <div class="layout">
+
+        <!-- === عمود الإدخال === -->
+        <div>
+            <!-- الخطوة 1: بيانات العرض -->
+            <div class="panel sr-tilt-card sr-holographic-card" id="step1Panel">
+                <h2 class="panel-title">📋 الخطوة 1 — بيانات عرض السعر</h2>
+
+                <div class="form-row">
+                    <div>
+                        <label class="form-label">اسم العميل / الشركة</label>
+                        <input class="form-input" id="pClientName" placeholder="اسم العميل الكريم">
+                    </div>
+                    <div>
+                        <label class="form-label">البريد الإلكتروني</label>
+                        <input class="form-input" id="pClientEmail" type="email" placeholder="client@example.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label class="form-label">رقم الواتساب (مع رمز الدولة)</label>
+                        <input class="form-input" id="pClientWA" placeholder="+966501234567" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="form-label">العملة</label>
+                        <select class="form-input" id="pCurrency">
+                            <option value="EUR">EUR — اليورو €</option>
+                            <option value="SAR">SAR — ريال ﷼</option>
+                            <option value="AED">AED — درهم د.إ</option>
+                            <option value="USD">USD — دولار $</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label class="form-label">موضوع العرض / المشروع</label>
+                <input class="form-input" id="pSubject" placeholder="مثال: تطوير منصة ذكاء اصطناعي سيادية متكاملة">
+
+                <label class="form-label">مدة صلاحية العرض (أيام)</label>
+                <input class="form-input" id="pValidity" type="number" value="14" min="1" max="90">
+
+                <!-- بنود العرض -->
+                <label class="form-label">🧾 بنود الخدمات والأسعار</label>
+                <table class="proposal-items">
+                    <thead><tr><th>الخدمة</th><th style="width:70px">الكمية</th><th style="width:110px">السعر</th><th style="width:36px"></th></tr></thead>
+                    <tbody id="propItemsBody">
+                        <tr>
+                            <td><input class="p-desc" placeholder="تصميم هوية بصرية سيادية كاملة"></td>
+                            <td><input class="p-qty" type="number" value="1" min="1"></td>
+                            <td><input class="p-price" type="number" value="4500" min="0"></td>
+                            <td><button class="btn-del" onclick="delPropRow(this)">🗑</button></td>
+                        </tr>
+                        <tr>
+                            <td><input class="p-desc" placeholder="بناء موقع إلكتروني مؤسسي فاخر + SEO"></td>
+                            <td><input class="p-qty" type="number" value="1" min="1"></td>
+                            <td><input class="p-price" type="number" value="8800" min="0"></td>
+                            <td><button class="btn-del" onclick="delPropRow(this)">🗑</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn-add" onclick="addPropRow()">+ إضافة بند</button>
+
+                <label class="form-label">ملاحظات وشروط إضافية (اختياري)</label>
+                <textarea class="form-input" id="pNotes" rows="3" placeholder="مثال: يشمل العرض ضمان صيانة 12 شهراً وثلاث جلسات مراجعة..."></textarea>
+
+                <label class="form-label">نسبة ضريبة القيمة المضافة (%)</label>
+                <input class="form-input" id="pVAT" type="number" value="15" min="0" max="30">
+
+                <button class="btn-gen sr-magnetic-btn" onclick="generateProposal()">
+                    👁️ معاينة العرض والانتقال للتوقيع
+                </button>
+            </div>
+        </div>
+
+        <!-- === عمود المعاينة والتوقيع === -->
+        <div>
+            <!-- أزرار الإجراءات -->
+            <div class="action-bar">
+                <button class="btn-action primary" onclick="printProposal()">🖨️ طباعة / تصدير PDF</button>
+                <button class="btn-action" onclick="sendWhatsApp()">📱 إرسال واتساب</button>
+                <button class="btn-action" onclick="copyLink()">🔗 نسخ رابط العرض</button>
+            </div>
+
+            <!-- ورقة العرض -->
+            <div class="proposal-sheet" id="proposalSheet">
+                <div class="ps-header">
+                    <div class="ps-logo">
+                        <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync">
+                        <div class="ps-company">S&R CoreSync</div>
+                        <div class="ps-company-sub">Sovereign Digital Intelligence · Amsterdam</div>
+                    </div>
+                    <div style="text-align:left;">
+                        <div class="ps-title">PROPOSAL</div>
+                        <div class="ps-ref">عرض رقم: <strong id="propNum">PROP-2026-001</strong></div>
+                        <div class="ps-ref" id="propDateRef">التاريخ: <span id="propDate">—</span></div>
+                        <div class="ps-ref">الصلاحية: <span id="propValid">—</span> يوماً</div>
+                    </div>
+                </div>
+
+                <div class="ps-parties">
+                    <div>
+                        <div class="ps-label">مقدّم العرض / From</div>
+                        <div class="ps-name">S&R CoreSync For Intelligent Solutions</div>
+                        <div class="ps-detail">VAT: NL853123456B01</div>
+                        <div class="ps-detail">Amsterdam, Netherlands</div>
+                    </div>
+                    <div>
+                        <div class="ps-label">العميل / Bill To</div>
+                        <div class="ps-name" id="propClientName">—</div>
+                        <div class="ps-detail" id="propClientEmail2">—</div>
+                    </div>
+                </div>
+
+                <div style="background:#f8f4ee; padding:12px 16px; border-radius:10px; margin-bottom:18px; border-right:3px solid #c5a880;">
+                    <div class="ps-label">موضوع العرض</div>
+                    <div style="font-size:.95rem; font-weight:700; color:#0a2010;" id="propSubject">—</div>
+                </div>
+
+                <table class="ps-table">
+                    <thead><tr><th>#</th><th>الخدمة</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>
+                    <tbody id="propPreviewItems"></tbody>
+                </table>
+
+                <div class="ps-totals">
+                    <div class="ps-row"><span>المجموع قبل الضريبة:</span><span id="pSubtotal">—</span></div>
+                    <div class="ps-row"><span>ضريبة القيمة المضافة (<span id="pVATpct">15</span>%):</span><span id="pVATamt">—</span></div>
+                    <div class="ps-row ps-grand"><span>الإجمالي المستحق:</span><span id="pTotal">—</span></div>
+                </div>
+
+                <div id="propNotes" style="display:none; background:#fffdf8; padding:12px; border-radius:10px; margin-bottom:16px; border:1px solid #eee;">
+                    <div class="ps-label">ملاحظات وشروط</div>
+                    <div style="font-size:.84rem; color:#444;" id="propNotesText"></div>
+                </div>
+
+                <!-- التوقيع الإلكتروني -->
+                <div style="background:#f8f4ee; padding:16px; border-radius:12px; margin-bottom:14px;">
+                    <div class="ps-label" style="margin-bottom:10px;">✍️ التوقيع الإلكتروني للعميل (e-Signature)</div>
+                    <div class="sig-box" id="sigBox">
+                        <span id="sigPlaceholder" style="pointer-events:none; color:#bbb;">— وقّع هنا بالضغط والسحب —</span>
+                        <canvas class="sig-canvas" id="sigCanvas"></canvas>
+                    </div>
+                    <div class="sig-actions">
+                        <button class="btn-sig-clear" onclick="clearSig()">🗑️ مسح التوقيع</button>
+                        <span style="font-size:.78rem; color:#94a3b8; align-self:center;">تُحفظ بصمة التوقيع مشفرة وتُرسل مع العقد</span>
+                    </div>
+                </div>
+
+                <div class="ps-footer">
+                    <div class="ps-seal">
+                        <strong>ختم التحقق الرقمي</strong><br>
+                        <span id="propSealTS" style="font-size:.65rem; color:#aaa;">—</span><br>
+                        <span style="font-size:.62rem; color:#ccc;">عرض ملزم قانونياً بعد التوقيع الرقمي المعتمد</span>
+                    </div>
+                    <div class="ps-sig-preview">
+                        <canvas id="sigPreview" width="100" height="45" style="border-bottom:1.5px solid #c5a880;"></canvas>
+                        <div class="ps-sig-label">توقيع العميل المعتمد</div>
+                    </div>
+                </div>
+
+                <!-- زر إرسال واعتماد العقد -->
+                <button class="btn-gen sr-magnetic-btn" style="margin-top:16px;" onclick="finalizeContract()">
+                    ✅ اعتماد العقد وإرسال الإشعار للطرفين
+                </button>
+
+                <!-- رسالة النجاح -->
+                <div class="success-msg" id="successMsg">
+                    <div style="font-size:2rem; margin-bottom:8px;">🎉</div>
+                    <div style="font-size:1.1rem; font-weight:800; color:#10b981; margin-bottom:6px;">تم اعتماد العقد وإرساله بنجاح!</div>
+                    <div style="font-size:.9rem; color:#94a3b8;">تم إرسال نسخة موقعة للعميل عبر البريد الإلكتروني والواتساب. رقم العقد: <span id="contractRef" style="color:#c5a880; font-weight:800;"></span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        // === التهيئة ===
+        const curSyms = { EUR:'€', SAR:'﷼', AED:'د.إ', USD:'$' };
+        let propCounter = parseInt(localStorage.getItem('sr_prop_cnt') || '0') + 1;
+        localStorage.setItem('sr_prop_cnt', propCounter);
+        const propNum = `PROP-${new Date().getFullYear()}-${String(propCounter).padStart(4,'0')}`;
+        document.getElementById('propNum').textContent = propNum;
+        document.getElementById('propDate').textContent = new Date().toLocaleDateString('ar-SA');
+        document.getElementById('propSealTS').textContent = new Date().toISOString();
+
+        // === بنود العرض ===
+        function addPropRow() {
+            const tbody = document.getElementById('propItemsBody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><input class="p-desc" placeholder="وصف الخدمة"></td><td><input class="p-qty" type="number" value="1" min="1"></td><td><input class="p-price" type="number" value="0" min="0"></td><td><button class="btn-del" onclick="delPropRow(this)">🗑</button></td>`;
+            tbody.appendChild(tr);
+        }
+        function delPropRow(btn) {
+            const rows = document.querySelectorAll('#propItemsBody tr');
+            if (rows.length > 1) btn.closest('tr').remove();
+        }
+
+        // === توليد العرض ===
+        function generateProposal() {
+            const sym      = curSyms[document.getElementById('pCurrency').value] || '€';
+            const vatRate  = parseFloat(document.getElementById('pVAT').value) || 15;
+            const client   = document.getElementById('pClientName').value  || 'العميل الكريم';
+            const email    = document.getElementById('pClientEmail').value || '—';
+            const subject  = document.getElementById('pSubject').value    || 'خدمات التحول الرقمي';
+            const validity = document.getElementById('pValidity').value   || '14';
+            const notes    = document.getElementById('pNotes').value;
+
+            document.getElementById('propClientName').textContent  = client;
+            document.getElementById('propClientEmail2').textContent = email;
+            document.getElementById('propSubject').textContent     = subject;
+            document.getElementById('propValid').textContent       = validity;
+            document.getElementById('pVATpct').textContent         = vatRate;
+
+            if (notes.trim()) {
+                document.getElementById('propNotes').style.display = 'block';
+                document.getElementById('propNotesText').textContent = notes;
+            }
+
+            const descs  = document.querySelectorAll('.p-desc');
+            const qtys   = document.querySelectorAll('.p-qty');
+            const prices = document.querySelectorAll('.p-price');
+            let sub = 0;
+            const tbody = document.getElementById('propPreviewItems');
+            tbody.innerHTML = '';
+            descs.forEach((d, i) => {
+                const qty   = parseFloat(qtys[i].value) || 1;
+                const price = parseFloat(prices[i].value) || 0;
+                const line  = qty * price;
+                sub += line;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${i+1}</td><td>${d.value||'خدمة'}</td><td>${qty}</td><td>${sym} ${price.toLocaleString('ar-SA',{minimumFractionDigits:2})}</td><td><strong>${sym} ${line.toLocaleString('ar-SA',{minimumFractionDigits:2})}</strong></td>`;
+                tbody.appendChild(tr);
+            });
+
+            const vatAmt = sub * (vatRate / 100);
+            const total  = sub + vatAmt;
+            const fmt = n => `${sym} ${n.toLocaleString('ar-SA',{minimumFractionDigits:2})}`;
+            document.getElementById('pSubtotal').textContent = fmt(sub);
+            document.getElementById('pVATamt').textContent   = fmt(vatAmt);
+            document.getElementById('pTotal').textContent    = fmt(total);
+
+            // تحديث مؤشر الخطوات
+            document.getElementById('dot1').className = 'step-dot done'; document.getElementById('dot1').textContent = '✓';
+            document.getElementById('line1').className = 'step-line done';
+            document.getElementById('dot2').className = 'step-dot active';
+        }
+
+        // === التوقيع الإلكتروني ===
+        const sigCanvas = document.getElementById('sigCanvas');
+        const sigCtx    = sigCanvas.getContext('2d');
+        const sigBox    = document.getElementById('sigBox');
+        let drawing = false;
+
+        function resizeSig() {
+            const r = sigBox.getBoundingClientRect();
+            sigCanvas.width  = r.width;
+            sigCanvas.height = r.height;
+            sigCtx.strokeStyle = '#1a1a2e';
+            sigCtx.lineWidth   = 2.5;
+            sigCtx.lineCap     = 'round';
+        }
+        resizeSig();
+        window.addEventListener('resize', resizeSig);
+
+        function getPos(e, canvas) {
+            const r  = canvas.getBoundingClientRect();
+            const ev = e.touches ? e.touches[0] : e;
+            return { x: ev.clientX - r.left, y: ev.clientY - r.top };
+        }
+
+        sigCanvas.addEventListener('mousedown', e => { drawing = true; const p = getPos(e, sigCanvas); sigCtx.beginPath(); sigCtx.moveTo(p.x, p.y); document.getElementById('sigPlaceholder').style.opacity = '0'; });
+        sigCanvas.addEventListener('mousemove', e => { if (!drawing) return; const p = getPos(e, sigCanvas); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); });
+        sigCanvas.addEventListener('mouseup', () => { drawing = false; mirrorSig(); });
+        sigCanvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = getPos(e, sigCanvas); sigCtx.beginPath(); sigCtx.moveTo(p.x, p.y); document.getElementById('sigPlaceholder').style.opacity = '0'; }, { passive: false });
+        sigCanvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; const p = getPos(e, sigCanvas); sigCtx.lineTo(p.x, p.y); sigCtx.stroke(); }, { passive: false });
+        sigCanvas.addEventListener('touchend', () => { drawing = false; mirrorSig(); });
+
+        function mirrorSig() {
+            const preview = document.getElementById('sigPreview');
+            const pCtx    = preview.getContext('2d');
+            pCtx.clearRect(0, 0, preview.width, preview.height);
+            pCtx.drawImage(sigCanvas, 0, 0, preview.width, preview.height);
+        }
+
+        function clearSig() {
+            sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+            document.getElementById('sigPlaceholder').style.opacity = '1';
+            const preview = document.getElementById('sigPreview');
+            preview.getContext('2d').clearRect(0, 0, preview.width, preview.height);
+        }
+
+        // === اعتماد العقد ===
+        function finalizeContract() {
+            generateProposal();
+            const contractId = `CTRCT-${new Date().getFullYear()}-${String(propCounter).padStart(4,'0')}`;
+            document.getElementById('contractRef').textContent = contractId;
+            document.getElementById('successMsg').classList.add('show');
+            document.getElementById('dot2').className = 'step-dot done'; document.getElementById('dot2').textContent = '✓';
+            document.getElementById('line2').className = 'step-line done';
+            document.getElementById('dot3').className = 'step-dot done'; document.getElementById('dot3').textContent = '✓';
+            document.getElementById('proposalSheet').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // === الإجراءات الخارجية ===
+        function printProposal() {
+            window.print();
+        }
+
+        function sendWhatsApp() {
+            const wa   = document.getElementById('pClientWA').value.replace(/\D/g,'');
+            const name = document.getElementById('pClientName').value || 'العميل الكريم';
+            const subj = document.getElementById('pSubject').value   || 'خدماتنا';
+            const msg  = encodeURIComponent(`مرحباً ${name}،\n\nتجد مرفقاً عرض السعر الخاص بـ: ${subj}\nالرقم المرجعي: ${propNum}\n\nللمراجعة والتوقيع الرقمي، يرجى التواصل مع فريقنا.\n\nS&R CoreSync For Intelligent Solutions\nAmsterdam, Netherlands`);
+            if (wa) {
+                window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+            } else {
+                window.open(`https://wa.me/?text=${msg}`, '_blank');
+            }
+        }
+
+        function copyLink() {
+            const ref = `${window.location.origin}/smart-proposal-portal.html?ref=${propNum}`;
+            navigator.clipboard.writeText(ref);
+            alert('تم نسخ رابط العرض: ' + ref);
+        }
+
+        // توليد تلقائي عند التحميل
+        generateProposal();
+    </script>
+</body>
+</html>

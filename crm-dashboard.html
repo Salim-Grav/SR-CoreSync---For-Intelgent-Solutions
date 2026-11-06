@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة CRM والبيانات الحية • S&R CoreSync</title>
+    <meta name="description" content="لوحة تحكم تنفيذية حية لمتابعة قاعدة العملاء، الفواتير المفتوحة، المشاريع الجارية، وإحصائيات المبيعات الشهرية بمخططات تفاعلية.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+    <style>
+        :root { --gold:#c5a880; --gold-l:#f3dfba; --gold-d:#8c734b; --bg:#030704; --card:rgba(8,20,13,.88); --border:rgba(197,168,128,.22); --cyan:#38bdf8; --emerald:#10b981; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:radial-gradient(ellipse at 30% 0%,#061208 0%,#030704 70%); color:#f8fafc; font-family:'Alexandria','IBM Plex Sans Arabic',system-ui,sans-serif; min-height:100vh; overflow-x:hidden; }
+
+        /* ناف */
+        .nav { display:flex; align-items:center; justify-content:space-between; padding:14px 28px; background:rgba(2,6,3,.96); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:200; }
+        .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+        .nav-links { display:flex; align-items:center; gap:14px; }
+        .nav-a { color:#94a3b8; text-decoration:none; font-size:.88rem; font-weight:600; transition:color .2s; }
+        .nav-a:hover, .nav-a.active { color:var(--gold-l); }
+
+        /* الحالة الحية */
+        .live-pill { display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.3); color:var(--emerald); padding:4px 12px; border-radius:999px; font-size:.78rem; font-weight:800; }
+        .live-dot { width:7px; height:7px; border-radius:50%; background:var(--emerald); animation:pulse 1.4s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+
+        /* شريط الرأس */
+        .dash-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; padding:28px 28px 20px; max-width:1400px; margin:0 auto; }
+        .dash-title { font-size:1.7rem; font-weight:900; }
+        .dash-subtitle { font-size:.9rem; color:#94a3b8; margin-top:2px; }
+        .btn-primary { display:inline-flex; align-items:center; gap:7px; background:linear-gradient(135deg,var(--gold),var(--gold-d)); color:#040806; padding:10px 20px; border-radius:12px; font-weight:800; font-size:.88rem; border:none; cursor:pointer; font-family:inherit; transition:all .2s; text-decoration:none; }
+        .btn-primary:hover { box-shadow:0 8px 20px rgba(197,168,128,.3); transform:translateY(-1px); }
+
+        /* شبكة KPI */
+        .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; padding:0 28px 24px; max-width:1400px; margin:0 auto; }
+        .kpi-card { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:22px; backdrop-filter:blur(12px); display:flex; flex-direction:column; gap:8px; }
+        .kpi-icon { font-size:1.6rem; }
+        .kpi-label { font-size:.8rem; font-weight:700; color:#94a3b8; }
+        .kpi-value { font-size:1.9rem; font-weight:900; color:#fff; font-family:'Space Grotesk',sans-serif; }
+        .kpi-delta { font-size:.78rem; font-weight:700; display:flex; align-items:center; gap:4px; }
+        .kpi-delta.up { color:var(--emerald); }
+        .kpi-delta.down { color:#ef4444; }
+
+        /* الشبكة الرئيسية */
+        .main-grid { display:grid; grid-template-columns:2fr 1fr; gap:24px; padding:0 28px 80px; max-width:1400px; margin:0 auto; }
+        @media(max-width:1024px){ .main-grid { grid-template-columns:1fr; } }
+
+        /* بطاقات الأقسام */
+        .section-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:24px; backdrop-filter:blur(12px); }
+        .section-title { font-size:1.1rem; font-weight:800; color:var(--gold-l); display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+
+        /* جدول العملاء */
+        .client-table { width:100%; border-collapse:collapse; }
+        .client-table th { font-size:.75rem; font-weight:700; color:#64748b; padding:0 10px 12px; text-align:right; border-bottom:1px solid rgba(255,255,255,.07); }
+        .client-table td { padding:12px 10px; border-bottom:1px solid rgba(255,255,255,.04); font-size:.88rem; }
+        .client-table tr:last-child td { border-bottom:none; }
+        .status-pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.72rem; font-weight:800; }
+        .status-pill.active  { background:rgba(16,185,129,.15); color:var(--emerald); }
+        .status-pill.pending { background:rgba(245,158,11,.15); color:#f59e0b; }
+        .status-pill.done    { background:rgba(100,116,139,.15); color:#94a3b8; }
+        .avatar { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--gold-d),#040806); border:1.5px solid var(--border); display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:.82rem; color:var(--gold-l); }
+
+        /* مخطط المبيعات بـ Canvas */
+        .chart-wrap { position:relative; height:200px; }
+        canvas.chart-canvas { position:absolute; inset:0; width:100%; height:100%; }
+        .chart-labels { display:flex; justify-content:space-between; margin-top:6px; }
+        .chart-label { font-size:.7rem; color:#64748b; }
+
+        /* قائمة المشاريع */
+        .project-list { display:flex; flex-direction:column; gap:12px; }
+        .project-item { background:rgba(5,12,8,.7); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:14px; }
+        .project-name { font-size:.9rem; font-weight:800; color:#fff; margin-bottom:6px; }
+        .project-meta { font-size:.78rem; color:#94a3b8; margin-bottom:8px; }
+        .progress-bar { height:5px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; }
+        .progress-fill { height:100%; border-radius:999px; }
+
+        /* الفواتير المفتوحة */
+        .inv-list { display:flex; flex-direction:column; gap:10px; }
+        .inv-item { display:flex; align-items:center; gap:12px; background:rgba(5,12,8,.7); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:12px; }
+        .inv-info { flex:1; }
+        .inv-name { font-size:.88rem; font-weight:700; color:#fff; }
+        .inv-ref  { font-size:.74rem; color:#94a3b8; }
+        .inv-amt  { font-size:.95rem; font-weight:800; color:var(--gold-l); font-family:'Space Grotesk',sans-serif; white-space:nowrap; }
+
+        /* الشريط الجانبي */
+        .sidebar { display:flex; flex-direction:column; gap:20px; }
+    </style>
+</head>
+<body>
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <header class="nav">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--gold-l);">S&R CoreSync</strong>
+                <span style="display:block; font-size:.72rem; color:#94a3b8;">لوحة CRM التنفيذية الحية</span>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <div class="live-pill"><span class="live-dot"></span>بيانات حية</div>
+            <a href="smart-proposal-portal.html" class="nav-a">عروض الأسعار</a>
+            <a href="invoice-engine.html" class="nav-a">الفوترة</a>
+            <a href="payment-gateway.html" class="nav-a">المدفوعات</a>
+        </nav>
+    </header>
+
+    <!-- شريط الرأس -->
+    <div class="dash-header">
+        <div>
+            <h1 class="dash-title">لوحة CRM التنفيذية <span style="color:var(--gold);">الحية</span> 📊</h1>
+            <div class="dash-subtitle">الجمعة، 06 نوفمبر 2026 — الساعة 05:23 صباحاً • S&R CoreSync Amsterdam</div>
+        </div>
+        <div style="display:flex; gap:10px;">
+            <a href="smart-proposal-portal.html" class="btn-primary sr-magnetic-btn">+ عرض سعر جديد</a>
+            <a href="invoice-engine.html" class="btn-primary sr-magnetic-btn" style="background:rgba(197,168,128,.15); color:var(--gold-l); border:1px solid var(--border);">+ فاتورة جديدة</a>
+        </div>
+    </div>
+
+    <!-- بطاقات KPI -->
+    <div class="kpi-grid">
+        <div class="kpi-card sr-tilt-card sr-holographic-card">
+            <span class="kpi-icon">💰</span>
+            <div class="kpi-label">إجمالي الإيرادات (نوفمبر)</div>
+            <div class="kpi-value" id="kpiRevenue">€ 0</div>
+            <div class="kpi-delta up">↑ 24.3% مقارنةً بأكتوبر</div>
+        </div>
+        <div class="kpi-card sr-tilt-card sr-holographic-card">
+            <span class="kpi-icon">🤝</span>
+            <div class="kpi-label">العملاء النشطون</div>
+            <div class="kpi-value" id="kpiClients">0</div>
+            <div class="kpi-delta up">↑ 3 عملاء جدد هذا الشهر</div>
+        </div>
+        <div class="kpi-card sr-tilt-card sr-holographic-card">
+            <span class="kpi-icon">📂</span>
+            <div class="kpi-label">المشاريع الجارية</div>
+            <div class="kpi-value" id="kpiProjects">0</div>
+            <div class="kpi-delta up">↑ 2 مشروع مضاف هذا الأسبوع</div>
+        </div>
+        <div class="kpi-card sr-tilt-card sr-holographic-card">
+            <span class="kpi-icon">📄</span>
+            <div class="kpi-label">الفواتير المفتوحة</div>
+            <div class="kpi-value" id="kpiInvoices">0</div>
+            <div class="kpi-delta down">↓ 2 فاتورة تجاوزت موعد الاستحقاق</div>
+        </div>
+        <div class="kpi-card sr-tilt-card sr-holographic-card">
+            <span class="kpi-icon">📈</span>
+            <div class="kpi-label">معدل التحويل (Leads → Clients)</div>
+            <div class="kpi-value">68%</div>
+            <div class="kpi-delta up">↑ أعلى بـ 12% من الصناعة</div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-grid">
+
+        <!-- العمود الرئيسي -->
+        <div style="display:flex; flex-direction:column; gap:22px;">
+
+            <!-- مخطط المبيعات -->
+            <div class="section-card">
+                <div class="section-title">📊 مخطط الإيرادات الشهرية (EUR)</div>
+                <div class="chart-wrap">
+                    <canvas id="salesChart" class="chart-canvas"></canvas>
+                </div>
+                <div class="chart-labels">
+                    <span class="chart-label">يونيو</span>
+                    <span class="chart-label">يوليو</span>
+                    <span class="chart-label">أغسطس</span>
+                    <span class="chart-label">سبتمبر</span>
+                    <span class="chart-label">أكتوبر</span>
+                    <span class="chart-label">نوفمبر</span>
+                </div>
+            </div>
+
+            <!-- جدول العملاء -->
+            <div class="section-card">
+                <div class="section-title">🤝 العملاء النشطون</div>
+                <table class="client-table" id="clientTable">
+                    <thead><tr>
+                        <th>العميل</th>
+                        <th>المشروع</th>
+                        <th>قيمة العقد</th>
+                        <th>الحالة</th>
+                        <th>آخر نشاط</th>
+                    </tr></thead>
+                    <tbody id="clientBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+
+            <!-- المشاريع الجارية -->
+            <div class="section-card">
+                <div class="section-title">📂 المشاريع الجارية</div>
+                <div class="project-list" id="projectList"></div>
+            </div>
+
+            <!-- الفواتير المفتوحة -->
+            <div class="section-card">
+                <div class="section-title">📄 الفواتير المفتوحة</div>
+                <div class="inv-list" id="invoiceList"></div>
+                <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-size:.85rem; color:#94a3b8;">إجمالي المستحقات:</span>
+                    <span style="font-size:1rem; font-weight:800; color:var(--gold-l);" id="totalDue">—</span>
+                </div>
+                <a href="invoice-engine.html" class="btn-primary sr-magnetic-btn" style="margin-top:14px; width:100%; justify-content:center;">+ فاتورة جديدة</a>
+            </div>
+
+            <!-- قنوات الوصول السريع -->
+            <div class="section-card">
+                <div class="section-title">⚡ وصول سريع</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <a href="smart-proposal-portal.html" class="btn-primary sr-magnetic-btn" style="justify-content:center;">🤝 بوابة عروض الأسعار</a>
+                    <a href="invoice-engine.html" class="btn-primary sr-magnetic-btn" style="background:rgba(197,168,128,.15); color:var(--gold-l); border:1px solid var(--border); justify-content:center;">📄 محرك الفواتير ZATCA</a>
+                    <a href="payment-gateway.html" class="btn-primary sr-magnetic-btn" style="background:rgba(56,189,248,.12); color:var(--cyan); border:1px solid rgba(56,189,248,.3); justify-content:center;">💳 بوابة الدفع الدولي</a>
+                    <a href="device-simulator-studio.html" class="btn-primary sr-magnetic-btn" style="background:rgba(197,168,128,.1); color:var(--gold-l); border:1px solid var(--border); justify-content:center;">📱 محاكي الأجهزة 3D</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        // === بيانات العرض (Demo Data) ===
+        const clients = [
+            { name:'شركة مجموعة الذهب', abbr:'م.ذ', project:'منصة ERP سيادية متكاملة', value:'€ 48,500', status:'active', date:'منذ 2 ساعة' },
+            { name:'بنك الإمارات الرقمي', abbr:'ب.إ', project:'بوابة المدفوعات CBDC', value:'€ 92,000', status:'active', date:'أمس' },
+            { name:'مؤسسة النخيل للعقارات', abbr:'ن.ع', project:'موقع مؤسسي + CRM', value:'€ 18,800', status:'pending', date:'منذ 3 أيام' },
+            { name:'مجموعة الأطلس الصناعية', abbr:'أ.ص', project:'هوية بصرية 8K + تطبيق', value:'€ 29,400', status:'active', date:'منذ أسبوع' },
+            { name:'شركة صحارى للتقنية', abbr:'ص.ت', project:'منصة ذكاء اصطناعي', value:'€ 65,000', status:'done', date:'اكتمل' },
+        ];
+
+        const projects = [
+            { name:'منصة ERP سيادية', client:'مجموعة الذهب', pct:68, color:'#10b981' },
+            { name:'بوابة CBDC الإماراتية', client:'بنك الإمارات', pct:42, color:'#38bdf8' },
+            { name:'هوية بصرية الأطلس', client:'الأطلس الصناعية', pct:85, color:'#c5a880' },
+            { name:'موقع مؤسسي النخيل', client:'النخيل العقارية', pct:25, color:'#f59e0b' },
+        ];
+
+        const invoices = [
+            { ref:'INV-2026-0097', client:'مجموعة الذهب', amt:'€ 12,500', overdue:false },
+            { ref:'INV-2026-0094', client:'بنك الإمارات', amt:'€ 23,000', overdue:true },
+            { ref:'INV-2026-0091', client:'الأطلس الصناعية', amt:'€ 7,350', overdue:false },
+            { ref:'INV-2026-0088', client:'صحارى للتقنية', amt:'€ 16,250', overdue:true },
+        ];
+
+        // === تعبئة KPI ===
+        function animateNum(el, target, prefix='', suffix='') {
+            let cur = 0; const step = target / 60;
+            const timer = setInterval(() => {
+                cur = Math.min(cur + step, target);
+                el.textContent = prefix + Math.floor(cur).toLocaleString('ar-SA') + suffix;
+                if (cur >= target) clearInterval(timer);
+            }, 16);
+        }
+        animateNum(document.getElementById('kpiRevenue'),   87400, '€ ');
+        animateNum(document.getElementById('kpiClients'),   24);
+        animateNum(document.getElementById('kpiProjects'),  11);
+        animateNum(document.getElementById('kpiInvoices'),  7);
+
+        // === جدول العملاء ===
+        const tbody = document.getElementById('clientBody');
+        clients.forEach(c => {
+            const statusLabels = { active:'نشط', pending:'قيد التنفيذ', done:'مكتمل' };
+            tbody.innerHTML += `
+                <tr>
+                    <td><div style="display:flex;align-items:center;gap:10px;"><div class="avatar">${c.abbr}</div><div style="font-weight:700;font-size:.88rem;">${c.name}</div></div></td>
+                    <td style="color:#94a3b8; font-size:.84rem;">${c.project}</td>
+                    <td style="font-weight:800; font-size:.9rem; color:var(--gold-l); font-family:'Space Grotesk',sans-serif;">${c.value}</td>
+                    <td><span class="status-pill ${c.status}">${statusLabels[c.status]}</span></td>
+                    <td style="color:#64748b; font-size:.8rem;">${c.date}</td>
+                </tr>`;
+        });
+
+        // === المشاريع ===
+        const pList = document.getElementById('projectList');
+        projects.forEach(p => {
+            pList.innerHTML += `
+                <div class="project-item">
+                    <div class="project-name">${p.name}</div>
+                    <div class="project-meta">${p.client} · نسبة الإنجاز ${p.pct}%</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width:${p.pct}%; background:${p.color};"></div></div>
+                </div>`;
+        });
+
+        // === الفواتير ===
+        const iList = document.getElementById('invoiceList');
+        let totalDue = 0;
+        invoices.forEach(inv => {
+            const amtNum = parseFloat(inv.amt.replace(/[^0-9.]/g,''));
+            totalDue += amtNum;
+            iList.innerHTML += `
+                <div class="inv-item">
+                    <div class="inv-info">
+                        <div class="inv-name">${inv.client}</div>
+                        <div class="inv-ref">${inv.ref} ${inv.overdue ? '• <span style="color:#ef4444;font-weight:800;">متأخرة</span>' : ''}</div>
+                    </div>
+                    <div class="inv-amt">${inv.amt}</div>
+                </div>`;
+        });
+        document.getElementById('totalDue').textContent = `€ ${totalDue.toLocaleString('ar-SA', {minimumFractionDigits:2})}`;
+
+        // === مخطط المبيعات بـ Canvas ===
+        const salesData   = [38200, 51400, 44800, 72300, 68900, 87400];
+        const chartCanvas = document.getElementById('salesChart');
+        const ctx         = chartCanvas.getContext('2d');
+
+        function drawSalesChart() {
+            const W = chartCanvas.width  = chartCanvas.offsetWidth;
+            const H = chartCanvas.height = chartCanvas.offsetHeight;
+            const pad   = { t:20, r:16, b:10, l:10 };
+            const max   = Math.max(...salesData) * 1.15;
+            const barW  = (W - pad.l - pad.r) / salesData.length;
+            const barGap = barW * 0.25;
+
+            ctx.clearRect(0, 0, W, H);
+
+            // رسم الأعمدة
+            salesData.forEach((val, i) => {
+                const x  = pad.l + i * barW + barGap / 2;
+                const h  = ((val / max) * (H - pad.t - pad.b));
+                const y  = H - pad.b - h;
+                const bw = barW - barGap;
+
+                // تدرج لوني
+                const grad = ctx.createLinearGradient(0, y, 0, H - pad.b);
+                grad.addColorStop(0, 'rgba(197,168,128,0.9)');
+                grad.addColorStop(1, 'rgba(197,168,128,0.15)');
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.roundRect(x, y, bw, h, [6, 6, 0, 0]);
+                ctx.fill();
+
+                // القيمة
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = `700 ${Math.max(10, Math.floor(bw * 0.3))}px 'Space Grotesk', sans-serif`;
+                ctx.textAlign = 'center';
+                const label = val >= 1000 ? (val/1000).toFixed(0)+'K' : val;
+                ctx.fillText(label, x + bw/2, y - 5);
+            });
+        }
+
+        // تأخير لضمان تهيئة الأبعاد
+        setTimeout(drawSalesChart, 100);
+        window.addEventListener('resize', drawSalesChart);
+    </script>
+</body>
+</html>
