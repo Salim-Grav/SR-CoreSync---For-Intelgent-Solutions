@@ -20,6 +20,7 @@ LANGUAGES = [
 ]
 
 CORE_HUBS = [
+    "api-docs.html",
     "smart-business-advisor.html",
     "autonomous-tax-audit.html",
     "sovereign-gold-rwa-treasury.html",
