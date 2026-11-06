@@ -492,6 +492,149 @@
             window.open('./assets/sr-core-emblem.svg', '_blank');
         }
 
+        // ============================================================
+        // 🔥 الخيار الأول: مولّد حزم أصول الهوية ZIP (Brand Asset Pack)
+        // ============================================================
+        async function generateBrandAssetZip() {
+            const btn = document.getElementById('zipGenBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳ جاري بناء الحزمة...</span>';
+            btn.disabled = true;
+
+            try {
+                // --- 1. SVG المتجه الرسمي ---
+                const svgResponse = await fetch('./assets/sr-core-emblem.svg');
+                const svgText = await svgResponse.ok ? await svgResponse.text() : generateFallbackSVG();
+
+                // --- 2. ملف متغيرات الـ CSS ---
+                const cssVars = `/* S&R CoreSync — متغيرات الألوان الرسمية (Brand Color Tokens) */
+/* تاريخ الإصدار: ${new Date().toLocaleDateString('ar-SA')} */
+
+:root {
+  /* الألوان الأساسية */
+  --sr-gold:          #c5a880;   /* الذهب السيادي الملكي */
+  --sr-gold-light:    #f3dfba;   /* الذهب الفاتح للنصوص */
+  --sr-gold-dark:     #8c734b;   /* الذهب الداكن للتدرجات */
+  --sr-bg-root:       #040806;   /* خلفية الزمرد الليلي */
+  --sr-bg-card:       rgba(10, 20, 15, 0.82);
+  --sr-border:        rgba(197, 168, 128, 0.22);
+  --sr-cyan:          #38bdf8;   /* السيان السيبراني */
+  --sr-emerald:       #10b981;   /* الأخضر المؤسسي */
+  --sr-text-main:     #f8fafc;
+  --sr-text-muted:    #94a3b8;
+}`;
+
+                // --- 3. ملف رموز التصميم JSON (Design Tokens) ---
+                const designTokens = JSON.stringify({
+                    "brand": "S&R CoreSync For Intelligent Solutions",
+                    "version": "2026-sovereign",
+                    "colors": {
+                        "gold":          { "hex": "#c5a880", "rgb": "197,168,128", "pantone": "Pantone 7508 C" },
+                        "gold-light":    { "hex": "#f3dfba", "rgb": "243,223,186" },
+                        "bg-root":       { "hex": "#040806", "rgb": "4,8,6" },
+                        "cyan":          { "hex": "#38bdf8", "rgb": "56,189,248" },
+                        "emerald":       { "hex": "#10b981", "rgb": "16,185,129" }
+                    },
+                    "typography": {
+                        "display":  "Alexandria 900",
+                        "body":     "IBM Plex Sans Arabic 400/600",
+                        "tech":     "Space Grotesk 700"
+                    },
+                    "borderRadius": {
+                        "card":   "20px",
+                        "button": "12px",
+                        "pill":   "999px"
+                    },
+                    "generated": new Date().toISOString()
+                }, null, 2);
+
+                // --- 4. ملف README دليل الاستخدام ---
+                const readme = `# S&R CoreSync — دليل الهوية البصرية السيادية (Brand Identity Guide)
+
+## 📁 محتويات حزمة الأصول
+
+| الملف | الوصف |
+|-------|-------|
+| sr-core-emblem.svg | الشعار الرسمي المتجه (لا نهائي الدقة) |
+| variables.css | متغيرات الألوان وقيم التصميم (CSS Custom Properties) |
+| tokens.json | رموز التصميم الكاملة بصيغة JSON للمطورين |
+
+## 🎨 لوحة الألوان المعتمدة
+
+- **الذهب السيادي:** #c5a880 | Pantone 7508 C
+- **خلفية الزمرد الليلي:** #040806
+- **السيان السيبراني:** #38bdf8
+- **الأخضر المؤسسي:** #10b981
+
+## 🖋️ الخطوط الرسمية
+
+- **العناوين والعرض:** Alexandria (900)
+- **النصوص العربية:** IBM Plex Sans Arabic (400 / 600)
+- **الأرقام والتقنية:** Space Grotesk (700)
+
+## ⚠️ قواعد الاستخدام
+
+1. لا يجوز تعديل شكل أو ألوان الشعار المتجه.
+2. استخدم الشعار دائماً على خلفية داكنة أو بيضاء فاخرة فقط.
+3. لا يجوز إضافة تأثيرات أو ظلال على الشعار المتجه.
+4. الحد الأدنى لحجم الشعار: 32x32px.
+
+---
+*S&R CoreSync For Intelligent Solutions — Amsterdam, Netherlands*
+*Sovereign Digital Excellence Since 2020*
+`;
+
+                // --- بناء الـ ZIP يدوياً (بدون مكتبة خارجية) ---
+                // استخدام JSZip إن كانت متاحة، وإلا تنزيل الملفات منفردة
+                if (window.JSZip) {
+                    const zip = new JSZip();
+                    const folder = zip.folder('SR-CoreSync-Brand-Assets-2026');
+                    folder.file('sr-core-emblem.svg', svgText);
+                    folder.file('variables.css', cssVars);
+                    folder.file('tokens.json', designTokens);
+                    folder.file('README.md', readme);
+
+                    const blob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'SR-CoreSync-Brand-Assets-2026.zip';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    showToast('✅ تم تنزيل حزمة الهوية البصرية ZIP بنجاح!');
+                } else {
+                    // بديل: تنزيل الملفات منفردة
+                    [
+                        { name: 'variables.css', content: cssVars, type: 'text/css' },
+                        { name: 'tokens.json', content: designTokens, type: 'application/json' },
+                        { name: 'README.md', content: readme, type: 'text/markdown' }
+                    ].forEach(f => {
+                        const blob = new Blob([f.content], { type: f.type });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url; a.download = f.name; a.click();
+                        URL.revokeObjectURL(url);
+                    });
+                    window.open('./assets/sr-core-emblem.svg', '_blank');
+                    showToast('✅ تم تنزيل ملفات الهوية البصرية بنجاح!');
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('⚠️ حدث خطأ أثناء بناء الحزمة، يتم التنزيل المنفرد...');
+                window.open('./assets/sr-core-emblem.svg', '_blank');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function generateFallbackSVG() {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="90" fill="#040806" stroke="#c5a880" stroke-width="3"/>
+  <text x="100" y="115" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="900" fill="#c5a880">SR</text>
+</svg>`;
+        }
+
         function switchStudioTab(tab) {
             document.querySelectorAll('.studio-tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
