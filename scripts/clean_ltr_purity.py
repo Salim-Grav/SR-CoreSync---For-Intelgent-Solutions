@@ -47,3 +47,4 @@ for p in glob.glob('*/index.html'):
         f.write(t)
 
 print('SUCCESS: Cleaned LTR language portals for purity CI')
+

@@ -34,3 +34,4 @@ for p in glob.glob('*/index.html'):
         count += 1
 
 print(f'Propagated dialect selector to {count} language portals.')
+
