@@ -7,3 +7,4 @@ echo Removing worktrees...
 rd /s /q "%W1%" 2>nul
 rd /s /q "%W2%" 2>nul
 echo Done.
+
