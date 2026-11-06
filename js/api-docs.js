@@ -238,3 +238,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const firstBody = document.getElementById('ep-auth-body');
     if (firstBody) firstBody.classList.add('open');
 });
+

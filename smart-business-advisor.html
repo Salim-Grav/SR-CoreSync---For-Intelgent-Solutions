@@ -1,32 +1,145 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المستشار القانوني والمحاسبي الذكي للأعمال | S&R CoreSync Sovereign Business Advisor</title>
-    <meta name="description" content="منصة المستشار القانوني والمحاسبي الذكي لأصحاب الأنشطة التجارية والمطاعم - حل وتخفيض الغرامات الضريبية، أتمتة الاعتراضات، وتوجيه القضايا للمحاسبين المعتمدين.">
+    <meta name="description"
+        content="منصة المستشار القانوني والمحاسبي الذكي لأصحاب الأنشطة التجارية والمطاعم - حل وتخفيض الغرامات الضريبية، أتمتة الاعتراضات، وتوجيه القضايا للمحاسبين المعتمدين.">
     <link rel="icon" type="image/png" href="./assets/favicon-96.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/sovereign-mission-suite.css">
     <style>
-        .advisor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
-        @media (max-width: 992px) { .advisor-grid { grid-template-columns: 1fr; } }
-        .card-advisor { background: var(--bg-card); border: 1px solid var(--border-dim); border-radius: 14px; padding: 1.5rem; position: relative; overflow: hidden; }
-        .card-advisor::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold-primary), var(--accent)); }
-        .mic-btn-pulse { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #b8860b); border: 2px solid #fff; color: #04070d; font-size: 1.7rem; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto; transition: all 0.3s; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-        .mic-btn-pulse.recording { animation: pulseRecord 1.2s infinite; background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; box-shadow: 0 0 25px rgba(239,68,68,0.7); }
-        @keyframes pulseRecord { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        .quick-tag { display: inline-block; background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.3); color: var(--accent); padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; margin: 0.2rem; }
-        .quick-tag:hover { background: rgba(212,175,55,0.2); border-color: var(--gold-primary); color: #fff; }
-        .status-badge-live { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.25rem 0.65rem; border-radius: 12px; font-size: 0.78rem; font-weight: 700; }
-        .status-badge-live.pending { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-        .status-badge-live.resolved { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .status-badge-live.assigned { background: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3); }
-        .timeline-box { border-right: 2px solid var(--accent); padding-right: 1rem; margin: 1rem 0; }
+        .advisor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .advisor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card-advisor {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-advisor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--accent));
+        }
+
+        .mic-btn-pulse {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            border: 2px solid #fff;
+            color: #04070d;
+            font-size: 1.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .mic-btn-pulse.recording {
+            animation: pulseRecord 1.2s infinite;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.7);
+        }
+
+        @keyframes pulseRecord {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .quick-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0.2rem;
+        }
+
+        .quick-tag:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--gold-primary);
+            color: #fff;
+        }
+
+        .status-badge-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .status-badge-live.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-badge-live.resolved {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge-live.assigned {
+            background: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .timeline-box {
+            border-right: 2px solid var(--accent);
+            padding-right: 1rem;
+            margin: 1rem 0;
+        }
     </style>
 </head>
+
 <body class="theme-gold">
     <header>
         <div class="nav-container">
@@ -42,51 +155,67 @@
                     <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span>
                     نظام الاعتراض الضريبي متصل بنظام مصلحة الضرائب الهولندية (Belastingdienst)
                 </span>
-                <a href="index.html" class="btn" style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid var(--border-dim); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">الرئيسية</a>
-                <a href="demo.html" class="btn" style="background: rgba(212,175,55,0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">لوحة القيادة</a>
+                <a href="index.html" class="btn"
+                    style="background: rgba(255,255,255,0.06); color: #e2e8f0; border: 1px solid var(--border-dim); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">الرئيسية</a>
+                <a href="demo.html" class="btn"
+                    style="background: rgba(212,175,55,0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); padding: 0.4rem 0.9rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none;">لوحة
+                    القيادة</a>
             </div>
         </div>
     </header>
 
     <main style="max-width: 1640px; margin: 1.5rem auto; padding: 0 1.5rem; flex: 1;">
         <!-- Banner Summary -->
-        <div style="background: linear-gradient(135deg, rgba(9,18,32,0.9), rgba(13,26,45,0.95)); border: 1px solid var(--border-gold); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div
+            style="background: linear-gradient(135deg, rgba(9,18,32,0.9), rgba(13,26,45,0.95)); border: 1px solid var(--border-gold); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <div>
                 <h1 style="color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 0.4rem;">
                     🏛️ المستشار المحاسبي والقانوني الذكي لأصحاب المطاعم والفعاليات التجارية
                 </h1>
                 <p style="color: #94a3b8; font-size: 0.92rem; max-width: 900px;">
-                    منظومة ذكية مخصصة لخدمة أكثر من 400 نشاط تجاري ومطعم من أبناء الجالية: طرح المشاكل المالية والمخالفات الضريبية بالصوت أو النص، تجهيز مسودات الاعتراض القانوني فورياً، وتخصيص الملفات مباشرة للشريك المحاسبي القانوني المعتمد (الأستاذ رودين).
+                    منظومة ذكية مخصصة لخدمة أكثر من 400 نشاط تجاري ومطعم من أبناء الجالية: طرح المشاكل المالية
+                    والمخالفات الضريبية بالصوت أو النص، تجهيز مسودات الاعتراض القانوني فورياً، وتخصيص الملفات مباشرة
+                    للشريك المحاسبي القانوني المعتمد (الأستاذ رودين).
                 </p>
             </div>
             <div style="display: flex; gap: 0.6rem; align-items: center;">
-                <button id="btn-export-all-cases" class="btn" style="background: rgba(56,189,248,0.15); color: var(--cyan); border: 1px solid var(--border-dim); padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                <button id="btn-export-all-cases" class="btn"
+                    style="background: rgba(56,189,248,0.15); color: var(--cyan); border: 1px solid var(--border-dim); padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
                     📥 تصدير سجل القضايا (JSON)
                 </button>
-                <button id="btn-whatsapp-dispatch" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                <button id="btn-whatsapp-dispatch" class="btn"
+                    style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
                     💬 مشاركة عاجلة عبر الواتساب
                 </button>
-                <button id="btn-send-to-audit" class="btn" style="background: linear-gradient(135deg, #c0a677, #8a6e3e); color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;" title="إرسال نتائج التحليل إلى محرك التدقيق الضريبي تلقائياً">
+                <button id="btn-send-to-audit" class="btn"
+                    style="background: linear-gradient(135deg, #c0a677, #8a6e3e); color: #fff; border: none; padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;"
+                    title="إرسال نتائج التحليل إلى محرك التدقيق الضريبي تلقائياً">
                     🔗 إرسال إلى التدقيق الضريبي
                 </button>
             </div>
         </div>
 
         <!-- 5 Pillars Navigation Tabs -->
-        <div style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-dim); padding-bottom: 0.8rem; overflow-x: auto;">
-            <button id="tab-btn-voice" class="btn active" style="background: var(--gold-primary); color: #04070d; border: none; padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 800; cursor: pointer;">
+        <div
+            style="display: flex; gap: 0.8rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-dim); padding-bottom: 0.8rem; overflow-x: auto;">
+            <button id="tab-btn-voice" class="btn active"
+                style="background: var(--gold-primary); color: #04070d; border: none; padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 800; cursor: pointer;">
                 🎙️ المستشار الصوتي الفوري (حل الغرامات)
             </button>
-            <button id="tab-btn-engine" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+            <button id="tab-btn-engine" class="btn"
+                style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
                 🧠 محرك التوصيات والتحليل المالي والضريبي الذكي
             </button>
-            <button id="tab-btn-onboarding" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+            <button id="tab-btn-onboarding" class="btn"
+                style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
                 📋 انضمام أصحاب الأنشطة (Onboarding السريع)
             </button>
-            <button id="tab-btn-accountant" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+            <button id="tab-btn-accountant" class="btn"
+                style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
                 ⚖️ لوحة المحاسب القانوني (الأستاذ رودين)
             </button>
-            <button id="tab-btn-stats" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+            <button id="tab-btn-stats" class="btn"
+                style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.6rem 1.3rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
                 📊 إحصائيات التوفير واسترداد المبالغ
             </button>
         </div>
@@ -100,7 +229,8 @@
                         🎙️ تحدث بصوتك أو اكتب مشكلتك المالية/الضريبية
                     </h2>
                     <p style="color: #94a3b8; font-size: 0.86rem; margin-bottom: 1rem;">
-                        لا داعي للقلق أو كتابة مصطلحات قانونية معقدة. تحدث بلغتك وسيقوم الذكاء الاصطناعي بتشخيص الحالة وتجهيز المسودة للمحاسب فوراً:
+                        لا داعي للقلق أو كتابة مصطلحات قانونية معقدة. تحدث بلغتك وسيقوم الذكاء الاصطناعي بتشخيص الحالة
+                        وتجهيز المسودة للمحاسب فوراً:
                     </p>
 
                     <!-- Mic Pulse Trigger -->
@@ -118,26 +248,35 @@
                         <span style="font-size: 0.8rem; color: #cbd5e1; display: block; margin-bottom: 0.4rem;">
                             ⚡ قوالب وحالات شائعة للاختيار السريع:
                         </span>
-                        <span class="quick-tag" data-case="ابو جميل: وصلتني غرامة تأخير من مصلحة الضرائب الهولندية بقيمة 4500 يورو عن إقرار ضريبة القيمة المضافة BTW، ومعي مهلة أسبوعين للاعتراض، والمحاسب السابق أهمل الموعد.">
+                        <span class="quick-tag"
+                            data-case="ابو جميل: وصلتني غرامة تأخير من مصلحة الضرائب الهولندية بقيمة 4500 يورو عن إقرار ضريبة القيمة المضافة BTW، ومعي مهلة أسبوعين للاعتراض، والمحاسب السابق أهمل الموعد.">
                             🔴 غرامة تأخير BTW مصلحة الضرائب (مثل حالة أبو جميل)
                         </span>
-                        <span class="quick-tag" data-case="مخالفة بلدية للترخيص وإشغال الرصيف الخارجي للمطعم بقيمة 1850 يورو بدون إشعار مسبق من مفتش البلدية.">
+                        <span class="quick-tag"
+                            data-case="مخالفة بلدية للترخيص وإشغال الرصيف الخارجي للمطعم بقيمة 1850 يورو بدون إشعار مسبق من مفتش البلدية.">
                             🏪 مخالفة بلدية وترخيص مطعم
                         </span>
-                        <span class="quick-tag" data-case="تراكم فواتير ضريبة الرواتب والأجور Loonheffing عن 4 موظفين عن الربع الثاني ونحتاج جدولة فورية مع الضرائب.">
+                        <span class="quick-tag"
+                            data-case="تراكم فواتير ضريبة الرواتب والأجور Loonheffing عن 4 موظفين عن الربع الثاني ونحتاج جدولة فورية مع الضرائب.">
                             👥 ضرائب رواتب وأجور موظفين
                         </span>
                     </div>
 
                     <!-- Input Box -->
-                    <label for="case-input-text" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">تفاصيل المشكلة / ملخص الموقف:</label>
-                    <textarea id="case-input-text" rows="5" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.8rem; font-size: 0.9rem; resize: vertical;" placeholder="اكتب هنا أو استخدم الميكروفون... مثلاً: وصلتني غرامة من مصلحة الضرائب الهولندية بمبلغ..."></textarea>
+                    <label for="case-input-text"
+                        style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">تفاصيل
+                        المشكلة / ملخص الموقف:</label>
+                    <textarea id="case-input-text" rows="5"
+                        style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.8rem; font-size: 0.9rem; resize: vertical;"
+                        placeholder="اكتب هنا أو استخدم الميكروفون... مثلاً: وصلتني غرامة من مصلحة الضرائب الهولندية بمبلغ..."></textarea>
 
                     <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
-                        <button id="btn-analyze-case" class="btn" style="flex: 1; background: linear-gradient(135deg, var(--gold-primary), #b8860b); color: #04070d; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.95rem;">
+                        <button id="btn-analyze-case" class="btn"
+                            style="flex: 1; background: linear-gradient(135deg, var(--gold-primary), #b8860b); color: #04070d; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.95rem;">
                             ⚡ تشخيص المشكلة وتوليد مسودة الاعتراض
                         </button>
-                        <button id="btn-clear-input" class="btn" style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid var(--border-dim); padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">
+                        <button id="btn-clear-input" class="btn"
+                            style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid var(--border-dim); padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer;">
                             مسح
                         </button>
                     </div>
@@ -145,7 +284,8 @@
 
                 <!-- Right: Analysis & Generated Draft -->
                 <div class="card-advisor">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
                         <h2 style="color: var(--accent); font-size: 1.2rem; font-weight: 800;">
                             📑 التشخيص ومسودة الاعتراض القانوني
                         </h2>
@@ -153,9 +293,11 @@
                     </div>
 
                     <div id="analysis-output-container">
-                        <div style="background: #060b13; border: 1px dashed var(--border-dim); border-radius: 10px; padding: 2rem; text-align: center; color: #64748b;">
+                        <div
+                            style="background: #060b13; border: 1px dashed var(--border-dim); border-radius: 10px; padding: 2rem; text-align: center; color: #64748b;">
                             <span style="font-size: 2.2rem; display: block; margin-bottom: 0.5rem;">⚖️</span>
-                            تحدث بالصوت أو اضغط على أحد القوالب الشائعة ثم انقر "تشخيص المشكلة" لعرض التكييف القانوني، نسبة النجاح في الإسقاط، ومسودة الخطاب الجاهز.
+                            تحدث بالصوت أو اضغط على أحد القوالب الشائعة ثم انقر "تشخيص المشكلة" لعرض التكييف القانوني،
+                            نسبة النجاح في الإسقاط، ومسودة الخطاب الجاهز.
                         </div>
                     </div>
                 </div>
@@ -169,43 +311,64 @@
                     🚀 انضمام وتسجيل أصحاب الأنشطة التجارية والمطاعم (بضغطة زر واحدة)
                 </h2>
                 <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 1.5rem;">
-                    استثمار شبكة العلاقات والأنشطة التجارية في هولندا والجالية العربية (أكثر من 400 مطعم ونشاط) لحماية مصالحهم وتنظيم ملفاتهم الضريبية والمحاسبية تحت مظلة واحدة:
+                    استثمار شبكة العلاقات والأنشطة التجارية في هولندا والجالية العربية (أكثر من 400 مطعم ونشاط) لحماية
+                    مصالحهم وتنظيم ملفاتهم الضريبية والمحاسبية تحت مظلة واحدة:
                 </p>
 
                 <form id="onboarding-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
-                        <label for="business-name" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم النشاط / المطعم:</label>
-                        <input id="business-name" type="text" required placeholder="مثال: مطعم الأندلس / كافيه دمشق" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                        <label for="business-name"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم
+                            النشاط / المطعم:</label>
+                        <input id="business-name" type="text" required placeholder="مثال: مطعم الأندلس / كافيه دمشق"
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
                     </div>
                     <div>
-                        <label for="owner-name" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم المالك / المدير المسؤول:</label>
-                        <input id="owner-name" type="text" required placeholder="مثال: السيد أبو جميل" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                        <label for="owner-name"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">اسم
+                            المالك / المدير المسؤول:</label>
+                        <input id="owner-name" type="text" required placeholder="مثال: السيد أبو جميل"
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
                     </div>
                     <div>
-                        <label for="contact-phone" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">رقم الهاتف / الواتساب:</label>
-                        <input id="contact-phone" type="tel" required placeholder="+31 6 12345678" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem; direction: ltr; text-align: right;">
+                        <label for="contact-phone"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">رقم
+                            الهاتف / الواتساب:</label>
+                        <input id="contact-phone" type="tel" required placeholder="+31 6 12345678"
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem; direction: ltr; text-align: right;">
                     </div>
                     <div>
-                        <label for="business-city" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">المدينة / البلدية في هولندا:</label>
-                        <input id="business-city" type="text" required placeholder="أمستردام / روتردام / أوترخت..." style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                        <label for="business-city"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">المدينة /
+                            البلدية في هولندا:</label>
+                        <input id="business-city" type="text" required placeholder="أمستردام / روتردام / أوترخت..."
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
                     </div>
                     <div style="grid-column: span 2;">
-                        <label for="primary-need" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">الحاجة الأساسية العاجلة:</label>
-                        <select id="primary-need" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
-                            <option value="غرامات ومخالفات ضريبية متراكمة (Belastingdienst)">حل وتخفيض غرامات ومخالفات مصلحة الضرائب المتراكمة</option>
-                            <option value="إدارة محاسبية شهرية وإقرارات BTW">إدارة محاسبية شهرية وتقديم إقرارات BTW بانتظام</option>
-                            <option value="استشارات عقود وإيجار وترخيص المطاعم">استشارات عقود إيجار وترخيص ومخالفات البلدية (Gemeente)</option>
+                        <label for="primary-need"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">الحاجة
+                            الأساسية العاجلة:</label>
+                        <select id="primary-need"
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem;">
+                            <option value="غرامات ومخالفات ضريبية متراكمة (Belastingdienst)">حل وتخفيض غرامات ومخالفات
+                                مصلحة الضرائب المتراكمة</option>
+                            <option value="إدارة محاسبية شهرية وإقرارات BTW">إدارة محاسبية شهرية وتقديم إقرارات BTW
+                                بانتظام</option>
+                            <option value="استشارات عقود وإيجار وترخيص المطاعم">استشارات عقود إيجار وترخيص ومخالفات
+                                البلدية (Gemeente)</option>
                             <option value="تأسيس أو نقل سجل تجاري KVK">تأسيس أو تسوية شركة وسجل تجاري KVK</option>
                         </select>
                     </div>
                     <div style="grid-column: span 2; margin-top: 0.5rem;">
-                        <button type="submit" class="btn" style="width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.85rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;">
+                        <button type="submit" class="btn"
+                            style="width: 100%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.85rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;">
                             ✅ تسجيل الانضمام وإنشاء بطاقة العميل الذكية
                         </button>
                     </div>
                 </form>
 
-                <div id="onboarding-result" style="display: none; margin-top: 1.5rem; background: #060b13; border: 1px solid #10b981; border-radius: 10px; padding: 1.2rem;">
+                <div id="onboarding-result"
+                    style="display: none; margin-top: 1.5rem; background: #060b13; border: 1px solid #10b981; border-radius: 10px; padding: 1.2rem;">
                     <!-- Result dynamically rendered -->
                 </div>
             </div>
@@ -214,17 +377,20 @@
         <!-- Section 3: Accountant / Rodin Central Console -->
         <div id="section-accountant" class="advisor-tab-content" style="display: none;">
             <div class="card-advisor">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
                     <div>
                         <h2 style="color: var(--gold-primary); font-size: 1.3rem; font-weight: 800;">
                             ⚖️ لوحة تحكم المحاسب القانوني المعتمد (الأستاذ رودين وفريق العمل)
                         </h2>
                         <p style="color: #94a3b8; font-size: 0.88rem;">
-                            إدارة قضايا الغرامات وتعيين المهام ومتابعة المواعيد القانونية والاعتراضات الرسمية مع Belastingdienst:
+                            إدارة قضايا الغرامات وتعيين المهام ومتابعة المواعيد القانونية والاعتراضات الرسمية مع
+                            Belastingdienst:
                         </p>
                     </div>
                     <div style="display: flex; gap: 0.6rem;">
-                        <span class="status-badge-live assigned">المحاسب المسؤول: أ. رودين (مكتب المحاسبة المعتمد)</span>
+                        <span class="status-badge-live assigned">المحاسب المسؤول: أ. رودين (مكتب المحاسبة
+                            المعتمد)</span>
                     </div>
                 </div>
 
@@ -254,41 +420,50 @@
         <div id="section-stats" class="advisor-tab-content" style="display: none;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
                 <div class="card-advisor" style="text-align: center;">
-                    <span style="font-size: 2rem; color: var(--gold-primary); font-weight: 900; display: block;">400+</span>
-                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">الأنشطة والمطاعم المستهدفة</span>
+                    <span
+                        style="font-size: 2rem; color: var(--gold-primary); font-weight: 900; display: block;">400+</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">الأنشطة والمطاعم
+                        المستهدفة</span>
                     <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">شبكة أعمال الجالية في هولندا</p>
                 </div>
                 <div class="card-advisor" style="text-align: center;">
                     <span style="font-size: 2rem; color: #10b981; font-weight: 900; display: block;">€184,200</span>
-                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">غرامات تم إسقاطها وتخفيضها</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">غرامات تم إسقاطها
+                        وتخفيضها</span>
                     <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">عبر مذكرات الاعتراض القانوني</p>
                 </div>
                 <div class="card-advisor" style="text-align: center;">
                     <span style="font-size: 2rem; color: var(--cyan); font-weight: 900; display: block;">100%</span>
-                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">حماية المواعيد (Deadlines)</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">حماية المواعيد
+                        (Deadlines)</span>
                     <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">لا قضايا تسقط بفوات المهلة</p>
                 </div>
                 <div class="card-advisor" style="text-align: center;">
                     <span style="font-size: 2rem; color: #a78bfa; font-weight: 900; display: block;">6 أسابيع</span>
-                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">مهلة الاعتراض الرسمية (Bezwaar)</span>
+                    <span style="color: #cbd5e1; font-weight: 700; font-size: 0.95rem;">مهلة الاعتراض الرسمية
+                        (Bezwaar)</span>
                     <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.4rem;">وفق القانون الضريبي الهولندي</p>
                 </div>
             </div>
         </div>
-    
+
         <!-- Section 5: Smart Financial & Tax Advisory Engine -->
         <div id="section-engine" class="advisor-tab-content" style="display: none;">
-            <div style="background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(9,18,32,0.95)); border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div
+                style="background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(9,18,32,0.95)); border: 1px solid rgba(16,185,129,0.3); border-radius: 14px; padding: 1.2rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                 <div>
                     <h2 style="color: var(--gold-primary); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem;">
                         🧠 محرك التوصيات الاستشارية والتحليل المالي والضريبي الذكي (2026 Sovereign Engine)
                     </h2>
                     <p style="color: #94a3b8; font-size: 0.88rem; max-width: 950px;">
-                        محاكاة مالية وضريبية قطاعية متطورة وفق معايير المحاسبة الدولية IFRS والتشريعات الضريبية الهولندية وقوانين الضرائب العامة (Awb & Wet IB) لحساب الوفورات التراكمية، ومؤشر مخاطر التدقيق (Audit Risk Score)، وتحليل نقطة التحول المثلى لشركة BV.
+                        محاكاة مالية وضريبية قطاعية متطورة وفق معايير المحاسبة الدولية IFRS والتشريعات الضريبية
+                        الهولندية وقوانين الضرائب العامة (Awb & Wet IB) لحساب الوفورات التراكمية، ومؤشر مخاطر التدقيق
+                        (Audit Risk Score)، وتحليل نقطة التحول المثلى لشركة BV.
                     </p>
                 </div>
                 <div style="display: flex; gap: 0.6rem;">
-                    <button id="btn-engine-quick-sample" class="btn" style="background: rgba(212,175,55,0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem;">
+                    <button id="btn-engine-quick-sample" class="btn"
+                        style="background: rgba(212,175,55,0.15); color: var(--gold-primary); border: 1px solid var(--border-gold); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 0.85rem;">
                         ⚡ تعبئة نموذج مطعم واقعي (€350k)
                     </button>
                 </div>
@@ -297,14 +472,18 @@
             <div class="advisor-grid">
                 <!-- Left: Parameters & Financial Input Console -->
                 <div class="card-advisor">
-                    <h3 style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <h3
+                        style="color: #fff; font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span>📊</span> مدخلات المنشأة والمعطيات المالية السنوية
                     </h3>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                         <div>
-                            <label for="engine-sector" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">القطاع الاقتصادي:</label>
-                            <select id="engine-sector" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem; font-size: 0.9rem;">
+                            <label for="engine-sector"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">القطاع
+                                الاقتصادي:</label>
+                            <select id="engine-sector"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem; font-size: 0.9rem;">
                                 <option value="horeca">🍽️ مطاعم ومقاهي وضيافة (Horeca)</option>
                                 <option value="retail">🛒 تجارة وتجزئة ومتاجر إلكترونية (Retail)</option>
                                 <option value="services">💼 خدمات مهنية وتكنولوجيا (Services / IT)</option>
@@ -313,8 +492,11 @@
                             </select>
                         </div>
                         <div>
-                            <label for="engine-entity" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">الشكل القانوني الحالي:</label>
-                            <select id="engine-entity" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem; font-size: 0.9rem;">
+                            <label for="engine-entity"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">الشكل
+                                القانوني الحالي:</label>
+                            <select id="engine-entity"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem; font-size: 0.9rem;">
                                 <option value="eenmanszaak">منشأة فردية (Eenmanszaak)</option>
                                 <option value="vof">شركة تضامن / شراكة (VOF)</option>
                                 <option value="bv">شركة ذات مسؤولية محدودة (BV)</option>
@@ -324,47 +506,59 @@
                     </div>
 
                     <div style="margin-bottom: 1rem;">
-                        <label for="engine-revenue" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
+                        <label for="engine-revenue"
+                            style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
                             الإيرادات والمبيعات السنوية الإجمالية (Jaaromzet باليورو €):
                         </label>
-                        <input id="engine-revenue" type="number" min="0" step="1000" value="350000" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem; font-size: 1rem; font-weight: 700;">
+                        <input id="engine-revenue" type="number" min="0" step="1000" value="350000"
+                            style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.7rem; font-size: 1rem; font-weight: 700;">
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                         <div>
-                            <label for="engine-cogs-pct" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
+                            <label for="engine-cogs-pct"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
                                 تكلفة البضائع / المشتريات (%):
                             </label>
-                            <input id="engine-cogs-pct" type="number" min="0" max="95" value="32" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
+                            <input id="engine-cogs-pct" type="number" min="0" max="95" value="32"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
                         </div>
                         <div>
-                            <label for="engine-payroll" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
+                            <label for="engine-payroll"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
                                 رواتب وأجور الموظفين (سنوياً €):
                             </label>
-                            <input id="engine-payroll" type="number" min="0" step="1000" value="85000" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
+                            <input id="engine-payroll" type="number" min="0" step="1000" value="85000"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
                         </div>
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
                         <div>
-                            <label for="engine-opex" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
+                            <label for="engine-opex"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
                                 إيجار ومصاريف تشغيلية (سنوياً €):
                             </label>
-                            <input id="engine-opex" type="number" min="0" step="500" value="48000" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
+                            <input id="engine-opex" type="number" min="0" step="500" value="48000"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
                         </div>
                         <div>
-                            <label for="engine-investments" style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
+                            <label for="engine-investments"
+                                style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-bottom: 0.3rem;">
                                 استثمارات أجهزة وتطوير (KIA €):
                             </label>
-                            <input id="engine-investments" type="number" min="0" step="500" value="18000" style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
+                            <input id="engine-investments" type="number" min="0" step="500" value="18000"
+                                style="width: 100%; background: #060b13; border: 1px solid var(--border-dim); border-radius: 8px; color: #fff; padding: 0.65rem;">
                         </div>
                     </div>
 
                     <div style="display: flex; gap: 0.8rem;">
-                        <button id="btn-run-engine" class="btn" style="flex: 1; background: linear-gradient(135deg, var(--gold-primary), #b8860b); color: #04070d; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;">
+                        <button id="btn-run-engine" class="btn"
+                            style="flex: 1; background: linear-gradient(135deg, var(--gold-primary), #b8860b); color: #04070d; border: none; padding: 0.8rem; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1rem;">
                             ⚡ تشغيل التحليل المالي وتوليد التوصيات الذكية
                         </button>
-                        <button id="btn-reset-engine" class="btn" style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid var(--border-dim); padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer;">
+                        <button id="btn-reset-engine" class="btn"
+                            style="background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid var(--border-dim); padding: 0.8rem 1.2rem; border-radius: 8px; cursor: pointer;">
                             إعادة ضبط
                         </button>
                     </div>
@@ -372,47 +566,68 @@
 
                 <!-- Right: Output Dashboard & Recommendations -->
                 <div class="card-advisor">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-                        <h3 style="color: var(--accent); font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <h3
+                            style="color: var(--accent); font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem;">
                             <span>📑</span> المؤشرات المالية وخارطة التوصيات الضريبية
                         </h3>
-                        <span id="engine-score-badge" class="status-badge-live resolved">مؤشر الامتثال: 92% (آمن ومحصّن)</span>
+                        <span id="engine-score-badge" class="status-badge-live resolved">مؤشر الامتثال: 92% (آمن
+                            ومحصّن)</span>
                     </div>
 
                     <!-- Metrics Grid -->
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.2rem;">
-                        <div style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
-                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">صافي الربح التشغيلي قبل الضريبة</span>
-                            <span id="metric-net-profit" style="font-size: 1.3rem; color: #fff; font-weight: 800; display: block; margin-top: 0.2rem;">€85,000</span>
+                    <div
+                        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.2rem;">
+                        <div
+                            style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
+                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">صافي الربح التشغيلي قبل
+                                الضريبة</span>
+                            <span id="metric-net-profit"
+                                style="font-size: 1.3rem; color: #fff; font-weight: 800; display: block; margin-top: 0.2rem;">€85,000</span>
                         </div>
-                        <div style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
-                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">إجمالي الوفورات الضريبية المتاحة</span>
-                            <span id="metric-tax-savings" style="font-size: 1.3rem; color: #10b981; font-weight: 800; display: block; margin-top: 0.2rem;">€14,820</span>
+                        <div
+                            style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
+                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">إجمالي الوفورات الضريبية
+                                المتاحة</span>
+                            <span id="metric-tax-savings"
+                                style="font-size: 1.3rem; color: #10b981; font-weight: 800; display: block; margin-top: 0.2rem;">€14,820</span>
                         </div>
-                        <div style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
-                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">الضريبة التقديرية بعد التحسين</span>
-                            <span id="metric-final-tax" style="font-size: 1.3rem; color: var(--gold-primary); font-weight: 800; display: block; margin-top: 0.2rem;">€18,650</span>
+                        <div
+                            style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
+                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">الضريبة التقديرية بعد
+                                التحسين</span>
+                            <span id="metric-final-tax"
+                                style="font-size: 1.3rem; color: var(--gold-primary); font-weight: 800; display: block; margin-top: 0.2rem;">€18,650</span>
                         </div>
-                        <div style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
-                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">جدوى التحول إلى شركة BV</span>
-                            <span id="metric-bv-status" style="font-size: 1.1rem; color: var(--cyan); font-weight: 800; display: block; margin-top: 0.2rem;">موصى به بقوة ✓</span>
+                        <div
+                            style="background: #060b13; border: 1px solid var(--border-dim); border-radius: 10px; padding: 0.9rem; text-align: center;">
+                            <span style="font-size: 0.78rem; color: #94a3b8; display: block;">جدوى التحول إلى شركة
+                                BV</span>
+                            <span id="metric-bv-status"
+                                style="font-size: 1.1rem; color: var(--cyan); font-weight: 800; display: block; margin-top: 0.2rem;">موصى
+                                به بقوة ✓</span>
                         </div>
                     </div>
 
                     <!-- Dynamic Recommendations List -->
-                    <div id="engine-recommendations-box" style="background: #060b13; border: 1px solid var(--border-gold); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem;">
+                    <div id="engine-recommendations-box"
+                        style="background: #060b13; border: 1px solid var(--border-gold); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.2rem;">
                         <!-- Injected via JS -->
                     </div>
 
                     <!-- Action Buttons -->
                     <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
-                        <button id="btn-engine-whatsapp" class="btn" style="flex: 1; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
+                        <button id="btn-engine-whatsapp" class="btn"
+                            style="flex: 1; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem;">
                             <span>💬</span> إرسال التوصيات للمحاسب المعتمد (WhatsApp VIP)
                         </button>
-                        <button id="btn-engine-print" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.75rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                        <button id="btn-engine-print" class="btn"
+                            style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid var(--border-dim); padding: 0.75rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
                             🖨️ طباعة التقرير (A4/PDF)
                         </button>
-                        <button id="btn-engine-json" class="btn" style="background: rgba(56,189,248,0.1); color: var(--cyan); border: 1px solid rgba(56,189,248,0.3); padding: 0.75rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
+                        <button id="btn-engine-json" class="btn"
+                            style="background: rgba(56,189,248,0.1); color: var(--cyan); border: 1px solid rgba(56,189,248,0.3); padding: 0.75rem 1.1rem; border-radius: 8px; cursor: pointer; font-weight: 700;">
                             📥 تصدير JSON
                         </button>
                     </div>
@@ -422,7 +637,8 @@
 
     </main>
 
-    <footer style="background: rgba(4, 10, 20, 0.95); border-top: 1px solid var(--border-dim); padding: 1.2rem; text-align: center; font-size: 0.82rem; color: #64748b;">
+    <footer
+        style="background: rgba(4, 10, 20, 0.95); border-top: 1px solid var(--border-dim); padding: 1.2rem; text-align: center; font-size: 0.82rem; color: #64748b;">
         جميع الحقوق محفوظة © 2026 S&R CoreSync For Intelligent Solutions — منصة المستشار القانوني والمحاسبي السيادية
     </footer>
 
@@ -430,5 +646,5 @@
     <script src="js/sr-lead-dispatcher.js" defer></script>
     <script src="js/smart-business-advisor.js"></script>
 </body>
-</html>
 
+</html>

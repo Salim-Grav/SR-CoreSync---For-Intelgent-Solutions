@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>توثيق API السيادي | S&R CoreSync Developer Docs 2026</title>
-    <meta name="description" content="توثيق API التفاعلي لمنظومة S&R CoreSync — OpenAPI 3.1، Webhooks، OAuth2، SDK متعدد اللغات بـ 29 لغة عالمية.">
+    <meta name="description"
+        content="توثيق API التفاعلي لمنظومة S&R CoreSync — OpenAPI 3.1، Webhooks، OAuth2، SDK متعدد اللغات بـ 29 لغة عالمية.">
     <link rel="icon" type="image/png" href="assets/branding/coresync-emblem-8k.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fira+Code:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg: #07110f;
             --panel: #0c1916;
             --panel-soft: #10211c;
-            --line: rgba(192,166,119,.2);
+            --line: rgba(192, 166, 119, .2);
             --gold: #c0a677;
             --gold-bright: #f0dfbd;
             --text: #edf2ef;
@@ -26,462 +30,890 @@
             color-scheme: dark;
             font-family: 'Cairo', sans-serif;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: radial-gradient(ellipse at 10% 0%, rgba(35,101,75,.18), transparent 34rem),
-                        radial-gradient(ellipse at 92% 20%, rgba(192,166,119,.1), transparent 30rem), var(--bg);
-            color: var(--text); min-height: 100vh;
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        a { color: inherit; text-decoration: none; }
-        button, select, input { font: inherit; cursor: pointer; }
+
+        body {
+            background: radial-gradient(ellipse at 10% 0%, rgba(35, 101, 75, .18), transparent 34rem),
+                radial-gradient(ellipse at 92% 20%, rgba(192, 166, 119, .1), transparent 30rem), var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        select,
+        input {
+            font: inherit;
+            cursor: pointer;
+        }
 
         /* TOPBAR */
-        .topbar { border-bottom: 1px solid var(--line); background: rgba(7,17,15,.88); position: sticky; top: 0; z-index: 100; }
-        .topbar-inner { width: min(1400px, calc(100% - 40px)); margin: 0 auto; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 10px 0; }
-        .brand { display: flex; align-items: center; gap: 12px; }
-        .brand img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); }
-        .brand strong { color: var(--gold-bright); font-size: .95rem; display: block; }
-        .brand small { color: var(--muted); font-size: .68rem; display: block; }
-        .nav { display: flex; gap: 8px; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 9px; background: rgba(16,33,28,.8); color: var(--text); font-size: .8rem; transition: all .2s; }
-        .btn:hover { border-color: var(--gold); color: var(--gold-bright); }
-        .btn.gold { border-color: var(--gold); background: rgba(192,166,119,.12); color: var(--gold-bright); }
+        .topbar {
+            border-bottom: 1px solid var(--line);
+            background: rgba(7, 17, 15, .88);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-inner {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+        }
+
+        .brand strong {
+            color: var(--gold-bright);
+            font-size: .95rem;
+            display: block;
+        }
+
+        .brand small {
+            color: var(--muted);
+            font-size: .68rem;
+            display: block;
+        }
+
+        .nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-height: 38px;
+            padding: 7px 14px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: rgba(16, 33, 28, .8);
+            color: var(--text);
+            font-size: .8rem;
+            transition: all .2s;
+        }
+
+        .btn:hover {
+            border-color: var(--gold);
+            color: var(--gold-bright);
+        }
+
+        .btn.gold {
+            border-color: var(--gold);
+            background: rgba(192, 166, 119, .12);
+            color: var(--gold-bright);
+        }
 
         /* LANG SWITCHER */
-        .lang-bar { background: var(--panel); border-bottom: 1px solid var(--line); padding: 10px 0; }
-        .lang-bar-inner { width: min(1400px, calc(100% - 40px)); margin: 0 auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .lang-bar label { color: var(--muted); font-size: .78rem; white-space: nowrap; }
-        .lang-select { background: var(--panel-soft); border: 1px solid var(--line); color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: .82rem; min-width: 180px; }
-        .lang-pills { display: flex; gap: 6px; flex-wrap: wrap; }
-        .lang-pill { padding: 4px 10px; border: 1px solid var(--line); border-radius: 20px; background: transparent; color: var(--muted); font-size: .72rem; transition: all .2s; }
-        .lang-pill:hover, .lang-pill.active { border-color: var(--gold); color: var(--gold-bright); background: rgba(192,166,119,.1); }
+        .lang-bar {
+            background: var(--panel);
+            border-bottom: 1px solid var(--line);
+            padding: 10px 0;
+        }
+
+        .lang-bar-inner {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .lang-bar label {
+            color: var(--muted);
+            font-size: .78rem;
+            white-space: nowrap;
+        }
+
+        .lang-select {
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            color: var(--text);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: .82rem;
+            min-width: 180px;
+        }
+
+        .lang-pills {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .lang-pill {
+            padding: 4px 10px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--muted);
+            font-size: .72rem;
+            transition: all .2s;
+        }
+
+        .lang-pill:hover,
+        .lang-pill.active {
+            border-color: var(--gold);
+            color: var(--gold-bright);
+            background: rgba(192, 166, 119, .1);
+        }
 
         /* HERO */
-        .hero { width: min(1400px, calc(100% - 40px)); margin: 0 auto; padding: 60px 0 40px; text-align: center; }
-        .hero-badge { display: inline-block; padding: 5px 16px; border: 1px solid var(--gold); border-radius: 20px; color: var(--gold); font-size: .75rem; margin-bottom: 20px; }
-        .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-bright); margin-bottom: 14px; }
-        .hero p { color: var(--muted); font-size: 1rem; max-width: 680px; margin: 0 auto 30px; line-height: 1.8; }
-        .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-        .hero-stat { text-align: center; }
-        .hero-stat strong { display: block; font-size: 1.6rem; color: var(--green); }
-        .hero-stat span { font-size: .75rem; color: var(--muted); }
+        .hero {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 5px 16px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            color: var(--gold);
+            font-size: .75rem;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--gold-bright);
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 680px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: 1.6rem;
+            color: var(--green);
+        }
+
+        .hero-stat span {
+            font-size: .75rem;
+            color: var(--muted);
+        }
 
         /* MAIN LAYOUT */
-        .shell { width: min(1400px, calc(100% - 40px)); margin: 0 auto; padding: 40px 0 80px; }
-        .layout { display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: start; }
-        @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+        .shell {
+            width: min(1400px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 40px 0 80px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 860px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
 
         /* SIDEBAR */
-        .sidebar { position: sticky; top: 90px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-        .sidebar-title { padding: 16px 20px; border-bottom: 1px solid var(--line); color: var(--gold); font-size: .82rem; font-weight: 700; }
-        .sidebar-nav { padding: 10px 0; }
-        .sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 10px 20px; color: var(--muted); font-size: .82rem; border-right: 3px solid transparent; transition: all .2s; }
-        .sidebar-nav a:hover, .sidebar-nav a.active { color: var(--gold-bright); border-right-color: var(--gold); background: rgba(192,166,119,.06); }
-        .sidebar-nav .cat { padding: 14px 20px 6px; color: var(--muted); font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; }
+        .sidebar {
+            position: sticky;
+            top: 90px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .sidebar-title {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--line);
+            color: var(--gold);
+            font-size: .82rem;
+            font-weight: 700;
+        }
+
+        .sidebar-nav {
+            padding: 10px 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: var(--muted);
+            font-size: .82rem;
+            border-right: 3px solid transparent;
+            transition: all .2s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            color: var(--gold-bright);
+            border-right-color: var(--gold);
+            background: rgba(192, 166, 119, .06);
+        }
+
+        .sidebar-nav .cat {
+            padding: 14px 20px 6px;
+            color: var(--muted);
+            font-size: .68rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
 
         /* CONTENT */
-        .content { display: flex; flex-direction: column; gap: 24px; }
-        .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
-        .card-head { padding: 20px 24px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
-        .card-head h2 { font-size: 1.1rem; color: var(--gold-bright); }
-        .card-head p { color: var(--muted); font-size: .82rem; margin-top: 4px; }
-        .card-body { padding: 24px; }
-        .badge { padding: 3px 10px; border-radius: 6px; font-size: .7rem; font-weight: 700; }
-        .badge.get { background: rgba(57,214,160,.15); color: var(--green); border: 1px solid rgba(57,214,160,.3); }
-        .badge.post { background: rgba(96,165,250,.15); color: var(--blue); border: 1px solid rgba(96,165,250,.3); }
-        .badge.put { background: rgba(242,182,109,.15); color: var(--amber); border: 1px solid rgba(242,182,109,.3); }
-        .badge.del { background: rgba(255,125,120,.15); color: var(--red); border: 1px solid rgba(255,125,120,.3); }
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .card-head {
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-head h2 {
+            font-size: 1.1rem;
+            color: var(--gold-bright);
+        }
+
+        .card-head p {
+            color: var(--muted);
+            font-size: .82rem;
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .badge {
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: .7rem;
+            font-weight: 700;
+        }
+
+        .badge.get {
+            background: rgba(57, 214, 160, .15);
+            color: var(--green);
+            border: 1px solid rgba(57, 214, 160, .3);
+        }
+
+        .badge.post {
+            background: rgba(96, 165, 250, .15);
+            color: var(--blue);
+            border: 1px solid rgba(96, 165, 250, .3);
+        }
+
+        .badge.put {
+            background: rgba(242, 182, 109, .15);
+            color: var(--amber);
+            border: 1px solid rgba(242, 182, 109, .3);
+        }
+
+        .badge.del {
+            background: rgba(255, 125, 120, .15);
+            color: var(--red);
+            border: 1px solid rgba(255, 125, 120, .3);
+        }
 
         /* ENDPOINT ROWS */
-        .endpoint { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
-        .endpoint-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; transition: background .2s; }
-        .endpoint-header:hover { background: rgba(192,166,119,.05); }
-        .endpoint-path { font-family: 'Fira Code', monospace; font-size: .82rem; color: var(--text); flex: 1; }
-        .endpoint-desc { color: var(--muted); font-size: .78rem; }
-        .endpoint-body { border-top: 1px solid var(--line); padding: 18px; background: rgba(7,17,15,.6); display: none; }
-        .endpoint-body.open { display: block; }
-        .code-block { background: #030c09; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-family: 'Fira Code', monospace; font-size: .78rem; color: var(--green); overflow-x: auto; white-space: pre; margin-top: 12px; }
+        .endpoint {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .endpoint-header:hover {
+            background: rgba(192, 166, 119, .05);
+        }
+
+        .endpoint-path {
+            font-family: 'Fira Code', monospace;
+            font-size: .82rem;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .endpoint-desc {
+            color: var(--muted);
+            font-size: .78rem;
+        }
+
+        .endpoint-body {
+            border-top: 1px solid var(--line);
+            padding: 18px;
+            background: rgba(7, 17, 15, .6);
+            display: none;
+        }
+
+        .endpoint-body.open {
+            display: block;
+        }
+
+        .code-block {
+            background: #030c09;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: .78rem;
+            color: var(--green);
+            overflow-x: auto;
+            white-space: pre;
+            margin-top: 12px;
+        }
 
         /* SDK TABS */
-        .tab-bar { display: flex; gap: 4px; border-bottom: 1px solid var(--line); padding: 0 24px; overflow-x: auto; }
-        .tab { padding: 12px 16px; border-bottom: 2px solid transparent; color: var(--muted); font-size: .82rem; cursor: pointer; white-space: nowrap; transition: all .2s; }
-        .tab.active, .tab:hover { color: var(--gold-bright); border-bottom-color: var(--gold); }
-        .tab-content { padding: 24px; display: none; }
-        .tab-content.active { display: block; }
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--line);
+            padding: 0 24px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 16px;
+            border-bottom: 2px solid transparent;
+            color: var(--muted);
+            font-size: .82rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all .2s;
+        }
+
+        .tab.active,
+        .tab:hover {
+            color: var(--gold-bright);
+            border-bottom-color: var(--gold);
+        }
+
+        .tab-content {
+            padding: 24px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
 
         /* LANG GRID */
-        .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-        .lang-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; text-align: center; transition: all .2s; cursor: pointer; }
-        .lang-card:hover, .lang-card.active { border-color: var(--gold); background: rgba(192,166,119,.08); }
-        .lang-card .flag { font-size: 1.5rem; display: block; margin-bottom: 4px; }
-        .lang-card .name { font-size: .72rem; color: var(--muted); }
-        .lang-card .portal-link { font-size: .65rem; color: var(--gold); margin-top: 4px; display: block; }
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .lang-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            transition: all .2s;
+            cursor: pointer;
+        }
+
+        .lang-card:hover,
+        .lang-card.active {
+            border-color: var(--gold);
+            background: rgba(192, 166, 119, .08);
+        }
+
+        .lang-card .flag {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .lang-card .name {
+            font-size: .72rem;
+            color: var(--muted);
+        }
+
+        .lang-card .portal-link {
+            font-size: .65rem;
+            color: var(--gold);
+            margin-top: 4px;
+            display: block;
+        }
 
         /* ADVISOR LINK PANEL */
-        .advisor-panel { background: linear-gradient(135deg, rgba(57,214,160,.08), rgba(192,166,119,.08)); border: 1px solid rgba(57,214,160,.25); border-radius: 14px; padding: 28px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .advisor-panel .icon { font-size: 2.5rem; }
-        .advisor-panel h3 { color: var(--gold-bright); margin-bottom: 6px; }
-        .advisor-panel p { color: var(--muted); font-size: .85rem; line-height: 1.7; }
-        .advisor-panel .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+        .advisor-panel {
+            background: linear-gradient(135deg, rgba(57, 214, 160, .08), rgba(192, 166, 119, .08));
+            border: 1px solid rgba(57, 214, 160, .25);
+            border-radius: 14px;
+            padding: 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .advisor-panel .icon {
+            font-size: 2.5rem;
+        }
+
+        .advisor-panel h3 {
+            color: var(--gold-bright);
+            margin-bottom: 6px;
+        }
+
+        .advisor-panel p {
+            color: var(--muted);
+            font-size: .85rem;
+            line-height: 1.7;
+        }
+
+        .advisor-panel .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
 
         /* FOOTER */
-        footer { border-top: 1px solid var(--line); padding: 28px 0; text-align: center; color: var(--muted); font-size: .78rem; }
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 28px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: .78rem;
+        }
     </style>
 </head>
+
 <body>
 
-<!-- TOPBAR -->
-<header class="topbar">
-    <div class="topbar-inner">
-        <a class="brand" href="index.html">
-            <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync">
-            <div>
-                <strong>S&R CoreSync</strong>
-                <small>Sovereign Business Platform — API Docs v3.1</small>
-            </div>
-        </a>
-        <nav class="nav" aria-label="روابط رئيسية">
-            <a class="btn" href="developer-portal.html">🔧 بوابة المطورين</a>
-            <a class="btn" href="smart-business-advisor.html">🧠 المستشار الذكي</a>
-            <a class="btn" href="autonomous-tax-audit.html">🔍 التدقيق الضريبي</a>
-            <a class="btn gold" href="https://github.com/Salim-Grav/SR-CoreSync-For-Intelgent-Solutions" target="_blank" rel="noopener">⭐ GitHub</a>
-        </nav>
-    </div>
-</header>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <a class="brand" href="index.html">
+                <img src="assets/branding/coresync-emblem-8k.png" alt="S&R CoreSync">
+                <div>
+                    <strong>S&R CoreSync</strong>
+                    <small>Sovereign Business Platform — API Docs v3.1</small>
+                </div>
+            </a>
+            <nav class="nav" aria-label="روابط رئيسية">
+                <a class="btn" href="developer-portal.html">🔧 بوابة المطورين</a>
+                <a class="btn" href="smart-business-advisor.html">🧠 المستشار الذكي</a>
+                <a class="btn" href="autonomous-tax-audit.html">🔍 التدقيق الضريبي</a>
+                <a class="btn gold" href="https://github.com/Salim-Grav/SR-CoreSync-For-Intelgent-Solutions"
+                    target="_blank" rel="noopener">⭐ GitHub</a>
+            </nav>
+        </div>
+    </header>
 
-<!-- LANG BAR -->
-<div class="lang-bar">
-    <div class="lang-bar-inner">
-        <label for="lang-select">🌍 لغة بوابة API:</label>
-        <select class="lang-select" id="lang-select" aria-label="اختر اللغة">
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="nl">🇳🇱 Nederlands</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="de">🇩🇪 Deutsch</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="pt">🇧🇷 Português</option>
-            <option value="it">🇮🇹 Italiano</option>
-            <option value="ru">🇷🇺 Русский</option>
-            <option value="zh">🇨🇳 中文</option>
-            <option value="ja">🇯🇵 日本語</option>
-            <option value="ko">🇰🇷 한국어</option>
-            <option value="tr">🇹🇷 Türkçe</option>
-            <option value="fa">🇮🇷 فارسی</option>
-            <option value="ur">🇵🇰 اردو</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
-            <option value="bn">🇧🇩 বাংলা</option>
-            <option value="id">🇮🇩 Bahasa Indonesia</option>
-            <option value="ms">🇲🇾 Bahasa Melayu</option>
-            <option value="th">🇹🇭 ภาษาไทย</option>
-            <option value="vi">🇻🇳 Tiếng Việt</option>
-            <option value="pl">🇵🇱 Polski</option>
-            <option value="sv">🇸🇪 Svenska</option>
-            <option value="da">🇩🇰 Dansk</option>
-            <option value="fi">🇫🇮 Suomi</option>
-            <option value="no">🇳🇴 Norsk</option>
-            <option value="cs">🇨🇿 Čeština</option>
-            <option value="ro">🇷🇴 Română</option>
-            <option value="hu">🇭🇺 Magyar</option>
-        </select>
-        <div class="lang-pills" id="quick-langs">
-            <button class="lang-pill active" data-lang="ar">AR</button>
-            <button class="lang-pill" data-lang="nl">NL</button>
-            <button class="lang-pill" data-lang="en">EN</button>
-            <button class="lang-pill" data-lang="fr">FR</button>
-            <button class="lang-pill" data-lang="de">DE</button>
-            <button class="lang-pill" data-lang="es">ES</button>
-            <button class="lang-pill" data-lang="zh">ZH</button>
-            <button class="lang-pill" data-lang="ru">RU</button>
+    <!-- LANG BAR -->
+    <div class="lang-bar">
+        <div class="lang-bar-inner">
+            <label for="lang-select">🌍 لغة بوابة API:</label>
+            <select class="lang-select" id="lang-select" aria-label="اختر اللغة">
+                <option value="ar">🇸🇦 العربية</option>
+                <option value="nl">🇳🇱 Nederlands</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="pt">🇧🇷 Português</option>
+                <option value="it">🇮🇹 Italiano</option>
+                <option value="ru">🇷🇺 Русский</option>
+                <option value="zh">🇨🇳 中文</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="ko">🇰🇷 한국어</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+                <option value="fa">🇮🇷 فارسی</option>
+                <option value="ur">🇵🇰 اردو</option>
+                <option value="hi">🇮🇳 हिन्दी</option>
+                <option value="bn">🇧🇩 বাংলা</option>
+                <option value="id">🇮🇩 Bahasa Indonesia</option>
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+                <option value="th">🇹🇭 ภาษาไทย</option>
+                <option value="vi">🇻🇳 Tiếng Việt</option>
+                <option value="pl">🇵🇱 Polski</option>
+                <option value="sv">🇸🇪 Svenska</option>
+                <option value="da">🇩🇰 Dansk</option>
+                <option value="fi">🇫🇮 Suomi</option>
+                <option value="no">🇳🇴 Norsk</option>
+                <option value="cs">🇨🇿 Čeština</option>
+                <option value="ro">🇷🇴 Română</option>
+                <option value="hu">🇭🇺 Magyar</option>
+            </select>
+            <div class="lang-pills" id="quick-langs">
+                <button class="lang-pill active" data-lang="ar">AR</button>
+                <button class="lang-pill" data-lang="nl">NL</button>
+                <button class="lang-pill" data-lang="en">EN</button>
+                <button class="lang-pill" data-lang="fr">FR</button>
+                <button class="lang-pill" data-lang="de">DE</button>
+                <button class="lang-pill" data-lang="es">ES</button>
+                <button class="lang-pill" data-lang="zh">ZH</button>
+                <button class="lang-pill" data-lang="ru">RU</button>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-badge">OpenAPI 3.1 · OAuth2 · REST + Webhooks</div>
-    <h1 id="hero-title">📡 توثيق API السيادي الموحّد</h1>
-    <p id="hero-desc">الوصول الكامل لجميع نقاط نهاية منظومة S&R CoreSync — المحاسبة، الضرائب، التدقيق، المستشار الذكي — بـ 29 لغة عالمية مع SDK جاهز للتكامل الفوري.</p>
-    <div class="hero-stats">
-        <div class="hero-stat"><strong>47+</strong><span>Endpoints</span></div>
-        <div class="hero-stat"><strong>29</strong><span id="stat-lang">لغة عالمية</span></div>
-        <div class="hero-stat"><strong>OAuth2</strong><span>Authentication</span></div>
-        <div class="hero-stat"><strong>99.9%</strong><span>Uptime SLA</span></div>
-    </div>
-</section>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">OpenAPI 3.1 · OAuth2 · REST + Webhooks</div>
+        <h1 id="hero-title">📡 توثيق API السيادي الموحّد</h1>
+        <p id="hero-desc">الوصول الكامل لجميع نقاط نهاية منظومة S&R CoreSync — المحاسبة، الضرائب، التدقيق، المستشار
+            الذكي — بـ 29 لغة عالمية مع SDK جاهز للتكامل الفوري.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><strong>47+</strong><span>Endpoints</span></div>
+            <div class="hero-stat"><strong>29</strong><span id="stat-lang">لغة عالمية</span></div>
+            <div class="hero-stat"><strong>OAuth2</strong><span>Authentication</span></div>
+            <div class="hero-stat"><strong>99.9%</strong><span>Uptime SLA</span></div>
+        </div>
+    </section>
 
-<!-- MAIN -->
-<main class="shell">
-    <div class="layout">
+    <!-- MAIN -->
+    <main class="shell">
+        <div class="layout">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar" aria-label="قائمة API">
-            <div class="sidebar-title">📋 فهرس الـ API</div>
-            <nav class="sidebar-nav">
-                <div class="cat">🔐 المصادقة</div>
-                <a href="#auth" class="active">OAuth2 / JWT</a>
-                <a href="#webhooks">Webhooks</a>
-                <div class="cat">💼 الأعمال</div>
-                <a href="#advisor">المستشار الذكي</a>
-                <a href="#tax">التدقيق الضريبي</a>
-                <a href="#invoices">الفواتير</a>
-                <div class="cat">🌍 اللغات</div>
-                <a href="#multilang">بوابات الـ 29 لغة</a>
-                <a href="#sdk">SDK المتعدد</a>
-                <div class="cat">🔗 التكاملات</div>
-                <a href="#erp">ERP / CRM</a>
-                <a href="#banking">Open Banking</a>
-            </nav>
-        </aside>
+            <!-- SIDEBAR -->
+            <aside class="sidebar" aria-label="قائمة API">
+                <div class="sidebar-title">📋 فهرس الـ API</div>
+                <nav class="sidebar-nav">
+                    <div class="cat">🔐 المصادقة</div>
+                    <a href="#auth" class="active">OAuth2 / JWT</a>
+                    <a href="#webhooks">Webhooks</a>
+                    <div class="cat">💼 الأعمال</div>
+                    <a href="#advisor">المستشار الذكي</a>
+                    <a href="#tax">التدقيق الضريبي</a>
+                    <a href="#invoices">الفواتير</a>
+                    <div class="cat">🌍 اللغات</div>
+                    <a href="#multilang">بوابات الـ 29 لغة</a>
+                    <a href="#sdk">SDK المتعدد</a>
+                    <div class="cat">🔗 التكاملات</div>
+                    <a href="#erp">ERP / CRM</a>
+                    <a href="#banking">Open Banking</a>
+                </nav>
+            </aside>
 
-        <!-- CONTENT -->
-        <div class="content">
+            <!-- CONTENT -->
+            <div class="content">
 
-            <!-- AUTH CARD -->
-            <div class="card" id="auth">
-                <div class="card-head">
-                    <div>
-                        <h2>🔐 المصادقة — OAuth2 & JWT</h2>
-                        <p>الحصول على رمز الوصول للوصول لجميع نقاط النهاية</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-auth-toggle">
-                            <span class="badge post">POST</span>
-                            <span class="endpoint-path">/v3/auth/token</span>
-                            <span class="endpoint-desc">الحصول على JWT Token</span>
-                        </div>
-                        <div class="endpoint-body" id="ep-auth-body">
-                            <p style="color:var(--muted);font-size:.82rem;margin-bottom:12px">أرسل بيانات اعتمادك للحصول على رمز وصول صالح لمدة 24 ساعة.</p>
-                            <div class="code-block">POST https://api.sr-coresync.com/v3/auth/token
-Content-Type: application/json
-
-{
-  "client_id": "YOUR_CLIENT_ID",
-  "client_secret": "YOUR_CLIENT_SECRET",
-  "grant_type": "client_credentials",
-  "scope": "advisor:read tax:write audit:full"
-}
-
-// Response
-{
-  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "token_type": "Bearer",
-  "expires_in": 86400,
-  "scope": "advisor:read tax:write audit:full"
-}</div>
+                <!-- AUTH CARD -->
+                <div class="card" id="auth">
+                    <div class="card-head">
+                        <div>
+                            <h2>🔐 المصادقة — OAuth2 & JWT</h2>
+                            <p>الحصول على رمز الوصول للوصول لجميع نقاط النهاية</p>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-auth-toggle">
+                                <span class="badge post">POST</span>
+                                <span class="endpoint-path">/v3/auth/token</span>
+                                <span class="endpoint-desc">الحصول على JWT Token</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-auth-body">
+                                <p style="color:var(--muted);font-size:.82rem;margin-bottom:12px">أرسل بيانات اعتمادك
+                                    للحصول على رمز وصول صالح لمدة 24 ساعة.</p>
+                                <div class="code-block">POST https://api.sr-coresync.com/v3/auth/token
+                                    Content-Type: application/json
 
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-refresh-toggle">
-                            <span class="badge post">POST</span>
-                            <span class="endpoint-path">/v3/auth/refresh</span>
-                            <span class="endpoint-desc">تجديد رمز الوصول</span>
+                                    {
+                                    "client_id": "YOUR_CLIENT_ID",
+                                    "client_secret": "YOUR_CLIENT_SECRET",
+                                    "grant_type": "client_credentials",
+                                    "scope": "advisor:read tax:write audit:full"
+                                    }
+
+                                    // Response
+                                    {
+                                    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+                                    "token_type": "Bearer",
+                                    "expires_in": 86400,
+                                    "scope": "advisor:read tax:write audit:full"
+                                    }</div>
+                            </div>
                         </div>
-                        <div class="endpoint-body" id="ep-refresh-body">
-                            <div class="code-block">POST https://api.sr-coresync.com/v3/auth/refresh
-Authorization: Bearer {refresh_token}
 
-// Response: نفس بنية /token مع رمز جديد</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-refresh-toggle">
+                                <span class="badge post">POST</span>
+                                <span class="endpoint-path">/v3/auth/refresh</span>
+                                <span class="endpoint-desc">تجديد رمز الوصول</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-refresh-body">
+                                <div class="code-block">POST https://api.sr-coresync.com/v3/auth/refresh
+                                    Authorization: Bearer {refresh_token}
 
-            <!-- ADVISOR API CARD -->
-            <div class="card" id="advisor">
-                <div class="card-head">
-                    <div>
-                        <h2>🧠 API المستشار الذكي</h2>
-                        <p>تحليل ضريبي، توصيات استراتيجية، حساب KIA وZelfstandigenaftrek</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-adv1-toggle">
-                            <span class="badge post">POST</span>
-                            <span class="endpoint-path">/v3/advisor/analyze</span>
-                            <span class="endpoint-desc">تحليل ضريبي واستراتيجي شامل</span>
-                        </div>
-                        <div class="endpoint-body" id="ep-adv1-body">
-                            <div class="code-block">POST https://api.sr-coresync.com/v3/advisor/analyze
-Authorization: Bearer {token}
-Content-Type: application/json
-
-{
-  "revenue": 120000,
-  "sector": "tech",
-  "legal_entity": "eenmanszaak",
-  "year": 2026,
-  "language": "ar"
-}
-
-// Response
-{
-  "tax_analysis": {
-    "zelfstandigenaftrek": 2460,
-    "kia_rate": 0.28,
-    "kia_amount": 33600,
-    "mkb_vrijstelling": 0.1331,
-    "net_taxable": 83940,
-    "estimated_tax": 32400
-  },
-  "recommendations": [
-    { "priority": "high", "title": "تحويل إلى BV عند €85k ربح", "saving": 8200 },
-    { "priority": "medium", "title": "تعظيم KIA بشراء أصول", "saving": 4100 }
-  ],
-  "audit_risk_score": 23,
-  "bv_breakeven": 85000
-}</div>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-adv2-toggle">
-                            <span class="badge get">GET</span>
-                            <span class="endpoint-path">/v3/advisor/report/{session_id}</span>
-                            <span class="endpoint-desc">استرجاع تقرير محفوظ</span>
-                        </div>
-                        <div class="endpoint-body" id="ep-adv2-body">
-                            <div class="code-block">GET https://api.sr-coresync.com/v3/advisor/report/sess_abc123
-Authorization: Bearer {token}
-
-// يُعيد تقرير JSON كامل مع توصيات للتصدير أو الربط مع التدقيق</div>
+                                    // Response: نفس بنية /token مع رمز جديد</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- TAX AUDIT API CARD -->
-            <div class="card" id="tax">
-                <div class="card-head">
-                    <div>
-                        <h2>🔍 API التدقيق الضريبي</h2>
-                        <p>مطابقة الفواتير، IFRS، AAOIFI، تصدير حزمة Big-4</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-tax1-toggle">
-                            <span class="badge post">POST</span>
-                            <span class="endpoint-path">/v3/audit/run</span>
-                            <span class="endpoint-desc">تشغيل مطابقة ضريبية كاملة</span>
-                        </div>
-                        <div class="endpoint-body" id="ep-tax1-body">
-                            <div class="code-block">POST https://api.sr-coresync.com/v3/audit/run
-Authorization: Bearer {token}
-
-{
-  "records": [ { "invoice_id": "INV-2601", "net": 10000, "vat": 2100, "standard": "IFRS" } ],
-  "export_format": "json",
-  "link_advisor_session": "sess_abc123"
-}
-
-// Response: نتائج مطابقة + ربط تلقائي بتقرير المستشار الذكي
-{
-  "audit_id": "AUD-2026-001",
-  "findings": 2,
-  "balanced": 18,
-  "advisor_link": "/v3/advisor/report/sess_abc123",
-  "export_url": "https://api.sr-coresync.com/v3/audit/export/AUD-2026-001"
-}</div>
+                <!-- ADVISOR API CARD -->
+                <div class="card" id="advisor">
+                    <div class="card-head">
+                        <div>
+                            <h2>🧠 API المستشار الذكي</h2>
+                            <p>تحليل ضريبي، توصيات استراتيجية، حساب KIA وZelfstandigenaftrek</p>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-adv1-toggle">
+                                <span class="badge post">POST</span>
+                                <span class="endpoint-path">/v3/advisor/analyze</span>
+                                <span class="endpoint-desc">تحليل ضريبي واستراتيجي شامل</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-adv1-body">
+                                <div class="code-block">POST https://api.sr-coresync.com/v3/advisor/analyze
+                                    Authorization: Bearer {token}
+                                    Content-Type: application/json
 
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-tax2-toggle">
-                            <span class="badge get">GET</span>
-                            <span class="endpoint-path">/v3/audit/export/{audit_id}</span>
-                            <span class="endpoint-desc">تصدير حزمة تدقيق Big-4</span>
+                                    {
+                                    "revenue": 120000,
+                                    "sector": "tech",
+                                    "legal_entity": "eenmanszaak",
+                                    "year": 2026,
+                                    "language": "ar"
+                                    }
+
+                                    // Response
+                                    {
+                                    "tax_analysis": {
+                                    "zelfstandigenaftrek": 2460,
+                                    "kia_rate": 0.28,
+                                    "kia_amount": 33600,
+                                    "mkb_vrijstelling": 0.1331,
+                                    "net_taxable": 83940,
+                                    "estimated_tax": 32400
+                                    },
+                                    "recommendations": [
+                                    { "priority": "high", "title": "تحويل إلى BV عند €85k ربح", "saving": 8200 },
+                                    { "priority": "medium", "title": "تعظيم KIA بشراء أصول", "saving": 4100 }
+                                    ],
+                                    "audit_risk_score": 23,
+                                    "bv_breakeven": 85000
+                                    }</div>
+                            </div>
                         </div>
-                        <div class="endpoint-body" id="ep-tax2-body">
-                            <div class="code-block">GET https://api.sr-coresync.com/v3/audit/export/AUD-2026-001?format=pdf
-Authorization: Bearer {token}
 
-// يُنزّل ملف PDF/JSON/CSV جاهز للمراجعة بمعايير Big-4</div>
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-adv2-toggle">
+                                <span class="badge get">GET</span>
+                                <span class="endpoint-path">/v3/advisor/report/{session_id}</span>
+                                <span class="endpoint-desc">استرجاع تقرير محفوظ</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-adv2-body">
+                                <div class="code-block">GET https://api.sr-coresync.com/v3/advisor/report/sess_abc123
+                                    Authorization: Bearer {token}
+
+                                    // يُعيد تقرير JSON كامل مع توصيات للتصدير أو الربط مع التدقيق</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- MULTILANG PORTALS CARD -->
-            <div class="card" id="multilang">
-                <div class="card-head">
-                    <div>
-                        <h2>🌍 بوابات API الـ 29 لغة</h2>
-                        <p>كل بوابة تدعم لغتها الكاملة مع Base URL منفصل</p>
+                <!-- TAX AUDIT API CARD -->
+                <div class="card" id="tax">
+                    <div class="card-head">
+                        <div>
+                            <h2>🔍 API التدقيق الضريبي</h2>
+                            <p>مطابقة الفواتير، IFRS، AAOIFI، تصدير حزمة Big-4</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-tax1-toggle">
+                                <span class="badge post">POST</span>
+                                <span class="endpoint-path">/v3/audit/run</span>
+                                <span class="endpoint-desc">تشغيل مطابقة ضريبية كاملة</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-tax1-body">
+                                <div class="code-block">POST https://api.sr-coresync.com/v3/audit/run
+                                    Authorization: Bearer {token}
+
+                                    {
+                                    "records": [ { "invoice_id": "INV-2601", "net": 10000, "vat": 2100, "standard":
+                                    "IFRS" } ],
+                                    "export_format": "json",
+                                    "link_advisor_session": "sess_abc123"
+                                    }
+
+                                    // Response: نتائج مطابقة + ربط تلقائي بتقرير المستشار الذكي
+                                    {
+                                    "audit_id": "AUD-2026-001",
+                                    "findings": 2,
+                                    "balanced": 18,
+                                    "advisor_link": "/v3/advisor/report/sess_abc123",
+                                    "export_url": "https://api.sr-coresync.com/v3/audit/export/AUD-2026-001"
+                                    }</div>
+                            </div>
+                        </div>
+
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-tax2-toggle">
+                                <span class="badge get">GET</span>
+                                <span class="endpoint-path">/v3/audit/export/{audit_id}</span>
+                                <span class="endpoint-desc">تصدير حزمة تدقيق Big-4</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-tax2-body">
+                                <div class="code-block">GET
+                                    https://api.sr-coresync.com/v3/audit/export/AUD-2026-001?format=pdf
+                                    Authorization: Bearer {token}
+
+                                    // يُنزّل ملف PDF/JSON/CSV جاهز للمراجعة بمعايير Big-4</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="lang-grid" id="lang-portal-grid">
-                        <!-- يتم ملؤها بـ JS -->
+
+                <!-- MULTILANG PORTALS CARD -->
+                <div class="card" id="multilang">
+                    <div class="card-head">
+                        <div>
+                            <h2>🌍 بوابات API الـ 29 لغة</h2>
+                            <p>كل بوابة تدعم لغتها الكاملة مع Base URL منفصل</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="lang-grid" id="lang-portal-grid">
+                            <!-- يتم ملؤها بـ JS -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- SDK CARD -->
-            <div class="card" id="sdk">
-                <div class="card-head">
-                    <div>
-                        <h2>📦 SDK متعدد اللغات البرمجية</h2>
-                        <p>مكتبات جاهزة للتكامل الفوري مع منظومتك</p>
+                <!-- SDK CARD -->
+                <div class="card" id="sdk">
+                    <div class="card-head">
+                        <div>
+                            <h2>📦 SDK متعدد اللغات البرمجية</h2>
+                            <p>مكتبات جاهزة للتكامل الفوري مع منظومتك</p>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-bar" role="tablist">
-                    <button class="tab active" data-tab="js" role="tab">JavaScript</button>
-                    <button class="tab" data-tab="py" role="tab">Python</button>
-                    <button class="tab" data-tab="php" role="tab">PHP</button>
-                    <button class="tab" data-tab="curl" role="tab">cURL</button>
-                </div>
-                <div class="tab-content active" id="tab-js">
-<div class="code-block">// npm install @sr-coresync/sdk
-import { CoreSyncClient } from '@sr-coresync/sdk';
+                    <div class="tab-bar" role="tablist">
+                        <button class="tab active" data-tab="js" role="tab">JavaScript</button>
+                        <button class="tab" data-tab="py" role="tab">Python</button>
+                        <button class="tab" data-tab="php" role="tab">PHP</button>
+                        <button class="tab" data-tab="curl" role="tab">cURL</button>
+                    </div>
+                    <div class="tab-content active" id="tab-js">
+                        <div class="code-block">// npm install @sr-coresync/sdk
+                            import { CoreSyncClient } from '@sr-coresync/sdk';
 
-const client = new CoreSyncClient({
-  clientId: process.env.CORESYNC_CLIENT_ID,
-  clientSecret: process.env.CORESYNC_CLIENT_SECRET,
-  language: 'ar'  // أو أي من الـ 29 لغة
-});
+                            const client = new CoreSyncClient({
+                            clientId: process.env.CORESYNC_CLIENT_ID,
+                            clientSecret: process.env.CORESYNC_CLIENT_SECRET,
+                            language: 'ar' // أو أي من الـ 29 لغة
+                            });
 
-// تحليل ضريبي
-const result = await client.advisor.analyze({
-  revenue: 120000, sector: 'tech', year: 2026
-});
+                            // تحليل ضريبي
+                            const result = await client.advisor.analyze({
+                            revenue: 120000, sector: 'tech', year: 2026
+                            });
 
-// ربط مع التدقيق تلقائياً
-const audit = await client.audit.run({
-  records: myInvoices,
-  linkAdvisorSession: result.session_id
-});
+                            // ربط مع التدقيق تلقائياً
+                            const audit = await client.audit.run({
+                            records: myInvoices,
+                            linkAdvisorSession: result.session_id
+                            });
 
-console.log(audit.findings); // 2 استثناءات للمراجعة</div>
-                </div>
-                <div class="tab-content" id="tab-py">
-<div class="code-block"># pip install sr-coresync
-from sr_coresync import CoreSyncClient
+                            console.log(audit.findings); // 2 استثناءات للمراجعة</div>
+                    </div>
+                    <div class="tab-content" id="tab-py">
+                        <div class="code-block"># pip install sr-coresync
+                            from sr_coresync import CoreSyncClient
 
-client = CoreSyncClient(
-    client_id=os.getenv("CORESYNC_CLIENT_ID"),
-    client_secret=os.getenv("CORESYNC_CLIENT_SECRET"),
-    language="ar"
-)
+                            client = CoreSyncClient(
+                            client_id=os.getenv("CORESYNC_CLIENT_ID"),
+                            client_secret=os.getenv("CORESYNC_CLIENT_SECRET"),
+                            language="ar"
+                            )
 
-# تحليل ضريبي
-result = client.advisor.analyze(
-    revenue=120000, sector="tech", year=2026
-)
+                            # تحليل ضريبي
+                            result = client.advisor.analyze(
+                            revenue=120000, sector="tech", year=2026
+                            )
 
-# ربط التدقيق بالمستشار
-audit = client.audit.run(
-    records=my_invoices,
-    link_advisor_session=result["session_id"]
-)
-print(f"استثناءات: {audit['findings']}")</div>
-                </div>
-                <div class="tab-content" id="tab-php">
-<div class="code-block"><?php
+                            # ربط التدقيق بالمستشار
+                            audit = client.audit.run(
+                            records=my_invoices,
+                            link_advisor_session=result["session_id"]
+                            )
+                            print(f"استثناءات: {audit['findings']}")</div>
+                    </div>
+                    <div class="tab-content" id="tab-php">
+                        <div class="code-block">
+                            <?php
 // composer require sr-coresync/sdk
 use SRCoreSync\CoreSyncClient;
 
@@ -499,79 +931,83 @@ $audit = $client->audit->run([
     'records' => $myInvoices,
     'link_advisor_session' => $result['session_id']
 ]);
-?></div>
-                </div>
-                <div class="tab-content" id="tab-curl">
-<div class="code-block"># الحصول على Token
-curl -X POST https://api.sr-coresync.com/v3/auth/token \
-  -H "Content-Type: application/json" \
-  -d '{"client_id":"YOUR_ID","client_secret":"YOUR_SECRET","grant_type":"client_credentials"}'
-
-# تحليل ضريبي
-curl -X POST https://api.sr-coresync.com/v3/advisor/analyze \
-  -H "Authorization: Bearer TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"revenue":120000,"sector":"tech","year":2026,"language":"ar"}'</div>
-                </div>
-            </div>
-
-            <!-- ADVISOR LINK PANEL (Option 3) -->
-            <div class="advisor-panel" id="advisor-link-section">
-                <div class="icon">🔗</div>
-                <div style="flex:1">
-                    <h3>ربط المستشار الذكي بمحرك التدقيق الضريبي</h3>
-                    <p>يمكنك إرسال نتائج تحليل المستشار الذكي مباشرةً إلى محرك التدقيق الضريبي، وسيُضمّن التقرير بياناتك الضريبية المحسوبة تلقائياً مع سجل الفواتير في حزمة واحدة جاهزة لـ Big-4.</p>
-                    <div class="actions">
-                        <a class="btn gold" href="smart-business-advisor.html">🧠 فتح المستشار الذكي</a>
-                        <a class="btn" href="autonomous-tax-audit.html">🔍 فتح محرك التدقيق</a>
-                        <a class="btn" href="developer-portal.html">🔧 بوابة المطورين الكاملة</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WEBHOOKS CARD -->
-            <div class="card" id="webhooks">
-                <div class="card-head">
-                    <div>
-                        <h2>⚡ Webhooks — الإشعارات الفورية</h2>
-                        <p>استقبل إشعارات فورية عند اكتمال التدقيق أو التحليل</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="endpoint">
-                        <div class="endpoint-header" id="ep-wh-toggle">
-                            <span class="badge post">POST</span>
-                            <span class="endpoint-path">/v3/webhooks/register</span>
-                            <span class="endpoint-desc">تسجيل Webhook جديد</span>
+?>
                         </div>
-                        <div class="endpoint-body" id="ep-wh-body">
-                            <div class="code-block">{
-  "url": "https://your-system.com/webhook",
-  "events": ["audit.completed", "advisor.analyzed", "invoice.flagged"],
-  "secret": "YOUR_WEBHOOK_SECRET"
-}
+                    </div>
+                    <div class="tab-content" id="tab-curl">
+                        <div class="code-block"># الحصول على Token
+                            curl -X POST https://api.sr-coresync.com/v3/auth/token \
+                            -H "Content-Type: application/json" \
+                            -d '{"client_id":"YOUR_ID","client_secret":"YOUR_SECRET","grant_type":"client_credentials"}'
 
-// Payload المُرسَل عند الحدث:
-{
-  "event": "audit.completed",
-  "audit_id": "AUD-2026-001",
-  "findings": 2,
-  "advisor_session": "sess_abc123",
-  "timestamp": "2026-11-06T03:38:00Z"
-}</div>
+                            # تحليل ضريبي
+                            curl -X POST https://api.sr-coresync.com/v3/advisor/analyze \
+                            -H "Authorization: Bearer TOKEN" \
+                            -H "Content-Type: application/json" \
+                            -d '{"revenue":120000,"sector":"tech","year":2026,"language":"ar"}'</div>
+                    </div>
+                </div>
+
+                <!-- ADVISOR LINK PANEL (Option 3) -->
+                <div class="advisor-panel" id="advisor-link-section">
+                    <div class="icon">🔗</div>
+                    <div style="flex:1">
+                        <h3>ربط المستشار الذكي بمحرك التدقيق الضريبي</h3>
+                        <p>يمكنك إرسال نتائج تحليل المستشار الذكي مباشرةً إلى محرك التدقيق الضريبي، وسيُضمّن التقرير
+                            بياناتك الضريبية المحسوبة تلقائياً مع سجل الفواتير في حزمة واحدة جاهزة لـ Big-4.</p>
+                        <div class="actions">
+                            <a class="btn gold" href="smart-business-advisor.html">🧠 فتح المستشار الذكي</a>
+                            <a class="btn" href="autonomous-tax-audit.html">🔍 فتح محرك التدقيق</a>
+                            <a class="btn" href="developer-portal.html">🔧 بوابة المطورين الكاملة</a>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div><!-- /content -->
-    </div><!-- /layout -->
-</main>
+                <!-- WEBHOOKS CARD -->
+                <div class="card" id="webhooks">
+                    <div class="card-head">
+                        <div>
+                            <h2>⚡ Webhooks — الإشعارات الفورية</h2>
+                            <p>استقبل إشعارات فورية عند اكتمال التدقيق أو التحليل</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="endpoint">
+                            <div class="endpoint-header" id="ep-wh-toggle">
+                                <span class="badge post">POST</span>
+                                <span class="endpoint-path">/v3/webhooks/register</span>
+                                <span class="endpoint-desc">تسجيل Webhook جديد</span>
+                            </div>
+                            <div class="endpoint-body" id="ep-wh-body">
+                                <div class="code-block">{
+                                    "url": "https://your-system.com/webhook",
+                                    "events": ["audit.completed", "advisor.analyzed", "invoice.flagged"],
+                                    "secret": "YOUR_WEBHOOK_SECRET"
+                                    }
 
-<footer>
-    <p>© 2026 S&R CoreSync For Intelligent Solutions · API v3.1 · <a href="https://sr-coresync.com" style="color:var(--gold)">sr-coresync.com</a></p>
-</footer>
+                                    // Payload المُرسَل عند الحدث:
+                                    {
+                                    "event": "audit.completed",
+                                    "audit_id": "AUD-2026-001",
+                                    "findings": 2,
+                                    "advisor_session": "sess_abc123",
+                                    "timestamp": "2026-11-06T03:38:00Z"
+                                    }</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<script src="js/api-docs.js"></script>
+            </div><!-- /content -->
+        </div><!-- /layout -->
+    </main>
+
+    <footer>
+        <p>© 2026 S&R CoreSync For Intelligent Solutions · API v3.1 · <a href="https://sr-coresync.com"
+                style="color:var(--gold)">sr-coresync.com</a></p>
+    </footer>
+
+    <script src="js/api-docs.js"></script>
 </body>
+
 </html>
