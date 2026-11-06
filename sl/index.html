@@ -2190,6 +2190,23 @@ main#wrapper:focus{outline:none}
                 </div>
 
                 
+                                <!-- Live Currency & VAT Switcher Bar -->
+                <div class="es-currency-bar-pricing">
+                    <div class="es-currency-bar-pricing-left">
+                        <span class="es-currency-bar-title">Izberite valuto in izračun davka:</span>
+                        <div class="es-currency-bar">
+                            <button class="es-currency-btn active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
+                            <button class="es-currency-btn" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
+                            <button class="es-currency-btn" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
+                            <button class="es-currency-btn" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (د.إ)</button>
+                            <button class="es-currency-btn" data-currency="GBP" data-sr-call="switchCurrency" data-sr-args='["GBP"]'>🇬🇧 GBP (£)</button>
+                        </div>
+                    </div>
+                    <div class="es-pricing-vat-notice">
+                        <span class="es-vat-live-badge">🇸🇮 DDV 22% (SL Tax Compliant)</span>
+                    </div>
+                </div>
+
                 <ul class="pricing-tab_btn" role="tablist" aria-label="Select Pricing Category">
                     <li class="nav-tab-item" role="presentation">
                         <button type="button" role="tab" aria-selected="true" class="tf-btn-tab fw-medium letter-space--1 active" data-sr-call="switchPricingTab" data-sr-args='["dev"]' data-sr-this="last">
@@ -2231,7 +2248,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Core Starter</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">1,490</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="1490">1,490</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Idealno za zagon namenske platforme v oblaku ali začetnega osrednjega izdelka.</p>
@@ -2265,7 +2282,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-primary br-line-gold"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Enterprise Growth</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">2,890</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="2890">2,890</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">
@@ -2292,7 +2309,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-white"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Core MAX Synergy</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">4,990</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="4990">4,990</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Celostna digitalna in finančna poslovna arhitektura, popolnoma prilagojena uveljavljenim korporacijam.</p>
@@ -2321,7 +2338,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line"></div>
                                 <p class="plan-name letter-space--1 fw-medium">ERP Setup</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">1,890</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="1890">1,890</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Core ERP deployment & chart of accounts consolidation</p>
@@ -2340,7 +2357,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-primary br-line-gold"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Full ERP Sync</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">3,490</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="3490">3,490</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Comprehensive ERP integration covering supply chains, payroll & banks</p>
@@ -2357,7 +2374,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-white"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Custom ERP Ecosystem</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">5,990</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="5990">5,990</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Poslovni ERP, zgrajen po meri od temeljev, točno prilagojen vašim delovnim tokom</p>
@@ -2379,7 +2396,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Security & Audit</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">490</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="490">490</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ complete audit</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Popoln varnostni, arhitekturni in finančni pregled za odpravo ozkih mest</p>
@@ -2390,7 +2407,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-primary br-line-gold"></div>
                                 <p class="plan-name letter-space--1 fw-medium">CoreCare Monthly</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">149</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="149">149</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ month</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Managed cloud, daily automated backups, 24/7 telemetry & instant SLA response</p>
@@ -2408,7 +2425,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Complete Visual Identity</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">590</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="590">590</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Izrazite vizualne identitete, ustvarjene s strategijo, jasnostjo in doslednostjo, ki utrjujejo institucionalno zaupanje.</p>
@@ -2442,7 +2459,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-primary br-line-gold"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Modern High-Performance Website</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">980</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="980">980</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Sodobna, zmogljiva spletna mesta, zasnovana za jasnost, zaupanje in rast s takojšnjim nalaganjem.</p>
@@ -2467,7 +2484,7 @@ main#wrapper:focus{outline:none}
                                 <div class="br-line bg-white"></div>
                                 <p class="plan-name letter-space--1 fw-medium">Intuitive E-Commerce Store</p>
                                 <h4 class="plan-price font-latin">
-                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount">1,450</span></span>
+                                    <span><span class="text-primary gold-accent">€</span><span class="plan-price__amount" data-eur-price="1450">1,450</span></span>
                                     <span class="text-body-2 fw-normal text-white-64 letter-space--1">/ project</span>
                                 </h4>
                                 <p class="plan-desc text-white-64">Intuitivna arhitektura spletne trgovine, ki občasne obiskovalce spremeni v vračajoče se kupce zahvaljujoč brezhibnemu zaključku nakupa.</p>
