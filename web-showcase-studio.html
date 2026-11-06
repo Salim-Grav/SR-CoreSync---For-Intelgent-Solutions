@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض ومولّد المواقع والمتاجر الإلكترونية الذكية • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="منصة واستوديو استعراض وتخصيص قوالب المواقع والمتاجر الإلكترونية الفاخرة، وصفحات الهبوط المتقدمة مع التكامل الفوري لبوابات الدفع العالمية والمحلية.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-bg-root: #020705;
+            --sr-bg-card: rgba(8, 18, 13, 0.85);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .showcase-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 32px;
+            background: rgba(4, 10, 7, 0.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .showcase-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .showcase-hero {
+            text-align: center;
+            padding: 55px 20px 35px;
+            max-width: 950px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .showcase-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .showcase-title {
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+
+        .showcase-desc {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        /* محاكي تخصيص النشاط */
+        .customizer-box {
+            background: rgba(10, 24, 17, 0.65);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .customizer-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .customizer-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--sr-gold-light);
+        }
+
+        .customizer-select {
+            background: #040806;
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .showcase-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* شبكة القوالب التفاعلية */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px;
+        }
+
+        .template-card {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .template-preview-frame {
+            height: 220px;
+            background: #0d1a13;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .template-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .template-badge-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--sr-cyan);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 12px;
+            border-radius: 999px;
+            align-self: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .template-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .template-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .template-features {
+            list-style: none;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .template-features li {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .template-features li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: 900;
+        }
+
+        .btn-template-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #c5a880 0%, #8c734b 100%);
+            color: #040806;
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-template-action:hover {
+            box-shadow: 0 10px 20px rgba(197, 168, 128, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* سلة المشتريات المنزلقة التفاعلية للمعاينة */
+        .cart-slideover {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 380px;
+            height: 100vh;
+            background: #06100b;
+            border-right: 1px solid var(--sr-border);
+            z-index: 1000;
+            transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 20px 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .cart-slideover.open {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الكانفاس المحيطي الشبكي ثلاثي الأبعاد -->
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل العلوي -->
+    <header class="showcase-navbar">
+        <a href="index.html" class="showcase-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="36" height="36">
+            <div>
+                <strong style="display:block; font-size:1.05rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.75rem; color:#94a3b8;">استوديو المواقع والمتاجر الذكية</span>
+            </div>
+        </a>
+
+        <div style="display:flex; align-items:center; gap:16px;">
+            <a href="brand-identity-studio.html" style="color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem;">استوديو الهوية 8K</a>
+            <a href="3d-mockup.html" style="color:#cbd5e1; text-decoration:none; font-weight:600; font-size:0.9rem;">معاينة 3D</a>
+            <button class="btn-template-action sr-magnetic-btn" onclick="toggleCartDrawer()">
+                <span>سلة المعاينة التفاعلية 🛒 (<span id="cartCount">1</span>)</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- الواجهة التقديمية -->
+    <section class="showcase-hero">
+        <div class="showcase-badge">
+            <span>🌐 محاكي ومعرض المنصات والمتاجر المتطورة 2026</span>
+        </div>
+        <h1 class="showcase-title">بناء وتطوير المواقع والمتاجر الإلكترونية الفاخرة</h1>
+        <p class="showcase-desc">
+            قوالب تفاعلية فائقة السرعة، متوافقة كلياً مع معايير محركات البحث (SEO 100%)، وتدعم بوابات الدفع العالمية (Stripe / iDEAL) مع تكامل العملات المتعددة والشحن الفوري.
+        </p>
+
+        <!-- محاكي التخصيص الفوري -->
+        <div class="customizer-box sr-tilt-card">
+            <div class="customizer-group">
+                <span class="customizer-label">قطاع العمل:</span>
+                <select class="customizer-select" id="industrySelect" onchange="applyCustomizer()">
+                    <option value="corporate">شركات ومؤسسات كبرى</option>
+                    <option value="ecommerce">متاجر إلكترونية فاخرة</option>
+                    <option value="fintech">تقنية مالية وبنوك</option>
+                    <option value="law">استشارات قانونية ودولية</option>
+                </select>
+            </div>
+
+            <div class="customizer-group">
+                <span class="customizer-label">نمط الألوان:</span>
+                <select class="customizer-select" id="themeSelect" onchange="applyTheme()">
+                    <option value="royal">الذهب الملكي (Royal Gold)</option>
+                    <option value="cyan">السيان السيبراني (Cyber Cyan)</option>
+                    <option value="emerald">الزمرد الأخضر (Sovereign Emerald)</option>
+                </select>
+            </div>
+
+            <div class="customizer-group">
+                <span class="customizer-label">العملة الافتراضية:</span>
+                <select class="customizer-select" id="currencySelect" onchange="updateCurrency()">
+                    <option value="EUR">اليورو الأوروبي (EUR €)</option>
+                    <option value="SAR">الريال السعودي (SAR ﷼)</option>
+                    <option value="AED">الدرهم الإماراتي (AED د.إ)</option>
+                    <option value="USD">الدولار الأمريكي (USD $)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- شبكة القوالب التفاعلية -->
+    <main class="showcase-container">
+        <div class="showcase-grid">
+
+            <!-- القالب 1: الموقع المؤسسي السيادي -->
+            <div class="template-card sr-tilt-card sr-holographic-card">
+                <div class="template-preview-frame">
+                    <div style="text-align:center;">
+                        <img src="./assets/sr-core-emblem.svg" width="60" height="60" style="filter: drop-shadow(0 0 15px rgba(197, 168, 128, 0.4));">
+                        <div style="margin-top:10px; font-weight:800; font-size:1.05rem; color:#ffffff;">Sovereign Corporate Platform</div>
+                        <div style="font-size:0.75rem; color:var(--sr-gold-light);">هيكل مؤسسي فائق السرعة</div>
+                    </div>
+                </div>
+
+                <div class="template-body">
+                    <div>
+                        <span class="template-badge-tag">مواقع الشركات الكبرى</span>
+                        <h2 class="template-title">منصة الشركات والمؤسسات السيادية</h2>
+                        <p class="template-desc">
+                            هيكل رقمي فخم يشمل أقسام تعريفية، لوحة تحكم في مؤشرات الأداء KPI، ونظام تقديم خدمات متقدم يدعم 29 لغة.
+                        </p>
+
+                        <ul class="template-features">
+                            <li>متوافق 100% مع Core Web Vitals (أداء 99/100)</li>
+                            <li>تكامل مباشر مع تقارير A4 المشفرة ونظام التذاكر</li>
+                            <li>دعم كامل للغة العربية والاتجاه من اليمين لليسار (RTL)</li>
+                        </ul>
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+                        <a href="index.html" class="btn-template-action sr-magnetic-btn" style="flex:1;">
+                            <span>معاينة حية للمنصة</span>
+                        </a>
+                        <button class="btn-template-action sr-magnetic-btn" style="background:rgba(255,255,255,0.08); color:#ffffff; border:1px solid var(--sr-border);" onclick="alert('تم نسخ مواصفات الهيكل المؤسسي!')">
+                            <span>تصدير المواصفات</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- القالب 2: المتجر الإلكتروني الفاخر -->
+            <div class="template-card sr-tilt-card sr-holographic-card">
+                <div class="template-preview-frame">
+                    <div style="text-align:center;">
+                        <div style="font-size:2.5rem; margin-bottom:6px;">🛍️</div>
+                        <div style="font-weight:800; font-size:1.05rem; color:#ffffff;">Luxury Sovereign E-Store</div>
+                        <div style="font-size:0.75rem; color:#10b981;">بوابات دفع جاهزة (Stripe/iDEAL)</div>
+                    </div>
+                </div>
+
+                <div class="template-body">
+                    <div>
+                        <span class="template-badge-tag" style="color:#10b981; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3);">متاجر فاخرة</span>
+                        <h2 class="template-title">متجر المنتجات الحصرية الذكي</h2>
+                        <p class="template-desc">
+                            تجربة تسوق حصرية تدعم الدفع بنقرة واحدة (Apple Pay / Google Pay / iDEAL)، وسلة مشتريات منزلقة سلسة.
+                        </p>
+
+                        <ul class="template-features">
+                            <li>سلة تسوق جانبية منزلقة دون إعادة تحميل الصفحة</li>
+                            <li>محول عملات آلي وحساب فوري للضرائب المحلية (VAT)</li>
+                            <li>إصدار فوري لفواتير الشراء بصيغة PDF المشفرة</li>
+                        </ul>
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-template-action sr-magnetic-btn" style="flex:1;" onclick="toggleCartDrawer()">
+                            <span>تجربة سلة التسوق الحية</span>
+                        </button>
+                        <button class="btn-template-action sr-magnetic-btn" style="background:rgba(255,255,255,0.08); color:#ffffff; border:1px solid var(--sr-border);" onclick="alert('تم تفعيل بوابات الدفع للتجربة!')">
+                            <span>اختبار الدفع</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- القالب 3: صفحة الهبوط ذات التحويل العالي -->
+            <div class="template-card sr-tilt-card sr-holographic-card">
+                <div class="template-preview-frame">
+                    <div style="text-align:center;">
+                        <div style="font-size:2.5rem; margin-bottom:6px;">🚀</div>
+                        <div style="font-weight:800; font-size:1.05rem; color:#ffffff;">High-Conversion Tech Landing</div>
+                        <div style="font-size:0.75rem; color:var(--sr-cyan);">تحويل قياسي ومؤثرات 3D</div>
+                    </div>
+                </div>
+
+                <div class="template-body">
+                    <div>
+                        <span class="template-badge-tag">صفحات هبوط عالية التحويل</span>
+                        <h2 class="template-title">صفحة الهبوط التفاعلية لمنتجات الذكاء الاصطناعي</h2>
+                        <p class="template-desc">
+                            مصممة هندسياً لرفع معدل التحويل (Conversion Rate)، متضمنة مسار صوتي تفاعلي، ومحاكي عوائد استثمارية (ROI).
+                        </p>
+
+                        <ul class="template-features">
+                            <li>عناصر تفاعلية 3D تستجيب لحركة المؤشر</li>
+                            <li>تكامل مع التخطيط الصوتي الذكي ونموذج الطلب السريع</li>
+                            <li>شهادات عملاء موثقة بخرائط التقييمات العالمية</li>
+                        </ul>
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+                        <a href="voice-dictate.html" class="btn-template-action sr-magnetic-btn" style="flex:1;">
+                            <span>معاينة تفاعل التخطيط الصوتي</span>
+                        </a>
+                        <a href="3d-mockup.html" class="btn-template-action sr-magnetic-btn" style="background:rgba(255,255,255,0.08); color:#ffffff; border:1px solid var(--sr-border);">
+                            <span>استعراض 3D</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- سلة التسوق المنزلقة التفاعلية -->
+    <aside class="cart-slideover" id="cartSlideover">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--sr-border);">
+            <h3 style="font-size:1.2rem; font-weight:800; color:#ffffff;">سلة المقتنيات الفاخرة 🛍️</h3>
+            <button onclick="toggleCartDrawer()" style="background:none; border:none; color:#94a3b8; font-size:1.4rem; cursor:pointer;">✕</button>
+        </div>
+
+        <div style="flex-grow:1; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; align-items:center; gap:12px; background:rgba(0,0,0,0.5); padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.08);">
+                <img src="./assets/sr-core-emblem.svg" width="40" height="40">
+                <div style="flex-grow:1;">
+                    <div style="font-weight:700; font-size:0.9rem; color:#ffffff;">حزمة المنظومة السيادية للشركات</div>
+                    <div style="font-size:0.8rem; color:var(--sr-gold-light);" id="cartPriceDisplay">€ 14,500.00</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding-top:20px; border-top:1px solid var(--sr-border);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-weight:700;">
+                <span>الإجمالي (شامل الضريبة):</span>
+                <span style="color:#10b981;" id="cartTotalDisplay">€ 14,500.00</span>
+            </div>
+            <button class="btn-template-action sr-magnetic-btn" style="width:100%;" onclick="alert('جاري التوجيه إلى بوابة الدفع الآمنة (Stripe / iDEAL)...')">
+                <span>إتمام الشراء والتعاقد الفوري 🔒</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- المحرك التفاعلي ثلاثي الأبعاد -->
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartSlideover');
+            drawer.classList.toggle('open');
+        }
+
+        function updateCurrency() {
+            const cur = document.getElementById('currencySelect').value;
+            const rates = {
+                'EUR': '€ 14,500.00',
+                'SAR': '﷼ 58,725.00',
+                'AED': 'د.إ 57,500.00',
+                'USD': '$ 15,660.00'
+            };
+            const val = rates[cur] || rates['EUR'];
+            document.getElementById('cartPriceDisplay').textContent = val;
+            document.getElementById('cartTotalDisplay').textContent = val;
+        }
+
+        function applyTheme() {
+            const th = document.getElementById('themeSelect').value;
+            if (th === 'cyan') {
+                document.documentElement.style.setProperty('--sr-gold', '#38bdf8');
+                document.documentElement.style.setProperty('--sr-gold-light', '#7dd3fc');
+            } else if (th === 'emerald') {
+                document.documentElement.style.setProperty('--sr-gold', '#10b981');
+                document.documentElement.style.setProperty('--sr-gold-light', '#6ee7b7');
+            } else {
+                document.documentElement.style.setProperty('--sr-gold', '#c5a880');
+                document.documentElement.style.setProperty('--sr-gold-light', '#f3dfba');
+            }
+        }
+
+        function applyCustomizer() {
+            const ind = document.getElementById('industrySelect').value;
+            console.log('Applied industry:', ind);
+        }
+    </script>
+</body>
+</html>
