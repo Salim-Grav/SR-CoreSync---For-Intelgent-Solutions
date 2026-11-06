@@ -4412,3 +4412,20 @@ gba(197, 168, 128, 0.45)) وبادجات اعتماد قانونية موثقة.
 - `python scripts/check_multilingual_page_parity.py` ➔ **اجتياز كامل بنسبة 100%**.
 - `python scripts/validate_publish_set.py` ➔ **اجتياز كامل بنسبة 100% (LTR Script Purity Check 54/54 صفحات نقية تماماً)**.
 - `node --check js/sr-inline-13eaa28e.js` ➔ **سليم برمجياً وخالٍ من الأخطاء**.
+
+
+---
+
+## 143. الجولة الثالثة والأربعون بعد المائة: تثبيت التوكن الجديد وربط المصادقة الصامتة الدائمة لمستودع GitHub
+
+### 1. الإجراء التقني المنفذ:
+- تم استبدال التوكن القديم المنتهي بالتوكن الشخصي الجديد المعتمد `ghp_...` داخل ملف [`.env`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.env).
+- تم تضمين التوكن مباشرة داخل إعدادات المستودع المحلي [`.git/config`](file:///d:/I-Ai/App/S&R%20CoreSync%20For%20Intelligent%20Solutions/Project/.git/config) كجزء من رابط المصادقة المباشر للـ Remote Origin:
+  `https://Salim-Grav:ghp_***@github.com/Salim-Grav/SR-CoreSync-For-Intelgent-Solutions.git`
+
+---
+
+### 2. الأثر التشغيلي والنتائج:
+- استبعاد أي حاجة لإدخال اسم مستخدم أو كلمة مرور مستقبلاً.
+- تنفيذ عمليات المزامنة والرفع (Sync Changes / Git Push) بصمت وسرعة مطلقة.
+- خلو المستودع من أي تسريبات أمنية بعد تشغيل فحص الأمان السيادي `validate_publish_set.py`.
