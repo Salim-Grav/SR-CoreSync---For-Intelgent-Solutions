@@ -2198,8 +2198,8 @@ main#wrapper:focus{outline:none}
                         <div class="es-currency-bar">
                             <button class="es-currency-btn active" data-currency="EUR" data-sr-call="switchCurrency" data-sr-args='["EUR"]'>🇪🇺 EUR (€)</button>
                             <button class="es-currency-btn" data-currency="USD" data-sr-call="switchCurrency" data-sr-args='["USD"]'>🇺🇸 USD ($)</button>
-                            <button class="es-currency-btn" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR (﷼)</button>
-                            <button class="es-currency-btn" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED (د.إ)</button>
+                            <button class="es-currency-btn" data-currency="SAR" data-sr-call="switchCurrency" data-sr-args='["SAR"]'>🇸🇦 SAR</button>
+                            <button class="es-currency-btn" data-currency="AED" data-sr-call="switchCurrency" data-sr-args='["AED"]'>🇦🇪 AED</button>
                             <button class="es-currency-btn" data-currency="GBP" data-sr-call="switchCurrency" data-sr-args='["GBP"]'>🇬🇧 GBP (£)</button>
                         </div>
                     </div>
@@ -8389,7 +8389,24 @@ try{(function(){window.addEventListener('scroll',function(){var winScroll=docume
                 <button type="button" class="sr-exec-modal-close" data-sr-call="closeAiVoicePlannerModal" aria-label="Close">&times;</button>
             </div>
 
-            <div class="sr-voice-mic-box">
+                                    <div class="sr-voice-mic-box">
+                <!-- Dialect & Language Selector -->
+                <div class="sr-voice-lang-bar" style="display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+                    <span style="font-size:0.82rem;color:var(--text-muted,#94a3b8);font-weight:600;">🌍 Voice Language & Dialect:</span>
+                    <select id="voicePlannerLangSelect" style="background:rgba(14,28,22,0.95);border:1px solid rgba(197,168,128,0.4);color:#f0dfbd;padding:6px 14px;border-radius:10px;font-size:0.84rem;font-family:inherit;cursor:pointer;outline:none;">
+                        <option value="ar-SA" selected>🇸🇦 Arabic (Gulf / Standard)</option>
+                        <option value="ar-SY">🇸🇾 Arabic (Levant / Syria)</option>
+                        <option value="ar-EG">🇪🇬 Arabic (Egypt)</option>
+                        <option value="ar-AE">🇦🇪 Arabic (UAE)</option>
+                        <option value="nl-NL">🇳🇱 Dutch (Nederlands)</option>
+                        <option value="en-US">🇬🇧 English</option>
+                        <option value="de-DE">🇩🇪 German (Deutsch)</option>
+                        <option value="fr-FR">🇫🇷 French (Français)</option>
+                        <option value="es-ES">🇪🇸 Spanish (Español)</option>
+                        <option value="it-IT">🇮🇹 Italian (Italiano)</option>
+                        <option value="tr-TR">🇹🇷 Turkish (Türkçe)</option>
+                    </select>
+                </div>
                 <button type="button" id="voicePlannerMicBtn" class="sr-voice-mic-btn" data-sr-call="toggleVoiceRecording" title="Tap to start or stop recording">
                     <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
                 </button>
