@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو توليد المتاجر الرقمية الفورية • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="محرك سيادي متقدم يتيح توليد وإطلاق متاجر إلكترونية فاخرة متكاملة في ثوانٍ، مع دعم المنتجات الرقمية والمادية، وبوابات الدفع والفوترة الفورية.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030805;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        /* المحرك التفاعلي للتوليد */
+        .launchpad-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1024px) {
+            .launchpad-grid { grid-template-columns: 1fr; }
+        }
+
+        .control-panel {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            height: fit-content;
+        }
+
+        .panel-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--sr-gold);
+        }
+
+        .type-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .type-card-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .type-card-btn.active, .type-card-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .type-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+        .type-title { font-size: 0.75rem; font-weight: 800; color: #f8fafc; }
+
+        .btn-launch {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-family: inherit;
+        }
+
+        .btn-launch:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+
+        /* نافذة المعاينة الحية للمتجر المولد */
+        .store-preview-wrapper {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(14px);
+        }
+
+        .preview-top-bar {
+            background: rgba(5, 12, 8, 0.95);
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-url-pill {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: var(--sr-cyan);
+            font-family: 'Space Grotesk', monospace;
+            direction: ltr;
+        }
+
+        .store-stage {
+            padding: 30px;
+            background: radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.08) 0%, transparent 60%);
+        }
+
+        .store-header-banner {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 30px;
+        }
+
+        .store-brand-name {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .store-brand-tagline {
+            font-size: 0.95rem;
+            color: #94a3b8;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: rgba(5, 12, 8, 0.65);
+            border: 1px solid rgba(197, 168, 128, 0.18);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+        }
+
+        .product-card:hover {
+            border-color: var(--sr-gold);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-image-box {
+            height: 140px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 6px;
+        }
+
+        .product-desc {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--sr-gold-light);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-add-cart {
+            background: rgba(197, 168, 128, 0.15);
+            border: 1px solid var(--sr-gold);
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--sr-gold);
+            color: #040806;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">استوديو توليد المتاجر الفورية</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-link">استوديو الهوية 8K</a>
+            <a href="web-showcase-studio.html" class="nav-link">معرض المواقع</a>
+            <a href="payment-gateway.html" class="nav-link">بوابة المدفوعات</a>
+            <a href="invoice-engine.html" class="nav-link">الفوترة الرقمية</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">🛍️ استوديو إطلاق المتاجر الذكية — Instant Store Launchpad</div>
+        <h1>توليد متجر إلكتروني فاخر جاهز للبيع في ثوانٍ</h1>
+        <p>اختر نوع نشاطك التجاري ومنتجاتك، وسيقوم محركنا السيادي بإنشاء متجر متكامل بهويتك البصرية، مربوط مباشرة بسلة التسوق، وبوابات الدفع (Stripe / iDEAL)، والفوترة الضريبية ZATCA.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="launchpad-grid">
+
+        <!-- لوحة التحكم وتخصيص المتجر -->
+        <div class="control-panel sr-tilt-card sr-holographic-card">
+            <div class="panel-heading">
+                <span>⚙️</span> إعدادات المتجر الفوري
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">نوع المنتجات والنشاط:</label>
+                <div class="type-selector-grid">
+                    <button type="button" class="type-card-btn active" onclick="setStoreType('digital')">
+                        <span class="type-icon">💻</span>
+                        <span class="type-title">رقمية وسوفتوير</span>
+                    </button>
+                    <button type="button" class="type-card-btn" onclick="setStoreType('luxury')">
+                        <span class="type-icon">👑</span>
+                        <span class="type-title">سلع فاخرة</span>
+                    </button>
+                    <button type="button" class="type-card-btn" onclick="setStoreType('services')">
+                        <span class="type-icon">💼</span>
+                        <span class="type-title">خدمات واستشارات</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">اسم المتجر / العلامة التجارية:</label>
+                <input type="text" class="form-input" id="storeNameInput" value="متجر نوفيلا الفاخر" oninput="updateStorePreview()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العبارة الترويجية (Tagline):</label>
+                <input type="text" class="form-input" id="storeTaglineInput" value="أحدث الابتكارات الرقمية والحلول المؤسسية الحصرية" oninput="updateStorePreview()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العملة الافتراضية للمتجر:</label>
+                <select class="form-select" id="storeCurrencySelect" onchange="updateStorePreview()">
+                    <option value="EUR">اليورو الأوروبي (EUR €)</option>
+                    <option value="SAR" selected>الريال السعودي (SAR ﷼)</option>
+                    <option value="AED">الدرهم الإماراتي (AED د.إ)</option>
+                    <option value="USD">الدولار الأمريكي (USD $)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">بوابة الدفع التلقائية المربوطة:</label>
+                <select class="form-select" id="storeGatewaySelect">
+                    <option value="all">الكل (Apple Pay + Stripe + iDEAL + بطاقات)</option>
+                    <option value="stripe">Stripe العالمية</option>
+                    <option value="ideal">iDEAL البنوك الهولندية</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn-launch sr-magnetic-btn" onclick="launchStore()">
+                <span>⚡ إطلاق المتجر وتصدير كود التشغيل</span>
+            </button>
+        </div>
+
+        <!-- المعاينة الحية للمتجر -->
+        <div class="store-preview-wrapper sr-tilt-card">
+            <div class="preview-top-bar">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+                    <span style="width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+                    <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+                </div>
+                <div class="preview-url-pill" id="storePreviewUrl">https://store.sr-coresync.com/live</div>
+                <div style="color:var(--sr-gold-light); font-size:0.85rem; font-weight:700;">معاينة حية 100%</div>
+            </div>
+
+            <div class="store-stage">
+                <div class="store-header-banner">
+                    <img src="./assets/sr-core-emblem.svg" width="50" height="50" style="margin-bottom:12px; filter: drop-shadow(0 0 10px rgba(197, 168, 128, 0.4));">
+                    <h2 class="store-brand-name" id="previewStoreName">متجر نوفيلا الفاخر</h2>
+                    <p class="store-brand-tagline" id="previewStoreTagline">أحدث الابتكارات الرقمية والحلول المؤسسية الحصرية</p>
+                </div>
+
+                <!-- شبكة المنتجات المعروضة -->
+                <div class="products-grid" id="productsGridContainer">
+                    <!-- تُولد ديناميكياً -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار الإطلاق والتصدير -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم توليد وتفعيل المتجر وربط بوابات الدفع بنجاح!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        const storeData = {
+            digital: [
+                { id: 1, name: 'رخصة نظام S&R ERP السحابي', desc: 'نظام إدارة الموارد وتخطيط المؤسسات السيادي مع تشفير كامل للبيانات.', price: 4500, icon: '⚡' },
+                { id: 2, name: 'حزمة قوالب المواقع 8K', desc: 'مكتبة تضم أكثر من 20 قالباً برمجياً فائق السرعة متوافق مع SEO.', price: 1850, icon: '🌐' },
+                { id: 3, name: 'محرك التشفير السيادي للبيانات', desc: 'أداة حماية وعزل السجلات الحساسة والامتثال للمعايير الدولية.', price: 3200, icon: '🔒' }
+            ],
+            luxury: [
+                { id: 4, name: 'بطاقة الأعمال الذكية NFC بالذهب 24K', desc: 'بطاقة معدنية فاخرة مدمجة بشريحة اتصال ذكي وختم بارز.', price: 750, icon: '💳' },
+                { id: 5, name: 'ساعة الحضور الرقمية المشفرة', desc: 'جهاز تسجيل دخول بيومتري معتمد للمكاتب التنفيذية العليا.', price: 2900, icon: '⌚' },
+                { id: 6, name: 'مجموعة الأختام المؤسسية الرسمية', desc: 'ختم هيدروليكي فاخر مع توثيق كودي QR متصل بالنظام السحابي.', price: 1100, icon: '📜' }
+            ],
+            services: [
+                { id: 7, name: 'جلسة استشارية لتحليل الهيكل التقني', desc: 'استشارة تنفيذية لمدة ساعتين مع كبير المهندسين لتقييم الأنظمة.', price: 1500, icon: '💼' },
+                { id: 8, name: 'تدقيق الأمان السيادي والامتثال ZATCA', desc: 'فحص شامل للأنظمة البرمجية ومطابقتها للمتطلبات الضريبية.', price: 5800, icon: '🛡️' },
+                { id: 9, name: 'عقد صيانة ودعم فني سنوي VIP', desc: 'دعم تقني مدار على مدار الساعة مع استجابة فورية خلال 15 دقيقة.', price: 9600, icon: '🎖️' }
+            ]
+        };
+
+        let currentStoreType = 'digital';
+
+        function setStoreType(type) {
+            currentStoreType = type;
+            document.querySelectorAll('.type-card-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderProducts();
+        }
+
+        function updateStorePreview() {
+            const name = document.getElementById('storeNameInput').value || 'المتجر الإلكتروني';
+            const tagline = document.getElementById('storeTaglineInput').value || 'حلول وخدمات حصرية';
+            document.getElementById('previewStoreName').textContent = name;
+            document.getElementById('previewStoreTagline').textContent = tagline;
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const cur = document.getElementById('storeCurrencySelect').value;
+            const rates = { EUR: { sym: '€', rate: 1 }, SAR: { sym: '﷼', rate: 4.05 }, AED: { sym: 'د.إ', rate: 3.97 }, USD: { sym: '$', rate: 1.08 } };
+            const { sym, rate } = rates[cur] || rates['EUR'];
+
+            const container = document.getElementById('productsGridContainer');
+            container.innerHTML = '';
+
+            const list = storeData[currentStoreType] || storeData.digital;
+            list.forEach(p => {
+                const priceFormatted = `${sym} ${(p.price * rate).toLocaleString('ar-SA', { minimumFractionDigits: 2 })}`;
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="product-image-box">${p.icon}</div>
+                        <h3 class="product-name">${p.name}</h3>
+                        <p class="product-desc">${p.desc}</p>
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">${priceFormatted}</span>
+                        <button class="btn-add-cart" onclick="redirectToPayment('${p.name}', ${p.price * rate}, '${sym}')">
+                            شراء الآن 🛍️
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function redirectToPayment(itemName, amount, symbol) {
+            window.location.href = `./payment-gateway.html?item=${encodeURIComponent(itemName)}&amt=${amount}&cur=${symbol}`;
+        }
+
+        function launchStore() {
+            const toast = document.getElementById('toastNotification');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو الحملات الإعلانية وتوليد أصول التواصل 8K • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="محرك تصميم سيادي لتوليد أصول وتصاميم الحملات الإعلانية وشبكات التواصل الاجتماعي بدقة فائقة 8K بنقرة واحدة.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #040806;
+            --sr-bg-card: rgba(10, 20, 15, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .ads-studio-layout {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1024px) {
+            .ads-studio-layout { grid-template-columns: 1fr; }
+        }
+
+        .editor-panel {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            height: fit-content;
+        }
+
+        .panel-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .format-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .format-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .format-btn.active, .format-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .format-name { font-size: 0.85rem; font-weight: 800; color: #ffffff; }
+        .format-dim { font-size: 0.72rem; color: #94a3b8; font-family: monospace; }
+
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--sr-gold); margin-bottom: 6px; }
+        .form-input {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .form-input:focus { border-color: var(--sr-gold); }
+
+        .btn-export-ad {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        .btn-export-ad:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+
+        /* المعاينة الحية للأصل الإعلاني */
+        .preview-canvas-wrapper {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 550px;
+            backdrop-filter: blur(14px);
+        }
+
+        /* كرت التصميم الإعلاني */
+        .ad-artboard {
+            background: linear-gradient(145deg, #0a1811 0%, #030805 100%);
+            border: 2px solid var(--sr-gold);
+            border-radius: 20px;
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        /* أبعاد قياسية محاكاة */
+        .ad-artboard.square { width: 420px; height: 420px; }
+        .ad-artboard.story { width: 320px; height: 568px; }
+        .ad-artboard.banner { width: 560px; height: 200px; }
+
+        .artboard-emblem {
+            width: 55px;
+            height: 55px;
+            filter: drop-shadow(0 0 12px rgba(197, 168, 128, 0.4));
+        }
+
+        .artboard-headline {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.35;
+            margin-bottom: 10px;
+        }
+
+        .artboard-subtitle {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .artboard-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 10px 22px;
+            border-radius: 999px;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(197, 168, 128, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">استوديو أصول التواصل 8K</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-link">استوديو الهوية</a>
+            <a href="ecommerce-launchpad.html" class="nav-link">مولّد المتاجر</a>
+            <a href="security-trust-center.html" class="nav-link">مركز الأمان</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">🎨 محرك أصول الحملات الإعلانية — 8K Social Asset Studio</div>
+        <h1>توليد تصاميم الحملات الإعلانية بالهوية الرسمية 8K</h1>
+        <p>أنشئ تصاميم إعلانية لمنصات التواصل الاجتماعي (Stories, Posts, Banners) مطابقة لهويتك البصرية، قابلة للتعديل اللحظي والتصدير بدقة 8K فائقة.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="ads-studio-layout">
+
+        <!-- لوحة التحكم -->
+        <div class="editor-panel sr-tilt-card sr-holographic-card">
+            <div class="panel-heading">
+                <span>⚙️</span> خيارات وحجم التصميم الإعلاني
+            </div>
+
+            <div class="format-buttons-grid">
+                <button type="button" class="format-btn active" onclick="setFormat('square')">
+                    <div class="format-name">منشور مربع (Post)</div>
+                    <div class="format-dim">1080 × 1080 px</div>
+                </button>
+                <button type="button" class="format-btn" onclick="setFormat('story')">
+                    <div class="format-name">قصة طولية (Story)</div>
+                    <div class="format-dim">1080 × 1920 px</div>
+                </button>
+                <button type="button" class="format-btn" onclick="setFormat('banner')">
+                    <div class="format-name">بانر عريض (Banner)</div>
+                    <div class="format-dim">1584 × 396 px</div>
+                </button>
+                <button type="button" class="format-btn" onclick="alert('جاري إتاحة أبعاد يوتيوب قريباً!')">
+                    <div class="format-name">غلاف فيديو (Cover)</div>
+                    <div class="format-dim">1280 × 720 px</div>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العنوان الإعلاني الرئيسي:</label>
+                <input type="text" class="form-input" id="adHeadlineInput" value="السيادة الرقمية تبدأ من هنا" oninput="updateArtboard()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">النص التعريفي المساعد:</label>
+                <input type="text" class="form-input" id="adSubtitleInput" value="حلول متكاملة في الذكاء الاصطناعي المؤسسي والأنظمة السحابية المعزولة." oninput="updateArtboard()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">نص زر الإجراء (CTA):</label>
+                <input type="text" class="form-input" id="adCtaInput" value="ابدأ التعاقد الآن ⚡" oninput="updateArtboard()">
+            </div>
+
+            <button type="button" class="btn-export-ad sr-magnetic-btn" onclick="exportAdAsset()">
+                <span>⬇️ تصدير التصميم الإعلاني عالي الدقة (8K)</span>
+            </button>
+        </div>
+
+        <!-- مساحة المعاينة الحية للأصل -->
+        <div class="preview-canvas-wrapper sr-tilt-card">
+            <div class="ad-artboard square" id="adArtboard">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <img src="./assets/sr-core-emblem.svg" alt="Brand Emblem" class="artboard-emblem">
+                    <span style="font-size:0.75rem; color:var(--sr-gold-light); font-weight:800; font-family:'Space Grotesk',sans-serif;">S&R CORESYNC</span>
+                </div>
+
+                <div>
+                    <h2 class="artboard-headline" id="artboardHeadline">السيادة الرقمية تبدأ من هنا</h2>
+                    <p class="artboard-subtitle" id="artboardSubtitle">حلول متكاملة في الذكاء الاصطناعي المؤسسي والأنظمة السحابية المعزولة.</p>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="artboard-cta-btn" id="artboardCta">ابدأ التعاقد الآن ⚡</div>
+                    <span style="font-size:0.7rem; color:#94a3b8; font-family:monospace;">SR-CORESYNC.COM</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار التصدير -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم إعداد وتصدير الأصل الإعلاني 8K بنجاح!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        function setFormat(fmt) {
+            document.querySelectorAll('.format-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            const board = document.getElementById('adArtboard');
+            board.className = 'ad-artboard ' + fmt;
+        }
+
+        function updateArtboard() {
+            document.getElementById('artboardHeadline').textContent = document.getElementById('adHeadlineInput').value || 'عنوان الإعلان';
+            document.getElementById('artboardSubtitle').textContent = document.getElementById('adSubtitleInput').value || 'وصف الإعلان';
+            document.getElementById('artboardCta').textContent = document.getElementById('adCtaInput').value || 'انقر هنا';
+        }
+
+        function exportAdAsset() {
+            const toast = document.getElementById('toastNotification');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+    </script>
+</body>
+</html>
+
