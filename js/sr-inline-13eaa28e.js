@@ -1,4 +1,6 @@
 let voiceRecognition=null,isVoiceRecording=!1;function openAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&(e.classList.add("active"),document.body.style.overflow="hidden","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("open"))}function closeAiVoicePlannerModal(){const e=document.getElementById("aiVoicePlannerModal");e&&e.classList.contains("active")&&(stopVoiceRecording(),stopBlueprintAudioSynthesis(),e.classList.remove("active"),document.body.style.overflow="","undefined"!=typeof LuxuryAudio&&LuxuryAudio.play("close"))}
+let isVoiceToggling = false;
+
 function getSelectedVoiceLang() {
     const select = document.getElementById('voicePlannerLangSelect');
     if (select && select.value) return select.value;
@@ -18,31 +20,12 @@ function getSelectedVoiceLang() {
     return langMap[docLang] || 'ar-SA';
 }
 
-async function requestMicPermission() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            stream.getTracks().forEach(track => track.stop());
-            return true;
-        } catch (err) {
-            console.warn('Microphone permission check:', err);
-            return false;
-        }
-    }
-    return true;
-}
-
-async function startVoiceRecording() {
+function startVoiceRecording() {
     const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     const btn = document.getElementById('voicePlannerMicBtn');
     const status = document.getElementById('voicePlannerStatus');
     const transcript = document.getElementById('voicePlannerTranscript');
-
-    if (window.location.protocol === 'file:') {
-        if (status) status.innerHTML = '⚠️ متصفح Chrome يمنع استخدام المايك على ملفات القرص (file:///). يرجى فتح الموقع عبر الرابط السحابي المعتمد أو استخدام المربع لكتابة فكرتك وسيقوم الذكاء الاصطناعي بهندستها فوراً!';
-        if (transcript) transcript.focus();
-        return;
-    }
+    const waves = document.getElementById('voicePlannerWaves');
 
     if (!SpeechRec) {
         if (status) status.innerHTML = '⚠️ المتصفح الحالي لا يدعم التعرف الصوتي المباشر. يرجى استخدام Google Chrome أو Edge، أو كتابة الفكرة مباشرة بالأسفل.';
@@ -50,12 +33,9 @@ async function startVoiceRecording() {
         return;
     }
 
-    if (status) status.innerHTML = '🎙️ جاري فتح الميكروفون والتحقق من الصلاحيات...';
-
-    const permGranted = await requestMicPermission();
-    if (!permGranted) {
-        if (status) status.innerHTML = '⚠️ يُرجى النقر على أيقونة القفل أو المايك في شريط عنوان المتصفح والسماح باستخدام الميكروفون (Allow).';
-        return;
+    if (window.location.protocol === 'file:') {
+        if (status) status.innerHTML = '⚠️ تشغيل الموقع محلياً عبر (file:///) يمنع وصول المتصفح للمايك تلقائياً. يُرجى فتح الموقع عبر الرابط السحابي المعتمد <strong>https://sr-coresync.com/</strong> أو كتابة الفكرة مباشرة وسيقوم الذكاء الاصطناعي بهندستها فوراً!';
+        if (transcript) transcript.focus();
     }
 
     try {
@@ -67,7 +47,8 @@ async function startVoiceRecording() {
         voiceRecognition = new SpeechRec();
         voiceRecognition.continuous = true;
         voiceRecognition.interimResults = true;
-        
+        voiceRecognition.maxAlternatives = 5;
+
         const chosenLang = getSelectedVoiceLang();
         voiceRecognition.lang = chosenLang;
 
@@ -77,11 +58,21 @@ async function startVoiceRecording() {
                 btn.classList.add('is-recording');
                 btn.setAttribute('aria-pressed', 'true');
             }
-            const waves = document.getElementById('voicePlannerWaves');
             if (waves) waves.classList.add('active');
 
-            const langDisplay = chosenLang.startsWith('ar') ? 'العربية 🇸🇦' : chosenLang;
-            if (status) status.innerHTML = '🔴 <strong>جاري الاستماع لصوتك الآن باللغة (' + langDisplay + ')...</strong> تحدث بحرية وسيقوم النظام بتفريغ كلامك فوراً!';
+            const langNames = {
+                'ar-SA': 'العربية الفصحى 🇸🇦',
+                'ar-SY': 'العربية الشامية 🇸🇾',
+                'ar-EG': 'العربية المصرية 🇪🇬',
+                'ar-AE': 'العربية الإماراتية 🇦🇪',
+                'nl-NL': 'الهولندية 🇳🇱',
+                'en-US': 'الإنجليزية 🇬🇧',
+                'de-DE': 'الألمانية 🇩🇪',
+                'fr-FR': 'الفرنسية 🇫🇷',
+                'tr-TR': 'التركية 🇹🇷'
+            };
+            const displayLabel = langNames[chosenLang] || chosenLang;
+            if (status) status.innerHTML = '🔴 <strong>جاري الاستماع لصوتك الآن بلهجة (' + displayLabel + ')...</strong> تحدث بحرية وسيقوم النظام بتفريغ كلامك فوراً!';
             if (typeof LuxuryAudio !== 'undefined') LuxuryAudio.play('tap');
         };
 
@@ -99,28 +90,36 @@ async function startVoiceRecording() {
             const fullText = (accumulated + interim).trim();
             if (transcript && fullText) {
                 transcript.value = fullText;
+                transcript.scrollTop = transcript.scrollHeight;
+            }
+            if (status) {
+                status.innerHTML = '🟢 <strong>تم التقاط الصوت بنجاح!</strong> تحدث بحرية أو انقر على المايك لإيقاف التسجيل.';
             }
         };
 
         voiceRecognition.onerror = function(e) {
             console.warn('Speech recognition notice:', e.error);
+            if (e.error === 'no-speech') {
+                if (status) status.innerHTML = '🎙️ المايك يستمع لصوتك الآن... تحدث بوضوح بالقرب من الميكروفون.';
+                return;
+            }
+
             isVoiceRecording = false;
             if (btn) {
                 btn.classList.remove('is-recording');
                 btn.setAttribute('aria-pressed', 'false');
             }
-            const waves = document.getElementById('voicePlannerWaves');
             if (waves) waves.classList.remove('active');
 
             if (status) {
                 if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
-                    status.innerHTML = '⚠️ تم رفض إذن المايك. اضغط على أيقونة القفل أعلى المتصفح 🔒 واختر السماح بالميكروفون (Allow).';
-                } else if (e.error === 'no-speech') {
-                    status.innerHTML = 'لم نسمع صوتاً واضحاً. اضغط على المايك وتحدث بالقرب من الجهاز، أو اكتب فكرتك مباشرة.';
+                    status.innerHTML = '⚠️ <strong>إذن الميكروفون مقيد:</strong> انقر على أيقونة القفل 🔒 في شريط عنوان المتصفح، واختر السماح للميكروفون (Allow)، ثم أعد النقر على المايك.';
+                } else if (e.error === 'audio-capture') {
+                    status.innerHTML = '⚠️ <strong>لم يتم العثور على ميكروفون:</strong> تأكد من توصيل الميكروفون واختياره كجهاز إدخال افتراضي في Windows.';
                 } else if (e.error === 'network') {
-                    status.innerHTML = '⚠️ تعذر الاتصال بمحرك تحويل الصوت السحابي. تحقق من اتصال الإنترنت أو اكتب الفكرة مباشرة.';
+                    status.innerHTML = '⚠️ تعذر الاتصال بمحرك الصوت السحابي. تحقق من اتصال الإنترنت أو اكتب فكرتك مباشرة وسيقوم الذكاء الاصطناعي بهندستها.';
                 } else {
-                    status.innerHTML = 'اضغط على المايك وتحدث، أو اكتب فكرتك مباشرة وسيقوم الذكاء الاصطناعي بهندستها.';
+                    status.innerHTML = 'اضغط على المايك وتحدث، أو اكتب فكرتك مباشرة في المربع بالأسفل.';
                 }
             }
         };
@@ -131,18 +130,18 @@ async function startVoiceRecording() {
                 btn.classList.remove('is-recording');
                 btn.setAttribute('aria-pressed', 'false');
             }
-            const waves = document.getElementById('voicePlannerWaves');
             if (waves) waves.classList.remove('active');
 
             if (status) {
                 if (transcript && transcript.value.trim().length > 0) {
-                    status.innerHTML = '✓ تم تسجيل فكرتك بنجاح! اضغط على الزر الذهبي بالأسفل لتوليد خطة العمل وخارطة الطريق فوراً.';
+                    status.innerHTML = '✓ <strong>تم تسجيل فكرتك بنجاح!</strong> اضغط على الزر الذهبي أدناه لتوليد خطة العمل وخارطة الطريق فوراً ⚡';
                 } else {
                     status.innerHTML = 'اضغط على المايك وتحدث، أو اكتب فكرتك مباشرة في المربع أدناه.';
                 }
             }
         };
 
+        if (status) status.innerHTML = '🎙️ جاري تفعيل الميكروفون... يُرجى التحدث الآن!';
         voiceRecognition.start();
     } catch(err) {
         console.error('Speech recognition start exception:', err);
@@ -162,14 +161,25 @@ function stopVoiceRecording() {
         btn.setAttribute('aria-pressed', 'false');
     }
     if (waves) waves.classList.remove('active');
-    if (status) status.innerHTML = '✓ تم تسجيل الفكرة. انقر على الزر الذهبي أدناه لتوليد خطة العمل!';
     if (voiceRecognition) {
         try { voiceRecognition.stop(); } catch(e) {}
         voiceRecognition = null;
     }
+    if (status) {
+        const transcript = document.getElementById('voicePlannerTranscript');
+        if (transcript && transcript.value.trim().length > 0) {
+            status.innerHTML = '✓ تم إيقاف التسجيل. اضغط على الزر الذهبي بالأسفل لتوليد خطة العمل!';
+        } else {
+            status.innerHTML = 'اضغط على المايك وتحدث، أو اكتب فكرتك مباشرة في المربع أدناه.';
+        }
+    }
 }
 
 function toggleVoiceRecording() {
+    if (isVoiceToggling) return;
+    isVoiceToggling = true;
+    setTimeout(function() { isVoiceToggling = false; }, 400);
+
     if (isVoiceRecording) {
         stopVoiceRecording();
     } else {
@@ -1258,14 +1268,4 @@ window.closeClientReportDispatchModal = closeClientReportDispatchModal;
 window.executeClientReportDispatch = executeClientReportDispatch;
 window.playExecutiveMasculineChime = playExecutiveMasculineChime;
 
-if (typeof document !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', function() {
-        const micBtn = document.getElementById('voicePlannerMicBtn');
-        if (micBtn) {
-            micBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                toggleVoiceRecording();
-            });
-        }
-    });
-}
+// Duplicate micBtn listener removed - handled via data-sr-call
