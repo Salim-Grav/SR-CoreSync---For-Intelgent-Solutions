@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز أتمتة الـ Webhooks والربط السحابي • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="منصة مركزية لمراقبة وأتمتة مسارات العمل وإرسال إشعارات Webhooks اللحظية المشفرة مع ربط Telegram و WhatsApp.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030806;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--sr-cyan);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .hub-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1080px) {
+            .hub-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel-card {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            margin-bottom: 24px;
+        }
+
+        .panel-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--sr-gold);
+        }
+
+        .code-box {
+            background: #020503;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: #38bdf8;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            max-height: 220px;
+        }
+
+        .btn-action-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            font-family: inherit;
+        }
+
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+
+        /* جدول سجل الأحداث */
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .log-table th {
+            text-align: right;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--sr-gold-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-weight: 700;
+        }
+
+        .log-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-badge.success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-replay {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--sr-cyan);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-replay:hover {
+            background: var(--sr-cyan);
+            color: #040806;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">مركز أتمتة الـ Webhooks</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="landing-page-builder.html" class="nav-link">مولّد صفحات الهبوط</a>
+            <a href="ecommerce-launchpad.html" class="nav-link">مولّد المتاجر</a>
+            <a href="payment-gateway.html" class="nav-link">بوابة المدفوعات</a>
+            <a href="security-trust-center.html" class="nav-link">مركز الأمان</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">⚡ مسارات الربط السحابي اللحظي — Autonomous Webhooks & Cloud Integrations</div>
+        <h1>مركز أتمتة الـ Webhooks والربط السحابي</h1>
+        <p>إدارة وتوجيه إشعارات الأحداث المشفرة (HMAC-SHA256) لحظة بلحظة مع كل عملية دفع، بيع، أو توقيع عقد، مع ربط تلقائي بروبوتات Telegram وتنبيهات WhatsApp المباشرة.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="hub-grid">
+
+        <!-- اللوحة الجانبية: تكوين وإطلاق Webhook تجريبي -->
+        <div>
+            <!-- بطاقة التكوين -->
+            <div class="panel-card sr-tilt-card sr-holographic-card">
+                <div class="panel-heading">
+                    <span>⚙️</span> تكوين نقطة النهاية (Endpoint Config)
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">رابط الاستقبال السحابي (Target Webhook URL):</label>
+                    <input type="text" class="form-input" id="targetUrlInput" value="https://api.yourcompany.com/webhooks/receiver" dir="ltr">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">نوع الحدث المستمع إليه (Trigger Event):</label>
+                    <select class="form-select" id="eventTypeSelect" onchange="updatePayloadPreview()">
+                        <option value="payment.succeeded">payment.succeeded (نجاح عملية دفع فوري)</option>
+                        <option value="order.created">order.created (إنشاء طلب متجر جديد)</option>
+                        <option value="contract.signed">contract.signed (اعتماد وتوقيع عقد إلكتروني)</option>
+                        <option value="invoice.issued">invoice.issued (إصدار فاتورة ضريبية ZATCA)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">المفتاح السري للتوقيع المشفر (Secret Key):</label>
+                    <input type="text" class="form-input" id="secretKeyInput" value="whsec_98f4a210b49c7e39a2d8" dir="ltr" readonly style="color:var(--sr-gold-light);">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">حمولة البيانات (JSON Payload Preview):</label>
+                    <div class="code-box" id="jsonPayloadDisplay">
+{
+  "event": "payment.succeeded",
+  "id": "evt_20261107_984",
+  "amount": 16093.00,
+  "currency": "EUR",
+  "client": "شركة مجموعة الذهب",
+  "timestamp": "2026-11-07T07:53:46Z",
+  "signature": "hmac_sha256_b41a99..."
+}
+                    </div>
+                </div>
+
+                <button type="button" class="btn-action-primary sr-magnetic-btn" onclick="dispatchTestWebhook()">
+                    <span>🚀 إرسال حدث تجريبي فوري (Trigger Webhook)</span>
+                </button>
+            </div>
+
+            <!-- بطاقة كود التحقق الأمني -->
+            <div class="panel-card sr-tilt-card">
+                <div class="panel-heading">
+                    <span>🔒</span> كود التحقق من التوقيع (HMAC-SHA256)
+                </div>
+                <div class="code-box">
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const hmac = crypto.createHmac('sha256', secret);
+  const digest = 'sha256=' + hmac.update(payload).digest('hex');
+  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- اللوحة الرئيسية: سجل الأحداث الحية والمراقبة -->
+        <div class="panel-card sr-tilt-card">
+            <div class="panel-heading">
+                <span>📡</span> سجل تسليم الأحداث السحابية الحية (Live Delivery Logs)
+            </div>
+
+            <div style="overflow-x:auto;">
+                <table class="log-table">
+                    <thead>
+                        <tr>
+                            <th>الحدث (Event)</th>
+                            <th>كود الحالة</th>
+                            <th>زمن الاستجابة</th>
+                            <th>التوقيت</th>
+                            <th>الإجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logsTableBody">
+                        <tr>
+                            <td><strong style="color:#ffffff;">payment.succeeded</strong><br><span style="font-size:0.75rem; color:#94a3b8; font-family:monospace;">evt_20261107_01</span></td>
+                            <td><span class="status-badge success">200 OK</span></td>
+                            <td><span style="font-family:monospace;">84ms</span></td>
+                            <td>07:53:46 ص</td>
+                            <td><button class="btn-replay" onclick="replayEvent('evt_20261107_01')">إعادة إرسال ↻</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:#ffffff;">contract.signed</strong><br><span style="font-size:0.75rem; color:#94a3b8; font-family:monospace;">evt_20261107_02</span></td>
+                            <td><span class="status-badge success">201 Created</span></td>
+                            <td><span style="font-family:monospace;">112ms</span></td>
+                            <td>07:50:12 ص</td>
+                            <td><button class="btn-replay" onclick="replayEvent('evt_20261107_02')">إعادة إرسال ↻</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:#ffffff;">order.created</strong><br><span style="font-size:0.75rem; color:#94a3b8; font-family:monospace;">evt_20261107_03</span></td>
+                            <td><span class="status-badge success">200 OK</span></td>
+                            <td><span style="font-family:monospace;">95ms</span></td>
+                            <td>07:44:28 ص</td>
+                            <td><button class="btn-replay" onclick="replayEvent('evt_20261107_03')">إعادة إرسال ↻</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- بطاقة التكامل مع Telegram و WhatsApp -->
+            <div style="margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08);">
+                <div style="font-size:1.05rem; font-weight:800; color:var(--sr-gold-light); margin-bottom:12px;">
+                    🤖 القنوات المتصلة بالتنبيهات اللحظية:
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                    <div style="background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px;">
+                        <span style="font-size:1.8rem;">✈️</span>
+                        <div>
+                            <div style="font-weight:800; font-size:0.9rem; color:#ffffff;">Telegram Enterprise Bot</div>
+                            <div style="font-size:0.75rem; color:var(--sr-cyan);">متصل ونشط • قناة الإدارة السيادية</div>
+                        </div>
+                    </div>
+                    <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px;">
+                        <span style="font-size:1.8rem;">💬</span>
+                        <div>
+                            <div style="font-weight:800; font-size:0.9rem; color:#ffffff;">WhatsApp Business API</div>
+                            <div style="font-size:0.75rem; color:var(--sr-emerald);">متصل ونشط • (+31 618111116)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار الإرسال -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم إرسال وتسليم حدث الـ Webhook السحابي بنجاح (Status: 200 OK)!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        const payloads = {
+            'payment.succeeded': {
+                event: 'payment.succeeded',
+                id: 'evt_' + Math.floor(Date.now() / 1000),
+                amount: 16093.00,
+                currency: 'EUR',
+                client: 'شركة مجموعة الذهب',
+                timestamp: new Date().toISOString(),
+                signature: 'hmac_sha256_b41a99...'
+            },
+            'order.created': {
+                event: 'order.created',
+                order_id: 'ORD-2026-884',
+                items_count: 3,
+                total: 4500.00,
+                store: 'متجر نوفيلا الفاخر',
+                timestamp: new Date().toISOString()
+            },
+            'contract.signed': {
+                event: 'contract.signed',
+                contract_ref: 'CTRCT-2026-0042',
+                signee: 'محمد السالم',
+                verified: true,
+                timestamp: new Date().toISOString()
+            },
+            'invoice.issued': {
+                event: 'invoice.issued',
+                invoice_num: 'INV-2026-0128',
+                vat_amount: 2793.00,
+                qr_verified: true,
+                timestamp: new Date().toISOString()
+            }
+        };
+
+        function updatePayloadPreview() {
+            const ev = document.getElementById('eventTypeSelect').value;
+            const data = payloads[ev] || payloads['payment.succeeded'];
+            document.getElementById('jsonPayloadDisplay').textContent = JSON.stringify(data, null, 2);
+        }
+
+        function dispatchTestWebhook() {
+            const ev = document.getElementById('eventTypeSelect').value;
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = `✅ تم إرسال وتسليم حدث (${ev}) بنجاح (Status: 200 OK)!`;
+            toast.style.display = 'block';
+
+            // إضافة السجل للجدول
+            const tbody = document.getElementById('logsTableBody');
+            const tr = document.createElement('tr');
+            const timeStr = new Date().toLocaleTimeString('ar-SA');
+            const evtId = 'evt_' + Math.floor(Date.now() / 1000);
+            
+            tr.innerHTML = `
+                <td><strong style="color:#ffffff;">${ev}</strong><br><span style="font-size:0.75rem; color:#94a3b8; font-family:monospace;">${evtId}</span></td>
+                <td><span class="status-badge success">200 OK</span></td>
+                <td><span style="font-family:monospace;">${Math.floor(Math.random() * 50 + 60)}ms</span></td>
+                <td>${timeStr}</td>
+                <td><button class="btn-replay" onclick="replayEvent('${evtId}')">إعادة إرسال ↻</button></td>
+            `;
+            tbody.insertBefore(tr, tbody.firstChild);
+
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        function replayEvent(id) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = `↻ تمت إعادة إرسال الحدث [${id}] بنجاح (200 OK)!`;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+
+        updatePayloadPreview();
+    </script>
+</body>
+</html>
