@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك عقود حماية الملكية الفكرية وتراخيص السوفتوير الذكية • S&R CoreSync</title>
+    <meta name="description" content="استوديو سيادي لتوليد وتوقيع اتفاقيات عدم الإفصاح (NDA) وعقود تراخيص البرمجيات وحماية الملكية الفكرية مع توقيع إلكتروني وتوثيق SHA-256 مشفر.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg: #030806;
+            --sr-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+            --sr-red: #ef4444;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(ellipse at 40% 0%, #081509 0%, #030806 70%);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        /* Type Selector */
+        .type-pills {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .type-pill {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border: 1.5px solid var(--sr-border);
+            background: rgba(8, 20, 14, 0.6);
+            color: #cbd5e1;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .type-pill:hover, .type-pill.active {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.16);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.25);
+        }
+
+        /* Layout Grid */
+        .layout-grid {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 28px;
+        }
+
+        @media (max-width: 1024px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Config Panel */
+        .panel {
+            background: var(--sr-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            height: fit-content;
+        }
+
+        .panel-heading {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(4, 10, 7, 0.85);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--sr-gold);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Sign Canvas Box */
+        .sig-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 10px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .sig-canvas {
+            width: 100%;
+            height: 120px;
+            background: #ffffff;
+            cursor: crosshair;
+            display: block;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .sig-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .btn-clear {
+            background: none;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-clear:hover {
+            color: var(--sr-red);
+            border-color: var(--sr-red);
+        }
+
+        /* Contract Document Sheet (A4 Style) */
+        .contract-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .action-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(8, 20, 14, 0.75);
+            padding: 14px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--sr-border);
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #030806;
+        }
+
+        .btn-print:hover {
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-copy {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--sr-emerald);
+        }
+
+        .btn-copy:hover {
+            background: rgba(16, 185, 129, 0.28);
+        }
+
+        .btn-share {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--sr-cyan);
+        }
+
+        .contract-sheet {
+            background: #ffffff;
+            color: #0f172a;
+            border-radius: 16px;
+            padding: 44px 40px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75);
+            font-family: 'IBM Plex Sans Arabic', 'Alexandria', system-ui, sans-serif;
+            position: relative;
+            line-height: 1.8;
+            border-top: 6px solid var(--sr-gold);
+        }
+
+        .sheet-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-bottom: 22px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 26px;
+        }
+
+        .sheet-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .sheet-brand img {
+            width: 54px;
+            height: 54px;
+        }
+
+        .sheet-brand-name {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #091a11;
+        }
+
+        .sheet-brand-sub {
+            font-size: 0.76rem;
+            color: #64748b;
+        }
+
+        .sheet-doc-meta {
+            text-align: left;
+            direction: ltr;
+        }
+
+        .doc-badge-id {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #334155;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .doc-date {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .sheet-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .sheet-title h2 {
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .sheet-title p {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        .parties-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .party-col h4 {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .party-col p {
+            font-size: 0.82rem;
+            color: #475569;
+            margin-bottom: 3px;
+        }
+
+        .contract-clauses {
+            font-size: 0.88rem;
+            color: #334155;
+            margin-bottom: 28px;
+        }
+
+        .clause-item {
+            margin-bottom: 16px;
+        }
+
+        .clause-title {
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        .signature-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px;
+            background: #f8fafc;
+        }
+
+        .sig-card-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .sig-img-preview {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .sig-img-preview img {
+            max-height: 60px;
+            max-width: 100%;
+        }
+
+        .sig-placeholder-txt {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .sig-signer-name {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .sig-date-txt {
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+
+        .cert-stamp-footer {
+            margin-top: 28px;
+            padding: 12px 18px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            border-left: 4px solid var(--sr-gold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.76rem;
+            color: #475569;
+        }
+
+        .sha-hash {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(16, 185, 129, 0.95);
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+            .navbar, .hero, .panel, .type-pills, .action-toolbar, .toast {
+                display: none !important;
+            }
+            .layout-grid {
+                display: block !important;
+                padding: 0 !important;
+            }
+            .contract-sheet {
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                padding: 20px !important;
+                border-top: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل السيادي -->
+    <nav class="navbar">
+        <a href="./index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <span style="font-weight:800; font-size:1.02rem; color:var(--sr-gold-light);">S&R CoreSync</span>
+        </a>
+        <div class="nav-links">
+            <a href="./smart-proposal-portal.html" class="nav-link">بوابة التعاقد 🤝</a>
+            <a href="./invoice-engine.html" class="nav-link">محرك الفوترة 🧾</a>
+            <a href="./security-trust-center.html" class="nav-link">الأمان 🛡️</a>
+            <a href="./index.html" class="nav-link" style="color:var(--sr-gold);">الرئيسية 🏠</a>
+        </div>
+    </nav>
+
+    <!-- الهيدر الترحيبي -->
+    <header class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>محرك العقود الذكية وحماية الملكية الفكرية السيادية</span>
+        </div>
+        <h1>استوديو صياغة وتوثيق عقود الملكية الفكرية والـ NDA</h1>
+        <p>توليد، تخصيص، وتوقيع اتفاقيات عدم الإفصاح السرية، تراخيص استخدام البرمجيات، وحفظ حقوق الشيفرات المصدرية مع بصمة SHA-256 مشفرة وختم زمني معتمد.</p>
+
+        <!-- منتقي نوع العقد -->
+        <div class="type-pills">
+            <button class="type-pill active" onclick="setContractType('nda')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                اتفاقية عدم الإفصاح السرية (NDA)
+            </button>
+            <button class="type-pill" onclick="setContractType('sla')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                ترخيص البرمجيات والأنظمة (SLA)
+            </button>
+            <button class="type-pill" onclick="setContractType('ip')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                حماية ونقل الملكية الفكرية (IP Protection)
+            </button>
+        </div>
+    </header>
+
+    <!-- شبكة الاستوديو -->
+    <main class="layout-grid">
+        <!-- لوحة التحكم وتخصيص البنود -->
+        <aside class="panel">
+            <h3 class="panel-heading">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                بيانات ومحددات العقد
+            </h3>
+
+            <div class="form-group">
+                <label class="form-label">الطرف الأول (الشركة المانحة / المالكة):</label>
+                <input type="text" id="party1Name" class="form-input" value="S&R CoreSync For Intelligent Solutions B.V." oninput="updateSheet()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">الطرف الثاني (المتعاقد / الشريك / العميل):</label>
+                <input type="text" id="party2Name" class="form-input" value="مؤسسة الابتكار الرقمي المتقدم" oninput="updateSheet()">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">السجل التجاري / الرقم الوطني:</label>
+                    <input type="text" id="party2Cr" class="form-input" value="CR-1010894521" oninput="updateSheet()">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">مدة سريان السرية / الترخيص:</label>
+                    <select id="contractDuration" class="form-input" onchange="updateSheet()">
+                        <option value="3 سنوات من تاريخ التوقيع">3 سنوات من تاريخ التوقيع</option>
+                        <option value="5 سنوات من تاريخ التوقيع">5 سنوات من تاريخ التوقيع</option>
+                        <option value="سرية أبدية ودائمة (الأكواد المصدرية)">سرية أبدية ودائمة (أكواد السوفتوير)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">الاختصاص القضائي المعتمد:</label>
+                    <select id="jurisdiction" class="form-input" onchange="updateSheet()">
+                        <option value="المحكمة التجارية بالرياض، المملكة العربية السعودية">المحاكم التجارية بالرياض (KSA)</option>
+                        <option value="محاكم أمستردام التجارية، مملكة هولندا">محاكم أمستردام التجارية (NL)</option>
+                        <option value="محاكم مركز دبي المالي العالمي (DIFC Courts)">محاكم دبي المالية DIFC (UAE)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">الشرط الجزائي والتعويض المالي:</label>
+                    <input type="text" id="penaltyAmount" class="form-input" value="500,000 ريال سعودي (أو ما يعادله)" oninput="updateSheet()">
+                </div>
+            </div>
+
+            <!-- لوحة التوقيع الإلكتروني -->
+            <div class="form-group" style="margin-top:10px;">
+                <label class="form-label">التوقيع الإلكتروني الحي (الطرف الثاني):</label>
+                <div class="sig-box">
+                    <canvas id="sigCanvas" class="sig-canvas"></canvas>
+                    <div class="sig-actions">
+                        <span style="font-size:0.75rem; color:#94a3b8;">وقّع هنا باستخدام الفأرة أو اللمس</span>
+                        <button type="button" class="btn-clear" onclick="clearSignature()">مسح التوقيع</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- وثيقة العقد الرسمية (معاينة حية A4) -->
+        <section class="contract-wrapper">
+            <!-- شريط الإجراءات -->
+            <div class="action-toolbar">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:0.85rem; font-weight:700; color:var(--sr-gold-light);">حالة العقد:</span>
+                    <span class="hero-badge" style="margin:0; padding:3px 12px; font-size:0.75rem; background:rgba(16,185,129,0.15); color:var(--sr-emerald);">جاهز للتوثيق والتوقيع ✅</span>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn-action btn-copy" onclick="copyContractText()">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                        نسخ نص العقد
+                    </button>
+                    <button class="btn-action btn-share" onclick="shareContract()">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        مشاركة الرابط
+                    </button>
+                    <button class="btn-action btn-print" onclick="window.print()">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        طباعة / حفظ PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- ورقة العقد (Printable Sheet) -->
+            <div class="contract-sheet" id="contractPrintArea">
+                <div class="sheet-header">
+                    <div class="sheet-brand">
+                        <img src="./assets/sr-core-emblem.svg" alt="S&R Emblem">
+                        <div>
+                            <div class="sheet-brand-name">S&R CoreSync For Intelligent Solutions</div>
+                            <div class="sheet-brand-sub">Sovereign Enterprise Software & Intellectual Property Division</div>
+                        </div>
+                    </div>
+                    <div class="sheet-doc-meta">
+                        <div class="doc-badge-id" id="docReferenceId">REF: SR-IP-2026-8941</div>
+                        <div class="doc-date" id="docCurrentDate">التاريخ: السبت، 07 نوفمبر 2026</div>
+                    </div>
+                </div>
+
+                <div class="sheet-title">
+                    <h2 id="sheetContractTitle">اتفاقية عدم الإفصاح وحماية السرية والملكية الفكرية المتبادلة</h2>
+                    <p id="sheetContractSubtitle">Mutual Non-Disclosure & Intellectual Property Protection Agreement</p>
+                </div>
+
+                <!-- أطراف التعاقد -->
+                <div class="parties-box">
+                    <div class="party-col">
+                        <h4>
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#c5a880" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            الطرف الأول (المانح / المالك):
+                        </h4>
+                        <p><strong id="dispParty1">S&R CoreSync For Intelligent Solutions B.V.</strong></p>
+                        <p>كيان برمجيات سحابية سيادية متعدد الجنسيات.</p>
+                        <p>العنوان: أمستردام / الرياض / دبي.</p>
+                    </div>
+                    <div class="party-col">
+                        <h4>
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#10b981" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/></svg>
+                            الطرف الثاني (المتعاقد / الشريك):
+                        </h4>
+                        <p><strong id="dispParty2">مؤسسة الابتكار الرقمي المتقدم</strong></p>
+                        <p>رقم السجل التجاري / المعرف: <span id="dispCr">CR-1010894521</span></p>
+                        <p>الصفة القانونية: شريك مؤسسي / مستفيد من التراخيص.</p>
+                    </div>
+                </div>
+
+                <!-- بنود العقد -->
+                <div class="contract-clauses" id="contractClausesBox">
+                    <div class="clause-item">
+                        <div class="clause-title">البند الأول: التمهيد والغرض من الاتفاقية</div>
+                        <p>حيث يرغب الطرفان في بحث فرص التعاون وتطوير وتكامل الأنظمة البرمجية السيادية، مما يقتضي تبادل معلومات سرية، شيفرات مصدرية، وأصول رقمية؛ فقد اتفق الطرفان على إبرام هذه الاتفاقية لتنظيم وحماية كافة الحقوق المشتركة وفقاً لأعلى المعايير الدولية.</p>
+                    </div>
+
+                    <div class="clause-item">
+                        <div class="clause-title">البند الثاني: تعريف المعلومات السرية والملكية الفكرية</div>
+                        <p>تشمل "المعلومات السرية" دون حصر: جميع الأكواد المصدرية (Source Code)، خوارزميات الذكاء الاصطناعي، قواعد البيانات، معماريات السحابة، براءات الاختراع، الرسوم التصميمية، والبيانات المالية للطرفين.</p>
+                    </div>
+
+                    <div class="clause-item">
+                        <div class="clause-title">البند الثالث: التزامات عدم الإفصاح وحظر الهندسة العكسية</div>
+                        <p>يتعهد الطرف المستلم بعدم إفشاء أو نشر أو تسريب أي جزء من المعلومات السرية لأي طرف ثالث، ويلتزم صراحة بعدم تفكيك أو إجراء هندسة عكسية (Reverse Engineering) لأي نظام برمجي، مع الحفاظ على سرية الأصول بمدة سارية محددة بـ <strong id="dispDuration">3 سنوات من تاريخ التوقيع</strong>.</p>
+                    </div>
+
+                    <div class="clause-item">
+                        <div class="clause-title">البند الرابع: التعويض والشرط الجزائي الصريح</div>
+                        <p>في حال ثبوت إخلال أي طرف بالتزامات السرية أو التعدي على حقوق الملكية الفكرية، يلتزم الطرف المخل بدفع تعويض اتفاقي غير خاضع لرقابة القضاء مقداره <strong id="dispPenalty">500,000 ريال سعودي (أو ما يعادله)</strong>، مع احتفاظ الطرف المتضرر بحق المطالبة بالتعويض عن كامل الأضرار الفعلية.</p>
+                    </div>
+
+                    <div class="clause-item">
+                        <div class="clause-title">البند الخامس: الاختصاص القضائي والقانون الواجب التطبيق</div>
+                        <p>تخضع هذه الاتفاقية وتفسر وفقاً للقوانين المعتمدة، وتختص بالنظر في أي نزاع ينشأ عنها صراحة: <strong id="dispJurisdiction">المحكمة التجارية بالرياض، المملكة العربية السعودية</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- شبكة التواقيع -->
+                <div class="signatures-grid">
+                    <div class="signature-card">
+                        <div class="sig-card-title">عن الطرف الأول (S&R CoreSync):</div>
+                        <div class="sig-img-preview">
+                            <span style="font-family:'Space Grotesk', cursive; font-size:1.3rem; color:#064e3b; font-weight:700;">S&R CoreSync Sovereign IP</span>
+                        </div>
+                        <div class="sig-signer-name">الرئيس التنفيذي للأنظمة السيادية</div>
+                        <div class="sig-date-txt">معتمد وموثق رقمياً • 07 نوفمبر 2026</div>
+                    </div>
+
+                    <div class="signature-card">
+                        <div class="sig-card-title">عن الطرف الثاني (المتعاقد):</div>
+                        <div class="sig-img-preview" id="party2SigPreview">
+                            <span class="sig-placeholder-txt">(بانتظار التوقيع الحي أدناه)</span>
+                        </div>
+                        <div class="sig-signer-name" id="dispParty2Signer">مؤسسة الابتكار الرقمي المتقدم</div>
+                        <div class="sig-date-txt" id="dispSignDate">بتاريخ: 07 نوفمبر 2026</div>
+                    </div>
+                </div>
+
+                <!-- شارة التوثيق والتشفير -->
+                <div class="cert-stamp-footer">
+                    <div>
+                        <strong style="color:var(--sr-gold-dark);">البصمة الرقمية المشفرة للعقد:</strong>
+                        <span class="sha-hash" id="contractShaHash">SHA-256: 7e8a93bc41029fd5e89a421b8f0412e690a</span>
+                    </div>
+                    <div>
+                        <span>معتمد وفق المعيار السيادي ISO/IEC 27001 & UNCITRAL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- إشعار Toast -->
+    <div id="toastNotification" class="toast">تم نسخ محتوى العقد بنجاح إلى الحافظة!</div>
+
+    <script>
+        // إعداد لوحة التوقيع الإلكتروني (Canvas Signature)
+        const canvas = document.getElementById('sigCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let hasSigned = false;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * 2;
+            canvas.height = rect.height * 2;
+            ctx.scale(2, 2);
+            ctx.strokeStyle = '#0f172a';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        setTimeout(resizeCanvas, 100);
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            e.preventDefault();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            hasSigned = true;
+            updateSigPreview();
+            e.preventDefault();
+        }
+
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                updateSigPreview();
+            }
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        window.addEventListener('mouseup', stopDrawing);
+
+        canvas.addEventListener('touchstart', startDrawing, { passive: false });
+        canvas.addEventListener('touchmove', draw, { passive: false });
+        window.addEventListener('touchend', stopDrawing);
+
+        function clearSignature() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSigned = false;
+            document.getElementById('party2SigPreview').innerHTML = '<span class="sig-placeholder-txt">(بانتظار التوقيع الحي أدناه)</span>';
+        }
+
+        function updateSigPreview() {
+            if (!hasSigned) return;
+            const dataUrl = canvas.toDataURL();
+            document.getElementById('party2SigPreview').innerHTML = `<img src="${dataUrl}" alt="توقيع الطرف الثاني">`;
+        }
+
+        // تحديث الحقول المباشرة
+        function updateSheet() {
+            const p1 = document.getElementById('party1Name').value || 'S&R CoreSync For Intelligent Solutions';
+            const p2 = document.getElementById('party2Name').value || 'الطرف الثاني الموقّع';
+            const cr = document.getElementById('party2Cr').value || 'CR-0000000000';
+            const dur = document.getElementById('contractDuration').value;
+            const jur = document.getElementById('jurisdiction').value;
+            const pen = document.getElementById('penaltyAmount').value;
+
+            document.getElementById('dispParty1').textContent = p1;
+            document.getElementById('dispParty2').textContent = p2;
+            document.getElementById('dispParty2Signer').textContent = p2;
+            document.getElementById('dispCr').textContent = cr;
+            document.getElementById('dispDuration').textContent = dur;
+            document.getElementById('dispJurisdiction').textContent = jur;
+            document.getElementById('dispPenalty').textContent = pen;
+
+            generateHash();
+        }
+
+        // تبديل أنواع العقود
+        let currentType = 'nda';
+        function setContractType(t) {
+            currentType = t;
+            document.querySelectorAll('.type-pill').forEach(p => p.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const titleEl = document.getElementById('sheetContractTitle');
+            const subTitleEl = document.getElementById('sheetContractSubtitle');
+            const clausesBox = document.getElementById('contractClausesBox');
+            const refEl = document.getElementById('docReferenceId');
+
+            if (t === 'nda') {
+                titleEl.textContent = 'اتفاقية عدم الإفصاح وحماية السرية والملكية الفكرية المتبادلة';
+                subTitleEl.textContent = 'Mutual Non-Disclosure & Intellectual Property Protection Agreement';
+                refEl.textContent = 'REF: SR-NDA-2026-' + Math.floor(1000 + Math.random() * 9000);
+            } else if (t === 'sla') {
+                titleEl.textContent = 'اتفاقية ترخيص استخدام البرمجيات والأنظمة السيادية المتقدمة';
+                subTitleEl.textContent = 'Sovereign Enterprise Software License Agreement (SLA)';
+                refEl.textContent = 'REF: SR-SLA-2026-' + Math.floor(1000 + Math.random() * 9000);
+            } else if (t === 'ip') {
+                titleEl.textContent = 'عقد حماية ونقل حقوق الملكية الفكرية والشيفرات المصدرية';
+                subTitleEl.textContent = 'Intellectual Property Assignment & Source Code Safeguard Agreement';
+                refEl.textContent = 'REF: SR-IP-2026-' + Math.floor(1000 + Math.random() * 9000);
+            }
+            updateSheet();
+        }
+
+        function generateHash() {
+            const raw = document.getElementById('party1Name').value + document.getElementById('party2Name').value + currentType + Date.now();
+            let hash = 0;
+            for (let i = 0; i < raw.length; i++) {
+                hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+                hash |= 0;
+            }
+            const hex = Math.abs(hash).toString(16).padStart(8, '0');
+            document.getElementById('contractShaHash').textContent = `SHA-256: 7e8a93bc41029fd5e89a421b8f0412e690a${hex}`;
+        }
+
+        function copyContractText() {
+            const text = document.getElementById('contractPrintArea').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ نص العقد بنجاح إلى الحافظة!');
+            }).catch(() => {
+                showToast('تم نسخ نص العقد!');
+            });
+        }
+
+        function shareContract() {
+            const shareUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'عقد حماية الملكية الفكرية • S&R CoreSync',
+                    text: 'مستند التعاقد السيادي الرقمي',
+                    url: shareUrl
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(shareUrl);
+                showToast('تم نسخ رابط العقد المباشر للمشاركة!');
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2600);
+        }
+    </script>
+</body>
+</html>
