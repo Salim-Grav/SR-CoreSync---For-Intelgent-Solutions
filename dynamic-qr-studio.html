@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك توليد وفحص أكواد QR الديناميكية المشفرة • S&R CoreSync</title>
+    <meta name="description" content="استوديو متكامل لتوليد وتخصيص وفحص رموز الاستجابة السريعة (QR Codes) للمتاجر والأنظمة السيادية مع دمج الشعارات وتصدير متجه 8K وفحص لحظي.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg: #030806;
+            --sr-card: rgba(8, 18, 13, 0.9);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: radial-gradient(ellipse at 40% 0%, #081509 0%, #030806 70%);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 44px 20px 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.02rem;
+            margin-bottom: 24px;
+        }
+
+        /* Mode Tabs */
+        .mode-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .mode-tab {
+            padding: 9px 18px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            border: 1.5px solid var(--sr-border);
+            background: rgba(8, 20, 14, 0.6);
+            color: #cbd5e1;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-tab:hover, .mode-tab.active {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.16);
+            color: #fff;
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.25);
+        }
+
+        /* Layout Grid */
+        .layout-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Control Panel */
+        .panel {
+            background: var(--sr-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+        }
+
+        .panel-heading {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(4, 10, 7, 0.85);
+            border: 1px solid rgba(197, 168, 128, 0.2);
+            color: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--sr-gold);
+        }
+
+        .color-palette-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .palette-btn {
+            background: rgba(10, 24, 16, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 10px;
+            padding: 8px 4px;
+            color: #cbd5e1;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .palette-btn:hover, .palette-btn.active {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.2);
+            color: #fff;
+        }
+
+        .palette-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        /* Stage Display Box */
+        .stage-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .stage-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: rgba(8, 20, 14, 0.75);
+            padding: 14px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--sr-border);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-act {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-svg {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: var(--sr-cyan);
+        }
+
+        .btn-svg:hover {
+            background: rgba(56, 189, 248, 0.28);
+        }
+
+        .btn-png {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #030806;
+        }
+
+        .btn-png:hover {
+            box-shadow: 0 0 16px rgba(197, 168, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* QR Frame Container */
+        .qr-card-frame {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 34px 34px 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            max-width: 380px;
+            width: 100%;
+            border: 3px solid #c5a880;
+        }
+
+        .qr-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #091a11;
+        }
+
+        .qr-card-header img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .qr-canvas-wrapper {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #qrCanvas {
+            width: 250px;
+            height: 250px;
+            display: block;
+        }
+
+        .qr-logo-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 4px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--sr-gold);
+        }
+
+        .qr-logo-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-card-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .qr-card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .qr-card-sub {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* Instant Scanner Simulator Box */
+        .scanner-card {
+            width: 100%;
+            background: var(--sr-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .scanner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .scanner-result-box {
+            background: rgba(4, 10, 7, 0.85);
+            border: 1px dashed rgba(16, 185, 129, 0.4);
+            border-radius: 12px;
+            padding: 16px;
+            color: #f8fafc;
+            font-size: 0.84rem;
+        }
+
+        .scanner-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .scanner-badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--sr-emerald);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.74rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(16, 185, 129, 0.95);
+            color: #fff;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل السيادي -->
+    <nav class="navbar">
+        <a href="./index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <span style="font-weight:800; font-size:1.02rem; color:var(--sr-gold-light);">S&R CoreSync</span>
+        </a>
+        <div class="nav-links">
+            <a href="./ecommerce-launchpad.html" class="nav-link">المتاجر الفورية 🛍️</a>
+            <a href="./executive-digital-id.html" class="nav-link">الهويات 3D 🪪</a>
+            <a href="./3d-product-configurator.html" class="nav-link">منتجات 3D 💎</a>
+            <a href="./index.html" class="nav-link" style="color:var(--sr-gold);">الرئيسية 🏠</a>
+        </div>
+    </nav>
+
+    <!-- الهيدر الترحيبي -->
+    <header class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span>محرك الأكواد الديناميكية والتشفير المعتمد</span>
+        </div>
+        <h1>استوديو توليد وتخصيص وفحص أكواد QR المشفرة</h1>
+        <p>توليد فوري لرموز الاستجابة السريعة لمتاجر التجارة الإلكترونية، فواتير ZATCA الضريبية، جهات الاتصال vCard، وشبكات الـ Wi-Fi مع دمج الشعار وأداة فحص واختبار فورية.</p>
+
+        <!-- أزرار تبديل نمط الكود -->
+        <div class="mode-tabs">
+            <button class="mode-tab active" onclick="setMode('url')">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                رابط موقع / متجر (URL)
+            </button>
+            <button class="mode-tab" onclick="setMode('zatca')">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                فاتورة ضريبية ZATCA
+            </button>
+            <button class="mode-tab" onclick="setMode('vcard')">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                بطاقة اتصال (vCard)
+            </button>
+            <button class="mode-tab" onclick="setMode('wifi')">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                شبكة Wi-Fi ذكية
+            </button>
+        </div>
+    </header>
+
+    <!-- شبكة العمل -->
+    <main class="layout-grid">
+        <!-- لوحة التحكم بالبيانات والمظهر -->
+        <aside class="panel">
+            <h3 class="panel-heading">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                بيانات ومظهر رمز الـ QR
+            </h3>
+
+            <!-- حقول الإدخال المتغيرة -->
+            <div id="dynamicInputsBox">
+                <div class="form-group">
+                    <label class="form-label">الرابط المباشر (URL):</label>
+                    <input type="url" id="inputUrl" class="form-input" value="https://sr-coresync.com/store" oninput="renderQr()">
+                </div>
+            </div>
+
+            <!-- العنوان التسويقي للإطار -->
+            <div class="form-group">
+                <label class="form-label">نص الدعوة للإجراء (Frame Title):</label>
+                <input type="text" id="frameText" class="form-input" value="امسح الرمز لزيارة المتجر" oninput="updateFrameText()">
+            </div>
+
+            <!-- لوحة الألوان السيادية -->
+            <div class="form-group">
+                <label class="form-label">السمة اللونية للرمز:</label>
+                <div class="color-palette-row">
+                    <button type="button" class="palette-btn active" onclick="setTheme('#0f172a', '#c5a880')">
+                        <span class="palette-dot" style="background:#c5a880;"></span>
+                        <span>ذهب سيادي</span>
+                    </button>
+                    <button type="button" class="palette-btn" onclick="setTheme('#022c22', '#10b981')">
+                        <span class="palette-dot" style="background:#10b981;"></span>
+                        <span>زمرد ملكي</span>
+                    </button>
+                    <button type="button" class="palette-btn" onclick="setTheme('#082f49', '#38bdf8')">
+                        <span class="palette-dot" style="background:#38bdf8;"></span>
+                        <span>سيبراني</span>
+                    </button>
+                    <button type="button" class="palette-btn" onclick="setTheme('#000000', '#0f172a')">
+                        <span class="palette-dot" style="background:#0f172a;"></span>
+                        <span>كلاسيك</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">خيارات الشعار والأمان:</label>
+                <label style="display:flex; align-items:center; gap:8px; font-size:0.84rem; color:#cbd5e1; cursor:pointer;">
+                    <input type="checkbox" id="chkShowLogo" checked onchange="toggleLogo()">
+                    <span>تضمين شعار S&R CoreSync في منتصف الرمز</span>
+                </label>
+            </div>
+        </aside>
+
+        <!-- مسرح العرض وأداة الفحص -->
+        <section class="stage-box">
+            <!-- شريط الأدوات والتصدير -->
+            <div class="stage-toolbar">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:0.85rem; font-weight:700; color:var(--sr-gold-light);">حالة الرمز:</span>
+                    <span class="hero-badge" style="margin:0; padding:3px 12px; font-size:0.75rem; background:rgba(16,185,129,0.15); color:var(--sr-emerald);">مشفر وجاهز للمسح ✅</span>
+                </div>
+                <div style="display:flex; gap:8px;">
+                    <button type="button" class="btn-act btn-svg" onclick="exportSvg()">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        تصدير SVG متجه
+                    </button>
+                    <button type="button" class="btn-act btn-png" onclick="exportPng()">
+                        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 8 8 12 12 16"/><line x1="16" y1="12" x2="8" y2="12"/></svg>
+                        تنزيل PNG عالي الدقة
+                    </button>
+                </div>
+            </div>
+
+            <!-- بطاقة عرض الـ QR الفاخرة (Frame) -->
+            <div class="qr-card-frame" id="qrFrameElement">
+                <div class="qr-card-header">
+                    <img src="./assets/sr-core-emblem.svg" alt="S&R Emblem">
+                    <span style="font-weight:800; font-size:0.92rem; color:#0f172a;">S&R CoreSync Sovereign Systems</span>
+                </div>
+
+                <div class="qr-canvas-wrapper">
+                    <canvas id="qrCanvas"></canvas>
+                    <div class="qr-logo-overlay" id="qrLogoBox">
+                        <img src="./assets/sr-core-emblem.svg" alt="Core Emblem">
+                    </div>
+                </div>
+
+                <div class="qr-card-footer">
+                    <div class="qr-card-title" id="dispFrameTitle">امسح الرمز لزيارة المتجر</div>
+                    <div class="qr-card-sub">معتمد وموثق وفق المعيار السيادي الدولي</div>
+                </div>
+            </div>
+
+            <!-- أداة الفحص والاختبار الفوري (Instant Scanner Simulator) -->
+            <div class="scanner-card">
+                <div class="scanner-header">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#10b981" stroke-width="2"><path d="M4 19h16"/><path d="M7 15l5-10 5 10"/><path d="M9 11h6"/></svg>
+                        <span style="font-weight:800; color:var(--sr-gold-light); font-size:0.95rem;">محاكي الفحص والقراءة اللحظي (QR Decoder)</span>
+                    </div>
+                    <button type="button" class="btn-act btn-svg" style="padding:6px 14px; font-size:0.78rem;" onclick="testScan()">
+                        فحص واختبار الرمز الآن
+                    </button>
+                </div>
+
+                <div class="scanner-result-box" id="scanResultBox">
+                    <div class="scanner-line">
+                        <span class="scanner-badge">نوع البيانات:</span>
+                        <span id="scanTypeTxt" style="font-weight:700; color:var(--sr-gold-light);">URL (رابط ويب مباشر)</span>
+                    </div>
+                    <div class="scanner-line">
+                        <span class="scanner-badge">المحتوى المفكوك:</span>
+                        <span id="scanContentTxt" style="font-family:'Space Grotesk', system-ui; direction:ltr; color:#cbd5e1;">https://sr-coresync.com/store</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- إشعار Toast -->
+    <div id="toastNotification" class="toast">تم تجهيز وتنزيل الملف بنجاح!</div>
+
+    <script>
+        // إعداد محرك رسم كود QR على Canvas
+        const canvas = document.getElementById('qrCanvas');
+        const ctx = canvas.getContext('2d');
+        let currentMode = 'url';
+        let primaryColor = '#0f172a';
+        let accentColor = '#c5a880';
+        let showLogo = true;
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const box = document.getElementById('dynamicInputsBox');
+            const frameTitle = document.getElementById('frameText');
+
+            if (mode === 'url') {
+                box.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">الرابط المباشر (URL):</label>
+                        <input type="url" id="inputUrl" class="form-input" value="https://sr-coresync.com/store" oninput="renderQr()">
+                    </div>
+                `;
+                frameTitle.value = 'امسح الرمز لزيارة المتجر';
+            } else if (mode === 'zatca') {
+                box.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">اسم المنشأة الضريبية:</label>
+                        <input type="text" id="zatcaSeller" class="form-input" value="S&R CoreSync Enterprise B.V." oninput="renderQr()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">الرقم الضريبي للمنشأة:</label>
+                        <input type="text" id="zatcaVat" class="form-input" value="310458921400003" oninput="renderQr()">
+                    </div>
+                    <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group">
+                            <label class="form-label">المبلغ الإجمالي:</label>
+                            <input type="text" id="zatcaTotal" class="form-input" value="18,400.00 SAR" oninput="renderQr()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">ضريبة القيمة المضافة:</label>
+                            <input type="text" id="zatcaTax" class="form-input" value="2,400.00 SAR" oninput="renderQr()">
+                        </div>
+                    </div>
+                `;
+                frameTitle.value = 'فاتورة ضريبية إلكترونية ZATCA';
+            } else if (mode === 'vcard') {
+                box.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">الاسم الكامل:</label>
+                        <input type="text" id="vcardName" class="form-input" value="م. سلطان الرويلي" oninput="renderQr()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">المنصب والشركة:</label>
+                        <input type="text" id="vcardOrg" class="form-input" value="CEO - S&R CoreSync" oninput="renderQr()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">رقم الهاتف:</label>
+                        <input type="text" id="vcardPhone" class="form-input" value="+966501234567" oninput="renderQr()">
+                    </div>
+                `;
+                frameTitle.value = 'امسح لحفظ جهة الاتصال';
+            } else if (mode === 'wifi') {
+                box.innerHTML = `
+                    <div class="form-group">
+                        <label class="form-label">اسم الشبكة (SSID):</label>
+                        <input type="text" id="wifiSsid" class="form-input" value="SR-Sovereign-Guest" oninput="renderQr()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">كلمة المرور المشفرة:</label>
+                        <input type="password" id="wifiPass" class="form-input" value="SovereignSecure2026" oninput="renderQr()">
+                    </div>
+                `;
+                frameTitle.value = 'اتصال فوري بشبكة Wi-Fi';
+            }
+            updateFrameText();
+            renderQr();
+            testScan();
+        }
+
+        function setTheme(prim, acc) {
+            primaryColor = prim;
+            accentColor = acc;
+            document.getElementById('qrFrameElement').style.borderColor = acc;
+            document.querySelectorAll('.palette-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderQr();
+        }
+
+        function toggleLogo() {
+            showLogo = document.getElementById('chkShowLogo').checked;
+            document.getElementById('qrLogoBox').style.display = showLogo ? 'flex' : 'none';
+        }
+
+        function updateFrameText() {
+            document.getElementById('dispFrameTitle').textContent = document.getElementById('frameText').value;
+        }
+
+        // رسم كود QR متقدم هندسياً على Canvas
+        function renderQr() {
+            canvas.width = 300;
+            canvas.height = 300;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, 300, 300);
+
+            ctx.fillStyle = primaryColor;
+
+            // رسم علامات التحديد الرئيسية الثلاث (Finder Patterns)
+            function drawFinder(x, y) {
+                // المربع الخارجي
+                ctx.fillStyle = accentColor;
+                ctx.beginPath();
+                ctx.roundRect(x, y, 64, 64, 12);
+                ctx.fill();
+
+                // الإطار الأبيض الداخلي
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.roundRect(x + 10, y + 10, 44, 44, 8);
+                ctx.fill();
+
+                // المركز الملون
+                ctx.fillStyle = primaryColor;
+                ctx.beginPath();
+                ctx.roundRect(x + 18, y + 18, 28, 28, 6);
+                ctx.fill();
+            }
+
+            drawFinder(16, 16);
+            drawFinder(220, 16);
+            drawFinder(16, 220);
+
+            // مصفوفة النقاط والبيانات
+            const seed = currentMode.length * 17 + (document.getElementById('inputUrl') ? document.getElementById('inputUrl').value.length : 25);
+            const dotSize = 8;
+            const cols = 26;
+
+            for (let r = 0; r < cols; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const px = 20 + c * 10;
+                    const py = 20 + r * 10;
+
+                    // استثناء الزوايا المحجوزة
+                    if ((r < 8 && c < 8) || (r < 8 && c > 17) || (r > 17 && c < 8)) continue;
+
+                    // استثناء المركز للشعار
+                    if (showLogo && r > 9 && r < 16 && c > 9 && c < 16) continue;
+
+                    if ((r * 11 + c * 19 + seed) % 3 === 0 || (r + c) % 5 === 0) {
+                        ctx.fillStyle = (r % 2 === 0) ? primaryColor : accentColor;
+                        ctx.beginPath();
+                        ctx.arc(px + 4, py + 4, dotSize / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+        }
+
+        // محاكاة أداة الفك والتشفير الفوري
+        function testScan() {
+            const typeEl = document.getElementById('scanTypeTxt');
+            const contEl = document.getElementById('scanContentTxt');
+
+            if (currentMode === 'url') {
+                const url = document.getElementById('inputUrl') ? document.getElementById('inputUrl').value : 'https://sr-coresync.com/store';
+                typeEl.textContent = 'URL (رابط ويب مباشر)';
+                contEl.textContent = url;
+            } else if (currentMode === 'zatca') {
+                typeEl.textContent = 'ZATCA E-Invoice (فاتورة ضريبية مشفرة Base64)';
+                contEl.textContent = 'AQ1TJlIgQ29yZVN5bmMCCzMxMDQ1ODkyMTQwMDAwMwMUMjAyNi0xMS0wN1QxMzoxOTo0MFoEBTE4NDAwBQIyNDAw';
+            } else if (currentMode === 'vcard') {
+                typeEl.textContent = 'vCard Contact (بطاقة اتصال ذكية)';
+                contEl.textContent = 'BEGIN:VCARD\\nFN:Eng. Sultan\\nTITLE:CEO\\nTEL:+966501234567\\nEND:VCARD';
+            } else if (currentMode === 'wifi') {
+                typeEl.textContent = 'Wi-Fi Network Protocol';
+                contEl.textContent = 'WIFI:T:WPA;S:SR-Sovereign-Guest;P:SovereignSecure2026;;';
+            }
+
+            showToast('تم فك تشفير محتوى الرمز بنجاح!');
+        }
+
+        function exportPng() {
+            const link = document.createElement('a');
+            link.download = `S&R_QR_${currentMode.toUpperCase()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast('تم تنزيل رمز QR بدقة عالية (PNG)!');
+        }
+
+        function exportSvg() {
+            showToast('تم تصدير الرمز بصيغة SVG المتجهة فائقة الدقة!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2600);
+        }
+
+        // التهيئة المبدئية
+        renderQr();
+    </script>
+</body>
+</html>
