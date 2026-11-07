@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بيئة اختبار واجهات البرمجة التفاعلية • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="استوديو ومحاكي تقني تفاعلي لاختبار واستدعاء واجهات البرمجة (APIs) للمنصة السيادية وتوليد أكواد التكامل في المتصفح.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030806;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--sr-cyan);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .playground-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1040px) {
+            .playground-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel-card {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(14px);
+            margin-bottom: 24px;
+        }
+
+        .panel-heading {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* قائمة نقاط النهاية */
+        .endpoint-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .endpoint-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            text-align: right;
+            width: 100%;
+        }
+
+        .endpoint-btn.active, .endpoint-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.12);
+        }
+
+        .method-badge {
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .method-badge.post { background: rgba(56, 189, 248, 0.15); color: var(--sr-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .method-badge.get { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+        .endpoint-path {
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #f8fafc;
+            direction: ltr;
+        }
+
+        /* محرر الطلب والاستجابة */
+        .url-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(2, 5, 3, 0.9);
+            border: 1px solid var(--sr-border);
+            border-radius: 14px;
+            padding: 8px 14px;
+            margin-bottom: 20px;
+        }
+
+        .url-bar-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+            direction: ltr;
+        }
+
+        .btn-send-request {
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 0.9rem;
+            padding: 10px 22px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-send-request:hover {
+            box-shadow: 0 8px 20px rgba(197, 168, 128, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* تبويبات الأكواد */
+        .tabs-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            color: #ffffff;
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .code-display {
+            background: #020503;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--sr-cyan);
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            max-height: 240px;
+            line-height: 1.6;
+        }
+
+        /* نافذة الاستجابة */
+        .response-box {
+            background: #010402;
+            border: 1px solid var(--sr-border);
+            border-radius: 14px;
+            padding: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: #10b981;
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            min-height: 220px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">بيئة اختبار واجهات البرمجة API</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="api-docs.html" class="nav-link">توثيق OpenAPI</a>
+            <a href="webhook-integration-hub.html" class="nav-link">مركز الـ Webhooks</a>
+            <a href="invoice-engine.html" class="nav-link">محرك الفواتير</a>
+            <a href="payment-gateway.html" class="nav-link">بوابة المدفوعات</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">🌐 استوديو المطورين التفاعلي — Interactive API Playground</div>
+        <h1>بيئة اختبار واستدعاء واجهات البرمجة السيادية</h1>
+        <p>قم بتجربة نقاط النهاية (Endpoints) لخدمات الفوترة ZATCA، المدفوعات، والعقود الذكية مباشرة من المتصفح مع توليد أمثلة أكواد فورية بلغات JavaScript و Python و cURL.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="playground-grid">
+
+        <!-- القائمة الجانبية لنقاط النهاية -->
+        <div>
+            <div class="panel-card sr-tilt-card sr-holographic-card">
+                <div class="panel-heading">
+                    <span>📡</span> نقاط النهاية المتاحة (Endpoints)
+                </div>
+
+                <div class="endpoint-list">
+                    <button type="button" class="endpoint-btn active" onclick="selectEndpoint('invoices')">
+                        <div>
+                            <div style="font-size:0.85rem; font-weight:800; color:#ffffff;">إصدار فاتورة ZATCA</div>
+                            <div class="endpoint-path">/v1/invoices/create</div>
+                        </div>
+                        <span class="method-badge post">POST</span>
+                    </button>
+
+                    <button type="button" class="endpoint-btn" onclick="selectEndpoint('payments')">
+                        <div>
+                            <div style="font-size:0.85rem; font-weight:800; color:#ffffff;">معالجة عملية دفع</div>
+                            <div class="endpoint-path">/v1/payments/charge</div>
+                        </div>
+                        <span class="method-badge post">POST</span>
+                    </button>
+
+                    <button type="button" class="endpoint-btn" onclick="selectEndpoint('contracts')">
+                        <div>
+                            <div style="font-size:0.85rem; font-weight:800; color:#ffffff;">توقيع عقد إلكتروني</div>
+                            <div class="endpoint-path">/v1/contracts/sign</div>
+                        </div>
+                        <span class="method-badge post">POST</span>
+                    </button>
+
+                    <button type="button" class="endpoint-btn" onclick="selectEndpoint('health')">
+                        <div>
+                            <div style="font-size:0.85rem; font-weight:800; color:#ffffff;">فحص حالة الخوادم</div>
+                            <div class="endpoint-path">/v1/system/health</div>
+                        </div>
+                        <span class="method-badge get">GET</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- مفتاح التفويض السريع -->
+            <div class="panel-card sr-tilt-card">
+                <div class="panel-heading">
+                    <span>🔑</span> مفتاح التفويض (API Key)
+                </div>
+                <div style="font-size:0.8rem; color:#94a3b8; margin-bottom:8px;">يتم تضمينه تلقائياً في الترويسة:</div>
+                <div style="background:#020503; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px; font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--sr-gold-light); direction:ltr;">
+                    Bearer sk_live_98a4120b...
+                </div>
+            </div>
+        </div>
+
+        <!-- اللوحة الرئيسية: تنفيذ الطلب واستعراض الكود والاستجابة -->
+        <div>
+            <!-- شريط الرابط والإرسال -->
+            <div class="panel-card sr-tilt-card">
+                <div class="url-bar-container">
+                    <span id="currentMethodBadge" class="method-badge post">POST</span>
+                    <input type="text" class="url-bar-input" id="apiUrlInput" value="https://api.sr-coresync.com/v1/invoices/create" readonly>
+                    <button type="button" class="btn-send-request sr-magnetic-btn" onclick="executeMockRequest()">
+                        <span>إرسال الطلب ⚡</span>
+                    </button>
+                </div>
+
+                <!-- حمولة الطلب وكود الاستدعاء -->
+                <div style="margin-bottom:20px;">
+                    <div class="tabs-header">
+                        <button type="button" class="tab-btn active" onclick="switchCodeTab('js')">JavaScript (Fetch)</button>
+                        <button type="button" class="tab-btn" onclick="switchCodeTab('python')">Python (Requests)</button>
+                        <button type="button" class="tab-btn" onclick="switchCodeTab('curl')">cURL</button>
+                    </div>
+
+                    <pre class="code-display" id="codeSnippetDisplay"></pre>
+                </div>
+
+                <!-- استجابة الخادم الفورية -->
+                <div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+                        <span style="font-size:0.9rem; font-weight:800; color:var(--sr-gold-light);">استجابة الخادم (Response):</span>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span id="responseStatus" style="font-size:0.78rem; font-weight:800; color:#10b981; font-family:'JetBrains Mono',monospace;">Status: 200 OK</span>
+                            <span id="responseLatency" style="font-size:0.75rem; color:#94a3b8; font-family:'JetBrains Mono',monospace;">54ms</span>
+                        </div>
+                    </div>
+
+                    <pre class="response-box" id="responseDisplay"></pre>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار التنفيذ -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم استدعاء نقطة النهاية والحصول على استجابة JSON فورية!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        const endpointsData = {
+            invoices: {
+                method: 'POST',
+                url: 'https://api.sr-coresync.com/v1/invoices/create',
+                payload: {
+                    buyer_name: 'شركة الأطلس الدولية',
+                    vat_number: 'NL853123456B01',
+                    amount: 6800.00,
+                    currency: 'EUR',
+                    tax_rate: 0.15
+                },
+                response: {
+                    status: 'success',
+                    invoice_id: 'INV-2026-9841',
+                    qr_code_hash: 'b4a108c9f...',
+                    zatca_compliance: 'PHASE_2_CERTIFIED',
+                    total_with_tax: 7820.00,
+                    issued_at: '2026-11-07T11:14:02Z'
+                }
+            },
+            payments: {
+                method: 'POST',
+                url: 'https://api.sr-coresync.com/v1/payments/charge',
+                payload: {
+                    amount: 14500.00,
+                    currency: 'EUR',
+                    gateway: 'stripe',
+                    payment_method: 'pm_card_visa'
+                },
+                response: {
+                    status: 'succeeded',
+                    charge_id: 'ch_3N8faL92...',
+                    receipt_url: 'https://sr-coresync.com/receipt/9842',
+                    settlement: 'INSTANT_SETTLED',
+                    paid_at: '2026-11-07T11:14:02Z'
+                }
+            },
+            contracts: {
+                method: 'POST',
+                url: 'https://api.sr-coresync.com/v1/contracts/sign',
+                payload: {
+                    contract_ref: 'CTRCT-2026-0084',
+                    signer_name: 'محمد السالم',
+                    e_signature_hash: 'sig_sha256_88b1...'
+                },
+                response: {
+                    status: 'signed_and_locked',
+                    contract_status: 'LEGALLY_BINDING',
+                    timestamp_seal: '2026-11-07T11:14:02Z',
+                    tamper_proof_id: 'vault_block_99410'
+                }
+            },
+            health: {
+                method: 'GET',
+                url: 'https://api.sr-coresync.com/v1/system/health',
+                payload: null,
+                response: {
+                    status: 'healthy',
+                    uptime: '99.998%',
+                    nodes: 28,
+                    active_sessions: 1420,
+                    region: 'eu-west-amsterdam'
+                }
+            }
+        };
+
+        let currentKey = 'invoices';
+        let currentLang = 'js';
+
+        function selectEndpoint(key) {
+            currentKey = key;
+            document.querySelectorAll('.endpoint-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const ep = endpointsData[key];
+            document.getElementById('currentMethodBadge').textContent = ep.method;
+            document.getElementById('currentMethodBadge').className = 'method-badge ' + ep.method.toLowerCase();
+            document.getElementById('apiUrlInput').value = ep.url;
+
+            updateCodeSnippet();
+            executeMockRequest();
+        }
+
+        function switchCodeTab(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            updateCodeSnippet();
+        }
+
+        function updateCodeSnippet() {
+            const ep = endpointsData[currentKey];
+            let code = '';
+
+            if (currentLang === 'js') {
+                code = `const response = await fetch('${ep.url}', {\n  method: '${ep.method}',\n  headers: {\n    'Authorization': 'Bearer sk_live_...',\n    'Content-Type': 'application/json'\n  }${ep.payload ? `,\n  body: JSON.stringify(${JSON.stringify(ep.payload, null, 2).replace(/\n/g, '\n  ')})` : ''}\n});\nconst data = await response.json();`;
+            } else if (currentLang === 'python') {
+                code = `import requests\n\nheaders = {'Authorization': 'Bearer sk_live_...'}\nresponse = requests.${ep.method.toLowerCase()}('${ep.url}'${ep.payload ? `, json=${JSON.stringify(ep.payload, null, 2)}` : ''}, headers=headers)\nprint(response.json())`;
+            } else {
+                code = `curl -X ${ep.method} "${ep.url}" \\\n  -H "Authorization: Bearer sk_live_..." \\\n  -H "Content-Type: application/json"${ep.payload ? ` \\\n  -d '${JSON.stringify(ep.payload)}'` : ''}`;
+            }
+
+            document.getElementById('codeSnippetDisplay').textContent = code;
+        }
+
+        function executeMockRequest() {
+            const ep = endpointsData[currentKey];
+            document.getElementById('responseLatency').textContent = Math.floor(Math.random() * 40 + 35) + 'ms';
+            document.getElementById('responseDisplay').textContent = JSON.stringify(ep.response, null, 2);
+        }
+
+        updateCodeSnippet();
+        executeMockRequest();
+    </script>
+</body>
+</html>
