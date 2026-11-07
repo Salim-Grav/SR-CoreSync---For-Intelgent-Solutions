@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو مولّد صفحات الهبوط فائقة التحويل • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="محرك سيادي متقدم لتوليد وتخصيص صفحات هبوط احترافية عالية التحويل في دقائق، مع حاسبة العائد الاستثماري ونماذج الحجز الفوري.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030806;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .builder-layout {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 440px 1fr;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1080px) {
+            .builder-layout { grid-template-columns: 1fr; }
+        }
+
+        .control-panel {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            height: fit-content;
+        }
+
+        .panel-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 6px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            border-color: var(--sr-gold);
+        }
+
+        .theme-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .theme-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 10px;
+            padding: 10px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: #f8fafc;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .theme-btn.active, .theme-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .btn-export {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        .btn-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+
+        /* مساحة المعاينة الحية */
+        .preview-wrapper {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(14px);
+        }
+
+        .preview-top-bar {
+            background: rgba(5, 12, 8, 0.95);
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-url-pill {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            color: var(--sr-cyan);
+            font-family: 'Space Grotesk', monospace;
+            direction: ltr;
+        }
+
+        .artboard-container {
+            padding: 30px;
+            background: radial-gradient(circle at 50% 0%, rgba(197, 168, 128, 0.07) 0%, transparent 70%);
+        }
+
+        /* أقسام صفحة الهبوط المولدة */
+        .landing-hero-section {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 36px;
+        }
+
+        .landing-hero-headline {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .landing-hero-sub {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            max-width: 650px;
+            margin: 0 auto 24px;
+        }
+
+        .landing-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 0.95rem;
+            padding: 12px 28px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(197, 168, 128, 0.35);
+        }
+
+        /* حاسبة العائد الاستثماري ROI */
+        .roi-box {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1px solid var(--sr-border);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 36px;
+        }
+
+        .roi-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .roi-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+        }
+
+        .roi-slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .roi-slider {
+            width: 100%;
+            accent-color: var(--sr-gold);
+            cursor: pointer;
+        }
+
+        .roi-result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .roi-stat-num {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--sr-emerald);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .roi-stat-label {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        /* جدول الباقات */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .pricing-card {
+            background: rgba(5, 12, 8, 0.65);
+            border: 1px solid var(--sr-border);
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--sr-gold);
+            transform: translateY(-3px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--sr-gold);
+            background: linear-gradient(180deg, rgba(197, 168, 128, 0.12) 0%, rgba(5, 12, 8, 0.8) 100%);
+            box-shadow: 0 10px 30px rgba(197, 168, 128, 0.15);
+        }
+
+        .pricing-plan-name { font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
+        .pricing-plan-price { font-size: 1.6rem; font-weight: 900; color: var(--sr-gold-light); font-family: 'Space Grotesk', sans-serif; margin-bottom: 12px; }
+
+        /* نموذج حجز الاستشارة الفورية */
+        .booking-box {
+            background: rgba(5, 12, 8, 0.8);
+            border: 1.5px solid var(--sr-gold);
+            border-radius: 18px;
+            padding: 26px;
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .booking-title { font-size: 1.3rem; font-weight: 900; color: #ffffff; margin-bottom: 4px; }
+        .booking-sub { font-size: 0.85rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">مولّد صفحات الهبوط فائقة التحويل</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="ecommerce-launchpad.html" class="nav-link">مولّد المتاجر</a>
+            <a href="smart-proposal-portal.html" class="nav-link">بوابة التعاقد</a>
+            <a href="social-ads-studio.html" class="nav-link">أصول التواصل 8K</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">🚀 محرك التحويل المتقدم — High-Converting Landing Page Builder</div>
+        <h1>بناء وتخصيص صفحات هبوط احترافية عالية التحويل</h1>
+        <p>قم بتوليد صفحات هبوط متكاملة مصممة لرفع المبيعات والاستشارات، تشمل واجهات Hero، حاسبة العائد الاستثماري ROI، جداول الباقات، ونماذج الحجز الفوري بنقرة واحدة.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="builder-layout">
+
+        <!-- لوحة التحكم وتخصيص المحتوى -->
+        <div class="control-panel sr-tilt-card sr-holographic-card">
+            <div class="panel-heading">
+                <span>⚙️</span> خيارات صفحة الهبوط
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">النمط البصري (Theme):</label>
+                <div class="theme-buttons-grid">
+                    <button type="button" class="theme-btn active" onclick="setTheme('gold')">الذهب السيادي</button>
+                    <button type="button" class="theme-btn" onclick="setTheme('emerald')">الزمرد الأخضر</button>
+                    <button type="button" class="theme-btn" onclick="setTheme('cyan')">السيان السيبراني</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العنوان الرئيسي (Hero Headline):</label>
+                <input type="text" class="form-input" id="headlineInput" value="ضاعف كفاءة مؤسستك بالذكاء الاصطناعي السيادي" oninput="updateArtboard()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">الوصف الترويجي (Sub-headline):</label>
+                <textarea class="form-textarea" id="subheadlineInput" rows="3" oninput="updateArtboard()">حلول سحابية مؤتمتة ومعزولة تضمن لك سيادة البيانات وخفض التكاليف التشغيلية بنسبة تصل إلى 45%.</textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">نص زر الدعوة لاتخاذ إجراء (CTA Button):</label>
+                <input type="text" class="form-input" id="ctaInput" value="احجز استشارتك المجانية الآن ⚡" oninput="updateArtboard()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">رقم واتساب الاستقبال الفوري:</label>
+                <input type="text" class="form-input" id="whatsappInput" value="+31 618111116" dir="ltr" placeholder="+31618111116">
+            </div>
+
+            <button type="button" class="btn-export sr-magnetic-btn" onclick="exportPageCode()">
+                <span>📋 تصدير كود الصفحة (HTML/CSS جاهز)</span>
+            </button>
+        </div>
+
+        <!-- المعاينة الحية لصفحة الهبوط -->
+        <div class="preview-wrapper sr-tilt-card">
+            <div class="preview-top-bar">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+                    <span style="width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+                    <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+                </div>
+                <div class="preview-url-pill">https://sr-coresync.com/lp/enterprise</div>
+                <div style="color:var(--sr-gold-light); font-size:0.85rem; font-weight:700;">معاينة تفاعلية حية</div>
+            </div>
+
+            <div class="artboard-container" id="artboardRoot">
+
+                <!-- 1. واجهة الهيرو -->
+                <div class="landing-hero-section">
+                    <img src="./assets/sr-core-emblem.svg" width="60" height="60" style="margin-bottom:14px; filter: drop-shadow(0 0 12px rgba(197, 168, 128, 0.4));">
+                    <h2 class="landing-hero-headline" id="artboardHeadline">ضاعف كفاءة مؤسستك بالذكاء الاصطناعي السيادي</h2>
+                    <p class="landing-hero-sub" id="artboardSub">حلول سحابية مؤتمتة ومعزولة تضمن لك سيادة البيانات وخفض التكاليف التشغيلية بنسبة تصل إلى 45%.</p>
+                    <a href="#bookingSection" class="landing-cta-btn" id="artboardCta">احجز استشارتك المجانية الآن ⚡</a>
+                </div>
+
+                <!-- 2. حاسبة العائد الاستثماري ROI -->
+                <div class="roi-box sr-tilt-card">
+                    <div class="roi-header">
+                        <span class="roi-title">📊 حاسبة توفير التكاليف والعائد الاستثماري</span>
+                        <span style="font-size:0.8rem; color:#10b981; font-weight:700;">توفير فوري</span>
+                    </div>
+
+                    <div class="roi-slider-group">
+                        <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+                            <span>حجم الفريق / الموظفين:</span>
+                            <span id="teamSizeDisplay" style="color:var(--sr-gold-light); font-weight:800;">25 موظفاً</span>
+                        </div>
+                        <input type="range" class="roi-slider" id="teamSlider" min="5" max="200" value="25" oninput="calculateROI()">
+                    </div>
+
+                    <div class="roi-result-grid">
+                        <div>
+                            <div class="roi-stat-num" id="savingsAmount">€ 37,500</div>
+                            <div class="roi-stat-label">التوفير السنوي التقديري المتوقع</div>
+                        </div>
+                        <div>
+                            <div class="roi-stat-num" id="hoursAmount">4,200 ساعة</div>
+                            <div class="roi-stat-label">ساعات العمل المؤتمتة سنوياً</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. باقات الأسعار -->
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div>
+                            <div class="pricing-plan-name">باقة الانطلاق</div>
+                            <div class="pricing-plan-price">€ 2,400</div>
+                            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:12px;">مثالية للشركات الناشئة لتدشين منظومة رقمية متكاملة.</p>
+                        </div>
+                        <button class="landing-cta-btn" style="width:100%; justify-content:center; padding:8px;" onclick="selectPlan('الانطلاق')">اختيار الباقة</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div>
+                            <span style="display:inline-block; background:var(--sr-gold); color:#040806; font-size:0.7rem; font-weight:900; padding:2px 8px; border-radius:999px; margin-bottom:6px;">الأكثر طلباً</span>
+                            <div class="pricing-plan-name">الباقة السيادية المؤسسية</div>
+                            <div class="pricing-plan-price">€ 6,800</div>
+                            <p style="font-size:0.8rem; color:#cbd5e1; margin-bottom:12px;">نظام ERP متكامل + بوابة دفع وفواتير + أمان عالي.</p>
+                        </div>
+                        <button class="landing-cta-btn" style="width:100%; justify-content:center; padding:8px;" onclick="selectPlan('السيادية المؤسسية')">اختيار الباقة</button>
+                    </div>
+                </div>
+
+                <!-- 4. نموذج الحجز الفوري عبر واتساب -->
+                <div class="booking-box" id="bookingSection">
+                    <div class="booking-header">
+                        <h3 class="booking-title">احجز جلسة استشارية خاصة الآن</h3>
+                        <p class="booking-sub">سيقوم فريقنا بالتواصل معك عبر واتساب لتحديد موعد الجلسة ومناقشة تفاصيل مشروعك.</p>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+                        <input type="text" class="form-input" id="clientNameInput" placeholder="اسمك الكريم">
+                        <input type="text" class="form-input" id="clientPhoneInput" placeholder="رقم هاتفك مع الرمز">
+                    </div>
+
+                    <button type="button" class="btn-export sr-magnetic-btn" onclick="sendWhatsAppBooking()">
+                        <span>💬 إرسال الطلب وحجز الموعد عبر WhatsApp</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار النسخ -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم نسخ كود صفحة الهبوط الكامل بنجاح!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        function updateArtboard() {
+            document.getElementById('artboardHeadline').textContent = document.getElementById('headlineInput').value || 'عنوان صفحة الهبوط';
+            document.getElementById('artboardSub').textContent = document.getElementById('subheadlineInput').value || 'الوصف الترويجي';
+            document.getElementById('artboardCta').textContent = document.getElementById('ctaInput').value || 'احجز الآن';
+        }
+
+        function calculateROI() {
+            const team = parseInt(document.getElementById('teamSlider').value);
+            document.getElementById('teamSizeDisplay').textContent = team + ' موظفاً';
+            
+            const savings = team * 1500;
+            const hours = team * 168;
+
+            document.getElementById('savingsAmount').textContent = '€ ' + savings.toLocaleString('ar-SA');
+            document.getElementById('hoursAmount').textContent = hours.toLocaleString('ar-SA') + ' ساعة';
+        }
+
+        function selectPlan(plan) {
+            document.getElementById('clientNameInput').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('clientNameInput').focus();
+        }
+
+        function sendWhatsAppBooking() {
+            const name = document.getElementById('clientNameInput').value || 'العميل الكريم';
+            const phone = document.getElementById('clientPhoneInput').value || '';
+            const targetPhone = document.getElementById('whatsappInput').value.replace(/\D/g, '');
+
+            const msg = encodeURIComponent(`مرحباً S&R CoreSync،\nأنا ${name}، أرغب في حجز جلسة استشارية لمناقشة حلول صفحة الهبوط والأنظمة السيادية.\nرقم هاتفي: ${phone}`);
+            window.open(`https://wa.me/${targetPhone}?text=${msg}`, '_blank');
+        }
+
+        function exportPageCode() {
+            const html = document.getElementById('artboardRoot').innerHTML;
+            navigator.clipboard.writeText(html);
+            const toast = document.getElementById('toastNotification');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+
+        function setTheme(t) {
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            if (t === 'emerald') {
+                document.documentElement.style.setProperty('--sr-gold', '#10b981');
+                document.documentElement.style.setProperty('--sr-gold-light', '#6ee7b7');
+            } else if (t === 'cyan') {
+                document.documentElement.style.setProperty('--sr-gold', '#38bdf8');
+                document.documentElement.style.setProperty('--sr-gold-light', '#7dd3fc');
+            } else {
+                document.documentElement.style.setProperty('--sr-gold', '#c5a880');
+                document.documentElement.style.setProperty('--sr-gold-light', '#f3dfba');
+            }
+        }
+
+        calculateROI();
+    </script>
+</body>
+</html>
+
