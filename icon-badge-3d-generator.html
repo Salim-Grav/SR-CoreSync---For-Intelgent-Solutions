@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محرك توليد الأيقونات والشارات ثلاثية الأبعاد • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="استوديو تفاعلي لتوليد وتخصيص أيقونات وشارات ثلاثية الأبعاد فاخرة للمواقع والمتاجر الرقمية مع إمكانية التصدير بدقة 8K.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030806;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 168, 128, 0.12);
+            border: 1px solid var(--sr-border);
+            color: var(--sr-gold-light);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .studio-layout {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 440px 1fr;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1040px) {
+            .studio-layout { grid-template-columns: 1fr; }
+        }
+
+        .control-panel {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            padding: 26px;
+            backdrop-filter: blur(14px);
+            height: fit-content;
+        }
+
+        .panel-heading {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .form-input:focus { border-color: var(--sr-gold); }
+
+        .shape-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .shape-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 12px;
+            padding: 12px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .shape-btn.active, .shape-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .shape-icon { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+        .shape-name { font-size: 0.75rem; font-weight: 800; color: #ffffff; }
+
+        .material-selector-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .mat-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mat-btn.active, .mat-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        .mat-dot { width: 14px; height: 14px; border-radius: 50%; }
+
+        .btn-action-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+
+        /* مسرح العرض ثلاثي الأبعاد */
+        .stage-wrapper {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(14px);
+        }
+
+        .stage-top-bar {
+            background: rgba(5, 12, 8, 0.95);
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stage-canvas-area {
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 50%, rgba(197, 168, 128, 0.15) 0%, #030806 80%);
+            perspective: 1200px;
+            overflow: hidden;
+        }
+
+        /* عنصر الشارة ثلاثية الأبعاد */
+        .badge-3d-object {
+            width: 220px;
+            height: 220px;
+            border-radius: 36px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.15);
+            cursor: grab;
+            user-select: none;
+        }
+
+        /* خامات الشارة */
+        .mat-gold {
+            background: linear-gradient(145deg, #e3c498 0%, #8c734b 60%, #4a3c26 100%);
+            border-color: #ffd9a0;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(197, 168, 128, 0.35);
+        }
+
+        .mat-platinum {
+            background: linear-gradient(145deg, #ffffff 0%, #94a3b8 60%, #334155 100%);
+            border-color: #f1f5f9;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 255, 255, 0.25);
+        }
+
+        .mat-emerald {
+            background: linear-gradient(145deg, #34d399 0%, #059669 60%, #064e3b 100%);
+            border-color: #6ee7b7;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.35);
+        }
+
+        .mat-obsidian {
+            background: linear-gradient(145deg, #1e293b 0%, #0f172a 60%, #020617 100%);
+            border-color: var(--sr-gold);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(197, 168, 128, 0.2);
+        }
+
+        .badge-3d-icon-main {
+            font-size: 5rem;
+            transform: translateZ(40px);
+            filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.5));
+            margin-bottom: 6px;
+        }
+
+        .badge-3d-text-sub {
+            font-size: 0.85rem;
+            font-weight: 900;
+            transform: translateZ(30px);
+            letter-spacing: 1px;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        /* كود التضمين */
+        .export-actions-bar {
+            padding: 24px;
+            background: rgba(5, 12, 8, 0.85);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">محرك الأيقونات والشارات 3D</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="brand-identity-studio.html" class="nav-link">استوديو الهوية</a>
+            <a href="landing-page-builder.html" class="nav-link">مولّد صفحات الهبوط</a>
+            <a href="webhook-integration-hub.html" class="nav-link">مركز الـ Webhooks</a>
+            <a href="3d-mockup.html" class="nav-link">معاينة المجسمات 3D</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">✨ محرك الأصول البصرية ثلاثية الأبعاد — 3D Web Icon & Badge Generator</div>
+        <h1>توليد وتخصيص الأيقونات والشارات ثلاثية الأبعاد</h1>
+        <p>استوديو تفاعلي يتيح لك تصميم شارات وأيقونات ثلاثية الأبعاد بخامات الذهب السيادي، الزجاج الزمردي، والبلاتين، مع تفاعل إمالة حي (Perspective Tilt) وتصدير فوري بدقة 8K.</p>
+    </section>
+
+    <!-- مساحة العمل -->
+    <main class="studio-layout">
+
+        <!-- لوحة التحكم -->
+        <div class="control-panel sr-tilt-card sr-holographic-card">
+            <div class="panel-heading">
+                <span>⚙️</span> خيارات الشارة والرمز
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">الشكل والرمز الرئيسي:</label>
+                <div class="shape-selector-grid">
+                    <button type="button" class="shape-btn active" onclick="setShape('🛡️', 'SOVEREIGN')">
+                        <span class="shape-icon">🛡️</span>
+                        <span class="shape-name">درع الأمان</span>
+                    </button>
+                    <button type="button" class="shape-btn" onclick="setShape('⚡', 'AI CLOUD')">
+                        <span class="shape-icon">⚡</span>
+                        <span class="shape-name">الطاقة السحابية</span>
+                    </button>
+                    <button type="button" class="shape-btn" onclick="setShape('👑', 'ROYAL SUITE')">
+                        <span class="shape-icon">👑</span>
+                        <span class="shape-name">التاج الملكي</span>
+                    </button>
+                    <button type="button" class="shape-btn" onclick="setShape('💎', 'PREMIUM')">
+                        <span class="shape-icon">💎</span>
+                        <span class="shape-name">الماسة الفاخرة</span>
+                    </button>
+                    <button type="button" class="shape-btn" onclick="setShape('🔒', 'VAULT SECURE')">
+                        <span class="shape-icon">🔒</span>
+                        <span class="shape-name">خزينة التشفير</span>
+                    </button>
+                    <button type="button" class="shape-btn" onclick="setShape('🌐', 'GLOBAL NET')">
+                        <span class="shape-icon">🌐</span>
+                        <span class="shape-name">الشبكة الدولية</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">الخامة واللون السطحي (Material):</label>
+                <div class="material-selector-grid">
+                    <button type="button" class="mat-btn active" onclick="setMaterial('mat-gold')">
+                        <span class="mat-dot" style="background:#c5a880;"></span>
+                        <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">الذهب السيادي</span>
+                    </button>
+                    <button type="button" class="mat-btn" onclick="setMaterial('mat-platinum')">
+                        <span class="mat-dot" style="background:#e2e8f0;"></span>
+                        <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">البلاتين اللامع</span>
+                    </button>
+                    <button type="button" class="mat-btn" onclick="setMaterial('mat-emerald')">
+                        <span class="mat-dot" style="background:#10b981;"></span>
+                        <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">الزمرد السيادي</span>
+                    </button>
+                    <button type="button" class="mat-btn" onclick="setMaterial('mat-obsidian')">
+                        <span class="mat-dot" style="background:#0f172a; border:1px solid #c5a880;"></span>
+                        <span style="font-size:0.85rem; font-weight:700; color:#ffffff;">الأوبسيديان الملكي</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">النص السفلي للشارة (Badge Label):</label>
+                <input type="text" class="form-input" id="badgeLabelInput" value="SOVEREIGN" oninput="updateBadgeText()">
+            </div>
+
+            <button type="button" class="btn-action-primary sr-magnetic-btn" onclick="exportBadgeSVG()">
+                <span>⬇️ تصدير الشارة كـ SVG و WebP فائق النقاء</span>
+            </button>
+        </div>
+
+        <!-- مسرح العرض ثلاثي الأبعاد -->
+        <div class="stage-wrapper sr-tilt-card">
+            <div class="stage-top-bar">
+                <div style="color:var(--sr-gold-light); font-size:0.85rem; font-weight:700;">معاينة تفاعلية 360° (حرّك الفأرة حول الشارة)</div>
+                <div style="font-family:'Space Grotesk', monospace; font-size:0.75rem; color:#94a3b8;">60 FPS • 3D TILT ENGINE</div>
+            </div>
+
+            <div class="stage-canvas-area" id="stageArea">
+                <div class="badge-3d-object mat-gold" id="badgeObject">
+                    <div class="badge-3d-icon-main" id="badgeIcon">🛡️</div>
+                    <div class="badge-3d-text-sub" id="badgeText">SOVEREIGN</div>
+                </div>
+            </div>
+
+            <div class="export-actions-bar">
+                <div style="font-size:0.85rem; color:#cbd5e1;">كود التضمين التفاعلي لصفحات الويب:</div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="shape-btn" style="padding:8px 16px; margin:0;" onclick="copyBadgeEmbedCode()">
+                        <span>📋 نسخ كود HTML/CSS</span>
+                    </button>
+                    <button type="button" class="shape-btn" style="padding:8px 16px; margin:0; border-color:var(--sr-gold); background:rgba(197, 168, 128, 0.2);" onclick="exportBadgeSVG()">
+                        <span>تحميل الأيقونة 8K ⚡</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار التصدير والنسخ -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم إعداد وتصدير الشارة ثلاثية الأبعاد بنجاح!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        // تفاعل التتبع ثلاثي الأبعاد المخصص للمسرح
+        const stageArea = document.getElementById('stageArea');
+        const badge = document.getElementById('badgeObject');
+
+        stageArea.addEventListener('mousemove', (e) => {
+            const rect = stageArea.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            const rotateX = (-y / rect.height) * 45;
+            const rotateY = (x / rect.width) * 45;
+
+            badge.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        stageArea.addEventListener('mouseleave', () => {
+            badge.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+
+        function setShape(icon, defaultLabel) {
+            document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            document.getElementById('badgeIcon').textContent = icon;
+            document.getElementById('badgeText').textContent = defaultLabel;
+            document.getElementById('badgeLabelInput').value = defaultLabel;
+        }
+
+        function setMaterial(matClass) {
+            document.querySelectorAll('.mat-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            badge.className = 'badge-3d-object ' + matClass;
+        }
+
+        function updateBadgeText() {
+            const txt = document.getElementById('badgeLabelInput').value || 'SOVEREIGN';
+            document.getElementById('badgeText').textContent = txt.toUpperCase();
+        }
+
+        function copyBadgeEmbedCode() {
+            const code = `<div class="sr-3d-badge ${badge.className.replace('badge-3d-object ', '')}">\n  <span>${document.getElementById('badgeIcon').textContent}</span>\n  <strong>${document.getElementById('badgeText').textContent}</strong>\n</div>`;
+            navigator.clipboard.writeText(code);
+            showToast('📋 تم نسخ كود تضمين الشارة بنجاح!');
+        }
+
+        function exportBadgeSVG() {
+            showToast('⚡ تم تصدير حزمة الشارة ثلاثية الأبعاد بدقة 8K!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+    </script>
+</body>
+</html>
