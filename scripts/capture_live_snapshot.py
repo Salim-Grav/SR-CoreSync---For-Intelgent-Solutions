@@ -16,8 +16,7 @@ def capture(url=None):
         '--headless=new',
         '--disable-gpu',
         '--no-sandbox',
-        f'--user-data-dir={TEMP_PROFILE}',
-        '--virtual-time-budget=2000',
+        '--incognito',
         f'--screenshot={temp_shot}',
         '--window-size=1280,800',
         url
