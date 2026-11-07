@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>دليل رفع التحديثات خطوة بخطوة — SR-CoreSync</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@page {
+    size: 720px 1020px;
+    margin: 0;
+}
+:root {
+    --c-dark: #0f2437;
+    --c-bg: #f6f8fa;
+    --c-accent: #0e7490;
+    --c-warn: #b45309;
+    --c-text: #1e293b;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 720px;
+    background: var(--c-dark);
+    color: var(--c-text);
+    font-family: 'Cairo', 'DejaVu Sans', sans-serif;
+    line-break: strict;
+}
+@media screen {
+    html {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        background: #1a2b3c;
+    }
+    body {
+        transform-origin: top center;
+        margin: 20px auto;
+        box-shadow: 0 8px 40px rgba(0,0,0,.45);
+    }
+}
+p, td, li, .content { overflow-wrap: break-word; word-break: break-word; }
+
+/* ---------- COVER ---------- */
+.cover {
+    width: 720px;
+    height: 1020px;
+    box-sizing: border-box;
+    break-after: page;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0f2437 0%, #10344a 60%, #0e4a5f 100%);
+    color: #eef4f8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px;
+}
+.cover .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,.14);
+}
+.cover .dc1 { width: 340px; height: 340px; top: -110px; left: -90px; }
+.cover .dc2 { width: 180px; height: 180px; bottom: 120px; left: 40px; border-color: rgba(94,203,224,.25); }
+.cover .dc3 { width: 90px; height: 90px; top: 150px; right: 70px; border-color: rgba(94,203,224,.35); background: rgba(94,203,224,.08); }
+.cover .deco-line {
+    position: absolute; right: 64px; top: 0; width: 2px; height: 150px;
+    background: linear-gradient(180deg, rgba(94,203,224,.7), transparent);
+}
+.cover-badge {
+    display: inline-block;
+    width: fit-content;
+    border: 1.5px solid rgba(94,203,224,.65);
+    color: #7fd6e8;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px;
+    padding: 6px 18px; border-radius: 999px;
+    margin-bottom: 26px;
+}
+.cover-title {
+    font-size: 52px; font-weight: 900; line-height: 1.25;
+    margin: 0 0 18px 0;
+}
+.cover-title .hl { color: #7fd6e8; }
+.cover-sub {
+    font-size: 17.5px; font-weight: 400; line-height: 1.9;
+    color: #c3d3de; max-width: 540px; margin-bottom: 44px;
+}
+.cover-zips { display: flex; flex-wrap: wrap; gap: 14px; max-width: 560px; }
+.cover-zip {
+    flex: 1 1 240px; min-width: 240px; max-width: 100%;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 14px; padding: 16px 18px;
+}
+.cover-zip .zname { direction: ltr; unicode-bidi: isolate; text-align: right; font-family: 'DejaVu Sans Mono', monospace; font-size: 13.5px; font-weight: 700; color: #aee7f5; }
+.cover-zip .zdesc { font-size: 13px; color: #c3d3de; margin-top: 6px; line-height: 1.7; }
+.cover-foot {
+    position: absolute; bottom: 52px; right: 64px; left: 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12.5px; color: #8fa5b5;
+    border-top: 1px solid rgba(255,255,255,.14); padding-top: 18px;
+}
+
+/* ---------- CONTENT ---------- */
+.main-content {
+    background: var(--c-bg);
+    padding: 56px 56px 44px 56px;
+}
+.chapter-header {
+    break-after: avoid;
+    break-inside: avoid;
+    margin-top: 28px;
+}
+.chapter-header:first-child { margin-top: 0; }
+.section-tag {
+    display: inline-block;
+    background: var(--c-accent); color: #fff;
+    font-size: 12px; font-weight: 700;
+    padding: 3px 14px; border-radius: 999px;
+    letter-spacing: .5px; margin-bottom: 10px;
+}
+.section-title { font-size: 25px; font-weight: 800; line-height: 1.4; margin: 0 0 6px 0; }
+.divider { width: 64px; height: 4px; background: var(--c-accent); border-radius: 2px; margin-bottom: 16px; }
+.body-text { font-size: 15px; line-height: 1.95; margin: 0 0 12px 0; }
+.body-text b, .body-text strong { font-weight: 800; }
+.lead { font-size: 15.5px; font-weight: 600; color: #0f2f43; }
+
+.fn {
+    direction: ltr; unicode-bidi: isolate;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: .86em; font-weight: 700;
+    background: #e8eef2; color: #0f3a4d;
+    padding: 1px 6px; border-radius: 5px;
+    white-space: nowrap;
+}
+
+/* flow diagram */
+.flow-bar { display: flex; flex-wrap: wrap; gap: 10px; max-width: 100%; margin: 18px 0 6px 0; break-inside: avoid; }
+.flow-step {
+    flex: 1 1 170px; min-width: 150px; max-width: 100%;
+    background: #fff; border: 1.5px solid #cfe0e8; border-radius: 12px;
+    padding: 14px 14px 12px 14px; text-align: center;
+    position: relative; overflow-wrap: break-word;
+}
+.flow-step .fnum {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--c-accent); color: #fff;
+    font-weight: 800; font-size: 15px; line-height: 30px;
+    margin: 0 auto 8px auto;
+}
+.flow-step .ftxt { font-size: 13.5px; font-weight: 700; line-height: 1.65; }
+.flow-step .fsub { font-size: 11.5px; color: #5b7285; line-height: 1.6; margin-top: 3px; }
+.flow-step + .flow-step::before {
+    content: '←';
+    position: absolute; top: 42%; right: -14px;
+    color: #0e7490; font-weight: 900; font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* step list */
+.steps { margin: 4px 0 8px 0; }
+.step {
+    display: flex; gap: 14px; align-items: flex-start;
+    break-inside: avoid;
+    margin-bottom: 12px; max-width: 100%;
+}
+.step .snum {
+    flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #0f3a4d; color: #fff;
+    font-weight: 800; font-size: 16px; line-height: 34px; text-align: center;
+    margin-top: 2px;
+}
+.step .sbody { font-size: 14.5px; line-height: 1.85; }
+.step .sbody .stitle { font-weight: 800; font-size: 15px; }
+.step .sbody .ssub { color: #46606f; font-size: 13px; }
+
+/* code block */
+.code {
+    direction: ltr; text-align: left;
+    background: var(--c-dark); color: #d8e8f0;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 12px; line-height: 1.75;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0 14px 0;
+    break-inside: avoid;
+    overflow-wrap: break-word; word-break: break-all;
+    max-width: 100%; box-sizing: border-box;
+}
+.code .cm { color: #6ea3bd; }
+.code .hi { color: #7fd6e8; font-weight: 700; }
+
+/* boxes */
+.note {
+    background: #eef7fa; border-inline-start: 4px solid var(--c-accent);
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 13.5px; line-height: 1.85;
+    margin: 12px 0 14px 0; break-inside: avoid;
+}
+.note .nt { font-weight: 800; color: var(--c-accent); }
+.warn {
+    background: #fdf6ec; border-inline-start: 4px solid var(--c-warn);
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 13.5px; line-height: 1.85;
+    margin: 12px 0 14px 0; break-inside: avoid;
+}
+.warn .nt { font-weight: 800; color: var(--c-warn); }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; margin: 12px 0 14px 0; break-inside: avoid; table-layout: fixed; }
+th {
+    background: var(--c-dark); color: #fff;
+    font-size: 13px; font-weight: 700;
+    padding: 9px 12px; text-align: right;
+}
+td {
+    font-size: 13px; line-height: 1.8;
+    padding: 9px 12px; text-align: right;
+    border-bottom: 1px solid #dde6ec;
+    background: #fff;
+    overflow-wrap: break-word;
+}
+tr:nth-child(even) td { background: #f2f6f9; }
+
+/* method card */
+.method {
+    background: #fff; border: 1.5px solid #cfe0e8; border-radius: 14px;
+    padding: 18px 20px; margin-bottom: 14px;
+}
+.method .mhead { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.method .mbadge {
+    background: var(--c-accent); color: #fff; font-size: 12.5px; font-weight: 800;
+    border-radius: 8px; padding: 4px 12px; flex-shrink: 0;
+}
+.method .mtitle { font-size: 17px; font-weight: 800; }
+.method .mfor { font-size: 12.5px; color: #5b7285; background: #eef2f5; border-radius: 999px; padding: 3px 12px; margin-inline-start: auto; }
+
+/* FAQ */
+.faq {
+    background: #fff; border: 1px solid #dde6ec; border-inline-start: 4px solid #0f3a4d;
+    border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; break-inside: avoid;
+}
+.faq .q { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
+.faq .a { font-size: 13.5px; line-height: 1.85; color: #3d5566; }
+
+/* ---------- ENDING ---------- */
+.ending {
+    width: 720px; height: 1020px; box-sizing: border-box;
+    break-before: page; overflow: hidden;
+    background: linear-gradient(200deg, #0f2437 0%, #10344a 55%, #0e4a5f 100%);
+    color: #eef4f8;
+    padding: 70px 64px;
+    position: relative;
+}
+.ending .etitle { font-size: 34px; font-weight: 900; margin-bottom: 10px; }
+.ending .esub { font-size: 15px; color: #c3d3de; line-height: 1.9; margin-bottom: 34px; }
+.check { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+.check .cnum {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+    background: #7fd6e8; color: #0f2437;
+    font-weight: 900; font-size: 15px; line-height: 32px; text-align: center;
+}
+.check .ctxt { font-size: 15px; line-height: 1.8; padding-top: 3px; }
+.check .ctxt b { color: #aee7f5; }
+.end-note {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(127,214,232,.35);
+    border-radius: 12px; padding: 18px 20px;
+    font-size: 13.5px; line-height: 1.9; color: #d5e4ed;
+    margin-top: 34px;
+}
+.end-note .nt { color: #7fd6e8; font-weight: 800; }
+.ending .efoot {
+    position: absolute; bottom: 50px; right: 64px; left: 64px;
+    border-top: 1px solid rgba(255,255,255,.14); padding-top: 16px;
+    font-size: 12px; color: #8fa5b5; display: flex; justify-content: space-between;
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= COVER ======================= -->
+<div class="cover">
+    <div class="deco-circle dc1"></div>
+    <div class="deco-circle dc2"></div>
+    <div class="deco-circle dc3"></div>
+    <div class="deco-line"></div>
+
+    <div class="cover-badge">SR-CORESYNC &bull; دليل تشغيلي مبسّط</div>
+    <h1 class="cover-title">أين أضع التحديثات؟<br><span class="hl">وكيف أرفعها خطوة بخطوة؟</span></h1>
+    <p class="cover-sub">شرح مبسّط بالعربية: من أين تجلب ملفات التحديث، وإلى أين تضعها بالضبط، سواء كانت نسختك على جهازك (الهاردديسك) أو على المستودع في GitHub أو على الاستضافة.</p>
+
+    <div class="cover-zips">
+        <div class="cover-zip">
+            <div class="zname">SR-CoreSync_P0_Patches.zip</div>
+            <div class="zdesc">حزمة الأمان P0 — 4 رقع + 11 ملفاً كاملاً + اختبار فحص من 16 بنداً</div>
+        </div>
+        <div class="cover-zip">
+            <div class="zname">SR-CoreSync_i18n_Fixes.zip</div>
+            <div class="zdesc">حزمة الترجمة الكاملة — 54 ملفاً تغطي 26 لغة + تقرير تدقيق بعد الإصلاح</div>
+        </div>
+    </div>
+
+    <div class="cover-foot">
+        <span>الإصدار 1.0</span>
+        <span>2 نوفمبر 2026</span>
+    </div>
+</div>
+
+<!-- ======================= CONTENT ======================= -->
+<div class="main-content">
+
+    <!-- 1. big picture -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 1</div>
+        <div class="section-title">الصورة الكبيرة: أين التحديثات الآن؟</div>
+        <div class="divider"></div>
+    </div>
+
+    <p class="body-text lead">قبل أي خطوة، من المهم أن تفهم أين توجد التحديثات حالياً ولماذا لا تصل إلى GitHub أو جهازك تلقائياً:</p>
+    <p class="body-text">التحديثات أُنجزت داخل بيئة عمل معزولة خاصة بمساعد الذكاء الاصطناعي، وجرى تجميعها في <b>ملفي ZIP</b> موجودَين في هذه المحادثة. هذه البيئة المعزولة <b>لا تملك كلمة سر حسابك في GitHub، ولا تستطيع اللمس أو الوصول إلى الهاردديسك في جهازك</b> — لذلك لا يمكن رفع الملفات تلقائياً إلى أي منهما. أنت الوحيد القادر على نقل التحديثات من المحادثة إلى أماكنها، والدليل كله يدور حول هذه الخطوات الثلاث البسيطة:</p>
+
+    <div class="flow-bar">
+        <div class="flow-step">
+            <div class="fnum">1</div>
+            <div class="ftxt">التحديثات جاهزة هنا في المحادثة</div>
+            <div class="fsub">كملفي ZIP قابلين للتنزيل</div>
+        </div>
+        <div class="flow-step">
+            <div class="fnum">2</div>
+            <div class="ftxt">أنت تنزّلهما إلى جهازك</div>
+            <div class="fsub">زر التنزيل بجانب كل ملف</div>
+        </div>
+        <div class="flow-step">
+            <div class="fnum">3</div>
+            <div class="ftxt">تضع الملفات في مكانها الصحيح</div>
+            <div class="fsub">الهاردديسك أو GitHub أو الاستضافة</div>
+        </div>
+    </div>
+
+    <div class="note">
+        <span class="nt">بمعنى آخر: </span>
+        أنا (المساعد) جهّزت كل شيء وحزمته وتحققت منه، لكن «آخر كيلومتر» — عملية الرفع الفعلية — تقع على عاتقك لأن الحسابات والأجهزة ملكك وحدك. الأخبار الجيدة: العملية كلها لا تتجاوز نسخ ولصق أو سحب وإفلات، وأي طريقة من الطرق الثلاث في الأقسام التالية تكفي.
+    </div>
+
+    <!-- 2. download -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 2</div>
+        <div class="section-title">الخطوة صفر: نزّل الحزمتين أولاً</div>
+        <div class="divider"></div>
+    </div>
+
+    <p class="body-text">في هذه المحادثة ستجد ملفي ZIP جاهزين للتنزيل. حمّلهما كليهما إلى جهازك (مثلاً إلى مجلد التنزيلات) قبل أي شيء آخر:</p>
+
+    <table>
+        <colgroup><col style="width:38%"><col style="width:20%"><col style="width:42%"></colgroup>
+        <tr><th>الملف</th><th>الحجم تقريباً</th><th>ماذا يحتوي؟</th></tr>
+        <tr>
+            <td><span class="fn">SR-CoreSync_P0_Patches.zip</span></td>
+            <td>‎69 كيلوبايت</td>
+            <td>ترقيع أمني P0: مصادقة بمفاتيح API، تقنين الوصول، حدود الرفع، سكربتات مساعدة، واختبار فحص من 16 بنداً</td>
+        </tr>
+        <tr>
+            <td><span class="fn">SR-CoreSync_i18n_Fixes.zip</span></td>
+            <td>‎4.3 ميغابايت</td>
+            <td>إصلاح الترجمة الكامل: 54 ملفاً تجعل 26 لغة تعرض محتواها بلغتها 100%، مع تقرير تدقيق قبل/بعد</td>
+        </tr>
+    </table>
+
+    <div class="note">
+        <span class="nt">لماذا حزمتان منفصلتان؟ </span>
+        لأن كل حزمة تصلح مشكلة مختلف تماماً: الأولى تغلق الثغرات الأمنية الخطيرة (أولوية قصوى)، والثانية تُكمل ترجمة البوابة متعددة اللغات. يُفضَّل تطبيق الأولى أولاً ثم الثانية، لكنهما لا يتعارضان مع بعضهما.
+    </div>
+
+    <!-- 3. method A -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 3</div>
+        <div class="section-title">الطريقة أ: تحديث النسخة على الهاردديسك أو الاستضافة</div>
+        <div class="divider"></div>
+    </div>
+
+    <div class="method">
+        <div class="mhead">
+            <div class="mbadge">الأسهل — بدون أي أوامر</div>
+            <div class="mtitle">نسخ الملفات مباشرة إلى مكانها</div>
+            <div class="mfor">تناسب: جهازك الشخصي، الاستضافة، لوحة ملفات السيرفر</div>
+        </div>
+
+        <div class="note">
+            <span class="nt">الأسرع من كل هذا — نقرة واحدة: </span>
+            داخل كل حزمة يوجد ملف تشغيل جاهز باسم <span class="fn">apply_updates.bat</span> (لويندوز) و <span class="fn">apply_updates.sh</span> (لماك ولينكس). شغّل الملف وأشر إلى مجلد مشروعك، فيضع كل الملفات في أماكنها الصحيحة تلقائياً، وإن كان مجلدك مستودع git فسيحفظ التغييرات ويدفعها إلى GitHub بعد أن تعطي موافقتك في نافذة المتصفح التي ستفتح لك.
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="snum">1</div>
+                <div class="sbody"><span class="stitle">فك الضغط عن الملفين.</span> اضغط بزر الفأرة الأيمن على كل ملف ZIP واختر «استخراج الكل» — ستحصل على مجلدين: <span class="fn">SR-CoreSync_P0_Patches</span> و <span class="fn">SR-CoreSync_i18n_Fixes</span>.</div>
+            </div>
+            <div class="step">
+                <div class="snum">2</div>
+                <div class="sbody"><span class="stitle">افتح مجلد <span class="fn">full_files</span> داخل كل حزمة.</span> هذا المجلد يحتوي «الملفات النهائية الجاهزة» — هي نفس الملفات لكن بعد إصلاحها. لا تحتاج إلى فهم محتواها، فقط انسخها.</div>
+            </div>
+            <div class="step">
+                <div class="snum">3</div>
+                <div class="sbody"><span class="stitle">انسخ كل ملف إلى نفس مساره في مشروعك.</span> استخدم الجدولين أدناه: الملف الموجود في المجلد الرئيسي للحزمة يذهب إلى المجلد الرئيسي لمشروعك، وهكذا. عندما يسألك النظام عن الاستبدال، اختر «استبدال».</div>
+            </div>
+        </div>
+
+        <table>
+            <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+            <tr><th>من حزمة الأمان: <span class="fn">P0/full_files/</span></th><th>إلى أين في مشروعك؟</th></tr>
+            <tr><td><span class="fn">Dockerfile</span>، <span class="fn">docker-compose.yml</span>، <span class="fn">sr_agent_server.py</span>، <span class="fn">sr_auth.py</span>، <span class="fn">sr_session_db.py</span>، <span class="fn">.gitignore</span>، <span class="fn">.dockerignore</span>، <span class="fn">.env.example</span></td><td>المجلد الرئيسي للمشروع (الجذر) مباشرة</td></tr>
+            <tr><td><span class="fn">scripts/generate_auth_keys.py</span> و <span class="fn">scripts/git_history_purge.sh</span></td><td>داخل مجلد <span class="fn">scripts/</span> في مشروعك</td></tr>
+            <tr><td><span class="fn">web/coresync-auth.js</span></td><td>داخل مجلد <span class="fn">web/</span> في مشروعك</td></tr>
+        </table>
+
+        <table>
+            <colgroup><col style="width:50%"><col style="width:50%"></colgroup>
+            <tr><th>من حزمة الترجمة: <span class="fn">i18n/full_files/</span></th><th>إلى أين في مشروعك؟</th></tr>
+            <tr><td><span class="fn">js/sr-geo-lang.js</span></td><td>إلى <span class="fn">js/sr-geo-lang.js</span> في موقعك (نفس المسار تماماً)</td></tr>
+            <tr><td>مجلدات اللغات: <span class="fn">de</span>، <span class="fn">fr</span>، <span class="fn">es</span>، <span class="fn">tr</span> … إلخ (26 مجلداً)، وكل منها يضم <span class="fn">index.html</span> و <span class="fn">demo.html</span></td><td>نفس مجلدات اللغات في موقعك: <span class="fn">de/index.html</span> يذهب إلى <span class="fn">de/index.html</span> وهكذا لكل لغة</td></tr>
+        </table>
+
+        <div class="steps">
+            <div class="step">
+                <div class="snum">4</div>
+                <div class="sbody"><span class="stitle">إذا كان موقعك منشوراً على استضافة:</span> كرر العملية نفسها من لوحة التحكم (cPanel أو ما شابه) عبر مدير الملفات — ارفع الملفات إلى نفس المسارات فوق الموجودة، ووافق على الاستبدال.</div>
+            </div>
+        </div>
+
+        <div class="warn">
+            <span class="nt">تنبيه: </span>
+            النسخ المباشر يستبدل الملفات الـ 65 المذكورة أعلاه فقط بأسمائها، وباقي ملفات مشروعك لا تُمسّ. لكن إن كنت عدّلت هذه الملفات بعينها يدوياً سابقاً، فستُستبدل تعديلاتك بنسخ الحزمة الموحدة — خذ نسخة احتياطية سريعة من المشروع قبل البدء.
+        </div>
+    </div>
+
+    <!-- 4. method B -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 4</div>
+        <div class="section-title">الطريقة ب: تحديث المستودع على GitHub من المتصفح</div>
+        <div class="divider"></div>
+    </div>
+
+    <div class="method">
+        <div class="mhead">
+            <div class="mbadge">بدون برامج أو أوامر</div>
+            <div class="mtitle">الرفع من موقع GitHub نفسه بالسحب والإفلات</div>
+            <div class="mfor">تناسب: من لا يستخدم git أصلاً</div>
+        </div>
+
+        <p class="body-text">GitHub يتيح رفع الملفات من المتصفح مباشرة. اتبع الخطوات التالية بالترتيب:</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="snum">1</div>
+                <div class="sbody"><span class="stitle">افتح المستودع في المتصفح</span> وسجّل الدخول بحسابك: <span class="fn">github.com/Salim-Grav/SR-CoreSync---For-Intelgent-Solutions</span></div>
+            </div>
+            <div class="step">
+                <div class="snum">2</div>
+                <div class="sbody"><span class="stitle">لملفات الجذر:</span> من الصفحة الرئيسية للمستودع اضغط <b>Add file ← Upload files</b>، ثم اسحب ملفات الجذر الثمانية من <span class="fn">P0/full_files/</span> (المدرجة في جدول القسم 3) إلى منطقة الرفع.</div>
+            </div>
+            <div class="step">
+                <div class="snum">3</div>
+                <div class="sbody"><span class="stitle">لملفات المجلدات الفرعية:</span> ادخل أولاً إلى المجلد المطلوب (مثلاً <span class="fn">scripts</span>) ثم اضغط <b>Add file ← Upload files</b> واسحب الملفين إليه، وكرر مع <span class="fn">web</span> ومجلدات اللغات. أو ببساطة: اسحب المجلد كاملاً من نافذة جهازك إلى صفحة الرفع وسيحفظ GitHub بنيته.</div>
+            </div>
+            <div class="step">
+                <div class="snum">4</div>
+                <div class="sbody"><span class="stitle">اكتب وصفاً قصيراً ثم اضغط Commit changes.</span> مثلاً: «تطبيق ترقيع الأمان P0». كرر العملية نفسها لملفات حزمة الترجمة الـ 54 (يفضّل سحب مجلدات اللغات دفعة واحدة).</div>
+            </div>
+        </div>
+
+        <div class="note">
+            <span class="nt">ملاحظة: </span>
+            هذه الطريقة أبطأ قليلاً لأنها يدوية، لكنها آمنة تماماً وتعطيك تحكماً كاملاً: ترى كل ملف قبل حفظه، ويمكنك في أي وقت الرجوع إلى نسخة سابقة من أي ملف عبر زر History في صفحة الملف.
+        </div>
+    </div>
+
+    <!-- 5. method C -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 5</div>
+        <div class="section-title">الطريقة ج: عبر أوامر git (الأدق — للمستودع الرئيسي)</div>
+        <div class="divider"></div>
+    </div>
+
+    <div class="method">
+        <div class="mhead">
+            <div class="mbadge">الموصى بها للمطورين</div>
+            <div class="mtitle">تطبيق الرقع بالترتيب ثم الرفع بضغطة واحدة</div>
+            <div class="mfor">تناسب: من يعرف أساسيات git</div>
+        </div>
+
+        <p class="body-text">الحزمتان تتضمنان رقع git جاهزة (<span class="fn">.patch</span>) حفظت بنية التعديلات الكاملة. هذه أسرع وأدق طريقة لتحديث المستودع الرئيسي، بشرط تطبيق الرقع <b>بهذا الترتيب تحديداً</b>:</p>
+
+        <div class="code">
+<span class="cm"># 1) نزّل نسخة جديدة من مستودعك</span><br>
+git clone https://github.com/Salim-Grav/SR-CoreSync---For-Intelgent-Solutions.git<br>
+cd SR-CoreSync---For-Intelgent-Solutions<br>
+<br>
+<span class="cm"># 2) طبّق رقع الأمان P0 الأربعة بالترتيب (من مجلد patches بعد فك الضغط)</span><br>
+<span class="hi">git am</span> /path/to/SR-CoreSync_P0_Patches/patches/0001-security-a1-add-sovereign-API-key-auth-layer-rate-li.patch<br>
+<span class="hi">git am</span> /path/to/SR-CoreSync_P0_Patches/patches/0002-security-a1-a3-a4-a8-enforce-auth-restrict-CORS-hard.patch<br>
+<span class="hi">git am</span> /path/to/SR-CoreSync_P0_Patches/patches/0003-security-p1-p5-whitelist-build-context-defense-in-de.patch<br>
+<span class="hi">git am</span> /path/to/SR-CoreSync_P0_Patches/patches/0004-security-p2-p3-stop-committing-runtime-artifacts-his.patch<br>
+<br>
+<span class="cm"># 3) طبّق رقعة الترجمة الكاملة</span><br>
+<span class="hi">git am</span> /path/to/SR-CoreSync_i18n_Fixes/patches/0001-fix-i18n-complete-multilingual-coverage.patch<br>
+<br>
+<span class="cm"># 4) ارفع كل شيء إلى GitHub دفعة واحدة</span><br>
+<span class="hi">git push</span> origin main
+        </div>
+
+        <div class="warn">
+            <span class="nt">مهم جداً: </span>
+            استبدل <span class="fn">/path/to/</span> بالمجلد الحقيقي الذي فكّ فيه ضغط الحزم على جهازك. والتزم الترتيب: رقع P0 من 0001 إلى 0004 أولاً، ثم رقعة الترجمة — لأن رقعة الترجمة مبنية فوق نتيجة رقع الأمان، وتطبيقها قبلهما قد يسبب تعارضاً. إن ظهرت رسالة خطأ في أي رقعة، لا تُكمل: انسخ نص الرسالة وأرسله لي وسأحلها معك.
+        </div>
+    </div>
+
+    <!-- 6. verification -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 6</div>
+        <div class="section-title">بعد التطبيق: كيف تتأكد أن كل شيء نجح؟</div>
+        <div class="divider"></div>
+    </div>
+
+    <p class="body-text">مهما اخترت طريقة، هناك اختباران سريعان يثبتان النجاح خلال دقائق:</p>
+
+    <table>
+        <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
+        <tr><th>اختبار</th><th>طريقة التحقق والنتيجة المتوقعة</th></tr>
+        <tr>
+            <td><b>الترجمة تعمل</b></td>
+            <td>افتح في المتصفح أي صفحة لغة من موقعك، مثل <span class="fn">de/index.html</span> أو <span class="fn">fr/index.html</span> أو <span class="fn">tr/index.html</span>. يجب أن تظهر الصفحة <b>كاملة بلغتها</b> — العناوين والفقرات والأسئلة الشائعة — دون أي فقرات إنجليزية متبقية. قبل الإصلاح كانت الفقرات إنجليزية في كل اللغات تقريباً.</td>
+        </tr>
+        <tr>
+            <td><b>الأمان يعمل</b></td>
+            <td>من مجلد المشروع نفّذ: <span class="fn">python3 scripts/generate_auth_keys.py</span> لولادة مفاتيح API، ثم أعد تشغيل الخادم، ثم <span class="fn">python3 smoke_test/p0_smoke_test.py</span> — النتيجة المتوقعة <b>16 من 16 فحصاً ناجحاً</b>.</td>
+        </tr>
+    </table>
+
+    <div class="warn">
+        <span class="nt">سلوك مقصود لا تخف منه: </span>
+        بعد تطبيق ترقيع الأمان P0، الخادم الذي يعمل <b>بدون مفاتيح API صالحة</b> يرفض خدمة الطلبات ويجيب برمز 503. هذا ليس عطلاً بل حماية مقصودة (إغلاق آمن). المفتاح إلى العمل الطبيعي: ولّد المفاتيح بالأمر أعلاه وضبطها في ملف البيئة، والشرح الكامل موجود داخل ملف <span class="fn">README_دليل_التطبيق.md</span> المرفق في كل حزمة.
+    </div>
+
+    <!-- 7. FAQ -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 7</div>
+        <div class="section-title">أسئلة سريعة وجوابها المباشر</div>
+        <div class="divider"></div>
+    </div>
+
+    <div class="faq">
+        <div class="q">هل رفعتَ أنت التحديثات إلى المستودع الرئيسي على GitHub؟</div>
+        <div class="a">لا. لا أملك صلاحية الدخول إلى حسابك في GitHub ولا يمكنني الرفع باسمك، ولا أستطيع الوصول إلى أي جهاز. كل ما أنجزته موجود في ملفي ZIP هنا في المحادثة، والرفع النهائي يتم بيدك بإحدى الطرق الثلاث أعلاه.</div>
+    </div>
+    <div class="faq">
+        <div class="q">وماذا عن «مجلدات الهارديسك» التي سألت عنها؟</div>
+        <div class="a">أي نسخة من المشروع محفوظة خارج GitHub: على جهازك، أو على قرص خارجي، أو على السيرفر/الاستضافة. طبّق عليها الطريقة أ (النسخ المباشر) على كل نسخة على حدة. إن كان لديك مسار مجلد بعينه غير متأكد منه، أخبرني بمساره وسأحدد لك بدقة الملفات التي توضع فيه.</div>
+    </div>
+    <div class="faq">
+        <div class="q">أي طريقة أنسب لي؟</div>
+        <div class="a">لا تعرف git؟ اختر الطريقة أ لنسخ جهازك والاستضافة، والطريقة ب لتحديث GitHub. تعرف git أو لديك من يساعدك؟ الطريقة ج هي الأنظف لأنها تطبق التعديلات كاملة بمحتواها التاريخي وبرسالة وصف لكل رقعة.</div>
+    </div>
+    <div class="faq">
+        <div class="q">هل يمكنني تطبيق حزمة الترجمة فقط دون حزمة الأمان؟</div>
+        <div class="a">تقنياً نعم — ملفات الحزمتين لا تتصادم. لكن لا ننصح بذلك إطلاقاً: حزمة الأمان تغلق ثغرات حقيقية (24 نقطة وصول API كانت مكشوفة بلا مصادقة)، وتأجيلها يترك المشروع مكشوفاً. طبّق الأمان أولاً دائماً.</div>
+    </div>
+
+    <!-- 8. decision table -->
+    <div class="chapter-header">
+        <div class="section-tag">القسم 8</div>
+        <div class="section-title">أي طريقة أختار؟ جدول القرار السريع</div>
+        <div class="divider"></div>
+    </div>
+
+    <p class="body-text">للخلاصة، هذا الجدول يجيب في سطر واحد عن سؤال «من أين أبدأ؟» حسب حالتك — ويمكنك دمج أكثر من طريقة معاً: مثلاً تطبيق الطريقة أ على نسخة جهازك والطريقة ج على المستودع في الوقت نفسه، فكلاهما يحتاج إلى التحديث:</p>
+
+    <table>
+        <colgroup><col style="width:24%"><col style="width:38%"><col style="width:38%"></colgroup>
+        <tr><th>الطريقة</th><th>اخترها إذا كنت…</th><th>ماذا تحصل عليه؟</th></tr>
+        <tr>
+            <td><b>أ — النسخ المباشر</b></td>
+            <td>تريد النتيجة الأسرع دون أي أوامر، ولديك نسخة المشروع على جهازك أو على الاستضافة</td>
+            <td>ملفات محدثة فوراً في مكانها، وتتحقق منها بفتح صفحات الموقع مباشرة</td>
+        </tr>
+        <tr>
+            <td><b>ب — الرفع من المتصفح</b></td>
+            <td>لا تستخدم git، وتريد تحديث المستودع على GitHub بنفسك من المتصفح</td>
+            <td>تعديلات محفوظة في المستودع، مع إمكانية التراجع عن أي ملف عبر History</td>
+        </tr>
+        <tr>
+            <td><b>ج — أوامر git</b></td>
+            <td>تعرف أساسيات git أو تستطيع نسخ 8 أوامر ولصقها بالترتيب</td>
+            <td>النتيجة الأدق: الرقع الكاملة بوصفها التاريخي، ثم رفع الجميع بضغطة <span class="fn">git push</span> واحدة</td>
+        </tr>
+    </table>
+
+    <p class="body-text">وسواء اخترت ما اخترت، لا تنسَ الخطوتين اللتين يغفل عنهما كثيرون: توليد مفاتيح API بعد ترقيع الأمان، ثم تشغيل اختبار الفحص السريع للتأكد — هما خط الحسم بين «طبّقت الملفات» و«التحديث يعمل فعلاً».</p>
+
+</div>
+
+<!-- ======================= ENDING ======================= -->
+<div class="ending">
+    <div class="etitle">الخلاصة: خطتك في 6 خطوات</div>
+    <div class="esub">من هذه المحادثة إلى مستودع ونسخ محدّثة بالكامل — بهذا الترتيب بالضبط:</div>
+
+    <div class="check"><div class="cnum">1</div><div class="ctxt"><b>نزّل الحزمتين</b> من هذه المحادثة إلى جهازك وفك الضغط عنهما.</div></div>
+    <div class="check"><div class="cnum">2</div><div class="ctxt"><b>خذ نسخة احتياطية سريعة</b> من مشروعك الحالي قبل أي استبدال.</div></div>
+    <div class="check"><div class="cnum">3</div><div class="ctxt"><b>طبّق حزمة الأمان P0 أولاً</b> — بالنسخ المباشر أو بالرقع حسب طريقتك.</div></div>
+    <div class="check"><div class="cnum">4</div><div class="ctxt"><b>طبّق حزمة الترجمة i18n</b> — فتنعم الـ 26 لغة بمحتوى أصيل بلغتها.</div></div>
+    <div class="check"><div class="cnum">5</div><div class="ctxt"><b>ولّد مفاتيح API وأعد تشغيل الخادم</b> حتى لا يبقى في وضع الإغلاق الآمن 503.</div></div>
+    <div class="check"><div class="cnum">6</div><div class="ctxt"><b>تحقق</b>: افتح صفحات اللغات وشغّل اختبار الفحص السريع (16/16).</div></div>
+
+    <div class="end-note">
+        <span class="nt">تذكير أخير: </span>
+        أنت وحدك من يملك مفاتيح الوصول إلى حسابك في GitHub وأجهزتك — وهذا سبب بقائك وحدك القادر على الرفع. إن تعثّرت في أي خطوة، أو ظهرت رسالة خطأ أثناء تطبيق الرقع، انسخها وأرسلها هنا وسأتولى حلها معك خطوة بخطوة.
+    </div>
+
+    <div class="efoot">
+        <span>SR-CoreSync — دليل رفع التحديثات</span>
+        <span>صفحة الخلاصة</span>
+    </div>
+</div>
+
+</body>
+</html>
