@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استوديو الرسوم البيانية التفاعلية للمؤشرات المالية • S&R CoreSync For Intelligent Solutions</title>
+    <meta name="description" content="محرك سيادي لتوليد وتصدير رسوم بيانية تفاعلية ومخططات نمو مالية فائقة السلاسة والدقة لمواقع الشركات والتقارير التنفيذية.">
+    <link rel="icon" type="image/svg+xml" href="./assets/sr-core-emblem.svg?v=sovereign2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./css/dananajmah-bundle.min.css">
+    <link rel="stylesheet" href="./css/sr-3d-interactions.css">
+
+    <style>
+        :root {
+            --sr-gold: #c5a880;
+            --sr-gold-light: #f3dfba;
+            --sr-gold-dark: #8c734b;
+            --sr-bg-root: #030806;
+            --sr-bg-card: rgba(8, 18, 13, 0.88);
+            --sr-border: rgba(197, 168, 128, 0.22);
+            --sr-cyan: #38bdf8;
+            --sr-emerald: #10b981;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--sr-bg-root);
+            color: #f8fafc;
+            font-family: 'Alexandria', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 28px;
+            background: rgba(3, 8, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--sr-border);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--sr-gold-light); }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--sr-emerald);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 40%, var(--sr-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .charts-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 1040px) {
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel-card {
+            background: var(--sr-bg-card);
+            border: 1px solid var(--sr-border);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(14px);
+            margin-bottom: 24px;
+        }
+
+        .panel-heading {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--sr-gold-light);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--sr-gold);
+            margin-bottom: 6px;
+        }
+
+        .form-select {
+            width: 100%;
+            background: rgba(5, 12, 8, 0.8);
+            border: 1px solid var(--sr-border);
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .form-select:focus { border-color: var(--sr-gold); }
+
+        .type-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .type-btn {
+            background: rgba(5, 12, 8, 0.7);
+            border: 1.5px solid var(--sr-border);
+            border-radius: 10px;
+            padding: 10px 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: #f8fafc;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .type-btn.active, .type-btn:hover {
+            border-color: var(--sr-gold);
+            background: rgba(197, 168, 128, 0.15);
+        }
+
+        /* المؤشرات الإحصائية السريعة */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-box {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .kpi-val {
+            font-size: 1.25rem;
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--sr-gold-light);
+            margin-bottom: 2px;
+        }
+
+        .kpi-lbl {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        /* مسرح المخطط */
+        .chart-stage {
+            background: #020503;
+            border: 1px solid var(--sr-border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+
+        canvas#financialChart {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .tooltip-box {
+            position: absolute;
+            background: rgba(8, 18, 13, 0.95);
+            border: 1px solid var(--sr-gold);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: #ffffff;
+            font-size: 0.78rem;
+            pointer-events: none;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-action-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--sr-gold), var(--sr-gold-dark));
+            color: #040806;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-family: inherit;
+        }
+
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 168, 128, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas class="sr-ambient-mesh-canvas"></canvas>
+
+    <!-- شريط التنقل -->
+    <header class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="./assets/sr-core-emblem.svg" alt="S&R CoreSync" width="34" height="34">
+            <div>
+                <strong style="display:block; font-size:1rem; font-weight:800; color:var(--sr-gold-light);">S&R CoreSync</strong>
+                <span style="display:block; font-size:0.72rem; color:#94a3b8;">استوديو الرسوم البيانية المالية</span>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="api-playground.html" class="nav-link">مختبر الـ API</a>
+            <a href="crm-dashboard.html" class="nav-link">لوحة CRM</a>
+            <a href="payment-gateway.html" class="nav-link">بوابة المدفوعات</a>
+            <a href="invoice-engine.html" class="nav-link">الفوترة ZATCA</a>
+        </nav>
+    </header>
+
+    <!-- واجهة التقديم -->
+    <section class="hero">
+        <div class="hero-badge">📈 محرك الرسوم البيانية والنمو المالي — High-Performance Financial Charts</div>
+        <h1>استوديو الرسوم البيانية للمؤشرات المالية والنمو</h1>
+        <p>قم بتوليد وتخصيص مخططات بيانية تفاعلية فائقة السرعة والخفة (60 FPS) مبنية بتقنية Canvas نقي، مع مؤشرات النمو السنوي، وحساب القمم المحققة، والتصدير بنقرة واحدة.</p>
+    </section>
+
+    <!-- منصة العمل -->
+    <main class="charts-grid">
+
+        <!-- لوحة التحكم -->
+        <div>
+            <div class="panel-card sr-tilt-card sr-holographic-card">
+                <div class="panel-heading">
+                    <span>⚙️</span> خيارات المخطط البياني
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">نوع المخطط المالي (Chart Type):</label>
+                    <div class="type-selector-grid">
+                        <button type="button" class="type-btn active" onclick="setChartType('area')">مساحي انسيابي</button>
+                        <button type="button" class="type-btn" onclick="setChartType('bar')">أعمدة نمو</button>
+                        <button type="button" class="type-btn" onclick="setChartType('line')">خط أداء نقي</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">العملة ونطاق التقارير:</label>
+                    <select class="form-select" id="currencySelect" onchange="updateCurrency()">
+                        <option value="EUR">EUR (€) — اليورو الأوروبي</option>
+                        <option value="SAR" selected>SAR (﷼) — الريال السعودي</option>
+                        <option value="AED">AED (د.إ) — الدرهم الإماراتي</option>
+                        <option value="USD">USD ($) — الدولار الأمريكي</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">النمط اللوني للمخطط:</label>
+                    <select class="form-select" id="themeSelect" onchange="updateTheme()">
+                        <option value="gold">الذهب السيادي الملكي (Royal Gold)</option>
+                        <option value="emerald">الزمرد الأخضر الصاعد (Emerald Growth)</option>
+                        <option value="cyan">السيان السيبراني (Cyber Cyan)</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn-action-primary sr-magnetic-btn" onclick="exportChartCode()">
+                    <span>📋 نسخ كود المخطط (Pure Canvas / JS)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- مسرح المخطط التفاعلي الحي -->
+        <div>
+            <div class="panel-card sr-tilt-card">
+                <div class="panel-heading">
+                    <span>📊</span> مؤشرات الأداء والنمو المالي (Annual Growth Track)
+                </div>
+
+                <!-- مؤشرات إحصائية سريعة -->
+                <div class="kpi-row">
+                    <div class="kpi-box">
+                        <div class="kpi-val" id="totalAnnualVal">﷼ 2,450,000</div>
+                        <div class="kpi-lbl">إجمالي الإيرادات المحققة</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-val" style="color:var(--sr-emerald);">+ 48.6%</div>
+                        <div class="kpi-lbl">معدل النمو السنوي YoY</div>
+                    </div>
+                    <div class="kpi-box">
+                        <div class="kpi-val" id="peakVal">﷼ 320,000</div>
+                        <div class="kpi-lbl">أعلى قمة شهرية (ATH)</div>
+                    </div>
+                </div>
+
+                <!-- مساحة رسم الكانفاس -->
+                <div class="chart-stage">
+                    <div class="canvas-container" id="canvasContainer">
+                        <canvas id="financialChart"></canvas>
+                        <div class="tooltip-box" id="chartTooltip"></div>
+                    </div>
+
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:0.75rem; color:#94a3b8; border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
+                        <span>نظام رصد التدفقات المالية السيادية • S&R CoreSync™ Analytics</span>
+                        <span style="font-family:'Space Grotesk',monospace; color:var(--sr-gold-light);">60 FPS HIGH-REFRESH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- إشعار النسخ -->
+    <div id="toastNotification" style="position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#10b981; color:#040806; padding:12px 28px; border-radius:999px; font-weight:800; font-size:0.95rem; display:none; z-index:999; box-shadow:0 10px 30px rgba(0,0,0,0.8);">
+        ✅ تم نسخ كود المخطط البياني التفاعلي بنجاح!
+    </div>
+
+    <script src="./js/sr-3d-interactions.js"></script>
+    <script>
+        const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+        const baseData = [120000, 145000, 160000, 155000, 190000, 220000, 210000, 245000, 270000, 290000, 310000, 320000];
+
+        let currentType = 'area';
+        let currentTheme = 'gold';
+        let currentRate = 4.05;
+        let currentSym = '﷼';
+
+        const canvas = document.getElementById('financialChart');
+        const ctx = canvas.getContext('2d');
+        const tooltip = document.getElementById('chartTooltip');
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            drawChart();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        function drawChart(hoverIndex = -1) {
+            const w = canvas.width;
+            const h = canvas.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const padding = { top: 30, right: 20, bottom: 40, left: 20 };
+            const chartW = w - padding.left - padding.right;
+            const chartH = h - padding.top - padding.bottom;
+
+            const values = baseData.map(v => v * (currentRate / 4.05));
+            const maxVal = Math.max(...values) * 1.15;
+            const stepX = chartW / (values.length - 1);
+
+            // تحديد الألوان
+            let mainColor = '#c5a880';
+            let gradStart = 'rgba(197, 168, 128, 0.45)';
+            if (currentTheme === 'emerald') {
+                mainColor = '#10b981';
+                gradStart = 'rgba(16, 185, 129, 0.45)';
+            } else if (currentTheme === 'cyan') {
+                mainColor = '#38bdf8';
+                gradStart = 'rgba(56, 189, 248, 0.45)';
+            }
+
+            // رسم شبكة أفقية خفيفة
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding.top + (chartH / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(w - padding.right, y);
+                ctx.stroke();
+            }
+
+            if (currentType === 'bar') {
+                // رسم مخطط الأعمدة
+                const barWidth = stepX * 0.55;
+                values.forEach((v, i) => {
+                    const barH = (v / maxVal) * chartH;
+                    const x = padding.left + i * stepX - barWidth / 2;
+                    const y = h - padding.bottom - barH;
+
+                    const grad = ctx.createLinearGradient(0, y, 0, h - padding.bottom);
+                    grad.addColorStop(0, mainColor);
+                    grad.addColorStop(1, 'rgba(0,0,0,0.2)');
+
+                    ctx.fillStyle = (i === hoverIndex) ? '#ffffff' : grad;
+                    ctx.beginPath();
+                    ctx.roundRect(x, y, barWidth, barH, [6, 6, 0, 0]);
+                    ctx.fill();
+                });
+            } else {
+                // رسم المخطط المساحي والانسيابي
+                const points = values.map((v, i) => ({
+                    x: padding.left + i * stepX,
+                    y: h - padding.bottom - (v / maxVal) * chartH
+                }));
+
+                if (currentType === 'area') {
+                    const areaGrad = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
+                    areaGrad.addColorStop(0, gradStart);
+                    areaGrad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
+
+                    ctx.beginPath();
+                    ctx.moveTo(points[0].x, points[0].y);
+                    for (let i = 1; i < points.length; i++) {
+                        ctx.lineTo(points[i].x, points[i].y);
+                    }
+                    ctx.lineTo(points[points.length - 1].x, h - padding.bottom);
+                    ctx.lineTo(points[0].x, h - padding.bottom);
+                    ctx.closePath();
+                    ctx.fillStyle = areaGrad;
+                    ctx.fill();
+                }
+
+                // الخط الرئيسي
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i].x, points[i].y);
+                }
+                ctx.strokeStyle = mainColor;
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // النقاط
+                points.forEach((p, i) => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, (i === hoverIndex) ? 6 : 4, 0, Math.PI * 2);
+                    ctx.fillStyle = (i === hoverIndex) ? '#ffffff' : mainColor;
+                    ctx.fill();
+                    ctx.strokeStyle = '#020503';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+            }
+
+            // أسماء الشهور في الأسفل
+            ctx.fillStyle = '#64748b';
+            ctx.font = '11px Alexandria, sans-serif';
+            ctx.textAlign = 'center';
+            values.forEach((_, i) => {
+                const x = padding.left + i * stepX;
+                ctx.fillText(months[i], x, h - 14);
+            });
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const w = canvas.width;
+            const padding = { left: 20, right: 20 };
+            const chartW = w - padding.left - padding.right;
+            const stepX = chartW / (baseData.length - 1);
+
+            const index = Math.round((mouseX - padding.left) / stepX);
+            if (index >= 0 && index < baseData.length) {
+                drawChart(index);
+                const val = (baseData[index] * (currentRate / 4.05)).toLocaleString('ar-SA', { minimumFractionDigits: 0 });
+                tooltip.style.display = 'block';
+                tooltip.style.left = (padding.left + index * stepX) + 'px';
+                tooltip.style.top = '40px';
+                tooltip.innerHTML = `<strong>${months[index]}</strong><br>${currentSym} ${val}`;
+            }
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+            drawChart(-1);
+        });
+
+        function setChartType(t) {
+            currentType = t;
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            drawChart();
+        }
+
+        function updateCurrency() {
+            const cur = document.getElementById('currencySelect').value;
+            const rates = { EUR: { rate: 1, sym: '€' }, SAR: { rate: 4.05, sym: '﷼' }, AED: { rate: 3.97, sym: 'د.إ' }, USD: { rate: 1.08, sym: '$' } };
+            const c = rates[cur] || rates['SAR'];
+            currentRate = c.rate;
+            currentSym = c.sym;
+
+            const total = (2450000 * (currentRate / 4.05)).toLocaleString('ar-SA', { minimumFractionDigits: 0 });
+            const peak = (320000 * (currentRate / 4.05)).toLocaleString('ar-SA', { minimumFractionDigits: 0 });
+
+            document.getElementById('totalAnnualVal').textContent = `${currentSym} ${total}`;
+            document.getElementById('peakVal').textContent = `${currentSym} ${peak}`;
+
+            drawChart();
+        }
+
+        function updateTheme() {
+            currentTheme = document.getElementById('themeSelect').value;
+            drawChart();
+        }
+
+        function exportChartCode() {
+            const toast = document.getElementById('toastNotification');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 2500);
+        }
+
+        setTimeout(resizeCanvas, 150);
+    </script>
+</body>
+</html>
